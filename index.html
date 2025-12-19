@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academia Esparta – Refuerzo y apoyo escolar en Torremolinos</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      :root {
+        --primary: #0e9343; /* verde corporativo principal */
+        --secondary: #09834c; /* tono secundario */
+        --accent: #f16565; /* color para botones */
+        --light: #f5fdf7;
+        --dark: #063c24;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+      }
+      body {
+        line-height: 1.6;
+        color: var(--dark);
+      }
+      header {
+        background: var(--light);
+        padding: 1rem 2rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      header .logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--primary);
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1.2rem;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      nav ul li a:hover {
+        color: var(--primary);
+      }
+      /* Hero section */
+      #hero {
+        background: linear-gradient(rgba(6, 60, 36, 0.6), rgba(6, 60, 36, 0.6)), url('hero.jpg') no-repeat center/cover;
+        color: white;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+        text-align: center;
+      }
+      #hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+      #hero h2 {
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-bottom: 2rem;
+      }
+      .btn {
+        display: inline-block;
+        margin: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .btn:hover {
+        background: #e14d4d;
+      }
+      section {
+        padding: 4rem 2rem;
+      }
+      section.light {
+        background: var(--light);
+      }
+      /* About / Description */
+      #about .container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      #about img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      #about .text {
+        max-width: 600px;
+      }
+      #about h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+      /* Levels cards */
+      #levels .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      #levels .card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 280px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        text-align: center;
+      }
+      #levels .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+      #levels .card h4 {
+        font-size: 1.25rem;
+        margin: 1rem 0 0.5rem;
+        color: var(--primary);
+      }
+      #levels .card p {
+        padding: 0 1rem 1rem;
+        font-size: 0.9rem;
+        color: #444;
+      }
+      /* Services sections */
+      .service {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+      .service .icon {
+        font-size: 3rem;
+        color: var(--primary);
+      }
+      .service .content {
+        max-width: 600px;
+      }
+      .service .content h3 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+      .service .content p {
+        margin-bottom: 1rem;
+      }
+      /* Contact */
+      #contact .contact-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: space-between;
+      }
+      #contact .info, #contact .form {
+        flex: 1 1 300px;
+      }
+      #contact h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+      #contact ul {
+        list-style: none;
+        margin-bottom: 1rem;
+      }
+      #contact ul li {
+        margin-bottom: 0.5rem;
+      }
+      #contact ul li i {
+        margin-right: 0.5rem;
+        color: var(--primary);
+      }
+      #contact form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      #contact form input,
+      #contact form textarea {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: inherit;
+        resize: vertical;
+      }
+      #contact form button {
+        align-self: flex-start;
+      }
+      /* Footer */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 2rem;
+      }
+      footer .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: space-between;
+      }
+      footer .footer-container div {
+        flex: 1 1 200px;
+      }
+      footer h4 {
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+      footer a {
+        color: #ffffff;
+        text-decoration: none;
+      }
+      .social-icons a {
+        font-size: 1.2rem;
+        margin-right: 0.5rem;
+        color: white;
+      }
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        #hero h1 {
+          font-size: 2rem;
+        }
+        #hero h2 {
+          font-size: 1.2rem;
+        }
+        #levels .card {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Academia Esparta</div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#about">Nosotros</a></li>
+          <li><a href="#levels">Servicios</a></li>
+          <li><a href="#private">Particulares</a></li>
+          <li><a href="#summer">Verano</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="hero">
+      <h1>Impulsa tu aprendizaje con Academia Esparta</h1>
+      <h2>Refuerzo escolar personalizado para cada alumno</h2>
+      <a class="btn" href="#contact">Contacto</a>
+      <a class="btn" href="https://wa.me/34659407023" target="_blank">WhatsApp</a>
+    </section>
+
+    <section id="about" class="light">
+      <div class="container">
+        <div class="text">
+          <h3>¿Quiénes somos?</h3>
+          <p>Somos un centro de apoyo y refuerzo escolar en Torremolinos para alumnos de todos los niveles: Primaria, Secundaria, Bachillerato y preparación de EBAU. Trabajamos con grupos reducidos de máximo seis alumnos por clase y con profesores especializados en cada materia para ofrecer una atención personalizada.</p>
+          <p>Nuestro objetivo es proporcionar un acompañamiento académico integral, reforzando conocimientos, hábitos de estudio y motivación para que cada estudiante alcance su máximo potencial.</p>
+        </div>
+        <!-- Imagen ilustrativa (candidata 1) -->
+        <img src="../16ab490f-6c6f-4221-baac-5a856a6dbca2.png" alt="Grupo de estudiantes estudiando" />
+      </div>
+    </section>
+
+    <section id="levels">
+      <h3 style="text-align:center; color: var(--primary); font-size:2rem;">Clases de apoyo por nivel</h3>
+      <div class="cards">
+        <div class="card">
+          <img src="../1bc62427-ef34-4d33-8f4d-55bceb698efd.png" alt="Primaria" />
+          <h4>Primaria</h4>
+          <p>Refuerzo en lectoescritura, matemáticas, inglés y apoyo global para los primeros niveles educativos.</p>
+        </div>
+        <div class="card">
+          <img src="https://images.pexels.com/photos/8199602/pexels-photo-8199602.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Secundaria" />
+          <h4>Secundaria</h4>
+          <p>Clases de apoyo en todas las asignaturas de ESO con profesores especializados por materia.</p>
+        </div>
+        <div class="card">
+          <img src="https://images.pexels.com/photos/8199602/pexels-photo-8199602.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Bachillerato &amp; EBAU" />
+          <h4>Bachillerato &amp; EBAU</h4>
+          <p>Preparación intensiva de Bachillerato y exámenes de acceso a la universidad (EBAU) con seguimiento individual.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="private" class="light">
+      <div class="service">
+        <i class="fa-solid fa-user-graduate icon"></i>
+        <div class="content">
+          <h3>Clases particulares</h3>
+          <p>Ofrecemos servicio de clases particulares para todas las materias y niveles, tanto de manera presencial como online. Las clases individuales permiten adaptar el ritmo y los contenidos a las necesidades específicas de cada estudiante, garantizando un mayor aprovechamiento del tiempo.</p>
+          <a class="btn" href="#contact">Más información</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="summer" class="light">
+      <div class="service">
+        <i class="fa-solid fa-sun icon"></i>
+        <div class="content">
+          <h3>Clases de refuerzo en verano</h3>
+          <p>Durante los meses de verano impartimos clases de apoyo de todas las asignaturas y niveles para repasar y preparar el próximo curso. Si necesitas aprobar en septiembre o quieres afianzar conocimientos, pregunta por nuestras clases de verano y elige tu horario.</p>
+          <a class="btn" href="#contact">Consulta disponibilidad</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3>Contacto</h3>
+      <div class="contact-container">
+        <div class="info">
+          <ul>
+            <li><i class="fa-solid fa-map-marker-alt"></i> Avenida Joan Miró 37, Local 2, 29620 Torremolinos (Málaga)</li>
+            <li><i class="fa-solid fa-phone"></i> 659 407 023</li>
+            <li><i class="fa-solid fa-envelope"></i> <a href="mailto:academiaesparta2012@gmail.com">academiaesparta2012@gmail.com</a></li>
+            <li><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/academia_esparta_torremolinos/" target="_blank">@academia_esparta_torremolinos</a></li>
+          </ul>
+          <h4>Horario de atención telefónica</h4>
+          <p>Lunes a viernes: 09:00–14:00 y 16:00–21:00</p>
+          <h4>Horario de clases</h4>
+          <p>Lunes a viernes: 16:00–22:00</p>
+        </div>
+        <div class="form">
+          <form onsubmit="return false">
+            <input type="text" placeholder="Nombre" required />
+            <input type="email" placeholder="Correo electrónico" required />
+            <input type="tel" placeholder="Teléfono" />
+            <textarea rows="4" placeholder="Mensaje"></textarea>
+            <button class="btn" type="submit">Enviar</button>
+          </form>
+        </div>
+      </div>
+      <div style="margin-top:2rem;">
+        <iframe src="https://maps.google.com/maps?q=Avenida+Joan+Mir%C3%B3+37+Torremolinos&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-container">
+        <div>
+          <h4>Academia Esparta</h4>
+          <p>Centro de refuerzo y apoyo escolar en Torremolinos.</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p>Avenida Joan Miró 37, Local 2<br/>29620 Torremolinos (Málaga)</p>
+          <p>Teléfono: 659 407 023</p>
+          <p>Email: academiaesparta2012@gmail.com</p>
+        </div>
+        <div>
+          <h4>Horario</h4>
+          <p>Atención telefónica: Lun–Vie 09:00–14:00 / 16:00–21:00</p>
+          <p>Clases de apoyo: Lun–Vie 16:00–22:00</p>
+        </div>
+        <div>
+          <h4>Síguenos</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/academia_esparta_torremolinos/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.8rem; text-align:center;">&copy; 2025 Academia Esparta. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>
