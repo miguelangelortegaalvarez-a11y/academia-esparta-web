@@ -285,7 +285,7 @@ nav ul li a {
         /* Control layout sección Quiénes somos */
 #about .container{
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 2rem;
   align-items: flex-start;
 }
@@ -295,16 +295,40 @@ nav ul li a {
   max-width: 700px;
 }
   #about .image{
-  flex: 0 0 260px;
-  max-width: 260px;
+  flex: 1 1 520px;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 #about .image img{
   width: 100%;
   height: auto;
-  max-height: 220px;
-  object-fit: cover;
   display: block;
+}/* iPad y tablets: imagen al lado y tamaño controlado */
+@media (min-width: 768px) and (max-width: 1024px){
+  #about .container{
+    flex-wrap: nowrap;
+  }
+  #about .image{
+    flex: 0 0 320px;
+    max-width: 320px;
+    margin: 0;
+  }
+}
+
+/* Móvil: imagen más grande y centrada */
+@media (max-width: 767px){
+  #about .container{
+    flex-wrap: wrap;
+  }
+  #about .text{
+    max-width: 100%;
+  }
+  #about .image{
+    max-width: 520px;
+    width: 100%;
+    margin: 1rem auto 0;
+  }
 }
   </style>
   </head>
