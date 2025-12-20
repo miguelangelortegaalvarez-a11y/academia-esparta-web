@@ -289,19 +289,21 @@ nav ul li a {
   gap: 2rem;
   align-items: flex-start;
 }
-    /* ================================
+    /* =========================
    Sección "Quiénes somos"
-   ================================ */
+========================= */
 
 #about .container{
   display: flex;
   gap: 2rem;
   align-items: flex-start;
+  flex-wrap: wrap; /* base: si no hay espacio, apila */
 }
 
 /* Texto */
 #about .text{
-  flex: 1 1 600px;
+  flex: 1 1 520px;
+  min-width: 280px;
   max-width: 700px;
 }
 
@@ -318,12 +320,10 @@ nav ul li a {
   border-radius: 8px;
 }
 
-/* ================================
-   iPad y tablets
-   ================================ */
-@media (min-width: 768px) and (max-width: 1366px){
+/* Tablets / iPad */
+@media (min-width: 700px) and (max-width: 1366px){
   #about .container{
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; /* en iPad: imagen al lado */
   }
 
   #about .image{
@@ -332,12 +332,10 @@ nav ul li a {
   }
 }
 
-/* ================================
-   Móvil
-   ================================ */
-@media (max-width: 767px){
+/* Móvil */
+@media (max-width: 699px){
   #about .container{
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* móvil: imagen debajo */
   }
 
   #about .text{
