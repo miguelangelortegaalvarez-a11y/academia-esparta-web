@@ -9,251 +9,150 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --primary: #0e9343;
-      --light: #f5fdf7;
-      --dark: #063c24;
+    :root{
+      --primary:#0e9343;     /* verde corporativo */
+      --bg:#f3f7f4;          /* verde MUY claro de fondo */
+      --text:#063c24;        /* verde oscuro para UI */
+      --black:#000000;       /* negro para nombres */
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family:'Poppins',sans-serif;
     }
 
-    body {
-      color: var(--dark);
-      line-height: 1.6;
+    body{
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
     }
 
-    header {
-      background: var(--light);
-      padding: 1rem 2rem;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* ===== HEADER / NAV ===== */
+    header{
+      background:#ffffffcc;
+      backdrop-filter: blur(6px);
+      padding:1rem 2rem;
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
     }
 
-    .logo {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary);
+    .logo{
+      font-size:2rem;
+      font-weight:700;
+      color:var(--primary);
     }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
+    nav ul{
+      list-style:none;
+      display:flex;
+      gap:1.5rem;
+      flex-wrap:wrap;
     }
 
-    nav ul li a {
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 500;
+    nav ul li a{
+      text-decoration:none;
+      color:var(--text);
+      font-weight:500;
     }
 
     nav ul li a:hover,
-    nav ul li a.active {
-      color: var(--primary);
-      font-weight: 700;
+    nav ul li a.active{
+      color:var(--primary);
+      font-weight:700;
     }
 
-    main {
-      padding-top: 120px;
+    /* ===== PAGE LAYOUT ===== */
+    main{
+      padding-top:110px; /* espacio por header fijo */
     }
 
-    section {
-      padding: 4rem 2rem;
-      background: var(--light);
+    section{
+      padding:3.5rem 2rem 5rem;
+      background:transparent;
     }
 
-    h1 {
-      text-align: center;
-      color: var(--primary);
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
+    h1{
+      text-align:center;
+      color:var(--primary);
+      font-size:2.5rem;
+      margin-bottom:3rem;
     }
 
-    .teachers {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 4rem;
+    /* ===== GRID PROFES ===== */
+    .teachers{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:3rem;
+      align-items:start;
     }
 
-    .teacher {
-      background: var(--primary);
-      color: white;
-      padding: 3rem 2rem;
-      text-align: center;
+    .teacher{
+      text-align:center;
+      padding:0 1rem;
+      color:var(--primary); /* por defecto, texto en verde corporativo */
     }
 
-    .teacher img {
-      width: 260px;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 2rem;
-      background: white;
+    .teacher img{
+      width:240px;
+      height:240px;
+      object-fit:cover;
+      border-radius:50%;
+      background:#fff;
+      display:block;
+      margin:0 auto 1.3rem;
     }
 
-    .teacher h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
+    /* NOMBRE: NEGRO (visible) */
+    .teacher h2{
+      color:var(--black);
+      font-size:1.9rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      margin-bottom:.4rem;
     }
 
-    .teacher h3 {
-      font-size: 1.1rem;
-      font-weight: 400;
-      margin-bottom: 2rem;
+    /* CARGO: VERDE */
+    .teacher h3{
+      color:var(--primary);
+      font-size:1.05rem;
+      font-weight:600;
+      margin-bottom:1.1rem;
     }
 
-    .teacher p {
-      text-align: justify;
-      text-align-last: center;
-      max-width: 500px;
-      margin: 0 auto;
+    /* TEXTO: JUSTIFICADO, EN VERDE */
+    .teacher p{
+      color:var(--primary);
+      max-width:520px;
+      margin:0 auto;
+      text-align:justify;
+      text-justify:inter-word;
+      text-align-last:center;
+      font-size:.98rem;
+      line-height:1.65;
     }
 
-    @media (max-width: 900px) {
-      .teachers {
-        grid-template-columns: 1fr;
+    @media (max-width: 900px){
+      .teachers{
+        grid-template-columns:1fr;
+      }
+      header{
+        padding:1rem 1.2rem;
+      }
+      .logo{
+        font-size:1.6rem;
       }
     }
-    /* ====== QUIÉNES SOMOS – AJUSTES VISUALES ====== */
-
-/* Fondo general verde muy claro */
-body {
-  background-color: #f3f7f4;
-}
-
-/* Título principal */
-.page-title {
-  text-align: center;
-  font-size: 2.4rem;
-  color: var(--primary);
-  margin: 6rem 0 3rem;
-}
-
-/* Contenedor de profesores */
-.team {
-  max-width: 1100px;
-  margin: 0 auto 5rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
-  padding: 0 2rem;
-}
-
-/* Tarjeta de profesor */
-.teacher {
-  background: transparent;
-  text-align: center;
-}
-
-/* Foto circular */
-.teacher img {
-  width: 220px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 1.5rem;
-}
-
-/* Nombre */
-.teacher h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.4rem;
-}
-
-/* Cargo */
-.teacher .role {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 1rem;
-}
-
-/* Texto */
-.teacher p {
-  text-align: justify;
-  text-justify: inter-word;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .team {
-    grid-template-columns: 1fr;
-  }
-}
-    /* ====== CORRECCIÓN DE CONTRASTE ====== */
-
-.teacher h3 {
-  color: #063c24; /* verde oscuro corporativo */
-}
-
-.teacher .role {
-  color: #2f4f3a;
-}
-
-.teacher p {
-  color: #1f1f1f;
-}
-    /* ====== AJUSTE FINAL DE COLORES PROFESORES ====== */
-
-/* Nombres en negro */
-.teacher h3 {
-  color: #000000;
-}
-
-/* Cargo y texto en verde corporativo */
-.teacher .role,
-.teacher p {
-  color: var(--primary);
-}
-    /* ===== AJUSTE COLORES QUIÉNES SOMOS ===== */
-
-/* Nombre del profesor */
-.profesor h3,
-.profesor h2 {
-  color: #000000;
-}
-
-/* Cargo del profesor */
-.profesor .cargo {
-  color: var(--primary);
-}
-
-/* Texto descriptivo */
-.profesor p {
-  color: var(--primary);
-}
-    /* ===== FORZAR NOMBRES EN NEGRO (VISIBLES) ===== */
-.profesor .nombre,
-.profesor .name,
-.profesor .profesor-nombre,
-.profesor .profesor-name,
-.profesor .titulo,
-.profesor .title,
-.profesor h1,
-.profesor h2,
-.profesor h3,
-.profesor strong {
-  color: #000 !important;
-  opacity: 1 !important;
-  text-shadow: none !important;
-}
   </style>
 </head>
 
@@ -281,7 +180,7 @@ body {
     <div class="teachers">
 
       <!-- MIGUEL -->
-      <div class="teacher">
+      <article class="teacher">
         <img src="miguel.PNG" alt="Miguel Ángel">
         <h2>MIGUEL ÁNGEL</h2>
         <h3>Profesor de Matemáticas · Dirección Académica</h3>
@@ -292,10 +191,10 @@ body {
           contenidos. Su objetivo es que el alumno no solo apruebe, sino que comprenda,
           gane seguridad y desarrolle autonomía en el estudio.
         </p>
-      </div>
+      </article>
 
       <!-- JULIO -->
-      <div class="teacher">
+      <article class="teacher">
         <img src="julio.PNG" alt="Julio Uceda">
         <h2>JULIO UCEDA</h2>
         <h3>Profesor de Matemáticas · Física · Química</h3>
@@ -306,7 +205,7 @@ body {
           EBAU. Su metodología fomenta el razonamiento, la corrección de errores y la
           confianza del alumno ante los exámenes.
         </p>
-      </div>
+      </article>
 
     </div>
   </section>
