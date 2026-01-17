@@ -95,8 +95,18 @@ const questions = [
 let currentStep = 0;
 let soundEnabled = true;
 
-// Contador de intentos (opcional)
-let attemptsThisStep = 0;
+// Imágenes de refuerzo que se mostrarán al alumno tras cada respuesta.
+// Estas rutas apuntan a archivos en la carpeta `assets`. Cuando se
+// acierta se elegirá aleatoriamente una de las imágenes de "clap", y
+// cuando se falla una de "sad".
+const successImages = ['clap1.png', 'clap2.png', 'clap3.png'];
+const failureImages = ['sad1.png', 'sad2.png', 'sad3.png'];
+
+// Variables de ayuda para mezclar las respuestas y saber cuál es la correcta
+// `displayedOptions` contendrá las dos opciones en el orden en que se muestran
+// `currentCorrectIndex` indica en qué posición de `displayedOptions` está la respuesta correcta
+let displayedOptions = [];
+let currentCorrectIndex = 0;
 
 const motivationalMessages = [
   'Paso a paso lo consigo',
@@ -121,33 +131,40 @@ function loadStep() {
     return;
   }
   const q = questions[currentStep];
-  attemptsThisStep = 0;
   document.getElementById('progress').textContent = `Paso ${
     currentStep + 1
   } de ${questions.length}`;
   document.getElementById('status').textContent = q.state;
   document.getElementById('question').textContent = q.question;
-  // Botones con etiqueta A/B (más claro para niños)
-  renderChoiceButton(document.getElementById('optionA'), 'A', q.options[0]);
-  renderChoiceButton(document.getElementById('optionB'), 'B', q.options[1]);
   document.getElementById('feedback').textContent = '';
+
+  // Ocultar la pegatina de animal de la pregunta anterior (si existe)
+  const sticker = document.getElementById('sticker');
+  if (sticker) {
+    sticker.classList.add('hidden');
+  }
+
+  // Alternar las opciones: en los pasos pares (índice 0, 2, 4...) la respuesta correcta
+  // se muestra en la izquierda; en los pasos impares se muestra en la derecha.
+  let order;
+  if (currentStep % 2 === 0) {
+    order = [0, 1];
+  } else {
+    order = [1, 0];
+  }
+  displayedOptions = order.map((i) => q.options[i]);
+  currentCorrectIndex = order.indexOf(q.correctIndex);
+
+  // Pintamos las opciones en los botones
+  document.getElementById('optionA').textContent = displayedOptions[0];
+  document.getElementById('optionB').textContent = displayedOptions[1];
+
   // Restablecer estilos y habilitar botones
   const buttons = document.querySelectorAll('.option-button');
   buttons.forEach((btn) => {
     btn.classList.remove('correct', 'incorrect');
     btn.disabled = false;
   });
-
-  updateStepDots();
-}
-
-function renderChoiceButton(btn, label, value) {
-  // Emoticonos/emoji sencillos para reforzar la opción
-  const labelEmoji = label === 'A' ? '🅰️' : '🅱️';
-  btn.innerHTML = `
-    <span class="choice-label">${labelEmoji} OPCIÓN ${label}</span>
-    <span class="choice-value">${value}</span>
-  `;
 }
 
 // Genera un tono simple usando la Web Audio API
@@ -184,15 +201,6 @@ function playIncorrectSound() {
   playTone(200, 0.3);
 }
 
-function playFinalFanfare() {
-  // Pequeña "fanfarria" (secuencia de tonos). Ligera y compatible con Safari.
-  if (!soundEnabled) return;
-  const notes = [523.25, 659.25, 783.99, 1046.5]; // Do-Mi-Sol-Do
-  notes.forEach((f, i) => {
-    setTimeout(() => playTone(f, 0.18), i * 190);
-  });
-}
-
 // Manejador para las respuestas del alumno
 function handleAnswer(index) {
   const q = questions[currentStep];
@@ -200,13 +208,22 @@ function handleAnswer(index) {
     document.getElementById('optionA'),
     document.getElementById('optionB'),
   ];
-  if (index === q.correctIndex) {
+  // Comparamos contra currentCorrectIndex calculado en loadStep
+  if (index === currentCorrectIndex) {
     // Respuesta correcta
     buttons[index].classList.add('correct');
-    const msg = attemptsThisStep === 0
-      ? `✅ ¡Correcto! Avanzas a ${q.newState}.`
-      : `✅ ¡Bien! Lo has conseguido. Avanzas a ${q.newState}.`;
-    document.getElementById('feedback').textContent = msg;
+    document.getElementById('feedback').textContent = `¡Correcto! Avanzas a ${
+      q.newState
+    }.`;
+    // Mostrar un animal aplaudiendo
+    const sticker = document.getElementById('sticker');
+    const stickerImg = document.getElementById('sticker-img');
+    if (sticker && stickerImg) {
+      const imgName =
+        successImages[Math.floor(Math.random() * successImages.length)];
+      stickerImg.src = 'assets/' + imgName;
+      sticker.classList.remove('hidden');
+    }
     playCorrectSound();
     // Desactivar botones para evitar pulsaciones múltiples
     buttons.forEach((btn) => {
@@ -219,9 +236,17 @@ function handleAnswer(index) {
     }, 1000);
   } else {
     // Respuesta incorrecta
-    attemptsThisStep += 1;
     buttons[index].classList.add('incorrect');
-    document.getElementById('feedback').textContent = '❌ No es ese. Inténtalo otra vez.';
+    document.getElementById('feedback').textContent = 'No es ese. Inténtalo otra vez.';
+    // Mostrar un animal triste
+    const sticker = document.getElementById('sticker');
+    const stickerImg = document.getElementById('sticker-img');
+    if (sticker && stickerImg) {
+      const imgName =
+        failureImages[Math.floor(Math.random() * failureImages.length)];
+      stickerImg.src = 'assets/' + imgName;
+      sticker.classList.remove('hidden');
+    }
     playIncorrectSound();
     // Eliminar el color rojo después de un momento para permitir reintento
     setTimeout(() => {
@@ -234,35 +259,31 @@ function handleAnswer(index) {
 function showFinalScreen() {
   document.getElementById('game-container').classList.add('hidden');
   const finalScreen = document.getElementById('final-screen');
-  document.getElementById('final-message').textContent =
-    '¡Has llegado a 15! ¡Eres un campeón/a! 🌟';
-  fireConfetti();
-  playFinalFanfare();
+  document.getElementById('final-message').innerHTML =
+    '¡Has llegado a 15! <br />¡Enhorabuena!';
+  // Mostrar un emoji grande como trofeo. Utilizamos <span> con rol decorativo.
+  const emojiContainer = document.getElementById('final-emoji');
+  if (emojiContainer) {
+    emojiContainer.textContent = '🎉🥳';
+  }
+  // Reproducir un sonido de celebración (subida de tonos)
+  playFinalSound();
   finalScreen.classList.remove('hidden');
 }
 
-// Genera confeti simple (sin librerías)
-function fireConfetti() {
-  const holder = document.getElementById('confetti');
-  if (!holder) return;
-  holder.innerHTML = '';
-  const colors = ['#ff4d6d', '#4dabf7', '#ffd43b', '#69db7c', '#845ef7'];
-  const pieces = 26;
-  for (let i = 0; i < pieces; i += 1) {
-    const piece = document.createElement('div');
-    piece.className = 'confetti-piece';
-    piece.style.left = `${Math.random() * 100}%`;
-    piece.style.background = colors[i % colors.length];
-    piece.style.animationDelay = `${Math.random() * 0.35}s`;
-    piece.style.transform = `rotate(${Math.random() * 180}deg)`;
-    holder.appendChild(piece);
-  }
+// Sonido especial para la pantalla final. Reproduce dos tonos en sucesión.
+function playFinalSound() {
+  if (!soundEnabled) return;
+  // Primer tono
+  playTone(600, 0.3);
+  setTimeout(() => {
+    playTone(800, 0.4);
+  }, 300);
 }
 
 // Reiniciar el juego desde el paso 0
 function restart() {
   currentStep = 0;
-  attemptsThisStep = 0;
   document.getElementById('final-screen').classList.add('hidden');
   document.getElementById('game-container').classList.remove('hidden');
   loadStep();
@@ -282,27 +303,4 @@ document.getElementById('toggle-sound').addEventListener('click', () => {
 
 // Inicializar la frase motivadora y el primer paso
 setMotivational();
-createStepDots();
 loadStep();
-
-function createStepDots() {
-  const dots = document.getElementById('step-dots');
-  if (!dots) return;
-  dots.innerHTML = '';
-  for (let i = 0; i < questions.length; i += 1) {
-    const dot = document.createElement('div');
-    dot.className = 'step-dot';
-    dot.setAttribute('aria-hidden', 'true');
-    dots.appendChild(dot);
-  }
-}
-
-function updateStepDots() {
-  const dots = document.querySelectorAll('.step-dot');
-  if (!dots || dots.length === 0) return;
-  dots.forEach((d, i) => {
-    d.classList.remove('done', 'current');
-    if (i < currentStep) d.classList.add('done');
-    if (i === currentStep) d.classList.add('current');
-  });
-}

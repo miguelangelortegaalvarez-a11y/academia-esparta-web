@@ -14,11 +14,7 @@
   <body>
     <!-- Cabecera fija con el nombre de la academia y subtítulo -->
     <header class="app-header">
-      <div class="header-badge" aria-hidden="true">➕ ➖</div>
-      <h1>
-        ACADEMIA ESPARTA
-        <span class="header-emoji" aria-hidden="true">⭐</span>
-      </h1>
+      <h1>ACADEMIA ESPARTA</h1>
       <h2>Matemáticas · Sumas y Restas</h2>
       <!-- Frase motivadora aleatoria insertada desde app.js -->
       <p id="motivational-text"></p>
@@ -27,19 +23,16 @@
     <!-- Contenedor principal del juego. aria-live="polite" anuncia
          dinámicamente los cambios de contenido a los lectores de pantalla. -->
     <main id="game-container" aria-live="polite">
-      <div class="background-decor" aria-hidden="true">
-        <span class="bubble b1">⭐</span>
-        <span class="bubble b2">🔢</span>
-        <span class="bubble b3">✏️</span>
-      </div>
       <!-- Progreso del camino: Paso N de 10 -->
       <div id="progress" class="progress"></div>
-      <!-- Camino visual: 10 puntos (se rellena desde app.js) -->
-      <div id="step-dots" class="step-dots" aria-hidden="true"></div>
       <!-- Estado actual (p.ej. “Empiezas en 5”, “Estás en 8”...) -->
       <div id="status" class="status"></div>
       <!-- Enunciado de la operación -->
       <div id="question" class="question"></div>
+      <!-- Contenedor para mostrar la pegatina de un animal que aplaude o está triste -->
+      <div id="sticker" class="sticker hidden" aria-hidden="true">
+        <img id="sticker-img" alt="Dibujo de animal" />
+      </div>
       <!-- Botones de respuesta -->
       <div class="options">
         <button id="optionA" class="option-button" aria-label="Opción A"></button>
@@ -51,44 +44,10 @@
 
     <!-- Pantalla final mostrada al completar todos los pasos -->
     <div id="final-screen" class="final-screen hidden">
-      <div class="final-illustration" aria-hidden="true">
-        <!-- Ilustración SVG (ligera, sin imágenes externas) -->
-        <svg class="trophy-svg" viewBox="0 0 320 220" role="img" aria-label="Trofeo">
-          <defs>
-            <linearGradient id="cup" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stop-color="#ffd36a" />
-              <stop offset="1" stop-color="#ffb300" />
-            </linearGradient>
-            <linearGradient id="base" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stop-color="#2f9d57" />
-              <stop offset="1" stop-color="#1e7a43" />
-            </linearGradient>
-          </defs>
-          <!-- Confeti -->
-          <g opacity="0.9">
-            <circle cx="35" cy="35" r="6" fill="#ff4d6d"/>
-            <circle cx="285" cy="40" r="5" fill="#4dabf7"/>
-            <circle cx="55" cy="85" r="4" fill="#ffd43b"/>
-            <circle cx="265" cy="85" r="4" fill="#69db7c"/>
-            <circle cx="100" cy="25" r="4" fill="#ffd43b"/>
-            <circle cx="230" cy="25" r="4" fill="#ff4d6d"/>
-          </g>
-          <!-- Copas / asas -->
-          <path d="M88 40c-22 0-40 18-40 40s18 40 40 40" fill="none" stroke="url(#cup)" stroke-width="14" stroke-linecap="round"/>
-          <path d="M232 40c22 0 40 18 40 40s-18 40-40 40" fill="none" stroke="url(#cup)" stroke-width="14" stroke-linecap="round"/>
-          <!-- Copa -->
-          <path d="M105 35h110c0 65-18 105-55 105s-55-40-55-105z" fill="url(#cup)" stroke="#d99000" stroke-width="4"/>
-          <!-- Estrella -->
-          <path d="M160 70l9 18 20 3-14 14 3 20-18-10-18 10 3-20-14-14 20-3z" fill="#fff3bf" stroke="#d99000" stroke-width="3"/>
-          <!-- Palo -->
-          <rect x="145" y="140" width="30" height="25" rx="6" fill="#f5c542" stroke="#d99000" stroke-width="4"/>
-          <!-- Base -->
-          <path d="M95 170h130c8 0 14 6 14 14v12H81v-12c0-8 6-14 14-14z" fill="url(#base)"/>
-          <text x="160" y="194" text-anchor="middle" font-size="18" font-weight="700" fill="#ffffff">¡Genial!</text>
-        </svg>
-        <div class="confetti" id="confetti"></div>
-      </div>
       <h2>¡META CONSEGUIDA!</h2>
+      <!-- Emoji de celebración grande. aria-hidden para que el lector de
+           pantalla ignore el contenido decorativo -->
+      <div id="final-emoji" class="final-emoji" aria-hidden="true"></div>
       <p id="final-message"></p>
       <button id="restart-final" class="restart-button">Reiniciar</button>
     </div>
