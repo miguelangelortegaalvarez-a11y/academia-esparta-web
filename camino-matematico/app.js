@@ -95,6 +95,9 @@ const questions = [
 let currentStep = 0;
 let soundEnabled = true;
 
+// Contador de intentos (opcional)
+let attemptsThisStep = 0;
+
 const motivationalMessages = [
   'Paso a paso lo consigo',
   'Hoy entreno mi mente',
@@ -118,13 +121,15 @@ function loadStep() {
     return;
   }
   const q = questions[currentStep];
+  attemptsThisStep = 0;
   document.getElementById('progress').textContent = `Paso ${
     currentStep + 1
   } de ${questions.length}`;
   document.getElementById('status').textContent = q.state;
   document.getElementById('question').textContent = q.question;
-  document.getElementById('optionA').textContent = q.options[0];
-  document.getElementById('optionB').textContent = q.options[1];
+  // Botones con etiqueta A/B (más claro para niños)
+  renderChoiceButton(document.getElementById('optionA'), 'A', q.options[0]);
+  renderChoiceButton(document.getElementById('optionB'), 'B', q.options[1]);
   document.getElementById('feedback').textContent = '';
   // Restablecer estilos y habilitar botones
   const buttons = document.querySelectorAll('.option-button');
@@ -132,6 +137,17 @@ function loadStep() {
     btn.classList.remove('correct', 'incorrect');
     btn.disabled = false;
   });
+
+  updateStepDots();
+}
+
+function renderChoiceButton(btn, label, value) {
+  // Emoticonos/emoji sencillos para reforzar la opción
+  const labelEmoji = label === 'A' ? '🅰️' : '🅱️';
+  btn.innerHTML = `
+    <span class="choice-label">${labelEmoji} OPCIÓN ${label}</span>
+    <span class="choice-value">${value}</span>
+  `;
 }
 
 // Genera un tono simple usando la Web Audio API
@@ -168,6 +184,15 @@ function playIncorrectSound() {
   playTone(200, 0.3);
 }
 
+function playFinalFanfare() {
+  // Pequeña "fanfarria" (secuencia de tonos). Ligera y compatible con Safari.
+  if (!soundEnabled) return;
+  const notes = [523.25, 659.25, 783.99, 1046.5]; // Do-Mi-Sol-Do
+  notes.forEach((f, i) => {
+    setTimeout(() => playTone(f, 0.18), i * 190);
+  });
+}
+
 // Manejador para las respuestas del alumno
 function handleAnswer(index) {
   const q = questions[currentStep];
@@ -178,9 +203,10 @@ function handleAnswer(index) {
   if (index === q.correctIndex) {
     // Respuesta correcta
     buttons[index].classList.add('correct');
-    document.getElementById('feedback').textContent = `¡Correcto! Avanzas a ${
-      q.newState
-    }.`;
+    const msg = attemptsThisStep === 0
+      ? `✅ ¡Correcto! Avanzas a ${q.newState}.`
+      : `✅ ¡Bien! Lo has conseguido. Avanzas a ${q.newState}.`;
+    document.getElementById('feedback').textContent = msg;
     playCorrectSound();
     // Desactivar botones para evitar pulsaciones múltiples
     buttons.forEach((btn) => {
@@ -193,8 +219,9 @@ function handleAnswer(index) {
     }, 1000);
   } else {
     // Respuesta incorrecta
+    attemptsThisStep += 1;
     buttons[index].classList.add('incorrect');
-    document.getElementById('feedback').textContent = 'No es ese. Inténtalo otra vez.';
+    document.getElementById('feedback').textContent = '❌ No es ese. Inténtalo otra vez.';
     playIncorrectSound();
     // Eliminar el color rojo después de un momento para permitir reintento
     setTimeout(() => {
@@ -208,13 +235,34 @@ function showFinalScreen() {
   document.getElementById('game-container').classList.add('hidden');
   const finalScreen = document.getElementById('final-screen');
   document.getElementById('final-message').textContent =
-    '¡Has llegado a 15! ¡Enhorabuena!';
+    '¡Has llegado a 15! ¡Eres un campeón/a! 🌟';
+  fireConfetti();
+  playFinalFanfare();
   finalScreen.classList.remove('hidden');
+}
+
+// Genera confeti simple (sin librerías)
+function fireConfetti() {
+  const holder = document.getElementById('confetti');
+  if (!holder) return;
+  holder.innerHTML = '';
+  const colors = ['#ff4d6d', '#4dabf7', '#ffd43b', '#69db7c', '#845ef7'];
+  const pieces = 26;
+  for (let i = 0; i < pieces; i += 1) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.background = colors[i % colors.length];
+    piece.style.animationDelay = `${Math.random() * 0.35}s`;
+    piece.style.transform = `rotate(${Math.random() * 180}deg)`;
+    holder.appendChild(piece);
+  }
 }
 
 // Reiniciar el juego desde el paso 0
 function restart() {
   currentStep = 0;
+  attemptsThisStep = 0;
   document.getElementById('final-screen').classList.add('hidden');
   document.getElementById('game-container').classList.remove('hidden');
   loadStep();
@@ -234,4 +282,27 @@ document.getElementById('toggle-sound').addEventListener('click', () => {
 
 // Inicializar la frase motivadora y el primer paso
 setMotivational();
+createStepDots();
 loadStep();
+
+function createStepDots() {
+  const dots = document.getElementById('step-dots');
+  if (!dots) return;
+  dots.innerHTML = '';
+  for (let i = 0; i < questions.length; i += 1) {
+    const dot = document.createElement('div');
+    dot.className = 'step-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    dots.appendChild(dot);
+  }
+}
+
+function updateStepDots() {
+  const dots = document.querySelectorAll('.step-dot');
+  if (!dots || dots.length === 0) return;
+  dots.forEach((d, i) => {
+    d.classList.remove('done', 'current');
+    if (i < currentStep) d.classList.add('done');
+    if (i === currentStep) d.classList.add('current');
+  });
+}
