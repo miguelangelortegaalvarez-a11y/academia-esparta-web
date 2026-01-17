@@ -1,0 +1,244 @@
+/*
+  Hoja de estilos de Camino Matemático
+
+  Este archivo define variables CSS para el color corporativo y estilos básicos
+  para crear una interfaz clara y accesible en tabletas. Las recomendaciones
+  internacionales sugieren que las áreas táctiles tengan al menos 44×44 píxeles
+  (iOS) o 48×48dp (Material Design)【638008952038423†L188-L239】.  Por ello, los
+  botones tienen una altura mínima generosa y márgenes adecuados para evitar
+  pulsaciones erróneas.
+*/
+
+:root {
+  /* Color corporativo; sustitúyelo por el valor exacto cuando lo conozcas */
+  --esparta-green: #2a9d55;
+  --correct-color: #2ecc71;
+  --incorrect-color: #e74c3c;
+  --button-bg: #f8f8f8;
+  --button-border: #cccccc;
+  --button-text: #333333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Verdana', 'Arial', sans-serif;
+  background: #ffffff;
+  color: #333333;
+  /* deja espacio para la cabecera fija */
+  padding-top: 120px;
+  min-height: 100vh;
+}
+
+/* Cabecera fija en la parte superior */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--esparta-green);
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.app-header h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.app-header p {
+  margin-top: 5px;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Contenedor principal */
+#game-container {
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.progress,
+.status,
+.question,
+.feedback {
+  margin-bottom: 15px;
+}
+
+.progress {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--esparta-green);
+}
+
+.status {
+  font-size: 1.4rem;
+}
+
+.question {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* Botones de respuesta */
+.option-button {
+  padding: 15px 20px;
+  font-size: 1.6rem;
+  border: 2px solid var(--button-border);
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-radius: 8px;
+  min-height: 64px;
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.option-button:hover,
+.option-button:focus {
+  background: var(--esparta-green);
+  color: #ffffff;
+  outline: none;
+}
+
+.option-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Colores de feedback en las opciones */
+.correct {
+  background: var(--correct-color) !important;
+  color: #ffffff !important;
+}
+
+.incorrect {
+  background: var(--incorrect-color) !important;
+  color: #ffffff !important;
+}
+
+.feedback {
+  font-size: 1.4rem;
+  min-height: 1.8rem;
+}
+
+/* Pantalla final */
+.final-screen {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.final-screen h2 {
+  font-size: 2.2rem;
+  color: var(--esparta-green);
+  margin-bottom: 10px;
+}
+
+/* Emoji de celebración grande al completar el camino */
+.final-emoji {
+  font-size: 3rem;
+  margin: 20px 0;
+  line-height: 1;
+}
+
+.final-screen p {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+/* Botones de reiniciar */
+.restart-button {
+  margin: 10px;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  border: none;
+  background: var(--esparta-green);
+  color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.restart-button:hover {
+  opacity: 0.9;
+}
+
+/* Controles fijos al fondo de la página */
+.controls {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  z-index: 1000;
+}
+
+/* Botón de sonido redondo */
+.sound-button {
+  font-size: 1.5rem;
+  background: var(--button-bg);
+  border: 2px solid var(--esparta-green);
+  color: var(--esparta-green);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sound-button:hover {
+  background: var(--esparta-green);
+  color: #ffffff;
+}
+
+/* Ocultar elementos */
+.hidden {
+  display: none;
+}
+
+@media screen and (min-width: 700px) {
+  /* En pantallas grandes los botones de respuesta se alinean en una fila */
+  .options {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .option-button {
+    flex: 1;
+    margin: 0 10px;
+  }
+}
+
+/* Pegatina de animal que aparece tras cada respuesta */
+.sticker {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+.sticker img {
+  max-width: 180px;
+  width: 50%;
+  height: auto;
+}
