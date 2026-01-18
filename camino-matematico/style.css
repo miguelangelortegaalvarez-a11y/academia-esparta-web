@@ -3,244 +3,284 @@
 ========================= */
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; padding: 0; }
-body {
+body{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: #000;
-  overflow: hidden;
+  background:#000;
+  overflow:hidden;
 }
 
 /* =========================
    Pantallas
 ========================= */
-.screen {
-  position: fixed;
-  inset: 0;
-  display: none;
-  width: 100vw;
-  height: 100vh;
+.screen{
+  position:fixed;
+  inset:0;
+  display:none;
+  width:100vw;
+  height:100vh;
+}
+.screen.is-active{ display:block; }
+
+/* Fondo */
+.screen-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-.screen.is-active { display: block; }
-
-/* Fondo de pantalla (imagen grande) */
-.screen-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Botones basados en imagen */
-.img-btn {
-  border: 0;
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
+/* Botones imagen */
+.img-btn{
+  border:0;
+  background:transparent;
+  padding:0;
+  cursor:pointer;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
-
-.img-btn img {
-  display: block;
-  width: clamp(180px, 40vw, 340px);
-  height: auto;
+.img-btn img{
+  display:block;
+  width:clamp(180px, 40vw, 340px);
+  height:auto;
 }
 
 /* =========================
    HOME
 ========================= */
-#screen-home .img-btn {
-  position: absolute;
-  left: 50%;
-  bottom: 7vh;
-  transform: translateX(-50%);
+#screen-home #home-next{
+  position:absolute;
+  left:50%;
+  bottom:7vh;
+  transform:translateX(-50%);
+  z-index:10;
 }
 
 /* =========================
-   GAME (ejercicio)
+   GAME
 ========================= */
 
 /* HUD */
-.hud {
-  position: absolute;
-  top: 2.2vh;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(92vw, 720px);
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
+.hud{
+  position:absolute;
+  top:2.2vh;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(92vw, 720px);
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  z-index:15;
 }
 
-.energy-wrap {
-  position: relative;
-  width: 100%;
-  height: 54px;
+.energy{
+  position:relative;
+  width:100%;
+  height:54px;
 }
 
-/* frame / fill / glow son imágenes en capas */
-.energy-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
+.energy-layer{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  pointer-events:none;
 }
 
-/* El fill lo metemos dentro de un contenedor con overflow hidden */
-.energy-fill {
-  position: absolute;
-  left: 7.2%;
-  top: 22%;
-  height: 38%;
-  width: 0%;
-  overflow: hidden;
-  border-radius: 999px;
-  pointer-events: none;
+/* Contenedor recorte del fill (HTML: .energy-fill-wrap) */
+.energy-fill-wrap{
+  position:absolute;
+  left:7.2%;
+  top:22%;
+  height:38%;
+  width:85.6%;
+  overflow:hidden;
+  border-radius:999px;
+  pointer-events:none;
 }
 
-.energy-fill img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+/* La imagen del fill (id="energy-fill") -> el JS le pondrá width % */
+#energy-fill{
+  position:absolute;
+  left:0;
+  top:0;
+  height:100%;
+  width:0%;
+  object-fit:cover;
 }
 
-#energy-text {
-  position: absolute;
-  right: 4%;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: 800;
-  font-size: 18px;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,.8);
-  pointer-events: none;
+#energy-text{
+  position:absolute;
+  right:4%;
+  top:50%;
+  transform:translateY(-50%);
+  font-weight:800;
+  font-size:18px;
+  color:#fff;
+  text-shadow:0 2px 6px rgba(0,0,0,.8);
+  pointer-events:none;
 }
 
-/* Personaje */
-.warrior {
-  position: absolute;
-  left: 50%;
-  top: 22vh;
-  transform: translateX(-50%);
-  width: clamp(150px, 30vw, 260px);
-  height: auto;
-  pointer-events: none;
+/* Guerrero */
+.warrior{
+  position:absolute;
+  left:50%;
+  top:22vh;
+  transform:translateX(-50%);
+  width:clamp(150px, 30vw, 260px);
+  height:auto;
+  pointer-events:none;
+  z-index:8;
 }
 
-/* Icono feedback (correct/wrong) */
-#feedback-icon {
-  position: absolute;
-  left: 50%;
-  top: 17vh;
-  transform: translateX(-50%);
-  width: clamp(60px, 12vw, 110px);
-  height: auto;
-  pointer-events: none;
-  filter: drop-shadow(0 8px 14px rgba(0,0,0,.55));
+/* =========================
+   PANEL (tu HTML real)
+========================= */
+.panel{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:min(94vw, 980px);
+  z-index:25;
 }
 
-/* Panel overlay */
-.message-panel {
-  position: absolute;
-  left: 50%;
-  top: 50vh;
-  transform: translateX(-50%);
-  width: min(92vw, 820px);
-  height: auto;
-  pointer-events: none;
+.panel-bg{
+  width:100%;
+  height:auto;
+  display:block;
+  pointer-events:none; /* clave: no bloquea clicks */
 }
 
-/* Zona de respuestas */
-.answers {
-  position: absolute;
-  left: 50%;
-  top: 58vh;
-  transform: translateX(-50%);
-  width: min(92vw, 820px);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  padding: 0 8px;
+.panel-content{
+  position:absolute;
+  inset:0;
+  pointer-events:auto;
 }
 
-/* Botón reutilizable azul (imagen) */
-.answer-btn {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+/* Pregunta */
+.question{
+  position:absolute;
+  left:50%;
+  top:18%;
+  transform:translateX(-50%);
+  width:90%;
+  text-align:center;
+  font-weight:900;
+  font-size:clamp(20px, 4.5vw, 40px);
+  color:#fff;
+  text-shadow:0 3px 10px rgba(0,0,0,.85);
 }
 
-.answer-btn img {
-  width: 100%;
-  height: auto;
-  max-width: 520px;
-  filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
+/* Respuestas */
+.answers{
+  position:absolute;
+  left:50%;
+  top:58%;
+  transform:translateX(-50%);
+  width:88%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
 }
 
-/* estado seleccionado */
-.answer-btn.is-selected img {
-  transform: translateY(-2px) scale(1.02);
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
+.answer-btn{
+  position:relative;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  pointer-events:auto;
 }
 
-/* Número encima (lo activaremos en el siguiente paso del index)
-   Si el index ya tiene un <span class="answer-text">, se verá.
-*/
-.answer-text {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  font-size: clamp(22px, 5vw, 42px);
-  color: #fff;
-  text-shadow: 0 3px 10px rgba(0,0,0,.9);
-  pointer-events: none;
+.answer-btn img{
+  width:100%;
+  height:auto;
+  max-width:520px;
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
 }
 
-/* Botón comprobar */
-#btn-check {
-  position: absolute;
-  left: 50%;
-  bottom: 6vh;
-  transform: translateX(-50%);
+.answer-btn.is-selected img{
+  transform:translateY(-2px) scale(1.02);
+  filter:drop-shadow(0 10px 18px rgba(0,0,0,.55));
 }
 
-#btn-check img {
-  width: clamp(200px, 46vw, 380px);
+.answer-text{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  font-size:clamp(22px, 5vw, 42px);
+  color:#fff;
+  text-shadow:0 3px 10px rgba(0,0,0,.9);
+  pointer-events:none;
 }
+
+/* Acciones (botón comprobar) */
+.actions{
+  position:absolute;
+  left:50%;
+  bottom:6%;
+  transform:translateX(-50%);
+  pointer-events:auto;
+}
+
+#btn-check img{
+  width:clamp(200px, 46vw, 380px);
+}
+
+/* Feedback (HTML: #icon-correct y #icon-wrong) */
+.feedback{
+  position:absolute;
+  left:50%;
+  top:10%;
+  transform:translateX(-50%);
+  width:clamp(70px, 14vw, 120px);
+  pointer-events:none;
+}
+.feedback .icon{
+  width:100%;
+  height:auto;
+  display:none; /* ocultos por defecto */
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,.55));
+}
+.icon[hidden]{ display:none !important; }
+
+/* =========================
+   Siguiente flotante (OCULTO)
+   -> elimina el “doble siguiente”
+========================= */
+#btn-next{ display:none; }
 
 /* =========================
    FINAL
 ========================= */
-#screen-final .final-warrior {
-  position: absolute;
-  left: 50%;
-  top: 52vh;
-  transform: translate(-50%, -50%);
-  width: clamp(160px, 32vw, 280px);
-  height: auto;
-  pointer-events: none;
+#screen-final .final-warrior{
+  position:absolute;
+  left:50%;
+  top:52vh;
+  transform:translate(-50%, -50%);
+  width:clamp(160px, 32vw, 280px);
+  height:auto;
+  pointer-events:none;
 }
 
-#screen-final #btn-retry {
-  position: absolute;
-  left: 50%;
-  bottom: 7vh;
-  transform: translateX(-50%);
+#screen-final #final-retry{
+  position:absolute;
+  left:50%;
+  bottom:7vh;
+  transform:translateX(-50%);
 }
 
 /* =========================
-   Ajustes responsive extra
+   Responsive
 ========================= */
-@media (max-height: 700px) {
-  .warrior { top: 20vh; }
-  #feedback-icon { top: 14vh; }
-  .answers { top: 56vh; }
-  #btn-check { bottom: 4.5vh; }
+@media (max-height: 700px){
+  .warrior{ top:20vh; }
+  .question{ top:16%; }
+  .answers{ top:56%; }
+  .actions{ bottom:5%; }
 }
