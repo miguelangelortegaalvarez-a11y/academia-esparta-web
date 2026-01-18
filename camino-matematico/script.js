@@ -13,7 +13,8 @@ const QUESTIONS = [
 let currentIndex = 0;
 let selectedAnswer = null;
 let locked = false;
-
+let correctCount = 0;
+const GOAL = 10;
 // Assets (tus nombres actuales con doble extensión)
 const ASSETS = {
   warrior: {
