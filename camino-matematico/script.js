@@ -1,5 +1,5 @@
 // =======================
-// Camino Matemático - script.js (adaptado a tus IDs y .PNG)
+// Camino Matemático - script.js (estable en iPad / sin btn-next)
 // =======================
 
 // Preguntas demo (luego las cambiamos por niveles)
@@ -13,40 +13,11 @@ const QUESTIONS = [
 let currentIndex = 0;
 let energy = 0; // 0..100
 
-// =======================
-// DOM (IDs reales de tu index)
-// =======================
+// Estado interacción
+let selectedAnswer = null;
+let locked = false;
 
-const screens = {
-  home: document.getElementById("screen-home"),
-  game: document.getElementById("screen-game"),
-  final: document.getElementById("screen-final"),
-};
-
-// Botones reales
-const btnHomeNext = document.getElementById("home-next");
-const btnCheck = document.getElementById("btn-check");
-const btnNext = document.getElementById("btn-next");       // el flotante (si lo quieres usar)
-const btnFinalRetry = document.getElementById("final-retry");
-
-// Elementos juego
-const warriorImg = document.getElementById("warrior");
-const questionEl = document.getElementById("question");
-
-const answerButtons = Array.from(document.querySelectorAll(".answer-btn"));
-const answerAText = document.getElementById("answer-a-text");
-const answerBText = document.getElementById("answer-b-text");
-
-const iconCorrect = document.getElementById("icon-correct");
-const iconWrong = document.getElementById("icon-wrong");
-
-const energyText = document.getElementById("energy-text");
-const energyFillImg = document.getElementById("energy-fill"); // <img> del fill
-
-// =======================
-// Rutas assets (según tus capturas: muchos acaban en .PNG)
-// =======================
-
+// Assets (ojo: según tus capturas, los warrior tienen doble extensión .png.PNG)
 const ASSETS = {
   warrior: {
     idle: "./assets/warrior/warrior-idle.png.PNG",
@@ -55,98 +26,79 @@ const ASSETS = {
   },
 };
 
-// =======================
-// Estado interacción
-// =======================
+function $(id) {
+  return document.getElementById(id);
+}
 
-let selectedAnswer = null;
-let locked = false;
-
-// =======================
-// Helpers UI
-// =======================
-
-function showScreen(name) {
+function showScreen(screens, name) {
   Object.values(screens).forEach((el) => el && el.classList.remove("is-active"));
   screens[name] && screens[name].classList.add("is-active");
 }
 
-function setWarrior(state) {
+function setWarrior(warriorImg, state) {
   if (!warriorImg) return;
   if (state === "idle") warriorImg.src = ASSETS.warrior.idle;
   if (state === "power") warriorImg.src = ASSETS.warrior.power;
   if (state === "sad") warriorImg.src = ASSETS.warrior.sad;
 }
 
-function hideFeedback() {
+function hideFeedback(iconCorrect, iconWrong) {
   if (iconCorrect) iconCorrect.style.display = "none";
   if (iconWrong) iconWrong.style.display = "none";
 }
 
-function showFeedback(type) {
-  // type: "correct" | "wrong"
-  hideFeedback();
+function showFeedback(iconCorrect, iconWrong, type) {
+  hideFeedback(iconCorrect, iconWrong);
   if (type === "correct" && iconCorrect) iconCorrect.style.display = "block";
   if (type === "wrong" && iconWrong) iconWrong.style.display = "block";
 }
 
-function setEnergy(newValue) {
-  energy = Math.max(0, Math.min(100, newValue));
-  updateEnergyUI();
+function clamp(n, a, b) {
+  return Math.max(a, Math.min(b, n));
 }
 
-function updateEnergyUI() {
-  // Texto
-  if (energyText) energyText.textContent = String(energy);
+function updateEnergyUI(energyText, energyFillImg, value) {
+  if (energyText) energyText.textContent = String(value);
 
-  // Relleno: como es una IMAGEN, usamos clip-path para simular el progreso
-  // (0% = invisible, 100% = completa)
+  // Con tu CSS actual, lo más robusto es controlar el ancho del propio <img>
+  // (va dentro de un contenedor con overflow hidden)
   if (energyFillImg) {
-    const p = energy / 100;
-    energyFillImg.style.clipPath = `inset(0 ${100 - p * 100}% 0 0)`;
-    energyFillImg.style.webkitClipPath = `inset(0 ${100 - p * 100}% 0 0)`;
+    energyFillImg.style.width = `${value}%`;
   }
 }
-
-function resetSelectionUI() {
-  selectedAnswer = null;
-  answerButtons.forEach((btn) => btn.classList.remove("is-selected"));
-}
-
-// =======================
-// Lógica de preguntas
-// =======================
 
 function currentQuestion() {
   return QUESTIONS[currentIndex % QUESTIONS.length];
 }
 
-function loadQuestion() {
+function resetSelectionUI(answerButtons) {
+  selectedAnswer = null;
+  answerButtons.forEach((btn) => btn.classList.remove("is-selected"));
+}
+
+function loadQuestion(ctx) {
   locked = false;
-  resetSelectionUI();
-  hideFeedback();
-  setWarrior("idle");
+  resetSelectionUI(ctx.answerButtons);
+  hideFeedback(ctx.iconCorrect, ctx.iconWrong);
+  setWarrior(ctx.warriorImg, "idle");
 
   const q = currentQuestion();
 
-  if (questionEl) {
-    questionEl.textContent = `${q.a} ${q.op} ${q.b} = ?`;
+  if (ctx.questionEl) {
+    ctx.questionEl.textContent = `${q.a} ${q.op} ${q.b} = ?`;
   }
 
   // Aleatoriza posición correcta/incorrecta
   const options = [q.correct, q.wrong].sort(() => Math.random() - 0.5);
 
-  if (answerButtons[0]) answerButtons[0].dataset.value = String(options[0]);
-  if (answerButtons[1]) answerButtons[1].dataset.value = String(options[1]);
+  if (ctx.answerButtons[0]) ctx.answerButtons[0].dataset.value = String(options[0]);
+  if (ctx.answerButtons[1]) ctx.answerButtons[1].dataset.value = String(options[1]);
 
-  if (answerAText) answerAText.textContent = String(options[0]);
-  if (answerBText) answerBText.textContent = String(options[1]);
-
-  // Oculta botón "Siguiente" flotante hasta que se compruebe (si lo usas)
-  if (btnNext) btnNext.style.display = "none";
+  if (ctx.answerAText) ctx.answerAText.textContent = String(options[0]);
+  if (ctx.answerBText) ctx.answerBText.textContent = String(options[1]);
 }
 
-function checkAnswer() {
+function checkAnswer(ctx) {
   if (locked) return;
   if (selectedAnswer === null) return;
 
@@ -156,41 +108,87 @@ function checkAnswer() {
   const isCorrect = Number(selectedAnswer) === Number(q.correct);
 
   if (isCorrect) {
-    setWarrior("power");
-    showFeedback("correct");
-    setEnergy(energy + 10);
+    setWarrior(ctx.warriorImg, "power");
+    showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
+    energy = clamp(energy + 10, 0, 100);
+    updateEnergyUI(ctx.energyText, ctx.energyFillImg, energy);
   } else {
-    setWarrior("sad");
-    showFeedback("wrong");
+    setWarrior(ctx.warriorImg, "sad");
+    showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
   }
-
-  // Si quieres usar el botón flotante "Siguiente"
-  if (btnNext) btnNext.style.display = "block";
 
   // Si llega a 100 => final
   if (energy >= 100) {
-    setTimeout(() => showScreen("final"), 500);
+    setTimeout(() => showScreen(ctx.screens, "final"), 600);
+    return;
   }
+
+  // Pasar a la siguiente pregunta automáticamente (sin botón extra)
+  setTimeout(() => {
+    currentIndex += 1;
+    loadQuestion(ctx);
+  }, 700);
 }
 
-function goNextQuestion() {
-  if (!locked) return; // solo después de comprobar
-  currentIndex += 1;
-  loadQuestion();
-}
+function init() {
+  // Pantallas
+  const screens = {
+    home: $("screen-home"),
+    game: $("screen-game"),
+    final: $("screen-final"),
+  };
 
-// =======================
-// Eventos
-// =======================
+  // Botones
+  const btnHomeNext = $("home-next");
+  const btnCheck = $("btn-check");
+  const btnFinalRetry = $("final-retry");
 
-function wireEvents() {
+  // Juego
+  const warriorImg = $("warrior");
+  const questionEl = $("question");
+
+  const answerButtons = Array.from(document.querySelectorAll(".answer-btn"));
+  const answerAText = $("answer-a-text");
+  const answerBText = $("answer-b-text");
+
+  const iconCorrect = $("icon-correct");
+  const iconWrong = $("icon-wrong");
+
+  const energyText = $("energy-text");
+  const energyFillImg = $("energy-fill");
+
+  const ctx = {
+    screens,
+    btnHomeNext,
+    btnCheck,
+    btnFinalRetry,
+    warriorImg,
+    questionEl,
+    answerButtons,
+    answerAText,
+    answerBText,
+    iconCorrect,
+    iconWrong,
+    energyText,
+    energyFillImg,
+  };
+
+  // Estado inicial
+  energy = 0;
+  currentIndex = 0;
+  updateEnergyUI(energyText, energyFillImg, energy);
+  setWarrior(warriorImg, "idle");
+  hideFeedback(iconCorrect, iconWrong);
+  showScreen(screens, "home");
+
   // HOME -> GAME
   if (btnHomeNext) {
     btnHomeNext.addEventListener("click", () => {
-      showScreen("game");
-      setEnergy(0);
+      showScreen(screens, "game");
+      energy = 0;
       currentIndex = 0;
-      loadQuestion();
+      updateEnergyUI(energyText, energyFillImg, energy);
+      loadQuestion(ctx);
     });
   }
 
@@ -207,40 +205,31 @@ function wireEvents() {
 
   // Comprobar
   if (btnCheck) {
-    btnCheck.addEventListener("click", () => checkAnswer());
+    btnCheck.addEventListener("click", () => checkAnswer(ctx));
   }
 
-  // Botón flotante siguiente (si existe)
-  if (btnNext) {
-    btnNext.addEventListener("click", () => goNextQuestion());
-  }
-
-  // FINAL -> HOME (reinicio)
+  // FINAL -> HOME
   if (btnFinalRetry) {
     btnFinalRetry.addEventListener("click", () => {
-      setEnergy(0);
+      energy = 0;
       currentIndex = 0;
-      hideFeedback();
-      setWarrior("idle");
-      resetSelectionUI();
-      showScreen("home");
+      locked = false;
+      selectedAnswer = null;
+
+      updateEnergyUI(energyText, energyFillImg, energy);
+      hideFeedback(iconCorrect, iconWrong);
+      setWarrior(warriorImg, "idle");
+      resetSelectionUI(answerButtons);
+      showScreen(screens, "home");
     });
   }
 }
 
-// =======================
-// Inicio seguro (evita que un null rompa todo)
-// =======================
-
-(function init() {
+// Arranque seguro (iPad/Safari)
+document.addEventListener("DOMContentLoaded", () => {
   try {
-    wireEvents();
-    showScreen("home");
-    setEnergy(0);
-    setWarrior("idle");
-    hideFeedback();
+    init();
   } catch (e) {
-    // Si algo falla, al menos lo vemos en consola
     console.error("Error iniciando el juego:", e);
   }
-})();
+});
