@@ -94,3 +94,36 @@
   z-index: 25;
   pointer-events: none;
 }
+/* =========================
+   FIX: quitar "barra blanca" detrás de los números
+   (restos de estilos antiguos / pseudo-elementos)
+========================= */
+
+/* 1) Asegura que el contenedor no pinta fondo */
+#screen-game .answers {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* 2) Asegura que los botones no pintan nada detrás */
+#screen-game .answer-btn {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  outline: none !important;
+}
+
+/* 3) Mata cualquier pseudo-elemento que dibuje una barra */
+#screen-game .answers::before,
+#screen-game .answers::after,
+#screen-game .answer-btn::before,
+#screen-game .answer-btn::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 4) Si la "barra" viene de una imagen antigua dentro de answers, la escondemos */
+#screen-game .answers img {
+  display: none !important;
+}
