@@ -58,7 +58,11 @@ function resetSelectionUI(answerButtons) {
 function currentQuestion() {
   return QUESTIONS[currentIndex % QUESTIONS.length];
 }
-
+function updateProgress(ctx) {
+  const pct = Math.min(100, (correctCount / GOAL) * 100);
+  if (ctx.progressFill) ctx.progressFill.style.width = pct + "%";
+  if (ctx.progressText) ctx.progressText.textContent = `${correctCount}/${GOAL}`;
+}
 function loadQuestion(ctx) {
   locked = false;
   resetSelectionUI(ctx.answerButtons);
