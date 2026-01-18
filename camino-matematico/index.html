@@ -8,66 +8,56 @@
 </head>
 <body>
 
-  <!-- =========================
-       HOME
-  ========================== -->
-  <section id="screen-home" class="screen is-active">
+  <!-- HOME -->
+  <section id="screen-home" class="screen is-active" aria-label="Pantalla inicial">
     <img
       class="screen-bg"
       src="./assets/ui/screens/screen-home.png.PNG"
       alt="Pantalla inicial"
     />
 
-    <button id="home-next" class="img-btn">
-      <img src="./assets/ui/buttons/btn-next.PNG" alt="Empezar" />
+    <button id="home-next" class="img-btn" aria-label="Siguiente">
+      <img src="./assets/ui/buttons/btn-next.PNG" alt="Siguiente" />
     </button>
   </section>
 
-  <!-- =========================
-       GAME
-  ========================== -->
-  <section id="screen-game" class="screen">
-
-    <!-- FONDO DOJO -->
+  <!-- GAME -->
+  <section id="screen-game" class="screen" aria-label="Pantalla de ejercicio">
+    <!-- Fondo -->
     <img
       class="screen-bg"
-      src="./assets/backgrounds/bg-dojo.PNG"
+      src="./assets/backgrounds/bg-dojo.png.PNG"
       alt="Dojo"
     />
 
-    <!-- =========================
-         HUD ENERGÍA (SOLO BARRA)
-    ========================== -->
+    <!-- ENERGÍA (solo barra que se rellena) -->
     <div class="hud">
-      <div class="energy-wrap">
+      <div class="energy">
+        <img class="energy-layer" src="./assets/ui/energy/energy-frame.PNG" alt="" />
+
+        <!-- IMPORTANTE: aquí NO hay ningún rectángulo extra.
+             El relleno se controla desde script.js con clip-path sobre #energy-fill -->
         <img
-          class="energy-layer"
-          src="./assets/ui/energy/energy-frame.PNG"
+          id="energy-fill"
+          class="energy-layer energy-fill"
+          src="./assets/ui/energy/energy-fill.PNG"
+          alt=""
+        />
+        <img
+          id="energy-glow"
+          class="energy-layer energy-glow"
+          src="./assets/ui/energy/energy-glow.PNG"
           alt=""
         />
 
-        <div class="energy-fill">
-          <img
-            id="energy-fill"
-            src="./assets/ui/energy/energy-fill.PNG"
-            alt=""
-          />
-        </div>
-
-        <div id="energy-text">0</div>
+        <div id="energy-text" class="energy-text">0</div>
       </div>
     </div>
 
-    <!-- =========================
-         PREGUNTA
-    ========================== -->
-    <div id="question" class="question">
-      3 + 2 = ?
-    </div>
+    <!-- PREGUNTA (LA SUMA/RESTA) -->
+    <div id="question" class="question">3 + 2 = ?</div>
 
-    <!-- =========================
-         PERSONAJE (CENTRO ZONA COMBATE)
-    ========================== -->
+    <!-- PERSONAJE -->
     <img
       id="warrior"
       class="warrior"
@@ -75,66 +65,54 @@
       alt="Guerrero"
     />
 
-    <!-- =========================
-         RESPUESTAS (IZQ / DER)
-    ========================== -->
-    <div class="answers">
-      <button class="answer-btn img-btn">
-        <span id="answer-a-text" class="answer-text">5</span>
+    <!-- RESPUESTAS (solo números clicables, sin imagen "Siguiente") -->
+    <div class="answers" role="group" aria-label="Respuestas">
+      <button class="answer-btn" data-index="0" type="button" aria-label="Respuesta A">
+        <span class="answer-text" id="answer-a-text">0</span>
       </button>
 
-      <button class="answer-btn img-btn">
-        <span id="answer-b-text" class="answer-text">6</span>
+      <button class="answer-btn" data-index="1" type="button" aria-label="Respuesta B">
+        <span class="answer-text" id="answer-b-text">0</span>
       </button>
     </div>
 
-    <!-- =========================
-         BOTÓN COMPROBAR
-    ========================== -->
-    <button id="btn-check" class="img-btn">
+    <!-- BOTÓN COMPROBAR -->
+    <button id="btn-check" class="img-btn" type="button" aria-label="Comprobar">
       <img src="./assets/ui/buttons/btn-check.PNG" alt="Comprobar" />
     </button>
 
-    <!-- =========================
-         FEEDBACK
-    ========================== -->
+    <!-- FEEDBACK -->
     <img
       id="icon-correct"
+      class="icon-feedback"
       src="./assets/ui/icons/icon-correct.PNG"
       alt="Correcto"
       style="display:none"
     />
-
     <img
       id="icon-wrong"
+      class="icon-feedback"
       src="./assets/ui/icons/icon-wrong.PNG"
       alt="Incorrecto"
       style="display:none"
     />
-
-    <!-- BOTÓN SIGUIENTE (OCULTO HASTA ACIERTO) -->
-    <button id="btn-next" class="img-btn" style="display:none">
-      <img src="./assets/ui/buttons/btn-next.PNG" alt="Siguiente" />
-    </button>
   </section>
 
-  <!-- =========================
-       FINAL
-  ========================== -->
-  <section id="screen-final" class="screen">
+  <!-- FINAL -->
+  <section id="screen-final" class="screen" aria-label="Pantalla final">
     <img
       class="screen-bg"
       src="./assets/ui/screens/screen-final.PNG"
-      alt="Final"
+      alt="Pantalla final"
     />
 
     <img
       class="final-warrior"
       src="./assets/warrior/warrior-power.png.PNG"
-      alt="Guerrero"
+      alt="Guerrero power"
     />
 
-    <button id="final-retry" class="img-btn">
+    <button id="final-retry" class="img-btn" aria-label="Reintentar">
       <img src="./assets/ui/buttons/btn-retry.PNG" alt="Reintentar" />
     </button>
   </section>
