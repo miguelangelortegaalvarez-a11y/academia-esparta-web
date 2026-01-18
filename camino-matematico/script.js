@@ -172,9 +172,19 @@ const progressText = $("progress-text");
   // HOME -> GAME
   if (btnHomeNext) {
     btnHomeNext.addEventListener("click", () => {
-      currentIndex = 0;
-      showScreen(screens, "game");
-      loadQuestion(ctx);
+    currentIndex = 0;
+correctCount = 0;
+locked = false;
+selectedAnswer = null;
+
+updateProgress(ctx);
+
+if (ctx.progressFill && ctx.progressFill.parentElement) {
+  ctx.progressFill.parentElement.classList.remove("complete");
+}
+
+showScreen(screens, "game");
+loadQuestion(ctx);
     });
   }
 
