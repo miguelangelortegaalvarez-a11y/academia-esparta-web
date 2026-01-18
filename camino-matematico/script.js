@@ -1,7 +1,8 @@
 // =======================
-// Configuración del juego
+// Camino Matemático - script.js (adaptado a tus IDs y .PNG)
 // =======================
 
+// Preguntas demo (luego las cambiamos por niveles)
 const QUESTIONS = [
   { a: 3, b: 2, op: "+", correct: 5, wrong: 6 },
   { a: 7, b: 4, op: "-", correct: 3, wrong: 2 },
@@ -10,38 +11,42 @@ const QUESTIONS = [
 ];
 
 let currentIndex = 0;
+let energy = 0; // 0..100
 
-// Energía: empieza en 0, sube +10 por acierto, max 100, no baja nunca.
-let energy = 0;
+// =======================
+// DOM (IDs reales de tu index)
+// =======================
 
-// Estado de pantalla
 const screens = {
   home: document.getElementById("screen-home"),
   game: document.getElementById("screen-game"),
   final: document.getElementById("screen-final"),
 };
 
-// Botones (IDs reales del index.html)
+// Botones reales
 const btnHomeNext = document.getElementById("home-next");
 const btnCheck = document.getElementById("btn-check");
-const btnNext = document.getElementById("btn-next");
+const btnNext = document.getElementById("btn-next");       // el flotante (si lo quieres usar)
 const btnFinalRetry = document.getElementById("final-retry");
 
-// Elementos de juego
+// Elementos juego
 const warriorImg = document.getElementById("warrior");
+const questionEl = document.getElementById("question");
+
 const answerButtons = Array.from(document.querySelectorAll(".answer-btn"));
 const answerAText = document.getElementById("answer-a-text");
 const answerBText = document.getElementById("answer-b-text");
 
-// Feedback (en tu HTML hay 2 iconos separados)
 const iconCorrect = document.getElementById("icon-correct");
 const iconWrong = document.getElementById("icon-wrong");
 
-// Energía UI (tus elementos reales del HTML)
 const energyText = document.getElementById("energy-text");
-const energyFillImg = document.getElementById("energy-fill"); // <img> que vamos a recortar con clipPath
+const energyFillImg = document.getElementById("energy-fill"); // <img> del fill
 
-// Rutas assets (EN MAYÚSCULAS .PNG según tus carpetas)
+// =======================
+// Rutas assets (según tus capturas: muchos acaban en .PNG)
+// =======================
+
 const ASSETS = {
   warrior: {
     idle: "./assets/warrior/warrior-idle.png.PNG",
@@ -50,7 +55,10 @@ const ASSETS = {
   },
 };
 
-// Selección y bloqueo
+// =======================
+// Estado interacción
+// =======================
+
 let selectedAnswer = null;
 let locked = false;
 
@@ -59,23 +67,25 @@ let locked = false;
 // =======================
 
 function showScreen(name) {
-  Object.values(screens).forEach((el) => el.classList.remove("is-active"));
-  screens[name].classList.add("is-active");
+  Object.values(screens).forEach((el) => el && el.classList.remove("is-active"));
+  screens[name] && screens[name].classList.add("is-active");
 }
 
 function setWarrior(state) {
+  if (!warriorImg) return;
   if (state === "idle") warriorImg.src = ASSETS.warrior.idle;
   if (state === "power") warriorImg.src = ASSETS.warrior.power;
   if (state === "sad") warriorImg.src = ASSETS.warrior.sad;
 }
 
-function showFeedback(type) {
-  // type: "correct" | "wrong" | null
+function hideFeedback() {
   if (iconCorrect) iconCorrect.style.display = "none";
   if (iconWrong) iconWrong.style.display = "none";
+}
 
-  if (!type) return;
-
+function showFeedback(type) {
+  // type: "correct" | "wrong"
+  hideFeedback();
   if (type === "correct" && iconCorrect) iconCorrect.style.display = "block";
   if (type === "wrong" && iconWrong) iconWrong.style.display = "block";
 }
@@ -86,12 +96,15 @@ function setEnergy(newValue) {
 }
 
 function updateEnergyUI() {
+  // Texto
   if (energyText) energyText.textContent = String(energy);
 
-  // Recorte horizontal del <img> según porcentaje (clip-path)
+  // Relleno: como es una IMAGEN, usamos clip-path para simular el progreso
+  // (0% = invisible, 100% = completa)
   if (energyFillImg) {
-    const p = Math.max(0, Math.min(100, energy));
-    energyFillImg.style.clipPath = `inset(0 ${100 - p}% 0 0)`;
+    const p = energy / 100;
+    energyFillImg.style.clipPath = `inset(0 ${100 - p * 100}% 0 0)`;
+    energyFillImg.style.webkitClipPath = `inset(0 ${100 - p * 100}% 0 0)`;
   }
 }
 
@@ -111,26 +124,26 @@ function currentQuestion() {
 function loadQuestion() {
   locked = false;
   resetSelectionUI();
-  showFeedback(null);
+  hideFeedback();
   setWarrior("idle");
-
-  // Ocultar botón siguiente (solo debe salir tras comprobar)
-  if (btnNext) btnNext.style.display = "none";
 
   const q = currentQuestion();
 
-  // Generar texto de la pregunta
-  const questionEl = document.getElementById("question");
-  if (questionEl) questionEl.textContent = `${q.a} ${q.op} ${q.b} = ?`;
+  if (questionEl) {
+    questionEl.textContent = `${q.a} ${q.op} ${q.b} = ?`;
+  }
 
-  // Aleatorizar posición de correct/wrong
+  // Aleatoriza posición correcta/incorrecta
   const options = [q.correct, q.wrong].sort(() => Math.random() - 0.5);
 
-  // Asignar valores a botones
-  answerButtons[0].dataset.value = String(options[0]);
-  answerButtons[1].dataset.value = String(options[1]);
-  answerAText.textContent = String(options[0]);
-  answerBText.textContent = String(options[1]);
+  if (answerButtons[0]) answerButtons[0].dataset.value = String(options[0]);
+  if (answerButtons[1]) answerButtons[1].dataset.value = String(options[1]);
+
+  if (answerAText) answerAText.textContent = String(options[0]);
+  if (answerBText) answerBText.textContent = String(options[1]);
+
+  // Oculta botón "Siguiente" flotante hasta que se compruebe (si lo usas)
+  if (btnNext) btnNext.style.display = "none";
 }
 
 function checkAnswer() {
@@ -151,21 +164,17 @@ function checkAnswer() {
     showFeedback("wrong");
   }
 
-  // Mostrar botón siguiente tras comprobar
+  // Si quieres usar el botón flotante "Siguiente"
   if (btnNext) btnNext.style.display = "block";
 
-  // Si energía llega a 100 -> pantalla final
+  // Si llega a 100 => final
   if (energy >= 100) {
-    setTimeout(() => {
-      showScreen("final");
-    }, 400);
+    setTimeout(() => showScreen("final"), 500);
   }
 }
 
 function goNextQuestion() {
   if (!locked) return; // solo después de comprobar
-  if (energy >= 100) return;
-
   currentIndex += 1;
   loadQuestion();
 }
@@ -174,55 +183,64 @@ function goNextQuestion() {
 // Eventos
 // =======================
 
-if (btnHomeNext) {
-  btnHomeNext.addEventListener("click", () => {
-    showScreen("game");
-    setEnergy(0);
-    currentIndex = 0;
-    loadQuestion();
+function wireEvents() {
+  // HOME -> GAME
+  if (btnHomeNext) {
+    btnHomeNext.addEventListener("click", () => {
+      showScreen("game");
+      setEnergy(0);
+      currentIndex = 0;
+      loadQuestion();
+    });
+  }
+
+  // Selección respuestas
+  answerButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (locked) return;
+      selectedAnswer = btn.dataset.value || null;
+
+      answerButtons.forEach((b) => b.classList.remove("is-selected"));
+      btn.classList.add("is-selected");
+    });
   });
+
+  // Comprobar
+  if (btnCheck) {
+    btnCheck.addEventListener("click", () => checkAnswer());
+  }
+
+  // Botón flotante siguiente (si existe)
+  if (btnNext) {
+    btnNext.addEventListener("click", () => goNextQuestion());
+  }
+
+  // FINAL -> HOME (reinicio)
+  if (btnFinalRetry) {
+    btnFinalRetry.addEventListener("click", () => {
+      setEnergy(0);
+      currentIndex = 0;
+      hideFeedback();
+      setWarrior("idle");
+      resetSelectionUI();
+      showScreen("home");
+    });
+  }
 }
 
-answerButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (locked) return;
-    selectedAnswer = btn.dataset.value || null;
+// =======================
+// Inicio seguro (evita que un null rompa todo)
+// =======================
 
-    answerButtons.forEach((b) => b.classList.remove("is-selected"));
-    btn.classList.add("is-selected");
-  });
-});
-
-if (btnCheck) {
-  btnCheck.addEventListener("click", () => {
-    checkAnswer();
-  });
-}
-
-if (btnNext) {
-  btnNext.addEventListener("click", () => {
-    goNextQuestion();
-  });
-}
-
-if (btnFinalRetry) {
-  btnFinalRetry.addEventListener("click", () => {
-    setEnergy(0);
-    currentIndex = 0;
-    showFeedback(null);
-    setWarrior("idle");
+(function init() {
+  try {
+    wireEvents();
     showScreen("home");
-    resetSelectionUI();
-    if (btnNext) btnNext.style.display = "none";
-  });
-}
-
-// =======================
-// Inicio
-// =======================
-
-showScreen("home");
-setEnergy(0);
-setWarrior("idle");
-showFeedback(null);
-if (btnNext) btnNext.style.display = "none";
+    setEnergy(0);
+    setWarrior("idle");
+    hideFeedback();
+  } catch (e) {
+    // Si algo falla, al menos lo vemos en consola
+    console.error("Error iniciando el juego:", e);
+  }
+})();
