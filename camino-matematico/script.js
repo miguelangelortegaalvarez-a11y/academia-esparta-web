@@ -1,8 +1,8 @@
 // =======================
-// Camino Matemático - script.js (SIN barra energía)
+// Camino Matemático - script.js
+// Auto-comprobar al pulsar número (sin botón "Comprobar")
 // =======================
 
-// Preguntas demo (luego cambiamos por niveles / por tu banco de ejercicios)
 const QUESTIONS = [
   { a: 3, b: 2, op: "+", correct: 5, wrong: 6 },
   { a: 7, b: 4, op: "-", correct: 3, wrong: 2 },
@@ -11,10 +11,9 @@ const QUESTIONS = [
 ];
 
 let currentIndex = 0;
-let selectedAnswer = null;
+let energy = 0; // lo dejamos por si luego vuelves a la barra
 let locked = false;
 
-// Assets (tus nombres actuales con doble extensión)
 const ASSETS = {
   warrior: {
     idle: "./assets/warrior/warrior-idle.png.PNG",
@@ -23,7 +22,9 @@ const ASSETS = {
   },
 };
 
-function $(id) { return document.getElementById(id); }
+function $(id) {
+  return document.getElementById(id);
+}
 
 function showScreen(screens, name) {
   Object.values(screens).forEach((el) => el && el.classList.remove("is-active"));
@@ -32,10 +33,9 @@ function showScreen(screens, name) {
 
 function setWarrior(warriorImg, state) {
   if (!warriorImg) return;
-  warriorImg.src =
-    state === "power" ? ASSETS.warrior.power :
-    state === "sad" ? ASSETS.warrior.sad :
-    ASSETS.warrior.idle;
+  if (state === "idle") warriorImg.src = ASSETS.warrior.idle;
+  if (state === "power") warriorImg.src = ASSETS.warrior.power;
+  if (state === "sad") warriorImg.src = ASSETS.warrior.sad;
 }
 
 function hideFeedback(iconCorrect, iconWrong) {
@@ -49,9 +49,8 @@ function showFeedback(iconCorrect, iconWrong, type) {
   if (type === "wrong" && iconWrong) iconWrong.style.display = "block";
 }
 
-function resetSelectionUI(answerButtons) {
-  selectedAnswer = null;
-  answerButtons.forEach((btn) => btn.classList.remove("is-selected"));
+function clamp(n, a, b) {
+  return Math.max(a, Math.min(b, n));
 }
 
 function currentQuestion() {
@@ -60,14 +59,16 @@ function currentQuestion() {
 
 function loadQuestion(ctx) {
   locked = false;
-  resetSelectionUI(ctx.answerButtons);
   hideFeedback(ctx.iconCorrect, ctx.iconWrong);
   setWarrior(ctx.warriorImg, "idle");
 
   const q = currentQuestion();
-  if (ctx.questionEl) ctx.questionEl.textContent = `${q.a} ${q.op} ${q.b} = ?`;
 
-  // Alterna de forma impredecible izquierda/derecha
+  if (ctx.questionEl) {
+    ctx.questionEl.textContent = `${q.a} ${q.op} ${q.b} = ?`;
+  }
+
+  // Aleatoriza posición correcta/incorrecta
   const options = [q.correct, q.wrong].sort(() => Math.random() - 0.5);
 
   if (ctx.answerButtons[0]) ctx.answerButtons[0].dataset.value = String(options[0]);
@@ -75,29 +76,38 @@ function loadQuestion(ctx) {
 
   if (ctx.answerAText) ctx.answerAText.textContent = String(options[0]);
   if (ctx.answerBText) ctx.answerBText.textContent = String(options[1]);
+
+  // Limpia selección visual
+  ctx.answerButtons.forEach((b) => b.classList.remove("is-selected"));
 }
 
-function checkAnswer(ctx) {
+function checkAnswerAndAdvance(ctx, selectedValue) {
   if (locked) return;
-  if (selectedAnswer === null) return;
-
   locked = true;
+
   const q = currentQuestion();
-  const isCorrect = Number(selectedAnswer) === Number(q.correct);
+  const isCorrect = Number(selectedValue) === Number(q.correct);
 
   if (isCorrect) {
     setWarrior(ctx.warriorImg, "power");
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
+    energy = clamp(energy + 10, 0, 100);
   } else {
     setWarrior(ctx.warriorImg, "sad");
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
   }
 
-  // Tras un momento, siguiente pregunta (o fin si quieres por nº de aciertos)
+  // Si llega a 100 => final
+  if (energy >= 100) {
+    setTimeout(() => showScreen(ctx.screens, "final"), 650);
+    return;
+  }
+
+  // Siguiente pregunta automático
   setTimeout(() => {
     currentIndex += 1;
     loadQuestion(ctx);
-  }, 650);
+  }, 700);
 }
 
 function init() {
@@ -108,7 +118,6 @@ function init() {
   };
 
   const btnHomeNext = $("home-next");
-  const btnCheck = $("btn-check");
   const btnFinalRetry = $("final-retry");
 
   const warriorImg = $("warrior");
@@ -123,9 +132,6 @@ function init() {
 
   const ctx = {
     screens,
-    btnHomeNext,
-    btnCheck,
-    btnFinalRetry,
     warriorImg,
     questionEl,
     answerButtons,
@@ -136,9 +142,9 @@ function init() {
   };
 
   // Estado inicial
+  energy = 0;
   currentIndex = 0;
   locked = false;
-  selectedAnswer = null;
 
   setWarrior(warriorImg, "idle");
   hideFeedback(iconCorrect, iconWrong);
@@ -147,45 +153,51 @@ function init() {
   // HOME -> GAME
   if (btnHomeNext) {
     btnHomeNext.addEventListener("click", () => {
+      energy = 0;
       currentIndex = 0;
+      locked = false;
+
       showScreen(screens, "game");
       loadQuestion(ctx);
     });
   }
 
-  // Selección respuestas
+  // Click en respuestas = seleccionar + comprobar automáticamente
   answerButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       if (locked) return;
-      selectedAnswer = btn.dataset.value || null;
 
+      const val = btn.dataset.value;
+      if (val == null) return;
+
+      // Marca visual selección
       answerButtons.forEach((b) => b.classList.remove("is-selected"));
       btn.classList.add("is-selected");
+
+      // Auto-check
+      checkAnswerAndAdvance(ctx, val);
     });
   });
 
-  // Comprobar
-  if (btnCheck) {
-    btnCheck.addEventListener("click", () => checkAnswer(ctx));
-  }
-
-  // FINAL -> HOME (si luego decides usar final, lo conectamos por regla)
+  // FINAL -> HOME
   if (btnFinalRetry) {
     btnFinalRetry.addEventListener("click", () => {
+      energy = 0;
       currentIndex = 0;
       locked = false;
-      selectedAnswer = null;
 
       hideFeedback(iconCorrect, iconWrong);
       setWarrior(warriorImg, "idle");
-      resetSelectionUI(answerButtons);
+      answerButtons.forEach((b) => b.classList.remove("is-selected"));
       showScreen(screens, "home");
     });
   }
 }
 
-// Arranque seguro
 document.addEventListener("DOMContentLoaded", () => {
-  try { init(); }
-  catch (e) { console.error("Error iniciando el juego:", e); }
+  try {
+    init();
+  } catch (e) {
+    console.error("Error iniciando el juego:", e);
+  }
 });
