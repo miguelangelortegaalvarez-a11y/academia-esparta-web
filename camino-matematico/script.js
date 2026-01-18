@@ -80,8 +80,8 @@ function loadQuestion(ctx) {
 
   if (ctx.answerAText) ctx.answerAText.textContent = String(options[0]);
   if (ctx.answerBText) ctx.answerBText.textContent = String(options[1]);
+  updateProgress(ctx);
 }
-updateProgress(ctx);
 function checkAnswer(ctx) {
   if (locked) return;
   if (selectedAnswer === null) return;
