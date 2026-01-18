@@ -81,7 +81,7 @@ function loadQuestion(ctx) {
   if (ctx.answerAText) ctx.answerAText.textContent = String(options[0]);
   if (ctx.answerBText) ctx.answerBText.textContent = String(options[1]);
 }
-
+updateProgress(ctx);
 function checkAnswer(ctx) {
   if (locked) return;
   if (selectedAnswer === null) return;
@@ -125,7 +125,8 @@ function init() {
 
   const iconCorrect = $("icon-correct");
   const iconWrong = $("icon-wrong");
-
+  const progressFill = $("progress-fill");
+const progressText = $("progress-text");
   const ctx = {
     screens,
     btnHomeNext,
@@ -138,6 +139,8 @@ function init() {
     answerBText,
     iconCorrect,
     iconWrong,
+    progressFill,
+    progressText,
   };
 
   // Estado inicial
