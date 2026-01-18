@@ -3,284 +3,235 @@
 ========================= */
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; padding: 0; }
-body{
+body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:#000;
-  overflow:hidden;
+  background: #000;
+  overflow: hidden;
 }
 
 /* =========================
    Pantallas
 ========================= */
-.screen{
-  position:fixed;
-  inset:0;
-  display:none;
-  width:100vw;
-  height:100vh;
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  width: 100vw;
+  height: 100vh;
 }
-.screen.is-active{ display:block; }
+
+.screen.is-active { display: block; }
 
 /* Fondo */
-.screen-bg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.screen-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Botones imagen */
-.img-btn{
-  border:0;
-  background:transparent;
-  padding:0;
-  cursor:pointer;
+.img-btn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 }
-.img-btn img{
-  display:block;
-  width:clamp(180px, 40vw, 340px);
-  height:auto;
+
+.img-btn img {
+  display: block;
+  width: clamp(180px, 40vw, 340px);
+  height: auto;
 }
 
 /* =========================
    HOME
 ========================= */
-#screen-home #home-next{
-  position:absolute;
-  left:50%;
-  bottom:7vh;
-  transform:translateX(-50%);
-  z-index:10;
+#screen-home .img-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 7vh;
+  transform: translateX(-50%);
+  z-index: 5;
 }
 
 /* =========================
    GAME
 ========================= */
 
-/* HUD */
-.hud{
-  position:absolute;
-  top:2.2vh;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(92vw, 720px);
-  height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
-  z-index:15;
+/* HUD energía */
+.hud {
+  position: absolute;
+  top: 2.2vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 720px);
+  height: 70px;
+  z-index: 5;
+  pointer-events: none;
 }
 
-.energy{
-  position:relative;
-  width:100%;
-  height:54px;
+.energy-wrap {
+  position: relative;
+  width: 100%;
+  height: 54px;
 }
 
-.energy-layer{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  pointer-events:none;
+/* SOLO relleno: contenedor con overflow */
+.energy-fill {
+  position: absolute;
+  left: 7.2%;
+  top: 22%;
+  height: 38%;
+  width: 0%;
+  overflow: hidden;
+  border-radius: 999px;
 }
 
-/* Contenedor recorte del fill (HTML: .energy-fill-wrap) */
-.energy-fill-wrap{
-  position:absolute;
-  left:7.2%;
-  top:22%;
-  height:38%;
-  width:85.6%;
-  overflow:hidden;
-  border-radius:999px;
-  pointer-events:none;
+.energy-fill img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
-/* La imagen del fill (id="energy-fill") -> el JS le pondrá width % */
-#energy-fill{
-  position:absolute;
-  left:0;
-  top:0;
-  height:100%;
-  width:0%;
-  object-fit:cover;
-}
-
-#energy-text{
-  position:absolute;
-  right:4%;
-  top:50%;
-  transform:translateY(-50%);
-  font-weight:800;
-  font-size:18px;
-  color:#fff;
-  text-shadow:0 2px 6px rgba(0,0,0,.8);
-  pointer-events:none;
-}
-
-/* Guerrero */
-.warrior{
-  position:absolute;
-  left:50%;
-  top:22vh;
-  transform:translateX(-50%);
-  width:clamp(150px, 30vw, 260px);
-  height:auto;
-  pointer-events:none;
-  z-index:8;
-}
-
-/* =========================
-   PANEL (tu HTML real)
-========================= */
-.panel{
-  position:absolute;
-  left:50%;
-  bottom:0;
-  transform:translateX(-50%);
-  width:min(94vw, 980px);
-  z-index:25;
-}
-
-.panel-bg{
-  width:100%;
-  height:auto;
-  display:block;
-  pointer-events:none; /* clave: no bloquea clicks */
-}
-
-.panel-content{
-  position:absolute;
-  inset:0;
-  pointer-events:auto;
+/* Número energía */
+#energy-text {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,.8);
 }
 
 /* Pregunta */
-.question{
-  position:absolute;
-  left:50%;
-  top:18%;
-  transform:translateX(-50%);
-  width:90%;
-  text-align:center;
-  font-weight:900;
-  font-size:clamp(20px, 4.5vw, 40px);
-  color:#fff;
-  text-shadow:0 3px 10px rgba(0,0,0,.85);
+.question {
+  position: absolute;
+  left: 50%;
+  top: 20vh;
+  transform: translateX(-50%);
+  z-index: 6;
+  font-weight: 900;
+  font-size: clamp(26px, 4.5vw, 44px);
+  color: #fff;
+  text-shadow: 0 3px 10px rgba(0,0,0,.9);
+  pointer-events: none;
 }
 
-/* Respuestas */
-.answers{
-  position:absolute;
-  left:50%;
-  top:58%;
-  transform:translateX(-50%);
-  width:88%;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
+/* Guerrero: centro, zona combate (círculo) */
+.warrior {
+  position: absolute;
+  left: 50%;
+  top: 30vh;              /* Ajusta fino si quieres */
+  transform: translateX(-50%);
+  width: clamp(190px, 18vw, 320px); /* Más grande */
+  height: auto;
+  z-index: 6;
+  pointer-events: none;
 }
 
-.answer-btn{
-  position:relative;
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  pointer-events:auto;
+/* Respuestas: izquierda / derecha del guerrero */
+.answers {
+  position: absolute;
+  left: 50%;
+  top: 52vh;
+  transform: translateX(-50%);
+  width: min(92vw, 900px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(18px, 3vw, 40px);
+  z-index: 7;
+  padding: 0 12px;
 }
 
-.answer-btn img{
-  width:100%;
-  height:auto;
-  max-width:520px;
-  filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
+/* Botones SOLO números */
+.answer-only-number {
+  border: 0;
+  background: rgba(0,0,0,.35);
+  border-radius: 18px;
+  padding: clamp(18px, 3vw, 28px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
 }
 
-.answer-btn.is-selected img{
-  transform:translateY(-2px) scale(1.02);
-  filter:drop-shadow(0 10px 18px rgba(0,0,0,.55));
+/* efecto selección */
+.answer-only-number.is-selected {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(0,0,0,.55);
 }
 
-.answer-text{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  font-size:clamp(22px, 5vw, 42px);
-  color:#fff;
-  text-shadow:0 3px 10px rgba(0,0,0,.9);
-  pointer-events:none;
+/* Texto número */
+.answer-text {
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: clamp(34px, 7vw, 64px);
+  color: #fff;
+  text-shadow: 0 3px 10px rgba(0,0,0,.9);
+  pointer-events: none;
 }
 
-/* Acciones (botón comprobar) */
-.actions{
-  position:absolute;
-  left:50%;
-  bottom:6%;
-  transform:translateX(-50%);
-  pointer-events:auto;
+/* Botón comprobar */
+#btn-check {
+  position: absolute;
+  left: 50%;
+  bottom: 6vh;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: auto;
 }
 
-#btn-check img{
-  width:clamp(200px, 46vw, 380px);
+#btn-check img {
+  width: clamp(220px, 42vw, 420px);
 }
 
-/* Feedback (HTML: #icon-correct y #icon-wrong) */
-.feedback{
-  position:absolute;
-  left:50%;
-  top:10%;
-  transform:translateX(-50%);
-  width:clamp(70px, 14vw, 120px);
-  pointer-events:none;
+/* Feedback icons */
+.feedback-icon {
+  position: absolute;
+  left: 50%;
+  top: 12vh;
+  transform: translateX(-50%);
+  width: clamp(70px, 10vw, 130px);
+  height: auto;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,.55));
 }
-.feedback .icon{
-  width:100%;
-  height:auto;
-  display:none; /* ocultos por defecto */
-  filter:drop-shadow(0 8px 14px rgba(0,0,0,.55));
-}
-.icon[hidden]{ display:none !important; }
-
-/* =========================
-   Siguiente flotante (OCULTO)
-   -> elimina el “doble siguiente”
-========================= */
-#btn-next{ display:none; }
 
 /* =========================
    FINAL
 ========================= */
-#screen-final .final-warrior{
-  position:absolute;
-  left:50%;
-  top:52vh;
-  transform:translate(-50%, -50%);
-  width:clamp(160px, 32vw, 280px);
-  height:auto;
-  pointer-events:none;
+#screen-final .final-warrior {
+  position: absolute;
+  left: 50%;
+  top: 52vh;
+  transform: translate(-50%, -50%);
+  width: clamp(160px, 32vw, 280px);
+  height: auto;
+  z-index: 5;
+  pointer-events: none;
 }
 
-#screen-final #final-retry{
-  position:absolute;
-  left:50%;
-  bottom:7vh;
-  transform:translateX(-50%);
+#screen-final #btn-retry {
+  position: absolute;
+  left: 50%;
+  bottom: 7vh;
+  transform: translateX(-50%);
+  z-index: 10;
 }
 
-/* =========================
-   Responsive
-========================= */
-@media (max-height: 700px){
-  .warrior{ top:20vh; }
-  .question{ top:16%; }
-  .answers{ top:56%; }
-  .actions{ bottom:5%; }
+/* Ajustes responsive */
+@media (max-height: 700px) {
+  .question { top: 18vh; }
+  .warrior { top: 28vh; }
+  .answers { top: 54vh; }
+  #btn-check { bottom: 4.5vh; }
 }
