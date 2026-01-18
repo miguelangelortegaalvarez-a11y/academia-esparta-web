@@ -1,67 +1,81 @@
 // =======================
-// Configuracion del juego
+// Camino Matemático (Guerrero)
+// Compatible con assets en .PNG (MAYUSCULAS)
+// y con tu index.html actual (IDs correctos)
 // =======================
 
+// 10 pasos exactos (1º Primaria, sin llevadas, hasta 15)
+// correct = respuesta correcta, wrong = incorrecta
 const QUESTIONS = [
-  // Mantengo preguntas simples por defecto.
-  // Luego las cambiamos por las tuyas (sumas/restas por niveles).
-  { a: 3, b: 2, op: "+", correct: 5, wrong: 6 },
-  { a: 7, b: 4, op: "-", correct: 3, wrong: 2 },
-  { a: 6, b: 1, op: "+", correct: 7, wrong: 8 },
-  { a: 9, b: 5, op: "-", correct: 4, wrong: 6 },
+  { stateText: "Empiezas en 5", questionText: "5 + 3 = ?", correct: 8,  wrong: 9  },
+  { stateText: "Estás en 8",    questionText: "8 − 2 = ?", correct: 6,  wrong: 5  },
+  { stateText: "Estás en 6",    questionText: "6 + 4 = ?", correct: 10, wrong: 9  },
+  { stateText: "Estás en 10",   questionText: "10 − 3 = ?", correct: 7,  wrong: 6  },
+  { stateText: "Estás en 7",    questionText: "7 + 5 = ?", correct: 12, wrong: 13 },
+  { stateText: "Estás en 12",   questionText: "12 − 4 = ?", correct: 8,  wrong: 9  },
+  { stateText: "Estás en 8",    questionText: "8 + 6 = ?", correct: 14, wrong: 13 },
+  { stateText: "Estás en 14",   questionText: "14 − 5 = ?", correct: 9,  wrong: 10 },
+  { stateText: "Estás en 9",    questionText: "9 + 1 = ?", correct: 10, wrong: 11 },
+  { stateText: "Estás en 10",   questionText: "10 + 5 = ?", correct: 15, wrong: 14 },
 ];
 
-let currentIndex = 0;
-
-// Energia: empieza en 0, sube +10 por acierto, max 100, no baja nunca.
+// Energía: empieza en 0, sube +10 por acierto, max 100, no baja
 let energy = 0;
 
-// Estado de pantalla
+// Paso actual (0..9)
+let currentIndex = 0;
+
+// Selección del alumno
+let selectedValue = null;
+let locked = false;
+
+// =======================
+// Rutas de assets (.PNG)
+// =======================
+const ASSETS = {
+  warrior: {
+    idle: "./assets/warrior/warrior-idle.PNG",
+    power: "./assets/warrior/warrior-power.PNG",
+    sad: "./assets/warrior/warrior-sad.PNG",
+  },
+};
+
+// =======================
+// Elementos DOM (IDs de tu index.html)
+// =======================
 const screens = {
   home: document.getElementById("screen-home"),
   game: document.getElementById("screen-game"),
   final: document.getElementById("screen-final"),
 };
 
-// Botones
-const btnHomeNext = document.getElementById("btn-home-next");
+const btnHomeNext = document.getElementById("home-next");
 const btnCheck = document.getElementById("btn-check");
-const btnRetry = document.getElementById("btn-retry");
+const btnRetry = document.getElementById("final-retry");
 
-// Elementos de juego
 const warriorImg = document.getElementById("warrior");
-const feedbackIcon = document.getElementById("feedback-icon");
-const answerButtons = Array.from(document.querySelectorAll(".answer-btn"));
 
+const questionEl = document.getElementById("question");
+const answerButtons = Array.from(document.querySelectorAll(".answer-btn"));
 const answerAText = document.getElementById("answer-a-text");
 const answerBText = document.getElementById("answer-b-text");
-// Rutas assets (fijas)
-const ASSETS = {
-  warrior: {
-    idle: "./assets/warrior/warrior-idle.png",
-    power: "./assets/warrior/warrior-power.png",
-    sad: "./assets/warrior/warrior-sad.png",
-  },
-  icons: {
-    correct: "./assets/ui/icons/icon-correct.png",
-    wrong: "./assets/ui/icons/icon-wrong.png",
-  },
-};
 
-// Para seleccionar una respuesta
-let selectedAnswer = null;
-let locked = false;
+const iconCorrect = document.getElementById("icon-correct");
+const iconWrong = document.getElementById("icon-wrong");
+
+const energyFillImg = document.getElementById("energy-fill");
+const energyTextEl = document.getElementById("energy-text");
 
 // =======================
 // Helpers UI
 // =======================
-
 function showScreen(name) {
-  Object.values(screens).forEach((el) => el.classList.remove("is-active"));
-  screens[name].classList.add("is-active");
+  Object.values(screens).forEach((el) => el && el.classList.remove("is-active"));
+  screens[name] && screens[name].classList.add("is-active");
 }
 
 function setWarrior(state) {
+  if (!warriorImg) return;
   if (state === "idle") warriorImg.src = ASSETS.warrior.idle;
   if (state === "power") warriorImg.src = ASSETS.warrior.power;
   if (state === "sad") warriorImg.src = ASSETS.warrior.sad;
@@ -69,13 +83,21 @@ function setWarrior(state) {
 
 function showFeedback(type) {
   // type: "correct" | "wrong" | null
+  if (!iconCorrect || !iconWrong) return;
+
   if (!type) {
-    feedbackIcon.hidden = true;
-    feedbackIcon.src = "";
+    iconCorrect.style.display = "none";
+    iconWrong.style.display = "none";
     return;
   }
-  feedbackIcon.hidden = false;
-  feedbackIcon.src = type === "correct" ? ASSETS.icons.correct : ASSETS.icons.wrong;
+
+  if (type === "correct") {
+    iconCorrect.style.display = "block";
+    iconWrong.style.display = "none";
+  } else {
+    iconCorrect.style.display = "none";
+    iconWrong.style.display = "block";
+  }
 }
 
 function setEnergy(newValue) {
@@ -84,123 +106,156 @@ function setEnergy(newValue) {
 }
 
 function updateEnergyUI() {
-  // El relleno es un DIV con overflow hidden que contiene la imagen del fill.
-  // Ajustamos el ancho en porcentaje.
-  const fillContainer = document.querySelector(".energy-fill");
-  if (fillContainer) fillContainer.style.width = `${energy}%`;
+  if (energyTextEl) energyTextEl.textContent = String(energy);
+
+  // Relleno por escala horizontal (0..1)
+  if (energyFillImg) {
+    energyFillImg.style.transformOrigin = "left center";
+    energyFillImg.style.transform = `scaleX(${energy / 100})`;
+  }
 }
 
 function resetSelectionUI() {
-  selectedAnswer = null;
+  selectedValue = null;
   answerButtons.forEach((btn) => btn.classList.remove("is-selected"));
 }
 
-// =======================
-// Logica de preguntas
-// =======================
-
-function currentQuestion() {
-  return QUESTIONS[currentIndex % QUESTIONS.length];
+function disableCheck(disabled) {
+  if (!btnCheck) return;
+  btnCheck.disabled = !!disabled;
+  btnCheck.style.opacity = disabled ? "0.6" : "1";
 }
 
-function loadQuestion() {
+// =======================
+// Lógica del juego
+// =======================
+function loadStep() {
   locked = false;
   resetSelectionUI();
   showFeedback(null);
   setWarrior("idle");
+  disableCheck(true);
 
-  const q = currentQuestion();
+  const step = QUESTIONS[currentIndex];
 
-  // Asignar valores a los dos botones (data-answer 1 y 2).
-  // Aleatorizamos posicion de correct/wrong.
-  const options = [q.correct, q.wrong].sort(() => Math.random() - 0.5);
+  // Pregunta en panel (incluye estado + operación)
+  if (questionEl) {
+    questionEl.textContent = `${step.stateText} · ${step.questionText}`;
+  }
 
-  // Guardamos la respuesta correcta real en cada boton
-  answerButtons[0].dataset.value = String(options[0]);
-  answerButtons[1].dataset.value = String(options[1]);
-  answerAText.textContent = String(options[0]);
-  answerBText.textContent = String(options[1]);
-  // Importante: tu index usa una imagen como boton.
-  // El numero no se ve porque no hay texto.
-  // De momento, el juego funciona aunque no se vea el numero.
-  // En el siguiente paso lo hacemos visible con CSS + un overlay de texto.
+  // Alternar posición correcta izquierda/derecha (sin que el niño se lo aprenda)
+  // Alterna por paso: pares izquierda, impares derecha
+  const correctOnLeft = currentIndex % 2 === 0;
+
+  const leftValue = correctOnLeft ? step.correct : step.wrong;
+  const rightValue = correctOnLeft ? step.wrong : step.correct;
+
+  // Guardar valores en botones
+  if (answerButtons[0]) answerButtons[0].dataset.value = String(leftValue);
+  if (answerButtons[1]) answerButtons[1].dataset.value = String(rightValue);
+
+  if (answerAText) answerAText.textContent = String(leftValue);
+  if (answerBText) answerBText.textContent = String(rightValue);
+}
+
+function isCorrectSelection() {
+  const step = QUESTIONS[currentIndex];
+  return Number(selectedValue) === Number(step.correct);
+}
+
+function goFinal() {
+  showScreen("final");
+}
+
+function goNextStep() {
+  currentIndex += 1;
+  if (currentIndex >= QUESTIONS.length) {
+    goFinal();
+  } else {
+    loadStep();
+  }
 }
 
 function checkAnswer() {
   if (locked) return;
-  if (selectedAnswer === null) return;
+  if (selectedValue === null) return;
 
   locked = true;
-  const q = currentQuestion();
-  const isCorrect = Number(selectedAnswer) === Number(q.correct);
+  disableCheck(true);
 
-  if (isCorrect) {
+  if (isCorrectSelection()) {
+    // Acierto
     setWarrior("power");
     showFeedback("correct");
-    setEnergy(energy + 10); // no baja, max 100
+    setEnergy(energy + 10);
+
+    // Avanza automáticamente
+    setTimeout(() => {
+      goNextStep();
+    }, 700);
   } else {
+    // Fallo
     setWarrior("sad");
     showFeedback("wrong");
-  }
 
-  // Si energia llega a 100 -> pantalla final
-  if (energy >= 100) {
-    // pequeña pausa visual
+    // No avanza; permite reintentar
     setTimeout(() => {
-      showScreen("final");
-    }, 400);
-    return;
+      locked = false;
+      setWarrior("idle");
+      disableCheck(false);
+    }, 700);
   }
-
-  // Pasar a siguiente pregunta tras una pausa
-  setTimeout(() => {
-    currentIndex += 1;
-    loadQuestion();
-  }, 700);
 }
 
 // =======================
 // Eventos
 // =======================
-
-btnHomeNext.addEventListener("click", () => {
-  showScreen("game");
-  setEnergy(0);
-  currentIndex = 0;
-  loadQuestion();
-});
+if (btnHomeNext) {
+  btnHomeNext.addEventListener("click", () => {
+    showScreen("game");
+    currentIndex = 0;
+    setEnergy(0);
+    loadStep();
+  });
+}
 
 answerButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     if (locked) return;
-    // Guardar seleccion
-    selectedAnswer = btn.dataset.value || null;
 
-    // UI seleccion
+    selectedValue = btn.dataset.value || null;
+
+    // UI selección
     answerButtons.forEach((b) => b.classList.remove("is-selected"));
     btn.classList.add("is-selected");
+
+    // Ahora sí se puede comprobar
+    disableCheck(false);
   });
 });
 
-btnCheck.addEventListener("click", () => {
-  checkAnswer();
-});
+if (btnCheck) {
+  btnCheck.addEventListener("click", () => {
+    checkAnswer();
+  });
+}
 
-btnRetry.addEventListener("click", () => {
-  // Reiniciar juego
-  setEnergy(0);
-  currentIndex = 0;
-  showScreen("home");
-  setWarrior("idle");
-  showFeedback(null);
-  resetSelectionUI();
-});
+if (btnRetry) {
+  btnRetry.addEventListener("click", () => {
+    // Reiniciar
+    currentIndex = 0;
+    setEnergy(0);
+    showFeedback(null);
+    setWarrior("idle");
+    showScreen("home");
+  });
+}
 
 // =======================
 // Inicio
 // =======================
-
 showScreen("home");
 setEnergy(0);
 setWarrior("idle");
 showFeedback(null);
+disableCheck(true);
