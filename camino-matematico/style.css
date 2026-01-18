@@ -1,284 +1,96 @@
 /* =========================
-   Reset básico
+   QUIRÚRGICO: SIN BARRA DE ENERGÍA
 ========================= */
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; padding: 0; }
-body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: #000;
-  overflow: hidden;
+
+/* Por si existe CSS viejo: escondemos cualquier HUD/energy */
+.energy-hud, .hud, .energy, .energy-wrap, .energy-box,
+#energy-fill, #energy-glow, #energy-text,
+.energy-layer, .energy-fill, .energy-fill-wrap {
+  display: none !important;
 }
 
-/* =========================
-   Pantallas
-========================= */
-.screen {
-  position: fixed;
-  inset: 0;
-  display: none;
-  width: 100vw;
-  height: 100vh;
+/* Fondo siempre visible y no bloquea clicks */
+#screen-game .screen-bg{
+  pointer-events: none;
 }
 
-.screen.is-active { display: block; }
-
-/* Fondo de pantalla (imagen grande) */
-.screen-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Botones basados en imagen */
-.img-btn {
-  border: 0;
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-.img-btn img {
-  display: block;
-  width: clamp(180px, 40vw, 340px);
-  height: auto;
-}
-
-/* =========================
-   HOME
-========================= */
-#screen-home .img-btn {
+/* Pregunta */
+#question{
   position: absolute;
   left: 50%;
-  bottom: 7vh;
+  top: 14vh;
   transform: translateX(-50%);
-}
-
-/* =========================
-   GAME (ejercicio)
-========================= */
-
-/* HUD */
-.hud {
-  position: absolute;
-  top: 2.2vh;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(92vw, 720px);
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.energy-wrap {
-  position: relative;
-  width: 100%;
-  height: 54px;
-}
-
-/* frame / fill / glow son imágenes en capas */
-.energy-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
-}
-
-/* El fill lo metemos dentro de un contenedor con overflow hidden */
-.energy-fill {
-  position: absolute;
-  left: 7.2%;
-  top: 22%;
-  height: 38%;
-  width: 0%;
-  overflow: hidden;
-  border-radius: 999px;
-  pointer-events: none;
-}
-
-.energy-fill img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
-#energy-text {
-  position: absolute;
-  right: 4%;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: 800;
-  font-size: 18px;
+  z-index: 15;
+  font-weight: 900;
+  font-size: clamp(34px, 6vw, 64px);
   color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,.8);
+  text-shadow: 0 3px 12px rgba(0,0,0,.85);
   pointer-events: none;
-  z-index: 11;
 }
 
-/* =========================
-   QUIRÚRGICO: quitar marco verde molesto
-   (se mantiene la barra que se rellena y el glow)
-========================= */
-#screen-game .energy-layer[src*="energy-frame"] {
-  display: none !important; /* ❌ quita el marco fijo */
-}
-
-/* Personaje (centrado y más abajo, pisando suelo) */
-.warrior {
+/* Muñeco (un poco más abajo, “pisando”) */
+#warrior{
   position: absolute;
   left: 50%;
-  top: 41vh; /* 🔽 más abajo para que "pise" */
+  top: 33vh;
   transform: translateX(-50%);
-  width: clamp(190px, 36vw, 320px); /* 🔼 un poco más grande */
+  width: clamp(190px, 18vw, 290px);
   height: auto;
+  z-index: 15;
   pointer-events: none;
-  z-index: 6;
 }
 
-/* Icono feedback (correct/wrong) */
-#feedback-icon {
+/* Respuestas (izquierda/derecha) */
+.answers{
   position: absolute;
   left: 50%;
-  top: 17vh;
+  top: 48vh;
   transform: translateX(-50%);
-  width: clamp(60px, 12vw, 110px);
-  height: auto;
-  pointer-events: none;
-  filter: drop-shadow(0 8px 14px rgba(0,0,0,.55));
-  z-index: 12;
-}
-
-/* Panel overlay */
-.message-panel {
-  position: absolute;
-  left: 50%;
-  top: 50vh;
-  transform: translateX(-50%);
-  width: min(92vw, 820px);
-  height: auto;
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* Zona de respuestas */
-.answers {
-  position: absolute;
-  left: 50%;
-  top: 58vh;
-  transform: translateX(-50%);
-  width: min(92vw, 820px);
+  width: min(90vw, 900px);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  padding: 0 8px;
-  z-index: 8;
+  gap: 12vw;
+  z-index: 16;
 }
 
-/* Botón reutilizable azul (imagen) */
-.answer-btn {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+/* Botones clicables: SOLO NÚMERO */
+.answer-btn{
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.answer-btn img {
+.answer-text{
+  display: inline-block;
   width: 100%;
-  height: auto;
-  max-width: 520px;
-  filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
-}
-
-/* estado seleccionado */
-.answer-btn.is-selected img {
-  transform: translateY(-2px) scale(1.02);
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
-}
-
-/* Número encima (si el index tiene <span class="answer-text">, se verá) */
-.answer-text {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
+  text-align: center;
   font-weight: 900;
-  font-size: clamp(22px, 5vw, 42px);
+  font-size: clamp(60px, 7vw, 110px);
   color: #fff;
-  text-shadow: 0 3px 10px rgba(0,0,0,.9);
-  pointer-events: none;
+  text-shadow: 0 4px 14px rgba(0,0,0,.85);
+  user-select: none;
 }
 
-/* Botón comprobar */
-#btn-check {
+/* Comprobar */
+#btn-check{
   position: absolute;
   left: 50%;
   bottom: 6vh;
   transform: translateX(-50%);
-  z-index: 9;
+  z-index: 18;
+  pointer-events: auto;
 }
 
-#btn-check img {
-  width: clamp(200px, 46vw, 380px);
-}
-
-/* =========================
-   FINAL
-========================= */
-#screen-final .final-warrior {
+/* Feedback */
+.icon-feedback{
   position: absolute;
   left: 50%;
-  top: 52vh;
-  transform: translate(-50%, -50%);
-  width: clamp(160px, 32vw, 280px);
-  height: auto;
-  pointer-events: none;
-}
-
-#screen-final #btn-retry {
-  position: absolute;
-  left: 50%;
-  bottom: 7vh;
+  top: 9vh;
   transform: translateX(-50%);
-}
-
-/* =========================
-   Ajustes responsive extra
-========================= */
-@media (max-height: 700px) {
-  .warrior { top: 38vh; }
-  #feedback-icon { top: 14vh; }
-  .answers { top: 56vh; }
-  #btn-check { bottom: 4.5vh; }
-}
-/* =========================
-   FORZAR VISIBILIDAD DE LA PREGUNTA (SUMA/RESTA)
-========================= */
-#question {
-  position: absolute !important;
-  left: 50% !important;
-  top: 26vh !important;              /* ajusta si quieres un poco más arriba/abajo */
-  transform: translateX(-50%) !important;
-
-  display: block !important;
-  z-index: 20 !important;
-
-  font-weight: 900 !important;
-  font-size: clamp(34px, 6vw, 64px) !important;
-  color: #fff !important;
-  text-align: center !important;
-  letter-spacing: 1px !important;
-
-  text-shadow:
-    0 3px 10px rgba(0,0,0,.85),
-    0 0 18px rgba(0,0,0,.55) !important;
-
-  pointer-events: none !important;
+  width: clamp(70px, 10vw, 120px);
+  z-index: 25;
+  pointer-events: none;
 }
