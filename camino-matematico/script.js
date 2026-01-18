@@ -56,8 +56,38 @@ function resetSelectionUI(answerButtons) {
   answerButtons.forEach((btn) => btn.classList.remove("is-selected"));
 }
 
+function makeQuestion() {
+  // Config simple: sumas y restas sin negativos (Infantil/Primaria)
+  const ops = ["+", "-"];
+  const op = ops[Math.floor(Math.random() * ops.length)];
+
+  let a = 0, b = 0, correct = 0;
+
+  if (op === "+") {
+    a = 1 + Math.floor(Math.random() * 9);  // 1..9
+    b = 1 + Math.floor(Math.random() * 9);  // 1..9
+    correct = a + b;
+  } else {
+    a = 1 + Math.floor(Math.random() * 9);  // 1..9
+    b = 1 + Math.floor(Math.random() * 9);  // 1..9
+    if (b > a) [a, b] = [b, a];             // evita negativos
+    correct = a - b;
+  }
+
+  // wrong: cercano pero distinto (y >=0)
+  let wrong = correct;
+  while (wrong === correct) {
+    const delta = 1 + Math.floor(Math.random() * 3); // 1..3
+    wrong = Math.random() < 0.5 ? correct + delta : Math.max(0, correct - delta);
+  }
+
+  return { a, b, op, correct, wrong };
+}
+
 function currentQuestion() {
-  return QUESTIONS[currentIndex % QUESTIONS.length];
+  // Si no hay pregunta, crea una
+  if (!currentQ) currentQ = makeQuestion();
+  return currentQ;
 }
 function updateProgress(ctx) {
   const pct = Math.min(100, (correctCount / GOAL) * 100);
