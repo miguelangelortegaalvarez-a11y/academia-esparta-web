@@ -33,6 +33,8 @@ const warriorImg = document.getElementById("warrior");
 const feedbackIcon = document.getElementById("feedback-icon");
 const answerButtons = Array.from(document.querySelectorAll(".answer-btn"));
 
+const answerAText = document.getElementById("answer-a-text");
+const answerBText = document.getElementById("answer-b-text");
 // Rutas assets (fijas)
 const ASSETS = {
   warrior: {
@@ -116,7 +118,8 @@ function loadQuestion() {
   // Guardamos la respuesta correcta real en cada boton
   answerButtons[0].dataset.value = String(options[0]);
   answerButtons[1].dataset.value = String(options[1]);
-
+  answerAText.textContent = String(options[0]);
+  answerBText.textContent = String(options[1]);
   // Importante: tu index usa una imagen como boton.
   // El numero no se ve porque no hay texto.
   // De momento, el juego funciona aunque no se vea el numero.
