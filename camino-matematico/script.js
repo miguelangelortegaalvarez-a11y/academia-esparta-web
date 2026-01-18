@@ -97,7 +97,7 @@ function checkAnswer(ctx) {
   setTimeout(() => {
     currentIndex += 1;
     loadQuestion(ctx);
-  }, 650);
+  }, 1500);
 }
 
 function init() {
