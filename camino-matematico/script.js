@@ -91,12 +91,29 @@ function checkAnswer(ctx) {
   const isCorrect = Number(selectedAnswer) === Number(q.correct);
 
   if (isCorrect) {
-    setWarrior(ctx.warriorImg, "power");
-    showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
-  } else {
-    setWarrior(ctx.warriorImg, "sad");
-    showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
+  // ✅ SUMA PROGRESO SOLO AL ACERTAR
+  correctCount += 1;
+  updateProgress(ctx);
+
+  // ✅ SI LLEGA A 10 → FINAL
+  if (correctCount >= GOAL) {
+    // Barra en dorado
+    if (ctx.progressFill && ctx.progressFill.parentElement) {
+      ctx.progressFill.parentElement.classList.add("complete");
+    }
+
+    showScreen(ctx.screens, "final");
+    return; // ⛔️ IMPORTANTÍSIMO: corta aquí
   }
+
+  setWarrior(ctx.warriorImg, "power");
+  showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
+
+} else {
+  // ❌ NO SUMA, ❌ NO RESTA
+  setWarrior(ctx.warriorImg, "sad");
+  showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
+}
 
   // Tras un momento, siguiente pregunta (o fin si quieres por nº de aciertos)
   setTimeout(() => {
