@@ -15,6 +15,7 @@ let selectedAnswer = null;
 let locked = false;
 let correctCount = 0;
 const GOAL = 10;
+let currentQ = null; // pregunta actualpaso
 // Assets (tus nombres actuales con doble extensión)
 const ASSETS = {
   warrior: {
