@@ -16,48 +16,34 @@
       alt="Pantalla inicial"
     />
 
-    <button id="home-next" class="img-btn" aria-label="Siguiente">
+    <button id="home-next" class="img-btn" aria-label="Siguiente" type="button">
       <img src="./assets/ui/buttons/btn-next.PNG" alt="Siguiente" />
     </button>
   </section>
 
   <!-- GAME -->
   <section id="screen-game" class="screen" aria-label="Pantalla de ejercicio">
-    <!-- Fondo -->
+    <!-- Fondo (CORREGIDO) -->
     <img
       class="screen-bg"
-      src="./assets/backgrounds/bg-dojo.png.PNG"
+      src="./assets/backgrounds/bg-dojo.PNG"
       alt="Dojo"
     />
 
-    <!-- ENERGÍA (solo barra que se rellena) -->
-    <div class="hud">
-      <div class="energy">
+    <!-- ENERGÍA (contenedor fijo para que NO haga banda blanca) -->
+    <div class="energy-hud" aria-label="Energía">
+      <div class="energy-box">
         <img class="energy-layer" src="./assets/ui/energy/energy-frame.PNG" alt="" />
-
-        <!-- IMPORTANTE: aquí NO hay ningún rectángulo extra.
-             El relleno se controla desde script.js con clip-path sobre #energy-fill -->
-        <img
-          id="energy-fill"
-          class="energy-layer energy-fill"
-          src="./assets/ui/energy/energy-fill.PNG"
-          alt=""
-        />
-        <img
-          id="energy-glow"
-          class="energy-layer energy-glow"
-          src="./assets/ui/energy/energy-glow.PNG"
-          alt=""
-        />
-
+        <img id="energy-fill" class="energy-layer" src="./assets/ui/energy/energy-fill.PNG" alt="" />
+        <img class="energy-layer" src="./assets/ui/energy/energy-glow.PNG" alt="" />
         <div id="energy-text" class="energy-text">0</div>
       </div>
     </div>
 
-    <!-- PREGUNTA (LA SUMA/RESTA) -->
+    <!-- PREGUNTA -->
     <div id="question" class="question">3 + 2 = ?</div>
 
-    <!-- PERSONAJE -->
+    <!-- PERSONAJE (centrado y un poco más abajo) -->
     <img
       id="warrior"
       class="warrior"
@@ -65,18 +51,18 @@
       alt="Guerrero"
     />
 
-    <!-- RESPUESTAS (solo números clicables, sin imagen "Siguiente") -->
+    <!-- RESPUESTAS: solo números clicables -->
     <div class="answers" role="group" aria-label="Respuestas">
-      <button class="answer-btn" data-index="0" type="button" aria-label="Respuesta A">
+      <button class="answer-btn" data-index="0" type="button" aria-label="Respuesta izquierda">
         <span class="answer-text" id="answer-a-text">0</span>
       </button>
 
-      <button class="answer-btn" data-index="1" type="button" aria-label="Respuesta B">
+      <button class="answer-btn" data-index="1" type="button" aria-label="Respuesta derecha">
         <span class="answer-text" id="answer-b-text">0</span>
       </button>
     </div>
 
-    <!-- BOTÓN COMPROBAR -->
+    <!-- COMPROBAR -->
     <button id="btn-check" class="img-btn" type="button" aria-label="Comprobar">
       <img src="./assets/ui/buttons/btn-check.PNG" alt="Comprobar" />
     </button>
@@ -112,7 +98,7 @@
       alt="Guerrero power"
     />
 
-    <button id="final-retry" class="img-btn" aria-label="Reintentar">
+    <button id="final-retry" class="img-btn" type="button" aria-label="Reintentar">
       <img src="./assets/ui/buttons/btn-retry.PNG" alt="Reintentar" />
     </button>
   </section>
