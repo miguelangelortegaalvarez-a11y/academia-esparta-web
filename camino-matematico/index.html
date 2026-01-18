@@ -4,7 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Camino Matemático</title>
-  <link rel="stylesheet" href="./style.css" />
+
+  <!-- Cache-busting para iPad/Safari -->
+  <link rel="stylesheet" href="./style.css?v=3" />
 </head>
 <body>
 
@@ -23,10 +25,11 @@
     <!-- HUD Energía -->
     <div class="hud">
       <div class="energy">
-        <img class="energy-layer" src="./assets/ui/energy/energy-frame.PNG" alt="" />
+        <!-- OJO: energy está ahora mismo en buttons (según me has dicho) -->
+        <img class="energy-layer" src="./assets/ui/buttons/energy-frame.PNG" alt="" />
         <div class="energy-fill-wrap" aria-label="Energía">
-          <img id="energy-fill" class="energy-layer energy-fill" src="./assets/ui/energy/energy-fill.PNG" alt="" />
-          <img id="energy-glow" class="energy-layer energy-glow" src="./assets/ui/energy/energy-glow.PNG" alt="" />
+          <img id="energy-fill" class="energy-layer energy-fill" src="./assets/ui/buttons/energy-fill.PNG" alt="" />
+          <img id="energy-glow" class="energy-layer energy-glow" src="./assets/ui/buttons/energy-glow.PNG" alt="" />
         </div>
         <div id="energy-text" class="energy-text">0</div>
       </div>
@@ -39,7 +42,7 @@
     <div class="panel">
       <img class="panel-bg" src="./assets/ui/overlay/message-panel.PNG" alt="" />
       <div class="panel-content">
-        <div id="question" class="question">3 + 4 = ?</div>
+        <div id="question" class="question">Cargando...</div>
 
         <div class="answers" role="group" aria-label="Respuestas">
           <button class="answer-btn img-btn" data-index="0" aria-label="Respuesta A">
@@ -66,7 +69,7 @@
       </div>
     </div>
 
-    <!-- Botón siguiente -->
+    <!-- Botón siguiente (solo tras comprobar) -->
     <button id="btn-next" class="img-btn next-float" aria-label="Siguiente">
       <img src="./assets/ui/buttons/btn-next.PNG" alt="Siguiente" />
     </button>
@@ -82,6 +85,7 @@
     </button>
   </section>
 
-  <script src="./script.js"></script>
+  <!-- Cache-busting para iPad/Safari -->
+  <script src="./script.js?v=3"></script>
 </body>
 </html>
