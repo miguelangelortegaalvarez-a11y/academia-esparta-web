@@ -1,5 +1,16 @@
 /* =========================
-   RESET + BASE
+   QUIRÚRGICO: SIN BARRA DE ENERGÍA
+========================= */
+
+/* Por si existe CSS viejo: escondemos cualquier HUD/energy */
+.energy-hud, .hud, .energy, .energy-wrap, .energy-box,
+#energy-fill, #energy-glow, #energy-text,
+.energy-layer, .energy-fill, .energy-fill-wrap {
+  display: none !important;
+}
+
+/* =========================
+   Base mínima para pantallas
 ========================= */
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; padding: 0; }
@@ -9,24 +20,23 @@ body {
   overflow: hidden;
 }
 
-/* =========================
-   PANTALLAS
-========================= */
+/* Solo la pantalla activa es visible e interactiva */
 .screen {
+  display: none;
+  pointer-events: none;
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  display: none;
-  pointer-events: none;
 }
+
 .screen.is-active {
   display: block;
   pointer-events: auto;
 }
 
-/* Fondo grande */
-.screen-bg {
+/* Fondo siempre visible y no bloquea clicks */
+.screen-bg{
   position: absolute;
   inset: 0;
   width: 100%;
@@ -35,7 +45,7 @@ body {
   pointer-events: none;
 }
 
-/* Botones imagen */
+/* Botones imagen genéricos */
 .img-btn {
   border: 0;
   background: transparent;
@@ -43,28 +53,10 @@ body {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.img-btn img {
-  display: block;
-  width: clamp(180px, 40vw, 340px);
-  height: auto;
-}
 
 /* =========================
-   HOME
+   PREGUNTA
 ========================= */
-#screen-home #home-next {
-  position: absolute;
-  left: 50%;
-  bottom: 7vh;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
-/* =========================
-   GAME
-========================= */
-
-/* Pregunta */
 #question{
   position: absolute;
   left: 50%;
@@ -78,45 +70,75 @@ body {
   pointer-events: none;
 }
 
-/* Guerrero: centrado, un poco más abajo “pisando suelo” */
-#warrior{
+/* =========================
+   MUÑECO + SOMBRA VERDE EN EL SUELO
+   (IMPORTANTE: requiere wrapper .warrior-wrap en el HTML)
+========================= */
+.warrior-wrap{
   position: absolute;
   left: 50%;
-  top: 38vh; /* más abajo → pisa el suelo */
+  top: 30.5vh;              /* baja/sube aquí si lo quieres más “pisando” */
   transform: translateX(-50%);
-  width: clamp(230px, 22vw, 340px); /* un poco más grande */
-  height: auto;
-  z-index: 15;
+  z-index: 20;
   pointer-events: none;
 }
 
-/* Respuestas a izquierda / derecha */
+/* Halo/sombra verde en el suelo */
+.warrior-wrap::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;            /* pega el halo al “suelo” del muñeco */
+  transform: translateX(-50%);
+  width: clamp(160px, 22vw, 260px);
+  height: clamp(26px, 3.6vw, 42px);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(110, 255, 120, 0.55) 0%,
+    rgba(110, 255, 120, 0.22) 45%,
+    rgba(110, 255, 120, 0.00) 75%
+  );
+  filter: blur(1px);
+}
+
+/* Muñeco más grande */
+#warrior{
+  display: block;
+  width: clamp(240px, 24vw, 360px);  /* MÁS GRANDE (ajusta si quieres aún más) */
+  height: auto;
+  pointer-events: none;
+}
+
+/* =========================
+   RESPUESTAS (izquierda/derecha) — solo números clicables
+========================= */
 .answers{
   position: absolute;
   left: 50%;
   top: 48vh;
   transform: translateX(-50%);
-  width: min(92vw, 980px);
+  width: min(90vw, 900px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12vw;
-  z-index: 30;
+  z-index: 25;
   background: transparent !important;
-  border: 0 !important;
   box-shadow: none !important;
+  border: 0 !important;
 }
 
-/* Botón (solo número) */
+/* Botones clicables: SOLO NÚMERO */
 .answer-btn{
   background: transparent !important;
   border: 0 !important;
   padding: 0;
   cursor: pointer;
+  pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
+  box-shadow: none !important;
   outline: none !important;
 }
 
-/* El número */
 .answer-text{
   display: inline-block;
   width: 100%;
@@ -128,55 +150,52 @@ body {
   user-select: none;
 }
 
-/* Seleccionado */
-.answer-btn.is-selected .answer-text{
-  transform: translateY(-2px) scale(1.04);
+/* Quita cualquier pseudo-elemento raro (barras, etc.) */
+#screen-game .answers::before,
+#screen-game .answers::after,
+#screen-game .answer-btn::before,
+#screen-game .answer-btn::after {
+  content: none !important;
+  display: none !important;
 }
 
-/* Comprobar */
+/* Si quedase alguna imagen antigua dentro de answers, fuera */
+#screen-game .answers img {
+  display: none !important;
+}
+
+/* =========================
+   COMPROBAR
+========================= */
 #btn-check{
   position: absolute;
   left: 50%;
   bottom: 6vh;
   transform: translateX(-50%);
-  z-index: 40;
-}
-
-/* Feedback icono (aparece arriba) */
-.icon-feedback{
-  position: absolute;
-  left: 50%;
-  top: 8.5vh;
-  transform: translateX(-50%);
-  width: clamp(70px, 10vw, 120px);
-  z-index: 60;
-  pointer-events: none;
-  display: none; /* JS lo mostrará */
+  z-index: 30;
+  pointer-events: auto;
 }
 
 /* =========================
-   FINAL
+   FEEDBACK
 ========================= */
-#screen-final .final-warrior {
+.icon-feedback{
   position: absolute;
   left: 50%;
-  top: 55vh;
-  transform: translate(-50%, -50%);
-  width: clamp(190px, 22vw, 320px);
-  height: auto;
+  top: 9vh;
+  transform: translateX(-50%);
+  width: clamp(70px, 10vw, 120px);
+  z-index: 40;
   pointer-events: none;
 }
 
-#screen-final #final-retry {
-  position: absolute;
-  left: 50%;
-  bottom: 7vh;
-  transform: translateX(-50%);
-}
-
-/* Responsive */
-@media (max-height: 700px) {
-  #warrior { top: 28vh; }
-  .answers { top: 50vh; }
-  #btn-check { bottom: 4.5vh; }
+/* =========================
+   HOME — evita que se “cuelen” botones del juego
+========================= */
+#screen-home #btn-check,
+#screen-home .answer-btn,
+#screen-home #question,
+#screen-home #warrior,
+#screen-home .warrior-wrap {
+  display: none !important;
 }
