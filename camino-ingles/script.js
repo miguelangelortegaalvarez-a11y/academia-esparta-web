@@ -110,7 +110,7 @@ function loadQuestion(ctx) {
   hideFeedback(ctx.iconCorrect, ctx.iconWrong);
   setWarrior(ctx.warriorImg, "idle");
 
-  currentQ = randomQuestion();
+  currentQ = getNextQuestion();
 
   if (ctx.questionEl)
     ctx.questionEl.textContent = currentQ.prompt;
