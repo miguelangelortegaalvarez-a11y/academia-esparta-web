@@ -3,17 +3,7 @@
 // AM / IS / ARE
 // =======================
 
-// Banco de preguntas INGLÉS
-const QUESTIONS = [
-  { prompt: "I ___ happy.", correct: "am", wrong: "is" },
-  { prompt: "He ___ my brother.", correct: "is", wrong: "are" },
-  { prompt: "They ___ at school.", correct: "are", wrong: "is" },
-  { prompt: "She ___ a teacher.", correct: "is", wrong: "am" },
-  { prompt: "We ___ friends.", correct: "are", wrong: "is" },
-  { prompt: "I ___ ready.", correct: "am", wrong: "are" },
-  { prompt: "He ___ tall.", correct: "is", wrong: "am" },
-  { prompt: "They ___ happy.", correct: "are", wrong: "is" },
-];
+
 
 let currentQ = null;
 let selectedAnswer = null;
