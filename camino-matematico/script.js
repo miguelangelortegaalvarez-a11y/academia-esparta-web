@@ -205,7 +205,7 @@ const progressText = $("progress-text");
 correctCount = 0;
 locked = false;
 selectedAnswer = null;
-
+currentQ = null;
 updateProgress(ctx);
 
 if (ctx.progressFill && ctx.progressFill.parentElement) {
