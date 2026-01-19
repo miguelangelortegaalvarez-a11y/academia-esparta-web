@@ -1,17 +1,23 @@
 // =======================
-// Camino Matemático - script.js
-// MODO INFINITO + PROGRESIÓN
+// Camino Matemático — script.js (MODOS + PROGRESO + NIVELES)
+// SUMAS/RESTAS vs MULTIPLICACIONES
 // =======================
 
-// Estado global
-let selectedAnswer = null;
-let locked = false;
+/** CONFIG **/
+const GOAL = 30;              // <-- Meta total de aciertos (cámbialo a 10 si quieres "prueba" corta)
+const LEVEL_EVERY = 3;        // <-- Cada cuántos aciertos sube el nivel
+const FEEDBACK_MS = 1500;     // <-- Tiempo que se ve el warrior + icono (ms)
+
+/** ESTADO **/
+let mode = null;              // "sumasrestas" | "multiplicaciones"
 let correctCount = 0;
 let level = 1;
-let streak = 0;
+
+let selectedAnswer = null;
+let locked = false;
 let currentQ = null;
 
-// Assets
+/** ASSETS **/
 const ASSETS = {
   warrior: {
     idle: "./assets/warrior/warrior-idle.png.PNG",
@@ -20,26 +26,20 @@ const ASSETS = {
   },
 };
 
-// Utilidades
-function $(id) {
-  return document.getElementById(id);
-}
+/** HELPERS **/
+function $(id) { return document.getElementById(id); }
 
 function showScreen(screens, name) {
-  Object.values(screens).forEach((el) =>
-    el && el.classList.remove("is-active")
-  );
+  Object.values(screens).forEach((el) => el && el.classList.remove("is-active"));
   screens[name] && screens[name].classList.add("is-active");
 }
 
 function setWarrior(img, state) {
   if (!img) return;
   img.src =
-    state === "power"
-      ? ASSETS.warrior.power
-      : state === "sad"
-      ? ASSETS.warrior.sad
-      : ASSETS.warrior.idle;
+    state === "power" ? ASSETS.warrior.power :
+    state === "sad" ? ASSETS.warrior.sad :
+    ASSETS.warrior.idle;
 }
 
 function hideFeedback(ok, wrong) {
@@ -53,140 +53,255 @@ function showFeedback(ok, wrong, type) {
   if (type === "wrong" && wrong) wrong.style.display = "block";
 }
 
-function resetSelection(btns) {
+function resetSelectionUI(btns) {
   selectedAnswer = null;
   btns.forEach((b) => b.classList.remove("is-selected"));
 }
 
-// =======================
-// GENERADOR DE EJERCICIOS
-// =======================
-function makeQuestion() {
-  let max;
+function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
 
-  if (level === 1) max = 5;
-  else if (level === 2) max = 10;
-  else if (level === 3) max = 20;
-  else max = 50;
+function randInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function shuffle2(a, b) {
+  return Math.random() < 0.5 ? [a, b] : [b, a];
+}
+
+/** NIVEL Y DIFICULTAD **/
+function computeLevelFromScore(score) {
+  return 1 + Math.floor(score / LEVEL_EVERY);
+}
+
+function updateLevelUI(ctx) {
+  level = computeLevelFromScore(correctCount);
+  if (ctx.levelText) ctx.levelText.textContent = `Nivel ${level}`;
+}
+
+function updateProgressUI(ctx) {
+  const pct = Math.min(100, (correctCount / GOAL) * 100);
+  if (ctx.progressFill) ctx.progressFill.style.width = pct + "%";
+  if (ctx.progressText) ctx.progressText.textContent = `${correctCount}/${GOAL}`;
+
+  // Dorado cuando completa
+  if (ctx.progressFill && ctx.progressFill.parentElement) {
+    if (correctCount >= GOAL) ctx.progressFill.parentElement.classList.add("complete");
+    else ctx.progressFill.parentElement.classList.remove("complete");
+  }
+}
+
+/** GENERADOR DE PREGUNTAS **/
+function makeQuestionSumasRestas(level) {
+  // Rango sube por nivel. Ajustable.
+  // Nivel 1: 0-10, Nivel 2: 0-20, Nivel 3: 0-30, etc.
+  const max = clamp(level * 10, 10, 100);
 
   const op = Math.random() < 0.5 ? "+" : "-";
+  let a = randInt(0, max);
+  let b = randInt(0, max);
 
-  let a = Math.floor(Math.random() * (max + 1));
-  let b = Math.floor(Math.random() * (max + 1));
+  if (op === "-" && b > a) [a, b] = [b, a]; // no negativos
 
-  if (op === "-" && b > a) [a, b] = [b, a];
-
-  const correct = op === "+" ? a + b : a - b;
+  const correct = op === "+" ? (a + b) : (a - b);
 
   let wrong = correct;
   while (wrong === correct || wrong < 0) {
-    wrong = correct + (Math.floor(Math.random() * 7) - 3);
+    const delta = randInt(-5, 5);
+    if (delta === 0) continue;
+    wrong = correct + delta;
   }
 
   return { a, b, op, correct, wrong };
 }
 
-// =======================
-// CARGA DE PREGUNTA
-// =======================
+function makeQuestionMultiplicaciones(level) {
+  // Tablas: nivel 1 (0-5), nivel 2 (0-7), nivel 3 (0-9), nivel 4 (0-10), etc.
+  const max = clamp(5 + (level - 1) * 2, 5, 12);
+  const a = randInt(0, max);
+  const b = randInt(0, max);
+  const op = "×";
+  const correct = a * b;
+
+  let wrong = correct;
+  while (wrong === correct || wrong < 0) {
+    const delta = randInt(-10, 10);
+    if (delta === 0) continue;
+    wrong = correct + delta;
+  }
+
+  return { a, b, op, correct, wrong };
+}
+
+function makeQuestion() {
+  if (mode === "multiplicaciones") return makeQuestionMultiplicaciones(level);
+  return makeQuestionSumasRestas(level); // por defecto
+}
+
+/** CARGAR PREGUNTA **/
 function loadQuestion(ctx) {
   locked = false;
-  resetSelection(ctx.answerButtons);
+  currentQ = null;
+
+  resetSelectionUI(ctx.answerButtons);
   hideFeedback(ctx.iconCorrect, ctx.iconWrong);
   setWarrior(ctx.warriorImg, "idle");
 
+  updateLevelUI(ctx);
+
   currentQ = makeQuestion();
 
-  ctx.questionEl.textContent = `${currentQ.a} ${currentQ.op} ${currentQ.b} = ?`;
+  if (ctx.questionEl) {
+    ctx.questionEl.textContent = `${currentQ.a} ${currentQ.op} ${currentQ.b} = ?`;
+  }
 
-  const options = [currentQ.correct, currentQ.wrong].sort(
-    () => Math.random() - 0.5
-  );
+  const [optA, optB] = shuffle2(String(currentQ.correct), String(currentQ.wrong));
 
-  ctx.answerButtons[0].dataset.value = options[0];
-  ctx.answerButtons[1].dataset.value = options[1];
+  if (ctx.answerButtons[0]) ctx.answerButtons[0].dataset.value = optA;
+  if (ctx.answerButtons[1]) ctx.answerButtons[1].dataset.value = optB;
 
-  ctx.answerAText.textContent = options[0];
-  ctx.answerBText.textContent = options[1];
+  if (ctx.answerAText) ctx.answerAText.textContent = optA;
+  if (ctx.answerBText) ctx.answerBText.textContent = optB;
 
-  ctx.progressText.textContent = `Aciertos: ${correctCount}`;
-  ctx.levelText.textContent = `Nivel ${level}`;
+  updateProgressUI(ctx);
 }
 
-// =======================
-// COMPROBAR RESPUESTA
-// =======================
+/** CHECK **/
 function checkAnswer(ctx) {
-  if (locked || selectedAnswer === null) return;
+  if (locked) return;
+  if (selectedAnswer === null) return;
+
   locked = true;
 
-  const isCorrect = Number(selectedAnswer) === currentQ.correct;
+  const ok = Number(selectedAnswer) === Number(currentQ.correct);
 
-  if (isCorrect) {
-    correctCount++;
-    streak++;
+  if (ok) {
+    correctCount += 1;
+    updateLevelUI(ctx);
+    updateProgressUI(ctx);
 
     setWarrior(ctx.warriorImg, "power");
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
 
-    // Subida de nivel cada 3 aciertos seguidos
-    if (streak === 3) {
-      level++;
-      streak = 0;
+    if (correctCount >= GOAL) {
+      // Completa
+      setTimeout(() => {
+        showScreen(ctx.screens, "final");
+      }, FEEDBACK_MS);
+      return;
     }
   } else {
-    streak = 0;
+    // No resta, no vuelve a 0
     setWarrior(ctx.warriorImg, "sad");
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
   }
 
-  setTimeout(() => loadQuestion(ctx), 1800);
+  setTimeout(() => {
+    loadQuestion(ctx);
+  }, FEEDBACK_MS);
 }
 
-// =======================
-// INIT
-// =======================
+/** RESET DE PARTIDA **/
+function resetRun(ctx) {
+  correctCount = 0;
+  level = 1;
+  locked = false;
+  selectedAnswer = null;
+  currentQ = null;
+
+  updateLevelUI(ctx);
+  updateProgressUI(ctx);
+  hideFeedback(ctx.iconCorrect, ctx.iconWrong);
+  setWarrior(ctx.warriorImg, "idle");
+  resetSelectionUI(ctx.answerButtons);
+
+  // quitar dorado si estaba
+  if (ctx.progressFill && ctx.progressFill.parentElement) {
+    ctx.progressFill.parentElement.classList.remove("complete");
+  }
+}
+
+/** INIT **/
 function init() {
   const ctx = {
     screens: {
       home: $("screen-home"),
       game: $("screen-game"),
+      final: $("screen-final"),
     },
     warriorImg: $("warrior"),
     questionEl: $("question"),
+    levelText: $("level-text"),
+
     answerButtons: Array.from(document.querySelectorAll(".answer-btn")),
     answerAText: $("answer-a-text"),
     answerBText: $("answer-b-text"),
+
     iconCorrect: $("icon-correct"),
     iconWrong: $("icon-wrong"),
+
+    progressFill: $("progress-fill"),
     progressText: $("progress-text"),
-    levelText: $("level-text"),
+
+    // Botones HOME
+    btnModeSumasRestas: $("home-mode-sumasrestas"),
+    btnModeMultiplicaciones: $("home-mode-multiplicaciones"),
+
+    // Botones comunes
+    btnCheck: $("btn-check"),
+    btnRetry: $("final-retry"),
   };
 
-  $("home-next").onclick = () => {
-    correctCount = 0;
-    level = 1;
-    streak = 0;
-    currentQ = null;
+  // Estado inicial
+  mode = null;
+  resetRun(ctx);
+  showScreen(ctx.screens, "home");
 
-    showScreen(ctx.screens, "game");
-    loadQuestion(ctx);
-  };
+  // HOME -> GAME (Sumas/Restas)
+  if (ctx.btnModeSumasRestas) {
+    ctx.btnModeSumasRestas.addEventListener("click", () => {
+      mode = "sumasrestas";
+      resetRun(ctx);
+      showScreen(ctx.screens, "game");
+      loadQuestion(ctx);
+    });
+  }
 
+  // HOME -> GAME (Multiplicaciones)
+  if (ctx.btnModeMultiplicaciones) {
+    ctx.btnModeMultiplicaciones.addEventListener("click", () => {
+      mode = "multiplicaciones";
+      resetRun(ctx);
+      showScreen(ctx.screens, "game");
+      loadQuestion(ctx);
+    });
+  }
+
+  // Selección respuestas
   ctx.answerButtons.forEach((btn) => {
-    btn.onclick = () => {
+    btn.addEventListener("click", () => {
       if (locked) return;
-      ctx.answerButtons.forEach((b) =>
-        b.classList.remove("is-selected")
-      );
+      ctx.answerButtons.forEach((b) => b.classList.remove("is-selected"));
       btn.classList.add("is-selected");
-      selectedAnswer = btn.dataset.value;
-    };
+      selectedAnswer = btn.dataset.value ?? null;
+    });
   });
 
-  $("btn-check").onclick = () => checkAnswer(ctx);
+  // Comprobar
+  if (ctx.btnCheck) {
+    ctx.btnCheck.addEventListener("click", () => checkAnswer(ctx));
+  }
 
-  showScreen(ctx.screens, "home");
+  // FINAL -> HOME
+  if (ctx.btnRetry) {
+    ctx.btnRetry.addEventListener("click", () => {
+      mode = null;
+      resetRun(ctx);
+      showScreen(ctx.screens, "home");
+    });
+  }
 }
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => {
+  try { init(); }
+  catch (e) { console.error("Error iniciando el juego:", e); }
+});
