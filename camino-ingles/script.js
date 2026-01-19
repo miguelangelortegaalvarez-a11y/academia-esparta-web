@@ -4,7 +4,38 @@
 // =======================
 
 
+// ========================
+// Banco de ejercicios INGLÉS (10–11 años)
+// Tipos mezclados: AM/IS/ARE, HAVE/HAS, DO/DOES, PAST (was/were), PREPOSITIONS, PLURALS
+// ========================
 
+const QUESTIONS = [
+  // 1) AM / IS / ARE
+  { type: "am_is_are", prompt: "I ___ hungry.", correct: "am", wrong: "is" },
+  { type: "am_is_are", prompt: "She ___ at home.", correct: "is", wrong: "are" },
+  { type: "am_is_are", prompt: "They ___ friends.", correct: "are", wrong: "is" },
+
+  // 2) HAVE / HAS
+  { type: "have_has", prompt: "He ___ a new bike.", correct: "has", wrong: "have" },
+  { type: "have_has", prompt: "We ___ two dogs.", correct: "have", wrong: "has" },
+
+  // 3) DO / DOES (present simple questions)
+  { type: "do_does", prompt: "___ you like pizza?", correct: "Do", wrong: "Does" },
+  { type: "do_does", prompt: "___ she play tennis?", correct: "Does", wrong: "Do" },
+
+  // 4) WAS / WERE (past of to be)
+  { type: "was_were", prompt: "I ___ tired yesterday.", correct: "was", wrong: "were" },
+  { type: "was_were", prompt: "They ___ at the park.", correct: "were", wrong: "was" },
+
+  // 5) PREPOSITIONS (in / on / at)
+  { type: "prepositions", prompt: "My birthday is ___ July.", correct: "in", wrong: "on" },
+  { type: "prepositions", prompt: "The book is ___ the table.", correct: "on", wrong: "in" },
+  { type: "prepositions", prompt: "We meet ___ 5 o'clock.", correct: "at", wrong: "in" },
+
+  // 6) PLURALS (s / es)
+  { type: "plurals", prompt: "One box, two ___.", correct: "boxes", wrong: "boxs" },
+  { type: "plurals", prompt: "One baby, two ___.", correct: "babies", wrong: "babys" },
+];
 let currentQ = null;
 let selectedAnswer = null;
 let locked = false;
