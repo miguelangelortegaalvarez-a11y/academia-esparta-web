@@ -1,44 +1,27 @@
 // =======================
-// Camino Matemático - script.js (SIN barra energía)
+// Camino Inglés — script.js
+// AM / IS / ARE
 // =======================
 
-// Preguntas demo (luego cambiamos por niveles / por tu banco de ejercicios)
-// Banco INGLÉS (am / is / are)
+// Banco de preguntas INGLÉS
 const QUESTIONS = [
-  {
-    prompt: "I ___ happy.",
-    correct: "am",
-    wrong: "is",
-  },
-  {
-    prompt: "He ___ my brother.",
-    correct: "is",
-    wrong: "are",
-  },
-  {
-    prompt: "They ___ at school.",
-    correct: "are",
-    wrong: "is",
-  },
-  {
-    prompt: "She ___ a student.",
-    correct: "is",
-    wrong: "am",
-  },
-  {
-    prompt: "We ___ ready.",
-    correct: "are",
-    wrong: "is",
-  },
+  { prompt: "I ___ happy.", correct: "am", wrong: "is" },
+  { prompt: "He ___ my brother.", correct: "is", wrong: "are" },
+  { prompt: "They ___ at school.", correct: "are", wrong: "is" },
+  { prompt: "She ___ a teacher.", correct: "is", wrong: "am" },
+  { prompt: "We ___ friends.", correct: "are", wrong: "is" },
+  { prompt: "I ___ ready.", correct: "am", wrong: "are" },
+  { prompt: "He ___ tall.", correct: "is", wrong: "am" },
+  { prompt: "They ___ happy.", correct: "are", wrong: "is" },
 ];
 
-let currentIndex = 0;
+let currentQ = null;
 let selectedAnswer = null;
 let locked = false;
 let correctCount = 0;
 const GOAL = 10;
-let currentQ = null; // pregunta actualpaso
-// Assets (tus nombres actuales con doble extensión)
+
+// Assets
 const ASSETS = {
   warrior: {
     idle: "./assets/warrior/warrior-idle.png.PNG",
@@ -47,231 +30,141 @@ const ASSETS = {
   },
 };
 
-function $(id) { return document.getElementById(id); }
+function $(id) {
+  return document.getElementById(id);
+}
 
 function showScreen(screens, name) {
   Object.values(screens).forEach((el) => el && el.classList.remove("is-active"));
   screens[name] && screens[name].classList.add("is-active");
 }
 
-function setWarrior(warriorImg, state) {
-  if (!warriorImg) return;
-  warriorImg.src =
-    state === "power" ? ASSETS.warrior.power :
-    state === "sad" ? ASSETS.warrior.sad :
-    ASSETS.warrior.idle;
+function setWarrior(img, state) {
+  if (!img) return;
+  img.src =
+    state === "power"
+      ? ASSETS.warrior.power
+      : state === "sad"
+      ? ASSETS.warrior.sad
+      : ASSETS.warrior.idle;
 }
 
-function hideFeedback(iconCorrect, iconWrong) {
-  if (iconCorrect) iconCorrect.style.display = "none";
-  if (iconWrong) iconWrong.style.display = "none";
+function hideFeedback(ok, wrong) {
+  if (ok) ok.style.display = "none";
+  if (wrong) wrong.style.display = "none";
 }
 
-function showFeedback(iconCorrect, iconWrong, type) {
-  hideFeedback(iconCorrect, iconWrong);
-  if (type === "correct" && iconCorrect) iconCorrect.style.display = "block";
-  if (type === "wrong" && iconWrong) iconWrong.style.display = "block";
+function showFeedback(ok, wrong, type) {
+  hideFeedback(ok, wrong);
+  if (type === "correct" && ok) ok.style.display = "block";
+  if (type === "wrong" && wrong) wrong.style.display = "block";
 }
 
-function resetSelectionUI(answerButtons) {
+function resetSelectionUI(btns) {
   selectedAnswer = null;
-  answerButtons.forEach((btn) => btn.classList.remove("is-selected"));
+  btns.forEach((b) => b.classList.remove("is-selected"));
 }
 
-function makeQuestion() {
-  const MIN = 0;
-  const MAX = 10;
-
-  const op = Math.random() < 0.5 ? "+" : "-";
-
-  let a = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
-  let b = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
-
-  if (op === "-" && b > a) {
-    [a, b] = [b, a];
-  }
-
-  const correct = op === "+" ? a + b : a - b;
-
-  let wrong = correct;
-  while (wrong === correct || wrong < 0) {
-    const delta = Math.floor(Math.random() * 7) - 3;
-    if (delta === 0) continue;
-    wrong = correct + delta;
-  }
-
-  return { a, b, op, correct, wrong };
+function randomQuestion() {
+  return QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
 }
 
-function currentQuestion() {
-  // Si no hay pregunta, crea una
-  if (!currentQ) currentQ = makeQuestion();
-  return currentQ;
-}
-function updateProgress(ctx) {
-  const pct = Math.min(100, (correctCount / GOAL) * 100);
-  if (ctx.progressFill) ctx.progressFill.style.width = pct + "%";
-  if (ctx.progressText) ctx.progressText.textContent = `${correctCount}/${GOAL}`;
-}
 function loadQuestion(ctx) {
   locked = false;
   resetSelectionUI(ctx.answerButtons);
   hideFeedback(ctx.iconCorrect, ctx.iconWrong);
   setWarrior(ctx.warriorImg, "idle");
 
-  const q = currentQuestion();
-  if (ctx.questionEl) ctx.questionEl.textContent = q.prompt;
+  currentQ = randomQuestion();
 
-  // Alterna de forma impredecible izquierda/derecha
-  const options = [q.correct, q.wrong].sort(() => Math.random() - 0.5);
+  if (ctx.questionEl)
+    ctx.questionEl.textContent = currentQ.prompt;
 
-  if (ctx.answerButtons[0]) ctx.answerButtons[0].dataset.value = String(options[0]);
-  if (ctx.answerButtons[1]) ctx.answerButtons[1].dataset.value = String(options[1]);
+  const options = [currentQ.correct, currentQ.wrong].sort(
+    () => Math.random() - 0.5
+  );
 
-  if (ctx.answerAText) ctx.answerAText.textContent = String(options[0]);
-  if (ctx.answerBText) ctx.answerBText.textContent = String(options[1]);
+  ctx.answerButtons[0].dataset.value = options[0];
+  ctx.answerButtons[1].dataset.value = options[1];
+
+  ctx.answerAText.textContent = options[0];
+  ctx.answerBText.textContent = options[1];
+
   updateProgress(ctx);
 }
+
+function updateProgress(ctx) {
+  const pct = Math.min(100, (correctCount / GOAL) * 100);
+  ctx.progressFill.style.width = pct + "%";
+  ctx.progressText.textContent = `${correctCount}/${GOAL}`;
+}
+
 function checkAnswer(ctx) {
-  if (locked) return;
-  if (selectedAnswer === null) return;
-
+  if (locked || selectedAnswer === null) return;
   locked = true;
-  const q = currentQuestion();
-  const isCorrect = Number(selectedAnswer) === Number(q.correct);
 
-  if (isCorrect) {
-  // ✅ SUMA PROGRESO SOLO AL ACERTAR
-  correctCount += 1;
-  updateProgress(ctx);
+  const ok = selectedAnswer === currentQ.correct;
 
-  // ✅ SI LLEGA A 10 → FINAL
-  if (correctCount >= GOAL) {
-    // Barra en dorado
-    if (ctx.progressFill && ctx.progressFill.parentElement) {
+  if (ok) {
+    correctCount++;
+    setWarrior(ctx.warriorImg, "power");
+    showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
+
+    if (correctCount >= GOAL) {
       ctx.progressFill.parentElement.classList.add("complete");
+      showScreen(ctx.screens, "final");
+      return;
     }
-
-    showScreen(ctx.screens, "final");
-    return; // ⛔️ IMPORTANTÍSIMO: corta aquí
+  } else {
+    setWarrior(ctx.warriorImg, "sad");
+    showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
   }
 
-  setWarrior(ctx.warriorImg, "power");
-  showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
-
-} else {
-  // ❌ NO SUMA, ❌ NO RESTA
-  setWarrior(ctx.warriorImg, "sad");
-  showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
-}
-
-  // Tras un momento, siguiente pregunta (o fin si quieres por nº de aciertos)
-  setTimeout(() => {
-  currentIndex += 1;
-  currentQ = null;
-  loadQuestion(ctx);
-}, 2000);
+  setTimeout(() => loadQuestion(ctx), 1500);
 }
 
 function init() {
-  const screens = {
-    home: $("screen-home"),
-    game: $("screen-game"),
-    final: $("screen-final"),
-  };
-
-  const btnHomeNext = $("home-next");
-  const btnCheck = $("btn-check");
-  const btnFinalRetry = $("final-retry");
-
-  const warriorImg = $("warrior");
-  const questionEl = $("question");
-
-  const answerButtons = Array.from(document.querySelectorAll(".answer-btn"));
-  const answerAText = $("answer-a-text");
-  const answerBText = $("answer-b-text");
-
-  const iconCorrect = $("icon-correct");
-  const iconWrong = $("icon-wrong");
-  const progressFill = $("progress-fill");
-const progressText = $("progress-text");
   const ctx = {
-    screens,
-    btnHomeNext,
-    btnCheck,
-    btnFinalRetry,
-    warriorImg,
-    questionEl,
-    answerButtons,
-    answerAText,
-    answerBText,
-    iconCorrect,
-    iconWrong,
-    progressFill,
-    progressText,
+    screens: {
+      home: $("screen-home"),
+      game: $("screen-game"),
+      final: $("screen-final"),
+    },
+    warriorImg: $("warrior"),
+    questionEl: $("question"),
+    answerButtons: Array.from(document.querySelectorAll(".answer-btn")),
+    answerAText: $("answer-a-text"),
+    answerBText: $("answer-b-text"),
+    iconCorrect: $("icon-correct"),
+    iconWrong: $("icon-wrong"),
+    progressFill: $("progress-fill"),
+    progressText: $("progress-text"),
   };
 
-  // Estado inicial
-  currentIndex = 0;
-  locked = false;
-  selectedAnswer = null;
+  $("home-next").onclick = () => {
+    correctCount = 0;
+    ctx.progressFill.parentElement.classList.remove("complete");
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  };
 
-  setWarrior(warriorImg, "idle");
-  hideFeedback(iconCorrect, iconWrong);
-  showScreen(screens, "home");
-
-  // HOME -> GAME
-  if (btnHomeNext) {
-    btnHomeNext.addEventListener("click", () => {
-    currentIndex = 0;
-correctCount = 0;
-locked = false;
-selectedAnswer = null;
-currentQ = null;
-updateProgress(ctx);
-
-if (ctx.progressFill && ctx.progressFill.parentElement) {
-  ctx.progressFill.parentElement.classList.remove("complete");
-}
-
-showScreen(screens, "game");
-loadQuestion(ctx);
-    });
-  }
-
-  // Selección respuestas
-  answerButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
+  ctx.answerButtons.forEach((btn) => {
+    btn.onclick = () => {
       if (locked) return;
-      selectedAnswer = btn.dataset.value || null;
-
-      answerButtons.forEach((b) => b.classList.remove("is-selected"));
+      ctx.answerButtons.forEach((b) => b.classList.remove("is-selected"));
       btn.classList.add("is-selected");
-    });
+      selectedAnswer = btn.dataset.value;
+    };
   });
 
-  // Comprobar
-  if (btnCheck) {
-    btnCheck.addEventListener("click", () => checkAnswer(ctx));
-  }
+  $("btn-check").onclick = () => checkAnswer(ctx);
 
-  // FINAL -> HOME (si luego decides usar final, lo conectamos por regla)
-  if (btnFinalRetry) {
-    btnFinalRetry.addEventListener("click", () => {
-      currentIndex = 0;
-      locked = false;
-      selectedAnswer = null;
+  $("final-retry").onclick = () => {
+    correctCount = 0;
+    showScreen(ctx.screens, "home");
+  };
 
-      hideFeedback(iconCorrect, iconWrong);
-      setWarrior(warriorImg, "idle");
-      resetSelectionUI(answerButtons);
-      showScreen(screens, "home");
-    });
-  }
+  showScreen(ctx.screens, "home");
 }
 
-// Arranque seguro
-document.addEventListener("DOMContentLoaded", () => {
-  try { init(); }
-  catch (e) { console.error("Error iniciando el juego:", e); }
-});
+document.addEventListener("DOMContentLoaded", init);
