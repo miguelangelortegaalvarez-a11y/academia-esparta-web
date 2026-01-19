@@ -3,11 +3,33 @@
 // =======================
 
 // Preguntas demo (luego cambiamos por niveles / por tu banco de ejercicios)
+// Banco INGLÉS (am / is / are)
 const QUESTIONS = [
-  { a: 3, b: 2, op: "+", correct: 5, wrong: 6 },
-  { a: 7, b: 4, op: "-", correct: 3, wrong: 2 },
-  { a: 6, b: 1, op: "+", correct: 7, wrong: 8 },
-  { a: 9, b: 5, op: "-", correct: 4, wrong: 6 },
+  {
+    prompt: "I ___ happy.",
+    correct: "am",
+    wrong: "is",
+  },
+  {
+    prompt: "He ___ my brother.",
+    correct: "is",
+    wrong: "are",
+  },
+  {
+    prompt: "They ___ at school.",
+    correct: "are",
+    wrong: "is",
+  },
+  {
+    prompt: "She ___ a student.",
+    correct: "is",
+    wrong: "am",
+  },
+  {
+    prompt: "We ___ ready.",
+    correct: "are",
+    wrong: "is",
+  },
 ];
 
 let currentIndex = 0;
