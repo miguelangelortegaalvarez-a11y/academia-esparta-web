@@ -57,28 +57,25 @@ function resetSelectionUI(answerButtons) {
 }
 
 function makeQuestion() {
-  // Config simple: sumas y restas sin negativos (Infantil/Primaria)
-  const ops = ["+", "-"];
-  const op = ops[Math.floor(Math.random() * ops.length)];
+  const MIN = 0;
+  const MAX = 10;
 
-  let a = 0, b = 0, correct = 0;
+  const op = Math.random() < 0.5 ? "+" : "-";
 
-  if (op === "+") {
-    a = 1 + Math.floor(Math.random() * 9);  // 1..9
-    b = 1 + Math.floor(Math.random() * 9);  // 1..9
-    correct = a + b;
-  } else {
-    a = 1 + Math.floor(Math.random() * 9);  // 1..9
-    b = 1 + Math.floor(Math.random() * 9);  // 1..9
-    if (b > a) [a, b] = [b, a];             // evita negativos
-    correct = a - b;
+  let a = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
+  let b = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
+
+  if (op === "-" && b > a) {
+    [a, b] = [b, a];
   }
 
-  // wrong: cercano pero distinto (y >=0)
+  const correct = op === "+" ? a + b : a - b;
+
   let wrong = correct;
-  while (wrong === correct) {
-    const delta = 1 + Math.floor(Math.random() * 3); // 1..3
-    wrong = Math.random() < 0.5 ? correct + delta : Math.max(0, correct - delta);
+  while (wrong === correct || wrong < 0) {
+    const delta = Math.floor(Math.random() * 7) - 3;
+    if (delta === 0) continue;
+    wrong = correct + delta;
   }
 
   return { a, b, op, correct, wrong };
