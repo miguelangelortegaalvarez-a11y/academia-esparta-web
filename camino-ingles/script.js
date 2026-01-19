@@ -36,11 +36,25 @@ const QUESTIONS = [
   { type: "plurals", prompt: "One box, two ___.", correct: "boxes", wrong: "boxs" },
   { type: "plurals", prompt: "One baby, two ___.", correct: "babies", wrong: "babys" },
 ];
-let currentQ = null;
-let selectedAnswer = null;
-let locked = false;
-let correctCount = 0;
-const GOAL = 10;
+// Pool de preguntas (para que no se repitan)
+let questionPool = [];
+
+// Mezclar array (Fisher-Yates)
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// Obtener siguiente pregunta sin repetir
+function getNextQuestion() {
+  if (questionPool.length === 0) {
+    questionPool = shuffle([...QUESTIONS]);
+  }
+  return questionPool.pop();
+}
 
 // Assets
 const ASSETS = {
