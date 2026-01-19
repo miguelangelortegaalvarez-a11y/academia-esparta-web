@@ -145,9 +145,10 @@ function checkAnswer(ctx) {
 
   // Tras un momento, siguiente pregunta (o fin si quieres por nº de aciertos)
   setTimeout(() => {
-    currentIndex += 1;
-    loadQuestion(ctx);
-  }, 3000);
+  currentIndex += 1;
+  currentQ = null;
+  loadQuestion(ctx);
+}, 3000);
 }
 
 function init() {
