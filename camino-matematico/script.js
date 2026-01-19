@@ -1,21 +1,21 @@
 // =======================
-// Camino Matemático - script.js (SIN barra energía)
+// Camino Matemático - script.js
+// MODOS: SUMAS/RESTAS y MULTIPLICACIONES
+// Nivel visible + sube cada 3 aciertos
 // =======================
 
-// Preguntas demo (luego cambiamos por niveles / por tu banco de ejercicios)
-const QUESTIONS = [
-  { a: 3, b: 2, op: "+", correct: 5, wrong: 6 },
-  { a: 7, b: 4, op: "-", correct: 3, wrong: 2 },
-  { a: 6, b: 1, op: "+", correct: 7, wrong: 8 },
-  { a: 9, b: 5, op: "-", correct: 4, wrong: 6 },
-];
-
-let currentIndex = 0;
 let selectedAnswer = null;
 let locked = false;
+
 let correctCount = 0;
 const GOAL = 10;
-let currentQ = null; // pregunta actualpaso
+
+let level = 1;            // Nivel actual
+let streak = 0;           // Aciertos seguidos para subir nivel (cada 3)
+let mode = null;          // "sumasrestas" | "multiplicaciones"
+
+let currentQ = null;      // pregunta actual
+
 // Assets (tus nombres actuales con doble extensión)
 const ASSETS = {
   warrior: {
@@ -56,51 +56,97 @@ function resetSelectionUI(answerButtons) {
   answerButtons.forEach((btn) => btn.classList.remove("is-selected"));
 }
 
-function makeQuestion() {
-  const MIN = 0;
-  const MAX = 10;
-
-  const op = Math.random() < 0.5 ? "+" : "-";
-
-  let a = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
-  let b = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
-
-  if (op === "-" && b > a) {
-    [a, b] = [b, a];
-  }
-
-  const correct = op === "+" ? a + b : a - b;
-
-  let wrong = correct;
-  while (wrong === correct || wrong < 0) {
-    const delta = Math.floor(Math.random() * 7) - 3;
-    if (delta === 0) continue;
-    wrong = correct + delta;
-  }
-
-  return { a, b, op, correct, wrong };
-}
-
-function currentQuestion() {
-  // Si no hay pregunta, crea una
-  if (!currentQ) currentQ = makeQuestion();
-  return currentQ;
-}
 function updateProgress(ctx) {
   const pct = Math.min(100, (correctCount / GOAL) * 100);
   if (ctx.progressFill) ctx.progressFill.style.width = pct + "%";
   if (ctx.progressText) ctx.progressText.textContent = `${correctCount}/${GOAL}`;
 }
+
+function updateLevelUI(ctx) {
+  if (ctx.levelText) ctx.levelText.textContent = `Nivel ${level}`;
+}
+
+// =======================
+// Generadores por modo + nivel
+// =======================
+
+function randInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function makeQuestionSumasRestas() {
+  // Nivel 1: 0..10
+  // Cada nivel sube el rango 5 puntos (ajustable)
+  const MAX = 10 + (level - 1) * 5;
+  const MIN = 0;
+
+  const op = Math.random() < 0.5 ? "+" : "-";
+
+  let a = randInt(MIN, MAX);
+  let b = randInt(MIN, MAX);
+
+  // Evitar negativos en restas
+  if (op === "-" && b > a) [a, b] = [b, a];
+
+  const correct = op === "+" ? a + b : a - b;
+
+  // Wrong cercano y no negativo
+  let wrong = correct;
+  while (wrong === correct || wrong < 0) {
+    const delta = randInt(-3, 3);
+    if (delta === 0) continue;
+    wrong = correct + delta;
+  }
+
+  return { text: `${a} ${op} ${b} = ?`, correct, wrong };
+}
+
+function makeQuestionMultiplicaciones() {
+  // Nivel 1: factores 0..5
+  // Cada nivel sube el factor máximo 2 puntos (ajustable)
+  const MAX = 5 + (level - 1) * 2;
+  const MIN = 0;
+
+  const a = randInt(MIN, MAX);
+  const b = randInt(MIN, MAX);
+
+  const correct = a * b;
+
+  let wrong = correct;
+  while (wrong === correct || wrong < 0) {
+    const delta = randInt(-5, 5);
+    if (delta === 0) continue;
+    wrong = correct + delta;
+  }
+
+  return { text: `${a} × ${b} = ?`, correct, wrong };
+}
+
+function makeQuestionByMode() {
+  if (mode === "multiplicaciones") return makeQuestionMultiplicaciones();
+  return makeQuestionSumasRestas(); // por defecto sumas/restas
+}
+
+function currentQuestion() {
+  if (!currentQ) currentQ = makeQuestionByMode();
+  return currentQ;
+}
+
+// =======================
+// Flujo de juego
+// =======================
+
 function loadQuestion(ctx) {
   locked = false;
   resetSelectionUI(ctx.answerButtons);
   hideFeedback(ctx.iconCorrect, ctx.iconWrong);
   setWarrior(ctx.warriorImg, "idle");
 
-  const q = currentQuestion();
-  if (ctx.questionEl) ctx.questionEl.textContent = `${q.a} ${q.op} ${q.b} = ?`;
+  updateLevelUI(ctx);
 
-  // Alterna de forma impredecible izquierda/derecha
+  const q = currentQuestion();
+  if (ctx.questionEl) ctx.questionEl.textContent = q.text;
+
   const options = [q.correct, q.wrong].sort(() => Math.random() - 0.5);
 
   if (ctx.answerButtons[0]) ctx.answerButtons[0].dataset.value = String(options[0]);
@@ -108,8 +154,10 @@ function loadQuestion(ctx) {
 
   if (ctx.answerAText) ctx.answerAText.textContent = String(options[0]);
   if (ctx.answerBText) ctx.answerBText.textContent = String(options[1]);
+
   updateProgress(ctx);
 }
+
 function checkAnswer(ctx) {
   if (locked) return;
   if (selectedAnswer === null) return;
@@ -119,36 +167,62 @@ function checkAnswer(ctx) {
   const isCorrect = Number(selectedAnswer) === Number(q.correct);
 
   if (isCorrect) {
-  // ✅ SUMA PROGRESO SOLO AL ACERTAR
-  correctCount += 1;
-  updateProgress(ctx);
+    correctCount += 1;
+    streak += 1;
 
-  // ✅ SI LLEGA A 10 → FINAL
-  if (correctCount >= GOAL) {
-    // Barra en dorado
-    if (ctx.progressFill && ctx.progressFill.parentElement) {
-      ctx.progressFill.parentElement.classList.add("complete");
+    // Subir nivel cada 3 aciertos
+    if (streak >= 3) {
+      level += 1;
+      streak = 0;
     }
 
-    showScreen(ctx.screens, "final");
-    return; // ⛔️ IMPORTANTÍSIMO: corta aquí
+    updateProgress(ctx);
+    updateLevelUI(ctx);
+
+    setWarrior(ctx.warriorImg, "power");
+    showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
+
+    if (correctCount >= GOAL) {
+      if (ctx.progressFill && ctx.progressFill.parentElement) {
+        ctx.progressFill.parentElement.classList.add("complete");
+      }
+      showScreen(ctx.screens, "final");
+      return;
+    }
+  } else {
+    // Fallo: NO sumamos aciertos, reiniciamos racha
+    streak = 0;
+
+    setWarrior(ctx.warriorImg, "sad");
+    showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
   }
 
-  setWarrior(ctx.warriorImg, "power");
-  showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
-
-} else {
-  // ❌ NO SUMA, ❌ NO RESTA
-  setWarrior(ctx.warriorImg, "sad");
-  showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
+  // Siguiente pregunta
+  setTimeout(() => {
+    currentQ = null;
+    loadQuestion(ctx);
+  }, 2000);
 }
 
-  // Tras un momento, siguiente pregunta (o fin si quieres por nº de aciertos)
-  setTimeout(() => {
-  currentIndex += 1;
+function startGame(ctx, newMode) {
+  mode = newMode;
+
+  correctCount = 0;
+  level = 1;
+  streak = 0;
+  locked = false;
+  selectedAnswer = null;
   currentQ = null;
+
+  updateProgress(ctx);
+  updateLevelUI(ctx);
+
+  if (ctx.progressFill && ctx.progressFill.parentElement) {
+    ctx.progressFill.parentElement.classList.remove("complete");
+  }
+
+  showScreen(ctx.screens, "game");
   loadQuestion(ctx);
-}, 2000);
 }
 
 function init() {
@@ -158,7 +232,10 @@ function init() {
     final: $("screen-final"),
   };
 
-  const btnHomeNext = $("home-next");
+  // BOTONES HOME (los nuevos)
+  const btnModeSumasRestas = $("home-mode-sumasrestas");
+  const btnModeMultiplicaciones = $("home-mode-multiplicaciones");
+
   const btnCheck = $("btn-check");
   const btnFinalRetry = $("final-retry");
 
@@ -171,13 +248,15 @@ function init() {
 
   const iconCorrect = $("icon-correct");
   const iconWrong = $("icon-wrong");
+
   const progressFill = $("progress-fill");
-const progressText = $("progress-text");
+  const progressText = $("progress-text");
+
+  // NIVEL (nuevo)
+  const levelText = $("level-text");
+
   const ctx = {
     screens,
-    btnHomeNext,
-    btnCheck,
-    btnFinalRetry,
     warriorImg,
     questionEl,
     answerButtons,
@@ -187,34 +266,30 @@ const progressText = $("progress-text");
     iconWrong,
     progressFill,
     progressText,
+    levelText,
   };
 
   // Estado inicial
-  currentIndex = 0;
   locked = false;
   selectedAnswer = null;
+  correctCount = 0;
+  level = 1;
+  streak = 0;
+  mode = null;
+  currentQ = null;
 
   setWarrior(warriorImg, "idle");
   hideFeedback(iconCorrect, iconWrong);
+  updateProgress(ctx);
+  updateLevelUI(ctx);
   showScreen(screens, "home");
 
-  // HOME -> GAME
-  if (btnHomeNext) {
-    btnHomeNext.addEventListener("click", () => {
-    currentIndex = 0;
-correctCount = 0;
-locked = false;
-selectedAnswer = null;
-currentQ = null;
-updateProgress(ctx);
-
-if (ctx.progressFill && ctx.progressFill.parentElement) {
-  ctx.progressFill.parentElement.classList.remove("complete");
-}
-
-showScreen(screens, "game");
-loadQuestion(ctx);
-    });
+  // HOME -> GAME por modo
+  if (btnModeSumasRestas) {
+    btnModeSumasRestas.addEventListener("click", () => startGame(ctx, "sumasrestas"));
+  }
+  if (btnModeMultiplicaciones) {
+    btnModeMultiplicaciones.addEventListener("click", () => startGame(ctx, "multiplicaciones"));
   }
 
   // Selección respuestas
@@ -233,22 +308,22 @@ loadQuestion(ctx);
     btnCheck.addEventListener("click", () => checkAnswer(ctx));
   }
 
-  // FINAL -> HOME (si luego decides usar final, lo conectamos por regla)
+  // FINAL -> HOME
   if (btnFinalRetry) {
     btnFinalRetry.addEventListener("click", () => {
-      currentIndex = 0;
       locked = false;
       selectedAnswer = null;
+      currentQ = null;
 
       hideFeedback(iconCorrect, iconWrong);
       setWarrior(warriorImg, "idle");
       resetSelectionUI(answerButtons);
+
       showScreen(screens, "home");
     });
   }
 }
 
-// Arranque seguro
 document.addEventListener("DOMContentLoaded", () => {
   try { init(); }
   catch (e) { console.error("Error iniciando el juego:", e); }
