@@ -1,0 +1,242 @@
+/* =========================
+   RESET + BASE
+========================= */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #000;
+  overflow: hidden;
+}
+
+/* =========================
+   PANTALLAS
+========================= */
+.screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  pointer-events: none;
+}
+.screen.is-active {
+  display: block;
+  pointer-events: auto;
+}
+
+/* Fondo grande */
+.screen-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Botones imagen */
+.img-btn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.img-btn img {
+  display: block;
+  width: clamp(180px, 40vw, 340px);
+  height: auto;
+}
+
+/* =========================
+   HOME
+========================= */
+#screen-home #home-next {
+  position: absolute;
+  left: 50%;
+  bottom: 7vh;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* =========================
+   GAME
+========================= */
+
+/* Pregunta */
+#question{
+  position: absolute;
+  left: 50%;
+  top: 14vh;
+  transform: translateX(-50%);
+  z-index: 20;
+  font-weight: 900;
+  font-size: clamp(34px, 6vw, 64px);
+  color: #fff;
+  text-shadow: 0 3px 12px rgba(0,0,0,.85);
+  pointer-events: none;
+}
+
+/* Guerrero: centrado, un poco más abajo “pisando suelo” */
+#warrior{
+  position: absolute;
+  left: 50%;
+  top: 35vh;            /* ajusta aquí si lo quieres aún más abajo */
+  transform: translateX(-50%);
+  width: clamp(350px, 50vw, 480px); /* un pelín más grande */
+  height: auto;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Respuestas a izquierda / derecha */
+.answers{
+  position: absolute;
+  left: 50%;
+  top: 48vh;
+  transform: translateX(-50%);
+  width: min(92vw, 980px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12vw;
+  z-index: 30;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Botón (solo número) */
+.answer-btn{
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  outline: none !important;
+}
+
+/* El número */
+.answer-text{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-weight: 900;
+  font-size: clamp(60px, 7vw, 110px);
+  color: #fff;
+  text-shadow: 0 4px 14px rgba(0,0,0,.85);
+  user-select: none;
+}
+
+/* Seleccionado */
+.answer-btn.is-selected .answer-text{
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Comprobar */
+#btn-check{
+  position: absolute;
+  left: 50%;
+  bottom: 6vh;
+  transform: translateX(-50%);
+  z-index: 40;
+}
+
+/* Feedback icono (aparece arriba) */
+.icon-feedback{
+  position: absolute;
+  left: 50%;
+  top: 8.5vh;
+  transform: translateX(-50%);
+  width: clamp(70px, 10vw, 120px);
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* =========================
+   FINAL
+========================= */
+#screen-final .final-warrior {
+  position: absolute;
+  left: 50%;
+  top: 55vh;
+  transform: translate(-50%, -50%);
+  width: clamp(190px, 22vw, 320px);
+  height: auto;
+  pointer-events: none;
+}
+
+#screen-final #final-retry {
+  position: absolute;
+  left: 50%;
+  bottom: 7vh;
+  transform: translateX(-50%);
+}
+
+/* Responsive */
+@media (max-height: 700px) {
+  #warrior { top: 28vh; }
+  .answers { top: 50vh; }
+  #btn-check { bottom: 4.5vh; }
+}
+/* === FIX DEFINITIVO: feedback visible === */
+#icon-correct,
+#icon-wrong {
+  display: none;
+}
+
+#icon-correct[style*="display: block"],
+#icon-wrong[style*="display: block"] {
+  display: block !important;
+}
+/* =========================
+   PROGRESO (arriba derecha)
+   ========================= */
+
+.progress-box {
+  position: absolute;
+  top: 3vh;
+  right: 3vw;
+
+  width: clamp(350px, 45vw, 550px);
+  height: 38px;
+
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 16px;
+  overflow: hidden;
+
+  z-index: 50;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+}
+
+/* Relleno de la barra */
+.progress-fill{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  z-index: 1;
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+  border-radius: 16px;
+  transition: width 0.55s ease-out, background 0.4s ease;
+}
+
+.progress-text{
+  position: absolute;
+  inset: 0;                 /* ocupa toda la barra */
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* centrado */
+  font-weight: 900;
+  font-size: 14px;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.75);
+  z-index: 3;               /* por encima del relleno */
+  pointer-events: none;
+}
+
+/* Estado final (10/10) → dorado */
+.progress-box.complete .progress-fill {
+  background: linear-gradient(90deg, #f1c40f, #f39c12);
+}
