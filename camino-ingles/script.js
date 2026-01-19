@@ -149,13 +149,15 @@ function checkAnswer(ctx) {
       ctx.progressFill.parentElement.classList.add("complete");
       showScreen(ctx.screens, "final");
       return;
+      setTimeout(() => loadQuestion(ctx), 1500);
     }
   } else {
     setWarrior(ctx.warriorImg, "sad");
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
+    setTimeout(() => loadQuestion(ctx), 1500);
   }
 
-  setTimeout(() => loadQuestion(ctx), 1500);
+  
 }
 
 function init() {
