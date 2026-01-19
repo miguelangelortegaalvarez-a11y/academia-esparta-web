@@ -120,7 +120,7 @@ function loadQuestion(ctx) {
   setWarrior(ctx.warriorImg, "idle");
 
   const q = currentQuestion();
-  if (ctx.questionEl) ctx.questionEl.textContent = `${q.a} ${q.op} ${q.b} = ?`;
+  if (ctx.questionEl) ctx.questionEl.textContent = q.prompt;
 
   // Alterna de forma impredecible izquierda/derecha
   const options = [q.correct, q.wrong].sort(() => Math.random() - 0.5);
