@@ -1,14 +1,9 @@
 // =======================
 // Camino Inglés — script.js
-// AM / IS / ARE
+// Banco de ejercicios (10–11 años)
 // =======================
 
-
-// ========================
-// Banco de ejercicios INGLÉS (10–11 años)
-// Tipos mezclados: AM/IS/ARE, HAVE/HAS, DO/DOES, PAST (was/were), PREPOSITIONS, PLURALS
-// ========================
-
+// Banco de ejercicios
 const QUESTIONS = [
   // 1) AM / IS / ARE
   { type: "am_is_are", prompt: "I ___ hungry.", correct: "am", wrong: "is" },
@@ -19,42 +14,35 @@ const QUESTIONS = [
   { type: "have_has", prompt: "He ___ a new bike.", correct: "has", wrong: "have" },
   { type: "have_has", prompt: "We ___ two dogs.", correct: "have", wrong: "has" },
 
-  // 3) DO / DOES (present simple questions)
+  // 3) DO / DOES
   { type: "do_does", prompt: "___ you like pizza?", correct: "Do", wrong: "Does" },
   { type: "do_does", prompt: "___ she play tennis?", correct: "Does", wrong: "Do" },
 
-  // 4) WAS / WERE (past of to be)
+  // 4) WAS / WERE
   { type: "was_were", prompt: "I ___ tired yesterday.", correct: "was", wrong: "were" },
   { type: "was_were", prompt: "They ___ at the park.", correct: "were", wrong: "was" },
 
-  // 5) PREPOSITIONS (in / on / at)
+  // 5) PREPOSITIONS
   { type: "prepositions", prompt: "My birthday is ___ July.", correct: "in", wrong: "on" },
   { type: "prepositions", prompt: "The book is ___ the table.", correct: "on", wrong: "in" },
   { type: "prepositions", prompt: "We meet ___ 5 o'clock.", correct: "at", wrong: "in" },
 
-  // 6) PLURALS (s / es)
+  // 6) PLURALS
   { type: "plurals", prompt: "One box, two ___.", correct: "boxes", wrong: "boxs" },
   { type: "plurals", prompt: "One baby, two ___.", correct: "babies", wrong: "babys" },
 ];
-// Pool de preguntas (para que no se repitan)
+
+// Meta
+const GOAL = 10;
+
+// Estado del juego
+let currentQ = null;
+let selectedAnswer = null;
+let locked = false;
+let correctCount = 0;
+
+// Pool para NO repetir hasta agotar banco
 let questionPool = [];
-
-// Mezclar array (Fisher-Yates)
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-// Obtener siguiente pregunta sin repetir
-function getNextQuestion() {
-  if (questionPool.length === 0) {
-    questionPool = shuffle([...QUESTIONS]);
-  }
-  return questionPool.pop();
-}
 
 // Assets
 const ASSETS = {
@@ -71,7 +59,7 @@ function $(id) {
 
 function showScreen(screens, name) {
   Object.values(screens).forEach((el) => el && el.classList.remove("is-active"));
-  screens[name] && screens[name].classList.add("is-active");
+  if (screens[name]) screens[name].classList.add("is-active");
 }
 
 function setWarrior(img, state) {
@@ -100,8 +88,25 @@ function resetSelectionUI(btns) {
   btns.forEach((b) => b.classList.remove("is-selected"));
 }
 
-function randomQuestion() {
-  return QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function getNextQuestion() {
+  if (questionPool.length === 0) {
+    questionPool = shuffle([...QUESTIONS]);
+  }
+  return questionPool.pop();
+}
+
+function updateProgress(ctx) {
+  const pct = Math.min(100, (correctCount / GOAL) * 100);
+  if (ctx.progressFill) ctx.progressFill.style.width = pct + "%";
+  if (ctx.progressText) ctx.progressText.textContent = `${correctCount}/${GOAL}`;
 }
 
 function loadQuestion(ctx) {
@@ -112,30 +117,23 @@ function loadQuestion(ctx) {
 
   currentQ = getNextQuestion();
 
-  if (ctx.questionEl)
-    ctx.questionEl.textContent = currentQ.prompt;
+  if (ctx.questionEl) ctx.questionEl.textContent = currentQ.prompt;
 
-  const options = [currentQ.correct, currentQ.wrong].sort(
-    () => Math.random() - 0.5
-  );
+  const options = [currentQ.correct, currentQ.wrong].sort(() => Math.random() - 0.5);
 
-  ctx.answerButtons[0].dataset.value = options[0];
-  ctx.answerButtons[1].dataset.value = options[1];
+  // botones
+  if (ctx.answerButtons[0]) ctx.answerButtons[0].dataset.value = options[0];
+  if (ctx.answerButtons[1]) ctx.answerButtons[1].dataset.value = options[1];
 
-  ctx.answerAText.textContent = options[0];
-  ctx.answerBText.textContent = options[1];
+  // textos
+  if (ctx.answerAText) ctx.answerAText.textContent = options[0];
+  if (ctx.answerBText) ctx.answerBText.textContent = options[1];
 
   updateProgress(ctx);
 }
 
-function updateProgress(ctx) {
-  const pct = Math.min(100, (correctCount / GOAL) * 100);
-  ctx.progressFill.style.width = pct + "%";
-  ctx.progressText.textContent = `${correctCount}/${GOAL}`;
-}
-
 function checkAnswer(ctx) {
-  if (locked || selectedAnswer === null) return;
+  if (locked || selectedAnswer === null || !currentQ) return;
   locked = true;
 
   const ok = selectedAnswer === currentQ.correct;
@@ -146,21 +144,17 @@ function checkAnswer(ctx) {
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
 
     if (correctCount >= GOAL) {
-      ctx.progressFill.parentElement.classList.add("complete");
+      if (ctx.progressFill?.parentElement) ctx.progressFill.parentElement.classList.add("complete");
       showScreen(ctx.screens, "final");
       return;
     }
 
     setTimeout(() => loadQuestion(ctx), 1500);
-
   } else {
     setWarrior(ctx.warriorImg, "sad");
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
     setTimeout(() => loadQuestion(ctx), 1500);
   }
-}
-
-  
 }
 
 function init() {
@@ -181,13 +175,18 @@ function init() {
     progressText: $("progress-text"),
   };
 
-  $("home-next").onclick = () => {
-    correctCount = 0;
-    ctx.progressFill.parentElement.classList.remove("complete");
-    showScreen(ctx.screens, "game");
-    loadQuestion(ctx);
-  };
+  // Ir al juego desde portada
+  const homeNext = $("home-next");
+  if (homeNext) {
+    homeNext.onclick = () => {
+      correctCount = 0;
+      if (ctx.progressFill?.parentElement) ctx.progressFill.parentElement.classList.remove("complete");
+      showScreen(ctx.screens, "game");
+      loadQuestion(ctx);
+    };
+  }
 
+  // Selección de respuesta
   ctx.answerButtons.forEach((btn) => {
     btn.onclick = () => {
       if (locked) return;
@@ -197,12 +196,18 @@ function init() {
     };
   });
 
-  $("btn-check").onclick = () => checkAnswer(ctx);
+  // Comprobar
+  const btnCheck = $("btn-check");
+  if (btnCheck) btnCheck.onclick = () => checkAnswer(ctx);
 
-  $("final-retry").onclick = () => {
-    correctCount = 0;
-    showScreen(ctx.screens, "home");
-  };
+  // Reintentar
+  const retry = $("final-retry");
+  if (retry) {
+    retry.onclick = () => {
+      correctCount = 0;
+      showScreen(ctx.screens, "home");
+    };
+  }
 
   showScreen(ctx.screens, "home");
 }
