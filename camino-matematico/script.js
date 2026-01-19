@@ -148,7 +148,7 @@ function checkAnswer(ctx) {
   currentIndex += 1;
   currentQ = null;
   loadQuestion(ctx);
-}, 3000);
+}, 2000);
 }
 
 function init() {
