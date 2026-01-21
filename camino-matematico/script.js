@@ -289,10 +289,6 @@ ctx.answerButtons.forEach((btn) => {
   });
 });
 
-  // Comprobar
-  if (ctx.btnCheck) {
-    ctx.btnCheck.addEventListener("click", () => checkAnswer(ctx));
-  }
 
   // FINAL -> HOME
   if (ctx.btnRetry) {
