@@ -247,7 +247,6 @@ function init() {
     btnModeMultiplicaciones: $("home-mode-multiplicaciones"),
 
     // Botones comunes
-    btnCheck: $("btn-check"),
     btnRetry: $("final-retry"),
   };
 
