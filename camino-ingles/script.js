@@ -196,10 +196,6 @@ function init() {
     };
   });
 
-  // Comprobar
-  const btnCheck = $("btn-check");
-  if (btnCheck) btnCheck.onclick = () => checkAnswer(ctx);
-
   // Reintentar
   const retry = $("final-retry");
   if (retry) {
