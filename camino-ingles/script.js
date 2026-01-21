@@ -185,16 +185,18 @@ function init() {
       loadQuestion(ctx);
     };
   }
+// Selección de respuesta (auto-resuelve al tocar)
+ctx.answerButtons.forEach((btn) => {
+  btn.onclick = () => {
+    if (locked) return;
+    ctx.answerButtons.forEach((b) => b.classList.remove("is-selected"));
+    btn.classList.add("is-selected");
+    selectedAnswer = btn.dataset.value;
 
-  // Selección de respuesta
-  ctx.answerButtons.forEach((btn) => {
-    btn.onclick = () => {
-      if (locked) return;
-      ctx.answerButtons.forEach((b) => b.classList.remove("is-selected"));
-      btn.classList.add("is-selected");
-      selectedAnswer = btn.dataset.value;
-    };
-  });
+    // ✅ Resolver automáticamente al tocar
+    checkAnswer(ctx);
+  };
+});
 
   // Reintentar
   const retry = $("final-retry");
