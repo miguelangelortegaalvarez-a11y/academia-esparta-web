@@ -275,16 +275,19 @@ function init() {
       loadQuestion(ctx);
     });
   }
+// Selección respuestas (auto-resuelve al tocar)
+ctx.answerButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (locked) return;
 
-  // Selección respuestas
-  ctx.answerButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (locked) return;
-      ctx.answerButtons.forEach((b) => b.classList.remove("is-selected"));
-      btn.classList.add("is-selected");
-      selectedAnswer = btn.dataset.value ?? null;
-    });
+    ctx.answerButtons.forEach((b) => b.classList.remove("is-selected"));
+    btn.classList.add("is-selected");
+    selectedAnswer = btn.dataset.value ?? null;
+
+    // ✅ Resolver automáticamente al tocar
+    checkAnswer(ctx);
   });
+});
 
   // Comprobar
   if (ctx.btnCheck) {
