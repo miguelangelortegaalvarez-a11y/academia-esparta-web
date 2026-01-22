@@ -808,3 +808,32 @@ html, body {
   min-height: 100vh;  /* fallback antiguo */
   overflow: hidden;
 }
+/* --- FIX iPad: capas que bloquean toques --- */
+.scene-bg,
+.scene-shade {
+  pointer-events: none !important;
+}
+
+/* Asegurar orden de capas */
+#sceneBg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.scene-shade {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+/* UI por encima del fondo */
+.hud,
+.screens {
+  position: relative;
+  z-index: 5;
+}
+
+/* Si tu CSS oculta pantallas, fuerza esto */
+.screen { display: none; }
+.screen.is-active { display: block; }
