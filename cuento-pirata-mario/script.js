@@ -147,11 +147,10 @@ function reportMissing(url) {
       bgEl.style.backgroundImage = `url("${url}")`;
     };
     img.onerror = () => {
-      bgEl.style.backgroundImage = "none";
-      show($("#assetFallback"));
-      // Minimal fallback gradient
-      bgEl.style.background = "linear-gradient(135deg, #0b1220, #12324a)";
-    };
+  reportMissing(url);
+  bgEl.style.backgroundImage = "none";
+  bgEl.style.background = "linear-gradient(135deg, #0b1220, #12324a)";
+};
     img.src = url;
   }
 
