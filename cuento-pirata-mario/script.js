@@ -335,7 +335,14 @@ function reportMissing(url) {
   function switchScreen(next) {
     const current = $(`.screen.is-active`);
     const target = $(`#screen-${next}`);
-    if (!target) return;
+    if (!target) {
+  console.warn("Pantalla no encontrada:", next, "→ volviendo a screen-1");
+  const fallback = document.getElementById("screen-1");
+  if (fallback) {
+    fallback.classList.add("is-active");
+  }
+  return;
+}
 
     // Fade out current
     if (current) {
