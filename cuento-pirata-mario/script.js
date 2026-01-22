@@ -80,7 +80,13 @@
   /* =========================
      HELPERS (DOM)
   ========================= */
-
+function reportMissing(url) {
+  const fb = document.getElementById("assetFallback");
+  if (!fb) return;
+  fb.hidden = false;
+  fb.textContent = `FALTA RECURSO: ${url}`;
+  console.error("FALTA RECURSO:", url);
+}
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
