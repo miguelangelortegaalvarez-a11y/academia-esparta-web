@@ -1,29 +1,3 @@
-/************************************************************
- * MODO DESARROLLO (TEMPORAL)
- * Mantiene el juego estable mientras se construye
- ************************************************************/
-
-const DEV_MODE = true; // ← cuando terminemos el juego, se pondrá en false
-let currentScreen = 1;
-
-function goToScreen(num) {
-  if (DEV_MODE) {
-    console.log("DEV MODE → Pantalla:", num);
-  }
-  document.querySelectorAll(".screen").forEach(s => {
-    s.classList.remove("active");
-  });
-  const next = document.getElementById("screen-" + num);
-  if (next) {
-    next.classList.add("active");
-    currentScreen = num;
-  }
-}
-
-/* Forzar inicio siempre en Pantalla 1 */
-document.addEventListener("DOMContentLoaded", () => {
-  goToScreen(1);
-});
 /* ==========================================================
    CUENTO PIRATA MARIO — Juego educativo 4 años (SPA)
    - Sin frameworks. Offline. GitHub Pages.
