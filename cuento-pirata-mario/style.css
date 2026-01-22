@@ -1,1 +1,796 @@
+/* ==========================================================
+   CUENTO PIRATA MARIO — STYLE
+   Compatible con el index.html + script.js entregados
+   Horizontal, táctil, botones grandes, transiciones suaves
+   ========================================================== */
 
+:root{
+  --bg: #07121f;
+  --panel: rgba(255,255,255,0.14);
+  --panel-strong: rgba(255,255,255,0.18);
+  --stroke: rgba(255,255,255,0.22);
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.78);
+  --shadow: 0 12px 28px rgba(0,0,0,0.35);
+
+  --primary: #ffd24d;
+  --primaryText: #2b2100;
+
+  --secondary: rgba(255,255,255,0.18);
+  --secondaryText: #ffffff;
+
+  --danger: #ff6b6b;
+  --ok: #55efc4;
+
+  --radius: 18px;
+  --btnRadius: 16px;
+
+  --hudH: 72px;
+  --pad: 16px;
+
+  --fadeMs: 350ms;
+}
+
+/* Base */
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+body{
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* App layout */
+.app{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Background scene */
+.scene-bg{
+  position: absolute;
+  inset: 0;
+  background: #0b1220;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.02);
+}
+
+/* Soft shade for readability */
+.scene-shade{
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(80% 70% at 50% 35%, rgba(0,0,0,0.15), rgba(0,0,0,0.55) 70%),
+    linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
+  pointer-events: none;
+}
+
+/* HUD */
+.hud{
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: var(--hudH);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px var(--pad);
+  gap: 12px;
+  z-index: 50;
+}
+
+.hud-left{ flex: 1; min-width: 0; }
+.hud-right{ display:flex; align-items:center; gap: 10px; }
+
+.instruction{
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.2;
+  max-width: min(920px, 75vw);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Screens container */
+.screens{
+  position: absolute;
+  inset: 0;
+  padding-top: var(--hudH);
+  z-index: 10;
+}
+
+/* Screen: SPA layers */
+.screen{
+  position: absolute;
+  inset: var(--hudH) 0 0 0;
+  padding: 18px;
+  display: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--fadeMs) ease, transform var(--fadeMs) ease;
+}
+
+.screen.is-active{
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.screen.is-leaving{
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* Panels */
+.panel{
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 18px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.panel-center{
+  position: relative;
+  top: 10vh;
+  text-align: center;
+  width: min(900px, 92vw);
+}
+
+.panel-wide{
+  width: min(1100px, 94vw);
+}
+
+.panel-full{
+  width: min(1200px, 96vw);
+}
+
+/* Typography */
+.title{
+  margin: 0 0 10px 0;
+  font-size: clamp(34px, 4vw, 56px);
+  letter-spacing: 0.5px;
+}
+
+.title-final{
+  font-size: clamp(26px, 3.2vw, 46px);
+}
+
+.subtitle{
+  margin: 0 0 18px 0;
+  font-size: 20px;
+  color: var(--muted);
+}
+
+.h2{
+  margin: 0 0 12px 0;
+  font-size: 26px;
+}
+
+/* Buttons */
+.btn{
+  appearance: none;
+  border: 0;
+  border-radius: var(--btnRadius);
+  padding: 14px 18px;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  min-height: 52px; /* >=44px táctil, aquí más cómodo */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.18);
+  transition: transform 120ms ease, opacity 120ms ease, filter 120ms ease;
+}
+
+.btn:active{ transform: scale(0.98); }
+.btn[disabled]{ opacity: 0.45; cursor: not-allowed; filter: grayscale(0.25); }
+
+.btn-big{
+  min-height: 60px;
+  padding: 18px 22px;
+  font-size: 22px;
+}
+
+.btn-primary{
+  background: var(--primary);
+  color: var(--primaryText);
+}
+
+.btn-secondary{
+  background: var(--secondary);
+  color: var(--secondaryText);
+  border: 1px solid rgba(255,255,255,0.22);
+}
+
+/* Toast & Check */
+.toast{
+  position: absolute;
+  left: 50%;
+  top: calc(var(--hudH) + 10px);
+  transform: translateX(-50%);
+  z-index: 70;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 18px;
+  max-width: min(900px, 92vw);
+  text-align: center;
+}
+
+.big-check{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 80;
+  font-size: clamp(90px, 12vw, 160px);
+  font-weight: 900;
+  color: var(--ok);
+  text-shadow: 0 16px 34px rgba(0,0,0,0.35);
+  pointer-events: none;
+}
+
+/* Fallback banner */
+.asset-fallback{
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 90;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 16px;
+}
+
+/* ==========================================================
+   SCREEN 2 — Letters
+   index uses: .letters-grid .letter-row .slot-drop .chip-drag
+   ========================================================== */
+
+.letters-grid{
+  display: grid;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.letter-row{
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.word-box .word{
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.slot{
+  display: inline-block;
+  width: 44px;
+  text-align: center;
+  border-bottom: 4px solid rgba(255,255,255,0.8);
+  margin-right: 4px;
+}
+
+.slot-drop{
+  border-bottom-color: rgba(255,210,77,0.95);
+}
+
+.slot-drop.is-correct{
+  color: var(--primary);
+  border-bottom-color: var(--ok);
+}
+
+.pic-box{
+  display: grid;
+  place-items: center;
+}
+
+.pic-placeholder{
+  width: 140px;
+  height: 78px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.14);
+  border: 1px dashed rgba(255,255,255,0.28);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+}
+
+.choices{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.chip{
+  min-width: 86px;
+  min-height: 58px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.14);
+  color: #fff;
+  font-size: 26px;
+  font-weight: 900;
+  cursor: grab;
+  touch-action: none;
+}
+
+.chip:active{ cursor: grabbing; }
+.chip.is-disabled{
+  opacity: 0.35;
+  filter: grayscale(0.25);
+  cursor: not-allowed;
+}
+
+/* dragging visuals */
+.is-dragging{
+  filter: drop-shadow(0 14px 18px rgba(0,0,0,0.35));
+  transform: scale(1.02);
+}
+
+/* Footer actions */
+.footer-actions{
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ==========================================================
+   SCREEN 3 — Keys
+   uses: #keysArea #keysLayer .key-item #chestDrop #chestImg
+   ========================================================== */
+
+.keys-area{
+  position: relative;
+  min-height: 56vh;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.16);
+  overflow: hidden;
+}
+
+.keys-layer{
+  position: absolute;
+  inset: 0;
+}
+
+.key-item{
+  width: 86px;
+  height: 86px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.10);
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  padding: 8px;
+}
+
+.key-item:active{ cursor: grabbing; }
+.key-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.chest-drop{
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 200px;
+  height: 170px;
+  border-radius: 18px;
+  border: 2px dashed rgba(255,210,77,0.7);
+  background: rgba(0,0,0,0.15);
+  display: grid;
+  place-items: center;
+}
+
+.chest-img{
+  width: 92%;
+  height: 92%;
+  object-fit: contain;
+}
+
+.chest-hint{
+  position: absolute;
+  bottom: 6px;
+  font-size: 14px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================
+   SCREEN 4 — Classification
+   uses: #classifyArea .dropzone #objectsTray .obj-card
+   ========================================================== */
+
+.classify-area{
+  display: grid;
+  gap: 14px;
+  min-height: 58vh;
+}
+
+.dropzones{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.dropzone{
+  min-height: 22vh;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.16);
+  border: 2px dashed rgba(255,255,255,0.20);
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropzone-title{
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.dropzone.is-hit{
+  border-color: rgba(85,239,196,0.9);
+  background: rgba(85,239,196,0.12);
+}
+
+.objects-tray{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.12);
+  justify-content: center;
+}
+
+.obj-card{
+  width: 110px;
+  height: 110px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.10);
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  padding: 10px;
+  touch-action: none;
+}
+
+.obj-card:active{ cursor: grabbing; }
+.obj-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ==========================================================
+   SCREEN 5 — Memory
+   uses: #memoryArea #memoryPreview .mem-slot #memoryBank .mem-item
+   ========================================================== */
+
+.memory-area{
+  display: grid;
+  gap: 14px;
+  min-height: 58vh;
+}
+
+.memory-top{
+  display: grid;
+  gap: 12px;
+}
+
+.memory-slots{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.mem-slot{
+  min-height: 150px;
+  border-radius: 18px;
+  border: 2px dashed rgba(255,210,77,0.65);
+  background: rgba(0,0,0,0.14);
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.82);
+  overflow: hidden;
+}
+
+.mem-slot.is-filled{
+  border-style: solid;
+  border-color: rgba(85,239,196,0.85);
+}
+
+.memory-preview{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.mem-preview-item{
+  width: 120px;
+  height: 120px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.mem-preview-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.memory-bank{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.14);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.mem-item{
+  width: 120px;
+  height: 120px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.10);
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  padding: 10px;
+  touch-action: none;
+}
+
+.mem-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ==========================================================
+   SCREEN 6 — Coins
+   uses: #coinsArea .count-chest .drop-chest #coinsBank .coin-item
+   ========================================================== */
+
+.coins-area{
+  display: grid;
+  gap: 14px;
+  min-height: 58vh;
+}
+
+.chests-row{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.count-chest{
+  border-radius: 18px;
+  background: rgba(0,0,0,0.16);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
+.count-label{
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(255,210,77,0.92);
+  color: #2b2100;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 28px;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.22);
+}
+
+.drop-chest{
+  width: 200px;
+  height: 150px;
+  border-radius: 18px;
+  border: 2px dashed rgba(255,210,77,0.65);
+  background: rgba(0,0,0,0.10);
+  display: grid;
+  place-items: center;
+}
+
+.count-status{
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.86);
+}
+
+.coins-bank{
+  border-radius: 18px;
+  background: rgba(0,0,0,0.12);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.coin-item{
+  width: 84px;
+  height: 84px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.10);
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  padding: 10px;
+  touch-action: none;
+}
+
+.coin-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.coin-item.is-selected{
+  outline: 4px solid rgba(255,210,77,0.95);
+  outline-offset: 2px;
+}
+
+/* ==========================================================
+   SCREEN 7 — Syllables
+   uses: .syll-row .btn-option .syll-result
+   ========================================================== */
+
+.syllables-area{
+  display: grid;
+  gap: 14px;
+}
+
+.syll-row{
+  display: grid;
+  grid-template-columns: 1fr 2fr 0.6fr;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.16);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.syll-word{
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.syll-options{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.btn-option{
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
+  min-width: 86px;
+  min-height: 56px;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.btn-option.is-picked{
+  background: rgba(255,210,77,0.90);
+  color: #2b2100;
+  border-color: rgba(255,210,77,0.95);
+}
+
+.syll-result{
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  font-weight: 900;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+.syll-result.is-correct{
+  background: rgba(85,239,196,0.18);
+  border-color: rgba(85,239,196,0.7);
+  color: var(--ok);
+}
+
+/* ==========================================================
+   Responsive / iPad landscape priorities
+   ========================================================== */
+
+@media (max-width: 980px){
+  .instruction{ max-width: 68vw; font-size: 16px; }
+  .letter-row{ grid-template-columns: 1.2fr 0.7fr 1fr; }
+  .pic-placeholder{ width: 120px; height: 70px; }
+  .drop-chest{ width: 180px; }
+}
+
+@media (max-width: 760px){
+  .hud{ height: 68px; }
+  :root{ --hudH: 68px; }
+  .screen{ inset: var(--hudH) 0 0 0; padding: 14px; }
+  .panel{ padding: 14px; }
+
+  .letter-row{
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .choices{ justify-content: center; }
+  .pic-box{ justify-content: center; }
+
+  .dropzones{ grid-template-columns: 1fr; }
+  .chests-row{ grid-template-columns: 1fr; }
+  .drop-chest{ width: 92%; max-width: 320px; }
+  .syll-row{ grid-template-columns: 1fr; }
+  .syll-options{ justify-content: center; }
+}
+
+/* iOS safe area */
+@supports (padding: max(0px)){
+  .hud{
+    padding-left: max(var(--pad), env(safe-area-inset-left));
+    padding-right: max(var(--pad), env(safe-area-inset-right));
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+}
