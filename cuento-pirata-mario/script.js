@@ -40,7 +40,7 @@
       coin: "./assets/objects/MONEDA_ORO.PNG",
     },
     audio: {
-      bgm: "./assets/audio/MUSICA_PIRATAS_FONDO.MP3",
+      bgm: "./assets/audio/MUSICA_PIRATAS_FONDO.mp3",
     },
   };
 
