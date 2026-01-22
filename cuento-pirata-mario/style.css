@@ -1,5 +1,6 @@
 /* Fix: garantizar que hidden siempre oculte (Safari/iOS) */
 [hidden]{ display:none !important; }
+
 /* ==========================================================
    CUENTO PIRATA MARIO — STYLE
    Compatible con el index.html + script.js entregados
@@ -44,11 +45,19 @@ body{
   overflow: hidden;
 }
 
-/* App layout */
+/* ===== iPad/Safari: altura real sin “agrandado” ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 .app{
   position: relative;
   width: 100vw;
   height: 100vh;
+  min-height: 100svh; /* Safari moderno: altura visible real */
+  min-height: 100dvh; /* fallback moderno */
+  min-height: 100vh;  /* fallback antiguo */
   overflow: hidden;
 }
 
@@ -61,6 +70,7 @@ body{
   background-position: center;
   background-repeat: no-repeat;
   transform: scale(1.02);
+  pointer-events: none !important; /* IMPORTANT: no bloquear toques */
 }
 
 /* Soft shade for readability */
@@ -70,7 +80,8 @@ body{
   background:
     radial-gradient(80% 70% at 50% 35%, rgba(0,0,0,0.15), rgba(0,0,0,0.55) 70%),
     linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
-  pointer-events: none;
+  pointer-events: none !important; /* IMPORTANT: no bloquear toques */
+  opacity: 0.22; /* reduce el efecto “apagado” (prueba 0.15–0.25) */
 }
 
 /* HUD */
@@ -108,14 +119,15 @@ body{
 .screens{
   position: absolute;
   inset: 0;
-  padding-top: var(--hudH);
+  padding-top: var(--hudH); /* dejamos este */
   z-index: 10;
 }
 
 /* Screen: SPA layers */
+/* FIX PRINCIPAL: NO volver a empujar con inset: var(--hudH) */
 .screen{
   position: absolute;
-  inset: var(--hudH) 0 0 0;
+  inset: 0; /* <- CLAVE */
   padding: 18px;
   display: none;
   opacity: 0;
@@ -194,7 +206,7 @@ body{
   font-weight: 800;
   line-height: 1;
   cursor: pointer;
-  min-height: 52px; /* >=44px táctil, aquí más cómodo */
+  min-height: 52px; /* >=44px táctil */
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -771,8 +783,10 @@ body{
 @media (max-width: 760px){
   .hud{ height: 68px; }
   :root{ --hudH: 68px; }
-  .screen{ inset: var(--hudH) 0 0 0; padding: 14px; }
   .panel{ padding: 14px; }
+
+  /* seguimos con inset:0 (no empujar otra vez) */
+  .screen{ inset: 0; padding: 14px; }
 
   .letter-row{
     grid-template-columns: 1fr;
@@ -796,44 +810,3 @@ body{
     padding-top: max(12px, env(safe-area-inset-top));
   }
 }
-/* ===== iPad/Safari: altura real sin “agrandado” ===== */
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-.app {
-  min-height: 100svh; /* Safari moderno: altura visible real */
-  min-height: 100dvh; /* fallback moderno */
-  min-height: 100vh;  /* fallback antiguo */
-  overflow: hidden;
-}
-/* --- FIX iPad: capas que bloquean toques --- */
-.scene-bg,
-.scene-shade {
-  pointer-events: none !important;
-}
-
-/* Asegurar orden de capas */
-#sceneBg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-}
-
-.scene-shade {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-}
-
-/* UI por encima del fondo */
-.hud,
-.screens {
-  position: relative;
-  z-index: 5;
-}
-
-/* Si tu CSS oculta pantallas, fuerza esto */
-.screen { display: none; }
-.screen.is-active { display: block; }
