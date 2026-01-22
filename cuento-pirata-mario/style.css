@@ -796,3 +796,15 @@ body{
     padding-top: max(12px, env(safe-area-inset-top));
   }
 }
+/* ===== iPad/Safari: altura real sin “agrandado” ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.app {
+  min-height: 100svh; /* Safari moderno: altura visible real */
+  min-height: 100dvh; /* fallback moderno */
+  min-height: 100vh;  /* fallback antiguo */
+  overflow: hidden;
+}
