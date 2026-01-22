@@ -841,3 +841,42 @@ html, body {
   position: relative;
   z-index: 10001 !important;
 }
+/* ================================
+   FIX URGENTE: que se vea PANTALLA 1
+   Pegar al FINAL del style.css
+   ================================ */
+
+.scene-bg,
+.scene-shade{
+  z-index: 0 !important;
+}
+
+.hud{
+  z-index: 50 !important;
+}
+
+.screens{
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 10 !important;
+  padding-top: var(--hudH, 72px) !important; /* fallback seguro */
+}
+
+/* Asegura que las pantallas existan y la activa se muestre */
+.screen{
+  position: absolute !important;
+  inset: 0 !important;
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.screen.is-active{
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* El panel encima de todo dentro de la pantalla */
+.panel{
+  position: relative !important;
+  z-index: 20 !important;
+}
