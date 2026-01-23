@@ -678,3 +678,37 @@ body{
     padding-top: max(12px, env(safe-area-inset-top));
   }
 }
+/* =========================================
+   PANTALLA 3 (Actividad 2) — LLAVES SIN CAJA
+   Quita el fondo/borde del botón y deja solo la llave
+   ========================================= */
+
+#screen-3 .key-item{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+}
+
+/* Mantén el área táctil grande pero invisible */
+#screen-3 .key-item{
+  width: 86px !important;
+  height: 86px !important;
+}
+
+/* La imagen de la llave: se ve “flotando” sobre el fondo */
+#screen-3 .key-item .key-img{
+  width: 56px !important;        /* ajusta si la quieres más grande/pequeña */
+  height: 56px !important;
+  object-fit: contain !important;
+  display: block !important;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35)) !important;
+}
+
+/* Evita que iOS dibuje resaltados raros al tocar */
+#screen-3 .key-item:focus,
+#screen-3 .key-item:active{
+  outline: none !important;
+}
