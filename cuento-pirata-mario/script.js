@@ -56,30 +56,46 @@
   };
 
   const SETTINGS = {
-    memoryPreviewMs: 2500,
-    fadeMs: 350,
-    keyCount: 5,
-    coinsTargets: [3, 5, 6],
-    letters: [
-  { id: "w1", solution: "M", rest: "APA" },        // MAPA
-  { id: "w2", solution: "P", rest: "IRATA" },     // PIRATA
-  { id: "w3", solution: "T", rest: "ESORO" },     // TESORO
-  { id: "w4", solution: "B", rest: "ARCO" },      // BARCO
-  { id: "w5", solution: "I", rest: "SLA" },       // ISLA
-  { id: "w6", solution: "C", rest: "OFRE" },      // COFRE
-  { id: "w7", solution: "B", rest: "ANDERA" }     // BANDERA
-],
-    syllables: [
-      { word: "MAPA", answer: 2 },
-      { word: "PIRATA", answer: 3 },
-      { word: "TESORO", answer: 3 },
-    ],
-    classify: {
-      pirates: ["telescope", "sword", "flag", "cannon"],
-      explorers: ["ball", "plush"],
-    },
-    memoryOrder: ["telescope", "sword", "flag"],
-  };
+  memoryPreviewMs: 2500,
+  fadeMs: 350,
+  keyCount: 5,
+  coinsTargets: [3, 5, 6],
+
+  /* =========================
+     ACTIVIDAD 1 – LETRAS
+     ========================= */
+  letters: [
+    { id: "w1", solution: "M", rest: "APA" },       // MAPA
+    { id: "w2", solution: "P", rest: "IRATA" },    // PIRATA
+    { id: "w3", solution: "T", rest: "ESORO" },    // TESORO
+    { id: "w4", solution: "B", rest: "ARCO" },     // BARCO
+    { id: "w5", solution: "I", rest: "SLA" },      // ISLA
+    { id: "w6", solution: "C", rest: "OFRE" },     // COFRE
+    { id: "w7", solution: "B", rest: "ANDERA" }    // BANDERA
+  ],
+
+  /* =========================
+     ACTIVIDAD 7 – SÍLABAS
+     ========================= */
+  syllables: [
+    { word: "MAPA", answer: 2 },
+    { word: "PIRATA", answer: 3 },
+    { word: "TESORO", answer: 3 }
+  ],
+
+  /* =========================
+     ACTIVIDAD 4 – CLASIFICAR
+     ========================= */
+  classify: {
+    pirates: ["telescope", "sword", "flag", "cannon"],
+    explorers: ["ball", "plush"]
+  },
+
+  /* =========================
+     ACTIVIDAD 5 – MEMORIA
+     ========================= */
+  memoryOrder: ["telescope", "sword", "flag"]
+};
 
   /* =========================
      HELPERS (DOM)
