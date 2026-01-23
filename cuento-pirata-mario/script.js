@@ -61,10 +61,14 @@
     keyCount: 5,
     coinsTargets: [3, 5, 6],
     letters: [
-      { id: "w1", solution: "M", rest: "APA" },
-      { id: "w2", solution: "P", rest: "IRATA" },
-      { id: "w3", solution: "T", rest: "ESORO" },
-    ],
+  { id: "w1", solution: "M", rest: "APA" },        // MAPA
+  { id: "w2", solution: "P", rest: "IRATA" },     // PIRATA
+  { id: "w3", solution: "T", rest: "ESORO" },     // TESORO
+  { id: "w4", solution: "B", rest: "ARCO" },      // BARCO
+  { id: "w5", solution: "I", rest: "SLA" },       // ISLA
+  { id: "w6", solution: "C", rest: "OFRE" },      // COFRE
+  { id: "w7", solution: "B", rest: "ANDERA" }     // BANDERA
+];
     syllables: [
       { word: "MAPA", answer: 2 },
       { word: "PIRATA", answer: 3 },
