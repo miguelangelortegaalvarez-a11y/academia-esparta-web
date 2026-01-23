@@ -255,9 +255,11 @@ function reportMissing(url) {
         const { el: ghost } = this.active;
         ghost.classList.remove("is-dragging");
 
-        // Detect drop target under pointer
-        const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
-        const dropZone = dropTarget?.closest?.(".slot-drop, .dropzone, .drop-chest, .chest-drop");
+        // Detect drop target under pointer (iPad fix: ignore the dragged element itself)
+ghost.style.pointerEvents = "none";
+const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
+ghost.style.pointerEvents = "";
+const dropZone = dropTarget?.closest?.(".slot-drop, .dropzone, .drop-chest, .chest-drop");
 
         if (typeof this.onDrop === "function") {
           this.onDrop(dropZone, ghost);
