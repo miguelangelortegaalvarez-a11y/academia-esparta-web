@@ -335,6 +335,16 @@ function reportMissing(url) {
   function switchScreen(next) {
     const current = $(`.screen.is-active`);
     const target = $(`#screen-${next}`);
+       // EVITA apagar la misma pantalla al iniciar (screen-1)
+  if (current && target && current === target) {
+    target.classList.add("is-active");
+    target.classList.remove("is-leaving");
+    state.screen = next;
+    setInstruction(next);
+    setBackground(next);
+    onEnterScreen(next);
+    return;
+  }
     if (!target) {
   console.warn("Pantalla no encontrada:", next, "→ volviendo a screen-1");
   const fallback = document.getElementById("screen-1");
