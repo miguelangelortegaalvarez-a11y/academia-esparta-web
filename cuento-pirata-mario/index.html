@@ -8,41 +8,7 @@
 
   <!-- Cache-bust (cambia el número cuando quieras) -->
   <link rel="stylesheet" href="./style.css?v=2146" />
-
-  <!-- Importante: defer para iPad/Safari -->
-   <script defer src="./script.js?v=2146"></script>
-
-  <!-- Fallback mínimo: si script.js falla, al menos "COMENZAR" cambia de pantalla -->
- <!-- <script>
-    (function () {
-      function fallbackGoNext() {
-        try {
-          var s1 = document.getElementById("screen-1");
-          var s2 = document.getElementById("screen-2");
-          if (!s1 || !s2) return;
-
-          // Si no existe la función del script principal, hacemos un cambio simple
-          s1.classList.remove("is-active");
-          s2.classList.add("is-active");
-        } catch (e) {}
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        var btn = document.getElementById("btnStart");
-        if (btn) {
-          btn.addEventListener("click", function () {
-            // Si tu script principal define switchScreen, lo usamos.
-            if (typeof window.switchScreen === "function") {
-              window.switchScreen(2);
-              return;
-            }
-            fallbackGoNext();
-          }, { passive: true });
-        }
-      });
-    })();
-  </script>
-  -->
+  <script defer src="./script.js?v=2146"></script>
 </head>
 
 <body>
@@ -109,40 +75,23 @@
       <!-- =====================================
            PANTALLA 2 — LETRAS INICIALES (PLAYA)
            ===================================== -->
-<section id="screen-2" class="screen" data-screen="2" aria-label="Pantalla 2: Letras iniciales">
-  <div class="panel panel-wide">
-    <h2 class="h2">Actividad 1</h2>
+      <section id="screen-2" class="screen" data-screen="2" aria-label="Pantalla 2: Letras iniciales">
+        <div class="panel panel-wide">
+          <h2 class="h2">Actividad 1</h2>
 
-    <!--
-      IMPORTANTE:
-      Este contenedor se rellena dinámicamente desde script.js
-      usando SETTINGS.letters (w1–w7)
-    -->
-    <div
-      class="letters-grid"
-      id="lettersGrid"
-      aria-label="Arrastra la letra correcta"
-    ></div>
+          <!--
+            IMPORTANTE:
+            Este contenedor se rellena dinámicamente desde script.js
+            usando SETTINGS.letters (w1–w7 o las que tengas)
+          -->
+          <div class="letters-grid" id="lettersGrid" aria-label="Arrastra la letra correcta"></div>
 
-    <div class="footer-actions">
-      <button
-        id="btnNext2"
-        class="btn btn-primary btn-big"
-        type="button"
-        disabled
-      >
-        CONTINUAR
-      </button>
-    </div>
-  </div>
-</section>
           <div class="footer-actions">
             <button id="btnNext2" class="btn btn-primary btn-big" type="button" disabled>CONTINUAR</button>
           </div>
         </div>
       </section>
 
-      <!-- PANTALLAS 3–8: las dejo exactamente como las tenías (sin cambios) -->
       <!-- =================================
            PANTALLA 3 — BUSCAR LLAVES (BOSQUE)
            ================================= -->
