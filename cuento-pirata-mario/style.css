@@ -345,16 +345,45 @@ body{
 }
 .keys-layer{ position: absolute; inset: 0; }
 
+/* ===== SCREEN 3 — Keys (SIN CAJA real en iOS) ===== */
+
 .key-item{
   width: 86px;
   height: 86px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.20);
-  background: rgba(255,255,255,0.10);
+
+  /* Quitar “caja”/estilo nativo de botón en iOS */
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  box-shadow: none;
+
+  /* Mantén área táctil pero invisible */
+  padding: 0;
+  border-radius: 0;
+
   display: grid;
   place-items: center;
   cursor: grab;
-  padding: 8px;
+
+  /* Quita el resaltado gris/azul al tocar */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key-item:active,
+.key-item:focus{
+  outline: none;
+  box-shadow: none;
+}
+
+.key-img{
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35));
 }
 .key-item:active{ cursor: grabbing; }
 .key-img{ width: 100%; height: 100%; object-fit: contain; }
