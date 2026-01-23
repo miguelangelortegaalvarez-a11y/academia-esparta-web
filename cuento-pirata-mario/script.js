@@ -68,7 +68,7 @@
   { id: "w5", solution: "I", rest: "SLA" },       // ISLA
   { id: "w6", solution: "C", rest: "OFRE" },      // COFRE
   { id: "w7", solution: "B", rest: "ANDERA" }     // BANDERA
-];
+],
     syllables: [
       { word: "MAPA", answer: 2 },
       { word: "PIRATA", answer: 3 },
