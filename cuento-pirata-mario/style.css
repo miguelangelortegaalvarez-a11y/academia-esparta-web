@@ -174,6 +174,7 @@ body{
 /* Buttons */
 .btn{
   appearance: none;
+  -webkit-appearance: none;
   border: 0;
   border-radius: var(--btnRadius);
   padding: 14px 18px;
@@ -187,6 +188,7 @@ body{
   touch-action: manipulation;
   box-shadow: 0 10px 18px rgba(0,0,0,0.18);
   transition: transform 120ms ease, opacity 120ms ease, filter 120ms ease;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn:active{ transform: scale(0.98); }
 .btn[disabled]{ opacity: 0.45; cursor: not-allowed; filter: grayscale(0.25); }
@@ -235,7 +237,7 @@ body{
 }
 
 /* ==========================================================
-   SCREEN 2 — Letters (ARREGLO: IMÁGENES Y DESCUIDRE)
+   SCREEN 2 — Letters
    ========================================================== */
 
 /* Clave: el panel puede scrollear si hay muchas palabras */
@@ -321,18 +323,19 @@ body{
   font-weight: 900;
   cursor: grab;
   touch-action: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .chip:active{ cursor: grabbing; }
 .chip.is-disabled{ opacity: 0.35; filter: grayscale(0.25); cursor: not-allowed; }
 
-/* dragging visuals */
+/* dragging visuals (aquí sí vale) */
 .is-dragging{
   filter: drop-shadow(0 14px 18px rgba(0,0,0,0.35));
   transform: scale(1.02);
 }
 
 /* ==========================================================
-   SCREEN 3 — Keys
+   SCREEN 3 — Keys (iOS estable, sin caja, sin tirones)
    ========================================================== */
 
 .keys-area{
@@ -345,8 +348,45 @@ body{
 }
 .keys-layer{ position: absolute; inset: 0; }
 
+/* Solo en pantalla 3: botón invisible y estable */
+#screen-3 .key-item{
+  position: absolute;                 /* CLAVE: evita reflow/tirones */
+  width: 86px;
+  height: 86px;
 
+  background: transparent;
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  border-radius: 0;
 
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+
+  display: grid;
+  place-items: center;
+
+  cursor: grab;
+  touch-action: none;
+
+  will-change: transform;
+  transform: translateZ(0);
+}
+#screen-3 .key-item:active{ cursor: grabbing; }
+#screen-3 .key-item:focus{ outline: none; box-shadow: none; }
+
+/* La imagen: tamaño fijo y SIN filter (mejor rendimiento iOS) */
+#screen-3 .key-item .key-img{
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Drop del cofre */
 .chest-drop{
   position: absolute;
   right: 14px;
@@ -418,6 +458,7 @@ body{
   cursor: grab;
   padding: 10px;
   touch-action: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .obj-card:active{ cursor: grabbing; }
 .obj-img{ width: 100%; height: 100%; object-fit: contain; }
@@ -493,6 +534,7 @@ body{
   cursor: grab;
   padding: 10px;
   touch-action: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .mem-item img{ width: 100%; height: 100%; object-fit: contain; }
 
@@ -564,6 +606,7 @@ body{
   cursor: grab;
   padding: 10px;
   touch-action: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .coin-item img{ width: 100%; height: 100%; object-fit: contain; }
 .coin-item.is-selected{
@@ -665,45 +708,4 @@ body{
     padding-right: max(var(--pad), env(safe-area-inset-right));
     padding-top: max(12px, env(safe-area-inset-top));
   }
-}
-/* =========================================
-   SCREEN 3 — LLAVES SIN CAJA (SIN TIRONES)
-   Mantiene positioning para que no haya reflow
-   ========================================= */
-#screen-3 .key-item{
-  position: absolute;                /* CLAVE para que no “recoloque” todo */
-  width: 86px;
-  height: 86px;
-
-  /* Quita caja visual */
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  outline: none;
-  padding: 0;
-  border-radius: 0;
-
-  /* iOS */
-  appearance: none;
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
-
-  /* rendimiento */
-  will-change: transform;
-  transform: translateZ(0);
-
-  cursor: grab;
-  touch-action: none;                /* evita scroll/zoom durante drag */
-}
-
-#screen-3 .key-item:active{ cursor: grabbing; }
-#screen-3 .key-item:focus{ outline: none; }
-
-#screen-3 .key-item .key-img{
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-  display: block;
-
-  /* IMPORTANTE: sin filter (drop-shadow) para que iOS no vaya a tirones */
 }
