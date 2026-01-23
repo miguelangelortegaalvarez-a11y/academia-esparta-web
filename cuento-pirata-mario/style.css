@@ -666,3 +666,44 @@ body{
     padding-top: max(12px, env(safe-area-inset-top));
   }
 }
+/* =========================================
+   SCREEN 3 — LLAVES SIN CAJA (SIN TIRONES)
+   Mantiene positioning para que no haya reflow
+   ========================================= */
+#screen-3 .key-item{
+  position: absolute;                /* CLAVE para que no “recoloque” todo */
+  width: 86px;
+  height: 86px;
+
+  /* Quita caja visual */
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  border-radius: 0;
+
+  /* iOS */
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+
+  /* rendimiento */
+  will-change: transform;
+  transform: translateZ(0);
+
+  cursor: grab;
+  touch-action: none;                /* evita scroll/zoom durante drag */
+}
+
+#screen-3 .key-item:active{ cursor: grabbing; }
+#screen-3 .key-item:focus{ outline: none; }
+
+#screen-3 .key-item .key-img{
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+
+  /* IMPORTANTE: sin filter (drop-shadow) para que iOS no vaya a tirones */
+}
