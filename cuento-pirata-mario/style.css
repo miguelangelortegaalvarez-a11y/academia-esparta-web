@@ -880,3 +880,49 @@ html, body {
   position: relative !important;
   z-index: 20 !important;
 }
+/* =========================
+   MOBILE FIX (<= 480px)
+   Pegar al FINAL del style.css
+========================= */
+@media (max-width: 480px) {
+
+  /* Que no “salte” el zoom al tocar inputs/botones en iOS */
+  html { -webkit-text-size-adjust: 100%; }
+
+  /* Evita recortes verticales: mejor scroll que pantalla cortada */
+  body { overflow-y: auto; }
+
+  /* Paneles más estrechos y con padding correcto */
+  .panel {
+    width: min(92vw, 520px);
+    max-height: none;
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  /* Títulos más contenidos */
+  .title { font-size: 22px; line-height: 1.15; }
+  .subtitle { font-size: 14px; }
+
+  .h2 { font-size: 18px; }
+
+  /* Botones grandes pero no gigantes */
+  .btn-big { padding: 12px 14px; font-size: 16px; }
+
+  /* HUD (instrucciones) más compacto */
+  .instruction { font-size: 14px; }
+
+  /* Actividad letras: que quepa sin apretar */
+  .letters-grid { gap: 10px; }
+  .letter-row { gap: 10px; }
+  .chip { font-size: 18px; min-width: 44px; min-height: 44px; }
+
+  /* Zonas de arrastre: que no se corten */
+  .keys-area,
+  .classify-area,
+  .memory-area,
+  .coins-area,
+  .syllables-area {
+    max-height: none;
+  }
+}
