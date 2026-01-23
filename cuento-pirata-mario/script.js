@@ -537,9 +537,9 @@ const dropZone = dropTarget?.closest?.(".slot-drop, .dropzone, .drop-chest, .che
         drag2.revertActive();
         bigCheck();
 
-        if (state.lettersDone.size >= 3) {
-          disable(btnNext, false);
-        }
+        if (state.lettersDone.size >= SETTINGS.letters.length) {
+  disable(btnNext, false);
+}
       } else {
         toast("Esa no… prueba la otra");
         drag2.revertActive();
