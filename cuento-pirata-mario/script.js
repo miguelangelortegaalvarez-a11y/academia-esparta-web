@@ -773,7 +773,8 @@ const dropZone = dropTarget?.closest?.(".slot-drop, .dropzone, .drop-chest, .che
       bigCheck();
 
       if (state.classifyDone >= items.length) {
-        disable(btnNext, false);
+  goToScreen("interlude");
+}
       }
     }
 
