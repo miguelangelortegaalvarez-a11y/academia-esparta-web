@@ -92,28 +92,36 @@ function updateProgressUI(ctx) {
 
 /** GENERADOR DE PREGUNTAS **/
 function makeQuestionSumasRestas(level) {
-  // Rango sube por nivel. Ajustable.
-  // Nivel 1: 0-10, Nivel 2: 0-20, Nivel 3: 0-30, etc.
-  const max = clamp(level * 10, 10, 100);
+  // SOLO SUMAS
+  // Números de una sola cifra (0–9)
+  // Resultado máximo: 18
 
-  const op = Math.random() < 0.5 ? "+" : "-";
-  let a = randInt(0, max);
-  let b = randInt(0, max);
+  let a = randInt(0, 9);
+  let b = randInt(0, 9);
 
-  if (op === "-" && b > a) [a, b] = [b, a]; // no negativos
+  // Forzar que la suma no pase de 18
+  while (a + b > 18) {
+    a = randInt(0, 9);
+    b = randInt(0, 9);
+  }
 
-  const correct = op === "+" ? (a + b) : (a - b);
+  const correct = a + b;
 
   let wrong = correct;
-  while (wrong === correct || wrong < 0) {
-    const delta = randInt(-5, 5);
+  while (wrong === correct || wrong < 0 || wrong > 18) {
+    const delta = randInt(-3, 3);
     if (delta === 0) continue;
     wrong = correct + delta;
   }
 
-  return { a, b, op, correct, wrong };
+  return {
+    a,
+    b,
+    op: "+",
+    correct,
+    wrong
+  };
 }
-
 function makeQuestionMultiplicaciones(level) {
   // Tablas: nivel 1 (0-5), nivel 2 (0-7), nivel 3 (0-9), nivel 4 (0-10), etc.
   const max = clamp(5 + (level - 1) * 2, 5, 12);
