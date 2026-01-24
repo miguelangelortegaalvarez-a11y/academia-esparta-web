@@ -635,125 +635,74 @@ body{
     padding-top: max(12px, env(safe-area-inset-top));
   }
 }
-/* ==========================================================
-   SCREEN 3 — LLAVES FLOTANDO + COFRE (DRAG SEGURO iOS)
-   ========================================================== */
+// ===== SCREEN 3: Drag de llaves con umbral (tap NO mueve) =====
 
-function initScreen3() {
-  const screen = document.querySelector("#screen-3");
-  if (!screen) return;
+const DRAG_THRESHOLD = 8; // px (ajusta entre 6 y 12 si quieres)
 
-  const keysArea = screen.querySelector(".keys-area") || screen;
-  const keys = screen.querySelectorAll(".key-item");
-  const chest = screen.querySelector(".chest-drop");
-  const btnContinue = screen.querySelector(".btn-continue");
+function enableKeyDrag(keyEl, containerEl, onDropCheck) {
+  let isPointerDown = false;
+  let isDragging = false;
 
-  const DRAG_THRESHOLD = 8; // px
-  let collectedKeys = 0;
+  let startX = 0, startY = 0;        // donde se pulsó (pointer)
+  let originLeft = 0, originTop = 0; // posición inicial del elemento
+  let offsetX = 0, offsetY = 0;      // offset dentro del elemento
 
-  keys.forEach(key => enableKeyDrag(key));
+  // Asegura posicionamiento absoluto
+  keyEl.style.position = "absolute";
 
-  function enableKeyDrag(keyEl) {
-    let isPointerDown = false;
-    let isDragging = false;
+  const getPoint = (e) => {
+    // PointerEvent ya trae clientX/Y
+    return { x: e.clientX, y: e.clientY };
+  };
 
-    let startX = 0, startY = 0;
-    let originLeft = 0, originTop = 0;
-    let offsetX = 0, offsetY = 0;
+  keyEl.addEventListener("pointerdown", (e) => {
+    // Solo dedo/pen; si quieres permitir mouse, quita esta línea
+    // if (e.pointerType === "mouse") return;
 
-    keyEl.style.position = "absolute";
+    isPointerDown = true;
+    isDragging = false;
 
-    keyEl.addEventListener("pointerdown", (e) => {
-      isPointerDown = true;
-      isDragging = false;
+    keyEl.setPointerCapture(e.pointerId);
 
-      keyEl.setPointerCapture(e.pointerId);
+    const p = getPoint(e);
+    startX = p.x;
+    startY = p.y;
 
-      startX = e.clientX;
-      startY = e.clientY;
+    // Posición actual (en px) del elemento
+    originLeft = parseFloat(keyEl.style.left) || keyEl.offsetLeft;
+    originTop  = parseFloat(keyEl.style.top)  || keyEl.offsetTop;
 
-      originLeft = parseFloat(keyEl.style.left) || keyEl.offsetLeft;
-      originTop  = parseFloat(keyEl.style.top)  || keyEl.offsetTop;
+    // Offset del toque dentro del elemento para que no “salte”
+    const rect = keyEl.getBoundingClientRect();
+    offsetX = p.x - rect.left;
+    offsetY = p.y - rect.top;
 
-      const rect = keyEl.getBoundingClientRect();
-      offsetX = e.clientX - rect.left;
-      offsetY = e.clientY - rect.top;
-    });
+    // IMPORTANTE: no preventDefault aquí para no fastidiar taps.
+    // Solo lo haremos cuando haya drag real.
+  });
 
-    keyEl.addEventListener("pointermove", (e) => {
-      if (!isPointerDown) return;
+  keyEl.addEventListener("pointermove", (e) => {
+    if (!isPointerDown) return;
 
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
+    const p = getPoint(e);
+    const dx = p.x - startX;
+    const dy = p.y - startY;
 
-      if (!isDragging) {
-        if (Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
-        isDragging = true;
-        keyEl.classList.add("is-dragging");
-        e.preventDefault();
-      }
+    // Hasta que no supere el umbral, no movemos
+    if (!isDragging) {
+      const dist = Math.hypot(dx, dy);
+      if (dist < DRAG_THRESHOLD) return;
 
+      isDragging = true;
+      keyEl.classList.add("is-dragging");
+
+      // Al empezar drag, ya sí bloqueamos scroll/gestos
       e.preventDefault();
+    } else {
+      e.preventDefault();
+    }
 
-      const areaRect = keysArea.getBoundingClientRect();
-      let newLeft = (e.clientX - areaRect.left) - offsetX;
-      let newTop  = (e.clientY - areaRect.top)  - offsetY;
-
-      newLeft = Math.max(0, Math.min(newLeft, areaRect.width  - keyEl.offsetWidth));
-      newTop  = Math.max(0, Math.min(newTop,  areaRect.height - keyEl.offsetHeight));
-
-      keyEl.style.left = `${newLeft}px`;
-      keyEl.style.top  = `${newTop}px`;
-    });
-
-    keyEl.addEventListener("pointerup", () => {
-      isPointerDown = false;
-      keyEl.classList.remove("is-dragging");
-
-      // 👉 TAP sin arrastrar → vuelve EXACTO a su sitio
-      if (!isDragging) {
-        keyEl.style.left = `${originLeft}px`;
-        keyEl.style.top  = `${originTop}px`;
-        return;
-      }
-
-      isDragging = false;
-
-      // 👉 Comprobar si cae en el cofre
-      if (isOverChest(keyEl)) {
-        keyEl.style.display = "none";
-        collectedKeys++;
-
-        if (collectedKeys >= keys.length) {
-          btnContinue?.removeAttribute("disabled");
-        }
-      } else {
-        // Si no cae en el cofre → vuelve al origen
-        keyEl.style.left = `${originLeft}px`;
-        keyEl.style.top  = `${originTop}px`;
-      }
-    });
-
-    keyEl.addEventListener("pointercancel", () => {
-      isPointerDown = false;
-      isDragging = false;
-      keyEl.classList.remove("is-dragging");
-      keyEl.style.left = `${originLeft}px`;
-      keyEl.style.top  = `${originTop}px`;
-    });
-  }
-
-  function isOverChest(keyEl) {
-    if (!chest) return false;
-
-    const keyRect = keyEl.getBoundingClientRect();
-    const chestRect = chest.getBoundingClientRect();
-
-    return !(
-      keyRect.right < chestRect.left ||
-      keyRect.left > chestRect.right ||
-      keyRect.bottom < chestRect.top ||
-      keyRect.top > chestRect.bottom
-    );
-  }
-}
+    // Movimiento dentro del contenedor
+    const cRect = containerEl.getBoundingClientRect();
+    let newLeft = (p.x - cRect.left) - offsetX;
+    let newTop  = (p.y - cRect.top
