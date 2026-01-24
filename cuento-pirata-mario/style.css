@@ -635,3 +635,147 @@ body{
     padding-top: max(12px, env(safe-area-inset-top));
   }
 }
+/* ==========================================================
+   SCREEN 3 — LLAVES EN EL FONDO (SIN CAJA) + COFRE PEQUEÑO
+   - Elimina cualquier rectángulo/área visible
+   - Oculta “Actividad 2”
+   - Llaves flotando en el fondo (suave, sin tirones iOS)
+   - Cofre pequeño abajo derecha (sin marco)
+   ========================================================== */
+
+/* 1) Quita el “panel/rectángulo” SOLO en pantalla 3 */
+#screen-3 .panel{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+/* Si además usas panel-wide/panel-full, los anulamos aquí */
+#screen-3 .panel-wide,
+#screen-3 .panel-full{
+  width: 100% !important;
+}
+
+/* 2) Oculta el título “Actividad 2” SOLO en pantalla 3 */
+#screen-3 .h2,
+#screen-3 h2{
+  display: none !important;
+}
+
+/* 3) El “área de llaves” no debe verse como caja */
+#screen-3 .keys-area{
+  position: relative !important;
+  min-height: 56vh;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+
+/* Por si existe una capa interna */
+#screen-3 .keys-layer{
+  position: absolute;
+  inset: 0;
+}
+
+/* 4) Llaves: SIN caja/botón iOS, flotando suave */
+#screen-3 .key-item{
+  position: absolute !important;   /* clave: no reflow */
+  width: 56px !important;
+  height: 56px !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+
+  cursor: grab;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent !important;
+
+  /* Rendimiento iOS */
+  will-change: transform;
+  transform: translateZ(0);
+
+  /* Flotación por defecto */
+  animation: key-float 3.2s ease-in-out infinite;
+}
+
+#screen-3 .key-item:active{ cursor: grabbing; }
+#screen-3 .key-item:focus{ outline: none !important; }
+
+/* Imagen llave (sin filtros para evitar tirones) */
+#screen-3 .key-item img,
+#screen-3 .key-img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  pointer-events: none !important;
+  filter: none !important; /* importante iOS */
+}
+
+/* Si tu JS añade una clase de arrastre, paramos la animación durante drag */
+#screen-3 .key-item.is-dragging{
+  animation: none !important;
+}
+
+/* Flotación suave (sin rotaciones agresivas) */
+@keyframes key-float{
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(0, -10px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* 5) Cofre: pequeño abajo derecha, SIN marco/rectángulo */
+#screen-3 .chest-drop{
+  position: absolute !important;
+  right: 18px !important;
+  bottom: 18px !important;
+
+  width: 130px !important;
+  height: 110px !important;
+
+  background: transparent !important;
+  border: 0 !important;              /* quita el dashed */
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  display: grid;
+  place-items: center;
+}
+
+/* Imagen del cofre (control de tamaño) */
+#screen-3 .chest-img,
+#screen-3 .chest-drop img{
+  width: 120px !important;
+  height: auto !important;
+  max-width: 120px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Quita cualquier texto tipo “COFRE” o pista */
+#screen-3 .chest-hint{
+  display: none !important;
+}
+
+/* 6) Por si el rectángulo viene de un contenedor extra dentro de screen-3 */
+#screen-3 .classify-area,
+#screen-3 .memory-area,
+#screen-3 .coins-area{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
