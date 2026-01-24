@@ -635,4 +635,157 @@ body{
     padding-top: max(12px, env(safe-area-inset-top));
   }
 }
+/* ==========================================================
+   SCREEN 3 — LLAVES EN EL FONDO (SIN CAJA) + COFRE + CONTINUAR
+   - Sin panel/rectángulo
+   - Oculta “Actividad 2”
+   - Llaves flotando (más grandes)
+   - Cofre abajo derecha (más grande, sin marco)
+   - Botón CONTINUAR abajo izquierda (solo en screen 3)
+   ========================================================== */
 
+/* 1) Quita el “panel/rectángulo” SOLO en pantalla 3 */
+#screen-3 .panel{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+#screen-3 .panel-wide,
+#screen-3 .panel-full{
+  width: 100% !important;
+}
+
+/* 2) Oculta el título “Actividad 2” SOLO en pantalla 3 */
+#screen-3 .h2,
+#screen-3 h2{
+  display: none !important;
+}
+
+/* 3) Área de juego SIN caja */
+#screen-3 .keys-area{
+  position: relative !important;
+  min-height: 56vh;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+#screen-3 .keys-layer{
+  position: absolute;
+  inset: 0;
+}
+
+/* 4) Llaves (más grandes) */
+#screen-3 .key-item{
+  position: absolute !important;
+  width: 64px !important;   /* antes 56px */
+  height: 64px !important;  /* antes 56px */
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+
+  cursor: grab;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent !important;
+
+  will-change: transform;
+  transform: translateZ(0);
+
+  animation: key-float 3.2s ease-in-out infinite;
+}
+#screen-3 .key-item:active{ cursor: grabbing; }
+#screen-3 .key-item:focus{ outline: none !important; }
+
+#screen-3 .key-item img,
+#screen-3 .key-img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  pointer-events: none !important;
+  filter: none !important; /* evita tirones iOS */
+}
+
+/* Si el JS añade clase de arrastre */
+#screen-3 .key-item.is-dragging{
+  animation: none !important;
+}
+
+@keyframes key-float{
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(0, -10px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* 5) Cofre abajo derecha (más grande, sin marco) */
+#screen-3 .chest-drop{
+  position: absolute !important;
+  right: 18px !important;
+  bottom: 18px !important;
+
+  width: 160px !important;   /* antes 130 */
+  height: 140px !important;  /* antes 110 */
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  display: grid;
+  place-items: center;
+}
+
+/* Tamaño real del dibujo del cofre */
+#screen-3 .chest-img,
+#screen-3 .chest-drop img{
+  width: 150px !important;      /* antes 120 */
+  height: auto !important;
+  max-width: 150px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Quita texto tipo “COFRE” si existiera */
+#screen-3 .chest-hint{
+  display: none !important;
+}
+
+/* 6) Botón CONTINUAR abajo izquierda SOLO en pantalla 3
+      (suele estar dentro de .footer-actions) */
+#screen-3 .footer-actions{
+  position: absolute !important;
+  left: 18px !important;
+  bottom: 18px !important;
+  margin-top: 0 !important;
+
+  display: flex !important;
+  justify-content: flex-start !important;
+  z-index: 5;
+}
+
+/* Asegura que no se “pegue” al cofre por ancho */
+#screen-3 .footer-actions .btn{
+  min-width: 180px;
+}
+
+/* 7) Evita que algún contenedor meta fondo sin querer */
+#screen-3 .classify-area,
+#screen-3 .memory-area,
+#screen-3 .coins-area{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
