@@ -321,30 +321,36 @@
     }
 
     _finishDrag(e) {
-      const a = this.active;
-      if (!a) return;
+  const a = this.active;
+  if (!a) return;
 
-      const { el } = a;
-      el.classList.remove("is-dragging");
+  const { el } = a;
+  el.classList.remove("is-dragging");
 
-      // detectar dropZone bajo el dedo (ignorando el propio elemento)
-      el.style.pointerEvents = "none";
-      const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
-      el.style.pointerEvents = "";
-      const dropZone = dropTarget?.closest?.(".slot-drop, .dropzone, .drop-chest, .chest-drop");
+  try {
+    // detectar dropZone bajo el dedo (ignorando el propio elemento)
+    el.style.pointerEvents = "none";
+    const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
+    el.style.pointerEvents = "";
+    const dropZone = dropTarget?.closest?.(
+      ".slot-drop, .dropzone, .drop-chest, .chest-drop"
+    );
 
-      if (typeof this.onDrop === "function") {
-        this.onDrop(dropZone, el);
-      } else {
-        this.revertActive();
-      }
-// SEGURO: si el chip sigue en <body>, lo devolvemos sí o sí
-if (el.parentElement === document.body) {
-  this.revertActive();
-}
-      try { el.releasePointerCapture(e.pointerId); } catch {}
-      this.active = null;
+    if (typeof this.onDrop === "function") {
+      this.onDrop(dropZone, el);
+    } else {
+      this.revertActive();
     }
+  } finally {
+    // SEGURIDAD TOTAL: si el elemento sigue colgando en <body>, vuelve a su origen
+    if (el.parentElement === document.body) {
+      this.revertActive();
+    }
+
+    try { el.releasePointerCapture(e.pointerId); } catch {}
+    this.active = null;
+  }
+}
 
     revertActive() {
       const a = this.active;
