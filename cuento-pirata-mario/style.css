@@ -636,156 +636,124 @@ body{
   }
 }
 /* ==========================================================
-   SCREEN 3 — LLAVES EN EL FONDO (SIN CAJA) + COFRE + CONTINUAR
-   - Sin panel/rectángulo
-   - Oculta “Actividad 2”
-   - Llaves flotando (más grandes)
-   - Cofre abajo derecha (más grande, sin marco)
-   - Botón CONTINUAR abajo izquierda (solo en screen 3)
+   SCREEN 3 — LLAVES FLOTANDO + COFRE (DRAG SEGURO iOS)
    ========================================================== */
 
-/* 1) Quita el “panel/rectángulo” SOLO en pantalla 3 */
-#screen-3 .panel{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  padding: 0 !important;
-  max-width: none !important;
-  margin: 0 !important;
-}
-#screen-3 .panel-wide,
-#screen-3 .panel-full{
-  width: 100% !important;
-}
+function initScreen3() {
+  const screen = document.querySelector("#screen-3");
+  if (!screen) return;
 
-/* 2) Oculta el título “Actividad 2” SOLO en pantalla 3 */
-#screen-3 .h2,
-#screen-3 h2{
-  display: none !important;
-}
+  const keysArea = screen.querySelector(".keys-area") || screen;
+  const keys = screen.querySelectorAll(".key-item");
+  const chest = screen.querySelector(".chest-drop");
+  const btnContinue = screen.querySelector(".btn-continue");
 
-/* 3) Área de juego SIN caja */
-#screen-3 .keys-area{
-  position: relative !important;
-  min-height: 56vh;
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  overflow: hidden;
-}
-#screen-3 .keys-layer{
-  position: absolute;
-  inset: 0;
-}
+  const DRAG_THRESHOLD = 8; // px
+  let collectedKeys = 0;
 
-/* 4) Llaves (más grandes) */
-#screen-3 .key-item{
-  position: absolute !important;
-  width: 64px !important;   /* antes 56px */
-  height: 64px !important;  /* antes 56px */
+  keys.forEach(key => enableKeyDrag(key));
 
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  outline: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
+  function enableKeyDrag(keyEl) {
+    let isPointerDown = false;
+    let isDragging = false;
 
-  cursor: grab;
-  touch-action: none;
-  -webkit-tap-highlight-color: transparent !important;
+    let startX = 0, startY = 0;
+    let originLeft = 0, originTop = 0;
+    let offsetX = 0, offsetY = 0;
 
-  will-change: transform;
-  transform: translateZ(0);
+    keyEl.style.position = "absolute";
 
-  animation: key-float 3.2s ease-in-out infinite;
-}
-#screen-3 .key-item:active{ cursor: grabbing; }
-#screen-3 .key-item:focus{ outline: none !important; }
+    keyEl.addEventListener("pointerdown", (e) => {
+      isPointerDown = true;
+      isDragging = false;
 
-#screen-3 .key-item img,
-#screen-3 .key-img{
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  display: block !important;
-  pointer-events: none !important;
-  filter: none !important; /* evita tirones iOS */
-}
+      keyEl.setPointerCapture(e.pointerId);
 
-/* Si el JS añade clase de arrastre */
-#screen-3 .key-item.is-dragging{
-  animation: none !important;
-}
+      startX = e.clientX;
+      startY = e.clientY;
 
-@keyframes key-float{
-  0%   { transform: translate3d(0, 0, 0); }
-  50%  { transform: translate3d(0, -10px, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
+      originLeft = parseFloat(keyEl.style.left) || keyEl.offsetLeft;
+      originTop  = parseFloat(keyEl.style.top)  || keyEl.offsetTop;
 
-/* 5) Cofre abajo derecha (más grande, sin marco) */
-#screen-3 .chest-drop{
-  position: absolute !important;
-  right: 18px !important;
-  bottom: 18px !important;
+      const rect = keyEl.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+    });
 
-  width: 160px !important;   /* antes 130 */
-  height: 140px !important;  /* antes 110 */
+    keyEl.addEventListener("pointermove", (e) => {
+      if (!isPointerDown) return;
 
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
 
-  display: grid;
-  place-items: center;
-}
+      if (!isDragging) {
+        if (Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
+        isDragging = true;
+        keyEl.classList.add("is-dragging");
+        e.preventDefault();
+      }
 
-/* Tamaño real del dibujo del cofre */
-#screen-3 .chest-img,
-#screen-3 .chest-drop img{
-  width: 150px !important;      /* antes 120 */
-  height: auto !important;
-  max-width: 150px !important;
-  object-fit: contain !important;
-  display: block !important;
-}
+      e.preventDefault();
 
-/* Quita texto tipo “COFRE” si existiera */
-#screen-3 .chest-hint{
-  display: none !important;
-}
+      const areaRect = keysArea.getBoundingClientRect();
+      let newLeft = (e.clientX - areaRect.left) - offsetX;
+      let newTop  = (e.clientY - areaRect.top)  - offsetY;
 
-/* 6) Botón CONTINUAR abajo izquierda SOLO en pantalla 3
-      (suele estar dentro de .footer-actions) */
-#screen-3 .footer-actions{
-  position: absolute !important;
-  left: 18px !important;
-  bottom: 18px !important;
-  margin-top: 0 !important;
+      newLeft = Math.max(0, Math.min(newLeft, areaRect.width  - keyEl.offsetWidth));
+      newTop  = Math.max(0, Math.min(newTop,  areaRect.height - keyEl.offsetHeight));
 
-  display: flex !important;
-  justify-content: flex-start !important;
-  z-index: 5;
-}
+      keyEl.style.left = `${newLeft}px`;
+      keyEl.style.top  = `${newTop}px`;
+    });
 
-/* Asegura que no se “pegue” al cofre por ancho */
-#screen-3 .footer-actions .btn{
-  min-width: 180px;
-}
+    keyEl.addEventListener("pointerup", () => {
+      isPointerDown = false;
+      keyEl.classList.remove("is-dragging");
 
-/* 7) Evita que algún contenedor meta fondo sin querer */
-#screen-3 .classify-area,
-#screen-3 .memory-area,
-#screen-3 .coins-area{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
+      // 👉 TAP sin arrastrar → vuelve EXACTO a su sitio
+      if (!isDragging) {
+        keyEl.style.left = `${originLeft}px`;
+        keyEl.style.top  = `${originTop}px`;
+        return;
+      }
+
+      isDragging = false;
+
+      // 👉 Comprobar si cae en el cofre
+      if (isOverChest(keyEl)) {
+        keyEl.style.display = "none";
+        collectedKeys++;
+
+        if (collectedKeys >= keys.length) {
+          btnContinue?.removeAttribute("disabled");
+        }
+      } else {
+        // Si no cae en el cofre → vuelve al origen
+        keyEl.style.left = `${originLeft}px`;
+        keyEl.style.top  = `${originTop}px`;
+      }
+    });
+
+    keyEl.addEventListener("pointercancel", () => {
+      isPointerDown = false;
+      isDragging = false;
+      keyEl.classList.remove("is-dragging");
+      keyEl.style.left = `${originLeft}px`;
+      keyEl.style.top  = `${originTop}px`;
+    });
+  }
+
+  function isOverChest(keyEl) {
+    if (!chest) return false;
+
+    const keyRect = keyEl.getBoundingClientRect();
+    const chestRect = chest.getBoundingClientRect();
+
+    return !(
+      keyRect.right < chestRect.left ||
+      keyRect.left > chestRect.right ||
+      keyRect.bottom < chestRect.top ||
+      keyRect.top > chestRect.bottom
+    );
+  }
 }
