@@ -327,22 +327,22 @@
   const { el } = a;
   el.classList.remove("is-dragging");
 
-  try {
-    // detectar dropZone bajo el dedo (ignorando el propio elemento)
-    el.style.pointerEvents = "none";
-    const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
-    el.style.pointerEvents = "";
-    const dropZone = dropTarget?.closest?.(
-      ".slot-drop, .dropzone, .drop-chest, .chest-drop"
-    );
+  // detectar dropZone bajo el dedo (ignorando el propio elemento)
+  el.style.pointerEvents = "none";
+  const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
+  el.style.pointerEvents = "";
+  const dropZone = dropTarget?.closest?.(
+    ".slot-drop, .dropzone, .drop-chest, .chest-drop"
+  );
 
+  try {
     if (typeof this.onDrop === "function") {
       this.onDrop(dropZone, el);
     } else {
       this.revertActive();
     }
   } finally {
-    // SEGURIDAD TOTAL: si el elemento sigue colgando en <body>, vuelve a su origen
+    // SEGURIDAD TOTAL: si el elemento sigue colgando en <body>, vuelve SIEMPRE
     if (el.parentElement === document.body) {
       this.revertActive();
     }
