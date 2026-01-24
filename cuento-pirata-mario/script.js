@@ -803,7 +803,9 @@ const dropZone = dropTarget?.closest?.(".slot-drop, .dropzone, .drop-chest, .che
       placeClassify(draggedEl, dz);
     };
 
-    if (btnNext) btnNext.addEventListener("click", nextScreen);
+    if (state.classifyDone >= TOTAL_CLASSIFY) {
+  goToScreen("interlude");
+}
   }
 
   function resetScreen4() {
