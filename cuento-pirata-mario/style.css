@@ -593,116 +593,157 @@ body{
   border-color: rgba(85,239,196,0.7);
   color: var(--ok);
 }
-
 /* ==========================================================
-   Responsive
+   SCREEN 3 — LLAVES EN EL FONDO (SIN CAJA) + COFRE + CONTINUAR
+   - Sin panel/rectángulo
+   - Oculta “Actividad 2”
+   - Llaves flotando (más grandes)
+   - Cofre abajo derecha (más grande, sin marco)
+   - Botón CONTINUAR abajo izquierda (solo en screen 3)
    ========================================================== */
 
-@media (max-width: 980px){
-  .instruction{ max-width: 68vw; font-size: 16px; }
-  .letter-row{ grid-template-columns: 1fr 220px 150px; }
-  .pic-box{ width: 220px; height: 130px; }
-  .drop-chest{ width: 180px; }
+/* 1) Quita el “panel/rectángulo” SOLO en pantalla 3 */
+#screen-3 .panel{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+#screen-3 .panel-wide,
+#screen-3 .panel-full{
+  width: 100% !important;
 }
 
-@media (max-width: 760px){
-  :root{ --hudH: 68px; }
-  .hud{ height: 68px; }
-  .panel{ padding: 14px; }
-
-  .screen{ inset: var(--hudH) 0 0 0; padding: 14px; }
-
-  .letter-row{
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .pic-box{ width: 100%; height: 160px; }
-  .choices{ justify-content: center; }
-
-  .dropzones{ grid-template-columns: 1fr; }
-  .chests-row{ grid-template-columns: 1fr; }
-  .drop-chest{ width: 92%; max-width: 320px; }
-
-  .syll-row{ grid-template-columns: 1fr; }
-  .syll-options{ justify-content: center; }
+/* 2) Oculta el título “Actividad 2” SOLO en pantalla 3 */
+#screen-3 .h2,
+#screen-3 h2{
+  display: none !important;
 }
 
-/* iOS safe area */
-@supports (padding: max(0px)){
-  .hud{
-    padding-left: max(var(--pad), env(safe-area-inset-left));
-    padding-right: max(var(--pad), env(safe-area-inset-right));
-    padding-top: max(12px, env(safe-area-inset-top));
-  }
+/* 3) Área de juego SIN caja */
+#screen-3 .keys-area{
+  position: relative !important;
+  min-height: 56vh;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: hidden;
 }
-// ===== SCREEN 3: Drag de llaves con umbral (tap NO mueve) =====
+#screen-3 .keys-layer{
+  position: absolute;
+  inset: 0;
+}
 
-const DRAG_THRESHOLD = 8; // px (ajusta entre 6 y 12 si quieres)
+/* 4) Llaves (más grandes) */
+#screen-3 .key-item{
+  position: absolute !important;
+  width: 64px !important;   /* antes 56px */
+  height: 64px !important;  /* antes 56px */
 
-function enableKeyDrag(keyEl, containerEl, onDropCheck) {
-  let isPointerDown = false;
-  let isDragging = false;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 
-  let startX = 0, startY = 0;        // donde se pulsó (pointer)
-  let originLeft = 0, originTop = 0; // posición inicial del elemento
-  let offsetX = 0, offsetY = 0;      // offset dentro del elemento
+  cursor: grab;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent !important;
 
-  // Asegura posicionamiento absoluto
-  keyEl.style.position = "absolute";
+  will-change: transform;
+  transform: translateZ(0);
 
-  const getPoint = (e) => {
-    // PointerEvent ya trae clientX/Y
-    return { x: e.clientX, y: e.clientY };
-  };
+  animation: key-float 3.2s ease-in-out infinite;
+}
+#screen-3 .key-item:active{ cursor: grabbing; }
+#screen-3 .key-item:focus{ outline: none !important; }
 
-  keyEl.addEventListener("pointerdown", (e) => {
-    // Solo dedo/pen; si quieres permitir mouse, quita esta línea
-    // if (e.pointerType === "mouse") return;
+#screen-3 .key-item img,
+#screen-3 .key-img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  pointer-events: none !important;
+  filter: none !important; /* evita tirones iOS */
+}
 
-    isPointerDown = true;
-    isDragging = false;
+/* Si el JS añade clase de arrastre */
+#screen-3 .key-item.is-dragging{
+  animation: none !important;
+}
 
-    keyEl.setPointerCapture(e.pointerId);
+@keyframes key-float{
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(0, -10px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
 
-    const p = getPoint(e);
-    startX = p.x;
-    startY = p.y;
+/* 5) Cofre abajo derecha (más grande, sin marco) */
+#screen-3 .chest-drop{
+  position: absolute !important;
+  right: 18px !important;
+  bottom: 18px !important;
 
-    // Posición actual (en px) del elemento
-    originLeft = parseFloat(keyEl.style.left) || keyEl.offsetLeft;
-    originTop  = parseFloat(keyEl.style.top)  || keyEl.offsetTop;
+  width: 160px !important;   /* antes 130 */
+  height: 140px !important;  /* antes 110 */
 
-    // Offset del toque dentro del elemento para que no “salte”
-    const rect = keyEl.getBoundingClientRect();
-    offsetX = p.x - rect.left;
-    offsetY = p.y - rect.top;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 
-    // IMPORTANTE: no preventDefault aquí para no fastidiar taps.
-    // Solo lo haremos cuando haya drag real.
-  });
+  display: grid;
+  place-items: center;
+}
 
-  keyEl.addEventListener("pointermove", (e) => {
-    if (!isPointerDown) return;
+/* Tamaño real del dibujo del cofre */
+#screen-3 .chest-img,
+#screen-3 .chest-drop img{
+  width: 150px !important;      /* antes 120 */
+  height: auto !important;
+  max-width: 150px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
 
-    const p = getPoint(e);
-    const dx = p.x - startX;
-    const dy = p.y - startY;
+/* Quita texto tipo “COFRE” si existiera */
+#screen-3 .chest-hint{
+  display: none !important;
+}
 
-    // Hasta que no supere el umbral, no movemos
-    if (!isDragging) {
-      const dist = Math.hypot(dx, dy);
-      if (dist < DRAG_THRESHOLD) return;
+/* 6) Botón CONTINUAR abajo izquierda SOLO en pantalla 3
+      (suele estar dentro de .footer-actions) */
+#screen-3 .footer-actions{
+  position: absolute !important;
+  left: 18px !important;
+  bottom: 18px !important;
+  margin-top: 0 !important;
 
-      isDragging = true;
-      keyEl.classList.add("is-dragging");
+  display: flex !important;
+  justify-content: flex-start !important;
+  z-index: 5;
+}
 
-      // Al empezar drag, ya sí bloqueamos scroll/gestos
-      e.preventDefault();
-    } else {
-      e.preventDefault();
-    }
+/* Asegura que no se “pegue” al cofre por ancho */
+#screen-3 .footer-actions .btn{
+  min-width: 180px;
+}
 
-    // Movimiento dentro del contenedor
-    const cRect = containerEl.getBoundingClientRect();
-    let newLeft = (p.x - cRect.left) - offsetX;
-    let newTop  = (p.y - cRect.top
+/* 7) Evita que algún contenedor meta fondo sin querer */
+#screen-3 .classify-area,
+#screen-3 .memory-area,
+#screen-3 .coins-area{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
