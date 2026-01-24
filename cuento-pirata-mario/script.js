@@ -338,7 +338,10 @@
       } else {
         this.revertActive();
       }
-
+// SEGURO: si el chip sigue en <body>, lo devolvemos sí o sí
+if (el.parentElement === document.body) {
+  this.revertActive();
+}
       try { el.releasePointerCapture(e.pointerId); } catch {}
       this.active = null;
     }
