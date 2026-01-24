@@ -6,394 +6,158 @@
   <meta name="theme-color" content="#07121f" />
   <title>Cuento Pirata Mario · Juego 4 años</title>
 
-  <!-- Cache-bust (cambia el número cuando quieras) -->
-  <link rel="stylesheet" href="./style.css?v=2146" />
-  <script defer src="./script.js?v=2146"></script>
+  <!-- Cache-bust -->
+  <link rel="stylesheet" href="./style.css?v=9999" />
+  <script defer src="./script.js?v=9999"></script>
 </head>
 
 <body>
-  <noscript>
-    <div style="padding:16px;background:#222;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial">
-      Este juego necesita JavaScript para funcionar.
+
+<noscript>
+  <div style="padding:16px;background:#222;color:#fff;font-family:system-ui">
+    Este juego necesita JavaScript para funcionar.
+  </div>
+</noscript>
+
+<div id="app" class="app" aria-label="Juego educativo pirata (4 años)">
+
+  <!-- Fondo dinámico -->
+  <div id="sceneBg" class="scene-bg" role="img" aria-label="Fondo del juego"></div>
+  <div class="scene-shade" aria-hidden="true"></div>
+
+  <!-- HUD -->
+  <header class="hud">
+    <div class="hud-left">
+      <div id="instruction" class="instruction" aria-live="polite"></div>
     </div>
-  </noscript>
+    <div class="hud-right">
+      <button id="btnMusic" class="btn btn-secondary" type="button" hidden>
+        Activar música
+      </button>
+    </div>
+  </header>
 
-  <div id="app" class="app" aria-label="Juego educativo pirata (4 años)">
+  <!-- Feedback -->
+  <div id="toast" class="toast" hidden></div>
+  <div id="bigCheck" class="big-check" hidden>✓</div>
 
-    <!-- Fondo de escena (se cambia por JS según pantalla) -->
-    <div id="sceneBg" class="scene-bg" role="img" aria-label="Fondo del juego"></div>
+  <!-- Audio -->
+  <audio id="bgm" preload="auto" loop playsinline></audio>
 
-    <!-- Capa de sombreado opcional para legibilidad -->
-    <div class="scene-shade" aria-hidden="true"></div>
+  <!-- =========================
+       CONTENEDOR DE PANTALLAS
+       ========================= -->
+  <main id="screens" class="screens">
 
-    <!-- HUD superior: instrucciones + música -->
-    <header class="hud">
-      <div class="hud-left">
-        <div id="instruction" class="instruction" aria-live="polite"></div>
+    <!-- PANTALLA 1 -->
+    <section id="screen-1" class="screen is-active" aria-label="Bienvenida">
+      <div class="panel panel-center">
+        <h1 class="title">VAMOS A JUGAR 🏴‍☠️</h1>
+        <p class="subtitle">Completa las actividades para llegar al tesoro.</p>
+        <button id="btnStart" class="btn btn-primary btn-big">COMENZAR</button>
       </div>
+    </section>
 
-      <div class="hud-right">
-        <!-- Botón visible solo si autoplay bloqueado -->
-        <button id="btnMusic" class="btn btn-secondary" type="button" hidden>
-          Activar música
+    <!-- PANTALLA 2 -->
+    <section id="screen-2" class="screen" aria-label="Letras iniciales">
+      <div class="panel panel-wide">
+        <h2 class="h2">Actividad 1</h2>
+        <div id="lettersGrid"></div>
+        <div class="footer-actions">
+          <button id="btnNext2" class="btn btn-primary btn-big" disabled>CONTINUAR</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 3 -->
+    <section id="screen-3" class="screen" aria-label="Buscar llaves">
+      <div class="panel panel-full">
+        <div class="keys-area">
+          <div id="keysLayer" class="keys-layer"></div>
+          <div id="chestDrop" class="chest-drop">
+            <img id="chestImg" src="./assets/objects/COFRE_CERRADO.PNG" alt="Cofre" />
+          </div>
+        </div>
+        <div class="footer-actions">
+          <button id="btnNext3" class="btn btn-primary btn-big" disabled>CONTINUAR</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 4 -->
+    <section id="screen-4" class="screen" aria-label="Clasificación">
+      <div class="panel panel-full">
+        <h2 class="h2">Actividad 3</h2>
+        <div class="classify-area">
+          <div class="dropzones">
+            <div id="dropPirates" class="dropzone">PIRATAS</div>
+            <div id="dropExplorers" class="dropzone">EXPLORADORES</div>
+          </div>
+          <div id="objectsTray" class="objects-tray"></div>
+        </div>
+        <div class="footer-actions">
+          <button id="btnNext4" class="btn btn-primary btn-big">CONTINUAR</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERLUDE -->
+    <section id="screen-interlude" class="screen" aria-label="Motivación">
+      <div class="panel panel-center">
+        <h2 class="title">¡GENIAL!</h2>
+        <p class="subtitle">Has colocado todo correctamente.</p>
+        <button id="btnInterludeNext" class="btn btn-primary btn-big">CONTINUAR</button>
+      </div>
+    </section>
+
+    <!-- PANTALLA 5 -->
+    <section id="screen-5" class="screen" aria-label="Memoria">
+      <div class="panel panel-full">
+        <h2 class="h2">Actividad 4</h2>
+        <div id="memoryPreview"></div>
+        <div id="memoryBank"></div>
+        <div class="footer-actions">
+          <button id="btnNext5" class="btn btn-primary btn-big" disabled>CONTINUAR</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 6 -->
+    <section id="screen-6" class="screen" aria-label="Monedas">
+      <div class="panel panel-full">
+        <h2 class="h2">Actividad 5</h2>
+        <div id="coinsBank"></div>
+        <div class="footer-actions">
+          <button id="btnNext6" class="btn btn-primary btn-big" disabled>CONTINUAR</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 7 -->
+    <section id="screen-7" class="screen" aria-label="Sílabas">
+      <div class="panel panel-wide">
+        <h2 class="h2">Actividad 6</h2>
+        <div id="syllablesArea"></div>
+        <div class="footer-actions">
+          <button id="btnNext7" class="btn btn-primary btn-big" disabled>CONTINUAR</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 8 -->
+    <section id="screen-8" class="screen" aria-label="Final">
+      <div class="panel panel-center">
+        <h2 class="title title-final">
+          EL MAYOR TESORO ES HABER RECORRIDO EL CAMINO JUNTOS
+        </h2>
+        <button id="btnRestart" class="btn btn-primary btn-big">
+          VOLVER A JUGAR
         </button>
       </div>
-    </header>
+    </section>
 
-    <!-- Toast / feedback global -->
-    <div id="toast" class="toast" aria-live="polite" aria-atomic="true" hidden></div>
+  </main>
 
-    <!-- Overlay check grande -->
-    <div id="bigCheck" class="big-check" aria-hidden="true" hidden>✓</div>
-
-    <!-- Audio único del proyecto (música en loop) -->
-    <audio
-      id="bgm"
-      src="./assets/audio/MUSICA_PIRATAS_FONDO.mp3?v=2146"
-      preload="auto"
-      loop
-      playsinline
-    ></audio>
-
-    <!-- Contenedor de pantallas -->
-    <main id="screens" class="screens" aria-live="polite">
-
-      <!-- =========================
-           PANTALLA 1 — BIENVENIDA
-           ========================= -->
-      <section id="screen-1" class="screen is-active" data-screen="1" aria-label="Pantalla 1: Bienvenida">
-        <div class="panel panel-center">
-          <h1 class="title">VAMOS A JUGAR <span aria-hidden="true">🏴‍☠️</span></h1>
-          <p class="subtitle">Completa las actividades para llegar al tesoro.</p>
-
-          <button id="btnStart" class="btn btn-primary btn-big" type="button">
-            COMENZAR
-          </button>
-        </div>
-      </section>
-
-      <!-- =====================================
-     PANTALLA 2 — LETRAS INICIALES (PLAYA)
-     ===================================== -->
-<section id="screen-2" class="screen" data-screen="2" aria-label="Pantalla 2: Letras iniciales">
-  <div class="panel panel-wide">
-    <h2 class="h2">Actividad 1</h2>
-
-    <div class="letters-grid" id="lettersGrid" aria-label="Arrastra la letra correcta">
-
-      <!-- MAPA -->
-      <div class="letter-row" data-id="w1" data-solution="M" data-rest="APA">
-        <div class="word-box" aria-label="Palabra MAPA">
-          <div class="word">
-            <span class="slot slot-drop" data-slot="w1">_</span><span class="rest">APA</span>
-          </div>
-        </div>
-
-        <div class="pic-box" aria-label="Imagen MAPA">
-          <img src="./assets/words/MAPA.PNG" alt="Mapa" draggable="false" />
-        </div>
-
-        <div class="choices" aria-label="Letras para arrastrar">
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="M" data-target="w1">M</button>
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="N" data-target="w1">N</button>
-        </div>
-      </div>
-
-      <!-- PIRATA -->
-      <div class="letter-row" data-id="w2" data-solution="P" data-rest="IRATA">
-        <div class="word-box" aria-label="Palabra PIRATA">
-          <div class="word">
-            <span class="slot slot-drop" data-slot="w2">_</span><span class="rest">IRATA</span>
-          </div>
-        </div>
-
-        <div class="pic-box" aria-label="Imagen PIRATA">
-          <img src="./assets/words/PIRATA.PNG" alt="Pirata" draggable="false" />
-        </div>
-
-        <div class="choices" aria-label="Letras para arrastrar">
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="P" data-target="w2">P</button>
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="B" data-target="w2">B</button>
-        </div>
-      </div>
-
-      <!-- TESORO -->
-      <div class="letter-row" data-id="w3" data-solution="T" data-rest="ESORO">
-        <div class="word-box" aria-label="Palabra TESORO">
-          <div class="word">
-            <span class="slot slot-drop" data-slot="w3">_</span><span class="rest">ESORO</span>
-          </div>
-        </div>
-
-        <div class="pic-box" aria-label="Imagen TESORO">
-          <img src="./assets/words/TESORO.PNG" alt="Tesoro" draggable="false" />
-        </div>
-
-        <div class="choices" aria-label="Letras para arrastrar">
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="T" data-target="w3">T</button>
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="D" data-target="w3">D</button>
-        </div>
-      </div>
-
-      <!-- BARCO -->
-      <div class="letter-row" data-id="w4" data-solution="B" data-rest="ARCO">
-        <div class="word-box" aria-label="Palabra BARCO">
-          <div class="word">
-            <span class="slot slot-drop" data-slot="w4">_</span><span class="rest">ARCO</span>
-          </div>
-        </div>
-
-        <div class="pic-box" aria-label="Imagen BARCO">
-          <img src="./assets/words/BARCO.PNG" alt="Barco" draggable="false" />
-        </div>
-
-        <div class="choices" aria-label="Letras para arrastrar">
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="B" data-target="w4">B</button>
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="V" data-target="w4">V</button>
-        </div>
-      </div>
-
-      <!-- ISLA -->
-      <div class="letter-row" data-id="w5" data-solution="I" data-rest="SLA">
-        <div class="word-box" aria-label="Palabra ISLA">
-          <div class="word">
-            <span class="slot slot-drop" data-slot="w5">_</span><span class="rest">SLA</span>
-          </div>
-        </div>
-
-        <div class="pic-box" aria-label="Imagen ISLA">
-          <img src="./assets/words/ISLA.PNG" alt="Isla" draggable="false" />
-        </div>
-
-        <div class="choices" aria-label="Letras para arrastrar">
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="I" data-target="w5">I</button>
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="L" data-target="w5">L</button>
-        </div>
-      </div>
-
-      <!-- COFRE -->
-      <div class="letter-row" data-id="w6" data-solution="C" data-rest="OFRE">
-        <div class="word-box" aria-label="Palabra COFRE">
-          <div class="word">
-            <span class="slot slot-drop" data-slot="w6">_</span><span class="rest">OFRE</span>
-          </div>
-        </div>
-
-        <div class="pic-box" aria-label="Imagen COFRE">
-          <img src="./assets/words/COFRE.PNG" alt="Cofre" draggable="false" />
-        </div>
-
-        <div class="choices" aria-label="Letras para arrastrar">
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="C" data-target="w6">C</button>
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="G" data-target="w6">G</button>
-        </div>
-      </div>
-
-      <!-- BANDERA -->
-      <div class="letter-row" data-id="w7" data-solution="B" data-rest="ANDERA">
-        <div class="word-box" aria-label="Palabra BANDERA">
-          <div class="word">
-            <span class="slot slot-drop" data-slot="w7">_</span><span class="rest">ANDERA</span>
-          </div>
-        </div>
-
-        <div class="pic-box" aria-label="Imagen BANDERA">
-          <img src="./assets/words/BANDERA.PNG" alt="Bandera" draggable="false" />
-        </div>
-
-        <div class="choices" aria-label="Letras para arrastrar">
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="B" data-target="w7">B</button>
-          <button class="chip chip-drag" type="button" draggable="true" data-letter="D" data-target="w7">D</button>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="footer-actions">
-      <button id="btnNext2" class="btn btn-primary btn-big" type="button" disabled>CONTINUAR</button>
-    </div>
-  </div>
-</section>
-
-      <!-- =================================
-           PANTALLA 3 — BUSCAR LLAVES (BOSQUE)
-           ================================= -->
-      <section id="screen-3" class="screen" data-screen="3" aria-label="Pantalla 3: Buscar llaves">
-        <div class="panel panel-full">
-          
-
-          <div class="keys-area" id="keysArea" aria-label="Arrastra 5 llaves al cofre">
-            <div class="keys-layer" id="keysLayer" aria-hidden="false"></div>
-
-            <div class="chest-drop" id="chestDrop" aria-label="Cofre del tesoro (zona de soltar)">
-              <img id="chestImg" class="chest-img" src="./assets/objects/COFRE_CERRADO.PNG?v=2146" alt="Cofre cerrado" draggable="false" />
-              <div class="chest-hint" aria-hidden="true">COFRE</div>
-            </div>
-          </div>
-
-          <div class="footer-actions">
-            <button id="btnNext3" class="btn btn-primary btn-big" type="button" disabled>CONTINUAR</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="screen-4" class="screen" data-screen="4" aria-label="Pantalla 4: Clasificación">
-        <div class="panel panel-full">
-          <h2 class="h2">Actividad 3</h2>
-
-          <div class="classify-area" id="classifyArea" aria-label="Arrastra objetos a Piratas o Exploradores">
-            <div class="dropzones">
-              <div class="dropzone" id="dropPirates" data-drop="pirates" aria-label="Zona Piratas">
-                <div class="dropzone-title">PIRATAS</div>
-              </div>
-              <div class="dropzone" id="dropExplorers" data-drop="explorers" aria-label="Zona Exploradores">
-                <div class="dropzone-title">EXPLORADORES</div>
-              </div>
-            </div>
-
-            <div class="objects-tray" id="objectsTray" aria-label="Objetos para arrastrar"></div>
-          </div>
-
-          <div class="footer-actions">
-            <button id="btnNext4" class="btn btn-primary btn-big" type="button" disabled>CONTINUAR</button>
-          </div>
-        </div>
-      </section>
-      <!-- =========================================
-           PANTALLA INTERMEDIA — MOTIVACIÓN
-           ========================================= -->
-      <section id="screen-interlude" class="screen" data-screen="interlude" aria-label="Pantalla intermedia: motivación">
-        <div class="interlude-wrap">
-          <div class="interlude-text" id="interludeText">
-            ¡Genial! Has colocado todo correctamente.
-          </div>
-
-          <button class="btn btn-primary btn-big interlude-btn" id="interludeContinue" type="button">
-            CONTINUAR
-          </button>
-        </div>
-      </section>
-      <section id="screen-5" class="screen" data-screen="5" aria-label="Pantalla 5: Memoria visual">
-        <div class="panel panel-full">
-          <h2 class="h2">Actividad 4</h2>
-
-          <div class="memory-area" id="memoryArea" aria-label="Memoriza el orden y colócalo">
-            <div class="memory-top">
-              <div class="memory-slots" id="memorySlots" aria-label="Huecos de orden">
-                <div class="mem-slot slot-drop" data-memslot="1" aria-label="Hueco 1">1</div>
-                <div class="mem-slot slot-drop" data-memslot="2" aria-label="Hueco 2">2</div>
-                <div class="mem-slot slot-drop" data-memslot="3" aria-label="Hueco 3">3</div>
-              </div>
-
-              <div class="memory-preview" id="memoryPreview" aria-label="Vista previa del orden" hidden></div>
-            </div>
-
-            <div class="memory-bottom">
-              <div class="memory-bank" id="memoryBank" aria-label="Objetos para arrastrar (desordenados)"></div>
-            </div>
-          </div>
-
-          <div class="footer-actions">
-            <button id="btnNext5" class="btn btn-primary btn-big" type="button" disabled>CONTINUAR</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="screen-6" class="screen" data-screen="6" aria-label="Pantalla 6: Contar monedas">
-        <div class="panel panel-full">
-          <h2 class="h2">Actividad 5</h2>
-
-          <div class="coins-area" id="coinsArea" aria-label="Arrastra monedas a los cofres">
-            <div class="chests-row" aria-label="Cofres con número objetivo">
-              <div class="count-chest" data-target="3" aria-label="Cofre 3">
-                <div class="count-label">3</div>
-                <div class="drop-chest slot-drop" data-coinchest="3">
-                  <img class="chest-img" src="./assets/objects/COFRE_ABIERTO.PNG?v=2146" alt="Cofre abierto" draggable="false" />
-                </div>
-                <div class="count-status" aria-label="Monedas colocadas">0 / 3</div>
-              </div>
-
-              <div class="count-chest" data-target="5" aria-label="Cofre 5">
-                <div class="count-label">5</div>
-                <div class="drop-chest slot-drop" data-coinchest="5">
-                  <img class="chest-img" src="./assets/objects/COFRE_ABIERTO.PNG?v=2146" alt="Cofre abierto" draggable="false" />
-                </div>
-                <div class="count-status" aria-label="Monedas colocadas">0 / 5</div>
-              </div>
-
-              <div class="count-chest" data-target="6" aria-label="Cofre 6">
-                <div class="count-label">6</div>
-                <div class="drop-chest slot-drop" data-coinchest="6">
-                  <img class="chest-img" src="./assets/objects/COFRE_ABIERTO.PNG?v=2146" alt="Cofre abierto" draggable="false" />
-                </div>
-                <div class="count-status" aria-label="Monedas colocadas">0 / 6</div>
-              </div>
-            </div>
-
-            <div class="coins-bank" id="coinsBank" aria-label="Monedas para arrastrar"></div>
-          </div>
-
-          <div class="footer-actions">
-            <button id="btnNext6" class="btn btn-primary btn-big" type="button" disabled>CONTINUAR</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="screen-7" class="screen" data-screen="7" aria-label="Pantalla 7: Contar sílabas">
-        <div class="panel panel-wide">
-          <h2 class="h2">Actividad 6</h2>
-
-          <div class="syllables-area" id="syllablesArea" aria-label="Selecciona cuántas sílabas tiene cada palabra">
-            <div class="syll-row" data-word="MAPA" data-answer="2">
-              <div class="syll-word">MAPA</div>
-              <div class="syll-options" role="group" aria-label="Opciones MAPA">
-                <button class="btn btn-option" type="button" data-pick="1">1</button>
-                <button class="btn btn-option" type="button" data-pick="2">2</button>
-                <button class="btn btn-option" type="button" data-pick="3">3</button>
-              </div>
-              <div class="syll-result" aria-label="Resultado MAPA">—</div>
-            </div>
-
-            <div class="syll-row" data-word="PIRATA" data-answer="3">
-              <div class="syll-word">PIRATA</div>
-              <div class="syll-options" role="group" aria-label="Opciones PIRATA">
-                <button class="btn btn-option" type="button" data-pick="1">1</button>
-                <button class="btn btn-option" type="button" data-pick="2">2</button>
-                <button class="btn btn-option" type="button" data-pick="3">3</button>
-              </div>
-              <div class="syll-result" aria-label="Resultado PIRATA">—</div>
-            </div>
-
-            <div class="syll-row" data-word="TESORO" data-answer="3">
-              <div class="syll-word">TESORO</div>
-              <div class="syll-options" role="group" aria-label="Opciones TESORO">
-                <button class="btn btn-option" type="button" data-pick="1">1</button>
-                <button class="btn btn-option" type="button" data-pick="2">2</button>
-                <button class="btn btn-option" type="button" data-pick="3">3</button>
-              </div>
-              <div class="syll-result" aria-label="Resultado TESORO">—</div>
-            </div>
-          </div>
-
-          <div class="footer-actions">
-            <button id="btnNext7" class="btn btn-primary btn-big" type="button" disabled>CONTINUAR</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="screen-8" class="screen" data-screen="8" aria-label="Pantalla 8: Final">
-        <div class="panel panel-center">
-          <h2 class="title title-final">EL MAYOR TESORO ES HABER RECORRIDO EL CAMINO JUNTOS</h2>
-          <button id="btnRestart" class="btn btn-primary btn-big" type="button">VOLVER A JUGAR</button>
-        </div>
-      </section>
-
-    </main>
-
-    <div id="assetFallback" class="asset-fallback" hidden aria-live="polite">
-      Falta un recurso. El juego sigue funcionando.
-    </div>
-
-  </div>
+</div>
 </body>
 </html>
