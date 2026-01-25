@@ -474,19 +474,29 @@ body{
 }
 
 /* ==========================================================
-   SCREEN 5 — Memory
+   SCREEN 5 — Memory (FIX)
    ========================================================== */
 
-.memory-area{ display: grid; gap: 14px; min-height: 58vh; }
+.memory-area{
+  display: grid;
+  gap: 14px;
+  min-height: 58vh;
+  align-content: start;
+}
+
 .memory-top{ display: grid; gap: 12px; }
 
 .memory-slots{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+  align-items: stretch;
 }
+
+/* CLAVE: altura fija para que NO se estire al meter una imagen */
 .mem-slot{
-  min-height: 150px;
+  height: 150px;          /* <- clave */
+  min-height: 150px;      /* <- clave */
   border-radius: 18px;
   border: 2px dashed rgba(255,210,77,0.65);
   background: rgba(0,0,0,0.14);
@@ -495,8 +505,18 @@ body{
   font-size: 26px;
   font-weight: 900;
   color: rgba(255,255,255,0.82);
-  overflow: hidden;
+  overflow: hidden;       /* <- clave */
 }
+
+/* CLAVE: la imagen dentro del slot NO puede empujar el layout */
+.mem-slot img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
 .mem-slot.is-filled{
   border-style: solid;
   border-color: rgba(85,239,196,0.85);
@@ -533,6 +553,7 @@ body{
   background: rgba(0,0,0,0.14);
   border: 1px solid rgba(255,255,255,0.12);
 }
+
 .mem-item{
   width: 120px;
   height: 120px;
