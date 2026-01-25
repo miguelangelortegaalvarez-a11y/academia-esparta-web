@@ -575,22 +575,34 @@ function playVoice(src) {
   let playing = false;
 
   btnListen.addEventListener("click", () => {
-    if (playing) return;
+  if (playing) return;
 
-    playing = true;
-    disable(btnListen, true); // evita doble tap
+  playing = true;
+  disable(btnListen, true); // evita doble tap
 
-    playOneShot(ASSETS.audio.intro1, () => {
+  playVoice("./assets/audio/INTRO_PANTALLA1.mp3")
+    .then(() => {
       listened = true;
-      playing = false;
 
       // Habilita empezar
       disable(btnPlay, false);
 
       // Vuelve a permitir escuchar si quieres (opcional)
       disable(btnListen, false);
+
+      bigCheck();
+    })
+    .catch(() => {
+      // Si falla la voz, por lo menos no bloqueamos el juego
+      listened = true;
+      disable(btnPlay, false);
+      disable(btnListen, false);
+      toast("No se pudo reproducir la voz");
+    })
+    .finally(() => {
+      playing = false;
     });
-  });
+});
 
   btnPlay.addEventListener("click", () => {
     if (!listened) return; // seguridad
