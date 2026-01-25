@@ -199,7 +199,6 @@ function checkAnswer(ctx) {
   }, FEEDBACK_MS);
   return;
 }
-    }
   } else {
     wrongCount += 1;
     setWarrior(ctx.warriorImg, "sad");
