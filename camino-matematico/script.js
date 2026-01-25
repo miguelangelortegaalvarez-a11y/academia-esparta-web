@@ -193,10 +193,10 @@ function checkAnswer(ctx) {
     setWarrior(ctx.warriorImg, "power");
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
 
-    if (correctCount >= GOAL) {
-  // Completa
+    // ✅ Fin tras 15 preguntas (aciertos + fallos)
+if (doneCount >= GOAL) {
   setTimeout(() => {
-    updateFinalStats(ctx);           // ✅ pinta aciertos/fallos
+    updateFinalStats(ctx);
     showScreen(ctx.screens, "final");
   }, FEEDBACK_MS);
   return;
