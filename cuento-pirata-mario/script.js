@@ -11,7 +11,8 @@
 
 (() => {
   "use strict";
-
+const VERSION = "2147";
+const withV = (url) => (url ? `${url}${url.includes("?") ? "&" : "?"}v=${VERSION}` : url);
   /* =========================
      CONFIG
   ========================= */
