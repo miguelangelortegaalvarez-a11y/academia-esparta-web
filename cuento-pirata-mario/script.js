@@ -118,7 +118,25 @@
     if (!el) return;
     el.hidden = true;
   }
+function playOneShot(url, onEnd) {
+  const a = new Audio(url);
+  a.preload = "auto";
+  a.playsInline = true;
 
+  a.addEventListener("ended", () => onEnd?.(), { once: true });
+  a.addEventListener("error", () => {
+    reportMissing(url);
+    onEnd?.(); // si falla el audio, desbloqueamos igualmente
+  }, { once: true });
+
+  // iOS: solo reproduce tras gesto del usuario (click/tap)
+  a.play().catch(() => {
+    // si iOS bloquea por algún motivo, desbloqueamos igualmente
+    onEnd?.();
+  });
+
+  return a;
+}
   function disable(btn, state) {
     if (!btn) return;
     btn.disabled = !!state;
