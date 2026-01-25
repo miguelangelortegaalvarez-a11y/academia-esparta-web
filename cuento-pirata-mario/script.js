@@ -948,9 +948,41 @@ function playVoice(src) {
   ========================= */
 
   function initInterlude() {
-    const btn = $("#interludeContinue");
-    if (btn) btn.addEventListener("click", () => switchScreen(5));
+  const btnContinue = $("#interludeContinue");
+  const btnListen = $("#btnListenInterlude");
+  const topRight = $("#interludeMotivation");
+  const centerText = $("#interludeText");
+
+  // Pinta el texto (una sola fuente de verdad)
+  safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
+  safeText(centerText, INTERLUDE_MOTIVATION_TEXT);
+
+  // CONTINUAR -> pantalla 5
+  if (btnContinue) {
+    btnContinue.addEventListener("click", () => switchScreen(5));
   }
+
+  // ESCUCHAR -> audio motivacional
+  if (btnListen) {
+    let playing = false;
+
+    btnListen.addEventListener("click", () => {
+      if (playing) return;
+      playing = true;
+      disable(btnListen, true);
+
+      // Reproduce el audio del interlude
+      playVoice(ASSETS.audio.interlude1)
+        .catch(() => {
+          toast("No se pudo reproducir la voz");
+        })
+        .finally(() => {
+          disable(btnListen, false);
+          playing = false;
+        });
+    });
+  }
+}
 
   /* =========================
      SCREEN 5 — MEMORY
