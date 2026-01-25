@@ -264,8 +264,8 @@ function init() {
     finalWrong: $("final-wrong"),
 
     // Botones HOME
-    btnModeSumasRestas: $("home-mode-sumasrestas"),
-    btnModeMultiplicaciones: $("home-mode-multiplicaciones"),
+btnModeSumas: $("home-mode-sumas"),
+btnModeMultiplicaciones: $("home-mode-multiplicaciones"),
 
     // Botones comunes
     btnRetry: $("final-retry"),
