@@ -174,7 +174,39 @@ function makeQuestionMultiplicaciones(level) {
 
   return { a, b, op, correct, wrong };
 }
+function makeQuestionTabla(n) {
+  // Tabla fija: n × b (b de 0 a 10)
+  const a = n;
+  const b = randInt(0, 10);
+  const op = "×";
+  const correct = a * b;
 
+  let wrong = correct;
+  while (wrong === correct || wrong < 0) {
+    const delta = randInt(-10, 10);
+    if (delta === 0) continue;
+    wrong = correct + delta;
+  }
+
+  return { a, b, op, correct, wrong };
+}
+
+function makeQuestionMultiMix() {
+  // Mezcladas: tablas del 2 al 9, multiplicador 0 a 10
+  const a = randInt(2, 9);
+  const b = randInt(0, 10);
+  const op = "×";
+  const correct = a * b;
+
+  let wrong = correct;
+  while (wrong === correct || wrong < 0) {
+    const delta = randInt(-10, 10);
+    if (delta === 0) continue;
+    wrong = correct + delta;
+  }
+
+  return { a, b, op, correct, wrong };
+}
 function makeQuestion() {
   if (mode === "multiplicaciones") return makeQuestionMultiplicaciones(level);
   if (mode === "restas") return makeQuestionRestas(level);
