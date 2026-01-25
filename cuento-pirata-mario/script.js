@@ -499,6 +499,7 @@ a.volume = 1.0; // máximo
 
     bgm.src = ASSETS.audio.bgm;
     bgm.loop = true;
+     bgm.volume = SETTINGS.bgmVolume;
 // Volumen de música de fondo (0.0 a 1.0)
 bgm.volume = 0.18; // discreta. Ajusta entre 0.10 y 0.25 si quieres
     const tryAutoplay = () => {
