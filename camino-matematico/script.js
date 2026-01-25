@@ -81,13 +81,13 @@ function updateLevelUI(ctx) {
 }
 
 function updateProgressUI(ctx) {
-  const pct = Math.min(100, (correctCount / GOAL) * 100);
+  const pct = Math.min(100, (doneCount / GOAL) * 100);
   if (ctx.progressFill) ctx.progressFill.style.width = pct + "%";
-  if (ctx.progressText) ctx.progressText.textContent = `${correctCount}/${GOAL}`;
+  if (ctx.progressText) ctx.progressText.textContent = `${doneCount}/${GOAL}`;
 
   // Dorado cuando completa
   if (ctx.progressFill && ctx.progressFill.parentElement) {
-    if (correctCount >= GOAL) ctx.progressFill.parentElement.classList.add("complete");
+    if (doneCount >= GOAL) ctx.progressFill.parentElement.classList.add("complete");
     else ctx.progressFill.parentElement.classList.remove("complete");
   }
 }
