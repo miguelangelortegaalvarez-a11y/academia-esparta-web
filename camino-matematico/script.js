@@ -213,6 +213,7 @@ function checkAnswer(ctx) {
 function resetRun(ctx) {
   correctCount = 0;
   level = 1;
+  wrongCount = 0;
   locked = false;
   selectedAnswer = null;
   currentQ = null;
