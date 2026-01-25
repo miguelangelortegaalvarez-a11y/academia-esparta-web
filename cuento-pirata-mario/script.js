@@ -48,7 +48,7 @@
 
   const INSTRUCTIONS = {
     1: "",
-    2: "Mira bien: falta la primera letra. Arrastra la correcta.",
+    2: "Mira bien: falta la primera letra. Pulsa la letra correcta.",
     3: "Encuentra 5 llaves y arrástralas al cofre.",
     4: "Arrastra los objetos PIRATAS hacia los niños piratas.",
     interlude: "",
