@@ -4,7 +4,7 @@
 // =======================
 
 /** CONFIG **/
-const GOAL = 30;              // <-- Meta total de aciertos (cámbialo a 10 si quieres "prueba" corta)
+const GOAL = 15;              // <-- Meta total de aciertos (cámbialo a 10 si quieres "prueba" corta)
 const LEVEL_EVERY = 3;        // <-- Cada cuántos aciertos sube el nivel
 const FEEDBACK_MS = 1500;     // <-- Tiempo que se ve el warrior + icono (ms)
 
