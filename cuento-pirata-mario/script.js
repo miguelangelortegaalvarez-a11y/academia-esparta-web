@@ -96,7 +96,11 @@ duckBgmWhileVoice: 0.06,  // música mientras habla la voz
     // Actividad 5 (memoria)
     memoryOrder: ["telescope", "sword", "flag"],
   };
-
+  // =========================
+  // MOTIVACIÓN (INTERLUDE)
+  // Una sola fuente de verdad: mismo texto en pantalla y en audio.
+  // =========================
+  const INTERLUDE_MOTIVATION_TEXT = "¡Genial! Lo has conseguido. Ahora, a por el siguiente reto.";
   /* =========================
      HELPERS (DOM)
   ========================= */
