@@ -64,6 +64,9 @@
     fadeMs: 350,
     keyCount: 5,
     coinsTargets: [3, 5, 6],
+     bgmVolume: 0.18,          // volumen normal música
+voiceVolume: 1.0,         // volumen voz/instrucciones
+duckBgmWhileVoice: 0.06,  // música mientras habla la voz
 
     // Actividad 1
     letters: [
