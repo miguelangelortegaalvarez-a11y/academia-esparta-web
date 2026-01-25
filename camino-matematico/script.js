@@ -208,7 +208,10 @@ function checkAnswer(ctx) {
     loadQuestion(ctx);
   }, FEEDBACK_MS);
 }
-
+function updateFinalStats(ctx) {
+  if (ctx.finalCorrect) ctx.finalCorrect.textContent = String(correctCount);
+  if (ctx.finalWrong) ctx.finalWrong.textContent = String(wrongCount);
+}
 /** RESET DE PARTIDA **/
 function resetRun(ctx) {
   correctCount = 0;
