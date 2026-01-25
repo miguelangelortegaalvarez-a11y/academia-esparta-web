@@ -124,6 +124,39 @@ function makeQuestionSumasRestas(level) {
     wrong
   };
 }
+function makeQuestionRestas(level) {
+  // RESTAS simples
+  // Un solo dígito
+  // Resultado SIEMPRE entre 0 y 9
+
+  let a = randInt(0, 9);
+  let b = randInt(0, 9);
+
+  // Asegurar:
+  // - a >= b (no negativos)
+  // - resultado < 10
+  while (a < b || (a - b) >= 10) {
+    a = randInt(0, 9);
+    b = randInt(0, 9);
+  }
+
+  const correct = a - b;
+
+  let wrong = correct;
+  while (wrong === correct || wrong < 0 || wrong >= 10) {
+    const delta = randInt(-3, 3);
+    if (delta === 0) continue;
+    wrong = correct + delta;
+  }
+
+  return {
+    a,
+    b,
+    op: "−",
+    correct,
+    wrong
+  };
+}
 function makeQuestionMultiplicaciones(level) {
   // Tablas: nivel 1 (0-5), nivel 2 (0-7), nivel 3 (0-9), nivel 4 (0-10), etc.
   const max = clamp(5 + (level - 1) * 2, 5, 12);
