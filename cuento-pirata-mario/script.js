@@ -951,11 +951,7 @@ function playVoice(src) {
   const btnContinue = $("#interludeContinue");
   const btnListen = $("#btnListenInterlude");
   const topRight = $("#interludeMotivation");
-  const centerText = $("#interludeText");
-
-  // Pinta el texto (una sola fuente de verdad)
-  safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
-  safeText(centerText, INTERLUDE_MOTIVATION_TEXT);
+safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
 
   // CONTINUAR -> pantalla 5
   if (btnContinue) {
