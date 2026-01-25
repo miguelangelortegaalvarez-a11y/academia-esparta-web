@@ -521,7 +521,31 @@ a.volume = 1.0; // máximo
     window.addEventListener("pointerdown", firstGesture, { once: true });
     window.addEventListener("touchstart", firstGesture, { once: true, passive: true });
   }
+function playVoice(src) {
+  const bgm = $("#bgm");
+  if (!bgm) return;
 
+  const voice = new Audio(src);
+  voice.volume = SETTINGS.voiceVolume;
+
+  const originalVolume = bgm.volume;
+
+  // Baja la música mientras habla la voz
+  bgm.volume = SETTINGS.duckBgmWhileVoice;
+
+  voice.addEventListener("ended", () => {
+    bgm.volume = originalVolume;
+  });
+
+  voice.addEventListener("error", () => {
+    bgm.volume = originalVolume;
+    console.warn("Error al reproducir voz:", src);
+  });
+
+  voice.play().catch(() => {
+    bgm.volume = originalVolume;
+  });
+}
   /* =========================
      SCREEN 1
   ========================= */
