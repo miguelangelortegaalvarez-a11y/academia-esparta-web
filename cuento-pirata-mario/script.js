@@ -41,9 +41,10 @@
       chestOpen: "./assets/objects/COFRE_ABIERTO.PNG",
       coin: "./assets/objects/MONEDA_ORO.PNG",
     },
-    audio: {
-      bgm: "./assets/audio/MUSICA_PIRATAS_FONDO.mp3",
-    },
+   audio: {
+  bgm: "./assets/audio/MUSICA_PIRATAS_FONDO.mp3",
+  intro1: "./assets/audio/INTRO_PANTALLA1.mp3",
+},
   };
 
   const INSTRUCTIONS = {
