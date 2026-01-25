@@ -346,9 +346,20 @@ function init() {
     finalWrong: $("final-wrong"),
 
     // Botones HOME
+// Botones HOME
 btnModeSumas: $("home-mode-sumas"),
 btnModeRestas: $("home-mode-restas"),
-btnModeMultiplicaciones: $("home-mode-multiplicaciones"),
+
+btnModeTabla2: $("home-mode-tabla2"),
+btnModeTabla3: $("home-mode-tabla3"),
+btnModeTabla4: $("home-mode-tabla4"),
+btnModeTabla5: $("home-mode-tabla5"),
+btnModeTabla6: $("home-mode-tabla6"),
+btnModeTabla7: $("home-mode-tabla7"),
+btnModeTabla8: $("home-mode-tabla8"),
+btnModeTabla9: $("home-mode-tabla9"),
+
+btnModeMultiMix: $("home-mode-multi-mix"),
 
     // Botones comunes
     btnRetry: $("final-retry"),
