@@ -13,6 +13,7 @@ let mode = null;              // "sumasrestas" | "multiplicaciones"
 let correctCount = 0;
 let level = 1;
 let wrongCount = 0;
+let doneCount = 0; // ✅ preguntas hechas (acierto o fallo)
 
 let selectedAnswer = null;
 let locked = false;
