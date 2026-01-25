@@ -177,7 +177,8 @@ function makeQuestionMultiplicaciones(level) {
 
 function makeQuestion() {
   if (mode === "multiplicaciones") return makeQuestionMultiplicaciones(level);
-  return makeQuestionSumasRestas(level); // por defecto
+  if (mode === "restas") return makeQuestionRestas(level);
+  return makeQuestionSumasRestas(level); // sumas por defecto
 }
 
 /** CARGAR PREGUNTA **/
