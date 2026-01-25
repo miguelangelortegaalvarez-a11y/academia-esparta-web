@@ -100,7 +100,7 @@ duckBgmWhileVoice: 0.06,  // música mientras habla la voz
   // MOTIVACIÓN (INTERLUDE)
   // Una sola fuente de verdad: mismo texto en pantalla y en audio.
   // =========================
-  const INTERLUDE_MOTIVATION_TEXT = "¡Genial! Lo has conseguido. Ahora, a por el siguiente reto.";
+  const INTERLUDE_MOTIVATION_TEXT = "¡Bien piratas, lo estáis haciendo genial!.";
   /* =========================
      HELPERS (DOM)
   ========================= */
