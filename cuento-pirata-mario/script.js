@@ -521,9 +521,39 @@ function playOneShot(url, onEnd) {
   ========================= */
 
   function initScreen1() {
-    const btn = $("#btnStart");
-    if (btn) btn.addEventListener("click", () => switchScreen(2));
-  }
+  const btnPlay = $("#btnStart");     // VAMOS A JUGAR
+  const btnListen = $("#btnListen1"); // ESCUCHAR
+  if (!btnPlay || !btnListen) return;
+
+  // Al cargar: NO se puede empezar
+  disable(btnPlay, true);
+
+  let listened = false;
+  let playing = false;
+
+  btnListen.addEventListener("click", () => {
+    if (playing) return;
+
+    playing = true;
+    disable(btnListen, true); // evita doble tap
+
+    playOneShot(ASSETS.audio.intro1, () => {
+      listened = true;
+      playing = false;
+
+      // Habilita empezar
+      disable(btnPlay, false);
+
+      // Vuelve a permitir escuchar si quieres (opcional)
+      disable(btnListen, false);
+    });
+  });
+
+  btnPlay.addEventListener("click", () => {
+    if (!listened) return; // seguridad
+    switchScreen(2);
+  });
+}
 
   /* =========================
      SCREEN 2 — LETTERS
