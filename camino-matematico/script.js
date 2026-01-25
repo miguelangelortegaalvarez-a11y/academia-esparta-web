@@ -219,6 +219,7 @@ function resetRun(ctx) {
   correctCount = 0;
   level = 1;
   wrongCount = 0;
+    doneCount = 0;
     if (ctx.finalCorrect) ctx.finalCorrect.textContent = "0";
   if (ctx.finalWrong) ctx.finalWrong.textContent = "0";
   locked = false;
