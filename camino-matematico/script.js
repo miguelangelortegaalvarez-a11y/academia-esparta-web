@@ -320,7 +320,16 @@ if (ctx.btnModeSumas) {
     loadQuestion(ctx);
   });
 }
-
+// HOME -> GAME (Restas)
+if (ctx.btnModeRestas) {
+  ctx.btnModeRestas.addEventListener("click", () => {
+    mode = "restas";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
+  
   // HOME -> GAME (Multiplicaciones)
   if (ctx.btnModeMultiplicaciones) {
     ctx.btnModeMultiplicaciones.addEventListener("click", () => {
