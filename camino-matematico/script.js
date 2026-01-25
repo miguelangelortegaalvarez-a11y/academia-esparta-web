@@ -299,6 +299,7 @@ function init() {
 
     // Botones HOME
 btnModeSumas: $("home-mode-sumas"),
+btnModeRestas: $("home-mode-restas"),
 btnModeMultiplicaciones: $("home-mode-multiplicaciones"),
 
     // Botones comunes
