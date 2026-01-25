@@ -9,7 +9,7 @@ const LEVEL_EVERY = 3;        // <-- Cada cuántos aciertos sube el nivel
 const FEEDBACK_MS = 1500;     // <-- Tiempo que se ve el warrior + icono (ms)
 
 /** ESTADO **/
-let mode = null;              // "sumasrestas" | "multiplicaciones"
+let mode = null;              // "sumas" | "multiplicaciones"
 let correctCount = 0;
 let level = 1;
 let wrongCount = 0;
