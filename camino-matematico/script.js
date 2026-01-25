@@ -183,6 +183,7 @@ function checkAnswer(ctx) {
   locked = true;
 
   const ok = Number(selectedAnswer) === Number(currentQ.correct);
+    doneCount += 1;       // ✅ una pregunta hecha (acierto o fallo)
 
   if (ok) {
     correctCount += 1;
