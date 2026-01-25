@@ -477,15 +477,6 @@ if (ctx.btnModeMultiMix) {
     loadQuestion(ctx);
   });
 }
-  // HOME -> GAME (Multiplicaciones)
-  if (ctx.btnModeMultiplicaciones) {
-    ctx.btnModeMultiplicaciones.addEventListener("click", () => {
-      mode = "multiplicaciones";
-      resetRun(ctx);
-      showScreen(ctx.screens, "game");
-      loadQuestion(ctx);
-    });
-  }
 // Selección respuestas (auto-resuelve al tocar)
 ctx.answerButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
