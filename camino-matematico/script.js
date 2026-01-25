@@ -1,6 +1,6 @@
 // =======================
 // Camino Matemático — script.js (MODOS + PROGRESO + NIVELES)
-// SUMAS/RESTAS vs MULTIPLICACIONES
+// SUMAS vs MULTIPLICACIONES
 // =======================
 
 /** CONFIG **/
