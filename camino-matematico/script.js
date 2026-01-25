@@ -208,9 +208,25 @@ function makeQuestionMultiMix() {
   return { a, b, op, correct, wrong };
 }
 function makeQuestion() {
-  if (mode === "multiplicaciones") return makeQuestionMultiplicaciones(level);
+  // Multiplicaciones por tabla fija (2–9)
+  if (mode === "tabla2") return makeQuestionTabla(2);
+  if (mode === "tabla3") return makeQuestionTabla(3);
+  if (mode === "tabla4") return makeQuestionTabla(4);
+  if (mode === "tabla5") return makeQuestionTabla(5);
+  if (mode === "tabla6") return makeQuestionTabla(6);
+  if (mode === "tabla7") return makeQuestionTabla(7);
+  if (mode === "tabla8") return makeQuestionTabla(8);
+  if (mode === "tabla9") return makeQuestionTabla(9);
+
+  // Multiplicaciones mezcladas (tablas 2–9)
+  if (mode === "multi_mix") return makeQuestionMultiMix();
+
+  // Modos ya existentes
+  if (mode === "multiplicaciones") return makeQuestionMultiplicaciones(level); // (si lo sigues usando)
   if (mode === "restas") return makeQuestionRestas(level);
-  return makeQuestionSumasRestas(level); // sumas por defecto
+
+  // Por defecto: sumas
+  return makeQuestionSumasRestas(level);
 }
 
 /** CARGAR PREGUNTA **/
