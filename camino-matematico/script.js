@@ -199,7 +199,7 @@ function checkAnswer(ctx) {
       return;
     }
   } else {
-    // No resta, no vuelve a 0
+    wrongCount += 1;
     setWarrior(ctx.warriorImg, "sad");
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "wrong");
   }
