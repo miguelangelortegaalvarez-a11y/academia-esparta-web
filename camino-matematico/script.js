@@ -251,6 +251,8 @@ function init() {
 
     progressFill: $("progress-fill"),
     progressText: $("progress-text"),
+    finalCorrect: $("final-correct"),
+    finalWrong: $("final-wrong"),
 
     // Botones HOME
     btnModeSumasRestas: $("home-mode-sumasrestas"),
