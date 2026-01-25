@@ -192,11 +192,13 @@ function checkAnswer(ctx) {
     showFeedback(ctx.iconCorrect, ctx.iconWrong, "correct");
 
     if (correctCount >= GOAL) {
-      // Completa
-      setTimeout(() => {
-        showScreen(ctx.screens, "final");
-      }, FEEDBACK_MS);
-      return;
+  // Completa
+  setTimeout(() => {
+    updateFinalStats(ctx);           // ✅ pinta aciertos/fallos
+    showScreen(ctx.screens, "final");
+  }, FEEDBACK_MS);
+  return;
+}
     }
   } else {
     wrongCount += 1;
