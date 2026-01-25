@@ -120,6 +120,8 @@
   }
 function playOneShot(url, onEnd) {
   const a = new Audio(url);
+   // Volumen de audios de instrucciones/intro (0.0 a 1.0)
+a.volume = 1.0; // máximo
   a.preload = "auto";
   a.playsInline = true;
 
