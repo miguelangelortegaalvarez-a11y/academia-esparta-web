@@ -388,7 +388,95 @@ if (ctx.btnModeRestas) {
     loadQuestion(ctx);
   });
 }
-  
+  // HOME -> GAME (TABLA 2)
+if (ctx.btnModeTabla2) {
+  ctx.btnModeTabla2.addEventListener("click", () => {
+    mode = "tabla2";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
+
+// HOME -> GAME (TABLA 3)
+if (ctx.btnModeTabla3) {
+  ctx.btnModeTabla3.addEventListener("click", () => {
+    mode = "tabla3";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
+
+// HOME -> GAME (TABLA 4)
+if (ctx.btnModeTabla4) {
+  ctx.btnModeTabla4.addEventListener("click", () => {
+    mode = "tabla4";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
+
+// HOME -> GAME (TABLA 5)
+if (ctx.btnModeTabla5) {
+  ctx.btnModeTabla5.addEventListener("click", () => {
+    mode = "tabla5";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
+
+// HOME -> GAME (TABLA 6)
+if (ctx.btnModeTabla6) {
+  ctx.btnModeTabla6.addEventListener("click", () => {
+    mode = "tabla6";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
+
+// HOME -> GAME (TABLA 7)
+if (ctx.btnModeTabla7) {
+  ctx.btnModeTabla7.addEventListener("click", () => {
+    mode = "tabla7";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
+
+// HOME -> GAME (TABLA 8)
+if (ctx.btnModeTabla8) {
+  ctx.btnModeTabla8.addEventListener("click", () => {
+    mode = "tabla8";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
+
+// HOME -> GAME (TABLA 9)
+if (ctx.btnModeTabla9) {
+  ctx.btnModeTabla9.addEventListener("click", () => {
+    mode = "tabla9";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
+
+// HOME -> GAME (MEZCLADAS 2–9)
+if (ctx.btnModeMultiMix) {
+  ctx.btnModeMultiMix.addEventListener("click", () => {
+    mode = "multi_mix"; // IMPORTANTE: coincide con makeQuestion()
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
   // HOME -> GAME (Multiplicaciones)
   if (ctx.btnModeMultiplicaciones) {
     ctx.btnModeMultiplicaciones.addEventListener("click", () => {
