@@ -276,15 +276,15 @@ btnModeMultiplicaciones: $("home-mode-multiplicaciones"),
   resetRun(ctx);
   showScreen(ctx.screens, "home");
 
-  // HOME -> GAME (Sumas/Restas)
-  if (ctx.btnModeSumasRestas) {
-    ctx.btnModeSumasRestas.addEventListener("click", () => {
-      mode = "sumasrestas";
-      resetRun(ctx);
-      showScreen(ctx.screens, "game");
-      loadQuestion(ctx);
-    });
-  }
+   // HOME -> GAME (Sumas)
+if (ctx.btnModeSumas) {
+  ctx.btnModeSumas.addEventListener("click", () => {
+    mode = "sumas";
+    resetRun(ctx);
+    showScreen(ctx.screens, "game");
+    loadQuestion(ctx);
+  });
+}
 
   // HOME -> GAME (Multiplicaciones)
   if (ctx.btnModeMultiplicaciones) {
