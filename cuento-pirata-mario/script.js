@@ -523,27 +523,40 @@ a.volume = 1.0; // máximo
   }
 function playVoice(src) {
   const bgm = $("#bgm");
-  if (!bgm) return;
 
   const voice = new Audio(src);
-  voice.volume = SETTINGS.voiceVolume;
+  voice.volume = SETTINGS.voiceVolume; // 1.0 = voz fuerte
+
+  // Si no hay música de fondo, reproducimos voz sin “ducking”
+  if (!bgm) {
+    return voice.play();
+  }
 
   const originalVolume = bgm.volume;
 
   // Baja la música mientras habla la voz
-  bgm.volume = SETTINGS.duckBgmWhileVoice;
+  bgm.volume = SETTINGS.duckBgmWhileVoice; // 0.04–0.08 suele ir muy bien
 
-  voice.addEventListener("ended", () => {
-    bgm.volume = originalVolume;
-  });
+  return new Promise((resolve, reject) => {
+    const restore = () => {
+      bgm.volume = originalVolume;
+    };
 
-  voice.addEventListener("error", () => {
-    bgm.volume = originalVolume;
-    console.warn("Error al reproducir voz:", src);
-  });
+    voice.addEventListener("ended", () => {
+      restore();
+      resolve();
+    });
 
-  voice.play().catch(() => {
-    bgm.volume = originalVolume;
+    voice.addEventListener("error", () => {
+      restore();
+      console.warn("Error al reproducir voz:", src);
+      reject(new Error("voice error"));
+    });
+
+    voice.play().catch((err) => {
+      restore();
+      reject(err);
+    });
   });
 }
   /* =========================
