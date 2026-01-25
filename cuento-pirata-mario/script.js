@@ -44,6 +44,7 @@
    audio: {
   bgm: "./assets/audio/MUSICA_PIRATAS_FONDO.mp3",
   intro1: "./assets/audio/INTRO_PANTALLA1.mp3",
+  interlude1: "./assets/audio/INTERLUDE_MOTIVACION_01.mp3",
 },
   };
 
