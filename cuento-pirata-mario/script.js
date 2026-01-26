@@ -840,109 +840,110 @@ function playVoice(src) {
     const chestImg = $("#chestImg");
     if (chestImg) chestImg.src = ASSETS.objects.chestClosed;
   }
+/* =========================
+   SCREEN 4 — PIRATE TAP (estilo llaves)
+   - Objetos flotando
+   - Pulsar SOLO los 4 piratas
+   - Al acertar los 4 -> activar CONTINUAR (btnNext4)
+========================= */
 
-  /* =========================
-     SCREEN 4 — CLASSIFY (-> INTERLUDE al completar)
-  ========================= */
+function buildScreen4() {
+  const root = $("#screen-4");
+  if (!root) return;
 
-  const drag4 = new PointerDrag();
+  const layer = $("#pirateTapLayer");
+  const btnNext = $("#btnNext4");
 
-  function buildScreen4() {
-    const root = $("#screen-4");
-    if (!root) return;
+  if (!layer || !btnNext) return;
 
-    const tray = $("#objectsTray");
-    const dropPirates = $("#dropPirates");
-    const dropExplorers = $("#dropExplorers");
-    const btnNext = $("#btnNext4");
+  disable(btnNext, true);
+  layer.innerHTML = "";
 
-    if (!tray || !dropPirates || !dropExplorers) return;
+  // Reinicio estado de esta pantalla
+  state.classifyDone = 0;
 
-    disable(btnNext, true);
-    state.classifyDone = 0;
+  // 4 objetos piratas + 2 “distractores”
+  const pirateKeys = SETTINGS.classify?.pirates || ["telescope", "sword", "flag", "cannon"];
+  const decoys = SETTINGS.classify?.explorers || ["ball", "plush"];
 
-    tray.innerHTML = "";
+  const items = [
+    ...pirateKeys.map((k) => ({ key: k, isPirate: true })),
+    ...decoys.map((k) => ({ key: k, isPirate: false })),
+  ];
 
-    const items = [
-      { key: "telescope", group: "pirates", label: "Catalejo" },
-      { key: "sword", group: "pirates", label: "Espada" },
-      { key: "flag", group: "pirates", label: "Bandera pirata" },
-      { key: "cannon", group: "pirates", label: "Cañón" },
-      { key: "ball", group: "explorers", label: "Pelota" },
-      { key: "plush", group: "explorers", label: "Peluche" },
-    ];
+  // Para que no se solapen tanto (posiciones predefinidas)
+  const spots = [
+    { left: 14, top: 20 },
+    { left: 40, top: 18 },
+    { left: 66, top: 22 },
+    { left: 22, top: 52 },
+    { left: 50, top: 54 },
+    { left: 74, top: 50 },
+  ];
 
-    const total = items.length;
+  // Mezclar items para que no salgan siempre iguales
+  shuffle(items);
 
-    function placeClassify(el, zone) {
-      el.classList.add("is-placed");
-      el.style.pointerEvents = "none";
-      el.style.opacity = "0.2";
+  items.forEach((it, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "pirate-tap-item";
+    b.dataset.key = it.key;
+    b.dataset.pirate = it.isPirate ? "1" : "0";
+    b.setAttribute("aria-label", it.isPirate ? "Objeto pirata" : "Objeto");
 
-      zone.classList.add("is-hit");
-      setTimeout(() => zone.classList.remove("is-hit"), 250);
+    const img = imgEl(ASSETS.objects[it.key], it.key);
+    img.classList.add("pirate-tap-img");
+    b.appendChild(img);
 
+    // Posición “flotando”
+    const pos = spots[i] || { left: 10 + (i * 12), top: 20 + (i * 8) };
+    b.style.position = "absolute";
+    b.style.left = `${pos.left}%`;
+    b.style.top = `${pos.top}%`;
+
+    // Pulsación (tap)
+    b.addEventListener("click", () => {
+      if (b.classList.contains("is-picked")) return;
+
+      const isPirate = b.dataset.pirate === "1";
+
+      if (!isPirate) {
+        toast("Ese no es de piratas");
+        // Pequeño “fallo” visual
+        b.classList.add("is-wrong");
+        setTimeout(() => b.classList.remove("is-wrong"), 250);
+        return;
+      }
+
+      // Acierto
+      b.classList.add("is-picked");
+      b.style.opacity = "0.18";
+      b.style.pointerEvents = "none";
       state.classifyDone++;
       bigCheck();
 
-      if (state.classifyDone >= total) {
-        // En lugar de “continuar” aquí, saltamos a interlude
+      // Si ya están los 4 piratas, activar botón
+      if (state.classifyDone >= pirateKeys.length) {
         disable(btnNext, false);
-        setTimeout(() => switchScreen("interlude"), 450);
       }
-    }
-
-    items.forEach((it) => {
-      const card = document.createElement("button");
-      card.type = "button";
-      card.className = "obj-card";
-      card.dataset.group = it.group;
-      card.dataset.key = it.key;
-      card.setAttribute("aria-label", it.label);
-
-      const img = imgEl(ASSETS.objects[it.key], it.label);
-      img.classList.add("obj-img");
-      card.appendChild(img);
-
-      card.addEventListener("click", () => {
-        if (card.classList.contains("is-placed")) return;
-        const correctZone = it.group === "pirates" ? dropPirates : dropExplorers;
-        placeClassify(card, correctZone);
-      });
-
-      tray.appendChild(card);
-      drag4.makeDraggable(card, { bounds: root });
     });
 
-    drag4.onDrop = (dropZone, draggedEl) => {
-      const dz = dropZone?.closest?.(".dropzone");
-      if (!dz) {
-        drag4.revertActive();
-        return;
-      }
+    layer.appendChild(b);
+  });
 
-      const group = draggedEl.dataset.group;
-      const correct =
-        (group === "pirates" && dz === dropPirates) ||
-        (group === "explorers" && dz === dropExplorers);
+  // CONTINUAR -> Interlude
+  btnNext.onclick = () => switchScreen("interlude");
+}
 
-      if (!correct) {
-        toast("Ese no va ahí");
-        drag4.revertActive();
-        return;
-      }
+function resetScreen4() {
+  state.classifyDone = 0;
+  disable($("#btnNext4"), true);
 
-      drag4.revertActive();
-      placeClassify(draggedEl, dz);
-    };
-
-    if (btnNext) btnNext.onclick = () => switchScreen("interlude");
-  }
-
-  function resetScreen4() {
-    state.classifyDone = 0;
-    disable($("#btnNext4"), true);
-  }
+  const layer = $("#pirateTapLayer");
+  if (layer) layer.innerHTML = "";
+}
+  
 
   /* =========================
      INTERLUDE
