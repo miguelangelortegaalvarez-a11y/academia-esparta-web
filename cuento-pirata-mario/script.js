@@ -429,11 +429,11 @@ a.volume = 1.0; // máximo
     safeText($("#instruction"), INSTRUCTIONS[screenKey] || "");
   }
 
-  function setBackground(screenKey) {
+    function setBackground(screenKey) {
     const bgEl = $("#sceneBg");
     const url = ASSETS.bg[screenKey];
     if (!url) return;
-    setBgWithFallback(bgEl, url);
+    setBgWithFallback(bgEl, withV(url));
   }
 
   function getScreenEl(key) {
