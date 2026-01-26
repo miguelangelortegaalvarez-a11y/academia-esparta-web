@@ -53,7 +53,7 @@ const withV = (url) => (url ? `${url}${url.includes("?") ? "&" : "?"}v=${VERSION
     1: "",
     2: "Mira bien: falta la primera letra. Pulsa la letra correcta.",
     3: "Encuentra 5 llaves y púlsalas.",
-    4: "Arrastra los objetos PIRATAS hacia los niños piratas.",
+    4: "Pulsa solo los 4 objetos piratas.",
     interlude: "",
     5: "Mira el orden. Memoriza… y colócalo igual.",
     6: "Arrastra monedas a cada cofre: 3, 5 y 6.",
