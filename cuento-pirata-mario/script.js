@@ -1274,7 +1274,7 @@ safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
     if (fb) fb.hidden = true;
 
     if (key === 3) { buildScreen3(); built3 = true; }
-    if (key === 4) { /* buildScreen4(); built4 = true; */ }
+    if (key === 4) { buildScreen4(); built4 = true; }
     if (key === 5) { buildScreen5(); built5 = true; }
     if (key === 6) { buildScreen6(); built6 = true; }
   }
