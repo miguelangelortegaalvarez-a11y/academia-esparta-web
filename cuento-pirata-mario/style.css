@@ -2,11 +2,12 @@
 [hidden]{ display:none !important; }
 
 /* ==========================================================
-   CUENTO PIRATA MARIO — STYLE (LIMPIO)
+   CUENTO PIRATA MARIO — STYLE (OPTIMIZADO iPad/Safari)
    ========================================================== */
 
 :root{
   --bg: #07121f;
+
   --panel: rgba(255,255,255,0.14);
   --stroke: rgba(255,255,255,0.22);
   --text: #ffffff;
@@ -27,10 +28,12 @@
   --hudH: 72px;
   --pad: 16px;
 
-  --fadeMs: 350ms;
+  --fadeMs: 260ms; /* un poco más rápido para iPad */
 }
 
-/* Base */
+/* =========================
+   BASE
+========================= */
 *{ box-sizing: border-box; }
 html, body{ height: 100%; }
 body{
@@ -50,7 +53,9 @@ body{
   overflow: hidden;
 }
 
-/* Background scene */
+/* =========================
+   FONDO
+========================= */
 .scene-bg{
   position: absolute;
   inset: 0;
@@ -60,9 +65,11 @@ body{
   background-repeat: no-repeat;
   pointer-events: none !important;
   z-index: 0;
+  transform: translateZ(0);
+  will-change: background-image;
 }
 
-/* Soft shade */
+/* Sombreado suave para legibilidad */
 .scene-shade{
   position: absolute;
   inset: 0;
@@ -73,7 +80,9 @@ body{
   z-index: 1;
 }
 
-/* HUD */
+/* =========================
+   HUD
+========================= */
 .hud{
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -103,39 +112,34 @@ body{
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-/* INTERLUDE: frase motivacional grande */
-#screen-interlude.is-active .instruction{
-  font-size: clamp(40px, 6.5vw, 54px); /* ← AQUÍ SE AGRANDA */
-  font-weight: 900;
-  white-space: normal;
-  max-width: 70vw;
-  background: rgba(0,0,0,0.45);
-}
 
-/* Screens container */
+/* =========================
+   CONTENEDOR PANTALLAS
+========================= */
 .screens{
   position: absolute;
   inset: 0;
-  padding-top: 0;          /* <-- CAMBIAR a 0 */
+  padding-top: 0;
   z-index: 10;
 }
 
-/* Screen layers */
+/* IMPORTANTE (rendimiento iOS):
+   - pantallas NO activas: display:none (no renderiza)
+   - pantalla activa: display:block + transición de opacidad */
 .screen{
   position: absolute;
-  inset: var(--hudH) 0 0 0; /* <-- ESTO (debajo del HUD) */
+  inset: var(--hudH) 0 0 0;
   padding: 18px;
-  visibility: hidden;
-  pointer-events: none;
+  display: none;
   opacity: 0;
   transform: translateY(6px);
   transition: opacity var(--fadeMs) ease, transform var(--fadeMs) ease;
+  contain: layout paint; /* ayuda en Safari */
 }
 
 .screen.is-active{
+  display: block;
   opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
   transform: translateY(0);
 }
 
@@ -144,18 +148,36 @@ body{
   transform: translateY(6px);
 }
 
-/* Panels */
+/* =========================
+   PANEL
+========================= */
 .panel{
   background: var(--panel);
   border: 1px solid var(--stroke);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   padding: 18px;
   max-width: 1100px;
   margin: 0 auto;
 }
+
+/* Blur: activarlo solo si está soportado (y más suave) */
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
+  .panel{
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+/* Si el dispositivo va justo: puedes desactivar blur rápido
+   (si necesitas probar: deja estas 2 líneas descomentadas)
+*/
+/*
+.panel{
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+*/
 
 .panel-center{
   position: relative;
@@ -167,7 +189,9 @@ body{
 .panel-wide{ width: min(1100px, 94vw); }
 .panel-full{ width: min(1200px, 96vw); }
 
-/* Typography */
+/* =========================
+   TIPOGRAFÍA
+========================= */
 .title{
   margin: 0 0 10px 0;
   font-size: clamp(34px, 4vw, 56px);
@@ -181,7 +205,9 @@ body{
 }
 .h2{ margin: 0 0 12px 0; font-size: 26px; }
 
-/* Buttons */
+/* =========================
+   BOTONES
+========================= */
 .btn{
   appearance: none;
   -webkit-appearance: none;
@@ -210,7 +236,9 @@ body{
   border: 1px solid rgba(255,255,255,0.22);
 }
 
-/* Toast & Check */
+/* =========================
+   TOAST / CHECK
+========================= */
 .toast{
   position: absolute;
   left: 50%;
@@ -244,13 +272,12 @@ body{
   margin-top: 14px;
   display: flex;
   justify-content: flex-end;
+  gap: 12px;
 }
 
 /* ==========================================================
-   SCREEN 2 — Letters
-   ========================================================== */
-
-/* Clave: el panel puede scrollear si hay muchas palabras */
+   SCREEN 2 — LETRAS
+========================================================== */
 #screen-2 .panel{
   max-height: calc(100svh - var(--hudH) - 28px);
   overflow: auto;
@@ -263,7 +290,6 @@ body{
   margin-top: 10px;
 }
 
-/* Estructura estable: palabra | imagen | letras */
 .letter-row{
   display: grid;
   grid-template-columns: 1fr 240px 160px;
@@ -275,7 +301,6 @@ body{
   border: 1px solid rgba(255,255,255,0.10);
 }
 
-/* Palabra */
 .word-box .word{
   font-size: 34px;
   font-weight: 900;
@@ -284,40 +309,28 @@ body{
   align-items: center;
 }
 
-/* ===============================
-   SLOT GRANDE PARA NIÑOS (DROP)
-   =============================== */
-
 .slot{
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  width: 86px;              /* MÁS ANCHO */
-  height: 64px;             /* MÁS ALTO */
+  width: 86px;
+  height: 64px;
   margin-right: 10px;
-
   font-size: 38px;
   font-weight: 900;
-
   border-radius: 14px;
   border: 3px dashed rgba(255,255,255,0.65);
   background: rgba(255,255,255,0.08);
 }
 
-/* Zona REAL de drop (más permisiva) */
-.slot-drop{
-  border-color: rgba(255,210,77,0.95);
-}
+.slot-drop{ border-color: rgba(255,210,77,0.95); }
 
-/* Feedback al acertar */
 .slot-drop.is-correct{
   background: rgba(0,255,140,0.25);
   border-color: #00ff8c;
 }
 
-/* Imagen: caja fija + contain = nunca se hace gigante */
 .pic-box{
   width: 240px;
   height: 140px;
@@ -336,12 +349,12 @@ body{
   display: block;
 }
 
-/* Letras */
 .choices{
   display: flex;
   gap: 10px;
   justify-content: flex-start;
 }
+
 .chip{
   min-width: 74px;
   min-height: 58px;
@@ -358,26 +371,148 @@ body{
 .chip:active{ cursor: grabbing; }
 .chip.is-disabled{ opacity: 0.35; filter: grayscale(0.25); cursor: not-allowed; }
 
-/* dragging visuals (aquí sí vale) */
 .is-dragging{
   filter: drop-shadow(0 14px 18px rgba(0,0,0,0.35));
   transform: scale(1.02);
 }
 
-/* =========================
-   SCREEN 4 — PIRATE TAP (flotando tipo llaves)
-========================= */
-
-#screen-4 .panel {
+/* ==========================================================
+   BASE “LLAVES/OBJETOS FLOTANDO” (screens 3 y 4)
+========================================================== */
+.keys-area{
   position: relative;
+  min-height: 58vh;
+  overflow: hidden;
+}
+.keys-layer{
+  position: absolute;
+  inset: 0;
 }
 
-#pirateTapArea {
+/* ==========================================================
+   SCREEN 3 — LLAVES EN EL FONDO (SIN CAJA) + COFRE + CONTINUAR
+========================================================== */
+#screen-3 .panel{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+#screen-3 .panel-wide,
+#screen-3 .panel-full{
+  width: 100% !important;
+}
+
+#screen-3 .h2,
+#screen-3 h2{
+  display: none !important;
+}
+
+#screen-3 .keys-area{
+  min-height: 56vh;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+#screen-3 .key-item{
+  position: absolute !important;
+  width: 64px !important;
+  height: 64px !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+
+  cursor: grab;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent !important;
+
+  will-change: transform;
+  transform: translateZ(0);
+
+  animation: key-float 3.2s ease-in-out infinite;
+}
+#screen-3 .key-item:active{ cursor: grabbing; }
+#screen-3 .key-item:focus{ outline: none !important; }
+
+#screen-3 .key-item img,
+#screen-3 .key-img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  pointer-events: none !important;
+  filter: none !important;
+}
+
+#screen-3 .key-item.is-dragging{ animation: none !important; }
+
+@keyframes key-float{
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(0, -10px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+#screen-3 .chest-drop{
+  position: absolute !important;
+  right: 18px !important;
+  bottom: 18px !important;
+
+  width: 160px !important;
+  height: 140px !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  display: grid;
+  place-items: center;
+}
+
+#screen-3 .chest-img,
+#screen-3 .chest-drop img{
+  width: 150px !important;
+  height: auto !important;
+  max-width: 150px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+#screen-3 .chest-hint{ display: none !important; }
+
+#screen-3 .footer-actions{
+  position: absolute !important;
+  left: 18px !important;
+  bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+  margin-top: 0 !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  z-index: 5;
+}
+#screen-3 .footer-actions .btn{ min-width: 180px; }
+
+/* ==========================================================
+   SCREEN 4 — PIRATE TAP (objetos flotando)
+========================================================== */
+#screen-4 .panel{ position: relative; }
+
+#pirateTapArea{
   position: relative;
   min-height: 58vh;
 }
-
-#pirateTapLayer {
+#pirateTapLayer{
   position: absolute;
   inset: 0;
 }
@@ -394,34 +529,24 @@ body{
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
-
 .pirate-tap-item img{
   width: 100%;
   height: 100%;
   object-fit: contain;
   padding: 10px;
 }
-
 .pirate-tap-item.is-wrong{
   transform: scale(0.96);
   filter: grayscale(1);
 }
-
 .pirate-tap-item.is-picked{
   outline: 4px solid rgba(255,210,77,0.95);
   outline-offset: 2px;
 }
 
-/* ===========================
-   MODO COMPLETADO (solo fondo)
-   =========================== */
+/* Modo completado (solo fondo + botón) */
+#screen-4.is-complete .h2{ display:none !important; }
 
-/* Quita título tipo "Actividad 4" si usa .h2 dentro del panel */
-#screen-4.is-complete .h2{
-  display: none !important;
-}
-
-/* El panel se vuelve invisible (sin rectángulo/blur) */
 #screen-4.is-complete .panel{
   background: transparent !important;
   border: 0 !important;
@@ -431,31 +556,58 @@ body{
   padding: 0 !important;
 }
 
-/* Oculta toda la UI del juego (zonas + bandeja) al completar */
-#screen-4.is-complete .classify-area{
+/* OJO: aquí SÍ ocultamos lo que realmente existe en screen-4 */
+#screen-4.is-complete #pirateTapArea{
   display: none !important;
 }
 
-/* Deja SOLO el botón continuar visible y lo fija abajo derecha */
 #screen-4.is-complete .footer-actions{
   position: fixed !important;
   right: 18px !important;
-  bottom: 18px !important;
+  bottom: calc(18px + env(safe-area-inset-bottom)) !important;
   margin: 0 !important;
   z-index: 999 !important;
   display: flex !important;
   justify-content: flex-end !important;
 }
 
-/* Responsive */
-@media (max-width: 760px){
-  #screen-4 .dropzones{ grid-template-columns: 1fr; }
+/* ==========================================================
+   INTERLUDE — MOTIVACIÓN
+========================================================== */
+.interlude-wrap{
+  position: relative;
+  width: min(1100px, 94vw);
+  margin: 0 auto;
+  min-height: calc(100svh - var(--hudH) - 36px);
+  padding: 18px;
+}
+
+.motivation-top-right{
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  max-width: min(720px, 78vw);
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.10);
+  font-size: clamp(28px, 4.2vw, 44px);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+#screen-interlude .footer-actions{
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: space-between;
 }
 
 /* ==========================================================
-   SCREEN 5 — Memory (FIX)
-   ========================================================== */
-
+   SCREEN 5 — MEMORY
+========================================================== */
 .memory-area{
   display: grid;
   gap: 14px;
@@ -472,10 +624,9 @@ body{
   align-items: stretch;
 }
 
-/* CLAVE: altura fija para que NO se estire al meter una imagen */
 .mem-slot{
-  height: 150px;          /* <- clave */
-  min-height: 150px;      /* <- clave */
+  height: 150px;
+  min-height: 150px;
   border-radius: 18px;
   border: 2px dashed rgba(255,210,77,0.65);
   background: rgba(0,0,0,0.14);
@@ -484,10 +635,8 @@ body{
   font-size: 26px;
   font-weight: 900;
   color: rgba(255,255,255,0.82);
-  overflow: hidden;       /* <- clave */
+  overflow: hidden;
 }
-
-/* CLAVE: la imagen dentro del slot NO puede empujar el layout */
 .mem-slot img{
   width: 100%;
   height: 100%;
@@ -495,7 +644,6 @@ body{
   display: block;
   pointer-events: none;
 }
-
 .mem-slot.is-filled{
   border-style: solid;
   border-color: rgba(85,239,196,0.85);
@@ -510,6 +658,7 @@ body{
   background: rgba(0,0,0,0.18);
   border: 1px solid rgba(255,255,255,0.12);
 }
+
 .mem-preview-item{
   width: 120px;
   height: 120px;
@@ -549,9 +698,8 @@ body{
 .mem-item img{ width: 100%; height: 100%; object-fit: contain; }
 
 /* ==========================================================
-   SCREEN 6 — Coins
-   ========================================================== */
-
+   SCREEN 6 — COINS
+========================================================== */
 .coins-area{ display: grid; gap: 14px; min-height: 58vh; }
 
 .chests-row{
@@ -625,9 +773,8 @@ body{
 }
 
 /* ==========================================================
-   SCREEN 7 — Syllables
-   ========================================================== */
-
+   SCREEN 7 — SÍLABAS
+========================================================== */
 .syllables-area{ display: grid; gap: 14px; }
 
 .syll-row{
@@ -677,157 +824,13 @@ body{
   border-color: rgba(85,239,196,0.7);
   color: var(--ok);
 }
+
 /* ==========================================================
-   SCREEN 3 — LLAVES EN EL FONDO (SIN CAJA) + COFRE + CONTINUAR
-   - Sin panel/rectángulo
-   - Oculta “Actividad 2”
-   - Llaves flotando (más grandes)
-   - Cofre abajo derecha (más grande, sin marco)
-   - Botón CONTINUAR abajo izquierda (solo en screen 3)
-   ========================================================== */
-
-/* 1) Quita el “panel/rectángulo” SOLO en pantalla 3 */
-#screen-3 .panel{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  padding: 0 !important;
-  max-width: none !important;
-  margin: 0 !important;
-}
-#screen-3 .panel-wide,
-#screen-3 .panel-full{
-  width: 100% !important;
-}
-
-/* 2) Oculta el título “Actividad 2” SOLO en pantalla 3 */
-#screen-3 .h2,
-#screen-3 h2{
-  display: none !important;
-}
-
-/* 3) Área de juego SIN caja */
-#screen-3 .keys-area{
-  position: relative !important;
-  min-height: 56vh;
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  overflow: hidden;
-}
-#screen-3 .keys-layer{
-  position: absolute;
-  inset: 0;
-}
-
-/* 4) Llaves (más grandes) */
-#screen-3 .key-item{
-  position: absolute !important;
-  width: 64px !important;   /* antes 56px */
-  height: 64px !important;  /* antes 56px */
-
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  outline: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-
-  cursor: grab;
-  touch-action: none;
-  -webkit-tap-highlight-color: transparent !important;
-
-  will-change: transform;
-  transform: translateZ(0);
-
-  animation: key-float 3.2s ease-in-out infinite;
-}
-#screen-3 .key-item:active{ cursor: grabbing; }
-#screen-3 .key-item:focus{ outline: none !important; }
-
-#screen-3 .key-item img,
-#screen-3 .key-img{
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  display: block !important;
-  pointer-events: none !important;
-  filter: none !important; /* evita tirones iOS */
-}
-
-/* Si el JS añade clase de arrastre */
-#screen-3 .key-item.is-dragging{
-  animation: none !important;
-}
-
-@keyframes key-float{
-  0%   { transform: translate3d(0, 0, 0); }
-  50%  { transform: translate3d(0, -10px, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
-
-/* 5) Cofre abajo derecha (más grande, sin marco) */
-#screen-3 .chest-drop{
-  position: absolute !important;
-  right: 18px !important;
-  bottom: 18px !important;
-
-  width: 160px !important;   /* antes 130 */
-  height: 140px !important;  /* antes 110 */
-
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-
-  display: grid;
-  place-items: center;
-}
-
-/* Tamaño real del dibujo del cofre */
-#screen-3 .chest-img,
-#screen-3 .chest-drop img{
-  width: 150px !important;      /* antes 120 */
-  height: auto !important;
-  max-width: 150px !important;
-  object-fit: contain !important;
-  display: block !important;
-}
-
-/* Quita texto tipo “COFRE” si existiera */
-#screen-3 .chest-hint{
-  display: none !important;
-}
-
-/* 6) Botón CONTINUAR abajo izquierda SOLO en pantalla 3
-      (suele estar dentro de .footer-actions) */
-#screen-3 .footer-actions{
-  position: absolute !important;
-  left: 18px !important;
-  bottom: calc(18px + env(safe-area-inset-bottom) + 46px) !important;
-  margin-top: 0 !important;
-
-  display: flex !important;
-  justify-content: flex-start !important;
-  z-index: 5;
-}
-
-/* Asegura que no se “pegue” al cofre por ancho */
-#screen-3 .footer-actions .btn{
-  min-width: 180px;
-}
-
-/* 7) Evita que algún contenedor meta fondo sin querer */
-#screen-3 .classify-area,
-#screen-3 .memory-area,
-#screen-3 .coins-area{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
+   RESPONSIVE
+========================================================== */
+@media (max-width: 760px){
+  .letter-row{ grid-template-columns: 1fr; }
+  .pic-box{ width: 100%; height: 160px; }
+  .choices{ justify-content: center; }
+  .chests-row{ grid-template-columns: 1fr; }
 }
