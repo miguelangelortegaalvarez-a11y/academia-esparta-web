@@ -362,63 +362,25 @@ body{
   transform: scale(1.02);
 }
 
-/* ==========================================================
-   SCREEN 4 — Classification (MEJORADO)
-   - Normal: panel visible con zonas y bandeja
-   - Al completar: se oculta el panel y queda SOLO el fondo + CONTINUAR
-   - Requiere que el JS ponga:  #screen-4.classList.add("is-complete")
-   ========================================================== */
+/* =========================
+   SCREEN 4 — PIRATE TAP (flotando tipo llaves)
+========================= */
 
-#screen-4 .classify-area{
-  display: grid;
-  gap: 14px;
+#screen-4 .panel {
+  position: relative;
+}
+
+#pirateTapArea {
+  position: relative;
   min-height: 58vh;
 }
 
-/* Dos zonas arriba */
-#screen-4 .dropzones{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+#pirateTapLayer {
+  position: absolute;
+  inset: 0;
 }
 
-/* Zona de destino */
-#screen-4 .dropzone{
-  min-height: 22vh;
-  border-radius: 18px;
-  background: rgba(0,0,0,0.16);
-  border: 2px dashed rgba(255,255,255,0.20);
-  padding: 12px;
-  position: relative;
-  overflow: hidden;
-}
-
-#screen-4 .dropzone-title{
-  font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  opacity: 0.9;
-  margin-bottom: 8px;
-}
-
-#screen-4 .dropzone.is-hit{
-  border-color: rgba(85,239,196,0.9);
-  background: rgba(85,239,196,0.12);
-}
-
-/* Bandeja de objetos abajo */
-#screen-4 .objects-tray{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.12);
-  justify-content: center;
-}
-
-#screen-4 .obj-card{
+.pirate-tap-item{
   width: 110px;
   height: 110px;
   border-radius: 18px;
@@ -426,19 +388,26 @@ body{
   background: rgba(255,255,255,0.10);
   display: grid;
   place-items: center;
-  cursor: grab;
-  padding: 10px;
-  touch-action: none;
+  cursor: pointer;
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
-#screen-4 .obj-card:active{ cursor: grabbing; }
-
-#screen-4 .obj-img{
+.pirate-tap-item img{
   width: 100%;
   height: 100%;
   object-fit: contain;
-  display: block;
+  padding: 10px;
+}
+
+.pirate-tap-item.is-wrong{
+  transform: scale(0.96);
+  filter: grayscale(1);
+}
+
+.pirate-tap-item.is-picked{
+  outline: 4px solid rgba(255,210,77,0.95);
+  outline-offset: 2px;
 }
 
 /* ===========================
