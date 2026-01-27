@@ -871,15 +871,14 @@ function buildScreen4() {
     ...decoys.map((k) => ({ key: k, isPirate: false })),
   ];
 
-  // Para que no se solapen tanto (posiciones predefinidas)
-  const spots = [
-    { left: 14, top: 20 },
-    { left: 40, top: 18 },
-    { left: 66, top: 22 },
-    { left: 22, top: 52 },
-    { left: 50, top: 54 },
-    { left: 74, top: 50 },
-  ];
+    const NAME_MAP = {
+    telescope: "CATALEJO",
+    sword: "ESPADA",
+    flag: "BANDERA",
+    cannon: "CAÑÓN",
+    ball: "PELOTA",
+    plush: "PELUCHE",
+  };
 
   // Mezclar items para que no salgan siempre iguales
   shuffle(items);
