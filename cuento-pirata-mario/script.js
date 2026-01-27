@@ -893,8 +893,14 @@ function buildScreen4() {
     b.setAttribute("aria-label", it.isPirate ? "Objeto pirata" : "Objeto");
 
     const img = imgEl(ASSETS.objects[it.key], it.key);
-    img.classList.add("pirate-tap-img");
-    b.appendChild(img);
+img.classList.add("pirate-tap-img");
+
+const label = document.createElement("div");
+label.className = "pirate-tap-label";
+label.textContent = it.key.toUpperCase();
+
+b.appendChild(img);
+b.appendChild(label);
 
     // Posición “flotando”
     const pos = spots[i] || { left: 10 + (i * 12), top: 20 + (i * 8) };
