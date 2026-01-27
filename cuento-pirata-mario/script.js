@@ -12,7 +12,7 @@
 (() => {
   "use strict";
 
-  const VERSION = "2147";
+  const VERSION = "2148";
   const withV = (url) =>
     (url ? `${url}${url.includes("?") ? "&" : "?"}v=${VERSION}` : url);
 
