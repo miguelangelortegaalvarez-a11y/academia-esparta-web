@@ -901,11 +901,7 @@ label.textContent = (NAME_MAP[it.key] || it.key).toUpperCase();
 b.appendChild(img);
 b.appendChild(label);
 
-    // Posición “flotando”
-    const pos = spots[i] || { left: 10 + (i * 12), top: 20 + (i * 8) };
-    b.style.position = "absolute";
-    b.style.left = `${pos.left}%`;
-    b.style.top = `${pos.top}%`;
+    
 
     // Pulsación (tap)
     b.addEventListener("click", () => {
