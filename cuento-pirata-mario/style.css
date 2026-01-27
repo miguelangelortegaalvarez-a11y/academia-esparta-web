@@ -169,16 +169,6 @@ body{
   }
 }
 
-/* Si el dispositivo va justo: puedes desactivar blur rápido
-   (si necesitas probar: deja estas 2 líneas descomentadas)
-*/
-/*
-.panel{
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-*/
-
 .panel-center{
   position: relative;
   top: 10vh;
@@ -543,11 +533,11 @@ body{
   position: relative;
 
   overflow: hidden;
-  display: flex;         /* ✅ */
-  flex-direction: column;/* ✅ */
-  align-items: center;   /* ✅ */
-  justify-content: center;/* ✅ */
-  gap: 8px;              /* ✅ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .pirate-tap-item img{
@@ -578,7 +568,6 @@ body{
   pointer-events: none;
   line-height: 1;
 }
-
 
 /* ==========================================================
    INTERLUDE — MOTIVACIÓN
@@ -615,96 +604,148 @@ body{
 }
 
 /* ==========================================================
-   SCREEN 5 — MEMORY
+   SCREEN 5 — ESCUCHA Y ENCUENTRA (5 OBJETOS)
+   - Rejilla 5 objetos (2 + 3)
+   - Al acertar: brillo/iluminación + bloqueado
+   - Fallo: pequeño “shake” + desaturación momentánea
 ========================================================== */
-.memory-area{
+
+#screen-5 .panel{
+  position: relative;
+}
+
+.find-area{
   display: grid;
   gap: 14px;
   min-height: 58vh;
   align-content: start;
 }
 
-.memory-top{ display: grid; gap: 12px; }
-
-.memory-slots{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.find-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  align-items: stretch;
+  flex-wrap: wrap;
 }
 
-.mem-slot{
-  height: 150px;
-  min-height: 150px;
+.find-top .find-hint{
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.92);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* Botón ESCUCHAR de la pantalla 5 */
+#btnListen5{
+  min-width: 190px;
+}
+
+/* Rejilla 5 objetos */
+#findObjectGrid{
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+  padding: 14px;
   border-radius: 18px;
-  border: 2px dashed rgba(255,210,77,0.65);
   background: rgba(0,0,0,0.14);
+  border: 1px solid rgba(255,255,255,0.12);
+  align-content: center;
+  justify-items: center;
+}
+
+/* Cada objeto */
+.fo-item{
+  width: 100%;
+  max-width: 170px;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.10);
   display: grid;
   place-items: center;
-  font-size: 26px;
-  font-weight: 900;
-  color: rgba(255,255,255,0.82);
+  cursor: pointer;
+  padding: 14px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform 120ms ease, filter 140ms ease, opacity 140ms ease, box-shadow 180ms ease, outline 180ms ease;
+  position: relative;
   overflow: hidden;
 }
-.mem-slot img{
+
+.fo-item:active{
+  transform: scale(0.98);
+}
+
+.fo-item img{
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
   pointer-events: none;
 }
-.mem-slot.is-filled{
-  border-style: solid;
-  border-color: rgba(85,239,196,0.85);
+
+/* (Opcional) etiqueta debajo dentro del botón */
+.fo-label{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.memory-preview{
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  padding: 12px;
-  border-radius: 18px;
-  background: rgba(0,0,0,0.18);
-  border: 1px solid rgba(255,255,255,0.12);
+/* Acierto: brillo + aro dorado */
+.fo-item.is-correct{
+  opacity: 1 !important;
+  filter: saturate(1.2) brightness(1.08);
+  outline: 4px solid rgba(255,210,77,0.95);
+  outline-offset: 2px;
+  box-shadow: 0 16px 26px rgba(0,0,0,0.28), 0 0 0 10px rgba(255,210,77,0.12);
 }
 
-.mem-preview-item{
-  width: 120px;
-  height: 120px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
-  padding: 10px;
-  display: grid;
-  place-items: center;
-}
-.mem-preview-item img{ width: 100%; height: 100%; object-fit: contain; }
-
-.memory-bank{
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 12px;
-  border-radius: 18px;
-  background: rgba(0,0,0,0.14);
-  border: 1px solid rgba(255,255,255,0.12);
+/* Bloqueado tras acierto */
+.fo-item.is-locked{
+  cursor: default;
+  pointer-events: none;
 }
 
-.mem-item{
-  width: 120px;
-  height: 120px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.20);
-  background: rgba(255,255,255,0.10);
-  display: grid;
-  place-items: center;
-  cursor: grab;
-  padding: 10px;
-  touch-action: none;
-  -webkit-tap-highlight-color: transparent;
+/* Fallo: “shake” suave */
+.fo-item.is-wrong{
+  animation: fo-shake 220ms ease;
+  filter: grayscale(1);
 }
-.mem-item img{ width: 100%; height: 100%; object-fit: contain; }
+
+@keyframes fo-shake{
+  0%{ transform: translateX(0); }
+  25%{ transform: translateX(-6px); }
+  50%{ transform: translateX(6px); }
+  75%{ transform: translateX(-4px); }
+  100%{ transform: translateX(0); }
+}
+
+/* Responsive: en pantallas estrechas baja a 3/2 */
+@media (max-width: 900px){
+  #findObjectGrid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 520px){
+  #findObjectGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
 /* ==========================================================
    SCREEN 6 — COINS
@@ -843,6 +884,7 @@ body{
   .choices{ justify-content: center; }
   .chests-row{ grid-template-columns: 1fr; }
 }
+
 /* ==========================================================
    AJUSTE HUD (frase de arriba): más abajo + más grande
    ========================================================== */
