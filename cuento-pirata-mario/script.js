@@ -11,8 +11,11 @@
 
 (() => {
   "use strict";
-const VERSION = "2147";
-const withV = (url) => (url ? `${url}${url.includes("?") ? "&" : "?"}v=${VERSION}` : url);
+
+  const VERSION = "2147";
+  const withV = (url) =>
+    (url ? `${url}${url.includes("?") ? "&" : "?"}v=${VERSION}` : url);
+
   /* =========================
      CONFIG
   ========================= */
@@ -23,7 +26,6 @@ const withV = (url) => (url ? `${url}${url.includes("?") ? "&" : "?"}v=${VERSION
       2: "./assets/images/ESCENA_02_PLAYA.PNG",
       3: "./assets/images/ESCENA_03_BOSQUE.PNG",
       4: "./assets/images/ESCENA_04_PUENTE.PNG",
-      // Interlude usa el mismo fondo que la 4 (puedes cambiarlo si quieres)
       interlude: "./assets/images/ESCENA_04_PUENTE.PNG",
       5: "./assets/images/ESCENA_05_CUEVA.PNG",
       6: "./assets/images/ESCENA_06_MONTANA_COFRES.PNG",
@@ -38,15 +40,23 @@ const withV = (url) => (url ? `${url}${url.includes("?") ? "&" : "?"}v=${VERSION
       ball: "./assets/objects/OBJ_PELOTA.PNG",
       plush: "./assets/objects/OBJ_PELUCHE.PNG",
       key: "./assets/objects/OBJ_LLAVE.PNG",
+      map: "./assets/objects/MAPA.PNG", // ✅ NUEVO
       chestClosed: "./assets/objects/COFRE_CERRADO.PNG",
       chestOpen: "./assets/objects/COFRE_ABIERTO.PNG",
       coin: "./assets/objects/MONEDA_ORO.PNG",
     },
-   audio: {
-  bgm: "./assets/audio/MUSICA_PIRATAS_FONDO.mp3",
-  intro1: "./assets/audio/INTRO_PANTALLA1.mp3",
-  interlude1: "./assets/audio/INTERLUDE_MOTIVACION.mp3",
-},
+    audio: {
+      bgm: "./assets/audio/MUSICA_PIRATAS_FONDO.mp3",
+      intro1: "./assets/audio/INTRO_PANTALLA1.mp3",
+      interlude1: "./assets/audio/INTERLUDE_MOTIVACION.mp3",
+
+      // ✅ NUEVOS audios de pista (puedes cambiar nombres/rutas)
+      clue_sword: "./assets/audio/PISTA_ESPADA.mp3",
+      clue_telescope: "./assets/audio/PISTA_CATALEJO.mp3",
+      clue_flag: "./assets/audio/PISTA_BANDERA.mp3",
+      clue_map: "./assets/audio/PISTA_MAPA.mp3",
+      clue_key: "./assets/audio/PISTA_LLAVE.mp3",
+    },
   };
 
   const INSTRUCTIONS = {
@@ -55,30 +65,30 @@ const withV = (url) => (url ? `${url}${url.includes("?") ? "&" : "?"}v=${VERSION
     3: "Encuentra 5 llaves y púlsalas.",
     4: "Pulsa solo los 4 objetos piratas.",
     interlude: "",
-    5: "Mira el orden. Memoriza… y colócalo igual.",
+    5: "Pulsa ESCUCHAR y toca el objeto correcto.",
     6: "Arrastra monedas a cada cofre: 3, 5 y 6.",
     7: "Cuenta las sílabas y elige la opción correcta.",
     8: "",
   };
 
   const SETTINGS = {
-    memoryPreviewMs: 2500,
     fadeMs: 350,
     keyCount: 5,
     coinsTargets: [3, 5, 6],
-     bgmVolume: 0.18,          // volumen normal música
-voiceVolume: 1.0,         // volumen voz/instrucciones
-duckBgmWhileVoice: 0.06,  // música mientras habla la voz
+
+    bgmVolume: 0.18,
+    voiceVolume: 1.0,
+    duckBgmWhileVoice: 0.06,
 
     // Actividad 1
     letters: [
-      { id: "w1", solution: "M" }, // MAPA
-      { id: "w2", solution: "P" }, // PIRATA
-      { id: "w3", solution: "T" }, // TESORO
-      { id: "w4", solution: "B" }, // BARCO
-      { id: "w5", solution: "I" }, // ISLA
-      { id: "w6", solution: "C" }, // COFRE
-      { id: "w7", solution: "B" }, // BANDERA
+      { id: "w1", solution: "M" },
+      { id: "w2", solution: "P" },
+      { id: "w3", solution: "T" },
+      { id: "w4", solution: "B" },
+      { id: "w5", solution: "I" },
+      { id: "w6", solution: "C" },
+      { id: "w7", solution: "B" },
     ],
 
     // Actividad 7
@@ -88,20 +98,49 @@ duckBgmWhileVoice: 0.06,  // música mientras habla la voz
       { word: "TESORO", answer: 3 },
     ],
 
-    // Actividad 4 (clasificar)
+    // Actividad 4 (tocar objetos piratas)
     classify: {
       pirates: ["telescope", "sword", "flag", "cannon"],
       explorers: ["ball", "plush"],
     },
 
-    // Actividad 5 (memoria)
-    memoryOrder: ["telescope", "sword", "flag"],
+    // ✅ NUEVA Actividad 5 (Escucha y encuentra)
+    findObject: {
+      // 5 rondas
+      pool: ["sword", "telescope", "flag", "map", "key"],
+      // 5 objetos en pantalla (usamos los mismos 5 para no añadir más imágenes)
+      grid: ["sword", "telescope", "flag", "map", "key"],
+      labels: {
+        sword: "ESPADA",
+        telescope: "CATALEJO",
+        flag: "BANDERA",
+        map: "MAPA",
+        key: "LLAVE",
+      },
+      // Texto muy simple por si quieres también mostrarlo en pantalla (opcional)
+      cluesText: {
+        sword: "Busca la espada del pirata.",
+        telescope: "Busca el catalejo para mirar lejos.",
+        flag: "Busca la bandera pirata.",
+        map: "Busca el mapa del tesoro.",
+        key: "Busca la llave para abrir el cofre.",
+      },
+      // Mapeo a audios
+      cluesAudio: {
+        sword: ASSETS.audio.clue_sword,
+        telescope: ASSETS.audio.clue_telescope,
+        flag: ASSETS.audio.clue_flag,
+        map: ASSETS.audio.clue_map,
+        key: ASSETS.audio.clue_key,
+      },
+    },
   };
+
   // =========================
   // MOTIVACIÓN (INTERLUDE)
-  // Una sola fuente de verdad: mismo texto en pantalla y en audio.
   // =========================
   const INTERLUDE_MOTIVATION_TEXT = "¡Bien, piratas! Lo estáis haciendo genial.";
+
   /* =========================
      HELPERS (DOM)
   ========================= */
@@ -127,27 +166,7 @@ duckBgmWhileVoice: 0.06,  // música mientras habla la voz
     if (!el) return;
     el.hidden = true;
   }
-function playOneShot(url, onEnd) {
-  const a = new Audio(url);
-   // Volumen de audios de instrucciones/intro (0.0 a 1.0)
-a.volume = 1.0; // máximo
-  a.preload = "auto";
-  a.playsInline = true;
 
-  a.addEventListener("ended", () => onEnd?.(), { once: true });
-  a.addEventListener("error", () => {
-    reportMissing(url);
-    onEnd?.(); // si falla el audio, desbloqueamos igualmente
-  }, { once: true });
-
-  // iOS: solo reproduce tras gesto del usuario (click/tap)
-  a.play().catch(() => {
-    // si iOS bloquea por algún motivo, desbloqueamos igualmente
-    onEnd?.();
-  });
-
-  return a;
-}
   function disable(btn, state) {
     if (!btn) return;
     btn.disabled = !!state;
@@ -221,17 +240,14 @@ a.volume = 1.0; // máximo
 
   /* =========================
      POINTER DRAG (iPad-friendly)
-     IMPORTANTE:
-     - NO movemos el elemento si solo “toca y suelta”.
-     - Solo empezamos drag si se desplaza > umbral.
   ========================= */
 
   class PointerDrag {
     constructor() {
-      this.active = null;   // drag en curso
-      this.pending = null;  // toque inicial (aún no drag)
+      this.active = null;
+      this.pending = null;
       this.onDrop = null;
-      this.thresholdPx = 8; // umbral para considerar “arrastre real”
+      this.thresholdPx = 8;
     }
 
     makeDraggable(el, opts = {}) {
@@ -277,9 +293,8 @@ a.volume = 1.0; // máximo
         const dy = e.clientY - this.pending.startY;
         const dist = Math.hypot(dx, dy);
 
-        if (dist < this.thresholdPx) return; // aún es “toque”, no drag
+        if (dist < this.thresholdPx) return;
 
-        // Activamos drag real
         this._activateDrag(e);
       });
 
@@ -290,9 +305,7 @@ a.volume = 1.0; // máximo
           return;
         }
 
-        // Si estaba en pending y NO llegó a drag => NO mover nada
         if (this.pending && this.pending.pointerId === e.pointerId) {
-          // click normal (no arrastre)
           this.pending = null;
           try { el.releasePointerCapture(e.pointerId); } catch {}
         }
@@ -351,36 +364,34 @@ a.volume = 1.0; // máximo
     }
 
     _finishDrag(e) {
-  const a = this.active;
-  if (!a) return;
+      const a = this.active;
+      if (!a) return;
 
-  const { el } = a;
-  el.classList.remove("is-dragging");
+      const { el } = a;
+      el.classList.remove("is-dragging");
 
-  // detectar dropZone bajo el dedo (ignorando el propio elemento)
-  el.style.pointerEvents = "none";
-  const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
-  el.style.pointerEvents = "";
-  const dropZone = dropTarget?.closest?.(
-    ".slot-drop, .dropzone, .drop-chest, .chest-drop"
-  );
+      el.style.pointerEvents = "none";
+      const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
+      el.style.pointerEvents = "";
+      const dropZone = dropTarget?.closest?.(
+        ".slot-drop, .dropzone, .drop-chest, .chest-drop"
+      );
 
-  try {
-    if (typeof this.onDrop === "function") {
-      this.onDrop(dropZone, el);
-    } else {
-      this.revertActive();
+      try {
+        if (typeof this.onDrop === "function") {
+          this.onDrop(dropZone, el);
+        } else {
+          this.revertActive();
+        }
+      } finally {
+        if (el.parentElement === document.body) {
+          this.revertActive();
+        }
+
+        try { el.releasePointerCapture(e.pointerId); } catch {}
+        this.active = null;
+      }
     }
-  } finally {
-    // SEGURIDAD TOTAL: si el elemento sigue colgando en <body>, vuelve SIEMPRE
-    if (el.parentElement === document.body) {
-      this.revertActive();
-    }
-
-    try { el.releasePointerCapture(e.pointerId); } catch {}
-    this.active = null;
-  }
-}
 
     revertActive() {
       const a = this.active;
@@ -414,9 +425,16 @@ a.volume = 1.0; // máximo
     lettersDone: new Set(),
     keysDropped: 0,
     classifyDone: 0,
-    memPlaced: [],
     coins: { 3: 0, 5: 0, 6: 0 },
     syllablesDone: new Set(),
+
+    // ✅ NUEVO estado pantalla 5
+    find: {
+      queue: [],
+      current: null,
+      solved: new Set(),
+      lock: false,
+    },
   };
 
   /* =========================
@@ -429,7 +447,7 @@ a.volume = 1.0; // máximo
     safeText($("#instruction"), INSTRUCTIONS[screenKey] || "");
   }
 
-    function setBackground(screenKey) {
+  function setBackground(screenKey) {
     const bgEl = $("#sceneBg");
     const url = ASSETS.bg[screenKey];
     if (!url) return;
@@ -486,9 +504,13 @@ a.volume = 1.0; // máximo
     state.lettersDone.clear();
     state.keysDropped = 0;
     state.classifyDone = 0;
-    state.memPlaced = [];
     state.coins = { 3: 0, 5: 0, 6: 0 };
     state.syllablesDone.clear();
+
+    state.find.queue = [];
+    state.find.current = null;
+    state.find.solved.clear();
+    state.find.lock = false;
 
     resetUIAll();
     switchScreen(1);
@@ -503,118 +525,105 @@ a.volume = 1.0; // máximo
     const btn = $("#btnMusic");
     if (!bgm) return;
 
-    bgm.src = ASSETS.audio.bgm;
+    // ✅ ocultamos el botón siempre (no quieres “activarla” manualmente)
+    if (btn) btn.hidden = true;
+
+    bgm.src = withV(ASSETS.audio.bgm);
     bgm.loop = true;
-     bgm.volume = SETTINGS.bgmVolume;
-// Volumen de música de fondo (0.0 a 1.0)
+    bgm.volume = SETTINGS.bgmVolume;
+
     const tryAutoplay = () => {
-      bgm.play().then(() => {
-        if (btn) btn.hidden = true;
-      }).catch(() => {
-        if (btn) btn.hidden = false;
+      bgm.play().catch(() => {
+        // iOS/Safari bloqueará hasta un gesto: lo resolvemos con firstGesture
       });
     };
 
     tryAutoplay();
 
-    if (btn) {
-      btn.addEventListener("click", () => {
-        bgm.play().then(() => (btn.hidden = true)).catch(() => toast("Toca de nuevo para activar música"));
-      });
-    }
-
+    // En el primer toque/click arrancamos si estaba bloqueada
     const firstGesture = () => tryAutoplay();
     window.addEventListener("pointerdown", firstGesture, { once: true });
     window.addEventListener("touchstart", firstGesture, { once: true, passive: true });
   }
-function playVoice(src) {
-  const bgm = $("#bgm");
 
-  const voice = new Audio(src);
-  voice.volume = SETTINGS.voiceVolume; // 1.0 = voz fuerte
+  function playVoice(src) {
+    const bgm = $("#bgm");
+    const voice = new Audio(withV(src));
+    voice.volume = SETTINGS.voiceVolume;
 
-  // Si no hay música de fondo, reproducimos voz sin “ducking”
-  if (!bgm) {
-    return voice.play();
+    if (!bgm) {
+      return voice.play();
+    }
+
+    const originalVolume = bgm.volume;
+    bgm.volume = SETTINGS.duckBgmWhileVoice;
+
+    return new Promise((resolve, reject) => {
+      const restore = () => {
+        bgm.volume = originalVolume;
+      };
+
+      voice.addEventListener("ended", () => {
+        restore();
+        resolve();
+      });
+
+      voice.addEventListener("error", () => {
+        restore();
+        console.warn("Error al reproducir voz:", src);
+        reject(new Error("voice error"));
+      });
+
+      voice.play().catch((err) => {
+        restore();
+        reject(err);
+      });
+    });
   }
 
-  const originalVolume = bgm.volume;
-
-  // Baja la música mientras habla la voz
-  bgm.volume = SETTINGS.duckBgmWhileVoice; // 0.04–0.08 suele ir muy bien
-
-  return new Promise((resolve, reject) => {
-    const restore = () => {
-      bgm.volume = originalVolume;
-    };
-
-    voice.addEventListener("ended", () => {
-      restore();
-      resolve();
-    });
-
-    voice.addEventListener("error", () => {
-      restore();
-      console.warn("Error al reproducir voz:", src);
-      reject(new Error("voice error"));
-    });
-
-    voice.play().catch((err) => {
-      restore();
-      reject(err);
-    });
-  });
-}
   /* =========================
      SCREEN 1
   ========================= */
 
   function initScreen1() {
-  const btnPlay = $("#btnStart");     // VAMOS A JUGAR
-  const btnListen = $("#btnListen1"); // ESCUCHAR
-  if (!btnPlay || !btnListen) return;
+    const btnPlay = $("#btnStart");
+    const btnListen = $("#btnListen1");
+    if (!btnPlay || !btnListen) return;
 
-  // Al cargar: NO se puede empezar
-  disable(btnPlay, true);
+    disable(btnPlay, true);
 
-  let listened = false;
-  let playing = false;
+    let listened = false;
+    let playing = false;
 
-  btnListen.addEventListener("click", () => {
-  if (playing) return;
+    btnListen.addEventListener("click", () => {
+      if (playing) return;
 
-  playing = true;
-  disable(btnListen, true); // evita doble tap
+      playing = true;
+      disable(btnListen, true);
 
-  playVoice("./assets/audio/INTRO_PANTALLA1.mp3")
-    .then(() => {
-      listened = true;
-
-      // Habilita empezar
-      disable(btnPlay, false);
-
-      // Vuelve a permitir escuchar si quieres (opcional)
-      disable(btnListen, false);
-
-      bigCheck();
-    })
-    .catch(() => {
-      // Si falla la voz, por lo menos no bloqueamos el juego
-      listened = true;
-      disable(btnPlay, false);
-      disable(btnListen, false);
-      toast("No se pudo reproducir la voz");
-    })
-    .finally(() => {
-      playing = false;
+      playVoice(ASSETS.audio.intro1)
+        .then(() => {
+          listened = true;
+          disable(btnPlay, false);
+          disable(btnListen, false);
+          bigCheck();
+        })
+        .catch(() => {
+          listened = true;
+          disable(btnPlay, false);
+          disable(btnListen, false);
+          toast("No se pudo reproducir la voz");
+        })
+        .finally(() => {
+          playing = false;
+        });
     });
-});
 
-  btnPlay.addEventListener("click", () => {
-    if (!listened) return; // seguridad
-    switchScreen(2);
-  });
-}
+    btnPlay.addEventListener("click", () => {
+      if (!listened) return;
+      switchScreen(2);
+    });
+  }
 
   /* =========================
      SCREEN 2 — LETTERS
@@ -771,7 +780,7 @@ function playVoice(src) {
       k.setAttribute("aria-label", "Llave");
       k.dataset.key = String(i + 1);
 
-      const img = imgEl(ASSETS.objects.key, "Llave");
+      const img = imgEl(withV(ASSETS.objects.key), "Llave");
       img.classList.add("key-img");
       k.appendChild(img);
 
@@ -789,7 +798,7 @@ function playVoice(src) {
         state.keysDropped++;
         bigCheck();
         if (state.keysDropped >= SETTINGS.keyCount) {
-          if (chestImg) chestImg.src = ASSETS.objects.chestOpen;
+          if (chestImg) chestImg.src = withV(ASSETS.objects.chestOpen);
           disable(btnNext, false);
         }
       });
@@ -819,7 +828,7 @@ function playVoice(src) {
       bigCheck();
 
       if (state.keysDropped >= SETTINGS.keyCount) {
-        if (chestImg) chestImg.src = ASSETS.objects.chestOpen;
+        if (chestImg) chestImg.src = withV(ASSETS.objects.chestOpen);
         disable(btnNext, false);
       }
     };
@@ -827,7 +836,7 @@ function playVoice(src) {
     if (btnNext) btnNext.onclick = nextScreen;
 
     if (chestImg) {
-      chestImg.src = ASSETS.objects.chestClosed;
+      chestImg.src = withV(ASSETS.objects.chestClosed);
       chestImg.addEventListener("error", () => {
         reportMissing(ASSETS.objects.chestClosed);
       });
@@ -838,260 +847,315 @@ function playVoice(src) {
     state.keysDropped = 0;
     disable($("#btnNext3"), true);
     const chestImg = $("#chestImg");
-    if (chestImg) chestImg.src = ASSETS.objects.chestClosed;
+    if (chestImg) chestImg.src = withV(ASSETS.objects.chestClosed);
   }
-/* =========================
-   SCREEN 4 — PIRATE TAP (estilo llaves)
-   - Objetos flotando
-   - Pulsar SOLO los 4 piratas
-   - Al acertar los 4 -> activar CONTINUAR (btnNext4)
-========================= */
 
-function buildScreen4() {
-  const root = $("#screen-4");
-  if (!root) return;
+  /* =========================
+     SCREEN 4 — PIRATE TAP
+  ========================= */
 
-  const layer = $("#pirateTapLayer");
-  const btnNext = $("#btnNext4");
+  function buildScreen4() {
+    const root = $("#screen-4");
+    if (!root) return;
 
-  if (!layer || !btnNext) return;
+    const layer = $("#pirateTapLayer");
+    const btnNext = $("#btnNext4");
 
-  disable(btnNext, true);
-  layer.innerHTML = "";
+    if (!layer || !btnNext) return;
 
-  // Reinicio estado de esta pantalla
-  state.classifyDone = 0;
+    disable(btnNext, true);
+    layer.innerHTML = "";
 
-  // 4 objetos piratas + 2 “distractores”
-  const pirateKeys = SETTINGS.classify?.pirates || ["telescope", "sword", "flag", "cannon"];
-  const decoys = SETTINGS.classify?.explorers || ["ball", "plush"];
+    state.classifyDone = 0;
 
-  const items = [
-    ...pirateKeys.map((k) => ({ key: k, isPirate: true })),
-    ...decoys.map((k) => ({ key: k, isPirate: false })),
-  ];
+    const pirateKeys = SETTINGS.classify?.pirates || ["telescope", "sword", "flag", "cannon"];
+    const decoys = SETTINGS.classify?.explorers || ["ball", "plush"];
+
+    const items = [
+      ...pirateKeys.map((k) => ({ key: k, isPirate: true })),
+      ...decoys.map((k) => ({ key: k, isPirate: false })),
+    ];
 
     const NAME_MAP = {
-    telescope: "CATALEJO",
-    sword: "ESPADA",
-    flag: "BANDERA",
-    cannon: "CAÑÓN",
-    ball: "PELOTA",
-    plush: "PELUCHE",
-  };
+      telescope: "CATALEJO",
+      sword: "ESPADA",
+      flag: "BANDERA",
+      cannon: "CAÑÓN",
+      ball: "PELOTA",
+      plush: "PELUCHE",
+    };
 
-  
+    // mezcla para variar
+    shuffle(items);
 
-  items.forEach((it, i) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "pirate-tap-item";
-    b.dataset.key = it.key;
-    b.dataset.pirate = it.isPirate ? "1" : "0";
-    b.setAttribute("aria-label", (NAME_MAP[it.key] || it.key).toUpperCase());
+    items.forEach((it) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "pirate-tap-item";
+      b.dataset.key = it.key;
+      b.dataset.pirate = it.isPirate ? "1" : "0";
+      b.setAttribute("aria-label", (NAME_MAP[it.key] || it.key).toUpperCase());
 
-    const img = imgEl(withV(ASSETS.objects[it.key]), it.key);
-img.classList.add("pirate-tap-img");
+      const img = imgEl(withV(ASSETS.objects[it.key]), it.key);
+      img.classList.add("pirate-tap-img");
 
-const label = document.createElement("div");
-label.className = "pirate-tap-label";
-label.textContent = (NAME_MAP[it.key] || it.key).toUpperCase();
+      const label = document.createElement("div");
+      label.className = "pirate-tap-label";
+      label.textContent = (NAME_MAP[it.key] || it.key).toUpperCase();
 
-b.appendChild(img);
-b.appendChild(label);
+      b.appendChild(img);
+      b.appendChild(label);
 
-    
+      b.addEventListener("click", () => {
+        if (b.classList.contains("is-picked")) return;
 
-    // Pulsación (tap)
-    b.addEventListener("click", () => {
-      if (b.classList.contains("is-picked")) return;
+        const isPirate = b.dataset.pirate === "1";
+        if (!isPirate) {
+          toast("Ese no es de piratas");
+          b.classList.add("is-wrong");
+          setTimeout(() => b.classList.remove("is-wrong"), 250);
+          return;
+        }
 
-      const isPirate = b.dataset.pirate === "1";
+        b.classList.add("is-picked");
+        b.style.opacity = "0.18";
+        b.style.pointerEvents = "none";
+        state.classifyDone++;
+        bigCheck();
 
-      if (!isPirate) {
-        toast("Ese no es de piratas");
-        // Pequeño “fallo” visual
-        b.classList.add("is-wrong");
-        setTimeout(() => b.classList.remove("is-wrong"), 250);
-        return;
-      }
+        if (state.classifyDone >= pirateKeys.length) {
+          disable(btnNext, false);
+        }
+      });
 
-      // Acierto
-      b.classList.add("is-picked");
-      b.style.opacity = "0.18";
-      b.style.pointerEvents = "none";
-      state.classifyDone++;
-      bigCheck();
-
-      // Si ya están los 4 piratas, activar botón
-      if (state.classifyDone >= pirateKeys.length) {
-        disable(btnNext, false);
-      }
+      layer.appendChild(b);
     });
 
-    layer.appendChild(b);
-  });
+    btnNext.onclick = () => switchScreen("interlude");
+  }
 
-  // CONTINUAR -> Interlude
-  btnNext.onclick = () => switchScreen("interlude");
-}
-
-function resetScreen4() {
-  state.classifyDone = 0;
-  disable($("#btnNext4"), true);
-
-  const layer = $("#pirateTapLayer");
-  if (layer) layer.innerHTML = "";
-}
-  
+  function resetScreen4() {
+    state.classifyDone = 0;
+    disable($("#btnNext4"), true);
+    const layer = $("#pirateTapLayer");
+    if (layer) layer.innerHTML = "";
+  }
 
   /* =========================
      INTERLUDE
   ========================= */
 
   function initInterlude() {
-  const btnContinue = $("#interludeContinue");
-  const btnListen = $("#btnListenInterlude");
-  const topRight = $("#interludeMotivation");
-safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
+    const btnContinue = $("#interludeContinue");
+    const btnListen = $("#btnListenInterlude");
+    const topRight = $("#interludeMotivation");
+    safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
 
-  // CONTINUAR -> pantalla 5
-  if (btnContinue) {
-    btnContinue.addEventListener("click", () => switchScreen(5));
+    if (btnContinue) {
+      btnContinue.addEventListener("click", () => switchScreen(5));
+    }
+
+    if (btnListen) {
+      let playing = false;
+
+      btnListen.addEventListener("click", () => {
+        if (playing) return;
+        playing = true;
+        disable(btnListen, true);
+
+        playVoice(ASSETS.audio.interlude1)
+          .catch(() => {
+            toast("No se pudo reproducir la voz");
+          })
+          .finally(() => {
+            disable(btnListen, false);
+            playing = false;
+          });
+      });
+    }
   }
-
-  // ESCUCHAR -> audio motivacional
-  if (btnListen) {
-    let playing = false;
-
-    btnListen.addEventListener("click", () => {
-      if (playing) return;
-      playing = true;
-      disable(btnListen, true);
-
-      // Reproduce el audio del interlude
-      playVoice(ASSETS.audio.interlude1)
-        .catch(() => {
-          toast("No se pudo reproducir la voz");
-        })
-        .finally(() => {
-          disable(btnListen, false);
-          playing = false;
-        });
-    });
-  }
-}
 
   /* =========================
-     SCREEN 5 — MEMORY
+     SCREEN 5 — ESCUCHA Y ENCUENTRA (NUEVO)
   ========================= */
-
-  const drag5 = new PointerDrag();
 
   function buildScreen5() {
     const root = $("#screen-5");
     if (!root) return;
 
-    const preview = $("#memoryPreview");
-    const bank = $("#memoryBank");
+    const area = $("#memoryArea");   // reutilizamos el contenedor del index
     const btnNext = $("#btnNext5");
-
-    if (!preview || !bank) return;
+    if (!area || !btnNext) return;
 
     disable(btnNext, true);
 
-    // Preview
-    preview.innerHTML = "";
-    SETTINGS.memoryOrder.forEach((k) => {
-      const wrap = document.createElement("div");
-      wrap.className = "mem-preview-item";
-      wrap.appendChild(imgEl(ASSETS.objects[k], k));
-      preview.appendChild(wrap);
+    // Construimos UI interna sin tocar el index
+    area.innerHTML = `
+      <div class="find-wrap" aria-label="Escucha y encuentra">
+        <div class="find-top">
+          <button id="btnFindListen" class="btn btn-secondary btn-big" type="button">ESCUCHAR</button>
+          <div id="findRoundText" class="find-round" aria-live="polite"></div>
+        </div>
+        <div id="findGrid" class="find-grid" role="group" aria-label="Objetos para elegir"></div>
+      </div>
+    `;
+
+    const btnListen = $("#btnFindListen", area);
+    const roundText = $("#findRoundText", area);
+    const grid = $("#findGrid", area);
+
+    // Inicializa cola aleatoria de 5 rondas
+    state.find.queue = [...SETTINGS.findObject.pool];
+    shuffle(state.find.queue);
+    state.find.current = null;
+    state.find.solved = new Set();
+    state.find.lock = false;
+
+    // Render grid (5 objetos visibles siempre)
+    grid.innerHTML = "";
+    SETTINGS.findObject.grid.forEach((k) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "find-item";
+      b.dataset.key = k;
+      b.setAttribute("aria-label", SETTINGS.findObject.labels[k] || k);
+
+      const img = imgEl(withV(ASSETS.objects[k]), SETTINGS.findObject.labels[k] || k);
+      img.classList.add("find-img");
+
+      const label = document.createElement("div");
+      label.className = "find-label";
+      label.textContent = (SETTINGS.findObject.labels[k] || k).toUpperCase();
+
+      b.appendChild(img);
+      b.appendChild(label);
+
+      b.addEventListener("click", () => {
+        if (state.find.lock) return;
+        if (state.find.solved.has(k)) return;
+
+        const target = state.find.current;
+        if (!target) {
+          toast("Pulsa ESCUCHAR primero");
+          return;
+        }
+
+        if (k !== target) {
+          toast("Ese no… prueba otro");
+          b.classList.add("is-wrong");
+          setTimeout(() => b.classList.remove("is-wrong"), 220);
+          return;
+        }
+
+        // ✅ ACIERTO
+        state.find.solved.add(k);
+        bigCheck();
+
+        // ilumina y bloquea ese objeto
+        b.classList.add("is-found");
+        b.style.pointerEvents = "none";
+        b.style.opacity = "1";
+        // un “brillo” inline para que se note incluso sin CSS nuevo
+        b.style.filter = "drop-shadow(0 0 14px rgba(255,215,90,0.75))";
+        b.style.outline = "3px solid rgba(255,215,90,0.8)";
+        b.style.outlineOffset = "6px";
+        b.style.borderRadius = "14px";
+
+        // “no se puede volver a escuchar” (en la práctica: avanzamos ronda y cambiamos objetivo)
+        state.find.current = null;
+        safeText(roundText, "¡Bien! ✅");
+
+        if (state.find.solved.size >= SETTINGS.findObject.pool.length) {
+          disable(btnNext, false);
+          safeText(roundText, "¡Perfecto! Ya puedes CONTINUAR.");
+          disable(btnListen, true);
+          return;
+        }
+
+        // siguiente ronda
+        setTimeout(() => {
+          startNextRound();
+        }, 450);
+      });
+
+      grid.appendChild(b);
     });
 
-    show(preview);
-    setTimeout(() => {
-      hide(preview);
-      startMemoryRound();
-    }, SETTINGS.memoryPreviewMs);
+    function startNextRound() {
+      if (state.find.lock) return;
 
-    function startMemoryRound() {
-      state.memPlaced = [];
-
-      $$(".mem-slot", root).forEach((s) => {
-        s.classList.remove("is-filled");
-        s.innerHTML = s.dataset.memslot;
-      });
-
-      const keys = [...SETTINGS.memoryOrder];
-      shuffle(keys);
-
-      bank.innerHTML = "";
-      keys.forEach((k) => {
-        const item = document.createElement("button");
-        item.type = "button";
-        item.className = "mem-item";
-        item.dataset.key = k;
-        item.setAttribute("aria-label", k);
-        item.appendChild(imgEl(ASSETS.objects[k], k));
-
-        item.addEventListener("click", () => {
-          if (item.classList.contains("is-used")) return;
-          const nextSlot = $$(".mem-slot", root).find(s => !s.classList.contains("is-filled"));
-          if (!nextSlot) return;
-          tryPlaceMemory(item, nextSlot);
-        });
-
-        bank.appendChild(item);
-        drag5.makeDraggable(item, { bounds: root });
-      });
-
-      drag5.onDrop = (dropZone, draggedEl) => {
-        const slot = dropZone?.closest?.(".mem-slot");
-        if (!slot) {
-          drag5.revertActive();
-          return;
+      // Busca el siguiente objetivo que no esté resuelto
+      let next = null;
+      while (state.find.queue.length) {
+        const cand = state.find.queue.shift();
+        if (!state.find.solved.has(cand)) {
+          next = cand;
+          break;
         }
-        if (slot.classList.contains("is-filled")) {
-          toast("Ese hueco ya está");
-          drag5.revertActive();
-          return;
-        }
-        drag5.revertActive();
-        tryPlaceMemory(draggedEl, slot);
-      };
-    }
-
-    function tryPlaceMemory(item, slot) {
-      const slotNum = Number(slot.dataset.memslot);
-      const correctKey = SETTINGS.memoryOrder[slotNum - 1];
-      const chosen = item.dataset.key;
-
-      if (chosen !== correctKey) {
-        toast("No era ese… prueba otro");
-        return;
+      }
+      // si por lo que sea se vació, reconstruimos con los que falten
+      if (!next) {
+        const remaining = SETTINGS.findObject.pool.filter(x => !state.find.solved.has(x));
+        shuffle(remaining);
+        next = remaining[0] || null;
       }
 
-      slot.classList.add("is-filled");
-      slot.textContent = "";
-      slot.appendChild(imgEl(ASSETS.objects[chosen], chosen));
+      state.find.current = next;
 
-      item.classList.add("is-used");
-      item.style.opacity = "0.2";
-      item.style.pointerEvents = "none";
-
-      state.memPlaced.push({ slot: slotNum, key: chosen });
-      bigCheck();
-
-      if (state.memPlaced.length >= 3) disable(btnNext, false);
+      const done = state.find.solved.size;
+      const total = SETTINGS.findObject.pool.length;
+      safeText(roundText, `Ronda ${done + 1} / ${total}`);
+      disable(btnListen, false);
     }
 
-    if (btnNext) btnNext.onclick = nextScreen;
+    // ESCUCHAR: reproduce pista del objetivo
+    if (btnListen) {
+      let playing = false;
+      btnListen.addEventListener("click", () => {
+        if (state.find.lock) return;
+        if (playing) return;
+
+        // si no hay ronda activa, la arrancamos
+        if (!state.find.current) startNextRound();
+
+        const target = state.find.current;
+        if (!target) return;
+
+        const src = SETTINGS.findObject.cluesAudio[target];
+        if (!src) {
+          toast("No hay audio de pista");
+          return;
+        }
+
+        playing = true;
+        disable(btnListen, true);
+
+        playVoice(src)
+          .catch(() => toast("No se pudo reproducir la voz"))
+          .finally(() => {
+            playing = false;
+            // si aún no se ha acertado esa ronda, permitimos volver a escuchar
+            if (state.find.current) disable(btnListen, false);
+          });
+      });
+    }
+
+    // Arranca primera ronda automáticamente (sin escuchar)
+    startNextRound();
+
+    // CONTINUAR
+    btnNext.onclick = nextScreen;
   }
 
   function resetScreen5() {
-    state.memPlaced = [];
     disable($("#btnNext5"), true);
+    state.find.queue = [];
+    state.find.current = null;
+    state.find.solved.clear();
+    state.find.lock = false;
+
+    const area = $("#memoryArea");
+    if (area) area.innerHTML = "";
   }
 
   /* =========================
@@ -1122,7 +1186,7 @@ safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
       c.className = "coin-item";
       c.dataset.coin = String(i + 1);
       c.setAttribute("aria-label", "Moneda");
-      c.appendChild(imgEl(ASSETS.objects.coin, "Moneda"));
+      c.appendChild(imgEl(withV(ASSETS.objects.coin), "Moneda"));
       bank.appendChild(c);
 
       c.addEventListener("click", () => {
@@ -1264,19 +1328,17 @@ safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
   }
 
   /* =========================
-     ENTER HOOKS (reconstrucción dinámica)
+     ENTER HOOKS
   ========================= */
-
-  let built3 = false, built4 = false, built5 = false, built6 = false;
 
   function onEnterScreen(key) {
     const fb = $("#assetFallback");
     if (fb) fb.hidden = true;
 
-    if (key === 3) { buildScreen3(); built3 = true; }
-    if (key === 4) { buildScreen4(); built4 = true; }
-    if (key === 5) { buildScreen5(); built5 = true; }
-    if (key === 6) { buildScreen6(); built6 = true; }
+    if (key === 3) buildScreen3();
+    if (key === 4) buildScreen4();
+    if (key === 5) buildScreen5(); // ✅ ahora es “Escucha y encuentra”
+    if (key === 6) buildScreen6();
   }
 
   /* =========================
