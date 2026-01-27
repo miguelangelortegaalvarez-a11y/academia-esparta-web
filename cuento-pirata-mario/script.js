@@ -880,8 +880,7 @@ function buildScreen4() {
     plush: "PELUCHE",
   };
 
-  // Mezclar items para que no salgan siempre iguales
-  shuffle(items);
+  
 
   items.forEach((it, i) => {
     const b = document.createElement("button");
@@ -889,7 +888,7 @@ function buildScreen4() {
     b.className = "pirate-tap-item";
     b.dataset.key = it.key;
     b.dataset.pirate = it.isPirate ? "1" : "0";
-    b.setAttribute("aria-label", it.isPirate ? "Objeto pirata" : "Objeto");
+    b.setAttribute("aria-label", (NAME_MAP[it.key] || it.key).toUpperCase());
 
     const img = imgEl(ASSETS.objects[it.key], it.key);
 img.classList.add("pirate-tap-img");
