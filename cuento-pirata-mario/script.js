@@ -890,7 +890,7 @@ function buildScreen4() {
     b.dataset.pirate = it.isPirate ? "1" : "0";
     b.setAttribute("aria-label", (NAME_MAP[it.key] || it.key).toUpperCase());
 
-    const img = imgEl(ASSETS.objects[it.key], it.key);
+    const img = imgEl(withV(ASSETS.objects[it.key]), it.key);
 img.classList.add("pirate-tap-img");
 
 const label = document.createElement("div");
