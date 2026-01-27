@@ -875,7 +875,12 @@
       ...pirateKeys.map((k) => ({ key: k, isPirate: true })),
       ...decoys.map((k) => ({ key: k, isPirate: false })),
     ];
-
+function resetScreen4() {
+  state.classifyDone = 0;
+  disable($("#btnNext4"), true);
+  const layer = $("#pirateTapLayer");
+  if (layer) layer.innerHTML = "";
+}
     const NAME_MAP = {
       telescope: "CATALEJO",
       sword: "ESPADA",
