@@ -896,7 +896,7 @@ img.classList.add("pirate-tap-img");
 
 const label = document.createElement("div");
 label.className = "pirate-tap-label";
-label.textContent = it.key.toUpperCase();
+label.textContent = (NAME_MAP[it.key] || it.key).toUpperCase();
 
 b.appendChild(img);
 b.appendChild(label);
