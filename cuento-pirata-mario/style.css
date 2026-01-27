@@ -834,3 +834,49 @@ body{
   .choices{ justify-content: center; }
   .chests-row{ grid-template-columns: 1fr; }
 }
+/* ==========================================================
+   AJUSTE HUD (frase de arriba): más abajo + más grande
+   ========================================================== */
+
+/* Baja el HUD un poco y respeta la zona segura del iPad */
+.hud{
+  top: calc(env(safe-area-inset-top) + 10px) !important;
+  height: auto !important;
+  padding: 10px var(--pad) 10px var(--pad) !important;
+}
+
+/* Frase más grande y que pueda partir en 2 líneas si hace falta */
+.instruction{
+  font-size: clamp(22px, 2.6vw, 34px) !important;
+  line-height: 1.15 !important;
+  white-space: normal !important;
+  max-width: min(980px, 92vw) !important;
+  padding: 12px 16px !important;
+}
+
+/* Como el HUD ya no tiene altura fija, deja espacio real arriba en las pantallas */
+.screen{
+  inset: calc(env(safe-area-inset-top) + 96px) 0 0 0 !important;
+}
+
+/* ==========================================================
+   PANTALLA 2: panel un poco más "pequeño" para que respire
+   ========================================================== */
+
+/* Reduce padding del panel y limita su altura */
+#screen-2 .panel{
+  padding: 14px !important;
+  max-height: calc(100svh - (env(safe-area-inset-top) + 120px)) !important;
+}
+
+/* Compacta cada fila (palabra/imagen/letras) un poco */
+#screen-2 .letter-row{
+  padding: 12px !important;
+  gap: 10px !important;
+}
+
+/* Si quieres el título “Actividad 1” un pelín más compacto */
+#screen-2 .h2{
+  margin: 0 0 8px 0 !important;
+  font-size: 24px !important;
+}
