@@ -504,7 +504,7 @@ body{
 #screen-3 .footer-actions .btn{ min-width: 180px; }
 
 /* ==========================================================
-   SCREEN 4 — PIRATE TAP (objetos flotando)
+   SCREEN 4 — PIRATE TAP (iconos bien, sin monstruos)
 ========================================================== */
 #screen-4 .panel{ position: relative; }
 
@@ -512,11 +512,13 @@ body{
   position: relative;
   min-height: 58vh;
 }
+
 #pirateTapLayer{
   position: absolute;
   inset: 0;
 }
 
+/* Botón/icono: tamaño FIJO y estable */
 .pirate-tap-item{
   width: 110px;
   height: 110px;
@@ -528,50 +530,43 @@ body{
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+
+  /* importante: que el PNG no se salga */
+  overflow: hidden;
 }
-.pirate-tap-label{
-  font-size: 16px;
-  font-weight: 900;
-  color: #ffffff;
-  text-align: center;
-  letter-spacing: 0.5px;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+
+/* La imagen JAMÁS puede superar el botón */
+.pirate-tap-item img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block;
+  padding: 10px;
+  pointer-events: none;
 }
 
 .pirate-tap-item.is-wrong{
   transform: scale(0.96);
   filter: grayscale(1);
 }
+
 .pirate-tap-item.is-picked{
   outline: 4px solid rgba(255,210,77,0.95);
   outline-offset: 2px;
 }
 
-/* Modo completado (solo fondo + botón) */
-#screen-4.is-complete .h2{ display:none !important; }
-
-#screen-4.is-complete .panel{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  padding: 0 !important;
-}
-
-/* OJO: aquí SÍ ocultamos lo que realmente existe en screen-4 */
-#screen-4.is-complete #pirateTapArea{
-  display: none !important;
-}
-
-#screen-4.is-complete .footer-actions{
-  position: fixed !important;
-  right: 18px !important;
-  bottom: calc(18px + env(safe-area-inset-bottom)) !important;
-  margin: 0 !important;
-  z-index: 999 !important;
-  display: flex !important;
-  justify-content: flex-end !important;
+/* (Opcional) nombre debajo — si luego lo quieres activar */
+.pirate-tap-label{
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 8px);
+  transform: translateX(-50%);
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.55);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* ==========================================================
