@@ -648,7 +648,7 @@ function initScreen2() {
   const btnNext = $("#btnNext2");
 
   // Mostrar el botón ESCUCHAR sí o sí
-  if (btnListenHUD) btnListenHUD.hidden = false;
+  if (btnListen2) btnListen2.hidden = false;
 
   // CONTINUAR bloqueado al entrar
   disable(btnNext, true);
