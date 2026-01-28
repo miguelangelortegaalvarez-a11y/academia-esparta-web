@@ -840,7 +840,42 @@ lockScreen(root, true);
     const chestDrop = $("#chestDrop");
     const chestImg = $("#chestImg");
     const btnNext = $("#btnNext3");
+    const btnListen3 = $("#btnListen3");
 
+// Al entrar: bloqueamos TODO hasta escuchar
+lockScreen(root, true);
+
+// Aseguramos que se vea ESCUCHAR
+if (btnListen3) btnListen3.hidden = false;
+
+let listened3 = false;
+let playing3 = false;
+
+if (btnListen3) {
+  btnListen3.onclick = () => {
+    if (playing3) return;
+    playing3 = true;
+
+    disable(btnListen3, true);
+
+    playVoice(ASSETS.audio.intro3)
+      .then(() => {
+        listened3 = true;
+        lockScreen(root, false);   // 🔓 desbloquea llaves
+        bigCheck();
+      })
+      .catch(() => {
+        // Si falla el audio, NO bloqueamos el juego
+        listened3 = true;
+        lockScreen(root, false);
+        toast("No se pudo reproducir el audio");
+      })
+      .finally(() => {
+        disable(btnListen3, false);
+        playing3 = false;
+      });
+  };
+}
     if (!keysLayer || !chestDrop) return;
 
     disable(btnNext, true);
