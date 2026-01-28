@@ -670,7 +670,9 @@ lockScreen(root, true);
       .then(() => {
         listened = true;
         bigCheck();
-      })
+      // 🔓 DESBLOQUEAR LA PANTALLA AL TERMINAR EL AUDIO
+  lockScreen(root, false);
+})
       .catch(() => {
         listened = true;
         toast("No se pudo reproducir el audio");
