@@ -644,7 +644,7 @@ function initScreen2() {
      AUDIO DE INSTRUCCIONES — PANTALLA 2
      (Muestra ESCUCHAR y bloquea CONTINUAR hasta terminar)
   ========================= */
-  const btnListenHUD = $("#btnListenHUD");
+  const btnListen2 = $("#btnListen2");
   const btnNext = $("#btnNext2");
 
   // Mostrar el botón ESCUCHAR sí o sí
