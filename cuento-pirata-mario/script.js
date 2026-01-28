@@ -639,6 +639,8 @@ function lockScreen(screenEl, shouldLock){
 function initScreen2() {
   const root = $("#screen-2");
   if (!root) return;
+   // 🔒 Bloqueamos la pantalla hasta escuchar el audio
+lockScreen(root, true);
 
   /* =========================
      AUDIO DE INSTRUCCIONES — PANTALLA 2
