@@ -374,23 +374,21 @@ body{
   filter: drop-shadow(0 14px 18px rgba(0,0,0,0.35));
   transform: scale(1.02);
 }
-/* ======================================
-   BLOQUEO INTELIGENTE — PANTALLA 2
-   (no bloquea el botón ESCUCHAR)
-====================================== */
+/* ============================
+   BLOQUEO TOTAL PANTALLA 2
+   (solo deja ESCUCHAR)
+============================ */
 
-/* Bloquea letras y huecos */
-#screen-2.is-locked .chip-drag,
-#screen-2.is-locked .slot-drop,
-#screen-2.is-locked .letters-grid {
-  pointer-events: none;
-  user-select: none;
+/* Bloquea TODO dentro de screen-2 */
+#screen-2.is-locked *{
+  pointer-events: none !important;
+  user-select: none !important;
 }
 
-/* Pero ESCUCHAR sí funciona */
+/* Pero deja ESCUCHAR (y su contenido) funcionando */
 #screen-2.is-locked #btnListen2,
-#screen-2.is-locked #btnListen2 * {
-  pointer-events: auto;
+#screen-2.is-locked #btnListen2 *{
+  pointer-events: auto !important;
 }
 /* ==========================================================
    BASE “LLAVES/OBJETOS FLOTANDO” (screens 3 y 4)
