@@ -1033,3 +1033,96 @@ body{
 /* Estados */
 .find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
 .find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
+/* ==========================================================
+   AJUSTE PRO: Pantalla 4 y 5 con tarjetas MÁS GRANDES
+   y MISMO tamaño visual (iPad friendly)
+========================================================== */
+
+:root{
+  --card-max: 240px;     /* tamaño máximo de tarjeta */
+  --card-min: 190px;     /* tamaño mínimo de tarjeta en pantallas anchas */
+  --card-pad: 18px;      /* padding interno */
+  --label-size: 20px;    /* tamaño del texto debajo */
+  --label-bottom: 14px;  /* separación del texto al borde */
+}
+
+/* ====== PANTALLA 5 (find) ====== */
+#screen-5 .find-grid{
+  display: grid;
+  grid-template-columns: repeat(5, minmax(var(--card-min), 1fr));
+  gap: 22px;
+  padding: 18px;
+  align-content: center;
+  justify-items: center;
+}
+
+#screen-5 .find-item{
+  width: 100%;
+  max-width: var(--card-max);
+  aspect-ratio: 1 / 1;
+  padding: var(--card-pad);
+  border-radius: 22px;
+}
+
+#screen-5 .find-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-height: 150px; /* hace el objeto más protagonista */
+}
+
+#screen-5 .find-label{
+  font-size: var(--label-size);
+  font-weight: 900;
+  bottom: var(--label-bottom);
+  letter-spacing: 0.6px;
+}
+
+/* Responsive Pantalla 5 */
+@media (max-width: 900px){
+  #screen-5 .find-grid{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+}
+@media (max-width: 560px){
+  #screen-5 .find-grid{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
+}
+
+
+/* ====== PANTALLA 4 (pirate tap) ====== */
+#screen-4 #pirateTapLayer{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(var(--card-min), 1fr));
+  gap: 22px;
+  padding: 18px;
+  align-content: center;
+  justify-items: center;
+}
+
+#screen-4 .pirate-tap-item{
+  width: 100%;
+  max-width: var(--card-max);
+  aspect-ratio: 1 / 1;
+  padding: var(--card-pad);
+  border-radius: 22px;
+}
+
+#screen-4 .pirate-tap-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-height: 150px;
+}
+
+#screen-4 .pirate-tap-label{
+  font-size: var(--label-size);
+  font-weight: 900;
+  bottom: var(--label-bottom);
+  letter-spacing: 0.6px;
+}
+
+/* Responsive Pantalla 4 */
+@media (max-width: 900px){
+  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+}
+@media (max-width: 560px){
+  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
+}
