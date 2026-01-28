@@ -62,7 +62,7 @@
   const INSTRUCTIONS = {
     1: "",
     2: "Mira bien: falta la primera letra. Pulsa la letra correcta.",
-    3: "Encuentra 5 llaves y púlsalas.",
+    3: "Encuentra 10 llaves y púlsalas.",
     4: "Pulsa solo los 4 objetos piratas.",
     interlude: "",
     5: "Pulsa ESCUCHAR y toca el objeto correcto.",
