@@ -636,101 +636,168 @@ function lockScreen(screenEl, shouldLock){
   ========================= */
 
   const drag2 = new PointerDrag();
+function initScreen2() {
+  const root = $("#screen-2");
+  if (!root) return;
 
-  function initScreen2() {
-    const root = $("#screen-2");
-    if (!root) return;
+  /* =========================
+     AUDIO DE INSTRUCCIONES — PANTALLA 2
+     (Muestra ESCUCHAR y bloquea CONTINUAR hasta terminar)
+  ========================= */
+  const btnListenHUD = $("#btnListenHUD");
+  const btnNext = $("#btnNext2");
 
-    const btnNext = $("#btnNext2");
-    disable(btnNext, true);
+  // Mostrar el botón ESCUCHAR sí o sí
+  if (btnListenHUD) btnListenHUD.hidden = false;
 
-    const chips = $$(".chip-drag", root);
+  // CONTINUAR bloqueado al entrar
+  disable(btnNext, true);
 
-    drag2.onDrop = (dropZone, draggedEl) => {
-      const letter = draggedEl?.dataset?.letter;
-      const targetId = draggedEl?.dataset?.target;
+  // Control para evitar dobles clicks
+  let listened = false;
+  let playing = false;
 
-      const slot = dropZone?.closest?.(".slot-drop");
-      const slotId = slot?.dataset?.slot;
+  if (btnListenHUD) {
+    btnListenHUD.onclick = () => {
+      if (playing) return;
+      playing = true;
 
-      if (!slot || !slotId) {
-        drag2.revertActive();
-        return;
+      disable(btnListenHUD, true);
+
+      playVoice("./assets/audio/INTRO_PANTALLA2.mp3")
+        .then(() => {
+          listened = true;
+          bigCheck();
+          // OJO: no activamos CONTINUAR aún si faltan letras,
+          // pero ya permitimos que se active cuando complete la actividad.
+        })
+        .catch(() => {
+          // Si falla el audio, no bloqueamos el juego
+          listened = true;
+          toast("No se pudo reproducir el audio");
+        })
+        .finally(() => {
+          disable(btnListenHUD, false);
+          playing = false;
+
+          // Si ya ha completado letras, que CONTINUAR se active
+          if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
+            disable(btnNext, false);
+          }
+        });
+    };
+  }
+
+  /* =========================
+     ACTIVIDAD LETRAS (drag/tap)
+  ========================= */
+
+  // Asegura estado limpio al entrar
+  disable(btnNext, true);
+
+  const chips = $$(".chip-drag", root);
+
+  drag2.onDrop = (dropZone, draggedEl) => {
+    const letter = draggedEl?.dataset?.letter;
+    const targetId = draggedEl?.dataset?.target;
+
+    const slot = dropZone?.closest?.(".slot-drop");
+    const slotId = slot?.dataset?.slot;
+
+    if (!slot || !slotId) {
+      drag2.revertActive();
+      return;
+    }
+
+    if (slotId !== targetId) {
+      toast("Prueba en su palabra");
+      drag2.revertActive();
+      return;
+    }
+
+    const row = root.querySelector(`.letter-row[data-id="${slotId}"]`);
+    const solution = row?.dataset?.solution;
+
+    if (!solution) {
+      drag2.revertActive();
+      return;
+    }
+
+    if (letter === solution) {
+      state.lettersDone.add(slotId);
+      slot.textContent = letter;
+      slot.classList.add("is-correct");
+
+      chips
+        .filter((c) => c.dataset.target === slotId)
+        .forEach((c) => {
+          c.disabled = true;
+          c.classList.add("is-disabled");
+        });
+
+      drag2.revertActive();
+      bigCheck();
+
+      // ✅ Solo dejamos CONTINUAR si:
+      // 1) están todas las letras
+      // 2) y ha escuchado el audio (o falló pero lo marcamos como listened)
+      if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
+        disable(btnNext, false);
       }
+    } else {
+      toast("Esa no… prueba la otra");
+      drag2.revertActive();
+    }
+  };
 
-      if (slotId !== targetId) {
-        toast("Prueba en su palabra");
-        drag2.revertActive();
-        return;
-      }
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      if (chip.disabled) return;
 
-      const row = root.querySelector(`.letter-row[data-id="${slotId}"]`);
+      const letter = chip.dataset.letter;
+      const targetId = chip.dataset.target;
+      const row = root.querySelector(`.letter-row[data-id="${targetId}"]`);
       const solution = row?.dataset?.solution;
-
-      if (!solution) {
-        drag2.revertActive();
-        return;
-      }
+      const slot = root.querySelector(`.slot-drop[data-slot="${targetId}"]`);
+      if (!slot) return;
 
       if (letter === solution) {
-        state.lettersDone.add(slotId);
+        state.lettersDone.add(targetId);
         slot.textContent = letter;
         slot.classList.add("is-correct");
 
         chips
-          .filter(c => c.dataset.target === slotId)
-          .forEach(c => {
+          .filter((c) => c.dataset.target === targetId)
+          .forEach((c) => {
             c.disabled = true;
             c.classList.add("is-disabled");
           });
 
-        drag2.revertActive();
         bigCheck();
 
-        if (state.lettersDone.size >= SETTINGS.letters.length) {
+        if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
           disable(btnNext, false);
+        } else if (state.lettersDone.size >= SETTINGS.letters.length && !listened) {
+          toast("Pulsa ESCUCHAR para continuar");
         }
       } else {
-        toast("Esa no… prueba la otra");
-        drag2.revertActive();
+        toast("Prueba la otra");
       }
-    };
-
-    chips.forEach((chip) => {
-      chip.addEventListener("click", () => {
-        if (chip.disabled) return;
-
-        const letter = chip.dataset.letter;
-        const targetId = chip.dataset.target;
-        const row = root.querySelector(`.letter-row[data-id="${targetId}"]`);
-        const solution = row?.dataset?.solution;
-        const slot = root.querySelector(`.slot-drop[data-slot="${targetId}"]`);
-        if (!slot) return;
-
-        if (letter === solution) {
-          state.lettersDone.add(targetId);
-          slot.textContent = letter;
-          slot.classList.add("is-correct");
-
-          chips
-            .filter(c => c.dataset.target === targetId)
-            .forEach(c => {
-              c.disabled = true;
-              c.classList.add("is-disabled");
-            });
-
-          bigCheck();
-          if (state.lettersDone.size >= SETTINGS.letters.length) disable(btnNext, false);
-        } else {
-          toast("Prueba la otra");
-        }
-      });
-
-      drag2.makeDraggable(chip, { bounds: root });
     });
 
-    if (btnNext) btnNext.addEventListener("click", nextScreen);
-  }
+    drag2.makeDraggable(chip, { bounds: root });
+  });
+
+  if (btnNext) btnNext.addEventListener("click", () => {
+    // Si intenta continuar sin escuchar, le avisamos
+    if (!listened) {
+      toast("Pulsa ESCUCHAR primero");
+      return;
+    }
+    nextScreen();
+  });
+}
+  
 
   function resetScreen2() {
     const root = $("#screen-2");
