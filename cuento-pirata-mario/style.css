@@ -979,3 +979,59 @@ body{
 
 .find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
 .find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
+/* ==========================================================
+   SCREEN 5 (JS NUEVO) — findGrid / find-item / find-label
+   ========================================================== */
+
+#findGrid{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding:12px;
+  border-radius:18px;
+  background:rgba(0,0,0,0.14);
+  border:1px solid rgba(255,255,255,0.12);
+}
+
+/* Cada objeto (con texto debajo) */
+.find-item{
+  width:120px;
+  min-height:140px;            /* ✅ deja sitio al nombre */
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.20);
+  background:rgba(255,255,255,0.10);
+  cursor:pointer;
+  padding:10px;
+  -webkit-tap-highlight-color:transparent;
+
+  display:flex;                /* ✅ imagen arriba + texto abajo */
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.find-img{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+  pointer-events:none;
+}
+
+/* ✅ Nombre debajo */
+.find-label{
+  display:block;               /* ✅ antes lo tenías oculto */
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:0.6px;
+  color:rgba(255,255,255,0.92);
+  text-shadow:0 2px 8px rgba(0,0,0,0.55);
+  line-height:1;
+  text-align:center;
+  white-space:nowrap;
+}
+
+/* Estados */
+.find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
+.find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
