@@ -657,36 +657,33 @@ function initScreen2() {
   let listened = false;
   let playing = false;
 
-  if (btnListenHUD) {
-    btnListenHUD.onclick = () => {
-      if (playing) return;
-      playing = true;
+  if (btnListen2) {
+  btnListen2.onclick = () => {
+    if (playing) return;
+    playing = true;
 
-      disable(btnListenHUD, true);
+    disable(btnListen2, true);
 
-      playVoice("./assets/audio/INTRO_PANTALLA2.mp3")
-        .then(() => {
-          listened = true;
-          bigCheck();
-          // OJO: no activamos CONTINUAR aún si faltan letras,
-          // pero ya permitimos que se active cuando complete la actividad.
-        })
-        .catch(() => {
-          // Si falla el audio, no bloqueamos el juego
-          listened = true;
-          toast("No se pudo reproducir el audio");
-        })
-        .finally(() => {
-          disable(btnListenHUD, false);
-          playing = false;
+    playVoice(ASSETS.audio.intro2)
+      .then(() => {
+        listened = true;
+        bigCheck();
+      })
+      .catch(() => {
+        listened = true;
+        toast("No se pudo reproducir el audio");
+      })
+      .finally(() => {
+        disable(btnListen2, false);
+        playing = false;
 
-          // Si ya ha completado letras, que CONTINUAR se active
-          if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
-            disable(btnNext, false);
-          }
-        });
-    };
-  }
+        // Si ya ha completado letras, que CONTINUAR se active
+        if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
+          disable(btnNext, false);
+        }
+      });
+  };
+}
 
   /* =========================
      ACTIVIDAD LETRAS (drag/tap)
