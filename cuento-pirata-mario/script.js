@@ -1331,7 +1331,41 @@ if (btnListen4) {
   function buildScreen6() {
     const root = $("#screen-6");
     if (!root) return;
+     const btnListen6 = $("#btnListen6");
 
+// 🔒 Bloqueamos la pantalla al entrar
+lockScreen(root, true);
+
+// Mostrar ESCUCHAR siempre
+if (btnListen6) btnListen6.hidden = false;
+
+let listened6 = false;
+let playing6 = false;
+
+if (btnListen6) {
+  btnListen6.onclick = () => {
+    if (playing6) return;
+    playing6 = true;
+
+    disable(btnListen6, true);
+
+    playVoice(ASSETS.audio.intro6)
+      .then(() => {
+        listened6 = true;
+        lockScreen(root, false); // 🔓 Desbloquea juego
+        bigCheck();
+      })
+      .catch(() => {
+        listened6 = true;
+        lockScreen(root, false); // si falla, no bloqueamos el juego
+        toast("No se pudo reproducir el audio");
+      })
+      .finally(() => {
+        disable(btnListen6, false);
+        playing6 = false;
+      });
+  };
+}
     state.coins = { 3: 0, 5: 0, 6: 0 };
     disable($("#btnNext6"), true);
 
