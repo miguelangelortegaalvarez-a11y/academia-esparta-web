@@ -785,8 +785,8 @@
       k.appendChild(img);
 
       k.style.position = "absolute";
-      k.style.left = `${10 + (i * 14) + (i % 2) * 8}%`;
-      k.style.top = `${18 + (i * 10) % 55}%`;
+      k.style.left = `${8 + Math.random() * 78}%`;  // 8%–86%
+k.style.top  = `${14 + Math.random() * 65}%`; // 14%–79%
 
       keysLayer.appendChild(k);
 
