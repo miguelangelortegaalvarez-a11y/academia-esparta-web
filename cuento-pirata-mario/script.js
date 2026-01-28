@@ -1462,7 +1462,40 @@ if (btnListen6) {
   function initScreen7() {
     const root = $("#screen-7");
     if (!root) return;
+  const btnListen7 = $("#btnListen7");
 
+  // 🔒 Bloqueamos al entrar (solo ESCUCHAR funciona)
+  lockScreen(root, true);
+
+  if (btnListen7) btnListen7.hidden = false;
+
+  let listened7 = false;
+  let playing7 = false;
+
+  if (btnListen7) {
+    btnListen7.onclick = () => {
+      if (playing7) return;
+      playing7 = true;
+
+      disable(btnListen7, true);
+
+      playVoice(ASSETS.audio.intro7)
+        .then(() => {
+          listened7 = true;
+          lockScreen(root, false); // 🔓 desbloquea juego
+          bigCheck();
+        })
+        .catch(() => {
+          listened7 = true;
+          lockScreen(root, false); // si falla, no bloqueamos
+          toast("No se pudo reproducir el audio");
+        })
+        .finally(() => {
+          disable(btnListen7, false);
+          playing7 = false;
+        });
+    };
+  }
     const btn = $("#btnNext7");
     disable(btn, true);
 
