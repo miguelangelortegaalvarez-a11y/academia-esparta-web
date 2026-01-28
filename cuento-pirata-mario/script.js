@@ -203,18 +203,7 @@ function lockScreen(screenEl, shouldLock){
   if (!screenEl) return;
   screenEl.classList.toggle("is-locked", !!shouldLock);
 }
-function playVoice(src){
-  return new Promise((resolve, reject) => {
-    const a = new Audio(src);
-    a.preload = "auto";
-    a.playsInline = true;
 
-    a.addEventListener("ended", resolve, { once: true });
-    a.addEventListener("error", reject, { once: true });
-
-    a.play().catch(reject);
-  });
-}
    
   /* =========================
      ASSET FALLBACKS
