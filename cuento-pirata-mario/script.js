@@ -73,7 +73,7 @@
 
   const SETTINGS = {
     fadeMs: 350,
-    keyCount: 5,
+    keyCount: 10,
     coinsTargets: [3, 5, 6],
 
     bgmVolume: 0.18,
