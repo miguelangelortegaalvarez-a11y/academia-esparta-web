@@ -2,7 +2,9 @@
 [hidden]{ display:none !important; }
 
 /* ==========================================================
-   CUENTO PIRATA MARIO — STYLE (OPTIMIZADO iPad/Safari)
+   CUENTO PIRATA MARIO — STYLE (LIMPIO / iPad Safari)
+   - Sin reglas duplicadas ni “parches” que se pisen
+   - Pantallas 4 y 5 del mismo tamaño visual (más grandes)
    ========================================================== */
 
 :root{
@@ -25,10 +27,20 @@
   --radius: 18px;
   --btnRadius: 16px;
 
-  --hudH: 72px;
   --pad: 16px;
 
-  --fadeMs: 260ms; /* un poco más rápido para iPad */
+  --fadeMs: 260ms;
+
+  /* HUD (zona superior real en iPad) */
+  --hudSpace: calc(env(safe-area-inset-top) + 96px);
+
+  /* Tarjetas Pantalla 4 y 5 (⬅️ aquí creces/reduces de golpe) */
+  --card-max: 300px;     /* antes aprox 240–280 → ahora un pelín más */
+  --card-min: 230px;
+  --card-pad: 18px;
+  --label-size: 24px;
+  --label-bottom: 14px;
+  --img-max: 185px;
 }
 
 /* =========================
@@ -69,7 +81,6 @@ body{
   will-change: background-image;
 }
 
-/* Sombreado suave para legibilidad */
 .scene-shade{
   position: absolute;
   inset: 0;
@@ -85,12 +96,13 @@ body{
 ========================= */
 .hud{
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: var(--hudH);
+  top: calc(env(safe-area-inset-top) + 10px);
+  left: 0; right: 0;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px var(--pad);
+  padding: 10px var(--pad);
   gap: 12px;
   z-index: 50;
 }
@@ -100,17 +112,15 @@ body{
 
 .instruction{
   display: inline-block;
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-radius: 14px;
   background: rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.10);
   color: var(--text);
-  font-size: 18px;
-  line-height: 1.2;
-  max-width: min(920px, 75vw);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.15;
+  white-space: normal;
+  max-width: min(980px, 92vw);
 }
 
 /* =========================
@@ -119,22 +129,19 @@ body{
 .screens{
   position: absolute;
   inset: 0;
-  padding-top: 0;
   z-index: 10;
 }
 
-/* IMPORTANTE (rendimiento iOS):
-   - pantallas NO activas: display:none (no renderiza)
-   - pantalla activa: display:block + transición de opacidad */
+/* Rendimiento iOS: sólo renderiza la activa */
 .screen{
   position: absolute;
-  inset: var(--hudH) 0 0 0;
+  inset: var(--hudSpace) 0 0 0;
   padding: 18px;
   display: none;
   opacity: 0;
   transform: translateY(6px);
   transition: opacity var(--fadeMs) ease, transform var(--fadeMs) ease;
-  contain: layout paint; /* ayuda en Safari */
+  contain: layout paint;
 }
 
 .screen.is-active{
@@ -161,7 +168,6 @@ body{
   margin: 0 auto;
 }
 
-/* Blur: activarlo solo si está soportado (y más suave) */
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
   .panel{
     backdrop-filter: blur(4px);
@@ -232,7 +238,7 @@ body{
 .toast{
   position: absolute;
   left: 50%;
-  top: calc(var(--hudH) + 10px);
+  top: calc(var(--hudSpace) - 58px);
   transform: translateX(-50%);
   z-index: 70;
   padding: 12px 16px;
@@ -269,7 +275,8 @@ body{
    SCREEN 2 — LETRAS
 ========================================================== */
 #screen-2 .panel{
-  max-height: calc(100svh - var(--hudH) - 28px);
+  padding: 14px;
+  max-height: calc(100svh - (var(--hudSpace) + 24px));
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -283,9 +290,9 @@ body{
 .letter-row{
   display: grid;
   grid-template-columns: 1fr 240px 160px;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
-  padding: 14px;
+  padding: 12px;
   border-radius: 16px;
   background: rgba(0,0,0,0.18);
   border: 1px solid rgba(255,255,255,0.10);
@@ -315,7 +322,6 @@ body{
 }
 
 .slot-drop{ border-color: rgba(255,210,77,0.95); }
-
 .slot-drop.is-correct{
   background: rgba(0,255,140,0.25);
   border-color: #00ff8c;
@@ -366,8 +372,13 @@ body{
   transform: scale(1.02);
 }
 
+#screen-2 .h2{
+  margin: 0 0 8px 0;
+  font-size: 24px;
+}
+
 /* ==========================================================
-   BASE “LLAVES/OBJETOS FLOTANDO” (screens 3 y 4)
+   BASE “LLAVES/OBJETOS FLOTANDO” (screen 3)
 ========================================================== */
 .keys-area{
   position: relative;
@@ -380,53 +391,49 @@ body{
 }
 
 /* ==========================================================
-   SCREEN 3 — LLAVES EN EL FONDO (SIN CAJA) + COFRE + CONTINUAR
+   SCREEN 3 — LLAVES EN EL FONDO + COFRE + CONTINUAR
 ========================================================== */
 #screen-3 .panel{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  padding: 0 !important;
-  max-width: none !important;
-  margin: 0 !important;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0;
+  max-width: none;
+  margin: 0;
 }
 #screen-3 .panel-wide,
-#screen-3 .panel-full{
-  width: 100% !important;
-}
+#screen-3 .panel-full{ width: 100%; }
 
 #screen-3 .h2,
-#screen-3 h2{
-  display: none !important;
-}
+#screen-3 h2{ display: none; }
 
 #screen-3 .keys-area{
   min-height: 56vh;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 #screen-3 .key-item{
-  position: absolute !important;
-  width: 64px !important;
-  height: 64px !important;
+  position: absolute;
+  width: 64px;
+  height: 64px;
 
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  outline: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  border-radius: 0;
 
   cursor: grab;
   touch-action: none;
-  -webkit-tap-highlight-color: transparent !important;
+  -webkit-tap-highlight-color: transparent;
 
   will-change: transform;
   transform: translateZ(0);
@@ -434,19 +441,18 @@ body{
   animation: key-float 3.2s ease-in-out infinite;
 }
 #screen-3 .key-item:active{ cursor: grabbing; }
-#screen-3 .key-item:focus{ outline: none !important; }
 
 #screen-3 .key-item img,
 #screen-3 .key-img{
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  display: block !important;
-  pointer-events: none !important;
-  filter: none !important;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  filter: none;
 }
 
-#screen-3 .key-item.is-dragging{ animation: none !important; }
+#screen-3 .key-item.is-dragging{ animation: none; }
 
 @keyframes key-float{
   0%   { transform: translate3d(0, 0, 0); }
@@ -455,17 +461,17 @@ body{
 }
 
 #screen-3 .chest-drop{
-  position: absolute !important;
-  right: 18px !important;
-  bottom: 18px !important;
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
 
-  width: 160px !important;
-  height: 140px !important;
+  width: 160px;
+  height: 140px;
 
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 
   display: grid;
   place-items: center;
@@ -473,28 +479,29 @@ body{
 
 #screen-3 .chest-img,
 #screen-3 .chest-drop img{
-  width: 150px !important;
-  height: auto !important;
-  max-width: 150px !important;
-  object-fit: contain !important;
-  display: block !important;
+  width: 150px;
+  height: auto;
+  max-width: 150px;
+  object-fit: contain;
+  display: block;
 }
 
-#screen-3 .chest-hint{ display: none !important; }
+#screen-3 .chest-hint{ display: none; }
 
 #screen-3 .footer-actions{
-  position: absolute !important;
-  left: 18px !important;
-  bottom: calc(18px + env(safe-area-inset-bottom)) !important;
-  margin-top: 0 !important;
-  display: flex !important;
-  justify-content: flex-start !important;
+  position: absolute;
+  left: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  margin-top: 0;
+  display: flex;
+  justify-content: flex-start;
   z-index: 5;
 }
 #screen-3 .footer-actions .btn{ min-width: 180px; }
 
 /* ==========================================================
-   SCREEN 4 — PIRATE TAP (iconos bien, sin monstruos)
+   SCREEN 4 — PIRATE TAP (rejilla 3x2 centrada)
+   (TAMAÑO PRO)
 ========================================================== */
 #screen-4 .panel{ position: relative; }
 
@@ -507,44 +514,59 @@ body{
   position: absolute;
   inset: 0;
 
-  /* ✅ Rejilla fija 3x2 centrada */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: min-content;
-  gap: 26px 28px;
+  grid-template-columns: repeat(3, minmax(var(--card-min), 1fr));
+  gap: 22px;
+  padding: 18px;
 
-  place-items: center;
   align-content: center;
-  justify-content: center;
-
-  padding: 22px;
+  justify-items: center;
 }
 
 .pirate-tap-item{
-  width: 110px;
-  height: 130px;
-  border-radius: 18px;
+  position: relative;
+  width: 100%;
+  max-width: var(--card-max);
+  aspect-ratio: 1 / 1;
+  padding: var(--card-pad);
+  border-radius: 22px;
+
   border: 1px solid rgba(255,255,255,0.20);
   background: rgba(255,255,255,0.10);
+
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 
-  position: relative;
-
+  display: grid;
+  place-items: center;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
 }
 
-.pirate-tap-item img{
-  width: 76px !important;
-  height: 76px !important;
-  object-fit: contain !important;
+.pirate-tap-img{
+  width: 100%;
+  height: 100%;
+  max-height: var(--img-max);
+  object-fit: contain;
   display: block;
+  pointer-events: none;
+}
+
+.pirate-tap-label{
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: var(--label-bottom);
+  text-align: center;
+
+  font-size: var(--label-size);
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  line-height: 1;
+
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+  white-space: nowrap;
   pointer-events: none;
 }
 
@@ -557,17 +579,6 @@ body{
   outline: 4px solid rgba(255,210,77,0.95);
   outline-offset: 2px;
 }
-.pirate-tap-label{
-  position: static;
-  transform: none;
-  font-size: 14px;
-  font-weight: 900;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.55);
-  white-space: nowrap;
-  pointer-events: none;
-  line-height: 1;
-}
 
 /* ==========================================================
    INTERLUDE — MOTIVACIÓN
@@ -576,7 +587,7 @@ body{
   position: relative;
   width: min(1100px, 94vw);
   margin: 0 auto;
-  min-height: calc(100svh - var(--hudH) - 36px);
+  min-height: calc(100svh - var(--hudSpace) - 18px);
   padding: 18px;
 }
 
@@ -604,21 +615,15 @@ body{
 }
 
 /* ==========================================================
-   SCREEN 5 — ESCUCHA Y ENCUENTRA (5 OBJETOS)
-   - Rejilla 5 objetos (2 + 3)
-   - Al acertar: brillo/iluminación + bloqueado
-   - Fallo: pequeño “shake” + desaturación momentánea
+   SCREEN 5 — ESCUCHA Y ENCUENTRA (JS NUEVO)
+   Usa: .find-wrap / #findGrid / .find-item / .find-img / .find-label
 ========================================================== */
+#screen-5 .panel{ position: relative; }
 
-#screen-5 .panel{
-  position: relative;
-}
-
-.find-area{
+.find-wrap{
   display: grid;
   gap: 14px;
   min-height: 58vh;
-  align-content: start;
 }
 
 .find-top{
@@ -629,123 +634,89 @@ body{
   flex-wrap: wrap;
 }
 
-.find-top .find-hint{
-  padding: 10px 14px;
+.find-round{
+  font-weight: 900;
+  font-size: 20px;
+  padding: 10px 12px;
+  background: rgba(0,0,0,0.25);
   border-radius: 14px;
-  background: rgba(0,0,0,0.28);
-  border: 1px solid rgba(255,255,255,0.10);
-  color: rgba(255,255,255,0.92);
-  font-size: 18px;
-  font-weight: 800;
 }
 
-/* Botón ESCUCHAR de la pantalla 5 */
-#btnListen5{
-  min-width: 190px;
-}
-
-/* Rejilla 5 objetos */
-#findObjectGrid{
+/* Rejilla 5 objetos (TAMAÑO PRO) */
+#findGrid{
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 18px;
-  padding: 14px;
+  grid-template-columns: repeat(5, minmax(var(--card-min), 1fr));
+  gap: 22px;
+  padding: 18px;
+
   border-radius: 18px;
   background: rgba(0,0,0,0.14);
   border: 1px solid rgba(255,255,255,0.12);
+
   align-content: center;
   justify-items: center;
 }
 
-/* Cada objeto */
-.fo-item{
+.find-item{
+  position: relative;
   width: 100%;
-  max-width: 240px;
+  max-width: var(--card-max);
   aspect-ratio: 1 / 1;
-  border-radius: 26px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.14);
-  display: grid;
-  place-items: center;
+  padding: var(--card-pad);
+  border-radius: 22px;
+
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.12);
+
   cursor: pointer;
-  padding: 18px;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  transition: transform 120ms ease, filter 140ms ease, opacity 140ms ease, box-shadow 180ms ease, outline 180ms ease;
-  position: relative;
+
+  display: grid;
+  place-items: center;
   overflow: hidden;
+
+  transition: transform 120ms ease, filter 140ms ease, opacity 140ms ease, box-shadow 180ms ease, outline 180ms ease;
 }
 
-.fo-item:active{
-  transform: scale(0.98);
-}
+.find-item:active{ transform: scale(0.98); }
 
-.fo-item img{
+.find-img{
   width: 100%;
   height: 100%;
-   max-height: 150px;
+  max-height: var(--img-max);
   object-fit: contain;
-  display: block;
   pointer-events: none;
 }
 
-/* (Opcional) etiqueta debajo dentro del botón */
-.fo-label{
+/* Nombre debajo (grande y centrado) */
+.find-label{
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  left: 12px;
+  right: 12px;
+  bottom: var(--label-bottom);
   text-align: center;
-  font-size: 22px;
+
+  font-size: var(--label-size);
   font-weight: 900;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
+  line-height: 1;
+
   color: rgba(255,255,255,0.92);
   text-shadow: 0 2px 8px rgba(0,0,0,0.55);
-  pointer-events: none;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Acierto: brillo + aro dorado */
-.fo-item.is-correct{
-  opacity: 1 !important;
-  filter: saturate(1.2) brightness(1.08);
-  outline: 4px solid rgba(255,210,77,0.95);
-  outline-offset: 2px;
-  box-shadow: 0 16px 26px rgba(0,0,0,0.28), 0 0 0 10px rgba(255,210,77,0.12);
-}
-
-/* Bloqueado tras acierto */
-.fo-item.is-locked{
-  cursor: default;
   pointer-events: none;
 }
 
-/* Fallo: “shake” suave */
-.fo-item.is-wrong{
-  animation: fo-shake 220ms ease;
+/* Estados */
+.find-item.is-wrong{
+  transform: scale(0.96);
   filter: grayscale(1);
 }
 
-@keyframes fo-shake{
-  0%{ transform: translateX(0); }
-  25%{ transform: translateX(-6px); }
-  50%{ transform: translateX(6px); }
-  75%{ transform: translateX(-4px); }
-  100%{ transform: translateX(0); }
-}
-
-/* Responsive: en pantallas estrechas baja a 3/2 */
-@media (max-width: 900px){
-  #findObjectGrid{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-@media (max-width: 520px){
-  #findObjectGrid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.find-item.is-found{
+  outline: 4px solid rgba(255,210,77,0.95);
+  outline-offset: 2px;
 }
 
 /* ==========================================================
@@ -877,61 +848,8 @@ body{
 }
 
 /* ==========================================================
-   RESPONSIVE
+   MENSAJE FALTA DE RECURSO
 ========================================================== */
-@media (max-width: 760px){
-  .letter-row{ grid-template-columns: 1fr; }
-  .pic-box{ width: 100%; height: 160px; }
-  .choices{ justify-content: center; }
-  .chests-row{ grid-template-columns: 1fr; }
-}
-
-/* ==========================================================
-   AJUSTE HUD (frase de arriba): más abajo + más grande
-   ========================================================== */
-
-/* Baja el HUD un poco y respeta la zona segura del iPad */
-.hud{
-  top: calc(env(safe-area-inset-top) + 10px) !important;
-  height: auto !important;
-  padding: 10px var(--pad) 10px var(--pad) !important;
-}
-
-/* Frase más grande y que pueda partir en 2 líneas si hace falta */
-.instruction{
-  font-size: clamp(22px, 2.6vw, 34px) !important;
-  line-height: 1.15 !important;
-  white-space: normal !important;
-  max-width: min(980px, 92vw) !important;
-  padding: 12px 16px !important;
-}
-
-/* Como el HUD ya no tiene altura fija, deja espacio real arriba en las pantallas */
-.screen{
-  inset: calc(env(safe-area-inset-top) + 96px) 0 0 0 !important;
-}
-
-/* ==========================================================
-   PANTALLA 2: panel un poco más "pequeño" para que respire
-   ========================================================== */
-
-/* Reduce padding del panel y limita su altura */
-#screen-2 .panel{
-  padding: 14px !important;
-  max-height: calc(100svh - (env(safe-area-inset-top) + 120px)) !important;
-}
-
-/* Compacta cada fila (palabra/imagen/letras) un poco */
-#screen-2 .letter-row{
-  padding: 12px !important;
-  gap: 10px !important;
-}
-
-/* Si quieres el título “Actividad 1” un pelín más compacto */
-#screen-2 .h2{
-  margin: 0 0 8px 0 !important;
-  font-size: 24px !important;
-}
 .asset-fallback{
   position: absolute;
   left: 12px;
@@ -945,184 +863,29 @@ body{
   font-size: 14px;
   color: #fff;
 }
+
 /* ==========================================================
-   SCREEN 5 — ESCUCHA Y ENCUENTRA (findObject)
+   RESPONSIVE
 ========================================================== */
-.find-wrap{ display:grid; gap:14px; min-height:58vh; }
-.find-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
-.find-round{ font-weight:900; font-size:20px; padding:10px 12px; background:rgba(0,0,0,0.25); border-radius:14px; }
-
-.find-grid{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-  padding:12px;
-  border-radius:18px;
-  background:rgba(0,0,0,0.14);
-  border:1px solid rgba(255,255,255,0.12);
-}
-
-.find-item{
-  width:120px; height:120px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,0.20);
-  background:rgba(255,255,255,0.10);
-  display:grid;
-  place-items:center;
-  cursor:pointer;
-  padding:10px;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.find-img{ width:100%; height:100%; object-fit:contain; pointer-events:none; }
-.find-label{ display:none; } /* si no quieres texto debajo */
-
-.find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
-.find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
-/* ==========================================================
-   SCREEN 5 (JS NUEVO) — findGrid / find-item / find-label
-   ========================================================== */
-
-#findGrid{
-  display:flex;
-  gap:18px;                 /* ⬅️ más aire entre objetos */
-  justify-content:center;
-  flex-wrap:wrap;
-  padding:18px;
-}
-
-/* Cada objeto (con texto debajo) */
-.find-item{
-  width:160px;              /* ⬅️ antes 120 */
-  min-height:190px;         /* ⬅️ más alto para texto grande */
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,0.22);
-  background:rgba(255,255,255,0.12);
-  cursor:pointer;
-  padding:14px;
-  -webkit-tap-highlight-color:transparent;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:12px;                 /* ⬅️ más separación imagen-texto */
-}
-
-.find-img{
-  width:100px;              /* ⬅️ antes 72 */
-  height:100px;
-  object-fit:contain;
-  pointer-events:none;
-}
-
-/* ✅ Nombre debajo */
-.find-label{
-  display:block;               /* ✅ antes lo tenías oculto */
-  font-size:14px;
-  font-weight:900;
-  letter-spacing:0.6px;
-  color:rgba(255,255,255,0.92);
-  text-shadow:0 2px 8px rgba(0,0,0,0.55);
-  line-height:1;
-  text-align:center;
-  white-space:nowrap;
-}
-
-/* Estados */
-.find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
-.find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
-/* ==========================================================
-   AJUSTE PRO: Pantalla 4 y 5 con tarjetas MÁS GRANDES
-   y MISMO tamaño visual (iPad friendly)
-========================================================== */
-
-:root{
-  --card-max: 240px;     /* tamaño máximo de tarjeta */
-  --card-min: 190px;     /* tamaño mínimo de tarjeta en pantallas anchas */
-  --card-pad: 18px;      /* padding interno */
-  --label-size: 20px;    /* tamaño del texto debajo */
-  --label-bottom: 14px;  /* separación del texto al borde */
-}
-
-/* ====== PANTALLA 5 (find) ====== */
-#screen-5 .find-grid{
-  display: grid;
-  grid-template-columns: repeat(5, minmax(var(--card-min), 1fr));
-  gap: 22px;
-  padding: 18px;
-  align-content: center;
-  justify-items: center;
-}
-
-#screen-5 .find-item{
-  width: 100%;
-  max-width: var(--card-max);
-  aspect-ratio: 1 / 1;
-  padding: var(--card-pad);
-  border-radius: 22px;
-}
-
-#screen-5 .find-img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  max-height: 150px; /* hace el objeto más protagonista */
-}
-
-#screen-5 .find-label{
-  font-size: var(--label-size);
-  font-weight: 900;
-  bottom: var(--label-bottom);
-  letter-spacing: 0.6px;
-}
-
-/* Responsive Pantalla 5 */
 @media (max-width: 900px){
-  #screen-5 .find-grid{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+  /* Pantalla 5: baja a 3 columnas */
+  #findGrid{ grid-template-columns: repeat(3, minmax(190px, 1fr)); }
+
+  /* Pantalla 4: sigue 3 columnas pero más estrechas */
+  #pirateTapLayer{ grid-template-columns: repeat(3, minmax(190px, 1fr)); }
 }
+
+@media (max-width: 760px){
+  .letter-row{ grid-template-columns: 1fr; }
+  .pic-box{ width: 100%; height: 160px; }
+  .choices{ justify-content: center; }
+  .chests-row{ grid-template-columns: 1fr; }
+}
+
 @media (max-width: 560px){
-  #screen-5 .find-grid{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
-}
+  /* Pantalla 5: 2 columnas */
+  #findGrid{ grid-template-columns: repeat(2, minmax(175px, 1fr)); }
 
-
-/* ====== PANTALLA 4 (pirate tap) ====== */
-#screen-4 #pirateTapLayer{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(var(--card-min), 1fr));
-  gap: 22px;
-  padding: 18px;
-  align-content: center;
-  justify-items: center;
-}
-
-#screen-4 .pirate-tap-item{
-  width: 100%;
-  max-width: var(--card-max);
-  aspect-ratio: 1 / 1;
-  padding: var(--card-pad);
-  border-radius: 22px;
-}
-
-#screen-4 .pirate-tap-img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  max-height: 150px;
-}
-
-#screen-4 .pirate-tap-label{
-  font-size: var(--label-size);
-  font-weight: 900;
-  bottom: var(--label-bottom);
-  letter-spacing: 0.6px;
-}
-
-/* Responsive Pantalla 4 */
-@media (max-width: 900px){
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
-}
-@media (max-width: 560px){
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
+  /* Pantalla 4: 2 columnas */
+  #pirateTapLayer{ grid-template-columns: repeat(2, minmax(175px, 1fr)); }
 }
