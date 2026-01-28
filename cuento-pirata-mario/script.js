@@ -48,6 +48,7 @@
     audio: {
       bgm: "./assets/audio/MUSICA_PIRATAS_FONDO.mp3",
       intro1: "./assets/audio/INTRO_PANTALLA1.mp3",
+       intro2: "./assets/audio/INTRO_PANTALLA2.mp3",
       interlude1: "./assets/audio/INTERLUDE_MOTIVACION.mp3",
 
       // ✅ NUEVOS audios de pista (puedes cambiar nombres/rutas)
