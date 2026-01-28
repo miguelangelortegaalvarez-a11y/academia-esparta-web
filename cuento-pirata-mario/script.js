@@ -971,6 +971,41 @@ k.style.top  = `${14 + Math.random() * 65}%`; // 14%–79%
 
     const layer = $("#pirateTapLayer");
     const btnNext = $("#btnNext4");
+     const btnListen4 = $("#btnListen4");
+
+// Al entrar: bloquear TODO hasta escuchar
+lockScreen(root, true);
+
+// Mostrar ESCUCHAR siempre
+if (btnListen4) btnListen4.hidden = false;
+
+let listened4 = false;
+let playing4 = false;
+
+if (btnListen4) {
+  btnListen4.onclick = () => {
+    if (playing4) return;
+    playing4 = true;
+
+    disable(btnListen4, true);
+
+    playVoice(ASSETS.audio.intro4)
+      .then(() => {
+        listened4 = true;
+        lockScreen(root, false); // 🔓 desbloquea juego
+        bigCheck();
+      })
+      .catch(() => {
+        listened4 = true;
+        lockScreen(root, false); // si falla, no bloqueamos
+        toast("No se pudo reproducir el audio");
+      })
+      .finally(() => {
+        disable(btnListen4, false);
+        playing4 = false;
+      });
+  };
+}
 
     if (!layer || !btnNext) return;
 
