@@ -951,34 +951,52 @@ function resetScreen4() {
   ========================= */
 
   function initInterlude() {
-    const btnContinue = $("#interludeContinue");
-    const btnListen = $("#btnListenInterlude");
-    const topRight = $("#interludeMotivation");
-    safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
+  const btnContinue = $("#interludeContinue");
+  const btnListen = $("#btnListenInterlude");
+  const topRight = $("#interludeMotivation");
 
-    if (btnContinue) {
-      btnContinue.addEventListener("click", () => switchScreen(5));
-    }
+  safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
 
-    if (btnListen) {
-      let playing = false;
+  // ✅ CONTINUAR empieza desactivado
+  disable(btnContinue, true);
 
-      btnListen.addEventListener("click", () => {
-        if (playing) return;
-        playing = true;
-        disable(btnListen, true);
-
-        playVoice(ASSETS.audio.interlude1)
-          .catch(() => {
-            toast("No se pudo reproducir la voz");
-          })
-          .finally(() => {
-            disable(btnListen, false);
-            playing = false;
-          });
-      });
-    }
+  // Si pulsan continuar sin escuchar (por si acaso)
+  if (btnContinue) {
+    btnContinue.addEventListener("click", () => {
+      if (btnContinue.disabled) return;
+      switchScreen(5);
+    });
   }
+
+  if (btnListen) {
+    let playing = false;
+
+    btnListen.addEventListener("click", () => {
+      if (playing) return;
+      playing = true;
+
+      // mientras suena, bloqueamos botones
+      disable(btnListen, true);
+      disable(btnContinue, true);
+
+      playVoice(ASSETS.audio.interlude1)
+        .then(() => {
+          // ✅ al terminar el audio: habilita CONTINUAR
+          disable(btnContinue, false);
+          bigCheck();
+        })
+        .catch(() => {
+          // Si falla el audio, decides: yo lo habilito igualmente para no bloquear el juego
+          toast("No se pudo reproducir la voz");
+          disable(btnContinue, false);
+        })
+        .finally(() => {
+          disable(btnListen, false);
+          playing = false;
+        });
+    });
+  }
+}
 
   /* =========================
      SCREEN 5 — ESCUCHA Y ENCUENTRA (NUEVO)
