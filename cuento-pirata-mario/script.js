@@ -1454,24 +1454,40 @@ if (btnListen6) {
     state.coins = { 3: 0, 5: 0, 6: 0 };
     disable($("#btnNext6"), true);
   }
+/* =========================
+   SCREEN 7 — SYLLABLES (REEMPLAZO COMPLETO)
+========================= */
 
-  /* =========================
-     SCREEN 7 — SYLLABLES
-  ========================= */
+function initScreen7() {
+  const root = $("#screen-7");
+  if (!root) return;
 
-  function initScreen7() {
-    const root = $("#screen-7");
-    if (!root) return;
   const btnListen7 = $("#btnListen7");
+  const btnNext7 = $("#btnNext7");
 
-  // 🔒 Bloqueamos al entrar (solo ESCUCHAR funciona)
+  // Al entrar: bloquear pantalla y CONTINUAR desactivado
   lockScreen(root, true);
+  disable(btnNext7, true);
 
   if (btnListen7) btnListen7.hidden = false;
 
-  let listened7 = false;
+  // Estado local (no afecta a otras pantallas)
   let playing7 = false;
 
+  // Recojo filas reales del HTML
+  const rows = $$(".syll-row", root);
+  const totalRows = rows.length;
+
+  // Si no hay filas, por seguridad no dejamos continuar
+  if (!totalRows) return;
+
+  // Helper: recalcular si se puede continuar
+  const updateNext = () => {
+    if (!btnNext7) return;
+    disable(btnNext7, state.syllablesDone.size !== totalRows);
+  };
+
+  // ESCUCHAR: desbloquea al terminar (o si falla, también)
   if (btnListen7) {
     btnListen7.onclick = () => {
       if (playing7) return;
@@ -1481,13 +1497,11 @@ if (btnListen6) {
 
       playVoice(ASSETS.audio.intro7)
         .then(() => {
-          listened7 = true;
-          lockScreen(root, false); // 🔓 desbloquea juego
+          lockScreen(root, false);
           bigCheck();
         })
         .catch(() => {
-          listened7 = true;
-          lockScreen(root, false); // si falla, no bloqueamos
+          lockScreen(root, false);
           toast("No se pudo reproducir el audio");
         })
         .finally(() => {
@@ -1496,61 +1510,95 @@ if (btnListen6) {
         });
     };
   }
-    const btn = $("#btnNext7");
-    disable(btn, true);
 
-    const rows = $$(".syll-row", root);
-     const totalRows = rows.length;
-    rows.forEach((row) => {
-      const word = row.dataset.word;
-      const answer = Number(row.dataset.answer);
-      const opts = $$(".btn-option", row);
-      const res = $(".syll-result", row);
+  // Limpieza inicial de estado por si vienes de atrás sin reset
+  state.syllablesDone.clear();
+  updateNext();
 
-      opts.forEach((b) => {
-        b.addEventListener("click", () => {
-          const pick = Number(b.dataset.pick);
-          opts.forEach(o => o.classList.remove("is-picked"));
-          b.classList.add("is-picked");
+  // Listeners por fila
+  rows.forEach((row) => {
+    const word = (row.dataset.word || "").trim();
+    const answer = Number(row.dataset.answer);
 
-          if (pick === answer) {
+    const opts = $$(".btn-option", row);
+    const res = $(".syll-result", row);
+
+    // Por si el HTML trae filas incompletas
+    if (!word || !opts.length || !Number.isFinite(answer)) return;
+
+    // Asegura estado visual limpio
+    opts.forEach((o) => {
+      o.classList.remove("is-picked");
+      disable(o, false);
+    });
+    if (res) {
+      res.classList.remove("is-correct");
+      safeText(res, "—");
+    }
+
+    opts.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Si ya está resuelta, no hacemos nada
+        if (state.syllablesDone.has(word)) return;
+
+        const pick = Number(btn.dataset.pick);
+
+        // marcar selección
+        opts.forEach((o) => o.classList.remove("is-picked"));
+        btn.classList.add("is-picked");
+
+        if (pick === answer) {
+          // ✅ acierto
+          state.syllablesDone.add(word);
+
+          if (res) {
             safeText(res, "✓");
             res.classList.add("is-correct");
-            state.syllablesDone.add(word);
-            bigCheck();
-          } else {
+          }
+
+          bigCheck();
+
+          // Bloquear fila para no volver a tocarla
+          opts.forEach((o) => disable(o, true));
+
+          updateNext();
+        } else {
+          // ❌ fallo
+          if (res) {
             safeText(res, "—");
             res.classList.remove("is-correct");
-            state.syllablesDone.delete(word);
-            toast("Cuenta otra vez");
           }
-
-          if (state.syllablesDone.size >= SETTINGS.syllables.length) {
-            disable(btn, false);
-          }
-        });
+          toast("Cuenta otra vez");
+        }
       });
     });
+  });
 
-    if (btn) btn.addEventListener("click", nextScreen);
-  }
+  if (btnNext7) btnNext7.addEventListener("click", nextScreen);
+}
 
-  function resetScreen7() {
-    state.syllablesDone.clear();
-    disable($("#btnNext7"), true);
-    const root = $("#screen-7");
-    if (!root) return;
+function resetScreen7() {
+  state.syllablesDone.clear();
 
-    $$(".syll-row", root).forEach((row) => {
-      $$(".btn-option", row).forEach(b => b.classList.remove("is-picked"));
-      const res = $(".syll-result", row);
-      if (res) {
-        res.textContent = "—";
-        res.classList.remove("is-correct");
-      }
+  const root = $("#screen-7");
+  if (!root) return;
+
+  disable($("#btnNext7"), true);
+
+  $$(".syll-row", root).forEach((row) => {
+    $$(".btn-option", row).forEach((b) => {
+      b.classList.remove("is-picked");
+      disable(b, false);
     });
-  }
 
+    const res = $(".syll-result", row);
+    if (res) {
+      res.textContent = "—";
+      res.classList.remove("is-correct");
+    }
+  });
+}
+  
   /* =========================
      SCREEN 8 — FINAL
   ========================= */
