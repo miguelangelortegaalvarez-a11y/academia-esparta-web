@@ -3,8 +3,12 @@
 
 /* ==========================================================
    CUENTO PIRATA MARIO — STYLE (OPTIMIZADO iPad/Safari)
+   - Limpio, ordenado y sin duplicados
    ========================================================== */
 
+/* =========================
+   VARIABLES
+========================= */
 :root{
   --bg: #07121f;
 
@@ -29,6 +33,13 @@
   --pad: 16px;
 
   --fadeMs: 260ms; /* un poco más rápido para iPad */
+
+  /* Cards grandes (pantallas 4/5) */
+  --card-max: 240px;
+  --card-min: 190px;
+  --card-pad: 18px;
+  --label-size: 20px;
+  --label-bottom: 14px;
 }
 
 /* =========================
@@ -36,6 +47,7 @@
 ========================= */
 *{ box-sizing: border-box; }
 html, body{ height: 100%; }
+
 body{
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -83,14 +95,18 @@ body{
 /* =========================
    HUD
 ========================= */
+/* Baja el HUD un poco y respeta la zona segura del iPad */
 .hud{
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: var(--hudH);
+  left: 0; right: 0;
+  top: calc(env(safe-area-inset-top) + 10px) !important;
+  height: auto !important;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px var(--pad);
+
+  padding: 10px var(--pad) 10px var(--pad) !important;
   gap: 12px;
   z-index: 50;
 }
@@ -98,20 +114,22 @@ body{
 .hud-left{ flex: 1; min-width: 0; }
 .hud-right{ display:flex; align-items:center; gap: 10px; }
 
+/* Frase más grande y con salto si hace falta */
 .instruction{
   display: inline-block;
-  padding: 10px 14px;
+  padding: 12px 16px !important;
   border-radius: 14px;
   background: rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.10);
   color: var(--text);
-  font-size: 18px;
-  line-height: 1.2;
-  max-width: min(920px, 75vw);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+
+  font-size: clamp(22px, 2.6vw, 34px) !important;
+  line-height: 1.15 !important;
+
+  white-space: normal !important;
+  max-width: min(980px, 92vw) !important;
 }
+
 /* Botón ESCUCHAR pegado a la instrucción (HUD) */
 .btn-small{
   min-height: 44px;
@@ -120,7 +138,6 @@ body{
   font-weight: 900;
   border-radius: 14px;
 }
-
 
 /* =========================
    CONTENEDOR PANTALLAS
@@ -132,18 +149,18 @@ body{
   z-index: 10;
 }
 
-/* IMPORTANTE (rendimiento iOS):
-   - pantallas NO activas: display:none (no renderiza)
-   - pantalla activa: display:block + transición de opacidad */
+/* Pantallas: rendimiento iOS */
 .screen{
   position: absolute;
-  inset: var(--hudH) 0 0 0;
+  inset: calc(env(safe-area-inset-top) + 96px) 0 0 0 !important;
   padding: 18px;
+
   display: none;
   opacity: 0;
   transform: translateY(6px);
   transition: opacity var(--fadeMs) ease, transform var(--fadeMs) ease;
-  contain: layout paint; /* ayuda en Safari */
+
+  contain: layout paint;
 }
 
 .screen.is-active{
@@ -170,7 +187,7 @@ body{
   margin: 0 auto;
 }
 
-/* Blur: activarlo solo si está soportado (y más suave) */
+/* Blur opcional */
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
   .panel{
     backdrop-filter: blur(4px);
@@ -235,6 +252,14 @@ body{
   border: 1px solid rgba(255,255,255,0.22);
 }
 
+/* Footer actions */
+.footer-actions{
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
 /* =========================
    TOAST / CHECK
 ========================= */
@@ -266,19 +291,46 @@ body{
   pointer-events: none;
 }
 
-/* Footer actions */
-.footer-actions{
-  margin-top: 14px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-}
+/* =========================
+   BLOQUEO (pantallas)
+========================= */
+#screen-2.is-locked *{ pointer-events: none !important; user-select: none !important; }
+#screen-2.is-locked #btnListen2,
+#screen-2.is-locked #btnListen2 *{ pointer-events: auto !important; }
 
-/* ==========================================================
+#screen-3.is-locked .key-item,
+#screen-3.is-locked #keysLayer,
+#screen-3.is-locked #chestDrop{ pointer-events: none; user-select: none; }
+#screen-3.is-locked #btnListen3,
+#screen-3.is-locked #btnListen3 *{ pointer-events: auto; }
+
+#screen-4.is-locked #pirateTapArea,
+#screen-4.is-locked #pirateTapLayer,
+#screen-4.is-locked .pirate-tap-item{ pointer-events: none; user-select: none; }
+#screen-4.is-locked #btnListen4,
+#screen-4.is-locked #btnListen4 *{ pointer-events: auto; }
+
+#screen-6.is-locked #coinsBank,
+#screen-6.is-locked .coin-item,
+#screen-6.is-locked .count-chest,
+#screen-6.is-locked .drop-chest,
+#screen-6.is-locked .coins-area{ pointer-events: none; user-select: none; }
+#screen-6.is-locked #btnListen6,
+#screen-6.is-locked #btnListen6 *{ pointer-events: auto; }
+
+#screen-7.is-locked .syll-row,
+#screen-7.is-locked .btn-option,
+#screen-7.is-locked .syllables,
+#screen-7.is-locked .panel{ pointer-events: none; user-select: none; }
+#screen-7.is-locked #btnListen7,
+#screen-7.is-locked #btnListen7 *{ pointer-events: auto; }
+
+/* =========================
    SCREEN 2 — LETRAS
-========================================================== */
+========================= */
 #screen-2 .panel{
-  max-height: calc(100svh - var(--hudH) - 28px);
+  padding: 14px !important;
+  max-height: calc(100svh - (env(safe-area-inset-top) + 120px)) !important;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -292,9 +344,9 @@ body{
 .letter-row{
   display: grid;
   grid-template-columns: 1fr 240px 160px;
-  gap: 12px;
+  gap: 10px !important;
   align-items: center;
-  padding: 14px;
+  padding: 12px !important;
   border-radius: 16px;
   background: rgba(0,0,0,0.18);
   border: 1px solid rgba(255,255,255,0.10);
@@ -374,97 +426,10 @@ body{
   filter: drop-shadow(0 14px 18px rgba(0,0,0,0.35));
   transform: scale(1.02);
 }
-/* ============================
-   BLOQUEO TOTAL PANTALLA 2
-   (solo deja ESCUCHAR)
-============================ */
 
-/* Bloquea TODO dentro de screen-2 */
-#screen-2.is-locked *{
-  pointer-events: none !important;
-  user-select: none !important;
-}
-
-/* Pero deja ESCUCHAR (y su contenido) funcionando */
-#screen-2.is-locked #btnListen2,
-#screen-2.is-locked #btnListen2 *{
-  pointer-events: auto !important;
-}
-/* =========================================
-   BLOQUEO TOTAL — PANTALLA 3 (LLAVES)
-   (bloquea juego, deja ESCUCHAR)
-========================================= */
-
-#screen-3.is-locked .key-item,
-#screen-3.is-locked #keysLayer,
-#screen-3.is-locked #chestDrop {
-  pointer-events: none;
-  user-select: none;
-}
-
-/* El botón ESCUCHAR sí funciona */
-#screen-3.is-locked #btnListen3,
-#screen-3.is-locked #btnListen3 * {
-  pointer-events: auto;
-}
-/* =========================================
-   BLOQUEO TOTAL — PANTALLA 4 (PIRATAS)
-   (bloquea juego, deja ESCUCHAR)
-========================================= */
-
-#screen-4.is-locked #pirateTapArea,
-#screen-4.is-locked #pirateTapLayer,
-#screen-4.is-locked .pirate-tap-item {
-  pointer-events: none;
-  user-select: none;
-}
-
-/* El botón ESCUCHAR sí funciona */
-#screen-4.is-locked #btnListen4,
-#screen-4.is-locked #btnListen4 * {
-  pointer-events: auto;
-}
-/* =========================================
-   BLOQUEO TOTAL — PANTALLA 6 (MONEDAS)
-   (bloquea juego, deja ESCUCHAR)
-========================================= */
-
-/* Bloquea interacción con el juego */
-#screen-6.is-locked #coinsBank,
-#screen-6.is-locked .coin-item,
-#screen-6.is-locked .count-chest,
-#screen-6.is-locked .drop-chest,
-#screen-6.is-locked .coins-area {
-  pointer-events: none;
-  user-select: none;
-}
-
-/* El botón ESCUCHAR sí funciona */
-#screen-6.is-locked #btnListen6,
-#screen-6.is-locked #btnListen6 * {
-  pointer-events: auto;
-}
-/* =========================================
-   BLOQUEO TOTAL — PANTALLA 7 (SÍLABAS)
-   (bloquea juego, deja ESCUCHAR)
-========================================= */
-
-#screen-7.is-locked .syll-row,
-#screen-7.is-locked .btn-option,
-#screen-7.is-locked .syllables,
-#screen-7.is-locked .panel {
-  pointer-events: none;
-  user-select: none;
-}
-
-/* ESCUCHAR sí funciona */
-#screen-7.is-locked #btnListen7,
-#screen-7.is-locked #btnListen7 * {
-  pointer-events: auto;
-}
-/* ==========================================================
-   BASE “LLAVES/OBJETOS FLOTANDO” (screens 3 y 4)
-========================================================== */
+/* =========================
+   SCREEN 3 — LLAVES (base)
+========================= */
 .keys-area{
   position: relative;
   min-height: 58vh;
@@ -475,9 +440,7 @@ body{
   inset: 0;
 }
 
-/* ==========================================================
-   SCREEN 3 — LLAVES EN EL FONDO (SIN CAJA) + COFRE + CONTINUAR
-========================================================== */
+/* LLAVES: pantalla 3 sin panel */
 #screen-3 .panel{
   background: transparent !important;
   border: 0 !important;
@@ -489,14 +452,10 @@ body{
   margin: 0 !important;
 }
 #screen-3 .panel-wide,
-#screen-3 .panel-full{
-  width: 100% !important;
-}
+#screen-3 .panel-full{ width: 100% !important; }
 
 #screen-3 .h2,
-#screen-3 h2{
-  display: none !important;
-}
+#screen-3 h2{ display: none !important; }
 
 #screen-3 .keys-area{
   min-height: 56vh;
@@ -589,9 +548,9 @@ body{
 }
 #screen-3 .footer-actions .btn{ min-width: 180px; }
 
-/* ==========================================================
-   SCREEN 4 — PIRATE TAP (iconos bien, sin monstruos)
-========================================================== */
+/* =========================
+   SCREEN 4 — PIRATE TAP (rejilla pro)
+========================= */
 #screen-4 .panel{ position: relative; }
 
 #pirateTapArea{
@@ -599,61 +558,44 @@ body{
   min-height: 58vh;
 }
 
-#pirateTapLayer{
+#screen-4 #pirateTapLayer{
   position: absolute;
   inset: 0;
 
-  /* ✅ Rejilla fija 3x2 centrada */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: min-content;
-  gap: 26px 28px;
+  grid-template-columns: repeat(3, minmax(var(--card-min), 1fr));
+  gap: 22px;
+  padding: 18px;
 
-  place-items: center;
   align-content: center;
-  justify-content: center;
-
-  padding: 22px;
+  justify-items: center;
 }
 
-.pirate-tap-item{
-  width: 110px;
-  height: 130px;
-  border-radius: 18px;
+/* Tarjeta */
+#screen-4 .pirate-tap-item{
+  width: 100%;
+  max-width: var(--card-max);
+  aspect-ratio: 1 / 1;
+  padding: var(--card-pad);
+  border-radius: 22px;
+
   border: 1px solid rgba(255,255,255,0.20);
   background: rgba(255,255,255,0.10);
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 
-  position: relative;
-
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
+
+  overflow: hidden;
 }
 
-.pirate-tap-item img{
-  width: 76px !important;
-  height: 76px !important;
-  object-fit: contain !important;
-  display: block;
-  pointer-events: none;
-}
-
-.pirate-tap-item.is-wrong{
-  transform: scale(0.96);
-  filter: grayscale(1);
-}
-
-.pirate-tap-item.is-picked{
-  outline: 4px solid rgba(255,210,77,0.95);
-  outline-offset: 2px;
-}
-.pirate-tap-label{
+/* ✅ TEXTO IGUAL (no lo tocamos) */
+#screen-4 .pirate-tap-label{
   position: static;
   transform: none;
   font-size: 14px;
@@ -665,9 +607,36 @@ body{
   line-height: 1;
 }
 
-/* ==========================================================
+/* ✅ IMAGEN MÁS GRANDE (lo que pediste) */
+#screen-4 .pirate-tap-img{
+  width: 185px;
+  height: 185px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+#screen-4 .pirate-tap-item.is-wrong{
+  transform: scale(0.96);
+  filter: grayscale(1);
+}
+
+#screen-4 .pirate-tap-item.is-picked{
+  outline: 4px solid rgba(255,210,77,0.95);
+  outline-offset: 2px;
+}
+
+/* Responsive Pantalla 4 */
+@media (max-width: 900px){
+  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+}
+@media (max-width: 560px){
+  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
+}
+
+/* =========================
    INTERLUDE — MOTIVACIÓN
-========================================================== */
+========================= */
 .interlude-wrap{
   position: relative;
   width: min(1100px, 94vw);
@@ -699,155 +668,75 @@ body{
   justify-content: space-between;
 }
 
-/* ==========================================================
-   SCREEN 5 — ESCUCHA Y ENCUENTRA (5 OBJETOS)
-   - Rejilla 5 objetos (2 + 3)
-   - Al acertar: brillo/iluminación + bloqueado
-   - Fallo: pequeño “shake” + desaturación momentánea
-========================================================== */
+/* =========================
+   SCREEN 5 — FIND (JS NUEVO actual)
+========================= */
+.find-wrap{ display:grid; gap:14px; min-height:58vh; }
+.find-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.find-round{ font-weight:900; font-size:20px; padding:10px 12px; background:rgba(0,0,0,0.25); border-radius:14px; }
 
-#screen-5 .panel{
-  position: relative;
-}
-
-.find-area{
+#findGrid{
   display: grid;
-  gap: 14px;
-  min-height: 58vh;
-  align-content: start;
-}
-
-.find-top{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.find-top .find-hint{
-  padding: 10px 14px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.28);
-  border: 1px solid rgba(255,255,255,0.10);
-  color: rgba(255,255,255,0.92);
-  font-size: 18px;
-  font-weight: 800;
-}
-
-/* Botón ESCUCHAR de la pantalla 5 */
-#btnListen5{
-  min-width: 190px;
-}
-
-/* Rejilla 5 objetos */
-#findObjectGrid{
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 18px;
-  padding: 14px;
-  border-radius: 18px;
-  background: rgba(0,0,0,0.14);
-  border: 1px solid rgba(255,255,255,0.12);
+  grid-template-columns: repeat(5, minmax(var(--card-min), 1fr));
+  gap: 22px;
+  padding: 18px;
   align-content: center;
   justify-items: center;
 }
 
-/* Cada objeto */
-.fo-item{
+.find-item{
   width: 100%;
-  max-width: 240px;
+  max-width: var(--card-max);
   aspect-ratio: 1 / 1;
-  border-radius: 26px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.14);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  padding: 18px;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  transition: transform 120ms ease, filter 140ms ease, opacity 140ms ease, box-shadow 180ms ease, outline 180ms ease;
-  position: relative;
-  overflow: hidden;
+  padding: var(--card-pad);
+  border-radius: 22px;
+
+  border:1px solid rgba(255,255,255,0.22);
+  background:rgba(255,255,255,0.12);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
 }
 
-.fo-item:active{
-  transform: scale(0.98);
-}
-
-.fo-item img{
+.find-img{
   width: 100%;
   height: 100%;
-   max-height: 150px;
   object-fit: contain;
-  display: block;
-  pointer-events: none;
+  max-height: 150px;
+  pointer-events:none;
 }
 
-/* (Opcional) etiqueta debajo dentro del botón */
-.fo-label{
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  color: rgba(255,255,255,0.92);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.55);
-  pointer-events: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.find-label{
+  display:block;
+  font-size: var(--label-size);
+  font-weight:900;
+  letter-spacing:0.6px;
+  color:rgba(255,255,255,0.92);
+  text-shadow:0 2px 8px rgba(0,0,0,0.55);
+  line-height:1;
+  text-align:center;
+  white-space:nowrap;
 }
 
-/* Acierto: brillo + aro dorado */
-.fo-item.is-correct{
-  opacity: 1 !important;
-  filter: saturate(1.2) brightness(1.08);
-  outline: 4px solid rgba(255,210,77,0.95);
-  outline-offset: 2px;
-  box-shadow: 0 16px 26px rgba(0,0,0,0.28), 0 0 0 10px rgba(255,210,77,0.12);
-}
+.find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
+.find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
 
-/* Bloqueado tras acierto */
-.fo-item.is-locked{
-  cursor: default;
-  pointer-events: none;
-}
-
-/* Fallo: “shake” suave */
-.fo-item.is-wrong{
-  animation: fo-shake 220ms ease;
-  filter: grayscale(1);
-}
-
-@keyframes fo-shake{
-  0%{ transform: translateX(0); }
-  25%{ transform: translateX(-6px); }
-  50%{ transform: translateX(6px); }
-  75%{ transform: translateX(-4px); }
-  100%{ transform: translateX(0); }
-}
-
-/* Responsive: en pantallas estrechas baja a 3/2 */
+/* Responsive Pantalla 5 */
 @media (max-width: 900px){
-  #findObjectGrid{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  #findGrid{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
 }
-@media (max-width: 520px){
-  #findObjectGrid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+@media (max-width: 560px){
+  #findGrid{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
 }
 
-/* ==========================================================
-   SCREEN 6 — COINS (FIX iPad: cofres y monedas)
-========================================================== */
-
+/* =========================
+   SCREEN 6 — COINS
+========================= */
 #screen-6 .coins-area{
   display: grid;
   gap: 14px;
@@ -870,7 +759,6 @@ body{
   justify-items: center;
 }
 
-/* Número (3 / 5 / 6) */
 #screen-6 .count-label{
   width: 64px;
   height: 64px;
@@ -884,20 +772,17 @@ body{
   box-shadow: 0 10px 18px rgba(0,0,0,0.22);
 }
 
-/* Zona de soltar (más pequeña + contenida) */
 #screen-6 .drop-chest{
-  width: 180px;                 /* ⬅️ antes 200 */
-  height: 140px;                /* ⬅️ antes 150 */
+  width: 180px;
+  height: 140px;
   border-radius: 18px;
   border: 2px dashed rgba(255,210,77,0.65);
   background: rgba(0,0,0,0.10);
-  display: flex;                /* mejor que grid para imágenes */
+  display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;             /* ✅ CLAVE: no se sale jamás */
+  overflow: hidden;
 }
-
-/* Imagen del cofre dentro del drop */
 #screen-6 .drop-chest img{
   max-width: 100%;
   max-height: 100%;
@@ -907,14 +792,12 @@ body{
   display: block;
 }
 
-/* Estado (0/3 etc.) */
 #screen-6 .count-status{
   font-weight: 900;
   letter-spacing: 0.5px;
   color: rgba(255,255,255,0.86);
 }
 
-/* Banco de monedas */
 #screen-6 .coins-bank{
   border-radius: 18px;
   background: rgba(0,0,0,0.12);
@@ -927,10 +810,9 @@ body{
   min-height: 120px;
 }
 
-/* Monedas (ligeramente más pequeñas para que respiren) */
 #screen-6 .coin-item{
-  width: 78px;                  /* ⬅️ antes 84 */
-  height: 78px;                 /* ⬅️ antes 84 */
+  width: 78px;
+  height: 78px;
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.20);
   background: rgba(255,255,255,0.10);
@@ -941,23 +823,20 @@ body{
   touch-action: none;
   -webkit-tap-highlight-color: transparent;
 }
-
 #screen-6 .coin-item img{
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
 }
-
 #screen-6 .coin-item.is-selected{
   outline: 4px solid rgba(255,210,77,0.95);
   outline-offset: 2px;
 }
 
 /* =========================
-   SCREEN 7 — SÍLABAS (igual que screen 2)
+   SCREEN 7 — SÍLABAS (final, sin duplicados)
 ========================= */
-
 #screen-7 .panel.panel-wide{
   display: flex;
   flex-direction: column;
@@ -965,7 +844,6 @@ body{
   overflow: hidden;
 }
 
-/* Área con scroll */
 #screen-7 #syllablesArea{
   flex: 1;
   overflow-y: auto;
@@ -973,27 +851,27 @@ body{
   padding-right: 6px;
 }
 
-/* Fila */
 #screen-7 .syll-row{
   display: grid;
-  grid-template-columns: 1fr 220px 220px 70px;
-  gap: 12px;
+  grid-template-columns: minmax(160px, 1fr) 220px 220px 70px;
+  column-gap: 16px;
   align-items: center;
+
   padding: 14px;
   margin-bottom: 14px;
+
   border-radius: 18px;
   background: rgba(0,0,0,0.16);
   border: 1px solid rgba(255,255,255,0.12);
 }
 
-/* Palabra */
 #screen-7 .syll-word{
   font-size: 28px;
   font-weight: 900;
   letter-spacing: 1px;
 }
 
-/* Imagen (igual que screen 2) */
+/* Imagen tipo pantalla 2 */
 #screen-7 .syll-pic{
   width: 220px;
   height: 130px;
@@ -1012,10 +890,11 @@ body{
   object-fit: contain;
 }
 
-/* Botones */
 #screen-7 .syll-options{
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
 }
 
 #screen-7 .btn-option{
@@ -1025,7 +904,6 @@ body{
   font-weight: 900;
 }
 
-/* Resultado */
 #screen-7 .syll-result{
   width: 64px;
   height: 64px;
@@ -1036,6 +914,7 @@ body{
   font-weight: 900;
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,255,255,0.16);
+  justify-self: end;
 }
 
 /* CONTINUAR siempre visible */
@@ -1046,9 +925,10 @@ body{
   padding-top: 12px;
   background: linear-gradient(to top, rgba(7,18,31,0.85), transparent);
 }
-/* ==========================================================
-   RESPONSIVE
-========================================================== */
+
+/* =========================
+   RESPONSIVE GENERAL
+========================= */
 @media (max-width: 760px){
   .letter-row{ grid-template-columns: 1fr; }
   .pic-box{ width: 100%; height: 160px; }
@@ -1056,52 +936,9 @@ body{
   .chests-row{ grid-template-columns: 1fr; }
 }
 
-/* ==========================================================
-   AJUSTE HUD (frase de arriba): más abajo + más grande
-   ========================================================== */
-
-/* Baja el HUD un poco y respeta la zona segura del iPad */
-.hud{
-  top: calc(env(safe-area-inset-top) + 10px) !important;
-  height: auto !important;
-  padding: 10px var(--pad) 10px var(--pad) !important;
-}
-
-/* Frase más grande y que pueda partir en 2 líneas si hace falta */
-.instruction{
-  font-size: clamp(22px, 2.6vw, 34px) !important;
-  line-height: 1.15 !important;
-  white-space: normal !important;
-  max-width: min(980px, 92vw) !important;
-  padding: 12px 16px !important;
-}
-
-/* Como el HUD ya no tiene altura fija, deja espacio real arriba en las pantallas */
-.screen{
-  inset: calc(env(safe-area-inset-top) + 96px) 0 0 0 !important;
-}
-
-/* ==========================================================
-   PANTALLA 2: panel un poco más "pequeño" para que respire
-   ========================================================== */
-
-/* Reduce padding del panel y limita su altura */
-#screen-2 .panel{
-  padding: 14px !important;
-  max-height: calc(100svh - (env(safe-area-inset-top) + 120px)) !important;
-}
-
-/* Compacta cada fila (palabra/imagen/letras) un poco */
-#screen-2 .letter-row{
-  padding: 12px !important;
-  gap: 10px !important;
-}
-
-/* Si quieres el título “Actividad 1” un pelín más compacto */
-#screen-2 .h2{
-  margin: 0 0 8px 0 !important;
-  font-size: 24px !important;
-}
+/* =========================
+   ASSET FALLBACK
+========================= */
 .asset-fallback{
   position: absolute;
   left: 12px;
@@ -1114,331 +951,4 @@ body{
   border: 1px solid rgba(255,255,255,0.18);
   font-size: 14px;
   color: #fff;
-}
-/* ==========================================================
-   SCREEN 5 — ESCUCHA Y ENCUENTRA (findObject)
-========================================================== */
-.find-wrap{ display:grid; gap:14px; min-height:58vh; }
-.find-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
-.find-round{ font-weight:900; font-size:20px; padding:10px 12px; background:rgba(0,0,0,0.25); border-radius:14px; }
-
-.find-grid{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-  padding:12px;
-  border-radius:18px;
-  background:rgba(0,0,0,0.14);
-  border:1px solid rgba(255,255,255,0.12);
-}
-
-.find-item{
-  width:120px; height:120px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,0.20);
-  background:rgba(255,255,255,0.10);
-  display:grid;
-  place-items:center;
-  cursor:pointer;
-  padding:10px;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.find-img{ width:100%; height:100%; object-fit:contain; pointer-events:none; }
-.find-label{ display:none; } /* si no quieres texto debajo */
-
-.find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
-.find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
-/* ==========================================================
-   SCREEN 5 (JS NUEVO) — findGrid / find-item / find-label
-   ========================================================== */
-
-#findGrid{
-  display:flex;
-  gap:18px;                 /* ⬅️ más aire entre objetos */
-  justify-content:center;
-  flex-wrap:wrap;
-  padding:18px;
-}
-
-/* Cada objeto (con texto debajo) */
-.find-item{
-  width:160px;              /* ⬅️ antes 120 */
-  min-height:190px;         /* ⬅️ más alto para texto grande */
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,0.22);
-  background:rgba(255,255,255,0.12);
-  cursor:pointer;
-  padding:14px;
-  -webkit-tap-highlight-color:transparent;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:12px;                 /* ⬅️ más separación imagen-texto */
-}
-
-.find-img{
-  width:100px;              /* ⬅️ antes 72 */
-  height:100px;
-  object-fit:contain;
-  pointer-events:none;
-}
-
-/* ✅ Nombre debajo */
-.find-label{
-  display:block;               /* ✅ antes lo tenías oculto */
-  font-size:14px;
-  font-weight:900;
-  letter-spacing:0.6px;
-  color:rgba(255,255,255,0.92);
-  text-shadow:0 2px 8px rgba(0,0,0,0.55);
-  line-height:1;
-  text-align:center;
-  white-space:nowrap;
-}
-
-/* Estados */
-.find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
-.find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
-/* ==========================================================
-   AJUSTE PRO: Pantalla 4 y 5 con tarjetas MÁS GRANDES
-   y MISMO tamaño visual (iPad friendly)
-========================================================== */
-
-:root{
-  --card-max: 240px;     /* tamaño máximo de tarjeta */
-  --card-min: 190px;     /* tamaño mínimo de tarjeta en pantallas anchas */
-  --card-pad: 18px;      /* padding interno */
-  --label-size: 20px;    /* tamaño del texto debajo */
-  --label-bottom: 14px;  /* separación del texto al borde */
-}
-
-/* ====== PANTALLA 5 (find) ====== */
-#screen-5 .find-grid{
-  display: grid;
-  grid-template-columns: repeat(5, minmax(var(--card-min), 1fr));
-  gap: 22px;
-  padding: 18px;
-  align-content: center;
-  justify-items: center;
-}
-
-#screen-5 .find-item{
-  width: 100%;
-  max-width: var(--card-max);
-  aspect-ratio: 1 / 1;
-  padding: var(--card-pad);
-  border-radius: 22px;
-}
-
-#screen-5 .find-img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  max-height: 150px; /* hace el objeto más protagonista */
-}
-
-#screen-5 .find-label{
-  font-size: var(--label-size);
-  font-weight: 900;
-  bottom: var(--label-bottom);
-  letter-spacing: 0.6px;
-}
-
-/* Responsive Pantalla 5 */
-@media (max-width: 900px){
-  #screen-5 .find-grid{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
-}
-@media (max-width: 560px){
-  #screen-5 .find-grid{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
-}
-
-
-/* ====== PANTALLA 4 (pirate tap) ====== */
-#screen-4 #pirateTapLayer{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(var(--card-min), 1fr));
-  gap: 22px;
-  padding: 18px;
-  align-content: center;
-  justify-items: center;
-}
-
-#screen-4 .pirate-tap-item{
-  width: 100%;
-  max-width: var(--card-max);
-  aspect-ratio: 1 / 1;
-  padding: var(--card-pad);
-  border-radius: 22px;
-}
-
-#screen-4 .pirate-tap-img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  max-height: 150px;
-}
-
-#screen-4 .pirate-tap-label{
-  font-size: var(--label-size);
-  font-weight: 900;
-  bottom: var(--label-bottom);
-  letter-spacing: 0.6px;
-}
-
-/* Responsive Pantalla 4 */
-@media (max-width: 900px){
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
-}
-@media (max-width: 560px){
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
-   }
-/* Bloqueo de pantalla hasta escuchar */
-.screen.is-locked .panel{
-  pointer-events: none;
-  filter: saturate(0.95);
-}
-/* Pantalla 7 — distancia uniforme entre filas */
-#screen-7 .syll-row{
-  margin-bottom: 14px;
-}
-#screen-7 .syll-row:last-child{
-  margin-bottom: 0;
-}
-/* Pantalla 7: permitir scroll dentro del panel */
-#screen-7 .panel {
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Que el botón CONTINUAR se quede accesible */
-#screen-7 .footer-actions {
-  position: sticky;
-  bottom: 0;
-  padding-top: 12px;
-}
-/* =========================
-   PANTALLA 7 (SÍLABAS) — igual que pantalla 2
-========================= */
-
-/* Panel en columna para poder hacer scroll en el contenido */
-#screen-7 .panel.panel-wide{
-  display: flex;
-  flex-direction: column;
-  max-height: 86vh;
-  overflow: hidden;
-}
-
-/* El área con palabras es la que hace scroll */
-#screen-7 #syllablesArea{
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-right: 6px;
-}
-
-/* Distancia uniforme entre filas */
-#screen-7 .syll-row{
-  margin-bottom: 14px;
-}
-#screen-7 .syll-row:last-child{
-  margin-bottom: 0;
-}
-
-/* Layout con imagen a la derecha */
-#screen-7 .syll-row{
-  display: grid;
-  grid-template-columns: 1fr 1.2fr 70px 140px;
-  gap: 12px;
-  align-items: center;
-}
-
-#screen-7 .syll-pic img{
-  width: 100%;
-  max-width: 140px;
-  height: auto;
-  border-radius: 12px;
-  display: block;
-  pointer-events: none;
-}
-
-/* CONTINUAR siempre visible (como en pantalla 2) */
-#screen-7 .footer-actions{
-  position: sticky;
-  bottom: 0;
-  padding-top: 12px;
-  margin-top: 12px;
-}
-/* ===== FIX Pantalla 7: evitar solapes (check encima del 2) ===== */
-#screen-7 .syll-row{
-  grid-template-columns: minmax(160px, 1fr) 200px auto 90px !important;
-  column-gap: 16px !important;
-}
-
-/* La imagen centrada y sin salirse */
-#screen-7 .syll-pic{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#screen-7 .syll-pic img{
-  max-width: 180px;
-  max-height: 110px;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Botones a la derecha sin pisarse */
-#screen-7 .syll-options{
-  justify-content: flex-end !important;
-  gap: 12px !important;
-  flex-wrap: nowrap !important;
-}
-
-/* El resultado SIEMPRE al final, sin invadir botones */
-#screen-7 .syll-result{
-  justify-self: end !important;
-}
-/* =========================
-   PANTALLA 4 – OBJETOS PIRATAS
-   Aumentar tamaño imagen + texto
-========================= */
-
-.pirate-tap-item {
-  min-width: 170px;
-  min-height: 170px;
-  padding: 16px;
-}
-
-.pirate-tap-img {
-  width: 110px;
-  height: 110px;
-  object-fit: contain;
-}
-
-.pirate-tap-label {
-  margin-top: 10px;
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-/* =========================
-   PANTALLA 4 – IMAGEN MÁS GRANDE
-   TEXTO IGUAL
-========================= */
-
-.pirate-tap-img {
-  width: 185px;   /* antes 150px */
-  height: 185px;  /* antes 150px */
-  object-fit: contain;
-}
-
-/* mantenemos la palabra EXACTAMENTE igual */
-.pirate-tap-label {
-  font-size: inherit;
 }
