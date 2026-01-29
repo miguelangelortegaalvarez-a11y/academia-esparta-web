@@ -1500,6 +1500,7 @@ if (btnListen6) {
     disable(btn, true);
 
     const rows = $$(".syll-row", root);
+     const totalRows = rows.length;
     rows.forEach((row) => {
       const word = row.dataset.word;
       const answer = Number(row.dataset.answer);
