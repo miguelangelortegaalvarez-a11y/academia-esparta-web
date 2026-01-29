@@ -954,59 +954,98 @@ body{
   outline-offset: 2px;
 }
 
-/* ==========================================================
-   SCREEN 7 — SÍLABAS
-========================================================== */
-.syllables-area{ display: grid; gap: 14px; }
+/* =========================
+   SCREEN 7 — SÍLABAS (igual que screen 2)
+========================= */
 
-.syll-row{
+#screen-7 .panel.panel-wide{
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100svh - 140px);
+  overflow: hidden;
+}
+
+/* Área con scroll */
+#screen-7 #syllablesArea{
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 6px;
+}
+
+/* Fila */
+#screen-7 .syll-row{
   display: grid;
-  grid-template-columns: 1fr 2fr 0.6fr;
+  grid-template-columns: 1fr 220px 220px 70px;
   gap: 12px;
   align-items: center;
   padding: 14px;
+  margin-bottom: 14px;
   border-radius: 18px;
   background: rgba(0,0,0,0.16);
   border: 1px solid rgba(255,255,255,0.12);
 }
-.syll-word{
+
+/* Palabra */
+#screen-7 .syll-word{
   font-size: 28px;
   font-weight: 900;
   letter-spacing: 1px;
 }
-.syll-options{ display: flex; gap: 10px; justify-content: flex-start; }
 
-.btn-option{
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.22);
-  color: #fff;
-  min-width: 86px;
+/* Imagen (igual que screen 2) */
+#screen-7 .syll-pic{
+  width: 220px;
+  height: 130px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#screen-7 .syll-pic img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Botones */
+#screen-7 .syll-options{
+  display: flex;
+  gap: 10px;
+}
+
+#screen-7 .btn-option{
+  min-width: 64px;
   min-height: 56px;
   font-size: 22px;
   font-weight: 900;
 }
-.btn-option.is-picked{
-  background: rgba(255,210,77,0.90);
-  color: #2b2100;
-  border-color: rgba(255,210,77,0.95);
-}
-.syll-result{
+
+/* Resultado */
+#screen-7 .syll-result{
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
   display: grid;
   place-items: center;
   font-size: 34px;
   font-weight: 900;
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,255,255,0.16);
 }
-.syll-result.is-correct{
-  background: rgba(85,239,196,0.18);
-  border-color: rgba(85,239,196,0.7);
-  color: var(--ok);
-}
 
+/* CONTINUAR siempre visible */
+#screen-7 .footer-actions{
+  position: sticky;
+  bottom: 0;
+  margin-top: 12px;
+  padding-top: 12px;
+  background: linear-gradient(to top, rgba(7,18,31,0.85), transparent);
+}
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
