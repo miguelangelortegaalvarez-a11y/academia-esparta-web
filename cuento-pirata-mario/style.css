@@ -512,12 +512,18 @@ body{
 /* ==========================================================
    SCREEN 3 — COFRE MÁS GRANDE Y PROTAGONISTA
 ========================================================== */
+/* ===== Screen 3: posiciones afinadas ===== */
+:root{
+  --s3-continue-bottom: calc(18px + env(safe-area-inset-bottom)); /* tu CONTINUAR “perfecto” */
+  --s3-chest-bottom:    calc(18px + env(safe-area-inset-bottom)); /* cofre a la misma altura (base) */
+}
+
 #screen-3 .chest-drop{
   position: absolute !important;
   right: 22px !important;
 
-  /* ⬇️ MISMA ALTURA QUE CONTINUAR */
-  bottom: calc(130px + env(safe-area-inset-bottom)) !important;
+  /* ✅ cofre MÁS ABAJO (usa su propia variable) */
+  bottom: var(--s3-chest-bottom) !important;
 
   width: 300px !important;
   height: 260px !important;
@@ -545,17 +551,19 @@ body{
 
 #screen-3 .chest-hint{ display: none !important; }
 
+
+}
 #screen-3 .footer-actions{
   position: absolute !important;
   left: 18px !important;
-  bottom: calc(130px + env(safe-area-inset-bottom)) !important;
+
+  /* ✅ continuar con SU altura (la que te queda perfecta) */
+  bottom: var(--s3-continue-bottom) !important;
+
   margin-top: 0 !important;
   display: flex !important;
   justify-content: flex-start !important;
   z-index: 7;
-}
-#screen-3 .footer-actions .btn{ min-width: 180px; }
-
 /* =========================
    SCREEN 4 — PIRATE TAP (rejilla pro)
 ========================= */
