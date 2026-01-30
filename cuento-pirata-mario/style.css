@@ -508,21 +508,21 @@ body{
   50%  { transform: translate3d(0, -10px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
-
 /* ==========================================================
    SCREEN 3 — COFRE MÁS GRANDE Y PROTAGONISTA
 ========================================================== */
-/* ===== Screen 3: posiciones afinadas ===== */
-:root{
-  --s3-continue-bottom: calc(18px + env(safe-area-inset-bottom)); /* tu CONTINUAR “perfecto” */
-  --s3-chest-bottom:    calc(18px + env(safe-area-inset-bottom)); /* cofre a la misma altura (base) */
+
+/* Variables SOLO para Screen 3 (mejor que un :root nuevo) */
+#screen-3{
+  --s3-continue-bottom: calc(18px + env(safe-area-inset-bottom));
+  --s3-chest-bottom:    calc(18px + env(safe-area-inset-bottom));
 }
 
 #screen-3 .chest-drop{
   position: absolute !important;
   right: 22px !important;
 
-  /* ✅ cofre MÁS ABAJO (usa su propia variable) */
+  /* ✅ cofre independiente del botón */
   bottom: var(--s3-chest-bottom) !important;
 
   width: 300px !important;
@@ -540,30 +540,30 @@ body{
 
 #screen-3 .chest-img,
 #screen-3 .chest-drop img{
-  width: 100% !important;
-  max-width: 310px !important; /* si quieres limitar tamaño máximo */
+  width: 310px !important;
+  max-width: 310px !important;
   height: auto !important;
   object-fit: contain !important;
   display: block !important;
 }
 
-
-
 #screen-3 .chest-hint{ display: none !important; }
 
-
-}
 #screen-3 .footer-actions{
   position: absolute !important;
   left: 18px !important;
 
-  /* ✅ continuar con SU altura (la que te queda perfecta) */
+  /* ✅ continuar con su propia altura */
   bottom: var(--s3-continue-bottom) !important;
 
   margin-top: 0 !important;
   display: flex !important;
   justify-content: flex-start !important;
   z-index: 7;
+}
+
+#screen-3 .footer-actions .btn{ min-width: 180px; }
+
 /* =========================
    SCREEN 4 — PIRATE TAP (rejilla pro)
 ========================= */
