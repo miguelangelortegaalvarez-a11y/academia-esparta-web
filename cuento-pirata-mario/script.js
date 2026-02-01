@@ -1172,9 +1172,9 @@ if (btnListen4) {
 
     // Inicializa cola aleatoria de 5 rondas
         state.find.queue = [...SETTINGS.findObject.pool];
-    state.find.current = null;
-    state.find.solved = new Set();
-    state.find.lock = false;
+state.find.current = null;
+state.find.solved = new Set();
+state.find.lock = false;
 
     // Render grid (5 objetos visibles siempre)
     grid.innerHTML = "";
