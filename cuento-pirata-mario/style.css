@@ -968,12 +968,20 @@ body{
   font-size: 14px;
   color: #fff;
 }
-/* Cofre: NO bloquea taps de llaves */
+/* Cofre: nunca debe bloquear taps */
+#screen-3 #chestDrop,
 #screen-3 .chest-drop{
-  pointer-events: none !important; /* deja pasar taps */
+  pointer-events: none !important;
+  z-index: 3 !important;
 }
 
-/* ...pero durante arrastre sí permitimos drop */
-#screen-3.is-dragging .chest-drop{
-  pointer-events: auto !important;
+/* Llaves: por encima visualmente */
+#screen-3 #keysLayer,
+#screen-3 .keys-layer{
+  position: absolute;
+  inset: 0;
+  z-index: 6 !important;
+}
+#screen-3 .key-item{
+  z-index: 7 !important;
 }
