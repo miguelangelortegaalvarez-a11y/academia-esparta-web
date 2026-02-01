@@ -1265,7 +1265,7 @@ if (!target || !state.find.heard) {
         next = remaining[0] || null;
       }
 
-      state.find.current = next;
+      state.find.heard = false; // ✅ hasta terminar el audio no puede acertar
 
       const done = state.find.solved.size;
       const total = SETTINGS.findObject.pool.length;
