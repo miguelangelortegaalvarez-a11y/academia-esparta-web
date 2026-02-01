@@ -111,9 +111,10 @@
 
     // ✅ NUEVA Actividad 5 (Escucha y encuentra)
     findObject: {
-      // 5 rondas
-      pool: ["sword", "telescope", "flag", "map", "key"],
-      // 5 objetos en pantalla (usamos los mismos 5 para no añadir más imágenes)
+            // 5 rondas (orden fijo como tú has decidido)
+      pool: ["sword", "map", "key", "telescope", "flag"],
+
+      // 5 objetos visibles siempre (pueden quedarse así)
       grid: ["sword", "telescope", "flag", "map", "key"],
       labels: {
         sword: "ESPADA",
