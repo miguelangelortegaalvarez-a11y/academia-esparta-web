@@ -1171,8 +1171,7 @@ if (btnListen4) {
     const grid = $("#findGrid", area);
 
     // Inicializa cola aleatoria de 5 rondas
-    state.find.queue = [...SETTINGS.findObject.pool];
-    shuffle(state.find.queue);
+        state.find.queue = [...SETTINGS.findObject.pool];
     state.find.current = null;
     state.find.solved = new Set();
     state.find.lock = false;
