@@ -1286,11 +1286,14 @@ if (!target || !state.find.heard) {
         const target = state.find.current;
         if (!target) return;
 
-        const src = SETTINGS.findObject.cluesAudio[target];
-        if (!src) {
-          toast("No hay audio de pista");
-          return;
-        }
+        // La ronda actual es "solved.size" (0..4)
+const roundIndex = state.find.solved.size;
+const src = SETTINGS.findObject.roundAudios[roundIndex];
+
+if (!src) {
+  toast("No hay audio de pista");
+  return;
+}
 
         playing = true;
         disable(btnListen, true);
