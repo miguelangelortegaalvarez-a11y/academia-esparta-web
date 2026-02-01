@@ -439,13 +439,13 @@ function lockScreen(screenEl, shouldLock){
     coins: { 3: 0, 5: 0, 6: 0 },
     syllablesDone: new Set(),
 
-    // ✅ NUEVO estado pantalla 5
     find: {
-      queue: [],
-      current: null,
-      solved: new Set(),
-      lock: false,
-    },
+  queue: [],
+  current: null,
+  solved: new Set(),
+  lock: false,
+  heard: false, // ✅ NUEVO
+},
   };
 
   /* =========================
