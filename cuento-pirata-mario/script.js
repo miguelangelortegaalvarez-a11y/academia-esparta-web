@@ -1264,7 +1264,7 @@ if (!target || !state.find.heard) {
         shuffle(remaining);
         next = remaining[0] || null;
       }
-
+       state.find.current = next;
       state.find.heard = false; // ✅ hasta terminar el audio no puede acertar
 
       const done = state.find.solved.size;
