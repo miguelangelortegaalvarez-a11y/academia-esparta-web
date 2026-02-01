@@ -131,14 +131,14 @@
         map: "Busca el mapa del tesoro.",
         key: "Busca la llave para abrir el cofre.",
       },
-      // Mapeo a audios
-      cluesAudio: {
-        sword: ASSETS.audio.clue_sword,
-        telescope: ASSETS.audio.clue_telescope,
-        flag: ASSETS.audio.clue_flag,
-        map: ASSETS.audio.clue_map,
-        key: ASSETS.audio.clue_key,
-      },
+            // Audios por ronda (numerados)
+      roundAudios: [
+        ASSETS.audio.a5_r1, // ronda 1: espada
+        ASSETS.audio.a5_r2, // ronda 2: mapa
+        ASSETS.audio.a5_r3, // ronda 3: llave
+        ASSETS.audio.a5_r4, // ronda 4: catalejo
+        ASSETS.audio.a5_r5, // ronda 5: bandera
+      ],
     },
   };
 
