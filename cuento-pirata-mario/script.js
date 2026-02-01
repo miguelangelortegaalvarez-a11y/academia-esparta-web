@@ -1299,12 +1299,15 @@ if (!src) {
         disable(btnListen, true);
 
         playVoice(src)
-          .catch(() => toast("No se pudo reproducir la voz"))
-          .finally(() => {
-            playing = false;
-            // si aún no se ha acertado esa ronda, permitimos volver a escuchar
-            if (state.find.current) disable(btnListen, false);
-          });
+  .then(() => {
+    state.find.heard = true; // ✅ ya puede tocar para acertar
+    bigCheck();
+  })
+  .catch(() => toast("No se pudo reproducir la voz"))
+  .finally(() => {
+    playing = false;
+    if (state.find.current) disable(btnListen, false);
+  });
       });
     }
 
