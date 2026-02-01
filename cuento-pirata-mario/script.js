@@ -55,12 +55,12 @@
        intro7: "./assets/audio/INTRO_PANTALLA7.mp3",
       interlude1: "./assets/audio/INTERLUDE_MOTIVACION.mp3",
 
-      // ✅ NUEVOS audios de pista (puedes cambiar nombres/rutas)
-      clue_sword: "./assets/audio/PISTA_ESPADA.mp3",
-      clue_telescope: "./assets/audio/PISTA_CATALEJO.mp3",
-      clue_flag: "./assets/audio/PISTA_BANDERA.mp3",
-      clue_map: "./assets/audio/PISTA_MAPA.mp3",
-      clue_key: "./assets/audio/PISTA_LLAVE.mp3",
+            // ✅ Actividad 5 — audios numerados (en tu orden)
+      a5_r1: "./assets/audio/A5_R1_PISTA.mp3", // ESPADA
+      a5_r2: "./assets/audio/A5_R2_PISTA.mp3", // MAPA
+      a5_r3: "./assets/audio/A5_R3_PISTA.mp3", // LLAVE
+      a5_r4: "./assets/audio/A5_R4_PISTA.mp3", // CATALEJO
+      a5_r5: "./assets/audio/A5_R5_PISTA.mp3", // BANDERA
     },
   };
 
