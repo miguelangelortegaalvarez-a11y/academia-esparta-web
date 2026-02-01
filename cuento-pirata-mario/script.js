@@ -1200,10 +1200,10 @@ state.find.lock = false;
         if (state.find.solved.has(k)) return;
 
         const target = state.find.current;
-        if (!target) {
-          toast("Pulsa ESCUCHAR primero");
-          return;
-        }
+if (!target || !state.find.heard) {
+  toast("Pulsa ESCUCHAR primero");
+  return;
+}
 
         if (k !== target) {
           toast("Ese no… prueba otro");
