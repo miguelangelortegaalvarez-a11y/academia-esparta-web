@@ -502,9 +502,6 @@
     setBackground(nextKey);
     onEnterScreen(nextKey);
 
-    // ✅ Gestión visual extra para la final
-    if (nextKey === 8) ensureFinalText();
-    else hideFinalText();
   }
 
   function nextScreen() {
