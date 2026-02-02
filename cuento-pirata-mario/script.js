@@ -135,9 +135,6 @@
         ASSETS.audio.a5_r5,
       ],
     },
-
-    // ✅ Texto final único
-    finalText: "4 AÑOS A",
   };
 
   // =========================
@@ -466,23 +463,6 @@
   function getScreenEl(key) {
     if (typeof key === "number") return $(`#screen-${key}`);
     return $(`#screen-${key}`);
-  }
-
-  function ensureFinalText() {
-    // Crea #finalClass si no existe (para no depender del index)
-    let el = $("#finalClass");
-    if (!el) {
-      el = document.createElement("div");
-      el.id = "finalClass";
-      document.body.appendChild(el);
-    }
-    el.textContent = SETTINGS.finalText;
-    el.hidden = false;
-  }
-
-  function hideFinalText() {
-    const el = $("#finalClass");
-    if (el) el.hidden = true;
   }
 
   function switchScreen(nextKey) {
