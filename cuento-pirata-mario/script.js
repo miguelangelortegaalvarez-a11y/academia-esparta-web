@@ -1592,8 +1592,6 @@
     setBackground(1);
     switchScreen(1);
 
-    // Asegura que el finalText no quede visible al iniciar
-    hideFinalText();
   }
 
   document.addEventListener("DOMContentLoaded", boot);
