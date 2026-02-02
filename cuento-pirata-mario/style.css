@@ -1,1044 +1,224 @@
-/* Fix: garantizar que [hidden] siempre oculte (Safari/iOS) */
-[hidden]{ display:none !important; }
-
 /* ==========================================================
-   CUENTO PIRATA MARIO — STYLE (RENOVADO / iPad Safari + Desktop)
-   - Sin duplicados, ordenado por secciones
-   - Mantiene tu diseño actual (pantallas 2–7) + final limpio
+   CUENTO PIRATA MARIO — STYLE DEFINITIVO ESTABLE
+   iPad · Mac · Pizarra digital · Sin zoom
    ========================================================== */
+
+[hidden]{ display:none !important; }
 
 /* =========================
    VARIABLES
 ========================= */
 :root{
-  --bg: #07121f;
+  --bg:#07121f;
 
-  --panel: rgba(255,255,255,0.14);
-  --stroke: rgba(255,255,255,0.22);
-  --text: #ffffff;
-  --muted: rgba(255,255,255,0.78);
-  --shadow: 0 12px 28px rgba(0,0,0,0.35);
+  --panel:rgba(255,255,255,0.14);
+  --stroke:rgba(255,255,255,0.22);
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.78);
+  --shadow:0 12px 28px rgba(0,0,0,0.35);
 
-  --primary: #ffd24d;
-  --primaryText: #2b2100;
+  --primary:#ffd24d;
+  --primaryText:#2b2100;
+  --secondary:rgba(255,255,255,0.18);
 
-  --secondary: rgba(255,255,255,0.18);
-  --secondaryText: #ffffff;
+  --ok:#55efc4;
 
-  --ok: #55efc4;
+  --radius:18px;
+  --btnRadius:16px;
 
-  --radius: 18px;
-  --btnRadius: 16px;
-
-  --hudH: 72px;
-  --pad: 16px;
-
-  --fadeMs: 260ms;
-
-  /* Cards grandes (pantallas 4/5) */
-  --card-max: 240px;
-  --card-min: 190px;
-  --card-pad: 18px;
-  --label-size: 20px;
+  --hudH:72px;
+  --pad:16px;
 }
 
 /* =========================
-   BASE
+   BASE (CLAVE)
 ========================= */
-*{ box-sizing: border-box; }
-html, body{ height: 100%; }
+*{ box-sizing:border-box; }
+
+html, body{
+  width:100%;
+  height:100%;
+  margin:0;
+}
 
 body{
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow: hidden;
-  -webkit-text-size-adjust: 100%;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow:hidden; /* NUNCA scroll global */
+  -webkit-text-size-adjust:100%;
 }
 
 .app{
-  position: relative;
-  width: 100vw;
-  height: 100vh;     /* fallback */
-  height: 100dvh;    /* viewport real dinámico */
-  min-height: 100svh;
-  overflow: hidden;
+  position:relative;
+  width:100%;
+  height:100%;
+  overflow:hidden;
 }
 
 /* =========================
-   FONDO DE ESCENA
+   FONDO
 ========================= */
+.scene-bg,
+.scene-shade{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
 .scene-bg{
-  position: absolute;
-  inset: 0;
-  background: #0b1220;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  pointer-events: none !important;
-  z-index: 0;
-  transform: translateZ(0);
-  will-change: background-image;
+  background:#0b1220;
+  background-size:cover;
+  background-position:center;
+  z-index:0;
 }
 
 .scene-shade{
-  position: absolute;
-  inset: 0;
   background:
     radial-gradient(80% 70% at 50% 35%, rgba(0,0,0,0.08), rgba(0,0,0,0.22) 70%),
     linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.18));
-  pointer-events: none !important;
-  z-index: 1;
+  z-index:1;
 }
 
 /* =========================
-   HUD (INSTRUCCIÓN + MÚSICA)
+   HUD
 ========================= */
 .hud{
-  position: absolute;
-  left: 0; right: 0;
-  top: calc(env(safe-area-inset-top) + 10px);
-  height: auto;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 10px var(--pad);
-  gap: 12px;
-  z-index: 50;
+  position:absolute;
+  top:env(safe-area-inset-top);
+  left:0;
+  right:0;
+  height:var(--hudH);
+  padding:10px var(--pad);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:50;
 }
-
-.hud-left{ flex: 1; min-width: 0; }
-.hud-right{ display:flex; align-items:center; gap: 10px; }
 
 .instruction{
-  display: inline-block;
-  padding: 12px 16px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.10);
-  color: var(--text);
-
-  font-size: clamp(22px, 2.6vw, 34px);
-  line-height: 1.15;
-
-  white-space: normal;
-  max-width: min(980px, 92vw);
-}
-
-/* Botón pequeño (si lo usas en HUD) */
-.btn-small{
-  min-height: 44px;
-  padding: 10px 14px;
-  font-size: 18px;
-  font-weight: 900;
-  border-radius: 14px;
+  background:rgba(0,0,0,0.35);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:12px 16px;
+  border-radius:14px;
+  font-size:clamp(20px,2.2vw,32px);
 }
 
 /* =========================
-   CONTENEDOR PANTALLAS
+   SCREENS
 ========================= */
 .screens{
-  position: absolute;
-  inset: 0;
-  z-index: 10;
+  position:absolute;
+  inset:0;
+  z-index:10;
 }
 
-/* Transiciones (rendimiento iOS) */
 .screen{
-  position: absolute;
-  inset:
-    calc(env(safe-area-inset-top) + 96px)
-    0
-    calc(env(safe-area-inset-bottom) + 16px)
-    0;
-
-  padding: 18px;
-
-  display: none;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity var(--fadeMs) ease, transform var(--fadeMs) ease;
-
-  contain: layout paint;
+  position:absolute;
+  top:var(--hudH);
+  left:0;
+  right:0;
+  bottom:0;
+  padding:18px;
+  display:none;
 }
 
 .screen.is-active{
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Si algo no cabe, que scrollee la SCREEN (no el panel) */
-.screen.is-active{
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.screen.is-leaving{
-  opacity: 0;
-  transform: translateY(6px);
+  display:block;
 }
 
 /* =========================
-   PANEL
+   PANEL (SCROLL AQUÍ)
 ========================= */
 .panel{
-  background: var(--panel);
-  border: 1px solid var(--stroke);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 18px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
+  max-width:1100px;
+  margin:0 auto;
+  padding:18px;
+  background:var(--panel);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
 
-@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
-  .panel{
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
+  max-height:calc(100% - 36px);
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
 }
 
 .panel-center{
-  position: relative;
-  top: 10vh;
-  text-align: center;
-  width: min(900px, 92vw);
+  margin-top:8vh;
+  text-align:center;
 }
 
-.panel-wide{ width: min(1100px, 94vw); }
-.panel-full{ width: min(1200px, 96vw); }
-
-/* =========================
-   TIPOGRAFÍA
-========================= */
-.title{
-  margin: 0 0 10px 0;
-  font-size: clamp(34px, 4vw, 56px);
-  letter-spacing: 0.5px;
-}
-.subtitle{
-  margin: 0 0 18px 0;
-  font-size: 20px;
-  color: var(--muted);
-}
-.h2{
-  margin: 0 0 12px 0;
-  font-size: 26px;
-}
+.panel-wide{ max-width:1100px; }
+.panel-full{ max-width:1200px; }
 
 /* =========================
    BOTONES
 ========================= */
 .btn{
-  appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  border-radius: var(--btnRadius);
-  padding: 14px 18px;
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1;
-  cursor: pointer;
-  min-height: 52px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  box-shadow: 0 10px 18px rgba(0,0,0,0.18);
-  transition: transform 120ms ease, opacity 120ms ease, filter 120ms ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.btn:active{ transform: scale(0.98); }
-.btn[disabled]{ opacity: 0.45; cursor: not-allowed; filter: grayscale(0.25); }
-.btn-big{ min-height: 60px; padding: 18px 22px; font-size: 22px; }
-
-.btn-primary{ background: var(--primary); color: var(--primaryText); }
-.btn-secondary{
-  background: var(--secondary);
-  color: var(--secondaryText);
-  border: 1px solid rgba(255,255,255,0.22);
-}
-
-/* Footer actions */
-.footer-actions{
-  margin-top: 14px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding-bottom: max(12px, env(safe-area-inset-bottom));
-}
-
-/* =========================
-   TOAST / CHECK
-========================= */
-.toast{
-  position: absolute;
-  left: 50%;
-  top: calc(var(--hudH) + 10px);
-  transform: translateX(-50%);
-  z-index: 70;
-  padding: 12px 16px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.12);
-  font-size: 18px;
-  max-width: min(900px, 92vw);
-  text-align: center;
-}
-
-.big-check{
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  z-index: 80;
-  font-size: clamp(90px, 12vw, 160px);
-  font-weight: 900;
-  color: var(--ok);
-  text-shadow: 0 16px 34px rgba(0,0,0,0.35);
-  pointer-events: none;
-}
-
-/* =========================
-   BLOQUEO (pantallas)
-========================= */
-#screen-2.is-locked *{ pointer-events: none !important; user-select: none !important; }
-#screen-2.is-locked #btnListen2,
-#screen-2.is-locked #btnListen2 *{ pointer-events: auto !important; }
-
-#screen-3.is-locked .key-item,
-#screen-3.is-locked #keysLayer,
-#screen-3.is-locked #chestDrop{ pointer-events: none; user-select: none; }
-#screen-3.is-locked #btnListen3,
-#screen-3.is-locked #btnListen3 *{ pointer-events: auto; }
-
-#screen-4.is-locked #pirateTapArea,
-#screen-4.is-locked #pirateTapLayer,
-#screen-4.is-locked .pirate-tap-item{ pointer-events: none; user-select: none; }
-#screen-4.is-locked #btnListen4,
-#screen-4.is-locked #btnListen4 *{ pointer-events: auto; }
-
-#screen-6.is-locked #coinsBank,
-#screen-6.is-locked .coin-item,
-#screen-6.is-locked .count-chest,
-#screen-6.is-locked .drop-chest,
-#screen-6.is-locked .coins-area{ pointer-events: none; user-select: none; }
-#screen-6.is-locked #btnListen6,
-#screen-6.is-locked #btnListen6 *{ pointer-events: auto; }
-
-#screen-7.is-locked .syll-row,
-#screen-7.is-locked .btn-option,
-#screen-7.is-locked .syllables,
-#screen-7.is-locked .panel{ pointer-events: none; user-select: none; }
-#screen-7.is-locked #btnListen7,
-#screen-7.is-locked #btnListen7 *{ pointer-events: auto; }
-
-/* =========================
-   SCREEN 2 — LETRAS
-========================= */
-#screen-2 .panel{
-  padding: 14px !important;
-  max-height: calc(100svh - (env(safe-area-inset-top) + 120px));
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.letters-grid{
-  display: grid;
-  gap: 14px;
-  margin-top: 10px;
-}
-
-.letter-row{
-  display: grid;
-  grid-template-columns: 1fr 240px 160px;
-  gap: 10px;
-  align-items: center;
-  padding: 12px;
-  border-radius: 16px;
-  background: rgba(0,0,0,0.18);
-  border: 1px solid rgba(255,255,255,0.10);
-}
-
-.word-box .word{
-  font-size: 34px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  display: inline-flex;
-  align-items: center;
-}
-
-.slot{
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 86px;
-  height: 64px;
-  margin-right: 10px;
-  font-size: 38px;
-  font-weight: 900;
-  border-radius: 14px;
-  border: 3px dashed rgba(255,255,255,0.65);
-  background: rgba(255,255,255,0.08);
-}
-
-.slot-drop{ border-color: rgba(255,210,77,0.95); }
-
-.slot-drop.is-correct{
-  background: rgba(0,255,140,0.25);
-  border-color: #00ff8c;
-}
-
-.pic-box{
-  width: 240px;
-  height: 140px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.pic-box img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.choices{
-  display: flex;
-  gap: 10px;
-  justify-content: flex-start;
-}
-
-.chip{
-  min-width: 74px;
-  min-height: 58px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.20);
-  background: rgba(255,255,255,0.14);
-  color: #fff;
-  font-size: 26px;
-  font-weight: 900;
-  cursor: grab;
-  touch-action: none;
-  -webkit-tap-highlight-color: transparent;
-}
-.chip:active{ cursor: grabbing; }
-.chip.is-disabled{ opacity: 0.35; filter: grayscale(0.25); cursor: not-allowed; }
-
-.is-dragging{
-  filter: drop-shadow(0 14px 18px rgba(0,0,0,0.35));
-  transform: scale(1.02);
-}
-
-/* =========================
-   SCREEN 3 — LLAVES
-========================= */
-.keys-area{
-  position: relative;
-  min-height: 58vh;
-  overflow: hidden;
-}
-.keys-layer{
-  position: absolute;
-  inset: 0;
-}
-
-/* Screen 3 sin panel visual */
-#screen-3 .panel{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  padding: 0 !important;
-  max-width: none !important;
-  margin: 0 !important;
-}
-#screen-3 .panel-wide,
-#screen-3 .panel-full{ width: 100% !important; }
-#screen-3 .h2,
-#screen-3 h2{ display: none !important; }
-
-#screen-3 .keys-area{
-  min-height: 56vh;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
-#screen-3 .key-item{
-  position: absolute !important;
-  width: 64px !important;
-  height: 64px !important;
-
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  outline: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-
-  cursor: grab;
-  touch-action: none;
-  -webkit-tap-highlight-color: transparent !important;
-
-  will-change: transform;
-  transform: translateZ(0);
-
-  animation: key-float 3.2s ease-in-out infinite;
-}
-#screen-3 .key-item:active{ cursor: grabbing; }
-#screen-3 .key-item:focus{ outline: none !important; }
-
-#screen-3 .key-item img,
-#screen-3 .key-img{
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  display: block !important;
-  pointer-events: none !important;
-}
-
-#screen-3 .key-item.is-dragging{ animation: none !important; }
-
-@keyframes key-float{
-  0%   { transform: translate3d(0, 0, 0); }
-  50%  { transform: translate3d(0, -10px, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
-
-/* Cofre más grande y protagonista */
-#screen-3{
-  --s3-continue-bottom: calc(18px + env(safe-area-inset-bottom));
-  --s3-chest-bottom:    calc(18px + env(safe-area-inset-bottom));
-}
-
-#screen-3 .chest-drop{
-  position: absolute !important;
-  right: 22px !important;
-  bottom: var(--s3-chest-bottom) !important;
-
-  width: 300px !important;
-  height: 260px !important;
-
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-
-  display: grid;
-  place-items: center;
-  z-index: 6;
-}
-
-#screen-3 .chest-img,
-#screen-3 .chest-drop img{
-  width: 310px !important;
-  max-width: 310px !important;
-  height: auto !important;
-  object-fit: contain !important;
-  display: block !important;
-}
-
-/* Si alguna vez aparece el hint, lo ocultamos */
-#screen-3 .chest-hint{ display: none !important; }
-
-/* Botón continuar a la izquierda */
-#screen-3 .footer-actions{
-  position: absolute !important;
-  left: 18px !important;
-  bottom: var(--s3-continue-bottom) !important;
-
-  margin-top: 0 !important;
-  display: flex !important;
-  justify-content: flex-start !important;
-  z-index: 7;
-}
-
-#screen-3 .footer-actions .btn{ min-width: 180px; }
-
-/* Cofre: nunca debe bloquear taps */
-#screen-3 #chestDrop,
-#screen-3 .chest-drop{
-  pointer-events: none !important;
-}
-
-/* Llaves: por encima visualmente */
-#screen-3 #keysLayer,
-#screen-3 .keys-layer{
-  position: absolute;
-  inset: 0;
-  z-index: 6 !important;
-}
-#screen-3 .key-item{
-  z-index: 7 !important;
-}
-
-/* =========================
-   SCREEN 4 — PIRATE TAP
-========================= */
-#screen-4 .panel{ position: relative; }
-
-#pirateTapArea{
-  position: relative;
-  min-height: 58vh;
-}
-
-#screen-4 #pirateTapLayer{
-  position: absolute;
-  inset: 0;
-
-  display: grid;
-  grid-template-columns: repeat(3, minmax(var(--card-min), 1fr));
-  gap: 22px;
-  padding: 18px;
-
-  align-content: center;
-  justify-items: center;
-}
-
-#screen-4 .pirate-tap-item{
-  width: 100%;
-  max-width: var(--card-max);
-  aspect-ratio: 1 / 1;
-  padding: var(--card-pad);
-  border-radius: 22px;
-
-  border: 1px solid rgba(255,255,255,0.20);
-  background: rgba(255,255,255,0.10);
-  cursor: pointer;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  overflow: hidden;
-}
-
-#screen-4 .pirate-tap-label{
-  position: static;
-  transform: none;
-  font-size: 14px;
-  font-weight: 900;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.55);
-  white-space: nowrap;
-  pointer-events: none;
-  line-height: 1;
-}
-
-#screen-4 .pirate-tap-img{
-  width: 185px;
-  height: 185px;
-  object-fit: contain;
-  display: block;
-  pointer-events: none;
-}
-
-#screen-4 .pirate-tap-item.is-wrong{
-  transform: scale(0.96);
-  filter: grayscale(1);
-}
-
-#screen-4 .pirate-tap-item.is-picked{
-  outline: 4px solid rgba(255,210,77,0.95);
-  outline-offset: 2px;
-}
-
-/* Responsive Pantalla 4 */
-@media (max-width: 900px){
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
-}
-@media (max-width: 560px){
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
-}
-
-/* =========================
-   INTERLUDE — MOTIVACIÓN
-========================= */
-.interlude-wrap{
-  position: relative;
-  width: min(1100px, 94vw);
-  margin: 0 auto;
-  min-height: calc(100svh - var(--hudH) - 36px);
-  padding: 18px;
-}
-
-.motivation-top-right{
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  max-width: min(720px, 78vw);
-  padding: 14px 16px;
-  border-radius: 16px;
-  background: rgba(0,0,0,0.45);
-  border: 1px solid rgba(255,255,255,0.10);
-  font-size: clamp(28px, 4.2vw, 44px);
-  font-weight: 900;
-  line-height: 1.15;
-}
-
-#screen-interlude .footer-actions{
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: calc(18px + env(safe-area-inset-bottom));
-  display: flex;
-  justify-content: space-between;
-}
-
-/* =========================
-   SCREEN 5 — FIND
-========================= */
-.find-wrap{ display:grid; gap:14px; min-height:58vh; }
-.find-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
-.find-round{ font-weight:900; font-size:20px; padding:10px 12px; background:rgba(0,0,0,0.25); border-radius:14px; }
-
-#findGrid{
-  display: grid;
-  grid-template-columns: repeat(5, minmax(var(--card-min), 1fr));
-  gap: 22px;
-  padding: 18px;
-  align-content: center;
-  justify-items: center;
-}
-
-.find-item{
-  width: 100%;
-  max-width: var(--card-max);
-  aspect-ratio: 1 / 1;
-  padding: var(--card-pad);
-  border-radius: 22px;
-
-  border:1px solid rgba(255,255,255,0.22);
-  background:rgba(255,255,255,0.12);
+  border:0;
+  border-radius:var(--btnRadius);
+  padding:14px 18px;
+  font-size:20px;
+  font-weight:800;
   cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
+  min-height:52px;
+}
 
+.btn-big{
+  font-size:22px;
+  min-height:60px;
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:var(--primaryText);
+}
+
+.btn-secondary{
+  background:var(--secondary);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.22);
+}
+
+.btn[disabled]{
+  opacity:0.45;
+  cursor:not-allowed;
+}
+
+/* =========================
+   FOOTER ACTIONS
+========================= */
+.footer-actions{
+  margin-top:16px;
   display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  justify-content:flex-end;
   gap:12px;
 }
 
-.find-img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  max-height: 150px;
-  pointer-events:none;
-}
-
-.find-label{
-  display:block;
-  font-size: var(--label-size);
-  font-weight:900;
-  letter-spacing:0.6px;
-  color:rgba(255,255,255,0.92);
-  text-shadow:0 2px 8px rgba(0,0,0,0.55);
-  line-height:1;
-  text-align:center;
-  white-space:nowrap;
-}
-
-.find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
-.find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
-
-/* Responsive Pantalla 5 */
-@media (max-width: 900px){
-  #findGrid{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
-}
-@media (max-width: 560px){
-  #findGrid{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
-}
-
 /* =========================
-   SCREEN 6 — COINS
-========================= */
-#screen-6 .coins-area{
-  display: grid;
-  gap: 14px;
-  min-height: 58vh;
-}
-
-#screen-6 .chests-row{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-#screen-6 .count-chest{
-  border-radius: 18px;
-  background: rgba(0,0,0,0.16);
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 12px;
-  display: grid;
-  gap: 10px;
-  justify-items: center;
-}
-
-#screen-6 .count-label{
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  background: rgba(255,210,77,0.92);
-  color: #2b2100;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  font-size: 28px;
-  box-shadow: 0 10px 18px rgba(0,0,0,0.22);
-}
-
-#screen-6 .drop-chest{
-  width: 180px;
-  height: 140px;
-  border-radius: 18px;
-  border: 2px dashed rgba(255,210,77,0.65);
-  background: rgba(0,0,0,0.10);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-#screen-6 .drop-chest img{
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-#screen-6 .count-status{
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  color: rgba(255,255,255,0.86);
-}
-
-#screen-6 .coins-bank{
-  border-radius: 18px;
-  background: rgba(0,0,0,0.12);
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  min-height: 120px;
-}
-
-#screen-6 .coin-item{
-  width: 78px;
-  height: 78px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.20);
-  background: rgba(255,255,255,0.10);
-  display: grid;
-  place-items: center;
-  cursor: grab;
-  padding: 10px;
-  touch-action: none;
-  -webkit-tap-highlight-color: transparent;
-}
-#screen-6 .coin-item img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-#screen-6 .coin-item.is-selected{
-  outline: 4px solid rgba(255,210,77,0.95);
-  outline-offset: 2px;
-}
-
-/* =========================
-   SCREEN 7 — SÍLABAS
-========================= */
-#screen-7 .panel.panel-wide{
-  display: flex;
-  flex-direction: column;
-  max-height: calc(100svh - 140px);
-  overflow: hidden;
-}
-
-#screen-7 #syllablesArea{
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-right: 6px;
-}
-
-#screen-7 .syll-row{
-  display: grid;
-  grid-template-columns: minmax(160px, 1fr) 220px 220px 70px;
-  column-gap: 16px;
-  align-items: center;
-
-  padding: 14px;
-  margin-bottom: 14px;
-
-  border-radius: 18px;
-  background: rgba(0,0,0,0.16);
-  border: 1px solid rgba(255,255,255,0.12);
-}
-
-#screen-7 .syll-word{
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-
-#screen-7 .syll-pic{
-  width: 220px;
-  height: 130px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-#screen-7 .syll-pic img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-#screen-7 .syll-options{
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  flex-wrap: nowrap;
-}
-
-#screen-7 .btn-option{
-  min-width: 64px;
-  min-height: 56px;
-  font-size: 22px;
-  font-weight: 900;
-}
-
-#screen-7 .syll-result{
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  font-size: 34px;
-  font-weight: 900;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.16);
-  justify-self: end;
-}
-
-/* CONTINUAR siempre visible */
-#screen-7 .footer-actions{
-  position: sticky;
-  bottom: 0;
-  margin-top: 12px;
-  padding-top: 12px;
-  background: linear-gradient(to top, rgba(7,18,31,0.85), transparent);
-}
-
-/* =========================
-   SCREEN 8 — FINAL (CONFETI)
+   SCREEN 8 — FINAL
 ========================= */
 body.is-final .hud{
-  display: none !important;
+  display:none;
 }
 
-/* Panel final sin caja */
-#screen-8 .panel{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-/* Confeti a pantalla completa */
 #confetti{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 5;
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:5;
 }
 
-/* Por si quedase algún h/p dentro del screen-8 (seguro extra) */
 #screen-8 h1,
 #screen-8 h2,
 #screen-8 p{
-  display: none !important;
+  display:none !important;
 }
 
 /* =========================
-   RESPONSIVE GENERAL
+   RESPONSIVE
 ========================= */
-@media (max-width: 760px){
-  .letter-row{ grid-template-columns: 1fr; }
-  .pic-box{ width: 100%; height: 160px; }
-  .choices{ justify-content: center; }
-  #screen-6 .chests-row{ grid-template-columns: 1fr; }
-}
-
-/* =========================
-   ASSET FALLBACK
-========================= */
-.asset-fallback{
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: calc(12px + env(safe-area-inset-bottom));
-  z-index: 9999;
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.75);
-  border: 1px solid rgba(255,255,255,0.18);
-  font-size: 14px;
-  color: #fff;
-}
-
-/* =========================================
-   DESKTOP / PIZARRA: reducir escala percibida
-   ========================================= */
-@media (pointer: fine){
-  :root{
-    --hudH: 64px;
-    --card-max: 220px;
-    --card-min: 170px;
-    --label-size: 18px;
-  }
-
-  .instruction{
-    font-size: clamp(18px, 1.8vw, 26px) !important;
-    padding: 10px 14px !important;
-  }
-
-  .btn{
-    font-size: 18px;
-    min-height: 48px;
-  }
-  .btn-big{
-    min-height: 54px;
-    font-size: 20px;
-  }
+@media (max-width:760px){
+  .footer-actions{ justify-content:center; }
 }
