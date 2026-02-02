@@ -1021,3 +1021,49 @@ body.is-final .hud{
   font-size: 14px;
   color: #fff;
 }
+/* =========================================
+   FIX DESKTOP: evitar "zoom" y cortes
+   ========================================= */
+
+/* 1) Reserva espacio abajo en todas las screens */
+.screen{
+  /* antes: inset: top ... 0 0 */
+  inset: calc(env(safe-area-inset-top) + 96px) 0
+         calc(env(safe-area-inset-bottom) + 16px) 0 !important;
+}
+
+/* 2) Si el contenido no cabe, el panel hace scroll (en vez de cortar botones) */
+.panel{
+  max-height: calc(100% - 12px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 3) En escritorio (ratón/trackpad), reducimos escala percibida */
+@media (pointer: fine){
+  :root{
+    --hudH: 64px;
+    --card-max: 220px;
+    --card-min: 170px;
+    --label-size: 18px;
+  }
+
+  .instruction{
+    font-size: clamp(18px, 1.8vw, 26px) !important;
+    padding: 10px 14px !important;
+  }
+
+  .btn{
+    font-size: 18px;
+    min-height: 48px;
+  }
+  .btn-big{
+    min-height: 54px;
+    font-size: 20px;
+  }
+}
+
+/* 4) Seguridad extra: si algún footer está pegado al borde, que no se salga */
+.footer-actions{
+  padding-bottom: max(0px, env(safe-area-inset-bottom));
+}
