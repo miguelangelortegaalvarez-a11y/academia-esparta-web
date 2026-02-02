@@ -2,7 +2,7 @@
 [hidden]{ display:none !important; }
 
 /* ==========================================================
-   CUENTO PIRATA MARIO — STYLE (RENOVADO / iPad Safari)
+   CUENTO PIRATA MARIO — STYLE (RENOVADO / iPad Safari + Desktop)
    - Sin duplicados, ordenado por secciones
    - Mantiene tu diseño actual (pantallas 2–7) + final limpio
    ========================================================== */
@@ -56,10 +56,13 @@ body{
   overflow: hidden;
   -webkit-text-size-adjust: 100%;
 }
+
 .app{
   position: relative;
   width: 100vw;
-  height: 100dvh;   /* viewport real dinámico */
+  height: 100vh;     /* fallback */
+  height: 100dvh;    /* viewport real dinámico */
+  min-height: 100svh;
   overflow: hidden;
 }
 
@@ -146,7 +149,12 @@ body{
 /* Transiciones (rendimiento iOS) */
 .screen{
   position: absolute;
-  inset: calc(env(safe-area-inset-top) + 96px) 0 0 0;
+  inset:
+    calc(env(safe-area-inset-top) + 96px)
+    0
+    calc(env(safe-area-inset-bottom) + 16px)
+    0;
+
   padding: 18px;
 
   display: none;
@@ -161,6 +169,12 @@ body{
   display: block;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Si algo no cabe, que scrollee la SCREEN (no el panel) */
+.screen.is-active{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .screen.is-leaving{
@@ -254,6 +268,7 @@ body{
   display: flex;
   justify-content: flex-end;
   gap: 12px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
 }
 
 /* =========================
@@ -945,12 +960,8 @@ body{
 }
 
 /* =========================
-   SCREEN 8 — FINAL (CONFETI + “4 AÑOS A”)
-   - No ocultamos el panel (para permitir #confetti y #finalClass)
+   SCREEN 8 — FINAL (CONFETI)
 ========================= */
-
-/* Si en tu JS añades: document.body.classList.toggle("is-final", nextKey===8);
-   entonces el HUD desaparece en la final */
 body.is-final .hud{
   display: none !important;
 }
@@ -1005,25 +1016,10 @@ body.is-final .hud{
   font-size: 14px;
   color: #fff;
 }
+
 /* =========================================
-   FIX DESKTOP: evitar "zoom" y cortes
+   DESKTOP / PIZARRA: reducir escala percibida
    ========================================= */
-
-/* 1) Reserva espacio abajo en todas las screens */
-.screen{
-  /* antes: inset: top ... 0 0 */
-  inset: calc(env(safe-area-inset-top) + 96px) 0
-         calc(env(safe-area-inset-bottom) + 16px) 0 !important;
-}
-
-/* 2) Si el contenido no cabe, el panel hace scroll (en vez de cortar botones) */
-.panel{
-  max-height: calc(100% - 12px);
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* 3) En escritorio (ratón/trackpad), reducimos escala percibida */
 @media (pointer: fine){
   :root{
     --hudH: 64px;
@@ -1045,9 +1041,4 @@ body.is-final .hud{
     min-height: 54px;
     font-size: 20px;
   }
-}
-
-/* 4) Seguridad extra: si algún footer está pegado al borde, que no se salga */
-.footer-actions{
-  padding-bottom: max(0px, env(safe-area-inset-bottom));
 }
