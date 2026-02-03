@@ -40,7 +40,7 @@
       ball: "./assets/objects/OBJ_PELOTA.PNG",
       plush: "./assets/objects/OBJ_PELUCHE.PNG",
       key: "./assets/objects/OBJ_LLAVE.PNG",
-      map: "./assets/objects/MAPA.PNG",
+      map: "./assets/objects/MAPA.PNG", // ✅ NUEVO
       chestClosed: "./assets/objects/COFRE_CERRADO.PNG",
       chestOpen: "./assets/objects/COFRE_ABIERTO.PNG",
       coin: "./assets/objects/MONEDA_ORO.PNG",
@@ -48,14 +48,14 @@
     audio: {
       bgm: "./assets/audio/MUSICA_PIRATAS_FONDO.mp3",
       intro1: "./assets/audio/INTRO_PANTALLA1.mp3",
-      intro2: "./assets/audio/INTRO_PANTALLA2.mp3",
-      intro3: "./assets/audio/INTRO_PANTALLA3.mp3",
-      intro4: "./assets/audio/INTRO_PANTALLA4.mp3",
-      intro6: "./assets/audio/INTRO_PANTALLA6.mp3",
-      intro7: "./assets/audio/INTRO_PANTALLA7.mp3",
+       intro2: "./assets/audio/INTRO_PANTALLA2.mp3",
+       intro3: "./assets/audio/INTRO_PANTALLA3.mp3",
+       intro4: "./assets/audio/INTRO_PANTALLA4.mp3",
+       intro6: "./assets/audio/INTRO_PANTALLA6.mp3",
+       intro7: "./assets/audio/INTRO_PANTALLA7.mp3",
       interlude1: "./assets/audio/INTERLUDE_MOTIVACION.mp3",
 
-      // Actividad 5 — audios numerados (en tu orden)
+            // ✅ Actividad 5 — audios numerados (en tu orden)
       a5_r1: "./assets/audio/A5_R1_PISTA.mp3", // ESPADA
       a5_r2: "./assets/audio/A5_R2_PISTA.mp3", // MAPA
       a5_r3: "./assets/audio/A5_R3_PISTA.mp3", // LLAVE
@@ -73,7 +73,7 @@
     5: "Pulsa ESCUCHAR y toca el objeto correcto.",
     6: "Arrastra monedas a cada cofre: 3, 5 y 6.",
     7: "Cuenta las sílabas y elige la opción correcta.",
-    8: "", // ✅ final sin textos
+    8: "",
   };
 
   const SETTINGS = {
@@ -109,9 +109,12 @@
       explorers: ["ball", "plush"],
     },
 
-    // Actividad 5 (Escucha y encuentra)
+    // ✅ NUEVA Actividad 5 (Escucha y encuentra)
     findObject: {
+            // 5 rondas (orden fijo como tú has decidido)
       pool: ["sword", "map", "key", "telescope", "flag"],
+
+      // 5 objetos visibles siempre (pueden quedarse así)
       grid: ["sword", "telescope", "flag", "map", "key"],
       labels: {
         sword: "ESPADA",
@@ -120,6 +123,7 @@
         map: "MAPA",
         key: "LLAVE",
       },
+      // Texto muy simple por si quieres también mostrarlo en pantalla (opcional)
       cluesText: {
         sword: "Busca la espada del pirata.",
         telescope: "Busca el catalejo para mirar lejos.",
@@ -127,12 +131,13 @@
         map: "Busca el mapa del tesoro.",
         key: "Busca la llave para abrir el cofre.",
       },
+            // Audios por ronda (numerados)
       roundAudios: [
-        ASSETS.audio.a5_r1,
-        ASSETS.audio.a5_r2,
-        ASSETS.audio.a5_r3,
-        ASSETS.audio.a5_r4,
-        ASSETS.audio.a5_r5,
+        ASSETS.audio.a5_r1, // ronda 1: espada
+        ASSETS.audio.a5_r2, // ronda 2: mapa
+        ASSETS.audio.a5_r3, // ronda 3: llave
+        ASSETS.audio.a5_r4, // ronda 4: catalejo
+        ASSETS.audio.a5_r5, // ronda 5: bandera
       ],
     },
   };
@@ -200,12 +205,12 @@
     fb.textContent = `FALTA RECURSO: ${url}`;
     console.error("FALTA RECURSO:", url);
   }
+function lockScreen(screenEl, shouldLock){
+  if (!screenEl) return;
+  screenEl.classList.toggle("is-locked", !!shouldLock);
+}
 
-  function lockScreen(screenEl, shouldLock){
-    if (!screenEl) return;
-    screenEl.classList.toggle("is-locked", !!shouldLock);
-  }
-
+   
   /* =========================
      ASSET FALLBACKS
   ========================= */
@@ -435,12 +440,12 @@
     syllablesDone: new Set(),
 
     find: {
-      queue: [],
-      current: null,
-      solved: new Set(),
-      lock: false,
-      heard: false,
-    },
+  queue: [],
+  current: null,
+  solved: new Set(),
+  lock: false,
+  heard: false, // ✅ NUEVO
+},
   };
 
   /* =========================
@@ -466,9 +471,6 @@
   }
 
   function switchScreen(nextKey) {
-    // ✅ Marca si estamos en final para CSS (ocultar HUD, etc.)
-    document.body.classList.toggle("is-final", nextKey === 8);
-
     const current = $(".screen.is-active");
     const target = getScreenEl(nextKey);
 
@@ -483,7 +485,6 @@
       target.classList.add("is-active");
       target.classList.remove("is-leaving");
       state.screen = nextKey;
-
       setInstruction(nextKey);
       setBackground(nextKey);
       onEnterScreen(nextKey);
@@ -501,7 +502,6 @@
     setInstruction(nextKey);
     setBackground(nextKey);
     onEnterScreen(nextKey);
-
   }
 
   function nextScreen() {
@@ -510,8 +510,22 @@
     switchScreen(nextKey);
   }
 
-  // ❌ Ya no se usa (no quieres volver a jugar)
-  function restartGame() { /* intencionadamente vacío */ }
+  function restartGame() {
+    state.screen = 1;
+    state.lettersDone.clear();
+    state.keysDropped = 0;
+    state.classifyDone = 0;
+    state.coins = { 3: 0, 5: 0, 6: 0 };
+    state.syllablesDone.clear();
+
+    state.find.queue = [];
+    state.find.current = null;
+    state.find.solved.clear();
+    state.find.lock = false;
+
+    resetUIAll();
+    switchScreen(1);
+  }
 
   /* =========================
      MUSIC
@@ -522,7 +536,7 @@
     const btn = $("#btnMusic");
     if (!bgm) return;
 
-    // ocultamos el botón siempre
+    // ✅ ocultamos el botón siempre (no quieres “activarla” manualmente)
     if (btn) btn.hidden = true;
 
     bgm.src = withV(ASSETS.audio.bgm);
@@ -530,11 +544,14 @@
     bgm.volume = SETTINGS.bgmVolume;
 
     const tryAutoplay = () => {
-      bgm.play().catch(() => {});
+      bgm.play().catch(() => {
+        // iOS/Safari bloqueará hasta un gesto: lo resolvemos con firstGesture
+      });
     };
 
     tryAutoplay();
 
+    // En el primer toque/click arrancamos si estaba bloqueada
     const firstGesture = () => tryAutoplay();
     window.addEventListener("pointerdown", firstGesture, { once: true });
     window.addEventListener("touchstart", firstGesture, { once: true, passive: true });
@@ -553,7 +570,9 @@
     bgm.volume = SETTINGS.duckBgmWhileVoice;
 
     return new Promise((resolve, reject) => {
-      const restore = () => { bgm.volume = originalVolume; };
+      const restore = () => {
+        bgm.volume = originalVolume;
+      };
 
       voice.addEventListener("ended", () => {
         restore();
@@ -622,151 +641,169 @@
   ========================= */
 
   const drag2 = new PointerDrag();
+function initScreen2() {
+  const root = $("#screen-2");
+  if (!root) return;
+   // 🔒 Bloqueamos la pantalla hasta escuchar el audio
+lockScreen(root, true);
 
-  function initScreen2() {
-    const root = $("#screen-2");
-    if (!root) return;
+  /* =========================
+     AUDIO DE INSTRUCCIONES — PANTALLA 2
+     (Muestra ESCUCHAR y bloquea CONTINUAR hasta terminar)
+  ========================= */
+  const btnListen2 = $("#btnListen2");
+  const btnNext = $("#btnNext2");
 
-    lockScreen(root, true);
+  // Mostrar el botón ESCUCHAR sí o sí
+  if (btnListen2) btnListen2.hidden = false;
 
-    const btnListen2 = $("#btnListen2");
-    const btnNext = $("#btnNext2");
+  // CONTINUAR bloqueado al entrar
+  disable(btnNext, true);
 
-    if (btnListen2) btnListen2.hidden = false;
-    disable(btnNext, true);
+  // Control para evitar dobles clicks
+  let listened = false;
+  let playing = false;
 
-    let listened = false;
-    let playing = false;
+  if (btnListen2) {
+  btnListen2.onclick = () => {
+    if (playing) return;
+    playing = true;
 
-    if (btnListen2) {
-      btnListen2.onclick = () => {
-        if (playing) return;
-        playing = true;
+    disable(btnListen2, true);
 
-        disable(btnListen2, true);
+    playVoice(ASSETS.audio.intro2)
+      .then(() => {
+        listened = true;
+        bigCheck();
+      // 🔓 DESBLOQUEAR LA PANTALLA AL TERMINAR EL AUDIO
+  lockScreen(root, false);
+})
+      .catch(() => {
+        listened = true;
+        toast("No se pudo reproducir el audio");
+      })
+      .finally(() => {
+        disable(btnListen2, false);
+        playing = false;
 
-        playVoice(ASSETS.audio.intro2)
-          .then(() => {
-            listened = true;
-            bigCheck();
-            lockScreen(root, false);
-          })
-          .catch(() => {
-            listened = true;
-            lockScreen(root, false);
-            toast("No se pudo reproducir el audio");
-          })
-          .finally(() => {
-            disable(btnListen2, false);
-            playing = false;
+        // Si ya ha completado letras, que CONTINUAR se active
+        if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
+          disable(btnNext, false);
+        }
+      });
+  };
+}
 
-            if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
-              disable(btnNext, false);
-            }
-          });
-      };
+  /* =========================
+     ACTIVIDAD LETRAS (drag/tap)
+  ========================= */
+
+  // Asegura estado limpio al entrar
+  disable(btnNext, true);
+
+  const chips = $$(".chip-drag", root);
+
+  drag2.onDrop = (dropZone, draggedEl) => {
+    const letter = draggedEl?.dataset?.letter;
+    const targetId = draggedEl?.dataset?.target;
+
+    const slot = dropZone?.closest?.(".slot-drop");
+    const slotId = slot?.dataset?.slot;
+
+    if (!slot || !slotId) {
+      drag2.revertActive();
+      return;
     }
 
-    disable(btnNext, true);
+    if (slotId !== targetId) {
+      toast("Prueba en su palabra");
+      drag2.revertActive();
+      return;
+    }
 
-    const chips = $$(".chip-drag", root);
+    const row = root.querySelector(`.letter-row[data-id="${slotId}"]`);
+    const solution = row?.dataset?.solution;
 
-    drag2.onDrop = (dropZone, draggedEl) => {
-      const letter = draggedEl?.dataset?.letter;
-      const targetId = draggedEl?.dataset?.target;
+    if (!solution) {
+      drag2.revertActive();
+      return;
+    }
 
-      const slot = dropZone?.closest?.(".slot-drop");
-      const slotId = slot?.dataset?.slot;
+    if (letter === solution) {
+      state.lettersDone.add(slotId);
+      slot.textContent = letter;
+      slot.classList.add("is-correct");
 
-      if (!slot || !slotId) {
-        drag2.revertActive();
-        return;
+      chips
+        .filter((c) => c.dataset.target === slotId)
+        .forEach((c) => {
+          c.disabled = true;
+          c.classList.add("is-disabled");
+        });
+
+      drag2.revertActive();
+      bigCheck();
+
+      // ✅ Solo dejamos CONTINUAR si:
+      // 1) están todas las letras
+      // 2) y ha escuchado el audio (o falló pero lo marcamos como listened)
+      if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
+        disable(btnNext, false);
       }
+    } else {
+      toast("Esa no… prueba la otra");
+      drag2.revertActive();
+    }
+  };
 
-      if (slotId !== targetId) {
-        toast("Prueba en su palabra");
-        drag2.revertActive();
-        return;
-      }
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      if (chip.disabled) return;
 
-      const row = root.querySelector(`.letter-row[data-id="${slotId}"]`);
+      const letter = chip.dataset.letter;
+      const targetId = chip.dataset.target;
+      const row = root.querySelector(`.letter-row[data-id="${targetId}"]`);
       const solution = row?.dataset?.solution;
-
-      if (!solution) {
-        drag2.revertActive();
-        return;
-      }
+      const slot = root.querySelector(`.slot-drop[data-slot="${targetId}"]`);
+      if (!slot) return;
 
       if (letter === solution) {
-        state.lettersDone.add(slotId);
+        state.lettersDone.add(targetId);
         slot.textContent = letter;
         slot.classList.add("is-correct");
 
         chips
-          .filter((c) => c.dataset.target === slotId)
+          .filter((c) => c.dataset.target === targetId)
           .forEach((c) => {
             c.disabled = true;
             c.classList.add("is-disabled");
           });
 
-        drag2.revertActive();
         bigCheck();
 
         if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
           disable(btnNext, false);
+        } else if (state.lettersDone.size >= SETTINGS.letters.length && !listened) {
+          toast("Pulsa ESCUCHAR para continuar");
         }
       } else {
-        toast("Esa no… prueba la otra");
-        drag2.revertActive();
+        toast("Prueba la otra");
       }
-    };
-
-    chips.forEach((chip) => {
-      chip.addEventListener("click", () => {
-        if (chip.disabled) return;
-
-        const letter = chip.dataset.letter;
-        const targetId = chip.dataset.target;
-        const row = root.querySelector(`.letter-row[data-id="${targetId}"]`);
-        const solution = row?.dataset?.solution;
-        const slot = root.querySelector(`.slot-drop[data-slot="${targetId}"]`);
-        if (!slot) return;
-
-        if (letter === solution) {
-          state.lettersDone.add(targetId);
-          slot.textContent = letter;
-          slot.classList.add("is-correct");
-
-          chips
-            .filter((c) => c.dataset.target === targetId)
-            .forEach((c) => {
-              c.disabled = true;
-              c.classList.add("is-disabled");
-            });
-
-          bigCheck();
-
-          if (state.lettersDone.size >= SETTINGS.letters.length && listened) {
-            disable(btnNext, false);
-          } else if (state.lettersDone.size >= SETTINGS.letters.length && !listened) {
-            toast("Pulsa ESCUCHAR para continuar");
-          }
-        } else {
-          toast("Prueba la otra");
-        }
-      });
-
-      drag2.makeDraggable(chip, { bounds: root });
     });
 
-    if (btnNext) btnNext.addEventListener("click", () => {
-      if (!listened) {
-        toast("Pulsa ESCUCHAR primero");
-        return;
-      }
-      nextScreen();
-    });
-  }
+    drag2.makeDraggable(chip, { bounds: root });
+  });
+
+  if (btnNext) btnNext.addEventListener("click", () => {
+    // Si intenta continuar sin escuchar, le avisamos
+    if (!listened) {
+      toast("Pulsa ESCUCHAR primero");
+      return;
+    }
+    nextScreen();
+  });
+}
+  
 
   function resetScreen2() {
     const root = $("#screen-2");
@@ -809,38 +846,40 @@
     const btnNext = $("#btnNext3");
     const btnListen3 = $("#btnListen3");
 
-    lockScreen(root, true);
+// Al entrar: bloqueamos TODO hasta escuchar
+lockScreen(root, true);
 
-    if (btnListen3) btnListen3.hidden = false;
+// Aseguramos que se vea ESCUCHAR
+if (btnListen3) btnListen3.hidden = false;
 
-    let listened3 = false;
-    let playing3 = false;
+let listened3 = false;
+let playing3 = false;
 
-    if (btnListen3) {
-      btnListen3.onclick = () => {
-        if (playing3) return;
-        playing3 = true;
+if (btnListen3) {
+  btnListen3.onclick = () => {
+    if (playing3) return;
+    playing3 = true;
 
-        disable(btnListen3, true);
+    disable(btnListen3, true);
 
-        playVoice(ASSETS.audio.intro3)
-          .then(() => {
-            listened3 = true;
-            lockScreen(root, false);
-            bigCheck();
-          })
-          .catch(() => {
-            listened3 = true;
-            lockScreen(root, false);
-            toast("No se pudo reproducir el audio");
-          })
-          .finally(() => {
-            disable(btnListen3, false);
-            playing3 = false;
-          });
-      };
-    }
-
+    playVoice(ASSETS.audio.intro3)
+      .then(() => {
+        listened3 = true;
+        lockScreen(root, false);   // 🔓 desbloquea llaves
+        bigCheck();
+      })
+      .catch(() => {
+        // Si falla el audio, NO bloqueamos el juego
+        listened3 = true;
+        lockScreen(root, false);
+        toast("No se pudo reproducir el audio");
+      })
+      .finally(() => {
+        disable(btnListen3, false);
+        playing3 = false;
+      });
+  };
+}
     if (!keysLayer || !chestDrop) return;
 
     disable(btnNext, true);
@@ -860,8 +899,8 @@
       k.appendChild(img);
 
       k.style.position = "absolute";
-      k.style.left = `${8 + Math.random() * 78}%`;
-      k.style.top  = `${14 + Math.random() * 65}%`;
+      k.style.left = `${8 + Math.random() * 78}%`;  // 8%–86%
+k.style.top  = `${14 + Math.random() * 65}%`; // 14%–79%
 
       keysLayer.appendChild(k);
 
@@ -935,41 +974,47 @@
 
     const layer = $("#pirateTapLayer");
     const btnNext = $("#btnNext4");
-    const btnListen4 = $("#btnListen4");
+     const btnListen4 = $("#btnListen4");
 
-    lockScreen(root, true);
+// Al entrar: bloquear TODO hasta escuchar
+lockScreen(root, true);
 
-    if (btnListen4) btnListen4.hidden = false;
+// Mostrar ESCUCHAR siempre
+if (btnListen4) btnListen4.hidden = false;
 
-    let playing4 = false;
+let listened4 = false;
+let playing4 = false;
 
-    if (btnListen4) {
-      btnListen4.onclick = () => {
-        if (playing4) return;
-        playing4 = true;
+if (btnListen4) {
+  btnListen4.onclick = () => {
+    if (playing4) return;
+    playing4 = true;
 
-        disable(btnListen4, true);
+    disable(btnListen4, true);
 
-        playVoice(ASSETS.audio.intro4)
-          .then(() => {
-            lockScreen(root, false);
-            bigCheck();
-          })
-          .catch(() => {
-            lockScreen(root, false);
-            toast("No se pudo reproducir el audio");
-          })
-          .finally(() => {
-            disable(btnListen4, false);
-            playing4 = false;
-          });
-      };
-    }
+    playVoice(ASSETS.audio.intro4)
+      .then(() => {
+        listened4 = true;
+        lockScreen(root, false); // 🔓 desbloquea juego
+        bigCheck();
+      })
+      .catch(() => {
+        listened4 = true;
+        lockScreen(root, false); // si falla, no bloqueamos
+        toast("No se pudo reproducir el audio");
+      })
+      .finally(() => {
+        disable(btnListen4, false);
+        playing4 = false;
+      });
+  };
+}
 
     if (!layer || !btnNext) return;
 
     disable(btnNext, true);
     layer.innerHTML = "";
+
     state.classifyDone = 0;
 
     const pirateKeys = SETTINGS.classify?.pirates || ["telescope", "sword", "flag", "cannon"];
@@ -979,7 +1024,6 @@
       ...pirateKeys.map((k) => ({ key: k, isPirate: true })),
       ...decoys.map((k) => ({ key: k, isPirate: false })),
     ];
-
     const NAME_MAP = {
       telescope: "CATALEJO",
       sword: "ESPADA",
@@ -989,6 +1033,7 @@
       plush: "PELUCHE",
     };
 
+    // mezcla para variar
     shuffle(items);
 
     items.forEach((it) => {
@@ -1049,61 +1094,68 @@
   ========================= */
 
   function initInterlude() {
-    const btnContinue = $("#interludeContinue");
-    const btnListen = $("#btnListenInterlude");
-    const topRight = $("#interludeMotivation");
+  const btnContinue = $("#interludeContinue");
+  const btnListen = $("#btnListenInterlude");
+  const topRight = $("#interludeMotivation");
 
-    safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
-    disable(btnContinue, true);
+  safeText(topRight, INTERLUDE_MOTIVATION_TEXT);
 
-    if (btnContinue) {
-      btnContinue.addEventListener("click", () => {
-        if (btnContinue.disabled) return;
-        switchScreen(5);
-      });
-    }
+  // ✅ CONTINUAR empieza desactivado
+  disable(btnContinue, true);
 
-    if (btnListen) {
-      let playing = false;
-
-      btnListen.addEventListener("click", () => {
-        if (playing) return;
-        playing = true;
-
-        disable(btnListen, true);
-        disable(btnContinue, true);
-
-        playVoice(ASSETS.audio.interlude1)
-          .then(() => {
-            disable(btnContinue, false);
-            bigCheck();
-          })
-          .catch(() => {
-            toast("No se pudo reproducir la voz");
-            disable(btnContinue, false);
-          })
-          .finally(() => {
-            disable(btnListen, false);
-            playing = false;
-          });
-      });
-    }
+  // Si pulsan continuar sin escuchar (por si acaso)
+  if (btnContinue) {
+    btnContinue.addEventListener("click", () => {
+      if (btnContinue.disabled) return;
+      switchScreen(5);
+    });
   }
 
+  if (btnListen) {
+    let playing = false;
+
+    btnListen.addEventListener("click", () => {
+      if (playing) return;
+      playing = true;
+
+      // mientras suena, bloqueamos botones
+      disable(btnListen, true);
+      disable(btnContinue, true);
+
+      playVoice(ASSETS.audio.interlude1)
+        .then(() => {
+          // ✅ al terminar el audio: habilita CONTINUAR
+          disable(btnContinue, false);
+          bigCheck();
+        })
+        .catch(() => {
+          // Si falla el audio, decides: yo lo habilito igualmente para no bloquear el juego
+          toast("No se pudo reproducir la voz");
+          disable(btnContinue, false);
+        })
+        .finally(() => {
+          disable(btnListen, false);
+          playing = false;
+        });
+    });
+  }
+}
+
   /* =========================
-     SCREEN 5 — ESCUCHA Y ENCUENTRA
+     SCREEN 5 — ESCUCHA Y ENCUENTRA (NUEVO)
   ========================= */
 
   function buildScreen5() {
     const root = $("#screen-5");
     if (!root) return;
 
-    const area = $("#memoryArea");
+    const area = $("#memoryArea");   // reutilizamos el contenedor del index
     const btnNext = $("#btnNext5");
     if (!area || !btnNext) return;
 
     disable(btnNext, true);
 
+    // Construimos UI interna sin tocar el index
     area.innerHTML = `
       <div class="find-wrap" aria-label="Escucha y encuentra">
         <div class="find-top">
@@ -1118,12 +1170,13 @@
     const roundText = $("#findRoundText", area);
     const grid = $("#findGrid", area);
 
-    state.find.queue = [...SETTINGS.findObject.pool];
-    state.find.current = null;
-    state.find.solved = new Set();
-    state.find.lock = false;
-    state.find.heard = false;
+    // Inicializa cola aleatoria de 5 rondas
+        state.find.queue = [...SETTINGS.findObject.pool];
+state.find.current = null;
+state.find.solved = new Set();
+state.find.lock = false;
 
+    // Render grid (5 objetos visibles siempre)
     grid.innerHTML = "";
     SETTINGS.findObject.grid.forEach((k) => {
       const b = document.createElement("button");
@@ -1147,10 +1200,10 @@
         if (state.find.solved.has(k)) return;
 
         const target = state.find.current;
-        if (!target || !state.find.heard) {
-          toast("Pulsa ESCUCHAR primero");
-          return;
-        }
+if (!target || !state.find.heard) {
+  toast("Pulsa ESCUCHAR primero");
+  return;
+}
 
         if (k !== target) {
           toast("Ese no… prueba otro");
@@ -1159,17 +1212,21 @@
           return;
         }
 
+        // ✅ ACIERTO
         state.find.solved.add(k);
         bigCheck();
 
+        // ilumina y bloquea ese objeto
         b.classList.add("is-found");
         b.style.pointerEvents = "none";
         b.style.opacity = "1";
+        // un “brillo” inline para que se note incluso sin CSS nuevo
         b.style.filter = "drop-shadow(0 0 14px rgba(255,215,90,0.75))";
         b.style.outline = "3px solid rgba(255,215,90,0.8)";
         b.style.outlineOffset = "6px";
         b.style.borderRadius = "14px";
 
+        // “no se puede volver a escuchar” (en la práctica: avanzamos ronda y cambiamos objetivo)
         state.find.current = null;
         safeText(roundText, "¡Bien! ✅");
 
@@ -1180,6 +1237,7 @@
           return;
         }
 
+        // siguiente ronda
         setTimeout(() => {
           startNextRound();
         }, 450);
@@ -1191,6 +1249,7 @@
     function startNextRound() {
       if (state.find.lock) return;
 
+      // Busca el siguiente objetivo que no esté resuelto
       let next = null;
       while (state.find.queue.length) {
         const cand = state.find.queue.shift();
@@ -1199,14 +1258,14 @@
           break;
         }
       }
+      // si por lo que sea se vació, reconstruimos con los que falten
       if (!next) {
         const remaining = SETTINGS.findObject.pool.filter(x => !state.find.solved.has(x));
         shuffle(remaining);
         next = remaining[0] || null;
       }
-
-      state.find.current = next;
-      state.find.heard = false;
+       state.find.current = next;
+      state.find.heard = false; // ✅ hasta terminar el audio no puede acertar
 
       const done = state.find.solved.size;
       const total = SETTINGS.findObject.pool.length;
@@ -1214,42 +1273,48 @@
       disable(btnListen, false);
     }
 
+    // ESCUCHAR: reproduce pista del objetivo
     if (btnListen) {
       let playing = false;
       btnListen.addEventListener("click", () => {
         if (state.find.lock) return;
         if (playing) return;
 
+        // si no hay ronda activa, la arrancamos
         if (!state.find.current) startNextRound();
 
         const target = state.find.current;
         if (!target) return;
 
-        const roundIndex = state.find.solved.size;
-        const src = SETTINGS.findObject.roundAudios[roundIndex];
+        // La ronda actual es "solved.size" (0..4)
+const roundIndex = state.find.solved.size;
+const src = SETTINGS.findObject.roundAudios[roundIndex];
 
-        if (!src) {
-          toast("No hay audio de pista");
-          return;
-        }
+if (!src) {
+  toast("No hay audio de pista");
+  return;
+}
 
         playing = true;
         disable(btnListen, true);
 
         playVoice(src)
-          .then(() => {
-            state.find.heard = true;
-            bigCheck();
-          })
-          .catch(() => toast("No se pudo reproducir la voz"))
-          .finally(() => {
-            playing = false;
-            if (state.find.current) disable(btnListen, false);
-          });
+  .then(() => {
+    state.find.heard = true; // ✅ ya puede tocar para acertar
+    bigCheck();
+  })
+  .catch(() => toast("No se pudo reproducir la voz"))
+  .finally(() => {
+    playing = false;
+    if (state.find.current) disable(btnListen, false);
+  });
       });
     }
 
+    // Arranca primera ronda automáticamente (sin escuchar)
     startNextRound();
+
+    // CONTINUAR
     btnNext.onclick = nextScreen;
   }
 
@@ -1259,7 +1324,6 @@
     state.find.current = null;
     state.find.solved.clear();
     state.find.lock = false;
-    state.find.heard = false;
 
     const area = $("#memoryArea");
     if (area) area.innerHTML = "";
@@ -1274,37 +1338,41 @@
   function buildScreen6() {
     const root = $("#screen-6");
     if (!root) return;
+     const btnListen6 = $("#btnListen6");
 
-    const btnListen6 = $("#btnListen6");
+// 🔒 Bloqueamos la pantalla al entrar
+lockScreen(root, true);
 
-    lockScreen(root, true);
-    if (btnListen6) btnListen6.hidden = false;
+// Mostrar ESCUCHAR siempre
+if (btnListen6) btnListen6.hidden = false;
 
-    let playing6 = false;
+let listened6 = false;
+let playing6 = false;
 
-    if (btnListen6) {
-      btnListen6.onclick = () => {
-        if (playing6) return;
-        playing6 = true;
+if (btnListen6) {
+  btnListen6.onclick = () => {
+    if (playing6) return;
+    playing6 = true;
 
-        disable(btnListen6, true);
+    disable(btnListen6, true);
 
-        playVoice(ASSETS.audio.intro6)
-          .then(() => {
-            lockScreen(root, false);
-            bigCheck();
-          })
-          .catch(() => {
-            lockScreen(root, false);
-            toast("No se pudo reproducir el audio");
-          })
-          .finally(() => {
-            disable(btnListen6, false);
-            playing6 = false;
-          });
-      };
-    }
-
+    playVoice(ASSETS.audio.intro6)
+      .then(() => {
+        listened6 = true;
+        lockScreen(root, false); // 🔓 Desbloquea juego
+        bigCheck();
+      })
+      .catch(() => {
+        listened6 = true;
+        lockScreen(root, false); // si falla, no bloqueamos el juego
+        toast("No se pudo reproducir el audio");
+      })
+      .finally(() => {
+        disable(btnListen6, false);
+        playing6 = false;
+      });
+  };
+}
     state.coins = { 3: 0, 5: 0, 6: 0 };
     disable($("#btnNext6"), true);
 
@@ -1392,148 +1460,158 @@
     state.coins = { 3: 0, 5: 0, 6: 0 };
     disable($("#btnNext6"), true);
   }
+/* =========================
+   SCREEN 7 — SYLLABLES (REEMPLAZO COMPLETO)
+========================= */
 
-  /* =========================
-     SCREEN 7 — SYLLABLES
-  ========================= */
+function initScreen7() {
+  const root = $("#screen-7");
+  if (!root) return;
 
-  function initScreen7() {
-    const root = $("#screen-7");
-    if (!root) return;
+  const btnListen7 = $("#btnListen7");
+  const btnNext7 = $("#btnNext7");
 
-    const btnListen7 = $("#btnListen7");
-    const btnNext7 = $("#btnNext7");
+  // Al entrar: bloquear pantalla y CONTINUAR desactivado
+  lockScreen(root, true);
+  disable(btnNext7, true);
 
-    lockScreen(root, true);
-    disable(btnNext7, true);
+  if (btnListen7) btnListen7.hidden = false;
 
-    if (btnListen7) btnListen7.hidden = false;
+  // Estado local (no afecta a otras pantallas)
+  let playing7 = false;
 
-    let playing7 = false;
+  // Recojo filas reales del HTML
+  const rows = $$(".syll-row", root);
+  const totalRows = rows.length;
 
-    const rows = $$(".syll-row", root);
-    const totalRows = rows.length;
-    if (!totalRows) return;
+  // Si no hay filas, por seguridad no dejamos continuar
+  if (!totalRows) return;
 
-    const updateNext = () => {
-      if (!btnNext7) return;
-      disable(btnNext7, state.syllablesDone.size !== totalRows);
+  // Helper: recalcular si se puede continuar
+  const updateNext = () => {
+    if (!btnNext7) return;
+    disable(btnNext7, state.syllablesDone.size !== totalRows);
+  };
+
+  // ESCUCHAR: desbloquea al terminar (o si falla, también)
+  if (btnListen7) {
+    btnListen7.onclick = () => {
+      if (playing7) return;
+      playing7 = true;
+
+      disable(btnListen7, true);
+
+      playVoice(ASSETS.audio.intro7)
+        .then(() => {
+          lockScreen(root, false);
+          bigCheck();
+        })
+        .catch(() => {
+          lockScreen(root, false);
+          toast("No se pudo reproducir el audio");
+        })
+        .finally(() => {
+          disable(btnListen7, false);
+          playing7 = false;
+        });
     };
+  }
 
-    if (btnListen7) {
-      btnListen7.onclick = () => {
-        if (playing7) return;
-        playing7 = true;
+  // Limpieza inicial de estado por si vienes de atrás sin reset
+  state.syllablesDone.clear();
+  updateNext();
 
-        disable(btnListen7, true);
+  // Listeners por fila
+  rows.forEach((row) => {
+    const word = (row.dataset.word || "").trim();
+    const answer = Number(row.dataset.answer);
 
-        playVoice(ASSETS.audio.intro7)
-          .then(() => {
-            lockScreen(root, false);
-            bigCheck();
-          })
-          .catch(() => {
-            lockScreen(root, false);
-            toast("No se pudo reproducir el audio");
-          })
-          .finally(() => {
-            disable(btnListen7, false);
-            playing7 = false;
-          });
-      };
+    const opts = $$(".btn-option", row);
+    const res = $(".syll-result", row);
+
+    // Por si el HTML trae filas incompletas
+    if (!word || !opts.length || !Number.isFinite(answer)) return;
+
+    // Asegura estado visual limpio
+    opts.forEach((o) => {
+      o.classList.remove("is-picked");
+      disable(o, false);
+    });
+    if (res) {
+      res.classList.remove("is-correct");
+      safeText(res, "—");
     }
 
-    state.syllablesDone.clear();
-    updateNext();
+    opts.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Si ya está resuelta, no hacemos nada
+        if (state.syllablesDone.has(word)) return;
 
-    rows.forEach((row) => {
-      const word = (row.dataset.word || "").trim();
-      const answer = Number(row.dataset.answer);
+        const pick = Number(btn.dataset.pick);
 
-      const opts = $$(".btn-option", row);
-      const res = $(".syll-result", row);
+        // marcar selección
+        opts.forEach((o) => o.classList.remove("is-picked"));
+        btn.classList.add("is-picked");
 
-      if (!word || !opts.length || !Number.isFinite(answer)) return;
+        if (pick === answer) {
+          // ✅ acierto
+          state.syllablesDone.add(word);
 
-      opts.forEach((o) => {
-        o.classList.remove("is-picked");
-        disable(o, false);
-      });
-      if (res) {
-        res.classList.remove("is-correct");
-        safeText(res, "—");
-      }
-
-      opts.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          if (state.syllablesDone.has(word)) return;
-
-          const pick = Number(btn.dataset.pick);
-
-          opts.forEach((o) => o.classList.remove("is-picked"));
-          btn.classList.add("is-picked");
-
-          if (pick === answer) {
-            state.syllablesDone.add(word);
-
-            if (res) {
-              safeText(res, "✓");
-              res.classList.add("is-correct");
-            }
-
-            bigCheck();
-            opts.forEach((o) => disable(o, true));
-            updateNext();
-          } else {
-            if (res) {
-              safeText(res, "—");
-              res.classList.remove("is-correct");
-            }
-            toast("Cuenta otra vez");
+          if (res) {
+            safeText(res, "✓");
+            res.classList.add("is-correct");
           }
-        });
+
+          bigCheck();
+
+          // Bloquear fila para no volver a tocarla
+          opts.forEach((o) => disable(o, true));
+
+          updateNext();
+        } else {
+          // ❌ fallo
+          if (res) {
+            safeText(res, "—");
+            res.classList.remove("is-correct");
+          }
+          toast("Cuenta otra vez");
+        }
       });
     });
+  });
 
-    if (btnNext7) btnNext7.addEventListener("click", nextScreen);
-  }
+  if (btnNext7) btnNext7.addEventListener("click", nextScreen);
+}
 
-  function resetScreen7() {
-    state.syllablesDone.clear();
+function resetScreen7() {
+  state.syllablesDone.clear();
 
-    const root = $("#screen-7");
-    if (!root) return;
+  const root = $("#screen-7");
+  if (!root) return;
 
-    disable($("#btnNext7"), true);
+  disable($("#btnNext7"), true);
 
-    $$(".syll-row", root).forEach((row) => {
-      $$(".btn-option", row).forEach((b) => {
-        b.classList.remove("is-picked");
-        disable(b, false);
-      });
-
-      const res = $(".syll-result", row);
-      if (res) {
-        res.textContent = "—";
-        res.classList.remove("is-correct");
-      }
+  $$(".syll-row", root).forEach((row) => {
+    $$(".btn-option", row).forEach((b) => {
+      b.classList.remove("is-picked");
+      disable(b, false);
     });
-  }
 
+    const res = $(".syll-result", row);
+    if (res) {
+      res.textContent = "—";
+      res.classList.remove("is-correct");
+    }
+  });
+}
+  
   /* =========================
      SCREEN 8 — FINAL
-     (sin “volver a jugar”, solo “4 AÑOS A”)
   ========================= */
 
   function initScreen8() {
-    // Oculta el botón si existe en el HTML
     const btn = $("#btnRestart");
-    if (btn) {
-      btn.hidden = true;
-      btn.disabled = true;
-      btn.style.display = "none";
-    }
-    // El texto final se asegura al entrar vía switchScreen(8)
+    if (btn) btn.addEventListener("click", restartGame);
   }
 
   /* =========================
@@ -1546,13 +1624,12 @@
 
     if (key === 3) buildScreen3();
     if (key === 4) buildScreen4();
-    if (key === 5) buildScreen5();
+    if (key === 5) buildScreen5(); // ✅ ahora es “Escucha y encuentra”
     if (key === 6) buildScreen6();
-    if (key === 8) initScreen8(); // ✅ al entrar en final
   }
 
   /* =========================
-     RESET UI (ya no se usa para reiniciar)
+     RESET UI
   ========================= */
 
   function resetUIAll() {
@@ -1587,11 +1664,11 @@
     initScreen2();
     initInterlude();
     initScreen7();
+    initScreen8();
 
     setInstruction(1);
     setBackground(1);
     switchScreen(1);
-
   }
 
   document.addEventListener("DOMContentLoaded", boot);
