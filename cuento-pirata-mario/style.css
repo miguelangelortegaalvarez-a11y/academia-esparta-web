@@ -2,8 +2,11 @@
 [hidden]{ display:none !important; }
 
 /* ==========================================================
-   CUENTO PIRATA MARIO — STYLE (OPTIMIZADO iPad/Safari)
-   - Limpio, ordenado y sin duplicados
+   CUENTO PIRATA MARIO — STYLE (ESTABLE iPad/Safari + Desktop)
+   - Basado en tu style, pero corrigiendo:
+     * Zoom/desktop (no se pierden paneles ni botones)
+     * Screen 3 drop cofre (pointer-events)
+     * Scroll controlado por pantalla activa
    ========================================================== */
 
 /* =========================
@@ -32,9 +35,8 @@
   --hudH: 72px;
   --pad: 16px;
 
-  --fadeMs: 260ms; /* un poco más rápido para iPad */
+  --fadeMs: 260ms;
 
-  /* Cards grandes (pantallas 4/5) */
   --card-max: 240px;
   --card-min: 190px;
   --card-pad: 18px;
@@ -60,8 +62,11 @@ body{
 .app{
   position: relative;
   width: 100vw;
-  height: 100vh;
+
+  height: 100vh;    /* fallback */
+  height: 100dvh;   /* iOS Safari moderno */
   min-height: 100svh;
+
   overflow: hidden;
 }
 
@@ -81,7 +86,6 @@ body{
   will-change: background-image;
 }
 
-/* Sombreado suave para legibilidad */
 .scene-shade{
   position: absolute;
   inset: 0;
@@ -95,18 +99,17 @@ body{
 /* =========================
    HUD
 ========================= */
-/* Baja el HUD un poco y respeta la zona segura del iPad */
 .hud{
   position: absolute;
   left: 0; right: 0;
-  top: calc(env(safe-area-inset-top) + 10px) !important;
-  height: auto !important;
+  top: calc(env(safe-area-inset-top) + 10px);
+  height: auto;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 10px var(--pad) 10px var(--pad) !important;
+  padding: 10px var(--pad);
   gap: 12px;
   z-index: 50;
 }
@@ -114,23 +117,21 @@ body{
 .hud-left{ flex: 1; min-width: 0; }
 .hud-right{ display:flex; align-items:center; gap: 10px; }
 
-/* Frase más grande y con salto si hace falta */
 .instruction{
   display: inline-block;
-  padding: 12px 16px !important;
+  padding: 12px 16px;
   border-radius: 14px;
   background: rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.10);
   color: var(--text);
 
-  font-size: clamp(22px, 2.6vw, 34px) !important;
-  line-height: 1.15 !important;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.15;
 
-  white-space: normal !important;
-  max-width: min(980px, 92vw) !important;
+  white-space: normal;
+  max-width: min(980px, 92vw);
 }
 
-/* Botón ESCUCHAR pegado a la instrucción (HUD) */
 .btn-small{
   min-height: 44px;
   padding: 10px 14px;
@@ -145,14 +146,18 @@ body{
 .screens{
   position: absolute;
   inset: 0;
-  padding-top: 0;
   z-index: 10;
 }
 
-/* Pantallas: rendimiento iOS */
+/* Pantallas: dejamos espacio arriba (HUD) y abajo (safe area + margen) */
 .screen{
   position: absolute;
-  inset: calc(env(safe-area-inset-top) + 96px) 0 0 0 !important;
+  inset:
+    calc(env(safe-area-inset-top) + 96px)
+    0
+    calc(env(safe-area-inset-bottom) + 16px)
+    0;
+
   padding: 18px;
 
   display: none;
@@ -163,10 +168,14 @@ body{
   contain: layout paint;
 }
 
+/* Activa + scroll SOLO en pantalla (no en body) */
 .screen.is-active{
   display: block;
   opacity: 1;
   transform: translateY(0);
+
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .screen.is-leaving{
@@ -187,7 +196,6 @@ body{
   margin: 0 auto;
 }
 
-/* Blur opcional */
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
   .panel{
     backdrop-filter: blur(4px);
@@ -195,11 +203,18 @@ body{
   }
 }
 
+/* FIX ZOOM: no usamos top:10vh rígido, que corta contenido */
 .panel-center{
   position: relative;
-  top: 10vh;
+  top: 0;
+  margin: clamp(18px, 8vh, 110px) auto 0 auto;
   text-align: center;
   width: min(900px, 92vw);
+
+  /* si hay zoom, que el panel no se salga */
+  max-height: calc(100% - 24px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .panel-wide{ width: min(1100px, 94vw); }
@@ -258,6 +273,7 @@ body{
   display: flex;
   justify-content: flex-end;
   gap: 12px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
 }
 
 /* =========================
@@ -330,7 +346,7 @@ body{
 ========================= */
 #screen-2 .panel{
   padding: 14px !important;
-  max-height: calc(100svh - (env(safe-area-inset-top) + 120px)) !important;
+  max-height: calc(100% - 10px) !important;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -344,9 +360,9 @@ body{
 .letter-row{
   display: grid;
   grid-template-columns: 1fr 240px 160px;
-  gap: 10px !important;
+  gap: 10px;
   align-items: center;
-  padding: 12px !important;
+  padding: 12px;
   border-radius: 16px;
   background: rgba(0,0,0,0.18);
   border: 1px solid rgba(255,255,255,0.10);
@@ -376,7 +392,6 @@ body{
 }
 
 .slot-drop{ border-color: rgba(255,210,77,0.95); }
-
 .slot-drop.is-correct{
   background: rgba(0,255,140,0.25);
   border-color: #00ff8c;
@@ -440,7 +455,7 @@ body{
   inset: 0;
 }
 
-/* LLAVES: pantalla 3 sin panel */
+/* Screen 3 sin panel visual */
 #screen-3 .panel{
   background: transparent !important;
   border: 0 !important;
@@ -465,6 +480,7 @@ body{
   border-radius: 0 !important;
 }
 
+/* Llaves */
 #screen-3 .key-item{
   position: absolute !important;
   width: 64px !important;
@@ -508,11 +524,8 @@ body{
   50%  { transform: translate3d(0, -10px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
-/* ==========================================================
-   SCREEN 3 — COFRE MÁS GRANDE Y PROTAGONISTA
-========================================================== */
 
-/* Variables SOLO para Screen 3 (mejor que un :root nuevo) */
+/* Cofre grande */
 #screen-3{
   --s3-continue-bottom: calc(18px + env(safe-area-inset-bottom));
   --s3-chest-bottom:    calc(18px + env(safe-area-inset-bottom));
@@ -521,8 +534,6 @@ body{
 #screen-3 .chest-drop{
   position: absolute !important;
   right: 22px !important;
-
-  /* ✅ cofre independiente del botón */
   bottom: var(--s3-chest-bottom) !important;
 
   width: 300px !important;
@@ -547,25 +558,53 @@ body{
   display: block !important;
 }
 
+/* Oculta hint */
 #screen-3 .chest-hint{ display: none !important; }
 
+/* IMPORTANTE: el cofre debe detectar drop */
+#screen-3 #chestDrop,
+#screen-3 .chest-drop{
+  pointer-events: auto !important;
+}
+
+/* pero la imagen NO debe robar eventos */
+#screen-3 #chestDrop img,
+#screen-3 .chest-drop img{
+  pointer-events: none !important;
+}
+
+/* Llaves por encima */
+#screen-3 #keysLayer,
+#screen-3 .keys-layer{
+  position: absolute;
+  inset: 0;
+  z-index: 6 !important;
+}
+#screen-3 .key-item{
+  z-index: 7 !important;
+}
+
+/* FIX ZOOM: CONTINUAR visible siempre (sticky) */
 #screen-3 .footer-actions{
-  position: absolute !important;
+  position: sticky !important;
+  bottom: 0 !important;
   left: 18px !important;
-
-  /* ✅ continuar con su propia altura */
-  bottom: var(--s3-continue-bottom) !important;
-
   margin-top: 0 !important;
   display: flex !important;
   justify-content: flex-start !important;
-  z-index: 7;
+  z-index: 999 !important;
+
+  padding: 12px 0 max(12px, env(safe-area-inset-bottom)) 0 !important;
+  background: linear-gradient(to top, rgba(7,18,31,0.70), transparent);
 }
 
 #screen-3 .footer-actions .btn{ min-width: 180px; }
 
+/* para que las llaves no “tapen” el footer en pantallas bajas */
+#screen-3 .keys-area{ padding-bottom: 110px; }
+
 /* =========================
-   SCREEN 4 — PIRATE TAP (rejilla pro)
+   SCREEN 4 — PIRATE TAP
 ========================= */
 #screen-4 .panel{ position: relative; }
 
@@ -587,7 +626,6 @@ body{
   justify-items: center;
 }
 
-/* Tarjeta */
 #screen-4 .pirate-tap-item{
   width: 100%;
   max-width: var(--card-max);
@@ -610,7 +648,6 @@ body{
   overflow: hidden;
 }
 
-/* ✅ TEXTO IGUAL (no lo tocamos) */
 #screen-4 .pirate-tap-label{
   position: static;
   transform: none;
@@ -623,7 +660,6 @@ body{
   line-height: 1;
 }
 
-/* ✅ IMAGEN MÁS GRANDE (lo que pediste) */
 #screen-4 .pirate-tap-img{
   width: 185px;
   height: 185px;
@@ -636,18 +672,16 @@ body{
   transform: scale(0.96);
   filter: grayscale(1);
 }
-
 #screen-4 .pirate-tap-item.is-picked{
   outline: 4px solid rgba(255,210,77,0.95);
   outline-offset: 2px;
 }
 
-/* Responsive Pantalla 4 */
 @media (max-width: 900px){
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
 }
 @media (max-width: 560px){
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
+  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(160px, 1fr)); }
 }
 
 /* =========================
@@ -657,7 +691,7 @@ body{
   position: relative;
   width: min(1100px, 94vw);
   margin: 0 auto;
-  min-height: calc(100svh - var(--hudH) - 36px);
+  min-height: calc(100% - 12px);
   padding: 18px;
 }
 
@@ -685,7 +719,7 @@ body{
 }
 
 /* =========================
-   SCREEN 5 — FIND (JS NUEVO actual)
+   SCREEN 5 — FIND
 ========================= */
 .find-wrap{ display:grid; gap:14px; min-height:58vh; }
 .find-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
@@ -742,12 +776,11 @@ body{
 .find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
 .find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
 
-/* Responsive Pantalla 5 */
 @media (max-width: 900px){
-  #findGrid{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+  #findGrid{ grid-template-columns: repeat(3, minmax(170px, 1fr)); }
 }
 @media (max-width: 560px){
-  #findGrid{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
+  #findGrid{ grid-template-columns: repeat(2, minmax(160px, 1fr)); }
 }
 
 /* =========================
@@ -806,6 +839,7 @@ body{
   height: auto;
   object-fit: contain;
   display: block;
+  pointer-events: none;
 }
 
 #screen-6 .count-status{
@@ -844,6 +878,7 @@ body{
   height: 100%;
   object-fit: contain;
   display: block;
+  pointer-events: none;
 }
 #screen-6 .coin-item.is-selected{
   outline: 4px solid rgba(255,210,77,0.95);
@@ -851,12 +886,12 @@ body{
 }
 
 /* =========================
-   SCREEN 7 — SÍLABAS (final, sin duplicados)
+   SCREEN 7 — SÍLABAS
 ========================= */
 #screen-7 .panel.panel-wide{
   display: flex;
   flex-direction: column;
-  max-height: calc(100svh - 140px);
+  max-height: calc(100% - 10px);
   overflow: hidden;
 }
 
@@ -887,7 +922,6 @@ body{
   letter-spacing: 1px;
 }
 
-/* Imagen tipo pantalla 2 */
 #screen-7 .syll-pic{
   width: 220px;
   height: 130px;
@@ -904,6 +938,7 @@ body{
   width: 100%;
   height: 100%;
   object-fit: contain;
+  pointer-events: none;
 }
 
 #screen-7 .syll-options{
@@ -933,7 +968,6 @@ body{
   justify-self: end;
 }
 
-/* CONTINUAR siempre visible */
 #screen-7 .footer-actions{
   position: sticky;
   bottom: 0;
@@ -949,7 +983,7 @@ body{
   .letter-row{ grid-template-columns: 1fr; }
   .pic-box{ width: 100%; height: 160px; }
   .choices{ justify-content: center; }
-  .chests-row{ grid-template-columns: 1fr; }
+  #screen-6 .chests-row{ grid-template-columns: 1fr; }
 }
 
 /* =========================
@@ -968,37 +1002,40 @@ body{
   font-size: 14px;
   color: #fff;
 }
-/* Cofre: nunca debe bloquear taps */
-#screen-3 #chestDrop,
-#screen-3 .chest-drop{
-  pointer-events: none !important;
-  z-index: 3 !important;
-}
 
-/* Llaves: por encima visualmente */
-#screen-3 #keysLayer,
-#screen-3 .keys-layer{
-  position: absolute;
-  inset: 0;
-  z-index: 6 !important;
-}
-#screen-3 .key-item{
-  z-index: 7 !important;
-}
 /* =========================
-   SCREEN 8 — FINAL (solo fondo + confeti)
+   SCREEN 8 — FINAL + CONFETTI
 ========================= */
+#screen-8 .panel{ display: none !important; }
 
-/* Oculta el panel/overlay central si existe */
-#screen-8 .panel{
-  display: none !important;
-}
-
-/* Oculta cualquier título/subtítulo por si los hubiera fuera del panel */
 #screen-8 .title,
 #screen-8 .subtitle,
 #screen-8 h1,
 #screen-8 h2,
 #screen-8 p{
   display: none !important;
+}
+
+#confetti{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.confetti-piece{
+  position: absolute;
+  top: -10vh;
+  width: 10px;
+  height: 16px;
+  opacity: 0.9;
+  transform: rotate(0deg);
+  animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall{
+  to{
+    transform: translate3d(var(--dx), 115vh, 0) rotate(720deg);
+  }
 }
