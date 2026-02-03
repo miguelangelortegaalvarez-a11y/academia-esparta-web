@@ -1,1 +1,224 @@
+/* ==========================================================
+   CUENTO PIRATA MARIO — STYLE DEFINITIVO ESTABLE
+   iPad · Mac · Pizarra digital · Sin zoom
+   ========================================================== */
 
+[hidden]{ display:none !important; }
+
+/* =========================
+   VARIABLES
+========================= */
+:root{
+  --bg:#07121f;
+
+  --panel:rgba(255,255,255,0.14);
+  --stroke:rgba(255,255,255,0.22);
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.78);
+  --shadow:0 12px 28px rgba(0,0,0,0.35);
+
+  --primary:#ffd24d;
+  --primaryText:#2b2100;
+  --secondary:rgba(255,255,255,0.18);
+
+  --ok:#55efc4;
+
+  --radius:18px;
+  --btnRadius:16px;
+
+  --hudH:72px;
+  --pad:16px;
+}
+
+/* =========================
+   BASE (CLAVE)
+========================= */
+*{ box-sizing:border-box; }
+
+html, body{
+  width:100%;
+  height:100%;
+  margin:0;
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow:hidden; /* NUNCA scroll global */
+  -webkit-text-size-adjust:100%;
+}
+
+.app{
+  position:relative;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+/* =========================
+   FONDO
+========================= */
+.scene-bg,
+.scene-shade{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.scene-bg{
+  background:#0b1220;
+  background-size:cover;
+  background-position:center;
+  z-index:0;
+}
+
+.scene-shade{
+  background:
+    radial-gradient(80% 70% at 50% 35%, rgba(0,0,0,0.08), rgba(0,0,0,0.22) 70%),
+    linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.18));
+  z-index:1;
+}
+
+/* =========================
+   HUD
+========================= */
+.hud{
+  position:absolute;
+  top:env(safe-area-inset-top);
+  left:0;
+  right:0;
+  height:var(--hudH);
+  padding:10px var(--pad);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:50;
+}
+
+.instruction{
+  background:rgba(0,0,0,0.35);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:12px 16px;
+  border-radius:14px;
+  font-size:clamp(20px,2.2vw,32px);
+}
+
+/* =========================
+   SCREENS
+========================= */
+.screens{
+  position:absolute;
+  inset:0;
+  z-index:10;
+}
+
+.screen{
+  position:absolute;
+  top:var(--hudH);
+  left:0;
+  right:0;
+  bottom:0;
+  padding:18px;
+  display:none;
+}
+
+.screen.is-active{
+  display:block;
+}
+
+/* =========================
+   PANEL (SCROLL AQUÍ)
+========================= */
+.panel{
+  max-width:1100px;
+  margin:0 auto;
+  padding:18px;
+  background:var(--panel);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+
+  max-height:calc(100% - 36px);
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.panel-center{
+  margin-top:8vh;
+  text-align:center;
+}
+
+.panel-wide{ max-width:1100px; }
+.panel-full{ max-width:1200px; }
+
+/* =========================
+   BOTONES
+========================= */
+.btn{
+  border:0;
+  border-radius:var(--btnRadius);
+  padding:14px 18px;
+  font-size:20px;
+  font-weight:800;
+  cursor:pointer;
+  min-height:52px;
+}
+
+.btn-big{
+  font-size:22px;
+  min-height:60px;
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:var(--primaryText);
+}
+
+.btn-secondary{
+  background:var(--secondary);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.22);
+}
+
+.btn[disabled]{
+  opacity:0.45;
+  cursor:not-allowed;
+}
+
+/* =========================
+   FOOTER ACTIONS
+========================= */
+.footer-actions{
+  margin-top:16px;
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+}
+
+/* =========================
+   SCREEN 8 — FINAL
+========================= */
+body.is-final .hud{
+  display:none;
+}
+
+#confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:5;
+}
+
+#screen-8 h1,
+#screen-8 h2,
+#screen-8 p{
+  display:none !important;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width:760px){
+  .footer-actions{ justify-content:center; }
+}
