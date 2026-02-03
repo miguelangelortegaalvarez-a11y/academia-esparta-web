@@ -1,13 +1,9 @@
-/* Fix: garantizar que [hidden] siempre oculte (Safari/iOS) */
+/* Fix: garantizar que hidden siempre oculte (Safari/iOS) */
 [hidden]{ display:none !important; }
 
 /* ==========================================================
-   CUENTO PIRATA MARIO — STYLE (FULL / iPad Safari + Desktop)
-   Objetivo:
-   - Mantener el layout como funcionaba “antes”
-   - Evitar que se corten botones en escritorio
-   - NO hacer scroll en .screen (solo en paneles concretos)
-   - Mantener capas/absolutos (llaves/cofre) sin descuadrar
+   CUENTO PIRATA MARIO — STYLE (OPTIMIZADO iPad/Safari)
+   - Limpio, ordenado y sin duplicados
    ========================================================== */
 
 /* =========================
@@ -33,27 +29,21 @@
   --radius: 18px;
   --btnRadius: 16px;
 
-  /* Alturas/paddings base */
+  --hudH: 72px;
   --pad: 16px;
-  --hudGapTop: 10px;
-  --hudMinH: 72px;
 
-  --fadeMs: 260ms;
+  --fadeMs: 260ms; /* un poco más rápido para iPad */
 
   /* Cards grandes (pantallas 4/5) */
   --card-max: 240px;
   --card-min: 190px;
   --card-pad: 18px;
   --label-size: 20px;
-
-  /* Espacios verticales útiles */
-  --screenPadX: 18px;
-  --screenPadTop: 18px;
-  --screenPadBottom: 18px;
+  --label-bottom: 14px;
 }
 
 /* =========================
-   BASE / RESET
+   BASE
 ========================= */
 *{ box-sizing: border-box; }
 html, body{ height: 100%; }
@@ -63,38 +53,20 @@ body{
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
-  overflow: hidden; /* clave: el juego controla el viewport */
+  overflow: hidden;
   -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
 }
 
-img{
-  max-width: 100%;
-  height: auto;
-}
-
-button{
-  font-family: inherit;
-}
-
-:focus-visible{
-  outline: 3px solid rgba(255,210,77,0.85);
-  outline-offset: 3px;
-  border-radius: 12px;
-}
-
-/* Contenedor principal */
 .app{
   position: relative;
   width: 100vw;
-  height: 100vh;     /* fallback */
-  height: 100dvh;    /* iOS dinámico */
-  min-height: 100svh;/* Safari */
+  height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
 }
 
 /* =========================
-   FONDO DE ESCENA
+   FONDO
 ========================= */
 .scene-bg{
   position: absolute;
@@ -109,6 +81,7 @@ button{
   will-change: background-image;
 }
 
+/* Sombreado suave para legibilidad */
 .scene-shade{
   position: absolute;
   inset: 0;
@@ -120,40 +93,50 @@ button{
 }
 
 /* =========================
-   HUD (INSTRUCCIÓN + MÚSICA)
+   HUD
 ========================= */
+/* Baja el HUD un poco y respeta la zona segura del iPad */
 .hud{
   position: absolute;
   left: 0; right: 0;
-  top: calc(env(safe-area-inset-top) + var(--hudGapTop));
-  z-index: 50;
+  top: calc(env(safe-area-inset-top) + 10px) !important;
+  height: auto !important;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 10px var(--pad);
+  padding: 10px var(--pad) 10px var(--pad) !important;
   gap: 12px;
-
-  min-height: var(--hudMinH);
+  z-index: 50;
 }
 
 .hud-left{ flex: 1; min-width: 0; }
 .hud-right{ display:flex; align-items:center; gap: 10px; }
 
+/* Frase más grande y con salto si hace falta */
 .instruction{
   display: inline-block;
-  padding: 12px 16px;
+  padding: 12px 16px !important;
   border-radius: 14px;
   background: rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.10);
   color: var(--text);
 
-  font-size: clamp(22px, 2.6vw, 34px);
-  line-height: 1.15;
+  font-size: clamp(22px, 2.6vw, 34px) !important;
+  line-height: 1.15 !important;
 
-  white-space: normal;
-  max-width: min(980px, 92vw);
+  white-space: normal !important;
+  max-width: min(980px, 92vw) !important;
+}
+
+/* Botón ESCUCHAR pegado a la instrucción (HUD) */
+.btn-small{
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 18px;
+  font-weight: 900;
+  border-radius: 14px;
 }
 
 /* =========================
@@ -162,21 +145,15 @@ button{
 .screens{
   position: absolute;
   inset: 0;
+  padding-top: 0;
   z-index: 10;
 }
 
-/* Importante:
-   - NO hacemos overflow:auto en .screen
-   - porque descuadra pantallas con absolutos (llaves/cofre/capas).
-*/
+/* Pantallas: rendimiento iOS */
 .screen{
   position: absolute;
-  inset: 0;
-  padding:
-    calc(env(safe-area-inset-top) + var(--hudMinH) + var(--hudGapTop) + var(--screenPadTop))
-    var(--screenPadX)
-    calc(env(safe-area-inset-bottom) + var(--screenPadBottom))
-    var(--screenPadX);
+  inset: calc(env(safe-area-inset-top) + 96px) 0 0 0 !important;
+  padding: 18px;
 
   display: none;
   opacity: 0;
@@ -184,7 +161,6 @@ button{
   transition: opacity var(--fadeMs) ease, transform var(--fadeMs) ease;
 
   contain: layout paint;
-  overflow: hidden; /* clave */
 }
 
 .screen.is-active{
@@ -199,7 +175,7 @@ button{
 }
 
 /* =========================
-   PANEL (base)
+   PANEL
 ========================= */
 .panel{
   background: var(--panel);
@@ -209,12 +185,9 @@ button{
   padding: 18px;
   max-width: 1100px;
   margin: 0 auto;
-
-  /* seguridad: si el panel se pasa, scrollea él (no la screen) */
-  max-height: 100%;
-  overflow: hidden;
 }
 
+/* Blur opcional */
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
   .panel{
     backdrop-filter: blur(4px);
@@ -223,10 +196,10 @@ button{
 }
 
 .panel-center{
+  position: relative;
+  top: 10vh;
   text-align: center;
   width: min(900px, 92vw);
-  margin: 0 auto;
-  margin-top: clamp(16px, 8vh, 90px);
 }
 
 .panel-wide{ width: min(1100px, 94vw); }
@@ -240,15 +213,13 @@ button{
   font-size: clamp(34px, 4vw, 56px);
   letter-spacing: 0.5px;
 }
+.title-final{ font-size: clamp(26px, 3.2vw, 46px); }
 .subtitle{
   margin: 0 0 18px 0;
   font-size: 20px;
   color: var(--muted);
 }
-.h2{
-  margin: 0 0 12px 0;
-  font-size: 26px;
-}
+.h2{ margin: 0 0 12px 0; font-size: 26px; }
 
 /* =========================
    BOTONES
@@ -274,7 +245,6 @@ button{
 .btn:active{ transform: scale(0.98); }
 .btn[disabled]{ opacity: 0.45; cursor: not-allowed; filter: grayscale(0.25); }
 .btn-big{ min-height: 60px; padding: 18px 22px; font-size: 22px; }
-
 .btn-primary{ background: var(--primary); color: var(--primaryText); }
 .btn-secondary{
   background: var(--secondary);
@@ -288,7 +258,6 @@ button{
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  padding-bottom: max(0px, env(safe-area-inset-bottom));
 }
 
 /* =========================
@@ -297,7 +266,7 @@ button{
 .toast{
   position: absolute;
   left: 50%;
-  top: calc(env(safe-area-inset-top) + var(--hudGapTop) + var(--hudMinH) + 8px);
+  top: calc(var(--hudH) + 10px);
   transform: translateX(-50%);
   z-index: 70;
   padding: 12px 16px;
@@ -351,27 +320,17 @@ button{
 
 #screen-7.is-locked .syll-row,
 #screen-7.is-locked .btn-option,
+#screen-7.is-locked .syllables,
 #screen-7.is-locked .panel{ pointer-events: none; user-select: none; }
 #screen-7.is-locked #btnListen7,
 #screen-7.is-locked #btnListen7 *{ pointer-events: auto; }
 
-/* ==========================================================
-   SCREEN 1 — BIENVENIDA
-========================================================== */
-#screen-1 .panel-center{
-  max-height: calc(100% - 12px);
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* ==========================================================
-   SCREEN 2 — LETRAS (SCROLL SOLO AQUÍ)
-========================================================== */
+/* =========================
+   SCREEN 2 — LETRAS
+========================= */
 #screen-2 .panel{
   padding: 14px !important;
-
-  /* Scroll dentro del panel, no en la screen */
-  max-height: calc(100% - 8px);
+  max-height: calc(100svh - (env(safe-area-inset-top) + 120px)) !important;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -385,9 +344,9 @@ button{
 .letter-row{
   display: grid;
   grid-template-columns: 1fr 240px 160px;
-  gap: 10px;
+  gap: 10px !important;
   align-items: center;
-  padding: 12px;
+  padding: 12px !important;
   border-radius: 16px;
   background: rgba(0,0,0,0.18);
   border: 1px solid rgba(255,255,255,0.10);
@@ -417,6 +376,7 @@ button{
 }
 
 .slot-drop{ border-color: rgba(255,210,77,0.95); }
+
 .slot-drop.is-correct{
   background: rgba(0,255,140,0.25);
   border-color: #00ff8c;
@@ -467,9 +427,20 @@ button{
   transform: scale(1.02);
 }
 
-/* ==========================================================
-   SCREEN 3 — LLAVES (ABSOLUTOS: NO TOCAR OVERFLOW EN SCREEN)
-========================================================== */
+/* =========================
+   SCREEN 3 — LLAVES (base)
+========================= */
+.keys-area{
+  position: relative;
+  min-height: 58vh;
+  overflow: hidden;
+}
+.keys-layer{
+  position: absolute;
+  inset: 0;
+}
+
+/* LLAVES: pantalla 3 sin panel */
 #screen-3 .panel{
   background: transparent !important;
   border: 0 !important;
@@ -479,24 +450,19 @@ button{
   padding: 0 !important;
   max-width: none !important;
   margin: 0 !important;
-  height: 100%;
 }
-
 #screen-3 .panel-wide,
 #screen-3 .panel-full{ width: 100% !important; }
 
 #screen-3 .h2,
 #screen-3 h2{ display: none !important; }
 
-.keys-area{
-  position: relative;
-  height: 100%;
-  min-height: 0;
-  overflow: hidden;
-}
-.keys-layer{
-  position: absolute;
-  inset: 0;
+#screen-3 .keys-area{
+  min-height: 56vh;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
 }
 
 #screen-3 .key-item{
@@ -519,8 +485,8 @@ button{
 
   will-change: transform;
   transform: translateZ(0);
+
   animation: key-float 3.2s ease-in-out infinite;
-  z-index: 7 !important;
 }
 #screen-3 .key-item:active{ cursor: grabbing; }
 #screen-3 .key-item:focus{ outline: none !important; }
@@ -532,6 +498,7 @@ button{
   object-fit: contain !important;
   display: block !important;
   pointer-events: none !important;
+  filter: none !important;
 }
 
 #screen-3 .key-item.is-dragging{ animation: none !important; }
@@ -541,8 +508,11 @@ button{
   50%  { transform: translate3d(0, -10px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
+/* ==========================================================
+   SCREEN 3 — COFRE MÁS GRANDE Y PROTAGONISTA
+========================================================== */
 
-/* Cofre */
+/* Variables SOLO para Screen 3 (mejor que un :root nuevo) */
 #screen-3{
   --s3-continue-bottom: calc(18px + env(safe-area-inset-bottom));
   --s3-chest-bottom:    calc(18px + env(safe-area-inset-bottom));
@@ -551,6 +521,8 @@ button{
 #screen-3 .chest-drop{
   position: absolute !important;
   right: 22px !important;
+
+  /* ✅ cofre independiente del botón */
   bottom: var(--s3-chest-bottom) !important;
 
   width: 300px !important;
@@ -580,6 +552,8 @@ button{
 #screen-3 .footer-actions{
   position: absolute !important;
   left: 18px !important;
+
+  /* ✅ continuar con su propia altura */
   bottom: var(--s3-continue-bottom) !important;
 
   margin-top: 0 !important;
@@ -587,27 +561,17 @@ button{
   justify-content: flex-start !important;
   z-index: 7;
 }
+
 #screen-3 .footer-actions .btn{ min-width: 180px; }
 
-/* Cofre no bloquea interacción */
-#screen-3 #chestDrop,
-#screen-3 .chest-drop{
-  pointer-events: none !important;
-}
-
-/* ==========================================================
-   SCREEN 4 — PIRATE TAP
-========================================================== */
-#screen-4 .panel{
-  position: relative;
-  max-height: 100%;
-  overflow: hidden;
-}
+/* =========================
+   SCREEN 4 — PIRATE TAP (rejilla pro)
+========================= */
+#screen-4 .panel{ position: relative; }
 
 #pirateTapArea{
   position: relative;
-  height: calc(100% - 90px); /* deja espacio al footer */
-  min-height: 0;
+  min-height: 58vh;
 }
 
 #screen-4 #pirateTapLayer{
@@ -623,6 +587,7 @@ button{
   justify-items: center;
 }
 
+/* Tarjeta */
 #screen-4 .pirate-tap-item{
   width: 100%;
   max-width: var(--card-max);
@@ -645,7 +610,10 @@ button{
   overflow: hidden;
 }
 
+/* ✅ TEXTO IGUAL (no lo tocamos) */
 #screen-4 .pirate-tap-label{
+  position: static;
+  transform: none;
   font-size: 14px;
   font-weight: 900;
   color: #fff;
@@ -655,6 +623,7 @@ button{
   line-height: 1;
 }
 
+/* ✅ IMAGEN MÁS GRANDE (lo que pediste) */
 #screen-4 .pirate-tap-img{
   width: 185px;
   height: 185px;
@@ -673,14 +642,22 @@ button{
   outline-offset: 2px;
 }
 
-/* ==========================================================
+/* Responsive Pantalla 4 */
+@media (max-width: 900px){
+  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+}
+@media (max-width: 560px){
+  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
+}
+
+/* =========================
    INTERLUDE — MOTIVACIÓN
-========================================================== */
-#screen-interlude .interlude-wrap{
+========================= */
+.interlude-wrap{
   position: relative;
   width: min(1100px, 94vw);
   margin: 0 auto;
-  height: 100%;
+  min-height: calc(100svh - var(--hudH) - 36px);
   padding: 18px;
 }
 
@@ -707,22 +684,10 @@ button{
   justify-content: space-between;
 }
 
-/* ==========================================================
-   SCREEN 5 — FIND / MEMORY AREA (JS inyecta contenido)
-========================================================== */
-#screen-5 .panel{
-  max-height: 100%;
-  overflow: hidden;
-}
-
-#memoryArea{
-  /* contenedor inyectado por JS */
-  width: 100%;
-  height: calc(100% - 90px);
-  min-height: 320px;
-}
-
-.find-wrap{ display:grid; gap:14px; height:100%; }
+/* =========================
+   SCREEN 5 — FIND (JS NUEVO actual)
+========================= */
+.find-wrap{ display:grid; gap:14px; min-height:58vh; }
 .find-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
 .find-round{ font-weight:900; font-size:20px; padding:10px 12px; background:rgba(0,0,0,0.25); border-radius:14px; }
 
@@ -777,19 +742,21 @@ button{
 .find-item.is-wrong{ transform:scale(0.96); filter:grayscale(1); }
 .find-item.is-found{ outline:4px solid rgba(255,210,77,0.95); outline-offset:2px; }
 
-/* ==========================================================
-   SCREEN 6 — COINS
-========================================================== */
-#screen-6 .panel{
-  max-height: 100%;
-  overflow: hidden;
+/* Responsive Pantalla 5 */
+@media (max-width: 900px){
+  #findGrid{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+}
+@media (max-width: 560px){
+  #findGrid{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
 }
 
+/* =========================
+   SCREEN 6 — COINS
+========================= */
 #screen-6 .coins-area{
   display: grid;
   gap: 14px;
-  height: calc(100% - 90px);
-  min-height: 0;
+  min-height: 58vh;
 }
 
 #screen-6 .chests-row{
@@ -857,7 +824,6 @@ button{
   gap: 10px;
   justify-content: center;
   min-height: 120px;
-  overflow: hidden;
 }
 
 #screen-6 .coin-item{
@@ -884,13 +850,13 @@ button{
   outline-offset: 2px;
 }
 
-/* ==========================================================
-   SCREEN 7 — SÍLABAS (SCROLL SOLO EN LISTA)
-========================================================== */
+/* =========================
+   SCREEN 7 — SÍLABAS (final, sin duplicados)
+========================= */
 #screen-7 .panel.panel-wide{
   display: flex;
   flex-direction: column;
-  max-height: 100%;
+  max-height: calc(100svh - 140px);
   overflow: hidden;
 }
 
@@ -899,7 +865,6 @@ button{
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding-right: 6px;
-  min-height: 0;
 }
 
 #screen-7 .syll-row{
@@ -922,6 +887,7 @@ button{
   letter-spacing: 1px;
 }
 
+/* Imagen tipo pantalla 2 */
 #screen-7 .syll-pic{
   width: 220px;
   height: 130px;
@@ -976,88 +942,14 @@ button{
   background: linear-gradient(to top, rgba(7,18,31,0.85), transparent);
 }
 
-/* ==========================================================
-   SCREEN 8 — FINAL + CONFETI (manteniendo fondo)
-========================================================== */
-/* Si tu JS hace: document.body.classList.add("is-final") al llegar */
-body.is-final .hud{ display: none !important; }
-
-/* Confeti a pantalla completa (por encima del fondo) */
-#confetti{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 999; /* muy arriba */
-}
-
-/* (Opcional) si el confeti usa piezas HTML */
-.confetti-piece{
-  position: absolute;
-  width: 10px;
-  height: 14px;
-  opacity: 0.95;
-  border-radius: 2px;
-  will-change: transform;
-  animation: confetti-fall linear forwards;
-}
-@keyframes confetti-fall{
-  to{
-    transform: translate3d(var(--dx, 0px), 120vh, 0) rotate(var(--rot, 360deg));
-  }
-}
-
-/* Pantalla final no debe ocultar nada */
-#screen-8{
-  overflow: hidden;
-}
-
-/* ==========================================================
-   RESPONSIVE (sin romper el diseño)
-========================================================== */
-@media (max-width: 900px){
-  #findGrid{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
-}
+/* =========================
+   RESPONSIVE GENERAL
+========================= */
 @media (max-width: 760px){
   .letter-row{ grid-template-columns: 1fr; }
   .pic-box{ width: 100%; height: 160px; }
   .choices{ justify-content: center; }
-
-  #screen-6 .chests-row{ grid-template-columns: 1fr; }
-}
-@media (max-width: 560px){
-  #findGrid{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
-  #screen-4 #pirateTapLayer{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
-}
-
-/* ==========================================================
-   DESKTOP / PIZARRA: reducir escala percibida (sin “zoom” raro)
-========================================================== */
-@media (pointer: fine){
-  :root{
-    --hudMinH: 64px;
-    --card-max: 220px;
-    --card-min: 170px;
-    --label-size: 18px;
-    --screenPadX: 22px;
-  }
-
-  .instruction{
-    font-size: clamp(18px, 1.8vw, 26px) !important;
-    padding: 10px 14px !important;
-  }
-
-  .btn{
-    font-size: 18px;
-    min-height: 48px;
-  }
-  .btn-big{
-    min-height: 54px;
-    font-size: 20px;
-  }
-
-  /* panel no debe “crecer” fuera de pantalla */
-  .panel{ max-height: 100%; }
+  .chests-row{ grid-template-columns: 1fr; }
 }
 
 /* =========================
@@ -1075,4 +967,38 @@ body.is-final .hud{ display: none !important; }
   border: 1px solid rgba(255,255,255,0.18);
   font-size: 14px;
   color: #fff;
+}
+/* Cofre: nunca debe bloquear taps */
+#screen-3 #chestDrop,
+#screen-3 .chest-drop{
+  pointer-events: none !important;
+  z-index: 3 !important;
+}
+
+/* Llaves: por encima visualmente */
+#screen-3 #keysLayer,
+#screen-3 .keys-layer{
+  position: absolute;
+  inset: 0;
+  z-index: 6 !important;
+}
+#screen-3 .key-item{
+  z-index: 7 !important;
+}
+/* =========================
+   SCREEN 8 — FINAL (solo fondo + confeti)
+========================= */
+
+/* Oculta el panel/overlay central si existe */
+#screen-8 .panel{
+  display: none !important;
+}
+
+/* Oculta cualquier título/subtítulo por si los hubiera fuera del panel */
+#screen-8 .title,
+#screen-8 .subtitle,
+#screen-8 h1,
+#screen-8 h2,
+#screen-8 p{
+  display: none !important;
 }
