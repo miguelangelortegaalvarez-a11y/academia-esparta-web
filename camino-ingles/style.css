@@ -240,3 +240,50 @@ body {
 .progress-box.complete .progress-fill {
   background: linear-gradient(90deg, #f1c40f, #f39c12);
 }
+/* ==========================================================
+   FIX FULLSCREEN/ZOOM — SOLO Pantalla 1 y Pantalla 8
+   Objetivo:
+   - En fullscreen: NO recortar el fondo (usar "contain")
+   - En zoom/alturas raras: que el panel de bienvenida nunca se salga
+   ========================================================== */
+
+/* 1) En Pantalla 1 y Pantalla 8: el fondo NO debe recortarse
+   Usamos :has() para aplicar SOLO cuando esa pantalla está activa.
+   (Safari moderno y Chrome lo soportan bien) */
+.app:has(#screen-1.is-active) #sceneBg,
+.app:has(#screen-8.is-active) #sceneBg{
+  background-size: contain !important;      /* ✅ no recorta */
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #07121f !important;    /* relleno si sobran bandas */
+}
+
+/* 2) Pantalla 1: el panel NO puede depender de top:10vh (con zoom falla)
+   Lo convertimos en layout centrado con margen seguro y scroll si hiciera falta */
+#screen-1{
+  display: grid !important;
+  place-items: center !important;
+  padding: 18px !important;
+}
+
+#screen-1 .panel-center{
+  top: auto !important;           /* anula el top:10vh */
+  position: relative !important;
+  margin: 0 auto !important;
+
+  /* ✅ nunca se sale de la pantalla */
+  max-height: calc(100svh - (env(safe-area-inset-top) + 140px)) !important;
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 3) Pantalla 8: asegúrate de que no haya ningún overlay/panel tapando y que el confeti ocupe todo */
+#screen-8{
+  padding: 0 !important;
+}
+
+#screen-8 #confetti{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
