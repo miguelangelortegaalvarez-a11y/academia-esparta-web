@@ -443,8 +443,13 @@ body{
 }
 
 /* =========================
-   SCREEN 3 — LLAVES (base)
+   SCREEN 3 — LLAVES (CORREGIDA COMPLETA)
+   - Sin “cuadro”/bandas raras
+   - Llaves siempre tocables incluso sobre el cofre
+   - Cofre detecta drop
 ========================= */
+
+/* Base */
 .keys-area{
   position: relative;
   min-height: 58vh;
@@ -480,6 +485,11 @@ body{
   border-radius: 0 !important;
 }
 
+/* Evita “doble tono / cuadro” en fullscreen (no overlays ni sticky con fondo) */
+#screen-3.is-active{
+  overflow: hidden !important;
+}
+
 /* Llaves */
 #screen-3 .key-item{
   position: absolute !important;
@@ -503,9 +513,20 @@ body{
   transform: translateZ(0);
 
   animation: key-float 3.2s ease-in-out infinite;
+
+  /* 🔑 Clave: siempre tocable */
+  pointer-events: auto !important;
+  z-index: 7 !important;
 }
 #screen-3 .key-item:active{ cursor: grabbing; }
 #screen-3 .key-item:focus{ outline: none !important; }
+
+/* Importante: cuando se arrastra, deja de capturar “tap”
+   (evita conflictos de drag/drop) */
+#screen-3 .key-item.is-dragging{
+  animation: none !important;
+  pointer-events: none !important;
+}
 
 #screen-3 .key-item img,
 #screen-3 .key-img{
@@ -516,8 +537,6 @@ body{
   pointer-events: none !important;
   filter: none !important;
 }
-
-#screen-3 .key-item.is-dragging{ animation: none !important; }
 
 @keyframes key-float{
   0%   { transform: translate3d(0, 0, 0); }
@@ -546,9 +565,15 @@ body{
 
   display: grid;
   place-items: center;
-  z-index: 6;
+
+  /* 🔑 Clave: el cofre por debajo de las llaves */
+  z-index: 4 !important;
+
+  /* 🔑 Clave: debe aceptar drop */
+  pointer-events: auto !important;
 }
 
+/* Imagen del cofre (no roba eventos) */
 #screen-3 .chest-img,
 #screen-3 .chest-drop img{
   width: 310px !important;
@@ -556,39 +581,21 @@ body{
   height: auto !important;
   object-fit: contain !important;
   display: block !important;
+  pointer-events: none !important;
 }
 
 /* Oculta hint */
 #screen-3 .chest-hint{ display: none !important; }
 
-/* IMPORTANTE: el cofre debe detectar drop */
-#screen-3 #chestDrop,
-#screen-3 .chest-drop{
-  pointer-events: auto !important;
-}
-
-/* pero la imagen NO debe robar eventos */
-#screen-3 #chestDrop img,
-#screen-3 .chest-drop img{
-  pointer-events: none !important;
-}
-
-/* Llaves por encima */
+/* Capa de llaves por encima del cofre */
 #screen-3 #keysLayer,
 #screen-3 .keys-layer{
   position: absolute;
   inset: 0;
   z-index: 6 !important;
 }
-#screen-3 .key-item{
-  z-index: 7 !important;
-}
 
-/* ✅ SCREEN 3 — CONTINUAR sin “cuadro” ni doble tono */
-#screen-3.is-active{
-  overflow: hidden !important; /* evita el efecto de “banda” en fullscreen */
-}
-
+/* CONTINUAR: sin degradado/“cuadro” */
 #screen-3 .footer-actions{
   position: absolute !important;
   left: 18px !important;
@@ -602,19 +609,16 @@ body{
   justify-content: flex-start !important;
   gap: 12px !important;
 
-  background: transparent !important; /* 👈 quita el degradado culpable */
+  background: transparent !important; /* ✅ sin banda */
   z-index: 999 !important;
-}
-
-/* Deja espacio para que el botón no tape las llaves */
-#screen-3 .keys-area{
-  padding-bottom: 120px !important;
 }
 
 #screen-3 .footer-actions .btn{ min-width: 180px; }
 
-/* para que las llaves no “tapen” el footer en pantallas bajas */
-#screen-3 .keys-area{ padding-bottom: 110px; }
+/* Deja espacio para que el botón no tape llaves */
+#screen-3 .keys-area{
+  padding-bottom: 120px !important;
+}
 
 /* =========================
    SCREEN 4 — PIRATE TAP
