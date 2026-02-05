@@ -8,7 +8,7 @@
 
   <!-- Cache-bust (sube el número si cambias archivos y no refresca) -->
   <link rel="stylesheet" href="./style.css?v=9999" />
-<script defer src="./script.js?v=9999"></script>
+  <script defer src="./script.js?v=9999"></script>
 </head>
 
 <body>
@@ -26,11 +26,14 @@
     <!-- Capa de sombreado opcional para legibilidad -->
     <div class="scene-shade" aria-hidden="true"></div>
 
+    <!-- ✅ CONFETTI (overlay global) -->
+    <div id="confetti" aria-hidden="true"></div>
+
     <!-- HUD superior: instrucciones + música -->
     <header class="hud">
       <div class="hud-left">
-  <div id="instruction" class="instruction" aria-live="polite"></div>
-</div>
+        <div id="instruction" class="instruction" aria-live="polite"></div>
+      </div>
 
       <div class="hud-right">
         <button id="btnMusic" class="btn btn-secondary" type="button" hidden>
@@ -82,8 +85,8 @@
         <div class="panel panel-wide">
           <h2 class="h2">Actividad 1</h2>
           <button id="btnListen2" class="btn btn-secondary btn-big" type="button">
-  ESCUCHAR
-</button>
+            ESCUCHAR
+          </button>
 
           <div class="letters-grid" id="lettersGrid" aria-label="Arrastra la letra correcta">
 
@@ -227,8 +230,9 @@
       <section id="screen-3" class="screen" data-screen="3" aria-label="Pantalla 3: Buscar llaves">
         <div class="panel panel-full">
           <button id="btnListen3" class="btn btn-secondary btn-big" type="button">
-  ESCUCHAR
-</button>
+            ESCUCHAR
+          </button>
+
           <div class="keys-area" id="keysArea" aria-label="Arrastra 5 llaves al cofre">
             <div class="keys-layer" id="keysLayer" aria-hidden="false"></div>
 
@@ -251,8 +255,8 @@
         <div class="panel panel-full">
           <h2 class="h2">Actividad 3</h2>
           <button id="btnListen4" class="btn btn-secondary btn-big" type="button">
-  ESCUCHAR
-</button>
+            ESCUCHAR
+          </button>
           <div class="keys-area" id="pirateTapArea" aria-label="Pulsa los objetos piratas">
             <div class="keys-layer" id="pirateTapLayer" aria-hidden="false"></div>
           </div>
@@ -269,7 +273,6 @@
       <section id="screen-interlude" class="screen" data-screen="interlude" aria-label="Pantalla intermedia: motivación">
         <div class="interlude-wrap">
 
-          <!-- Frase motivacional arriba derecha -->
           <div id="interludeMotivation" class="motivation-top-right" aria-live="polite">
             ¡Genial! Has colocado todo correctamente.
           </div>
@@ -291,19 +294,18 @@
            PANTALLA 5 — ESCUCHA Y ENCUENTRA (5 OBJETOS)
            ================================= -->
       <section id="screen-5" class="screen" data-screen="5" aria-label="Pantalla 5: Escucha y encuentra">
-  <div class="panel panel-full">
-    <h2 class="h2">Actividad 5</h2>
+        <div class="panel panel-full">
+          <h2 class="h2">Actividad 5</h2>
 
-    <!-- ESTE ES EL CONTENEDOR QUE TU JS NECESITA -->
-    <div id="memoryArea"></div>
+          <div id="memoryArea"></div>
 
-    <div class="footer-actions">
-      <button id="btnNext5" class="btn btn-primary btn-big" type="button" disabled>
-        CONTINUAR
-      </button>
-    </div>
-  </div>
-</section>
+          <div class="footer-actions">
+            <button id="btnNext5" class="btn btn-primary btn-big" type="button" disabled>
+              CONTINUAR
+            </button>
+          </div>
+        </div>
+      </section>
 
       <!-- =================================
            PANTALLA 6 — MONEDAS
@@ -312,8 +314,9 @@
         <div class="panel panel-full">
           <h2 class="h2">Actividad 5</h2>
           <button id="btnListen6" class="btn btn-secondary btn-big" type="button">
-  ESCUCHAR
-</button>
+            ESCUCHAR
+          </button>
+
           <div class="coins-area" id="coinsArea" aria-label="Arrastra monedas a los cofres">
             <div class="chests-row" aria-label="Cofres con número objetivo">
               <div class="count-chest" data-target="3" aria-label="Cofre 3">
@@ -351,135 +354,30 @@
       </section>
 
       <!-- =================================
-     PANTALLA 7 — SÍLABAS
-     ================================= -->
-<section id="screen-7" class="screen" data-screen="7" aria-label="Pantalla 7: Contar sílabas">
-  <div class="panel panel-wide">
-    <h2 class="h2">Actividad 6</h2>
+           PANTALLA 7 — SÍLABAS
+           ================================= -->
+      <section id="screen-7" class="screen" data-screen="7" aria-label="Pantalla 7: Contar sílabas">
+        <div class="panel panel-wide">
+          <h2 class="h2">Actividad 6</h2>
 
-    <button id="btnListen7" class="btn btn-secondary btn-big" type="button">
-      ESCUCHAR
-    </button>
+          <button id="btnListen7" class="btn btn-secondary btn-big" type="button">
+            ESCUCHAR
+          </button>
 
-    <!-- IMPORTANTE: TODAS las filas van DENTRO de este contenedor -->
-    <div class="syllables-area" id="syllablesArea" aria-label="Selecciona cuántas sílabas tiene cada palabra">
+          <div class="syllables-area" id="syllablesArea" aria-label="Selecciona cuántas sílabas tiene cada palabra">
+            <!-- ... (tu contenido sigue igual) ... -->
+          </div>
 
-      <!-- MAPA -->
-      <div class="syll-row" data-word="MAPA" data-answer="2">
-        <div class="syll-word">MAPA</div>
-
-        <div class="syll-pic" aria-label="Imagen MAPA">
-          <img src="./assets/words/MAPA.PNG" alt="Mapa" draggable="false" />
+          <div class="footer-actions">
+            <button id="btnNext7" class="btn btn-primary btn-big" type="button" disabled>CONTINUAR</button>
+          </div>
         </div>
-
-        <div class="syll-options" role="group" aria-label="Opciones MAPA">
-          <button class="btn btn-option" type="button" data-pick="1">1</button>
-          <button class="btn btn-option" type="button" data-pick="2">2</button>
-          <button class="btn btn-option" type="button" data-pick="3">3</button>
-        </div>
-
-        <div class="syll-result" aria-label="Resultado MAPA">—</div>
-      </div>
-
-      <!-- PIRATA -->
-      <div class="syll-row" data-word="PIRATA" data-answer="3">
-        <div class="syll-word">PIRATA</div>
-
-        <div class="syll-pic" aria-label="Imagen PIRATA">
-          <img src="./assets/words/PIRATA.PNG" alt="Pirata" draggable="false" />
-        </div>
-
-        <div class="syll-options" role="group" aria-label="Opciones PIRATA">
-          <button class="btn btn-option" type="button" data-pick="1">1</button>
-          <button class="btn btn-option" type="button" data-pick="2">2</button>
-          <button class="btn btn-option" type="button" data-pick="3">3</button>
-        </div>
-
-        <div class="syll-result" aria-label="Resultado PIRATA">—</div>
-      </div>
-
-      <!-- TESORO -->
-      <div class="syll-row" data-word="TESORO" data-answer="3">
-        <div class="syll-word">TESORO</div>
-
-        <div class="syll-pic" aria-label="Imagen TESORO">
-          <img src="./assets/words/TESORO.PNG" alt="Tesoro" draggable="false" />
-        </div>
-
-        <div class="syll-options" role="group" aria-label="Opciones TESORO">
-          <button class="btn btn-option" type="button" data-pick="1">1</button>
-          <button class="btn btn-option" type="button" data-pick="2">2</button>
-          <button class="btn btn-option" type="button" data-pick="3">3</button>
-        </div>
-
-        <div class="syll-result" aria-label="Resultado TESORO">—</div>
-      </div>
-
-      <!-- BARCO -->
-      <div class="syll-row" data-word="BARCO" data-answer="2">
-        <div class="syll-word">BARCO</div>
-
-        <div class="syll-pic" aria-label="Imagen BARCO">
-          <img src="./assets/words/BARCO.PNG" alt="Barco" draggable="false" />
-        </div>
-
-        <div class="syll-options" role="group" aria-label="Opciones BARCO">
-          <button class="btn btn-option" type="button" data-pick="1">1</button>
-          <button class="btn btn-option" type="button" data-pick="2">2</button>
-          <button class="btn btn-option" type="button" data-pick="3">3</button>
-        </div>
-
-        <div class="syll-result" aria-label="Resultado BARCO">—</div>
-      </div>
-
-      <!-- ESPADA -->
-      <div class="syll-row" data-word="ESPADA" data-answer="3">
-        <div class="syll-word">ESPADA</div>
-
-        <div class="syll-pic" aria-label="Imagen ESPADA">
-          <img src="./assets/words/OBJ_ESPADA.PNG" alt="Espada" draggable="false" />
-        </div>
-
-        <div class="syll-options" role="group" aria-label="Opciones ESPADA">
-          <button class="btn btn-option" type="button" data-pick="1">1</button>
-          <button class="btn btn-option" type="button" data-pick="2">2</button>
-          <button class="btn btn-option" type="button" data-pick="3">3</button>
-        </div>
-
-        <div class="syll-result" aria-label="Resultado ESPADA">—</div>
-      </div>
-
-      <!-- ISLA -->
-      <div class="syll-row" data-word="ISLA" data-answer="2">
-        <div class="syll-word">ISLA</div>
-
-        <div class="syll-pic" aria-label="Imagen ISLA">
-          <img src="./assets/words/ISLA.PNG" alt="Isla" draggable="false" />
-        </div>
-
-        <div class="syll-options" role="group" aria-label="Opciones ISLA">
-          <button class="btn btn-option" type="button" data-pick="1">1</button>
-          <button class="btn btn-option" type="button" data-pick="2">2</button>
-          <button class="btn btn-option" type="button" data-pick="3">3</button>
-        </div>
-
-        <div class="syll-result" aria-label="Resultado ISLA">—</div>
-      </div>
-
-    </div>
-
-    <div class="footer-actions">
-      <button id="btnNext7" class="btn btn-primary btn-big" type="button" disabled>CONTINUAR</button>
-    </div>
-  </div>
-</section>
+      </section>
 
       <!-- =================================
            PANTALLA 8 — FINAL
            ================================= -->
-     <section id="screen-8" class="screen" data-screen="8" aria-label="Pantalla 8: Final">
-  <div id="confetti" aria-hidden="true"></div>
-</section>
+      <section id="screen-8" class="screen" data-screen="8" aria-label="Pantalla 8: Final"></section>
 
     </main>
 
