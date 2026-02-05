@@ -1039,3 +1039,33 @@ body{
     transform: translate3d(var(--dx), 115vh, 0) rotate(720deg);
   }
 }
+/* ==========================================================
+   FIX FULLSCREEN (SOLO Screen 1 y Screen 8)
+   Objetivo:
+   - En fullscreen: NO recortar el fondo (usar "contain")
+   - Mantener imagen completa siempre visible (sin zoom)
+   ========================================================== */
+
+/* 1) SOLO cuando está activa la pantalla 1 (bienvenida) o la 8 (final),
+      el fondo pasa a "contain" para que NO se pierda nada */
+.app:has(#screen-1.is-active) .scene-bg,
+.app:has(#screen-8.is-active) .scene-bg{
+  background-size: contain !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: var(--bg) !important; /* relleno si sobran bandas */
+}
+
+/* 2) Extra: evita recortes raros por alturas/zoom en iOS/desktop */
+.app:has(#screen-1.is-active) .screen,
+.app:has(#screen-8.is-active) .screen{
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 3) (Opcional) si quieres que en pantalla 1 el panel quede siempre centrado
+      y no “se vaya” con zoom, puedes activar esto. Si ya te va bien, bórralo. */
+.app:has(#screen-1.is-active) #screen-1 .panel-center{
+  margin: 0 auto !important;
+  max-height: calc(100% - 24px) !important;
+}
