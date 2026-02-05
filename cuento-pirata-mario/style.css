@@ -584,18 +584,31 @@ body{
   z-index: 7 !important;
 }
 
-/* FIX ZOOM: CONTINUAR visible siempre (sticky) */
+/* ✅ SCREEN 3 — CONTINUAR sin “cuadro” ni doble tono */
+#screen-3.is-active{
+  overflow: hidden !important; /* evita el efecto de “banda” en fullscreen */
+}
+
 #screen-3 .footer-actions{
-  position: sticky !important;
-  bottom: 0 !important;
+  position: absolute !important;
   left: 18px !important;
-  margin-top: 0 !important;
+  right: 18px !important;
+  bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
   display: flex !important;
   justify-content: flex-start !important;
-  z-index: 999 !important;
+  gap: 12px !important;
 
-  padding: 12px 0 max(12px, env(safe-area-inset-bottom)) 0 !important;
-  background: linear-gradient(to top, rgba(7,18,31,0.70), transparent);
+  background: transparent !important; /* 👈 quita el degradado culpable */
+  z-index: 999 !important;
+}
+
+/* Deja espacio para que el botón no tape las llaves */
+#screen-3 .keys-area{
+  padding-bottom: 120px !important;
 }
 
 #screen-3 .footer-actions .btn{ min-width: 180px; }
