@@ -1464,16 +1464,6 @@
       });
     });
 
-    drag6.onDrop = (dropZone, draggedEl) => {
-      const dz = dropZone?.closest?.(".drop-chest");
-      if (!dz) {
-        drag6.revertActive();
-        return;
-      }
-      const target = Number(dz.dataset.coinchest);
-      drag6.revertActive();
-      placeCoin(draggedEl, target);
-    };
 
     function placeCoin(coinEl, target) {
       if (coinEl.classList.contains("is-used")) return;
