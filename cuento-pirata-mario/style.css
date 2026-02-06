@@ -903,20 +903,24 @@ body{
 }
 
 /* =========================
-   SCREEN 7 — SÍLABAS
+   SCREEN 7 — SÍLABAS (FIX iPad / Safari)
+   ✅ Evitamos flex + overflow:hidden dentro del panel
+   ✅ Evitamos scroll interno forzado
+   ✅ Footer normal (no sticky)
 ========================= */
+
+/* Panel en modo normal (NO flex) */
 #screen-7 .panel.panel-wide{
-  display: flex;
-  flex-direction: column;
-  max-height: calc(100% - 10px);
-  overflow: hidden;
+  display: block;
+  max-height: none;
+  overflow: visible;
 }
 
+/* El área NO hace scroll propio (que lo haga la .screen) */
 #screen-7 #syllablesArea{
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-right: 6px;
+  overflow: visible;
+  -webkit-overflow-scrolling: auto;
+  padding-right: 0;
 }
 
 #screen-7 .syll-row{
@@ -985,12 +989,12 @@ body{
   justify-self: end;
 }
 
+/* Footer normal (NO sticky) */
 #screen-7 .footer-actions{
-  position: sticky;
-  bottom: 0;
-  margin-top: 12px;
-  padding-top: 12px;
-  background: linear-gradient(to top, rgba(7,18,31,0.85), transparent);
+  position: relative;
+  margin-top: 18px;
+  padding-top: 0;
+  background: transparent;
 }
 
 /* =========================
@@ -1056,6 +1060,7 @@ body{
     transform: translate3d(var(--dx), 115vh, 0) rotate(720deg);
   }
 }
+
 /* ==========================================================
    FIX FULLSCREEN (SOLO Screen 1 y Screen 8)
    Objetivo:
