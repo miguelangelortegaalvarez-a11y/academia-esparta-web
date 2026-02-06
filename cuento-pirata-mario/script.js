@@ -1451,8 +1451,6 @@
         c.classList.add("is-selected");
         toast("Ahora toca un cofre (3, 5 o 6)");
       });
-
-      drag6.makeDraggable(c, { bounds: root });
     }
 
     chests.forEach((ch) => {
