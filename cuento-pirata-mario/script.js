@@ -1662,7 +1662,7 @@
     if (key === 4) buildScreen4();
     if (key === 5) buildScreen5();
     if (key === 6) buildScreen6();
-
+    if (key === 7) initScreen7();
     // ✅ Confeti en pantalla final
     if (key === 8) startConfetti();
   }
