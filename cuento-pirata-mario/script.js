@@ -71,7 +71,7 @@
     4: "Pulsa solo los 4 objetos piratas.",
     interlude: "",
     5: "Pulsa ESCUCHAR y toca el objeto correcto.",
-    6: "Arrastra monedas a cada cofre: 3, 5 y 6.",
+    6: "Pulsa la moneda y después pulsa su cofre.",
     7: "Cuenta las sílabas y elige la opción correcta.",
     8: "",
   };
