@@ -80,7 +80,7 @@
       .hero-overlay {
         width: 100%;
         min-height: 75vh;
-        background: rgba(6, 60, 36, 0.05);
+        background: rgba(6, 60, 36, 0.08);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -93,18 +93,45 @@
         color: #ffffff;
       }
 
+      .hero-badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.16);
+        border: 1px solid rgba(255,255,255,0.20);
+        color: #fff;
+        padding: 0.6rem 1rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      }
+
       .hero-content h1 {
-        font-size: 2.9rem;
-        line-height: 1.15;
+        font-size: 3rem;
+        line-height: 1.12;
         margin-bottom: 1rem;
         font-weight: 700;
         text-shadow: 0 3px 12px rgba(0, 0, 0, 0.42);
       }
 
       .hero-content p {
-        font-size: 1.15rem;
+        font-size: 1.12rem;
         margin-bottom: 1.5rem;
+        max-width: 850px;
+        margin-left: auto;
+        margin-right: auto;
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.38);
+      }
+
+      .hero-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.9rem;
+        flex-wrap: wrap;
+        margin-top: 0.8rem;
       }
 
       .hero-btn {
@@ -121,6 +148,43 @@
 
       .hero-btn:hover {
         background: var(--secondary);
+      }
+
+      .hero-btn-secondary {
+        display: inline-block;
+        background: rgba(255,255,255,0.14);
+        border: 1.5px solid rgba(255,255,255,0.28);
+        color: #ffffff;
+        padding: 1rem 1.4rem;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      }
+
+      .hero-btn-secondary:hover {
+        background: rgba(255,255,255,0.22);
+      }
+
+      .hero-tags {
+        margin-top: 1.4rem;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+
+      .hero-tags span {
+        display: inline-block;
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.14);
+        border: 1px solid rgba(255,255,255,0.18);
+        color: #fff;
+        font-size: 0.88rem;
+        font-weight: 500;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
       }
 
       section {
@@ -445,11 +509,31 @@
       /* Responsive adjustments */
       @media (max-width: 768px) {
         .hero-content h1 {
-          font-size: 2.15rem;
+          font-size: 2.2rem;
         }
 
         .hero-content p {
           font-size: 1rem;
+        }
+
+        .hero-badge {
+          font-size: 0.8rem;
+          padding: 0.5rem 0.85rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .hero-btn,
+        .hero-btn-secondary {
+          width: 100%;
+          max-width: 320px;
+        }
+
+        .hero-tags span {
+          font-size: 0.8rem;
         }
 
         #hero h2 {
@@ -537,9 +621,24 @@
     <section id="hero">
       <div class="hero-overlay">
         <div class="hero-content">
-          <h1>Refuerzo escolar para Primaria, ESO, Bachillerato y EBAU</h1>
-          <p>En Torremolinos · Grupos reducidos · Atención personalizada · Más de 15 años de experiencia</p>
-          <a href="inscripcion.html" class="hero-btn">Reserva tu plaza</a>
+          <div class="hero-badge">Más de 15 años ayudando a alumnos en Torremolinos</div>
+          <h1>Tu hijo puede mejorar sus notas y ganar seguridad 💚</h1>
+          <p>Grupos reducidos, atención personalizada y acompañamiento real para Primaria, ESO, Bachillerato y EBAU.</p>
+
+          <div class="hero-buttons">
+            <a href="inscripcion.html" class="hero-btn">Reserva tu plaza</a>
+            <a href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases" class="hero-btn-secondary" target="_blank" rel="noopener">
+              Escríbenos por WhatsApp
+            </a>
+          </div>
+
+          <div class="hero-tags">
+            <span>Primaria</span>
+            <span>ESO</span>
+            <span>Bachillerato</span>
+            <span>EBAU</span>
+            <span>Grupos reducidos</span>
+          </div>
         </div>
       </div>
     </section>
