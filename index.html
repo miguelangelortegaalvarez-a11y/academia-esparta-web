@@ -5,17 +5,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Academia Esparta – Refuerzo y apoyo escolar en Torremolinos</title>
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta
+      name="description"
+      content="Academia Esparta en Torremolinos. Refuerzo escolar para Primaria, ESO, Bachillerato y EBAU con grupos reducidos, atención personalizada y más de 15 años de experiencia."
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG" />
+    <link rel="apple-touch-icon" href="/favicon.PNG" />
+
     <style>
       :root {
         --primary: #0e9343;
+        --primary-dark: #087337;
         --secondary: #09834c;
         --accent: #f16565;
         --light: #f5fdf7;
+        --light-2: #eef8f1;
         --dark: #063c24;
+        --text: #1d2b22;
+        --muted: #5f6f65;
+        --white: #ffffff;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        --radius: 16px;
+        --header-height: 86px;
       }
 
       * {
@@ -25,13 +50,59 @@
         font-family: 'Poppins', sans-serif;
       }
 
-      body {
-        line-height: 1.6;
-        color: var(--dark);
+      html {
+        scroll-behavior: smooth;
       }
 
-      header {
+      body {
+        line-height: 1.65;
+        color: var(--text);
+        background: #ffffff;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        transition: all 0.25s ease;
+      }
+
+      .container {
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 0.8rem;
+        font-weight: 800;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto 2.5rem;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+        scroll-margin-top: 100px;
+      }
+
+      section.light {
         background: var(--light);
+      }
+
+      /* HEADER */
+      header {
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(12px);
         padding: 1rem 2rem;
         position: fixed;
         width: 100%;
@@ -41,50 +112,71 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        min-height: var(--header-height);
       }
 
       header .logo {
-        font-weight: 700;
+        font-weight: 800;
         font-size: 2rem;
         color: var(--primary);
+        letter-spacing: -0.6px;
       }
 
       nav ul {
         list-style: none;
         display: flex;
         gap: 1.2rem;
+        align-items: center;
       }
 
       nav ul li a {
         text-decoration: none;
-        color: var(--dark);
+        color: var(--text);
         font-weight: 500;
-        transition: color 0.3s;
+        font-size: 0.96rem;
       }
 
       nav ul li a:hover {
         color: var(--primary);
       }
 
-      /* Hero section */
+      .nav-cta {
+        background: var(--primary);
+        color: var(--white) !important;
+        padding: 0.7rem 1rem;
+        border-radius: 999px;
+        font-weight: 700;
+      }
+
+      .nav-cta:hover {
+        background: var(--primary-dark);
+      }
+
+      /* HERO */
       #hero {
         background: url('hero.PNG') no-repeat center center / cover;
-        min-height: 75vh;
+        min-height: 92vh;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding-top: calc(var(--header-height) + 2rem);
       }
 
       .hero-overlay {
         width: 100%;
-        min-height: 75vh;
-        background: rgba(6, 60, 36, 0.05);
+        min-height: 92vh;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(6, 60, 36, 0.72),
+            rgba(6, 60, 36, 0.48)
+          );
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2rem;
+        padding: 2rem 1.5rem;
       }
 
       .hero-content {
@@ -93,128 +185,219 @@
         color: #ffffff;
       }
 
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        background: rgba(255,255,255,0.14);
+        border: 1px solid rgba(255,255,255,0.18);
+        color: #fff;
+        padding: 0.65rem 1rem;
+        border-radius: 999px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        margin-bottom: 1.3rem;
+        backdrop-filter: blur(8px);
+      }
+
       .hero-content h1 {
-        font-size: 2.9rem;
-        line-height: 1.15;
+        font-size: 3.3rem;
+        line-height: 1.1;
         margin-bottom: 1rem;
-        font-weight: 700;
-        text-shadow: 0 3px 12px rgba(0, 0, 0, 0.42);
+        font-weight: 800;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
       }
 
       .hero-content p {
-        font-size: 1.15rem;
-        margin-bottom: 1.5rem;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.38);
+        font-size: 1.16rem;
+        max-width: 850px;
+        margin: 0 auto 1.8rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.24);
       }
 
-      .hero-btn {
-        display: inline-block;
-        background: var(--primary);
-        color: #ffffff;
-        padding: 1rem 1.6rem;
-        border-radius: 10px;
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1.6rem;
+      }
+
+      .btn-primary,
+      .btn-secondary,
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
         text-decoration: none;
         font-weight: 700;
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
         font-size: 1rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.18);
       }
 
-      .hero-btn:hover {
-        background: var(--secondary);
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.18);
       }
 
-      section {
-        padding: 4rem 2rem;
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
       }
 
-      section.light {
-        background: var(--light);
+      .btn-secondary {
+        background: rgba(255,255,255,0.14);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.24);
       }
 
-      /* ABOUT / QUIÉNES SOMOS */
-      #about .container {
+      .btn-secondary:hover {
+        background: rgba(255,255,255,0.22);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+      }
+
+      .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .hero-highlights {
         display: flex;
-        gap: 2rem;
-        align-items: flex-start;
-        max-width: 1000px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.9rem;
+        margin-top: 1rem;
+      }
+
+      .hero-highlights span {
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.15);
+        padding: 0.7rem 1rem;
+        border-radius: 999px;
+        font-size: 0.92rem;
+        font-weight: 500;
+      }
+
+      /* TRUST STRIP */
+      .trust-strip {
+        background: var(--light-2);
+        padding: 1.25rem 1.5rem;
+        border-top: 1px solid rgba(14,147,67,0.08);
+        border-bottom: 1px solid rgba(14,147,67,0.08);
+      }
+
+      .trust-grid {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+
+      .trust-item {
+        background: white;
+        border-radius: 14px;
+        padding: 1rem 1.1rem;
+        text-align: center;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+        color: var(--dark);
+        font-weight: 600;
+      }
+
+      .trust-item i {
+        display: block;
+        color: var(--primary);
+        font-size: 1.2rem;
+        margin-bottom: 0.45rem;
+      }
+
+      /* ABOUT */
+      #about .about-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 2.5rem;
+        align-items: center;
+        max-width: 1100px;
         margin: 0 auto;
       }
 
       #about .text {
-        flex: 1 1 520px;
-        max-width: 600px;
-        text-align: justify;
-        text-justify: inter-word;
-        line-height: 1.6;
-      }
-
-      #about .image {
-        flex: 0 0 360px;
-        max-width: 360px;
-      }
-
-      #about .image img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        object-fit: contain;
+        text-align: left;
       }
 
       #about h3 {
-        font-size: 2rem;
+        font-size: 2.2rem;
         margin-bottom: 1rem;
         color: var(--primary);
+        font-weight: 800;
       }
 
-      /* iPad / tablets */
-      @media (min-width: 768px) and (max-width: 1180px) {
-        #about .image {
-          flex: 0 0 320px;
-          max-width: 320px;
-          margin-top: 4.5rem;
-        }
+      #about .text p {
+        margin-bottom: 1rem;
+        color: var(--text);
       }
 
-      /* Móvil */
-      @media (max-width: 767px) {
-        #about .container {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        #about .image {
-          width: 100%;
-          max-width: 520px;
-        }
-      }
-
-      .img-primaria {
-        width: 100%;
-        height: 200px;
+      #about .image img {
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
         object-fit: cover;
-        object-position: center 30%;
-        border-radius: 8px;
       }
 
-      .img-bachiller {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        object-position: center 20%;
-        border-radius: 8px;
+      .about-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1.6rem;
       }
 
-      .img-secundaria {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        object-position: center 20%;
-        border-radius: 8px;
+      /* RESULTS */
+      #results {
+        background: white;
       }
 
-      /* Levels cards */
+      .results-grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.4rem;
+      }
+
+      .result-card {
+        background: var(--light);
+        border-radius: var(--radius);
+        padding: 1.6rem;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+        text-align: left;
+      }
+
+      .result-card i {
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .result-card h4 {
+        color: var(--dark);
+        margin-bottom: 0.5rem;
+        font-size: 1.15rem;
+      }
+
+      .result-card p {
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      /* LEVELS */
       #levels .cards {
         display: flex;
         flex-wrap: wrap;
@@ -225,65 +408,157 @@
 
       #levels .card {
         background: white;
-        border-radius: 8px;
+        border-radius: var(--radius);
         overflow: hidden;
-        width: 280px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        width: 320px;
+        box-shadow: var(--shadow);
         text-align: center;
       }
 
       #levels .card img {
         width: 100%;
-        height: 180px;
+        height: 200px;
         object-fit: cover;
       }
 
       #levels .card h4 {
-        font-size: 1.25rem;
-        margin: 1rem 0 0.5rem;
+        font-size: 1.3rem;
+        margin: 1.1rem 0 0.6rem;
         color: var(--primary);
       }
 
       #levels .card p {
-        padding: 0 1rem 1rem;
-        font-size: 0.9rem;
+        padding: 0 1.1rem 1.4rem;
+        font-size: 0.95rem;
         color: #444;
         text-align: justify;
-        text-justify: inter-word;
-        hyphens: auto;
-        -webkit-hyphens: auto;
       }
 
-      /* Services sections */
-      .service {
+      .img-primaria {
+        object-position: center 30%;
+      }
+
+      .img-bachiller {
+        object-position: center 20%;
+      }
+
+      .img-secundaria {
+        object-position: center 20%;
+      }
+
+      /* TESTIMONIOS */
+      #testimonios {
+        background: var(--light);
+      }
+
+      .reviews-summary {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-weight: 700;
+        color: var(--dark);
+        font-size: 1.05rem;
+      }
+
+      .reviews-grid {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.3rem;
+      }
+
+      .review-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+
+      .review-card .stars {
+        color: #f4b400;
+        margin-bottom: 0.8rem;
+        font-size: 1rem;
+      }
+
+      .review-card p {
+        color: var(--text);
+        font-size: 0.96rem;
+        margin-bottom: 1rem;
+      }
+
+      .review-card span {
+        color: var(--muted);
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+
+      /* JUEGOS */
+      .games-grid {
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
+        justify-content: center;
         gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .game-card {
+        background: #fff;
+        width: 320px;
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .game-card-content {
+        padding: 1.6rem;
+      }
+
+      .game-card h4 {
+        color: var(--primary);
+        font-size: 1.35rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .game-card p {
+        font-size: 0.95rem;
+        color: #444;
         margin-bottom: 1.2rem;
       }
 
-      #speech {
-        padding-bottom: 0 !important;
-        margin-bottom: 0 !important;
+      /* SERVICES */
+      .service-wrapper {
+        max-width: 1100px;
+        margin: 0 auto;
       }
 
-      #speech .service {
-        margin-bottom: 0rem !important;
+      .service {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 1.5rem;
+        background: #fff;
+        padding: 2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
       }
 
+      #speech,
       #psychology {
-        padding-top: 0.6 !important;
-        margin-top: 0 !important;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
       }
 
       .service .icon {
-        font-size: 3rem;
+        font-size: 2.7rem;
         color: var(--primary);
+        flex: 0 0 56px;
+        margin-top: 0.15rem;
       }
 
       .service .content {
-        max-width: 600px;
+        flex: 1;
       }
 
       .service .content h3 {
@@ -293,94 +568,106 @@
       }
 
       .service .content p {
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
         text-align: justify;
-        text-justify: inter-word;
-        hyphens: auto;
-        -webkit-hyphens: auto;
-        line-height: 1.6;
+        line-height: 1.7;
       }
 
-      /* Contact */
-      #contact .contact-container {
+      /* CTA FINAL */
+      #cta-final {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        text-align: center;
+      }
+
+      #cta-final h3 {
+        font-size: 2.2rem;
+        margin-bottom: 0.8rem;
+      }
+
+      #cta-final p {
+        max-width: 720px;
+        margin: 0 auto 1.5rem;
+        opacity: 0.96;
+      }
+
+      .cta-final-actions {
         display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      /* CONTACT */
+      #contact .contact-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 2rem;
-        justify-content: space-between;
-        align-items: center;
       }
 
       #contact .info {
-        flex: 2;
-      }
-
-      #contact .contact-image {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      #contact .contact-image img {
-        max-width: 1100px;
-        height: auto;
-        margin-top: -20rem;
-      }
-
-      #contact .form {
-        flex: 1 1 300px;
+        background: var(--light);
+        padding: 2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
       }
 
       #contact h3 {
-        font-size: 2rem;
+        font-size: 2.2rem;
         margin-bottom: 1rem;
         color: var(--primary);
+        font-weight: 800;
+        text-align: center;
       }
 
       #contact ul {
         list-style: none;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
       }
 
       #contact ul li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.9rem;
+        color: var(--text);
       }
 
       #contact ul li i {
-        margin-right: 0.5rem;
+        margin-right: 0.6rem;
         color: var(--primary);
       }
 
-      #contact form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+      #contact a {
+        color: var(--primary-dark);
+        font-weight: 600;
+        text-decoration: none;
       }
 
-      #services h3 {
-        margin-top: 0.8rem;
+      #contact a:hover {
+        text-decoration: underline;
       }
 
-      #contact form input,
-      #contact form textarea {
-        padding: 0.75rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-family: inherit;
-        resize: vertical;
+      #contact h4 {
+        color: var(--dark);
+        margin-top: 1rem;
+        margin-bottom: 0.35rem;
       }
 
-      #contact form button {
-        align-self: flex-start;
+      .map-wrap iframe {
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
       }
 
-      /* Footer */
+      /* FOOTER */
       footer {
         background: var(--dark);
         color: white;
-        padding: 2rem;
+        padding: 3rem 1.5rem 2rem;
       }
 
       footer .footer-container {
+        max-width: 1180px;
+        margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
         gap: 2rem;
@@ -388,12 +675,12 @@
       }
 
       footer .footer-container div {
-        flex: 1 1 200px;
+        flex: 1 1 220px;
       }
 
       footer h4 {
         margin-bottom: 1rem;
-        color: var(--primary);
+        color: #8de3ae;
       }
 
       footer a {
@@ -401,9 +688,13 @@
         text-decoration: none;
       }
 
+      footer a:hover {
+        text-decoration: underline;
+      }
+
       .social-icons a {
-        font-size: 1.2rem;
-        margin-right: 0.5rem;
+        font-size: 1.25rem;
+        margin-right: 0.6rem;
         color: white;
       }
 
@@ -423,7 +714,6 @@
         text-decoration: none;
         box-shadow: 0 8px 20px rgba(0,0,0,0.25);
         z-index: 9999;
-        transition: all 0.3s ease;
         font-weight: 700;
         font-size: 15px;
       }
@@ -442,37 +732,73 @@
         transform: translateY(-3px);
       }
 
-      /* Responsive adjustments */
+      /* RESPONSIVE */
+      @media (max-width: 1100px) {
+        .trust-grid,
+        .results-grid,
+        .reviews-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        #about .about-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 0.9rem 1rem;
+        }
+
+        header .logo {
+          font-size: 1.7rem;
+          margin-bottom: 0.5rem;
+        }
+
+        nav ul {
+          flex-wrap: wrap;
+          gap: 0.6rem 0.9rem;
+        }
+
+        nav ul li a {
+          font-size: 0.9rem;
+        }
+
+        #hero,
+        .hero-overlay {
+          min-height: 88vh;
+        }
+
         .hero-content h1 {
-          font-size: 2.15rem;
+          font-size: 2.3rem;
         }
 
         .hero-content p {
           font-size: 1rem;
         }
 
-        #hero h2 {
-          font-size: 1.2rem;
+        .section-title,
+        #about h3,
+        #contact h3,
+        #cta-final h3 {
+          font-size: 1.85rem;
         }
 
-        #levels .card {
-          width: 90%;
+        .trust-grid,
+        .results-grid,
+        .reviews-grid {
+          grid-template-columns: 1fr;
         }
 
-        header {
-          flex-direction: column;
-          align-items: flex-start;
-          padding: 0.75rem 1rem;
+        #levels .card,
+        .game-card {
+          width: 100%;
         }
 
-        nav ul {
-          flex-wrap: wrap;
-          gap: 0.6rem;
-        }
-
-        nav ul li a {
-          font-size: 0.9rem;
+        .service {
+          padding: 1.5rem;
         }
 
         .whatsapp-float {
@@ -492,30 +818,9 @@
           font-size: 14px;
         }
       }
-
-      @media (max-width: 767px) {
-        #about .container {
-          flex-wrap: wrap;
-        }
-
-        #about .text {
-          max-width: 100%;
-        }
-
-        #about .image {
-          max-width: 520px;
-          width: 100%;
-          margin: 1.5rem auto 0;
-        }
-
-        #about .image img {
-          height: auto;
-        }
-      }
     </style>
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG">
-    <link rel="apple-touch-icon" href="/favicon.PNG">
   </head>
+
   <body>
     <header>
       <div class="logo">Academia Esparta</div>
@@ -528,8 +833,9 @@
           <li><a href="#levels">Refuerzo escolar</a></li>
           <li><a href="#speech">Logopedia</a></li>
           <li><a href="#psychology">Psicología</a></li>
+          <li><a href="#testimonios">Reseñas</a></li>
           <li><a href="inscripcion.html">Inscripción</a></li>
-          <li><a href="#contact">Contacto</a></li>
+          <li><a href="#contact" class="nav-cta">Contacto</a></li>
         </ul>
       </nav>
     </header>
@@ -537,166 +843,423 @@
     <section id="hero">
       <div class="hero-overlay">
         <div class="hero-content">
-          <h1>Refuerzo escolar para Primaria, ESO, Bachillerato y EBAU</h1>
-          <p>En Torremolinos · Grupos reducidos · Atención personalizada · Más de 15 años de experiencia</p>
-          <a href="inscripcion.html" class="hero-btn">Reserva tu plaza</a>
+          <div class="hero-badge">
+            <i class="fa-solid fa-star"></i>
+            Más de 15 años acompañando a alumnos y familias en Torremolinos
+          </div>
+
+          <h1>Más de 300 alumnos ya mejoran sus notas en Academia Esparta 💚</h1>
+
+          <p>
+            Refuerzo escolar real para Primaria, ESO, Bachillerato y EBAU.
+            Grupos reducidos, seguimiento personalizado y un trato cercano
+            para que cada alumno avance con seguridad, método y confianza.
+          </p>
+
+          <div class="hero-actions">
+            <a href="inscripcion.html" class="btn-primary">
+              <i class="fa-solid fa-pen-to-square"></i>
+              Reserva tu plaza
+            </a>
+
+            <a
+              href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases"
+              class="btn-secondary"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+              Escríbenos por WhatsApp
+            </a>
+          </div>
+
+          <div class="hero-highlights">
+            <span>Primaria</span>
+            <span>ESO</span>
+            <span>Bachillerato</span>
+            <span>EBAU</span>
+            <span>Atención personalizada</span>
+          </div>
         </div>
       </div>
     </section>
 
+    <div class="trust-strip">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <i class="fa-solid fa-users"></i>
+          Más de 300 alumnos confían en nosotros
+        </div>
+        <div class="trust-item">
+          <i class="fa-solid fa-chalkboard-user"></i>
+          Profesores especializados por materia
+        </div>
+        <div class="trust-item">
+          <i class="fa-solid fa-user-group"></i>
+          Grupos reducidos y seguimiento real
+        </div>
+        <div class="trust-item">
+          <i class="fa-solid fa-location-dot"></i>
+          En Torremolinos, cerca de las familias
+        </div>
+      </div>
+    </div>
+
     <section id="about" class="light">
-      <div class="container">
+      <div class="about-grid">
         <div class="text">
-          <h3>Nosotros</h3>
+          <h3>Mucho más que apoyo escolar</h3>
+
           <p>
-            Somos un centro de apoyo y refuerzo escolar en Torremolinos con <strong>más de 15 años de experiencia</strong>, dedicado a acompañar a alumnos de todos los niveles: Primaria, Secundaria, Bachillerato y preparación de EBAU.
+            En Academia Esparta llevamos <strong>más de 15 años</strong> ayudando
+            a alumnos de Primaria, ESO, Bachillerato y preparación de EBAU a
+            mejorar sus resultados, su organización y su confianza.
           </p>
 
           <p>
-            Trabajamos con grupos reducidos y con profesores especializados en cada materia para ofrecer una atención personalizada y adaptada a las necesidades de cada estudiante.
+            Trabajamos con <strong>grupos reducidos</strong> y con
+            <strong>profesores especializados</strong> para ofrecer una atención
+            realmente personalizada, adaptada al ritmo y a las necesidades de
+            cada alumno.
           </p>
 
           <p>
-            Nuestro objetivo es proporcionar un acompañamiento académico integral, reforzando conocimientos, hábitos de estudio y motivación para que cada alumno alcance su máximo potencial.
+            Nuestro objetivo no es solo que aprueben, sino que construyan una
+            base sólida, adquieran hábitos de estudio y ganen seguridad para
+            afrontar cada etapa con más autonomía.
           </p>
 
-          <div style="margin-top:1.5rem; text-align:left;">
-            <a href="inscripcion.html" style="display:inline-block;background: var(--primary);color:#fff;padding: 0.9rem 1.35rem;border-radius: 10px;text-decoration:none;font-weight:700;">
+          <div class="about-actions">
+            <a href="inscripcion.html" class="btn-primary">
+              <i class="fa-solid fa-book-open-reader"></i>
               Reserva tu plaza
             </a>
 
-            <a href="inscripcion.html" style="display:block;margin-top:0.55rem;color:var(--primary);text-decoration:none;font-weight:500;font-size:0.95rem;">
-              Inscripción
+            <a
+              href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases"
+              target="_blank"
+              rel="noopener"
+              class="btn-outline"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+              Pide información
             </a>
           </div>
         </div>
+
         <div class="image">
           <img src="quienes-somos.PNG" alt="Equipo y aula de Academia Esparta" />
         </div>
       </div>
     </section>
 
-    <section id="levels">
-      <h3 style="text-align:center; color: var(--primary); font-size:2rem;">Método Esparta por etapas educativas</h3>
-      <div class="cards">
-        <div class="card">
-          <img src="primaria.PNG" alt="Primaria" class="img-primaria" />
-          <h4>Primaria</h4>
+    <section id="results">
+      <h2 class="section-title">Resultados que se notan</h2>
+      <p class="section-subtitle">
+        Las familias no solo valoran la mejora académica. También destacan la
+        cercanía, la seguridad que ganan los alumnos y la implicación real del equipo.
+      </p>
+
+      <div class="results-grid">
+        <div class="result-card">
+          <i class="fa-solid fa-arrow-trend-up"></i>
+          <h4>Mejora académica real</h4>
           <p>
-            Refuerzo en lectoescritura, matemáticas básicas e inglés, adaptado al ritmo de cada alumno.
-            En Primaria no todos aprenden igual, por eso trabajamos de forma cercana y personalizada
-            para que construyan una base sólida desde el inicio.
+            Trabajamos para que el alumno avance en notas, comprensión y
+            constancia, con una base sólida y bien construida.
           </p>
         </div>
-        <div class="card">
-          <img src="secundaria.PNG" alt="Secundaria" class="img-secundaria" />
-          <h4>Secundaria</h4>
+
+        <div class="result-card">
+          <i class="fa-solid fa-shield-heart"></i>
+          <h4>Más seguridad y confianza</h4>
           <p>
-            Acompañamiento académico integral en ESO con refuerzo de materias específicas y técnicas de estudio.
-            Enseñamos a organizarse, planificar tareas y preparar exámenes con método, para que el alumno gane
-            autonomía, seguridad y hábitos de trabajo sólidos.
+            Cuando un alumno entiende mejor y se siente acompañado, estudia con
+            menos bloqueo y afronta los exámenes con más tranquilidad.
           </p>
         </div>
-        <div class="card">
-          <img src="bachiller.PNG" alt="Bachillerato y EBAU" class="img-bachiller" />
-          <h4>Bachillerato &amp; EBAU</h4>
+
+        <div class="result-card">
+          <i class="fa-solid fa-handshake-angle"></i>
+          <h4>Trato cercano con las familias</h4>
           <p>
-            En Bachillerato trabajamos desde el primer día con un objetivo claro: lograr la mejor nota posible
-            para abrir puertas de futuro, sin perder lo más importante: una formación sólida y bien asentada.
-            Preparamos la EBAU de forma específica con exámenes reales.
+            La comunicación y el seguimiento forman parte de nuestra forma de trabajar.
+            Nos implicamos de verdad en la evolución de cada alumno.
           </p>
         </div>
       </div>
     </section>
 
+    <section id="levels">
+      <h2 class="section-title">Método Esparta por etapas educativas</h2>
+      <p class="section-subtitle">
+        Adaptamos el trabajo a cada momento académico para reforzar lo que el alumno necesita en cada etapa.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <img src="primaria.PNG" alt="Primaria" class="img-primaria" />
+          <h4>Primaria</h4>
+          <p>
+            Refuerzo en lectoescritura, matemáticas básicas e inglés, adaptado al ritmo
+            de cada alumno. Trabajamos de forma cercana y personalizada para construir
+            una base sólida desde el inicio.
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="secundaria.PNG" alt="Secundaria" class="img-secundaria" />
+          <h4>Secundaria</h4>
+          <p>
+            Acompañamiento integral en ESO con refuerzo de materias específicas y técnicas
+            de estudio. Enseñamos a organizarse, planificar tareas y preparar exámenes con método.
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="bachiller.PNG" alt="Bachillerato y EBAU" class="img-bachiller" />
+          <h4>Bachillerato &amp; EBAU</h4>
+          <p>
+            En Bachillerato trabajamos desde el primer día con un objetivo claro:
+            lograr la mejor nota posible sin perder lo más importante, una formación
+            sólida y bien asentada. Preparamos la EBAU con enfoque específico.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios" class="light">
+      <h2 class="section-title">Lo que dicen las familias 💚</h2>
+      <p class="section-subtitle">
+        La confianza de las familias es una de nuestras mayores fortalezas.
+      </p>
+
+      <div class="reviews-summary">
+        ⭐ 4,8 / 5 en Google con más de 50 reseñas
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            “Mi hijo ha ganado seguridad y ha mejorado muchísimo. Se nota el trato
+            cercano y la atención individual.”
+          </p>
+          <span>— Madre de alumno</span>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            “Llevamos años y los resultados son increíbles. Los profesores explican
+            de forma clara y siempre están disponibles.”
+          </p>
+          <span>— Madre de alumnos</span>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            “Muy profesionales y atentos. He notado una gran mejora en mis hijos
+            desde que van.”
+          </p>
+          <span>— Padre de alumnos</span>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            “La mejor academia de Torremolinos. Profesores cercanos, pacientes y
+            muy implicados.”
+          </p>
+          <span>— Padre de alumna</span>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            “Han mejorado mucho, pero sobre todo van más seguros y tranquilos.
+            El trato de los profesores marca la diferencia.”
+          </p>
+          <span>— Madre de dos alumnos</span>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            “Se implican de verdad con cada niño y eso se nota muchísimo.
+            Para nosotros ha sido un acierto total.”
+          </p>
+          <span>— Familia de la academia</span>
+        </div>
+      </div>
+    </section>
+
     <section id="juegos" class="light">
-      <div style="max-width:1000px; margin:0 auto;">
-        <h3 style="text-align:center; color: var(--primary); font-size:2rem;">Juegos interactivos</h3>
-        <p style="text-align:center; max-width:800px; margin: 0.75rem auto 0; color: var(--dark);">
-          Recursos interactivos para practicar de forma dinámica y divertida. Accede a nuestros juegos de matemáticas e inglés.
-        </p>
+      <h2 class="section-title">Juegos interactivos</h2>
+      <p class="section-subtitle">
+        Recursos para practicar de forma dinámica y divertida. Aprender también puede ser motivador.
+      </p>
 
-        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; margin-top:2rem;">
-          <div style="background:#fff; width:300px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); overflow:hidden; text-align:center;">
-            <div style="padding:1.5rem;">
-              <h4 style="color:var(--primary); font-size:1.35rem; margin-bottom:0.75rem;">Juegos de matemáticas</h4>
-              <p style="font-size:0.95rem; color:#444; margin-bottom:1.2rem;">
-                Practica cálculo y agilidad mental con actividades interactivas adaptadas a distintas edades.
-              </p>
-              <a href="/camino-matematico/" style="display:inline-block; background:var(--accent); color:#fff; padding:0.85rem 1.2rem; border-radius:10px; text-decoration:none; font-weight:700;">
-                Entrar
-              </a>
-            </div>
+      <div class="games-grid">
+        <div class="game-card">
+          <div class="game-card-content">
+            <h4>Juegos de matemáticas</h4>
+            <p>
+              Practica cálculo y agilidad mental con actividades interactivas adaptadas a distintas edades.
+            </p>
+            <a href="/camino-matematico/" class="btn-outline">Entrar</a>
           </div>
+        </div>
 
-          <div style="background:#fff; width:300px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); overflow:hidden; text-align:center;">
-            <div style="padding:1.5rem;">
-              <h4 style="color:var(--primary); font-size:1.35rem; margin-bottom:0.75rem;">Inglés interactivo</h4>
-              <p style="font-size:0.95rem; color:#444; margin-bottom:1.2rem;">
-                Refuerza vocabulario y comprensión con recursos interactivos pensados para aprender jugando.
-              </p>
-              <a href="/camino-ingles/" style="display:inline-block; background:var(--primary); color:#fff; padding:0.85rem 1.2rem; border-radius:10px; text-decoration:none; font-weight:700;">
-                Entrar
-              </a>
-            </div>
+        <div class="game-card">
+          <div class="game-card-content">
+            <h4>Inglés interactivo</h4>
+            <p>
+              Refuerza vocabulario y comprensión con recursos interactivos pensados para aprender jugando.
+            </p>
+            <a href="/camino-ingles/" class="btn-primary">Entrar</a>
           </div>
         </div>
       </div>
     </section>
 
     <section id="speech" class="light">
-      <div class="service">
-        <i class="fa-solid fa-user-graduate icon"></i>
-        <div class="content">
-          <h3>Logopedia</h3>
-          <p>
-            Potenciamos la <strong>comunicación</strong> y favorecemos un desarrollo más eficaz del <strong>habla y del lenguaje</strong>. A través de tareas guiadas y adaptadas a la edad, se interviene en aspectos como la <strong>articulación e inteligibilidad</strong>, la <strong>conciencia fonológica</strong>, el <strong>vocabulario</strong>, la <strong>morfosintaxis</strong> (organización de palabras y construcción de frases), y la <strong>comprensión y expresión oral</strong>.
-            <br><br>
-            El trabajo se realiza de manera <strong>personalizada e individualizada</strong>, definiendo objetivos claros y ajustando el ritmo y el nivel de apoyo a las necesidades del alumno, para mejorar la <strong>claridad</strong>, la <strong>precisión</strong> y la <strong>seguridad comunicativa</strong> en el aula y en su día a día.
-          </p>
-          <a class="btn" href="#contact">Más información</a>
+      <div class="service-wrapper">
+        <div class="service">
+          <i class="fa-solid fa-comments icon"></i>
+          <div class="content">
+            <h3>Logopedia</h3>
+            <p>
+              Potenciamos la <strong>comunicación</strong> y favorecemos un desarrollo más eficaz
+              del <strong>habla y del lenguaje</strong>. A través de tareas guiadas y adaptadas
+              a la edad, se interviene en aspectos como la <strong>articulación e inteligibilidad</strong>,
+              la <strong>conciencia fonológica</strong>, el <strong>vocabulario</strong>, la
+              <strong>morfosintaxis</strong> y la <strong>comprensión y expresión oral</strong>.
+            </p>
+            <p>
+              El trabajo se realiza de manera <strong>personalizada e individualizada</strong>,
+              definiendo objetivos claros y ajustando el ritmo a las necesidades del alumno
+              para mejorar la claridad, la precisión y la seguridad comunicativa.
+            </p>
+            <a class="btn-outline" href="#contact">Más información</a>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="psychology" class="light">
-      <div class="service">
-        <i class="fa-solid fa-sun icon"></i>
-        <div class="content">
-          <h3>Psicología</h3>
-          <p>
-            Acompañamos a <strong>niños y adultos</strong> en el desarrollo del bienestar personal y emocional, favoreciendo un mejor equilibrio entre lo que sienten, piensan y hacen en su día a día. El trabajo se centra en aspectos como la <strong>gestión emocional</strong>, la <strong>motivación</strong>, la <strong>autoestima</strong>, la <strong>regulación de la conducta</strong> y el fortalecimiento de <strong>habilidades personales y sociales</strong> que influyen directamente en el ámbito académico, familiar y personal.
-            <br><br>
-            La intervención se realiza de manera <strong>personalizada e individualizada</strong>, estableciendo objetivos claros y adaptando el proceso a las necesidades de cada persona. El objetivo es proporcionar herramientas prácticas que ayuden a afrontar dificultades, mejorar el bienestar emocional y favorecer un desarrollo personal más seguro y equilibrado.
-          </p>
-          <a class="btn" href="#contact">Más información</a>
+      <div class="service-wrapper">
+        <div class="service">
+          <i class="fa-solid fa-brain icon"></i>
+          <div class="content">
+            <h3>Psicología</h3>
+            <p>
+              Acompañamos a <strong>niños y adultos</strong> en el desarrollo del bienestar
+              personal y emocional, favoreciendo un mejor equilibrio entre lo que sienten,
+              piensan y hacen en su día a día.
+            </p>
+            <p>
+              El trabajo se centra en la <strong>gestión emocional</strong>, la
+              <strong>motivación</strong>, la <strong>autoestima</strong>, la
+              <strong>regulación de la conducta</strong> y el fortalecimiento de
+              <strong>habilidades personales y sociales</strong> que influyen directamente
+              en el ámbito académico, familiar y personal.
+            </p>
+            <a class="btn-outline" href="#contact">Más información</a>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section id="cta-final">
+      <h3>Plazas limitadas para mantener grupos reducidos</h3>
+      <p>
+        Si quieres información o estás pensando en reservar plaza, escríbenos.
+        Te orientamos sin compromiso y te ayudamos a encontrar la mejor opción para el alumno.
+      </p>
+
+      <div class="cta-final-actions">
+        <a href="inscripcion.html" class="btn-secondary">
+          <i class="fa-solid fa-pen-to-square"></i>
+          Reserva tu plaza
+        </a>
+
+        <a
+          href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases"
+          target="_blank"
+          rel="noopener"
+          class="btn-secondary"
+        >
+          <i class="fa-brands fa-whatsapp"></i>
+          Escríbenos por WhatsApp
+        </a>
       </div>
     </section>
 
     <section id="contact">
       <h3>Contacto</h3>
-      <div class="contact-container" style="align-items:flex-start;">
+
+      <div class="contact-container">
         <div class="info">
           <ul>
-            <li><i class="fa-solid fa-map-marker-alt"></i> Calle Rafael Quintana Rosado 8, 29620 Torremolinos (Málaga)</li>
+            <li>
+              <i class="fa-solid fa-map-marker-alt"></i>
+              Calle Rafael Quintana Rosado 8, 29620 Torremolinos (Málaga)
+            </li>
 
-            <li><i class="fa-solid fa-phone"></i> <strong>Llámanos 👉 </strong><a href="tel:659407023">659 407 023</a></li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <strong>Llámanos:</strong>
+              <a href="tel:659407023">659 407 023</a>
+            </li>
 
-            <li><i class="fa-solid fa-envelope"></i> <strong>Escríbenos ✉️ </strong><a href="mailto:academiaesparta2012@gmail.com">academiaesparta2012@gmail.com</a></li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <strong>Correo:</strong>
+              <a href="mailto:academiaesparta2012@gmail.com">academiaesparta2012@gmail.com</a>
+            </li>
 
-            <li><i class="fa-brands fa-whatsapp"></i> <strong>WhatsApp 💬 </strong><a href="https://wa.me/34659407023" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></li>
+            <li>
+              <i class="fa-brands fa-whatsapp"></i>
+              <strong>WhatsApp:</strong>
+              <a href="https://wa.me/34659407023" target="_blank" rel="noopener">
+                Escríbenos directamente
+              </a>
+            </li>
 
-            <li><i class="fa-brands fa-instagram"></i> <strong>Instagram 📷 </strong><a href="https://www.instagram.com/academia_esparta_torremolinos/" target="_blank" rel="noopener">@academia_esparta_torremolinos</a></li>
+            <li>
+              <i class="fa-brands fa-instagram"></i>
+              <strong>Instagram:</strong>
+              <a
+                href="https://www.instagram.com/academia_esparta_torremolinos/"
+                target="_blank"
+                rel="noopener"
+              >
+                @academia_esparta_torremolinos
+              </a>
+            </li>
           </ul>
+
           <h4>Horario de atención telefónica</h4>
           <p>Lunes a viernes: 09:00–14:00 y 16:00–21:00</p>
+
           <h4>Horario de clases</h4>
           <p>Lunes a viernes: 16:00–22:00</p>
         </div>
-      </div>
-      <div style="margin-top:2rem;">
-        <iframe src="https://maps.google.com/maps?q=Calle+Rafael+Quintana+Rosado+8+Torremolinos&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        <div class="map-wrap">
+          <iframe
+            src="https://maps.google.com/maps?q=Calle+Rafael+Quintana+Rosado+8+Torremolinos&output=embed"
+            width="100%"
+            height="320"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa Academia Esparta"
+          ></iframe>
+        </div>
       </div>
     </section>
 
@@ -705,44 +1268,63 @@
         <div>
           <h4>Academia Esparta</h4>
           <p>Centro de refuerzo y apoyo escolar en Torremolinos.</p>
+          <p style="margin-top: 0.7rem;">
+            Grupos reducidos, atención personalizada y acompañamiento académico real.
+          </p>
         </div>
+
         <div>
           <h4>Contacto</h4>
-          <p>Calle Rafael Quintana Rosado 8<br/>29620 Torremolinos (Málaga)</p>
-          <p><strong>Llámanos 👉 </strong>
+          <p>Calle Rafael Quintana Rosado 8<br />29620 Torremolinos (Málaga)</p>
+          <p style="margin-top:0.6rem;">
+            <strong>Teléfono:</strong>
             <a href="tel:659407023">659 407 023</a>
           </p>
-
-          <p><strong>Escríbenos ✉️ </strong>
-            <a href="mailto:academiaesparta2012@gmail.com">
-              academiaesparta2012@gmail.com
-            </a>
+          <p>
+            <strong>Email:</strong>
+            <a href="mailto:academiaesparta2012@gmail.com">academiaesparta2012@gmail.com</a>
           </p>
-
-          <p><strong>WhatsApp 💬 </strong>
+          <p>
+            <strong>WhatsApp:</strong>
             <a href="https://wa.me/34659407023" target="_blank" rel="noopener">
-              Escríbenos por WhatsApp
+              Escríbenos
             </a>
           </p>
+        </div>
+
+        <div>
           <h4>Horario</h4>
           <p>Atención telefónica: Lun–Vie 09:00–14:00 / 16:00–21:00</p>
-          <p>Clases de apoyo: Lun–Vie 16:00–22:00</p>
+          <p>Clases: Lun–Vie 16:00–22:00</p>
         </div>
+
         <div>
           <h4>Síguenos</h4>
           <div class="social-icons">
-            <a href="https://www.instagram.com/academia_esparta_torremolinos/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a
+              href="https://www.instagram.com/academia_esparta_torremolinos/"
+              target="_blank"
+              rel="noopener"
+              aria-label="Instagram Academia Esparta"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
           </div>
         </div>
       </div>
-      <p style="margin-top: 1rem; font-size: 0.8rem; text-align:center;">&copy; 2025 Academia Esparta. Todos los derechos reservados.</p>
+
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; text-align:center;">
+        &copy; 2025 Academia Esparta. Todos los derechos reservados.
+      </p>
     </footer>
 
-    <a href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases"
-       class="whatsapp-float"
-       target="_blank"
-       rel="noopener"
-       aria-label="Contactar por WhatsApp">
+    <a
+      href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases"
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener"
+      aria-label="Contactar por WhatsApp"
+    >
       <i class="fa-brands fa-whatsapp"></i>
       <span>WhatsApp</span>
     </a>
