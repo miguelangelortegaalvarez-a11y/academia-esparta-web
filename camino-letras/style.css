@@ -11,14 +11,11 @@ body, html {
   margin: 0; padding: 0;
   width: 100%; height: 100%;
   font-family: 'Poppins', sans-serif;
-  /* CAMBIO AQUÍ: Ahora usa tu imagen de fondo */
-  background: url('fondo-letras.png') no-repeat center center fixed;
-  background-size: cover;
   color: var(--text);
   overflow: hidden;
+  background-color: var(--light);
 }
 
-/* Añadimos un pequeño velo para que el contenido resalte sobre el fondo */
 .screen {
   display: none;
   width: 100%; height: 100vh;
@@ -26,42 +23,58 @@ body, html {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: rgba(255, 255, 255, 0.2); /* Velo suave */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .screen.is-active { display: flex; }
 
-/* Tarjetas Estilo Academia - He subido la opacidad para que se lea mejor */
-.home-card, .final-card {
-  background: rgba(255, 255, 255, 0.95);
+/* --- ESCENARIO 1: INICIO (El Camino) --- */
+#screen-home {
+  background-image: url('fondo-letras.png');
+}
+
+/* --- ESCENARIO 2: JUEGO (El Pupitre) --- */
+#screen-game {
+  background-image: url('fondo-juego.png');
+}
+
+/* --- ESCENARIO 3: FINAL (El Pupitre) --- */
+#screen-final {
+  background-image: url('fondo-juego.png');
+}
+
+/* Botón Principal (Limpio y sin tarjeta blanca detrás) */
+.main-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 1.5rem 4rem;
+  border-radius: 50px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(14, 147, 67, 0.4);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.main-btn:hover {
+  transform: scale(1.1);
+  background: var(--secondary);
+}
+
+/* Tarjeta Final (Ahora con fondo semi-transparente para ver el pupitre) */
+.final-card {
+  background: rgba(255, 255, 255, 0.9);
   padding: 2.5rem;
   border-radius: 30px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   text-align: center;
   max-width: 80%;
+  backdrop-filter: blur(5px);
 }
-
-.logo-game {
-  color: var(--primary);
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-/* Botón Principal */
-.main-btn {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 1rem 2.5rem;
-  border-radius: 50px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 1.5rem;
-  transition: transform 0.2s;
-}
-
-.main-btn:hover { transform: scale(1.05); }
 
 /* Juego */
 .progress-container {
@@ -94,15 +107,15 @@ body, html {
 }
 
 .image-box img {
-  max-width: 85%; max-height: 85%;
+  max-width: 90%; max-height: 90%;
   object-fit: contain;
 }
 
 .instruction {
-  font-size: 1.3rem; 
-  font-weight: 600; 
+  font-size: 1.5rem; 
+  font-weight: 700; 
   margin-bottom: 2rem;
-  text-shadow: 0 0 10px white; /* Para que se lea bien sobre el fondo */
+  text-shadow: 0 0 15px white; /* Brillo para leer sobre el pupitre */
 }
 
 /* Botones de Letras */
