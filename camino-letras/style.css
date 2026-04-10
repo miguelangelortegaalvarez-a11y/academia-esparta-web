@@ -11,11 +11,14 @@ body, html {
   margin: 0; padding: 0;
   width: 100%; height: 100%;
   font-family: 'Poppins', sans-serif;
-  background-color: var(--light);
+  /* CAMBIO AQUÍ: Ahora usa tu imagen de fondo */
+  background: url('fondo-letras.png') no-repeat center center fixed;
+  background-size: cover;
   color: var(--text);
   overflow: hidden;
 }
 
+/* Añadimos un pequeño velo para que el contenido resalte sobre el fondo */
 .screen {
   display: none;
   width: 100%; height: 100vh;
@@ -23,16 +26,17 @@ body, html {
   align-items: center;
   justify-content: center;
   position: relative;
+  background: rgba(255, 255, 255, 0.2); /* Velo suave */
 }
 
 .screen.is-active { display: flex; }
 
-/* Tarjetas Estilo Academia */
+/* Tarjetas Estilo Academia - He subido la opacidad para que se lea mejor */
 .home-card, .final-card {
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.95);
   padding: 2.5rem;
   border-radius: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   text-align: center;
   max-width: 80%;
 }
@@ -67,10 +71,11 @@ body, html {
 
 .progress-bar {
   width: 100%; height: 12px;
-  background: #e0e0e0;
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 5px;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 #progress-fill {
@@ -84,17 +89,20 @@ body, html {
   width: 280px; height: 280px;
   display: flex; align-items: center; justify-content: center;
   border-radius: 25px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   margin-bottom: 1.5rem;
 }
 
 .image-box img {
-  max-width: 80%; max-height: 80%;
+  max-width: 85%; max-height: 85%;
   object-fit: contain;
 }
 
 .instruction {
-  font-size: 1.3rem; font-weight: 500; margin-bottom: 2rem;
+  font-size: 1.3rem; 
+  font-weight: 600; 
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px white; /* Para que se lea bien sobre el fondo */
 }
 
 /* Botones de Letras */
@@ -110,6 +118,7 @@ body, html {
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .answer-text {
