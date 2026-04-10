@@ -30,22 +30,20 @@ body, html {
 
 .screen.is-active { display: flex; }
 
-/* --- ESCENARIO 1: INICIO (El Camino) --- */
-#screen-home {
-  background-image: url('fondo-letras.png');
+/* --- ESCENARIOS --- */
+#screen-home { background-image: url('fondo-letras.png'); }
+#screen-game { background-image: url('fondo-juego.png'); }
+#screen-final { background-image: url('fondo-juego.png'); }
+
+/* Contenedor del Juego: Lo subimos para no pisar el pupitre del fondo */
+.game-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -60px; 
 }
 
-/* --- ESCENARIO 2: JUEGO (El Pupitre) --- */
-#screen-game {
-  background-image: url('fondo-juego.png');
-}
-
-/* --- ESCENARIO 3: FINAL (El Pupitre) --- */
-#screen-final {
-  background-image: url('fondo-juego.png');
-}
-
-/* Botón Principal (Limpio y sin tarjeta blanca detrás) */
+/* Botón Principal */
 .main-btn {
   background: var(--primary);
   color: white;
@@ -60,12 +58,9 @@ body, html {
   text-transform: uppercase;
 }
 
-.main-btn:hover {
-  transform: scale(1.1);
-  background: var(--secondary);
-}
+.main-btn:hover { transform: scale(1.1); background: var(--secondary); }
 
-/* Tarjeta Final (Ahora con fondo semi-transparente para ver el pupitre) */
+/* Tarjeta Final */
 .final-card {
   background: rgba(255, 255, 255, 0.9);
   padding: 2.5rem;
@@ -76,19 +71,24 @@ body, html {
   backdrop-filter: blur(5px);
 }
 
-/* Juego */
+/* Progreso superior: Añadimos fondo para que se lea bien sobre el cielo */
 .progress-container {
-  position: absolute; top: 30px;
-  width: 70%; text-align: center;
+  position: absolute; 
+  top: 30px;
+  width: 70%; 
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 10px 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
 }
 
 .progress-bar {
   width: 100%; height: 12px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 5px;
-  border: 1px solid rgba(0,0,0,0.1);
 }
 
 #progress-fill {
@@ -97,25 +97,31 @@ body, html {
   transition: width 0.4s ease;
 }
 
+#progress-text {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Imagen de la pregunta: Más grande y limpia */
 .image-box {
   background: var(--white);
-  width: 280px; height: 280px;
+  width: 300px; height: 300px;
   display: flex; align-items: center; justify-content: center;
   border-radius: 25px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .image-box img {
-  max-width: 90%; max-height: 90%;
+  max-width: 95%; max-height: 95%;
   object-fit: contain;
 }
 
 .instruction {
   font-size: 1.5rem; 
   font-weight: 700; 
-  margin-bottom: 2rem;
-  text-shadow: 0 0 15px white; /* Brillo para leer sobre el pupitre */
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 15px white;
 }
 
 /* Botones de Letras */
@@ -124,7 +130,7 @@ body, html {
 }
 
 .answer-btn {
-  width: 100px; height: 100px;
+  width: 110px; height: 110px;
   background: var(--white);
   border: 4px solid var(--primary);
   border-radius: 20px;
@@ -135,7 +141,7 @@ body, html {
 }
 
 .answer-text {
-  font-size: 3.5rem; font-weight: 700; color: var(--primary);
+  font-size: 4rem; font-weight: 700; color: var(--primary);
 }
 
 .answer-btn:active { transform: scale(0.9); }
@@ -143,6 +149,5 @@ body, html {
 /* Feedback */
 .correct { background-color: var(--primary) !important; }
 .correct .answer-text { color: white !important; }
-
 .wrong { background-color: var(--accent) !important; border-color: var(--accent) !important; }
 .wrong .answer-text { color: white !important; }
