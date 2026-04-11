@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
-    <title>Libro de Vectores - Academia Esparta</title>
+    <title>Ecuaciones de la Recta - Academia Esparta</title>
     
     <script>
         window.MathJax = {
@@ -19,40 +19,38 @@
 
     <style>
         :root { --esparta-green: #2e7d32; --light-bg: #f8f9fa; }
-        
         body { font-family: 'Lora', serif; background-color: #e9ecef; margin: 0; padding: 20px; color: #212529; line-height: 1.8; }
         
-        /* CONTENEDOR DE LA PÁGINA */
+        /* CONTENEDOR DE PÁGINA */
         .page { 
             max-width: 850px; 
-            margin: 0 auto; 
+            margin: 0 auto 40px auto; 
             background: white; 
             padding: 60px; 
             border-radius: 2px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
             position: relative;
-            overflow: hidden; /* Para que la marca de agua no se salga */
+            overflow: hidden;
+            page-break-after: always;
         }
 
-        /* GOTA DE AGUA (WATERMARK) */
+        /* MARCA DE AGUA */
         .watermark {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 8rem;
-            color: rgba(46, 125, 50, 0.05); /* Muy suave para no molestar */
+            font-size: 7rem;
+            color: rgba(46, 125, 50, 0.04);
             font-family: 'Montserrat';
             font-weight: 900;
             white-space: nowrap;
-            pointer-events: none; /* No interfiere con el ratón */
+            pointer-events: none;
             z-index: 0;
             text-transform: uppercase;
         }
 
         .content { position: relative; z-index: 1; }
 
-        /* CABECERA OFICIAL */
         header { 
             border-bottom: 3px solid var(--esparta-green); 
             margin-bottom: 40px; 
@@ -61,87 +59,109 @@
             align-items: flex-end;
             padding-bottom: 10px;
         }
-        .header-left h1 { font-family: 'Montserrat'; font-size: 2.2rem; margin: 0; color: #1a1a1a; }
-        .header-right { text-align: right; font-family: 'Montserrat'; color: var(--esparta-green); font-weight: 800; font-size: 0.8rem; }
+        .header-left h1 { font-family: 'Montserrat'; font-size: 2rem; margin: 0; color: #1a1a1a; }
+        .header-right { text-align: right; font-family: 'Montserrat'; color: var(--esparta-green); font-weight: 800; font-size: 0.75rem; }
 
-        h2 { font-family: 'Montserrat'; font-size: 1.5rem; margin-top: 40px; border-left: 6px solid var(--esparta-green); padding-left: 15px; }
+        h2 { font-family: 'Montserrat'; font-size: 1.4rem; margin-top: 35px; border-left: 6px solid var(--esparta-green); padding-left: 15px; color: #1a1a1a; }
         
         .definition { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 20px; border-radius: 5px; margin: 20px 0; }
         
-        .formula-highlight { 
-            background: white; border: 2px solid #333; padding: 25px; margin: 30px 0; text-align: center; 
-            font-size: 1.6rem; box-shadow: 8px 8px 0px #eee; position: relative;
+        .formula-box { 
+            background: white; border: 2px solid #333; padding: 25px; margin: 25px 0; text-align: center; 
+            font-size: 1.5rem; box-shadow: 6px 6px 0px #eee; position: relative;
         }
-        .formula-label { position: absolute; top: -12px; left: 20px; background: white; padding: 0 10px; font-family: 'Open Sans'; font-size: 0.7rem; font-weight: bold; border: 2px solid #333; }
+        .formula-label { position: absolute; top: -12px; left: 20px; background: white; padding: 0 10px; font-family: 'Open Sans'; font-size: 0.65rem; font-weight: bold; border: 2px solid #333; text-transform: uppercase; }
         
-        .example { background: #fffde7; border: 1px solid #ffe082; padding: 25px; border-radius: 5px; margin: 25px 0; }
+        .example { background: #fffde7; border: 1px solid #ffe082; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid #fbc02d; }
         .example-title { color: #d32f2f; font-family: 'Open Sans'; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
 
         @media print {
             .no-print { display: none; }
             body { background: white; padding: 0; }
             .page { box-shadow: none; padding: 40px; width: 100%; max-width: 100%; }
-            .watermark { color: rgba(0, 0, 0, 0.03); } /* Aún más suave en papel */
         }
 
-        .btn-esparta { background: var(--esparta-green); color: white; border: none; padding: 12px 20px; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-print { background: var(--esparta-green); color: white; border: none; padding: 10px 20px; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold; cursor: pointer; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
+<div class="no-print" style="text-align:center;">
+    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR APUNTES OFICIALES (PÁGS 1-2)</button>
+</div>
+
 <div class="page">
     <div class="watermark">ACADEMIA ESPARTA</div>
-
     <div class="content">
-        <button class="no-print btn-esparta" onclick="window.print()" style="margin-bottom:20px;">🖨️ IMPRIMIR APUNTES OFICIALES</button>
-
         <header>
-            <div class="header-left">
-                <h1>5. Vectores y Coordenadas</h1>
-            </div>
-            <div class="header-right">
-                ACADEMIA ESPARTA<br>MATEMÁTICAS 4º ESO
-            </div>
+            <div class="header-left"><h1>6. Ecuaciones de la Recta</h1></div>
+            <div class="header-right">ACADEMIA ESPARTA<br>MATEMÁTICAS II</div>
         </header>
 
-        <h2>5.1 Concepto de Vector</h2>
-        <div class="definition">
-            <b>DEFINICIÓN:</b> Un vector fijo $\vec{AB}$ es un segmento orientado que tiene su origen en el punto $A(x_1, y_1)$ y su extremo en el punto $B(x_2, y_2)$.
+        <p>Para determinar una recta $r$ en el plano, necesitamos conocer un <b>punto</b> de paso $P(a, b)$ y un <b>vector director</b> $\vec{v}(v_1, v_2)$ que marque la dirección.</p>
+
+        <h2>6.1 Ecuación Vectorial</h2>
+        <p>Expresa que cualquier punto $(x, y)$ de la recta se obtiene sumando al punto $P$ el vector director multiplicado por un parámetro $t$.</p>
+        <div class="formula-box">
+            <div class="formula-label">Vectorial</div>
+            $$(x, y) = (a, b) + t \cdot (v_1, v_2)$$
         </div>
 
-        <p>Para trabajar de forma analítica, restamos las coordenadas del extremo menos las del origen:</p>
-
-        <div class="formula-highlight">
-            <div class="formula-label">FÓRMULA DE COMPONENTES</div>
-            $$\vec{AB} = (x_2 - x_1, \, y_2 - y_1)$$
-        </div>
-
-        <div class="example">
-            <span class="example-title">EJEMPLO RESUELTO 1</span><br>
-            Halla el vector $\vec{AB}$ siendo $A(1, -2)$ y $B(4, 5)$.
-            <p style="margin-top:15px; font-weight: bold; font-size: 1.1rem;">
-                $\vec{AB} = (4 - 1, \, 5 - (-2)) = (3, \, 5 + 2) = \mathbf{(3, 7)}$
-            </p>
-        </div>
-
-        <h2>5.2 El Módulo del Vector</h2>
-        <p>El módulo representa la "longitud" o tamaño del vector. Se calcula mediante la raíz cuadrada de la suma de los cuadrados de sus componentes.</p>
-
-        <div class="formula-highlight">
-            <div class="formula-label">MÓDULO DE UN VECTOR</div>
-            $$|\vec{v}| = \sqrt{v_1^2 + v_2^2}$$
+        <h2>6.2 Ecuaciones Paramétricas</h2>
+        <p>Surgen de separar las coordenadas $x$ e $y$ de la ecuación vectorial.</p>
+        <div class="formula-box">
+            <div class="formula-label">Paramétricas</div>
+            $$\begin{cases} x = a + t \cdot v_1 \\ y = b + t \cdot v_2 \end{cases}$$
         </div>
 
         <div class="example">
-            <span class="example-title">EJEMPLO RESUELTO 2</span><br>
-            Calcula el módulo de $\vec{u} = (-3, 4)$.
-            <p style="margin-top:15px; font-weight: bold; font-size: 1.1rem;">
-                $|\vec{u}| = \sqrt{(-3)^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = \mathbf{5}$
+            <span class="example-title">Ejemplo Resuelto 1</span><br>
+            Halla las paramétricas de la recta que pasa por $P(2, -1)$ con dirección $\vec{v}(3, 4)$.
+            <p style="margin-top:10px; font-weight:bold;">$\begin{cases} x = 2 + 3t \\ y = -1 + 4t \end{cases}$</p>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="watermark">ACADEMIA ESPARTA</div>
+    <div class="content">
+        <header>
+            <div class="header-left"><h1>6. Ecuaciones de la Recta (cont.)</h1></div>
+            <div class="header-right">ACADEMIA ESPARTA<br>MATEMÁTICAS II</div>
+        </header>
+
+        <h2>6.3 Ecuación Continua</h2>
+        <p>Se obtiene despejando $t$ en ambas paramétricas e igualando. Nota: $v_1$ y $v_2$ no pueden ser cero.</p>
+        <div class="formula-box">
+            <div class="formula-label">Continua</div>
+            $$\frac{x - a}{v_1} = \frac{y - b}{v_2}$$
+        </div>
+
+        <h2>6.4 Ecuación Explícita (La más común)</h2>
+        <p>Utiliza la <b>pendiente</b> ($m = v_2 / v_1$) y la ordenada en el origen ($n$).</p>
+        <div class="formula-box">
+            <div class="formula-label">Explícita</div>
+            $$y = m \cdot x + n$$
+        </div>
+
+        <div class="example">
+            <span class="example-title">Ejemplo Resuelto 2</span><br>
+            Pasa a explícita la recta $\frac{x-1}{2} = \frac{y-3}{4}$.
+            <p style="margin-top:10px; font-style:italic;">
+                1. Multiplicamos en cruz: $4(x-1) = 2(y-3)$ <br>
+                2. Operamos: $4x - 4 = 2y - 6 \rightarrow 2y = 4x + 2$ <br>
+                3. Despejamos $y$: $\mathbf{y = 2x + 1}$
             </p>
+        </div>
+
+        <h2>6.5 Ecuación General o Implícita</h2>
+        <div class="formula-box">
+            <div class="formula-label">General</div>
+            $$Ax + By + C = 0$$
         </div>
         
-        <footer style="margin-top: 50px; text-align: center; font-family: 'Open Sans'; font-size: 0.7rem; color: #999; border-top: 1px solid #eee; padding-top: 15px;">
-            Material de estudio propiedad de Academia Esparta. Prohibida su distribución comercial.
+        <footer style="margin-top: 40px; text-align: center; font-size: 0.7rem; color: #999; border-top: 1px solid #eee; padding-top: 15px;">
+            Documento de estudio oficial - Academia Esparta.
         </footer>
     </div>
 </div>
