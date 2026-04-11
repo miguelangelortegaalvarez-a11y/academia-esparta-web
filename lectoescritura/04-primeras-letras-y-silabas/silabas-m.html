@@ -65,59 +65,29 @@
 
     <div class="book-slider">
         
-        <div class="page active" id="p1" data-total="3">
+        <div class="page active" id="p1" data-total="3" data-target="MA" data-options="MA,ME,MA,MO,MA">
             <h2>1. Busca la sílaba "MA"</h2>
-            <div>
-                <span class="tap-item" onclick="checkSimple(this, true, 1)">MA</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 1)">ME</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 1)">MA</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 1)">MO</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 1)">MA</span>
-            </div>
+            <div class="options-container"></div>
         </div>
 
-        <div class="page" id="p2" data-total="3">
+        <div class="page" id="p2" data-total="3" data-target="ME" data-options="ME,MI,ME,MU,ME">
             <h2>2. Busca la sílaba "ME"</h2>
-            <div>
-                <span class="tap-item" onclick="checkSimple(this, true, 2)">ME</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 2)">MI</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 2)">ME</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 2)">MU</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 2)">ME</span>
-            </div>
+            <div class="options-container"></div>
         </div>
 
-        <div class="page" id="p3" data-total="3">
+        <div class="page" id="p3" data-total="3" data-target="MI" data-options="MI,MA,MI,MO,MI">
             <h2>3. Busca la sílaba "MI"</h2>
-            <div>
-                <span class="tap-item" onclick="checkSimple(this, true, 3)">MI</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 3)">MA</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 3)">MI</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 3)">MO</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 3)">MI</span>
-            </div>
+            <div class="options-container"></div>
         </div>
 
-        <div class="page" id="p4" data-total="3">
+        <div class="page" id="p4" data-total="3" data-target="MO" data-options="MO,MU,MO,ME,MO">
             <h2>4. Busca la sílaba "MO"</h2>
-            <div>
-                <span class="tap-item" onclick="checkSimple(this, true, 4)">MO</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 4)">MU</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 4)">MO</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 4)">ME</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 4)">MO</span>
-            </div>
+            <div class="options-container"></div>
         </div>
 
-        <div class="page" id="p5" data-total="3">
+        <div class="page" id="p5" data-total="3" data-target="MU" data-options="MU,MI,MU,MA,MU">
             <h2>5. Busca la sílaba "MU"</h2>
-            <div>
-                <span class="tap-item" onclick="checkSimple(this, true, 5)">MU</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 5)">MI</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 5)">MU</span>
-                <span class="tap-item" onclick="checkSimple(this, false, 5)">MA</span>
-                <span class="tap-item" onclick="checkSimple(this, true, 5)">MU</span>
-            </div>
+            <div class="options-container"></div>
         </div>
         
         <div class="page" id="p6" data-total="5">
@@ -165,13 +135,39 @@
         ];
         let currentWordIndex = 0;
 
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function loadSearchPage(num) {
+            const page = document.getElementById(`p${num}`);
+            const container = page.querySelector('.options-container');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            const target = page.dataset.target;
+            const options = shuffle(page.dataset.options.split(','));
+
+            options.forEach(opt => {
+                const span = document.createElement('span');
+                span.className = 'tap-item';
+                span.innerText = opt;
+                span.onclick = () => checkSimple(span, opt === target, num);
+                container.appendChild(span);
+            });
+        }
+
         function navegar(dir) {
             document.getElementById(`p${paginaActual}`).classList.remove('active');
             paginaActual += dir;
             if(paginaActual > totalPaginas) { finalizar(); return; }
-            document.getElementById(`p${paginaActual}`).classList.add('active');
             
+            const nuevaPagina = document.getElementById(`p${paginaActual}`);
+            nuevaPagina.classList.add('active');
+            
+            if (paginaActual <= 5) loadSearchPage(paginaActual);
             if (paginaActual === 6) { currentWordIndex = 0; loadWordChallenge(); }
+            
             actualizarInterfaz();
         }
 
@@ -200,7 +196,7 @@
 
             const optionsArea = document.getElementById('options-area');
             optionsArea.innerHTML = '';
-            data.options.forEach(opt => {
+            shuffle([...data.options]).forEach(opt => {
                 const span = document.createElement('span');
                 span.className = 'tap-item';
                 span.innerText = opt;
@@ -259,6 +255,9 @@
             confetti({ particleCount: 200, spread: 100 });
             setTimeout(() => { window.location.href = 'index.html'; }, 3000);
         }
+
+        // Inicializar primera página
+        loadSearchPage(1);
     </script>
 </body>
 </html>
