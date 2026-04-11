@@ -19,77 +19,20 @@
 
     <style>
         :root { --esparta-green: #2e7d32; --oro: #fbc02d; --rojo: #d32f2f; }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Lora', serif; background-color: #555; color: #212529; }
-        
-        .page { 
-            width: 210mm; 
-            height: 296mm; 
-            margin: 20px auto; 
-            background: white; 
-            padding: 25mm 25mm; 
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            break-after: page;
-        }
-
-        @media print {
-            body { background: white; }
-            .no-print { display: none !important; }
-            @page { margin: 0; size: A4; }
-            .page { 
-                margin: 0 !important; 
-                box-shadow: none !important;
-                page-break-after: always !important;
-            }
-        }
-
-        .btn-pdf { 
-            position: fixed; top: 20px; left: 20px; 
-            background: var(--rojo); color: white; border: none; 
-            padding: 15px 25px; border-radius: 8px; cursor: pointer; 
-            font-family: 'Montserrat'; font-weight: bold; z-index: 1000;
-        }
-
+        .page { width: 210mm; height: 296mm; margin: 20px auto; background: white; padding: 25mm 25mm; position: relative; display: flex; flex-direction: column; box-shadow: 0 0 15px rgba(0,0,0,0.5); break-after: page; }
+        @media print { body { background: white; } .no-print { display: none !important; } @page { margin: 0; size: A4; } .page { margin: 0 !important; box-shadow: none !important; page-break-after: always !important; } }
+        .btn-pdf { position: fixed; top: 20px; left: 20px; background: var(--rojo); color: white; border: none; padding: 15px 25px; border-radius: 8px; cursor: pointer; font-family: 'Montserrat'; font-weight: bold; z-index: 1000; }
         header { border-bottom: 4px solid var(--esparta-green); margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; }
         h1 { font-family: 'Montserrat'; font-size: 1.4rem; margin: 0; text-transform: uppercase; }
         .header-brand { text-align: right; font-family: 'Montserrat'; font-weight: 800; font-size: 0.75rem; color: var(--esparta-green); }
-
         .theory-box { background: #fffde7; border: 1px solid #ffe082; border-left: 8px solid var(--oro); padding: 30px; border-radius: 8px; line-height: 1.6; }
         .step-label { font-weight: 800; color: var(--esparta-green); font-family: 'Open Sans'; font-size: 0.95rem; display: block; margin-top: 25px; text-transform: uppercase; border-bottom: 2px solid #eee; padding-bottom: 5px; }
         .note { background: #e8f5e9; border: 1px solid #c8e6c9; padding: 15px; border-radius: 5px; margin-top: 20px; font-size: 0.95rem; font-style: italic; }
-
-        .combat-zone {
-            border: 3px solid var(--esparta-green);
-            border-radius: 12px;
-            flex-grow: 1;
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        .combat-header {
-            background: var(--esparta-green);
-            color: white;
-            padding: 15px 20px;
-            font-family: 'Montserrat';
-            font-size: 1.1rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .grid-area {
-            flex-grow: 1;
-            background-image: 
-                linear-gradient(rgba(46, 125, 50, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(46, 125, 50, 0.08) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-
+        .combat-zone { border: 3px solid var(--esparta-green); border-radius: 12px; flex-grow: 1; margin-top: 20px; display: flex; flex-direction: column; overflow: hidden; }
+        .combat-header { background: var(--esparta-green); color: white; padding: 15px 20px; font-family: 'Montserrat'; font-size: 1.1rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .grid-area { flex-grow: 1; background-image: linear-gradient(rgba(46, 125, 50, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(46, 125, 50, 0.08) 1px, transparent 1px); background-size: 30px 30px; }
         footer { text-align: center; font-family: 'Montserrat'; font-weight: 800; font-size: 0.9rem; color: #999; border-top: 1px solid #eee; padding-top: 15px; margin-top: 20px; text-transform: uppercase; }
     </style>
 </head>
@@ -102,30 +45,18 @@
         <div><h1>Método de Igualación</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
-
     <div class="theory-box">
-        <p>El método de igualación consiste en aislar la <b>misma letra</b> en las dos ecuaciones. Al final, "igualamos" lo que vale esa letra en una con lo que vale en la otra.</p>
-        
-        <span class="step-label">1. Selección y Doble Despeje</span>
-        <p>Analizamos el sistema: $$\begin{cases} \mathbf{x} + 2y = 8 \\ 3x - y = 3 \end{cases}$$
-        Vamos a despejar la $x$ en ambas. En la primera es fácil: $x = 8 - 2y$.<br>
-        En la segunda: $3x = 3 + y \Rightarrow x = \frac{3 + y}{3}$</p>
-
-        <span class="step-label">2. El Espejo Matemático</span>
-        <p>Como $x$ es igual a $x$, las dos expresiones de la derecha deben valer lo mismo:</p>
+        <p>El método de igualación consiste en aislar la <b>misma letra</b> en las dos ecuaciones. Al final, igualamos sus expresiones.</p>
+        <span class="step-label">1. Doble Despeje</span>
+        <p>Sistema: $$\begin{cases} x + 2y = 8 \\ 3x - y = 3 \end{cases}$$
+        Despejamos la $x$ en ambas:</p>
+        $$x = 8 - 2y \quad \text{y} \quad x = \frac{3 + y}{3}$$
+        <span class="step-label">2. Igualar</span>
         $$8 - 2y = \frac{3 + y}{3}$$
-
-        <span class="step-label">3. Resolución de la Ecuación</span>
-        <p>Para quitar el 3, multiplicamos todo el lado izquierdo por 3:</p>
-        $$3(8 - 2y) = 3 + y \Rightarrow 24 - 6y = 3 + y$$
-        $$24 - 3 = y + 6y \Rightarrow 21 = 7y \Rightarrow \mathbf{y = 3}$$
-
-        <span class="step-label">4. Hallar la segunda variable</span>
-        <p>Sustituimos la $y$ en el despeje más cómodo: $x = 8 - 2(3) \Rightarrow \mathbf{x = 2}$.</p>
-
-        <div class="note">
-            <strong>Consejo Espartano:</strong> Este método es ideal si ya ves una letra sola en ambas ecuaciones, o si las dos ecuaciones ya empiezan por "$x = ...$".
-        </div>
+        <span class="step-label">3. Resolver</span>
+        $$3(8 - 2y) = 3 + y \Rightarrow 24 - 6y = 3 + y \Rightarrow \mathbf{y = 3}$$
+        <span class="step-label">4. Hallar pareja</span>
+        $$x = 8 - 2(3) \Rightarrow \mathbf{x = 2}$$
     </div>
     <footer>Academia Esparta</footer>
 </div>
@@ -135,12 +66,8 @@
         <div><h1>Método de Igualación</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
-
     <div class="combat-zone">
-        <div class="combat-header">
-            <span>ZONA DE COMBATE 1:</span>
-            <span>$\begin{cases} 2x + y = 7 \\ x - 3y = -7 \end{cases}$</span>
-        </div>
+        <div class="combat-header"><span>ZONA DE COMBATE 1:</span><span>$\begin{cases} 2x + y = 7 \\ x - 3y = -7 \end{cases}$</span></div>
         <div class="grid-area"></div>
     </div>
     <footer>Academia Esparta</footer>
@@ -151,30 +78,18 @@
         <div><h1>Método de Igualación</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
-
     <div class="theory-box">
-        <p>Cuando las letras tienen números, al igualar nos quedarán fracciones a ambos lados. Se resuelve multiplicando en cruz.</p>
-        
+        <p>Cuando aparecen coeficientes, igualamos fracciones y resolvemos multiplicando en cruz.</p>
         <span class="step-label">1. Doble Despeje Fraccionario</span>
         <p>Sistema: $$\begin{cases} 2x + 3y = 12 \\ 3x + 2y = 13 \end{cases}$$
-        Despejamos la $x$ en ambas:<br>
-        $x = \frac{12 - 3y}{2}$ \quad y \quad $x = \frac{13 - 2y}{3}$</p>
-
+        Despejamos $x$ en ambas:</p>
+        $$x = \frac{12 - 3y}{2} \qquad x = \frac{13 - 2y}{3}$$
         <span class="step-label">2. Igualación Total</span>
-        <p>Igualamos los dos bloques:</p>
         $$\frac{12 - 3y}{2} = \frac{13 - 2y}{3}$$
-
-        <span class="step-label">3. El Ataque en Cruz</span>
-        <p>El 3 multiplica a la izquierda y el 2 multiplica a la derecha:</p>
-        $$3(12 - 3y) = 2(13 - 2y) \Rightarrow 36 - 9y = 26 - 4y$$
-        $$36 - 26 = 9y - 4y \Rightarrow 10 = 5y \Rightarrow \mathbf{y = 2}$$
-
+        <span class="step-label">3. Ataque en Cruz</span>
+        $$3(12 - 3y) = 2(13 - 2y) \Rightarrow 36 - 9y = 26 - 4y \Rightarrow \mathbf{y = 2}$$
         <span class="step-label">4. Cálculo Final</span>
-        <p>Sustituimos en cualquier fracción: $x = \frac{12 - 3(2)}{2} = \frac{6}{2} \Rightarrow \mathbf{x = 3}$</p>
-
-        <div class="note">
-            <strong>Consejo Espartano:</strong> No olvides que los paréntesis son obligatorios al multiplicar en cruz. ¡Protegen toda la expresión!
-        </div>
+        $$x = \frac{12 - 3(2)}{2} \Rightarrow \mathbf{x = 3}$$
     </div>
     <footer>Academia Esparta</footer>
 </div>
@@ -184,12 +99,8 @@
         <div><h1>Método de Igualación</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
-
     <div class="combat-zone">
-        <div class="combat-header">
-            <span>ZONA DE COMBATE 2:</span>
-            <span>$\begin{cases} 5x + 2y = 1 \\ 2x + 3y = 7 \end{cases}$</span>
-        </div>
+        <div class="combat-header"><span>ZONA DE COMBATE 2:</span><span>$\begin{cases} 5x + 2y = 1 \\ 2x + 3y = 7 \end{cases}$</span></div>
         <div class="grid-area"></div>
     </div>
     <footer>Academia Esparta</footer>
@@ -200,28 +111,16 @@
         <div><h1>Método de Igualación</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
-
     <div class="theory-box">
-        <p>Con paréntesis, el primer paso es decidir si despejar una letra "limpia" o simplificar el sistema primero.</p>
-        
-        <span class="step-label">1. Preparación</span>
-        <p>$$\begin{cases} x = 2y - 1 \\ 2(x + 1) - 3y = 5 \end{cases}$$
-        En la primera ya tenemos despejada la $x$. En la segunda, despejamos la $x$ también para poder igualar:<br>
-        $2(x+1) = 5 + 3y \Rightarrow x+1 = \frac{5 + 3y}{2} \Rightarrow x = \frac{5 + 3y}{2} - 1$</p>
-
-        <span class="step-label">2. La Igualdad</span>
+        <p>Sistemas complejos: aislamos la variable incluso si hay paréntesis, simplificando después.</p>
+        <span class="step-label">1. Despeje de X</span>
+        <p>$$\begin{cases} x = 2y - 1 \\ x = \frac{5 + 3y}{2} - 1 \end{cases}$$</p>
+        <span class="step-label">2. Igualar</span>
         $$2y - 1 = \frac{5 + 3y}{2} - 1$$
-
-        <span class="step-label">3. Simplificación y Resolución</span>
-        <p>Como hay un $-1$ en ambos lados, se cancelan. Multiplicamos por 2:</p>
-        $$2 \cdot (2y) = 5 + 3y \Rightarrow 4y = 5 + 3y \Rightarrow \mathbf{y = 5}$$
-
-        <span class="step-label">4. Victoria Final</span>
-        <p>Calculamos $x$: $x = 2(5) - 1 \Rightarrow \mathbf{x = 9}$</p>
-
-        <div class="note">
-            <strong>Consejo Espartano:</strong> Si al igualar ves el mismo número sumando o restando a ambos lados del igual, táchalos. Harás la ecuación mucho más pequeña.
-        </div>
+        <span class="step-label">3. Simplificar</span>
+        <p>Tachamos el -1 en ambos lados: $2y = \frac{5 + 3y}{2} \Rightarrow 4y = 5 + 3y \Rightarrow \mathbf{y = 5}$</p>
+        <span class="step-label">4. Final</span>
+        $$x = 2(5) - 1 \Rightarrow \mathbf{x = 9}$$
     </div>
     <footer>Academia Esparta</footer>
 </div>
@@ -231,12 +130,8 @@
         <div><h1>Método de Igualación</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
-
     <div class="combat-zone">
-        <div class="combat-header">
-            <span>ZONA DE COMBATE 3:</span>
-            <span>$\begin{cases} 2(x - 1) + y = 2 \\ x + 2y = 10 \end{cases}$</span>
-        </div>
+        <div class="combat-header"><span>ZONA DE COMBATE 3:</span><span>$\begin{cases} 2(x - 1) + y = 2 \\ x + 2y = 10 \end{cases}$</span></div>
         <div class="grid-area"></div>
     </div>
     <footer>Academia Esparta</footer>
