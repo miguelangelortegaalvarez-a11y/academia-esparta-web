@@ -3,209 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Erik: Ojeador Pro - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
+    <title>Ajedrez Esparta: Mario vs Papá</title>
     <style>
-        :root { --verde: #4CAF50; --azul: #2196f3; --rojo: #e74c3c; --gris: #f4f7f6; --blanco: #ffffff; --negro: #333; }
-        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding-bottom: 50px; }
-        .header { background: var(--blanco); color: var(--verde); text-align: center; padding: 20px; border-bottom: 5px solid var(--verde); }
-        .header h1 { font-family: 'Montserrat'; margin: 0; text-transform: uppercase; font-size: 1.8rem; }
+        :root { --verde: #4CAF50; --negro: #333; --gris: #f4f7f6; }
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .header { text-align: center; color: var(--verde); margin-bottom: 20px; }
+        .header h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; }
         
-        .container { max-width: 600px; margin: 20px auto; background: var(--blanco); padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        #board { width: 400px; border: 10px solid var(--negro); border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         
-        /* MARCADOR */
-        .status-bar { display: flex; justify-content: space-between; align-items: center; background: var(--negro); color: white; padding: 12px; border-radius: 12px; margin-bottom: 15px; font-family: 'Montserrat'; font-size: 0.8rem; }
-        .vidas-box { background: var(--rojo); padding: 4px 8px; border-radius: 6px; font-weight: bold; }
-        .nivel-box { background: var(--azul); padding: 4px 8px; border-radius: 6px; }
-
-        .barra-bg { width: 100%; height: 10px; background: #eee; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
-        .barra-fill { height: 100%; background: var(--verde); width: 0%; transition: 0.4s; }
-
-        .pregunta-box { text-align: center; margin-bottom: 25px; }
-        .pregunta-box h2 { font-family: 'Montserrat'; font-size: 1.4rem; color: #222; }
-
-        .opciones { display: grid; gap: 10px; }
-        .opcion { padding: 15px; border: 2px solid #ddd; border-radius: 12px; background: white; cursor: pointer; font-size: 1.1rem; font-weight: 600; transition: 0.2s; }
-        .opcion:hover:not(:disabled) { border-color: var(--azul); background: #f0f7ff; }
+        .info-panel { margin-top: 20px; text-align: center; background: white; padding: 15px 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 340px; }
+        .turno-txt { font-family: 'Montserrat'; font-weight: 800; color: var(--negro); font-size: 1.2rem; }
+        .btn-reset { margin-top: 15px; padding: 10px 20px; background: var(--verde); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; text-transform: uppercase; }
         
-        .correcto { background-color: var(--verde) !important; color: white; border-color: #388E3C !important; }
-        .incorrecto { background-color: var(--rojo) !important; color: white; border-color: #b71c1c !important; }
-
-        .feedback { margin-top: 20px; text-align: center; font-weight: 800; font-size: 1.1rem; min-height: 1.5em; font-family: 'Montserrat'; }
-        .shake { animation: shake 0.4s; }
-        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-8px);} 75% {transform: translateX(8px);} }
-
-        .final { display: none; text-align: center; padding: 20px; }
-        .btn { margin-top: 20px; padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.1rem; color: white; text-transform: uppercase; }
+        /* Estilos para resaltar movimientos */
+        .highlight-white { box-shadow: inset 0 0 3px 3px rgba(76, 175, 80, 0.7); }
+        .highlight-black { box-shadow: inset 0 0 3px 3px rgba(76, 175, 80, 0.7); }
     </style>
 </head>
 <body>
 
-<header class="header">
+<div class="header">
     <h1>ACADEMIA ESPARTA</h1>
-    <p>¡Erik, el Ojeador de 1ª División!</p>
-</header>
-
-<div class="container">
-    <div class="status-bar">
-        <div class="nivel-box" id="tag-nivel">NIVEL 1</div>
-        <div style="color: var(--verde);">✅ <span id="pts">0</span></div>
-        <div class="vidas-box">🛡️ <span id="vidas">3</span></div>
-        <div>🎯 <span id="num-p">1</span>/10</div>
-    </div>
-    
-    <div class="barra-bg"><div class="barra-fill" id="barra"></div></div>
-    
-    <div id="pantalla-juego">
-        <div class="pregunta-box">
-            <h2 id="txt-pregunta">Cargando fichaje...</h2>
-        </div>
-        <div class="opciones" id="box-opciones"></div>
-        <div id="feedback" class="feedback"></div>
-    </div>
-
-    <div class="final" id="pantalla-final">
-        <h2 id="tit-final"></h2>
-        <p id="nota-final" style="font-size: 2.5rem; font-weight: 800; color: var(--azul);"></p>
-        <p id="msg-final" style="font-style: italic; font-size: 1.2rem;"></p>
-        <button class="btn" id="btn-next" style="background: var(--verde); display:none;" onclick="irSiguienteNivel()">SIGUIENTE NIVEL 🚀</button>
-        <button class="btn" id="btn-retry" style="background: var(--rojo); display:none;" onclick="reiniciar()">REINTENTAR 🔄</button>
-    </div>
+    <p>Estrategia Suprema: Duelo de Reyes</p>
 </div>
 
+<div id="board"></div>
+
+<div class="info-panel">
+    <div class="turno-txt" id="status">Turno de: BLANCAS (Mario)</div>
+    <button class="btn-reset" onclick="reiniciarJuego()">Reiniciar Batalla 🔄</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+
 <script>
-    let nivelActual = 1;
-    let indexP = 0;
-    let aciertos = 0;
-    let fallos = 0;
-    let preguntasNivel = [];
+    var board = null;
+    var game = new Chess();
+    var $status = $('#status');
 
-    const EQUIPOS = ["Real Madrid", "FC Barcelona", "Atlético de Madrid", "Real Betis", "Valencia CF", "Athletic Club", "Real Sociedad", "Villarreal CF", "Sevilla FC", "Girona FC", "CA Osasuna", "Getafe CF", "Rayo Vallecano", "RCD Espanyol", "CD Leganés", "RCD Mallorca", "Real Valladolid", "UD Las Palmas", "Celta de Vigo", "Alavés"];
+    function onDragStart (source, piece, position, orientation) {
+        // No permitir mover piezas si el juego ha terminado
+        if (game.game_over()) return false;
 
-    const BANCO = [
-        // NIVEL 1: FÁCIL (Madrid, Barça, Atleti, Betis, Valencia)
-        { j: "Mbappé", e: "Real Madrid", n: 1 },
-        { j: "Lamine Yamal", e: "FC Barcelona", n: 1 },
-        { j: "Julián Alvarez", e: "Atlético de Madrid", n: 1 },
-        { j: "Isco", e: "Real Betis", n: 1 },
-        { j: "Hugo Duro", e: "Valencia CF", n: 1 },
-        { j: "Vinícius Jr", e: "Real Madrid", n: 1 },
-        { j: "Dani Olmo", e: "FC Barcelona", n: 1 },
-        { j: "Griezmann", e: "Atlético de Madrid", n: 1 },
-        { j: "Pepelu", e: "Valencia CF", n: 1 },
-        { j: "Bellingham", e: "Real Madrid", n: 1 },
-
-        // NIVEL 2: MEDIO
-        { j: "Nico Williams", e: "Athletic Club", n: 2 },
-        { j: "Take Kubo", e: "Real Sociedad", n: 2 },
-        { j: "Ayoze Pérez", e: "Villarreal CF", n: 2 },
-        { j: "Isaac Romero", e: "Sevilla FC", n: 2 },
-        { j: "Bryan Gil", e: "Girona FC", n: 2 },
-        { j: "Oyarzabal", e: "Real Sociedad", n: 2 },
-        { j: "Iñaki Williams", e: "Athletic Club", n: 2 },
-        { j: "Tsygankov", e: "Girona FC", n: 2 },
-        { j: "Gerard Moreno", e: "Villarreal CF", n: 2 },
-        { j: "Lukebakio", e: "Sevilla FC", n: 2 },
-
-        // NIVEL 3: DIFÍCIL
-        { j: "James Rodríguez", e: "Rayo Vallecano", n: 3 },
-        { j: "Sébastien Haller", e: "CD Leganés", n: 3 },
-        { j: "Ante Budimir", e: "CA Osasuna", n: 3 },
-        { j: "Luis Milla", e: "Getafe CF", n: 3 },
-        { j: "Carlos Vicente", e: "Alavés", n: 3 },
-        { j: "Borja Mayoral", e: "Getafe CF", n: 3 },
-        { j: "Isi Palazón", e: "Rayo Vallecano", n: 3 },
-        { j: "Vedat Muriqi", e: "RCD Mallorca", n: 3 },
-        { j: "Moleiro", e: "UD Las Palmas", n: 3 },
-        { j: "Iago Aspas", e: "Celta de Vigo", n: 3 }
-    ];
-
-    function mezclar(array) {
-        return array.sort(() => Math.random() - 0.5);
+        // Solo permitir mover las piezas del jugador al que le toca
+        if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+            (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+            return false;
+        }
     }
 
-    function iniciar() {
-        indexP = 0; aciertos = 0; fallos = 0;
-        preguntasNivel = mezclar(BANCO.filter(q => q.n === nivelActual)).slice(0, 10);
-        document.getElementById("tag-nivel").innerText = "NIVEL " + nivelActual;
-        document.getElementById("pantalla-juego").style.display = "block";
-        document.getElementById("pantalla-final").style.display = "none";
-        document.getElementById("btn-retry").style.display = "none";
-        document.getElementById("btn-next").style.display = "none";
-        cargarPregunta();
-    }
-
-    function cargarPregunta() {
-        document.getElementById("pts").innerText = aciertos;
-        document.getElementById("vidas").innerText = 3 - fallos;
-        document.getElementById("num-p").innerText = indexP + 1;
-        document.getElementById("barra").style.width = (indexP * 10) + "%";
-        document.getElementById("feedback").innerText = "";
-        document.getElementById("feedback").className = "feedback";
-
-        const q = preguntasNivel[indexP];
-        document.getElementById("txt-pregunta").innerText = "¿En qué equipo juega " + q.j + "?";
-        
-        const contenedor = document.getElementById("box-opciones");
-        contenedor.innerHTML = "";
-        
-        let falsas = mezclar(EQUIPOS.filter(e => e !== q.e)).slice(0, 2);
-        let todas = mezclar([{ t: q.e, c: true }, { t: falsas[0], c: false }, { t: falsas[1], c: false }]);
-
-        todas.forEach(op => {
-            const b = document.createElement("button");
-            b.className = "opcion";
-            b.innerText = op.t;
-            b.onclick = () => verificar(op.c, b);
-            contenedor.appendChild(b);
+    function onDrop (source, target) {
+        // Ver si el movimiento es legal
+        var move = game.move({
+            from: source,
+            to: target,
+            promotion: 'q' // Siempre promocionar a reina por simplicidad
         });
+
+        // Si es ilegal, devolver la pieza
+        if (move === null) return 'snapback';
+
+        actualizarEstado();
     }
 
-    function verificar(esC, btn) {
-        document.querySelectorAll(".opcion").forEach(b => b.disabled = true);
-        const fb = document.getElementById("feedback");
+    function onSnapEnd () {
+        board.position(game.fen());
+    }
 
-        if (esC) {
-            btn.classList.add("correcto");
-            aciertos++;
-            fb.innerText = "¡GOLAZO ERIK! ⚽";
-            fb.style.color = "var(--verde)";
+    function actualizarEstado () {
+        var status = '';
+        var moveColor = (game.turn() === 'b') ? 'NEGRAS (Papá)' : 'BLANCAS (Mario)';
+
+        if (game.in_checkmate()) {
+            status = '¡JAQUE MATE! Ganador: ' + ((game.turn() === 'w') ? 'Papá' : 'Mario');
+        } else if (game.in_draw()) {
+            status = '¡TABLAS (Empate)!';
         } else {
-            btn.classList.add("incorrecto");
-            fallos++;
-            fb.innerText = "¡ERES MÁS MALO QUE EL BARÇA EN CHAMPIONS! 😂";
-            fb.classList.add("shake");
-            fb.style.color = "var(--rojo)";
+            status = 'Turno de: ' + moveColor;
+            if (game.in_check()) {
+                status += ' - ¡ESTÁS EN JAQUE!';
+            }
         }
 
-        setTimeout(() => {
-            indexP++;
-            if (indexP < 10 && fallos <= 3) cargarPregunta();
-            else finalizar();
-        }, 1500);
+        $status.html(status);
     }
 
-    function finalizar() {
-        document.getElementById("pantalla-juego").style.display = "none";
-        document.getElementById("pantalla-final").style.display = "block";
-        document.getElementById("nota-final").innerText = aciertos + " / 10";
+    var config = {
+        draggable: true,
+        position: 'start',
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onSnapEnd: onSnapEnd,
+        pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
+    };
+    
+    board = Chessboard('board', config);
 
-        if (fallos > 3 || aciertos < 7) {
-            document.getElementById("tit-final").innerText = "¡EXPULSADO!";
-            document.getElementById("msg-final").innerText = "¡Más malo que el Barça en Champions! Entrena más, Erik.";
-            document.getElementById("btn-retry").style.display = "inline-block";
-        } else {
-            document.getElementById("tit-final").innerText = "¡VICTORIA!";
-            document.getElementById("msg-final").innerText = "¡Erik, eres mejor que Mbappé en el Madrid!";
-            if(nivelActual < 3) document.getElementById("btn-next").style.display = "inline-block";
-            else document.getElementById("tit-final").innerText = "¡ERES EL PICHICHI DE ESPARTA! 🏆";
-        }
+    function reiniciarJuego() {
+        game.reset();
+        board.start();
+        actualizarEstado();
     }
 
-    function irSiguienteNivel() { nivelActual++; iniciar(); }
-    function reiniciar() { iniciar(); }
-
-    iniciar();
+    actualizarEstado();
 </script>
+
 </body>
 </html>
