@@ -3,156 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
-    <title>English Pro - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <title>Sistemas de Ecuaciones: Sustitución - Academia Esparta</title>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
     <style>
-        :root { --verde: #2e7d32; --oro: #f1c40f; --rojo: #e74c3c; --azul: #2196f3; --gris: #f1f8f1; }
-        body { font-family: 'Open Sans', sans-serif; background: var(--gris); margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        :root { --esparta-green: #2e7d32; --light-bg: #f8f9fa; }
+        body { font-family: 'Lora', serif; background-color: #e9ecef; margin: 0; padding: 20px; color: #212529; line-height: 1.8; }
         
-        .header { position: absolute; top: 20px; text-align: center; width: 100%; }
-        .header h1 { font-family: 'Montserrat'; color: #1a1a1a; margin: 0; text-transform: uppercase; font-size: 1.8rem; }
-        .header p { color: var(--verde); font-weight: 800; margin: 0; }
+        .page { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 50px 70px; 
+            border-radius: 2px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            position: relative;
+        }
 
-        .game-box { background: white; padding: 30px; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); width: 90%; max-width: 550px; text-align: center; border: 8px solid #eee; position: relative; }
+        .no-cut { page-break-inside: avoid; break-inside: avoid; margin-bottom: 40px; }
+
+        .watermark {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 7rem;
+            color: rgba(46, 125, 50, 0.04);
+            font-family: 'Montserrat';
+            font-weight: 900;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header { 
+            border-bottom: 3px solid var(--esparta-green); 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end;
+            padding-bottom: 10px;
+        }
         
-        .btn-listen { width: 90px; height: 90px; border-radius: 50%; border: none; background: var(--azul); color: white; font-size: 2.5rem; cursor: pointer; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3); }
+        h1 { font-family: 'Montserrat'; font-size: 2rem; margin: 0; }
+        .header-brand { text-align: right; font-family: 'Montserrat'; color: var(--esparta-green); font-weight: 800; font-size: 0.75rem; }
 
-        .options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .option-card { background: #fff; border: 4px solid #eee; border-radius: 20px; padding: 15px; cursor: pointer; font-size: 4rem; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px; }
+        h2 { font-family: 'Montserrat'; font-size: 1.4rem; color: #1a1a1a; border-left: 6px solid var(--esparta-green); padding-left: 15px; margin: 30px 0 15px 0; }
         
-        .card-name { font-size: 1rem; margin-top: 10px; color: #555; display: none; text-transform: uppercase; font-family: 'Montserrat'; }
+        .step-box { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+        .step-num { background: var(--esparta-green); color: white; padding: 2px 10px; border-radius: 50%; font-weight: bold; margin-right: 10px; }
 
-        /* ESTADOS */
-        .correct { background: var(--verde) !important; border-color: #1b5e20 !important; color: white !important; }
-        .secondary { background: #e3f2fd !important; border-color: var(--azul) !important; transform: scale(0.95); }
-        .wrong { background: var(--rojo) !important; border-color: #b71c1c !important; }
-        .shake { animation: shake 0.5s; }
-        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-10px);} 75% {transform: translateX(10px);} }
+        .example { background: #fffde7; border: 1px solid #ffe082; border-left: 5px solid #fbc02d; padding: 25px; border-radius: 5px; }
+        .example-title { color: #d32f2f; font-family: 'Open Sans'; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 15px; display: block; }
 
-        /* LLUVIA EMOJIS */
-        .emoji-rain { position: fixed; top: -50px; font-size: 2rem; animation: fall 3s linear forwards; z-index: 1000; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-
-        #progreso { font-family: 'Montserrat'; font-size: 1.2rem; margin-bottom: 10px; color: var(--negro); }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; }
+            .page { box-shadow: none; width: 100%; max-width: 100%; padding: 40px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>ACADEMIA ESPARTA</h1>
-    <p>WELL DONE, MARIO!</p>
-</div>
-
-<div id="progreso">Pregunta 1 de 10</div>
-
-<div class="game-box" id="main-box">
-    <button class="btn-listen" id="main-mic" onclick="speakWord(quiz[currentTask].word)">🔊</button>
-    <div style="margin-bottom: 20px; font-weight: 800; color: #666;">TOUCH THE CORRECT ONE</div>
+<div class="page">
+    <div class="watermark">ACADEMIA ESPARTA</div>
     
-    <div class="options-grid" id="options-container"></div>
+    <header>
+        <div><h1>El Método de Sustitución</h1></div>
+        <div class="header-brand">ACADEMIA ESPARTA<br>ÁLGEBRA NIVEL 1</div>
+    </header>
+
+    <div class="no-cut">
+        <h2>¿En qué consiste?</h2>
+        <p>Este método se basa en <b>despejar</b> una incógnita de una de las ecuaciones y <b>sustituir</b> su valor en la otra. Es ideal cuando una de las letras está "sola" (no tiene número delante).</p>
+        
+        <div class="step-box">
+            <span class="step-num">1</span> Despejar una incógnita en la ecuación más fácil.<br>
+            <span class="step-num">2</span> Sustituir esa expresión en la otra ecuación.<br>
+            <span class="step-num">3</span> Resolver la ecuación de primer grado resultante.<br>
+            <span class="step-num">4</span> Calcular la otra incógnita con el valor obtenido.
+        </div>
+    </div>
+
+    <div class="no-cut">
+        <div class="example">
+            <span class="example-title">Nivel 1: Sin Fracciones (Letras solas)</span>
+            Resolver el sistema:
+            $$\begin{cases} x + 2y = 8 \\ 3x - y = 3 \end{cases}$$
+            <p><b>Paso 1:</b> Despejamos la $x$ en la primera ecuación porque está sola:<br>
+            $x = 8 - 2y$</p>
+            <p><b>Paso 2:</b> Sustituimos en la segunda ecuación:<br>
+            $3(8 - 2y) - y = 3$</p>
+            <p><b>Paso 3:</b> Resolvemos:<br>
+            $24 - 6y - y = 3 \Rightarrow 24 - 7y = 3 \Rightarrow -7y = -21 \Rightarrow \mathbf{y = 3}$</p>
+            <p><b>Paso 4:</b> Hallamos $x$:<br>
+            $x = 8 - 2(3) = 8 - 6 \Rightarrow \mathbf{x = 2}$</p>
+        </div>
+    </div>
+
+    <div class="no-cut">
+        <div class="example">
+            <span class="example-title">Nivel 2: Con Fracciones</span>
+            Resolver el sistema:
+            $$\begin{cases} 2x + 3y = 12 \\ 3x + 2y = 13 \end{cases}$$
+            <p><b>Paso 1:</b> Despejamos $x$ en la primera (aquí aparece la fracción):<br>
+            $2x = 12 - 3y \Rightarrow x = \frac{12 - 3y}{2}$</p>
+            <p><b>Paso 2:</b> Sustituimos en la segunda:<br>
+            $3 \left( \frac{12 - 3y}{2} \right) + 2y = 13$</p>
+            <p><b>Paso 3:</b> Quitamos el denominador multiplicando todo por 2:<br>
+            $3(12 - 3y) + 4y = 26 \Rightarrow 36 - 9y + 4y = 26 \Rightarrow -5y = -10 \Rightarrow \mathbf{y = 2}$</p>
+            <p><b>Paso 4:</b> Hallamos $x$:<br>
+            $x = \frac{12 - 3(2)}{2} = \frac{6}{2} \Rightarrow \mathbf{x = 3}$</p>
+        </div>
+    </div>
+
+    <div class="no-cut">
+        <div class="example">
+            <span class="example-title">Nivel 3: Con Paréntesis</span>
+            Resolver el sistema:
+            $$\begin{cases} x = 2y - 1 \\ 2(x + 1) - 3y = 5 \end{cases}$$
+            <p><b>Paso 1:</b> La $x$ ya está despejada: $x = 2y - 1$</p>
+            <p><b>Paso 2:</b> Sustituimos en la segunda respetando el paréntesis:<br>
+            $2((2y - 1) + 1) - 3y = 5$</p>
+            <p><b>Paso 3:</b> Simplificamos dentro del paréntesis primero:<br>
+            $2(2y) - 3y = 5 \Rightarrow 4y - 3y = 5 \Rightarrow \mathbf{y = 5}$</p>
+            <p><b>Paso 4:</b> Hallamos $x$:<br>
+            $x = 2(5) - 1 = 10 - 1 \Rightarrow \mathbf{x = 9}$</p>
+        </div>
+    </div>
+
+    <footer style="margin-top: 40px; text-align: center; font-size: 0.8rem; color: #999; border-top: 1px solid #eee; padding-top: 20px;">
+        "Ninguna retirada, ninguna rendición". Academia Esparta 2026.
+    </footer>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-<script>
-    const quiz = [
-        { word: "Apple", o: [{e:"🍎",n:"Apple"}, {e:"🍌",n:"Banana"}, {e:"🍇",n:"Grapes"}], c: 0 },
-        { word: "Dog", o: [{e:"🐱",n:"Cat"}, {e:"🐶",n:"Dog"}, {e:"🦁",n:"Lion"}], c: 1 },
-        { word: "One", o: [{e:"2️⃣",n:"Two"}, {e:"3️⃣",n:"Three"}, {e:"1️⃣",n:"One"}], c: 2 },
-        { word: "Sun", o: [{e:"☀️",n:"Sun"}, {e:"☁️",n:"Cloud"}, {e:"🌙",n:"Moon"}], c: 0 },
-        { word: "Blue", o: [{e:"🟥",n:"Red"}, {e:"🟦",n:"Blue"}, {e:"🟩",n:"Green"}], c: 1 },
-        { word: "Car", o: [{e:"🚗",n:"Car"}, {e:"🚲",n:"Bike"}, {e:"✈️",n:"Plane"}], c: 0 },
-        { word: "House", o: [{e:"🌳",n:"Tree"}, {e:"🏠",n:"House"}, {e:"🌸",n:"Flower"}], c: 1 },
-        { word: "Five", o: [{e:"4️⃣",n:"Four"}, {e:"5️⃣",n:"Five"}, {e:"6️⃣",n:"Six"}], c: 1 },
-        { word: "Ball", o: [{e:"⚽",n:"Ball"}, {e:"🧸",n:"Doll"}, {e:"🎨",n:"Paint"}], c: 0 },
-        { word: "Hat", o: [{e:"👟",n:"Shoe"}, {e:"👕",n:"Shirt"}, {e:"🎩",n:"Hat"}], c: 2 }
-    ];
-
-    let currentTask = 0;
-    const synth = window.speechSynthesis;
-
-    function loadTask() {
-        if (currentTask >= 10) {
-            celebracionFinal();
-            return;
-        }
-        document.getElementById('progreso').innerText = `Pregunta ${currentTask + 1} de 10`;
-        const task = quiz[currentTask];
-        const container = document.getElementById('options-container');
-        container.innerHTML = '';
-
-        task.o.forEach((item, index) => {
-            const card = document.createElement('div');
-            card.className = 'option-card';
-            card.id = `card-${index}`;
-            card.innerHTML = `<span>${item.e}</span><span class="card-name">${item.n}</span>`;
-            card.onclick = () => checkAnswer(index, card);
-            container.appendChild(card);
-        });
-    }
-
-    function speakWord(text, callback) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.8;
-        if (callback) utterance.onend = callback;
-        synth.speak(utterance);
-    }
-
-    async function checkAnswer(idx, card) {
-        if (card.classList.contains('correct') || card.classList.contains('secondary')) return;
-
-        const task = quiz[currentTask];
-        if (idx === task.c) {
-            // ACIERTO MARIO
-            card.classList.add('correct');
-            card.querySelector('.card-name').style.display = "block";
-            confetti({ particleCount: 100, spread: 60 });
-            
-            // "Well done, Mario!"
-            speakWord("Well done, Mario!", async () => {
-                // Ahora enseñamos las otras dos
-                const indicesRestantes = [0, 1, 2].filter(i => i !== task.c);
-                
-                for (let i of indicesRestantes) {
-                    await new Promise(r => setTimeout(r, 1500));
-                    const otherCard = document.getElementById(`card-${i}`);
-                    otherCard.classList.add('secondary');
-                    otherCard.querySelector('.card-name').style.display = "block";
-                    speakWord(task.o[i].n);
-                }
-
-                // Siguiente pregunta tras ver todas
-                setTimeout(() => {
-                    currentTask++;
-                    loadTask();
-                }, 2000);
-            });
-        } else {
-            // FALLO
-            card.classList.add('wrong');
-            document.getElementById('main-box').classList.add('shake');
-            setTimeout(() => {
-                document.getElementById('main-box').classList.remove('shake');
-                card.classList.remove('wrong');
-            }, 500);
-        }
-    }
-
-    function celebracionFinal() {
-        document.getElementById('main-box').innerHTML = "<h1 style='font-size:3rem'>🏆 CHAMPION!</h1><p style='font-size:1.5rem'>MARIO IS THE BEST</p>";
-        const emojis = ['😊', '🎉', '🌟', '👏', '🦁', '🔥', '💎', '🚀'];
-        setInterval(() => {
-            const e = document.createElement('div');
-            e.className = 'emoji-rain';
-            e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            e.style.left = Math.random() * 100 + 'vw';
-            document.body.appendChild(e);
-            setTimeout(() => e.remove(), 3000);
-        }, 100);
-    }
-
-    loadTask();
-</script>
 
 </body>
 </html>
