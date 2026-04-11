@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
-    <title>Ecuaciones de la Recta - Academia Esparta</title>
+    <title>Manual de Límites - Academia Esparta</title>
     
     <script>
         window.MathJax = {
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                displayMath: [['$$', '$$']],
                 processEscapes: true
             }
         };
@@ -19,22 +19,21 @@
 
     <style>
         :root { --esparta-green: #2e7d32; --light-bg: #f8f9fa; }
-        body { font-family: 'Lora', serif; background-color: #e9ecef; margin: 0; padding: 20px; color: #212529; line-height: 1.8; }
+        body { font-family: 'Lora', serif; background-color: #e9ecef; margin: 0; padding: 0; color: #212529; }
         
-        /* CONTENEDOR DE PÁGINA */
         .page { 
-            max-width: 850px; 
-            margin: 0 auto 40px auto; 
+            max-width: 800px; 
+            margin: 40px auto; 
             background: white; 
-            padding: 60px; 
+            padding: 60px 70px; 
             border-radius: 2px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
             position: relative;
-            overflow: hidden;
-            page-break-after: always;
+            min-height: 1000px;
         }
 
-        /* MARCA DE AGUA */
+        .no-cut { page-break-inside: avoid; break-inside: avoid; margin-bottom: 30px; position: relative; }
+
         .watermark {
             position: absolute;
             top: 50%; left: 50%;
@@ -46,78 +45,94 @@
             white-space: nowrap;
             pointer-events: none;
             z-index: 0;
-            text-transform: uppercase;
         }
 
         .content { position: relative; z-index: 1; }
 
         header { 
             border-bottom: 3px solid var(--esparta-green); 
-            margin-bottom: 40px; 
+            margin-bottom: 30px; 
             display: flex; 
             justify-content: space-between; 
             align-items: flex-end;
             padding-bottom: 10px;
         }
-        .header-left h1 { font-family: 'Montserrat'; font-size: 2rem; margin: 0; color: #1a1a1a; }
-        .header-right { text-align: right; font-family: 'Montserrat'; color: var(--esparta-green); font-weight: 800; font-size: 0.75rem; }
-
-        h2 { font-family: 'Montserrat'; font-size: 1.4rem; margin-top: 35px; border-left: 6px solid var(--esparta-green); padding-left: 15px; color: #1a1a1a; }
         
-        .definition { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 20px; border-radius: 5px; margin: 20px 0; }
+        h1 { font-family: 'Montserrat'; font-size: 2rem; margin: 0; color: #1a1a1a; }
+        .header-brand { text-align: right; font-family: 'Montserrat'; color: var(--esparta-green); font-weight: 800; font-size: 0.75rem; }
+
+        h2 { font-family: 'Montserrat'; font-size: 1.4rem; color: #1a1a1a; border-left: 6px solid var(--esparta-green); padding-left: 15px; margin: 35px 0 15px 0; }
+        
+        .definition { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 20px; border-radius: 5px; }
         
         .formula-box { 
-            background: white; border: 2px solid #333; padding: 25px; margin: 25px 0; text-align: center; 
-            font-size: 1.5rem; box-shadow: 6px 6px 0px #eee; position: relative;
+            background: white; border: 2px solid #333; padding: 25px; text-align: center; 
+            font-size: 1.5rem; box-shadow: 6px 6px 0px #eee; margin: 15px 0;
         }
-        .formula-label { position: absolute; top: -12px; left: 20px; background: white; padding: 0 10px; font-family: 'Open Sans'; font-size: 0.65rem; font-weight: bold; border: 2px solid #333; text-transform: uppercase; }
+        .formula-label { position: absolute; top: -12px; left: 20px; background: white; padding: 0 10px; font-family: 'Open Sans'; font-size: 0.7rem; font-weight: bold; border: 2px solid #333; text-transform: uppercase; }
         
-        .example { background: #fffde7; border: 1px solid #ffe082; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid #fbc02d; }
-        .example-title { color: #d32f2f; font-family: 'Open Sans'; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
+        .example { background: #fffde7; border: 1px solid #ffe082; border-left: 5px solid #fbc02d; padding: 20px; border-radius: 5px; }
+        .example-title { color: #d32f2f; font-family: 'Open Sans'; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
+
+        .indeterminacion-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
+        .indet-item { background: #333; color: white; text-align: center; padding: 10px; border-radius: 4px; font-weight: bold; font-family: 'Montserrat'; }
 
         @media print {
+            body { background: white; }
             .no-print { display: none; }
-            body { background: white; padding: 0; }
-            .page { box-shadow: none; padding: 40px; width: 100%; max-width: 100%; }
+            .page { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 40px; page-break-after: always; }
         }
 
-        .btn-print { background: var(--esparta-green); color: white; border: none; padding: 10px 20px; border-radius: 4px; font-family: 'Montserrat'; font-weight: bold; cursor: pointer; margin-bottom: 20px; }
+        .btn-print { position: fixed; top: 20px; right: 20px; background: var(--esparta-green); color: white; border: none; padding: 15px 25px; border-radius: 50px; font-family: 'Montserrat'; font-weight: bold; cursor: pointer; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-<div class="no-print" style="text-align:center;">
-    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR APUNTES OFICIALES (PÁGS 1-2)</button>
-</div>
+<button class="btn-print no-print" onclick="window.print()">🖨️ IMPRIMIR MANUAL DE LÍMITES</button>
 
 <div class="page">
     <div class="watermark">ACADEMIA ESPARTA</div>
     <div class="content">
         <header>
-            <div class="header-left"><h1>6. Ecuaciones de la Recta</h1></div>
-            <div class="header-right">ACADEMIA ESPARTA<br>MATEMÁTICAS II</div>
+            <div><h1>7. Límites de Funciones</h1></div>
+            <div class="header-brand">ACADEMIA ESPARTA<br>ANÁLISIS MATEMÁTICO</div>
         </header>
 
-        <p>Para determinar una recta $r$ en el plano, necesitamos conocer un <b>punto</b> de paso $P(a, b)$ y un <b>vector director</b> $\vec{v}(v_1, v_2)$ que marque la dirección.</p>
-
-        <h2>6.1 Ecuación Vectorial</h2>
-        <p>Expresa que cualquier punto $(x, y)$ de la recta se obtiene sumando al punto $P$ el vector director multiplicado por un parámetro $t$.</p>
-        <div class="formula-box">
-            <div class="formula-label">Vectorial</div>
-            $$(x, y) = (a, b) + t \cdot (v_1, v_2)$$
+        <div class="no-cut">
+            <h2>7.1 Concepto de Límite</h2>
+            <div class="definition">
+                El límite de una función $f(x)$ cuando $x$ tiende a $a$ es el valor al que se aproxima la función cuando la variable independiente se acerca mucho a ese punto $a$.
+            </div>
+            <div class="formula-box">
+                <div class="formula-label">Notación</div>
+                $$\lim_{x \to a} f(x) = L$$
+            </div>
         </div>
 
-        <h2>6.2 Ecuaciones Paramétricas</h2>
-        <p>Surgen de separar las coordenadas $x$ e $y$ de la ecuación vectorial.</p>
-        <div class="formula-box">
-            <div class="formula-label">Paramétricas</div>
-            $$\begin{cases} x = a + t \cdot v_1 \\ y = b + t \cdot v_2 \end{cases}$$
+        <div class="no-cut">
+            <h2>7.2 Las Indeterminaciones</h2>
+            <p>A veces, al sustituir el valor de $x$, obtenemos expresiones que no tienen una solución inmediata. Estas son las <b>"Indeterminaciones"</b> que debemos resolver:</p>
+            <div class="indeterminacion-grid">
+                <div class="indet-item">$\frac{0}{0}$</div>
+                <div class="indet-item">$\frac{\infty}{\infty}$</div>
+                <div class="indet-item">$\infty - \infty$</div>
+                <div class="indet-item">$1^\infty$</div>
+                <div class="indet-item">$0 \cdot \infty$</div>
+                <div class="indet-item">$0^0$</div>
+                <div class="indet-item">$\infty^0$</div>
+            </div>
         </div>
 
-        <div class="example">
-            <span class="example-title">Ejemplo Resuelto 1</span><br>
-            Halla las paramétricas de la recta que pasa por $P(2, -1)$ con dirección $\vec{v}(3, 4)$.
-            <p style="margin-top:10px; font-weight:bold;">$\begin{cases} x = 2 + 3t \\ y = -1 + 4t \end{cases}$</p>
+        <div class="no-cut">
+            <h2>7.3 Límites al Infinito ($\infty / \infty$)</h2>
+            <div class="definition">
+                Para resolver $\lim_{x \to \infty} \frac{P(x)}{Q(x)}$, comparamos los grados de los polinomios:
+            </div>
+            <ul>
+                <li>Si <b>grado P > grado Q</b> $\rightarrow$ El resultado es $\pm \infty$.</li>
+                <li>Si <b>grado P = grado Q</b> $\rightarrow$ Cociente de los coeficientes principales.</li>
+                <li>Si <b>grado P < grado Q</b> $\rightarrow$ El resultado es $0$.</li>
+            </ul>
         </div>
     </div>
 </div>
@@ -126,42 +141,40 @@
     <div class="watermark">ACADEMIA ESPARTA</div>
     <div class="content">
         <header>
-            <div class="header-left"><h1>6. Ecuaciones de la Recta (cont.)</h1></div>
-            <div class="header-right">ACADEMIA ESPARTA<br>MATEMÁTICAS II</div>
+            <div><h1>7. Resolución de Límites (cont.)</h1></div>
+            <div class="header-brand">ACADEMIA ESPARTA<br>ANÁLISIS MATEMÁTICO</div>
         </header>
 
-        <h2>6.3 Ecuación Continua</h2>
-        <p>Se obtiene despejando $t$ en ambas paramétricas e igualando. Nota: $v_1$ y $v_2$ no pueden ser cero.</p>
-        <div class="formula-box">
-            <div class="formula-label">Continua</div>
-            $$\frac{x - a}{v_1} = \frac{y - b}{v_2}$$
+        <div class="no-cut">
+            <h2>7.4 Indeterminación $0 / 0$</h2>
+            <div class="definition">
+                Suele aparecer en funciones racionales. Se resuelve <b>factorizando</b> los polinomios (usando Ruffini o identidades notables) y simplificando el factor que causa el cero.
+            </div>
+            <div class="example">
+                <span class="example-title">Ejemplo Resuelto</span>
+                Calcula $\lim_{x \to 2} \frac{x^2 - 4}{x - 2}$.
+                <p><b>Solución:</b> Sustituyendo sale $0/0$. Factorizamos el numerador:<br>
+                $\lim_{x \to 2} \frac{(x-2)(x+2)}{x-2} = \lim_{x \to 2} (x+2) = \mathbf{4}$.</p>
+            </div>
         </div>
 
-        <h2>6.4 Ecuación Explícita (La más común)</h2>
-        <p>Utiliza la <b>pendiente</b> ($m = v_2 / v_1$) y la ordenada en el origen ($n$).</p>
-        <div class="formula-box">
-            <div class="formula-label">Explícita</div>
-            $$y = m \cdot x + n$$
+        <div class="no-cut">
+            <h2>7.5 Límites con Raíces ($\infty - \infty$)</h2>
+            <div class="definition">
+                Cuando tenemos una resta de raíces, multiplicamos y dividimos por el <b>conjugado</b> de la expresión para eliminar la indeterminación.
+            </div>
         </div>
 
-        <div class="example">
-            <span class="example-title">Ejemplo Resuelto 2</span><br>
-            Pasa a explícita la recta $\frac{x-1}{2} = \frac{y-3}{4}$.
-            <p style="margin-top:10px; font-style:italic;">
-                1. Multiplicamos en cruz: $4(x-1) = 2(y-3)$ <br>
-                2. Operamos: $4x - 4 = 2y - 6 \rightarrow 2y = 4x + 2$ <br>
-                3. Despejamos $y$: $\mathbf{y = 2x + 1}$
-            </p>
+        <div class="no-cut">
+            <h2>7.6 El Número $e$ ($1^\infty$)</h2>
+            <div class="formula-box">
+                <div class="formula-label">Fórmula del nº e</div>
+                $$\lim_{x \to a} [f(x)]^{g(x)} = e^{\lim_{x \to a} [g(x) \cdot (f(x) - 1)]}$$
+            </div>
         </div>
 
-        <h2>6.5 Ecuación General o Implícita</h2>
-        <div class="formula-box">
-            <div class="formula-label">General</div>
-            $$Ax + By + C = 0$$
-        </div>
-        
-        <footer style="margin-top: 40px; text-align: center; font-size: 0.7rem; color: #999; border-top: 1px solid #eee; padding-top: 15px;">
-            Documento de estudio oficial - Academia Esparta.
+        <footer style="margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 25px; font-size: 0.8rem; color: #999;">
+            "En el límite de tus fuerzas es donde se forja el carácter". Academia Esparta 2026.
         </footer>
     </div>
 </div>
