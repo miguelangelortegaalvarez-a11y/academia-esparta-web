@@ -3,139 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&family=Saso+Write&display=swap" rel="stylesheet">
-    <title>Master en la Letra M - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Reto Matemático - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --rosa: #e91e63; --azul: #2196f3; --naranja: #ff9800; --gris: #f4f7f6; }
-        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding-bottom: 50px; }
+        :root { --verde: #4CAF50; --verde-oscuro: #388E3C; --rojo: #e74c3c; --gris: #f4f7f6; }
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 0; }
+        .header-web { background: white; color: var(--verde); text-align: center; padding: 30px; border-bottom: 4px solid var(--verde); }
+        .container { max-width: 800px; margin: 30px auto; padding: 20px; }
         
-        .header-web { background: white; color: var(--verde); text-align: center; padding: 30px; border-bottom: 4px solid var(--verde); margin-bottom: 20px; }
-        .container { max-width: 900px; margin: auto; padding: 0 20px; }
+        .quiz-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .quiz-card h3 { color: var(--verde-oscuro); margin-top: 0; font-family: 'Montserrat'; font-size: 1.1rem; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         
-        .nivel-card { background: white; border-radius: 15px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid var(--azul); }
-        .nivel-card h2 { margin-top: 0; color: #333; font-family: 'Montserrat'; display: flex; align-items: center; gap: 10px; }
-        .badge { background: var(--azul); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; }
-
-        /* Nivel 1: Sonidos */
-        .silabas-flex { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .btn-silaba { padding: 15px 25px; font-size: 1.8rem; border: 3px solid var(--verde); border-radius: 12px; cursor: pointer; background: white; transition: 0.2s; font-family: 'Montserrat'; }
-        .btn-silaba:hover { background: var(--verde); color: white; transform: translateY(-3px); }
-
-        /* Nivel 2 y 3: Juegos Visuales */
-        .grid-imagenes { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin-top: 15px; }
-        .img-card { border: 2px solid #ddd; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; font-size: 1.1rem; }
-        .img-card:hover { border-color: var(--rosa); }
-
-        /* Nivel 4: Completar Palabras */
-        .input-m { width: 40px; border: none; border-bottom: 2px solid var(--azul); text-align: center; font-size: 1.2rem; font-weight: bold; color: var(--rosa); outline: none; }
-
-        /* Nivel 5: Ordenar Frases */
-        .drop-zone { border: 2px dashed #ccc; min-height: 50px; display: flex; gap: 10px; padding: 10px; background: #fafafa; border-radius: 10px; margin-top: 10px; }
-        .word { padding: 8px 15px; background: var(--verde); color: white; border-radius: 5px; cursor: grab; }
-
-        /* Feedback */
-        .correcto { background-color: #c8e6c9 !important; border-color: #4caf50 !important; }
-        .incorrecto { background-color: #ffcdd2 !important; border-color: #f44336 !important; }
+        .pregunta-texto { font-size: 1.2rem; font-weight: 600; margin: 20px 0; display: block; }
+        
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .boton-opcion { 
+            padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; 
+            cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s;
+        }
+        .boton-opcion:hover { border-color: var(--verde); background: #f9fff9; }
+        
+        /* Estados de respuesta */
+        .acierto { background-color: var(--verde) !important; color: white !important; border-color: var(--verde-oscuro) !important; }
+        .fallo { background-color: var(--rojo) !important; color: white !important; border-color: #c0392b !important; }
+        
+        .mensaje { margin-top: 15px; font-weight: bold; display: none; padding: 10px; border-radius: 6px; text-align: center; }
     </style>
 </head>
 <body>
 
 <header class="header-web">
     <h1>Academia Esparta</h1>
-    <p>Aventura de Aprendizaje: La Letra <strong>M</strong></p>
+    <p>¿Aceptas el Reto Matemático? 🧠</p>
 </header>
 
 <div class="container">
 
-    <div class="nivel-card" style="border-top-color: var(--verde);">
-        <h2><span class="badge">Nivel 1</span> Las 5 Llaves</h2>
-        <p>Toca cada sílaba y repite su sonido en voz alta:</p>
-        <div class="silabas-flex">
-            <button class="btn-silaba">ma</button>
-            <button class="btn-silaba">me</button>
-            <button class="btn-silaba">mi</button>
-            <button class="btn-silaba">mo</button>
-            <button class="btn-silaba">mu</button>
+    <div class="quiz-card">
+        <h3>Nivel: Bronce (Cálculo Rápido)</h3>
+        <span class="pregunta-texto">Si multiplicas 7 por 8 y luego le restas 6... ¿cuál es el resultado?</span>
+        <div class="opciones-grid">
+            <button class="boton-opcion" onclick="validar(this, false, 'm1')">48</button>
+            <button class="boton-opcion" onclick="validar(this, true, 'm1')">50</button>
+            <button class="boton-opcion" onclick="validar(this, false, 'm1') blonde">52</button>
+            <button class="boton-opcion" onclick="validar(this, false, 'm1')">56</button>
         </div>
+        <div id="m1" class="mensaje"></div>
     </div>
 
-    <div class="nivel-card" style="border-top-color: var(--naranja);">
-        <h2><span class="badge">Nivel 2</span> Detective de M</h2>
-        <p>¿Qué cosas empiezan por <strong>M</strong>? Haz clic en las correctas:</p>
-        <div class="grid-imagenes">
-            <div class="img-card" onclick="check(this, true)">🍎<br>Manzana</div>
-            <div class="img-card" onclick="check(this, false)">🚗<br>Coche</div>
-            <div class="img-card" onclick="check(this, true)">🐒<br>Mono</div>
-            <div class="img-card" onclick="check(this, true)">🧤<br>Manopla</div>
-            <div class="img-card" onclick="check(this, false)">🐕<br>Perro</div>
-            <div class="img-card" onclick="check(this, true)">🦋<br>Mariposa</div>
+    <div class="quiz-card">
+        <h3>Nivel: Plata (Geometría)</h3>
+        <span class="pregunta-texto">¿Cómo se llama un polígono que tiene exactamente 7 lados?</span>
+        <div class="opciones-grid">
+            <button class="boton-opcion" onclick="validar(this, false, 'm2')">Hexágono</button>
+            <button class="boton-opcion" onclick="validar(this, true, 'm2')">Heptágono</button>
+            <button class="boton-opcion" onclick="validar(this, false, 'm2')">Octógono</button>
+            <button class="boton-opcion" onclick="validar(this, false, 'm2')">Pentágono</button>
         </div>
+        <div id="m2" class="mensaje"></div>
     </div>
 
-    <div class="nivel-card" style="border-top-color: var(--rosa);">
-        <h2><span class="badge">Nivel 3</span> Cazador de Letras</h2>
-        <p>Encuentra la <strong>M</strong> intrusa (clic en las letras M):</p>
-        <div style="font-size: 1.5rem; letter-spacing: 15px; text-align: center; cursor: pointer;">
-            W N <span onclick="check(this, true)">M</span> V N <span onclick="check(this, true)">M</span> W N <span onclick="check(this, true)">M</span> H
+    <div class="quiz-card">
+        <h3>Nivel: Oro (Lógica)</h3>
+        <span class="pregunta-texto">Un tren sale de Madrid a 100km/h. ¿Cuánto tardará en recorrer 250km si no hace paradas?</span>
+        <div class="opciones-grid">
+            <button class="boton-opcion" onclick="validar(this, false, 'm3')">2 horas</button>
+            <button class="boton-opcion" onclick="validar(this, false, 'm3')">3 horas</button>
+            <button class="boton-opcion" onclick="validar(this, true, 'm3')">2 horas y media</button>
+            <button class="boton-opcion" onclick="validar(this, false, 'm3')">150 minutos</button>
         </div>
-    </div>
-
-    <div class="nivel-card" style="border-top-color: var(--azul);">
-        <h2><span class="badge">Nivel 4</span> Constructor de Palabras</h2>
-        <p>Escribe la sílaba que falta (ma, me, mi, mo, mu):</p>
-        <ul style="list-style: none; padding: 0; line-height: 2.5;">
-            <li>1. 🍯 <input type="text" class="input-m" placeholder="..."> el (Miel)</li>
-            <li>2. 🏠 <input type="text" class="input-m" placeholder="..."> sa (Mesa)</li>
-            <li>3. 🛌 <input type="text" class="input-m" placeholder="..."> la (Muela)</li>
-            <li>4. 🗺️ <input type="text" class="input-m" placeholder="..."> pa (Mapa)</li>
-        </ul>
-    </div>
-
-    <div class="nivel-card" style="border-top-color: #9c27b0;">
-        <h2><span class="badge">Nivel 5</span> Orden en el Caos</h2>
-        <p>Ordena las palabras para formar la frase: <em>"Mi mamá me mima"</em></p>
-        <div class="drop-zone" id="dropzone">
-            </div>
-        <div class="silabas-flex" style="margin-top: 15px;">
-            <div class="word" onclick="move(this)">mima</div>
-            <div class="word" onclick="move(this)">Mi</div>
-            <div class="word" onclick="move(this)">me</div>
-            <div class="word" onclick="move(this)">mamá</div>
-        </div>
-    </div>
-
-    <div class="nivel-card" style="border-top-color: #333;">
-        <h2><span class="badge">Nivel 6</span> Lectura de Gigantes</h2>
-        <p>Lee estas frases rápido sin trabarte:</p>
-        <div style="background: #fff3e0; padding: 20px; border-radius: 10px; font-style: italic;">
-            "Amo a mi mamá. Mi mamá me ama. Ema mima a su miau."
-        </div>
-    </div>
-
-    <div class="nivel-card" style="border-top-color: gold;">
-        <h2><span class="badge">Nivel 7</span> Dictado Mágico</h2>
-        <p>Pide a alguien que te diga una palabra con M y escríbela aquí:</p>
-        <textarea style="width: 100%; height: 80px; border-radius: 10px; border: 2px solid #ccc; padding: 10px; font-family: 'Saso Write', cursive; font-size: 1.5rem;"></textarea>
+        <div id="m3" class="mensaje"></div>
     </div>
 
 </div>
 
 <script>
-    function check(element, isCorrect) {
-        if(isCorrect) {
-            element.classList.add('correcto');
-            element.style.pointerEvents = 'none';
+    function validar(boton, esCorrecto, idMensaje) {
+        const contenedor = boton.parentElement;
+        const botones = contenedor.querySelectorAll('.boton-opcion');
+        const mensaje = document.getElementById(idMensaje);
+        
+        // Bloquear botones
+        botones.forEach(b => b.disabled = true);
+        
+        if (esCorrecto) {
+            boton.classList.add('acierto');
+            mensaje.style.display = 'block';
+            mensaje.style.color = 'var(--verde-oscuro)';
+            mensaje.innerHTML = '¡Excelente! Objetivo cumplido. ✅';
         } else {
-            element.classList.add('incorrecto');
-            setTimeout(() => element.classList.remove('incorrecto'), 500);
+            boton.classList.add('fallo');
+            mensaje.style.display = 'block';
+            mensaje.style.color = 'var(--rojo)';
+            mensaje.innerHTML = 'Casi... revisa la operación e inténtalo de nuevo. ❌';
         }
     }
-
-    function move(element) {
-        const zone = document.getElementById('dropzone');
-        zone.appendChild(element);
-    }
 </script>
+
+<footer style="text-align: center; padding: 30px; color: #999;">
+    © 2026 Academia Esparta - Entrena tu mente
+</footer>
 
 </body>
 </html>
