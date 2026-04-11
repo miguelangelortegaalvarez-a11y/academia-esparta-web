@@ -2,22 +2,34 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha Letra P - Nivel 1</title>
+    <title>Ficha Letra P - Nivel 1 (Estilo Cuaderno de Caligrafía)</title>
     <style>
+        /* IMPORTACIÓN DE FUENTE DE CALIGRAFÍA ESCOLAR PUNTEADA */
+        /* Esta fuente imita perfectamente la letra ligada y punteada para repasar */
+        @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+        
+        /* Definimos una tipografía que simula el punteado con estilo caligráfico */
+        @font-face {
+            font-family: 'TraceCalig';
+            src: url('https://raw.githubusercontent.com/AnandChowdhary/opentracelines/main/TraceLines-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         /* Configuración para impresión A4 */
         @page { size: A4; margin: 1cm; }
-        body { font-family: 'Arial', sans-serif; color: #333; line-height: 1.2; margin: 0; padding: 0; }
+        body { font-family: 'Arial', sans-serif; color: #1a1a1a; line-height: 1.2; margin: 0; padding: 0; background: white; }
         
-        /* Cabecera Estilo Academia Esparta */
-        .header { border: 2px solid #0e9343; padding: 15px; border-radius: 15px; text-align: center; margin-bottom: 20px; position: relative; }
-        .logo-text { color: #0e9343; font-weight: bold; font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
-        .info-row { margin-top: 10px; display: flex; justify-content: space-between; font-size: 14px; }
+        /* Cabecera */
+        .header { border-bottom: 2px solid #0e9343; padding: 10px 15px; text-align: center; margin-bottom: 20px; }
+        .logo-text { color: #0e9343; font-weight: bold; font-size: 18px; margin: 0; text-transform: uppercase; }
+        .info-row { margin-top: 10px; display: flex; justify-content: space-between; font-size: 12px; }
 
-        h2 { color: #0e9343; font-size: 16px; border-left: 5px solid #0e9343; padding-left: 10px; margin: 25px 0 15px 0; text-transform: uppercase; }
-
-        /* Ejercicio 1: Cuadrado de letras */
+        h2 { color: #333; font-size: 16px; margin: 20px 0 10px 0; font-weight: bold; }
+        
+        /* Cuadrado de letras */
         .letter-grid { 
-            border: 3px solid #333; 
+            border: 2px solid #333; 
             padding: 15px; 
             display: grid; 
             grid-template-columns: repeat(6, 1fr); 
@@ -26,98 +38,117 @@
             margin: 0 auto; 
             text-align: center;
         }
-        .letter { font-size: 30px; font-weight: bold; padding: 5px; }
+        .letter { font-size: 32px; font-weight: bold; padding: 5px; }
 
-        /* Ejercicio 2: Caligrafía */
-        .trace-section { font-size: 40px; letter-spacing: 25px; color: #ccc; margin: 10px 0; font-family: 'Courier New', monospace; }
-        .writing-line { 
-            border-bottom: 2px solid #333; 
-            height: 45px; 
-            margin: 20px 0; 
-            width: 100%;
+        /* --- SECCIÓN DE CALIGRAFÍA CON CUADRÍCULA --- */
+        .caligrafia-container { margin: 20px 0; }
+
+        /* Estilo para las líneas punteadas de caligrafía */
+        .linea-trace { 
+            font-family: 'TraceCalig', sans-serif; 
+            font-size: 60px; /* Tamaño grande para visibilidad */
+            letter-spacing: 25px; 
+            color: #ccc; /* Color suave para repasar */
+            padding: 10px 20px;
+            margin: 10px 0;
+            text-align: left;
+            border: 1px dashed #eee; /* Borde sutil para delimitar la zona */
+        }
+
+        /* El secreto de la cuadrícula pautada:
+           Se usa un gradiente repetido para crear líneas y la cuadrícula */
+        .pauta-cuadricula {
+            position: relative;
+            background-color: transparent;
+            /* Crea líneas horizontales */
+            background-image: repeating-linear-gradient(transparent, transparent 19px, #ccc 19px, #ccc 20px),
+                             /* Crea líneas verticales suaves para la cuadrícula */
+                             repeating-linear-gradient(90deg, transparent, transparent 19px, #f2f2f2 19px, #f2f2f2 20px);
+            margin: 15px 0;
+            padding: 10px;
+        }
+
+        /* Líneas vacías para que el niño escriba solo */
+        .pauta-vacia {
+            height: 60px;
+            margin: 25px 0;
+            border-bottom: 2px solid #1a1a1a;
             position: relative;
         }
-        .writing-line::after {
+        /* Guía central punteada en la línea vacía */
+        .pauta-vacia::after {
             content: "";
             position: absolute;
             top: 50%;
             left: 0;
             width: 100%;
-            border-bottom: 1px dotted #aaa;
+            border-bottom: 1px dotted #999;
         }
 
-        /* Ejercicio 3: Sílabas */
-        .syllable-container {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 10px;
+        /* Ejercicio de sílabas con cuadrícula */
+        .silabas-grid-calig {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 20px 0;
         }
-        .syllable-box {
-            text-align: center;
-            width: 15%;
-        }
-        .syllable-top {
-            font-size: 35px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .syllable-input {
-            border: 2px solid #333;
-            height: 60px;
-            border-radius: 5px;
+        .silaba-pautada {
+            font-family: 'TraceCalig', sans-serif;
+            font-size: 50px;
+            letter-spacing: 15px;
+            color: #ccc;
+            text-align: left;
+            background-color: #f9f9f9;
+            background-image: repeating-linear-gradient(transparent, transparent 19px, #f2f2f2 19px, #f2f2f2 20px);
+            padding: 10px;
+            border: 1px solid #eee;
         }
 
-        /* Decoración */
-        .footer-esparta { text-align: center; color: #0e9343; font-weight: bold; font-size: 12px; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px; }
+        /* Pie de página */
+        .footer { text-align: center; color: #0e9343; font-weight: bold; font-size: 11px; margin-top: 30px; border-top: 1px solid #ddd; padding-top: 10px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <p class="logo-text">Academia Esparta: Lectoescritura</p>
+        <p class="logo-text">Academia Esparta: Cuaderno de Caligrafía</p>
         <div class="info-row">
-            <span>NOMBRE: ____________________________________</span>
+            <span>NOMBRE: _________________________________________</span>
             <span>FECHA: __________</span>
         </div>
     </div>
 
-    <h2>1. Busca y rodea la letra "P" y "p" en el cuadro</h2>
+    <h2>1. Busca y rodea las letras "P" (Mayúscula y Minúscula)</h2>
     <div class="letter-grid">
         <div class="letter">P</div> <div class="letter">b</div> <div class="letter">d</div> <div class="letter">p</div> <div class="letter">M</div> <div class="letter">P</div>
         <div class="letter">q</div> <div class="letter">p</div> <div class="letter">P</div> <div class="letter">B</div> <div class="letter">g</div> <div class="letter">p</div>
         <div class="letter">D</div> <div class="letter">P</div> <div class="letter">b</div> <div class="letter">P</div> <div class="letter">p</div> <div class="letter">q</div>
     </div>
 
-    <h2>2. Repasa la letra P y sigue escribiendo en las líneas</h2>
-    <div class="trace-section">P P P P P P P P</div>
-    <div class="writing-line"></div>
-    <div class="writing-line"></div>
-
-    <h2>3. Lee las sílabas y escríbelas debajo</h2>
-    <div class="syllable-container">
-        <div class="syllable-box">
-            <div class="syllable-top">pa</div>
-            <div class="syllable-input"></div>
-        </div>
-        <div class="syllable-box">
-            <div class="syllable-top">pe</div>
-            <div class="syllable-input"></div>
-        </div>
-        <div class="syllable-box">
-            <div class="syllable-top">pi</div>
-            <div class="syllable-input"></div>
-        </div>
-        <div class="syllable-box">
-            <div class="syllable-top">po</div>
-            <div class="syllable-input"></div>
-        </div>
-        <div class="syllable-box">
-            <div class="syllable-top">pu</div>
-            <div class="syllable-input"></div>
-        </div>
+    <h2>2. Repasa la letra P y escribe solo en las líneas</h2>
+    
+    <div class="caligrafia-container">
+        <p style="font-weight:bold; margin-bottom:5px;">P - Mayúscula</p>
+        <div class="pauta-cuadricula linea-trace">P P P P P</div>
+        
+        <p style="font-weight:bold; margin-bottom:5px;">p - Minúscula</p>
+        <div class="pauta-cuadricula linea-trace" style="font-size: 50px;">p p p p p</div>
+        
+        <p style="font-weight:bold; margin-top:20px;">Práctica libre (Mayúscula y Minúscula)</p>
+        <div class="pauta-vacia"></div>
+        <div class="pauta-vacia"></div>
     </div>
 
-    <div class="footer-esparta">ACADEMIA ESPARTA - MATERIAL DE APOYO</div>
+    <h2>3. Lee las sílabas y repásalas dentro de la cuadrícula</h2>
+    <div class="silabas-grid-calig">
+        <div class="silaba-pautada">pa</div>
+        <div class="silaba-pautada">pe</div>
+        <div class="silaba-pautada">pi</div>
+        <div class="silaba-pautada">po</div>
+        <div class="silaba-pautada">pu</div>
+    </div>
+
+    <div class="footer">ACADEMIA ESPARTA - MATERIAL DE LECTOESCRITURA</div>
 
 </body>
 </html>
