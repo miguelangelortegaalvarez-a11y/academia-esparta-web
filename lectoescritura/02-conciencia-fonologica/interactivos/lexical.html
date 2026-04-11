@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conciencia Lexical - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; }
+        body { font-family: 'Poppins', sans-serif; background: #e8f5e9; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        .game-header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--primary); font-weight: bold; }
+
+        .game-container { max-width: 800px; width: 90%; background: white; margin-top: 2rem; padding: 2rem; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        .instruccion { font-size: 1.2rem; color: #555; margin-bottom: 2rem; }
+        
+        .frase-box { background: var(--light); padding: 1.5rem; border-radius: 20px; border: 2px solid var(--primary); margin-bottom: 2rem; font-size: 1.5rem; font-weight: 700; color: var(--dark); }
+
+        .espacio-ladrillos { display: flex; justify-content: center; gap: 10px; min-height: 80px; margin: 2rem 0; border-bottom: 4px dashed #ccc; padding-bottom: 10px; }
+        .ladrillo { width: 80px; height: 40px; background: var(--primary); border-radius: 8px; border-bottom: 5px solid #063c24; animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+        .controles { display: flex; gap: 20px; justify-content: center; }
+        .btn { padding: 1rem 2rem; border: none; border-radius: 15px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 1rem; }
+        .btn-ladrillo { background: #fbc02d; color: #333; box-shadow: 0 4px 0 #c49000; }
+        .btn-check { background: var(--primary); color: white; box-shadow: 0 4px 0 #063c24; }
+        .btn-reset { background: #ef5350; color: white; box-shadow: 0 4px 0 #b71c1c; }
+        .btn:active { transform: translateY(4px); box-shadow: none; }
+
+        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        
+        .feedback { margin-top: 1rem; font-weight: bold; height: 25px; }
+        .success { color: var(--primary); }
+        .error { color: #ef5350; }
+    </style>
+</head>
+<body>
+
+    <div class="game-header">
+        <a href="index.html" class="back-link">← Salir</a>
+        <h2 style="color: var(--primary); margin: 0;">Academia Esparta: Misión Lexical</h2>
+    </div>
+
+    <div class="game-container">
+        <p class="instruccion">Escucha o lee la frase y pon un bloque por cada palabra que tenga.</p>
+        
+        <div id="display-frase" class="frase-box">El gato salta</div>
+
+        <div id="contenedor-ladrillos" class="espacio-ladrillos">
+            </div>
+
+        <div class="controles">
+            <button class="btn btn-ladrillo" onclick="añadirLadrillo()">➕ PONER BLOQUE</button>
+            <button class="btn btn-reset" onclick="borrarLadrillos()">🗑️ BORRAR</button>
+            <button class="btn btn-check" onclick="comprobar()">✅ COMPROBAR</button>
+        </div>
+
+        <div id="mensaje" class="feedback"></div>
+    </div>
+
+    <script>
+        const retos = [
+            { texto: "El gato salta", palabras: 3 },
+            { texto: "Mi mamá me ama", palabras: 4 },
+            { texto: "Me gusta mucho el helado", palabras: 5 },
+            { texto: "El sol es amarillo", palabras: 4 }
+        ];
+
+        let retoActual = 0;
+        let ladrillosPuestos = 0;
+
+        function añadirLadrillo() {
+            if(ladrillosPuestos < 8) {
+                const contenedor = document.getElementById('contenedor-ladrillos');
+                const div = document.createElement('div');
+                div.className = 'ladrillo';
+                contenedor.appendChild(div);
+                ladrillosPuestos++;
+            }
+        }
+
+        function borrarLadrillos() {
+            document.getElementById('contenedor-ladrillos').innerHTML = '';
+            document.getElementById('mensaje').innerHTML = '';
+            ladrillosPuestos = 0;
+        }
+
+        function comprobar() {
+            const msg = document.getElementById('mensaje');
+            if(ladrillosPuestos === retos[retoActual].palabras) {
+                msg.innerHTML = '<span class="success">¡Genial! Has contado muy bien. 🌟</span>';
+                setTimeout(siguienteReto, 1500);
+            } else {
+                msg.innerHTML = '<span class="error">¡Casi! Prueba a contar otra vez. 🧐</span>';
+            }
+        }
+
+        function siguienteReto() {
+            retoActual++;
+            if(retoActual >= retos.length) {
+                document.getElementById('display-frase').innerHTML = "¡MISIÓN COMPLETADA! 🏆";
+                borrarLadrillos();
+                document.querySelector('.controles').style.display = 'none';
+            } else {
+                document.getElementById('display-frase').innerHTML = retos[retoActual].texto;
+                borrarLadrillos();
+            }
+        }
+    </script>
+</body>
+</html>
