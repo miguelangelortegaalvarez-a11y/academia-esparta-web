@@ -1,58 +1,279 @@
-<div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
-    <div class="enunciado-top"><b>27.</b> He cambiado un montón de monedas de 20 céntimos por monedas de 1 €, de manera que ahora tengo 24 monedas menos que antes. ¿Cuántas monedas de 20 céntimos tenía?</div>
-    <div class="sistema-box"><h3>SISTEMA 27</h3><div class="sistema-math">$ \begin{cases} 0.20x = y \\ x - 24 = y \end{cases} $</div></div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas de Ecuaciones Detallados - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
     
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        :root {
+            --primary: #0e9343; /* Verde Academia Esparta */
+            --dark: #063c24; 
+            --accent: #fbc02d; /* Amarillo/Naranja de la caja de desarrollo */
+            --bg-crema: #fffdf2; /* Fondo amarillento suave */
+            --bg-page: #ffffff; /* Fondo blanco de la página */
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: var(--bg-page);
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; }
+
+        /* Estilo Título Superior con línea verde */
+        .page-header {
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+        .page-header h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; color: #333; letter-spacing: 1px; }
+        .page-header span { font-size: 0.8rem; color: var(--primary); font-weight: bold; }
+
+        /* Bloque del Enunciado Superior */
+        .enunciado-top {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+            line-height: 1.5;
+        }
+        .enunciado-top b { color: var(--primary); }
+
+        /* Caja Verde Sólida del Sistema */
+        .sistema-box {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .sistema-box h3 { margin: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .sistema-math { font-size: 1.2rem; }
+
+        /* Caja Crema de Desarrollo con borde naranja */
+        .desarrollo-box {
+            background-color: var(--bg-crema);
+            border-left: 6px solid var(--accent);
+            padding: 25px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        /* Títulos de los pasos en verde */
+        .paso-titulo { color: var(--primary); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 20px 0 10px 0; display: block; }
+        
+        /* Centrado de ecuaciones dentro del desarrollo */
+        .math-center { text-align: center; margin: 15px 0; font-weight: bold; font-size: 1.1rem; }
+        
+        /* Resaltado de variables en verde */
+        .highlight { color: var(--primary); font-weight: bold; }
+
+        /* Caja de Resultado Final Verde */
+        .result-box {
+            background-color: #e8f5e9;
+            border: 2px solid var(--primary);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--dark);
+            margin-top: 15px;
+        }
+
+        /* Footer de Ficha */
+        .ficha-footer { text-align: center; font-size: 0.8rem; color: #ccc; text-transform: uppercase; margin-top: 10px; letter-spacing: 2px; }
+
+        /* Botón PDF (no se imprime) */
+        .no-print { text-align: right; margin-bottom: 30px; }
+        .btn-pdf { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Fredoka'; font-weight: bold; }
+
+        /* Ajustes para impresión */
+        @media print {
+            .no-print { display: none; }
+            body { padding: 0; }
+            .desarrollo-box { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="no-print">
+        <button class="btn-pdf" onclick="window.print()">📥 GENERAR PDF</button>
+    </div>
+
+    <div class="page-header">
+        <h1>Sistemas de Ecuaciones</h1>
+        <span>ACADEMIA ESPARTA</span>
+    </div>
+    
+    <div class="enunciado-top">
+        <b>ENUNCIADO 27:</b> He cambiado un montón de monedas de 20 céntimos por monedas de 1 €, de manera que ahora tengo 24 monedas menos que antes. ¿Cuántas monedas de 20 céntimos tenía?
+    </div>
+
+    <div class="sistema-box">
+        <h3>SISTEMA DE PARTIDA:</h3>
+        <div class="sistema-math">
+            $ \begin{cases} 0.20x = y \\ x - 24 = y \end{cases} $
+        </div>
+    </div>
+
     <div class="desarrollo-box">
         <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
-        <p>1. <b>Letras:</b> $x$ son las monedas de 20 cént. e $y$ las de 1€.<br>
-           2. <b>Valor:</b> El dinero total es el mismo $\implies 0.20 \cdot x = 1 \cdot y$.<br>
-           3. <b>Cantidad:</b> Tenemos 24 monedas menos que antes $\implies x - 24 = y$.</p>
-        
-        <span class="paso-titulo">RESOLUCIÓN PASO A PASO</span>
-        <p><b>1. Igualación:</b> Como las dos ecuaciones son iguales a $y$, las igualamos entre sí:</p>
+        <p>1. <b>Las letras:</b> Llamamos <span class="highlight">$x$</span> a las monedas de 20 céntimos e <span class="highlight">$y$</span> a las monedas de 1 €.<br>
+           2. <b>Primera frase:</b> "Cambiar un montón..." El valor del dinero no cambia. El total de 20 céntimos ($0.20 \cdot x$) es igual al total de euros ($1 \cdot y$). De ahí sale <span class="highlight">$0.20x = y$</span>.<br>
+           3. <b>Segunda frase:</b> "Ahora tengo 24 menos." El número de monedas nuevas es igual a las que tenía antes menos 24. De ahí sale <span class="highlight">$x - 24 = y$</span>.</p>
+
+        <span class="paso-titulo">RESOLUCIÓN DETALLADA PASO A PASO (Igualación)</span>
+        <p><b>Paso 1: Observar e Igualar.</b> Vemos que ambas ecuaciones ya tienen la $y$ despejada por separado. Como sabemos que $y$ es igual a sí misma, podemos igualar las dos partes derechas de las ecuaciones:</p>
         <div class="math-center">$0.20x = x - 24$</div>
-        
-        <p><b>2. Agrupar las x:</b> Pasamos el $0.20x$ a la derecha restando y el $24$ a la izquierda sumando para que los números queden positivos:</p>
-        <div class="math-center">$24 = x - 0.20x$</div>
-        
-        <p><b>3. Operar:</b> Restamos las $x$ (recuerda que $x$ es lo mismo que $1x$):</p>
-        <div class="math-center">$24 = 0.80x$</div>
-        
-        <p><b>4. Despejar:</b> El $0.80$ que está multiplicando a la $x$ pasa al otro lado dividiendo:</p>
+
+        <span class="paso-titulo">EL AISLAMIENTO DE LA INCÓGNITA X</span>
+        <p><b>Paso 2: Agrupar las letras.</b> Pasamos el $x$ de la derecha (que está sumando) restando al lado izquierdo de la ecuación:</p>
+        <div class="math-center">$0.20x - x = -24$</div>
+
+        <p><b>Paso 3: Operar las x.</b> Recuerda que $x$ es lo mismo que $1x$. Restamos los coeficientes: $0.20 - 1 = -0.80$:</p>
+        <div class="math-center">$-0.80x = -24$</div>
+
+        <p><b>Paso 4: Limpieza de Signos Negativos.</b> Como tenemos signos negativos a ambos lados, multiplicamos toda la ecuación por $-1$ para hacerlos positivos (esto es lo mismo que decir que se cancelan):</p>
+        <div class="math-center">$0.80x = 24$</div>
+
+        <p><b>Paso 5: Despeje Final de x.</b> El $0.80$ que está multiplicando a la $x$ pasa al otro lado dividiendo debajo del $24$:</p>
         <div class="math-center">$x = \frac{24}{0.80} \implies x = 30$</div>
 
-        <div class="result-box" style="background:#e8f5e9; padding:10px; border:2px solid var(--primary); border-radius:10px; text-align:center; font-weight:bold; color:var(--primary);">
-            RESULTADO: Tenía 30 monedas de 20 céntimos.
+        <span class="paso-titulo">HALLAR PAREJA (Incógnita Y)</span>
+        <p><b>Paso 6: Sustituir para hallar y.</b> Usamos la ecuación más sencilla (la primera) y cambiamos $x$ por 30:</p>
+        <div class="math-center">$y = 0.20 \cdot (30) \implies y = 6$</div>
+        
+        <div class="result-box">
+            SOLUCIÓN: Tenía 30 monedas de 20 céntimos (x) y las cambió por 6 monedas de 1 € (y).
+        </div>
+        <div class="ficha-footer">ACADEMIA ESPARTA</div>
+    </div>
+
+    <div class="page-header">
+        <h1>Sistemas de Ecuaciones</h1>
+        <span>ACADEMIA ESPARTA</span>
+    </div>
+    
+    <div class="enunciado-top">
+        <b>ENUNCIADO 28:</b> Tengo dos tabletas de chocolate, una con 60% de cacao y otra con 85%. ¿Qué cantidad fundir de cada una para obtener 300g con un 75% de cacao?
+    </div>
+
+    <div class="sistema-box">
+        <h3>SISTEMA DE PARTIDA:</h3>
+        <div class="sistema-math">
+            $ \begin{cases} x + y = 300 \\ 0.60x + 0.85y = 225 \end{cases} $
         </div>
     </div>
 
-    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
-    <div class="enunciado-top"><b>28.</b> Tengo dos tabletas de chocolate, una con 60% de cacao y otra con 85%. ¿Qué cantidad fundir de cada una para obtener 300g con un 75% de cacao?</div>
-    <div class="sistema-box"><h3>SISTEMA 28</h3><div class="sistema-math">$ \begin{cases} x + y = 300 \\ 0.60x + 0.85y = 225 \end{cases} $</div></div>
-    
     <div class="desarrollo-box">
         <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
-        <p>1. <b>Letras:</b> $x$ (gramos al 60%) e $y$ (gramos al 85%).<br>
-           2. <b>Mezcla:</b> La suma de gramos es 300 $\implies x + y = 300$.<br>
-           3. <b>Cacao:</b> El 75% de 300g es 225g de cacao puro.</p>
+        <p>1. <b>Las letras:</b> <span class="highlight">$x$</span> son los gramos al 60% e <span class="highlight">$y$</span> los gramos al 85%.<br>
+           2. <b>Mezcla Total:</b> La suma de los gramos de las dos tabletas debe ser 300. De ahí sale <span class="highlight">$x + y = 300$</span>.<br>
+           3. <b>Cacao Puro:</b> Queremos el 75% de 300, que son 225g de cacao puro. La suma del cacao puro de cada tableta debe dar eso. El cacao de la primera es $0.60 \cdot x$ y de la segunda es $0.85 \cdot y$. De ahí sale <span class="highlight">$0.60x + 0.85y = 225$</span>.</p>
 
-        <span class="paso-titulo">RESOLUCIÓN PASO A PASO</span>
-        <p><b>1. Despejar:</b> En la primera ecuación, dejamos la $x$ sola:</p>
-        <div class="math-center">$x = 300 - y$</div>
+        <span class="paso-titulo">RESOLUCIÓN DETALLADA PASO A PASO (Sustitución)</span>
+        <p><b>Paso 1: Despejar la y.</b> En la primera ecuación, dejamos la $y$ sola pasando la $x$ restando al otro lado:</p>
+        <div class="math-center">$y = 300 - x$</div>
 
-        <p><b>2. Sustituir:</b> Metemos este valor en la segunda ecuación:</p>
-        <div class="math-center">$0.60 \cdot (300 - y) + 0.85y = 225$</div>
+        <span class="paso-titulo">LA SUSTITUCIÓN</span>
+        <p><b>Paso 2: Sustituir en la segunda ecuación.</b> Tomamos la segunda ecuación y reemplazamos la $y$ por nuestra expresión entre paréntesis:</p>
+        <div class="math-center">$0.60x + 0.85 \cdot (300 - x) = 225$</div>
 
-        <p><b>3. Quitar paréntesis:</b> Multiplicamos $0.60$ por los dos números de dentro:</p>
-        <div class="math-center">$180 - 0.60y + 0.85y = 225$</div>
+        <p><b>Paso 3: Eliminar el paréntesis.</b> Multiplicamos el $0.85$ por los dos números de dentro: $0.85 \cdot 300$ y $0.85 \cdot (-x)$:</p>
+        <div class="math-center">$0.60x + 255 - 0.85x = 225$</div>
 
-        <p><b>4. Agrupar y operar:</b> Pasamos el $180$ restando y restamos las $y$:</p>
-        <div class="math-center">$0.25y = 225 - 180 \implies 0.25y = 45$</div>
+        <span class="paso-titulo">RESOLUCIÓN CON LIMPIEZA</span>
+        <p><b>Paso 4: Agrupar términos.</b> Pasamos el $255$ restando al lado derecho y agrupamos las $x$ en el izquierdo:</p>
+        <div class="math-center">$0.60x - 0.85x = 225 - 255 \implies -0.25x = -30$</div>
 
-        <p><b>5. Finalizar:</b> Dividimos para hallar la $y$:</p>
-        <div class="math-center">$y = \frac{45}{0.25} \implies y = 180$</div>
+        <p><b>Paso 5: Limpieza de Signos y Despeje de x.</b> Como ambos son negativos, los pasamos a positivos. El $0.25$ que está multiplicando a la $x$ pasa dividiendo debajo del $30$:</p>
+        <div class="math-center">$0.25x = 30 \implies x = \frac{30}{0.25} \implies x = 120$</div>
 
-        <div class="result-box" style="background:#e8f5e9; padding:10px; border:2px solid var(--primary); border-radius:10px; text-align:center; font-weight:bold; color:var(--primary);">
-            RESULTADO: Necesitas 120g de chocolate al 60% y 180g al 85%.
+        <span class="paso-titulo">HALLAR PAREJA (Incógnita Y)</span>
+        <p><b>Paso 6: Calcular y.</b> Sustituimos el valor de $x$ en el primer despeje para hallar los gramos de la otra tableta:</p>
+        <div class="math-center">$y = 300 - 120 = 180 \implies y = 180$</div>
+        
+        <div class="result-box">
+            SOLUCIÓN: Necesitas 120g de chocolate al 60% (x) y 180g al 85% (y).
+        </div>
+        <div class="ficha-footer">ACADEMIA ESPARTA</div>
+    </div>
+
+    <div class="page-header">
+        <h1>Sistemas de Ecuaciones</h1>
+        <span>ACADEMIA ESPARTA</span>
+    </div>
+    
+    <div class="enunciado-top">
+        <b>ENUNCIADO 29:</b> Mezclamos un bidón de aceite de oliva de 6,50 €/L con otro de mejor calidad de 11 €/L, obteniendo 50 L de aceite de 8,30 €/L. ¿Cuántos litros de cada tipo se han mezclado?
+    </div>
+
+    <div class="sistema-box">
+        <h3>SISTEMA DE PARTIDA:</h3>
+        <div class="sistema-math">
+            $ \begin{cases} x + y = 50 \\ 6.50x + 11y = 415 \end{cases} $
         </div>
     </div>
+
+    <div class="desarrollo-box">
+        <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
+        <p>1. <b>Las letras:</b> <span class="highlight">$x$</span> son los litros de aceite barato e <span class="highlight">$y$</span> los del aceite de mejor calidad.<br>
+           2. <b>Ecuación de cantidad:</b> El total de la mezcla son 50 litros, por tanto la suma de litros es 50. De ahí sale <span class="highlight">$x + y = 50$</span>.<br>
+           3. <b>Ecuación de dinero:</b> Multiplicamos cada litro por su precio. El valor total de la mezcla debe ser $50 \text{ L} \cdot 8.30 \text{ €/L} = 415 \text{ €}$. De ahí sale <span class="highlight">$6.50x + 11y = 415$</span>.</p>
+
+        <span class="paso-titulo">RESOLUCIÓN DETALLADA PASO A PASO (Sustitución)</span>
+        <p><b>Paso 1: Despejar la x.</b> Elegimos la primera ecuación por ser la más sencilla, y dejamos la $x$ sola pasando la $y$ restando al otro lado:</p>
+        <div class="math-center">$x = 50 - y$</div>
+
+        <span class="paso-titulo">LA SUSTITUCIÓN</span>
+        <p><b>Paso 2: Sustituir en la segunda ecuación.</b> Tomamos la segunda ecuación y reemplazamos la $x$ por nuestra expresión entre paréntesis:</p>
+        <div class="math-center">$6.50 \cdot (50 - y) + 11y = 415$</div>
+
+        <p><b>Paso 3: Eliminar el paréntesis.</b> Multiplicamos el $6.50$ por los dos números de dentro: $6.50 \cdot 50$ y $6.50 \cdot (-y)$:</p>
+        <div class="math-center">$325 - 6.50y + 11y = 415$</div>
+
+        <span class="paso-titulo">RESOLUCIÓN CON LIMPIEZA</span>
+        <p><b>Paso 4: Agrupar términos.</b> Pasamos el $325$ restando al lado derecho y agrupamos las $y$ en el izquierdo:</p>
+        <div class="math-center">$-6.50y + 11y = 415 - 325 \implies 4.50y = 90$</div>
+
+        <p><b>Paso 5: Despeje Final de y.</b> El $4.50$ que está multiplicando a la $y$ pasa al otro lado dividiendo debajo del $90$:</p>
+        <div class="math-center">$y = \frac{90}{4.50} \implies y = 20 \text{ litros}$</div>
+
+        <span class="paso-titulo">HALLAR PAREJA (Incógnita X)</span>
+        <p><b>Paso 6: Calcular x.</b> Sustituimos el valor de $y$ en el primer despeje para hallar los litros del otro aceite:</p>
+        <div class="math-center">$x = 50 - 20 = 30 \implies x = 30 \text{ litros}$</div>
+        
+        <div class="result-box">
+            SOLUCIÓN: Se han mezclado 30 L de aceite de 6,50€ (x) y 20 L de aceite de 11€ (y).
+        </div>
+        <div class="ficha-footer">ACADEMIA ESPARTA</div>
+    </div>
+
+</div>
+
+</body>
+</html>
