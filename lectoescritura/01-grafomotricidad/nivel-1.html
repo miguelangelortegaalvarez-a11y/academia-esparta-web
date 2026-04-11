@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivel 1: Líneas Rectas - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        /* Estilos para visualización en pantalla */
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        
+        .no-print-area { margin-bottom: 20px; text-align: center; }
+        .btn-print { background: #d32f2f; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
+        .btn-print:hover { background: #b71c1c; transform: scale(1.05); }
+
+        /* Estilo de la hoja A4 */
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            padding: 15mm;
+            box-sizing: border-box;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header { border-bottom: 3px solid #0e9343; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+        .header h2 { color: #0e9343; margin: 0; font-size: 1.5rem; }
+        .header-info { text-align: right; font-size: 0.9rem; color: #333; }
+
+        .title-box { text-align: center; margin-bottom: 20px; }
+        .title-box h1 { margin: 0; font-size: 1.8rem; color: #333; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .instructions { background: #f5fdf7; border-left: 5px solid #0e9343; padding: 15px; margin-bottom: 30px; font-size: 0.95rem; }
+
+        /* Área de ejercicios */
+        .exercise-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around; padding: 20px 0; }
+        
+        .trace-row { display: flex; align-items: center; justify-content: space-between; height: 60px; position: relative; }
+        .icon-start { font-size: 2.5rem; width: 60px; text-align: center; z-index: 2; }
+        .icon-end { font-size: 2.5rem; width: 60px; text-align: center; opacity: 0.2; z-index: 2; }
+        
+        .dots-line {
+            flex-grow: 1;
+            height: 2px;
+            border-bottom: 3px dotted #bbb;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        /* Pequeña flecha indicadora */
+        .dots-line::after {
+            content: '▶';
+            position: absolute;
+            right: -15px;
+            bottom: -11px;
+            color: #bbb;
+            font-size: 0.8rem;
+        }
+
+        footer { border-top: 1px solid #eee; padding-top: 10px; text-align: center; font-size: 0.75rem; color: #aaa; }
+
+        /* Ajustes para impresión */
+        @media print {
+            body { background: white; padding: 0; }
+            .no-print-area { display: none; }
+            .page { box-shadow: none; margin: 0; width: 100%; height: 100%; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print-area">
+        <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR ESTA FICHA</button>
+        <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">Asegúrate de que el destino sea "Guardar como PDF" o tu impresora.</p>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <div>
+                <h2>ACADEMIA ESPARTA</h2>
+                <p style="margin: 0; font-size: 0.8rem; font-weight: bold; color: #666;">CENTRO DE REFUERZO EDUCATIVO</p>
+            </div>
+            <div class="header-info">
+                Nombre: _________________________________<br>
+                Fecha: ____ / ____ / ________
+            </div>
+        </div>
+
+        <div class="title-box">
+            <h1>Nivel 1: Caminos Rectos</h1>
+        </div>
+
+        <div class="instructions">
+            <strong>RETO PARA EL ALUMNO:</strong> Ayuda a los personajes a llegar a su meta. Traza una línea recta siguiendo los puntos <strong>sin levantar el lápiz</strong> del papel.
+        </div>
+
+        <div class="exercise-area">
+            <div class="trace-row">
+                <span class="icon-start">🐝</span>
+                <div class="dots-line"></div>
+                <span class="icon-end">🌸</span>
+            </div>
+
+            <div class="trace-row">
+                <span class="icon-start">🚀</span>
+                <div class="dots-line"></div>
+                <span class="icon-end">🪐</span>
+            </div>
+
+            <div class="trace-row">
+                <span class="icon-start">🚗</span>
+                <div class="dots-line"></div>
+                <span class="icon-end">🏁</span>
+            </div>
+
+            <div class="trace-row">
+                <span class="icon-start">🐜</span>
+                <div class="dots-line"></div>
+                <span class="icon-end">🍎</span>
+            </div>
+
+            <div class="trace-row">
+                <span class="icon-start">⚽</span>
+                <div class="dots-line"></div>
+                <span class="icon-end">🥅</span>
+            </div>
+
+            <div class="trace-row">
+                <span class="icon-start">🚢</span>
+                <div class="dots-line"></div>
+                <span class="icon-end">🏝️</span>
+            </div>
+        </div>
+
+        <footer>
+            Academia Esparta - Torremolinos | Material de apoyo educativo gratuito | www.academiaesparta.es
+        </footer>
+    </div>
+
+</body>
+</html>
