@@ -3,89 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Entrenamiento - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Superación Académica - Academia Esparta</title>
     <style>
-        :root { --oro: #d4af37; --rojo: #8b0000; --gris: #f4f4f4; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fff; margin: 0; padding: 0; }
-        .container { max-width: 850px; margin: 40px auto; padding: 20px; }
-        .header { text-align: center; border-bottom: 3px solid var(--oro); padding-bottom: 20px; margin-bottom: 30px; }
-        .logo { max-width: 150px; margin-bottom: 10px; }
-        h1 { color: var(--rojo); margin: 0; }
-        .intro { font-style: italic; color: #555; text-align: center; }
-        
-        /* Estilo de los ejercicios */
-        .card { background: var(--gris); border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #ddd; box-shadow: 2px 2px 10px rgba(0,0,0,0.05); }
-        .card h3 { color: var(--rojo); margin-top: 0; }
-        .pista { background: #fff; padding: 10px; border-left: 4px solid var(--oro); font-size: 0.95em; margin: 15px 0; }
-        
-        /* Botón de solución */
-        summary { cursor: pointer; font-weight: bold; color: var(--oro); padding: 10px 0; outline: none; }
-        summary:hover { text-decoration: underline; }
-        .solucion { background: #fff; padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px dashed var(--oro); }
-        
-        .footer { text-align: center; margin-top: 50px; font-size: 0.9em; color: #777; }
-        .btn-home { display: inline-block; padding: 12px 25px; background: var(--rojo); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        :root {
+            --verde-principal: #4CAF50; 
+            --verde-oscuro: #388E3C;
+            --texto-oscuro: #2c3e50;
+            --gris-fondo: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--gris-fondo);
+            margin: 0;
+            padding: 0;
+            color: var(--texto-oscuro);
+        }
+
+        /* CABECERA CORPORATIVA */
+        .header-web {
+            background-color: white;
+            color: var(--verde-principal);
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 4px solid var(--verde-principal);
+        }
+
+        .header-web h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header-web p {
+            margin: 10px 0 0;
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* FRASE MOTIVACIONAL (Sin guerreros) */
+        .frase-motivadora {
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--verde-principal);
+        }
+
+        .frase-motivadora h2 {
+            margin: 0;
+            color: var(--verde-oscuro);
+            font-size: 1.4rem;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        /* TARJETAS DE EJERCICIOS */
+        .card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            background: #fff;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.01);
+        }
+
+        .card h3 {
+            color: var(--verde-principal);
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* BOTONES DE ACCIÓN */
+        summary {
+            background: var(--verde-principal);
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            list-style: none;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        summary:hover {
+            background: var(--verde-oscuro);
+        }
+
+        .solucion-box {
+            background: #fdfdfd;
+            padding: 25px;
+            border: 1px solid #ddd;
+            margin-top: 5px;
+            border-radius: 0 0 6px 6px;
+            line-height: 2;
+            font-size: 1.05rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* FORMATO MATEMÁTICO */
+        .formula {
+            display: block;
+            text-align: center;
+            margin: 15px 0;
+            font-weight: 600;
+            color: #333;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <img src="logo-esparta.PNG" alt="Logo Academia Esparta" class="logo">
-        <h1>🛡️ Entrenamiento de Ecuaciones Cuadráticas</h1>
-        <p class="intro">Domina las ecuaciones de segundo grado con el método de Academia Esparta</p>
+    <header class="header-web">
+        <h1>Academia Esparta</h1>
+        <p>Refuerzo y apoyo escolar personalizado</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="frase-motivadora">
+            <h2>"El éxito no es el final, el fracaso no es fatal: lo que cuenta es el valor para continuar aprendiendo."</h2>
+        </div>
+
+        <div class="card">
+            <h3>Paso 1: Resolución Directa</h3>
+            <p>Resuelve la ecuación incompleta: <strong>x² - 9 = 0</strong></p>
+            <details>
+                <summary>Ver explicación paso a paso</summary>
+                <div class="solucion-box">
+                    <p>1. Despejamos el término al cuadrado: <strong>x² = 9</strong></p>
+                    <p>2. Aplicamos la raíz cuadrada en ambos miembros: <strong>x = ±√9</strong></p>
+                    <p>3. Obtenemos las dos soluciones: <strong>x₁ = 3, x₂ = -3</strong></p>
+                </div>
+            </details>
+        </div>
+
+        <div class="card">
+            <h3>Paso 2: Aplicación de la Fórmula General</h3>
+            <p>Resuelve la ecuación completa: <strong>x² - 5x + 6 = 0</strong></p>
+            <details>
+                <summary>Ver explicación paso a paso</summary>
+                <div class="solucion-box">
+                    <p>Aplicamos la fórmula general directamente con a=1, b=-5, c=6:</p>
+                    <div class="formula">
+                        x = [ -(-5) ± √((-5)² - 4 · 1 · 6) ] / (2 · 1)
+                    </div>
+                    <p>Resolvemos el interior de la raíz y los signos:</p>
+                    <div class="formula">
+                        x = [ 5 ± √(25 - 24) ] / 2
+                    </div>
+                    <p>Simplificamos la expresión:</p>
+                    <div class="formula">
+                        x = (5 ± √1) / 2  →  x = (5 ± 1) / 2
+                    </div>
+                    <p>Calculamos las dos soluciones finales:</p>
+                    <p>• x₁ = (5 + 1) / 2 = 6 / 2 = <strong>3</strong></p>
+                    <p>• x₂ = (5 - 1) / 2 = 4 / 2 = <strong>2</strong></p>
+                </div>
+            </details>
+        </div>
+
     </div>
 
-    <div class="card">
-        <h3>1. Ecuación Incompleta (b = 0)</h3>
-        <p>Resuelve la siguiente ecuación: <strong>x² - 9 = 0</strong></p>
-        <div class="pista">💡 <strong>Pista Espartana:</strong> Despeja la x² como si fuera una ecuación de primer grado y no olvides que la raíz cuadrada tiene dos soluciones (±).</div>
-        <details>
-            <summary>Ver solución paso a paso</summary>
-            <div class="solucion">
-                <p>1. Pasamos el -9 al segundo miembro: <strong>x² = 9</strong></p>
-                <p>2. Aplicamos la raíz cuadrada en ambos lados: <strong>x = ±√9</strong></p>
-                <p>3. Resultados: <strong>x₁ = 3, x₂ = -3</strong></p>
-            </div>
-        </details>
-    </div>
-
-    <div class="card">
-        <h3>2. Ecuación Completa (Fórmula General)</h3>
-        <p>Resuelve la siguiente ecuación: <strong>2x² + 4x - 6 = 0</strong></p>
-        <div class="pista">💡 <strong>Pista Espartana:</strong> Identifica los coeficientes: a=2, b=4, c=-6. Primero calcula el discriminante (b² - 4ac).</div>
-        <details>
-            <summary>Ver solución paso a paso</summary>
-            <div class="solucion">
-                <p>1. Discriminante: 4² - 4 · 2 · (-6) = 16 + 48 = <strong>64</strong></p>
-                <p>2. Aplicamos la fórmula: x = (-4 ± √64) / (2 · 2)</p>
-                <p>3. x = (-4 ± 8) / 4</p>
-                <p>4. Resultados: <strong>x₁ = 1, x₂ = -3</strong></p>
-            </div>
-        </details>
-    </div>
-
-    <div class="card">
-        <h3>3. Problema de Aplicación Real</h3>
-        <p><em>"Busca un número cuyo cuadrado menos su triple sea igual a 130."</em></p>
-        <div class="pista">💡 <strong>Pista Espartana:</strong> Traduce el enunciado a lenguaje algebraico: x² - 3x = 130. Luego, iguala a cero.</div>
-        <details>
-            <summary>Ver solución paso a paso</summary>
-            <div class="solucion">
-                <p>1. Planteamos la ecuación: <strong>x² - 3x - 130 = 0</strong></p>
-                <p>2. Aplicamos la fórmula general (a=1, b=-3, c=-130).</p>
-                <p>3. El discriminante es 529 (su raíz es 23).</p>
-                <p>4. Resultados: <strong>El número puede ser 13 o -10.</strong></p>
-            </div>
-        </details>
-    </div>
-
-    <div class="footer">
-        <a href="index.html" class="btn-home">Volver al Inicio</a>
-        <p>© 2026 Academia Esparta. Todos los derechos reservados.</p>
-    </div>
-</div>
+    <footer class="footer">
+        <p>© 2026 Academia Esparta - Tu centro de formación en Torremolinos</p>
+    </footer>
 
 </body>
 </html>
