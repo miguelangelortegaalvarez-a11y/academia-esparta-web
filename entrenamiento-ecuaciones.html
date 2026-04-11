@@ -2,107 +2,127 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Reto Matemático - Academia Esparta</title>
+    <title>Hoja de Sumas - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --verde-oscuro: #388E3C; --rojo: #e74c3c; --gris: #f4f7f6; }
-        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 0; }
-        .header-web { background: white; color: var(--verde); text-align: center; padding: 30px; border-bottom: 4px solid var(--verde); }
-        .container { max-width: 800px; margin: 30px auto; padding: 20px; }
+        body { font-family: 'Arial', sans-serif; padding: 20px; }
+        .hoja { width: 210mm; height: 297mm; margin: auto; border: 1px solid #eee; padding: 40px; box-sizing: border-box; position: relative; }
+        .header { text-align: center; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; margin-bottom: 30px; }
+        .header h1 { color: #4CAF50; text-transform: uppercase; margin: 0; font-size: 24pt; }
+        .datos-alumno { margin-bottom: 30px; font-size: 12pt; }
         
-        .quiz-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .quiz-card h3 { color: var(--verde-oscuro); margin-top: 0; font-family: 'Montserrat'; font-size: 1.1rem; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        /* Grid de 3 sumas por fila */
+        .grid-sumas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px 20px; }
         
-        .pregunta-texto { font-size: 1.2rem; font-weight: 600; margin: 20px 0; display: block; }
+        .suma-container { display: flex; flex-direction: column; align-items: center; font-family: 'Courier New', monospace; font-size: 22pt; position: relative; }
+        .numero { letter-spacing: 15px; text-align: right; width: 150px; }
+        .linea { border-bottom: 3px solid black; width: 140px; margin: 5px 0; }
+        .signo { position: absolute; left: 10px; top: 35px; }
         
-        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .boton-opcion { 
-            padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; 
-            cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s;
+        /* Cuadricula para ayudar a escribir */
+        .cuadricula { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.1; }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .hoja { border: none; box-shadow: none; }
+            button { display: none; }
         }
-        .boton-opcion:hover { border-color: var(--verde); background: #f9fff9; }
-        
-        /* Estados de respuesta */
-        .acierto { background-color: var(--verde) !important; color: white !important; border-color: var(--verde-oscuro) !important; }
-        .fallo { background-color: var(--rojo) !important; color: white !important; border-color: #c0392b !important; }
-        
-        .mensaje { margin-top: 15px; font-weight: bold; display: none; padding: 10px; border-radius: 6px; text-align: center; }
     </style>
 </head>
 <body>
 
-<header class="header-web">
-    <h1>Academia Esparta</h1>
-    <p>¿Aceptas el Reto Matemático? 🧠</p>
-</header>
-
-<div class="container">
-
-    <div class="quiz-card">
-        <h3>Nivel: Bronce (Cálculo Rápido)</h3>
-        <span class="pregunta-texto">Si multiplicas 7 por 8 y luego le restas 6... ¿cuál es el resultado?</span>
-        <div class="opciones-grid">
-            <button class="boton-opcion" onclick="validar(this, false, 'm1')">48</button>
-            <button class="boton-opcion" onclick="validar(this, true, 'm1')">50</button>
-            <button class="boton-opcion" onclick="validar(this, false, 'm1') blonde">52</button>
-            <button class="boton-opcion" onclick="validar(this, false, 'm1')">56</button>
-        </div>
-        <div id="m1" class="mensaje"></div>
-    </div>
-
-    <div class="quiz-card">
-        <h3>Nivel: Plata (Geometría)</h3>
-        <span class="pregunta-texto">¿Cómo se llama un polígono que tiene exactamente 7 lados?</span>
-        <div class="opciones-grid">
-            <button class="boton-opcion" onclick="validar(this, false, 'm2')">Hexágono</button>
-            <button class="boton-opcion" onclick="validar(this, true, 'm2')">Heptágono</button>
-            <button class="boton-opcion" onclick="validar(this, false, 'm2')">Octógono</button>
-            <button class="boton-opcion" onclick="validar(this, false, 'm2')">Pentágono</button>
-        </div>
-        <div id="m2" class="mensaje"></div>
-    </div>
-
-    <div class="quiz-card">
-        <h3>Nivel: Oro (Lógica)</h3>
-        <span class="pregunta-texto">Un tren sale de Madrid a 100km/h. ¿Cuánto tardará en recorrer 250km si no hace paradas?</span>
-        <div class="opciones-grid">
-            <button class="boton-opcion" onclick="validar(this, false, 'm3')">2 horas</button>
-            <button class="boton-opcion" onclick="validar(this, false, 'm3')">3 horas</button>
-            <button class="boton-opcion" onclick="validar(this, true, 'm3')">2 horas y media</button>
-            <button class="boton-opcion" onclick="validar(this, false, 'm3')">150 minutos</button>
-        </div>
-        <div id="m3" class="mensaje"></div>
-    </div>
-
+<div style="text-align: center; margin: 10px;">
+    <button onclick="window.print()" style="padding: 15px 30px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+        🖨️ CLIC AQUÍ PARA DESCARGAR PDF O IMPRIMIR
+    </button>
 </div>
 
-<script>
-    function validar(boton, esCorrecto, idMensaje) {
-        const contenedor = boton.parentElement;
-        const botones = contenedor.querySelectorAll('.boton-opcion');
-        const mensaje = document.getElementById(idMensaje);
-        
-        // Bloquear botones
-        botones.forEach(b => b.disabled = true);
-        
-        if (esCorrecto) {
-            boton.classList.add('acierto');
-            mensaje.style.display = 'block';
-            mensaje.style.color = 'var(--verde-oscuro)';
-            mensaje.innerHTML = '¡Excelente! Objetivo cumplido. ✅';
-        } else {
-            boton.classList.add('fallo');
-            mensaje.style.display = 'block';
-            mensaje.style.color = 'var(--rojo)';
-            mensaje.innerHTML = 'Casi... revisa la operación e inténtalo de nuevo. ❌';
-        }
-    }
-</script>
+<div class="hoja">
+    <div class="header">
+        <h1>Academia Esparta</h1>
+        <p>Entrenamiento de Cálculo: Sumas de 3 cifras</p>
+    </div>
 
-<footer style="text-align: center; padding: 30px; color: #999;">
-    © 2026 Academia Esparta - Entrena tu mente
-</footer>
+    <div class="datos-alumno">
+        Nombre: __________________________________________________ Fecha: ___/___/___
+    </div>
+
+    <div class="grid-sumas">
+        <div class="suma-container">
+            <div class="numero">456</div>
+            <div class="signo">+</div>
+            <div class="numero">278</div>
+            <div class="linea"></div>
+            <div style="height: 40px;"></div> </div>
+
+        <div class="suma-container">
+            <div class="numero">589</div>
+            <div class="signo">+</div>
+            <div class="numero">143</div>
+            <div class="linea"></div>
+            <div style="height: 40px;"></div>
+        </div>
+
+        <div class="suma-container">
+            <div class="numero">367</div>
+            <div class="signo">+</div>
+            <div class="numero">465</div>
+            <div class="linea"></div>
+            <div style="height: 40px;"></div>
+        </div>
+
+        <div class="suma-container">
+            <div class="numero">725</div>
+            <div class="signo">+</div>
+            <div class="numero">196</div>
+            <div class="linea"></div>
+            <div style="height: 40px;"></div>
+        </div>
+
+        <div class="suma-container">
+            <div class="numero">284</div>
+            <div class="signo">+</div>
+            <div class="numero">357</div>
+            <div class="linea"></div>
+            <div style="height: 40px;"></div>
+        </div>
+
+        <div class="suma-container">
+            <div class="numero">618</div>
+            <div class="signo">+</div>
+            <div class="numero">294</div>
+            <div class="linea"></div>
+            <div style="height: 40px;"></div>
+        </div>
+
+        <div class="suma-container">
+            <div class="numero">834</div>
+            <div class="signo">+</div>
+            <div class="numero">275</div>
+            <div class="linea"></div>
+            <div style="height: 40px;"></div>
+        </div>
+
+        <div class="suma-container">
+            <div class="numero">512</div>
+            <div class="signo">+</div>
+            <div class="numero">187</div>
+            <div class="linea"></div>
+            <div style="height: 40px;"></div>
+        </div>
+
+        <div class="suma-container">
+            <div class="numero">643</div>
+            <div class="signo">+</div>
+            <div class="numero">368</div>
+            <div class="linea"></div>
+            <div style="height: 40px;"></div>
+        </div>
+    </div>
+
+    <div style="margin-top: 100px; border-top: 1px dashed #ccc; padding-top: 20px; font-size: 10pt; color: #666;">
+        <b>Recordatorio Espartano:</b> Empieza siempre por las unidades y no olvides las llevadas.
+    </div>
+</div>
 
 </body>
 </html>
