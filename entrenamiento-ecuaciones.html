@@ -3,225 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resolución de Problemas - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Ejercicios Academia Esparta - PDF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0e9343;
-            --secondary: #f9fbf9;
+            --dark: #063c24;
             --accent: #fb8c00;
-            --text: #333;
-            --border: #e0e0e0;
+            --bg-page: #f0f2f5;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f7f6;
-            color: var(--text);
-            line-height: 1.6;
+            font-family: 'Fredoka', sans-serif;
+            background-color: var(--bg-page);
+            margin: 0;
             padding: 20px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        .container { max-width: 850px; margin: 0 auto; }
 
-        .problem-card {
-            background: white;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid var(--border);
-        }
-
-        .problem-header {
-            background-color: var(--primary);
-            color: white;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .problem-header h2 {
-            margin: 0;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .problem-body {
-            padding: 25px;
-        }
-
-        .enunciado {
-            background: var(--secondary);
-            border-left: 5px solid var(--accent);
-            padding: 15px;
-            margin-bottom: 25px;
-            font-style: italic;
-            border-radius: 0 10px 10px 0;
-        }
-
-        .step {
+        /* --- BOTÓN DESCARGA PDF --- */
+        .no-print-area {
+            text-align: right;
             margin-bottom: 20px;
         }
 
-        .step-title {
+        .btn-pdf {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--dark);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-pdf:active { transform: translateY(3px); box-shadow: none; }
+
+        /* --- FICHAS DE EJERCICIOS --- */
+        .problem-card {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            border-left: 8px solid var(--primary);
+            overflow: hidden;
+            page-break-inside: avoid; /* Evita que el ejercicio se corte entre dos páginas al imprimir */
+        }
+
+        .header-card {
+            background: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .content { padding: 25px; }
+
+        .enunciado {
+            background: #f9fbf9;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px dashed var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .step-box {
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 3px solid #eee;
+        }
+
+        .step-number {
             color: var(--primary);
             font-weight: 600;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
             display: block;
         }
 
-        .math-box {
-            background: #fdfdfd;
-            border: 1px solid #f0f0f0;
-            padding: 15px;
+        .math {
+            background: #fafafa;
+            padding: 10px;
             border-radius: 8px;
+            display: inline-block;
             font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
+            margin: 8px 0;
+            border: 1px solid #eee;
         }
 
-        .solucion-final {
-            background-color: var(--light-green, #e8f5e9);
+        .highlight { color: var(--accent); font-weight: 600; }
+
+        .result-box {
+            background: #e8f5e9;
             border: 2px solid var(--primary);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             text-align: center;
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-top: 20px;
+            font-weight: 600;
+            color: var(--dark);
         }
 
-        .highlight { color: var(--accent); }
+        /* --- AJUSTES PARA IMPRESIÓN PDF --- */
+        @media print {
+            body { background-color: white; padding: 0; }
+            .no-print-area, .back-btn { display: none !important; } /* Oculta botones al imprimir */
+            .container { max-width: 100%; width: 100%; }
+            .problem-card { box-shadow: none; border: 1px solid #eee; border-left: 8px solid var(--primary); }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
+    
+    <div class="no-print-area">
+        <button class="btn-pdf" onclick="window.print()">📥 DESCARGAR EN PDF</button>
+    </div>
 
     <div class="problem-card">
-        <div class="problem-header">
-            <h2>Problema 24</h2>
-            <span>Academia Esparta</span>
+        <div class="header-card">
+            <span>EJERCICIO 24</span>
+            <span>ACADEMIA ESPARTA</span>
         </div>
-        <div class="problem-body">
-            <div class="enunciado">
-                "Por un pantalón y unos zapatos he pagado 126 €. Si el precio del pantalón aumentara un 14%, entonces sería el 75% del precio de los zapatos. ¿Cuánto pagué por cada uno?"
+        <div class="content">
+            <div class="enunciado"><b>Enunciado:</b> Por un pantalón y unos zapatos he pagado 126 €. Si el precio del pantalón aumentara un 14%, entonces sería el 75% del precio de los zapatos.</div>
+            
+            <div class="step-box">
+                <span class="step-number">Paso 1: Variables</span>
+                <p>Usamos <span class="highlight">x</span> para el pantalón e <span class="highlight">y</span> para los zapatos.</p>
             </div>
 
-            <div class="step">
-                <span class="step-title">1. Definición de Incógnitas</span>
-                <ul>
-                    <li><b>x:</b> Precio del pantalón (€)</li>
-                    <li><b>y:</b> Precio de los zapatos (€)</li>
-                </ul>
+            <div class="step-box">
+                <span class="step-number">Paso 2: Ecuaciones</span>
+                <p>Total: <span class="math">x + y = 126</span></p>
+                <p>Comparación: <span class="math">1.14x = 0.75y</span></p>
             </div>
 
-            <div class="step">
-                <span class="step-title">2. Planteamiento del Sistema</span>
-                <div class="math-box">
-                    x + y = 126 <br>
-                    1.14x = 0.75y
-                </div>
+            <div class="step-box">
+                <span class="step-number">Paso 3: Resolución</span>
+                <p>Despejamos: <span class="highlight">y = 126 - x</span></p>
+                <div class="math">1.14x = 0.75 · (126 - x)</div>
+                <div class="math">1.14x = 94.5 - 0.75x</div>
+                <div class="math">1.89x = 94.5  -->  x = 50</div>
             </div>
 
-            <div class="step">
-                <span class="step-title">3. Resolución por Sustitución</span>
-                <p>Despejamos y: <code class="highlight">y = 126 - x</code></p>
-                <p>Sustituimos en la segunda ecuación:</p>
-                <div class="math-box">
-                    1.14x = 0.75(126 - x) <br>
-                    1.14x = 94.5 - 0.75x <br>
-                    1.89x = 94.5 <br>
-                    x = 50
-                </div>
-            </div>
-
-            <div class="solucion-final">
-                <b>RESULTADO:</b> El pantalón cuesta <b>50 €</b> y los zapatos <b>76 €</b>.
+            <div class="result-box">
+                RESULTADO: El pantalón (x) vale 50 € y los zapatos (y) valen 76 €.
             </div>
         </div>
     </div>
 
     <div class="problem-card">
-        <div class="problem-header">
-            <h2>Problema 25</h2>
-            <span>Academia Esparta</span>
+        <div class="header-card">
+            <span>EJERCICIO 25</span>
+            <span>ACADEMIA ESPARTA</span>
         </div>
-        <div class="problem-body">
-            <div class="enunciado">
-                "En un test de 50 preguntas, por cada acierto te dan 4 puntos y por cada error te restan 3. Si mi nota ha sido el 58% de la puntuación máxima, ¿cuántos aciertos y fallos he tenido?"
+        <div class="content">
+            <div class="enunciado"><b>Enunciado:</b> Test de 50 preguntas. Acierto (+4), fallo (-3). Mi nota es el 58% de la máxima (200 puntos).</div>
+            
+            <div class="step-box">
+                <span class="step-number">Paso 1: Datos</span>
+                <p>Mi nota: <span class="highlight">116 puntos</span>. Aciertos = <span class="highlight">x</span>, Fallos = <span class="highlight">y</span>.</p>
             </div>
 
-            <div class="step">
-                <span class="step-title">1. Análisis de Datos</span>
-                <p>Máximo posible: 50 x 4 = 200 puntos.</p>
-                <p>Nota obtenida: 58% de 200 = <code class="highlight">116 puntos</code>.</p>
+            <div class="step-box">
+                <span class="step-number">Paso 2: Sistema</span>
+                <div class="math">x + y = 50</div>
+                <div class="math">4x - 3y = 116</div>
             </div>
 
-            <div class="step">
-                <span class="step-title">2. Sistema de Ecuaciones</span>
-                <div class="math-box">
-                    A + F = 50 <br>
-                    4A - 3F = 116
-                </div>
+            <div class="step-box">
+                <span class="step-number">Paso 3: Resolución</span>
+                <p>Sustituimos y: <span class="highlight">y = 50 - x</span></p>
+                <div class="math">4x - 3 · (50 - x) = 116</div>
+                <div class="math">4x - 150 + 3x = 116  -->  7x = 266</div>
+                <div class="math">x = 38</div>
             </div>
 
-            <div class="step">
-                <span class="step-title">3. Resolución</span>
-                <div class="math-box">
-                    F = 50 - A <br>
-                    4A - 3(50 - A) = 116 <br>
-                    4A - 150 + 3A = 116 <br>
-                    7A = 266 -> A = 38
-                </div>
-            </div>
-
-            <div class="solucion-final">
-                <b>RESULTADO:</b> Has tenido <b>38 aciertos</b> y <b>12 fallos</b>.
+            <div class="result-box">
+                RESULTADO: 38 aciertos (x) y 12 fallos (y).
             </div>
         </div>
     </div>
 
     <div class="problem-card">
-        <div class="problem-header">
-            <h2>Problema 26</h2>
-            <span>Academia Esparta</span>
+        <div class="header-card">
+            <span>EJERCICIO 26</span>
+            <span>ACADEMIA ESPARTA</span>
         </div>
-        <div class="problem-body">
-            <div class="enunciado">
-                "La edad de Carmen es el triple de la de su hija Maite. Pero dentro de 15 años será el doble. ¿Cuál es la edad de cada una?"
+        <div class="content">
+            <div class="enunciado"><b>Enunciado:</b> Carmen es el triple de Maite. Dentro de 15 años será el doble.</div>
+            
+            <div class="step-box">
+                <span class="step-number">Paso 1: Variables</span>
+                <p><span class="highlight">x</span> (Carmen) e <span class="highlight">y</span> (Maite).</p>
             </div>
 
-            <div class="step">
-                <span class="step-title">1. Incógnitas Actuales</span>
-                <p>C: Carmen | M: Maite</p>
+            <div class="step-box">
+                <span class="step-number">Paso 2: Sistema</span>
+                <p>Hoy: <span class="math">x = 3y</span></p>
+                <p>Futuro: <span class="math">x + 15 = 2 · (y + 15)</span></p>
             </div>
 
-            <div class="step">
-                <span class="step-title">2. Sistema</span>
-                <div class="math-box">
-                    C = 3M <br>
-                    C + 15 = 2(M + 15)
-                </div>
+            <div class="step-box">
+                <span class="step-number">Paso 3: Resolución</span>
+                <div class="math">3y + 15 = 2y + 30</div>
+                <div class="math">3y - 2y = 30 - 15  -->  y = 15</div>
             </div>
 
-            <div class="step">
-                <span class="step-title">3. Resolución</span>
-                <div class="math-box">
-                    3M + 15 = 2M + 30 <br>
-                    3M - 2M = 30 - 15 <br>
-                    M = 15
-                </div>
-            </div>
-
-            <div class="solucion-final">
-                <b>RESULTADO:</b> Maite tiene <b>15 años</b> y Carmen tiene <b>45 años</b>.
+            <div class="result-box">
+                RESULTADO: Maite (y) tiene 15 años y Carmen (x) tiene 45 años.
             </div>
         </div>
     </div>
