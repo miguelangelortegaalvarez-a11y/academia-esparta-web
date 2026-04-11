@@ -3,69 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juegos Fonología - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <title>Laboratorio de Sonidos - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --gold: #fbc02d; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f2f5; color: var(--dark); }
-        header { background: var(--light); padding: 1.5rem; text-align: center; border-bottom: 2px solid var(--primary); }
-        .back-btn { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.9rem; }
-        .container { max-width: 1100px; margin: 3rem auto; padding: 0 2rem; }
-        h1 { color: var(--primary); text-align: center; margin-bottom: 3rem; font-size: 2.2rem; }
-
-        .fases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
-        .fase-card { background: white; border-radius: 20px; padding: 2rem; text-align: center; border: 2px solid #eee; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
-        .fase-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .num-fase { background: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 1rem; }
-        .icon { font-size: 3.5rem; margin-bottom: 1.5rem; }
-        h3 { color: var(--primary); margin-bottom: 0.5rem; }
-        p { font-size: 0.85rem; color: #666; margin-bottom: 1.5rem; flex-grow: 1; }
-        .btn-jugar { background: var(--primary); color: white; text-decoration: none; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 700; width: 100%; transition: 0.3s; text-align: center; }
-        .btn-jugar:hover { background: #09834c; }
-        .locked { background: #eee; color: #aaa; cursor: not-allowed; }
+        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --accent: #fbc02d; --red: #ef5350; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; position: relative; }
+        .game-header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); position: relative; z-index: 10; }
+        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--primary); font-weight: bold; }
+        .stats-bar { display: flex; justify-content: space-around; width: 100%; max-width: 800px; margin-top: 15px; font-weight: bold; color: var(--dark); z-index: 10; }
+        .game-container { max-width: 850px; width: 95%; background: white; margin-top: 1rem; padding: 2rem; border-radius: 40px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; z-index: 10; }
+        .instruccion-box { margin-bottom: 1rem; }
+        .mision-tag { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); font-weight: bold; background: var(--light); padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 10px; border: 1px solid var(--primary); }
+        .instruccion-text { font-size: 1.5rem; font-weight: 700; color: var(--dark); margin: 0; }
+        .sonido-display { font-size: 5.5rem; color: var(--primary); background: white; width: 130px; height: 130px; line-height: 130px; border-radius: 50%; border: 5px dashed var(--primary); margin: 0 auto 1.5rem; box-shadow: 0 10px 20px rgba(14, 147, 67, 0.1); }
+        .opciones-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .card-fonema { width: 160px; height: 200px; background: white; border: 4px solid #eee; border-radius: 30px; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 6px 0 #eee; }
+        .card-fonema:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .card-fonema .emoji { font-size: 4.5rem; }
+        .card-fonema .label { margin-top: 10px; font-weight: bold; color: #555; text-transform: uppercase; font-size: 0.85rem; }
+        #overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); border-radius: 40px; flex-direction: column; align-items: center; justify-content: center; z-index: 30; }
+        .btn-next { padding: 1.2rem 3rem; border: none; border-radius: 20px; font-weight: 700; background: var(--primary); color: white; font-size: 1.3rem; cursor: pointer; box-shadow: 0 6px 0 var(--dark); text-transform: uppercase; }
+        #trophy-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; display: none; }
+        @keyframes rain { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
 <body>
-    <header>
-        <div style="font-weight: 700; font-size: 1.8rem; color: var(--primary);">Academia Esparta</div>
-        <a href="../index.html" class="back-btn">← Volver al Menú Anterior</a>
-    </header>
-    <div class="container">
-        <h1>Entrenamiento de Oído</h1>
-        <div class="fases-grid">
-            <div class="fase-card">
-                <div class="num-fase">1</div>
-                <div class="icon">💬</div>
-                <h3>Conciencia Lexical</h3>
-                <p>¿Cuántas palabras escuchas en la frase? Aprende a separar los sonidos del habla.</p>
-                <a href="lexical.html" class="btn-jugar">JUGAR</a>
-            </div>
-
-            <div class="fase-card">
-                <div class="num-fase">2</div>
-                <div class="icon">👏</div>
-                <h3>Conciencia Silábica</h3>
-                <p>Rompemos las palabras en trocitos (sílabas) usando palmadas mágicas.</p>
-                <a href="silabas.html" class="btn-jugar">JUGAR</a>
-            </div>
-
-            <div class="fase-card">
-                <div class="num-fase">3</div>
-                <div class="icon">👂</div>
-                <h3>Conciencia Fonémica</h3>
-                <p>El reto final: identificar los sonidos individuales de cada letra.</p>
-                <a href="fonemica.html" class="btn-jugar">JUGAR</a>
-            </div>
-
-            <div class="fase-card">
-                <div class="num-fase">4</div>
-                <div class="icon">✍️</div>
-                <h3>Alfabetización</h3>
-                <p>Relacionamos los sonidos con su letra escrita para empezar a leer.</p>
-                <a href="#" class="btn-jugar locked">PRÓXIMAMENTE</a>
-            </div>
-        </div>
+    <div id="trophy-rain"></div>
+    <div class="game-header">
+        <a href="index.html" class="back-link">← SALIR</a>
+        <h2 style="color: var(--primary); margin: 0;">Laboratorio de Sonidos</h2>
     </div>
+    <div class="stats-bar">
+        <span>Nivel: <span id="mision-num">1</span>/2</span>
+        <span>Reto: <span id="reto-num">1</span>/10</span>
+    </div>
+    <div class="game-container">
+        <div id="overlay">
+            <h2 id="overlay-msg" style="color: var(--primary); font-size: 3rem; margin: 0;">¡MAGNÍFICO!</h2>
+            <p id="overlay-sub" style="margin: 1rem 0 2rem 0; font-size: 1.3rem; color: #444;">¡Has superado el reto!</p>
+            <button class="btn-next" onclick="cerrarOverlay()">CONTINUAR</button>
+        </div>
+        <div class="instruccion-box">
+            <div id="mision-tag" class="mision-tag">Nivel 1</div>
+            <p id="instruccion-texto" class="instruccion-text">¿Qué dibujo empieza por...</p>
+        </div>
+        <div id="sonido-val" class="sonido-display">-</div>
+        <div id="grid-opciones" class="opciones-grid"></div>
+        <div id="feedback" style="margin-top: 1.5rem; font-weight: bold; font-size: 1.3rem; min-height: 35px;"></div>
+    </div>
+
+    <script>
+        const bancoMisiones = [
+            // NIVEL 1: 10 PALABRAS (EMPIEZA POR)
+            { t: 1, s: 'A', p: [{e:'✈️', n:'Avión', ok:true}, {e:'🐱', n:'Gato', ok:false}, {e:'🚗', n:'Coche', ok:false}] },
+            { t: 1, s: 'E', p: [{e:'🐘', n:'Elefante', ok:true}, {e:'☀️', n:'Sol', ok:false}, {e:'🏠', n:'Casa', ok:false}] },
+            { t: 1, s: 'I', p: [{e:'🏝️', n:'Isla', ok:true}, {e:'🍎', n:'Manzana', ok:false}, {e:'👟', n:'Zapato', ok:false}] },
+            { t: 1, s: 'O', p: [{e:'🐻', n:'Oso', ok:true}, {e:'🎈', n:'Globo', ok:false}, {e:'🚲', n:'Bici', ok:false}] },
+            { t: 1, s: 'U', p: [{e:'🍇', n:'Uva', ok:true}, {e:'🍐', n:'Pera', ok:false}, {e:'🌙', n:'Luna', ok:false}] },
+            { t: 1, s: 'M', p: [{e:'🍎', n:'Manzana', ok:true}, {e:'🚜', n:'Tractor', ok:false}, {e:'☁️', n:'Nube', ok:false}] },
+            { t: 1, s: 'P', p: [{e:'🦆', n:'Pato', ok:true}, {e:'🦒', n:'Jirafa', ok:false}, {e:'🌻', n:'Flor', ok:false}] },
+            { t: 1, s: 'S', p: [{e:'☀️', n:'Sol', ok:true}, {e:'🐶', n:'Perro', ok:false}, {e:'🚆', n:'Tren', ok:false}] },
+            { t: 1, s: 'L', p: [{e:'🌙', n:'Luna', ok:true}, {e:'🍞', n:'Pan', ok:false}, {e:'🍅', n:'Tomate', ok:false}] },
+            { t: 1, s: 'T', p: [{e:'🚆', n:'Tren', ok:true}, {e:'🦉', n:'Búho', ok:false}, {e:'📦', n:'Caja', ok:false}] },
+
+            // NIVEL 2: 10 PALABRAS (CONTIENE EL FONEMA)
+            { t: 2, s: 'R', p: [{e:'🐶', n:'Perro', ok:true}, {e:'🏠', n:'Casa', ok:false}, {e:'🐱', n:'Gato', ok:false}] },
+            { t: 2, s: 'S', p: [{e:'🏠', n:'Casa', ok:true}, {e:'🦆', n:'Pato', ok:false}, {e:'🍞', n:'Pan', ok:false}] },
+            { t: 2, s: 'L', p: [{e:'🎈', n:'Globo', ok:true}, {e:'🍎', n:'Manzana', ok:false}, {e:'🚆', n:'Tren', ok:false}] },
+            { t: 2, s: 'N', p: [{e:'🍎', n:'Manzana', ok:true}, {e:'☀️', n:'Sol', ok:false}, {e:'🐻', n:'Oso', ok:false}] },
+            { t: 2, s: 'T', p: [{e:'🦆', n:'Pato', ok:true}, {e:'☁️', n:'Nube', ok:false}, {e:'🍐', n:'Pera', ok:false}] },
+            { t: 2, s: 'I', p: [{e:'🚲', n:'Bici', ok:true}, {e:'🐻', n:'Oso', ok:false}, {e:'🚗', n:'Coche', ok:false}] },
+            { t: 2, s: 'O', p: [{e:'🚜', n:'Tractor', ok:true}, {e:'🍌', n:'Plátano', ok:true}, {e:'🍋', n:'Limón', ok:true}] }, // Todos tienen O, pero buscamos el dibujo
+            { t: 2, s: 'A', p: [{e:'🍅', n:'Tomate', ok:true}, {e:'🚆', n:'Tren', ok:false}, {e:'📦', n:'Caja', ok:true}] },
+            { t: 2, s: 'M', p: [{e:'🍋', n:'Limón', ok:true}, {e:'☀️', n:'Sol', ok:false}, {e:'🐱', n:'Gato', ok:false}] },
+            { t: 2, s: 'E', p: [{e:'📦', n:'Caja', ok:false}, {e:'👟', n:'Zapato', ok:true}, {e:'🎈', n:'Globo', ok:false}] }
+        ];
+
+        let indiceReto = 0;
+        let bloqueado = false;
+
+        function iniciar() { mostrarReto(); }
+
+        function mostrarReto() {
+            bloqueado = false;
+            const reto = bancoMisiones[indiceReto];
+            document.getElementById('mision-num').innerText = reto.t;
+            document.getElementById('reto-num').innerText = (indiceReto % 10) + 1;
+            document.getElementById('sonido-val').innerText = reto.s;
+            document.getElementById('feedback').innerText = '';
+
+            const titulos = {
+                1: ["NIVEL 1: EL BUSCADOR", "¿Qué dibujo empieza por..."],
+                2: ["NIVEL 2: EL DETECTIVE", "¿Qué dibujo contiene el sonido..."]
+            };
+
+            document.getElementById('mision-tag').innerText = titulos[reto.t][0];
+            document.getElementById('instruccion-texto').innerText = titulos[reto.t][1];
+
+            const grid = document.getElementById('grid-opciones');
+            grid.innerHTML = '';
+            
+            [...reto.p].sort(() => Math.random() - 0.5).forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-fonema';
+                card.innerHTML = `<span class="emoji">${item.e}</span><span class="label">${item.n}</span>`;
+                card.onclick = () => {
+                    if(bloqueado) return;
+                    if(item.ok) {
+                        bloqueado = true;
+                        confetti({ particleCount: 60, spread: 60, origin: { y: 0.8 } });
+                        document.getElementById('overlay').style.display = 'flex';
+                    } else {
+                        document.getElementById('feedback').innerHTML = '<span style="color: var(--red)">¡Casi! Prueba otra vez. 🧐</span>';
+                        card.style.borderColor = 'var(--red)';
+                        setTimeout(()=>card.style.borderColor='#eee', 500);
+                    }
+                };
+                grid.appendChild(card);
+            });
+        }
+
+        function cerrarOverlay() {
+            document.getElementById('overlay').style.display = 'none';
+            indiceReto++;
+            if(indiceReto < bancoMisiones.length) { 
+                mostrarReto(); 
+            } else { 
+                document.getElementById('overlay-msg').innerText = "¡MAESTRO FONÉMICO!";
+                document.getElementById('overlay-sub').innerText = "Has superado todos los desafíos de sonidos.";
+                const btn = document.querySelector('.btn-next');
+                btn.innerText = "VOLVER AL MENÚ";
+                btn.onclick = () => window.location.href = 'index.html';
+                document.getElementById('overlay').style.display = 'flex';
+                iniciarTrofeos();
+            }
+        }
+
+        function iniciarTrofeos() {
+            const container = document.getElementById('trophy-rain');
+            container.innerHTML = '';
+            container.style.display = 'block';
+            for (let i = 0; i < 20; i++) {
+                const t = document.createElement('div');
+                t.className = 'trophy'; t.innerText = '🏆';
+                t.style.left = Math.random() * 100 + 'vw';
+                t.style.animation = `rain ${Math.random()*2 + 2}s linear infinite`;
+                container.appendChild(t);
+            }
+        }
+
+        iniciar();
+    </script>
 </body>
 </html>
