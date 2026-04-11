@@ -26,8 +26,6 @@
         .next { right: 40px; display: none; }
         .prev { left: 40px; background: #999; box-shadow: 0 5px 0 #666; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
-        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -54,11 +52,11 @@
             <div class="match-container">
                 <div class="match-col">
                     <div class="match-box" id="w1" onclick="match('w1', 'taza')">TAZA</div>
-                    <div class="match-box" id="w2" onclick="match('w2', 'tapa')">TAPA</div>
+                    <div class="match-box" id="w2" onclick="match('w2', 'tito')">TITO</div>
                     <div class="match-box" id="w3" onclick="match('w3', 'tubo')">TUBO</div>
                 </div>
                 <div class="match-col">
-                    <div class="match-box" id="i1" onclick="match('i1', 'tapa')">🥫</div>
+                    <div class="match-box" id="i1" onclick="match('i1', 'tito')">👦</div>
                     <div class="match-box" id="i2" onclick="match('i2', 'taza')">☕</div>
                     <div class="match-box" id="i3" onclick="match('i3', 'tubo')">🧪</div>
                 </div>
@@ -71,10 +69,10 @@
         let paginaActual = 1, totalPaginas = 7, aciertos = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0}, selId = null, selVal = null;
         const wordGameData = [
             { emoji: '☕', p2: 'ZA', options: ['TA', 'TE', 'TI'], correct: 'TA', final: 'TAZA' },
-            { emoji: '🥫', p2: 'PA', options: ['TA', 'TU', 'TO'], correct: 'TA', final: 'TAPA' },
+            { emoji: '👦', p2: 'TO', options: ['TI', 'TA', 'TU'], correct: 'TI', final: 'TITO' },
             { emoji: '🍅', p2: 'MATE', options: ['TO', 'TU', 'TA'], correct: 'TO', final: 'TOMATE' },
             { emoji: '🧪', p2: 'BO', options: ['TU', 'TI', 'TE'], correct: 'TU', final: 'TUBO' },
-            { emoji: '🍴', p2: 'LA', options: ['TE', 'TI', 'TA'], correct: 'TE', final: 'TELA' }
+            { emoji: '🍴', p2: 'NEDOR', options: ['TE', 'TI', 'TA'], correct: 'TE', final: 'TENEDOR' }
         ];
         let currentWordIndex = 0;
         function shuffle(a) { return a.sort(() => Math.random() - 0.5); }
