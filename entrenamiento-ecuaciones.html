@@ -8,10 +8,16 @@
     <style>
         :root { --verde: #4CAF50; --verde-oscuro: #388E3C; --azul: #2196f3; --gris: #f4f7f6; --rojo: #e74c3c; }
         body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding-bottom: 50px; }
-        .header { background: white; color: var(--verde); text-align: center; padding: 30px; border-bottom: 4px solid var(--verde); }
-        .container { max-width: 700px; margin: 30px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .header { background: white; color: var(--verde); text-align: center; padding: 20px; border-bottom: 4px solid var(--verde); }
+        .container { max-width: 700px; margin: 20px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
         
-        .nivel-info { background: var(--azul); color: white; padding: 10px 20px; border-radius: 50px; display: inline-block; margin-bottom: 20px; font-weight: bold; }
+        /* BARRA DE ESTADO */
+        .status-bar { display: flex; justify-content: space-between; margin-bottom: 20px; background: #eee; padding: 10px; border-radius: 10px; font-weight: bold; }
+        .stat { display: flex; align-items: center; gap: 5px; }
+        .progreso-bg { width: 100%; height: 10px; background: #ddd; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
+        .progreso-fill { height: 100%; background: var(--azul); width: 0%; transition: 0.5s; }
+
+        .nivel-info { background: var(--azul); color: white; padding: 5px 15px; border-radius: 50px; font-weight: bold; }
         .pregunta { font-size: 1.3rem; font-weight: 600; margin-bottom: 20px; color: #333; }
         
         .opciones { display: grid; gap: 10px; }
@@ -21,18 +27,16 @@
         .correcto { background-color: var(--verde) !important; color: white; border-color: var(--verde-oscuro) !important; }
         .incorrecto { background-color: var(--rojo) !important; color: white; border-color: #b71c1c !important; }
 
-        .feedback-instantaneo { margin-top: 15px; font-weight: bold; font-size: 1.1rem; min-height: 1.5em; text-align: center; }
-        .frase-falla { color: var(--rojo); animation: shake 0.5s; }
+        .feedback-instantaneo { margin-top: 15px; font-weight: bold; font-size: 1.1rem; text-align: center; min-height: 1.5em; }
+        .frase-falla { color: var(--rojo); animation: shake 0.5s; display: block; }
 
         .resultado-final { display: none; text-align: center; padding: 30px; }
-        .btn-accion { margin-top: 20px; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.2rem; color: white; display: none; }
+        .btn-accion { margin-top: 20px; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.2rem; color: white; }
 
         @keyframes shake {
-            0% { transform: translateX(0); }
+            0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-10px); }
-            50% { transform: translateX(10px); }
-            75% { transform: translateX(-10px); }
-            100% { transform: translateX(0); }
+            75% { transform: translateX(10px); }
         }
     </style>
 </head>
@@ -40,14 +44,21 @@
 
 <header class="header">
     <h1>ACADEMIA ESPARTA</h1>
-    <p>Desafío de Cultura General (Nivel 1 al 5)</p>
+    <p>Control de Progreso en Tiempo Real</p>
 </header>
 
 <div class="container" id="quiz-container">
-    <div class="nivel-info">Nivel <span id="num-nivel">1</span></div>
+    <div class="status-bar">
+        <div class="stat"><span class="nivel-info">Nivel <span id="num-nivel">1</span></span></div>
+        <div class="stat" style="color: var(--verde-oscuro);">✅ <span id="count-aciertos">0</span></div>
+        <div class="stat" style="color: var(--rojo);">❌ <span id="count-fallos">0</span></div>
+        <div class="stat">🎯 <span id="count-quedan">10</span>/10</div>
+    </div>
+    
+    <div class="progreso-bg"><div class="progreso-fill" id="barra-progreso"></div></div>
     
     <div id="juego">
-        <div class="pregunta" id="texto-pregunta">Cargando pregunta...</div>
+        <div class="pregunta" id="texto-pregunta">Cargando...</div>
         <div class="opciones" id="contenedor-opciones"></div>
         <div id="feedback" class="feedback-instantaneo"></div>
     </div>
@@ -56,9 +67,8 @@
         <h2 id="titulo-resultado"></h2>
         <p id="puntos-texto" style="font-size: 1.4rem;"></p>
         <p id="comentario-gracioso" style="font-style: italic; color: #666;"></p>
-        
-        <button class="btn-accion" id="btn-siguiente" style="background: var(--verde);" onclick="siguienteNivel()">¡SIGUIENTE NIVEL! 🚀</button>
-        <button class="btn-accion" id="btn-repetir" style="background: var(--rojo);" onclick="reiniciarNivel()">REINTENTAR NIVEL 🔄</button>
+        <button class="btn-accion" id="btn-siguiente" style="background: var(--verde); display: none;" onclick="siguienteNivel()">¡SIGUIENTE NIVEL! 🚀</button>
+        <button class="btn-accion" id="btn-repetir" style="background: var(--rojo); display: none;" onclick="reiniciarNivel()">REINTENTAR NIVEL 🔄</button>
     </div>
 </div>
 
@@ -66,40 +76,45 @@
     let nivelActual = 1;
     let preguntaActual = 0;
     let aciertos = 0;
+    let fallos = 0;
+    const MAX_FALLOS = 3; // Al 4º fallo ya no llega al 7, por tanto pierde.
     const FRASE_BROMA = "¡Eres más malo que el Barcelona en Champions! 😂";
 
     const preguntasPorNivel = {
         1: [
-            { p: "¿Cuánto es 2 + 2?", o: ["3", "4", "5", "22"], c: 1 },
-            { p: "¿Cuál es el color de las nubes?", o: ["Verde", "Azul", "Blanco", "Rojo"], c: 2 },
-            { p: "¿Qué animal hace 'miau'?", o: ["Perro", "Gato", "Pájaro", "Pez"], c: 1 },
-            { p: "¿Cuántos meses tiene un año?", o: ["10", "12", "7", "30"], c: 1 },
-            { p: "¿Qué fruta es roja y tiene semillas por fuera?", o: ["Plátano", "Manzana", "Fresa", "Uva"], c: 2 },
-            { p: "¿Por dónde sale el Sol?", o: ["Norte", "Sur", "Este", "Oeste"], c: 2 },
-            { p: "¿Cuántas patas tiene un perro?", o: ["2", "4", "6", "8"], c: 1 },
-            { p: "¿Qué usamos para ver?", o: ["Orejas", "Nariz", "Ojos", "Boca"], c: 2 },
-            { p: "¿Cuál es la capital de España?", o: ["Barcelona", "Sevilla", "Madrid", "Valencia"], c: 2 },
-            { p: "¿Qué día viene después del martes?", o: ["Lunes", "Miércoles", "Jueves", "Viernes"], c: 1 }
-        ],
-        2: [
-            { p: "¿Cuántos continentes hay?", o: ["3", "5", "6", "8"], c: 2 },
-            { p: "¿Quién pintó la Mona Lisa?", o: ["Picasso", "Da Vinci", "Dalí", "Velázquez"], c: 1 },
-            { p: "¿Cuál es el océano más grande?", o: ["Atlántico", "Índico", "Pacífico", "Ártico"], c: 2 },
-            { p: "¿Qué instrumento tiene teclas blancas y negras?", o: ["Guitarra", "Flauta", "Piano", "Tambor"], c: 2 },
-            { p: "¿Cómo se llama el triángulo de 3 lados iguales?", o: ["Isósceles", "Escaleno", "Equilátero", "Rectángulo"], c: 2 },
-            { p: "¿En qué país están las Pirámides de Giza?", o: ["México", "Egipto", "China", "Italia"], c: 1 },
-            { p: "¿Cuál es el hueso más largo del cuerpo?", o: ["Fémur", "Radio", "Cúbito", "Costilla"], c: 0 },
-            { p: "¿Qué gas exhalamos al respirar?", o: ["Oxígeno", "Dióxido de Carbono", "Hidrógeno", "Helio"], c: 1 },
-            { p: "¿Cuál es el metal más caro?", o: ["Oro", "Plata", "Platino", "Cobre"], c: 2 },
-            { p: "¿Cuántos años es un siglo?", o: ["10", "50", "100", "1000"], c: 2 }
+            { p: "¿Cuántos dedos tenemos en una mano?", o: ["4", "5", "6", "10"], c: 1 },
+            { p: "¿De qué color es el tronco de un árbol?", o: ["Verde", "Marrón", "Azul", "Blanco"], c: 1 },
+            { p: "¿Cuál es el animal que tiene trompa?", o: ["León", "Elefante", "Jirafa", "Rinoceronte"], c: 1 },
+            { p: "¿Qué sale por el día y da calor?", o: ["La Luna", "El Sol", "Las Nubes", "La Lluvia"], c: 1 },
+            { p: "¿Cuántos segundos tiene un minuto?", o: ["30", "60", "100", "12"], c: 1 },
+            { p: "¿Qué órgano usamos para pensar?", o: ["Corazón", "Cerebro", "Estómago", "Hígado"], c: 1 },
+            { p: "¿Cómo se llama el lugar donde compramos pan?", o: ["Farmacia", "Panadería", "Cine", "Parque"], c: 1 },
+            { p: "¿Cuál es el color de la hierba?", o: ["Rojo", "Verde", "Amarillo", "Violeta"], c: 1 },
+            { p: "¿Qué número viene antes del 10?", o: ["8", "9", "11", "12"], c: 1 },
+            { p: "¿Cómo se llama el bebé de la vaca?", o: ["Pollito", "Ternero", "Lechón", "Potro"], c: 1 }
         ]
-        // Añadir aquí niveles 3, 4 y 5 siguiendo la misma estructura
     };
 
+    function actualizarInterfaz() {
+        document.getElementById("count-aciertos").innerText = aciertos;
+        document.getElementById("count-fallos").innerText = fallos;
+        document.getElementById("count-quedan").innerText = preguntaActual;
+        let porcentaje = (preguntaActual / 10) * 100;
+        document.getElementById("barra-progreso").style.width = porcentaje + "%";
+    }
+
     function cargarPregunta() {
+        actualizarInterfaz();
         document.getElementById("feedback").innerText = "";
-        let lista = preguntasPorNivel[nivelActual];
-        if (preguntaActual < lista.length) {
+        
+        // Si ya ha fallado 4, no puede sacar un 7. Fin del juego.
+        if (fallos > MAX_FALLOS) {
+            finalizarNivel(true);
+            return;
+        }
+
+        let lista = preguntasPorNivel[nivelActual] || preguntasPorNivel[1];
+        if (preguntaActual < 10) {
             let data = lista[preguntaActual];
             document.getElementById("texto-pregunta").innerText = data.p;
             let contenedor = document.getElementById("contenedor-opciones");
@@ -112,7 +127,7 @@
                 contenedor.appendChild(btn);
             });
         } else {
-            finalizarNivel();
+            finalizarNivel(false);
         }
     }
 
@@ -124,11 +139,12 @@
         if (elegido === correcto) {
             botones[elegido].classList.add("correcto");
             aciertos++;
-            feedback.innerText = "¡Correcto! ✨";
+            feedback.innerText = "¡Muy bien! 🛡️";
             feedback.style.color = "var(--verde-oscuro)";
         } else {
             botones[elegido].classList.add("incorrecto");
             botones[correcto].classList.add("correcto");
+            fallos++;
             feedback.innerHTML = `<span class="frase-falla">${FRASE_BROMA}</span>`;
         }
         
@@ -138,41 +154,32 @@
         }, 1800);
     }
 
-    function finalizarNivel() {
+    function finalizarNivel(porFallos) {
         document.getElementById("juego").style.display = "none";
         document.getElementById("resultado-final").style.display = "block";
         
-        let puntos = aciertos;
-        document.getElementById("puntos-texto").innerText = `Nota: ${puntos} / 10`;
-        
-        const btnSig = document.getElementById("btn-siguiente");
-        const btnRep = document.getElementById("btn-repetir");
-
-        if (puntos >= 7) {
-            document.getElementById("titulo-resultado").innerText = "¡NIVEL SUPERADO! 🎖️";
-            document.getElementById("comentario-gracioso").innerText = "Has demostrado ser un auténtico espartano.";
-            btnSig.style.display = "inline-block";
-            btnRep.style.display = "none";
-        } else {
-            document.getElementById("titulo-resultado").innerText = "SUSPENSO... ❌";
+        if (porFallos) {
+            document.getElementById("titulo-resultado").innerText = "¡ELIMINADO! 😵";
+            document.getElementById("puntos-texto").innerText = "Demasiados errores.";
             document.getElementById("comentario-gracioso").innerText = FRASE_BROMA;
-            btnSig.style.display = "none";
-            btnRep.style.display = "inline-block";
+            document.getElementById("btn-repetir").style.display = "inline-block";
+        } else if (aciertos >= 7) {
+            document.getElementById("titulo-resultado").innerText = "¡NIVEL SUPERADO! 🎖️";
+            document.getElementById("puntos-texto").innerText = `Nota: ${aciertos} / 10`;
+            document.getElementById("btn-siguiente").style.display = "inline-block";
+        } else {
+            document.getElementById("titulo-resultado").innerText = "NO ES SUFICIENTE... ❌";
+            document.getElementById("comentario-gracioso").innerText = FRASE_BROMA;
+            document.getElementById("btn-repetir").style.display = "inline-block";
         }
     }
 
-    function siguienteNivel() {
-        nivelActual++;
-        reiniciarNivel();
-    }
-
     function reiniciarNivel() {
-        preguntaActual = 0;
-        aciertos = 0;
-        document.getElementById("num-nivel").innerText = nivelActual;
+        preguntaActual = 0; aciertos = 0; fallos = 0;
         document.getElementById("juego").style.display = "block";
         document.getElementById("resultado-final").style.display = "none";
-        document.querySelectorAll(".btn-accion").forEach(b => b.style.display = "none");
+        document.getElementById("btn-siguiente").style.display = "none";
+        document.getElementById("btn-repetir").style.display = "none";
         cargarPregunta();
     }
 
