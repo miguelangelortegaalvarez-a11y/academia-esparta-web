@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas de Ecuaciones - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        :root { --primary: #0e9343; --accent: #fbc02d; --bg-crema: #fffdf2; }
+        body { font-family: 'Fredoka', sans-serif; background-color: #ffffff; margin: 0; padding: 40px 20px; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        .page-header { border-bottom: 2px solid var(--primary); display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 5px; margin-bottom: 20px; }
+        .page-header h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; }
+        .page-header span { font-size: 0.8rem; color: var(--primary); font-weight: bold; }
+
+        .enunciado-top { background-color: #f9f9f9; border-radius: 10px; padding: 20px; margin-bottom: 20px; border: 1px solid #eee; line-height: 1.5; }
+        .enunciado-top b { color: var(--primary); }
+
+        .sistema-box { background-color: var(--primary); color: white; padding: 20px 30px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .sistema-math { font-size: 1.2rem; }
+
+        .desarrollo-box { background-color: var(--bg-crema); border-left: 6px solid var(--accent); padding: 25px; border-radius: 0 10px 10px 0; margin-bottom: 80px; }
+        .paso-titulo { color: var(--primary); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 20px 0 10px 0; display: block; }
+        .math-center { text-align: center; margin: 15px 0; font-weight: bold; font-size: 1.1rem; }
+        .highlight { color: var(--primary); font-weight: bold; }
+
+        .no-print { text-align: right; margin-bottom: 30px; }
+        .btn-pdf { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Fredoka'; font-weight: bold; }
+
+        @media print { .no-print { display: none; } .desarrollo-box { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="no-print">
+        <button class="btn-pdf" onclick="window.print()">📥 DESCARGAR PDF</button>
+    </div>
+
+    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>27.</b> He cambiado un montón de monedas de 20 céntimos por monedas de 1 €, de manera que ahora tengo 24 monedas menos que antes. ¿Cuántas monedas de 20 céntimos tenía?</div>
+    <div class="sistema-box"><h3>SISTEMA 27</h3><div class="sistema-math">$ \begin{cases} 0.20x = y \\ x - 24 = y \end{cases} $</div></div>
+    <div class="desarrollo-box">
+        <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
+        <p>1. <b>Letras:</b> $x$ (monedas de 0.20€) e $y$ (monedas de 1€).<br>2. <b>Valor:</b> El dinero no cambia, así que $0.20 \cdot x$ es igual al valor de las de 1€ ($1 \cdot y$).<br>3. <b>Cantidad:</b> Ahora tengo 24 menos: $x - 24 = y$.</p>
+        <span class="paso-titulo">RESOLUCIÓN</span>
+        <p>Igualamos las $y$:</p>
+        <div class="math-center">$0.20x = x - 24 \implies 24 = 0.80x \implies x = 30$</div>
+        <p class="highlight">RESULTADO: Tenía 30 monedas de 20 céntimos.</p>
+    </div>
+
+    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>28.</b> Tengo dos tabletas de chocolate, una con 60% de cacao y otra con 85%. ¿Qué cantidad fundir de cada una para obtener 300g con un 75% de cacao?</div>
+    <div class="sistema-box"><h3>SISTEMA 28</h3><div class="sistema-math">$ \begin{cases} x + y = 300 \\ 0.60x + 0.85y = 225 \end{cases} $</div></div>
+    <div class="desarrollo-box">
+        <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
+        <p>1. <b>Letras:</b> $x$ (gramos al 60%) e $y$ (gramos al 85%).<br>2. <b>Mezcla:</b> El total son 300g $\implies x+y=300$.<br>3. <b>Cacao:</b> Queremos el 75% de 300, que son 225g de cacao puro.</p>
+        <span class="paso-titulo">RESOLUCIÓN</span>
+        <div class="math-center">$x = 300 - y \implies 0.60(300-y) + 0.85y = 225$</div>
+        <div class="math-center">$180 - 0.60y + 0.85y = 225 \implies 0.25y = 45 \implies y = 180$</div>
+        <p class="highlight">RESULTADO: 120g de la primera y 180g de la segunda.</p>
+    </div>
+
+    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>29.</b> Mezclamos aceite de 6,50 €/L con otro de 11 €/L para obtener 50L a 8,30 €/L. ¿Cuántos litros de cada uno?</div>
+    <div class="sistema-box"><h3>SISTEMA 29</h3><div class="sistema-math">$ \begin{cases} x + y = 50 \\ 6.5x + 11y = 415 \end{cases} $</div></div>
+    <div class="desarrollo-box">
+        <span class="paso-titulo">PLANTEAMIENTO</span>
+        <p>Total litros ($x+y=50$). Precio total: $50 \cdot 8.30 = 415€$.</p>
+        <span class="paso-titulo">RESOLUCIÓN</span>
+        <div class="math-center">$11(50-x) + 6.5x = 415 \implies 550 - 11x + 6.5x = 415 \implies 135 = 4.5x \implies x = 30$</div>
+        <p class="highlight">RESULTADO: 30L de aceite barato y 20L del caro.</p>
+    </div>
+
+    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>30.</b> En dos autobuses viajan 120 personas. Si del más lleno pasan 2/5 al otro, ambos llevan lo mismo.</div>
+    <div class="sistema-box"><h3>SISTEMA 30</h3><div class="sistema-math">$ \begin{cases} x + y = 120 \\ x - \frac{2}{5}x = y + \frac{2}{5}x \end{cases} $</div></div>
+    <div class="desarrollo-box">
+        <p>Simplificando la segunda: $\frac{3}{5}x = y + \frac{2}{5}x \implies \frac{1}{5}x = y \implies x = 5y$.</p>
+        <div class="math-center">$5y + y = 120 \implies 6y = 120 \implies y = 20, x = 100$</div>
+        <p class="highlight">RESULTADO: Uno lleva 100 personas y el otro 20.</p>
+    </div>
+
+    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>31.</b> Fábrica de macetas. Si hago 250/día faltan 150. Si hago 260/día sobran 80. ¿Días de plazo y macetas?</div>
+    <div class="sistema-box"><h3>SISTEMA 31</h3><div class="sistema-math">$ \begin{cases} 250x = y - 150 \\ 260x = y + 80 \end{cases} $</div></div>
+    <div class="desarrollo-box">
+        <p>$x$ = días, $y$ = macetas totales.</p>
+        <div class="math-center">$y = 250x + 150 \implies 260x = (250x + 150) + 80 \implies 10x = 230 \implies x = 23$</div>
+        <p class="highlight">RESULTADO: 23 días de plazo y 5900 macetas.</p>
+    </div>
+
+    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>32.</b> Málaga y San Fernando (234 km). Bus y Tren salen a la vez y tardan 1.5h en cruzarse. El tren va 5 km/h más rápido.</div>
+    <div class="sistema-box"><h3>SISTEMA 32</h3><div class="sistema-math">$ \begin{cases} y = x + 5 \\ 1.5x + 1.5y = 234 \end{cases} $</div></div>
+    <div class="desarrollo-box">
+        <p>$x$ (v. bus), $y$ (v. tren). Suma de distancias = total.</p>
+        <div class="math-center">$1.5x + 1.5(x+5) = 234 \implies 3x + 7.5 = 234 \implies 3x = 226.5 \implies x = 75.5$</div>
+        <p class="highlight">RESULTADO: Bus a 75.5 km/h y Tren a 80.5 km/h.</p>
+    </div>
+
+    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>33.</b> Bus a 90 km/h sale 25 km antes que un coche a 110 km/h. ¿Cuánto tarda en alcanzarlo?</div>
+    <div class="sistema-box"><h3>SISTEMA 33</h3><div class="sistema-math">$ \begin{cases} x = 90t + 25 \\ x = 110t \end{cases} $</div></div>
+    <div class="desarrollo-box">
+        <p>$x$ distancia, $t$ tiempo. Igualamos distancias:</p>
+        <div class="math-center">$110t = 90t + 25 \implies 20t = 25 \implies t = 1.25 \text{ horas}$</div>
+        <p class="highlight">RESULTADO: Tarda 1 hora y 15 min. Recorre 137.5 km.</p>
+    </div>
+
+    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>34.</b> Comparar dos empresas de mensajería A y B con IVA del 21%.</div>
+    <div class="sistema-box"><h3>SISTEMA 34</h3><div class="sistema-math">$ \begin{cases} 1.21(2x + y) = 21.78 \\ 1.21(x-1 + y+2) = 13.31 \end{cases} $</div></div>
+    <div class="desarrollo-box">
+        <p>$x$ (precio/kg), $y$ (fijo urgente). Quitando el IVA (dividiendo por 1.21):</p>
+        <div class="math-center">$2x + y = 18 \text{ y } x + y = 10$</div>
+        <p>Restando ecuaciones: $x = 8, y = 2$.</p>
+        <p class="highlight">RESULTADO: Empresa A: 8€/kg y 2€ fijo. Empresa B: 7€/kg y 4€ fijo.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
