@@ -3,122 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Cuadro Resumen Sintaxis - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <title>Matemáticas 4º ESO - Vectores - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --negro: #333; --gris: #f8f9fa; }
-        body { font-family: 'Open Sans', sans-serif; background: var(--gris); margin: 0; padding: 20px; color: #333; }
+        :root { --esparta-green: #2e7d32; --light-bg: #f8f9fa; --formula-box: #ffffff; --example-box: #fffde7; }
         
-        .header-web { text-align: center; margin-bottom: 30px; border-bottom: 4px solid var(--verde); background: white; padding: 20px; }
-        .header-web h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; color: var(--negro); }
-        .header-web p { font-style: italic; color: #666; margin: 5px 0 0; }
-
-        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.95rem; }
-        th { background: var(--negro); color: white; font-family: 'Montserrat'; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
-        th, td { border: 1px solid #dee2e6; padding: 15px; vertical-align: top; line-height: 1.5; }
+        body { font-family: 'Lora', serif; background-color: #e9ecef; margin: 0; padding: 40px 20px; color: #212529; line-height: 1.8; }
         
-        /* Columna de Funciones en verde espartano */
-        td:first-child { font-weight: 800; color: var(--verde); background: #f1f8f1; width: 15%; }
-        
-        .sustitucion { color: #d32f2f; font-weight: 600; }
-        .ejemplo-frase { background: #fffde7; padding: 2px 4px; border-radius: 3px; font-weight: 600; }
+        /* PORTADA DEL CAPÍTULO */
+        .page { max-width: 850px; margin: 0 auto; background: white; padding: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 2px; position: relative; }
+        .page::after { content: "UNIDAD 5: GEOMETRÍA ANALÍTICA"; position: absolute; top: 20px; right: 60px; font-family: 'Open Sans'; font-size: 0.7rem; color: #adb5bd; letter-spacing: 1px; }
 
-        .footer-note { margin-top: 30px; padding: 15px; background: #eee; border-radius: 8px; font-size: 0.85rem; }
+        header { border-bottom: 3px solid var(--esparta-green); margin-bottom: 40px; }
+        header h1 { font-family: 'Montserrat'; font-size: 2.5rem; margin: 0; color: #1a1a1a; }
+        .subtitle { font-family: 'Open Sans'; color: var(--esparta-green); font-weight: 800; margin-bottom: 10px; }
+
+        h2 { font-family: 'Montserrat'; font-size: 1.5rem; margin-top: 40px; color: #1a1a1a; border-left: 6px solid var(--esparta-green); padding-left: 15px; }
+
+        /* BLOQUES ESTILO LIBRO */
+        .definition { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 20px; border-radius: 5px; margin: 25px 0; }
+        .definition b { color: var(--esparta-green); font-family: 'Open Sans'; text-transform: uppercase; font-size: 0.8rem; }
+
+        .formula-highlight { 
+            background: var(--formula-box); 
+            border: 2px solid #333; 
+            padding: 30px; 
+            margin: 30px 0; 
+            text-align: center; 
+            font-size: 1.4rem; 
+            box-shadow: 8px 8px 0px #eee;
+            position: relative;
+        }
+        .formula-label { position: absolute; top: -12px; left: 20px; background: white; padding: 0 10px; font-family: 'Open Sans'; font-size: 0.7rem; font-weight: bold; border: 2px solid #333; }
+
+        .example { background: var(--example-box); border: 1px solid #ffe082; padding: 25px; border-radius: 5px; margin: 25px 0; }
+        .example-title { color: #d32f2f; font-family: 'Open Sans'; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; display: block; margin-bottom: 10px; }
+        .solution { margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ccc; font-style: italic; color: #444; }
+
+        /* TABLA DE OPERACIONES */
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; font-family: 'Open Sans'; font-size: 0.9rem; }
+        th { background: #343a40; color: white; padding: 12px; text-align: left; }
+        td { border: 1px solid #dee2e6; padding: 12px; }
 
         @media print {
-            .no-print { display: none; }
             body { background: white; padding: 0; }
-            .container { box-shadow: none; max-width: 100%; padding: 0; }
-            th { background: #444 !important; color: white !important; }
-            td:first-child { background: #f9f9f9 !important; color: black !important; }
+            .page { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 30px; }
+            .no-print { display: none; }
         }
 
-        .btn-print { background: var(--verde); color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-family: 'Montserrat'; font-weight: bold; margin-bottom: 15px; }
+        .btn-print { background: var(--esparta-green); color: white; border: none; padding: 15px 30px; border-radius: 5px; font-family: 'Montserrat'; font-weight: bold; cursor: pointer; margin-bottom: 20px; transition: 0.3s; }
+        .btn-print:hover { background: #1b5e20; }
     </style>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/MathJax.js"></script>
 </head>
 <body>
 
-<div class="header-web">
-    <h1>ACADEMIA ESPARTA</h1>
-    <p>Cuadro-Resumen de los Complementos del Verbo</p>
-</div>
+<div class="page">
+    <button class="btn-print no-print" onclick="window.print()">🖨️ IMPRIMIR TEMA COMPLETO</button>
 
-<div class="container">
-    <button class="btn-print no-print" onclick="window.print()">🖨️ IMPRIMIR CUADRO COMPLETO</button>
+    <header>
+        <div class="subtitle">MATEMÁTICAS ORIENTADAS A LAS ENSEÑANZAS ACADÉMICAS</div>
+        <h1>5. Vectores en el Plano</h1>
+    </header>
+
+    <p>En este capítulo estudiaremos los vectores desde un punto de vista analítico, herramientas esenciales para describir magnitudes físicas como la fuerza o la velocidad en el plano real $\mathbb{R}^2$.</p>
+
+    <h2>5.1 Concepto de Vector y Componentes</h2>
+    <div class="definition">
+        <b>Definición:</b> Un vector fijo $\vec{AB}$ es un segmento orientado que tiene su origen en el punto $A(x_1, y_1)$ y su extremo en el punto $B(x_2, y_2)$.
+    </div>
+
+    <p>Para trabajar con ellos de forma numérica, definimos sus <b>componentes</b> restando las coordenadas de sus puntos:</p>
+
+    <div class="formula-highlight">
+        <div class="formula-label">CÁLCULO DE COMPONENTES</div>
+        $$\vec{AB} = (x_2 - x_1, \, y_2 - y_1)$$
+    </div>
+
+    <div class="example">
+        <span class="example-title">Ejemplo Resuelto 1</span>
+        Dados los puntos $A(1, -2)$ y $B(4, 5)$, halla las componentes del vector $\vec{AB}$.
+        <div class="solution">
+            $\vec{AB} = (4 - 1, \, 5 - (-2)) = (3, \, 5 + 2) = \mathbf{(3, 7)}$
+        </div>
+    </div>
+
+    <h2>5.2 El Módulo de un Vector</h2>
+    <p>El módulo representa la longitud del vector. Matemáticamente, es la raíz cuadrada de la suma de los cuadrados de sus componentes (Teorema de Pitágoras).</p>
+
+    <div class="formula-highlight">
+        <div class="formula-label">FÓRMULA DEL MÓDULO</div>
+        $$|\vec{v}| = \sqrt{v_1^2 + v_2^2}$$
+    </div>
+
+    <div class="example">
+        <span class="example-title">Ejemplo Resuelto 2</span>
+        Calcula el módulo del vector $\vec{u} = (-6, 8)$.
+        <div class="solution">
+            $|\vec{u}| = \sqrt{(-6)^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = \mathbf{10}$
+        </div>
+    </div>
+
+    <h2>5.3 Operaciones con Vectores</h2>
+    <p>Los vectores se pueden sumar entre sí o multiplicar por un número real (escalar) de forma sencilla:</p>
 
     <table>
         <thead>
             <tr>
-                <th>Funciones</th>
-                <th>Concepto</th>
-                <th>¿Cómo distinguirlo?</th>
-                <th>Ejemplos</th>
+                <th>Operación</th>
+                <th>Definición Analítica</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Sujeto (Suj)</td>
-                <td>Persona, animal o cosa que realiza la acción o de quien se dice algo.</td>
-                <td>Concordancia en nº y persona con el verbo. Nunca lleva preposición (salvo excepciones).</td>
-                <td>- <span class="ejemplo-frase">La secretaria</span> ha salido tarde.<br>- <span class="ejemplo-frase">Las secretarias</span> han salido tarde.</td>
+                <td>Suma de vectores</td>
+                <td>$\vec{u} + \vec{v} = (u_1 + v_1, \, u_2 + v_2)$</td>
             </tr>
             <tr>
-                <td>C. Directo (CD)</td>
-                <td>Objeto o persona sobre la que recae la acción directamente.</td>
-                <td>Sustituible por <span class="sustitucion">lo, la, los, las</span>. Al pasar a pasiva se convierte en Sujeto Paciente.</td>
-                <td>- He visto <span class="ejemplo-frase">a tu hermano</span> (Lo he visto).<br>- Comí <span class="ejemplo-frase">manzanas</span> (Las comí).</td>
+                <td>Resta de vectores</td>
+                <td>$\vec{u} - \vec{v} = (u_1 - v_1, \, u_2 - v_2)$</td>
             </tr>
             <tr>
-                <td>C. Indirecto (CI)</td>
-                <td>Destinatario de la acción verbal, el que recibe el daño o provecho.</td>
-                <td>Sustituible por <span class="sustitucion">le, les</span> (o "se"). Siempre lleva la preposición "a".</td>
-                <td>- Mandé la carta <span class="ejemplo-frase">a mi prima</span>.<br>- <span class="ejemplo-frase">Le</span> mandé la carta.</td>
-            </tr>
-            <tr>
-                <td>C. Circunstancial (CC)</td>
-                <td>Expresa lugar, tiempo, modo, cantidad, causa, etc.</td>
-                <td>Puede ir con o sin preposición. Responde a: ¿Dónde?, ¿Cuándo?, ¿Cómo?, ¿Con quién?</td>
-                <td>- Fui <span class="ejemplo-frase">a la playa</span> (Lugar).<br>- Vendré <span class="ejemplo-frase">mañana</span> (Tiempo).<br>- Lo hizo <span class="ejemplo-frase">con desgana</span> (Modo).</td>
-            </tr>
-            <tr>
-                <td>Atributo (Atrib)</td>
-                <td>Cualidad o estado del sujeto con verbos copulativos.</td>
-                <td>Acompaña a <span class="sustitucion">ser, estar, parecer</span>. Sustituible por "lo".</td>
-                <td>- Mi vecina es <span class="ejemplo-frase">enfermera</span>.<br>- Felipe parece <span class="ejemplo-frase">cansado</span>.</td>
-            </tr>
-            <tr>
-                <td>C. Predicativo (CPred)</td>
-                <td>Igual que el atributo pero con verbos NO copulativos.</td>
-                <td>Concuerda con sujeto/CD. <span class="sustitucion">NO</span> se puede sustituir por "lo".</td>
-                <td>- Felipe salió del examen <span class="ejemplo-frase">cansado</span>.</td>
-            </tr>
-            <tr>
-                <td>C. Régimen (CRég)</td>
-                <td>Sintagma preposicional exigido por el verbo para tener sentido.</td>
-                <td>Lleva una preposición fija (confiar <span class="sustitucion">en</span>, quejarse <span class="sustitucion">de</span>...).</td>
-                <td>- No te preocupes <span class="ejemplo-frase">por ese problema</span>.<br>- Pienso <span class="ejemplo-frase">en mi familia</span>.</td>
-            </tr>
-            <tr>
-                <td>C. Agente (CAg)</td>
-                <td>Indica quién realiza la acción en oraciones pasivas.</td>
-                <td>Aparece solo en pasiva. Siempre empieza por la preposición <span class="sustitucion">por</span>.</td>
-                <td>- La noticia fue difundida <span class="ejemplo-frase">por un periodista</span>.</td>
-            </tr>
-            <tr>
-                <td>Modificadores Oracionales</td>
-                <td>Afectan a toda la oración, no solo al verbo.</td>
-                <td>Van separados por comas. Interjecciones, vocativos, adverbios de opinión...</td>
-                <td>- <span class="ejemplo-frase">Francamente</span>, no sé qué hizo.<br>- <span class="ejemplo-frase">Luis</span>, recoge tu ropa.</td>
+                <td>Producto por un número $k$</td>
+                <td>$k \cdot \vec{u} = (k \cdot u_1, \, k \cdot u_2)$</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="footer-note">
-        <strong>RECUERDA:</strong> No te olvides de los complementos de núcleo no verbal como: 
-        <em>Música agradable</em> (GAdj/CN), <em>Pastel de chocolate</em> (GP/CN), <em>Harto de ti</em> (GP/CAdj), <em>Lejos de mi casa</em> (GP/CAdv).
+    <div class="example">
+        <span class="example-title">Ejemplo Resuelto 3</span>
+        Si $\vec{a} = (2, 3)$ y $\vec{b} = (1, -1)$, calcula el vector $\vec{w} = 3\vec{a} - 2\vec{b}$.
+        <div class="solution">
+            $3\vec{a} = (6, 9)$ <br>
+            $2\vec{b} = (2, -2)$ <br>
+            $\vec{w} = (6 - 2, \, 9 - (-2)) = \mathbf{(4, 11)}$
+        </div>
     </div>
+
+    <h2 style="page-break-before: always;">5.4 Punto Medio de un Segmento</h2>
+    <p>Dada la importancia de localizar el centro de un segmento $AB$, utilizamos la media aritmética de sus coordenadas:</p>
+
+    <div class="formula-highlight">
+        <div class="formula-label">PUNTO MEDIO $M$</div>
+        $$M = \left( \frac{x_1 + x_2}{2}, \, \frac{y_1 + y_2}{2} \right)$$
+    </div>
+
+    <footer style="margin-top: 80px; text-align: center; font-size: 0.8rem; color: #adb5bd; border-top: 1px solid #eee; padding-top: 20px;">
+        © 2026 Academia Esparta - Departamento de Matemáticas. <br>
+        "En la pizarra y en la batalla, precisión absoluta".
+    </footer>
 </div>
 
 </body>
