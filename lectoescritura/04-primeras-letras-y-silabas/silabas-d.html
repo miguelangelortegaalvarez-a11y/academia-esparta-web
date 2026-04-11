@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Letra T - Academia Esparta</title>
+    <title>Letra D - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
@@ -31,48 +31,51 @@
 <body>
     <header>
         <a href="index.html" class="back-link">← VOLVER</a>
-        <div style="font-weight:700; font-size:1.6rem; color:var(--primary);">Cuaderno Letra T 🐯</div>
+        <div style="font-weight:700; font-size:1.6rem; color:var(--primary);">Cuaderno Letra D 🦖</div>
     </header>
     <div class="book-slider">
-        <div class="page active" id="p1" data-total="3" data-target="TA" data-options="TA,TE,TA,TO,TA"><h2>Busca "TA"</h2><div class="options-container"></div></div>
-        <div class="page" id="p2" data-total="3" data-target="TE" data-options="TE,TI,TE,TU,TE"><h2>Busca "TE"</h2><div class="options-container"></div></div>
-        <div class="page" id="p3" data-total="3" data-target="TI" data-options="TI,TA,TI,TO,TI"><h2>Busca "TI"</h2><div class="options-container"></div></div>
-        <div class="page" id="p4" data-total="3" data-target="TO" data-options="TO,TU,TO,TE,TO"><h2>Busca "TO"</h2><div class="options-container"></div></div>
-        <div class="page" id="p5" data-total="3" data-target="TU" data-options="TU,TI,TU,TA,TU"><h2>Busca "TU"</h2><div class="options-container"></div></div>
+        <div class="page active" id="p1" data-total="3" data-target="DA" data-options="DA,DE,DA,DO,DA"><h2>Busca "DA"</h2><div class="options-container"></div></div>
+        <div class="page" id="p2" data-total="3" data-target="DE" data-options="DE,DI,DE,DU,DE"><h2>Busca "DE"</h2><div class="options-container"></div></div>
+        <div class="page" id="p3" data-total="3" data-target="DI" data-options="DI,DA,DI,DO,DI"><h2>Busca "DI"</h2><div class="options-container"></div></div>
+        <div class="page" id="p4" data-total="3" data-target="DO" data-options="DO,DU,DO,DE,DO"><h2>Busca "DO"</h2><div class="options-container"></div></div>
+        <div class="page" id="p5" data-total="3" data-target="DU" data-options="DU,DI,DU,DA,DU"><h2>Busca "DU"</h2><div class="options-container"></div></div>
+        
         <div class="page" id="p6" data-total="5">
             <h2>Completa la palabra</h2>
             <div style="text-align: center;">
-                <div id="word-emoji" style="font-size: 7rem;">☕</div>
-                <div id="word-display" style="font-size: 4.5rem; font-weight: bold; margin-bottom: 20px;"><span id="word-part-1">__</span><span id="word-part-2">ZA</span></div>
+                <div id="word-emoji" style="font-size: 7rem;">🦖</div>
+                <div id="word-display" style="font-size: 4.5rem; font-weight: bold; margin-bottom: 20px;"><span id="word-part-1">__</span><span id="word-part-2">NO</span></div>
                 <div id="options-area"></div>
             </div>
         </div>
+
         <div class="page" id="p7" data-total="3">
             <h2>Une con su dibujo</h2>
             <div class="match-container">
                 <div class="match-col">
-                    <div class="match-box" id="w1" onclick="match('w1', 'taza')">TAZA</div>
-                    <div class="match-box" id="w2" onclick="match('w2', 'tito')">TITO</div>
-                    <div class="match-box" id="w3" onclick="match('w3', 'tubo')">TUBO</div>
+                    <div class="match-box" id="w1" onclick="match('w1', 'dado')">DADO</div>
+                    <div class="match-box" id="w2" onclick="match('w2', 'dedo')">DEDO</div>
+                    <div class="match-box" id="w3" onclick="match('w3', 'dino')">DINO</div>
                 </div>
                 <div class="match-col">
-                    <div class="match-box" id="i1" onclick="match('i1', 'tito')">👦</div>
-                    <div class="match-box" id="i2" onclick="match('i2', 'taza')">☕</div>
-                    <div class="match-box" id="i3" onclick="match('i3', 'tubo')">🧪</div>
+                    <div class="match-box" id="i1" onclick="match('i1', 'dedo')">☝️</div>
+                    <div class="match-box" id="i2" onclick="match('i2', 'dado')">🎲</div>
+                    <div class="match-box" id="i3" onclick="match('i3', 'dino')">🦖</div>
                 </div>
             </div>
         </div>
         <button class="nav-btn prev" id="btnPrev" onclick="navegar(-1)" style="display: none;">ATRÁS</button>
         <button class="nav-btn next" id="btnNext" onclick="navegar(1)">SIGUIENTE</button>
     </div>
+
     <script>
         let paginaActual = 1, totalPaginas = 7, aciertos = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0}, selId = null, selVal = null;
         const wordGameData = [
-            { emoji: '☕', p2: 'ZA', options: ['TA', 'TE', 'TI'], correct: 'TA', final: 'TAZA' },
-            { emoji: '👦', p2: 'TO', options: ['TI', 'TA', 'TU'], correct: 'TI', final: 'TITO' },
-            { emoji: '🍅', p2: 'MATE', options: ['TO', 'TU', 'TA'], correct: 'TO', final: 'TOMATE' },
-            { emoji: '🧪', p2: 'BO', options: ['TU', 'TI', 'TE'], correct: 'TU', final: 'TUBO' },
-            { emoji: '🍴', p2: 'NEDOR', options: ['TE', 'TI', 'TA'], correct: 'TE', final: 'TENEDOR' }
+            { emoji: '🎲', p2: 'DO', options: ['DA', 'DE', 'DI'], correct: 'DA', final: 'DADO' },
+            { emoji: '☝️', p2: 'DO', options: ['DE', 'DI', 'DU'], correct: 'DE', final: 'DEDO' },
+            { emoji: '👩', p2: 'MA', options: ['DA', 'DE', 'DI'], correct: 'DA', final: 'DAMA' },
+            { emoji: '🏜️', p2: 'NA', options: ['DU', 'DO', 'DA'], correct: 'DU', final: 'DUNA' },
+            { emoji: '🦖', p2: 'NO', options: ['DI', 'DE', 'DA'], correct: 'DI', final: 'DINO' }
         ];
         let currentWordIndex = 0;
         function shuffle(a) { return a.sort(() => Math.random() - 0.5); }
