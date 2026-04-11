@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuaderno Letra L - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --primary: #0e9343; --dark: #063c24; --light-green: #e8f5e9; --bg: #f0f2f5; }
+        body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; }
+        
+        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); position: relative; z-index: 10; }
+        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--primary); font-weight: bold; }
+
+        .book-slider { width: 100%; flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative; }
+        .page { 
+            display: none; width: 90%; max-width: 800px; height: 75vh; 
+            background: white; border-radius: 30px; padding: 2rem; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 2px solid #eee;
+            flex-direction: column; align-items: center; justify-content: center;
+            animation: fadeIn 0.4s ease;
+        }
+        .page.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        h2 { color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem; text-align: center; }
+
+        .tap-item { 
+            font-size: 3rem; cursor: pointer; padding: 15px 25px; border-radius: 20px; 
+            margin: 10px; border: 4px solid transparent; transition: 0.2s; background: #f9f9f9;
+            display: inline-block; color: #333;
+        }
+        .tap-item.selected-correct { border-color: var(--primary); background: var(--light-green); color: var(--primary); pointer-events: none; }
+
+        .match-container { display: flex; justify-content: space-around; width: 100%; gap: 15px; }
+        .match-col { display: flex; flex-direction: column; gap: 10px; }
+        .match-box { 
+            padding: 12px; background: #f9f9f9; border: 3px solid #eee; 
+            border-radius: 15px; font-size: 1.8rem; cursor: pointer; text-align: center; min-width: 140px;
+        }
+        .match-box.selected { border-color: #fb8c00; background: #fff3e0; }
+        .match-box.correct { border-color: var(--primary); background: var(--light-green); color: var(--primary); pointer-events: none; }
+
+        .nav-btn { 
+            position: absolute; bottom: 30px; background: var(--primary); color: white; 
+            border: none; padding: 12px 35px; border-radius: 50px; font-size: 1.4rem; 
+            font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 var(--dark); z-index: 20;
+            text-transform: uppercase; transition: 0.3s;
+        }
+        .nav-btn:active { transform: translateY(4px); box-shadow: none; }
+        .next { right: 40px; display: none; }
+        .prev { left: 40px; background: #999; box-shadow: 0 5px 0 #666; }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-link">← VOLVER</a>
+        <div style="font-weight:700; font-size:1.6rem; color:var(--primary);">Cuaderno Letra L 🦁</div>
+    </header>
+
+    <div class="book-slider">
+        
+        <div class="page active" id="p1" data-total="3" data-target="LA" data-options="LA,LE,LA,LO,LA">
+            <h2>1. Busca la sílaba "LA"</h2>
+            <div class="options-container"></div>
+        </div>
+
+        <div class="page" id="p2" data-total="3" data-target="LE" data-options="LE,LI,LE,LU,LE">
+            <h2>2. Busca la sílaba "LE"</h2>
+            <div class="options-container"></div>
+        </div>
+
+        <div class="page" id="p3" data-total="3" data-target="LI" data-options="LI,LA,LI,LO,LI">
+            <h2>3. Busca la sílaba "LI"</h2>
+            <div class="options-container"></div>
+        </div>
+
+        <div class="page" id="p4" data-total="3" data-target="LO" data-options="LO,LU,LO,LE,LO">
+            <h2>4. Busca la sílaba "LO"</h2>
+            <div class="options-container"></div>
+        </div>
+
+        <div class="page" id="p5" data-total="3" data-target="LU" data-options="LU,LI,LU,LA,LU">
+            <h2>5. Busca la sílaba "LU"</h2>
+            <div class="options-container"></div>
+        </div>
+        
+        <div class="page" id="p6" data-total="5">
+            <h2>6. Completa la palabra</h2>
+            <div id="word-game-area" style="text-align: center;">
+                <div id="word-emoji" style="font-size: 7rem; margin-bottom: 10px;">🔍</div>
+                <div id="word-display" style="font-size: 4.5rem; letter-spacing: 5px; color: var(--dark); font-weight: bold; margin-bottom: 20px;">
+                    <span id="word-part-1">__</span><span id="word-part-2">PA</span>
+                </div>
+                <div id="options-area"></div>
+            </div>
+        </div>
+
+        <div class="page" id="p7" data-total="3">
+            <h2>7. Une la palabra con su dibujo</h2>
+            <div class="match-container">
+                <div class="match-col">
+                    <div class="match-box" id="w1" onclick="match('w1', 'luna')">LUNA</div>
+                    <div class="match-box" id="w2" onclick="match('w2', 'loro')">LORO</div>
+                    <div class="match-box" id="w3" onclick="match('w3', 'leon')">LEÓN</div>
+                </div>
+                <div class="match-col">
+                    <div class="match-box" id="i1" onclick="match('i1', 'loro')">🦜</div> 
+                    <div class="match-box" id="i2" onclick="match('i2', 'leon')">🦁</div>
+                    <div class="match-box" id="i3" onclick="match('i3', 'luna')">🌙</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="nav-btn prev" id="btnPrev" onclick="navegar(-1)" style="display: none;">ATRÁS</button>
+        <button class="nav-btn next" id="btnNext" onclick="navegar(1)">SIGUIENTE</button>
+    </div>
+
+    <script>
+        let paginaActual = 1, totalPaginas = 7;
+        let aciertos = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0};
+        let selId = null, selVal = null;
+
+        const wordGameData = [
+            { emoji: '🔍', p1: '__', p2: 'PA', options: ['LU', 'LA', 'LO'], correct: 'LU', final: 'LUPA' },
+            { emoji: '🦜', p1: '__', p2: 'RO', options: ['LE', 'LO', 'LI'], correct: 'LO', final: 'LORO' },
+            { emoji: '🧶', p1: '__', p2: 'NA', options: ['LA', 'LU', 'LI'], correct: 'LA', final: 'LANA' },
+            { emoji: '🦁', p1: '__', p2: 'ÓN', options: ['LE', 'LI', 'LA'], correct: 'LE', final: 'LEÓN' },
+            { emoji: '🌙', p1: '__', p2: 'NA', options: ['LU', 'LO', 'LA'], correct: 'LU', final: 'LUNA' }
+        ];
+        let currentWordIndex = 0;
+
+        function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
+
+        function loadSearchPage(num) {
+            const page = document.getElementById(`p${num}`);
+            const container = page.querySelector('.options-container');
+            if (!container) return;
+            container.innerHTML = '';
+            const target = page.dataset.target;
+            const options = shuffle(page.dataset.options.split(','));
+            options.forEach(opt => {
+                const span = document.createElement('span');
+                span.className = 'tap-item';
+                span.innerText = opt;
+                span.onclick = () => checkSimple(span, opt === target, num);
+                container.appendChild(span);
+            });
+        }
+
+        function navegar(dir) {
+            document.getElementById(`p${paginaActual}`).classList.remove('active');
+            paginaActual += dir;
+            if(paginaActual > totalPaginas) { finalizar(); return; }
+            const nuevaPagina = document.getElementById(`p${paginaActual}`);
+            nuevaPagina.classList.add('active');
+            if (paginaActual <= 5) loadSearchPage(paginaActual);
+            if (paginaActual === 6) { currentWordIndex = 0; loadWordChallenge(); }
+            actualizarInterfaz();
+        }
+
+        function actualizarInterfaz() {
+            document.getElementById('btnPrev').style.display = paginaActual === 1 ? 'none' : 'block';
+            const btnN = document.getElementById('btnNext');
+            const obj = parseInt(document.getElementById(`p${paginaActual}`).dataset.total);
+            btnN.style.display = aciertos[paginaActual] >= obj ? 'block' : 'none';
+            btnN.innerText = paginaActual === totalPaginas ? 'FINALIZAR' : 'SIGUIENTE';
+        }
+
+        function checkSimple(el, ok, pag) {
+            if(ok) {
+                if(!el.classList.contains('selected-correct')) {
+                    el.classList.add('selected-correct'); aciertos[pag]++;
+                    confetti({ particleCount: 20, colors:['#0e9343'] }); actualizarInterfaz();
+                }
+            } else { el.style.animation = 'shake 0.3s'; setTimeout(()=>el.style.animation='', 300); }
+        }
+
+        function loadWordChallenge() {
+            const data = wordGameData[currentWordIndex];
+            document.getElementById('word-emoji').innerText = data.emoji;
+            const wordDisplay = document.getElementById('word-display');
+            wordDisplay.innerHTML = '<span id="word-part-1">__</span><span id="word-part-2">' + data.p2 + '</span>';
+            const optionsArea = document.getElementById('options-area');
+            optionsArea.innerHTML = '';
+            shuffle([...data.options]).forEach(opt => {
+                const span = document.createElement('span');
+                span.className = 'tap-item';
+                span.innerText = opt;
+                span.onclick = () => checkWordOption(span, opt);
+                optionsArea.appendChild(span);
+            });
+        }
+
+        function checkWordOption(el, selectedOpt) {
+            const data = wordGameData[currentWordIndex];
+            if (selectedOpt === data.correct) {
+                el.classList.add('selected-correct');
+                confetti({ particleCount: 50, spread: 70 });
+                const wordDisplay = document.getElementById('word-display');
+                wordDisplay.innerHTML = `<span style="color: var(--primary); animation: popIn 0.5s ease;">${data.final}</span>`;
+                aciertos[6]++;
+                setTimeout(() => {
+                    currentWordIndex++;
+                    if (currentWordIndex < wordGameData.length) loadWordChallenge();
+                    else {
+                        actualizarInterfaz();
+                        document.getElementById('options-area').innerHTML = '<p style="color:var(--primary); font-weight:bold;">¡FANTÁSTICO!</p>';
+                    }
+                }, 1500);
+            } else { el.style.animation = 'shake 0.3s'; setTimeout(() => el.style.animation = '', 300); }
+        }
+
+        function match(id, val) {
+            const el = document.getElementById(id);
+            if(el.classList.contains('correct')) return;
+            if(!selId) { selId = id; selVal = val; el.classList.add('selected'); }
+            else {
+                const prev = document.getElementById(selId);
+                if(selId[0] !== id[0] && selVal === val) {
+                    el.classList.add('correct'); prev.classList.add('correct');
+                    aciertos[paginaActual]++; confetti({ particleCount: 40 });
+                } else {
+                    el.style.animation = 'shake 0.3s'; prev.style.animation = 'shake 0.3s';
+                    setTimeout(()=> { el.style.animation=''; prev.style.animation=''; }, 300);
+                }
+                prev.classList.remove('selected'); selId = null; selVal = null;
+                actualizarInterfaz();
+            }
+        }
+
+        function finalizar() {
+            confetti({ particleCount: 200, spread: 100 });
+            setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+        }
+
+        loadSearchPage(1);
+    </script>
+</body>
+</html>
