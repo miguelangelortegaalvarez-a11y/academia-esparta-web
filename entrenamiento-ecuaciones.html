@@ -4,203 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
-    <title>Memoria Espartana de Erik - Academia Esparta</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <title>Duelo de Memoria - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --verde-oscuro: #2e7d32; --gris: #f4f7f6; --blanco: #ffffff; --fondo-pieza: #333333; }
+        :root { --verde: #4CAF50; --azul: #2196f3; --rojo: #e74c3c; --gris: #f4f7f6; --blanco: #ffffff; --esparta: #333; }
         body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
         .header { text-align: center; margin-bottom: 20px; color: var(--verde); }
-        .header h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; font-size: 2rem; }
-        .frase-motivacional { font-size: 1.1rem; color: #666; font-style: italic; margin-top: 5px; font-weight: 600; }
+        .header h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; }
 
-        .container { max-width: 600px; display: flex; flex-direction: column; align-items: center; }
+        .container { max-width: 800px; width: 100%; display: flex; flex-direction: column; align-items: center; }
 
-        /* MARCADOR */
-        .status-bar { display: flex; justify-content: space-between; align-items: center; background: #333; color: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-family: 'Montserrat'; width: 100%; box-sizing: border-box; }
-        .parejas-count { background: var(--verde); padding: 5px 12px; border-radius: 8px; font-weight: bold; }
+        /* PANTALLA DE REGISTRO */
+        #registro { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; }
+        input { width: 80%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; text-align: center; }
+        
+        /* MARCADOR DE DUELO */
+        #marcador { display: none; width: 100%; justify-content: space-around; margin-bottom: 20px; font-family: 'Montserrat'; }
+        .jugador-score { padding: 15px; border-radius: 15px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 40%; text-align: center; border-bottom: 5px solid #ddd; transition: 0.3s; }
+        .activo { border-color: var(--verde) !important; transform: scale(1.05); box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3); }
+        .puntos { font-size: 2.5rem; font-weight: 800; display: block; }
 
-        /* TABLERO DE JUEGO (GRID) */
-        .tablero {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 columnas para las 10 piezas en 2 filas */
-            gap: 15px;
-            width: 100%;
-            margin-top: 10px;
-        }
+        /* TABLERO */
+        #tablero-container { display: none; width: 100%; }
+        .tablero { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; width: 100%; margin-top: 10px; }
 
-        /* ESTILO DE CADA PIEZA */
-        .pieza {
-            background-color: var(--fondo-pieza);
-            aspect-ratio: 1; /* Piezas cuadradas */
-            border-radius: 12px;
-            cursor: pointer;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            border: 3px solid #fff; /* Borde blanco como en tus otros juegos */
-        }
+        .pieza { aspect-ratio: 1; background: var(--esparta); border-radius: 12px; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform 0.5s; border: 3px solid #fff; }
+        .pieza.girada { transform: rotateY(180deg); }
+        .cara { position: absolute; width: 100%; height: 100%; border-radius: 10px; display: flex; align-items: center; justify-content: center; backface-visibility: hidden; font-size: 2.5rem; }
+        .detras { background: var(--esparta); color: var(--verde); font-family: 'Montserrat'; font-weight: 800; }
+        .delante { background: #eee; transform: rotateY(180deg); }
 
-        /* PIEZA GIRADA */
-        .pieza.girada {
-            transform: rotateY(180deg);
-        }
-
-        /* CARAS DE LA PIEZA (DELANTE Y DETRÁS) */
-        .cara {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backface-visibility: hidden; /* Oculta la parte de atrás al girar */
-            font-size: 3rem; /* Tamaño de los emojis de animales */
-        }
-
-        /* Detrás de la pieza (lo que ve Erik al principio) */
-        .detras {
-            background-color: var(--fondo-pieza);
-            color: var(--verde);
-            font-family: 'Montserrat';
-            font-weight: 800;
-        }
-
-        /* Delante de la pieza (el animal escondido) */
-        .delante {
-            background-color: #f0f0f0;
-            transform: rotateY(180deg); /* El animal ya viene "girado" internamente */
-            color: #333;
-        }
-
-        /* PANTALLA FINAL */
-        .pantalla-final { display: none; text-align: center; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box; }
-        .btn-accion { margin-top: 25px; padding: 15px 35px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.2rem; color: white; transition: 0.3s; text-transform: uppercase; background: var(--verde); }
+        /* FINAL */
+        #final { display: none; text-align: center; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 90%; }
+        .btn { background: var(--verde); color: white; padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.2rem; margin-top: 20px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
-<header class="header">
+<div class="header">
     <h1>ACADEMIA ESPARTA</h1>
-    <p class="frase-motivacional">"Erik, entrena tu mente. ¡Disciplina espartana!"</p>
-</header>
+    <p>Duelo de Memoria: ¿Quién es el más rápido?</p>
+</div>
 
 <div class="container">
-    <div id="juego-container">
-        <div class="status-bar">
-            <div>JUEGO DE MEMORIA</div>
-            <div class="parejas-count">PAREJAS: <span id="parejas-acertadas">0</span> / 5</div>
-        </div>
-        
-        <div class="tablero" id="tablero">
-            </div>
+    <div id="registro">
+        <h2>Introduce los Nombres</h2>
+        <input type="text" id="n1" placeholder="Nombre Jugador 1" value="Erik">
+        <input type="text" id="n2" placeholder="Nombre Jugador 2" value="Papá">
+        <br>
+        <button class="btn" onclick="iniciarDuelo()">¡A LUCHAR! ⚔️</button>
     </div>
 
-    <div class="pantalla-final" id="final">
-        <span style="font-size: 5rem;">🏆</span>
-        <h2 style="font-size: 2.2rem; color: var(--verde); font-family: 'Montserrat'; text-transform: uppercase;">¡MUY BIEN ERIK!</h2>
-        <p style="font-size: 1.5rem; font-weight: 700; margin: 10px 0;">¡Has encontrado todas las parejas!</p>
-        <p id="fin-mensaje" style="font-style: italic; font-size: 1.2rem; margin: 20px 0;">Pura disciplina espartana de 4 años.</p>
-        <button class="btn-accion" onclick="reiniciarJuego()">¿JUGAR OTRA VEZ? 🔄</button>
+    <div id="marcador">
+        <div id="card-j1" class="jugador-score">
+            <span id="label-j1">JUGADOR 1</span>
+            <span id="pts-j1" class="puntos">0</span>
+        </div>
+        <div id="card-j2" class="jugador-score">
+            <span id="label-j2">JUGADOR 2</span>
+            <span id="pts-j2" class="puntos">0</span>
+        </div>
+    </div>
+
+    <div id="tablero-container">
+        <div class="tablero" id="tablero"></div>
+    </div>
+
+    <div id="final">
+        <span style="font-size: 6rem;">🏆</span>
+        <h2 id="ganador-txt" style="font-family: 'Montserrat'; font-size: 2.5rem; color: var(--verde);"></h2>
+        <p id="mensaje-final" style="font-size: 1.5rem; font-weight: 700;"></p>
+        <button class="btn" onclick="location.reload()">REPETIR DUELO 🔄</button>
     </div>
 </div>
 
 <script>
-    // 5 animales diferentes para hacer 5 parejas (10 piezas)
-    const animales = ['🐶', '🐱', '🦁', '🐘', '🐥'];
-    let piezasArray = [...animales, ...animales]; // Duplicamos para hacer las parejas
-    let piezasGiradas = [];
-    let parejasAcertadas = 0;
-    let bloqueado = false; // Para evitar girar más de 2 piezas a la vez
+    const animales = ['🦁', '🐘', '🐶', '🐱', '🐥'];
+    let piezas = [...animales, ...animales];
+    let giradas = [];
+    let acertadas = 0;
+    let bloqueado = false;
+    
+    let nombre1, nombre2;
+    let pts1 = 0, pts2 = 0;
+    let turno = 1; // 1 para Jugador 1, 2 para Jugador 2
 
-    // Función para mezclar las piezas (Algoritmo Fisher-Yates)
-    function mezclar(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+    function iniciarDuelo() {
+        nombre1 = document.getElementById("n1").value || "Erik";
+        nombre2 = document.getElementById("n2").value || "Papá";
+        
+        document.getElementById("label-j1").innerText = nombre1.toUpperCase();
+        document.getElementById("label-j2").innerText = nombre2.toUpperCase();
+        
+        document.getElementById("registro").style.display = "none";
+        document.getElementById("marcador").style.display = "flex";
+        document.getElementById("tablero-container").style.display = "block";
+        
+        actualizarTurnoVisual();
+        crearTablero();
     }
 
-    // Función para crear el tablero de juego
     function crearTablero() {
-        mezclar(piezasArray); // Barajamos las piezas
-        const tablero = document.getElementById("tablero");
-        tablero.innerHTML = ""; // Limpiamos el tablero
-
-        piezasArray.forEach((animal, index) => {
-            const pieza = document.createElement("div");
-            pieza.classList.add("pieza");
-            pieza.setAttribute("data-animal", animal);
-            pieza.setAttribute("data-index", index);
-            pieza.onclick = girarPieza;
-
-            pieza.innerHTML = `
-                <div class="cara detras">M</div>
-                <div class="cara delante">${animal}</div>
-            `;
-            tablero.appendChild(pieza);
+        piezas.sort(() => Math.random() - 0.5);
+        const t = document.getElementById("tablero");
+        t.innerHTML = "";
+        piezas.forEach((a, i) => {
+            const p = document.createElement("div");
+            p.className = "pieza";
+            p.innerHTML = `<div class="cara detras">M</div><div class="cara delante">${a}</div>`;
+            p.onclick = () => girar(p, a);
+            t.appendChild(p);
         });
     }
 
-    // Función que se ejecuta cuando Erik pulsa una pieza
-    function girarPieza() {
-        if (bloqueado || this.classList.contains('girada')) return; // No hacer nada si ya está girada o el juego está bloqueado
+    function girar(p, a) {
+        if (bloqueado || p.classList.contains("girada")) return;
+        p.classList.add("girada");
+        giradas.push({p, a});
 
-        this.classList.add('girada'); // Giramos la pieza visualmente
-        piezasGiradas.push(this);
-
-        if (piezasGiradas.length === 2) {
-            bloqueado = true; // Bloqueamos el tablero para que no gire más de 2
-            comprobarPareja();
+        if (giradas.length === 2) {
+            bloqueado = true;
+            setTimeout(comprobar, 1000);
         }
     }
 
-    // Función para comprobar si las dos piezas giradas son iguales
-    function comprobarPareja() {
-        const pieza1 = piezasGiradas[0];
-        const pieza2 = piezasGiradas[1];
-
-        if (pieza1.getAttribute('data-animal') === pieza2.getAttribute('data-animal')) {
-            // ¡Es una pareja!
-            parejasAcertadas++;
-            document.getElementById("parejas-acertadas").innerText = parejasAcertadas;
-            piezasGiradas = []; // Limpiamos la lista
-            bloqueado = false; // Desbloqueamos el tablero
-
-            // Si Erik encuentra todas las parejas
-            if (parejasAcertadas === 5) {
-                setTimeout(finalizarJuego, 800);
+    function comprobar() {
+        if (giradas[0].a === giradas[1].a) {
+            // ACIERTO
+            if (turno === 1) { pts1++; document.getElementById("pts-j1").innerText = pts1; }
+            else { pts2++; document.getElementById("pts-j2").innerText = pts2; }
+            
+            acertadas++;
+            if (acertadas === 5) finalizar();
+            else {
+                // Si acierta, ¡repite turno!
+                bloqueado = false;
             }
         } else {
-            // No es pareja, volvemos a girarlas después de un tiempo
-            setTimeout(() => {
-                pieza1.classList.remove('girada');
-                pieza2.classList.remove('girada');
-                piezasGiradas = []; // Limpiamos la lista
-                bloqueado = false; // Desbloqueamos el tablero
-            }, 1200); // Tiempo de espera antes de volver a girarlas
+            // FALLO - Cambia el turno
+            giradas[0].p.classList.remove("girada");
+            giradas[1].p.classList.remove("girada");
+            turno = turno === 1 ? 2 : 1;
+            actualizarTurnoVisual();
+            bloqueado = false;
         }
+        giradas = [];
     }
 
-    // Función para mostrar la pantalla final
-    function finalizarJuego() {
-        document.getElementById("juego-container").style.display = "none";
+    function actualizarTurnoVisual() {
+        document.getElementById("card-j1").className = turno === 1 ? "jugador-score activo" : "jugador-score";
+        document.getElementById("card-j2").className = turno === 2 ? "jugador-score activo" : "jugador-score";
+    }
+
+    function finalizar() {
+        document.getElementById("tablero-container").style.display = "none";
+        document.getElementById("marcador").style.display = "none";
         document.getElementById("final").style.display = "block";
-    }
+        
+        let ganador = "";
+        if (pts1 > pts2) ganador = nombre1;
+        else if (pts2 > pts1) ganador = nombre2;
+        else ganador = "¡EMPATE!";
 
-    // Función para reiniciar el juego
-    function reiniciarJuego() {
-        parejasAcertadas = 0;
-        document.getElementById("parejas-acertadas").innerText = parejasAcertadas;
-        document.getElementById("juego-container").style.display = "block";
-        document.getElementById("final").style.display = "none";
-        crearTablero(); // Volvemos a crear y barajar el tablero
+        document.getElementById("ganador-txt").innerText = "¡GANADOR: " + ganador.toUpperCase() + "!";
+        document.getElementById("mensaje-final").innerText = pts1 + " vs " + pts2;
+        
+        // LANZAR CONFETI
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#4CAF50', '#2196f3', '#ffffff'] });
     }
-
-    // Iniciamos el juego por primera vez
-    crearTablero();
 </script>
 
 </body>
