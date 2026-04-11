@@ -4,113 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Vectores 4º ESO - Academia Esparta</title>
+    <title>Cuadro Resumen Sintaxis - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --negro: #222; --gris: #f4f7f6; }
-        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 0; color: #333; }
+        :root { --verde: #4CAF50; --negro: #333; --gris: #f8f9fa; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--gris); margin: 0; padding: 20px; color: #333; }
         
-        .header-print { background: white; text-align: center; padding: 30px; border-bottom: 5px solid var(--verde); }
-        .header-print h1 { font-family: 'Montserrat'; font-size: 2.2rem; color: var(--negro); margin: 0; }
-        .subtitulo { color: var(--verde); font-weight: 800; letter-spacing: 2px; }
+        .header-web { text-align: center; margin-bottom: 30px; border-bottom: 4px solid var(--verde); background: white; padding: 20px; }
+        .header-web h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; color: var(--negro); }
+        .header-web p { font-style: italic; color: #666; margin: 5px 0 0; }
 
-        .container { max-width: 850px; margin: 30px auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
-        h2 { font-family: 'Montserrat'; color: var(--verde); border-left: 5px solid var(--negro); padding-left: 15px; margin-top: 40px; text-transform: uppercase; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.95rem; }
+        th { background: var(--negro); color: white; font-family: 'Montserrat'; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        th, td { border: 1px solid #dee2e6; padding: 15px; vertical-align: top; line-height: 1.5; }
         
-        .caja-formula { background: #f0f4f0; border: 2px dashed var(--verde); padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center; font-size: 1.2rem; }
+        /* Columna de Funciones en verde espartano */
+        td:first-child { font-weight: 800; color: var(--verde); background: #f1f8f1; width: 15%; }
         
-        .ejemplo { background: #fffde7; border-left: 5px solid #fbc02d; padding: 15px; margin: 20px 0; font-style: italic; }
+        .sustitucion { color: #d32f2f; font-weight: 600; }
+        .ejemplo-frase { background: #fffde7; padding: 2px 4px; border-radius: 3px; font-weight: 600; }
 
-        .destacado { font-weight: bold; color: var(--verde); }
-
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background: var(--negro); color: white; }
+        .footer-note { margin-top: 30px; padding: 15px; background: #eee; border-radius: 8px; font-size: 0.85rem; }
 
         @media print {
             .no-print { display: none; }
-            body { background: white; }
-            .container { box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
-            h2 { page-break-before: auto; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; max-width: 100%; padding: 0; }
+            th { background: #444 !important; color: white !important; }
+            td:first-child { background: #f9f9f9 !important; color: black !important; }
         }
 
-        .btn-imprimir { background: var(--negro); color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-family: 'Montserrat'; font-weight: bold; margin-bottom: 20px; transition: 0.3s; }
-        .btn-imprimir:hover { background: var(--verde); }
+        .btn-print { background: var(--verde); color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-family: 'Montserrat'; font-weight: bold; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-<header class="header-print">
+<div class="header-web">
     <h1>ACADEMIA ESPARTA</h1>
-    <div class="subtitulo">GEOMETRÍA: VECTORES EN EL PLANO</div>
-</header>
+    <p>Cuadro-Resumen de los Complementos del Verbo</p>
+</div>
 
 <div class="container">
-    <button class="btn-imprimir no-print" onclick="window.print()">🖨️ IMPRIMIR FICHA DE ESTUDIO</button>
+    <button class="btn-print no-print" onclick="window.print()">🖨️ IMPRIMIR CUADRO COMPLETO</button>
 
-    <h2>1. ¿Qué es un Vector?</h2>
-    <p>Un vector $\vec{v}$ es un segmento orientado que va desde un punto origen $A$ hasta un punto extremo $B$. Se define por tres elementos:</p>
-    <ul>
-        <li><span class="destacado">Módulo:</span> La longitud del segmento (lo que mide).</li>
-        <li><span class="destacado">Dirección:</span> La recta sobre la que se apoya.</li>
-        <li><span class="destacado">Sentido:</span> Hacia dónde apunta la flecha.</li>
-    </ul>
-
-    <h2>2. Coordenadas de un Vector</h2>
-    <p>Si tenemos dos puntos $A(x_1, y_1)$ y $B(x_2, y_2)$, las coordenadas del vector $\vec{AB}$ se calculan restando el extremo menos el origen:</p>
-    <div class="caja-formula">
-        $\vec{AB} = (x_2 - x_1, y_2 - y_1)$
-    </div>
-    <div class="ejemplo">
-        <b>Ejemplo:</b> Si $A(1, 2)$ y $B(4, 6) \rightarrow \vec{AB} = (4-1, 6-2) = (3, 4)$.
-    </div>
-
-    <h2>3. Módulo de un Vector</h2>
-    <p>El módulo es la distancia entre los dos puntos. Se utiliza el Teorema de Pitágoras:</p>
-    <div class="caja-formula">
-        $|\vec{v}| = \sqrt{v_1^2 + v_2^2}$
-    </div>
-    <div class="ejemplo">
-        <b>Ejemplo:</b> El módulo de $\vec{v}(3, 4)$ es $\sqrt{3^2 + 4^2} = \sqrt{9+16} = \sqrt{25} = 5$.
-    </div>
-
-    <h2>4. Operaciones con Vectores</h2>
     <table>
         <thead>
             <tr>
-                <th>Operación</th>
-                <th>Fórmula</th>
-                <th>Resultado</th>
+                <th>Funciones</th>
+                <th>Concepto</th>
+                <th>¿Cómo distinguirlo?</th>
+                <th>Ejemplos</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><b>Suma</b></td>
-                <td>$(u_1, u_2) + (v_1, v_2)$</td>
-                <td>$(u_1+v_1, u_2+v_2)$</td>
+                <td>Sujeto (Suj)</td>
+                <td>Persona, animal o cosa que realiza la acción o de quien se dice algo.</td>
+                <td>Concordancia en nº y persona con el verbo. Nunca lleva preposición (salvo excepciones).</td>
+                <td>- <span class="ejemplo-frase">La secretaria</span> ha salido tarde.<br>- <span class="ejemplo-frase">Las secretarias</span> han salido tarde.</td>
             </tr>
             <tr>
-                <td><b>Resta</b></td>
-                <td>$(u_1, u_2) - (v_1, v_2)$</td>
-                <td>$(u_1-v_1, u_2-v_2)$</td>
+                <td>C. Directo (CD)</td>
+                <td>Objeto o persona sobre la que recae la acción directamente.</td>
+                <td>Sustituible por <span class="sustitucion">lo, la, los, las</span>. Al pasar a pasiva se convierte en Sujeto Paciente.</td>
+                <td>- He visto <span class="ejemplo-frase">a tu hermano</span> (Lo he visto).<br>- Comí <span class="ejemplo-frase">manzanas</span> (Las comí).</td>
             </tr>
             <tr>
-                <td><b>Producto por Escalar</b></td>
-                <td>$k \cdot (v_1, v_2)$</td>
-                <td>$(k \cdot v_1, k \cdot v_2)$</td>
+                <td>C. Indirecto (CI)</td>
+                <td>Destinatario de la acción verbal, el que recibe el daño o provecho.</td>
+                <td>Sustituible por <span class="sustitucion">le, les</span> (o "se"). Siempre lleva la preposición "a".</td>
+                <td>- Mandé la carta <span class="ejemplo-frase">a mi prima</span>.<br>- <span class="ejemplo-frase">Le</span> mandé la carta.</td>
+            </tr>
+            <tr>
+                <td>C. Circunstancial (CC)</td>
+                <td>Expresa lugar, tiempo, modo, cantidad, causa, etc.</td>
+                <td>Puede ir con o sin preposición. Responde a: ¿Dónde?, ¿Cuándo?, ¿Cómo?, ¿Con quién?</td>
+                <td>- Fui <span class="ejemplo-frase">a la playa</span> (Lugar).<br>- Vendré <span class="ejemplo-frase">mañana</span> (Tiempo).<br>- Lo hizo <span class="ejemplo-frase">con desgana</span> (Modo).</td>
+            </tr>
+            <tr>
+                <td>Atributo (Atrib)</td>
+                <td>Cualidad o estado del sujeto con verbos copulativos.</td>
+                <td>Acompaña a <span class="sustitucion">ser, estar, parecer</span>. Sustituible por "lo".</td>
+                <td>- Mi vecina es <span class="ejemplo-frase">enfermera</span>.<br>- Felipe parece <span class="ejemplo-frase">cansado</span>.</td>
+            </tr>
+            <tr>
+                <td>C. Predicativo (CPred)</td>
+                <td>Igual que el atributo pero con verbos NO copulativos.</td>
+                <td>Concuerda con sujeto/CD. <span class="sustitucion">NO</span> se puede sustituir por "lo".</td>
+                <td>- Felipe salió del examen <span class="ejemplo-frase">cansado</span>.</td>
+            </tr>
+            <tr>
+                <td>C. Régimen (CRég)</td>
+                <td>Sintagma preposicional exigido por el verbo para tener sentido.</td>
+                <td>Lleva una preposición fija (confiar <span class="sustitucion">en</span>, quejarse <span class="sustitucion">de</span>...).</td>
+                <td>- No te preocupes <span class="ejemplo-frase">por ese problema</span>.<br>- Pienso <span class="ejemplo-frase">en mi familia</span>.</td>
+            </tr>
+            <tr>
+                <td>C. Agente (CAg)</td>
+                <td>Indica quién realiza la acción en oraciones pasivas.</td>
+                <td>Aparece solo en pasiva. Siempre empieza por la preposición <span class="sustitucion">por</span>.</td>
+                <td>- La noticia fue difundida <span class="ejemplo-frase">por un periodista</span>.</td>
+            </tr>
+            <tr>
+                <td>Modificadores Oracionales</td>
+                <td>Afectan a toda la oración, no solo al verbo.</td>
+                <td>Van separados por comas. Interjecciones, vocativos, adverbios de opinión...</td>
+                <td>- <span class="ejemplo-frase">Francamente</span>, no sé qué hizo.<br>- <span class="ejemplo-frase">Luis</span>, recoge tu ropa.</td>
             </tr>
         </tbody>
     </table>
 
-    <h2>5. Punto Medio de un Segmento</h2>
-    <p>Para hallar el punto que está justo en la mitad de $A$ y $B$:</p>
-    <div class="caja-formula">
-        $M = \left( \frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2} \right)$
+    <div class="footer-note">
+        <strong>RECUERDA:</strong> No te olvides de los complementos de núcleo no verbal como: 
+        <em>Música agradable</em> (GAdj/CN), <em>Pastel de chocolate</em> (GP/CN), <em>Harto de ti</em> (GP/CAdj), <em>Lejos de mi casa</em> (GP/CAdv).
     </div>
-
-    <footer style="margin-top: 50px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; font-size: 0.8rem; color: #777;">
-        "Ninguna retirada, ninguna rendición. ¡Eso es la ley espartana!" - Academia Esparta 2026
-    </footer>
 </div>
 
 </body>
