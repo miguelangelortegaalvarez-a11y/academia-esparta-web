@@ -21,18 +21,48 @@
         :root { --esparta-green: #2e7d32; --oro: #fbc02d; --rojo: #d32f2f; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Lora', serif; background-color: #555; color: #212529; }
-        .page { width: 210mm; height: 296mm; margin: 20px auto; background: white; padding: 25mm 25mm; position: relative; display: flex; flex-direction: column; box-shadow: 0 0 15px rgba(0,0,0,0.5); break-after: page; }
-        @media print { body { background: white; } .no-print { display: none !important; } @page { margin: 0; size: A4; } .page { margin: 0 !important; box-shadow: none !important; page-break-after: always !important; } }
-        .btn-pdf { position: fixed; top: 20px; left: 20px; background: var(--rojo); color: white; border: none; padding: 15px 25px; border-radius: 8px; cursor: pointer; font-family: 'Montserrat'; font-weight: bold; z-index: 1000; }
+        
+        .page { 
+            width: 210mm; 
+            height: 296mm; 
+            margin: 20px auto; 
+            background: white; 
+            padding: 25mm 25mm; 
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            break-after: page;
+        }
+
+        @media print {
+            body { background: white; }
+            .no-print { display: none !important; }
+            @page { margin: 0; size: A4; }
+            .page { margin: 0 !important; box-shadow: none !important; page-break-after: always !important; }
+        }
+
+        .btn-pdf { 
+            position: fixed; top: 20px; left: 20px; 
+            background: var(--rojo); color: white; border: none; 
+            padding: 15px 25px; border-radius: 8px; cursor: pointer; 
+            font-family: 'Montserrat'; font-weight: bold; z-index: 1000;
+        }
+
         header { border-bottom: 4px solid var(--esparta-green); margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; }
         h1 { font-family: 'Montserrat'; font-size: 1.4rem; margin: 0; text-transform: uppercase; }
         .header-brand { text-align: right; font-family: 'Montserrat'; font-weight: 800; font-size: 0.75rem; color: var(--esparta-green); }
+
         .theory-box { background: #fffde7; border: 1px solid #ffe082; border-left: 8px solid var(--oro); padding: 30px; border-radius: 8px; line-height: 1.6; }
         .step-label { font-weight: 800; color: var(--esparta-green); font-family: 'Open Sans'; font-size: 0.95rem; display: block; margin-top: 25px; text-transform: uppercase; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        .explanation-text { font-size: 1.05rem; color: #333; margin: 10px 0; }
+        
         .note { background: #e8f5e9; border: 1px solid #c8e6c9; padding: 15px; border-radius: 5px; margin-top: 20px; font-size: 0.95rem; font-style: italic; }
+
         .combat-zone { border: 3px solid var(--esparta-green); border-radius: 12px; flex-grow: 1; margin-top: 20px; display: flex; flex-direction: column; overflow: hidden; }
         .combat-header { background: var(--esparta-green); color: white; padding: 15px 20px; font-family: 'Montserrat'; font-size: 1.1rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
         .grid-area { flex-grow: 1; background-image: linear-gradient(rgba(46, 125, 50, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(46, 125, 50, 0.08) 1px, transparent 1px); background-size: 30px 30px; }
+
         footer { text-align: center; font-family: 'Montserrat'; font-weight: 800; font-size: 0.9rem; color: #999; border-top: 1px solid #eee; padding-top: 15px; margin-top: 20px; text-transform: uppercase; }
     </style>
 </head>
@@ -46,17 +76,23 @@
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
     <div class="theory-box">
-        <p>El método de igualación consiste en aislar la <b>misma letra</b> en las dos ecuaciones. Al final, igualamos sus expresiones.</p>
-        <span class="step-label">1. Doble Despeje</span>
-        <p>Sistema: $$\begin{cases} x + 2y = 8 \\ 3x - y = 3 \end{cases}$$
-        Despejamos la $x$ en ambas:</p>
-        $$x = 8 - 2y \quad \text{y} \quad x = \frac{3 + y}{3}$$
-        <span class="step-label">2. Igualar</span>
+        <p>Este método se basa en un principio lógico: si dos cosas son iguales a una tercera, son iguales entre sí. Es como decir: si $A = C$ y $B = C$, entonces $A = B$.</p>
+        
+        <span class="step-label">1. El Doble Despeje</span>
+        <p class="explanation-text">Elegimos una letra (la $x$) y la dejamos sola en las dos ecuaciones. 
+        En la primera, el $+2y$ pasa restando. En la segunda, el $-y$ pasa sumando y el $3$ que multiplica a la $x$ pasa dividiendo a todo:</p>
+        $$x = 8 - 2y \qquad \text{y} \qquad x = \frac{3 + y}{3}$$
+
+        <span class="step-label">2. La Igualdad (El Espejo)</span>
+        <p class="explanation-text">Como ambas expresiones representan el valor de $x$, las ponemos frente a frente con un signo igual en medio:</p>
         $$8 - 2y = \frac{3 + y}{3}$$
-        <span class="step-label">3. Resolver</span>
-        $$3(8 - 2y) = 3 + y \Rightarrow 24 - 6y = 3 + y \Rightarrow \mathbf{y = 3}$$
-        <span class="step-label">4. Hallar pareja</span>
-        $$x = 8 - 2(3) \Rightarrow \mathbf{x = 2}$$
+
+        <span class="step-label">3. Resolución con Limpieza</span>
+        <p class="explanation-text">Para que ese $3$ no nos moleste, lo pasamos al otro lado multiplicando a <b>todo</b> el bloque izquierdo. Usamos paréntesis para no olvidar nada:</p>
+        $$3 \cdot (8 - 2y) = 3 + y \Rightarrow 24 - 6y = 3 + y \Rightarrow 21 = 7y \Rightarrow \mathbf{y = 3}$$
+
+        <span class="step-label">4. Cálculo del Compañero</span>
+        <p class="explanation-text">Ahora que sabemos que $y=3$, lo metemos en el despeje más fácil: $x = 8 - 2(3) = 8 - 6 \Rightarrow \mathbf{x = 2}$.</p>
     </div>
     <footer>Academia Esparta</footer>
 </div>
@@ -79,17 +115,23 @@
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
     <div class="theory-box">
-        <p>Cuando aparecen coeficientes, igualamos fracciones y resolvemos multiplicando en cruz.</p>
-        <span class="step-label">1. Doble Despeje Fraccionario</span>
-        <p>Sistema: $$\begin{cases} 2x + 3y = 12 \\ 3x + 2y = 13 \end{cases}$$
-        Despejamos $x$ en ambas:</p>
+        <p>Cuando todas las letras tienen números delante, la igualación nos obliga a enfrentarnos a dos fracciones. La clave aquí es el "ataque en cruz".</p>
+        
+        <span class="step-label">1. Despeje Fraccionario</span>
+        <p class="explanation-text">Aislamos la $x$ en ambas ecuaciones. En ambas tendremos que pasar un término restando y luego el número que acompaña a la $x$ dividiendo debajo de toda la línea:</p>
         $$x = \frac{12 - 3y}{2} \qquad x = \frac{13 - 2y}{3}$$
-        <span class="step-label">2. Igualación Total</span>
+
+        <span class="step-label">2. La Igualdad Total</span>
+        <p class="explanation-text">Igualamos los dos bloques fraccionarios:</p>
         $$\frac{12 - 3y}{2} = \frac{13 - 2y}{3}$$
-        <span class="step-label">3. Ataque en Cruz</span>
-        $$3(12 - 3y) = 2(13 - 2y) \Rightarrow 36 - 9y = 26 - 4y \Rightarrow \mathbf{y = 2}$$
-        <span class="step-label">4. Cálculo Final</span>
-        $$x = \frac{12 - 3(2)}{2} \Rightarrow \mathbf{x = 3}$$
+
+        <span class="step-label">3. El Ataque en Cruz</span>
+        <p class="explanation-text">Para eliminar los denominadores, multiplicamos de forma cruzada: el $3$ de abajo a la derecha multiplica a todo lo de arriba a la izquierda, y el $2$ de abajo a la izquierda multiplica a todo lo de arriba a la derecha:</p>
+        $$3 \cdot (12 - 3y) = 2 \cdot (13 - 2y) \Rightarrow 36 - 9y = 26 - 4y$$
+        $$36 - 26 = 9y - 4y \Rightarrow 10 = 5y \Rightarrow \mathbf{y = 2}$$
+
+        <span class="step-label">4. Resultado Final</span>
+        <p class="explanation-text">Metemos el $2$ en la primera fracción: $x = \frac{12 - 3(2)}{2} = \frac{6}{2} \Rightarrow \mathbf{x = 3}$.</p>
     </div>
     <footer>Academia Esparta</footer>
 </div>
@@ -112,15 +154,22 @@
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
     <div class="theory-box">
-        <p>Sistemas complejos: aislamos la variable incluso si hay paréntesis, simplificando después.</p>
-        <span class="step-label">1. Despeje de X</span>
-        <p>$$\begin{cases} x = 2y - 1 \\ x = \frac{5 + 3y}{2} - 1 \end{cases}$$</p>
-        <span class="step-label">2. Igualar</span>
+        <p>Los sistemas con paréntesis suelen asustar, pero si aplicamos la igualación con astucia, podemos anular términos antes incluso de empezar a operar fuerte.</p>
+        
+        <span class="step-label">1. Preparar el Despeje</span>
+        <p class="explanation-text">En la primera ecuación la $x$ ya está sola. En la segunda, despejamos el bloque $(x+1)$ primero: movemos el $3y$ sumando, pasamos el $2$ dividiendo y finalmente pasamos el $+1$ restando:</p>
+        $$x = 2y - 1 \qquad x = \frac{5 + 3y}{2} - 1$$
+
+        <span class="step-label">2. Igualar y Observar</span>
+        <p class="explanation-text">Igualamos las dos expresiones. Fíjate que hay un $-1$ al final de ambos lados del igual:</p>
         $$2y - 1 = \frac{5 + 3y}{2} - 1$$
-        <span class="step-label">3. Simplificar</span>
-        <p>Tachamos el -1 en ambos lados: $2y = \frac{5 + 3y}{2} \Rightarrow 4y = 5 + 3y \Rightarrow \mathbf{y = 5}$</p>
-        <span class="step-label">4. Final</span>
-        $$x = 2(5) - 1 \Rightarrow \mathbf{x = 9}$$
+
+        <span class="step-label">3. Simplificación Inteligente</span>
+        <p class="explanation-text">Como el $-1$ aparece en los dos sitios haciendo lo mismo, lo podemos "tachar" directamente. Luego pasamos el $2$ dividiendo a multiplicar al otro lado:</p>
+        $$2y = \frac{5 + 3y}{2} \Rightarrow 2 \cdot (2y) = 5 + 3y \Rightarrow 4y = 5 + 3y \Rightarrow \mathbf{y = 5}$$
+
+        <span class="step-label">4. Cierre del Sistema</span>
+        <p class="explanation-text">Calculamos la $x$ con el primer despeje, que es el más corto: $x = 2(5) - 1 \Rightarrow \mathbf{x = 9}$.</p>
     </div>
     <footer>Academia Esparta</footer>
 </div>
