@@ -84,21 +84,44 @@
             "Aprendo a leer palabras nuevas cada día", "El tractor trabaja en el campo del pueblo", "Mi mejor amigo se llama Pedro Luis", "La mariposa vuela entre las flores rosas", "El oso duerme en su cueva fría"
         ];
 
-        let frasesMezcladas = [];
+        let frasesNivelActual = [];
         let nivelActual = 1;
         let fraseActual = 0;
         let ladrillosPuestos = 0;
 
         function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
 
+        function filtrarFrasesPorNivel(nivel) {
+            let min, max;
+            switch(nivel) {
+                case 1: min = 2; max = 3; break;
+                case 2: min = 3; max = 4; break;
+                case 3: min = 4; max = 5; break;
+                case 4: min = 5; max = 6; break;
+                case 5: min = 6; max = 7; break;
+                default: min = 2; max = 7;
+            }
+            // Filtramos la bolsa completa buscando frases que encajen en el rango de palabras
+            return bolsaDeFrases.filter(f => {
+                const numPalabras = f.split(" ").length;
+                return numPalabras >= min && numPalabras <= max;
+            });
+        }
+
         function iniciarJuego() {
-            frasesMezcladas = shuffle([...bolsaDeFrases]);
+            prepararNivel();
             cargarFrase();
         }
 
+        function prepararNivel() {
+            const frasesPosibles = filtrarFrasesPorNivel(nivelActual);
+            // Mezclamos y cogemos 5 frases para este nivel
+            frasesNivelActual = shuffle([...frasesPosibles]).slice(0, 5);
+            fraseActual = 0;
+        }
+
         function cargarFrase() {
-            const indice = ((nivelActual - 1) * 5) + fraseActual;
-            document.getElementById('display-frase').innerText = frasesMezcladas[indice];
+            document.getElementById('display-frase').innerText = frasesNivelActual[fraseActual];
             document.getElementById('lvl-num').innerText = nivelActual;
             document.getElementById('reto-num').innerText = fraseActual + 1;
             borrarLadrillos();
@@ -138,8 +161,7 @@
         }
 
         function comprobar() {
-            const indice = ((nivelActual - 1) * 5) + fraseActual;
-            const frase = frasesMezcladas[indice];
+            const frase = frasesNivelActual[fraseActual];
             const correctas = frase.split(" ").length;
 
             if(ladrillosPuestos === correctas) {
@@ -195,7 +217,7 @@
         function cerrarOverlay() {
             document.getElementById('overlay').style.display = 'none';
             nivelActual++;
-            fraseActual = 0;
+            prepararNivel();
             cargarFrase();
         }
 
