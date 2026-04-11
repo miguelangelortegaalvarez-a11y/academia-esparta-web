@@ -5,13 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrenamiento Ecuaciones - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']] // Define qué símbolos buscar (los dólares)
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         :root {
-            --primary: #0e9343;
-            --dark: #063c24;
-            --accent: #fbc02d;
-            --bg-crema: #fffdf2;
-            --bg-page: #ffffff;
+            --primary: #0e9343; /* Verde Academia Esparta */
+            --dark: #063c24; 
+            --accent: #fbc02d; /* Amarillo/Naranja de la caja de desarrollo */
+            --bg-crema: #fffdf2; /* Fondo amarillento suave */
+            --bg-page: #ffffff; /* Fondo blanco de la página */
         }
 
         body {
@@ -24,6 +34,7 @@
 
         .container { max-width: 800px; margin: 0 auto; }
 
+        /* Estilo Título Superior con línea verde */
         .page-header {
             border-bottom: 2px solid var(--primary);
             display: flex;
@@ -35,7 +46,7 @@
         .page-header h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; color: #333; letter-spacing: 1px; }
         .page-header span { font-size: 0.8rem; color: var(--primary); font-weight: bold; }
 
-        /* Bloque del Enunciado */
+        /* Bloque del Enunciado Superior */
         .enunciado-top {
             background-color: #f9f9f9;
             border-radius: 10px;
@@ -46,7 +57,7 @@
         }
         .enunciado-top b { color: var(--primary); }
 
-        /* Caja Verde del Sistema */
+        /* Caja Verde Sólida del Sistema */
         .sistema-box {
             background-color: var(--primary);
             color: white;
@@ -57,9 +68,10 @@
             align-items: center;
             margin-bottom: 25px;
         }
-        .sistema-math { font-size: 1.2rem; font-family: 'Courier New', Courier, monospace; }
+        .sistema-box h3 { margin: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .sistema-math { font-size: 1.2rem; } /* Fuente por defecto para que MathJax la use */
 
-        /* Caja Crema de Desarrollo */
+        /* Caja Crema de Desarrollo con borde naranja */
         .desarrollo-box {
             background-color: var(--bg-crema);
             border-left: 6px solid var(--accent);
@@ -68,15 +80,23 @@
             margin-bottom: 80px;
         }
 
+        /* Títulos de los pasos en verde */
         .paso-titulo { color: var(--primary); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 20px 0 10px 0; display: block; }
+        
+        /* Centrado de ecuaciones dentro del desarrollo */
         .math-center { text-align: center; margin: 15px 0; font-weight: bold; font-size: 1.1rem; }
+        
+        /* Resaltado de variables en verde */
         .highlight { color: var(--primary); font-weight: bold; }
 
+        /* Botón PDF (no se imprime) */
         .no-print { text-align: right; margin-bottom: 30px; }
         .btn-pdf { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Fredoka'; font-weight: bold; }
 
+        /* Ajustes para impresión */
         @media print {
             .no-print { display: none; }
+            body { padding: 0; }
             .desarrollo-box { break-inside: avoid; }
         }
     </style>
@@ -100,30 +120,31 @@
     <div class="sistema-box">
         <h3>SISTEMA DE PARTIDA:</h3>
         <div class="sistema-math">
-            { x + y = 126 <br>
-            { 1.14x = 0.75y
+            $ \begin{cases} x + y = 126 \\ 1.14x = 0.75y \end{cases} $
         </div>
     </div>
 
     <div class="desarrollo-box">
         <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
-        <p>1. <b>Las letras:</b> Llamamos <span class="highlight">x</span> al pantalón e <span class="highlight">y</span> a los zapatos.<br>
-           2. <b>Primera frase:</b> "Pagado 126 €" significa que la suma de ambos es 126. De ahí sale <span class="highlight">x + y = 126</span>.<br>
-           3. <b>Segunda frase:</b> "Aumentar un 14%" es multiplicar por 1.14, y el "75% de los zapatos" es 0.75y. De ahí sale <span class="highlight">1.14x = 0.75y</span>.</p>
+        <p>1. <b>Las letras:</b> Llamamos <span class="highlight">$x$</span> al pantalón e <span class="highlight">$y$</span> a los zapatos.<br>
+           2. <b>Primera frase:</b> "Pagado 126 €" significa que la suma de ambos es 126. De ahí sale <span class="highlight">$x + y = 126$</span>.<br>
+           3. <b>Segunda frase:</b> "Aumentar un 14%" es multiplicar por 1.14 ($1.14x$), y el "75% de los zapatos" es 0.75y. De ahí sale <span class="highlight">$1.14x = 0.75y$</span>.</p>
 
         <span class="paso-titulo">1. EL DESPEJE ESTRATÉGICO</span>
-        <p>Dejamos la y sola en la primera ecuación:</p>
-        <div class="math-center">y = 126 - x</div>
+        <p>Buscamos despejar la $y$ en la primera ecuación:</p>
+        <div class="math-center">$y = 126 - x$</div>
 
         <span class="paso-titulo">2. LA SUSTITUCIÓN</span>
-        <p>Cambiamos la y en la segunda ecuación por nuestro paréntesis:</p>
-        <div class="math-center">1.14x = 0.75 · (126 - x)</div>
+        <p>Cambiamos la $y$ en la segunda ecuación por nuestra expresión entre paréntesis:</p>
+        <div class="math-center">$1.14x = 0.75 \cdot (126 - x)$</div>
 
         <span class="paso-titulo">3. RESOLUCIÓN CON LIMPIEZA</span>
-        <div class="math-center">1.14x = 94.5 - 0.75x  ⇒  1.89x = 94.5  ⇒  x = 50</div>
+        <p>Operamos para hallar el valor de $x$ (pantalón):</p>
+        <div class="math-center">$1.14x = 94.5 - 0.75x \implies 1.89x = 94.5 \implies x = 50$</div>
 
         <span class="paso-titulo">4. HALLAR PAREJA</span>
-        <div class="math-center">y = 126 - 50 = 76  ⇒  y = 76</div>
+        <p>Sustituimos $x$ para hallar el valor de $y$ (zapatos):</p>
+        <div class="math-center">$y = 126 - 50 = 76 \implies y = 76$</div>
     </div>
 
     <div class="page-header">
@@ -138,28 +159,31 @@
     <div class="sistema-box">
         <h3>SISTEMA DE PARTIDA:</h3>
         <div class="sistema-math">
-            { x + y = 50 <br>
-            { 4x - 3y = 116
+            $ \begin{cases} x + y = 50 \\ 4x - 3y = 116 \end{cases} $
         </div>
     </div>
 
     <div class="desarrollo-box">
         <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
-        <p>1. <b>Las letras:</b> <span class="highlight">x</span> son los aciertos e <span class="highlight">y</span> los fallos.<br>
-           2. <b>Total preguntas:</b> Como hay 50 preguntas en total, <span class="highlight">x + y = 50</span>.<br>
-           3. <b>Los puntos:</b> Cada acierto suma 4 ($4x$) y cada fallo resta 3 ($-3y$). La nota es 116 (el 58% de 200). De ahí sale <span class="highlight">4x - 3y = 116</span>.</p>
+        <p>1. <b>Las letras:</b> Usamos <span class="highlight">$x$</span> para los aciertos e <span class="highlight">$y$</span> para los fallos.<br>
+           2. <b>Total preguntas:</b> Como hay 50 preguntas en total, la suma de aciertos y fallos es 50: <span class="highlight">$x + y = 50$</span>.<br>
+           3. <b>Los puntos:</b> Cada acierto suma 4 ($4x$) y cada fallo resta 3 ($-3y$). La nota final es 116 (el 58% del máximo, que es 200). De ahí sale <span class="highlight">$4x - 3y = 116$</span>.</p>
 
         <span class="paso-titulo">1. EL DESPEJE</span>
-        <div class="math-center">y = 50 - x</div>
+        <p>Despejamos la $y$ en la ecuación del total de preguntas:</p>
+        <div class="math-center">$y = 50 - x$</div>
 
         <span class="paso-titulo">2. LA SUSTITUCIÓN</span>
-        <div class="math-center">4x - 3 · (50 - x) = 116</div>
+        <p>Llevamos este valor a la ecuación de los puntos totales:</p>
+        <div class="math-center">$4x - 3 \cdot (50 - x) = 116$</div>
 
         <span class="paso-titulo">3. RESOLUCIÓN</span>
-        <div class="math-center">4x - 150 + 3x = 116  ⇒  7x = 266  ⇒  x = 38</div>
+        <p>Operamos el paréntesis y despejamos la $x$ (aciertos):</p>
+        <div class="math-center">$4x - 150 + 3x = 116 \implies 7x = 266 \implies x = 38$</div>
 
         <span class="paso-titulo">4. HALLAR PAREJA</span>
-        <div class="math-center">y = 50 - 38 = 12  ⇒  y = 12</div>
+        <p>Hallamos $y$ (fallos) restando los aciertos al total:</p>
+        <div class="math-center">$y = 50 - 38 = 12 \implies y = 12$</div>
     </div>
 
     <div class="page-header">
@@ -174,29 +198,31 @@
     <div class="sistema-box">
         <h3>SISTEMA DE PARTIDA:</h3>
         <div class="sistema-math">
-            { x = 3y <br>
-            { x + 15 = 2(y + 15)
+            $ \begin{cases} x = 3y \\ x + 15 = 2(y + 15) \end{cases} $
         </div>
     </div>
 
     <div class="desarrollo-box">
         <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
-        <p>1. <b>Las letras:</b> <span class="highlight">x</span> es Carmen e <span class="highlight">y</span> es Maite.<br>
-           2. <b>Hoy:</b> Carmen es el triple, por tanto <span class="highlight">x = 3y</span>.<br>
-           3. <b>Futuro:</b> Dentro de 15 años, Carmen tendrá $x+15$ y Maite $y+15$. El problema dice que será el doble: <span class="highlight">x + 15 = 2(y + 15)</span>.</p>
+        <p>1. <b>Las letras:</b> Llamamos <span class="highlight">$x$</span> a la edad de Carmen e <span class="highlight">$y$</span> a la de Maite.<br>
+           2. <b>Hoy:</b> Carmen es el triple, por tanto su edad es $3y$. Esto nos da <span class="highlight">$x = 3y$</span>.<br>
+           3. <b>Futuro:</b> Dentro de 15 años, Carmen tendrá $x+15$ y Maite $y+15$. El problema dice que será el doble: <span class="highlight">$x + 15 = 2(y + 15)$</span>.</p>
 
         <span class="paso-titulo">1. SUSTITUCIÓN DIRECTA</span>
-        <p>Cambiamos x por 3y en la segunda ecuación:</p>
-        <div class="math-center">3y + 15 = 2 · (y + 15)</div>
+        <p>Como ya tenemos $x$ despejada ($x=3y$), sustituimos directamente en la segunda ecuación:</p>
+        <div class="math-center">$3y + 15 = 2 \cdot (y + 15)$</div>
 
-        <span class="paso-titulo">2. LIMPIEZA DE PARÉNTESIS</span>
-        <div class="math-center">3y + 15 = 2y + 30</div>
+        <span class="paso-titulo">2. ELIMINACIÓN DE PARÉNTESIS</span>
+        <p>Multiplicamos el 2 por todo el bloque de la derecha:</p>
+        <div class="math-center">$3y + 15 = 2y + 30$</div>
 
-        <span class="paso-titulo">3. RESOLUCIÓN</span>
-        <div class="math-center">3y - 2y = 30 - 15  ⇒  y = 15</div>
+        <span class="paso-titulo">3. HALLAR EDAD DE MAITE</span>
+        <p>Agrupamos las $y$ a la izquierda:</p>
+        <div class="math-center">$3y - 2y = 30 - 15 \implies y = 15$</div>
 
-        <span class="paso-titulo">4. HALLAR PAREJA</span>
-        <div class="math-center">x = 3 · 15 = 45  ⇒  x = 45</div>
+        <span class="paso-titulo">4. HALLAR EDAD DE CARMEN</span>
+        <p>Multiplicamos por 3 la edad de Maite:</p>
+        <div class="math-center">$x = 3 \cdot (15) = 45 \implies x = 45$</div>
     </div>
 </div>
 
