@@ -93,9 +93,9 @@
         <div class="page" id="p6" data-total="5">
             <h2>6. Completa la palabra</h2>
             <div id="word-game-area" style="text-align: center;">
-                <div id="word-emoji" style="font-size: 7rem; margin-bottom: 10px;">⚽</div>
+                <div id="word-emoji" style="font-size: 7rem; margin-bottom: 10px;">👨</div>
                 <div id="word-display" style="font-size: 4.5rem; letter-spacing: 5px; color: var(--dark); font-weight: bold; margin-bottom: 20px;">
-                    <span id="word-part-1">__</span><span id="word-part-2">LOTA</span>
+                    <span id="word-part-1">__</span><span id="word-part-2">PÁ</span>
                 </div>
                 <div id="options-area"></div>
             </div>
@@ -126,11 +126,12 @@
         let aciertos = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0};
         let selId = null, selVal = null;
 
+        // Datos específicos de la Letra P (Actualizado: Puerta -> Papá)
         const wordGameData = [
+            { emoji: '👨', p1: '__', p2: 'PÁ', options: ['PA', 'PO', 'PE'], correct: 'PA', final: 'PAPÁ' },
             { emoji: '⚽', p1: '__', p2: 'LOTA', options: ['PE', 'PA', 'PI'], correct: 'PE', final: 'PELOTA' },
             { emoji: '🦆', p1: '__', p2: 'TO', options: ['PA', 'PO', 'PU'], correct: 'PA', final: 'PATO' },
             { emoji: '🌲', p1: '__', p2: 'NO', options: ['PE', 'PI', 'PA'], correct: 'PI', final: 'PINO' },
-            { emoji: '🚪', p1: '__', p2: 'RTA', options: ['PU', 'PO', 'PA'], correct: 'PU', final: 'PUERTA' },
             { emoji: '🐓', p1: '__', p2: 'LLO', options: ['PE', 'PO', 'PA'], correct: 'PO', final: 'POLLO' }
         ];
         let currentWordIndex = 0;
@@ -210,7 +211,7 @@
                     if (currentWordIndex < wordGameData.length) loadWordChallenge();
                     else {
                         actualizarInterfaz();
-                        document.getElementById('options-area').innerHTML = '<p style="color:var(--primary); font-weight:bold;">¡GENIAL!</p>';
+                        document.getElementById('options-area').innerHTML = '<p style="color:var(--primary); font-weight:bold;">¡EXCELENTE TRABAJO!</p>';
                     }
                 }, 1500);
             } else { el.style.animation = 'shake 0.3s'; setTimeout(() => el.style.animation = '', 300); }
