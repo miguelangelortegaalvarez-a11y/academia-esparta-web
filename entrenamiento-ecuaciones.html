@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Sustitución: Manual de Élite - Academia Esparta</title>
+    <title>Cuaderno de Sustitución - Academia Esparta</title>
     
     <script>
         window.MathJax = {
@@ -19,177 +19,177 @@
 
     <style>
         :root { --esparta-green: #2e7d32; --oro: #fbc02d; --rojo: #d32f2f; }
-        body { font-family: 'Lora', serif; background-color: #f0f0f0; margin: 0; padding: 0; color: #212529; }
         
-        /* Formato de página con espacio y saltos automáticos */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lora', serif; background-color: #555; color: #212529; }
+        
         .page { 
             width: 210mm; 
-            min-height: 297mm; /* Permite que crezca si hace falta, pero mantiene el mínimo */
+            height: 296mm; 
             margin: 20px auto; 
             background: white; 
-            padding: 25mm 25mm; 
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
-            box-sizing: border-box; 
+            padding: 20mm 20mm; 
             position: relative;
             display: flex;
             flex-direction: column;
-            /* FUERZA EL SALTO DE PÁGINA ANTES DE CADA BLOQUE .page */
-            break-before: page;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
 
-        /* El primer bloque no necesita salto antes de sí mismo */
-        .page:first-of-type { break-before: auto; margin-top: 0; }
+        @media print {
+            body { background: white; }
+            .no-print { display: none !important; }
+            .page { 
+                margin: 0 !important; 
+                box-shadow: none !important;
+                break-before: page !important;
+                page-break-before: always !important;
+            }
+            .page:first-of-type { break-before: avoid !important; }
+        }
 
         .btn-pdf { 
             position: fixed; top: 20px; left: 20px; 
             background: var(--rojo); color: white; border: none; 
-            padding: 15px 20px; border-radius: 8px; cursor: pointer; 
+            padding: 15px 25px; border-radius: 8px; cursor: pointer; 
             font-family: 'Montserrat'; font-weight: bold; z-index: 1000;
         }
 
-        header { border-bottom: 4px solid var(--esparta-green); margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
-        h1 { font-family: 'Montserrat'; font-size: 1.8rem; margin: 0; text-transform: uppercase; }
-        .header-brand { text-align: right; font-family: 'Montserrat'; font-weight: 800; font-size: 0.8rem; color: var(--esparta-green); }
+        header { border-bottom: 4px solid var(--esparta-green); margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; }
+        h1 { font-family: 'Montserrat'; font-size: 1.6rem; margin: 0; text-transform: uppercase; }
+        .header-brand { text-align: right; font-family: 'Montserrat'; font-weight: 800; font-size: 0.75rem; color: var(--esparta-green); }
 
-        h2 { font-family: 'Montserrat'; font-size: 1.4rem; color: white; background: var(--esparta-green); padding: 12px 25px; border-radius: 4px; margin: 30px 0 20px 0; display: inline-block; text-transform: uppercase; }
+        h2 { font-family: 'Montserrat'; font-size: 1.2rem; color: white; background: var(--esparta-green); padding: 8px 20px; border-radius: 4px; margin: 15px 0 10px 0; display: inline-block; text-transform: uppercase; }
         
-        .box-info { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 20px; border-radius: 8px; margin-bottom: 25px; font-size: 1.05rem; }
-        .example-box { background: #fffde7; border: 1px solid #ffe082; border-left: 8px solid var(--oro); padding: 35px; border-radius: 8px; flex-grow: 1; }
-        
-        .step-title { font-weight: 800; color: var(--esparta-green); font-family: 'Open Sans'; font-size: 0.95rem; display: block; margin-top: 25px; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-        .explanation { font-size: 1.1rem; color: #333; margin: 12px 0; line-height: 1.6; }
-        
-        /* El pie de página ahora se queda siempre al final de la hoja */
-        footer { 
-            margin-top: 50px;
-            text-align: center; 
-            font-size: 0.85rem; 
-            color: #bbb; 
-            border-top: 1px solid #eee; 
-            padding-top: 20px;
+        .example-box { background: #fffde7; border: 1px solid #ffe082; border-left: 6px solid var(--oro); padding: 20px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; }
+        .step-title { font-weight: 800; color: var(--esparta-green); font-family: 'Open Sans'; font-size: 0.85rem; display: block; margin-top: 15px; text-transform: uppercase; border-bottom: 1px solid #eee; }
+        .explanation { font-size: 0.95rem; color: #333; margin: 5px 0; }
+
+        /* ZONA DE TRABAJO CON CUADRÍCULA */
+        .combat-zone {
+            border: 2px solid var(--esparta-green);
+            border-radius: 10px;
+            flex-grow: 1;
+            margin-top: 10px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .combat-header {
+            background: var(--esparta-green);
+            color: white;
+            padding: 8px 15px;
+            font-family: 'Montserrat';
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        .grid-area {
+            flex-grow: 1;
+            background-color: #fff;
+            background-image: 
+                linear-gradient(rgba(46, 125, 50, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 125, 50, 0.1) 1px, transparent 1px);
+            background-size: 25px 25px; /* Tamaño del cuadro de la cuadrícula */
         }
 
-        @media print {
-            .no-print { display: none !important; }
-            body { background: white; padding: 0; }
-            .page { 
-                box-shadow: none; 
-                margin: 0; 
-                width: 210mm; 
-                height: 297mm; /* Fijamos la altura para el PDF */
-                page-break-after: always;
-            }
+        footer { 
+            margin-top: 15px;
+            text-align: center; 
+            font-size: 0.75rem; 
+            color: #bbb; 
+            border-top: 1px solid #eee; 
+            padding-top: 10px;
         }
     </style>
 </head>
 <body>
 
-<button class="btn-pdf no-print" onclick="window.print()">📄 GENERAR PDF PROFESIONAL</button>
+<button class="btn-pdf no-print" onclick="window.print()">📄 GENERAR CUADERNO PDF</button>
 
 <div class="page">
     <header>
         <div><h1>Sustitución: Nivel 1</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA<br>ENTRENAMIENTO ALGEBRAICO</div>
+        <div class="header-brand">ACADEMIA ESPARTA<br>WORKBOOK 01</div>
     </header>
 
-    <div class="box-info">
-        <strong>Estrategia Espartana:</strong> Buscamos siempre la incógnita que no tenga ningún número delante (coeficiente 1). Esto hace que el despeje sea limpio y directo.
-    </div>
-
-    <h2>Caso: La Letra "Sola"</h2>
     <div class="example-box">
-        Resolver el sistema:
-        $$\begin{cases} \mathbf{x} + 2y = 8 \\ 3x - y = 3 \end{cases}$$
-
-        <span class="step-title">1. El Despeje Estratégico</span>
-        <p class="explanation">En la primera ecuación, la $x$ está sola. La aislamos pasando el $+2y$ al otro lado restando:</p>
-        $$x = 8 - 2y$$
-
-        <span class="step-title">2. La Sustitución</span>
-        <p class="explanation">Tomamos la <b>segunda</b> ecuación y ponemos nuestro despeje donde estaba la $x$:</p>
-        $$3 \cdot (8 - 2y) - y = 3$$
-
-        <span class="step-title">3. Resolución</span>
-        <p class="explanation">Multiplicamos y agrupamos términos semejantes:</p>
-        $$24 - 6y - y = 3 \Rightarrow 24 - 7y = 3 \Rightarrow -7y = -21 \Rightarrow \mathbf{y = 3}$$
-
-        <span class="step-title">4. Hallar la Pareja</span>
-        <p class="explanation">Sustituimos el valor de $y$ en el despeje del paso 1:</p>
-        $$x = 8 - 2(3) \Rightarrow \mathbf{x = 2}$$
+        <span style="font-weight:bold; color:var(--rojo)">EJEMPLO GUIADO:</span>
+        $$\begin{cases} x + 2y = 8 \\ 3x - y = 3 \end{cases}$$
+        <span class="step-title">1. Despeje</span>
+        <p class="explanation">Despejamos la $x$ en la primera ecuación: $x = 8 - 2y$</p>
+        <span class="step-title">2. Sustitución y Resolución</span>
+        <p class="explanation">$3(8 - 2y) - y = 3 \Rightarrow 24 - 6y - y = 3 \Rightarrow \mathbf{y = 3}$</p>
+        <span class="step-title">3. Final</span>
+        <p class="explanation">$x = 8 - 2(3) \Rightarrow \mathbf{x = 2}$</p>
     </div>
 
-    <footer>© 2026 Academia Esparta - Página 1 de 3</footer>
+    <div class="combat-zone">
+        <div class="combat-header">
+            <span>ZONA DE COMBATE: Resuelve este sistema</span>
+            <span>$\begin{cases} 2x + y = 7 \\ x - 3y = -7 \end{cases}$</span>
+        </div>
+        <div class="grid-area"></div>
+    </div>
+
+    <footer>© 2026 Academia Esparta - Disciplina y Victoria</footer>
 </div>
 
 <div class="page">
     <header>
         <div><h1>Sustitución: Nivel 2</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA<br>ENTRENAMIENTO ALGEBRAICO</div>
+        <div class="header-brand">ACADEMIA ESPARTA<br>WORKBOOK 02</div>
     </header>
 
-    <div class="box-info">
-        <strong>Estrategia Espartana:</strong> Si todas las letras tienen números, aparecerá una fracción. El truco es multiplicar toda la ecuación por el denominador para trabajar con números enteros.
-    </div>
-
-    <h2>Caso: Gestión de Fracciones</h2>
     <div class="example-box">
-        Resolver el sistema:
+        <span style="font-weight:bold; color:var(--rojo)">EJEMPLO CON FRACCIONES:</span>
         $$\begin{cases} 2x + 3y = 12 \\ 3x + 2y = 13 \end{cases}$$
-
-        <span class="step-title">1. El Despeje con Fracción</span>
-        <p class="explanation">Despejamos la $x$ en la primera ecuación:</p>
-        $$x = \frac{12 - 3y}{2}$$
-
-        <span class="step-title">2. Sustitución</span>
-        <p class="explanation">Llevamos esa fracción a la segunda ecuación:</p>
-        $$3 \cdot \left( \frac{12 - 3y}{2} \right) + 2y = 13$$
-
-        <span class="step-title">3. El Truco del Denominador</span>
-        <p class="explanation">Multiplicamos <b>todos</b> los términos por 2 para eliminar la fracción:</p>
-        $$3 \cdot (12 - 3y) + 4y = 26$$
-        $$36 - 9y + 4y = 26 \Rightarrow -5y = -10 \Rightarrow \mathbf{y = 2}$$
-
-        <span class="step-title">4. Resultado Final</span>
-        <p class="explanation">Calculamos la $x$ con el valor de $y$:</p>
-        $$x = \frac{12 - 3(2)}{2} = \frac{6}{2} \Rightarrow \mathbf{x = 3}$$
+        <span class="step-title">1. Despeje con Fracción</span>
+        <p class="explanation">$x = \frac{12 - 3y}{2}$</p>
+        <span class="step-title">2. Sustitución (Multiplicamos todo por 2)</span>
+        <p class="explanation">$3(\frac{12-3y}{2}) + 2y = 13 \Rightarrow 3(12-3y) + 4y = 26 \Rightarrow \mathbf{y = 2}$</p>
+        <span class="step-title">3. Final</span>
+        <p class="explanation">$x = \frac{12-6}{2} \Rightarrow \mathbf{x = 3}$</p>
     </div>
 
-    <footer>© 2026 Academia Esparta - Página 2 de 3</footer>
+    <div class="combat-zone">
+        <div class="combat-header">
+            <span>ZONA DE COMBATE: Resuelve este sistema</span>
+            <span>$\begin{cases} 5x + 2y = 1 \\ 2x + 3y = 7 \end{cases}$</span>
+        </div>
+        <div class="grid-area"></div>
+    </div>
+
+    <footer>© 2026 Academia Esparta - Disciplina y Victoria</footer>
 </div>
 
 <div class="page">
     <header>
         <div><h1>Sustitución: Nivel 3</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA<br>ENTRENAMIENTO ALGEBRAICO</div>
+        <div class="header-brand">ACADEMIA ESPARTA<br>WORKBOOK 03</div>
     </header>
 
-    <div class="box-info">
-        <strong>Estrategia Espartana:</strong> Los paréntesis indican prioridad. A veces, la sustitución directa dentro de un paréntesis simplifica el problema de forma mágica.
-    </div>
-
-    <h2>Caso: Sistemas con Paréntesis</h2>
     <div class="example-box">
-        Resolver el sistema:
+        <span style="font-weight:bold; color:var(--rojo)">EJEMPLO CON PARÉNTESIS:</span>
         $$\begin{cases} x = 2y - 1 \\ 2(x + 1) - 3y = 5 \end{cases}$$
-
-        <span class="step-title">1. El Despeje</span>
-        <p class="explanation">La $x$ ya está aislada en la primera ecuación:</p>
-        $$x = 2y - 1$$
-
-        <span class="step-title">2. Sustitución Directa</span>
-        <p class="explanation">Metemos el bloque de la $x$ dentro del paréntesis de la segunda:</p>
-        $$2 \cdot ( (2y - 1) + 1 ) - 3y = 5$$
-
-        <span class="step-title">3. Simplificación</span>
-        <p class="explanation">Resolvemos lo que hay dentro del paréntesis antes de multiplicar:</p>
-        $$2 \cdot (2y) - 3y = 5 \Rightarrow 4y - 3y = 5 \Rightarrow \mathbf{y = 5}$$
-
-        <span class="step-title">4. Hallar la X</span>
-        <p class="explanation">Finalizamos calculando la $x$:</p>
-        $$x = 2(5) - 1 \Rightarrow \mathbf{x = 9}$$
+        <span class="step-title">1. Sustitución Directa</span>
+        <p class="explanation">$2((2y - 1) + 1) - 3y = 5 \Rightarrow 2(2y) - 3y = 5$</p>
+        <span class="step-title">2. Resolución</span>
+        <p class="explanation">$4y - 3y = 5 \Rightarrow \mathbf{y = 5}$</p>
+        <span class="step-title">3. Final</span>
+        <p class="explanation">$x = 2(5) - 1 \Rightarrow \mathbf{x = 9}$</p>
     </div>
 
-    <footer>© 2026 Academia Esparta - Página 3 de 3</footer>
+    <div class="combat-zone">
+        <div class="combat-header">
+            <span>ZONA DE COMBATE: Resuelve este sistema</span>
+            <span>$\begin{cases} 2(x - 1) + y = 2 \\ x + 2y = 10 \end{cases}$</span>
+        </div>
+        <div class="grid-area"></div>
+    </div>
+
+    <footer>© 2026 Academia Esparta - Disciplina y Victoria</footer>
 </div>
 
 </body>
