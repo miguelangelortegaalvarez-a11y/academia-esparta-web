@@ -3,108 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sílabas M - Academia Esparta</title>
+    <title>Cuaderno Letra M - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        :root { 
-            --primary: #0e9343; 
-            --dark: #063c24; 
-            --light-green: #e8f5e9;
-            --bg: #f0f2f5;
-        }
+        :root { --primary: #0e9343; --dark: #063c24; --light-green: #e8f5e9; --bg: #f0f2f5; }
+        body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; }
         
-        body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; position: relative; }
-        
-        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); position: relative; z-index: 10; box-sizing: border-box; }
+        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); position: relative; z-index: 10; }
         .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--primary); font-weight: bold; }
-        .header-title { font-weight: 700; font-size: 1.5rem; color: var(--primary); }
 
         .book-slider { width: 100%; flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative; }
-        
         .page { 
-            display: none; width: 85%; max-width: 700px; height: 60vh; 
+            display: none; width: 90%; max-width: 800px; height: 75vh; 
             background: white; border-radius: 30px; padding: 2rem; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 2px solid #eee;
             flex-direction: column; align-items: center; justify-content: center;
             animation: fadeIn 0.4s ease;
         }
         .page.active { display: flex; }
-
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        h2 { color: var(--primary); font-size: 2.2rem; margin-bottom: 2rem; text-align: center; }
 
-        .silaba-tap { 
-            font-size: 4.5rem; cursor: pointer; padding: 15px 25px; border-radius: 20px; 
-            margin: 10px; border: 4px solid transparent; transition: 0.2s; display: inline-block;
-            color: #333; background: #f9f9f9;
+        h2 { color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center; }
+
+        /* Estilos Elementos */
+        .tap-item { 
+            font-size: 3rem; cursor: pointer; padding: 15px 25px; border-radius: 20px; 
+            margin: 10px; border: 4px solid transparent; transition: 0.2s; background: #f9f9f9;
         }
-        
-        .silaba-tap.selected-correct { border-color: var(--primary); background: var(--light-green); color: var(--primary); pointer-events: none; }
+        .tap-item.correct { border-color: var(--primary); background: var(--light-green); color: var(--primary); pointer-events: none; }
+
+        /* Estilo Unir (Match) */
+        .match-container { display: flex; justify-content: space-around; width: 100%; gap: 15px; }
+        .match-col { display: flex; flex-direction: column; gap: 10px; }
+        .match-box { 
+            padding: 12px; background: #f9f9f9; border: 3px solid #eee; 
+            border-radius: 15px; font-size: 1.5rem; cursor: pointer; text-align: center; min-width: 140px;
+        }
+        .match-box.selected { border-color: #fb8c00; background: #fff3e0; }
+        .match-box.correct { border-color: var(--primary); background: var(--light-green); pointer-events: none; }
 
         .nav-btn { 
             position: absolute; bottom: 30px; background: var(--primary); color: white; 
             border: none; padding: 12px 35px; border-radius: 50px; font-size: 1.4rem; 
             font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 var(--dark); z-index: 20;
-            text-transform: uppercase;
         }
         .next { right: 40px; display: none; }
         .prev { left: 40px; background: #999; box-shadow: 0 5px 0 #666; }
 
-        .dibujo-tap { font-size: 7rem; cursor: pointer; filter: grayscale(100%); transition: 0.4s; padding: 15px; }
-        .dibujo-tap.active { filter: grayscale(0%); transform: scale(1.1); pointer-events: none; }
-
-        /* Estilo para formar sílabas */
-        .combinador { display: flex; align-items: center; gap: 20px; font-size: 6rem; font-weight: bold; color: var(--dark); }
-        .plus { color: var(--primary); }
-
-        #trophy-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; display: none; }
-        .trophy { position: absolute; font-size: 3rem; animation: fall linear forwards; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
     </style>
 </head>
 <body>
 
-    <div id="trophy-rain"></div>
-
     <header>
         <a href="index.html" class="back-link">← VOLVER</a>
-        <div class="header-title">Misión: Letra M Ⓜ️</div>
+        <div style="font-weight:700; font-size:1.6rem; color:var(--primary);">Cuaderno Letra M Ⓜ️</div>
     </header>
 
     <div class="book-slider">
         
-        <div class="page active" id="p1" data-total="1">
-            <h2>1. ¡Formamos la sílaba!</h2>
-            <div class="combinador">
-                <span>M</span>
-                <span class="plus">+</span>
-                <span>A</span>
-                <span class="plus">=</span>
-                <div class="silaba-tap" onclick="marcar(this, true, 1)">MA</div>
+        <div class="page active" id="p1" data-total="3">
+            <h2>1. Busca la sílaba "MA"</h2>
+            <div>
+                <span class="tap-item" onclick="check(this, true, 1)">MA</span>
+                <span class="tap-item" onclick="check(this, false, 1)">ME</span>
+                <span class="tap-item" onclick="check(this, true, 1)">MA</span>
+                <span class="tap-item" onclick="check(this, false, 1)">MO</span>
+                <span class="tap-item" onclick="check(this, true, 1)">MA</span>
             </div>
-            <p style="margin-top:20px; color:#666;">Toca el resultado para avanzar</p>
         </div>
 
-        <div class="page" id="p2" data-total="2">
-            <h2>2. Busca las sílabas "ME"</h2>
-            <div style="text-align: center;">
-                <span class="silaba-tap" onclick="marcar(this, true, 2)">ME</span>
-                <span class="silaba-tap" onclick="marcar(this, false, 2)">MA</span>
-                <span class="silaba-tap" onclick="marcar(this, true, 2)">ME</span>
-                <span class="silaba-tap" onclick="marcar(this, false, 2)">MO</span>
+        <div class="page" id="p2" data-total="3">
+            <h2>2. Busca la sílaba "ME"</h2>
+            <div>
+                <span class="tap-item" onclick="check(this, true, 2)">ME</span>
+                <span class="tap-item" onclick="check(this, false, 2)">MI</span>
+                <span class="tap-item" onclick="check(this, true, 2)">ME</span>
+                <span class="tap-item" onclick="check(this, true, 2)">ME</span>
             </div>
         </div>
 
         <div class="page" id="p3" data-total="1">
-            <h2>3. ¿Qué empieza por "MU"?</h2>
-            <div style="display: flex; gap: 40px;">
-                <div class="dibujo-tap" onclick="pintar(this, false, 3)">🍎</div>
-                <div class="dibujo-tap" onclick="pintar(this, true, 3)">🦇</div> <div class="dibujo-tap" onclick="pintar(this, false, 3)">✈️</div>
+            <h2>3. Completa la palabra</h2>
+            <div style="font-size: 5rem; margin-bottom: 20px;">🍯</div>
+            <div style="font-size: 4rem; letter-spacing: 10px; margin-bottom: 20px;">__ EL</div>
+            <div>
+                <span class="tap-item" onclick="check(this, true, 3)">MI</span>
+                <span class="tap-item" onclick="check(this, false, 3)">MA</span>
+                <span class="tap-item" onclick="check(this, false, 3)">MU</span>
             </div>
-            <p style="color:#666;">(Murciélago)</p>
+            <p style="color:#666;">(MIEL)</p>
+        </div>
+
+        <div class="page" id="p4" data-total="3">
+            <h2>4. Une la palabra con su dibujo</h2>
+            <div class="match-container">
+                <div class="match-col">
+                    <div class="match-box" id="w1" onclick="match('w1', 'mimo')">MIMO</div>
+                    <div class="match-box" id="w2" onclick="match('w2', 'mesa')">MESA</div>
+                    <div class="match-box" id="w3" onclick="match('w3', 'mono')">MONO</div>
+                </div>
+                <div class="match-col">
+                    <div class="match-box" id="i1" onclick="match('i1', 'mesa')">🪑</div>
+                    <div class="match-box" id="i2" onclick="match('i2', 'mimo')">🤡</div>
+                    <div class="match-box" id="i3" onclick="match('i3', 'mono')">🐒</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="p5" data-total="2">
+            <h2>5. Une la frase con el dibujo</h2>
+            <div class="match-container">
+                <div class="match-col">
+                    <div class="match-box" id="f1" onclick="match('f1', 'ama')" style="font-size: 1.1rem;">MI MAMÁ ME AMA</div>
+                    <div class="match-box" id="f2" onclick="match('f2', 'mimo')" style="font-size: 1.1rem;">EL MIMO HACE REÍR</div>
+                </div>
+                <div class="match-col">
+                    <div class="match-box" id="fi1" onclick="match('fi1', 'mimo')">🤡</div>
+                    <div class="match-box" id="fi2" onclick="match('fi2', 'ama')">❤️</div>
+                </div>
+            </div>
         </div>
 
         <button class="nav-btn prev" id="btnPrev" onclick="navegar(-1)" style="display: none;">ATRÁS</button>
@@ -112,71 +131,58 @@
     </div>
 
     <script>
-        let paginaActual = 1;
-        const totalPaginas = 3;
-        let aciertos = {1: 0, 2: 0, 3: 0};
+        let paginaActual = 1, totalPaginas = 5;
+        let aciertos = {1:0, 2:0, 3:0, 4:0, 5:0};
+        let selId = null, selVal = null;
 
-        function navegar(direccion) {
-            if (paginaActual === totalPaginas && direccion === 1) {
-                finalizarMision();
-                return;
-            }
+        function navegar(dir) {
             document.getElementById(`p${paginaActual}`).classList.remove('active');
-            paginaActual += direccion;
+            paginaActual += dir;
+            if(paginaActual > totalPaginas) { finalizar(); return; }
             document.getElementById(`p${paginaActual}`).classList.add('active');
-            actualizarInterfaz();
+            actualizar();
         }
 
-        function actualizarInterfaz() {
+        function actualizar() {
             document.getElementById('btnPrev').style.display = paginaActual === 1 ? 'none' : 'block';
-            const btnNext = document.getElementById('btnNext');
-            const objetivo = parseInt(document.getElementById(`p${paginaActual}`).dataset.total);
-            
-            if (aciertos[paginaActual] >= objetivo) {
-                btnNext.style.display = 'block';
-                btnNext.innerText = paginaActual === totalPaginas ? '¡LO LOGRÉ! 🏆' : 'SIGUIENTE';
+            const btnN = document.getElementById('btnNext');
+            const obj = parseInt(document.getElementById(`p${paginaActual}`).dataset.total);
+            btnN.style.display = aciertos[paginaActual] >= obj ? 'block' : 'none';
+            btnN.innerText = paginaActual === totalPaginas ? 'FINALIZAR' : 'SIGUIENTE';
+        }
+
+        function check(el, ok, pag) {
+            if(ok) {
+                if(!el.classList.contains('correct')) {
+                    el.classList.add('correct'); aciertos[pag]++;
+                    confetti({ particleCount: 20, colors:['#0e9343'] }); actualizar();
+                }
+            } else { el.style.animation = 'shake 0.3s'; setTimeout(()=>el.style.animation='', 300); }
+        }
+
+        function match(id, val) {
+            const el = document.getElementById(id);
+            if(el.classList.contains('correct')) return;
+            if(!selId) {
+                selId = id; selVal = val; el.classList.add('selected');
             } else {
-                btnNext.style.display = 'none';
+                const prev = document.getElementById(selId);
+                if(selId[0] !== id[0] && selVal === val) {
+                    el.classList.add('correct'); prev.classList.add('correct');
+                    aciertos[paginaActual]++;
+                    confetti({ particleCount: 40 });
+                } else {
+                    el.style.animation = 'shake 0.3s'; prev.style.animation = 'shake 0.3s';
+                    setTimeout(()=> { el.style.animation=''; prev.style.animation=''; }, 300);
+                }
+                prev.classList.remove('selected'); selId = null; selVal = null;
+                actualizar();
             }
         }
 
-        function marcar(el, esCorrecto, idPag) {
-            if(esCorrecto) {
-                el.classList.add('selected-correct');
-                aciertos[idPag]++;
-                confetti({ particleCount: 40, spread: 60, colors: ['#0e9343'] });
-                actualizarInterfaz();
-            } else {
-                el.style.animation = 'shake 0.3s';
-                setTimeout(() => el.style.animation = '', 300);
-            }
-        }
-
-        function pintar(el, esCorrecto, idPag) {
-            if(esCorrecto) {
-                el.classList.add('active');
-                aciertos[idPag]++;
-                confetti({ particleCount: 60, spread: 80, colors: ['#0e9343'] });
-                actualizarInterfaz();
-            } else {
-                el.style.animation = 'shake 0.3s';
-                setTimeout(() => el.style.animation = '', 300);
-            }
-        }
-
-        function finalizarMision() {
-            confetti({ particleCount: 200, spread: 120, origin: { y: 0.6 } });
-            const rain = document.getElementById('trophy-rain');
-            rain.style.display = 'block';
-            for (let i = 0; i < 25; i++) {
-                const t = document.createElement('div');
-                t.className = 'trophy';
-                t.innerText = '🏆';
-                t.style.left = Math.random() * 100 + 'vw';
-                t.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                rain.appendChild(t);
-            }
-            setTimeout(() => { window.location.href = 'index.html'; }, 4000);
+        function finalizar() {
+            confetti({ particleCount: 200, spread: 100 });
+            setTimeout(() => { window.location.href = 'index.html'; }, 3000);
         }
     </script>
 </body>
