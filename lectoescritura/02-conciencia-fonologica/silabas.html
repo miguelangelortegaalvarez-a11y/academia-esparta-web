@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misión Sílabas - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --accent: #fbc02d; }
+        body { font-family: 'Poppins', sans-serif; background: #e3f2fd; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; }
+        
+        .game-header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid #1976d2; position: relative; z-index: 5; }
+        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: #1976d2; font-weight: bold; }
+
+        .game-container { max-width: 800px; width: 90%; background: white; margin-top: 1.5rem; padding: 2rem; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); z-index: 5; }
+        
+        /* Área del dibujo */
+        .target-box { margin-bottom: 2rem; }
+        .item-to-drag { font-size: 6rem; cursor: grab; display: inline-block; transition: transform 0.2s; user-select: none; }
+        .item-to-drag:active { cursor: grabbing; transform: scale(1.1); }
+
+        .word-hint { font-size: 2rem; font-weight: 700; color: var(--dark); margin-top: 10px; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Platos de sílabas */
+        .drop-zone-container { display: flex; justify-content: center; gap: 15px; margin-top: 2rem; }
+        .drop-zone { width: 120px; height: 120px; border: 4px dashed #bbdefb; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.3s; background: #f1f8e9; }
+        .drop-zone.hover { background: #c8e6c9; border-color: var(--primary); transform: scale(1.05); }
+        .drop-zone span { font-size: 2.5rem; font-weight: 700; color: #1976d2; }
+        .drop-zone label { font-size: 0.8rem; color: #666; font-weight: bold; }
+
+        #overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); border-radius: 30px; flex-direction: column; align-items: center; justify-content: center; z-index: 20; }
+        .btn { padding: 1.2rem 2.5rem; border: none; border-radius: 15px; font-weight: 700; cursor: pointer; background: var(--primary); color: white; font-size: 1.2rem; margin-top: 1rem; }
+
+        #trophy-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 15; display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="trophy-rain"></div>
+
+    <div class="game-header">
+        <a href="index.html" class="back-link">← Salir</a>
+        <h2 style="color: #1976d2; margin: 0;">Misión: El Salto de las Sílabas</h2>
+    </div>
+
+    <div class="game-container">
+        <div id="overlay">
+            <h2 id="overlay-msg" style="color: var(--primary); font-size: 3rem;">¡GENIAL!</h2>
+            <p id="overlay-sub" style="font-size: 1.2rem;">¡Has completado este nivel!</p>
+            <button class="btn" id="btn-next" onclick="cerrarOverlay()">SIGUIENTE NIVEL</button>
+            <a href="index.html" class="btn" id="btn-final" style="display:none; text-decoration:none;">MENÚ PRINCIPAL</a>
+        </div>
+
+        <p style="color: #666;">Da palmadas y lleva el dibujo al número de sílabas correcto:</p>
+        
+        <div class="target-box">
+            <div id="drag-item" class="item-to-drag" draggable="true">🍎</div>
+            <div id="word-text" class="word-hint">MANZANA</div>
+        </div>
+
+        <div class="drop-zone-container">
+            <div class="drop-zone" data-syllables="1"><span>1</span><label>Palmada</label></div>
+            <div class="drop-zone" data-syllables="2"><span>2</span><label>Palmadas</label></div>
+            <div class="drop-zone" data-syllables="3"><span>3</span><label>Palmadas</label></div>
+            <div class="drop-zone" data-syllables="4"><span>4</span><label>Palmadas</label></div>
+        </div>
+
+        <div id="feedback-msg" style="margin-top: 2rem; font-weight: bold; min-height: 30px;"></div>
+    </div>
+
+    <script>
+        const retos = [
+            // Mezclados de 1 a 4 sílabas
+            { img: '☀️', word: 'SOL', value: 1 },
+            { img: '🐱', word: 'GATO', value: 2 },
+            { img: '🍌', word: 'PLÁTANO', value: 3 },
+            { img: '🐘', word: 'ELEFANTE', value: 4 },
+            { img: '🏠', word: 'CASA', value: 2 },
+            { img: '🚗', word: 'COCHE', value: 2 },
+            { img: '🦋', word: 'MARIPOSA', value: 4 },
+            { img: '🍞', word: 'PAN', value: 1 },
+            { img: '🦉', word: 'BÚHO', value: 2 },
+            { img: '🎈', word: 'GLOBO', value: 2 }
+        ];
+
+        let indexActual = 0;
+        let nivelActual = 1;
+        const dragItem = document.getElementById('drag-item');
+        const zones = document.querySelectorAll('.drop-zone');
+
+        // Configuración Drag & Drop para iPad
+        dragItem.addEventListener('dragstart', (e) => { e.dataTransfer.setData('text', ''); });
+
+        zones.forEach(zone => {
+            zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('hover'); });
+            zone.addEventListener('dragleave', () => { zone.classList.remove('hover'); });
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('hover');
+                const selectedValue = parseInt(zone.getAttribute('data-syllables'));
+                comprobar(selectedValue);
+            });
+            // Soporte para clicks manuales también
+            zone.addEventListener('click', () => comprobar(parseInt(zone.getAttribute('data-syllables'))));
+        });
+
+        function sonidoAplausos() {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const duration = 1.2;
+            const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * duration, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.4));
+            const noise = audioCtx.createBufferSource();
+            noise.buffer = buffer;
+            const filter = audioCtx.createBiquadFilter();
+            filter.frequency.value = 1200;
+            noise.connect(filter); filter.connect(audioCtx.destination);
+            noise.start();
+        }
+
+        function comprobar(valor) {
+            const correcto = retos[indexActual].value;
+            const msg = document.getElementById('feedback-msg');
+            
+            if(valor === correcto) {
+                sonidoAplausos();
+                confetti({ particleCount: 60, spread: 50, origin: { y: 0.7 } });
+                msg.innerHTML = '<span style="color: var(--primary)">¡SÍ! Muy bien contado. 👏</span>';
+                setTimeout(progresar, 1500);
+            } else {
+                msg.innerHTML = '<span style="color: #ef5350">¡Casi! Prueba de nuevo. 🧐</span>';
+            }
+        }
+
+        function progresar() {
+            indexActual++;
+            if(indexActual % 5 === 0) { // Cada 5 aciertos sube un nivel visual
+                mostrarOverlay();
+            } else if(indexActual < retos.length) {
+                cargarReto();
+            } else {
+                mostrarOverlay(true);
+            }
+        }
+
+        function cargarReto() {
+            const r = retos[indexActual];
+            dragItem.innerText = r.img;
+            document.getElementById('word-text').innerText = r.word;
+            document.getElementById('feedback-msg').innerText = '';
+        }
+
+        function mostrarOverlay(final = false) {
+            const overlay = document.getElementById('overlay');
+            overlay.style.display = 'flex';
+            iniciarLluviaTrofeos();
+            if(final) {
+                document.getElementById('overlay-msg').innerText = "¡MAESTRO DE LAS SÍLABAS!";
+                document.getElementById('btn-next').style.display = 'none';
+                document.getElementById('btn-final').style.display = 'inline-block';
+            }
+        }
+
+        function cerrarOverlay() {
+            document.getElementById('overlay').style.display = 'none';
+            nivelActual++;
+            cargarReto();
+        }
+
+        function iniciarLluviaTrofeos() {
+            const container = document.getElementById('trophy-rain');
+            container.innerHTML = '';
+            container.style.display = 'block';
+            for (let i = 0; i < 15; i++) {
+                const t = document.createElement('div');
+                t.style.cssText = `position:fixed; left:${Math.random()*100}vw; top:-50px; font-size:3rem; animation: rain 2s linear forwards; animation-delay:${Math.random()}s;`;
+                t.innerText = '🏆';
+                container.appendChild(t);
+            }
+            const style = document.createElement('style');
+            style.innerHTML = `@keyframes rain { to { transform: translateY(110vh) rotate(360deg); } }`;
+            document.head.appendChild(style);
+            setTimeout(() => { container.style.display = 'none'; }, 4000);
+        }
+
+        cargarReto();
+    </script>
+</body>
+</html>
