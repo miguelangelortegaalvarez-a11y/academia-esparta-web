@@ -2,16 +2,23 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha Letra P - Caligrafía Real Academia Esparta</title>
+    <title>Ficha Letra P - Caligrafía Cursiva Real</title>
     <style>
-        /* Importamos una fuente que se parece a la escolar para los textos */
-        @import url('https://fonts.googleapis.com/css2?family=Short+Stack&display=swap');
+        /* IMPORTACIÓN DE FUENTE CURSIVA ESCOLAR PUNTEADA REAL */
+        @font-face {
+            font-family: 'CursivaPunteada';
+            src: url('https://raw.githubusercontent.com/miguelsanchez/fonts/master/EscolarPunteada.woff') format('woff');
+        }
 
         @page { size: A4; margin: 0; }
-        body { font-family: 'Short Stack', cursive; margin: 0; padding: 0; background: #f0f2f5; color: #333; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f2f5; }
         
+        /* Botón de Impresión */
         .no-print-area { background: #fff; padding: 15px; text-align: center; border-bottom: 2px solid #ccc; }
-        .btn-imprimir { background: #e74c3c; color: white; border: none; padding: 12px 25px; font-weight: bold; font-size: 16px; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
+        .btn-imprimir { 
+            background: #e74c3c; color: white; border: none; padding: 12px 25px; 
+            font-weight: bold; font-size: 16px; border-radius: 8px; cursor: pointer; 
+        }
 
         .hoja {
             background: white;
@@ -20,77 +27,50 @@
             margin: 10px auto;
             padding: 1.5cm;
             box-sizing: border-box;
-            position: relative;
         }
 
-        /* Cabecera */
-        .header { border-bottom: 2px solid #0e9343; padding-bottom: 10px; margin-bottom: 20px; }
-        .logo { color: #0e9343; font-weight: bold; font-size: 22px; margin: 0; text-align: center; }
+        .header { border-bottom: 2px solid #0e9343; padding-bottom: 10px; margin-bottom: 20px; text-align: center;}
+        .logo { color: #0e9343; font-weight: bold; font-size: 22px; margin: 0; }
         .info { display: flex; justify-content: space-between; font-size: 14px; margin-top: 15px; }
 
-        h2 { font-size: 16px; margin: 25px 0 10px 0; color: #000; font-weight: bold; border-left: 5px solid #0e9343; padding-left: 10px; }
+        h2 { font-size: 16px; margin: 25px 0 10px 0; color: #000; border-left: 5px solid #0e9343; padding-left: 10px; }
 
         /* Cuadro de Búsqueda */
         .search-box {
-            border: 2px solid #000;
-            padding: 15px;
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
-            max-width: 500px;
-            margin: 10px auto;
-            text-align: center;
+            border: 2px solid #000; padding: 15px; display: grid;
+            grid-template-columns: repeat(6, 1fr); gap: 10px;
+            max-width: 500px; margin: 0 auto; text-align: center;
         }
         .search-box span { font-size: 28px; font-weight: bold; }
 
-        /* --- LA PAUTA MONTESSORI --- */
+        /* PAUTA MONTESSORI PROFESIONAL */
         .pauta {
-            height: 40px;
-            width: 100%;
-            margin: 15px 0;
-            position: relative;
-            /* Carril central sombreado como en los cuadernos reales */
-            background: linear-gradient(
-                to bottom,
-                #fff 0px, #fff 10px,
-                #e8f0fe 10px, #e8f0fe 30px,
-                #fff 30px, #fff 40px
-            );
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
+            height: 40px; width: 100%; margin: 15px 0; position: relative;
+            background: linear-gradient(to bottom, 
+                #fff 0px, #fff 10px, 
+                #d1e3ff 10px, #d1e3ff 30px, 
+                #fff 30px, #fff 40px);
+            border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;
         }
-        .linea-guia {
-            position: absolute;
-            width: 100%;
-            border-top: 1px solid #999;
-            top: 10px;
-        }
-        .linea-guia-inf {
-            position: absolute;
-            width: 100%;
-            border-top: 1px solid #999;
-            top: 30px;
-        }
+        .linea-central { position: absolute; width: 100%; border-top: 1px solid #bbb; top: 10px; height: 20px; }
+        .linea-central-fin { position: absolute; width: 100%; border-top: 1px solid #bbb; top: 30px; }
 
-        /* --- LA LETRA ESCOLAR (SIMULADA) --- */
-        .letra-escolar {
-            font-family: 'Short Stack', cursive;
-            font-size: 38px;
-            color: #bbb; /* Gris para repasar */
-            letter-spacing: 45px;
+        /* LA LETRA CURSIVA ESCOLAR */
+        .letra-cursiva {
+            font-family: 'CursivaPunteada', cursive;
+            font-size: 48px;
+            color: #aaa; /* Gris para repasar */
+            letter-spacing: 40px;
             padding-left: 20px;
             position: absolute;
-            top: -12px;
-            font-weight: normal;
+            top: -12px; /* Ajuste para que la cursiva se apoye en la línea */
         }
 
-        /* Ajuste para que la p minúscula baje del renglón */
-        .p-min {
-            top: -5px;
-            font-size: 35px;
+        /* Ajuste específico para que la p minúscula baje del renglón */
+        .letra-cursiva.min {
+            top: -10px;
+            font-size: 45px;
         }
-
-        .instruccion { font-style: italic; font-size: 14px; color: #666; margin-bottom: 5px; }
 
         @media print {
             body { background: white; }
@@ -107,9 +87,9 @@
 
     <div class="hoja">
         <div class="header">
-            <p class="logo">ACADEMIA ESPARTA: CUADERNO DE CALIGRAFÍA</p>
+            <p class="logo">ACADEMIA ESPARTA: CALIGRAFÍA CURSIVA</p>
             <div class="info">
-                <span>ALUMNO/A: _________________________________________</span>
+                <span>NOMBRE: _________________________________________</span>
                 <span>FECHA: __________</span>
             </div>
         </div>
@@ -121,31 +101,32 @@
             <span>D</span> <span>P</span> <span>b</span> <span>P</span> <span>p</span> <span>q</span>
         </div>
 
-        <h2>2. Repasa y escribe con buena letra</h2>
+        <h2>2. Repasa la letra cursiva escolar</h2>
         
-        <div class="instruccion">Mayúscula escolar:</div>
+        <p style="font-size:13px; margin:0;">P - Mayúscula cursiva:</p>
         <div class="pauta">
-            <div class="linea-guia"></div><div class="linea-guia-inf"></div>
-            <div class="letra-escolar">P P P P P P</div>
+            <div class="linea-central"></div><div class="linea-central-fin"></div>
+            <div class="letra-cursiva">PPPPPP</div>
         </div>
-        <div class="pauta"><div class="linea-guia"></div><div class="linea-guia-inf"></div></div>
 
-        <div class="instruccion" style="margin-top:20px;">Minúscula (la p baja del renglón):</div>
+        <p style="font-size:13px; margin:20px 0 0 0;">p - Minúscula cursiva (ligada):</p>
         <div class="pauta">
-            <div class="linea-guia"></div><div class="linea-guia-inf"></div>
-            <div class="letra-escolar p-min">p p p p p p</div>
+            <div class="linea-central"></div><div class="linea-central-fin"></div>
+            <div class="letra-cursiva min">pppppp</div>
         </div>
-        <div class="pauta"><div class="linea-guia"></div><div class="linea-guia-inf"></div></div>
 
-        <div class="instruccion" style="margin-top:20px;">Sílabas ligadas:</div>
+        <p style="font-size:13px; margin:20px 0 0 0;">Sílabas ligadas:</p>
         <div class="pauta">
-            <div class="linea-guia"></div><div class="linea-guia-inf"></div>
-            <div class="letra-escolar p-min" style="letter-spacing: 30px;">pa pe pi po pu</div>
+            <div class="linea-central"></div><div class="linea-central-fin"></div>
+            <div class="letra-cursiva min" style="letter-spacing: 25px;">pa pe pi po pu</div>
         </div>
-        <div class="pauta"><div class="linea-guia"></div><div class="linea-guia-inf"></div></div>
 
-        <div style="text-align: center; color: #0e9343; font-weight: bold; font-size: 12px; margin-top: 50px; border-top: 1px solid #eee; padding-top: 10px;">
-            ACADEMIA ESPARTA - ENTRENANDO MENTES FUERTES
+        <div class="pauta" style="margin-top:30px;">
+            <div class="linea-central"></div><div class="linea-central-fin"></div>
+        </div>
+
+        <div style="text-align: center; color: #0e9343; font-weight: bold; font-size: 11px; margin-top: 60px; border-top: 1px solid #eee; padding-top: 10px;">
+            ACADEMIA ESPARTA - MÉTODO DE ESCRITURA LIGADA
         </div>
     </div>
 
