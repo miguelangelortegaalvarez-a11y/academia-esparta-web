@@ -2,18 +2,19 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha Letra P - Caligrafía Academia Esparta</title>
+    <title>Ficha Letra P - Caligrafía Escolar Academia Esparta</title>
     <style>
-        /* FUENTE ESCOLAR LIGADA PUNTEADA */
+        /* INCLUSIÓN DE LA FUENTE DE CALIGRAFÍA ESCOLAR LIGADA CORRECTA */
+        /* Esta fuente imita perfectamente la letra escolar clásica y limpia de los cuadernos Rubio */
         @font-face {
-            font-family: 'EscolarPunteada';
-            src: url('https://raw.githubusercontent.com/miguelsanchez/fonts/master/EscolarPunteada.woff') format('woff');
+            font-family: 'Massallera';
+            src: url('https://fonts.cdnfonts.com/s/20831/massallerapunteada.woff') format('woff');
         }
 
         @page { size: A4; margin: 1cm; }
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f2f5; color: #333; }
         
-        /* Estilo del Botón de Impresión */
+        /* Estilo del Botón de Impresión (No se imprime) */
         .no-print-area {
             background: #fff;
             padding: 15px;
@@ -46,14 +47,15 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* Cabecera */
+        /* Cabecera de la Ficha */
         .header { border-bottom: 2px solid #0e9343; padding-bottom: 10px; margin-bottom: 20px; }
-        .logo { color: #0e9343; font-weight: bold; font-size: 20px; margin: 0; }
+        .logo { color: #0e9343; font-weight: bold; font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
         .info { display: flex; justify-content: space-between; font-size: 13px; margin-top: 15px; }
 
-        h2 { font-size: 15px; margin: 25px 0 10px 0; color: #000; font-weight: bold; border-left: 4px solid #0e9343; padding-left: 10px; }
+        /* Títulos de los ejercicios */
+        h2 { color: #000; font-size: 15px; font-weight: bold; margin: 25px 0 10px 0; border-left: 4px solid #0e9343; padding-left: 10px; }
 
-        /* Cuadro de Búsqueda */
+        /* Cuadro de Búsqueda de letras */
         .search-box {
             border: 2px solid #000;
             padding: 20px;
@@ -66,16 +68,18 @@
         }
         .search-box span { font-size: 32px; font-weight: bold; }
 
-        /* Pauta Montessori */
+        /* --- SECCIÓN DE CALIGRAFÍA CON LA FUENTE CORRECTA --- */
         .pauta-contenedor { margin-top: 25px; }
+        
+        /* Definición de la Pauta Montessori / Escolar */
         .lineas-pauta {
             height: 45px;
             width: 100%;
             background-image: 
-                linear-gradient(#eee 1px, transparent 1px), 
-                linear-gradient(#999 1px, transparent 1px), 
-                linear-gradient(#999 1px, transparent 1px), 
-                linear-gradient(#eee 1px, transparent 1px);
+                linear-gradient(#eee 1px, transparent 1px), /* Línea superior */
+                linear-gradient(#999 1px, transparent 1px), /* Línea guía central superior */
+                linear-gradient(#999 1px, transparent 1px), /* Línea guía central inferior */
+                linear-gradient(#eee 1px, transparent 1px); /* Línea inferior */
             background-size: 100% 45px;
             background-position: 0 0, 0 12px, 0 33px, 0 45px;
             background-repeat: repeat-y;
@@ -84,18 +88,25 @@
             align-items: center;
         }
 
-        .letra-punteada {
-            font-family: 'EscolarPunteada', cursive;
+        /* La Letra Punteada Ligada Correcta */
+        .letra-correcta {
+            font-family: 'Massallera', cursive;
             font-size: 50px;
-            color: #bbb;
-            letter-spacing: 40px;
+            color: #bbb; /* Color suave para repasar */
+            letter-spacing: 38px;
             padding-left: 20px;
             line-height: 45px;
         }
 
+        /* Pequeño ajuste para las sílabas, un poco más pequeñas */
+        .letra-correcta.silabas {
+            font-size: 42px;
+            letter-spacing: 28px;
+        }
+
         .instruccion { font-style: italic; font-size: 14px; color: #555; margin-bottom: 8px; font-weight: bold; }
 
-        /* Ocultar elementos al imprimir */
+        /* Reglas CSS para ocultar el botón al imprimir */
         @media print {
             body { background: white; }
             .no-print-area { display: none; }
@@ -111,7 +122,7 @@
 
     <div class="hoja">
         <div class="header">
-            <p class="logo">ACADEMIA ESPARTA: CUADERNO DE CALIGRAFÍA</p>
+            <p class="logo">Academia Esparta: Cuaderno de Caligrafía</p>
             <div class="info">
                 <span>ALUMNO/A: _________________________________________</span>
                 <span>FECHA: __________</span>
@@ -128,21 +139,19 @@
         <h2>2. Repasa y escribe siguiendo la pauta escolar</h2>
         
         <div class="pauta-contenedor">
-            <div class="instruccion">Mayúscula:</div>
-            <div class="lineas-pauta"><span class="letra-punteada">PPPPPP</span></div>
-            <div class="lineas-pauta"></div>
-            
-            <div class="instruccion" style="margin-top:25px;">Minúscula ligada:</div>
-            <div class="lineas-pauta"><span class="letra-punteada" style="font-size:42px;">pppppp</span></div>
+            <div class="instruccion">Mayúscula escolar:</div>
+            <div class="lineas-pauta"><span class="letra-correcta">PPPPPP</span></div>
+            <div class="lineas-pauta"></div> <div class="instruccion" style="margin-top:25px;">Minúscula ligada clásica:</div>
+            <div class="lineas-pauta"><span class="letra-correcta" style="font-size:45px;">pppppp</span></div>
             <div class="lineas-pauta"></div>
 
-            <div class="instruccion" style="margin-top:25px;">Sílabas:</div>
-            <div class="lineas-pauta"><span class="letra-punteada" style="font-size:38px; letter-spacing: 28px;">pa pe pi po pu</span></div>
+            <div class="instruccion" style="margin-top:25px;">Sílabas ligadas:</div>
+            <div class="lineas-pauta"><span class="letra-correcta silabas">pa pe pi po pu</span></div>
             <div class="lineas-pauta"></div>
         </div>
 
-        <div style="text-align: center; color: #0e9343; font-weight: bold; font-size: 12px; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px;">
-            ACADEMIA ESPARTA - MATERIAL DE APOYO ESCOLAR
+        <div style="text-align: center; color: #0e9343; font-weight: bold; font-size: 12px; margin-top: 45px; border-top: 1px solid #eee; padding-top: 10px; text-transform: uppercase;">
+            Academia Esparta - Entrenando Mentes Fuertes
         </div>
     </div>
 
