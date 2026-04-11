@@ -3,151 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
-    <title>Parchís Espartano - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>English Battle: Passive Voice - Academia Esparta</title>
     <style>
-        :root { --amarillo: #ffeb3b; --azul: #2196f3; --rojo: #f44336; --verde: #4caf50; --esparta: #333; }
-        body { font-family: 'Open Sans', sans-serif; background: #f0f0f0; display: flex; flex-direction: column; align-items: center; margin: 0; touch-action: none; }
+        :root { --verde: #4CAF50; --azul: #2196f3; --rojo: #e74c3c; --negro: #333; --gris: #f4f7f6; }
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding-bottom: 50px; }
+        .header { background: white; color: var(--verde); text-align: center; padding: 20px; border-bottom: 5px solid var(--verde); }
+        .header h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; }
+        .container { max-width: 700px; margin: 20px auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
-        .header { text-align: center; color: var(--verde); padding: 15px; }
-        .header h1 { font-family: 'Montserrat'; margin: 0; text-transform: uppercase; }
-
-        /* EL TABLERO */
-        #contenedor-tablero {
-            position: relative;
-            width: 600px; height: 600px;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Parcheesi_Board.svg/1024px-Parcheesi_Board.svg.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            border-radius: 10px;
-            background-color: white;
-        }
-
-        /* LAS FICHAS */
-        .ficha {
-            width: 25px; height: 25px;
-            border-radius: 50%;
-            position: absolute;
-            cursor: move;
-            border: 2px solid white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
-            z-index: 10;
-        }
-        .f-roja { background: var(--rojo); }
-        .f-azul { background: var(--azul); }
-        .f-amarilla { background: var(--amarillo); }
-        .f-verde { background: var(--verde); }
-
-        /* DADO */
-        .controles { margin-top: 20px; display: flex; align-items: center; gap: 20px; background: white; padding: 15px 30px; border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        #dado { font-size: 3rem; font-family: 'Montserrat'; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; background: var(--esparta); color: white; border-radius: 12px; }
-        .btn-lanzar { padding: 15px 25px; background: var(--verde); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-family: 'Montserrat'; text-transform: uppercase; }
+        .status-bar { display: flex; justify-content: space-between; align-items: center; background: var(--negro); color: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-family: 'Montserrat'; font-size: 0.9rem; }
+        .vidas-count { background: var(--rojo); padding: 5px 10px; border-radius: 8px; font-weight: bold; }
         
-        .instrucciones { margin-top: 15px; font-size: 0.9rem; color: #666; font-style: italic; }
+        .progreso-bg { width: 100%; height: 12px; background: #eee; border-radius: 10px; margin-bottom: 25px; overflow: hidden; }
+        .progreso-fill { height: 100%; background: var(--azul); width: 0%; transition: 0.5s; }
+
+        .pregunta { font-size: 1.4rem; font-weight: 700; color: #333; margin-bottom: 20px; text-align: center; }
+        .opciones { display: grid; gap: 12px; }
+        .opcion { padding: 18px; border: 2px solid #ddd; border-radius: 12px; background: white; cursor: pointer; font-size: 1.1rem; transition: 0.2s; font-weight: 600; text-align: left; }
+        .opcion:hover:not(:disabled) { border-color: var(--azul); background: #f0f7ff; }
+        
+        .correcto { background-color: var(--verde) !important; color: white; border-color: #388E3C !important; }
+        .incorrecto { background-color: var(--rojo) !important; color: white; border-color: #b71c1c !important; }
+
+        .feedback { margin-top: 20px; text-align: center; font-weight: 800; font-size: 1.2rem; min-height: 2em; font-family: 'Montserrat'; }
+        .shake { animation: shake 0.4s; }
+        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-10px);} 75% {transform: translateX(10px);} }
+
+        .pantalla-final { display: none; text-align: center; padding: 20px; }
+        .btn { margin-top: 25px; padding: 15px 35px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.2rem; color: white; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
-<div class="header">
+<header class="header">
     <h1>ACADEMIA ESPARTA</h1>
-    <p>¡Gran Torneo de Parchís Familiar!</p>
+    <p>English Challenge: Passive Voice 🇬🇧</p>
+</header>
+
+<div class="container">
+    <div class="status-bar">
+        <div id="tag-nivel" style="background: var(--azul); padding: 5px 10px; border-radius: 8px;">LEVEL 1</div>
+        <div style="color: var(--verde);">✅ <span id="puntos">0</span></div>
+        <div class="vidas-count">🛡️ <span id="vidas">3</span></div>
+        <div>🎯 <span id="num-preg">1</span>/10</div>
+    </div>
+    
+    <div class="progreso-bg"><div class="progreso-fill" id="barra"></div></div>
+    
+    <div id="juego">
+        <div class="pregunta" id="txt-pregunta">Cargando frase...</div>
+        <div class="opciones" id="box-opciones"></div>
+        <div id="feedback" class="feedback"></div>
+    </div>
+
+    <div class="pantalla-final" id="final">
+        <h2 id="titulo-final"></h2>
+        <p id="puntos-final" style="font-size: 3rem; font-weight: 900; color: var(--azul);"></p>
+        <p id="mensaje-final" style="font-style: italic; font-size: 1.3rem; margin: 20px 0;"></p>
+        <button class="btn" id="btn-next" style="background: var(--verde); display:none;" onclick="irSiguienteNivel()">NEXT LEVEL 🚀</button>
+        <button class="btn" id="btn-retry" style="background: var(--rojo); display:none;" onclick="reiniciarNivel()">RETRY 🔄</button>
+    </div>
 </div>
-
-<div id="contenedor-tablero">
-    <div class="ficha f-roja" style="top: 50px; left: 50px;"></div>
-    <div class="ficha f-roja" style="top: 50px; left: 85px;"></div>
-    <div class="ficha f-roja" style="top: 85px; left: 50px;"></div>
-    <div class="ficha f-roja" style="top: 85px; left: 85px;"></div>
-
-    <div class="ficha f-azul" style="top: 50px; left: 485px;"></div>
-    <div class="ficha f-azul" style="top: 50px; left: 520px;"></div>
-    <div class="ficha f-azul" style="top: 85px; left: 485px;"></div>
-    <div class="ficha f-azul" style="top: 85px; left: 520px;"></div>
-
-    <div class="ficha f-amarilla" style="top: 485px; left: 50px;"></div>
-    <div class="ficha f-amarilla" style="top: 485px; left: 85px;"></div>
-    <div class="ficha f-amarilla" style="top: 520px; left: 50px;"></div>
-    <div class="ficha f-amarilla" style="top: 520px; left: 85px;"></div>
-
-    <div class="ficha f-verde" style="top: 485px; left: 485px;"></div>
-    <div class="ficha f-verde" style="top: 485px; left: 520px;"></div>
-    <div class="ficha f-verde" style="top: 520px; left: 485px;"></div>
-    <div class="ficha f-verde" style="top: 520px; left: 520px;"></div>
-</div>
-
-<div class="controles">
-    <button class="btn-lanzar" onclick="lanzarDado()">Lanzar Dado 🎲</button>
-    <div id="dado">?</div>
-</div>
-
-<p class="instrucciones">Arrastra las fichas con el dedo o el ratón por el tablero.</p>
 
 <script>
-    // Lógica del Dado
-    function lanzarDado() {
-        const dadoElemento = document.getElementById('dado');
-        let iteraciones = 0;
-        const intervalo = setInterval(() => {
-            dadoElemento.innerText = Math.floor(Math.random() * 6) + 1;
-            iteraciones++;
-            if (iteraciones > 10) {
-                clearInterval(intervalo);
-                const resultado = Math.floor(Math.random() * 6) + 1;
-                dadoElemento.innerText = resultado;
-                // Si sale un 6, mensaje de suerte
-                if(resultado === 6) console.log("¡Espartano, vuelve a tirar!");
-            }
-        }, 50);
+    let nivel = 1;
+    let index = 0;
+    let aciertos = 0;
+    let fallos = 0;
+    let bancoActual = [];
+
+    const PREGUNTAS = [
+        // NIVEL 1: Present & Past Simple
+        { p: "Change to Passive: 'The chef prepares the food.'", o: ["The food is prepared by the chef.", "The food was prepared by the chef.", "The food prepares by the chef."], c: 0, n: 1 },
+        { p: "Passive: 'Bell invented the telephone.'", o: ["The telephone is invented.", "The telephone was invented.", "The telephone were invented."], c: 1, n: 1 },
+        { p: "Passive: 'They build houses every year.'", o: ["Houses are built every year.", "Houses is built every year.", "Houses were built every year."], c: 0, n: 1 },
+        { p: "Passive: 'Someone stole my car yesterday.'", o: ["My car is stolen.", "My car was stole.", "My car was stolen."], c: 2, n: 1 },
+        { p: "Passive: 'Many people speak English.'", o: ["English is spoken.", "English is speaked.", "English was spoken."], c: 0, n: 1 },
+
+        // NIVEL 2: Modals, Continuous, Perfect
+        { p: "Passive: 'You must wash this shirt.'", o: ["This shirt must washed.", "This shirt must be washed.", "This shirt is must washed."], c: 1, n: 2 },
+        { p: "Passive: 'They are painting the stadium.'", o: ["The stadium is painted.", "The stadium is being painted.", "The stadium was being painted."], c: 1, n: 2 },
+        { p: "Passive: 'Scientists have discovered a planet.'", o: ["A planet was discovered.", "A planet has been discovered.", "A planet have been discovered."], c: 1, n: 2 },
+        { p: "Passive: 'The government will build a hospital.'", o: ["A hospital will be built.", "A hospital will built.", "A hospital is built."], c: 0, n: 2 },
+        { p: "Passive: 'They gave me a gift.'", o: ["I was given a gift.", "A gift was gave me.", "I am given a gift."], c: 0, n: 2 }
+    ];
+
+    function mezclar(array) { return array.sort(() => Math.random() - 0.5); }
+
+    function iniciar() {
+        index = 0; aciertos = 0; fallos = 0;
+        bancoActual = mezclar(PREGUNTAS.filter(q => q.n === nivel)).slice(0, 5); // 5 preguntas por nivel
+        document.getElementById("tag-nivel").innerText = "LEVEL " + nivel;
+        document.getElementById("juego").style.display = "block";
+        document.getElementById("final").style.display = "none";
+        cargar();
     }
 
-    // Lógica para Arrastrar Fichas (Drag & Drop)
-    const fichas = document.querySelectorAll('.ficha');
-    let fichaActiva = null;
+    function cargar() {
+        document.getElementById("puntos").innerText = aciertos;
+        document.getElementById("vidas").innerText = 3 - fallos;
+        document.getElementById("num-preg").innerText = index + 1;
+        document.getElementById("barra").style.width = (index * 20) + "%";
+        document.getElementById("feedback").innerText = "";
 
-    fichas.forEach(ficha => {
-        ficha.addEventListener('mousedown', iniciarArrastre);
-        ficha.addEventListener('touchstart', iniciarArrastre, {passive: false});
-    });
-
-    function iniciarArrastre(e) {
-        e.preventDefault();
-        fichaActiva = this;
-        document.addEventListener('mousemove', arrastrar);
-        document.addEventListener('mouseup', detenerArrastre);
-        document.addEventListener('touchmove', arrastrar, {passive: false});
-        document.addEventListener('touchend', detenerArrastre);
-    }
-
-    function arrastrar(e) {
-        if (!fichaActiva) return;
+        const q = bancoActual[index];
+        document.getElementById("txt-pregunta").innerText = q.p;
+        const box = document.getElementById("box-opciones");
+        box.innerHTML = "";
         
-        let x, y;
-        if (e.type === 'touchmove') {
-            x = e.touches[0].clientX;
-            y = e.touches[0].clientY;
+        q.o.forEach((txt, i) => {
+            const b = document.createElement("button");
+            b.className = "opcion";
+            b.innerText = txt;
+            b.onclick = () => validar(i === q.c, b);
+            box.appendChild(b);
+        });
+    }
+
+    function validar(esC, btn) {
+        document.querySelectorAll(".opcion").forEach(b => b.disabled = true);
+        const fb = document.getElementById("feedback");
+
+        if (esC) {
+            btn.classList.add("correcto");
+            aciertos++;
+            fb.innerText = "EXCELLENT! 🌟";
+            fb.style.color = "var(--verde)";
         } else {
-            x = e.clientX;
-            y = e.clientY;
+            btn.classList.add("incorrecto");
+            fallos++;
+            fb.innerText = "MORE TERRIBLE THAN BARÇA IN CHAMPIONS! 😂";
+            fb.classList.add("shake");
+            fb.style.color = "var(--rojo)";
         }
 
-        const rect = document.getElementById('contenedor-tablero').getBoundingClientRect();
-        
-        // Mantener la ficha dentro del tablero
-        let posX = x - rect.left - 12;
-        let posY = y - rect.top - 12;
-
-        fichaActiva.style.left = posX + 'px';
-        fichaActiva.style.top = posY + 'px';
+        setTimeout(() => {
+            index++;
+            if (index < 5 && fallos <= 3) cargar();
+            else finalizar();
+        }, 1500);
     }
 
-    function detenerArrastre() {
-        fichaActiva = null;
-        document.removeEventListener('mousemove', arrastrar);
-        document.removeEventListener('mouseup', detenerArrastre);
-        document.removeEventListener('touchmove', arrastrar);
-        document.removeEventListener('touchend', detenerArrastre);
+    function finalizar() {
+        document.getElementById("juego").style.display = "none";
+        document.getElementById("final").style.display = "block";
+        document.getElementById("puntos-final").innerText = aciertos + " / 5";
+
+        if (fallos > 3 || aciertos < 3) {
+            document.getElementById("titulo-final").innerText = "FAILED!";
+            document.getElementById("mensaje-final").innerText = "You need more discipline, Erik! Try again.";
+            document.getElementById("btn-retry").style.display = "inline-block";
+        } else {
+            document.getElementById("titulo-final").innerText = "VICTORY!";
+            document.getElementById("mensaje-final").innerText = "You are better than Mbappé in Real Madrid!";
+            if(nivel < 2) document.getElementById("btn-next").style.display = "inline-block";
+            else document.getElementById("titulo-final").innerText = "PASSIVE MASTER! 🏆";
+        }
     }
+
+    function irSiguienteNivel() { nivel++; iniciar(); }
+    function reiniciarNivel() { iniciar(); }
+
+    iniciar();
 </script>
 
 </body>
