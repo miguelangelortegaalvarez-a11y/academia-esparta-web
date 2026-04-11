@@ -2,136 +2,188 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha Letra P - Letra Ligada Escolar</title>
+    <title>Ficha de Sumas - Academia Esparta</title>
     <style>
-        /* IMPORTACIÓN DE FUENTE LIGADA ESCOLAR (MASSALLERA) */
-        @font-face {
-            font-family: 'LetraLigada';
-            src: url('https://fonts.cdnfonts.com/s/20831/MassalleraPuntejada.woff') format('woff');
-        }
-
-        @page { size: A4; margin: 0; }
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f2f5; color: #333; }
+        @page { size: A4; margin: 1cm; }
+        body { font-family: 'Courier New', Courier, monospace; margin: 0; padding: 0; background: #f0f2f5; color: #333; }
         
         /* Botón de Impresión */
-        .no-print-area { background: #fff; padding: 15px; text-align: center; border-bottom: 2px solid #ccc; }
-        .btn-imprimir { 
-            background: #e74c3c; color: white; border: none; padding: 12px 25px; 
-            font-weight: bold; font-size: 16px; border-radius: 8px; cursor: pointer; 
+        .no-print-area {
+            background: #fff;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #ccc;
+            margin-bottom: 20px;
         }
+        .btn-imprimir {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn-imprimir:hover { background: #c0392b; }
 
+        /* Hoja A4 */
         .hoja {
             background: white;
             width: 210mm;
             height: 297mm;
-            margin: 10px auto;
+            margin: 0 auto;
             padding: 1.5cm;
             box-sizing: border-box;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        .header { border-bottom: 2px solid #0e9343; padding-bottom: 10px; margin-bottom: 20px; }
-        .logo { color: #0e9343; font-weight: bold; font-size: 20px; margin: 0; text-transform: uppercase; text-align: center; }
-        .info { display: flex; justify-content: space-between; font-size: 14px; margin-top: 15px; }
-
-        h2 { font-size: 15px; margin: 25px 0 10px 0; color: #000; border-left: 5px solid #0e9343; padding-left: 10px; font-weight: bold; }
-
-        /* Cuadro de Búsqueda */
-        .search-box {
-            border: 2px solid #000; padding: 15px; display: grid;
-            grid-template-columns: repeat(6, 1fr); gap: 10px;
-            max-width: 500px; margin: 0 auto; text-align: center;
-        }
-        .search-box span { font-size: 28px; font-weight: bold; }
-
-        /* PAUTA MONTESSORI CON CARRIL AZUL */
-        .pauta {
-            height: 40px; width: 100%; margin: 15px 0; position: relative;
-            background: linear-gradient(to bottom, 
-                #fff 0px, #fff 10px, 
-                #e8f0fe 10px, #e8f0fe 30px, 
-                #fff 30px, #fff 40px);
-            border-top: 1px solid #bbb; border-bottom: 1px solid #bbb;
+        .header { border-bottom: 2px solid #0e9343; padding-bottom: 10px; margin-bottom: 30px; }
+        .logo { color: #0e9343; font-weight: bold; font-size: 22px; margin: 0; text-align: center; font-family: Arial, sans-serif; }
+        
+        /* Rejilla de Sumas */
+        .grid-sumas {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px 20px;
+            margin-top: 40px;
         }
 
-        /* LÍNEAS GUÍA */
-        .guia { position: absolute; width: 100%; border-top: 1px solid #99b3ff; top: 10px; }
-        .guia-inf { position: absolute; width: 100%; border-top: 1px solid #99b3ff; top: 30px; }
+        .suma-box {
+            text-align: right;
+            font-size: 35px;
+            padding: 10px;
+            width: 120px;
+            margin: 0 auto;
+            position: relative;
+        }
 
-        /* LA LETRA LIGADA ESCOLAR */
-        .letra-ligada {
-            font-family: 'LetraLigada', cursive;
-            font-size: 55px;
-            color: #aaa; /* Gris para repasar */
-            letter-spacing: 30px;
-            padding-left: 20px;
+        /* Espacio para las llevadas */
+        .llevadas {
+            font-size: 18px;
+            color: #ccc;
+            letter-spacing: 12px;
+            margin-bottom: 5px;
+            height: 20px;
+        }
+
+        .linea-suma {
+            border-bottom: 3px solid #000;
+            margin-top: 5px;
+            margin-bottom: 40px;
+        }
+
+        .signo {
             position: absolute;
-            top: -18px; /* Ajustado para que el cuerpo de la letra esté en el carril azul */
-            font-weight: normal;
-        }
-
-        /* Ajuste para minúsculas ligadas */
-        .min {
-            font-size: 52px;
-            top: -15px;
+            left: -25px;
+            bottom: 65px;
         }
 
         @media print {
             body { background: white; }
             .no-print-area { display: none; }
-            .hoja { box-shadow: none; margin: 0; width: 100%; padding: 1cm; }
+            .hoja { box-shadow: none; margin: 0; width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div class="no-print-area">
-        <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR FICHA (PDF)</button>
+        <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR SUMAS (PDF)</button>
     </div>
 
     <div class="hoja">
         <div class="header">
-            <p class="logo">ACADEMIA ESPARTA: LETRA LIGADA</p>
-            <div class="info">
+            <p class="logo">ACADEMIA ESPARTA: OPERACIONES</p>
+            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 10px; font-family: Arial;">
                 <span>NOMBRE: _________________________________________</span>
                 <span>FECHA: __________</span>
             </div>
         </div>
 
-        <h2>1. Busca y rodea las letras "P" y "p"</h2>
-        <div class="search-box">
-            <span>P</span> <span>b</span> <span>d</span> <span>p</span> <span>M</span> <span>P</span>
-            <span>q</span> <span>p</span> <span>P</span> <span>B</span> <span>g</span> <span>p</span>
-            <span>D</span> <span>P</span> <span>b</span> <span>P</span> <span>p</span> <span>q</span>
+        <h2 style="text-align: center; font-family: Arial; font-size: 18px;">Resuelve las siguientes sumas de tres cifras</h2>
+
+        <div class="grid-sumas">
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>458</div>
+                <div><span class="signo">+</span> 275</div>
+                <div class="linea-suma"></div>
+            </div>
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>639</div>
+                <div><span class="signo">+</span> 184</div>
+                <div class="linea-suma"></div>
+            </div>
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>297</div>
+                <div><span class="signo">+</span> 546</div>
+                <div class="linea-suma"></div>
+            </div>
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>382</div>
+                <div><span class="signo">+</span> 429</div>
+                <div class="linea-suma"></div>
+            </div>
+
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>516</div>
+                <div><span class="signo">+</span> 297</div>
+                <div class="linea-suma"></div>
+            </div>
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>745</div>
+                <div><span class="signo">+</span> 168</div>
+                <div class="linea-suma"></div>
+            </div>
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>189</div>
+                <div><span class="signo">+</span> 632</div>
+                <div class="linea-suma"></div>
+            </div>
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>473</div>
+                <div><span class="signo">+</span> 358</div>
+                <div class="linea-suma"></div>
+            </div>
+
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>364</div>
+                <div><span class="signo">+</span> 547</div>
+                <div class="linea-suma"></div>
+            </div>
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>821</div>
+                <div><span class="signo">+</span> 099</div>
+                <div class="linea-suma"></div>
+            </div>
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>256</div>
+                <div><span class="signo">+</span> 465</div>
+                <div class="linea-suma"></div>
+            </div>
+            <div class="suma-box">
+                <div class="llevadas">...</div>
+                <div>678</div>
+                <div><span class="signo">+</span> 243</div>
+                <div class="linea-suma"></div>
+            </div>
         </div>
 
-        <h2>2. Repasa la letra ligada (escolar)</h2>
-        
-        <p style="font-size:13px; margin:0; font-weight:bold;">P Mayúscula ligada:</p>
-        <div class="pauta">
-            <div class="guia"></div><div class="guia-inf"></div>
-            <div class="letra-ligada">P P P P P</div>
-        </div>
-
-        <p style="font-size:13px; margin:25px 0 0 0; font-weight:bold;">p minúscula ligada:</p>
-        <div class="pauta">
-            <div class="guia"></div><div class="guia-inf"></div>
-            <div class="letra-ligada min">p p p p p</div>
-        </div>
-
-        <p style="font-size:13px; margin:25px 0 0 0; font-weight:bold;">Sílabas ligadas:</p>
-        <div class="pauta">
-            <div class="guia"></div><div class="guia-inf"></div>
-            <div class="letra-ligada min" style="letter-spacing: 20px;">pa pe pi po pu</div>
-        </div>
-
-        <p style="font-size:13px; margin:25px 0 0 0; font-weight:bold;">Practica tú solo:</p>
-        <div class="pauta">
-            <div class="guia"></div><div class="guia-inf"></div>
-        </div>
-
-        <div style="text-align: center; color: #0e9343; font-weight: bold; font-size: 11px; margin-top: 50px; border-top: 1px solid #eee; padding-top: 10px;">
-            ACADEMIA ESPARTA - MÉTODO DE ESCRITURA LIGADA ESCOLAR
+        <div style="text-align: center; color: #0e9343; font-weight: bold; font-size: 12px; margin-top: 80px; border-top: 1px solid #eee; padding-top: 10px; font-family: Arial;">
+            ACADEMIA ESPARTA - ENTRENANDO MENTES FUERTES
         </div>
     </div>
 
