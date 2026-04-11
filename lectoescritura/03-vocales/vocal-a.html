@@ -8,121 +8,69 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root { 
-            --primary: #0e9343; /* Verde Academia Esparta */
+            --primary: #0e9343; 
             --dark: #063c24; 
-            /* --- CORRECCIÓN AQUÍ: Instrucciones en Verde --- */
-            --a-color-text: var(--primary); /* Antes era Rojo, ahora es Verde */
+            --a-color-text: var(--primary); 
             --light-green: #e8f5e9;
             --bg: #f0f2f5;
         }
         
-        body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; }
+        body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; position: relative; }
         
-        /* Header en Verde */
-        header { 
-            background: white; 
-            width: 100%; 
-            padding: 1rem; 
-            text-align: center; 
-            border-bottom: 4px solid var(--primary); 
-            position: relative; 
-            z-index: 10; 
-            box-sizing: border-box; 
-        }
-        .back-link { 
-            position: absolute; 
-            left: 20px; 
-            top: 25px; 
-            text-decoration: none; 
-            color: var(--primary); 
-            font-weight: bold; 
-        }
-        .header-title {
-            font-weight: 700; 
-            font-size: 1.5rem; 
-            color: var(--primary); 
-        }
+        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); position: relative; z-index: 10; box-sizing: border-box; }
+        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--primary); font-weight: bold; }
+        .header-title { font-weight: 700; font-size: 1.5rem; color: var(--primary); }
 
-        /* Contenedor de Páginas Ajustado */
         .book-slider { width: 100%; flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative; }
         
         .page { 
-            display: none; 
-            width: 85%; 
-            max-width: 700px; 
-            height: 60vh; 
-            background: white; 
-            border-radius: 30px; 
-            padding: 2rem; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
-            border: 2px solid #eee;
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
+            display: none; width: 85%; max-width: 700px; height: 60vh; 
+            background: white; border-radius: 30px; padding: 2rem; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 2px solid #eee;
+            flex-direction: column; align-items: center; justify-content: center;
             animation: fadeIn 0.4s ease;
         }
         .page.active { display: flex; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        /* Títulos de instrucción (ahora verdes por la variable CSS) */
         h2 { color: var(--a-color-text); font-size: 2.2rem; margin-bottom: 2rem; text-align: center; }
 
-        /* Letras */
         .letra-tap { 
-            font-size: 5.5rem; 
-            cursor: pointer; 
-            padding: 10px 25px; 
-            border-radius: 50%; 
-            margin: 10px; 
-            border: 4px solid transparent; 
-            transition: 0.2s; 
-            display: inline-block;
+            font-size: 5.5rem; cursor: pointer; padding: 10px 25px; border-radius: 50%; 
+            margin: 10px; border: 4px solid transparent; transition: 0.2s; display: inline-block;
             color: #333; 
         }
         
-        /* Círculo VERDE para aciertos */
-        .letra-tap.selected-correct { 
-            border-color: var(--primary); 
-            background: var(--light-green); 
-            color: var(--primary); 
-        }
+        .letra-tap.selected-correct { border-color: var(--primary); background: var(--light-green); color: var(--primary); pointer-events: none; }
 
-        /* Botones de Navegación Verdes */
         .nav-btn { 
-            position: absolute; 
-            bottom: 30px; 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            padding: 12px 35px; 
-            border-radius: 50px; 
-            font-size: 1.4rem; 
-            font-weight: bold; 
-            cursor: pointer; 
-            box-shadow: 0 5px 0 var(--dark); 
-            z-index: 20;
+            position: absolute; bottom: 30px; background: var(--primary); color: white; 
+            border: none; padding: 12px 35px; border-radius: 50px; font-size: 1.4rem; 
+            font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 var(--dark); z-index: 20;
             text-transform: uppercase;
+            transition: 0.3s;
         }
         .nav-btn:active { transform: translateY(4px); box-shadow: none; }
+        .next { right: 40px; display: none; }
         .prev { left: 40px; background: #999; box-shadow: 0 5px 0 #666; }
-        .next { right: 40px; }
 
-        /* Estilos restantes (dibujos, lectura) */
         .dibujo-tap { font-size: 7rem; cursor: pointer; filter: grayscale(100%); transition: 0.4s; padding: 15px; }
-        .dibujo-tap.active { filter: grayscale(0%); transform: scale(1.1); }
+        .dibujo-tap.active { filter: grayscale(0%); transform: scale(1.1); pointer-events: none; }
         .lectura-grande { font-size: 6rem; letter-spacing: 20px; color: #333; background: #fafafa; padding: 30px 60px; border-radius: 25px; border: 3px dashed #ccc; text-transform: lowercase; }
-        .btn-cambiar { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 0 var(--dark); font-family: 'Fredoka'; }
+        .btn-cambiar { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 0 var(--dark); }
 
-        /* Animación de error (vibración) */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
-        }
+        /* Lluvia de Trofeos */
+        #trophy-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; display: none; }
+        .trophy { position: absolute; font-size: 3rem; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+        @keyframes pop { 0% { transform: scale(0.8); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
+
+    <div id="trophy-rain"></div>
 
     <header>
         <a href="index.html" class="back-link">← VOLVER</a>
@@ -130,47 +78,45 @@
     </header>
 
     <div class="book-slider">
-        
-        <div class="page active" id="p1">
+        <div class="page active" id="p1" data-total="3">
             <h2>1. Busca la "A" mayúscula</h2>
             <div style="text-align: center;">
-                <span class="letra-tap" onclick="marcar(this, true)">A</span>
-                <span class="letra-tap" onclick="marcar(this, false)">E</span>
-                <span class="letra-tap" onclick="marcar(this, true)">A</span>
-                <span class="letra-tap" onclick="marcar(this, false)">O</span>
-                <span class="letra-tap" onclick="marcar(this, true)">A</span>
+                <span class="letra-tap" onclick="marcar(this, true, 1)">A</span>
+                <span class="letra-tap" onclick="marcar(this, false, 1)">E</span>
+                <span class="letra-tap" onclick="marcar(this, true, 1)">A</span>
+                <span class="letra-tap" onclick="marcar(this, false, 1)">O</span>
+                <span class="letra-tap" onclick="marcar(this, true, 1)">A</span>
             </div>
         </div>
 
-        <div class="page" id="p2">
+        <div class="page" id="p2" data-total="3">
             <h2>2. Busca la "a" minúscula</h2>
             <div style="text-align: center;">
-                <span class="letra-tap" onclick="marcar(this, true)">a</span>
-                <span class="letra-tap" onclick="marcar(this, false)">o</span>
-                <span class="letra-tap" onclick="marcar(this, true)">a</span>
-                <span class="letra-tap" onclick="marcar(this, false)">e</span>
-                <span class="letra-tap" onclick="marcar(this, true)">a</span>
+                <span class="letra-tap" onclick="marcar(this, true, 2)">a</span>
+                <span class="letra-tap" onclick="marcar(this, false, 2)">o</span>
+                <span class="letra-tap" onclick="marcar(this, true, 2)">a</span>
+                <span class="letra-tap" onclick="marcar(this, false, 2)">e</span>
+                <span class="letra-tap" onclick="marcar(this, true, 2)">a</span>
             </div>
         </div>
 
-        <div class="page" id="p3">
+        <div class="page" id="p3" data-total="2">
             <h2>3. ¿Qué empieza por "a"?</h2>
             <div style="display: flex; gap: 40px;">
-                <div class="dibujo-tap" onclick="pintar(this, true)">🐝</div>
-                <div class="dibujo-tap" onclick="pintar(this, false)">🐱</div>
-                <div class="dibujo-tap" onclick="pintar(this, true)">✈️</div>
+                <div class="dibujo-tap" onclick="pintar(this, true, 3)">🐝</div>
+                <div class="dibujo-tap" onclick="pintar(this, false, 3)">🐱</div>
+                <div class="dibujo-tap" onclick="pintar(this, true, 3)">✈️</div>
             </div>
         </div>
 
-        <div class="page" id="p4">
+        <div class="page" id="p4" data-total="1">
             <h2>4. ¡Leemos juntos!</h2>
             <div class="lectura-grande" id="texto-lectura">a e</div>
-            <button class="btn-cambiar" onclick="cambiarLectura()">CAMBIAR COMBINACIÓN</button>
+            <button class="btn-cambiar" onclick="cambiarLectura(4)">CAMBIAR COMBINACIÓN</button>
         </div>
 
         <button class="nav-btn prev" id="btnPrev" onclick="navegar(-1)" style="display: none;">ATRÁS</button>
         <button class="nav-btn next" id="btnNext" onclick="navegar(1)">SIGUIENTE</button>
-
     </div>
 
     <script>
@@ -178,45 +124,90 @@
         const totalPaginas = 4;
         const combinaciones = ["a e", "a i", "a u", "a o", "a a"];
         let indiceLectura = 0;
+        let aciertos = {1: 0, 2: 0, 3: 0, 4: 0};
 
         function navegar(direccion) {
-            document.getElementById(`p${paginaActual}`).classList.remove('active');
-            paginaActual += direccion;
-            
-            if(paginaActual > totalPaginas) {
-                window.location.href = 'index.html';
+            if (paginaActual === totalPaginas && direccion === 1) {
+                finalizarMision();
                 return;
             }
-
+            document.getElementById(`p${paginaActual}`).classList.remove('active');
+            paginaActual += direccion;
             document.getElementById(`p${paginaActual}`).classList.add('active');
+            actualizarInterfaz();
+        }
+
+        function finalizarMision() {
+            // Fiesta de Confeti
+            confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 }, colors: ['#0e9343', '#FFD700'] });
+            
+            // Lluvia de Trofeos
+            const rain = document.getElementById('trophy-rain');
+            rain.style.display = 'block';
+            for (let i = 0; i < 20; i++) {
+                const t = document.createElement('div');
+                t.className = 'trophy';
+                t.innerText = '🏆';
+                t.style.left = Math.random() * 100 + 'vw';
+                t.style.top = '-50px';
+                t.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                rain.appendChild(t);
+            }
+
+            // Redirigir tras 3 segundos
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 3500);
+        }
+
+        function actualizarInterfaz() {
             document.getElementById('btnPrev').style.display = paginaActual === 1 ? 'none' : 'block';
-            document.getElementById('btnNext').innerText = paginaActual === totalPaginas ? 'FINALIZAR' : 'SIGUIENTE';
+            const btnNext = document.getElementById('btnNext');
+            const objetivo = parseInt(document.getElementById(`p${paginaActual}`).dataset.total);
+            
+            if (aciertos[paginaActual] >= objetivo) {
+                btnNext.style.display = 'block';
+                btnNext.innerText = paginaActual === totalPaginas ? 'FINALIZAR' : 'SIGUIENTE';
+            } else {
+                btnNext.style.display = 'none';
+            }
         }
 
-        function marcar(el, esCorrecto) {
+        function marcar(el, esCorrecto, idPag) {
             if(esCorrecto) {
-                el.classList.add('selected-correct');
-                confetti({ particleCount: 30, spread: 60, origin: { y: 0.7 }, colors: ['#0e9343'] });
+                if (!el.classList.contains('selected-correct')) {
+                    el.classList.add('selected-correct');
+                    aciertos[idPag]++;
+                    confetti({ particleCount: 20, spread: 50, origin: { y: 0.7 }, colors: ['#0e9343'] });
+                    actualizarInterfaz();
+                }
             } else {
-                // Vibración sin color rojo
                 el.style.animation = 'shake 0.3s';
                 setTimeout(() => el.style.animation = '', 300);
             }
         }
 
-        function pintar(el, esCorrecto) {
+        function pintar(el, esCorrecto, idPag) {
             if(esCorrecto) {
-                el.classList.add('active');
-                confetti({ particleCount: 50, spread: 70, colors: ['#0e9343'] });
+                if (!el.classList.contains('active')) {
+                    el.classList.add('active');
+                    aciertos[idPag]++;
+                    confetti({ particleCount: 40, spread: 60, colors: ['#0e9343'] });
+                    actualizarInterfaz();
+                }
             } else {
                 el.style.animation = 'shake 0.3s';
                 setTimeout(() => el.style.animation = '', 300);
             }
         }
 
-        function cambiarLectura() {
+        function cambiarLectura(idPag) {
             indiceLectura = (indiceLectura + 1) % combinaciones.length;
             document.getElementById('texto-lectura').innerText = combinaciones[indiceLectura];
+            if (aciertos[idPag] === 0) {
+                aciertos[idPag]++;
+                actualizarInterfaz();
+            }
         }
     </script>
 </body>
