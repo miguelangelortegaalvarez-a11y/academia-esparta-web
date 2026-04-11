@@ -2,211 +2,118 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Multiplicación Rayo - Academia Esparta</title>
+    <title>Efecto Espartano Sorprendente</title>
     <style>
-        :root { --verde: #4CAF50; --rojo: #e74c3c; --azul: #2196f3; --negro: #333; --blanco: #fff; }
-        body { font-family: 'Open Sans', sans-serif; background: #f4f7f6; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .header { text-align: center; color: var(--verde); margin-bottom: 20px; }
-        .header h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; }
-
-        .container { max-width: 600px; width: 100%; background: var(--blanco); padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
-        
-        /* TEMPORIZADOR */
-        .timer-bg { width: 100%; height: 15px; background: #eee; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
-        .timer-fill { height: 100%; background: var(--rojo); width: 100%; transition: linear 1s; }
-
-        .status-bar { display: flex; justify-content: space-between; align-items: center; background: var(--negro); color: white; padding: 12px; border-radius: 12px; margin-bottom: 15px; font-family: 'Montserrat'; }
-        
-        .pregunta { font-size: 2.5rem; font-weight: 800; text-align: center; margin: 30px 0; color: var(--negro); }
-        .opciones { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .opcion { padding: 20px; border: 2px solid #ddd; border-radius: 15px; background: white; cursor: pointer; font-size: 1.5rem; font-weight: 700; transition: 0.2s; }
-        .opcion:hover:not(:disabled) { border-color: var(--azul); background: #f0f7ff; }
-
-        .correcto { background-color: var(--verde) !important; color: white; border-color: #388E3C !important; }
-        .incorrecto { background-color: var(--rojo) !important; color: white; border-color: #b71c1c !important; }
-
-        .final { display: none; text-align: center; padding: 20px; }
-        .btn { margin-top: 25px; padding: 15px 35px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.2rem; color: white; text-transform: uppercase; }
-        
-        .shake { animation: shake 0.4s; }
-        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-10px);} 75% {transform: translateX(10px);} }
+        body { margin: 0; overflow: hidden; background: #111; font-family: 'Montserrat', sans-serif; }
+        canvas { display: block; }
+        .mensaje {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 5rem;
+            pointer-events: none;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 10px;
+        }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>ACADEMIA ESPARTA</h1>
-    <p>¡Entrenamiento de Velocidad Absoluta!</p>
-</div>
-
-<div class="container">
-    <div class="timer-bg"><div class="timer-fill" id="timer-bar"></div></div>
-    
-    <div class="status-bar">
-        <div id="tag-nivel" style="background: var(--azul); padding: 5px 10px; border-radius: 8px;">NIVEL 1</div>
-        <div>🛡️ VIDAS: <span id="vidas">3</span></div>
-        <div>🎯 <span id="num-p">1</span>/10</div>
-    </div>
-
-    <div id="juego">
-        <div class="pregunta" id="txt-pregunta">? x ?</div>
-        <div class="opciones" id="box-opciones"></div>
-    </div>
-
-    <div class="final" id="final">
-        <h2 id="tit-final"></h2>
-        <p id="nota-final" style="font-size: 3rem; font-weight: 900;"></p>
-        <p id="msg-final" style="font-style: italic; margin-bottom: 20px;"></p>
-        <button class="btn" id="btn-next" style="background: var(--verde); display:none;" onclick="irSiguienteNivel()">SIGUIENTE NIVEL 🚀</button>
-        <button class="btn" id="btn-retry" style="background: var(--rojo); display:none;" onclick="reiniciar()">REINTENTAR 🔄</button>
-    </div>
-</div>
+<div class="mensaje">Academia Esparta</div>
+<canvas id="canvas1"></canvas>
 
 <script>
-    let nivel = 1;
-    let index = 0;
-    let aciertos = 0;
-    let fallos = 0;
-    let tiempoRestante = 5;
-    let crono;
-    let listaPreguntas = [];
+const canvas = document.getElementById('canvas1');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-    const BANCO = {
-        1: [ // Fácil: Tablas del 1, 2, 5 y 10
-            { p: "2 x 5", o: [10, 12, 8], c: 10 },
-            { p: "5 x 3", o: [15, 20, 10], c: 15 },
-            { p: "10 x 4", o: [40, 50, 30], c: 40 },
-            { p: "2 x 8", o: [16, 14, 18], c: 16 },
-            { p: "5 x 5", o: [25, 30, 20], c: 25 },
-            { p: "1 x 9", o: [9, 1, 10], c: 9 },
-            { p: "2 x 7", o: [14, 12, 16], c: 14 },
-            { p: "5 x 8", o: [40, 35, 45], c: 40 },
-            { p: "10 x 10", o: [100, 10, 20], c: 100 },
-            { p: "2 x 9", o: [18, 16, 20], c: 18 }
-        ],
-        2: [ // Medio: Tablas del 3, 4, 6
-            { p: "3 x 4", o: [12, 9, 15], c: 12 },
-            { p: "4 x 6", o: [24, 20, 28], c: 24 },
-            { p: "6 x 3", o: [18, 12, 21], c: 18 },
-            { p: "3 x 8", o: [24, 21, 27], c: 24 },
-            { p: "4 x 9", o: [36, 32, 40], c: 36 },
-            { p: "6 x 6", o: [36, 30, 42], c: 36 },
-            { p: "4 x 4", o: [16, 12, 20], c: 16 },
-            { p: "6 x 7", o: [42, 48, 36], c: 42 },
-            { p: "3 x 9", o: [27, 24, 30], c: 27 },
-            { p: "4 x 8", o: [32, 36, 28], c: 32 }
-        ],
-        3: [ // Difícil: Tablas del 7, 8, 9
-            { p: "7 x 8", o: [56, 54, 63], c: 56 },
-            { p: "8 x 9", o: [72, 64, 81], c: 72 },
-            { p: "9 x 7", o: [63, 56, 70], c: 63 },
-            { p: "8 x 8", o: [64, 56, 72], c: 64 },
-            { p: "7 x 7", o: [49, 42, 56], c: 49 },
-            { p: "9 x 6", o: [54, 48, 63], c: 54 },
-            { p: "8 x 6", o: [48, 42, 54], c: 48 },
-            { p: "7 x 6", o: [42, 36, 48], c: 42 },
-            { p: "9 x 9", o: [81, 72, 90], c: 81 },
-            { p: "8 x 4", o: [32, 28, 36], c: 32 }
-        ]
-    };
+let particlesArray;
 
-    function iniciar() {
-        index = 0; aciertos = 0; fallos = 0;
-        listaPreguntas = [...BANCO[nivel]].sort(() => Math.random() - 0.5);
-        document.getElementById("tag-nivel").innerText = "NIVEL " + nivel;
-        document.getElementById("juego").style.display = "block";
-        document.getElementById("final").style.display = "none";
-        cargar();
+// Manejar el ratón
+let mouse = {
+    x: null,
+    y: null,
+    radius: 150
+}
+
+window.addEventListener('mousemove', function(event) {
+    mouse.x = event.x;
+    mouse.y = event.y;
+});
+
+class Particle {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = 3;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.density = (Math.random() * 30) + 1;
     }
-
-    function cargar() {
-        if (fallos >= 3) { finalizar(true); return; }
-        if (index >= 10) { finalizar(false); return; }
-
-        document.getElementById("vidas").innerText = 3 - fallos;
-        document.getElementById("num-p").innerText = index + 1;
-        
-        const q = listaPreguntas[index];
-        document.getElementById("txt-pregunta").innerText = q.p;
-        
-        const box = document.getElementById("box-opciones");
-        box.innerHTML = "";
-        q.o.sort(() => Math.random() - 0.5).forEach(op => {
-            const b = document.createElement("button");
-            b.className = "opcion";
-            b.innerText = op;
-            b.onclick = () => validar(op === q.c, b);
-            box.appendChild(b);
-        });
-
-        iniciarTemporizador();
+    draw() {
+        ctx.fillStyle = '#4CAF50';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
     }
+    update() {
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let forceDirectionX = dx / distance;
+        let forceDirectionY = dy / distance;
+        let maxDistance = mouse.radius;
+        let force = (maxDistance - distance) / maxDistance;
+        let directionX = forceDirectionX * force * this.density;
+        let directionY = forceDirectionY * force * this.density;
 
-    function iniciarTemporizador() {
-        clearInterval(crono);
-        tiempoRestante = 5;
-        const bar = document.getElementById("timer-bar");
-        bar.style.transition = "none";
-        bar.style.width = "100%";
-        
-        setTimeout(() => {
-            bar.style.transition = "linear 5s";
-            bar.style.width = "0%";
-        }, 50);
-
-        crono = setInterval(() => {
-            tiempoRestante--;
-            if (tiempoRestante <= 0) {
-                clearInterval(crono);
-                validar(false, null); // Tiempo agotado = fallo
+        if (distance < mouse.radius) {
+            this.x -= directionX;
+            this.y -= directionY;
+        } else {
+            if (this.x !== this.baseX) {
+                let dx = this.x - this.baseX;
+                this.x -= dx / 10;
             }
-        }, 1000);
-    }
-
-    function validar(esC, btn) {
-        clearInterval(crono);
-        document.querySelectorAll(".opcion").forEach(b => b.disabled = true);
-
-        if (esC) {
-            btn.classList.add("correcto");
-            aciertos++;
-        } else {
-            if (btn) btn.classList.add("incorrecto");
-            document.querySelector(".container").classList.add("shake");
-            setTimeout(() => document.querySelector(".container").classList.remove("shake"), 400);
-            fallos++;
-        }
-
-        setTimeout(() => {
-            index++;
-            cargar();
-        }, 1000);
-    }
-
-    function finalizar(perdio) {
-        document.getElementById("juego").style.display = "none";
-        document.getElementById("final").style.display = "block";
-        document.getElementById("nota-final").innerText = aciertos + " / 10";
-
-        if (perdio || aciertos < 7) {
-            document.getElementById("tit-final").innerText = "¡DERROTA!";
-            document.getElementById("msg-final").innerText = "¡Eres más lento que el Barça defendiendo! 😂";
-            document.getElementById("btn-retry").style.display = "inline-block";
-            document.getElementById("btn-next").style.display = "none";
-        } else {
-            document.getElementById("tit-final").innerText = "¡VICTORIA!";
-            document.getElementById("msg-final").innerText = "¡Erik, eres un rayo! Más rápido que Mbappé.";
-            if(nivel < 3) document.getElementById("btn-next").style.display = "inline-block";
-            else document.getElementById("tit-final").innerText = "¡MAESTRO DE LAS TABLAS! 🏆";
+            if (this.y !== this.baseY) {
+                let dy = this.y - this.baseY;
+                this.y -= dy / 10;
+            }
         }
     }
+}
 
-    function irSiguienteNivel() { nivel++; iniciar(); }
-    function reiniciar() { iniciar(); }
+function init() {
+    particlesArray = [];
+    // Crear una malla de puntos
+    for (let y = 0; y < canvas.height; y += 20) {
+        for (let x = 0; x < canvas.width; x += 20) {
+            particlesArray.push(new Particle(x, y));
+        }
+    }
+}
 
-    iniciar();
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].draw();
+        particlesArray[i].update();
+    }
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();
+
+window.addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
 </script>
 </body>
 </html>
