@@ -26,7 +26,6 @@
 
         h2 { color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem; text-align: center; }
 
-        /* Estilos Elementos */
         .tap-item { 
             font-size: 3rem; cursor: pointer; padding: 15px 25px; border-radius: 20px; 
             margin: 10px; border: 4px solid transparent; transition: 0.2s; background: #f9f9f9;
@@ -34,7 +33,6 @@
         }
         .tap-item.selected-correct { border-color: var(--primary); background: var(--light-green); color: var(--primary); pointer-events: none; }
 
-        /* Estilo Unir (Match) */
         .match-container { display: flex; justify-content: space-around; width: 100%; gap: 15px; }
         .match-col { display: flex; flex-direction: column; gap: 10px; }
         .match-box { 
@@ -54,7 +52,6 @@
         .next { right: 40px; display: none; }
         .prev { left: 40px; background: #999; box-shadow: 0 5px 0 #666; }
 
-        /* Animaciones */
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
         @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
     </style>
@@ -85,33 +82,67 @@
                 <span class="tap-item" onclick="checkSimple(this, true, 2)">ME</span>
                 <span class="tap-item" onclick="checkSimple(this, false, 2)">MI</span>
                 <span class="tap-item" onclick="checkSimple(this, true, 2)">ME</span>
+                <span class="tap-item" onclick="checkSimple(this, false, 2)">MU</span>
                 <span class="tap-item" onclick="checkSimple(this, true, 2)">ME</span>
             </div>
         </div>
+
+        <div class="page" id="p3" data-total="3">
+            <h2>3. Busca la sílaba "MI"</h2>
+            <div>
+                <span class="tap-item" onclick="checkSimple(this, true, 3)">MI</span>
+                <span class="tap-item" onclick="checkSimple(this, false, 3)">MA</span>
+                <span class="tap-item" onclick="checkSimple(this, true, 3)">MI</span>
+                <span class="tap-item" onclick="checkSimple(this, false, 3)">MO</span>
+                <span class="tap-item" onclick="checkSimple(this, true, 3)">MI</span>
+            </div>
+        </div>
+
+        <div class="page" id="p4" data-total="3">
+            <h2>4. Busca la sílaba "MO"</h2>
+            <div>
+                <span class="tap-item" onclick="checkSimple(this, true, 4)">MO</span>
+                <span class="tap-item" onclick="checkSimple(this, false, 4)">MU</span>
+                <span class="tap-item" onclick="checkSimple(this, true, 4)">MO</span>
+                <span class="tap-item" onclick="checkSimple(this, false, 4)">ME</span>
+                <span class="tap-item" onclick="checkSimple(this, true, 4)">MO</span>
+            </div>
+        </div>
+
+        <div class="page" id="p5" data-total="3">
+            <h2>5. Busca la sílaba "MU"</h2>
+            <div>
+                <span class="tap-item" onclick="checkSimple(this, true, 5)">MU</span>
+                <span class="tap-item" onclick="checkSimple(this, false, 5)">MI</span>
+                <span class="tap-item" onclick="checkSimple(this, true, 5)">MU</span>
+                <span class="tap-item" onclick="checkSimple(this, false, 5)">MA</span>
+                <span class="tap-item" onclick="checkSimple(this, true, 5)">MU</span>
+            </div>
+        </div>
         
-        <div class="page" id="p3" data-total="5">
-            <h2>3. Completa la palabra</h2>
+        <div class="page" id="p6" data-total="5">
+            <h2>6. Completa la palabra</h2>
             <div id="word-game-area" style="text-align: center;">
                 <div id="word-emoji" style="font-size: 7rem; margin-bottom: 10px;">🍯</div>
                 <div id="word-display" style="font-size: 4.5rem; letter-spacing: 5px; color: var(--dark); font-weight: bold; margin-bottom: 20px;">
                     <span id="word-part-1">__</span><span id="word-part-2">EL</span>
                 </div>
-                <div id="options-area">
-                    </div>
+                <div id="options-area"></div>
             </div>
         </div>
 
-        <div class="page" id="p4" data-total="3">
-            <h2>4. Une la palabra con su dibujo</h2>
+        <div class="page" id="p7" data-total="3">
+            <h2>7. Une la palabra con su dibujo</h2>
             <div class="match-container">
                 <div class="match-col">
                     <div class="match-box" id="w1" onclick="match('w1', 'mimo')">MIMO</div>
-                    <div class="match-box" id="w2" onclick="match('w2', 'mesa')">MESA</div>
-                    <div class="match-box" id="w3" onclick="match('w3', 'mono')">MONO</div>
+                    <div class="match-box" id="w2" onclick="match('w2', 'moto')">MOTO</div>
+                    <div class="match-box" id="w3" onclick="match('w3', 'mula')">MULA</div>
                 </div>
                 <div class="match-col">
-                    <div class="match-box" id="i1" onclick="match('i1', 'mesa')">🧱</div> <div class="match-box" id="i2" onclick="match('i2', 'mimo')">🤡</div>
-                    <div class="match-box" id="i3" onclick="match('i3', 'mono')">🐒</div>
+                    <div class="match-box" id="i1" onclick="match('i1', 'moto')">🏍️</div> 
+                    <div class="match-box" id="i2" onclick="match('i2', 'mimo')">🤡</div>
+                    <div class="match-box" id="i3" onclick="match('i3', 'mula')">🫏</div>
                 </div>
             </div>
         </div>
@@ -121,17 +152,16 @@
     </div>
 
     <script>
-        let paginaActual = 1, totalPaginas = 4;
-        let aciertos = {1:0, 2:0, 3:0, 4:0};
+        let paginaActual = 1, totalPaginas = 7;
+        let aciertos = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0};
         let selId = null, selVal = null;
 
-        // Base de datos para el juego de completar palabras
         const wordGameData = [
-            { emoji: '🍯', p1: '__', p2: 'EL', options: ['MA', 'MI', 'MU'], correct: 'MI', final: 'MIEL' }, // MI
-            { emoji: '🤚', p1: '__', p2: 'NO', options: ['ME', 'MA', 'MO'], correct: 'MA', final: 'MANO' }, // MA
-            { emoji: '🧱', p1: '__', p2: 'SA', options: ['MI', 'ME', 'MU'], correct: 'ME', final: 'MESA' }, // ME
-            { emoji: '🐒', p1: '__', p2: 'NO', options: ['MO', 'MA', 'ME'], correct: 'MO', final: 'MONO' }, // MO
-            { emoji: '🦷', p1: '__', p2: 'LA', options: ['MI', 'MU', 'MA'], correct: 'MU', final: 'MUELA' }  // MU
+            { emoji: '🍯', p1: '__', p2: 'EL', options: ['MA', 'MI', 'MU'], correct: 'MI', final: 'MIEL' },
+            { emoji: '🤚', p1: '__', p2: 'NO', options: ['ME', 'MA', 'MO'], correct: 'MA', final: 'MANO' },
+            { emoji: '🏍️', p1: '__', p2: 'TO', options: ['MI', 'ME', 'MO'], correct: 'MO', final: 'MOTO' },
+            { emoji: '🐒', p1: '__', p2: 'NO', options: ['MO', 'MA', 'ME'], correct: 'MO', final: 'MONO' },
+            { emoji: '🫏', p1: '__', p2: 'LA', options: ['MI', 'MU', 'MA'], correct: 'MU', final: 'MULA' }
         ];
         let currentWordIndex = 0;
 
@@ -141,9 +171,7 @@
             if(paginaActual > totalPaginas) { finalizar(); return; }
             document.getElementById(`p${paginaActual}`).classList.add('active');
             
-            // Si entramos en la página del juego de palabras, cargamos la primera
-            if (paginaActual === 3) { currentWordIndex = 0; loadWordChallenge(); }
-            
+            if (paginaActual === 6) { currentWordIndex = 0; loadWordChallenge(); }
             actualizarInterfaz();
         }
 
@@ -164,22 +192,14 @@
             } else { el.style.animation = 'shake 0.3s'; setTimeout(()=>el.style.animation='', 300); }
         }
 
-        /* --- LÓGICA DEL JUEGO DE COMPLETAR PALABRAS --- */
         function loadWordChallenge() {
             const data = wordGameData[currentWordIndex];
             document.getElementById('word-emoji').innerText = data.emoji;
-            
-            // Reset visual de la palabra (vuelve a mostrar las rayitas)
-            const p1 = document.getElementById('word-part-1');
-            const p2 = document.getElementById('word-part-2');
-            p1.innerText = data.p1;
-            p1.style.color = '--dark';
-            p2.innerText = data.p2;
-            p2.style.color = '--dark';
+            const wordDisplay = document.getElementById('word-display');
+            wordDisplay.innerHTML = '<span id="word-part-1">__</span><span id="word-part-2">' + data.p2 + '</span>';
 
-            // Cargar opciones
             const optionsArea = document.getElementById('options-area');
-            optionsArea.innerHTML = ''; // Limpiar opciones anteriores
+            optionsArea.innerHTML = '';
             data.options.forEach(opt => {
                 const span = document.createElement('span');
                 span.className = 'tap-item';
@@ -192,38 +212,29 @@
         function checkWordOption(el, selectedOpt) {
             const data = wordGameData[currentWordIndex];
             if (selectedOpt === data.correct) {
-                // Acierto
                 el.classList.add('selected-correct');
                 confetti({ particleCount: 50, spread: 70 });
                 
-                // --- CORRECCIÓN AQUÍ: Mostrar palabra entera y verde ---
                 const wordDisplay = document.getElementById('word-display');
                 wordDisplay.innerHTML = `<span style="color: var(--primary); animation: popIn 0.5s ease;">${data.final}</span>`;
 
-                aciertos[3]++; // Sumamos acierto de la palabra actual
+                aciertos[6]++;
                 
-                // Esperar un poco y cargar la siguiente palabra o habilitar el botón siguiente
                 setTimeout(() => {
                     currentWordIndex++;
                     if (currentWordIndex < wordGameData.length) {
-                        // Re-renderizar la estructura base de la palabra para el siguiente reto
-                        wordDisplay.innerHTML = '<span id="word-part-1">__</span><span id="word-part-2">EL</span>';
                         loadWordChallenge();
                     } else {
-                        // Hemos terminado las 5 palabras
-                        actualizarInterfaz(); // Habilitar botón SIGUIENTE
+                        actualizarInterfaz();
                         document.getElementById('options-area').innerHTML = '<p style="color:var(--primary); font-weight:bold;">¡EXCELENTE TRABAJO!</p>';
                     }
                 }, 1500);
-
             } else {
-                // Error (vibración)
                 el.style.animation = 'shake 0.3s';
                 setTimeout(() => el.style.animation = '', 300);
             }
         }
 
-        /* --- LÓGICA DE UNIR (MATCH) --- */
         function match(id, val) {
             const el = document.getElementById(id);
             if(el.classList.contains('correct')) return;
@@ -231,13 +242,11 @@
                 selId = id; selVal = val; el.classList.add('selected');
             } else {
                 const prev = document.getElementById(selId);
-                // Si son de columnas distintas y coinciden
                 if(selId[0] !== id[0] && selVal === val) {
                     el.classList.add('correct'); prev.classList.add('correct');
                     aciertos[paginaActual]++;
                     confetti({ particleCount: 40 });
                 } else {
-                    // Error
                     el.style.animation = 'shake 0.3s'; prev.style.animation = 'shake 0.3s';
                     setTimeout(()=> { el.style.animation=''; prev.style.animation=''; }, 300);
                 }
@@ -250,8 +259,6 @@
             confetti({ particleCount: 200, spread: 100 });
             setTimeout(() => { window.location.href = 'index.html'; }, 3000);
         }
-
-        actualizarInterfaz();
     </script>
 </body>
 </html>
