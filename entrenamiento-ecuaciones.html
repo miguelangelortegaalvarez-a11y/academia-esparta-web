@@ -4,154 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Grafomotricidad Nivel 1 - Academia Esparta</title>
+    <title>La Vocal A - Academia Esparta</title>
     <style>
-        :root { --esparta-green: #2e7d32; --oro: #fbc02d; --gris-claro: #e0e0e0; }
+        :root { --esparta-green: #2e7d32; --soft-blue: #e3f2fd; --text-gray: #333; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Open Sans', sans-serif; background-color: #f5f5f5; }
+        body { font-family: 'Open Sans', sans-serif; background-color: #f9f9f9; color: var(--text-gray); }
 
         .page { 
             width: 210mm; 
             height: 296mm; 
             margin: 20px auto; 
             background: white; 
-            padding: 15mm; 
+            padding: 20mm; 
             display: flex;
             flex-direction: column;
-            position: relative;
-            border: 2px solid var(--esparta-green);
+            border-top: 10px solid var(--esparta-green);
         }
 
         @media print {
             body { background: white; }
             .no-print { display: none !important; }
-            .page { margin: 0; border: none; }
+            .page { margin: 0; border-top: none; }
         }
 
         .btn-pdf { 
             position: fixed; top: 20px; left: 20px; 
             background: #d32f2f; color: white; border: none; 
-            padding: 12px 20px; border-radius: 8px; cursor: pointer; 
+            padding: 12px 25px; border-radius: 8px; cursor: pointer; 
             font-family: 'Montserrat'; font-weight: bold; z-index: 1000;
         }
 
-        header { 
-            text-align: center; 
-            border-bottom: 3px solid var(--esparta-green); 
-            padding-bottom: 10px; 
-            margin-bottom: 30px;
-        }
-        h1 { font-family: 'Montserrat'; color: var(--esparta-green); font-size: 1.8rem; text-transform: uppercase; }
-        .subtitle { font-size: 1rem; color: #666; font-weight: bold; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .title-box h1 { font-family: 'Montserrat'; font-size: 1.8rem; color: var(--esparta-green); text-transform: uppercase; }
+        .brand { text-align: right; font-weight: 800; font-size: 0.9rem; color: #999; }
 
-        /* Estilo de los caminos de trazo */
-        .trace-container { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around; }
+        .vocal-hero { display: flex; align-items: center; justify-content: space-around; background: var(--soft-blue); padding: 20px; border-radius: 15px; margin-bottom: 30px; }
+        .big-letter { font-size: 8rem; font-family: 'Montserrat'; font-weight: 800; color: var(--esparta-green); border: 4px dashed #999; padding: 0 40px; border-radius: 10px; }
+        .vocal-info { font-size: 1.2rem; line-height: 1.4; font-weight: 600; }
+
+        .section-title { font-family: 'Montserrat'; font-size: 1.1rem; color: var(--esparta-green); margin: 20px 0 10px; border-left: 5px solid var(--esparta-green); padding-left: 10px; }
         
-        .trace-row { 
-            display: flex; 
-            align-items: center; 
-            width: 100%; 
-            height: 80px; 
-            position: relative;
-        }
+        /* Cuadrícula de trazo */
+        .tracing-area { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; margin-bottom: 30px; }
+        .trace-item { font-size: 2.5rem; color: #ccc; border-bottom: 1px solid #eee; text-align: center; border-right: 1px solid #eee; padding: 10px; }
 
-        .icon { font-size: 2rem; width: 50px; text-align: center; }
-        .target { font-size: 2rem; width: 50px; text-align: center; opacity: 0.3; }
+        /* Conciencia fonológica */
+        .images-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+        .image-card { border: 2px solid #f0f0f0; border-radius: 10px; padding: 10px; }
+        .image-card span { display: block; font-size: 3rem; margin-bottom: 5px; }
+        .image-card p { font-size: 0.9rem; font-weight: 600; }
 
-        .line { 
-            flex-grow: 1; 
-            height: 40px; 
-            border-bottom: 3px dotted #bbb; 
-            margin: 0 15px; 
-            position: relative;
-        }
-
-        /* Variaciones de líneas */
-        .line-zigzag {
-            background-image: linear-gradient(45deg, transparent 45%, #bbb 45%, #bbb 55%, transparent 55%),
-                              linear-gradient(-45deg, transparent 45%, #bbb 45%, #bbb 55%, transparent 55%);
-            background-size: 40px 40px;
-            border-bottom: none;
-        }
-
-        .line-waves {
-            background-image: radial-gradient(circle at 50% 100%, transparent 40%, #bbb 42%, #bbb 48%, transparent 50%);
-            background-size: 60px 30px;
-            border-bottom: none;
-            height: 30px;
-        }
-
-        .instruction {
-            background: #fff9c4;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--oro);
-        }
-
-        footer { 
-            text-align: center; 
-            font-family: 'Montserrat'; 
-            font-size: 0.8rem; 
-            color: #999; 
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-        }
+        footer { margin-top: auto; text-align: center; font-size: 0.8rem; color: #bbb; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
 <body>
 
-<button class="btn-pdf no-print" onclick="window.print()">📄 DESCARGAR FICHA DE TRAZOS</button>
+<button class="btn-pdf no-print" onclick="window.print()">📄 DESCARGAR FICHA LETRA A</button>
 
 <div class="page">
     <header>
-        <h1>Entrenamiento de Trazos</h1>
-        <div class="subtitle">Misión: ¡Lleva la ayuda a tus compañeros!</div>
+        <div class="title-box">
+            <h1>Aprendo la Vocal A</h1>
+        </div>
+        <div class="brand">ACADEMIA ESPARTA<br>RECURSOS INFANTIL</div>
     </header>
 
-    <div class="instruction">
-        <strong>INSTRUCCIONES:</strong> Repasa las líneas punteadas sin levantar el lápiz del papel. Sigue la dirección de izquierda a derecha.
-    </div>
-
-    <div class="trace-container">
-        <div class="trace-row">
-            <div class="icon">⚔️</div>
-            <div class="line"></div>
-            <div class="target">🛡️</div>
-        </div>
-
-        <div class="trace-row">
-            <div class="icon">🏹</div>
-            <div class="line line-zigzag"></div>
-            <div class="target">🎯</div>
-        </div>
-
-        <div class="trace-row">
-            <div class="icon">⛵</div>
-            <div class="line line-waves"></div>
-            <div class="target">🏛️</div>
-        </div>
-
-        <div class="trace-row">
-            <div class="icon">🐎</div>
-            <div style="flex-grow: 1; display: flex; justify-content: space-between; padding: 0 20px;">
-                <span style="border-bottom: 3px dotted #bbb; width: 40px;"></span>
-                <span style="border-bottom: 3px dotted #bbb; width: 40px;"></span>
-                <span style="border-bottom: 3px dotted #bbb; width: 40px;"></span>
-                <span style="border-bottom: 3px dotted #bbb; width: 40px;"></span>
-            </div>
-            <div class="target">⛺</div>
-        </div>
-
-        <div class="trace-row" style="height: 120px;">
-            <div class="icon">🦅</div>
-            <div class="line" style="border-radius: 50% 50% 0 0 / 100% 100% 0 0; border: 3px dotted #bbb; border-bottom: none;"></div>
-            <div class="target">🏔️</div>
+    <div class="vocal-hero">
+        <div class="big-letter">A a</div>
+        <div class="vocal-info">
+            Paso 1: ¡Decora la letra!<br>
+            Paso 2: Repasa el trazo.<br>
+            Paso 3: Busca los dibujos.
         </div>
     </div>
 
-    <footer>ACADEMIA ESPARTA - Material Didáctico de Iniciación</footer>
+    <div class="section-title">1. Entrenamiento de escritura</div>
+    <div class="tracing-area">
+        <div class="trace-item" style="color:#666">A</div><div class="trace-item">A</div><div class="trace-item">A</div><div class="trace-item">A</div><div class="trace-item">A</div><div class="trace-item">A</div>
+        <div class="trace-item" style="color:#666">a</div><div class="trace-item">a</div><div class="trace-item">a</div><div class="trace-item">a</div><div class="trace-item">a</div><div class="trace-item">a</div>
+    </div>
+
+    <div class="section-title">2. Conciencia Fonológica: Rodea los que empiezan por A</div>
+    <div class="images-grid">
+        <div class="image-card"><span>✈️</span><p>Avión</p></div>
+        <div class="image-card"><span>🐻</span><p>Oso</p></div>
+        <div class="image-card"><span>🐝</span><p>Abeja</p></div>
+        <div class="image-card"><span>🌳</span><p>Árbol</p></div>
+        <div class="image-card"><span>🐘</span><p>Elefante</p></div>
+        <div class="image-card"><span>🕷️</span><p>Araña</p></div>
+        <div class="image-card"><span>🔔</span><p>Campana</p></div>
+        <div class="image-card"><span>⚓</span><p>Ancla</p></div>
+    </div>
+
+    <footer>ACADEMIA ESPARTA - Aprendiendo juntos paso a paso</footer>
 </div>
 
 </body>
