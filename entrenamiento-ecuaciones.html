@@ -3,263 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Multiplicaciones - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&family=Saso+Write&display=swap" rel="stylesheet">
+    <title>Master en la Letra M - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --verde-oscuro: #388E3C; --gris: #f4f7f6; }
-        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 0; }
-        .header-web { background: white; color: var(--verde); text-align: center; padding: 30px; border-bottom: 4px solid var(--verde); }
-        .header-web h1 { font-family: 'Montserrat', sans-serif; font-size: 2.2rem; margin: 0; text-transform: uppercase; }
+        :root { --verde: #4CAF50; --rosa: #e91e63; --azul: #2196f3; --naranja: #ff9800; --gris: #f4f7f6; }
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding-bottom: 50px; }
         
-        .container { max-width: 950px; margin: 30px auto; padding: 20px; }
+        .header-web { background: white; color: var(--verde); text-align: center; padding: 30px; border-bottom: 4px solid var(--verde); margin-bottom: 20px; }
+        .container { max-width: 900px; margin: auto; padding: 0 20px; }
         
-        .multi-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 25px; 
-        }
+        .nivel-card { background: white; border-radius: 15px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid var(--azul); }
+        .nivel-card h2 { margin-top: 0; color: #333; font-family: 'Montserrat'; display: flex; align-items: center; gap: 10px; }
+        .badge { background: var(--azul); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; }
 
-        .card { border: 1px solid #eee; border-radius: 10px; padding: 20px; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .card h4 { margin-top: 0; color: #555; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
+        /* Nivel 1: Sonidos */
+        .silabas-flex { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .btn-silaba { padding: 15px 25px; font-size: 1.8rem; border: 3px solid var(--verde); border-radius: 12px; cursor: pointer; background: white; transition: 0.2s; font-family: 'Montserrat'; }
+        .btn-silaba:hover { background: var(--verde); color: white; transform: translateY(-3px); }
 
-        summary { background: var(--verde); color: white; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; text-align: center; list-style: none; text-transform: uppercase; font-size: 0.8rem; margin-top: 10px; }
-        
-        .operacion-desarrollo {
-            font-family: 'Courier New', monospace;
-            font-size: 1.4rem;
-            line-height: 1.3;
-            text-align: right;
-            display: inline-block;
-            margin: 15px 0;
-            padding-right: 20px;
-        }
-        /* Solo dejamos la línea del multiplicador y la del resultado final */
-        .linea-multiplicacion { border-bottom: 2px solid #333; display: block; margin-top: -2px; }
-        .resultado-final { color: var(--verde-oscuro); font-weight: bold; border-top: 2px solid #333; margin-top: 5px; display: block; padding-top: 2px; }
-        
-        @media (max-width: 600px) { .multi-grid { grid-template-columns: 1fr; } }
+        /* Nivel 2 y 3: Juegos Visuales */
+        .grid-imagenes { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin-top: 15px; }
+        .img-card { border: 2px solid #ddd; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; font-size: 1.1rem; }
+        .img-card:hover { border-color: var(--rosa); }
+
+        /* Nivel 4: Completar Palabras */
+        .input-m { width: 40px; border: none; border-bottom: 2px solid var(--azul); text-align: center; font-size: 1.2rem; font-weight: bold; color: var(--rosa); outline: none; }
+
+        /* Nivel 5: Ordenar Frases */
+        .drop-zone { border: 2px dashed #ccc; min-height: 50px; display: flex; gap: 10px; padding: 10px; background: #fafafa; border-radius: 10px; margin-top: 10px; }
+        .word { padding: 8px 15px; background: var(--verde); color: white; border-radius: 5px; cursor: grab; }
+
+        /* Feedback */
+        .correcto { background-color: #c8e6c9 !important; border-color: #4caf50 !important; }
+        .incorrecto { background-color: #ffcdd2 !important; border-color: #f44336 !important; }
     </style>
 </head>
 <body>
 
 <header class="header-web">
     <h1>Academia Esparta</h1>
-    <p>Entrenamiento de Multiplicaciones (3x2 cifras)</p>
+    <p>Aventura de Aprendizaje: La Letra <strong>M</strong></p>
 </header>
 
 <div class="container">
-    <div class="multi-grid">
 
-        <div class="card">
-            <h4>1. 345 × 26</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        3 4 5<br>
-                        × 2 6<br>
-                        <span class="linea-multiplicacion"></span>
-                        2 0 7 0<br>
-                        6 9 0 &nbsp;<br>
-                        <span class="resultado-final">8 9 7 0</span>
-                    </div>
-                </div>
-            </details>
+    <div class="nivel-card" style="border-top-color: var(--verde);">
+        <h2><span class="badge">Nivel 1</span> Las 5 Llaves</h2>
+        <p>Toca cada sílaba y repite su sonido en voz alta:</p>
+        <div class="silabas-flex">
+            <button class="btn-silaba">ma</button>
+            <button class="btn-silaba">me</button>
+            <button class="btn-silaba">mi</button>
+            <button class="btn-silaba">mo</button>
+            <button class="btn-silaba">mu</button>
         </div>
-
-        <div class="card">
-            <h4>2. 128 × 43</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        1 2 8<br>
-                        × 4 3<br>
-                        <span class="linea-multiplicacion"></span>
-                        3 8 4<br>
-                        5 1 2 &nbsp;<br>
-                        <span class="resultado-final">5 5 0 4</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>3. 562 × 17</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        5 6 2<br>
-                        × 1 7<br>
-                        <span class="linea-multiplicacion"></span>
-                        3 9 3 4<br>
-                        5 6 2 &nbsp;<br>
-                        <span class="resultado-final">9 5 5 4</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>4. 419 × 35</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        4 1 9<br>
-                        × 3 5<br>
-                        <span class="linea-multiplicacion"></span>
-                        2 0 9 5<br>
-                        1 2 5 7 &nbsp;<br>
-                        <span class="resultado-final">1 4 6 6 5</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>5. 724 × 52</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        7 2 4<br>
-                        × 5 2<br>
-                        <span class="linea-multiplicacion"></span>
-                        1 4 4 8<br>
-                        3 6 2 0 &nbsp;<br>
-                        <span class="resultado-final">3 7 6 4 8</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>6. 803 × 29</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        8 0 3<br>
-                        × 2 9<br>
-                        <span class="linea-multiplicacion"></span>
-                        7 2 2 7<br>
-                        1 6 0 6 &nbsp;<br>
-                        <span class="resultado-final">2 3 2 8 7</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>7. 637 × 48</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        6 3 7<br>
-                        × 4 8<br>
-                        <span class="linea-multiplicacion"></span>
-                        5 0 9 6<br>
-                        2 5 4 8 &nbsp;<br>
-                        <span class="resultado-final">3 0 5 7 6</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>8. 291 × 64</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        2 9 1<br>
-                        × 6 4<br>
-                        <span class="linea-multiplicacion"></span>
-                        1 1 6 4<br>
-                        1 7 4 6 &nbsp;<br>
-                        <span class="resultado-final">1 8 6 2 4</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>9. 956 × 13</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        9 5 6<br>
-                        × 1 3<br>
-                        <span class="linea-multiplicacion"></span>
-                        2 8 6 8<br>
-                        9 5 6 &nbsp;<br>
-                        <span class="resultado-final">1 2 4 2 8</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>10. 482 × 75</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        4 8 2<br>
-                        × 7 5<br>
-                        <span class="linea-multiplicacion"></span>
-                        2 4 1 0<br>
-                        3 3 7 4 &nbsp;<br>
-                        <span class="resultado-final">3 6 1 5 0</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>11. 315 × 82</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        3 1 5<br>
-                        × 8 2<br>
-                        <span class="linea-multiplicacion"></span>
-                        6 3 0<br>
-                        2 5 2 0 &nbsp;<br>
-                        <span class="resultado-final">2 5 8 3 0</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h4>12. 674 × 59</h4>
-            <details>
-                <summary>Ver desarrollo</summary>
-                <div style="text-align: center;">
-                    <div class="operacion-desarrollo">
-                        6 7 4<br>
-                        × 5 9<br>
-                        <span class="linea-multiplicacion"></span>
-                        6 0 6 6<br>
-                        3 3 7 0 &nbsp;<br>
-                        <span class="resultado-final">3 9 7 6 6</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
     </div>
+
+    <div class="nivel-card" style="border-top-color: var(--naranja);">
+        <h2><span class="badge">Nivel 2</span> Detective de M</h2>
+        <p>¿Qué cosas empiezan por <strong>M</strong>? Haz clic en las correctas:</p>
+        <div class="grid-imagenes">
+            <div class="img-card" onclick="check(this, true)">🍎<br>Manzana</div>
+            <div class="img-card" onclick="check(this, false)">🚗<br>Coche</div>
+            <div class="img-card" onclick="check(this, true)">🐒<br>Mono</div>
+            <div class="img-card" onclick="check(this, true)">🧤<br>Manopla</div>
+            <div class="img-card" onclick="check(this, false)">🐕<br>Perro</div>
+            <div class="img-card" onclick="check(this, true)">🦋<br>Mariposa</div>
+        </div>
+    </div>
+
+    <div class="nivel-card" style="border-top-color: var(--rosa);">
+        <h2><span class="badge">Nivel 3</span> Cazador de Letras</h2>
+        <p>Encuentra la <strong>M</strong> intrusa (clic en las letras M):</p>
+        <div style="font-size: 1.5rem; letter-spacing: 15px; text-align: center; cursor: pointer;">
+            W N <span onclick="check(this, true)">M</span> V N <span onclick="check(this, true)">M</span> W N <span onclick="check(this, true)">M</span> H
+        </div>
+    </div>
+
+    <div class="nivel-card" style="border-top-color: var(--azul);">
+        <h2><span class="badge">Nivel 4</span> Constructor de Palabras</h2>
+        <p>Escribe la sílaba que falta (ma, me, mi, mo, mu):</p>
+        <ul style="list-style: none; padding: 0; line-height: 2.5;">
+            <li>1. 🍯 <input type="text" class="input-m" placeholder="..."> el (Miel)</li>
+            <li>2. 🏠 <input type="text" class="input-m" placeholder="..."> sa (Mesa)</li>
+            <li>3. 🛌 <input type="text" class="input-m" placeholder="..."> la (Muela)</li>
+            <li>4. 🗺️ <input type="text" class="input-m" placeholder="..."> pa (Mapa)</li>
+        </ul>
+    </div>
+
+    <div class="nivel-card" style="border-top-color: #9c27b0;">
+        <h2><span class="badge">Nivel 5</span> Orden en el Caos</h2>
+        <p>Ordena las palabras para formar la frase: <em>"Mi mamá me mima"</em></p>
+        <div class="drop-zone" id="dropzone">
+            </div>
+        <div class="silabas-flex" style="margin-top: 15px;">
+            <div class="word" onclick="move(this)">mima</div>
+            <div class="word" onclick="move(this)">Mi</div>
+            <div class="word" onclick="move(this)">me</div>
+            <div class="word" onclick="move(this)">mamá</div>
+        </div>
+    </div>
+
+    <div class="nivel-card" style="border-top-color: #333;">
+        <h2><span class="badge">Nivel 6</span> Lectura de Gigantes</h2>
+        <p>Lee estas frases rápido sin trabarte:</p>
+        <div style="background: #fff3e0; padding: 20px; border-radius: 10px; font-style: italic;">
+            "Amo a mi mamá. Mi mamá me ama. Ema mima a su miau."
+        </div>
+    </div>
+
+    <div class="nivel-card" style="border-top-color: gold;">
+        <h2><span class="badge">Nivel 7</span> Dictado Mágico</h2>
+        <p>Pide a alguien que te diga una palabra con M y escríbela aquí:</p>
+        <textarea style="width: 100%; height: 80px; border-radius: 10px; border: 2px solid #ccc; padding: 10px; font-family: 'Saso Write', cursive; font-size: 1.5rem;"></textarea>
+    </div>
+
 </div>
 
-<footer style="text-align: center; padding: 40px; color: #999;">
-    © 2026 Academia Esparta - Práctica de Cálculo
-</footer>
+<script>
+    function check(element, isCorrect) {
+        if(isCorrect) {
+            element.classList.add('correcto');
+            element.style.pointerEvents = 'none';
+        } else {
+            element.classList.add('incorrecto');
+            setTimeout(() => element.classList.remove('incorrecto'), 500);
+        }
+    }
+
+    function move(element) {
+        const zone = document.getElementById('dropzone');
+        zone.appendChild(element);
+    }
+</script>
 
 </body>
 </html>
