@@ -2,153 +2,149 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha Letra P - Nivel 1 (Estilo Cuaderno de Caligrafía)</title>
+    <title>Ficha Letra P - Caligrafía Academia Esparta</title>
     <style>
-        /* IMPORTACIÓN DE FUENTE DE CALIGRAFÍA ESCOLAR PUNTEADA */
-        /* Esta fuente imita perfectamente la letra ligada y punteada para repasar */
-        @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
-        
-        /* Definimos una tipografía que simula el punteado con estilo caligráfico */
+        /* FUENTE ESCOLAR LIGADA PUNTEADA */
         @font-face {
-            font-family: 'TraceCalig';
-            src: url('https://raw.githubusercontent.com/AnandChowdhary/opentracelines/main/TraceLines-Regular.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
+            font-family: 'EscolarPunteada';
+            src: url('https://raw.githubusercontent.com/miguelsanchez/fonts/master/EscolarPunteada.woff') format('woff');
         }
 
-        /* Configuración para impresión A4 */
         @page { size: A4; margin: 1cm; }
-        body { font-family: 'Arial', sans-serif; color: #1a1a1a; line-height: 1.2; margin: 0; padding: 0; background: white; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f2f5; color: #333; }
         
-        /* Cabecera */
-        .header { border-bottom: 2px solid #0e9343; padding: 10px 15px; text-align: center; margin-bottom: 20px; }
-        .logo-text { color: #0e9343; font-weight: bold; font-size: 18px; margin: 0; text-transform: uppercase; }
-        .info-row { margin-top: 10px; display: flex; justify-content: space-between; font-size: 12px; }
+        /* Estilo del Botón de Impresión */
+        .no-print-area {
+            background: #fff;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .btn-imprimir {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn-imprimir:hover { background: #c0392b; }
 
-        h2 { color: #333; font-size: 16px; margin: 20px 0 10px 0; font-weight: bold; }
-        
-        /* Cuadrado de letras */
-        .letter-grid { 
-            border: 2px solid #333; 
-            padding: 15px; 
-            display: grid; 
-            grid-template-columns: repeat(6, 1fr); 
-            gap: 10px; 
-            max-width: 450px; 
-            margin: 0 auto; 
+        /* Contenedor de la Ficha (Hoja A4) */
+        .hoja {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 1.5cm;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Cabecera */
+        .header { border-bottom: 2px solid #0e9343; padding-bottom: 10px; margin-bottom: 20px; }
+        .logo { color: #0e9343; font-weight: bold; font-size: 20px; margin: 0; }
+        .info { display: flex; justify-content: space-between; font-size: 13px; margin-top: 15px; }
+
+        h2 { font-size: 15px; margin: 25px 0 10px 0; color: #000; font-weight: bold; border-left: 4px solid #0e9343; padding-left: 10px; }
+
+        /* Cuadro de Búsqueda */
+        .search-box {
+            border: 2px solid #000;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            max-width: 500px;
+            margin: 10px auto;
             text-align: center;
         }
-        .letter { font-size: 32px; font-weight: bold; padding: 5px; }
+        .search-box span { font-size: 32px; font-weight: bold; }
 
-        /* --- SECCIÓN DE CALIGRAFÍA CON CUADRÍCULA --- */
-        .caligrafia-container { margin: 20px 0; }
-
-        /* Estilo para las líneas punteadas de caligrafía */
-        .linea-trace { 
-            font-family: 'TraceCalig', sans-serif; 
-            font-size: 60px; /* Tamaño grande para visibilidad */
-            letter-spacing: 25px; 
-            color: #ccc; /* Color suave para repasar */
-            padding: 10px 20px;
-            margin: 10px 0;
-            text-align: left;
-            border: 1px dashed #eee; /* Borde sutil para delimitar la zona */
-        }
-
-        /* El secreto de la cuadrícula pautada:
-           Se usa un gradiente repetido para crear líneas y la cuadrícula */
-        .pauta-cuadricula {
-            position: relative;
-            background-color: transparent;
-            /* Crea líneas horizontales */
-            background-image: repeating-linear-gradient(transparent, transparent 19px, #ccc 19px, #ccc 20px),
-                             /* Crea líneas verticales suaves para la cuadrícula */
-                             repeating-linear-gradient(90deg, transparent, transparent 19px, #f2f2f2 19px, #f2f2f2 20px);
-            margin: 15px 0;
-            padding: 10px;
-        }
-
-        /* Líneas vacías para que el niño escriba solo */
-        .pauta-vacia {
-            height: 60px;
-            margin: 25px 0;
-            border-bottom: 2px solid #1a1a1a;
-            position: relative;
-        }
-        /* Guía central punteada en la línea vacía */
-        .pauta-vacia::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 0;
+        /* Pauta Montessori */
+        .pauta-contenedor { margin-top: 25px; }
+        .lineas-pauta {
+            height: 45px;
             width: 100%;
-            border-bottom: 1px dotted #999;
+            background-image: 
+                linear-gradient(#eee 1px, transparent 1px), 
+                linear-gradient(#999 1px, transparent 1px), 
+                linear-gradient(#999 1px, transparent 1px), 
+                linear-gradient(#eee 1px, transparent 1px);
+            background-size: 100% 45px;
+            background-position: 0 0, 0 12px, 0 33px, 0 45px;
+            background-repeat: repeat-y;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
         }
 
-        /* Ejercicio de sílabas con cuadrícula */
-        .silabas-grid-calig {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-        }
-        .silaba-pautada {
-            font-family: 'TraceCalig', sans-serif;
+        .letra-punteada {
+            font-family: 'EscolarPunteada', cursive;
             font-size: 50px;
-            letter-spacing: 15px;
-            color: #ccc;
-            text-align: left;
-            background-color: #f9f9f9;
-            background-image: repeating-linear-gradient(transparent, transparent 19px, #f2f2f2 19px, #f2f2f2 20px);
-            padding: 10px;
-            border: 1px solid #eee;
+            color: #bbb;
+            letter-spacing: 40px;
+            padding-left: 20px;
+            line-height: 45px;
         }
 
-        /* Pie de página */
-        .footer { text-align: center; color: #0e9343; font-weight: bold; font-size: 11px; margin-top: 30px; border-top: 1px solid #ddd; padding-top: 10px; }
+        .instruccion { font-style: italic; font-size: 14px; color: #555; margin-bottom: 8px; font-weight: bold; }
+
+        /* Ocultar elementos al imprimir */
+        @media print {
+            body { background: white; }
+            .no-print-area { display: none; }
+            .hoja { box-shadow: none; margin: 0; width: 100%; padding: 0.5cm; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <p class="logo-text">Academia Esparta: Cuaderno de Caligrafía</p>
-        <div class="info-row">
-            <span>NOMBRE: _________________________________________</span>
-            <span>FECHA: __________</span>
+    <div class="no-print-area">
+        <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR FICHA (PDF)</button>
+    </div>
+
+    <div class="hoja">
+        <div class="header">
+            <p class="logo">ACADEMIA ESPARTA: CUADERNO DE CALIGRAFÍA</p>
+            <div class="info">
+                <span>ALUMNO/A: _________________________________________</span>
+                <span>FECHA: __________</span>
+            </div>
+        </div>
+
+        <h2>1. Busca y rodea las letras "P" y "p"</h2>
+        <div class="search-box">
+            <span>P</span> <span>b</span> <span>d</span> <span>p</span> <span>M</span> <span>P</span>
+            <span>q</span> <span>p</span> <span>P</span> <span>B</span> <span>g</span> <span>p</span>
+            <span>D</span> <span>P</span> <span>b</span> <span>P</span> <span>p</span> <span>q</span>
+        </div>
+
+        <h2>2. Repasa y escribe siguiendo la pauta escolar</h2>
+        
+        <div class="pauta-contenedor">
+            <div class="instruccion">Mayúscula:</div>
+            <div class="lineas-pauta"><span class="letra-punteada">PPPPPP</span></div>
+            <div class="lineas-pauta"></div>
+            
+            <div class="instruccion" style="margin-top:25px;">Minúscula ligada:</div>
+            <div class="lineas-pauta"><span class="letra-punteada" style="font-size:42px;">pppppp</span></div>
+            <div class="lineas-pauta"></div>
+
+            <div class="instruccion" style="margin-top:25px;">Sílabas:</div>
+            <div class="lineas-pauta"><span class="letra-punteada" style="font-size:38px; letter-spacing: 28px;">pa pe pi po pu</span></div>
+            <div class="lineas-pauta"></div>
+        </div>
+
+        <div style="text-align: center; color: #0e9343; font-weight: bold; font-size: 12px; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px;">
+            ACADEMIA ESPARTA - MATERIAL DE APOYO ESCOLAR
         </div>
     </div>
-
-    <h2>1. Busca y rodea las letras "P" (Mayúscula y Minúscula)</h2>
-    <div class="letter-grid">
-        <div class="letter">P</div> <div class="letter">b</div> <div class="letter">d</div> <div class="letter">p</div> <div class="letter">M</div> <div class="letter">P</div>
-        <div class="letter">q</div> <div class="letter">p</div> <div class="letter">P</div> <div class="letter">B</div> <div class="letter">g</div> <div class="letter">p</div>
-        <div class="letter">D</div> <div class="letter">P</div> <div class="letter">b</div> <div class="letter">P</div> <div class="letter">p</div> <div class="letter">q</div>
-    </div>
-
-    <h2>2. Repasa la letra P y escribe solo en las líneas</h2>
-    
-    <div class="caligrafia-container">
-        <p style="font-weight:bold; margin-bottom:5px;">P - Mayúscula</p>
-        <div class="pauta-cuadricula linea-trace">P P P P P</div>
-        
-        <p style="font-weight:bold; margin-bottom:5px;">p - Minúscula</p>
-        <div class="pauta-cuadricula linea-trace" style="font-size: 50px;">p p p p p</div>
-        
-        <p style="font-weight:bold; margin-top:20px;">Práctica libre (Mayúscula y Minúscula)</p>
-        <div class="pauta-vacia"></div>
-        <div class="pauta-vacia"></div>
-    </div>
-
-    <h2>3. Lee las sílabas y repásalas dentro de la cuadrícula</h2>
-    <div class="silabas-grid-calig">
-        <div class="silaba-pautada">pa</div>
-        <div class="silaba-pautada">pe</div>
-        <div class="silaba-pautada">pi</div>
-        <div class="silaba-pautada">po</div>
-        <div class="silaba-pautada">pu</div>
-    </div>
-
-    <div class="footer">ACADEMIA ESPARTA - MATERIAL DE LECTOESCRITURA</div>
 
 </body>
 </html>
