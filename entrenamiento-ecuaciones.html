@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Sistemas de Ecuaciones: Manual Oficial - Academia Esparta</title>
+    <title>Sustitución: Los 3 Niveles - Academia Esparta</title>
     
     <script>
         window.MathJax = {
@@ -18,165 +18,160 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 
     <style>
-        :root { --esparta-green: #2e7d32; --oro: #f1c40f; --rojo: #d32f2f; --negro: #212529; }
-        body { font-family: 'Lora', serif; background-color: #e9ecef; margin: 0; padding: 20px; color: var(--negro); line-height: 1.8; }
+        :root { --esparta-green: #2e7d32; --oro: #fbc02d; --rojo: #d32f2f; }
+        body { font-family: 'Lora', serif; background-color: #f0f0f0; margin: 0; padding: 0; color: #212529; }
         
-        .page { max-width: 900px; margin: 40px auto; background: white; padding: 60px 80px; border-radius: 2px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
-        .no-cut { page-break-inside: avoid; break-inside: avoid; margin-bottom: 50px; }
-
-        /* BOTÓN DE IMPRESIÓN / PDF */
-        .btn-pdf { 
-            position: fixed; 
-            top: 25px; 
-            left: 25px; 
-            background: var(--rojo); 
-            color: white; 
-            padding: 12px 20px; 
-            border: none; 
-            border-radius: 8px; 
-            font-family: 'Montserrat'; 
-            font-weight: bold; 
-            cursor: pointer; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
-            z-index: 9999; 
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
+        /* Formato A4 */
+        .page { 
+            width: 210mm; 
+            height: 297mm; 
+            margin: 10mm auto; 
+            background: white; 
+            padding: 20mm; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+            box-sizing: border-box; 
+            position: relative;
+            page-break-after: always; /* Esto fuerza el salto de página en el PDF */
         }
-        .btn-pdf:hover { background: #b71c1c; transform: scale(1.05); }
 
-        header { border-bottom: 4px solid var(--esparta-green); margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 15px; }
-        h1 { font-family: 'Montserrat'; font-size: 2.2rem; margin: 0; text-transform: uppercase; letter-spacing: -1px; }
-        .header-brand { text-align: right; font-family: 'Montserrat'; color: var(--esparta-green); font-weight: 800; font-size: 0.8rem; }
+        .btn-pdf { 
+            position: fixed; top: 20px; left: 20px; 
+            background: var(--rojo); color: white; border: none; 
+            padding: 15px 20px; border-radius: 8px; cursor: pointer; 
+            font-family: 'Montserrat'; font-weight: bold; z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
 
-        h2 { font-family: 'Montserrat'; font-size: 1.6rem; color: white; background: var(--esparta-green); padding: 12px 25px; border-radius: 4px; margin: 50px 0 25px 0; text-transform: uppercase; letter-spacing: 1px; }
-        h3 { font-family: 'Montserrat'; font-size: 1.4rem; border-left: 6px solid var(--esparta-green); padding-left: 15px; margin: 35px 0 20px 0; color: var(--esparta-green); }
+        header { border-bottom: 4px solid var(--esparta-green); margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        h1 { font-family: 'Montserrat'; font-size: 1.8rem; margin: 0; text-transform: uppercase; }
+        .header-brand { text-align: right; font-family: 'Montserrat'; font-weight: 800; font-size: 0.8rem; color: var(--esparta-green); }
+
+        h2 { font-family: 'Montserrat'; font-size: 1.3rem; color: white; background: var(--esparta-green); padding: 10px 20px; border-radius: 4px; margin: 30px 0 20px 0; display: inline-block; text-transform: uppercase; }
         
-        /* RECUADROS DE EXPLICACIÓN */
-        .example { background: #fffde7; border: 1px solid #ffe082; border-left: 8px solid var(--oro); padding: 35px; border-radius: 8px; margin-bottom: 40px; }
-        .example-title { color: var(--rojo); font-family: 'Open Sans'; font-weight: 800; font-size: 0.95rem; text-transform: uppercase; margin-bottom: 25px; display: block; border-bottom: 1px solid rgba(211, 47, 47, 0.2); padding-bottom: 8px; }
-        .step-label { color: var(--esparta-green); font-weight: bold; font-family: 'Open Sans'; font-size: 0.9rem; text-transform: uppercase; display: block; margin-top: 20px; }
+        .box-info { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 20px; border-radius: 8px; margin-bottom: 25px; font-size: 1rem; line-height: 1.6; }
+        .example-box { background: #fffde7; border: 1px solid #ffe082; border-left: 8px solid var(--oro); padding: 30px; border-radius: 8px; }
         
-        .practice-container { border: 2px solid #eee; border-radius: 12px; padding: 30px; background: #fafafa; margin-bottom: 30px; }
-        summary { font-family: 'Open Sans'; font-weight: bold; color: var(--esparta-green); cursor: pointer; padding: 12px 20px; border: 2px solid var(--esparta-green); border-radius: 8px; display: inline-block; margin-top: 20px; background: white; }
-        .solution-content { background: white; border: 1px solid #ddd; padding: 30px; margin-top: 20px; border-radius: 10px; font-style: italic; }
+        .step-title { font-weight: 800; color: var(--esparta-green); font-family: 'Open Sans'; font-size: 0.9rem; display: block; margin-top: 25px; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        .explanation { font-size: 1rem; color: #444; margin: 10px 0; }
+        
+        footer { position: absolute; bottom: 20mm; left: 0; width: 100%; text-align: center; font-size: 0.8rem; color: #bbb; border-top: 1px solid #eee; padding-top: 15px; }
 
-        .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 9rem; color: rgba(46, 125, 50, 0.03); font-family: 'Montserrat'; font-weight: 900; pointer-events: none; z-index: 0; }
-
-        /* CONFIGURACIÓN PARA EL PDF / IMPRESIÓN */
         @media print {
             .no-print { display: none !important; }
             body { background: white; padding: 0; }
-            .page { box-shadow: none; width: 100%; max-width: 100%; padding: 40px; margin: 0; }
-            details[open] { display: block; } /* Opcional: abrir desplegables al imprimir */
+            .page { box-shadow: none; margin: 0; width: 210mm; height: 297mm; }
         }
     </style>
 </head>
 <body>
 
-<button class="btn-pdf no-print" onclick="window.print()">
-    <span>📄</span> DESCARGAR PDF / IMPRIMIR
-</button>
+<button class="btn-pdf no-print" onclick="window.print()">📄 DESCARGAR PDF (3 PÁGINAS)</button>
 
 <div class="page">
-    <div class="watermark">ACADEMIA ESPARTA</div>
-
     <header>
-        <div><h1>Sistemas de Ecuaciones</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA<br>MANUAL DE ESTRATEGIA MATEMÁTICA</div>
+        <div><h1>Sustitución: Nivel 1</h1></div>
+        <div class="header-brand">ACADEMIA ESPARTA<br>ENTRENAMIENTO ALGEBRAICO</div>
     </header>
 
-    <section id="sec-sustitucion">
-        <h2>1. Método de Sustitución</h2>
-        <div class="no-cut">
-            <div class="example">
-                <span class="example-title">Explicación Paso a Paso</span>
-                $$\begin{cases} 2x + 3y = 12 \\ 3x + 2y = 13 \end{cases}$$
-                
-                <span class="step-label">Paso 1: Aislar la incógnita</span>
-                Elegimos la $x$ de la primera ecuación. El $3y$ pasa restando y el $2$ pasa dividiendo a todo:
-                $$x = \frac{12 - 3y}{2}$$
-
-                <span class="step-label">Paso 2: Inserción</span>
-                En la segunda ecuación, sustituimos la $x$ por nuestra fracción:
-                $$3 \cdot \left( \frac{12 - 3y}{2} \right) + 2y = 13$$
-
-                <span class="step-label">Paso 3: Limpieza y Resolución</span>
-                Multiplicamos toda la fila por $2$ para quitar denominadores:
-                $$36 - 9y + 4y = 26 \Rightarrow -5y = -10 \Rightarrow \mathbf{y = 2}$$
-
-                <span class="step-label">Paso 4: Resultado Final</span>
-                Sustituimos la $y$ en nuestro primer despeje:
-                $$x = \frac{12 - 3(2)}{2} \Rightarrow \mathbf{x = 3}$$
-            </div>
-        </div>
-    </section>
-
-    <section id="sec-igualacion">
-        <h2>2. Método de Igualación</h2>
-        <div class="no-cut">
-            <div class="example">
-                <span class="example-title">Explicación Paso a Paso</span>
-                $$\begin{cases} 3x - y = 7 \\ 2x + y = 8 \end{cases}$$
-
-                <span class="step-label">Paso 1: Despeje doble</span>
-                Despejamos la $y$ en ambas para que actúen como un espejo:
-                $$y = 3x - 7 \quad \text{y} \quad y = 8 - 2x$$
-
-                <span class="step-label">Paso 2: La Igualdad</span>
-                Como $y$ vale lo mismo en ambas, igualamos los resultados:
-                $$3x - 7 = 8 - 2x$$
-
-                <span class="step-label">Paso 3: Agrupar y Resolver</span>
-                Pasamos las $x$ a un lado y los números al otro:
-                $$5x = 15 \Rightarrow \mathbf{x = 3}$$
-
-                <span class="step-label">Paso 4: Obtener la pareja</span>
-                Usamos cualquier despeje: $y = 8 - 2(3) \Rightarrow \mathbf{y = 2}$
-            </div>
-        </div>
-    </section>
-
-    <section id="sec-reduccion">
-        <h2>3. Método de Reducción</h2>
-        <div class="no-cut">
-            <div class="example">
-                <span class="example-title">Explicación Paso a Paso</span>
-                $$\begin{cases} 3x + 2y = 7 \\ 4x - 3y = -2 \end{cases}$$
-
-                <span class="step-label">Paso 1: Ajuste de coeficientes</span>
-                Buscamos que la $y$ tenga el mismo número pero distinto signo. Multiplicamos la de arriba por $3$ y la de abajo por $2$:
-                $$(1) \rightarrow 9x + 6y = 21$$
-                $$(2) \rightarrow 8x - 6y = -4$$
-
-                <span class="step-label">Paso 2: Suma Vertical</span>
-                Sumamos las columnas. Las $y$ desaparecen ($+6-6=0$):
-                $$17x = 17 \Rightarrow \mathbf{x = 1}$$
-
-                <span class="step-label">Paso 3: Sustitución Final</span>
-                En la primera ecuación: $3(1) + 2y = 7 \Rightarrow 2y = 4 \Rightarrow \mathbf{y = 2}$
-            </div>
-        </div>
-    </section>
-
-    <div class="no-cut">
-        <h3>Zona de Entrenamiento (Desplegables)</h3>
-        <div class="practice-container no-print">
-            <p><strong>Reto A:</strong> $\begin{cases} x + y = 5 \\ 2x - y = 4 \end{cases}$</p>
-            <details>
-                <summary>Ver solución experta</summary>
-                <div class="solution-content">
-                    Por reducción: Sumamos filas $\rightarrow 3x = 9 \rightarrow \mathbf{x = 3}$. <br>
-                    Sustituimos: $3 + y = 5 \rightarrow \mathbf{y = 2}$.
-                </div>
-            </details>
-        </div>
+    <div class="box-info">
+        <strong>Estrategia Espartana:</strong> Buscamos siempre la incógnita que no tenga ningún número delante. Si la $x$ o la $y$ están "limpias", el despeje será directo y no tendremos que trabajar con fracciones.
     </div>
 
-    <footer style="margin-top: 80px; text-align: center; border-top: 1px solid #eee; padding-top: 30px; font-size: 0.85rem; color: #777;">
-        © 2026 Academia Esparta. Material de alta fidelidad para alumnos de élite.
-    </footer>
+    <h2>Ejercicio: La Incógnita Aislada</h2>
+    <div class="example-box">
+        Resolver el sistema:
+        $$\begin{cases} \mathbf{x} + 2y = 8 \\ 3x - y = 3 \end{cases}$$
+
+        <span class="step-title">Paso 1: El Despeje Estratégico</span>
+        <p class="explanation">Miramos ambas ecuaciones. En la primera, la $x$ no tiene coeficiente. La dejamos sola pasando el $+2y$ al otro lado del igual. Como está sumando, pasa restando:</p>
+        $$x = 8 - 2y$$
+
+        <span class="step-title">Paso 2: La Sustitución</span>
+        <p class="explanation">Ahora tomamos la <b>segunda ecuación</b>. Donde pone $x$, abrimos un paréntesis y metemos nuestro despeje:</p>
+        $$3 \cdot \mathbf{(8 - 2y)} - y = 3$$
+
+        <span class="step-title">Paso 3: Resolución de la Ecuación</span>
+        <p class="explanation">Aplicamos la propiedad distributiva (el 3 multiplica a todo lo de dentro):</p>
+        $$24 - 6y - y = 3 \Rightarrow 24 - 7y = 3$$
+        $$24 - 3 = 7y \Rightarrow 21 = 7y \Rightarrow \mathbf{y = 3}$$
+
+        <span class="step-title">Paso 4: Hallar la Pareja</span>
+        <p class="explanation">Volvemos al despeje del Paso 1 para calcular la $x$:</p>
+        $$x = 8 - 2(3) = 8 - 6 \Rightarrow \mathbf{x = 2}$$
+    </div>
+
+    <footer>© 2026 Academia Esparta - "Disciplina en el estudio, victoria en el examen"</footer>
+</div>
+
+<div class="page">
+    <header>
+        <div><h1>Sustitución: Nivel 2</h1></div>
+        <div class="header-brand">ACADEMIA ESPARTA<br>ENTRENAMIENTO ALGEBRAICO</div>
+    </header>
+
+    <div class="box-info">
+        <strong>Estrategia Espartana:</strong> Cuando todas las letras tienen números delante, es inevitable que aparezca una fracción. No tengas miedo: el truco es multiplicar toda la ecuación por el denominador para eliminarlo rápidamente.
+    </div>
+
+    <h2>Ejercicio: Gestión de Fracciones</h2>
+    <div class="example-box">
+        Resolver el sistema:
+        $$\begin{cases} 2x + 3y = 12 \\ 3x + 2y = 13 \end{cases}$$
+
+        <span class="step-title">Paso 1: El Despeje con Fracción</span>
+        <p class="explanation">Despejamos $x$ en la primera ecuación. El $3y$ pasa restando y el $2$ que multiplica a la $x$ pasa dividiendo a todo el bloque:</p>
+        $$x = \frac{12 - 3y}{2}$$
+
+        <span class="step-title">Paso 2: Sustitución en la Segunda</span>
+        <p class="explanation">Metemos la fracción en la $x$ de la otra ecuación:</p>
+        $$3 \cdot \left( \frac{12 - 3y}{2} \right) + 2y = 13$$
+
+        <span class="step-title">Paso 3: El "Golpe" al Denominador</span>
+        <p class="explanation">Para eliminar ese $/2$, multiplicamos <b>cada término</b> de la ecuación por 2:</p>
+        $$3 \cdot (12 - 3y) + 4y = 26$$
+        $$36 - 9y + 4y = 26 \Rightarrow -5y = 26 - 36 \Rightarrow -5y = -10 \Rightarrow \mathbf{y = 2}$$
+
+        <span class="step-title">Paso 4: Cálculo de la X</span>
+        $$x = \frac{12 - 3(2)}{2} = \frac{6}{2} \Rightarrow \mathbf{x = 3}$$
+    </div>
+
+    <footer>© 2026 Academia Esparta - Página 2</footer>
+</div>
+
+<div class="page">
+    <header>
+        <div><h1>Sustitución: Nivel 3</h1></div>
+        <div class="header-brand">ACADEMIA ESPARTA<br>ENTRENAMIENTO ALGEBRAICO</div>
+    </header>
+
+    <div class="box-info">
+        <strong>Estrategia Espartana:</strong> Los paréntesis son como escudos. Antes de sustituir, mira si puedes simplificar o si la sustitución directa te ahorra trabajo. La clave es el orden y no olvidar ningún signo al multiplicar.
+    </div>
+
+    <h2>Ejercicio: Sistemas con Paréntesis</h2>
+    <div class="example-box">
+        Resolver el sistema:
+        $$\begin{cases} x = 2y - 1 \\ 2(x + 1) - 3y = 5 \end{cases}$$
+
+        <span class="step-title">Paso 1: El Despeje ya hecho</span>
+        <p class="explanation">En este caso, la $x$ ya está despejada en la primera ecuación. ¡Ahorramos tiempo!</p>
+        $$x = 2y - 1$$
+
+        <span class="step-title">Paso 2: Sustitución Doble</span>
+        <p class="explanation">Sustituimos el bloque $(2y - 1)$ dentro del paréntesis de la segunda ecuación. Fíjate bien en la estructura:</p>
+        $$2 \cdot ( \underbrace{2y - 1}_{x} + 1 ) - 3y = 5$$
+
+        <span class="step-title">Paso 3: Simplificación y Resolución</span>
+        <p class="explanation">Dentro del paréntesis, $-1 + 1$ se cancelan. La ecuación se vuelve mucho más sencilla de repente:</p>
+        $$2 \cdot (2y) - 3y = 5$$
+        $$4y - 3y = 5 \Rightarrow \mathbf{y = 5}$$
+
+        <span class="step-title">Paso 4: Hallar la X final</span>
+        <p class="explanation">Usamos el valor de $y$ en nuestro despeje inicial:</p>
+        $$x = 2(5) - 1 = 10 - 1 \Rightarrow \mathbf{x = 9}$$
+    </div>
+
+    <footer>© 2026 Academia Esparta - Manual Completo de Sustitución</footer>
 </div>
 
 </body>
