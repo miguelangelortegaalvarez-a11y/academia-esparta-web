@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misión Vocal A - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --a-color: #ef5350; --primary: #0e9343; --dark: #063c24; --light: #fdf2f2; }
+        
+        /* Aplicamos la fuente Fredoka para que la 'a' sea redondita */
+        body { font-family: 'Fredoka', sans-serif; background: #f0f2f5; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--a-color); position: relative; }
+        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--a-color); font-weight: bold; }
+
+        .book-container { max-width: 1000px; width: 95%; margin: 2rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        .page-section { background: white; border-radius: 25px; padding: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 2px solid #eee; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+        h2 { color: var(--dark); font-size: 1.2rem; margin-top: 0; border-bottom: 2px solid #f0f0f0; width: 100%; text-align: center; padding-bottom: 10px; }
+
+        /* Estilo para la letra A gigante */
+        .big-a { font-size: 9rem; font-weight: 700; color: var(--dark); line-height: 1; margin: 15px 0; }
+        
+        .example-img { font-size: 5rem; margin-bottom: 10px; }
+        .game-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+        .btn-game { background: #f9f9f9; border: 2px solid #eee; border-radius: 15px; padding: 10px; cursor: pointer; font-size: 2.5rem; transition: 0.2s; }
+        .btn-game:active { transform: scale(0.9); }
+        .correct { background: #e8f5e9 !important; border-color: var(--primary) !important; }
+
+        .trace-box { width: 100%; height: 150px; background: url('https://www.transparenttextures.com/patterns/lined-paper.png'); background-color: #fafafa; border: 2px dashed #ccc; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 6rem; color: #ddd; position: relative; font-weight: 400; }
+
+        .btn-action { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 0 var(--dark); font-family: 'Fredoka', sans-serif; }
+        .btn-action:active { transform: translateY(3px); box-shadow: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-link">← Volver</a>
+        <div style="font-weight: 700; font-size: 1.5rem; color: var(--a-color);">Misión de la Vocal A 🍎</div>
+    </header>
+
+    <div class="book-container">
+        <div class="page-section">
+            <h2>1. Conoce la Letra</h2>
+            <div class="big-a">A a</div>
+            <div class="example-img">✈️</div>
+            <p style="font-weight: bold; color: #666; font-size: 1.2rem;">a de AVIÓN</p>
+            <button class="btn-action">ESCUCHAR SONIDO</button>
+        </div>
+
+        <div class="page-section">
+            <h2>2. Caza de Sonidos</h2>
+            <p style="font-size: 0.9rem; color: #666;">Toca lo que empieza por a:</p>
+            <div class="game-grid">
+                <button class="btn-game" onclick="check(this, true)">🐝</button>
+                <button class="btn-game" onclick="check(this, true)">🌳</button>
+                <button class="btn-game" onclick="check(this, false)">🐱</button>
+                <button class="btn-game" onclick="check(this, true)">🕸️</button>
+            </div>
+            <div id="msg" style="margin-top: 10px; font-weight: bold; height: 20px;"></div>
+        </div>
+
+        <div class="page-section">
+            <h2>3. Trazado Mágico</h2>
+            <div class="trace-box">a</div>
+            <p style="font-size: 0.8rem; color: #888;">Repasa la vocal redondita</p>
+            <button class="btn-action" style="background: #555;">PRACTICAR</button>
+        </div>
+
+        <div class="page-section">
+            <h2>4. El Intruso</h2>
+            <p style="font-size: 0.9rem; color: #666;">¿Cuál NO empieza por a?</p>
+            <div style="display: flex; gap: 15px; font-size: 3.5rem;">
+                <span>🥑</span> <span>🏹</span> <span id="intruso" onclick="eliminarIntruso()" style="cursor:pointer">🧸</span>
+            </div>
+            <button class="btn-action" style="background: #ef5350;" onclick="eliminarIntruso()">ELIMINAR</button>
+        </div>
+    </div>
+
+    <script>
+        function check(btn, isCorrect) {
+            if(isCorrect) {
+                btn.classList.add('correct');
+                confetti({ particleCount: 30, spread: 50, origin: { y: 0.8 } });
+            } else {
+                btn.style.background = '#ffebee';
+                setTimeout(() => btn.style.background = '#f9f9f9', 500);
+            }
+        }
+
+        function eliminarIntruso() {
+            const i = document.getElementById('intruso');
+            i.style.transition = '0.5s';
+            i.style.transform = 'scale(0) rotate(360deg)';
+            i.style.opacity = '0';
+            confetti({ particleCount: 100, spread: 70 });
+        }
+    </script>
+</body>
+</html>
