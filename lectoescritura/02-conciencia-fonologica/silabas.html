@@ -7,37 +7,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --blue: #1976d2; }
-        body { font-family: 'Poppins', sans-serif; background: #e3f2fd; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; }
+        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --accent: #fbc02d; }
         
-        .game-header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--blue); position: relative; z-index: 10; }
-        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--blue); font-weight: bold; }
+        /* Cambiado a fondo verde suave para mantener la identidad */
+        body { font-family: 'Poppins', sans-serif; background: #e8f5e9; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; position: relative; }
+        
+        .game-header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); position: relative; z-index: 10; }
+        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--primary); font-weight: bold; }
         
         .stats-bar { display: flex; justify-content: space-around; width: 100%; max-width: 800px; margin-top: 10px; font-weight: bold; color: var(--dark); }
         
-        .game-container { max-width: 800px; width: 90%; background: white; margin-top: 1rem; padding: 2rem; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        .game-container { max-width: 800px; width: 90%; background: white; margin-top: 1rem; padding: 2rem; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; z-index: 10; border: 1px solid #eee; }
         
         .animal-area { height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 1rem; }
-        .animal { font-size: 6rem; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; cursor: pointer; }
-        .word-tag { font-size: 2rem; font-weight: 700; color: var(--dark); text-transform: uppercase; margin-top: 10px; background: #eee; padding: 5px 20px; border-radius: 50px; }
+        .animal { font-size: 6.5rem; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; }
+        
+        /* Etiqueta de la palabra con el verde primario */
+        .word-tag { font-size: 2.2rem; font-weight: 700; color: var(--dark); text-transform: uppercase; margin-top: 10px; background: var(--light); padding: 8px 25px; border-radius: 50px; border: 2px solid var(--primary); }
 
-        .plates-container { display: flex; justify-content: center; gap: 15px; margin-top: 2rem; perspective: 1000px; }
-        .plate { width: 110px; height: 110px; background: #f1f8e9; border: 4px solid #bbdefb; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; position: relative; }
-        .plate:hover { transform: scale(1.05); background: #e3f2fd; }
-        .plate span { font-size: 2.5rem; font-weight: 900; color: var(--blue); }
-        .plate label { font-size: 0.7rem; font-weight: bold; color: #666; }
+        .plates-container { display: flex; justify-content: center; gap: 15px; margin-top: 2rem; }
+        
+        /* Platos unificados con el estilo del sitio */
+        .plate { width: 115px; height: 115px; background: white; border: 4px solid var(--primary); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 0 var(--dark); }
+        .plate:hover { transform: scale(1.05); background: var(--light); }
+        .plate:active { transform: translateY(4px); box-shadow: none; }
+        .plate span { font-size: 2.8rem; font-weight: 900; color: var(--primary); }
+        .plate label { font-size: 0.75rem; font-weight: bold; color: #666; text-transform: uppercase; }
 
-        /* Animaciones */
-        @keyframes eat { 
-            0% { transform: scale(1) translateY(0); }
-            50% { transform: scale(1.2) translateY(50px); }
-            100% { transform: scale(1) translateY(0); }
-        }
-        .eating { animation: eat 0.6s ease-in-out; }
-        .disappear { transform: scale(0) rotate(360deg); opacity: 0; transition: 0.5s; }
-
+        /* Pantallas de victoria unificadas */
         #overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); border-radius: 30px; flex-direction: column; align-items: center; justify-content: center; z-index: 30; }
-        .btn-next { padding: 1.2rem 2rem; border: none; border-radius: 15px; font-weight: 700; background: var(--primary); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 5px 0 var(--dark); }
+        .btn-next { padding: 1.2rem 2.5rem; border: none; border-radius: 15px; font-weight: 700; background: var(--primary); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 5px 0 var(--dark); text-transform: uppercase; }
+
+        @keyframes eat { 50% { transform: scale(1.3) translateY(40px); } }
+        .eating { animation: eat 0.6s ease-in-out; }
+        .disappear { transform: scale(0); opacity: 0; transition: 0.4s; }
 
         #trophy-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; display: none; }
         .trophy { position: absolute; font-size: 3rem; animation: rain linear infinite; }
@@ -49,8 +52,8 @@
     <div id="trophy-rain"></div>
 
     <div class="game-header">
-        <a href="index.html" class="back-link">← Salir</a>
-        <h2 style="color: var(--blue); margin: 0;">¿Qué come el animal?</h2>
+        <a href="index.html" class="back-link">← SALIR</a>
+        <h2 style="color: var(--primary); margin: 0;">Laboratorio de Sílabas</h2>
     </div>
 
     <div class="stats-bar">
@@ -60,16 +63,16 @@
 
     <div class="game-container">
         <div id="overlay">
-            <h2 id="overlay-msg" style="color: var(--primary); font-size: 2.8rem; margin: 0;">¡NIVEL SUPERADO!</h2>
-            <p id="overlay-sub" style="margin: 1rem 0 2rem 0;">¡El animal está muy contento!</p>
+            <h2 id="overlay-msg" style="color: var(--primary); font-size: 3rem; margin: 0;">¡NIVEL SUPERADO!</h2>
+            <p id="overlay-sub" style="margin: 1rem 0 2rem 0; font-size: 1.2rem;">¡Los animales están llenos y felices!</p>
             <button class="btn-next" id="btn-action" onclick="cerrarOverlay()">SIGUIENTE NIVEL</button>
         </div>
 
-        <p style="color: #666; font-weight: bold;">Dale de comer al animal según sus sílabas:</p>
+        <p style="color: #666; font-weight: bold; margin-bottom: 2rem;">¿Cuántas sílabas tiene esta palabra?</p>
         
         <div class="animal-area">
-            <div id="animal-emoji" class="animal">🐱</div>
-            <div id="word-text" class="word-tag">GATO</div>
+            <div id="animal-emoji" class="animal">🦒</div>
+            <div id="word-text" class="word-tag">JIRAFA</div>
         </div>
 
         <div class="plates-container">
@@ -79,16 +82,17 @@
             <div class="plate" onclick="comprobar(4, this)"><span>4</span><label>Sílabas</label></div>
         </div>
 
-        <div id="feedback" style="margin-top: 1.5rem; font-weight: bold; font-size: 1.2rem; min-height: 30px;"></div>
+        <div id="feedback" style="margin-top: 1.5rem; font-weight: bold; font-size: 1.3rem; min-height: 35px;"></div>
     </div>
 
     <script>
+        // ... (Se mantiene la misma lógica de JavaScript anterior que ya funcionaba perfecta)
         const comidaAnimales = [
-            { e: '🐱', w: 'GATO', s: 2 }, { e: '🐶', w: 'PERRO', s: 2 }, { e: '🐷', w: 'CERDO', s: 2 }, { e: '🐵', w: 'MONO', s: 2 }, { e: '🐸', w: 'RANA', s: 2 },
-            { e: '🦁', w: 'LEÓN', s: 2 }, { e: '🐯', w: 'TIGRE', s: 2 }, { e: '🦆', w: 'PATO', s: 2 }, { e: '🐔', w: 'POLLO', s: 2 }, { e: '🐭', w: 'RATÓN', s: 2 },
-            { e: '🦒', w: 'JIRAFA', s: 3 }, { e: '🐘', w: 'ELEFANTE', s: 4 }, { e: '🐍', w: 'SERPIENTE', s: 3 }, { e: '🦉', w: 'BÚHO', s: 2 }, { e: '🦋', w: 'MARIPOSA', s: 4 },
-            { e: '🐝', w: 'ABEJA', s: 3 }, { e: '🐰', w: 'CONEJO', s: 3 }, { e: '🐻', w: 'OSO', s: 2 }, { e: '🦓', w: 'CEBRA', s: 2 }, { e: '🦛', w: 'HIPOPÓTAMO', s: 5 },
-            { e: '🦐', w: 'GAMBA', s: 2 }, { e: '🐳', w: 'BALLENA', s: 3 }, { e: '🦀', w: 'CANGREJO', s: 3 }, { e: '🦈', w: 'TIBURÓN', s: 3 }, { e: '🐢', w: 'TORTUGA', s: 3 }
+            { e: '🐱', w: 'GATO', s: 2 }, { e: '🐶', w: 'PERRO', s: 2 }, { e: '🐷', w: 'CERDO', s: 2 }, { e: '🐵', w: 'MONO', s: 2 }, { e: '🦁', w: 'LEÓN', s: 2 },
+            { e: '🐯', w: 'TIGRE', s: 2 }, { e: '🦆', w: 'PATO', s: 2 }, { e: '🐔', w: 'GALLO', s: 2 }, { e: '🐭', w: 'RATÓN', s: 2 }, { e: '🦒', w: 'JIRAFA', s: 3 },
+            { e: '🐘', w: 'ELEFANTE', s: 4 }, { e: '🐍', w: 'SERPIENTE', s: 3 }, { e: '🦋', w: 'MARIPOSA', s: 4 }, { e: '🐝', w: 'ABEJA', s: 3 }, { e: '🐰', w: 'CONEJO', s: 3 },
+            { e: '🐻', w: 'OSO', s: 2 }, { e: '🦓', w: 'CEBRA', s: 2 }, { e: '🦛', w: 'HIPOPÓTAMO', s: 5 }, { e: '🐳', w: 'BALLENA', s: 3 }, { e: '🦀', w: 'CANGREJO', s: 3 },
+            { e: '🦈', w: 'TIBURÓN', s: 3 }, { e: '🐢', w: 'TORTUGA', s: 3 }, { e: '🐙', w: 'PULPO', s: 2 }, { e: '🐿️', w: 'ARDILLA', s: 3 }, { e: '🦉', w: 'BÚHO', s: 2 }
         ];
 
         let mezclados = [];
@@ -108,20 +112,18 @@
             const item = mezclados[index];
             const animal = document.getElementById('animal-emoji');
             animal.innerText = item.e;
-            animal.className = 'animal'; // Reset animations
+            animal.className = 'animal';
             document.getElementById('word-text').innerText = item.w;
             document.getElementById('lvl-num').innerText = nivelActual;
             document.getElementById('reto-num').innerText = retoActual + 1;
             document.getElementById('feedback').innerText = '';
-            
-            // Reset plates
             document.querySelectorAll('.plate').forEach(p => p.classList.remove('disappear'));
             bloqueado = false;
         }
 
         function sonidoAplausos() {
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const dur = 1.5;
+            const dur = 1.2;
             const buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
             const d = buf.getChannelData(0);
             for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.4));
@@ -130,38 +132,27 @@
             s.connect(f); f.connect(ctx.destination); s.start();
         }
 
-        function comprobar(valor, elementoPlate) {
+        function comprobar(valor, elemento) {
             if(bloqueado) return;
             const index = ((nivelActual - 1) * 5) + retoActual;
-            const correcto = mezcladasAlLlegar(mezclados[index].s); // Ajuste para 4 o más
-            const fb = document.getElementById('feedback');
-            const animal = document.getElementById('animal-emoji');
+            const correcto = mezclados[index].s > 4 ? 4 : mezclados[index].s;
 
-            if(valor === correcto || (valor === 4 && mezclados[index].s >= 4)) {
+            if(valor === correcto) {
                 bloqueado = true;
                 sonidoAplausos();
-                confetti({ particleCount: 40, spread: 50, origin: { y: 0.8 } });
-                
-                // Animación de comer
-                animal.classList.add('eating');
-                elementoPlate.classList.add('disappear');
-                fb.innerHTML = '<span style="color: var(--primary)">¡YUM! 👏</span>';
-                
-                setTimeout(progresar, 1200);
+                confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+                document.getElementById('animal-emoji').classList.add('eating');
+                elemento.classList.add('disappear');
+                document.getElementById('feedback').innerHTML = '<span style="color: var(--primary)">¡ÑAM! ¡MUY BIEN! 👏</span>';
+                setTimeout(progresar, 1300);
             } else {
-                fb.innerHTML = '<span style="color: #ef5350">¡Casi! No es su plato. 🧐</span>';
+                document.getElementById('feedback').innerHTML = '<span style="color: #d32f2f">¡Casi! Prueba otro plato. 🧐</span>';
             }
         }
 
-        function mezcladasAlLlegar(s) { return s > 4 ? 4 : s; }
-
         function progresar() {
             retoActual++;
-            if(retoActual >= 5) {
-                lanzarFestejoNivel();
-            } else {
-                mostrarReto();
-            }
+            if(retoActual >= 5) { lanzarFestejoNivel(); } else { mostrarReto(); }
         }
 
         function lanzarFestejoNivel() {
@@ -169,7 +160,7 @@
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             iniciarTrofeos();
             if(nivelActual === 5) {
-                document.getElementById('overlay-msg').innerText = "¡MAESTRO DE ANIMALES!";
+                document.getElementById('overlay-msg').innerText = "¡CAMPEÓN DE SÍLABAS!";
                 document.getElementById('btn-action').innerText = "VOLVER AL MENÚ";
                 document.getElementById('btn-action').onclick = () => window.location.href = 'index.html';
             }
@@ -181,11 +172,9 @@
             container.style.display = 'block';
             for (let i = 0; i < 20; i++) {
                 const t = document.createElement('div');
-                t.className = 'trophy';
-                t.innerText = '🏆';
+                t.className = 'trophy'; t.innerText = '🏆';
                 t.style.left = Math.random() * 100 + 'vw';
                 t.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                t.style.animationDelay = (Math.random() * 1) + 's';
                 container.appendChild(t);
             }
             setTimeout(() => { container.style.display = 'none'; }, 5000);
