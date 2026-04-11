@@ -3,228 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento Ecuaciones - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-    
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']] // Define qué símbolos buscar (los dólares)
-        }
-      };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+    <title>Desafío Fichajes - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --primary: #0e9343; /* Verde Academia Esparta */
-            --dark: #063c24; 
-            --accent: #fbc02d; /* Amarillo/Naranja de la caja de desarrollo */
-            --bg-crema: #fffdf2; /* Fondo amarillento suave */
-            --bg-page: #ffffff; /* Fondo blanco de la página */
+            --primary: #0e9343;
+            --dark: #063c24;
+            --error: #ef5350;
+            --bg: #f0f2f5;
         }
 
-        body {
-            font-family: 'Fredoka', sans-serif;
-            background-color: var(--bg-page);
-            margin: 0;
-            padding: 40px 20px;
-            color: #333;
-        }
+        body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
-        .container { max-width: 800px; margin: 0 auto; }
+        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); box-sizing: border-box; }
+        .header-title { font-weight: 700; font-size: 1.5rem; color: var(--primary); text-transform: uppercase; }
 
-        /* Estilo Título Superior con línea verde */
-        .page-header {
-            border-bottom: 2px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-        }
-        .page-header h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; color: #333; letter-spacing: 1px; }
-        .page-header span { font-size: 0.8rem; color: var(--primary); font-weight: bold; }
+        .game-container { max-width: 600px; width: 90%; margin: 2rem auto; background: white; border-radius: 25px; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; border: 2px solid #eee; }
 
-        /* Bloque del Enunciado Superior */
-        .enunciado-top {
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid #eee;
-            line-height: 1.5;
-        }
-        .enunciado-top b { color: var(--primary); }
+        .nivel-badge { background: var(--dark); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; margin-bottom: 1rem; display: inline-block; }
 
-        /* Caja Verde Sólida del Sistema */
-        .sistema-box {
-            background-color: var(--primary);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        .sistema-box h3 { margin: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
-        .sistema-math { font-size: 1.2rem; } /* Fuente por defecto para que MathJax la use */
+        .player-name { font-size: 2.5rem; color: var(--dark); margin: 1rem 0; font-weight: 700; }
 
-        /* Caja Crema de Desarrollo con borde naranja */
-        .desarrollo-box {
-            background-color: var(--bg-crema);
-            border-left: 6px solid var(--accent);
-            padding: 25px;
-            border-radius: 0 10px 10px 0;
-            margin-bottom: 80px;
-        }
+        .options-grid { display: grid; gap: 15px; margin-top: 2rem; }
 
-        /* Títulos de los pasos en verde */
-        .paso-titulo { color: var(--primary); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 20px 0 10px 0; display: block; }
-        
-        /* Centrado de ecuaciones dentro del desarrollo */
-        .math-center { text-align: center; margin: 15px 0; font-weight: bold; font-size: 1.1rem; }
-        
-        /* Resaltado de variables en verde */
-        .highlight { color: var(--primary); font-weight: bold; }
+        .btn-option { background: #f8f9fa; border: 3px solid #eee; padding: 15px; border-radius: 15px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.2s; font-family: 'Fredoka'; color: #333; }
+        .btn-option:active { transform: scale(0.95); }
 
-        /* Botón PDF (no se imprime) */
-        .no-print { text-align: right; margin-bottom: 30px; }
-        .btn-pdf { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Fredoka'; font-weight: bold; }
+        .feedback-msg { margin-top: 1.5rem; font-size: 1.2rem; font-weight: bold; min-height: 3.5rem; display: flex; align-items: center; justify-content: center; padding: 0 10px; line-height: 1.3; }
+        .msg-success { color: var(--primary); animation: pop 0.4s ease; }
+        .msg-error { color: var(--error); animation: shake 0.3s ease; }
 
-        /* Ajustes para impresión */
-        @media print {
-            .no-print { display: none; }
-            body { padding: 0; }
-            .desarrollo-box { break-inside: avoid; }
-        }
+        .next-btn { margin-top: 2rem; background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; display: none; box-shadow: 0 4px 0 var(--dark); font-family: 'Fredoka'; }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+        @keyframes pop { 0% { transform: scale(0.8); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="no-print">
-        <button class="btn-pdf" onclick="window.print()">📥 GENERAR PDF</button>
+    <header>
+        <div class="header-title">⚽ Desafío Fichajes Esparta</div>
+    </header>
+
+    <div class="game-container">
+        <div id="nivel-info" class="nivel-badge">Nivel 1: Estrellas</div>
+        <p style="color: #666; margin: 0;">¿En qué equipo juega...?</p>
+        <div id="player-display" class="player-name">---</div>
+        
+        <div id="options-grid" class="options-grid"></div>
+
+        <div id="feedback" class="feedback-msg"></div>
+        <button id="next-btn" class="next-btn" onclick="proximoJugador()">SIGUIENTE FICHAJE →</button>
     </div>
 
-    <div class="page-header">
-        <h1>Resolución de Problemas</h1>
-        <span>ACADEMIA ESPARTA</span>
-    </div>
-    
-    <div class="enunciado-top">
-        <b>ENUNCIADO 24:</b> Por un pantalón y unos zapatos he pagado 126 €. Si el precio del pantalón aumentara un 14%, entonces sería el 75% del precio de los zapatos. ¿Cuánto pagué por cada uno?
-    </div>
+    <script>
+        const jugadores = [
+            // NIVEL 1: Los grandes
+            { nombre: "Vinícius Jr.", equipos: ["Real Madrid", "Villarreal", "Sevilla"], correcto: "Real Madrid", nivel: 1 },
+            { nombre: "Lewandowski", equipos: ["Espanyol", "FC Barcelona", "Betis"], correcto: "FC Barcelona", nivel: 1 },
+            { nombre: "Griezmann", equipos: ["Getafe", "Real Sociedad", "Atlético de Madrid"], correcto: "Atlético de Madrid", nivel: 1 },
+            { nombre: "Gayà", equipos: ["Valencia CF", "Celta", "Alavés"], correcto: "Valencia CF", nivel: 1 },
+            
+            // NIVEL 2: Media tabla
+            { nombre: "Iago Aspas", equipos: ["Celta de Vigo", "Girona", "Osasuna"], correcto: "Celta de Vigo", nivel: 2 },
+            { nombre: "Gerard Moreno", equipos: ["Mallorca", "Villarreal CF", "Athletic"], correcto: "Villarreal CF", nivel: 2 },
+            { nombre: "Brais Méndez", equipos: ["Real Sociedad", "Leganés", "Valladolid"], correcto: "Real Sociedad", nivel: 2 },
+            
+            // NIVEL 3: Los díficiles (Ojeador Erik)
+            { nombre: "Isi Palazón", equipos: ["Rayo Vallecano", "Getafe", "Sevilla"], correcto: "Rayo Vallecano", nivel: 3 },
+            { nombre: "Borja Mayoral", equipos: ["Getafe CF", "Rayo", "Las Palmas"], correcto: "Getafe CF", nivel: 3 },
+            { nombre: "Kirian Rodríguez", equipos: ["UD Las Palmas", "Betis", "Celta"], correcto: "UD Las Palmas", nivel: 3 }
+        ];
 
-    <div class="sistema-box">
-        <h3>SISTEMA DE PARTIDA:</h3>
-        <div class="sistema-math">
-            $ \begin{cases} x + y = 126 \\ 1.14x = 0.75y \end{cases} $
-        </div>
-    </div>
+        const frasesExito = [
+            "¡Qué golazo has metido por la escuadra, Erik!",
+            "¡Erik, eres mejor que Mbappé!",
+            "¡Eres el Pichichi de la Academia, Erik!",
+            "¡Ni Bellingham tiene esa puntería, Erik!",
+            "¡Balón de Oro para Erik!"
+        ];
 
-    <div class="desarrollo-box">
-        <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
-        <p>1. <b>Las letras:</b> Llamamos <span class="highlight">$x$</span> al pantalón e <span class="highlight">$y$</span> a los zapatos.<br>
-           2. <b>Primera frase:</b> "Pagado 126 €" significa que la suma de ambos es 126. De ahí sale <span class="highlight">$x + y = 126$</span>.<br>
-           3. <b>Segunda frase:</b> "Aumentar un 14%" es multiplicar por 1.14 ($1.14x$), y el "75% de los zapatos" es 0.75y. De ahí sale <span class="highlight">$1.14x = 0.75y$</span>.</p>
+        const frasesFallo = [
+            "Erik, aciertas menos que el Barcelona en Champions...",
+            "¡Uff! Estás jugando peor que el Barça de Xavi.",
+            "¡Vaya fallo! Pareces un defensa del Barcelona.",
+            "Erik, estás más perdido que el Barça en Europa...",
+            "¡A las nubes! Menos puntería que el Barça este año."
+        ];
 
-        <span class="paso-titulo">1. EL DESPEJE ESTRATÉGICO</span>
-        <p>Buscamos despejar la $y$ en la primera ecuación:</p>
-        <div class="math-center">$y = 126 - x$</div>
+        let indexActual = 0;
 
-        <span class="paso-titulo">2. LA SUSTITUCIÓN</span>
-        <p>Cambiamos la $y$ en la segunda ecuación por nuestra expresión entre paréntesis:</p>
-        <div class="math-center">$1.14x = 0.75 \cdot (126 - x)$</div>
+        function cargarJugador() {
+            const j = jugadores[indexActual];
+            document.getElementById('nivel-info').innerText = `Nivel ${j.nivel}: ${j.nivel === 1 ? 'Estrellas' : j.nivel === 2 ? 'Conocidos' : 'Ojeador PRO'}`;
+            document.getElementById('player-display').innerText = j.nombre;
+            document.getElementById('feedback').innerText = "";
+            document.getElementById('next-btn').style.display = 'none';
 
-        <span class="paso-titulo">3. RESOLUCIÓN CON LIMPIEZA</span>
-        <p>Operamos para hallar el valor de $x$ (pantalón):</p>
-        <div class="math-center">$1.14x = 94.5 - 0.75x \implies 1.89x = 94.5 \implies x = 50$</div>
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
 
-        <span class="paso-titulo">4. HALLAR PAREJA</span>
-        <p>Sustituimos $x$ para hallar el valor de $y$ (zapatos):</p>
-        <div class="math-center">$y = 126 - 50 = 76 \implies y = 76$</div>
-    </div>
+            j.equipos.forEach(equipo => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-option';
+                btn.innerText = equipo;
+                btn.onclick = () => verificarRespuesta(btn, equipo === j.correcto);
+                grid.appendChild(btn);
+            });
+        }
 
-    <div class="page-header">
-        <h1>Resolución de Problemas</h1>
-        <span>ACADEMIA ESPARTA</span>
-    </div>
-    
-    <div class="enunciado-top">
-        <b>ENUNCIADO 25:</b> En un test de 50 preguntas, por cada acierto te dan 4 puntos y por cada error te restan 3 puntos. Si mi nota ha sido el 58% de la puntuación máxima, ¿cuántos aciertos y fallos he tenido?
-    </div>
+        function verificarRespuesta(btn, esCorrecto) {
+            const feedback = document.getElementById('feedback');
+            const botones = document.querySelectorAll('.btn-option');
 
-    <div class="sistema-box">
-        <h3>SISTEMA DE PARTIDA:</h3>
-        <div class="sistema-math">
-            $ \begin{cases} x + y = 50 \\ 4x - 3y = 116 \end{cases} $
-        </div>
-    </div>
+            if (esCorrecto) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#0e9343', '#ffffff'] });
+                feedback.innerHTML = `<span class="msg-success">${frasesExito[Math.floor(Math.random() * frasesExito.length)]}</span>`;
+                btn.style.borderColor = 'var(--primary)';
+                btn.style.background = '#e8f5e9';
+                document.getElementById('next-btn').style.display = 'inline-block';
+                botones.forEach(b => b.style.pointerEvents = 'none');
+            } else {
+                feedback.innerHTML = `<span class="msg-error">${frasesFallo[Math.floor(Math.random() * frasesFallo.length)]}</span>`;
+                btn.style.borderColor = 'var(--error)';
+                btn.style.background = '#ffebee';
+                btn.style.animation = 'shake 0.3s ease';
+            }
+        }
 
-    <div class="desarrollo-box">
-        <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
-        <p>1. <b>Las letras:</b> Usamos <span class="highlight">$x$</span> para los aciertos e <span class="highlight">$y$</span> para los fallos.<br>
-           2. <b>Total preguntas:</b> Como hay 50 preguntas en total, la suma de aciertos y fallos es 50: <span class="highlight">$x + y = 50$</span>.<br>
-           3. <b>Los puntos:</b> Cada acierto suma 4 ($4x$) y cada fallo resta 3 ($-3y$). La nota final es 116 (el 58% del máximo, que es 200). De ahí sale <span class="highlight">$4x - 3y = 116$</span>.</p>
+        function proximoJugador() {
+            indexActual++;
+            if (indexActual < jugadores.length) {
+                cargarJugador();
+            } else {
+                document.querySelector('.game-container').innerHTML = `
+                    <h2 style="color:var(--primary)">🏆 ¡FINAL DEL TORNEO! 🏆</h2>
+                    <p style="font-size:1.2rem"><b>Erik</b>, has demostrado que no se te escapa ni un fichaje.</p>
+                    <p>Eres oficialmente el MVP de la Academia Esparta.</p>
+                    <button class="next-btn" style="display:block; margin: 20px auto;" onclick="location.reload()">VOLVER A JUGAR</button>
+                `;
+            }
+        }
 
-        <span class="paso-titulo">1. EL DESPEJE</span>
-        <p>Despejamos la $y$ en la ecuación del total de preguntas:</p>
-        <div class="math-center">$y = 50 - x$</div>
-
-        <span class="paso-titulo">2. LA SUSTITUCIÓN</span>
-        <p>Llevamos este valor a la ecuación de los puntos totales:</p>
-        <div class="math-center">$4x - 3 \cdot (50 - x) = 116$</div>
-
-        <span class="paso-titulo">3. RESOLUCIÓN</span>
-        <p>Operamos el paréntesis y despejamos la $x$ (aciertos):</p>
-        <div class="math-center">$4x - 150 + 3x = 116 \implies 7x = 266 \implies x = 38$</div>
-
-        <span class="paso-titulo">4. HALLAR PAREJA</span>
-        <p>Hallamos $y$ (fallos) restando los aciertos al total:</p>
-        <div class="math-center">$y = 50 - 38 = 12 \implies y = 12$</div>
-    </div>
-
-    <div class="page-header">
-        <h1>Resolución de Problemas</h1>
-        <span>ACADEMIA ESPARTA</span>
-    </div>
-    
-    <div class="enunciado-top">
-        <b>ENUNCIADO 26:</b> La edad de Carmen es el triple de la de su hija Maite. Pero dentro de 15 años será el doble. ¿Cuál es la edad de cada una?
-    </div>
-
-    <div class="sistema-box">
-        <h3>SISTEMA DE PARTIDA:</h3>
-        <div class="sistema-math">
-            $ \begin{cases} x = 3y \\ x + 15 = 2(y + 15) \end{cases} $
-        </div>
-    </div>
-
-    <div class="desarrollo-box">
-        <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
-        <p>1. <b>Las letras:</b> Llamamos <span class="highlight">$x$</span> a la edad de Carmen e <span class="highlight">$y$</span> a la de Maite.<br>
-           2. <b>Hoy:</b> Carmen es el triple, por tanto su edad es $3y$. Esto nos da <span class="highlight">$x = 3y$</span>.<br>
-           3. <b>Futuro:</b> Dentro de 15 años, Carmen tendrá $x+15$ y Maite $y+15$. El problema dice que será el doble: <span class="highlight">$x + 15 = 2(y + 15)$</span>.</p>
-
-        <span class="paso-titulo">1. SUSTITUCIÓN DIRECTA</span>
-        <p>Como ya tenemos $x$ despejada ($x=3y$), sustituimos directamente en la segunda ecuación:</p>
-        <div class="math-center">$3y + 15 = 2 \cdot (y + 15)$</div>
-
-        <span class="paso-titulo">2. ELIMINACIÓN DE PARÉNTESIS</span>
-        <p>Multiplicamos el 2 por todo el bloque de la derecha:</p>
-        <div class="math-center">$3y + 15 = 2y + 30$</div>
-
-        <span class="paso-titulo">3. HALLAR EDAD DE MAITE</span>
-        <p>Agrupamos las $y$ a la izquierda:</p>
-        <div class="math-center">$3y - 2y = 30 - 15 \implies y = 15$</div>
-
-        <span class="paso-titulo">4. HALLAR EDAD DE CARMEN</span>
-        <p>Multiplicamos por 3 la edad de Maite:</p>
-        <div class="math-center">$x = 3 \cdot (15) = 45 \implies x = 45$</div>
-    </div>
-</div>
-
+        cargarJugador();
+    </script>
 </body>
 </html>
