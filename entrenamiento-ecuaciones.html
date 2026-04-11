@@ -4,136 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <title>Formulario de Derivadas - Academia Esparta</title>
+    <title>Desafío Erik - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --verde-oscuro: #2e7d32; --gris: #f4f7f6; --fondo-tarjeta: #ffffff; }
+        :root { --verde: #4CAF50; --azul: #2196f3; --rojo: #e74c3c; --gris: #f4f7f6; --blanco: #ffffff; }
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding-bottom: 50px; }
+        .header { background: var(--blanco); color: var(--verde); text-align: center; padding: 25px; border-bottom: 5px solid var(--verde); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .header h1 { font-family: 'Montserrat'; font-size: 2.5rem; margin: 0; text-transform: uppercase; }
         
-        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 0; color: #333; }
+        .container { max-width: 700px; margin: 25px auto; background: var(--blanco); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); position: relative; }
         
-        /* CABECERA CORPORATIVA ESPARTANA */
-        .header-esparta { background: #ffffff; text-align: center; padding: 40px 20px; border-bottom: 5px solid var(--verde); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .header-esparta h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; color: var(--verde); margin: 0; text-transform: uppercase; letter-spacing: -1px; }
-        .frase-motivacional { font-size: 1.3rem; color: #555; font-style: italic; margin-top: 15px; font-weight: 600; }
+        /* MARCADOR SUPERIOR */
+        .status-bar { display: flex; justify-content: space-between; align-items: center; background: #333; color: white; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; font-family: 'Montserrat'; font-size: 0.9rem; }
+        .vidas-box { background: var(--rojo); padding: 5px 12px; border-radius: 8px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% {transform: scale(1);} 50% {transform: scale(1.05);} 100% {transform: scale(1);} }
 
-        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .progreso-bg { width: 100%; height: 12px; background: #eee; border-radius: 10px; margin-bottom: 30px; overflow: hidden; }
+        .progreso-fill { height: 100%; background: linear-gradient(90deg, var(--azul), #00d4ff); width: 0%; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+        .pregunta { font-size: 1.5rem; font-weight: 700; color: #2c3e50; margin-bottom: 25px; line-height: 1.4; }
+        .opciones { display: grid; gap: 15px; }
+        .opcion { padding: 20px; border: 2px solid #e0e0e0; border-radius: 15px; background: var(--blanco); cursor: pointer; font-size: 1.1rem; font-weight: 600; transition: 0.2s; text-align: left; }
+        .opcion:hover:not(:disabled) { border-color: var(--azul); background: #f0f7ff; transform: translateY(-3px); }
         
-        /* ESTILO DE TARJETAS TIPO LIBRO */
-        .card-formula { background: var(--fondo-tarjeta); border-radius: 12px; border: 1px solid #ddd; margin-bottom: 30px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .card-titulo { background-color: #f0f0f0; border-bottom: 1px solid #ddd; padding: 15px 20px; font-family: 'Montserrat'; font-weight: bold; color: var(--verde-oscuro); display: flex; justify-content: space-between; align-items: center; }
-        
-        /* BOTÓN DE DESARROLLO VERDE */
-        summary { background: var(--verde); color: #fff; padding: 12px 20px; font-weight: bold; text-align: center; cursor: pointer; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; transition: background 0.3s; border-radius: 6px; }
-        summary:hover { background: var(--verde-oscuro); }
-        summary::marker { content: ""; } /* Quita la flechita por defecto */
-        
-        /* ESTILO DE TABLA CON LÍNEAS TIPO LIBRO */
-        .derivadas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid #ddd; }
-        .columna { padding: 25px; display: flex; flex-direction: column; gap: 15px; font-size: 1.15rem; line-height: 1.8; }
-        .columna-izq { border-right: 1px solid #eee; } /* Línea vertical central */
-        .item-derivada { padding-bottom: 10px; border-bottom: 1px solid #eee; } /* Línea horizontal entre fórmulas */
-        .item-derivada:last-child { border-bottom: none; }
-        
-        .nota-espartana { background: #e8f5e9; border-left: 5px solid var(--verde); padding: 15px; margin: 20px 0; font-style: italic; font-weight: 600; }
-        .info-header { text-align: left; padding: 15px; border-bottom: 1px solid #eee; font-weight: 600; font-family: 'Montserrat'; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; color: #777; }
+        .correcto { background-color: var(--verde) !important; color: white; border-color: #388E3C !important; }
+        .incorrecto { background-color: var(--rojo) !important; color: white; border-color: #b71c1c !important; }
+
+        /* AREA DE FEEDBACK */
+        .msg-area { margin-top: 25px; text-align: center; min-height: 60px; font-size: 1.3rem; font-weight: 800; font-family: 'Montserrat'; }
+        .shake { animation: shake 0.5s; color: var(--rojo); }
+        @keyframes shake { 0%, 100% {transform: translateX(0);} 20%, 60% {transform: translateX(-10px);} 40%, 80% {transform: translateX(10px);} }
+
+        /* PANTALLA FINAL */
+        .pantalla-final { display: none; text-align: center; padding: 20px; }
+        .emoji-gigante { font-size: 5rem; margin-bottom: 20px; display: block; }
+        .btn-accion { margin-top: 30px; padding: 20px 40px; border: none; border-radius: 15px; cursor: pointer; font-weight: 800; font-size: 1.4rem; color: white; text-transform: uppercase; transition: 0.3s; }
+        .btn-accion:hover { transform: scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-    <header class="header-esparta">
-        <h1>ACADEMIA ESPARTA</h1>
-        <div class="frase-motivacional">"La victoria ama la preparación. Entrena tu mente, domina el cálculo diferencial."</div>
-    </header>
+<header class="header">
+    <h1>ACADEMIA ESPARTA</h1>
+    <p>¡El Gran Torneo de Erik!</p>
+</header>
 
-    <div class="container">
-        
-        <div class="nota-espartana">
-            Usa este formulario como referencia rápida. La columna de la izquierda es la función simple y la de la derecha es la función compuesta, aplicando la Regla de la Cadena. ¡A por ello!
-        </div>
-
-        <div class="card-formula">
-            <div class="card-titulo"><span>1. Funciones Algebráicas</span> <span>\( k, x, x^n, \sqrt{x} \)</span></div>
-            <details>
-                <summary>VER DERIVADAS Y DESARROLLOS</summary>
-                <div class="derivadas-grid">
-                    <div class="columna columna-izq">
-                        <div class="info-header">FUNCIONES SIMPLES</div>
-                        <div class="item-derivada">Constante: \( f(x) = k \)<br>Derivada: \( f'(x) = 0 \)</div>
-                        <div class="item-derivada">Identidad: \( f(x) = x \)<br>Derivada: \( f'(x) = 1 \)</div>
-                        <div class="item-derivada">Potencia Simple: \( f(x) = x^n \)<br>Derivada: \( f'(x) = n \cdot x^{n-1} \)</div>
-                        <div class="item-derivada">Raíz Cuadrada Simple: \( f(x) = \sqrt{x} \)<br>Derivada: \( f'(x) = \frac{1}{2\sqrt{x}} \)</div>
-                    </div>
-                    <div class="columna">
-                        <div class="info-header">FUNCIONES COMPUESTAS (Regla de la Cadena)</div>
-                        <div class="item-derivada">-</div>
-                        <div class="item-derivada">Identidad Compuesta: \( f(u) = u(x) \)<br>Derivada: \( f'(x) = u' \)</div>
-                        <div class="item-derivada">Potencia Compuesta: \( f(u) = u^n \)<br>Derivada: \( f'(x) = n \cdot u^{n-1} \cdot u' \)</div>
-                        <div class="item-derivada">Raíz Cuadrada Compuesta: \( f(u) = \sqrt{u} \)<br>Derivada: \( f'(x) = \frac{u'}{2\sqrt{u}} \)</div>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card-formula">
-            <div class="card-titulo"><span>2. Exponenciales y Logaritmos</span> <span>\( e^x, a^x, \ln(x) \)</span></div>
-            <details>
-                <summary>VER DERIVADAS Y DESARROLLOS</summary>
-                <div class="derivadas-grid">
-                    <div class="columna columna-izq">
-                        <div class="info-header">FUNCIONES SIMPLES</div>
-                        <div class="item-derivada">Exponencial base \( e \): \( f(x) = e^x \)<br>Derivada: \( f'(x) = e^x \)</div>
-                        <div class="item-derivada">Exponencial base \( a \): \( f(x) = a^x \)<br>Derivada: \( f'(x) = a^x \cdot \ln(a) \)</div>
-                        <div class="item-derivada">Logaritmo Neperiano: \( f(x) = \ln(x) \)<br>Derivada: \( f'(x) = \frac{1}{x} \)</div>
-                    </div>
-                    <div class="columna">
-                        <div class="info-header">FUNCIONES COMPUESTAS (Regla de la Cadena)</div>
-                        <div class="item-derivada">Exponencial base \( e \) Compuesta: \( f(u) = e^u \)<br>Derivada: \( f'(x) = e^u \cdot u' \)</div>
-                        <div class="item-derivada">Exponencial base \( a \) Compuesta: \( f(u) = a^u \)<br>Derivada: \( f'(x) = a^u \cdot \ln(a) \cdot u' \)</div>
-                        <div class="item-derivada">Logaritmo Neperiano Compuesto: \( f(u) = \ln(u) \)<br>Derivada: \( f'(x) = \frac{u'}{u} \)</div>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card-formula">
-            <div class="card-titulo"><span>3. Trigonométricas</span> <span>\( \text{sen}(x), \cos(x), \text{tg}(x) \)</span></div>
-            <details>
-                <summary>VER DERIVADAS Y DESARROLLOS</summary>
-                <div class="derivadas-grid">
-                    <div class="columna columna-izq">
-                        <div class="info-header">FUNCIONES SIMPLES</div>
-                        <div class="item-derivada">Seno Simple: \( f(x) = \text{sen}(x) \)<br>Derivada: \( f'(x) = \cos(x) \)</div>
-                        <div class="item-derivada">Coseno Simple: \( f(x) = \cos(x) \)<br>Derivada: \( f'(x) = -\text{sen}(x) \)</div>
-                        <div class="item-derivada">Tangente Simple: \( f(x) = \text{tg}(x) \)<br>Derivada: \( f'(x) = 1 + \text{tg}^2(x) \)</div>
-                    </div>
-                    <div class="columna">
-                        <div class="info-header">FUNCIONES COMPUESTAS (Regla de la Cadena)</div>
-                        <div class="item-derivada">Seno Compuesto: \( f(u) = \text{sen}(u) \)<br>Derivada: \( f'(x) = \cos(u) \cdot u' \)</div>
-                        <div class="item-derivada">Coseno Compuesto: \( f(u) = \cos(u) \)<br>Derivada: \( f'(x) = -\text{sen}(u) \cdot u' \)</div>
-                        <div class="item-derivada">Tangente Compuesta: \( f(u) = \text{tg}(u) \)<br>Derivada: \( f'(x) = (1 + \text{tg}^2(u)) \cdot u' \)</div>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <div class="card-formula">
-            <div class="card-titulo"><span>4. Álgebra de Derivadas</span> <span>\( (u+v)', (uv)', (u/v)' \)</span></div>
-            <details>
-                <summary>VER REGLAS Y DESARROLLOS</summary>
-                <div class="columna" style="padding: 25px; gap: 10px; font-size: 1.2rem;">
-                    <div>Suma/Resta de Funciones:<br> \( f = u \pm v \implies f' = u' \pm v' \)</div>
-                    <div>Producto de Funciones:<br> \( f = u \cdot v \implies f' = u' \cdot v + u \cdot v' \)</div>
-                    <div>Cociente de Funciones:<br> \( f = \frac{u}{v} \implies f' = \frac{u' \cdot v - u \cdot v'}{v^2} \)</div>
-                </div>
-            </details>
-        </div>
-
+<div class="container">
+    <div class="status-bar">
+        <div>NIVEL <span id="num-nivel">1</span></div>
+        <div style="color: #4CAF50;">✅ <span id="aciertos">0</span></div>
+        <div class="vidas-box">🛡️ VIDAS: <span id="vidas">3</span></div>
+        <div>🎯 <span id="progreso-txt">1</span>/10</div>
+    </div>
+    
+    <div class="progreso-bg"><div class="progreso-fill" id="barra"></div></div>
+    
+    <div id="pantalla-juego">
+        <div class="pregunta" id="pregunta-txt">¿Preparado, Erik?</div>
+        <div class="opciones" id="opciones-box"></div>
+        <div id="feedback" class="msg-area"></div>
     </div>
 
-    <footer style="text-align: center; padding: 40px; color: #aaa; font-size: 0.9rem;">
-        © 2026 Academia Esparta - Material de Referencia para Estudiantes de Élite
-    </footer>
+    <div class="pantalla-final" id="pantalla-final">
+        <span id="emoji-final" class="emoji-gigante"></span>
+        <h2 id="titulo-final"></h2>
+        <p id="nota-final" style="font-size: 2rem; font-weight: 800; margin: 10px 0;"></p>
+        <p id="mensaje-final" style="font-size: 1.4rem; font-style: italic; color: #444;"></p>
+        <button class="btn-accion" id="btn-next" style="background: var(--verde); display:none;" onclick="subirNivel()">SIGUIENTE NIVEL 🚀</button>
+        <button class="btn-accion" id="btn-retry" style="background: var(--rojo); display:none;" onclick="reintentar()">REINTENTAR 🔄</button>
+    </div>
+</div>
+
+<script>
+    let nivel = 1;
+    let pIndex = 0;
+    let aciertos = 0;
+    let fallos = 0;
+    const MAX_FALLOS = 3;
+
+    const frasesAcierto = [
+        "¡Golazo de Erik por la escuadra! ⚽",
+        "¡Estás en racha, Erik!",
+        "¡Eres un crack espartano!",
+        "¡Nivel Mbappé activado! 🔥"
+    ];
+
+    const frasesFallo = [
+        "¡Eres más malo que el Barcelona en Champions! 😂",
+        "¡Uf Erik, ese tiro se fue a las nubes!",
+        "¡Concentración espartana, Erik! ¡Vamos!",
+        "¡Casi... pero no! ¡Vuelve a intentarlo!"
+    ];
+
+    const niveles = {
+        1: [
+            { p: "Erik, ¿cuántos dedos tenemos en las dos manos juntos?", o: ["5", "8", "10", "12"], c: 2 },
+            { p: "¿De qué color es la hierba del Bernabéu?", o: ["Azul", "Amarilla", "Verde", "Roja"], c: 2 },
+            { p: "¿Cómo se llama el animal que relincha?", o: ["Vaca", "Burro", "Caballo", "Oveja"], c: 2 },
+            { p: "¿Qué sale por el día y nos da calor?", o: ["Luna", "Sol", "Nubes", "Rayos"], c: 1 },
+            { p: "¿Cuánto es 10 + 10?", o: ["15", "20", "25", "100"], c: 1 },
+            { p: "¿Qué animal es el rey de la selva?", o: ["Tigre", "Elefante", "León", "Mono"], c: 2 },
+            { p: "¿Cuál es el planeta donde vivimos?", o: ["Marte", "Tierra", "Luna", "Saturno"], c: 1 },
+            { p: "¿Qué órgano usamos para pensar?", o: ["Corazón", "Estómago", "Cerebro", "Mano"], c: 2 },
+            { p: "¿Cuántas patas tiene una mesa?", o: ["2", "3", "4", "5"], c: 2 },
+            { p: "¿Qué día viene después del lunes?", o: ["Miércoles", "Martes", "Sábado", "Domingo"], c: 1 }
+        ]
+        // Aquí puedes añadir más niveles siguiendo el mismo formato
+    };
+
+    function cargar() {
+        if (fallos > MAX_FALLOS) { finalizar(true); return; }
+        
+        document.getElementById("num-nivel").innerText = nivel;
+        document.getElementById("aciertos").innerText = aciertos;
+        document.getElementById("vidas").innerText = MAX_FALLOS - fallos;
+        document.getElementById("progreso-txt").innerText = pIndex + 1;
+        document.getElementById("barra").style.width = (pIndex * 10) + "%";
+        document.getElementById("feedback").innerText = "";
+        document.getElementById("feedback").classList.remove("shake");
+
+        const q = niveles[nivel][pIndex];
+        document.getElementById("pregunta-txt").innerText = q.p;
+        const box = document.getElementById("opciones-box");
+        box.innerHTML = "";
+        
+        q.o.forEach((opt, i) => {
+            const b = document.createElement("button");
+            b.className = "opcion";
+            b.innerText = opt;
+            b.onclick = () => validar(i, q.c);
+            box.appendChild(b);
+        });
+    }
+
+    function validar(idx, correcta) {
+        const btns = document.querySelectorAll(".opcion");
+        btns.forEach(b => b.disabled = true);
+        const fb = document.getElementById("feedback");
+
+        if (idx === correcta) {
+            btns[idx].classList.add("correcto");
+            aciertos++;
+            fb.innerText = frasesAcierto[Math.floor(Math.random() * frasesAcierto.length)];
+            fb.style.color = "var(--verde)";
+        } else {
+            btns[idx].classList.add("incorrecto");
+            btns[correcta].classList.add("correcto");
+            fallos++;
+            fb.innerText = frasesFallo[Math.floor(Math.random() * frasesFallo.length)];
+            fb.classList.add("shake");
+        }
+
+        setTimeout(() => {
+            pIndex++;
+            if (pIndex < 10 && fallos <= MAX_FALLOS) cargar();
+            else finalizar(fallos > MAX_FALLOS || aciertos < 7);
+        }, 2000);
+    }
+
+    function finalizar(perdio) {
+        document.getElementById("pantalla-juego").style.display = "none";
+        const f = document.getElementById("pantalla-final");
+        f.style.display = "block";
+
+        if (perdio) {
+            document.getElementById("emoji-final").innerText = "😵";
+            document.getElementById("titulo-final").innerText = "¡OH NO, ERIK!";
+            document.getElementById("nota-final").innerText = aciertos + " / 10";
+            document.getElementById("mensaje-final").innerText = "Eres más malo que el Barcelona en Champions... ¡Tienes que entrenar más!";
+            document.getElementById("btn-retry").style.display = "inline-block";
+        } else {
+            document.getElementById("emoji-final").innerText = "🏆";
+            document.getElementById("titulo-final").innerText = "¡ERES UNA MÁQUINA!";
+            document.getElementById("nota-final").innerText = aciertos + " / 10";
+            document.getElementById("mensaje-final").innerText = "¡Erik, eres mejor que Mbappé en el Real Madrid! ¡A por el siguiente nivel!";
+            document.getElementById("btn-next").style.display = "inline-block";
+        }
+    }
+
+    function reintentar() { location.reload(); }
+    function subirNivel() { alert("¡Pronto añadiremos el Nivel 2! Por ahora eres el Rey del Nivel 1."); reintentar(); }
+
+    cargar();
+</script>
 
 </body>
 </html>
