@@ -25,6 +25,7 @@
         #overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); border-radius: 40px; flex-direction: column; align-items: center; justify-content: center; z-index: 30; }
         .btn-next { padding: 1.2rem 3rem; border: none; border-radius: 20px; font-weight: 700; background: var(--primary); color: white; font-size: 1.3rem; cursor: pointer; box-shadow: 0 6px 0 var(--dark); text-transform: uppercase; }
         #trophy-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; display: none; }
+        .trophy { position: absolute; font-size: 3rem; animation: rain linear infinite; }
         @keyframes rain { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
@@ -59,7 +60,7 @@
             { t: 1, s: 'A', p: [{e:'✈️', n:'Avión', ok:true}, {e:'🐱', n:'Gato', ok:false}, {e:'🚗', n:'Coche', ok:false}] },
             { t: 1, s: 'E', p: [{e:'🐘', n:'Elefante', ok:true}, {e:'☀️', n:'Sol', ok:false}, {e:'🏠', n:'Casa', ok:false}] },
             { t: 1, s: 'I', p: [{e:'🏝️', n:'Isla', ok:true}, {e:'🍎', n:'Manzana', ok:false}, {e:'👟', n:'Zapato', ok:false}] },
-            { t: 1, s: 'O', p: [{e:'🐻', n:'Oso', ok:true}, {e:'🎈', n:'Globo', ok:false}, {e:'🚲', n:'Bici', ok:false}] },
+            { t: 1, s: 'O', p: [{e:'🐻', n:'Oso', ok:true}, {e:'🏠', n:'Casa', ok:false}, {e:'🚲', n:'Bici', ok:false}] },
             { t: 1, s: 'U', p: [{e:'🍇', n:'Uva', ok:true}, {e:'🍐', n:'Pera', ok:false}, {e:'🌙', n:'Luna', ok:false}] },
             { t: 1, s: 'M', p: [{e:'🍎', n:'Manzana', ok:true}, {e:'🚜', n:'Tractor', ok:false}, {e:'☁️', n:'Nube', ok:false}] },
             { t: 1, s: 'P', p: [{e:'🦆', n:'Pato', ok:true}, {e:'🦒', n:'Jirafa', ok:false}, {e:'🌻', n:'Flor', ok:false}] },
@@ -74,7 +75,7 @@
             { t: 2, s: 'N', p: [{e:'🍎', n:'Manzana', ok:true}, {e:'☀️', n:'Sol', ok:false}, {e:'🐻', n:'Oso', ok:false}] },
             { t: 2, s: 'T', p: [{e:'🦆', n:'Pato', ok:true}, {e:'☁️', n:'Nube', ok:false}, {e:'🍐', n:'Pera', ok:false}] },
             { t: 2, s: 'I', p: [{e:'🚲', n:'Bici', ok:true}, {e:'🐻', n:'Oso', ok:false}, {e:'🚗', n:'Coche', ok:false}] },
-            { t: 2, s: 'O', p: [{e:'🚜', n:'Tractor', ok:true}, {e:'🍌', n:'Plátano', ok:true}, {e:'🍋', n:'Limón', ok:true}] }, // Todos tienen O, pero buscamos el dibujo
+            { t: 2, s: 'O', p: [{e:'🚜', n:'Tractor', ok:true}, {e:'🍌', n:'Plátano', ok:true}, {e:'🍋', n:'Limón', ok:true}] },
             { t: 2, s: 'A', p: [{e:'🍅', n:'Tomate', ok:true}, {e:'🚆', n:'Tren', ok:false}, {e:'📦', n:'Caja', ok:true}] },
             { t: 2, s: 'M', p: [{e:'🍋', n:'Limón', ok:true}, {e:'☀️', n:'Sol', ok:false}, {e:'🐱', n:'Gato', ok:false}] },
             { t: 2, s: 'E', p: [{e:'📦', n:'Caja', ok:false}, {e:'👟', n:'Zapato', ok:true}, {e:'🎈', n:'Globo', ok:false}] }
@@ -94,7 +95,7 @@
             document.getElementById('feedback').innerText = '';
 
             const titulos = {
-                1: ["NIVEL 1: EL BUSCADOR", "¿Qué dibujo empieza por..."],
+                1: ["NIVEL 1: EL BUSCADOR", "¿Qué dibujo empieza por el sonido..."],
                 2: ["NIVEL 2: EL DETECTIVE", "¿Qué dibujo contiene el sonido..."]
             };
 
@@ -112,8 +113,7 @@
                     if(bloqueado) return;
                     if(item.ok) {
                         bloqueado = true;
-                        confetti({ particleCount: 60, spread: 60, origin: { y: 0.8 } });
-                        document.getElementById('overlay').style.display = 'flex';
+                        lanzarCelebracion();
                     } else {
                         document.getElementById('feedback').innerHTML = '<span style="color: var(--red)">¡Casi! Prueba otra vez. 🧐</span>';
                         card.style.borderColor = 'var(--red)';
@@ -124,8 +124,32 @@
             });
         }
 
+        function lanzarCelebracion() {
+            // Siempre lanzamos una ráfaga pequeña al acertar
+            confetti({ particleCount: 40, spread: 50, origin: { y: 0.8 } });
+
+            // Si es el reto 10 (Nivel 1 completado) o el 20 (Juego finalizado), lanzamos la fiesta grande
+            const esHitoImportante = (indiceReto + 1) === 10 || (indiceReto + 1) === 20;
+
+            if (esHitoImportante) {
+                // Fiesta grande de confeti
+                confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 } });
+                iniciarTrofeos();
+                
+                // Cambiamos el mensaje del overlay para que sea más especial
+                if ((indiceReto + 1) === 10) {
+                    document.getElementById('overlay-msg').innerText = "¡NIVEL 1 SUPERADO!";
+                    document.getElementById('overlay-sub').innerText = "¡Eres un experto buscando sonidos iniciales!";
+                }
+            }
+
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
         function cerrarOverlay() {
             document.getElementById('overlay').style.display = 'none';
+            document.getElementById('trophy-rain').style.display = 'none';
+            
             indiceReto++;
             if(indiceReto < bancoMisiones.length) { 
                 mostrarReto(); 
@@ -136,7 +160,7 @@
                 btn.innerText = "VOLVER AL MENÚ";
                 btn.onclick = () => window.location.href = 'index.html';
                 document.getElementById('overlay').style.display = 'flex';
-                iniciarTrofeos();
+                iniciarTrofeos(); // Trofeos finales permanentes
             }
         }
 
