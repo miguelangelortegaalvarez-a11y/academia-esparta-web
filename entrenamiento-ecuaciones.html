@@ -3,148 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
-    <title>Entrenamiento Numérico - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Futbol Challenge - Academia Esparta</title>
     <style>
-        :root { --verde: #2e7d32; --negro: #333; }
-        body { font-family: 'Open Sans', sans-serif; background: #f0f0f0; margin: 0; padding: 0; }
-
-        /* PAGINACIÓN */
-        .folio {
-            width: 210mm;
-            min-height: 297mm;
-            padding: 20mm;
-            margin: 20px auto;
-            background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            box-sizing: border-box;
-            page-break-after: always;
-        }
-
-        /* MARCA DE AGUA */
-        .watermark {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 6rem;
-            color: rgba(46, 125, 50, 0.05);
-            font-family: 'Montserrat';
-            font-weight: 900;
-            white-space: nowrap;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .header {
-            border-bottom: 3px solid var(--verde);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            position: relative; z-index: 1;
-        }
-        h1 { font-family: 'Montserrat'; margin: 0; font-size: 1.8rem; color: var(--negro); }
-        .datos { font-family: 'Montserrat'; font-size: 0.8rem; color: var(--verde); text-align: right; }
-
-        /* TÍTULOS CON SEPARACIÓN EXTRA */
-        h2 { 
-            font-family: 'Montserrat'; 
-            font-size: 1.2rem; 
-            background: var(--negro); 
-            color: white; 
-            padding: 8px 15px; 
-            border-radius: 4px; 
-            margin-top: 80px; /* AQUÍ LA SEPARACIÓN ENTRE EJERCICIOS */
-        }
+        :root { --verde: #4CAF50; --rojo: #e74c3c; --azul: #2196f3; --negro: #1a1a1a; --oro: #f1c40f; }
+        body { font-family: 'Open Sans', sans-serif; background: #f4f7f6; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
-        /* El primer título de cada página no necesita tanto margen arriba */
-        .primer-titulo { margin-top: 10px !important; }
+        .header { text-align: center; color: var(--negro); margin-bottom: 20px; }
+        .header h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; border-bottom: 4px solid var(--oro); }
 
-        /* CUADRÍCULA DE OPERACIONES */
-        .grid-operaciones {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 50px 20px; /* Más espacio entre filas de operaciones */
-            margin-top: 40px;
-            position: relative; z-index: 1;
-        }
+        .container { max-width: 600px; width: 100%; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        
+        .status-bar { display: flex; justify-content: space-between; align-items: center; background: var(--negro); color: white; padding: 12px; border-radius: 12px; margin-bottom: 20px; font-family: 'Montserrat'; font-size: 0.9rem; }
+        .vidas-count { background: var(--rojo); padding: 5px 10px; border-radius: 8px; font-weight: bold; }
+        
+        .progreso-bg { width: 100%; height: 10px; background: #eee; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+        .progreso-fill { height: 100%; background: var(--oro); width: 0%; transition: 0.4s; }
 
-        .operacion {
-            font-family: 'Courier New', monospace;
-            font-size: 2.2rem;
-            text-align: right;
-            width: 160px;
-            margin: 0 auto;
-            letter-spacing: 12px;
-            line-height: 1.3;
-        }
-        .linea { border-top: 4px solid black; margin-top: 8px; }
-        .signo { float: left; padding-right: 15px; }
+        .pregunta { font-size: 1.3rem; font-weight: 700; color: #333; margin-bottom: 20px; text-align: center; min-height: 60px; }
+        .opciones { display: grid; gap: 10px; }
+        .opcion { padding: 15px; border: 2px solid #ddd; border-radius: 12px; background: white; cursor: pointer; font-size: 1.1rem; transition: 0.2s; font-weight: 600; text-align: center; }
+        .opcion:hover:not(:disabled) { border-color: var(--azul); background: #f0f7ff; }
+        
+        .correcto { background-color: var(--verde) !important; color: white; border-color: #388E3C !important; }
+        .incorrecto { background-color: var(--rojo) !important; color: white; border-color: #b71c1c !important; }
 
-        @media print {
-            body { background: white; }
-            .no-print { display: none; }
-            .folio { margin: 0; box-shadow: none; border: none; }
-        }
-
-        .btn-print {
-            position: fixed; top: 20px; right: 20px;
-            background: var(--verde); color: white; border: none;
-            padding: 15px 25px; border-radius: 50px; font-weight: bold;
-            cursor: pointer; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
+        .feedback { margin-top: 20px; text-align: center; font-weight: 800; font-size: 1.2rem; min-height: 1.5em; font-family: 'Montserrat'; }
+        
+        .final-screen { display: none; text-align: center; padding: 20px; }
+        .btn { margin-top: 25px; padding: 15px 35px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.1rem; color: white; text-transform: uppercase; }
+        
+        .shake { animation: shake 0.5s; }
+        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-10px);} 75% {transform: translateX(10px);} }
     </style>
 </head>
 <body>
 
-<button class="btn-print no-print" onclick="window.print()">🖨️ IMPRIMIR ENTRENAMIENTO</button>
+<div class="header">
+    <h1>FÚTBOL CHALLENGE</h1>
+    <p>Solo para expertos de la Academia Esparta</p>
+</div>
 
-<div class="folio">
-    <div class="watermark">ACADEMIA ESPARTA</div>
-    <header>
-        <div><h1>CÁLCULO NIVEL 1</h1></div>
-        <div class="datos">NOMBRE: ____________________<br>FECHA: ____ / ____ / 2026</div>
-    </header>
-
-    <h2 class="primer-titulo">1. Sumas de 3 cifras (Con llevadas)</h2>
-    <div class="grid-operaciones">
-        <div class="operacion"> 458<br><span class="signo">+</span>367<div class="linea"></div></div>
-        <div class="operacion"> 782<br><span class="signo">+</span>149<div class="linea"></div></div>
-        <div class="operacion"> 563<br><span class="signo">+</span>278<div class="linea"></div></div>
+<div class="container">
+    <div class="status-bar">
+        <div id="tag-nivel" style="background: var(--azul); padding: 5px 10px; border-radius: 8px;">NIVEL 1</div>
+        <div class="vidas-count">🛡️ <span id="vidas">3</span></div>
+        <div>🎯 <span id="num-p">1</span>/10</div>
+    </div>
+    
+    <div class="progreso-bg"><div class="progreso-fill" id="barra"></div></div>
+    
+    <div id="juego">
+        <div class="pregunta" id="txt-pregunta">Cargando...</div>
+        <div class="opciones" id="box-opciones"></div>
+        <div id="feedback" class="feedback"></div>
     </div>
 
-    <h2>2. Restas de 3 cifras (Con llevadas)</h2>
-    <div class="grid-operaciones">
-        <div class="operacion"> 941<br><span class="signo">-</span>356<div class="linea"></div></div>
-        <div class="operacion"> 620<br><span class="signo">-</span>241<div class="linea"></div></div>
-        <div class="operacion"> 513<br><span class="signo">-</span>187<div class="linea"></div></div>
+    <div class="final-screen" id="final">
+        <h2 id="tit-final"></h2>
+        <p id="msg-final" style="font-size: 1.4rem; font-style: italic; margin: 20px 0;"></p>
+        <button class="btn" id="btn-next" style="background: var(--verde); display:none;" onclick="irSiguienteNivel()">SIGUIENTE NIVEL 🚀</button>
+        <button class="btn" id="btn-retry" style="background: var(--rojo); display:none;" onclick="reiniciar()">REINTENTAR 🔄</button>
     </div>
 </div>
 
-<div class="folio">
-    <div class="watermark">ACADEMIA ESPARTA</div>
-    <header>
-        <div><h1>CÁLCULO NIVEL 2</h1></div>
-        <div class="datos">ACADEMIA ESPARTA<br>ENTRENAMIENTO DE ÉLITE</div>
-    </header>
+<script>
+    let nivel = 1;
+    let index = 0;
+    let fallos = 0;
+    let bancoActual = [];
 
-    <h2 class="primer-titulo">3. Multiplicaciones (3 cifras x 1 cifra)</h2>
-    <div class="grid-operaciones">
-        <div class="operacion"> 245<br><span class="signo">x</span>  6<div class="linea"></div></div>
-        <div class="operacion"> 781<br><span class="signo">x</span>  3<div class="linea"></div></div>
-        <div class="operacion"> 509<br><span class="signo">x</span>  7<div class="linea"></div></div>
-        <div class="operacion"> 128<br><span class="signo">x</span>  9<div class="linea"></div></div>
-        <div class="operacion"> 634<br><span class="signo">x</span>  4<div class="linea"></div></div>
-        <div class="operacion"> 812<br><span class="signo">x</span>  5<div class="linea"></div></div>
-    </div>
+    const PREGUNTAS = {
+        1: [ // Madrid, Barça, Valencia, Atleti
+            { p: "¿Quién es el portero titular del Real Madrid (2024)?", o: ["Courtois", "Lunin", "Kepa"], c: 0 },
+            { p: "¿Qué joven estrella del Barça lleva el dorsal 27?", o: ["Gavi", "Lamine Yamal", "Pedri"], c: 1 },
+            { p: "¿Quién es el capitán y delantero del Atlético de Madrid?", o: ["Griezmann", "Koke", "Correa"], c: 1 },
+            { p: "¿Cómo se llama el capitán y lateral del Valencia CF?", o: ["Gayà", "Hugo Duro", "Pepelu"], c: 0 },
+            { p: "¿Quién es el 'pichichi' polaco del FC Barcelona?", o: ["Raphinha", "Lewandowski", "Ferran Torres"], c: 1 },
+            { p: "¿Qué centrocampista del Madrid ganó el Balón de Oro 2018?", o: ["Modric", "Kroos", "Bellingham"], c: 0 },
+            { p: "¿Cómo se llama el portero esloveno del Atleti?", o: ["Oblak", "Ter Stegen", "Mamardashvili"], c: 0 },
+            { p: "¿Qué jugador del Madrid lleva el dorsal 7?", o: ["Vinícius Jr.", "Rodrygo", "Mbappé"], c: 0 },
+            { p: "¿Quién es el canterano del Barça que lleva el 6?", o: ["Pedri", "Gavi", "Fermín"], c: 1 },
+            { p: "¿Qué delantero del Madrid llegó libre del PSG en 2024?", o: ["Endrick", "Mbappé", "Brahim"], c: 1 }
+        ],
+        2: [ // Otros equipos (Medio)
+            { p: "¿En qué equipo juega el goleador Iago Aspas?", o: ["Celta de Vigo", "Betis", "Sevilla"], c: 0 },
+            { p: "¿Quién es el mediapunta estrella del Real Betis?", o: ["Isco", "Fekir", "Fornals"], c: 0 },
+            { p: "¿En qué equipo juega el portero Unai Simón?", o: ["Real Sociedad", "Athletic Club", "Villarreal"], c: 1 },
+            { p: "¿Qué equipo tiene a Gerard Moreno como delantero?", o: ["Villarreal", "Girona", "Mallorca"], c: 0 },
+            { p: "¿Dónde juega actualmente el veterano Jesús Navas?", o: ["Sevilla FC", "Cádiz", "Las Palmas"], c: 0 },
+            { p: "¿En qué equipo destaca Takefusa Kubo?", o: ["Real Sociedad", "Girona", "Getafe"], c: 0 },
+            { p: "¿Quién es el capitán del Athletic Club que lleva el 10?", o: ["Nico Williams", "Muniain", "Iñaki Williams"], c: 1 },
+            { p: "¿Qué delantero juega en el Girona y marcó muchos goles en 2024?", o: ["Dovbyk", "Stuani", "Savinho"], c: 1 },
+            { p: "¿En qué equipo juega Mikel Oyarzabal?", o: ["Athletic", "Real Sociedad", "Osasuna"], c: 1 },
+            { p: "¿Dónde juega el centrocampista Aleix García?", o: ["Girona", "Villarreal", "Alavés"], c: 0 }
+        ],
+        3: [ // Equipos difíciles / Jugadores específicos
+            { p: "¿Quién es el delantero referencia del CA Osasuna?", o: ["Budimir", "Chimy Ávila", "Raúl García"], c: 0 },
+            { p: "¿En qué equipo juega el habilidoso Kirian Rodríguez?", o: ["Rayo Vallecano", "Las Palmas", "Tenerife"], c: 1 },
+            { p: "¿Quién es el portero del Rayo Vallecano?", o: ["Batalla", "Dimitrievski", "Cárdenas"], c: 1 },
+            { p: "¿Qué delantero es la estrella del Getafe?", o: ["Mayoral", "Greenwood", "Enes Ünal"], c: 1 },
+            { p: "¿En qué equipo juega el defensa central Raíllo?", o: ["Mallorca", "Alavés", "Granada"], c: 0 },
+            { p: "¿Quién es el '10' de la UD Las Palmas?", o: ["Moleiro", "Munir", "Sandro"], c: 0 },
+            { p: "¿En qué equipo juega el centrocampista Luis Milla?", o: ["Getafe", "Granada", "Leganés"], c: 0 },
+            { p: "¿Quién es el delantero del Deportivo Alavés?", o: ["Kike García", "Samu Omorodion", "Guridi"], c: 1 },
+            { p: "¿Qué jugador lleva el timón del Mallorca en el medio?", o: ["Dani Rodríguez", "Darder", "Samú Costa"], c: 1 },
+            { p: "¿Quién es el portero del Valladolid (2024/25)?", o: ["Karl Hein", "Masip", "André Ferreira"], c: 0 }
+        ]
+    };
 
-    <footer style="margin-top: 100px; text-align: center; font-size: 0.8rem; color: #777;">
-        "Ninguna retirada, ninguna rendición". Academia Esparta 2026.
-    </footer>
-</div>
+    function iniciar() {
+        index = 0; fallos = 0;
+        bancoActual = PREGUNTAS[nivel];
+        document.getElementById("tag-nivel").innerText = "NIVEL " + nivel;
+        document.getElementById("juego").style.display = "block";
+        document.getElementById("final").style.display = "none";
+        cargar();
+    }
+
+    function cargar() {
+        document.getElementById("vidas").innerText = 3 - fallos;
+        document.getElementById("num-p").innerText = index + 1;
+        document.getElementById("barra").style.width = (index * 10) + "%";
+        document.getElementById("feedback").innerText = "";
+
+        const q = bancoActual[index];
+        document.getElementById("txt-pregunta").innerText = q.p;
+        const box = document.getElementById("box-opciones");
+        box.innerHTML = "";
+        
+        q.o.forEach((txt, i) => {
+            const b = document.createElement("button");
+            b.className = "opcion";
+            b.innerText = txt;
+            b.onclick = () => validar(i === q.c, b);
+            box.appendChild(b);
+        });
+    }
+
+    function validar(esC, btn) {
+        document.querySelectorAll(".opcion").forEach(b => b.disabled = true);
+        const fb = document.getElementById("feedback");
+
+        if (esC) {
+            btn.classList.add("correcto");
+            fb.innerText = "¡GOLAZO! ⚽";
+            fb.style.color = "var(--verde)";
+        } else {
+            btn.classList.add("incorrecto");
+            fallos++;
+            fb.innerText = "¡ERES PEOR QUE EL BARÇA EN CHAMPIONS! 😂";
+            fb.style.color = "var(--rojo)";
+            document.querySelector(".container").classList.add("shake");
+            setTimeout(() => document.querySelector(".container").classList.remove("shake"), 500);
+        }
+
+        setTimeout(() => {
+            index++;
+            if (fallos >= 3) finalizar(true);
+            else if (index >= 10) finalizar(false);
+            else cargar();
+        }, 1500);
+    }
+
+    function finalizar(derrota) {
+        document.getElementById("juego").style.display = "none";
+        document.getElementById("final").style.display = "block";
+        const tit = document.getElementById("tit-final");
+        const msg = document.getElementById("msg-final");
+
+        if (derrota) {
+            tit.innerText = "¡ELIMINADO! ❌";
+            msg.innerText = "Has fallado 3 veces. Eres peor que el Barça en Champions. ¡Entrena más!";
+            document.getElementById("btn-retry").style.display = "inline-block";
+            document.getElementById("btn-next").style.display = "none";
+        } else {
+            tit.innerText = "¡NIVEL SUPERADO! 🏆";
+            msg.innerText = "¡Increíble, Erik! Eres mejor que Mbappé.";
+            if (nivel < 3) {
+                document.getElementById("btn-next").style.display = "inline-block";
+                document.getElementById("btn-retry").style.display = "none";
+            } else {
+                tit.innerText = "¡CAMPEÓN DE LIGA! 👑";
+                msg.innerText = "Erik, has completado todos los niveles. ¡Eres el Balón de Oro de la Academia Esparta!";
+                document.getElementById("btn-next").style.display = "none";
+            }
+        }
+    }
+
+    function irSiguienteNivel() { nivel++; iniciar(); }
+    function reiniciar() { nivel = 1; iniciar(); }
+
+    iniciar();
+</script>
 
 </body>
 </html>
