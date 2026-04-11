@@ -10,20 +10,21 @@
         :root { 
             --primary: #0e9343; /* Verde Academia Esparta */
             --dark: #063c24; 
-            --a-color-text: #ef5350; /* Rojo solo para el emoji de la A */
+            /* --- CORRECCIÓN AQUÍ: Instrucciones en Verde --- */
+            --a-color-text: var(--primary); /* Antes era Rojo, ahora es Verde */
             --light-green: #e8f5e9;
             --bg: #f0f2f5;
         }
         
         body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; }
         
-        /* --- HEADER CORREGIDO: TODO EN VERDE --- */
+        /* Header en Verde */
         header { 
             background: white; 
             width: 100%; 
             padding: 1rem; 
             text-align: center; 
-            border-bottom: 4px solid var(--primary); /* Borde verde */
+            border-bottom: 4px solid var(--primary); 
             position: relative; 
             z-index: 10; 
             box-sizing: border-box; 
@@ -33,27 +34,27 @@
             left: 20px; 
             top: 25px; 
             text-decoration: none; 
-            color: var(--primary); /* Texto volver verde */
+            color: var(--primary); 
             font-weight: bold; 
         }
         .header-title {
             font-weight: 700; 
             font-size: 1.5rem; 
-            color: var(--primary); /* Título principal verde */
+            color: var(--primary); 
         }
 
-        /* --- CONTENEDOR DE PÁGINAS AJUSTADO (MÁS PEQUEÑO) --- */
+        /* Contenedor de Páginas Ajustado */
         .book-slider { width: 100%; flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative; }
         
         .page { 
             display: none; 
-            width: 85%; /* Reducido de 90% */
-            max-width: 700px; /* Reducido de 850px */
-            height: 60vh; /* Reducido de 70vh */
+            width: 85%; 
+            max-width: 700px; 
+            height: 60vh; 
             background: white; 
-            border-radius: 30px; /* Un poco más curvo para el nuevo tamaño */
+            border-radius: 30px; 
             padding: 2rem; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Sombra más suave */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
             border: 2px solid #eee;
             flex-direction: column; 
             align-items: center; 
@@ -63,17 +64,17 @@
         .page.active { display: flex; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Títulos temáticos de la A (pueden ser rojos o verdes, he puesto el rojo sutil del emoji) */
+        
+        /* Títulos de instrucción (ahora verdes por la variable CSS) */
         h2 { color: var(--a-color-text); font-size: 2.2rem; margin-bottom: 2rem; text-align: center; }
 
         /* Letras */
         .letra-tap { 
-            font-size: 5.5rem; /* Ajustado al nuevo tamaño de página */
+            font-size: 5.5rem; 
             cursor: pointer; 
             padding: 10px 25px; 
             border-radius: 50%; 
-            margin: 10px; /* Reducido margen */
+            margin: 10px; 
             border: 4px solid transparent; 
             transition: 0.2s; 
             display: inline-block;
@@ -87,19 +88,19 @@
             color: var(--primary); 
         }
 
-        /* Botones de Navegación Verdes (Formato original) */
+        /* Botones de Navegación Verdes */
         .nav-btn { 
             position: absolute; 
-            bottom: 30px; /* Ajustado */
+            bottom: 30px; 
             background: var(--primary); 
             color: white; 
             border: none; 
-            padding: 12px 35px; /* Ajustado */
+            padding: 12px 35px; 
             border-radius: 50px; 
-            font-size: 1.4rem; /* Ajustado */
+            font-size: 1.4rem; 
             font-weight: bold; 
             cursor: pointer; 
-            box-shadow: 0 5px 0 var(--dark); /* Ajustado */
+            box-shadow: 0 5px 0 var(--dark); 
             z-index: 20;
             text-transform: uppercase;
         }
@@ -107,11 +108,18 @@
         .prev { left: 40px; background: #999; box-shadow: 0 5px 0 #666; }
         .next { right: 40px; }
 
-        /* Estilos para el resto de páginas (se mantienen de la versión anterior) */
+        /* Estilos restantes (dibujos, lectura) */
         .dibujo-tap { font-size: 7rem; cursor: pointer; filter: grayscale(100%); transition: 0.4s; padding: 15px; }
         .dibujo-tap.active { filter: grayscale(0%); transform: scale(1.1); }
         .lectura-grande { font-size: 6rem; letter-spacing: 20px; color: #333; background: #fafafa; padding: 30px 60px; border-radius: 25px; border: 3px dashed #ccc; text-transform: lowercase; }
         .btn-cambiar { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 0 var(--dark); font-family: 'Fredoka'; }
+
+        /* Animación de error (vibración) */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
     </style>
 </head>
 <body>
@@ -190,7 +198,7 @@
                 el.classList.add('selected-correct');
                 confetti({ particleCount: 30, spread: 60, origin: { y: 0.7 }, colors: ['#0e9343'] });
             } else {
-                // Pequeña vibración sin color rojo
+                // Vibración sin color rojo
                 el.style.animation = 'shake 0.3s';
                 setTimeout(() => el.style.animation = '', 300);
             }
