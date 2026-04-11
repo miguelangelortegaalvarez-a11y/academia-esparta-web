@@ -8,31 +8,22 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --accent: #fbc02d; }
-        body { font-family: 'Poppins', sans-serif; background: #e8f5e9; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; position: relative; }
-        
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; position: relative; }
         .game-header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); position: relative; z-index: 5; }
         .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--primary); font-weight: bold; }
-        
         .stats-bar { display: flex; justify-content: space-around; width: 100%; max-width: 800px; margin-top: 10px; font-weight: bold; color: var(--dark); z-index: 5; }
-        
         .game-container { max-width: 800px; width: 90%; background: white; margin-top: 1.5rem; padding: 2rem; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; z-index: 5; }
-        
         .frase-box { background: var(--light); padding: 2rem; border-radius: 20px; border: 3px solid var(--primary); margin-bottom: 2rem; font-size: 1.8rem; font-weight: 700; color: var(--dark); min-height: 80px; display: flex; align-items: center; justify-content: center; }
-        
         .espacio-ladrillos { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; min-height: 60px; margin: 2rem 0; border-bottom: 4px dashed #ccc; padding-bottom: 15px; }
         .ladrillo { width: 70px; height: 35px; background: var(--primary); border-radius: 8px; border-bottom: 5px solid #063c24; animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-
         .controles { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-width: 500px; margin: 0 auto; }
         .btn { padding: 1.2rem; border: none; border-radius: 15px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 1.1rem; text-transform: uppercase; }
         .btn-ladrillo { background: var(--accent); color: #333; box-shadow: 0 5px 0 #c49000; grid-column: span 2; font-size: 1.3rem; }
         .btn-check { background: var(--primary); color: white; box-shadow: 0 5px 0 #063c24; }
         .btn-reset { background: #ef5350; color: white; box-shadow: 0 5px 0 #b71c1c; }
         .btn:active { transform: translateY(4px); box-shadow: none; }
-        
         #overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); border-radius: 30px; flex-direction: column; align-items: center; justify-content: center; z-index: 20; }
-        
         @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-        
         #trophy-rain-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 15; display: none; }
         .trophy { position: absolute; font-size: 3rem; animation: rain linear infinite; opacity: 0; }
         @keyframes rain { 0% { transform: translateY(-100px) rotate(0deg); opacity: 1; } 100% { transform: translateY(105vh) rotate(360deg); opacity: 0.5; } }
@@ -44,7 +35,7 @@
 
     <div class="game-header">
         <a href="index.html" class="back-link">← Salir</a>
-        <h2 style="color: var(--primary); margin: 0;">Laboratorio Lexical Pro</h2>
+        <h2 style="color: var(--primary); margin: 0;">Laboratorio Lexical</h2>
     </div>
 
     <div class="stats-bar">
@@ -60,7 +51,7 @@
             <a href="index.html" class="btn btn-check" id="btn-final" style="display:none; text-decoration:none;">VOLVER AL MENÚ</a>
         </div>
 
-        <p style="color: #666;">Cuenta las palabras de esta frase:</p>
+        <p style="color: #666; font-weight: bold;">Cuenta las palabras de esta frase:</p>
         <div id="display-frase" class="frase-box">Cargando...</div>
         <div id="contenedor-ladrillos" class="espacio-ladrillos"></div>
 
@@ -74,14 +65,16 @@
 
     <script>
         const bolsaDeFrases = [
-            "El sol brilla", "Mi mamá cocina", "La mesa verde", "Papá lee mucho", "Veo el mar",
-            "El gato bebe leche", "Mi casa es grande", "Tengo un juguete nuevo", "El perro corre rápido", "Hoy es mi cumple",
-            "El elefante tiene orejas grandes", "Me gusta jugar en el jardín", "Las flores son muy bonitas", "Mi hermano estudia mucho hoy", "El coche rojo corre veloz",
-            "El astronauta viaja en un cohete", "Me lavo los dientes por la mañana", "El panadero hace pan muy rico", "Tengo ganas de jugar con amigos", "La lluvia cae sobre el suelo",
-            "El pájaro canta una canción muy dulce", "Mi familia va a comer una pizza", "El ratón come un trozo de queso", "El bombero apaga el fuego con agua", "La maestra enseña letras a los niños",
-            "Tengo un perro que salta muy alto", "Mañana iremos a la playa con mamá", "El helado de fresa está muy rico", "Veo una estrella en el cielo azul", "El conejo salta por el campo verde",
-            "Mi mochila tiene muchos lápices de colores", "El barco navega por el océano muy lejos", "Me gusta mucho comer frutas y verduras", "El león es el rey de la selva", "La luna brilla en la noche oscura",
-            "Aprendo a leer palabras nuevas cada día", "El tractor trabaja en el campo del pueblo", "Mi mejor amigo se llama Pedro Luis", "La mariposa vuela entre las flores rosas", "El oso duerme en su cueva fría"
+            // 2 y 3 palabras
+            "El sol brilla", "Mi mamá cocina", "La mesa verde", "Papá lee mucho", "Veo el mar", "El gato salta", "Mi casa blanca", "El perro corre", "La sopa quema", "Juan come pan",
+            // 4 palabras
+            "El gato bebe leche", "Mi casa es grande", "Hoy es mi cumple", "El perro corre mucho", "El coche es azul", "La niña tiene hambre", "El sol es amarillo", "Mi hermano juega solo",
+            // 5 palabras
+            "Me gusta comer chocolate rico", "El pájaro vuela muy alto", "Hoy hace un día soleado", "Mi abuelo me cuenta cuentos", "Las flores huelen muy bien", "El coche rojo corre veloz",
+            // 6 palabras
+            "El elefante es un animal grande", "Tengo muchas ganas de ir allí", "El profesor explica la lección hoy", "Me lavo las manos con jabón", "Los niños juegan en el patio",
+            // 7 palabras
+            "El astronauta viaja en una nave espacial", "Me encanta leer libros de aventuras divertidas", "Mi familia cocina una cena muy rica", "El pequeño ratón come un queso grande", "Aprendo a leer palabras nuevas cada día", "Me gusta mucho comer frutas y verduras"
         ];
 
         let frasesNivelActual = [];
@@ -91,33 +84,29 @@
 
         function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
 
-        function filtrarFrasesPorNivel(nivel) {
+        function prepararNivel() {
             let min, max;
-            switch(nivel) {
-                case 1: min = 2; max = 3; break;
-                case 2: min = 3; max = 4; break;
-                case 3: min = 4; max = 5; break;
-                case 4: min = 5; max = 6; break;
-                case 5: min = 6; max = 7; break;
-                default: min = 2; max = 7;
-            }
-            // Filtramos la bolsa completa buscando frases que encajen en el rango de palabras
-            return bolsaDeFrases.filter(f => {
-                const numPalabras = f.split(" ").length;
-                return numPalabras >= min && numPalabras <= max;
+            // Definimos el rango exacto de palabras según tu nueva progresión
+            if (nivelActual === 1) { min = 2; max = 3; }
+            else if (nivelActual === 2) { min = 3; max = 4; }
+            else if (nivelActual === 3) { min = 4; max = 5; }
+            else if (nivelActual === 4) { min = 5; max = 6; }
+            else { min = 6; max = 10; } // Nivel 5: Frases largas
+
+            // Filtramos la bolsa de frases para que SOLO entren las que cumplen el rango
+            const frasesFiltradas = bolsaDeFrases.filter(f => {
+                const cuenta = f.split(" ").length;
+                return cuenta >= min && cuenta <= max;
             });
+
+            // Mezclamos y elegimos las 5 del nivel
+            frasesNivelActual = shuffle([...frasesFiltradas]).slice(0, 5);
+            fraseActual = 0;
         }
 
         function iniciarJuego() {
             prepararNivel();
             cargarFrase();
-        }
-
-        function prepararNivel() {
-            const frasesPosibles = filtrarFrasesPorNivel(nivelActual);
-            // Mezclamos y cogemos 5 frases para este nivel
-            frasesNivelActual = shuffle([...frasesPosibles]).slice(0, 5);
-            fraseActual = 0;
         }
 
         function cargarFrase() {
@@ -144,19 +133,14 @@
 
         function sonidoAplausos() {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const duration = 1.5;
-            const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * duration, audioCtx.sampleRate);
+            const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 1.5, audioCtx.sampleRate);
             const data = buffer.getChannelData(0);
-            for (let i = 0; i < audioCtx.sampleRate * duration; i++) {
-                data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.5));
-            }
+            for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.5));
             const noise = audioCtx.createBufferSource();
             noise.buffer = buffer;
             const filter = audioCtx.createBiquadFilter();
-            filter.type = 'lowpass';
-            filter.frequency.value = 1000;
-            noise.connect(filter);
-            filter.connect(audioCtx.destination);
+            filter.type = 'lowpass'; filter.frequency.value = 1000;
+            noise.connect(filter); filter.connect(audioCtx.destination);
             noise.start();
         }
 
@@ -186,7 +170,6 @@
         function mostrarOverlay() {
             const overlay = document.getElementById('overlay');
             overlay.style.display = 'flex';
-            
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             iniciarLluviaTrofeos();
 
@@ -204,11 +187,9 @@
             container.style.display = 'block';
             for (let i = 0; i < 20; i++) {
                 const t = document.createElement('div');
-                t.className = 'trophy';
-                t.innerText = '🏆';
+                t.className = 'trophy'; t.innerText = '🏆';
                 t.style.left = Math.random() * 100 + 'vw';
                 t.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                t.style.animationDelay = (Math.random() * 2) + 's';
                 container.appendChild(t);
             }
             setTimeout(() => { container.style.display = 'none'; }, 5000);
