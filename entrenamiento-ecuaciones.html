@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Método de Sustitución - Academia Esparta</title>
+    <title>Resolución de Problemas - Academia Esparta</title>
     
     <script>
         window.MathJax = {
@@ -19,203 +19,187 @@
 
     <style>
         :root { --esparta-green: #2e7d32; --oro: #fbc02d; --rojo: #d32f2f; --crema: #fffde7; }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Lora', serif; background-color: #555; color: #212529; }
+        body { font-family: 'Lora', serif; background-color: #555; color: #212529; line-height: 1.6; }
         
         .page { 
             width: 210mm; 
-            height: 296mm; 
+            min-height: 296mm; 
             margin: 20px auto; 
             background: white; 
-            padding: 25mm 25mm; 
+            padding: 20mm 20mm; 
             position: relative;
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            break-after: page;
+            page-break-after: always;
         }
 
         @media print {
             body { background: white; }
             .no-print { display: none !important; }
             @page { margin: 0; size: A4; }
-            .page { 
-                margin: 0 !important; 
-                box-shadow: none !important;
-                page-break-after: always !important;
-            }
+            .page { margin: 0 !important; box-shadow: none !important; page-break-after: always !important; }
         }
 
-        .btn-pdf { 
-            position: fixed; top: 20px; left: 20px; 
-            background: var(--rojo); color: white; border: none; 
-            padding: 15px 25px; border-radius: 8px; cursor: pointer; 
-            font-family: 'Montserrat'; font-weight: bold; z-index: 1000;
-        }
+        .btn-pdf { position: fixed; top: 20px; left: 20px; background: var(--rojo); color: white; border: none; padding: 15px 25px; border-radius: 8px; cursor: pointer; font-family: 'Montserrat'; font-weight: bold; z-index: 1000; }
 
         header { border-bottom: 4px solid var(--esparta-green); margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; }
         h1 { font-family: 'Montserrat'; font-size: 1.4rem; margin: 0; text-transform: uppercase; }
         .header-brand { text-align: right; font-family: 'Montserrat'; font-weight: 800; font-size: 0.75rem; color: var(--esparta-green); }
 
-        .starting-system {
-            background: var(--esparta-green);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-family: 'Montserrat';
-            font-size: 1rem;
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .theory-box { background: var(--crema); border: 1px solid #ffe082; border-left: 8px solid var(--oro); padding: 30px; border-radius: 8px; line-height: 1.6; flex-grow: 1; }
-        .step-label { font-weight: 800; color: var(--esparta-green); font-family: 'Open Sans'; font-size: 0.95rem; display: block; margin-top: 25px; text-transform: uppercase; border-bottom: 2px solid #eee; padding-bottom: 5px; }
-        .explanation-text { font-size: 1.05rem; color: #333; margin: 10px 0; }
+        .problem-box { background: #f1f8e9; border-left: 5px solid var(--esparta-green); padding: 20px; margin-bottom: 20px; font-style: italic; font-size: 0.95rem; }
+        .solution-box { background: var(--crema); border: 1px solid #ffe082; border-left: 8px solid var(--oro); padding: 25px; border-radius: 8px; margin-bottom: 20px; }
         
-        .note { background: #e8f5e9; border: 1px solid #c8e6c9; padding: 15px; border-radius: 5px; margin-top: 20px; font-size: 0.95rem; font-style: italic; }
-
-        .combat-zone { border: 3px solid var(--esparta-green); border-radius: 12px; flex-grow: 1; margin-top: 20px; display: flex; flex-direction: column; overflow: hidden; }
-        .combat-header { background: var(--esparta-green); color: white; padding: 15px 20px; font-family: 'Montserrat'; font-size: 1.1rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-        .grid-area { flex-grow: 1; background-image: linear-gradient(rgba(46, 125, 50, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(46, 125, 50, 0.08) 1px, transparent 1px); background-size: 30px 30px; }
-
-        footer { text-align: center; font-family: 'Montserrat'; font-weight: 800; font-size: 0.9rem; color: #999; border-top: 1px solid #eee; padding-top: 15px; margin-top: 20px; text-transform: uppercase; }
+        .step-label { font-weight: 800; color: var(--esparta-green); font-family: 'Open Sans'; font-size: 0.9rem; display: block; margin-top: 20px; text-transform: uppercase; border-bottom: 1px solid #eee; }
+        .math-block { margin: 15px 0; font-size: 1.05rem; }
+        
+        footer { text-align: center; font-family: 'Montserrat'; font-weight: 800; font-size: 0.8rem; color: #999; border-top: 1px solid #eee; padding-top: 10px; margin-top: auto; }
     </style>
 </head>
 <body>
 
-<button class="btn-pdf no-print" onclick="window.print()">📄 GENERAR PDF SUSTITUCIÓN</button>
+<button class="btn-pdf no-print" onclick="window.print()">📄 GENERAR PDF PROBLEMAS</button>
 
 <div class="page">
     <header>
-        <div><h1>Método de Sustitución</h1></div>
+        <div><h1>Resolución de Problemas (18-19)</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
 
-    <div class="starting-system">
-        <span>SISTEMA DE PARTIDA A4:</span>
-        <span>$$\begin{cases} \mathbf{x} + 2y = 8 \\ 3x - y = 3 \end{cases}$$</span>
+    <div class="problem-box">
+        <strong>18.</strong> Una cooperativa de Jaén ha envasado 2000 L de aceite en botellas de 1,5 L y de 2 L. Sabemos que han utilizado 1100 botellas en total. ¿Cuántas se han necesitado de cada clase?
+    </div>
+    <div class="solution-box">
+        <span class="step-label">1. Planteamiento</span>
+        $x$: botellas de 1,5 L | $y$: botellas de 2 L.
+        $$\begin{cases} x + y = 1100 \quad \text{(Total botellas)} \\ 1,5x + 2y = 2000 \quad \text{(Total litros)} \end{cases}$$
+        <span class="step-label">2. Resolución (Sustitución)</span>
+        Despejamos $y = 1100 - x$. Sustituimos: $1,5x + 2(1100 - x) = 2000$.
+        $$1,5x + 2200 - 2x = 2000 \Rightarrow -0,5x = -200 \Rightarrow \mathbf{x = 400}$$
+        $y = 1100 - 400 \Rightarrow \mathbf{y = 700}$.
+        <strong>Solución:</strong> 400 botellas de 1,5 L y 700 de 2 L.
     </div>
 
-    <div class="theory-box">
-        <p>A continuación, desglosamos la estrategia paso a paso para resolver este sistema utilizando el aislamiento de una variable:</p>
-        
-        <span class="step-label">1. El Despeje Estratégico</span>
-        <p class="explanation-text">Buscamos la incógnita sin coeficiente. En la primera ecuación, la $x$ está sola. La aislamos pasando el $+2y$ al otro lado restando:</p>
-        $$x = 8 - 2y$$
-
-        <span class="step-label">2. La Sustitución</span>
-        <p class="explanation-text">Tomamos la <b>segunda</b> ecuación y reemplazamos la $x$ por nuestra expresión entre paréntesis:</p>
-        $$3 \cdot (8 - 2y) - y = 3$$
-
-        <span class="step-label">3. Resolución Algebraica</span>
-        <p class="explanation-text">Multiplicamos el 3 por el bloque y agrupamos términos semejantes:</p>
-        $$24 - 6y - y = 3 \Rightarrow 24 - 7y = 3 \Rightarrow \mathbf{y = 3}$$
-
-        <span class="step-label">4. Hallar la Pareja</span>
-        <p class="explanation-text">Llevamos el valor de $y$ al despeje inicial: $x = 8 - 2(3) \Rightarrow \mathbf{x = 2}$.</p>
+    <div class="problem-box">
+        <strong>19.</strong> Una persona compra una bicicleta y un ordenador por 2500 €. Los vende por 2157,50 €. Con la bicicleta perdió el 10% y con el ordenador el 15%. ¿Cuánto le costó cada objeto?
+    </div>
+    <div class="solution-box">
+        <span class="step-label">1. Planteamiento</span>
+        $x$: precio bici | $y$: precio ordenador.
+        $$\begin{cases} x + y = 2500 \\ 0,90x + 0,85y = 2157,50 \end{cases}$$
+        <span class="step-label">2. Resolución</span>
+        $x = 2500 - y$. Sustituimos: $0,90(2500 - y) + 0,85y = 2157,50$.
+        $$2250 - 0,90y + 0,85y = 2157,50 \Rightarrow -0,05y = -92,5 \Rightarrow \mathbf{y = 1850}$$
+        $x = 2500 - 1850 \Rightarrow \mathbf{x = 650}$.
+        <strong>Solución:</strong> Bici 650 € y Ordenador 1850 €.
     </div>
     <footer>Academia Esparta</footer>
 </div>
 
 <div class="page">
     <header>
-        <div><h1>Método de Sustitución</h1></div>
+        <div><h1>Resolución de Problemas (20-21)</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
-    <div class="combat-zone">
-        <div class="combat-header"><span>ZONA DE COMBATE 1:</span><span>$\begin{cases} 2x + y = 7 \\ x - 3y = -7 \end{cases}$</span></div>
-        <div class="grid-area"></div>
+
+    <div class="problem-box">
+        <strong>20.</strong> Presupuesto de 100 €. 3 libros y 4 discos sobran 5 €. Si compra 4 libros y 4 discos faltan 10 €. Halla el precio de cada uno.
+    </div>
+    <div class="solution-box">
+        <span class="step-label">1. Planteamiento</span>
+        $x$: precio libro | $y$: precio disco.
+        $$\begin{cases} 3x + 4y = 95 \quad (100-5) \\ 4x + 4y = 110 \quad (100+10) \end{cases}$$
+        <span class="step-label">2. Resolución (Reducción)</span>
+        Restamos la segunda menos la primera: $(4x - 3x) + (4y - 4y) = 110 - 95$.
+        $$\mathbf{x = 15}$$
+        $3(15) + 4y = 95 \Rightarrow 45 + 4y = 95 \Rightarrow 4y = 50 \Rightarrow \mathbf{y = 12,50}$.
+        <strong>Solución:</strong> Libro 15 € y Disco 12,50 €.
+    </div>
+
+    <div class="problem-box">
+        <strong>21.</strong> 1200 estudiantes. 333 participan. 30% de las chicas y 25% de los chicos participan. ¿Cuántos hay de cada?
+    </div>
+    <div class="solution-box">
+        <span class="step-label">1. Planteamiento</span>
+        $x$: chicas | $y$: chicos.
+        $$\begin{cases} x + y = 1200 \\ 0,30x + 0,25y = 333 \end{cases}$$
+        <span class="step-label">2. Resolución</span>
+        $y = 1200 - x$. Sustituimos: $0,30x + 0,25(1200 - x) = 333$.
+        $$0,30x + 300 - 0,25x = 333 \Rightarrow 0,05x = 33 \Rightarrow \mathbf{x = 660}$$
+        $y = 1200 - 660 \Rightarrow \mathbf{y = 540}$.
+        <strong>Solución:</strong> 660 chicas y 540 chicos.
     </div>
     <footer>Academia Esparta</footer>
 </div>
 
 <div class="page">
     <header>
-        <div><h1>Método de Sustitución</h1></div>
+        <div><h1>Resolución de Problemas (22-23)</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
 
-    <div class="starting-system">
-        <span>SISTEMA DE PARTIDA A4:</span>
-        <span>$$\begin{cases} 2x + 3y = 12 \\ 3x + 2y = 13 \end{cases}$$</span>
+    <div class="problem-box">
+        <strong>22.</strong> Caja grande tiene 30 bombones más que la pequeña. Con 3 pequeñas llenamos la mitad de una grande. ¿Cuántos bombones tienen?
+    </div>
+    <div class="solution-box">
+        <span class="step-label">1. Planteamiento</span>
+        $x$: bombones caja grande | $y$: bombones caja pequeña.
+        $$\begin{cases} x = y + 30 \\ 3y = \frac{x}{2} \Rightarrow 6y = x \end{cases}$$
+        <span class="step-label">2. Resolución (Igualación)</span>
+        $y + 30 = 6y \Rightarrow 30 = 5y \Rightarrow \mathbf{y = 6}$.
+        $x = 6(6) \Rightarrow \mathbf{x = 36}$.
+        <strong>Solución:</strong> Grande 36 y Pequeña 6.
     </div>
 
-    <div class="theory-box">
-        <p>A continuación, desglosamos la estrategia para gestionar sistemas donde aparecen fracciones en el despeje:</p>
-        
-        <span class="step-label">1. Despeje Fraccionario</span>
-        <p class="explanation-text">Aislamos la $x$ en la primera ecuación. El $2$ que multiplica pasa dividiendo a todo el bloque derecho:</p>
-        $$x = \frac{12 - 3y}{2}$$
-
-        <span class="step-label">2. Sustitución en Bloque</span>
-        <p class="explanation-text">Inyectamos la fracción en la segunda ecuación:</p>
-        $$3 \cdot \left( \frac{12 - 3y}{2} \right) + 2y = 13$$
-
-        <span class="step-label">3. Eliminación del Denominador</span>
-        <p class="explanation-text">Multiplicamos toda la fila por 2 para trabajar con números enteros:</p>
-        $$3 \cdot (12 - 3y) + 4y = 26 \Rightarrow 36 - 9y + 4y = 26 \Rightarrow \mathbf{y = 2}$$
-
-        <span class="step-label">4. Resultado Final</span>
-        <p class="explanation-text">Calculamos $x$ usando la fracción: $x = \frac{12 - 3(2)}{2} = \frac{6}{2} \Rightarrow \mathbf{x = 3}$.</p>
+    <div class="problem-box">
+        <strong>23.</strong> Beneficio 0,30 € por bombilla buena y pérdida 0,40 € por defectuosa. 2100 bombillas total, beneficio 484,40 €. ¿Cuántas de cada?
+    </div>
+    <div class="solution-box">
+        <span class="step-label">1. Planteamiento</span>
+        $x$: válidas | $y$: defectuosas.
+        $$\begin{cases} x + y = 2100 \\ 0,30x - 0,40y = 484,40 \end{cases}$$
+        <span class="step-label">2. Resolución</span>
+        $x = 2100 - y \Rightarrow 0,30(2100 - y) - 0,40y = 484,40$.
+        $$630 - 0,30y - 0,40y = 484,40 \Rightarrow -0,7y = -145,6 \Rightarrow \mathbf{y = 208}$$
+        $x = 2100 - 208 \Rightarrow \mathbf{x = 1892}$.
+        <strong>Solución:</strong> 1892 válidas y 208 defectuosas.
     </div>
     <footer>Academia Esparta</footer>
 </div>
 
 <div class="page">
     <header>
-        <div><h1>Método de Sustitución</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
-    </header>
-    <div class="combat-zone">
-        <div class="combat-header"><span>ZONA DE COMBATE 2:</span><span>$\begin{cases} 5x + 2y = 1 \\ 2x + 3y = 7 \end{cases}$</span></div>
-        <div class="grid-area"></div>
-    </div>
-    <footer>Academia Esparta</footer>
-</div>
-
-<div class="page">
-    <header>
-        <div><h1>Método de Sustitución</h1></div>
+        <div><h1>Resolución de Problemas (24-25)</h1></div>
         <div class="header-brand">ACADEMIA ESPARTA</div>
     </header>
 
-    <div class="starting-system">
-        <span>SISTEMA DE PARTIDA A4:</span>
-        <span>$$\begin{cases} x = 2y - 1 \\ 2(x + 1) - 3y = 5 \end{cases}$$</span>
+    <div class="problem-box">
+        <strong>24.</strong> Pantalón y zapatos 126 €. Si el pantalón sube un 14%, costaría el 75% de los zapatos. ¿Cuánto costó cada uno?
+    </div>
+    <div class="solution-box">
+        <span class="step-label">1. Planteamiento</span>
+        $x$: pantalón | $y$: zapatos.
+        $$\begin{cases} x + y = 126 \\ 1,14x = 0,75y \end{cases}$$
+        <span class="step-label">2. Resolución</span>
+        $y = 126 - x$. Sustituimos: $1,14x = 0,75(126 - x)$.
+        $$1,14x = 94,5 - 0,75x \Rightarrow 1,89x = 94,5 \Rightarrow \mathbf{x = 50}$$
+        $y = 126 - 50 \Rightarrow \mathbf{y = 76}$.
+        <strong>Solución:</strong> Pantalón 50 € y Zapatos 76 €.
     </div>
 
-    <div class="theory-box">
-        <p>A continuación, desglosamos la estrategia para resolver sistemas con paréntesis y despejes previos:</p>
-        
-        <span class="step-label">1. Aprovechamiento del Despeje</span>
-        <p class="explanation-text">La primera ecuación ya nos da el valor de $x$ despejado. Lo tomamos directamente:</p>
-        $$x = 2y - 1$$
-
-        <span class="step-label">2. Sustitución y Paréntesis</span>
-        <p class="explanation-text">Introducimos el valor de $x$ dentro del paréntesis de la segunda ecuación:</p>
-        $$2 \cdot ( (2y - 1) + 1 ) - 3y = 5$$
-
-        <span class="step-label">3. Simplificación y Cálculo</span>
-        <p class="explanation-text">Resolvemos el interior del paréntesis antes de multiplicar:</p>
-        $$2 \cdot (2y) - 3y = 5 \Rightarrow 4y - 3y = 5 \Rightarrow \mathbf{y = 5}$$
-
-        <span class="step-label">4. Finalización</span>
-        <p class="explanation-text">Sustituimos $y$ para hallar la $x$: $x = 2(5) - 1 \Rightarrow \mathbf{x = 9}$.</p>
+    <div class="problem-box">
+        <strong>25.</strong> 50 preguntas. Acierto +4 puntos, Fallo -3 puntos. Nota 58% de la máxima posible. ¿Aciertos y fallos? (Máxima: 50x4 = 200 pts. Nota: 58% de 200 = 116 pts).
     </div>
-    <footer>Academia Esparta</footer>
-</div>
-
-<div class="page">
-    <header>
-        <div><h1>Método de Sustitución</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
-    </header>
-    <div class="combat-zone">
-        <div class="combat-header"><span>ZONA DE COMBATE 3:</span><span>$\begin{cases} 2(x - 1) + y = 2 \\ x + 2y = 10 \end{cases}$</span></div>
-        <div class="grid-area"></div>
+    <div class="solution-box">
+        <span class="step-label">1. Planteamiento</span>
+        $x$: aciertos | $y$: fallos.
+        $$\begin{cases} x + y = 50 \\ 4x - 3y = 116 \end{cases}$$
+        <span class="step-label">2. Resolución</span>
+        $y = 50 - x \Rightarrow 4x - 3(50 - x) = 116$.
+        $$4x - 150 + 3x = 116 \Rightarrow 7x = 266 \Rightarrow \mathbf{x = 38}$$
+        $y = 50 - 38 \Rightarrow \mathbf{y = 12}$.
+        <strong>Solución:</strong> 38 aciertos y 12 fallos.
     </div>
     <footer>Academia Esparta</footer>
 </div>
