@@ -3,36 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misión Sílabas - Academia Esparta</title>
+    <title>La Merienda de las Sílabas - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --accent: #fbc02d; }
+        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --blue: #1976d2; }
         body { font-family: 'Poppins', sans-serif; background: #e3f2fd; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; }
         
-        .game-header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid #1976d2; position: relative; z-index: 5; }
-        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: #1976d2; font-weight: bold; }
-
-        .game-container { max-width: 800px; width: 90%; background: white; margin-top: 1.5rem; padding: 2rem; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); z-index: 5; }
+        .game-header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--blue); position: relative; z-index: 10; }
+        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--blue); font-weight: bold; }
         
-        /* Área del dibujo */
-        .target-box { margin-bottom: 2rem; }
-        .item-to-drag { font-size: 6rem; cursor: grab; display: inline-block; transition: transform 0.2s; user-select: none; }
-        .item-to-drag:active { cursor: grabbing; transform: scale(1.1); }
+        .stats-bar { display: flex; justify-content: space-around; width: 100%; max-width: 800px; margin-top: 10px; font-weight: bold; color: var(--dark); }
+        
+        .game-container { max-width: 800px; width: 90%; background: white; margin-top: 1rem; padding: 2rem; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        
+        .animal-area { height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .animal { font-size: 6rem; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; cursor: pointer; }
+        .word-tag { font-size: 2rem; font-weight: 700; color: var(--dark); text-transform: uppercase; margin-top: 10px; background: #eee; padding: 5px 20px; border-radius: 50px; }
 
-        .word-hint { font-size: 2rem; font-weight: 700; color: var(--dark); margin-top: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .plates-container { display: flex; justify-content: center; gap: 15px; margin-top: 2rem; perspective: 1000px; }
+        .plate { width: 110px; height: 110px; background: #f1f8e9; border: 4px solid #bbdefb; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; position: relative; }
+        .plate:hover { transform: scale(1.05); background: #e3f2fd; }
+        .plate span { font-size: 2.5rem; font-weight: 900; color: var(--blue); }
+        .plate label { font-size: 0.7rem; font-weight: bold; color: #666; }
 
-        /* Platos de sílabas */
-        .drop-zone-container { display: flex; justify-content: center; gap: 15px; margin-top: 2rem; }
-        .drop-zone { width: 120px; height: 120px; border: 4px dashed #bbdefb; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.3s; background: #f1f8e9; }
-        .drop-zone.hover { background: #c8e6c9; border-color: var(--primary); transform: scale(1.05); }
-        .drop-zone span { font-size: 2.5rem; font-weight: 700; color: #1976d2; }
-        .drop-zone label { font-size: 0.8rem; color: #666; font-weight: bold; }
+        /* Animaciones */
+        @keyframes eat { 
+            0% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.2) translateY(50px); }
+            100% { transform: scale(1) translateY(0); }
+        }
+        .eating { animation: eat 0.6s ease-in-out; }
+        .disappear { transform: scale(0) rotate(360deg); opacity: 0; transition: 0.5s; }
 
-        #overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); border-radius: 30px; flex-direction: column; align-items: center; justify-content: center; z-index: 20; }
-        .btn { padding: 1.2rem 2.5rem; border: none; border-radius: 15px; font-weight: 700; cursor: pointer; background: var(--primary); color: white; font-size: 1.2rem; margin-top: 1rem; }
+        #overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); border-radius: 30px; flex-direction: column; align-items: center; justify-content: center; z-index: 30; }
+        .btn-next { padding: 1.2rem 2rem; border: none; border-radius: 15px; font-weight: 700; background: var(--primary); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 5px 0 var(--dark); }
 
-        #trophy-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 15; display: none; }
+        #trophy-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; display: none; }
+        .trophy { position: absolute; font-size: 3rem; animation: rain linear infinite; }
+        @keyframes rain { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -41,150 +50,155 @@
 
     <div class="game-header">
         <a href="index.html" class="back-link">← Salir</a>
-        <h2 style="color: #1976d2; margin: 0;">Misión: El Salto de las Sílabas</h2>
+        <h2 style="color: var(--blue); margin: 0;">¿Qué come el animal?</h2>
+    </div>
+
+    <div class="stats-bar">
+        <span>Nivel: <span id="lvl-num">1</span>/5</span>
+        <span>Reto: <span id="reto-num">1</span>/5</span>
     </div>
 
     <div class="game-container">
         <div id="overlay">
-            <h2 id="overlay-msg" style="color: var(--primary); font-size: 3rem;">¡GENIAL!</h2>
-            <p id="overlay-sub" style="font-size: 1.2rem;">¡Has completado este nivel!</p>
-            <button class="btn" id="btn-next" onclick="cerrarOverlay()">SIGUIENTE NIVEL</button>
-            <a href="index.html" class="btn" id="btn-final" style="display:none; text-decoration:none;">MENÚ PRINCIPAL</a>
+            <h2 id="overlay-msg" style="color: var(--primary); font-size: 2.8rem; margin: 0;">¡NIVEL SUPERADO!</h2>
+            <p id="overlay-sub" style="margin: 1rem 0 2rem 0;">¡El animal está muy contento!</p>
+            <button class="btn-next" id="btn-action" onclick="cerrarOverlay()">SIGUIENTE NIVEL</button>
         </div>
 
-        <p style="color: #666;">Da palmadas y lleva el dibujo al número de sílabas correcto:</p>
+        <p style="color: #666; font-weight: bold;">Dale de comer al animal según sus sílabas:</p>
         
-        <div class="target-box">
-            <div id="drag-item" class="item-to-drag" draggable="true">🍎</div>
-            <div id="word-text" class="word-hint">MANZANA</div>
+        <div class="animal-area">
+            <div id="animal-emoji" class="animal">🐱</div>
+            <div id="word-text" class="word-tag">GATO</div>
         </div>
 
-        <div class="drop-zone-container">
-            <div class="drop-zone" data-syllables="1"><span>1</span><label>Palmada</label></div>
-            <div class="drop-zone" data-syllables="2"><span>2</span><label>Palmadas</label></div>
-            <div class="drop-zone" data-syllables="3"><span>3</span><label>Palmadas</label></div>
-            <div class="drop-zone" data-syllables="4"><span>4</span><label>Palmadas</label></div>
+        <div class="plates-container">
+            <div class="plate" onclick="comprobar(1, this)"><span>1</span><label>Sílaba</label></div>
+            <div class="plate" onclick="comprobar(2, this)"><span>2</span><label>Sílabas</label></div>
+            <div class="plate" onclick="comprobar(3, this)"><span>3</span><label>Sílabas</label></div>
+            <div class="plate" onclick="comprobar(4, this)"><span>4</span><label>Sílabas</label></div>
         </div>
 
-        <div id="feedback-msg" style="margin-top: 2rem; font-weight: bold; min-height: 30px;"></div>
+        <div id="feedback" style="margin-top: 1.5rem; font-weight: bold; font-size: 1.2rem; min-height: 30px;"></div>
     </div>
 
     <script>
-        const retos = [
-            // Mezclados de 1 a 4 sílabas
-            { img: '☀️', word: 'SOL', value: 1 },
-            { img: '🐱', word: 'GATO', value: 2 },
-            { img: '🍌', word: 'PLÁTANO', value: 3 },
-            { img: '🐘', word: 'ELEFANTE', value: 4 },
-            { img: '🏠', word: 'CASA', value: 2 },
-            { img: '🚗', word: 'COCHE', value: 2 },
-            { img: '🦋', word: 'MARIPOSA', value: 4 },
-            { img: '🍞', word: 'PAN', value: 1 },
-            { img: '🦉', word: 'BÚHO', value: 2 },
-            { img: '🎈', word: 'GLOBO', value: 2 }
+        const comidaAnimales = [
+            { e: '🐱', w: 'GATO', s: 2 }, { e: '🐶', w: 'PERRO', s: 2 }, { e: '🐷', w: 'CERDO', s: 2 }, { e: '🐵', w: 'MONO', s: 2 }, { e: '🐸', w: 'RANA', s: 2 },
+            { e: '🦁', w: 'LEÓN', s: 2 }, { e: '🐯', w: 'TIGRE', s: 2 }, { e: '🦆', w: 'PATO', s: 2 }, { e: '🐔', w: 'POLLO', s: 2 }, { e: '🐭', w: 'RATÓN', s: 2 },
+            { e: '🦒', w: 'JIRAFA', s: 3 }, { e: '🐘', w: 'ELEFANTE', s: 4 }, { e: '🐍', w: 'SERPIENTE', s: 3 }, { e: '🦉', w: 'BÚHO', s: 2 }, { e: '🦋', w: 'MARIPOSA', s: 4 },
+            { e: '🐝', w: 'ABEJA', s: 3 }, { e: '🐰', w: 'CONEJO', s: 3 }, { e: '🐻', w: 'OSO', s: 2 }, { e: '🦓', w: 'CEBRA', s: 2 }, { e: '🦛', w: 'HIPOPÓTAMO', s: 5 },
+            { e: '🦐', w: 'GAMBA', s: 2 }, { e: '🐳', w: 'BALLENA', s: 3 }, { e: '🦀', w: 'CANGREJO', s: 3 }, { e: '🦈', w: 'TIBURÓN', s: 3 }, { e: '🐢', w: 'TORTUGA', s: 3 }
         ];
 
-        let indexActual = 0;
+        let mezclados = [];
         let nivelActual = 1;
-        const dragItem = document.getElementById('drag-item');
-        const zones = document.querySelectorAll('.drop-zone');
+        let retoActual = 0;
+        let bloqueado = false;
 
-        // Configuración Drag & Drop para iPad
-        dragItem.addEventListener('dragstart', (e) => { e.dataTransfer.setData('text', ''); });
+        function shuffle(a) { return a.sort(() => Math.random() - 0.5); }
 
-        zones.forEach(zone => {
-            zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('hover'); });
-            zone.addEventListener('dragleave', () => { zone.classList.remove('hover'); });
-            zone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                zone.classList.remove('hover');
-                const selectedValue = parseInt(zone.getAttribute('data-syllables'));
-                comprobar(selectedValue);
-            });
-            // Soporte para clicks manuales también
-            zone.addEventListener('click', () => comprobar(parseInt(zone.getAttribute('data-syllables'))));
-        });
+        function iniciar() {
+            mezclados = shuffle([...comidaAnimales]);
+            mostrarReto();
+        }
+
+        function mostrarReto() {
+            const index = ((nivelActual - 1) * 5) + retoActual;
+            const item = mezclados[index];
+            const animal = document.getElementById('animal-emoji');
+            animal.innerText = item.e;
+            animal.className = 'animal'; // Reset animations
+            document.getElementById('word-text').innerText = item.w;
+            document.getElementById('lvl-num').innerText = nivelActual;
+            document.getElementById('reto-num').innerText = retoActual + 1;
+            document.getElementById('feedback').innerText = '';
+            
+            // Reset plates
+            document.querySelectorAll('.plate').forEach(p => p.classList.remove('disappear'));
+            bloqueado = false;
+        }
 
         function sonidoAplausos() {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const duration = 1.2;
-            const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * duration, audioCtx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.4));
-            const noise = audioCtx.createBufferSource();
-            noise.buffer = buffer;
-            const filter = audioCtx.createBiquadFilter();
-            filter.frequency.value = 1200;
-            noise.connect(filter); filter.connect(audioCtx.destination);
-            noise.start();
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const dur = 1.5;
+            const buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
+            const d = buf.getChannelData(0);
+            for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.4));
+            const s = ctx.createBufferSource(); s.buffer = buf;
+            const f = ctx.createBiquadFilter(); f.frequency.value = 1000;
+            s.connect(f); f.connect(ctx.destination); s.start();
         }
 
-        function comprobar(valor) {
-            const correcto = retos[indexActual].value;
-            const msg = document.getElementById('feedback-msg');
-            
-            if(valor === correcto) {
+        function comprobar(valor, elementoPlate) {
+            if(bloqueado) return;
+            const index = ((nivelActual - 1) * 5) + retoActual;
+            const correcto = mezcladasAlLlegar(mezclados[index].s); // Ajuste para 4 o más
+            const fb = document.getElementById('feedback');
+            const animal = document.getElementById('animal-emoji');
+
+            if(valor === correcto || (valor === 4 && mezclados[index].s >= 4)) {
+                bloqueado = true;
                 sonidoAplausos();
-                confetti({ particleCount: 60, spread: 50, origin: { y: 0.7 } });
-                msg.innerHTML = '<span style="color: var(--primary)">¡SÍ! Muy bien contado. 👏</span>';
-                setTimeout(progresar, 1500);
+                confetti({ particleCount: 40, spread: 50, origin: { y: 0.8 } });
+                
+                // Animación de comer
+                animal.classList.add('eating');
+                elementoPlate.classList.add('disappear');
+                fb.innerHTML = '<span style="color: var(--primary)">¡YUM! 👏</span>';
+                
+                setTimeout(progresar, 1200);
             } else {
-                msg.innerHTML = '<span style="color: #ef5350">¡Casi! Prueba de nuevo. 🧐</span>';
+                fb.innerHTML = '<span style="color: #ef5350">¡Casi! No es su plato. 🧐</span>';
             }
         }
+
+        function mezcladasAlLlegar(s) { return s > 4 ? 4 : s; }
 
         function progresar() {
-            indexActual++;
-            if(indexActual % 5 === 0) { // Cada 5 aciertos sube un nivel visual
-                mostrarOverlay();
-            } else if(indexActual < retos.length) {
-                cargarReto();
+            retoActual++;
+            if(retoActual >= 5) {
+                lanzarFestejoNivel();
             } else {
-                mostrarOverlay(true);
+                mostrarReto();
             }
         }
 
-        function cargarReto() {
-            const r = retos[indexActual];
-            dragItem.innerText = r.img;
-            document.getElementById('word-text').innerText = r.word;
-            document.getElementById('feedback-msg').innerText = '';
+        function lanzarFestejoNivel() {
+            document.getElementById('overlay').style.display = 'flex';
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            iniciarTrofeos();
+            if(nivelActual === 5) {
+                document.getElementById('overlay-msg').innerText = "¡MAESTRO DE ANIMALES!";
+                document.getElementById('btn-action').innerText = "VOLVER AL MENÚ";
+                document.getElementById('btn-action').onclick = () => window.location.href = 'index.html';
+            }
         }
 
-        function mostrarOverlay(final = false) {
-            const overlay = document.getElementById('overlay');
-            overlay.style.display = 'flex';
-            iniciarLluviaTrofeos();
-            if(final) {
-                document.getElementById('overlay-msg').innerText = "¡MAESTRO DE LAS SÍLABAS!";
-                document.getElementById('btn-next').style.display = 'none';
-                document.getElementById('btn-final').style.display = 'inline-block';
+        function iniciarTrofeos() {
+            const container = document.getElementById('trophy-rain');
+            container.innerHTML = '';
+            container.style.display = 'block';
+            for (let i = 0; i < 20; i++) {
+                const t = document.createElement('div');
+                t.className = 'trophy';
+                t.innerText = '🏆';
+                t.style.left = Math.random() * 100 + 'vw';
+                t.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                t.style.animationDelay = (Math.random() * 1) + 's';
+                container.appendChild(t);
             }
+            setTimeout(() => { container.style.display = 'none'; }, 5000);
         }
 
         function cerrarOverlay() {
             document.getElementById('overlay').style.display = 'none';
             nivelActual++;
-            cargarReto();
+            retoActual = 0;
+            mostrarReto();
         }
 
-        function iniciarLluviaTrofeos() {
-            const container = document.getElementById('trophy-rain');
-            container.innerHTML = '';
-            container.style.display = 'block';
-            for (let i = 0; i < 15; i++) {
-                const t = document.createElement('div');
-                t.style.cssText = `position:fixed; left:${Math.random()*100}vw; top:-50px; font-size:3rem; animation: rain 2s linear forwards; animation-delay:${Math.random()}s;`;
-                t.innerText = '🏆';
-                container.appendChild(t);
-            }
-            const style = document.createElement('style');
-            style.innerHTML = `@keyframes rain { to { transform: translateY(110vh) rotate(360deg); } }`;
-            document.head.appendChild(style);
-            setTimeout(() => { container.style.display = 'none'; }, 4000);
-        }
-
-        cargarReto();
+        iniciar();
     </script>
 </body>
 </html>
