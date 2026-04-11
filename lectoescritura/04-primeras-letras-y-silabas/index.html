@@ -7,9 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0e9343; /* Verde Academia Esparta */
+            --primary: #0e9343;
             --bg-page: #f0f2f5;
-            --text-dark: #333;
             --gray-locked: #b0b0b0;
         }
 
@@ -35,16 +34,16 @@
         .subtitle { color: #666; margin-bottom: 3rem; }
 
         .container {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            max-width: 1000px;
             padding: 20px;
+            width: 100%;
         }
 
         .card {
             background: white;
-            width: 280px;
             padding: 2rem;
             border-radius: 30px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
@@ -57,7 +56,7 @@
 
         .card:hover { transform: translateY(-10px); }
 
-        .letter { font-size: 5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .letter { font-size: 5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary); }
         .syllables { font-size: 1.1rem; color: #555; margin-bottom: 1.5rem; }
 
         .btn {
@@ -68,17 +67,13 @@
             text-transform: uppercase;
             font-size: 1rem;
             transition: 0.3s;
-            display: inline-block;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
         }
 
-        /* Estado ACTIVO (M, P y ahora L) */
-        .active .letter { color: var(--primary); }
-        .active .btn { background: var(--primary); color: white; border: none; cursor: pointer; }
-        .active .btn:hover { background: #0a7a37; }
-
-        /* Estado BLOQUEADO */
-        .locked .letter { color: var(--gray-locked); }
-        .locked .btn { background: #e0e0e0; color: #999; cursor: not-allowed; pointer-events: none; }
+        .btn:hover { background: #0a7a37; }
     </style>
 </head>
 <body>
@@ -92,22 +87,40 @@
 
     <div class="container">
         
-        <div class="card active">
+        <div class="card">
             <div class="letter">Mm</div>
             <div class="syllables">Ma, Me, Mi, Mo, Mu</div>
             <a href="silabas-m.html" class="btn">JUGAR</a>
         </div>
 
-        <div class="card active">
+        <div class="card">
             <div class="letter">Pp</div>
             <div class="syllables">Pa, Pe, Pi, Po, Pu</div>
             <a href="silabas-p.html" class="btn">JUGAR</a>
         </div>
 
-        <div class="card active">
+        <div class="card">
             <div class="letter">Ll</div>
             <div class="syllables">La, Le, Li, Lo, Lu</div>
             <a href="silabas-l.html" class="btn">JUGAR</a>
+        </div>
+
+        <div class="card">
+            <div class="letter">Ss</div>
+            <div class="syllables">Sa, Se, Si, So, Su</div>
+            <a href="silabas-s.html" class="btn">JUGAR</a>
+        </div>
+
+        <div class="card">
+            <div class="letter">Tt</div>
+            <div class="syllables">Ta, Te, Ti, To, Tu</div>
+            <a href="silabas-t.html" class="btn">JUGAR</a>
+        </div>
+
+        <div class="card">
+            <div class="letter">Dd</div>
+            <div class="syllables">Da, De, Di, Do, Du</div>
+            <a href="silabas-d.html" class="btn">JUGAR</a>
         </div>
 
     </div>
