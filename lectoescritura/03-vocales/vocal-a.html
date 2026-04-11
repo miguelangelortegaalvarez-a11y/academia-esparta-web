@@ -3,66 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misión Vocal A - Academia Esparta</title>
+    <title>Cuaderno Vocal A - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --a-color: #ef5350; --primary: #0e9343; --dark: #063c24; --light: #fdf2f2; }
-        body { font-family: 'Fredoka', sans-serif; background: #f0f2f5; margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; }
+        :root { 
+            --a-color: #ef5350; /* Rojo temático de la A */
+            --primary: #0e9343; /* Verde Academia Esparta para aciertos */
+            --dark: #063c24; 
+            --light-green: #e8f5e9;
+            --bg: #f0f2f5;
+        }
         
-        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--a-color); position: relative; z-index: 10; }
+        body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; }
+        
+        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--a-color); position: relative; z-index: 10; box-sizing: border-box; }
         .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--a-color); font-weight: bold; }
 
-        /* Contenedor de Páginas */
         .book-slider { width: 100%; flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative; }
         
         .page { 
-            display: none; width: 90%; max-width: 800px; height: 70vh; 
+            display: none; width: 90%; max-width: 850px; height: 70vh; 
             background: white; border-radius: 40px; padding: 2rem; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 4px solid #eee;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 2px solid #eee;
             flex-direction: column; align-items: center; justify-content: center;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.4s ease;
         }
         .page.active { display: flex; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        h2 { color: var(--a-color); font-size: 2.2rem; margin-bottom: 2rem; text-align: center; }
+        /* Títulos en Rojo temático */
+        h2 { color: var(--a-color); font-size: 2.5rem; margin-bottom: 2rem; text-align: center; }
 
-        /* Estilos de interacción */
+        /* Letras */
         .letra-tap { 
-            font-size: 5rem; cursor: pointer; padding: 10px 25px; border-radius: 50%; 
-            margin: 15px; border: 4px solid transparent; transition: 0.2s; display: inline-block;
+            font-size: 6rem; cursor: pointer; padding: 10px 30px; border-radius: 50%; 
+            margin: 15px; border: 5px solid transparent; transition: 0.2s; display: inline-block;
+            color: #333; /* Color neutro inicial */
         }
-        .letra-tap.selected { border-color: var(--a-color); background: var(--light); color: var(--a-color); }
+        
+        /* Círculo VERDE para aciertos */
+        .letra-tap.selected-correct { 
+            border-color: var(--primary); 
+            background: var(--light-green); 
+            color: var(--primary); 
+        }
 
-        .dibujo-tap { font-size: 7rem; cursor: pointer; filter: grayscale(100%); transition: 0.4s; padding: 20px; }
-        .dibujo-tap.active { filter: grayscale(0%); transform: scale(1.2); }
+        /* Dibujos */
+        .dibujo-tap { font-size: 8rem; cursor: pointer; filter: grayscale(100%); transition: 0.4s; padding: 20px; }
+        .dibujo-tap.active { filter: grayscale(0%); transform: scale(1.1); }
 
-        .lectura-grande { font-size: 6rem; letter-spacing: 20px; color: var(--dark); background: #fafafa; padding: 30px 60px; border-radius: 25px; border: 2px dashed #ccc; }
+        /* Lectura */
+        .lectura-grande { font-size: 7rem; letter-spacing: 25px; color: #333; background: #fafafa; padding: 40px 80px; border-radius: 30px; border: 3px dashed #ccc; text-transform: lowercase; }
 
-        /* Navegación */
+        /* Botones de Navegación Verdes */
         .nav-btn { 
-            position: absolute; bottom: 30px; background: var(--primary); color: white; 
-            border: none; padding: 15px 40px; border-radius: 50px; font-size: 1.5rem; 
+            position: absolute; bottom: 40px; background: var(--primary); color: white; 
+            border: none; padding: 15px 45px; border-radius: 50px; font-size: 1.6rem; 
             font-weight: bold; cursor: pointer; box-shadow: 0 6px 0 var(--dark); z-index: 20;
+            text-transform: uppercase;
         }
         .nav-btn:active { transform: translateY(4px); box-shadow: none; }
-        .prev { left: 50px; background: #999; }
-        .next { right: 50px; }
+        .prev { left: 60px; background: #999; box-shadow: 0 6px 0 #666; }
+        .next { right: 60px; }
+
+        .btn-cambiar { 
+            background: var(--a-color); color: white; border: none; padding: 12px 25px; 
+            border-radius: 15px; font-weight: bold; cursor: pointer; margin-top: 20px;
+            box-shadow: 0 4px 0 #b71c1c; font-family: 'Fredoka';
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="index.html" class="back-link">← Salir</a>
+        <a href="index.html" class="back-link">← VOLVER</a>
         <div style="font-weight: 700; font-size: 1.8rem; color: var(--a-color);">Cuaderno Vocal A 🍎</div>
     </header>
 
     <div class="book-slider">
         
         <div class="page active" id="p1">
-            <h2>1. Toca todas las letras "A"</h2>
+            <h2>1. Busca la "A" mayúscula</h2>
             <div style="text-align: center;">
                 <span class="letra-tap" onclick="marcar(this, true)">A</span>
                 <span class="letra-tap" onclick="marcar(this, false)">E</span>
@@ -73,7 +96,7 @@
         </div>
 
         <div class="page" id="p2">
-            <h2>2. Toca todas las letras "a"</h2>
+            <h2>2. Busca la "a" minúscula</h2>
             <div style="text-align: center;">
                 <span class="letra-tap" onclick="marcar(this, true)">a</span>
                 <span class="letra-tap" onclick="marcar(this, false)">o</span>
@@ -85,7 +108,7 @@
 
         <div class="page" id="p3">
             <h2>3. ¿Qué empieza por "a"?</h2>
-            <div style="display: flex; gap: 40px;">
+            <div style="display: flex; gap: 50px;">
                 <div class="dibujo-tap" onclick="pintar(this, true)">🐝</div>
                 <div class="dibujo-tap" onclick="pintar(this, false)">🐱</div>
                 <div class="dibujo-tap" onclick="pintar(this, true)">✈️</div>
@@ -95,13 +118,11 @@
         <div class="page" id="p4">
             <h2>4. ¡Leemos juntos!</h2>
             <div class="lectura-grande" id="texto-lectura">a e</div>
-            <div style="margin-top: 30px;">
-                <button class="nav-btn" style="position: static; background: var(--a-color);" onclick="cambiarLectura()">CAMBIAR COMBINACIÓN</button>
-            </div>
+            <button class="btn-cambiar" onclick="cambiarLectura()">CAMBIAR COMBINACIÓN</button>
         </div>
 
-        <button class="nav-btn prev" id="btnPrev" onclick="navegar(-1)" style="display: none;">←</button>
-        <button class="nav-btn next" id="btnNext" onclick="navegar(1)">SIGUIENTE →</button>
+        <button class="nav-btn prev" id="btnPrev" onclick="navegar(-1)" style="display: none;">ATRÁS</button>
+        <button class="nav-btn next" id="btnNext" onclick="navegar(1)">SIGUIENTE</button>
 
     </div>
 
@@ -114,35 +135,42 @@
         function navegar(direccion) {
             document.getElementById(`p${paginaActual}`).classList.remove('active');
             paginaActual += direccion;
-            document.getElementById(`p${paginaActual}`).classList.add('active');
-
-            // Control de botones
-            document.getElementById('btnPrev').style.display = paginaActual === 1 ? 'none' : 'block';
-            document.getElementById('btnNext').innerText = paginaActual === totalPaginas ? 'FINALIZAR' : 'SIGUIENTE →';
             
             if(paginaActual > totalPaginas) {
                 window.location.href = 'index.html';
+                return;
             }
+
+            document.getElementById(`p${paginaActual}`).classList.add('active');
+            document.getElementById('btnPrev').style.display = paginaActual === 1 ? 'none' : 'block';
+            document.getElementById('btnNext').innerText = paginaActual === totalPaginas ? 'FINALIZAR' : 'SIGUIENTE';
         }
 
         function marcar(el, esCorrecto) {
-            el.classList.toggle('selected');
-            if(esCorrecto && el.classList.contains('selected')) {
-                confetti({ particleCount: 20, spread: 50, origin: { y: 0.7 } });
+            if(esCorrecto) {
+                // Solo marcamos y damos feedback si es la letra correcta
+                el.classList.add('selected-correct');
+                confetti({ particleCount: 30, spread: 60, origin: { y: 0.7 }, colors: ['#0e9343'] });
+            } else {
+                // Feedback visual sutil de error (pequeña vibración) sin marcar en rojo
+                el.style.animation = 'shake 0.3s';
+                setTimeout(() => el.style.animation = '', 300);
             }
         }
 
         function pintar(el, esCorrecto) {
             if(esCorrecto) {
                 el.classList.add('active');
-                confetti({ particleCount: 50, spread: 70 });
+                confetti({ particleCount: 50, spread: 70, colors: ['#0e9343'] });
+            } else {
+                el.style.animation = 'shake 0.3s';
+                setTimeout(() => el.style.animation = '', 300);
             }
         }
 
         function cambiarLectura() {
             indiceLectura = (indiceLectura + 1) % combinaciones.length;
             document.getElementById('texto-lectura').innerText = combinaciones[indiceLectura];
-            confetti({ particleCount: 10, colors: ['#ef5350'] });
         }
     </script>
 </body>
