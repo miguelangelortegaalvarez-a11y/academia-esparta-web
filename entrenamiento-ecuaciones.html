@@ -3,122 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Complementos del Verbo - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <title>Parchís Espartano - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --verde-oscuro: #2e7d32; --gris: #f4f7f6; --texto: #333; }
+        :root { --amarillo: #ffeb3b; --azul: #2196f3; --rojo: #f44336; --verde: #4caf50; --esparta: #333; }
+        body { font-family: 'Open Sans', sans-serif; background: #f0f0f0; display: flex; flex-direction: column; align-items: center; margin: 0; touch-action: none; }
         
-        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 0; color: var(--texto); }
-        
-        /* HEADER PARA LA WEB */
-        .header-esparta { background: white; text-align: center; padding: 30px; border-bottom: 5px solid var(--verde); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .header-esparta h1 { font-family: 'Montserrat'; font-size: 2.5rem; color: var(--verde); margin: 0; text-transform: uppercase; }
-        .frase { font-style: italic; color: #666; margin-top: 10px; font-weight: 600; }
+        .header { text-align: center; color: var(--verde); padding: 15px; }
+        .header h1 { font-family: 'Montserrat'; margin: 0; text-transform: uppercase; }
 
-        .container { max-width: 900px; margin: 30px auto; background: white; padding: 50px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
-
-        h2 { font-family: 'Montserrat'; color: var(--verde-oscuro); border-bottom: 2px solid var(--verde); padding-bottom: 10px; margin-top: 40px; text-transform: uppercase; font-size: 1.4rem; }
-        
-        /* TABLAS DE APUNTES */
-        .tabla-apuntes { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 1rem; }
-        .tabla-apuntes th { background-color: var(--verde); color: white; padding: 12px; text-align: left; font-family: 'Montserrat'; border: 1px solid #ddd; }
-        .tabla-apuntes td { border: 1px solid #ddd; padding: 15px; vertical-align: top; line-height: 1.6; }
-        .tabla-apuntes tr:nth-child(even) { background-color: #f9fdf9; }
-        
-        .ejemplo { background-color: #e8f5e9; padding: 2px 6px; border-radius: 4px; font-weight: 600; color: var(--verde-oscuro); }
-        .pregunta-clave { color: #d32f2f; font-weight: bold; }
-
-        /* ESTILO PARA IMPRESIÓN */
-        @media print {
-            body { background-color: white; }
-            .container { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 20px; }
-            .header-esparta { border-bottom: 2px solid black; }
-            .tabla-apuntes th { background-color: #eee !important; color: black !important; }
-            button { display: none; } /* Ocultar botones al imprimir */
+        /* EL TABLERO */
+        #contenedor-tablero {
+            position: relative;
+            width: 600px; height: 600px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Parcheesi_Board.svg/1024px-Parcheesi_Board.svg.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            background-color: white;
         }
 
-        .btn-imprimir { background: var(--verde); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: 'Montserrat'; font-weight: bold; margin-bottom: 20px; }
+        /* LAS FICHAS */
+        .ficha {
+            width: 25px; height: 25px;
+            border-radius: 50%;
+            position: absolute;
+            cursor: move;
+            border: 2px solid white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+        .f-roja { background: var(--rojo); }
+        .f-azul { background: var(--azul); }
+        .f-amarilla { background: var(--amarillo); }
+        .f-verde { background: var(--verde); }
+
+        /* DADO */
+        .controles { margin-top: 20px; display: flex; align-items: center; gap: 20px; background: white; padding: 15px 30px; border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        #dado { font-size: 3rem; font-family: 'Montserrat'; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; background: var(--esparta); color: white; border-radius: 12px; }
+        .btn-lanzar { padding: 15px 25px; background: var(--verde); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-family: 'Montserrat'; text-transform: uppercase; }
+        
+        .instrucciones { margin-top: 15px; font-size: 0.9rem; color: #666; font-style: italic; }
     </style>
 </head>
 <body>
 
-<header class="header-esparta">
+<div class="header">
     <h1>ACADEMIA ESPARTA</h1>
-    <div class="frase">"Escribir bien es pensar con claridad. ¡Domina la lengua!"</div>
-</header>
-
-<div class="container">
-    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR APUNTES</button>
-
-    <h2>1. Complementos del Predicado Verbal</h2>
-    <table class="tabla-apuntes">
-        <thead>
-            <tr>
-                <th>Complemento</th>
-                <th>¿Cómo reconocerlo?</th>
-                <th>Ejemplo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><b>Directo (CD)</b></td>
-                <td>Nombra el objeto sobre el que recae la acción. Se sustituye por <span class="pregunta-clave">lo, la, los, las</span>.</td>
-                <td>Erik come <span class="ejemplo">una manzana</span>.<br> (Erik <span class="ejemplo">la</span> come).</td>
-            </tr>
-            <tr>
-                <td><b>Indirecto (CI)</b></td>
-                <td>Indica el destinatario de la acción. Se sustituye por <span class="pregunta-clave">le, les</span>. Siempre lleva la preposición "a".</td>
-                <td>Damián dio un regalo <span class="ejemplo">a su madre</span>.<br> (Damián <span class="ejemplo">le</span> dio un regalo).</td>
-            </tr>
-            <tr>
-                <td><b>Circunstancial (CC)</b></td>
-                <td>Indica las circunstancias (lugar, tiempo, modo...). No se puede sustituir por pronombres.</td>
-                <td>Estudiamos <span class="ejemplo">en la academia</span> (Lugar).<br> Mañana iremos <span class="ejemplo">temprano</span> (Tiempo).</td>
-            </tr>
-            <tr>
-                <td><b>De Régimen (CRég)</b></td>
-                <td>Es un complemento con preposición exigida por el verbo (confiar en, pensar en...).</td>
-                <td>Ellos confían <span class="ejemplo">en sus posibilidades</span>.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2>2. Complementos del Predicado Nominal</h2>
-    <table class="tabla-apuntes">
-        <thead>
-            <tr>
-                <th>Complemento</th>
-                <th>¿Cómo reconocerlo?</th>
-                <th>Ejemplo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><b>Atributo (Atr)</b></td>
-                <td>Aparece con verbos copulativos (<span class="pregunta-clave">ser, estar, parecer</span>). Concuerda en género y número con el sujeto.</td>
-                <td>El examen era <span class="ejemplo">difícil</span>.<br> Mis primos están <span class="ejemplo">cansados</span>.</td>
-            </tr>
-            <tr>
-                <td><b>Predicativo (CPred)</b></td>
-                <td>Es como un atributo pero con verbos predicativos (no copulativos).</td>
-                <td>Los alumnos corren <span class="ejemplo">felices</span>.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2>3. Resumen de Preguntas Clave</h2>
-    <div style="background: #333; color: white; padding: 20px; border-radius: 8px; line-height: 1.8;">
-        • <b>¿Qué?</b> → Complemento Directo.<br>
-        • <b>¿A quién? / ¿Para quién?</b> → Complemento Indirecto.<br>
-        • <b>¿Dónde?</b> → C. C. de Lugar.<br>
-        • <b>¿Cuándo?</b> → C. C. de Tiempo.<br>
-        • <b>¿Cómo?</b> → C. C. de Modo / Atributo.
-    </div>
-
-    <footer style="margin-top: 50px; text-align: center; color: #999; font-size: 0.8rem;">
-        © 2026 Academia Esparta - Material de Refuerzo de Lengua Española
-    </footer>
+    <p>¡Gran Torneo de Parchís Familiar!</p>
 </div>
+
+<div id="contenedor-tablero">
+    <div class="ficha f-roja" style="top: 50px; left: 50px;"></div>
+    <div class="ficha f-roja" style="top: 50px; left: 85px;"></div>
+    <div class="ficha f-roja" style="top: 85px; left: 50px;"></div>
+    <div class="ficha f-roja" style="top: 85px; left: 85px;"></div>
+
+    <div class="ficha f-azul" style="top: 50px; left: 485px;"></div>
+    <div class="ficha f-azul" style="top: 50px; left: 520px;"></div>
+    <div class="ficha f-azul" style="top: 85px; left: 485px;"></div>
+    <div class="ficha f-azul" style="top: 85px; left: 520px;"></div>
+
+    <div class="ficha f-amarilla" style="top: 485px; left: 50px;"></div>
+    <div class="ficha f-amarilla" style="top: 485px; left: 85px;"></div>
+    <div class="ficha f-amarilla" style="top: 520px; left: 50px;"></div>
+    <div class="ficha f-amarilla" style="top: 520px; left: 85px;"></div>
+
+    <div class="ficha f-verde" style="top: 485px; left: 485px;"></div>
+    <div class="ficha f-verde" style="top: 485px; left: 520px;"></div>
+    <div class="ficha f-verde" style="top: 520px; left: 485px;"></div>
+    <div class="ficha f-verde" style="top: 520px; left: 520px;"></div>
+</div>
+
+<div class="controles">
+    <button class="btn-lanzar" onclick="lanzarDado()">Lanzar Dado 🎲</button>
+    <div id="dado">?</div>
+</div>
+
+<p class="instrucciones">Arrastra las fichas con el dedo o el ratón por el tablero.</p>
+
+<script>
+    // Lógica del Dado
+    function lanzarDado() {
+        const dadoElemento = document.getElementById('dado');
+        let iteraciones = 0;
+        const intervalo = setInterval(() => {
+            dadoElemento.innerText = Math.floor(Math.random() * 6) + 1;
+            iteraciones++;
+            if (iteraciones > 10) {
+                clearInterval(intervalo);
+                const resultado = Math.floor(Math.random() * 6) + 1;
+                dadoElemento.innerText = resultado;
+                // Si sale un 6, mensaje de suerte
+                if(resultado === 6) console.log("¡Espartano, vuelve a tirar!");
+            }
+        }, 50);
+    }
+
+    // Lógica para Arrastrar Fichas (Drag & Drop)
+    const fichas = document.querySelectorAll('.ficha');
+    let fichaActiva = null;
+
+    fichas.forEach(ficha => {
+        ficha.addEventListener('mousedown', iniciarArrastre);
+        ficha.addEventListener('touchstart', iniciarArrastre, {passive: false});
+    });
+
+    function iniciarArrastre(e) {
+        e.preventDefault();
+        fichaActiva = this;
+        document.addEventListener('mousemove', arrastrar);
+        document.addEventListener('mouseup', detenerArrastre);
+        document.addEventListener('touchmove', arrastrar, {passive: false});
+        document.addEventListener('touchend', detenerArrastre);
+    }
+
+    function arrastrar(e) {
+        if (!fichaActiva) return;
+        
+        let x, y;
+        if (e.type === 'touchmove') {
+            x = e.touches[0].clientX;
+            y = e.touches[0].clientY;
+        } else {
+            x = e.clientX;
+            y = e.clientY;
+        }
+
+        const rect = document.getElementById('contenedor-tablero').getBoundingClientRect();
+        
+        // Mantener la ficha dentro del tablero
+        let posX = x - rect.left - 12;
+        let posY = y - rect.top - 12;
+
+        fichaActiva.style.left = posX + 'px';
+        fichaActiva.style.top = posY + 'px';
+    }
+
+    function detenerArrastre() {
+        fichaActiva = null;
+        document.removeEventListener('mousemove', arrastrar);
+        document.removeEventListener('mouseup', detenerArrastre);
+        document.removeEventListener('touchmove', arrastrar);
+        document.removeEventListener('touchend', detenerArrastre);
+    }
+</script>
 
 </body>
 </html>
