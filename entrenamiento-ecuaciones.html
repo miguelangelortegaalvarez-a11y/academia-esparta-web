@@ -3,100 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>La Vocal A - Academia Esparta</title>
+    <title>Resolución de Problemas - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --esparta-green: #2e7d32; --soft-blue: #e3f2fd; --text-gray: #333; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Open Sans', sans-serif; background-color: #f9f9f9; color: var(--text-gray); }
+        :root {
+            --primary: #0e9343;
+            --secondary: #f9fbf9;
+            --accent: #fb8c00;
+            --text: #333;
+            --border: #e0e0e0;
+        }
 
-        .page { 
-            width: 210mm; 
-            height: 296mm; 
-            margin: 20px auto; 
-            background: white; 
-            padding: 20mm; 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6;
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .problem-card {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .problem-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 25px;
             display: flex;
-            flex-direction: column;
-            border-top: 10px solid var(--esparta-green);
+            justify-content: space-between;
+            align-items: center;
         }
 
-        @media print {
-            body { background: white; }
-            .no-print { display: none !important; }
-            .page { margin: 0; border-top: none; }
+        .problem-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .btn-pdf { 
-            position: fixed; top: 20px; left: 20px; 
-            background: #d32f2f; color: white; border: none; 
-            padding: 12px 25px; border-radius: 8px; cursor: pointer; 
-            font-family: 'Montserrat'; font-weight: bold; z-index: 1000;
+        .problem-body {
+            padding: 25px;
         }
 
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .title-box h1 { font-family: 'Montserrat'; font-size: 1.8rem; color: var(--esparta-green); text-transform: uppercase; }
-        .brand { text-align: right; font-weight: 800; font-size: 0.9rem; color: #999; }
+        .enunciado {
+            background: var(--secondary);
+            border-left: 5px solid var(--accent);
+            padding: 15px;
+            margin-bottom: 25px;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
 
-        .vocal-hero { display: flex; align-items: center; justify-content: space-around; background: var(--soft-blue); padding: 20px; border-radius: 15px; margin-bottom: 30px; }
-        .big-letter { font-size: 8rem; font-family: 'Montserrat'; font-weight: 800; color: var(--esparta-green); border: 4px dashed #999; padding: 0 40px; border-radius: 10px; }
-        .vocal-info { font-size: 1.2rem; line-height: 1.4; font-weight: 600; }
+        .step {
+            margin-bottom: 20px;
+        }
 
-        .section-title { font-family: 'Montserrat'; font-size: 1.1rem; color: var(--esparta-green); margin: 20px 0 10px; border-left: 5px solid var(--esparta-green); padding-left: 10px; }
-        
-        /* Cuadrícula de trazo */
-        .tracing-area { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; margin-bottom: 30px; }
-        .trace-item { font-size: 2.5rem; color: #ccc; border-bottom: 1px solid #eee; text-align: center; border-right: 1px solid #eee; padding: 10px; }
+        .step-title {
+            color: var(--primary);
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+            display: block;
+        }
 
-        /* Conciencia fonológica */
-        .images-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
-        .image-card { border: 2px solid #f0f0f0; border-radius: 10px; padding: 10px; }
-        .image-card span { display: block; font-size: 3rem; margin-bottom: 5px; }
-        .image-card p { font-size: 0.9rem; font-weight: 600; }
+        .math-box {
+            background: #fdfdfd;
+            border: 1px solid #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
 
-        footer { margin-top: auto; text-align: center; font-size: 0.8rem; color: #bbb; border-top: 1px solid #eee; padding-top: 15px; }
+        .solucion-final {
+            background-color: var(--light-green, #e8f5e9);
+            border: 2px solid var(--primary);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 20px;
+        }
+
+        .highlight { color: var(--accent); }
     </style>
 </head>
 <body>
 
-<button class="btn-pdf no-print" onclick="window.print()">📄 DESCARGAR FICHA LETRA A</button>
+<div class="container">
 
-<div class="page">
-    <header>
-        <div class="title-box">
-            <h1>Aprendo la Vocal A</h1>
+    <div class="problem-card">
+        <div class="problem-header">
+            <h2>Problema 24</h2>
+            <span>Academia Esparta</span>
         </div>
-        <div class="brand">ACADEMIA ESPARTA<br>RECURSOS INFANTIL</div>
-    </header>
+        <div class="problem-body">
+            <div class="enunciado">
+                "Por un pantalón y unos zapatos he pagado 126 €. Si el precio del pantalón aumentara un 14%, entonces sería el 75% del precio de los zapatos. ¿Cuánto pagué por cada uno?"
+            </div>
 
-    <div class="vocal-hero">
-        <div class="big-letter">A a</div>
-        <div class="vocal-info">
-            Paso 1: ¡Decora la letra!<br>
-            Paso 2: Repasa el trazo.<br>
-            Paso 3: Busca los dibujos.
+            <div class="step">
+                <span class="step-title">1. Definición de Incógnitas</span>
+                <ul>
+                    <li><b>x:</b> Precio del pantalón (€)</li>
+                    <li><b>y:</b> Precio de los zapatos (€)</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <span class="step-title">2. Planteamiento del Sistema</span>
+                <div class="math-box">
+                    x + y = 126 <br>
+                    1.14x = 0.75y
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-title">3. Resolución por Sustitución</span>
+                <p>Despejamos y: <code class="highlight">y = 126 - x</code></p>
+                <p>Sustituimos en la segunda ecuación:</p>
+                <div class="math-box">
+                    1.14x = 0.75(126 - x) <br>
+                    1.14x = 94.5 - 0.75x <br>
+                    1.89x = 94.5 <br>
+                    x = 50
+                </div>
+            </div>
+
+            <div class="solucion-final">
+                <b>RESULTADO:</b> El pantalón cuesta <b>50 €</b> y los zapatos <b>76 €</b>.
+            </div>
         </div>
     </div>
 
-    <div class="section-title">1. Entrenamiento de escritura</div>
-    <div class="tracing-area">
-        <div class="trace-item" style="color:#666">A</div><div class="trace-item">A</div><div class="trace-item">A</div><div class="trace-item">A</div><div class="trace-item">A</div><div class="trace-item">A</div>
-        <div class="trace-item" style="color:#666">a</div><div class="trace-item">a</div><div class="trace-item">a</div><div class="trace-item">a</div><div class="trace-item">a</div><div class="trace-item">a</div>
+    <div class="problem-card">
+        <div class="problem-header">
+            <h2>Problema 25</h2>
+            <span>Academia Esparta</span>
+        </div>
+        <div class="problem-body">
+            <div class="enunciado">
+                "En un test de 50 preguntas, por cada acierto te dan 4 puntos y por cada error te restan 3. Si mi nota ha sido el 58% de la puntuación máxima, ¿cuántos aciertos y fallos he tenido?"
+            </div>
+
+            <div class="step">
+                <span class="step-title">1. Análisis de Datos</span>
+                <p>Máximo posible: 50 x 4 = 200 puntos.</p>
+                <p>Nota obtenida: 58% de 200 = <code class="highlight">116 puntos</code>.</p>
+            </div>
+
+            <div class="step">
+                <span class="step-title">2. Sistema de Ecuaciones</span>
+                <div class="math-box">
+                    A + F = 50 <br>
+                    4A - 3F = 116
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-title">3. Resolución</span>
+                <div class="math-box">
+                    F = 50 - A <br>
+                    4A - 3(50 - A) = 116 <br>
+                    4A - 150 + 3A = 116 <br>
+                    7A = 266 -> A = 38
+                </div>
+            </div>
+
+            <div class="solucion-final">
+                <b>RESULTADO:</b> Has tenido <b>38 aciertos</b> y <b>12 fallos</b>.
+            </div>
+        </div>
     </div>
 
-    <div class="section-title">2. Conciencia Fonológica: Rodea los que empiezan por A</div>
-    <div class="images-grid">
-        <div class="image-card"><span>✈️</span><p>Avión</p></div>
-        <div class="image-card"><span>🐻</span><p>Oso</p></div>
-        <div class="image-card"><span>🐝</span><p>Abeja</p></div>
-        <div class="image-card"><span>🌳</span><p>Árbol</p></div>
-        <div class="image-card"><span>🐘</span><p>Elefante</p></div>
-        <div class="image-card"><span>🕷️</span><p>Araña</p></div>
-        <div class="image-card"><span>🔔</span><p>Campana</p></div>
-        <div class="image-card"><span>⚓</span><p>Ancla</p></div>
+    <div class="problem-card">
+        <div class="problem-header">
+            <h2>Problema 26</h2>
+            <span>Academia Esparta</span>
+        </div>
+        <div class="problem-body">
+            <div class="enunciado">
+                "La edad de Carmen es el triple de la de su hija Maite. Pero dentro de 15 años será el doble. ¿Cuál es la edad de cada una?"
+            </div>
+
+            <div class="step">
+                <span class="step-title">1. Incógnitas Actuales</span>
+                <p>C: Carmen | M: Maite</p>
+            </div>
+
+            <div class="step">
+                <span class="step-title">2. Sistema</span>
+                <div class="math-box">
+                    C = 3M <br>
+                    C + 15 = 2(M + 15)
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-title">3. Resolución</span>
+                <div class="math-box">
+                    3M + 15 = 2M + 30 <br>
+                    3M - 2M = 30 - 15 <br>
+                    M = 15
+                </div>
+            </div>
+
+            <div class="solucion-final">
+                <b>RESULTADO:</b> Maite tiene <b>15 años</b> y Carmen tiene <b>45 años</b>.
+            </div>
+        </div>
     </div>
 
-    <footer>ACADEMIA ESPARTA - Aprendiendo juntos paso a paso</footer>
 </div>
 
 </body>
