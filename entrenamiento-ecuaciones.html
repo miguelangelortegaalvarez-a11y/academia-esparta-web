@@ -1,138 +1,58 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafío Fichajes PRO - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <style>
-        :root { --primary: #0e9343; --dark: #063c24; --error: #ef5350; --bg: #f0f2f5; }
-        body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); margin-bottom: 10px; }
-        .scoreboard { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 95%; max-width: 700px; margin-bottom: 15px; }
-        .stat-card { background: white; padding: 10px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-bottom: 3px solid #ddd; }
-        .stat-val { display: block; font-size: 1.2rem; font-weight: 700; color: var(--dark); }
-        .stat-label { font-size: 0.6rem; text-transform: uppercase; color: #888; }
-        .game-container { max-width: 650px; width: 95%; background: white; border-radius: 25px; padding: 1.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; border: 2px solid #eee; }
-        .nivel-badge { background: var(--dark); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.9rem; margin-bottom: 1rem; display: inline-block; }
-        .player-name { font-size: 2.5rem; color: var(--dark); margin: 0.5rem 0; font-weight: 700; }
-        .options-grid { display: grid; gap: 10px; margin-top: 1.5rem; }
-        .btn-option { background: #f8f9fa; border: 3px solid #eee; padding: 14px; border-radius: 15px; font-size: 1.1rem; font-weight: bold; cursor: pointer; font-family: 'Fredoka'; }
-        .feedback-msg { margin-top: 1rem; font-size: 1.1rem; font-weight: bold; min-height: 3.5rem; display: flex; align-items: center; justify-content: center; }
-        .next-btn { margin-top: 1rem; background: var(--primary); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: bold; cursor: pointer; display: none; box-shadow: 0 4px 0 var(--dark); font-family: 'Fredoka'; }
-    </style>
-</head>
-<body>
+<div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>27.</b> He cambiado un montón de monedas de 20 céntimos por monedas de 1 €, de manera que ahora tengo 24 monedas menos que antes. ¿Cuántas monedas de 20 céntimos tenía?</div>
+    <div class="sistema-box"><h3>SISTEMA 27</h3><div class="sistema-math">$ \begin{cases} 0.20x = y \\ x - 24 = y \end{cases} $</div></div>
+    
+    <div class="desarrollo-box">
+        <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
+        <p>1. <b>Letras:</b> $x$ son las monedas de 20 cént. e $y$ las de 1€.<br>
+           2. <b>Valor:</b> El dinero total es el mismo $\implies 0.20 \cdot x = 1 \cdot y$.<br>
+           3. <b>Cantidad:</b> Tenemos 24 monedas menos que antes $\implies x - 24 = y$.</p>
+        
+        <span class="paso-titulo">RESOLUCIÓN PASO A PASO</span>
+        <p><b>1. Igualación:</b> Como las dos ecuaciones son iguales a $y$, las igualamos entre sí:</p>
+        <div class="math-center">$0.20x = x - 24$</div>
+        
+        <p><b>2. Agrupar las x:</b> Pasamos el $0.20x$ a la derecha restando y el $24$ a la izquierda sumando para que los números queden positivos:</p>
+        <div class="math-center">$24 = x - 0.20x$</div>
+        
+        <p><b>3. Operar:</b> Restamos las $x$ (recuerda que $x$ es lo mismo que $1x$):</p>
+        <div class="math-center">$24 = 0.80x$</div>
+        
+        <p><b>4. Despejar:</b> El $0.80$ que está multiplicando a la $x$ pasa al otro lado dividiendo:</p>
+        <div class="math-center">$x = \frac{24}{0.80} \implies x = 30$</div>
 
-    <header><div class="header-title">⚽ LIGA ESPARTANA: ERIK EDITION</div></header>
-
-    <div class="scoreboard">
-        <div class="stat-card"><span id="stat-total" class="stat-val">1/30</span><span class="stat-label">Pregunta</span></div>
-        <div class="stat-card"><span id="stat-correct" class="stat-val">0</span><span class="stat-label">Goles</span></div>
-        <div class="stat-card"><span id="stat-wrong" class="stat-val">0</span><span class="stat-label">Fallos</span></div>
-        <div class="stat-card" style="border-color: var(--error);"><span id="stat-lives" class="stat-val">❤️❤️❤️</span><span class="stat-label">Vidas</span></div>
+        <div class="result-box" style="background:#e8f5e9; padding:10px; border:2px solid var(--primary); border-radius:10px; text-align:center; font-weight:bold; color:var(--primary);">
+            RESULTADO: Tenía 30 monedas de 20 céntimos.
+        </div>
     </div>
 
-    <div class="game-container" id="main-box">
-        <div id="nivel-info" class="nivel-badge">Nivel 1: Los Galácticos</div>
-        <p style="color: #666; margin: 0;">¿En qué equipo juega...?</p>
-        <div id="player-display" class="player-name">---</div>
-        <div id="options-grid" class="options-grid"></div>
-        <div id="feedback" class="feedback-msg"></div>
-        <button id="next-btn" class="next-btn" onclick="proximoJugador()">SIGUIENTE FICHAJE →</button>
+    <div class="page-header"><h1>Sistemas de Ecuaciones</h1><span>ACADEMIA ESPARTA</span></div>
+    <div class="enunciado-top"><b>28.</b> Tengo dos tabletas de chocolate, una con 60% de cacao y otra con 85%. ¿Qué cantidad fundir de cada una para obtener 300g con un 75% de cacao?</div>
+    <div class="sistema-box"><h3>SISTEMA 28</h3><div class="sistema-math">$ \begin{cases} x + y = 300 \\ 0.60x + 0.85y = 225 \end{cases} $</div></div>
+    
+    <div class="desarrollo-box">
+        <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
+        <p>1. <b>Letras:</b> $x$ (gramos al 60%) e $y$ (gramos al 85%).<br>
+           2. <b>Mezcla:</b> La suma de gramos es 300 $\implies x + y = 300$.<br>
+           3. <b>Cacao:</b> El 75% de 300g es 225g de cacao puro.</p>
+
+        <span class="paso-titulo">RESOLUCIÓN PASO A PASO</span>
+        <p><b>1. Despejar:</b> En la primera ecuación, dejamos la $x$ sola:</p>
+        <div class="math-center">$x = 300 - y$</div>
+
+        <p><b>2. Sustituir:</b> Metemos este valor en la segunda ecuación:</p>
+        <div class="math-center">$0.60 \cdot (300 - y) + 0.85y = 225$</div>
+
+        <p><b>3. Quitar paréntesis:</b> Multiplicamos $0.60$ por los dos números de dentro:</p>
+        <div class="math-center">$180 - 0.60y + 0.85y = 225$</div>
+
+        <p><b>4. Agrupar y operar:</b> Pasamos el $180$ restando y restamos las $y$:</p>
+        <div class="math-center">$0.25y = 225 - 180 \implies 0.25y = 45$</div>
+
+        <p><b>5. Finalizar:</b> Dividimos para hallar la $y$:</p>
+        <div class="math-center">$y = \frac{45}{0.25} \implies y = 180$</div>
+
+        <div class="result-box" style="background:#e8f5e9; padding:10px; border:2px solid var(--primary); border-radius:10px; text-align:center; font-weight:bold; color:var(--primary);">
+            RESULTADO: Necesitas 120g de chocolate al 60% y 180g al 85%.
+        </div>
     </div>
-
-    <script>
-        const jugadores = [
-            // NIVEL 1: FÁCIL (Madrid, Barça, Atleti, Valencia)
-            { n: "Mbappé", e: ["Real Madrid", "Getafe", "Girona"], c: "Real Madrid", lv: 1 },
-            { n: "Lamine Yamal", e: ["Sevilla", "FC Barcelona", "Villarreal"], c: "FC Barcelona", lv: 1 },
-            { n: "Julián Alvarez", e: ["Real Madrid", "Betis", "Atlético de Madrid"], c: "Atlético de Madrid", lv: 1 },
-            { n: "Pepelu", e: ["Valencia CF", "Celta", "Espanyol"], c: "Valencia CF", lv: 1 },
-            { n: "Bellingham", e: ["FC Barcelona", "Real Madrid", "Atlético"], c: "Real Madrid", lv: 1 },
-            { n: "Gavi", e: ["FC Barcelona", "Sevilla", "Valencia"], c: "FC Barcelona", lv: 1 },
-            { n: "Griezmann", e: ["Girona", "Atlético de Madrid", "Villarreal"], c: "Atlético de Madrid", lv: 1 },
-            { n: "Hugo Duro", e: ["Valencia CF", "Betis", "Valladolid"], c: "Valencia CF", lv: 1 },
-            { n: "Vinícius Jr.", e: ["Real Madrid", "Espanyol", "Leganés"], c: "Real Madrid", lv: 1 },
-            { n: "Pedri", e: ["Real Sociedad", "FC Barcelona", "Athletic"], c: "FC Barcelona", lv: 1 },
-
-            // NIVEL 2: INTERMEDIO (Equipos asentados)
-            { n: "Iago Aspas", e: ["Celta de Vigo", "Sevilla", "Getafe"], c: "Celta de Vigo", lv: 2 },
-            { n: "Nico Williams", e: ["Villarreal", "Athletic Club", "Real Sociedad"], c: "Athletic Club", lv: 2 },
-            { n: "Gerard Moreno", e: ["Villarreal CF", "Celta", "Espanyol"], c: "Villarreal CF", lv: 2 },
-            { n: "Take Kubo", e: ["Betis", "Real Sociedad", "Girona"], c: "Real Sociedad", lv: 2 },
-            { n: "Isco", e: ["Sevilla", "Betis", "Villarreal"], c: "Betis", lv: 2 },
-            { n: "Isaac Romero", e: ["Sevilla FC", "Betis", "Celta"], c: "Sevilla FC", lv: 2 },
-            { n: "Bryan Zaragoza", e: ["Osasuna", "Girona", "Valencia"], c: "Osasuna", lv: 2 },
-            { n: "Oyarzabal", e: ["Athletic", "Real Sociedad", "Alavés"], c: "Real Sociedad", lv: 2 },
-            { n: "Tsygankov", e: ["Girona FC", "Mallorca", "Sevilla"], c: "Girona FC", lv: 2 },
-            { n: "Muriqi", e: ["Mallorca", "Alavés", "Getafe"], c: "Mallorca", lv: 2 },
-
-            // NIVEL 3: EXPERTO (Rayo, recién ascendidos, equipos modestos)
-            { n: "Isi Palazón", e: ["Rayo Vallecano", "Leganés", "Levante"], c: "Rayo Vallecano", lv: 3 },
-            { n: "Borja Mayoral", e: ["Getafe CF", "Rayo", "Valladolid"], c: "Getafe CF", lv: 3 },
-            { n: "James Rodríguez", e: ["Rayo Vallecano", "Villarreal", "Betis"], c: "Rayo Vallecano", lv: 3 },
-            { n: "Luis Milla", e: ["Getafe CF", "Espanyol", "Leganés"], c: "Getafe CF", lv: 3 },
-            { n: "Vicente Guaita", e: ["Celta", "Valencia", "Getafe"], c: "Celta", lv: 3 },
-            { n: "Carlos Vicente", e: ["Alavés", "Espanyol", "Leganés"], c: "Alavés", lv: 3 },
-            { n: "Puado", e: ["Espanyol", "Valladolid", "Celta"], c: "Espanyol", lv: 3 },
-            { n: "Sandro", e: ["Las Palmas", "Levante", "Cádiz"], c: "Las Palmas", lv: 3 }, // Corregido: Las Palmas está en 1ª en 24/25 y 25/26
-            { n: "Roger Martí", e: ["Cádiz CF", "Levante", "Valladolid"], c: "Cádiz CF", lv: 3 },
-            { n: "Morales", e: ["Levante UD", "Villarreal", "Espanyol"], c: "Levante UD", lv: 3 }
-        ];
-
-        let indexActual = 0, aciertos = 0, fallos = 0, vidas = 3;
-
-        function actualizarMarcador() {
-            document.getElementById('stat-total').innerText = `${indexActual + 1}/30`;
-            document.getElementById('stat-correct').innerText = aciertos;
-            document.getElementById('stat-wrong').innerText = fallos;
-            document.getElementById('stat-lives').innerText = "❤️".repeat(vidas) + "🖤".repeat(3-vidas);
-        }
-
-        function cargarJugador() {
-            if (vidas <= 0) return;
-            const j = jugadores[indexActual];
-            document.getElementById('nivel-info').innerText = `Nivel ${j.lv}: ${j.lv==1?'Fácil':j.lv==2?'Intermedio':'Experto'}`;
-            document.getElementById('player-display').innerText = j.n;
-            document.getElementById('feedback').innerText = "";
-            document.getElementById('next-btn').style.display = 'none';
-            actualizarMarcador();
-            const grid = document.getElementById('options-grid');
-            grid.innerHTML = '';
-            j.e.forEach(eq => {
-                const b = document.createElement('button');
-                b.className = 'btn-option'; b.innerText = eq;
-                b.onclick = () => {
-                    if (eq === j.c) {
-                        aciertos++; confetti({ particleCount: 100, spread: 70 });
-                        document.getElementById('feedback').innerHTML = "<span style='color:var(--primary)'>¡Qué golazo, Erik! ¡Eres mejor que Mbappé!</span>";
-                        document.getElementById('next-btn').style.display = 'inline-block';
-                        Array.from(grid.children).forEach(btn => btn.style.pointerEvents = 'none');
-                        b.style.background = '#e8f5e9'; b.style.borderColor = 'var(--primary)';
-                    } else {
-                        fallos++; vidas--; actualizarMarcador();
-                        if (vidas <= 0) return gameOver();
-                        document.getElementById('feedback').innerHTML = "<span style='color:var(--error)'>Erik, aciertas menos que el Barça en Champions...</span>";
-                        b.style.background = '#ffebee'; b.style.borderColor = 'var(--error)'; b.disabled = true;
-                    }
-                };
-                grid.appendChild(b);
-            });
-        }
-
-        function gameOver() {
-            document.getElementById('main-box').innerHTML = `<h2 style='color:var(--error)'>❌ ¡ELIMINADO! ❌</h2><p style='font-size:1.5rem'>Erik, eres más malo que el Barcelona.</p><button class='next-btn' style='display:block;margin:20px auto' onclick='location.reload()'>REINTENTAR</button>`;
-        }
-
-        function proximoJugador() {
-            indexActual++;
-            if (indexActual < jugadores.length) cargarJugador();
-            else document.getElementById('main-box').innerHTML = `<h2 style='color:var(--primary)'>🏆 ¡CAMPEÓN DE LIGA! 🏆</h2><p>¡Erik, has completado los 3 niveles!</p><button class='next-btn' style='display:block;margin:20px auto' onclick='location.reload()'>JUGAR DE NUEVO</button>`;
-        }
-
-        cargarJugador();
-    </script>
-</body>
-</html>
