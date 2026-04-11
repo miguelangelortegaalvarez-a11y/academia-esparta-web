@@ -4,111 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <title>Ecuaciones de Primer Grado - Academia Esparta</title>
+    <title>Desafío Interactivo - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --verde-oscuro: #388E3C; --gris: #f4f7f6; }
+        :root { --verde: #4CAF50; --verde-oscuro: #388E3C; --rojo: #e74c3c; --gris: #f4f7f6; }
         body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 0; }
         .header-web { background: white; color: var(--verde); text-align: center; padding: 40px 20px; border-bottom: 4px solid var(--verde); }
         .header-web h1 { font-family: 'Montserrat', sans-serif; font-size: 2.5rem; margin: 0; text-transform: uppercase; }
-        .container { max-width: 850px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .frase-motivadora { background: #e8f5e9; border-radius: 8px; padding: 25px; text-align: center; margin-bottom: 40px; border-left: 5px solid var(--verde); font-style: italic; color: var(--verde-oscuro); font-weight: 600; }
-        .card { border: 1px solid #eee; border-radius: 8px; padding: 25px; margin-bottom: 25px; background: #fff; }
-        .card h3 { color: var(--verde); font-family: 'Montserrat', sans-serif; margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        summary { background: var(--verde); color: white; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; text-align: center; list-style: none; text-transform: uppercase; font-size: 0.9rem; }
-        .solucion-box { background: #fdfdfd; padding: 20px; border: 1px solid #ddd; margin-top: 5px; border-radius: 0 0 6px 6px; font-size: 1.2rem; line-height: 2; }
-        .paso { display: block; margin-bottom: 10px; border-left: 3px solid var(--verde); padding-left: 10px; }
+        .container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        
+        .quiz-card { border: 1px solid #eee; border-radius: 10px; padding: 25px; margin-bottom: 30px; background: #fff; }
+        .quiz-card h3 { color: var(--verde-oscuro); margin-top: 0; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        
+        .texto-lectura { background: #fdfdfd; padding: 20px; border-left: 4px solid var(--verde); margin-bottom: 20px; font-style: italic; line-height: 1.6; }
+
+        .opciones { display: grid; gap: 10px; margin-top: 15px; }
+        .boton-opcion { 
+            padding: 12px; border: 2px solid #ddd; border-radius: 6px; background: white; 
+            cursor: pointer; font-weight: 600; transition: all 0.2s; text-align: left;
+        }
+        .boton-opcion:hover { border-color: var(--verde); background: #f9fff9; }
+
+        /* Clases para el resultado */
+        .correcto { background-color: var(--verde) !important; color: white !important; border-color: var(--verde-oscuro) !important; }
+        .incorrecto { background-color: var(--rojo) !important; color: white !important; border-color: #c0392b !important; }
+        
+        .feedback { margin-top: 15px; font-weight: bold; display: none; padding: 10px; border-radius: 5px; }
     </style>
 </head>
 <body>
 
     <header class="header-web">
         <h1>Academia Esparta</h1>
-        <p>Entrenamiento: Ecuaciones de Primer Grado</p>
+        <p>Desafío de Comprensión y Lógica</p>
     </header>
 
     <div class="container">
-        <div class="frase-motivadora">
-            "La constancia es la clave para dominar cualquier desafío matemático."
+
+        <div class="quiz-card">
+            <h3>📖 Comprensión Lectora</h3>
+            <div class="texto-lectura">
+                "El sistema solar se formó hace unos 4.600 millones de años a partir del colapso de una nube molecular gigante. El Sol concentra el 99,86% de la masa de todo el sistema."
+            </div>
+            <p><strong>Según el texto, ¿qué porcentaje de masa NO pertenece al Sol?</strong></p>
+            <div class="opciones">
+                <button class="boton-opcion" onclick="verificar(this, false, 'f1')">A) 99,86%</button>
+                <button class="boton-opcion" onclick="verificar(this, true, 'f1')">B) 0,14%</button>
+                <button class="boton-opcion" onclick="verificar(this, false, 'f1')">C) 4,6%</button>
+            </div>
+            <div id="f1" class="feedback"></div>
         </div>
 
-        <div class="card">
-            <h3>1. Ecuación Básica</h3>
-            <p>Resuelve: \(3x - 5 = 10\)</p>
-            <details>
-                <summary>Ver paso a paso</summary>
-                <div class="solucion-box">
-                    <span class="paso">Pasamos el -5 sumando al otro lado: \(3x = 10 + 5\)</span>
-                    <span class="paso">Operamos: \(3x = 15\)</span>
-                    <span class="paso">El 3 que multiplica pasa dividiendo: \(x = \frac{15}{3}\)</span>
-                    <p><strong>Resultado: \(x = 5\)</strong></p>
-                </div>
-            </details>
+        <div class="quiz-card">
+            <h3>⚖️ ¿Verdadero o Falso?</h3>
+            <p><strong>"En una ecuación de primer grado, el objetivo principal es encontrar el valor de la incógnita (x) que hace que la igualdad sea cierta."</strong></p>
+            <div class="opciones">
+                <button class="boton-opcion" onclick="verificar(this, true, 'f2')">Verdadero</button>
+                <button class="boton-opcion" onclick="verificar(this, false, 'f2')">Falso</button>
+            </div>
+            <div id="f2" class="feedback"></div>
         </div>
 
-        <div class="card">
-            <h3>2. X en ambos lados</h3>
-            <p>Resuelve: \(5x + 4 = 2x + 13\)</p>
-            <details>
-                <summary>Ver paso a paso</summary>
-                <div class="solucion-box">
-                    <span class="paso">Agrupamos las \(x\) a la izquierda y los números a la derecha: \(5x - 2x = 13 - 4\)</span>
-                    <span class="paso">Operamos ambos lados: \(3x = 9\)</span>
-                    <span class="paso">Despejamos: \(x = \frac{9}{3}\)</span>
-                    <p><strong>Resultado: \(x = 3\)</strong></p>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h3>3. Con Paréntesis</h3>
-            <p>Resuelve: \(2(x - 3) = 8\)</p>
-            <details>
-                <summary>Ver paso a paso</summary>
-                <div class="solucion-box">
-                    <span class="paso">Multiplicamos el 2 por todo lo de dentro: \(2x - 6 = 8\)</span>
-                    <span class="paso">Pasamos el -6 sumando: \(2x = 8 + 6\)</span>
-                    <span class="paso">Operamos: \(2x = 14\)</span>
-                    <span class="paso">Despejamos: \(x = \frac{14}{2}\)</span>
-                    <p><strong>Resultado: \(x = 7\)</strong></p>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h3>4. Paréntesis y Negativos</h3>
-            <p>Resuelve: \(4 - (x + 2) = 10\)</p>
-            <details>
-                <summary>Ver paso a paso</summary>
-                <div class="solucion-box">
-                    <span class="paso">El signo menos cambia todo el paréntesis: \(4 - x - 2 = 10\)</span>
-                    <span class="paso">Operamos los números: \(2 - x = 10\)</span>
-                    <span class="paso">Pasamos el 2 restando: \(-x = 10 - 2\)</span>
-                    <span class="paso">Cambiamos el signo a todo: \(x = -8\)</span>
-                    <p><strong>Resultado: \(x = -8\)</strong></p>
-                </div>
-            </details>
-        </div>
-
-        <div class="card">
-            <h3>5. Con Denominadores</h3>
-            <p>Resuelve: \(\frac{x}{2} + 3 = 7\)</p>
-            <details>
-                <summary>Ver paso a paso</summary>
-                <div class="solucion-box">
-                    <span class="paso">Pasamos el 3 restando: \(\frac{x}{2} = 7 - 3\)</span>
-                    <span class="paso">Operamos: \(\frac{x}{2} = 4\)</span>
-                    <span class="paso">El 2 que divide pasa multiplicando: \(x = 4 \cdot 2\)</span>
-                    <p><strong>Resultado: \(x = 8\)</strong></p>
-                </div>
-            </details>
+        <div class="quiz-card">
+            <h3>🧠 Reto de Cálculo</h3>
+            <p><strong>Si tengo 3 manzanas y me quitan 2, ¿cuántas manzanas tengo?</strong></p>
+            <div class="opciones">
+                <button class="boton-opcion" onclick="verificar(this, false, 'f3')">A) Ninguna</button>
+                <button class="boton-opcion" onclick="verificar(this, true, 'f3')">B) Una</button>
+                <button class="boton-opcion" onclick="verificar(this, false, 'f3')">C) Cinco</button>
+            </div>
+            <div id="f3" class="feedback"></div>
         </div>
 
     </div>
 
-    <footer style="text-align: center; padding: 40px; color: #999; font-size: 0.8rem;">
-        © 2026 Academia Esparta - Material de apoyo escolar
+    <script>
+        function verificar(elemento, esCorrecto, feedbackId) {
+            const padre = elemento.parentElement;
+            const botones = padre.querySelectorAll('.boton-opcion');
+            const feedback = document.getElementById(feedbackId);
+
+            // Deshabilitar todos los botones de esta pregunta
+            botones.forEach(btn => btn.disabled = true);
+
+            if (esCorrecto) {
+                elemento.classList.add('correcto');
+                feedback.style.display = 'block';
+                feedback.style.color = '#2e7d32';
+                feedback.innerHTML = '✅ ¡Excelente! Respuesta correcta.';
+            } else {
+                elemento.classList.add('incorrecto');
+                feedback.style.display = 'block';
+                feedback.style.color = '#c62828';
+                feedback.innerHTML = '❌ Inténtalo de nuevo la próxima vez.';
+                
+                // Mostrar cuál era la correcta
+                botones.forEach(btn => {
+                    // Aquí simulamos saber cuál es la correcta para marcarla en verde
+                    // En un sistema real lo programaríamos más dinámico
+                });
+            }
+        }
+    </script>
+
+    <footer style="text-align: center; padding: 40px; color: #999;">
+        © 2026 Academia Esparta - Aprendizaje dinámico
     </footer>
 
 </body>
