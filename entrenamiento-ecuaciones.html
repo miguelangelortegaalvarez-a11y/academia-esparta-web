@@ -1,10 +1,139 @@
-<header class="header-web">
-    <h1>ACADEMIA ESPARTA</h1>
-    <p>Formulario Oficial: Cálculo Diferencial</p>
-</header>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Formulario de Derivadas - Academia Esparta</title>
+    <style>
+        :root { --verde: #4CAF50; --verde-oscuro: #2e7d32; --gris: #f4f7f6; --fondo-tarjeta: #ffffff; }
+        
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 0; color: #333; }
+        
+        /* CABECERA CORPORATIVA ESPARTANA */
+        .header-esparta { background: #ffffff; text-align: center; padding: 40px 20px; border-bottom: 5px solid var(--verde); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .header-esparta h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; color: var(--verde); margin: 0; text-transform: uppercase; letter-spacing: -1px; }
+        .frase-motivacional { font-size: 1.3rem; color: #555; font-style: italic; margin-top: 15px; font-weight: 600; }
 
-<div class="container">
-    <div class="nota-espartana">
-        "La derivada es la herramienta que mide el cambio. Domina la tabla y dominarás el análisis."
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        
+        /* ESTILO DE TARJETAS TIPO LIBRO */
+        .card-formula { background: var(--fondo-tarjeta); border-radius: 12px; border: 1px solid #ddd; margin-bottom: 30px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .card-titulo { background-color: #f0f0f0; border-bottom: 1px solid #ddd; padding: 15px 20px; font-family: 'Montserrat'; font-weight: bold; color: var(--verde-oscuro); display: flex; justify-content: space-between; align-items: center; }
+        
+        /* BOTÓN DE DESARROLLO VERDE */
+        summary { background: var(--verde); color: #fff; padding: 12px 20px; font-weight: bold; text-align: center; cursor: pointer; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; transition: background 0.3s; border-radius: 6px; }
+        summary:hover { background: var(--verde-oscuro); }
+        summary::marker { content: ""; } /* Quita la flechita por defecto */
+        
+        /* ESTILO DE TABLA CON LÍNEAS TIPO LIBRO */
+        .derivadas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid #ddd; }
+        .columna { padding: 25px; display: flex; flex-direction: column; gap: 15px; font-size: 1.15rem; line-height: 1.8; }
+        .columna-izq { border-right: 1px solid #eee; } /* Línea vertical central */
+        .item-derivada { padding-bottom: 10px; border-bottom: 1px solid #eee; } /* Línea horizontal entre fórmulas */
+        .item-derivada:last-child { border-bottom: none; }
+        
+        .nota-espartana { background: #e8f5e9; border-left: 5px solid var(--verde); padding: 15px; margin: 20px 0; font-style: italic; font-weight: 600; }
+        .info-header { text-align: left; padding: 15px; border-bottom: 1px solid #eee; font-weight: 600; font-family: 'Montserrat'; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; color: #777; }
+    </style>
+</head>
+<body>
+
+    <header class="header-esparta">
+        <h1>ACADEMIA ESPARTA</h1>
+        <div class="frase-motivacional">"La victoria ama la preparación. Entrena tu mente, domina el cálculo diferencial."</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="nota-espartana">
+            Usa este formulario como referencia rápida. La columna de la izquierda es la función simple y la de la derecha es la función compuesta, aplicando la Regla de la Cadena. ¡A por ello!
+        </div>
+
+        <div class="card-formula">
+            <div class="card-titulo"><span>1. Funciones Algebráicas</span> <span>\( k, x, x^n, \sqrt{x} \)</span></div>
+            <details>
+                <summary>VER DERIVADAS Y DESARROLLOS</summary>
+                <div class="derivadas-grid">
+                    <div class="columna columna-izq">
+                        <div class="info-header">FUNCIONES SIMPLES</div>
+                        <div class="item-derivada">Constante: \( f(x) = k \)<br>Derivada: \( f'(x) = 0 \)</div>
+                        <div class="item-derivada">Identidad: \( f(x) = x \)<br>Derivada: \( f'(x) = 1 \)</div>
+                        <div class="item-derivada">Potencia Simple: \( f(x) = x^n \)<br>Derivada: \( f'(x) = n \cdot x^{n-1} \)</div>
+                        <div class="item-derivada">Raíz Cuadrada Simple: \( f(x) = \sqrt{x} \)<br>Derivada: \( f'(x) = \frac{1}{2\sqrt{x}} \)</div>
+                    </div>
+                    <div class="columna">
+                        <div class="info-header">FUNCIONES COMPUESTAS (Regla de la Cadena)</div>
+                        <div class="item-derivada">-</div>
+                        <div class="item-derivada">Identidad Compuesta: \( f(u) = u(x) \)<br>Derivada: \( f'(x) = u' \)</div>
+                        <div class="item-derivada">Potencia Compuesta: \( f(u) = u^n \)<br>Derivada: \( f'(x) = n \cdot u^{n-1} \cdot u' \)</div>
+                        <div class="item-derivada">Raíz Cuadrada Compuesta: \( f(u) = \sqrt{u} \)<br>Derivada: \( f'(x) = \frac{u'}{2\sqrt{u}} \)</div>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="card-formula">
+            <div class="card-titulo"><span>2. Exponenciales y Logaritmos</span> <span>\( e^x, a^x, \ln(x) \)</span></div>
+            <details>
+                <summary>VER DERIVADAS Y DESARROLLOS</summary>
+                <div class="derivadas-grid">
+                    <div class="columna columna-izq">
+                        <div class="info-header">FUNCIONES SIMPLES</div>
+                        <div class="item-derivada">Exponencial base \( e \): \( f(x) = e^x \)<br>Derivada: \( f'(x) = e^x \)</div>
+                        <div class="item-derivada">Exponencial base \( a \): \( f(x) = a^x \)<br>Derivada: \( f'(x) = a^x \cdot \ln(a) \)</div>
+                        <div class="item-derivada">Logaritmo Neperiano: \( f(x) = \ln(x) \)<br>Derivada: \( f'(x) = \frac{1}{x} \)</div>
+                    </div>
+                    <div class="columna">
+                        <div class="info-header">FUNCIONES COMPUESTAS (Regla de la Cadena)</div>
+                        <div class="item-derivada">Exponencial base \( e \) Compuesta: \( f(u) = e^u \)<br>Derivada: \( f'(x) = e^u \cdot u' \)</div>
+                        <div class="item-derivada">Exponencial base \( a \) Compuesta: \( f(u) = a^u \)<br>Derivada: \( f'(x) = a^u \cdot \ln(a) \cdot u' \)</div>
+                        <div class="item-derivada">Logaritmo Neperiano Compuesto: \( f(u) = \ln(u) \)<br>Derivada: \( f'(x) = \frac{u'}{u} \)</div>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="card-formula">
+            <div class="card-titulo"><span>3. Trigonométricas</span> <span>\( \text{sen}(x), \cos(x), \text{tg}(x) \)</span></div>
+            <details>
+                <summary>VER DERIVADAS Y DESARROLLOS</summary>
+                <div class="derivadas-grid">
+                    <div class="columna columna-izq">
+                        <div class="info-header">FUNCIONES SIMPLES</div>
+                        <div class="item-derivada">Seno Simple: \( f(x) = \text{sen}(x) \)<br>Derivada: \( f'(x) = \cos(x) \)</div>
+                        <div class="item-derivada">Coseno Simple: \( f(x) = \cos(x) \)<br>Derivada: \( f'(x) = -\text{sen}(x) \)</div>
+                        <div class="item-derivada">Tangente Simple: \( f(x) = \text{tg}(x) \)<br>Derivada: \( f'(x) = 1 + \text{tg}^2(x) \)</div>
+                    </div>
+                    <div class="columna">
+                        <div class="info-header">FUNCIONES COMPUESTAS (Regla de la Cadena)</div>
+                        <div class="item-derivada">Seno Compuesto: \( f(u) = \text{sen}(u) \)<br>Derivada: \( f'(x) = \cos(u) \cdot u' \)</div>
+                        <div class="item-derivada">Coseno Compuesto: \( f(u) = \cos(u) \)<br>Derivada: \( f'(x) = -\text{sen}(u) \cdot u' \)</div>
+                        <div class="item-derivada">Tangente Compuesta: \( f(u) = \text{tg}(u) \)<br>Derivada: \( f'(x) = (1 + \text{tg}^2(u)) \cdot u' \)</div>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="card-formula">
+            <div class="card-titulo"><span>4. Álgebra de Derivadas</span> <span>\( (u+v)', (uv)', (u/v)' \)</span></div>
+            <details>
+                <summary>VER REGLAS Y DESARROLLOS</summary>
+                <div class="columna" style="padding: 25px; gap: 10px; font-size: 1.2rem;">
+                    <div>Suma/Resta de Funciones:<br> \( f = u \pm v \implies f' = u' \pm v' \)</div>
+                    <div>Producto de Funciones:<br> \( f = u \cdot v \implies f' = u' \cdot v + u \cdot v' \)</div>
+                    <div>Cociente de Funciones:<br> \( f = \frac{u}{v} \implies f' = \frac{u' \cdot v - u \cdot v'}{v^2} \)</div>
+                </div>
+            </details>
+        </div>
+
     </div>
-    ...
+
+    <footer style="text-align: center; padding: 40px; color: #aaa; font-size: 0.9rem;">
+        © 2026 Academia Esparta - Material de Referencia para Estudiantes de Élite
+    </footer>
+
+</body>
+</html>
