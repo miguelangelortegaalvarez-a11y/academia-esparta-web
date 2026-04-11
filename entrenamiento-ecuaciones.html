@@ -4,169 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>English Battle: Passive Voice - Academia Esparta</title>
+    <title>Comprensión Lectora - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --azul: #2196f3; --rojo: #e74c3c; --negro: #333; --gris: #f4f7f6; }
-        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding-bottom: 50px; }
-        .header { background: white; color: var(--verde); text-align: center; padding: 20px; border-bottom: 5px solid var(--verde); }
-        .header h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; }
-        .container { max-width: 700px; margin: 20px auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        :root { --verde: #4CAF50; --negro: #333; --gris: #f4f7f6; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--gris); margin: 0; padding: 20px; }
         
-        .status-bar { display: flex; justify-content: space-between; align-items: center; background: var(--negro); color: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-family: 'Montserrat'; font-size: 0.9rem; }
-        .vidas-count { background: var(--rojo); padding: 5px 10px; border-radius: 8px; font-weight: bold; }
+        .no-print { text-align: center; margin-bottom: 30px; }
+        .btn-imprimir { background: var(--verde); color: white; padding: 15px 30px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-family: 'Montserrat'; }
+
+        /* FICHA INDEPENDIENTE */
+        .ficha { 
+            background: white; 
+            max-width: 800px; 
+            margin: 0 auto 50px auto; 
+            padding: 40px; 
+            border: 2px solid #ddd; 
+            border-radius: 10px; 
+            page-break-after: always; /* Para que al imprimir cada una sea una hoja */
+            position: relative;
+        }
+
+        .header-ficha { border-bottom: 3px solid var(--verde); margin-bottom: 20px; padding-bottom: 10px; }
+        .header-ficha h1 { font-family: 'Montserrat'; color: var(--verde); margin: 0; text-transform: uppercase; font-size: 1.5rem; }
         
-        .progreso-bg { width: 100%; height: 12px; background: #eee; border-radius: 10px; margin-bottom: 25px; overflow: hidden; }
-        .progreso-fill { height: 100%; background: var(--azul); width: 0%; transition: 0.5s; }
-
-        .pregunta { font-size: 1.4rem; font-weight: 700; color: #333; margin-bottom: 20px; text-align: center; }
-        .opciones { display: grid; gap: 12px; }
-        .opcion { padding: 18px; border: 2px solid #ddd; border-radius: 12px; background: white; cursor: pointer; font-size: 1.1rem; transition: 0.2s; font-weight: 600; text-align: left; }
-        .opcion:hover:not(:disabled) { border-color: var(--azul); background: #f0f7ff; }
+        .texto-animal { background: #f9f9f9; padding: 20px; border-radius: 8px; line-height: 1.6; font-size: 1.1rem; border-left: 5px solid var(--verde); margin-bottom: 30px; }
         
-        .correcto { background-color: var(--verde) !important; color: white; border-color: #388E3C !important; }
-        .incorrecto { background-color: var(--rojo) !important; color: white; border-color: #b71c1c !important; }
+        h2 { font-family: 'Montserrat'; font-size: 1.2rem; color: var(--negro); margin-top: 25px; border-left: 3px solid var(--negro); padding-left: 10px; }
+        
+        .ejercicio { margin-left: 10px; }
+        .opcion { margin: 10px 0; }
+        .vf-row { margin: 10px 0; display: flex; gap: 20px; }
+        .unir-container { display: flex; justify-content: space-around; margin-top: 15px; border: 1px dashed #ccc; padding: 15px; }
+        .columna { list-style: none; padding: 0; }
+        .columna li { margin: 10px 0; padding: 5px; background: #eee; border-radius: 4px; width: 150px; text-align: center; font-weight: 600; font-size: 0.9rem; }
 
-        .feedback { margin-top: 20px; text-align: center; font-weight: 800; font-size: 1.2rem; min-height: 2em; font-family: 'Montserrat'; }
-        .shake { animation: shake 0.4s; }
-        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-10px);} 75% {transform: translateX(10px);} }
-
-        .pantalla-final { display: none; text-align: center; padding: 20px; }
-        .btn { margin-top: 25px; padding: 15px 35px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.2rem; color: white; text-transform: uppercase; }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; }
+            .ficha { border: none; margin: 0; width: 100%; box-shadow: none; }
+        }
     </style>
 </head>
 <body>
 
-<header class="header">
-    <h1>ACADEMIA ESPARTA</h1>
-    <p>English Challenge: Passive Voice 🇬🇧</p>
-</header>
+<div class="no-print">
+    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR TODAS LAS FICHAS</button>
+    <p>Cada animal saldrá en una página diferente al imprimir.</p>
+</div>
 
-<div class="container">
-    <div class="status-bar">
-        <div id="tag-nivel" style="background: var(--azul); padding: 5px 10px; border-radius: 8px;">LEVEL 1</div>
-        <div style="color: var(--verde);">✅ <span id="puntos">0</span></div>
-        <div class="vidas-count">🛡️ <span id="vidas">3</span></div>
-        <div>🎯 <span id="num-preg">1</span>/10</div>
+<div class="ficha">
+    <div class="header-ficha"><h1>1. El León: El Rey de la Sabana</h1></div>
+    <div class="texto-animal">
+        El león es un gran felino que vive en grupos llamados manadas. A diferencia de otros gatos, a los leones les gusta vivir en familia. Los machos tienen una gran melena que protege su cuello durante las peleas y les hace parecer más grandes. Las hembras son las encargadas de cazar para alimentar a todo el grupo.
     </div>
     
-    <div class="progreso-bg"><div class="progreso-fill" id="barra"></div></div>
-    
-    <div id="juego">
-        <div class="pregunta" id="txt-pregunta">Cargando frase...</div>
-        <div class="opciones" id="box-opciones"></div>
-        <div id="feedback" class="feedback"></div>
+    <h2>I. Elige la respuesta correcta</h2>
+    <div class="ejercicio">
+        <div class="opcion">a) ¿Cómo viven los leones? ▢ Solos ▢ En manadas ▢ En cuevas ▢ En el agua</div>
+        <div class="opcion">b) ¿Para qué sirve la melena? ▢ Para volar ▢ Para nadar ▢ Para proteger el cuello ▢ Para dormir</div>
+        <div class="opcion">c) ¿Quién caza principalmente? ▢ Los cachorros ▢ Los machos ▢ Las hembras ▢ Los elefantes</div>
+        <div class="opcion">d) ¿Qué tipo de animal es? ▢ Un ave ▢ Un felino ▢ Un pez ▢ Un reptil</div>
     </div>
 
-    <div class="pantalla-final" id="final">
-        <h2 id="titulo-final"></h2>
-        <p id="puntos-final" style="font-size: 3rem; font-weight: 900; color: var(--azul);"></p>
-        <p id="mensaje-final" style="font-style: italic; font-size: 1.3rem; margin: 20px 0;"></p>
-        <button class="btn" id="btn-next" style="background: var(--verde); display:none;" onclick="irSiguienteNivel()">NEXT LEVEL 🚀</button>
-        <button class="btn" id="btn-retry" style="background: var(--rojo); display:none;" onclick="reiniciarNivel()">RETRY 🔄</button>
+    <h2>II. ¿Verdadero (V) o Falso (F)?</h2>
+    <div class="ejercicio">
+        <div class="vf-row">( ) Los leones prefieren vivir solos.</div>
+        <div class="vf-row">( ) La melena hace que el macho parezca más grande.</div>
+        <div class="vf-row">( ) Las leonas son las que buscan comida.</div>
+    </div>
+
+    <h2>III. Une con flechas</h2>
+    <div class="unir-container">
+        <ul class="columna"><li>Macho</li><li>Manada</li><li>Hembra</li></ul>
+        <ul class="columna"><li>Caza</li><li>Melena</li><li>Familia</li></ul>
     </div>
 </div>
 
-<script>
-    let nivel = 1;
-    let index = 0;
-    let aciertos = 0;
-    let fallos = 0;
-    let bancoActual = [];
+<div class="ficha">
+    <div class="header-ficha"><h1>2. El Elefante: Un Gigante Inteligente</h1></div>
+    <div class="texto-animal">
+        Los elefantes son los animales terrestres más grandes. Tienen una trompa larga que usan para respirar, beber agua y agarrar comida. Sus orejas son enormes y las mueven para refrescarse cuando hace mucho calor. Son muy inteligentes y tienen una memoria excelente.
+    </div>
+    
+    <h2>I. Elige la respuesta correcta</h2>
+    <div class="ejercicio">
+        <div class="opcion">a) ¿Para qué NO usan la trompa? ▢ Beber ▢ Respirar ▢ Agarrar ▢ Correr</div>
+        <div class="opcion">b) ¿Por qué mueven las orejas? ▢ Para volar ▢ Para refrescarse ▢ Para saludar ▢ Para asustar</div>
+        <div class="opcion">c) ¿Dónde viven? ▢ En el mar ▢ En la tierra ▢ En las nubes ▢ En el hielo</div>
+        <div class="opcion">d) ¿Cómo es su memoria? ▢ Muy mala ▢ Excelente ▢ No tienen ▢ Se les olvida todo</div>
+    </div>
 
-    const PREGUNTAS = [
-        // NIVEL 1: Present & Past Simple
-        { p: "Change to Passive: 'The chef prepares the food.'", o: ["The food is prepared by the chef.", "The food was prepared by the chef.", "The food prepares by the chef."], c: 0, n: 1 },
-        { p: "Passive: 'Bell invented the telephone.'", o: ["The telephone is invented.", "The telephone was invented.", "The telephone were invented."], c: 1, n: 1 },
-        { p: "Passive: 'They build houses every year.'", o: ["Houses are built every year.", "Houses is built every year.", "Houses were built every year."], c: 0, n: 1 },
-        { p: "Passive: 'Someone stole my car yesterday.'", o: ["My car is stolen.", "My car was stole.", "My car was stolen."], c: 2, n: 1 },
-        { p: "Passive: 'Many people speak English.'", o: ["English is spoken.", "English is speaked.", "English was spoken."], c: 0, n: 1 },
+    <h2>II. ¿Verdadero (V) o Falso (F)?</h2>
+    <div class="ejercicio">
+        <div class="vf-row">( ) El elefante es el animal más grande del mar.</div>
+        <div class="vf-row">( ) La trompa sirve para beber agua.</div>
+        <div class="vf-row">( ) Los elefantes son animales poco inteligentes.</div>
+    </div>
 
-        // NIVEL 2: Modals, Continuous, Perfect
-        { p: "Passive: 'You must wash this shirt.'", o: ["This shirt must washed.", "This shirt must be washed.", "This shirt is must washed."], c: 1, n: 2 },
-        { p: "Passive: 'They are painting the stadium.'", o: ["The stadium is painted.", "The stadium is being painted.", "The stadium was being painted."], c: 1, n: 2 },
-        { p: "Passive: 'Scientists have discovered a planet.'", o: ["A planet was discovered.", "A planet has been discovered.", "A planet have been discovered."], c: 1, n: 2 },
-        { p: "Passive: 'The government will build a hospital.'", o: ["A hospital will be built.", "A hospital will built.", "A hospital is built."], c: 0, n: 2 },
-        { p: "Passive: 'They gave me a gift.'", o: ["I was given a gift.", "A gift was gave me.", "I am given a gift."], c: 0, n: 2 }
-    ];
+    <h2>III. Une con flechas</h2>
+    <div class="unir-container">
+        <ul class="columna"><li>Orejas</li><li>Trompa</li><li>Cuerpo</li></ul>
+        <ul class="columna"><li>Grande</li><li>Calor</li><li>Comida</li></ul>
+    </div>
+</div>
 
-    function mezclar(array) { return array.sort(() => Math.random() - 0.5); }
+<div class="ficha">
+    <div class="header-ficha"><h1>3. El Delfín: El Amigo del Mar</h1></div>
+    <div class="texto-animal">
+        El delfín no es un pez, es un mamífero que vive en el agua. Necesita salir a la superficie para respirar aire a través de un agujero en su cabeza llamado espiráculo. Son famosos por ser muy juguetones y por comunicarse entre ellos mediante silbidos y chasquidos.
+    </div>
+    
+    <h2>I. Elige la respuesta correcta</h2>
+    <div class="ejercicio">
+        <div class="opcion">a) ¿Qué es un delfín? ▢ Un pez ▢ Un mamífero ▢ Una planta ▢ Un ave</div>
+        <div class="opcion">b) ¿Por dónde respira? ▢ Por la nariz ▢ Por branquias ▢ Por el espiráculo ▢ Por la boca</div>
+        <div class="opcion">c) ¿Cómo se comunican? ▢ Hablando ▢ Con silbidos ▢ Con señas ▢ No se comunican</div>
+        <div class="opcion">d) ¿Dónde vive? ▢ En el desierto ▢ En el bosque ▢ En el agua ▢ En la montaña</div>
+    </div>
 
-    function iniciar() {
-        index = 0; aciertos = 0; fallos = 0;
-        bancoActual = mezclar(PREGUNTAS.filter(q => q.n === nivel)).slice(0, 5); // 5 preguntas por nivel
-        document.getElementById("tag-nivel").innerText = "LEVEL " + nivel;
-        document.getElementById("juego").style.display = "block";
-        document.getElementById("final").style.display = "none";
-        cargar();
-    }
+    <h2>II. ¿Verdadero (V) o Falso (F)?</h2>
+    <div class="ejercicio">
+        <div class="vf-row">( ) Los delfines pueden respirar bajo el agua como los peces.</div>
+        <div class="vf-row">( ) El espiráculo está en la cabeza.</div>
+        <div class="vf-row">( ) Son animales que les gusta jugar.</div>
+    </div>
 
-    function cargar() {
-        document.getElementById("puntos").innerText = aciertos;
-        document.getElementById("vidas").innerText = 3 - fallos;
-        document.getElementById("num-preg").innerText = index + 1;
-        document.getElementById("barra").style.width = (index * 20) + "%";
-        document.getElementById("feedback").innerText = "";
-
-        const q = bancoActual[index];
-        document.getElementById("txt-pregunta").innerText = q.p;
-        const box = document.getElementById("box-opciones");
-        box.innerHTML = "";
-        
-        q.o.forEach((txt, i) => {
-            const b = document.createElement("button");
-            b.className = "opcion";
-            b.innerText = txt;
-            b.onclick = () => validar(i === q.c, b);
-            box.appendChild(b);
-        });
-    }
-
-    function validar(esC, btn) {
-        document.querySelectorAll(".opcion").forEach(b => b.disabled = true);
-        const fb = document.getElementById("feedback");
-
-        if (esC) {
-            btn.classList.add("correcto");
-            aciertos++;
-            fb.innerText = "EXCELLENT! 🌟";
-            fb.style.color = "var(--verde)";
-        } else {
-            btn.classList.add("incorrecto");
-            fallos++;
-            fb.innerText = "MORE TERRIBLE THAN BARÇA IN CHAMPIONS! 😂";
-            fb.classList.add("shake");
-            fb.style.color = "var(--rojo)";
-        }
-
-        setTimeout(() => {
-            index++;
-            if (index < 5 && fallos <= 3) cargar();
-            else finalizar();
-        }, 1500);
-    }
-
-    function finalizar() {
-        document.getElementById("juego").style.display = "none";
-        document.getElementById("final").style.display = "block";
-        document.getElementById("puntos-final").innerText = aciertos + " / 5";
-
-        if (fallos > 3 || aciertos < 3) {
-            document.getElementById("titulo-final").innerText = "FAILED!";
-            document.getElementById("mensaje-final").innerText = "You need more discipline, Erik! Try again.";
-            document.getElementById("btn-retry").style.display = "inline-block";
-        } else {
-            document.getElementById("titulo-final").innerText = "VICTORY!";
-            document.getElementById("mensaje-final").innerText = "You are better than Mbappé in Real Madrid!";
-            if(nivel < 2) document.getElementById("btn-next").style.display = "inline-block";
-            else document.getElementById("titulo-final").innerText = "PASSIVE MASTER! 🏆";
-        }
-    }
-
-    function irSiguienteNivel() { nivel++; iniciar(); }
-    function reiniciarNivel() { iniciar(); }
-
-    iniciar();
-</script>
+    <h2>III. Une con flechas</h2>
+    <div class="unir-container">
+        <ul class="columna"><li>Silbidos</li><li>Espiráculo</li><li>Mamífero</li></ul>
+        <ul class="columna"><li>Respirar</li><li>Comunicación</li><li>Delfín</li></ul>
+    </div>
+</div>
 
 </body>
 </html>
