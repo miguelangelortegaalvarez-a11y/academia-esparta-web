@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letra T - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --primary: #0e9343; --dark: #063c24; --light-green: #e8f5e9; --bg: #f0f2f5; }
+        body { font-family: 'Fredoka', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow: hidden; }
+        header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); position: relative; z-index: 10; }
+        .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--primary); font-weight: bold; }
+        .book-slider { width: 100%; flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative; }
+        .page { display: none; width: 90%; max-width: 800px; height: 75vh; background: white; border-radius: 30px; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 2px solid #eee; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.4s ease; }
+        .page.active { display: flex; }
+        h2 { color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem; text-align: center; }
+        .tap-item { font-size: 3rem; cursor: pointer; padding: 15px 25px; border-radius: 20px; margin: 10px; border: 4px solid transparent; transition: 0.2s; background: #f9f9f9; display: inline-block; color: #333; }
+        .tap-item.selected-correct { border-color: var(--primary); background: var(--light-green); color: var(--primary); pointer-events: none; }
+        .match-container { display: flex; justify-content: space-around; width: 100%; gap: 15px; }
+        .match-col { display: flex; flex-direction: column; gap: 10px; }
+        .match-box { padding: 12px; background: #f9f9f9; border: 3px solid #eee; border-radius: 15px; font-size: 1.8rem; cursor: pointer; text-align: center; min-width: 140px; }
+        .match-box.selected { border-color: #fb8c00; background: #fff3e0; }
+        .match-box.correct { border-color: var(--primary); background: var(--light-green); color: var(--primary); pointer-events: none; }
+        .nav-btn { position: absolute; bottom: 30px; background: var(--primary); color: white; border: none; padding: 12px 35px; border-radius: 50px; font-size: 1.4rem; font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 var(--dark); z-index: 20; text-transform: uppercase; }
+        .next { right: 40px; display: none; }
+        .prev { left: 40px; background: #999; box-shadow: 0 5px 0 #666; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-link">← VOLVER</a>
+        <div style="font-weight:700; font-size:1.6rem; color:var(--primary);">Cuaderno Letra T 🐯</div>
+    </header>
+    <div class="book-slider">
+        <div class="page active" id="p1" data-total="3" data-target="TA" data-options="TA,TE,TA,TO,TA"><h2>Busca "TA"</h2><div class="options-container"></div></div>
+        <div class="page" id="p2" data-total="3" data-target="TE" data-options="TE,TI,TE,TU,TE"><h2>Busca "TE"</h2><div class="options-container"></div></div>
+        <div class="page" id="p3" data-total="3" data-target="TI" data-options="TI,TA,TI,TO,TI"><h2>Busca "TI"</h2><div class="options-container"></div></div>
+        <div class="page" id="p4" data-total="3" data-target="TO" data-options="TO,TU,TO,TE,TO"><h2>Busca "TO"</h2><div class="options-container"></div></div>
+        <div class="page" id="p5" data-total="3" data-target="TU" data-options="TU,TI,TU,TA,TU"><h2>Busca "TU"</h2><div class="options-container"></div></div>
+        <div class="page" id="p6" data-total="5">
+            <h2>Completa la palabra</h2>
+            <div style="text-align: center;">
+                <div id="word-emoji" style="font-size: 7rem;">☕</div>
+                <div id="word-display" style="font-size: 4.5rem; font-weight: bold; margin-bottom: 20px;"><span id="word-part-1">__</span><span id="word-part-2">ZA</span></div>
+                <div id="options-area"></div>
+            </div>
+        </div>
+        <div class="page" id="p7" data-total="3">
+            <h2>Une con su dibujo</h2>
+            <div class="match-container">
+                <div class="match-col">
+                    <div class="match-box" id="w1" onclick="match('w1', 'taza')">TAZA</div>
+                    <div class="match-box" id="w2" onclick="match('w2', 'tapa')">TAPA</div>
+                    <div class="match-box" id="w3" onclick="match('w3', 'tubo')">TUBO</div>
+                </div>
+                <div class="match-col">
+                    <div class="match-box" id="i1" onclick="match('i1', 'tapa')">🥫</div>
+                    <div class="match-box" id="i2" onclick="match('i2', 'taza')">☕</div>
+                    <div class="match-box" id="i3" onclick="match('i3', 'tubo')">🧪</div>
+                </div>
+            </div>
+        </div>
+        <button class="nav-btn prev" id="btnPrev" onclick="navegar(-1)" style="display: none;">ATRÁS</button>
+        <button class="nav-btn next" id="btnNext" onclick="navegar(1)">SIGUIENTE</button>
+    </div>
+    <script>
+        let paginaActual = 1, totalPaginas = 7, aciertos = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0}, selId = null, selVal = null;
+        const wordGameData = [
+            { emoji: '☕', p2: 'ZA', options: ['TA', 'TE', 'TI'], correct: 'TA', final: 'TAZA' },
+            { emoji: '🥫', p2: 'PA', options: ['TA', 'TU', 'TO'], correct: 'TA', final: 'TAPA' },
+            { emoji: '🍅', p2: 'MATE', options: ['TO', 'TU', 'TA'], correct: 'TO', final: 'TOMATE' },
+            { emoji: '🧪', p2: 'BO', options: ['TU', 'TI', 'TE'], correct: 'TU', final: 'TUBO' },
+            { emoji: '🍴', p2: 'LA', options: ['TE', 'TI', 'TA'], correct: 'TE', final: 'TELA' }
+        ];
+        let currentWordIndex = 0;
+        function shuffle(a) { return a.sort(() => Math.random() - 0.5); }
+        function loadSearchPage(n) {
+            const p = document.getElementById(`p${n}`), c = p.querySelector('.options-container');
+            if (!c) return; c.innerHTML = '';
+            shuffle(p.dataset.options.split(',')).forEach(o => {
+                const s = document.createElement('span'); s.className = 'tap-item'; s.innerText = o;
+                s.onclick = () => { if(o === p.dataset.target && !s.classList.contains('selected-correct')) { s.classList.add('selected-correct'); aciertos[n]++; confetti({particleCount:20}); actualizarInterfaz(); } };
+                c.appendChild(s);
+            });
+        }
+        function navegar(d) {
+            document.getElementById(`p${paginaActual}`).classList.remove('active');
+            paginaActual += d; if(paginaActual > totalPaginas) { window.location.href = 'index.html'; return; }
+            document.getElementById(`p${paginaActual}`).classList.add('active');
+            if (paginaActual <= 5) loadSearchPage(paginaActual);
+            if (paginaActual === 6) { currentWordIndex = 0; loadWordChallenge(); }
+            actualizarInterfaz();
+        }
+        function actualizarInterfaz() {
+            document.getElementById('btnPrev').style.display = paginaActual === 1 ? 'none' : 'block';
+            const btnN = document.getElementById('btnNext'), obj = parseInt(document.getElementById(`p${paginaActual}`).dataset.total);
+            btnN.style.display = aciertos[paginaActual] >= obj ? 'block' : 'none';
+        }
+        function loadWordChallenge() {
+            const d = wordGameData[currentWordIndex]; document.getElementById('word-emoji').innerText = d.emoji;
+            document.getElementById('word-display').innerHTML = `<span>__</span><span>${d.p2}</span>`;
+            const oa = document.getElementById('options-area'); oa.innerHTML = '';
+            shuffle([...d.options]).forEach(o => {
+                const s = document.createElement('span'); s.className = 'tap-item'; s.innerText = o;
+                s.onclick = () => { if(o === d.correct) { s.classList.add('selected-correct'); confetti({particleCount:40}); document.getElementById('word-display').innerHTML = `<span style="color:var(--primary)">${d.final}</span>`; aciertos[6]++; setTimeout(() => { currentWordIndex++; if(currentWordIndex < wordGameData.length) loadWordChallenge(); else actualizarInterfaz(); }, 1500); } };
+                oa.appendChild(s);
+            });
+        }
+        function match(id, val) {
+            const el = document.getElementById(id); if(el.classList.contains('correct')) return;
+            if(!selId) { selId = id; selVal = val; el.classList.add('selected'); }
+            else {
+                const prev = document.getElementById(selId);
+                if(selId[0] !== id[0] && selVal === val) { el.classList.add('correct'); prev.classList.add('correct'); aciertos[7]++; confetti({particleCount:40}); }
+                prev.classList.remove('selected'); selId = null; selVal = null; actualizarInterfaz();
+            }
+        }
+        loadSearchPage(1);
+    </script>
+</body>
+</html>
