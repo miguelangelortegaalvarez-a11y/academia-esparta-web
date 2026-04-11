@@ -3,88 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Erik: El Ojeador de La Liga - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <title>Memoria Espartana de Erik - Academia Esparta</title>
     <style>
-        :root { --verde: #4CAF50; --azul: #2196f3; --rojo: #e74c3c; --gris: #f4f7f6; --blanco: #ffffff; }
-        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding-bottom: 50px; }
-        .header { background: var(--blanco); color: var(--verde); text-align: center; padding: 20px; border-bottom: 5px solid var(--verde); }
-        .header h1 { font-family: 'Montserrat'; font-size: 2.2rem; margin: 0; text-transform: uppercase; }
-        .container { max-width: 750px; margin: 20px auto; background: var(--blanco); padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .status-bar { display: flex; justify-content: space-between; align-items: center; background: #333; color: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-family: 'Montserrat'; }
-        .vidas-count { background: var(--rojo); padding: 5px 10px; border-radius: 8px; font-weight: bold; }
-        .progreso-bg { width: 100%; height: 12px; background: #eee; border-radius: 10px; margin-bottom: 25px; overflow: hidden; }
-        .progreso-fill { height: 100%; background: var(--azul); width: 0%; transition: 0.5s; }
-        .pregunta { font-size: 1.5rem; font-weight: 700; color: #333; margin-bottom: 25px; text-align: center; }
-        .opciones { display: grid; gap: 12px; }
-        .opcion { padding: 18px; border: 2px solid #ddd; border-radius: 12px; background: white; cursor: pointer; font-size: 1.2rem; transition: 0.2s; text-align: center; font-weight: 600; }
-        .opcion:hover:not(:disabled) { border-color: var(--azul); background: #f0f7ff; transform: scale(1.02); }
-        .correcto { background-color: var(--verde) !important; color: white; border-color: #388E3C !important; }
-        .incorrecto { background-color: var(--rojo) !important; color: white; border-color: #b71c1c !important; }
-        .feedback-area { margin-top: 25px; text-align: center; font-weight: 800; font-size: 1.3rem; min-height: 2em; font-family: 'Montserrat'; }
-        .shake { animation: shake 0.5s; }
-        @keyframes shake { 0%, 100% {transform: translateX(0);} 20%, 60% {transform: translateX(-10px);} 40%, 80% {transform: translateX(10px);} }
-        .pantalla-final { display: none; text-align: center; padding: 20px; }
-        .btn-accion { margin-top: 25px; padding: 15px 35px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.2rem; color: white; transition: 0.3s; text-transform: uppercase; }
+        :root { --verde: #4CAF50; --verde-oscuro: #2e7d32; --gris: #f4f7f6; --blanco: #ffffff; --fondo-pieza: #333333; }
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--gris); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        
+        .header { text-align: center; margin-bottom: 20px; color: var(--verde); }
+        .header h1 { font-family: 'Montserrat'; text-transform: uppercase; margin: 0; font-size: 2rem; }
+        .frase-motivacional { font-size: 1.1rem; color: #666; font-style: italic; margin-top: 5px; font-weight: 600; }
+
+        .container { max-width: 600px; display: flex; flex-direction: column; align-items: center; }
+
+        /* MARCADOR */
+        .status-bar { display: flex; justify-content: space-between; align-items: center; background: #333; color: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-family: 'Montserrat'; width: 100%; box-sizing: border-box; }
+        .parejas-count { background: var(--verde); padding: 5px 12px; border-radius: 8px; font-weight: bold; }
+
+        /* TABLERO DE JUEGO (GRID) */
+        .tablero {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columnas para las 10 piezas en 2 filas */
+            gap: 15px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* ESTILO DE CADA PIEZA */
+        .pieza {
+            background-color: var(--fondo-pieza);
+            aspect-ratio: 1; /* Piezas cuadradas */
+            border-radius: 12px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 3px solid #fff; /* Borde blanco como en tus otros juegos */
+        }
+
+        /* PIEZA GIRADA */
+        .pieza.girada {
+            transform: rotateY(180deg);
+        }
+
+        /* CARAS DE LA PIEZA (DELANTE Y DETRÁS) */
+        .cara {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden; /* Oculta la parte de atrás al girar */
+            font-size: 3rem; /* Tamaño de los emojis de animales */
+        }
+
+        /* Detrás de la pieza (lo que ve Erik al principio) */
+        .detras {
+            background-color: var(--fondo-pieza);
+            color: var(--verde);
+            font-family: 'Montserrat';
+            font-weight: 800;
+        }
+
+        /* Delante de la pieza (el animal escondido) */
+        .delante {
+            background-color: #f0f0f0;
+            transform: rotateY(180deg); /* El animal ya viene "girado" internamente */
+            color: #333;
+        }
+
+        /* PANTALLA FINAL */
+        .pantalla-final { display: none; text-align: center; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box; }
+        .btn-accion { margin-top: 25px; padding: 15px 35px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.2rem; color: white; transition: 0.3s; text-transform: uppercase; background: var(--verde); }
     </style>
 </head>
 <body>
 
 <header class="header">
     <h1>ACADEMIA ESPARTA</h1>
-    <p>¿Erik, sabes de qué equipo es cada jugador?</p>
+    <p class="frase-motivacional">"Erik, entrena tu mente. ¡Disciplina espartana!"</p>
 </header>
 
 <div class="container">
-    <div class="status-bar">
-        <div style="background: var(--verde); padding: 5px 10px; border-radius: 8px;">LALIGA 25/26</div>
-        <div style="color: #4CAF50;">✅ <span id="aciertos">0</span></div>
-        <div class="vidas-count">🛡️ VIDAS: <span id="vidas">3</span></div>
-        <div>🎯 <span id="p-actual">1</span>/10</div>
-    </div>
-    
-    <div class="progreso-bg"><div class="progreso-fill" id="barra"></div></div>
-    
-    <div id="juego">
-        <div class="pregunta" id="txt-pregunta">Cargando fichaje...</div>
-        <div class="opciones" id="opciones-box"></div>
-        <div id="feedback" class="feedback-area"></div>
+    <div id="juego-container">
+        <div class="status-bar">
+            <div>JUEGO DE MEMORIA</div>
+            <div class="parejas-count">PAREJAS: <span id="parejas-acertadas">0</span> / 5</div>
+        </div>
+        
+        <div class="tablero" id="tablero">
+            </div>
     </div>
 
     <div class="pantalla-final" id="final">
-        <h2 id="fin-titulo" style="font-size: 2rem;"></h2>
-        <p id="fin-nota" style="font-size: 3rem; font-weight: 900; margin: 10px 0;"></p>
-        <p id="fin-mensaje" style="font-style: italic; font-size: 1.4rem; margin: 20px 0; font-weight: 600;"></p>
-        <button class="btn-accion" id="btn-retry" style="background: var(--rojo);" onclick="reiniciarNivel()">REINTENTAR 🔄</button>
+        <span style="font-size: 5rem;">🏆</span>
+        <h2 style="font-size: 2.2rem; color: var(--verde); font-family: 'Montserrat'; text-transform: uppercase;">¡MUY BIEN ERIK!</h2>
+        <p style="font-size: 1.5rem; font-weight: 700; margin: 10px 0;">¡Has encontrado todas las parejas!</p>
+        <p id="fin-mensaje" style="font-style: italic; font-size: 1.2rem; margin: 20px 0;">Pura disciplina espartana de 4 años.</p>
+        <button class="btn-accion" onclick="reiniciarJuego()">¿JUGAR OTRA VEZ? 🔄</button>
     </div>
 </div>
 
 <script>
-    let pIndex = 0;
-    let pts = 0;
-    let err = 0;
-    let preguntasPartida = [];
+    // 5 animales diferentes para hacer 5 parejas (10 piezas)
+    const animales = ['🐶', '🐱', '🦁', '🐘', '🐥'];
+    let piezasArray = [...animales, ...animales]; // Duplicamos para hacer las parejas
+    let piezasGiradas = [];
+    let parejasAcertadas = 0;
+    let bloqueado = false; // Para evitar girar más de 2 piezas a la vez
 
-    const FRASE_BARCA = "¡Erik, eres más malo que el Barcelona en Champions! 😂";
-    const FRASE_MBAPPE = "¡BRUTAL ERIK! ¡Eres mejor que Mbappé en el Real Madrid! 👑";
-
-    const jugadores = [
-        { p: "¿En qué equipo juega Kylian Mbappé?", o: ["Real Madrid", "Atlético de Madrid", "Sevilla"], c: 0 },
-        { p: "¿En qué equipo juega Lamine Yamal?", o: ["Real Madrid", "FC Barcelona", "Girona"], c: 1 },
-        { p: "¿En qué equipo juega Antoine Griezmann?", o: ["Real Sociedad", "FC Barcelona", "Atlético de Madrid"], c: 2 },
-        { p: "¿En qué equipo juega Vinícius Júnior?", o: ["Real Madrid", "Betis", "Valencia"], c: 0 },
-        { p: "¿En qué equipo juega Nico Williams?", o: ["Athletic Club", "Real Sociedad", "Villarreal"], c: 0 },
-        { p: "¿En qué equipo juega Iago Aspas?", o: ["Celta de Vigo", "Deportivo", "Sevilla"], c: 0 },
-        { p: "¿En qué equipo juega Robert Lewandowski?", o: ["Real Madrid", "FC Barcelona", "Atlético de Madrid"], c: 1 },
-        { p: "¿En qué equipo juega Pedri?", o: ["Las Palmas", "FC Barcelona", "Valencia"], c: 1 },
-        { p: "¿En qué equipo juega Jude Bellingham?", o: ["Real Madrid", "Manchester City", "Girona"], c: 0 },
-        { p: "¿En qué equipo juega Takefusa Kubo?", o: ["Getafe", "Mallorca", "Real Sociedad"], c: 2 },
-        { p: "¿En qué equipo juega Álvaro Morata?", o: ["Atlético de Madrid", "Milan", "Real Madrid"], c: 0 },
-        { p: "¿En qué equipo juega Dani Olmo?", o: ["FC Barcelona", "Leipzig", "Girona"], c: 0 },
-        { p: "¿En qué equipo juega Federico Valverde?", o: ["Real Madrid", "Peñarol", "Uruguay FC"], c: 0 },
-        { p: "¿En qué equipo juega Gavi?", o: ["Sevilla", "FC Barcelona", "Betis"], c: 1 }
-    ];
-
+    // Función para mezclar las piezas (Algoritmo Fisher-Yates)
     function mezclar(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -93,84 +123,84 @@
         return array;
     }
 
-    function refrescar() {
-        document.getElementById("aciertos").innerText = pts;
-        document.getElementById("vidas").innerText = Math.max(0, 3 - err);
-        document.getElementById("p-actual").innerText = pIndex + 1;
-        document.getElementById("barra").style.width = (pIndex * 10) + "%";
-    }
+    // Función para crear el tablero de juego
+    function crearTablero() {
+        mezclar(piezasArray); // Barajamos las piezas
+        const tablero = document.getElementById("tablero");
+        tablero.innerHTML = ""; // Limpiamos el tablero
 
-    function cargar() {
-        refrescar();
-        document.getElementById("feedback").innerText = "";
-        document.getElementById("feedback").classList.remove("shake");
-        if (err > 3) { finalizar(true); return; }
+        piezasArray.forEach((animal, index) => {
+            const pieza = document.createElement("div");
+            pieza.classList.add("pieza");
+            pieza.setAttribute("data-animal", animal);
+            pieza.setAttribute("data-index", index);
+            pieza.onclick = girarPieza;
 
-        const q = preguntasPartida[pIndex];
-        document.getElementById("txt-pregunta").innerText = q.p;
-        const box = document.getElementById("opciones-box");
-        box.innerHTML = "";
-        
-        let opts = q.o.map((t, i) => ({ t, esC: i === q.c }));
-        // Mezclamos las opciones para que el Real Madrid no siempre sea la A
-        mezclar(opts);
-
-        opts.forEach(o => {
-            const b = document.createElement("button");
-            b.className = "opcion";
-            b.innerText = o.t;
-            b.onclick = () => validar(o.esC, b);
-            box.appendChild(b);
+            pieza.innerHTML = `
+                <div class="cara detras">M</div>
+                <div class="cara delante">${animal}</div>
+            `;
+            tablero.appendChild(pieza);
         });
     }
 
-    function validar(esC, btn) {
-        document.querySelectorAll(".opcion").forEach(b => b.disabled = true);
-        const fb = document.getElementById("feedback");
+    // Función que se ejecuta cuando Erik pulsa una pieza
+    function girarPieza() {
+        if (bloqueado || this.classList.contains('girada')) return; // No hacer nada si ya está girada o el juego está bloqueado
 
-        if (esC) {
-            btn.classList.add("correcto");
-            pts++;
-            fb.innerText = "¡GOLAZO ERIK! ⚽";
-            fb.style.color = "var(--verde)";
-        } else {
-            btn.classList.add("incorrecto");
-            err++;
-            fb.innerText = FRASE_BARCA;
-            fb.classList.add("shake");
-            fb.style.color = "var(--rojo)";
+        this.classList.add('girada'); // Giramos la pieza visualmente
+        piezasGiradas.push(this);
+
+        if (piezasGiradas.length === 2) {
+            bloqueado = true; // Bloqueamos el tablero para que no gire más de 2
+            comprobarPareja();
         }
-
-        setTimeout(() => {
-            pIndex++;
-            if (pIndex < 10 && err <= 3) cargar();
-            else finalizar(err > 3 || pts < 7);
-        }, 1800);
     }
 
-    function finalizar(perdio) {
-        document.getElementById("juego").style.display = "none";
+    // Función para comprobar si las dos piezas giradas son iguales
+    function comprobarPareja() {
+        const pieza1 = piezasGiradas[0];
+        const pieza2 = piezasGiradas[1];
+
+        if (pieza1.getAttribute('data-animal') === pieza2.getAttribute('data-animal')) {
+            // ¡Es una pareja!
+            parejasAcertadas++;
+            document.getElementById("parejas-acertadas").innerText = parejasAcertadas;
+            piezasGiradas = []; // Limpiamos la lista
+            bloqueado = false; // Desbloqueamos el tablero
+
+            // Si Erik encuentra todas las parejas
+            if (parejasAcertadas === 5) {
+                setTimeout(finalizarJuego, 800);
+            }
+        } else {
+            // No es pareja, volvemos a girarlas después de un tiempo
+            setTimeout(() => {
+                pieza1.classList.remove('girada');
+                pieza2.classList.remove('girada');
+                piezasGiradas = []; // Limpiamos la lista
+                bloqueado = false; // Desbloqueamos el tablero
+            }, 1200); // Tiempo de espera antes de volver a girarlas
+        }
+    }
+
+    // Función para mostrar la pantalla final
+    function finalizarJuego() {
+        document.getElementById("juego-container").style.display = "none";
         document.getElementById("final").style.display = "block";
-        document.getElementById("fin-nota").innerText = pts + " / 10";
-
-        if (perdio) {
-            document.getElementById("fin-titulo").innerText = "¡EXPULSADO CON ROJA!";
-            document.getElementById("fin-mensaje").innerText = FRASE_BARCA;
-        } else {
-            document.getElementById("fin-titulo").innerText = "¡EL PICHICHI DE LA ACADEMIA!";
-            document.getElementById("fin-mensaje").innerText = FRASE_MBAPPE;
-        }
     }
 
-    function reiniciarNivel() {
-        pIndex = 0; pts = 0; err = 0;
-        preguntasPartida = mezclar([...jugadores]).slice(0, 10);
-        document.getElementById("juego").style.display = "block";
+    // Función para reiniciar el juego
+    function reiniciarJuego() {
+        parejasAcertadas = 0;
+        document.getElementById("parejas-acertadas").innerText = parejasAcertadas;
+        document.getElementById("juego-container").style.display = "block";
         document.getElementById("final").style.display = "none";
-        cargar();
+        crearTablero(); // Volvemos a crear y barajar el tablero
     }
 
-    reiniciarNivel();
+    // Iniciamos el juego por primera vez
+    crearTablero();
 </script>
 
 </body>
