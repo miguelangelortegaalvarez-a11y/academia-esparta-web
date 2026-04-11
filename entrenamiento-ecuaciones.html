@@ -3,198 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <title>Ecuaciones de Primer Grado - Academia Esparta</title>
-    
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$']],
-                processEscapes: true
-            }
-        };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Grafomotricidad Nivel 1 - Academia Esparta</title>
     <style>
-        :root { --esparta-green: #2e7d32; --oro: #fbc02d; --rojo: #d32f2f; --crema: #fffde7; }
+        :root { --esparta-green: #2e7d32; --oro: #fbc02d; --gris-claro: #e0e0e0; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Lora', serif; background-color: #555; color: #212529; }
-        
+        body { font-family: 'Open Sans', sans-serif; background-color: #f5f5f5; }
+
         .page { 
             width: 210mm; 
             height: 296mm; 
             margin: 20px auto; 
             background: white; 
-            padding: 25mm 25mm; 
-            position: relative;
+            padding: 15mm; 
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            break-after: page;
+            position: relative;
+            border: 2px solid var(--esparta-green);
         }
 
         @media print {
             body { background: white; }
             .no-print { display: none !important; }
-            @page { margin: 0; size: A4; }
-            .page { margin: 0 !important; box-shadow: none !important; page-break-after: always !important; }
+            .page { margin: 0; border: none; }
         }
 
-        .btn-pdf { position: fixed; top: 20px; left: 20px; background: var(--rojo); color: white; border: none; padding: 15px 25px; border-radius: 8px; cursor: pointer; font-family: 'Montserrat'; font-weight: bold; z-index: 1000; }
+        .btn-pdf { 
+            position: fixed; top: 20px; left: 20px; 
+            background: #d32f2f; color: white; border: none; 
+            padding: 12px 20px; border-radius: 8px; cursor: pointer; 
+            font-family: 'Montserrat'; font-weight: bold; z-index: 1000;
+        }
 
-        header { border-bottom: 4px solid var(--esparta-green); margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; }
-        h1 { font-family: 'Montserrat'; font-size: 1.4rem; margin: 0; text-transform: uppercase; }
-        .header-brand { text-align: right; font-family: 'Montserrat'; font-weight: 800; font-size: 0.75rem; color: var(--esparta-green); }
+        header { 
+            text-align: center; 
+            border-bottom: 3px solid var(--esparta-green); 
+            padding-bottom: 10px; 
+            margin-bottom: 30px;
+        }
+        h1 { font-family: 'Montserrat'; color: var(--esparta-green); font-size: 1.8rem; text-transform: uppercase; }
+        .subtitle { font-size: 1rem; color: #666; font-weight: bold; }
 
-        .starting-box { background: var(--esparta-green); color: white; padding: 15px 25px; border-radius: 8px; font-family: 'Montserrat'; font-size: 1.1rem; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
-
-        .theory-box { background: var(--crema); border: 1px solid #ffe082; border-left: 8px solid var(--oro); padding: 30px; border-radius: 8px; line-height: 1.6; flex-grow: 1; }
-        .step-label { font-weight: 800; color: var(--esparta-green); font-family: 'Open Sans'; font-size: 0.95rem; display: block; margin-top: 20px; text-transform: uppercase; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        /* Estilo de los caminos de trazo */
+        .trace-container { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around; }
         
-        .combat-zone { border: 3px solid var(--esparta-green); border-radius: 12px; flex-grow: 1; margin-top: 20px; display: flex; flex-direction: column; overflow: hidden; }
-        .combat-header { background: var(--esparta-green); color: white; padding: 15px 20px; font-family: 'Montserrat'; font-size: 1.1rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-        .grid-area { flex-grow: 1; background-image: linear-gradient(rgba(46, 125, 50, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(46, 125, 50, 0.08) 1px, transparent 1px); background-size: 30px 30px; }
+        .trace-row { 
+            display: flex; 
+            align-items: center; 
+            width: 100%; 
+            height: 80px; 
+            position: relative;
+        }
 
-        footer { text-align: center; font-family: 'Montserrat'; font-weight: 800; font-size: 0.9rem; color: #999; border-top: 1px solid #eee; padding-top: 15px; margin-top: 20px; text-transform: uppercase; }
+        .icon { font-size: 2rem; width: 50px; text-align: center; }
+        .target { font-size: 2rem; width: 50px; text-align: center; opacity: 0.3; }
+
+        .line { 
+            flex-grow: 1; 
+            height: 40px; 
+            border-bottom: 3px dotted #bbb; 
+            margin: 0 15px; 
+            position: relative;
+        }
+
+        /* Variaciones de líneas */
+        .line-zigzag {
+            background-image: linear-gradient(45deg, transparent 45%, #bbb 45%, #bbb 55%, transparent 55%),
+                              linear-gradient(-45deg, transparent 45%, #bbb 45%, #bbb 55%, transparent 55%);
+            background-size: 40px 40px;
+            border-bottom: none;
+        }
+
+        .line-waves {
+            background-image: radial-gradient(circle at 50% 100%, transparent 40%, #bbb 42%, #bbb 48%, transparent 50%);
+            background-size: 60px 30px;
+            border-bottom: none;
+            height: 30px;
+        }
+
+        .instruction {
+            background: #fff9c4;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--oro);
+        }
+
+        footer { 
+            text-align: center; 
+            font-family: 'Montserrat'; 
+            font-size: 0.8rem; 
+            color: #999; 
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
     </style>
 </head>
 <body>
 
-<button class="btn-pdf no-print" onclick="window.print()">📄 GENERAR PDF ECUACIONES</button>
+<button class="btn-pdf no-print" onclick="window.print()">📄 DESCARGAR FICHA DE TRAZOS</button>
 
 <div class="page">
     <header>
-        <div><h1>Ecuaciones: Nivel 1</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
+        <h1>Entrenamiento de Trazos</h1>
+        <div class="subtitle">Misión: ¡Lleva la ayuda a tus compañeros!</div>
     </header>
-    <div class="starting-box">
-        <span>ECUACIÓN DE PARTIDA:</span>
-        <span>$x + 5 = 12$</span>
-    </div>
-    <div class="theory-box">
-        <p>Una ecuación es una balanza. Lo que hagamos en un lado, debemos hacerlo en el otro para mantener el equilibrio.</p>
-        <span class="step-label">1. Identificar el Objetivo</span>
-        <p>Queremos dejar a la $x$ sola en un lado del igual. El número $+5$ nos está estorbando.</p>
-        <span class="step-label">2. La Regla de Salto</span>
-        <p>Cuando un número salta al otro lado del igual, cambia su operación a la contraria. Si está sumando, pasa restando:</p>
-        $$x = 12 - 5$$
-        <span class="step-label">3. Resultado</span>
-        $$\mathbf{x = 7}$$
-        <span class="step-label">4. Comprobación</span>
-        <p>¿$7 + 5$ es igual a $12$? Sí. Entonces la solución es correcta.</p>
-    </div>
-    <footer>Academia Esparta</footer>
-</div>
-<div class="page">
-    <header>
-        <div><h1>Entrenamiento: Nivel 1</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
-    </header>
-    <div class="combat-zone">
-        <div class="combat-header"><span>RESUELVE:</span><span>$x - 8 = 15$</span></div>
-        <div class="grid-area"></div>
-    </div>
-    <footer>Academia Esparta</footer>
-</div>
 
-<div class="page">
-    <header>
-        <div><h1>Ecuaciones: Nivel 2</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
-    </header>
-    <div class="starting-box">
-        <span>ECUACIÓN DE PARTIDA:</span>
-        <span>$3x = 18$</span>
+    <div class="instruction">
+        <strong>INSTRUCCIONES:</strong> Repasa las líneas punteadas sin levantar el lápiz del papel. Sigue la dirección de izquierda a derecha.
     </div>
-    <div class="theory-box">
-        <span class="step-label">1. Analizar la Operación</span>
-        <p>El número 3 está pegado a la $x$, lo que significa que la está <b>multiplicando</b>.</p>
-        <span class="step-label">2. Despejar la X</span>
-        <p>Siguiendo la regla de oro, lo que multiplica pasa al otro lado haciendo la operación contraria: <b>dividendo</b>.</p>
-        $$x = \frac{18}{3}$$
-        <span class="step-label">3. Resolución</span>
-        $$\mathbf{x = 6}$$
-    </div>
-    <footer>Academia Esparta</footer>
-</div>
-<div class="page">
-    <header>
-        <div><h1>Entrenamiento: Nivel 2</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
-    </header>
-    <div class="combat-zone">
-        <div class="combat-header"><span>RESUELVE:</span><span>$5x = 40$</span></div>
-        <div class="grid-area"></div>
-    </div>
-    <footer>Academia Esparta</footer>
-</div>
 
-<div class="page">
-    <header>
-        <div><h1>Ecuaciones: Nivel 3</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
-    </header>
-    <div class="starting-box">
-        <span>ECUACIÓN DE PARTIDA:</span>
-        <span>$2(x - 3) = 10$</span>
-    </div>
-    <div class="theory-box">
-        <span class="step-label">1. Eliminar el Escudo (Paréntesis)</span>
-        <p>El 2 que está fuera multiplica a <b>todo</b> lo que hay dentro del paréntesis:</p>
-        $$2 \cdot x - 2 \cdot 3 = 10 \Rightarrow 2x - 6 = 10$$
-        <span class="step-label">2. Agrupar Números</span>
-        <p>Pasamos el $-6$ al otro lado sumando:</p>
-        $$2x = 10 + 6 \Rightarrow 2x = 16$$
-        <span class="step-label">3. Finalizar Despeje</span>
-        $$x = \frac{16}{2} \Rightarrow \mathbf{x = 8}$$
-    </div>
-    <footer>Academia Esparta</footer>
-</div>
-<div class="page">
-    <header>
-        <div><h1>Entrenamiento: Nivel 3</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
-    </header>
-    <div class="combat-zone">
-        <div class="combat-header"><span>RESUELVE:</span><span>$3(x + 4) = 21$</span></div>
-        <div class="grid-area"></div>
-    </div>
-    <footer>Academia Esparta</footer>
-</div>
+    <div class="trace-container">
+        <div class="trace-row">
+            <div class="icon">⚔️</div>
+            <div class="line"></div>
+            <div class="target">🛡️</div>
+        </div>
 
-<div class="page">
-    <header>
-        <div><h1>Ecuaciones: Nivel 4</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
-    </header>
-    <div class="starting-box">
-        <span>ECUACIÓN DE PARTIDA:</span>
-        <span>$\frac{x}{4} + 2 = 5$</span>
+        <div class="trace-row">
+            <div class="icon">🏹</div>
+            <div class="line line-zigzag"></div>
+            <div class="target">🎯</div>
+        </div>
+
+        <div class="trace-row">
+            <div class="icon">⛵</div>
+            <div class="line line-waves"></div>
+            <div class="target">🏛️</div>
+        </div>
+
+        <div class="trace-row">
+            <div class="icon">🐎</div>
+            <div style="flex-grow: 1; display: flex; justify-content: space-between; padding: 0 20px;">
+                <span style="border-bottom: 3px dotted #bbb; width: 40px;"></span>
+                <span style="border-bottom: 3px dotted #bbb; width: 40px;"></span>
+                <span style="border-bottom: 3px dotted #bbb; width: 40px;"></span>
+                <span style="border-bottom: 3px dotted #bbb; width: 40px;"></span>
+            </div>
+            <div class="target">⛺</div>
+        </div>
+
+        <div class="trace-row" style="height: 120px;">
+            <div class="icon">🦅</div>
+            <div class="line" style="border-radius: 50% 50% 0 0 / 100% 100% 0 0; border: 3px dotted #bbb; border-bottom: none;"></div>
+            <div class="target">🏔️</div>
+        </div>
     </div>
-    <div class="theory-box">
-        <span class="step-label">1. Prioridad de Operaciones</span>
-        <p>Primero movemos lo que no está pegado a la $x$. El $+2$ pasa restando:</p>
-        $$\frac{x}{4} = 5 - 2 \Rightarrow \frac{x}{4} = 3$$
-        <span class="step-label">2. Eliminar Denominador</span>
-        <p>El 4 que está debajo (dividiendo) pasa al otro lado <b>multiplicando</b> a todo el bloque derecho:</p>
-        $$x = 3 \cdot 4$$
-        <span class="step-label">3. Resultado</span>
-        $$\mathbf{x = 12}$$
-    </div>
-    <footer>Academia Esparta</footer>
-</div>
-<div class="page">
-    <header>
-        <div><h1>Entrenamiento: Nivel 4</h1></div>
-        <div class="header-brand">ACADEMIA ESPARTA</div>
-    </header>
-    <div class="combat-zone">
-        <div class="combat-header"><span>RESUELVE:</span><span>$\frac{x}{2} - 3 = 7$</span></div>
-        <div class="grid-area"></div>
-    </div>
-    <footer>Academia Esparta</footer>
+
+    <footer>ACADEMIA ESPARTA - Material Didáctico de Iniciación</footer>
 </div>
 
 </body>
