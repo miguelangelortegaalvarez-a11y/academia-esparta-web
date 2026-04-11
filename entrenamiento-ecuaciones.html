@@ -3,161 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sintaxis Profesional - Academia Esparta</title>
+    <title>Apuntes Maestro de Sintaxis - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         :root {
-            --primary: #0e9343;
-            --accent: #fbc02d;
-            --bg-crema: #fffdf2;
-            --dark: #1a1a1a;
+            --primary: #0e9343; /* Verde Academia Esparta */
+            --accent: #fbc02d; /* Amarillo/Naranja de la caja de desarrollo */
+            --bg-crema: #fffdf2; /* Fondo amarillento suave */
+            --bg-page: #ffffff; /* Fondo blanco de la página */
         }
-        body { font-family: 'Fredoka', sans-serif; background-color: #ffffff; padding: 40px; color: var(--dark); line-height: 1.8; }
-        .container { max-width: 900px; margin: 0 auto; }
-        
-        .header-esparta { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: baseline; }
-        .header-esparta h1 { margin: 0; font-size: 1.8rem; text-transform: uppercase; color: var(--primary); }
-        
-        .seccion-titulo { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; margin-top: 50px; text-transform: uppercase; font-size: 1.1rem; }
-        h3 { color: var(--primary); border-bottom: 2px solid var(--accent); display: inline-block; margin-top: 30px; font-size: 1.3rem; }
-        
-        .teoria-box { background: var(--bg-crema); padding: 25px; border-radius: 15px; border: 1px solid #e0e0e0; margin: 20px 0; }
-        .metodo-tag { background: #d32f2f; color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-        
-        .ejemplo-item { background: white; padding: 20px; border-radius: 10px; border-left: 6px solid var(--primary); margin-top: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .analisis-txt { font-size: 0.95rem; color: #555; margin-top: 10px; display: block; border-top: 1px dashed #ccc; padding-top: 10px; }
-        .resaltado { color: var(--primary); font-weight: bold; }
 
-        .footer-final { text-align: center; margin-top: 100px; padding: 40px; border-top: 2px solid #eee; font-weight: bold; color: var(--primary); letter-spacing: 3px; }
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: var(--bg-page);
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; }
+
+        /* Estilo Título Superior con línea verde */
+        .page-header {
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+        .page-header h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; color: #333; letter-spacing: 1px; }
+        .page-header span { font-size: 0.8rem; color: var(--primary); font-weight: bold; }
+
+        /* Bloque del Enunciado Superior */
+        .enunciado-top {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+            line-height: 1.5;
+        }
+        .enunciado-top b { color: var(--primary); }
+
+        /* Caja Verde Sólida del Sistema */
+        .sistema-box {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .sistema-box h3 { margin: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .sistema-math { font-size: 1.2rem; }
+
+        /* Caja Crema de Desarrollo con borde naranja */
+        .desarrollo-box {
+            background-color: var(--bg-crema);
+            border-left: 6px solid var(--accent);
+            padding: 25px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        /* Títulos de los pasos en verde */
+        .paso-titulo { color: var(--primary); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; margin: 20px 0 10px 0; display: block; }
+        
+        /* Centrado de ecuaciones dentro del desarrollo */
+        .math-center { text-align: center; margin: 15px 0; }
+        
+        /* Resaltado de variables en verde */
+        .highlight { color: var(--primary); font-weight: bold; }
+
+        /* Footer de Ficha */
+        .ficha-footer { text-align: center; font-size: 0.8rem; color: #ccc; text-transform: uppercase; margin-top: 10px; letter-spacing: 2px; }
+
+        /* Botón PDF (no se imprime) */
+        .no-print { text-align: right; margin-bottom: 30px; }
+        .btn-pdf { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Fredoka'; font-weight: bold; }
+
+        /* Ajustes para impresión */
+        @media print {
+            .no-print { display: none; }
+            body { padding: 0; }
+            .desarrollo-box { break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header-esparta">
-        <h1>TEMA 8: Complementos del Verbo</h1>
+    <div class="no-print">
+        <button class="btn-pdf" onclick="window.print()">📥 GENERAR PDF</button>
+    </div>
+
+    <div class="page-header">
+        <h1>Sistemas de Ecuaciones</h1>
         <span>ACADEMIA ESPARTA</span>
     </div>
+    
+    <div class="enunciado-top">
+        <b>ENUNCIADO 24:</b> Un librero vendió 84 libros a dos precios distintos: unos a 4,20 € y otros a 6 €. Obtuvo por la venta 462 €. ¿Cuántos libros vendió de cada clase?
+    </div>
 
-    [span_10](start_span)<p>Los complementos se dividen en dos grandes bloques: los <b>exclusivos del predicado verbal</b> (CD, Régimen, Predicativo y Agente) y los que pueden aparecer en <b>cualquier predicado</b> (CI y Circunstancial)[span_10](end_span).</p>
-
-    <div class="seccion-titulo">I. Complementos Exclusivos del Predicado Verbal</div>
-
-    <h3>A) Complemento Directo (CD)</h3>
-    <div class="teoria-box">
-        <span class="metodo-tag">Definición y Reconocimiento</span>
-        <p>Aparece para completar el significado del verbo. [span_11](start_span)Puede ser un Sintagma Nominal (ser inanimado) o un Sintagma Preposicional con "a" (ser animado)[span_11](end_span). 
-        [span_12](start_span)Se reconoce sustituyéndolo por <b>LO, LA, LOS, LAS</b>[span_12](end_span).</p>
-
-        <div class="ejemplo-item">
-            [span_13](start_span)<b>1.</b> "Dale <span class="resaltado">la llave</span> al portero"[span_13](end_span).
-            <span class="analisis-txt"><b>Análisis:</b> "La llave" es un S.N. inanimado. Sustitución: "Dá<b>la</b>". [span_14](start_span)Es CD porque completa la acción de dar[span_14](end_span).</span>
-        </div>
-
-        <div class="ejemplo-item">
-            [span_15](start_span)<b>2.</b> "Llama <span class="resaltado">a tu madre</span>"[span_15](end_span).
-            <span class="analisis-txt"><b>Análisis:</b> S.Prep con "a" (ser animado). Sustitución: "Lláma<b>la</b>". [span_16](start_span)Evita el laísmo[span_16](end_span).</span>
-        </div>
-
-        <div class="ejemplo-item">
-            [span_17](start_span)<b>3.</b> "<span class="resaltado">La llave</span> se <span class="resaltado">la</span> das al portero"[span_17](end_span).
-            <span class="analisis-txt"><b>Análisis:</b> Doble representación. [span_18](start_span)El CD aparece como S.N. y como pronombre átono "la" simultáneamente[span_18](end_span).</span>
+    <div class="sistema-box">
+        <h3>SISTEMA DE PARTIDA:</h3>
+        <div class="sistema-math">
+            $ \begin{cases} x + y = 84 \\ 4.20x + 6y = 462 \end{cases} $
         </div>
     </div>
 
-    <h3>B) Suplemento o Complemento de Régimen</h3>
-    <div class="teoria-box">
-        <span class="metodo-tag">Definición y Reconocimiento</span>
-        <p>Siempre es un Sintagma Preposicional. [span_19](start_span)El verbo "exige" una preposición específica para tener sentido pleno[span_19](end_span). [span_20](start_span)Indica el objeto de la acción y se puede sustituir por "eso" o "ello" manteniendo la preposición[span_20](end_span).</p>
+    <div class="desarrollo-box">
+        <span class="paso-titulo">ESTRATEGIA DE PLANTEAMIENTO</span>
+        <p>1. <b>Definimos variables:</b> Llamamos <span class="highlight">$x$</span> al número de libros vendidos a 4,20 € e <span class="highlight">$y$</span> al número de libros vendidos a 6 €.<br>
+           2. <b>Ecuación de cantidad:</b> El total de libros vendidos es 84 $\implies x + y = 84$.<br>
+           3. <b>Ecuación de dinero:</b> El dinero total obtenido es 462 €. Multiplicamos cada libro por su precio $\implies 4.20x + 6y = 462$.</p>
 
-        <div class="ejemplo-item">
-            [span_21](start_span)<b>1.</b> "No me fío <span class="resaltado">de las apariencias</span>"[span_21](end_span).
-            <span class="analisis-txt"><b>Análisis:</b> El verbo "fiarse" exige la preposición "de". [span_22](start_span)Sustitución: "No me fío de <b>ello</b>"[span_22](end_span).</span>
-        </div>
+        <span class="paso-titulo">RESOLUCIÓN PASO A PASO</span>
+        <p><b>Paso 1: Despejar la y.</b> En la primera ecuación, despejamos la variable $y$ pasando la $x$ restando al otro lado:</p>
+        <div class="math-center">$y = 84 - x$</div>
 
-        <div class="ejemplo-item">
-            [span_23](start_span)<b>2.</b> "¿Te acuerdas <span class="resaltado">de tu padre</span>?"[span_23](end_span).
-            [span_24](start_span)<span class="analisis-txt"><b>Análisis:</b> El régimen preposicional viene marcado por el verbo pronominal "acordarse de"[span_24](end_span).</span>
-        </div>
+        <p><b>Paso 2: Sustituir.</b> Tomamos la segunda ecuación y reemplazamos la $y$ por nuestra expresión:</p>
+        <div class="math-center">$4.20x + 6 \cdot (84 - x) = 462$</div>
 
-        <div class="ejemplo-item">
-            [span_25](start_span)<b>3.</b> "He llenado <span class="resaltado">de agua</span> la botella"[span_25](end_span).
-            [span_26](start_span)<span class="analisis-txt"><b>Análisis:</b> Caso especial donde conviven el CD (la botella) y el Suplemento (de agua)[span_26](end_span).</span>
-        </div>
+        <p><b>Paso 3: Quitar paréntesis.</b> Multiplicamos el $6$ por los dos números de dentro: $6 \cdot 84 = 504$ y $6 \cdot (-x) = -6x$:</p>
+        <div class="math-center">$4.20x + 504 - 6x = 462$</div>
+
+        <p><b>Paso 4: Agrupar términos.</b> Pasamos el $504$ restando al lado derecho y agrupamos las $x$ en el izquierdo:</p>
+        <div class="math-center">$4.20x - 6x = 462 - 504 \implies -1.80x = -42$</div>
+
+        <p><b>Paso 5: Limpieza de Signos y Despeje.</b> Como ambos son negativos, los pasamos a positivos. El $1.80$ que está multiplicando a la $x$ pasa dividiendo debajo del $42$:</p>
+        <div class="math-center">$1.80x = 42 \implies x = \frac{42}{1.80} \implies x = 23.33 \text{...}$</div>
+        <p><i>Nota: El resultado original de la foto da decimales periódicos.</i></p>
+
+        <p><b>Paso 6: Hallar y.</b> Sustituimos el valor de $x$ en el primer despeje:</p>
+        <div class="math-center">$y = 84 - 23.33 \implies y = 60.67$</div>
+        
+        <p class="highlight" style="margin-top:20px; text-align:center; font-size:1.1rem;">RESULTADO: Vendió 23 libros a 4,20€ y 61 libros a 6€ (redondeando).</p>
+        
+        <div class="ficha-footer">ACADEMIA ESPARTA</div>
     </div>
 
-    <h3>C) Complemento Predicativo (CPred)</h3>
-    <div class="teoria-box">
-        <span class="metodo-tag">Definición y Reconocimiento</span>
-        [span_27](start_span)<p>Modifica al mismo tiempo al verbo y a otro elemento (sujeto o CD)[span_27](end_span). [span_28](start_span)Suele ser un S. Adjetival que concuerda en género y número con el elemento al que modifica[span_28](end_span).</p>
-
-        <div class="ejemplo-item">
-            [span_29](start_span)<b>1.</b> "Los soldados llegaron <span class="resaltado">abatidos</span>"[span_29](end_span).
-            <span class="analisis-txt"><b>Análisis:</b> Modifica al sujeto "soldados" (masculino plural). [span_30](start_span)Si fuera "la soldado", diríamos "llegó abatida"[span_30](end_span).</span>
-        </div>
-
-        <div class="ejemplo-item">
-            [span_31](start_span)<b>2.</b> "Se puso <span class="resaltado">manchada</span> la camisa"[span_31](end_span).
-            <span class="analisis-txt"><b>Análisis:</b> Modifica al CD "la camisa". [span_32](start_span)Concuerda en femenino singular[span_32](end_span).</span>
-        </div>
-    </div>
-
-    <h3>D) Complemento Agente (CAg)</h3>
-    <div class="teoria-box">
-        <span class="metodo-tag">Definición y Reconocimiento</span>
-        <p>Aparece exclusivamente en oraciones pasivas. [span_33](start_span)Indica quién realiza la acción que el sujeto recibe[span_33](end_span). [span_34](start_span)Siempre es un S. Prep. introducido por "por"[span_34](end_span).</p>
-
-        <div class="ejemplo-item">
-            [span_35](start_span)<b>1.</b> "El delincuente fue detenido <span class="resaltado">por la policía</span>"[span_35](end_span).
-            <span class="analisis-txt"><b>Análisis:</b> Oración pasiva. [span_36](start_span)La policía es quien ejecuta la detención[span_36](end_span).</span>
-        </div>
-
-        <div class="ejemplo-item">
-            [span_37](start_span)<b>2.</b> "Aquel actor fue olvidado pronto <span class="resaltado">por el público</span>"[span_37](end_span).
-            [span_38](start_span)[span_39](start_span)<span class="analisis-txt"><b>Análisis:</b> El S.Prep "por el público" realiza la acción del verbo en voz pasiva[span_38](end_span)[span_39](end_span).</span>
-        </div>
-    </div>
-
-    <div class="seccion-titulo">II. Complementos en Cualquier Predicado</div>
-
-    <h3>E) Complemento Indirecto (CI)</h3>
-    <div class="teoria-box">
-        <span class="metodo-tag">Definición y Reconocimiento</span>
-        [span_40](start_span)<p>Indica el destinatario, beneficiado o perjudicado por la acción[span_40](end_span). [span_41](start_span)Se reconoce porque se sustituye por <b>LE, LES</b> (o SE si hay CD pronominalizado)[span_41](end_span).</p>
-
-        <div class="ejemplo-item">
-            [span_42](start_span)<b>1.</b> "Le di la llave <span class="resaltado">a Juan</span>"[span_42](end_span).
-            <span class="analisis-txt"><b>Análisis:</b> Doble representación (pronombre "le" + S.Prep). [span_43](start_span)Sustitución: "<b>Le</b> di la llave"[span_43](end_span).</span>
-        </div>
-
-        <div class="ejemplo-item">
-            [span_44](start_span)<b>2.</b> "¿Has escrito <span class="resaltado">a tus padres</span>?"[span_44](end_span).
-            <span class="analisis-txt"><b>Análisis:</b> Destinatario de la acción. [span_45](start_span)Sustitución: "¿<b>Les</b> has escrito?"[span_45](end_span).</span>
-        </div>
-    </div>
-
-    <h3>F) Complemento Circunstancial (CC)</h3>
-    <div class="teoria-box">
-        <span class="metodo-tag">Definición y Reconocimiento</span>
-        [span_46](start_span)<p>Aporta datos sobre las condiciones del hecho (lugar, tiempo, modo, causa, etc.)[span_46](end_span). [span_47](start_span)No es necesario para la gramaticalidad de la frase[span_47](end_span).</p>
-
-        <div class="ejemplo-item">
-            [span_48](start_span)<b>1.</b> "<span class="resaltado">Ayer</span> me examiné" (CC Tiempo)[span_48](end_span).
-            [span_49](start_span)<span class="analisis-txt"><b>Análisis:</b> Indica cuándo ocurre la acción[span_49](end_span).</span>
-        </div>
-
-        <div class="ejemplo-item">
-            [span_50](start_span)<b>2.</b> "Eso hay que comerlo <span class="resaltado">con tenedor</span>" (CC Instrumento)[span_50](end_span).
-            [span_51](start_span)<span class="analisis-txt"><b>Análisis:</b> Indica la herramienta usada para la acción[span_51](end_span).</span>
-        </div>
-
-        <div class="ejemplo-item">
-            [span_52](start_span)<b>3.</b> "No he venido <span class="resaltado">por problemas personales</span>" (CC Causa)[span_52](end_span).
-            [span_53](start_span)<span class="analisis-txt"><b>Análisis:</b> Explica el motivo de la acción[span_53](end_span).</span>
-        </div>
-    </div>
-
-    <div class="footer-final">ACADEMIA ESPARTA</div>
 </div>
 
 </body>
