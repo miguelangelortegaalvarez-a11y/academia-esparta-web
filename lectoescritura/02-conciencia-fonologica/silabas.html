@@ -8,91 +8,68 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --accent: #fbc02d; }
-        
-        /* Cambiado a fondo verde suave para mantener la identidad */
-        body { font-family: 'Poppins', sans-serif; background: #e8f5e9; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; position: relative; }
-        
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow: hidden; position: relative; }
         .game-header { background: white; width: 100%; padding: 1rem; text-align: center; border-bottom: 4px solid var(--primary); position: relative; z-index: 10; }
         .back-link { position: absolute; left: 20px; top: 25px; text-decoration: none; color: var(--primary); font-weight: bold; }
-        
-        .stats-bar { display: flex; justify-content: space-around; width: 100%; max-width: 800px; margin-top: 10px; font-weight: bold; color: var(--dark); }
-        
-        .game-container { max-width: 800px; width: 90%; background: white; margin-top: 1rem; padding: 2rem; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; z-index: 10; border: 1px solid #eee; }
-        
-        .animal-area { height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .stats-bar { display: flex; justify-content: space-around; width: 100%; max-width: 800px; margin-top: 15px; font-weight: bold; color: var(--dark); z-index: 10; }
+        .game-container { max-width: 800px; width: 95%; background: white; margin-top: 1rem; padding: 2rem; border-radius: 40px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; z-index: 10; }
+        .animal-area { height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 1rem; }
         .animal { font-size: 6.5rem; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; }
-        
-        /* Etiqueta de la palabra con el verde primario */
-        .word-tag { font-size: 2.2rem; font-weight: 700; color: var(--dark); text-transform: uppercase; margin-top: 10px; background: var(--light); padding: 8px 25px; border-radius: 50px; border: 2px solid var(--primary); }
-
-        .plates-container { display: flex; justify-content: center; gap: 15px; margin-top: 2rem; }
-        
-        /* Platos unificados con el estilo del sitio */
-        .plate { width: 115px; height: 115px; background: white; border: 4px solid var(--primary); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 0 var(--dark); }
-        .plate:hover { transform: scale(1.05); background: var(--light); }
-        .plate:active { transform: translateY(4px); box-shadow: none; }
-        .plate span { font-size: 2.8rem; font-weight: 900; color: var(--primary); }
-        .plate label { font-size: 0.75rem; font-weight: bold; color: #666; text-transform: uppercase; }
-
-        /* Pantallas de victoria unificadas */
-        #overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); border-radius: 30px; flex-direction: column; align-items: center; justify-content: center; z-index: 30; }
-        .btn-next { padding: 1.2rem 2.5rem; border: none; border-radius: 15px; font-weight: 700; background: var(--primary); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 5px 0 var(--dark); text-transform: uppercase; }
-
-        @keyframes eat { 50% { transform: scale(1.3) translateY(40px); } }
+        .word-tag { font-size: 2.2rem; font-weight: 700; color: var(--dark); text-transform: uppercase; margin-top: 10px; background: var(--light); padding: 8px 30px; border-radius: 50px; border: 3px solid var(--primary); display: inline-block; }
+        .plates-container { display: flex; justify-content: center; gap: 12px; margin-top: 2rem; flex-wrap: wrap; }
+        .plate { width: 100px; height: 100px; background: white; border: 4px solid var(--primary); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 0 var(--dark); }
+        .plate:hover { transform: scale(1.08); background: var(--light); }
+        .plate:active { transform: translateY(6px); box-shadow: none; }
+        .plate span { font-size: 2.5rem; font-weight: 900; color: var(--primary); line-height: 1; }
+        .plate label { font-size: 0.6rem; font-weight: bold; color: #666; text-transform: uppercase; }
+        #overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); border-radius: 40px; flex-direction: column; align-items: center; justify-content: center; z-index: 30; }
+        .btn-next { padding: 1.2rem 3rem; border: none; border-radius: 20px; font-weight: 700; background: var(--primary); color: white; font-size: 1.3rem; cursor: pointer; box-shadow: 0 6px 0 var(--dark); text-transform: uppercase; }
+        @keyframes eat { 50% { transform: scale(1.4) translateY(30px); } }
         .eating { animation: eat 0.6s ease-in-out; }
         .disappear { transform: scale(0); opacity: 0; transition: 0.4s; }
-
         #trophy-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; display: none; }
         .trophy { position: absolute; font-size: 3rem; animation: rain linear infinite; }
         @keyframes rain { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
 <body>
-
     <div id="trophy-rain"></div>
-
     <div class="game-header">
         <a href="index.html" class="back-link">← SALIR</a>
         <h2 style="color: var(--primary); margin: 0;">Laboratorio de Sílabas</h2>
     </div>
-
     <div class="stats-bar">
         <span>Nivel: <span id="lvl-num">1</span>/5</span>
         <span>Reto: <span id="reto-num">1</span>/5</span>
     </div>
-
     <div class="game-container">
         <div id="overlay">
-            <h2 id="overlay-msg" style="color: var(--primary); font-size: 3rem; margin: 0;">¡NIVEL SUPERADO!</h2>
-            <p id="overlay-sub" style="margin: 1rem 0 2rem 0; font-size: 1.2rem;">¡Los animales están llenos y felices!</p>
-            <button class="btn-next" id="btn-action" onclick="cerrarOverlay()">SIGUIENTE NIVEL</button>
+            <h2 id="overlay-msg" style="color: var(--primary); font-size: 3.5rem; margin: 0;">¡BIEN HECHO!</h2>
+            <p id="overlay-sub" style="margin: 1rem 0 2rem 0; font-size: 1.3rem; color: #444;">¡Siguiente nivel!</p>
+            <button class="btn-next" onclick="cerrarOverlay()">CONTINUAR</button>
         </div>
-
-        <p style="color: #666; font-weight: bold; margin-bottom: 2rem;">¿Cuántas sílabas tiene esta palabra?</p>
-        
+        <p style="color: #666; font-weight: bold; margin-bottom: 1.5rem;">¿Cuántas palmadas tiene esta palabra?</p>
         <div class="animal-area">
             <div id="animal-emoji" class="animal">🦒</div>
-            <div id="word-text" class="word-tag">JIRAFA</div>
+            <div id="word-text" class="word-tag">CARGANDO...</div>
         </div>
-
         <div class="plates-container">
             <div class="plate" onclick="comprobar(1, this)"><span>1</span><label>Sílaba</label></div>
             <div class="plate" onclick="comprobar(2, this)"><span>2</span><label>Sílabas</label></div>
             <div class="plate" onclick="comprobar(3, this)"><span>3</span><label>Sílabas</label></div>
             <div class="plate" onclick="comprobar(4, this)"><span>4</span><label>Sílabas</label></div>
+            <div class="plate" onclick="comprobar(5, this)"><span>5</span><label>Sílabas</label></div>
         </div>
-
-        <div id="feedback" style="margin-top: 1.5rem; font-weight: bold; font-size: 1.3rem; min-height: 35px;"></div>
+        <div id="feedback" style="margin-top: 1.5rem; font-weight: bold; font-size: 1.4rem; min-height: 35px;"></div>
     </div>
-
     <script>
-        // ... (Se mantiene la misma lógica de JavaScript anterior que ya funcionaba perfecta)
-        const comidaAnimales = [
-            { e: '🐱', w: 'GATO', s: 2 }, { e: '🐶', w: 'PERRO', s: 2 }, { e: '🐷', w: 'CERDO', s: 2 }, { e: '🐵', w: 'MONO', s: 2 }, { e: '🦁', w: 'LEÓN', s: 2 },
-            { e: '🐯', w: 'TIGRE', s: 2 }, { e: '🦆', w: 'PATO', s: 2 }, { e: '🐔', w: 'GALLO', s: 2 }, { e: '🐭', w: 'RATÓN', s: 2 }, { e: '🦒', w: 'JIRAFA', s: 3 },
-            { e: '🐘', w: 'ELEFANTE', s: 4 }, { e: '🐍', w: 'SERPIENTE', s: 3 }, { e: '🦋', w: 'MARIPOSA', s: 4 }, { e: '🐝', w: 'ABEJA', s: 3 }, { e: '🐰', w: 'CONEJO', s: 3 },
-            { e: '🐻', w: 'OSO', s: 2 }, { e: '🦓', w: 'CEBRA', s: 2 }, { e: '🦛', w: 'HIPOPÓTAMO', s: 5 }, { e: '🐳', w: 'BALLENA', s: 3 }, { e: '🦀', w: 'CANGREJO', s: 3 },
-            { e: '🦈', w: 'TIBURÓN', s: 3 }, { e: '🐢', w: 'TORTUGA', s: 3 }, { e: '🐙', w: 'PULPO', s: 2 }, { e: '🐿️', w: 'ARDILLA', s: 3 }, { e: '🦉', w: 'BÚHO', s: 2 }
+        const bancoSílabas = [
+            { e: '🐱', w: 'GATO', s: 2 }, { e: '🐶', w: 'PERRO', s: 2 }, { e: '🐵', w: 'MONO', s: 2 }, { e: '🦁', w: 'LEÓN', s: 2 },
+            { e: '🦒', w: 'JIRAFA', s: 3 }, { e: '🐘', w: 'ELEFANTE', s: 4 }, { e: '🦛', w: 'HIPOPÓTAMO', s: 5 }, { e: '🦋', w: 'MARIPOSA', s: 4 },
+            { e: '🐰', w: 'CONEJO', s: 3 }, { e: '🐢', w: 'TORTUGA', s: 3 }, { e: '🐳', w: 'BALLENA', s: 3 }, { e: '🐙', w: 'PULPO', s: 2 },
+            { e: '🚁', w: 'HELICÓPTERO', s: 5 }, { e: '🚲', w: 'BICICLETA', s: 4 }, { e: '🍎', w: 'MANZANA', s: 3 }, { e: '🍌', w: 'PLÁTANO', s: 3 },
+            { e: '🐞', w: 'MARIQUITA', s: 4 }, { e: '🦉', w: 'LECHUZA', s: 3 }, { e: '🐪', w: 'CAMELLO', s: 3 }, { e: '🦆', w: 'PATO', s: 2 },
+            { e: '🐑', w: 'OVEJA', s: 3 }, { e: '🦀', w: 'CANGREJO', s: 3 }, { e: '🦢', w: 'CISNE', s: 2 }, { e: '🦖', w: 'DINOSAURIO', s: 4 }, { e: '🐜', w: 'HORMIGA', s: 3 }
         ];
 
         let mezclados = [];
@@ -103,7 +80,7 @@
         function shuffle(a) { return a.sort(() => Math.random() - 0.5); }
 
         function iniciar() {
-            mezclados = shuffle([...comidaAnimales]);
+            mezclados = shuffle([...bancoSílabas]);
             mostrarReto();
         }
 
@@ -135,7 +112,7 @@
         function comprobar(valor, elemento) {
             if(bloqueado) return;
             const index = ((nivelActual - 1) * 5) + retoActual;
-            const correcto = mezclados[index].s > 4 ? 4 : mezclados[index].s;
+            const correcto = mezclados[index].s;
 
             if(valor === correcto) {
                 bloqueado = true;
@@ -143,10 +120,10 @@
                 confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
                 document.getElementById('animal-emoji').classList.add('eating');
                 elemento.classList.add('disappear');
-                document.getElementById('feedback').innerHTML = '<span style="color: var(--primary)">¡ÑAM! ¡MUY BIEN! 👏</span>';
+                document.getElementById('feedback').innerHTML = '<span style="color: var(--primary)">¡HI-PO-PÓ-TA-MO! ¡SÍ! 👏</span>';
                 setTimeout(progresar, 1300);
             } else {
-                document.getElementById('feedback').innerHTML = '<span style="color: #d32f2f">¡Casi! Prueba otro plato. 🧐</span>';
+                document.getElementById('feedback').innerHTML = '<span style="color: #d32f2f">¡Casi! Da las palmadas otra vez. 🧐</span>';
             }
         }
 
@@ -160,9 +137,9 @@
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             iniciarTrofeos();
             if(nivelActual === 5) {
-                document.getElementById('overlay-msg').innerText = "¡CAMPEÓN DE SÍLABAS!";
-                document.getElementById('btn-action').innerText = "VOLVER AL MENÚ";
-                document.getElementById('btn-action').onclick = () => window.location.href = 'index.html';
+                document.getElementById('overlay-msg').innerText = "¡MAESTRO!";
+                document.getElementById('overlay-sub').innerText = "¡Has alimentado a todos!";
+                document.querySelector('.btn-next').onclick = () => window.location.href = 'index.html';
             }
         }
 
