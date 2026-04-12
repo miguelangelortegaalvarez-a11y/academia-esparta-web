@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Divisiones de 2 Cifras - Nivel Inicial - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 0; }
+        body { margin: 0; padding: 0; background: #f4f4f4; font-family: 'Kalam', cursive; -webkit-print-color-adjust: exact; }
+        .page { width: 210mm; min-height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative; page-break-after: always; box-sizing: border-box; }
+        @media print { body { background: white; } .page { margin: 0; box-shadow: none; width: 100%; } .btn-print { display: none; } }
+        
+        .header { display: flex; justify-content: space-between; border-bottom: 2pt solid #0e9343; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: bold; color: #0e9343; }
+        .datos { display: flex; justify-content: space-between; margin-bottom: 25pt; font-size: 11pt; }
+        .campo { border-bottom: 1pt dashed #ccc; flex-grow: 1; margin-left: 5pt; height: 14pt; }
+        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 35pt; border: 2pt solid #0e9343; display: inline-block; padding: 8pt 20mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px; }
+        
+        .btn-print { position: fixed; top: 20px; right: 20px; background: #0e9343; color: white; border: none; padding: 15px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+        /* REJILLA MUY ESPACIADA: 3 columnas x 3 filas (9 operaciones) */
+        .grid-divi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 110pt 30pt; padding-top: 15pt; }
+
+        .div-block { display: flex; align-items: flex-start; font-size: 28pt; font-weight: bold; margin: auto; }
+        .dividendo { padding-right: 12pt; padding-top: 2pt; letter-spacing: 5pt; }
+        .divisor-box { border-left: 3pt solid black; border-bottom: 3pt solid black; padding: 0 15pt 5pt 12pt; min-width: 45pt; text-align: center; }
+
+        .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(14, 147, 67, 0.03); z-index: 0; pointer-events: none; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR DIVISIONES 2 CIFRAS (8 FOLIOS)</button>
+
+    <script>
+        function crearFicha(folio, titulo, minDivisor, maxDivisor) {
+            document.write(`
+                <div class="page">
+                    <div class="watermark">ESPARTA</div>
+                    <div class="header"><span>FICHA ${folio} - DIVISIÓN 2 CIFRAS</span><span>ACADEMIA ESPARTA</span></div>
+                    <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
+                    <div class="titulo-ficha"><h3>${titulo}</h3></div>
+                    <div class="grid-divi">
+            `);
+            
+            // 9 operaciones por página para máximo espacio de anotaciones laterales
+            for(let i=0; i<9; i++) {
+                let divisor = Math.floor(Math.random() * (maxDivisor - minDivisor + 1)) + minDivisor;
+                // Dividendo de 3 o 4 cifras
+                let dividendo = Math.floor(Math.random() * 8900) + 110; 
+                
+                // Aseguramos que el dividendo sea mayor que el divisor
+                if(dividendo < divisor) dividendo += divisor;
+
+                document.write(`
+                    <div class="div-block">
+                        <div class="dividendo">${dividendo}</div>
+                        <div class="divisor-box">${divisor}</div>
+                    </div>
+                `);
+            }
+            
+            document.write(`</div></div>`);
+        }
+
+        // Generamos 8 folios progresivos
+        crearFicha("01", "DIVISORES ENTRE 10 Y 12", 10, 12);
+        crearFicha("02", "DIVISORES ENTRE 13 Y 15", 13, 15);
+        crearFicha("03", "DIVISORES ENTRE 16 Y 19", 16, 19);
+        crearFicha("04", "REPASO: DIVISORES 10-20", 10, 20);
+        crearFicha("05", "DIVISORES ENTRE 21 Y 30", 21, 30);
+        crearFicha("06", "DIVISORES ENTRE 31 Y 50", 31, 50);
+        crearFicha("07", "MEZCLADAS 2 CIFRAS (REPASO)", 10, 99);
+        crearFicha("08", "MEZCLADAS 2 CIFRAS (REPASO)", 10, 99);
+    </script>
+
+</body>
+</html>
