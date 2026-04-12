@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes Combinatoria - Academia Esparta</title>
+    <title>Apuntes Combinatoria Completo - Academia Esparta</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
@@ -23,62 +23,108 @@
         .header-ficha { display: flex; justify-content: space-between; border-bottom: 3px solid #2e7d32; padding-bottom: 8px; margin-bottom: 40px; }
         .header-ficha span { font-weight: bold; color: #2e7d32; text-transform: uppercase; }
 
-        h2 { color: #1b5e20; border-bottom: 2px solid #4caf50; padding-bottom: 5px; margin-top: 40px; }
+        h2 { color: #1b5e20; border-bottom: 2px solid #4caf50; padding-bottom: 5px; margin-top: 40px; text-transform: uppercase; font-size: 1.4rem; }
 
-        .logica-box { background-color: #fffde7; border: 1px solid #fbc02d; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .logica-box { background-color: #fffde7; border: 1px solid #fbc02d; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
         .logica-box strong { color: #c62828; text-transform: uppercase; display: block; margin-bottom: 10px; }
 
-        .bloque-formula { background-color: #4caf50; color: white; padding: 15px 25px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .bloque-formula { background-color: #4caf50; color: white; padding: 15px 25px; border-radius: 8px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
 
-        .desarrollo-seccion { border-left: 4px solid #fbc02d; padding-left: 25px; margin-left: 10px; margin-bottom: 40px; }
-        .enunciado { font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; color: #000; }
+        .desarrollo-seccion { border-left: 4px solid #fbc02d; padding-left: 25px; margin-left: 10px; margin-bottom: 50px; }
+        .enunciado-ejemplo { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #000; background: #f9f9f9; padding: 10px; border-radius: 5px; }
         
-        /* Estilo para el tachado pedagógico en LaTeX */
-        .cancel { color: #e53935; text-decoration: line-through; }
+        .titulo-paso { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; margin-top: 20px; margin-bottom: 10px; }
+        .resultado-cuadro { background-color: #e8f5e9; border: 2px solid #4caf50; border-radius: 10px; padding: 15px; text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 20px; color: #1b5e20; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <button class="btn-print" onclick="window.print()">📄 Generar PDF para el alumno</button>
+    <button class="btn-print" onclick="window.print()">📄 GENERAR PDF PARA EL ALUMNO</button>
 
     <div class="header-ficha">
-        <span>Técnicas de Simplificación</span>
+        <span>Guía Maestra de Combinatoria</span>
         <span>Academia Esparta</span>
     </div>
 
+    <p>Para dominar la combinatoria, el alumno debe aprender a simplificar los factoriales. Desarrollamos el numerador hasta encontrar el factorial más grande del denominador y entonces los <b>tachamos</b> para evitar cálculos innecesarios.</p>
+
     <h2>1. Variaciones Ordinarias</h2>
+    <div class="logica-box">
+        <strong>¿Por qué las usamos?</strong>
+        Usamos variaciones cuando <b>SÍ importa el orden</b> de los elementos, pero <b>NO usamos todos</b> los elementos del grupo. Cambiar la posición de dos elementos genera un resultado distinto.
+    </div>
+
+    <div class="bloque-formula">
+        <span>Variaciones Ordinarias</span>
+        <span>$$V_{m,n} = \frac{m!}{(m-n)!}$$</span>
+    </div>
+
     <div class="desarrollo-seccion">
-        <div class="enunciado">Ejemplo: Podio de 3 puestos con 8 caballos.</div>
-        <p><b>Desarrollo con simplificación:</b></p>
+        <div class="enunciado-ejemplo">Ejemplo: En una carrera de 8 caballos, ¿de cuántas formas se pueden repartir el 1º, 2º y 3º puesto?</div>
+        
+        <div class="titulo-paso">Estrategia de planteamiento</div>
+        <p>1. <b>Elementos (m):</b> 8 caballos en total. <br> 2. <b>Posiciones (n):</b> 3 puestos de podio.</p>
+
+        <div class="titulo-paso">Resolución con Simplificación</div>
+        <p>Aplicamos la fórmula y desarrollamos el 8! hasta llegar al 5! para poder tachar:</p>
         <p>
-            $$V_{8,3} = \frac{8!}{(8-3)!} = \frac{8 \cdot 7 \cdot 6 \cdot \color{red}{\require{cancel}\cancel{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}}}{\color{red}{\cancel{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}}} = 8 \cdot 7 \cdot 6 = 336$$
+            $$V_{8,3} = \frac{8!}{(8-3)!} = \frac{8!}{5!} = \frac{8 \cdot 7 \cdot 6 \cdot \color{red}{\require{cancel}\cancel{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}}}{\color{red}{\cancel{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}}} = 8 \cdot 7 \cdot 6 = 336$$
         </p>
-        <p><i>Nota: Tachamos el 5! de arriba con el 5! de abajo para trabajar solo con los números que quedan.</i></p>
+        <div class="resultado-cuadro">RESULTADO: Hay 336 formas distintas de repartir el podio.</div>
     </div>
 
     <h2>2. Permutaciones con Repetición</h2>
+    <div class="logica-box">
+        <strong>¿Por qué las usamos?</strong>
+        Las usamos cuando queremos <b>ordenar todos</b> los elementos de un grupo, pero algunos elementos son <b>idénticos entre sí</b>. Debemos dividir para "quitar" las formas que parecen iguales.
+    </div>
+
+    <div class="bloque-formula">
+        <span>Permutaciones con Repetición</span>
+        <span>$$PR_{n}^{a,b} = \frac{n!}{a! \cdot b!}$$</span>
+    </div>
+
     <div class="desarrollo-seccion">
-        <div class="enunciado">Ejemplo: Ordenar 4 vagones M y 2 vagones C (Total 6).</div>
-        <p><b>Desarrollo con simplificación:</b></p>
+        <div class="enunciado-ejemplo">Ejemplo: ¿De cuántas formas se pueden ordenar 4 vagones de Mercancía (M) y 2 de Combustible (C)?</div>
+        
+        <div class="titulo-paso">Estrategia de planteamiento</div>
+        <p>1. <b>Total (n):</b> 6 vagones. <br> 2. <b>Repeticiones:</b> 4 del tipo M y 2 del tipo C.</p>
+
+        <div class="titulo-paso">Resolución con Simplificación</div>
+        <p>Desarrollamos el 6! hasta el 4! (que es el grupo más grande abajo) para tacharlo:</p>
         <p>
             $$PR_{6}^{4,2} = \frac{6!}{4! \cdot 2!} = \frac{6 \cdot 5 \cdot \color{red}{\cancel{4 \cdot 3 \cdot 2 \cdot 1}}}{(\color{red}{\cancel{4 \cdot 3 \cdot 2 \cdot 1}}) \cdot (2 \cdot 1)} = \frac{30}{2} = 15$$
         </p>
+        <div class="resultado-cuadro">RESULTADO: Los vagones se pueden ordenar de 15 formas.</div>
     </div>
 
-    <h2>3. Combinaciones</h2>
+    <h2>3. Combinaciones Ordinarias</h2>
+    <div class="logica-box">
+        <strong>¿Por qué las usamos?</strong>
+        Las usamos cuando <b>NO importa el orden</b>. Solo nos interesa qué elementos han sido elegidos, sin importar en qué posición estén (comités, grupos de trabajo, sorteos).
+    </div>
+
+    <div class="bloque-formula">
+        <span>Combinaciones Ordinarias</span>
+        <span>$$C_{m,n} = \binom{m}{n} = \frac{m!}{n! \cdot (m-n)!}$$</span>
+    </div>
+
     <div class="desarrollo-seccion">
-        <div class="enunciado">Ejemplo: Elegir comité de 3 personas entre 20 alumnos.</div>
-        <p><b>Desarrollo con simplificación:</b></p>
+        <div class="enunciado-ejemplo">Ejemplo: De 10 alumnos, queremos elegir a 2 para que vayan a por tizas. ¿Cuántas parejas distintas existen?</div>
+        
+        <div class="titulo-paso">Estrategia de planteamiento</div>
+        <p>1. <b>Grupo (m):</b> 10 alumnos. <br> 2. <b>Elegidos (n):</b> 2 alumnos.</p>
+
+        <div class="titulo-paso">Resolución con Simplificación</div>
+        <p>Desarrollamos el 10! hasta el 8! (que sale de 10-2) y tachamos:</p>
         <p>
-            $$C_{20,3} = \frac{20!}{3! \cdot 17!} = \frac{20 \cdot 19 \cdot 18 \cdot \color{red}{\cancel{17 \cdot 16 \dots 1}}}{(3 \cdot 2 \cdot 1) \cdot \color{red}{\cancel{17 \cdot 16 \dots 1}}} = \frac{20 \cdot 19 \cdot 18}{6} = 1.140$$
+            $$C_{10,2} = \frac{10!}{2! \cdot 8!} = \frac{10 \cdot 9 \cdot \color{red}{\cancel{8 \cdot 7 \cdot 6 \dots 1}}}{(2 \cdot 1) \cdot \color{red}{\cancel{8 \cdot 7 \cdot 6 \dots 1}}} = \frac{90}{2} = 45$$
         </p>
+        <div class="resultado-cuadro">RESULTADO: Existen 45 parejas posibles.</div>
     </div>
 
-    <div class="logica-box" style="margin-top: 50px;">
-        <strong>💡 TRUCO PARA EL EXAMEN:</strong>
-        <p>Desarrolla el factorial de arriba solo hasta que llegues al número más grande de abajo. En ese momento, ¡para y táchalos! Te ahorrarás multiplicar números enormes.</p>
-    </div>
+    <p style="text-align: center; font-style: italic; color: #777;">"La paciencia en la simplificación es la clave del éxito en la combinatoria." - Academia Esparta</p>
 </div>
 
 </body>
