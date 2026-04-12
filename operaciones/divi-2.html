@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Divisiones de 1 Cifra - Nivel 2 - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 0; }
+        body { margin: 0; padding: 0; background: #f4f4f4; font-family: 'Kalam', cursive; -webkit-print-color-adjust: exact; }
+        .page { width: 210mm; min-height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative; page-break-after: always; box-sizing: border-box; }
+        @media print { body { background: white; } .page { margin: 0; box-shadow: none; width: 100%; } .btn-print { display: none; } }
+        
+        .header { display: flex; justify-content: space-between; border-bottom: 2pt solid #0e9343; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: bold; color: #0e9343; }
+        .datos { display: flex; justify-content: space-between; margin-bottom: 25pt; font-size: 11pt; }
+        .campo { border-bottom: 1pt dashed #ccc; flex-grow: 1; margin-left: 5pt; height: 14pt; }
+        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 35pt; border: 2pt solid #0e9343; display: inline-block; padding: 8pt 20mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px; }
+        
+        .btn-print { position: fixed; top: 20px; right: 20px; background: #0e9343; color: white; border: none; padding: 15px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+        .grid-divi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 75pt 20pt; padding-top: 10pt; }
+
+        .div-block { display: flex; align-items: flex-start; font-size: 26pt; font-weight: bold; margin: auto; }
+        .dividendo { padding-right: 8pt; padding-top: 2pt; letter-spacing: 2pt; }
+        .divisor-box { border-left: 3pt solid black; border-bottom: 3pt solid black; padding: 0 10pt 2pt 8pt; min-width: 30pt; text-align: center; }
+
+        .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(14, 147, 67, 0.03); z-index: 0; pointer-events: none; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR DIVISIONES NIVEL 2 (10 FOLIOS)</button>
+
+    <script>
+        function crearFicha(folio, titulo, tablaFija) {
+            document.write(`
+                <div class="page">
+                    <div class="watermark">ESPARTA</div>
+                    <div class="header"><span>FICHA ${folio} - DIVISIÓN 1 CIFRA</span><span>ACADEMIA ESPARTA</span></div>
+                    <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
+                    <div class="titulo-ficha"><h3>${titulo}</h3></div>
+                    <div class="grid-divi">
+            `);
+            
+            for(let i=0; i<16; i++) {
+                let divisor = tablaFija ? tablaFija : (Math.floor(Math.random() * 8) + 2);
+                // Dividendo entre 20 y 999 para que tengan que "romper" el número
+                let dividendo = Math.floor(Math.random() * 980) + 20; 
+                
+                document.write(`
+                    <div class="div-block">
+                        <div class="dividendo">${dividendo}</div>
+                        <div class="divisor-box">${divisor}</div>
+                    </div>
+                `);
+            }
+            
+            document.write(`</div></div>`);
+        }
+
+        for(let t=2; t<=9; t++) {
+            let numFolio = (t-1).toString().padStart(2, '0');
+            crearFicha(numFolio, "DIVIDIR POR EL " + t + " (NIVEL 2)", t);
+        }
+
+        crearFicha("09", "REPASO MEZCLADO 1 CIFRA", null);
+        crearFicha("10", "REPASO MEZCLADO 1 CIFRA", null);
+    </script>
+
+</body>
+</html>
