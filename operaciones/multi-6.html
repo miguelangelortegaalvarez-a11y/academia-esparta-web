@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad Seguida de Ceros - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 0; }
+        body { margin: 0; padding: 0; background: #f4f4f4; font-family: 'Kalam', cursive; -webkit-print-color-adjust: exact; }
+        .page { width: 210mm; min-height: 297mm; padding: 15mm; margin: 10mm auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative; page-break-after: always; box-sizing: border-box; }
+        @media print { body { background: white; } .page { margin: 0; box-shadow: none; width: 100%; } .btn-print { display: none; } }
+        .header { display: flex; justify-content: space-between; border-bottom: 2pt solid #0e9343; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: bold; color: #0e9343; }
+        .datos { display: flex; justify-content: space-between; margin-bottom: 20pt; font-size: 11pt; }
+        .campo { border-bottom: 1pt dashed #ccc; flex-grow: 1; margin-left: 5pt; height: 14pt; }
+        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 25pt; border: 2pt solid #0e9343; display: inline-block; padding: 5pt 15mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px; }
+        .btn-print { position: fixed; top: 20px; right: 20px; background: #0e9343; color: white; border: none; padding: 15px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        
+        .grid-horizontal { display: grid; grid-template-columns: 1fr 1fr; gap: 20pt 40pt; padding: 10pt; }
+        .op-h { font-size: 20pt; display: flex; align-items: center; gap: 8pt; border-bottom: 1px solid #eee; padding-bottom: 5pt; }
+        .hueco { border: 2pt solid #0e9343; border-radius: 5px; min-width: 60pt; height: 30pt; display: inline-block; background: #f9f9f9; }
+        .hueco-corto { min-width: 45pt; }
+        
+        .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(14, 147, 67, 0.03); z-index: 0; pointer-events: none; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR PACK UNIDAD CEROS (6 FOLIOS)</button>
+
+    <script>
+        const ceros = [10, 100, 1000];
+
+        function crearFicha(folio, titulo, tipo) {
+            document.write(`
+                <div class="page">
+                    <div class="watermark">ESPARTA</div>
+                    <div class="header"><span>FICHA ${folio} - CÁLCULO MENTAL</span><span>ACADEMIA ESPARTA</span></div>
+                    <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
+                    <div class="titulo-ficha"><h3>${titulo}</h3></div>
+                    <div class="grid-horizontal">
+            `);
+
+            for (let i = 0; i < 30; i++) {
+                let n = Math.floor(Math.random() * 89) + 11; // Número base 11-99
+                let factor = ceros[Math.floor(Math.random() * 3)];
+                let esMult = Math.random() > 0.5;
+                
+                if (tipo === 'directo') {
+                    let simbolo = esMult ? 'x' : ':';
+                    if (!esMult) n = n * factor; // Para que la división sea exacta
+                    document.write(`<div class="op-h">${n} ${simbolo} ${factor} = <div class="hueco"></div></div>`);
+                } 
+                else if (tipo === 'factor') {
+                    let simbolo = esMult ? 'x' : ':';
+                    let res = esMult ? n * factor : n;
+                    let numInicial = esMult ? n : n * factor;
+                    document.write(`<div class="op-h">${numInicial} ${simbolo} <div class="hueco hueco-corto"></div> = ${res}</div>`);
+                }
+                else if (tipo === 'inicial') {
+                    let simbolo = esMult ? 'x' : ':';
+                    let res = esMult ? n * factor : n;
+                    document.write(`<div class="op-h"><div class="hueco"></div> ${simbolo} ${factor} = ${res}</div>`);
+                }
+            }
+
+            document.write(`</div></div>`);
+        }
+
+        crearFicha("01", "MULTIPLICAR Y DIVIDIR (DIRECTO)", "directo");
+        crearFicha("02", "MULTIPLICAR Y DIVIDIR (DIRECTO)", "directo");
+        crearFicha("03", "ENCUENTRA EL FACTOR (x10, x100, x1000)", "factor");
+        crearFicha("04", "ENCUENTRA EL FACTOR (x10, x100, x1000)", "factor");
+        crearFicha("05", "¿CUÁL ES EL NÚMERO INICIAL?", "inicial");
+        crearFicha("06", "¿CUÁL ES EL NÚMERO INICIAL?", "inicial");
+    </script>
+
+</body>
+</html>
