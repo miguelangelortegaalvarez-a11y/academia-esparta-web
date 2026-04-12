@@ -3,129 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes Combinatoria Completo - Academia Esparta</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+    <title>Desafío Espartano: Erick al Olimpo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Bangers&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #ffffff; color: #333; padding: 20px; line-height: 1.6; }
-        .container { max-width: 900px; margin: auto; border: 1px solid #eee; padding: 40px; border-radius: 12px; position: relative; }
+        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --esparta-rojo: #e74c3c; }
+        body { font-family: 'Kalam', cursive; background: #f0f0f0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; }
         
-        .btn-print {
-            position: absolute; top: 20px; right: 20px;
-            background-color: #2e7d32; color: white; border: none;
-            padding: 10px 15px; border-radius: 5px; cursor: pointer;
-            font-weight: bold; text-transform: uppercase; font-size: 0.8rem;
+        .header { background: var(--esparta-verde); color: white; width: 100%; text-align: center; padding: 15px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-family: 'Bangers', cursive; letter-spacing: 2px; }
+        .progress-container { width: 80%; background: #ddd; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid #333; position: relative; }
+        #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #f1c40f, #f39c12); transition: width 0.5s ease; }
+
+        .game-container { background: white; padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); border: 6px solid var(--esparta-verde); position: relative; margin-top: 20px; min-width: 320px; }
+        .operation { display: flex; flex-direction: column; align-items: flex-end; font-size: 70px; font-weight: bold; gap: 5px; color: #2c3e50; }
+        
+        input { font-family: 'Kalam', cursive; font-size: 50px; text-align: center; border: 3px solid #ccc; border-radius: 12px; width: 75px; height: 75px; outline: none; transition: all 0.2s; background: #fafafa; }
+        input:focus { border-color: var(--esparta-oro); background: #fffde7; box-shadow: 0 0 10px rgba(241, 196, 15, 0.3); }
+        input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; transform: scale(1.05); }
+        input.wrong { background: #ffcdd2 !important; border-color: var(--esparta-rojo) !important; animation: shake 0.3s; }
+
+        .llevada-container { height: 70px; margin-bottom: 10px; display: flex; justify-content: flex-start; width: 100%; padding-left: 20px; }
+        #llevada { width: 55px; height: 55px; font-size: 35px; border: 3px dashed var(--esparta-rojo); visibility: hidden; color: var(--esparta-rojo); }
+        
+        .linea { width: 110%; border-bottom: 6px solid #333; margin: 10px -5%; border-radius: 3px; }
+        .result-row { display: flex; gap: 12px; justify-content: flex-end; width: 100%; }
+        .signo { position: absolute; left: -60px; bottom: 115px; color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 50px; }
+
+        .status-msg { margin-top: 25px; height: 40px; font-weight: bold; font-size: 28px; color: var(--esparta-verde); text-shadow: 1px 1px 0px white; text-align: center; }
+        .puntos { font-family: 'Bangers'; font-size: 35px; color: #333; margin-top: 15px; display: flex; align-items: center; gap: 10px; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
         }
-
-        @media print { .btn-print { display: none; } .container { border: none; } body { padding: 0; } }
-
-        .header-ficha { display: flex; justify-content: space-between; border-bottom: 3px solid #2e7d32; padding-bottom: 8px; margin-bottom: 40px; }
-        .header-ficha span { font-weight: bold; color: #2e7d32; text-transform: uppercase; }
-
-        h2 { color: #1b5e20; border-bottom: 2px solid #4caf50; padding-bottom: 5px; margin-top: 40px; text-transform: uppercase; font-size: 1.4rem; }
-
-        .logica-box { background-color: #fffde7; border: 1px solid #fbc02d; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
-        .logica-box strong { color: #c62828; text-transform: uppercase; display: block; margin-bottom: 10px; }
-
-        .bloque-formula { background-color: #4caf50; color: white; padding: 15px 25px; border-radius: 8px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
-
-        .desarrollo-seccion { border-left: 4px solid #fbc02d; padding-left: 25px; margin-left: 10px; margin-bottom: 50px; }
-        .enunciado-ejemplo { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #000; background: #f9f9f9; padding: 10px; border-radius: 5px; }
-        
-        .titulo-paso { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; margin-top: 20px; margin-bottom: 10px; }
-        .resultado-cuadro { background-color: #e8f5e9; border: 2px solid #4caf50; border-radius: 10px; padding: 15px; text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 20px; color: #1b5e20; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <button class="btn-print" onclick="window.print()">📄 GENERAR PDF PARA EL ALUMNO</button>
-
-    <div class="header-ficha">
-        <span>Guía Maestra de Combinatoria</span>
-        <span>Academia Esparta</span>
+    <div class="header"><h1>GUERRERO ERICK: EL ASCENSO AL OLIMPO</h1></div>
+    
+    <div class="puntos">ESCUDOS DE ERICK: <span id="score">0</span> 🛡️</div>
+    
+    <div class="progress-container">
+        <div id="progress-bar"></div>
     </div>
 
-    <p>Para dominar la combinatoria, el alumno debe aprender a simplificar los factoriales. Desarrollamos el numerador hasta encontrar el factorial más grande del denominador y entonces los <b>tachamos</b> para evitar cálculos innecesarios.</p>
-
-    <h2>1. Variaciones Ordinarias</h2>
-    <div class="logica-box">
-        <strong>¿Por qué las usamos?</strong>
-        Usamos variaciones cuando <b>SÍ importa el orden</b> de los elementos, pero <b>NO usamos todos</b> los elementos del grupo. Cambiar la posición de dos elementos genera un resultado distinto.
-    </div>
-
-    <div class="bloque-formula">
-        <span>Variaciones Ordinarias</span>
-        <span>$$V_{m,n} = \frac{m!}{(m-n)!}$$</span>
-    </div>
-
-    <div class="desarrollo-seccion">
-        <div class="enunciado-ejemplo">Ejemplo: En una carrera de 8 caballos, ¿de cuántas formas se pueden repartir el 1º, 2º y 3º puesto?</div>
+    <div class="game-container">
+        <div class="llevada-container">
+            <input type="number" id="llevada" placeholder="?" title="Erick, ¿cuántas te llevas?">
+        </div>
         
-        <div class="titulo-paso">Estrategia de planteamiento</div>
-        <p>1. <b>Elementos (m):</b> 8 caballos en total. <br> 2. <b>Posiciones (n):</b> 3 puestos de podio.</p>
-
-        <div class="titulo-paso">Resolución con Simplificación</div>
-        <p>Aplicamos la fórmula y desarrollamos el 8! hasta llegar al 5! para poder tachar:</p>
-        <p>
-            $$V_{8,3} = \frac{8!}{(8-3)!} = \frac{8!}{5!} = \frac{8 \cdot 7 \cdot 6 \cdot \color{red}{\require{cancel}\cancel{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}}}{\color{red}{\cancel{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}}} = 8 \cdot 7 \cdot 6 = 336$$
-        </p>
-        <div class="resultado-cuadro">RESULTADO: Hay 336 formas distintas de repartir el podio.</div>
+        <div class="operation">
+            <div id="num-arriba">--</div>
+            <div style="position: relative;">
+                <span class="signo">x</span>
+                <span id="num-abajo">-</span>
+            </div>
+            <div class="linea"></div>
+            <div class="result-row">
+                <input type="number" id="res-centena" class="res-in">
+                <input type="number" id="res-decena" class="res-in">
+                <input type="number" id="res-unidad" class="res-in">
+            </div>
+        </div>
     </div>
 
-    <h2>2. Permutaciones con Repetición</h2>
-    <div class="logica-box">
-        <strong>¿Por qué las usamos?</strong>
-        Las usamos cuando queremos <b>ordenar todos</b> los elementos de un grupo, pero algunos elementos son <b>idénticos entre sí</b>. Debemos dividir para "quitar" las formas que parecen iguales.
-    </div>
+    <div class="status-msg" id="msg">¡Demuestra tu fuerza, Erick!</div>
 
-    <div class="bloque-formula">
-        <span>Permutaciones con Repetición</span>
-        <span>$$PR_{n}^{a,b} = \frac{n!}{a! \cdot b!}$$</span>
-    </div>
+    <script>
+        let n1, n2, llevadaReal, uReal, dReal, cReal;
+        let score = 0;
+        let goal = 10;
 
-    <div class="desarrollo-seccion">
-        <div class="enunciado-ejemplo">Ejemplo: ¿De cuántas formas se pueden ordenar 4 vagones de Mercancía (M) y 2 de Combustible (C)?</div>
-        
-        <div class="titulo-paso">Estrategia de planteamiento</div>
-        <p>1. <b>Total (n):</b> 6 vagones. <br> 2. <b>Repeticiones:</b> 4 del tipo M y 2 del tipo C.</p>
+        const inputs = {
+            llevada: document.getElementById('llevada'),
+            u: document.getElementById('res-unidad'),
+            d: document.getElementById('res-decena'),
+            c: document.getElementById('res-centena')
+        };
 
-        <div class="titulo-paso">Resolución con Simplificación</div>
-        <p>Desarrollamos el 6! hasta el 4! (que es el grupo más grande abajo) para tacharlo:</p>
-        <p>
-            $$PR_{6}^{4,2} = \frac{6!}{4! \cdot 2!} = \frac{6 \cdot 5 \cdot \color{red}{\cancel{4 \cdot 3 \cdot 2 \cdot 1}}}{(\color{red}{\cancel{4 \cdot 3 \cdot 2 \cdot 1}}) \cdot (2 \cdot 1)} = \frac{30}{2} = 15$$
-        </p>
-        <div class="resultado-cuadro">RESULTADO: Los vagones se pueden ordenar de 15 formas.</div>
-    </div>
+        const frasesAnimo = [
+            "¡Impresionante, Erick!",
+            "¡Eres un rayo, Erick!",
+            "¡Casi lo tienes, guerrero!",
+            "¡Por Esparta, Erick!",
+            "¡Nadie te detiene!",
+            "¡Esa mente es de oro!"
+        ];
 
-    <h2>3. Combinaciones Ordinarias</h2>
-    <div class="logica-box">
-        <strong>¿Por qué las usamos?</strong>
-        Las usamos cuando <b>NO importa el orden</b>. Solo nos interesa qué elementos han sido elegidos, sin importar en qué posición estén (comités, grupos de trabajo, sorteos).
-    </div>
+        function nuevaOperacion() {
+            n1 = Math.floor(Math.random() * 90) + 10;
+            n2 = Math.floor(Math.random() * 8) + 2;
+            
+            document.getElementById('num-arriba').innerText = n1;
+            document.getElementById('num-abajo').innerText = n2;
 
-    <div class="bloque-formula">
-        <span>Combinaciones Ordinarias</span>
-        <span>$$C_{m,n} = \binom{m}{n} = \frac{m!}{n! \cdot (m-n)!}$$</span>
-    </div>
+            let uni_arriba = n1 % 10;
+            let mult_u = uni_arriba * n2;
+            uReal = mult_u % 10;
+            llevadaReal = Math.floor(mult_u / 10);
+            
+            let final_total = n1 * n2;
+            cReal = Math.floor(final_total / 100);
+            dReal = Math.floor((final_total % 100) / 10);
 
-    <div class="desarrollo-seccion">
-        <div class="enunciado-ejemplo">Ejemplo: De 10 alumnos, queremos elegir a 2 para que vayan a por tizas. ¿Cuántas parejas distintas existen?</div>
-        
-        <div class="titulo-paso">Estrategia de planteamiento</div>
-        <p>1. <b>Grupo (m):</b> 10 alumnos. <br> 2. <b>Elegidos (n):</b> 2 alumnos.</p>
+            Object.values(inputs).forEach(i => {
+                i.value = '';
+                i.className = '';
+                i.disabled = true;
+            });
+            
+            inputs.llevada.style.visibility = 'hidden';
+            inputs.u.disabled = false;
+            inputs.u.focus();
+            document.getElementById('msg').innerText = "¡A por ella, Erick!";
+        }
 
-        <div class="titulo-paso">Resolución con Simplificación</div>
-        <p>Desarrollamos el 10! hasta el 8! (que sale de 10-2) y tachamos:</p>
-        <p>
-            $$C_{10,2} = \frac{10!}{2! \cdot 8!} = \frac{10 \cdot 9 \cdot \color{red}{\cancel{8 \cdot 7 \cdot 6 \dots 1}}}{(2 \cdot 1) \cdot \color{red}{\cancel{8 \cdot 7 \cdot 6 \dots 1}}} = \frac{90}{2} = 45$$
-        </p>
-        <div class="resultado-cuadro">RESULTADO: Existen 45 parejas posibles.</div>
-    </div>
+        inputs.u.oninput = function() {
+            if(this.value == uReal) {
+                this.classList.add('correct');
+                this.disabled = true;
+                if(llevadaReal > 0) {
+                    inputs.llevada.style.visibility = 'visible';
+                    inputs.llevada.disabled = false;
+                    inputs.llevada.focus();
+                    document.getElementById('msg').innerText = "¡Bien! Erick, ¿cuánto te llevas?";
+                } else {
+                    inputs.d.disabled = false;
+                    inputs.d.focus();
+                    document.getElementById('msg').innerText = "¡Llevada 0! Sigue así.";
+                }
+            } else if(this.value.length >= 1) {
+                this.classList.add('wrong');
+                setTimeout(() => this.classList.remove('wrong'), 300);
+                this.value = '';
+            }
+        };
 
-    <p style="text-align: center; font-style: italic; color: #777;">"La paciencia en la simplificación es la clave del éxito en la combinatoria." - Academia Esparta</p>
-</div>
+        inputs.llevada.oninput = function() {
+            if(this.value == llevadaReal) {
+                this.classList.add('correct');
+                this.disabled = true;
+                inputs.d.disabled = false;
+                inputs.d.focus();
+                document.getElementById('msg').innerText = "¡Eso es! Ahora las decenas...";
+            } else if(this.value.length >= 1) {
+                this.classList.add('wrong');
+                this.value = '';
+            }
+        };
 
+        inputs.d.oninput = function() {
+            if(this.value == dReal) {
+                this.classList.add('correct');
+                this.disabled = true;
+                if(cReal > 0) {
+                    inputs.c.disabled = false;
+                    inputs.c.focus();
+                } else {
+                    ganar();
+                }
+            } else if(this.value.length >= 1) {
+                this.classList.add('wrong');
+                this.value = '';
+            }
+        };
+
+        inputs.c.oninput = function() {
+            if(this.value == cReal) {
+                this.classList.add('correct');
+                this.disabled = true;
+                ganar();
+            } else if(this.value.length >= 1) {
+                this.classList.add('wrong');
+                this.value = '';
+            }
+        };
+
+        function ganar() {
+            score++;
+            document.getElementById('score').innerText = score;
+            let frase = frasesAnimo[Math.floor(Math.random() * frasesAnimo.length)];
+            document.getElementById('msg').innerText = frase;
+            
+            let prog = (score / goal) * 100;
+            document.getElementById('progress-bar').style.width = prog + "%";
+            
+            if(score >= goal) {
+                document.getElementById('msg').innerText = "¡ERICK, HAS CONQUISTADO EL OLIMPO!";
+                confetti(); // Si quieres añadir una animación extra
+                setTimeout(() => { score = 0; document.getElementById('progress-bar').style.width = "0%"; nuevaOperacion(); }, 4000);
+            } else {
+                setTimeout(nuevaOperacion, 1500);
+            }
+        }
+
+        nuevaOperacion();
+    </script>
 </body>
 </html>
