@@ -7,24 +7,30 @@
     <style>
         @page { size: A4; margin: 0; }
         body { margin: 0; padding: 0; background: #f4f4f4; font-family: 'Kalam', cursive; -webkit-print-color-adjust: exact; }
-        .page { width: 210mm; min-height: 297mm; padding: 15mm; margin: 10mm auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative; page-break-after: always; box-sizing: border-box; }
+        .page { width: 210mm; min-height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative; page-break-after: always; box-sizing: border-box; }
         @media print { body { background: white; } .page { margin: 0; box-shadow: none; width: 100%; } .btn-print { display: none; } }
+        
         .header { display: flex; justify-content: space-between; border-bottom: 2pt solid #0e9343; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: bold; color: #0e9343; }
-        .datos { display: flex; justify-content: space-between; margin-bottom: 20pt; font-size: 11pt; }
+        .datos { display: flex; justify-content: space-between; margin-bottom: 25pt; font-size: 11pt; }
         .campo { border-bottom: 1pt dashed #ccc; flex-grow: 1; margin-left: 5pt; height: 14pt; }
-        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 25pt; border: 2pt solid #0e9343; display: inline-block; padding: 5pt 15mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px; }
+        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 35pt; border: 2pt solid #0e9343; display: inline-block; padding: 8pt 20mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px; }
+        
         .btn-print { position: fixed; top: 20px; right: 20px; background: #0e9343; color: white; border: none; padding: 15px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .grid-ops { display: grid; grid-template-columns: repeat(5, 1fr); gap: 30pt 10pt; }
-        .op-v { display: flex; flex-direction: column; align-items: flex-end; font-size: 28pt; font-weight: bold; position: relative; width: 70pt; margin: auto; }
-        .op-v .linea { width: 100%; border-bottom: 2.5pt solid black; margin: 3pt 0; }
-        .op-v .signo { position: absolute; left: 0pt; bottom: 35pt; font-size: 22pt; }
+
+        /* NUEVA REJILLA: 4 columnas con mucho más espacio */
+        .grid-ops { display: grid; grid-template-columns: repeat(4, 1fr); gap: 50pt 20pt; padding-top: 10pt; }
+
+        .op-v { display: flex; flex-direction: column; align-items: flex-end; font-size: 34pt; font-weight: bold; position: relative; width: 80pt; margin: auto; }
+        .op-v .linea { width: 100%; border-bottom: 3pt solid black; margin: 4pt 0; }
+        .op-v .signo { position: absolute; left: 0pt; bottom: 45pt; font-size: 26pt; }
         .numero { letter-spacing: 5pt; padding-right: 2pt; }
+
         .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(14, 147, 67, 0.03); z-index: 0; pointer-events: none; font-family: sans-serif; }
     </style>
 </head>
 <body>
 
-    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR PACK PROGRESIVO (10 FOLIOS)</button>
+    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR PACK ESPACIADO (10 FOLIOS)</button>
 
     <script>
         function crearFicha(folio, titulo, tablaFija) {
@@ -37,8 +43,8 @@
                     <div class="grid-ops">
             `);
             
-            for(let i=0; i<30; i++) {
-                // Si tablaFija es null, mezclamos todo. Si no, fijamos el número de abajo.
+            // Ahora generamos solo 20 operaciones por página (4 columnas x 5 filas)
+            for(let i=0; i<20; i++) {
                 let n1 = Math.floor(Math.random() * 9) + 1;
                 let n2 = tablaFija ? tablaFija : (Math.floor(Math.random() * 8) + 2); 
                 
@@ -55,13 +61,12 @@
             document.write(`</div></div>`);
         }
 
-        // 1. Generar folios de las tablas del 2 al 9
+        // Generamos los 10 folios con el nuevo diseño espaciado
         for(let t=2; t<=9; t++) {
             let numFolio = (t-1).toString().padStart(2, '0');
             crearFicha(numFolio, "TABLA DEL " + t, t);
         }
 
-        // 2. Generar 2 folios finales con todas mezcladas
         crearFicha("09", "REPASO: TODAS LAS TABLAS", null);
         crearFicha("10", "REPASO: TODAS LAS TABLAS", null);
     </script>
