@@ -14,7 +14,6 @@
             padding: 0;
         }
 
-        /* Botón solo visible en web */
         .btn-print { 
             position: fixed; top: 20px; right: 20px;
             background-color: #0e9343; color: white; border: none; 
@@ -22,83 +21,85 @@
             font-weight: bold; z-index: 100; font-family: sans-serif;
         }
 
-        /* Estructura de Páginas */
+        /* Configuración de folios A4 */
         .page {
-            width: 210mm; /* Ancho A4 */
-            min-height: 297mm; /* Alto A4 */
-            padding: 15mm 20mm;
+            width: 210mm;
+            height: 297mm;
+            padding: 15mm 25mm; /* Más margen lateral para que el justificado luzca */
             margin: 0 auto;
             box-sizing: border-box;
             position: relative;
             background: white;
             page-break-after: always;
+            overflow: hidden;
         }
 
         @media print {
             .btn-print { display: none; }
             body { background: none; }
-            .page { margin: 0; border: none; width: 100%; height: 100%; }
+            .page { margin: 0; border: none; width: 210mm; height: 297mm; }
         }
 
-        /* Cabecera */
         .header { 
             display: flex; justify-content: space-between; 
             border-bottom: 2px solid #000; padding-bottom: 5px; 
-            margin-bottom: 15px; font-family: sans-serif;
+            margin-bottom: 20px; font-family: sans-serif;
             text-transform: uppercase; font-size: 0.8rem; font-weight: bold;
         }
 
         .datos-alumno {
             display: flex; justify-content: space-between; 
-            margin-bottom: 25px; font-size: 1.1rem;
+            margin-bottom: 30px; font-size: 1.1rem;
         }
         .campo { border-bottom: 1px dashed #000; flex-grow: 1; margin-left: 5px; height: 1.2rem; }
 
-        /* Bloque de Lectura */
         .lectura-box h3 { 
-            font-size: 2.8rem; margin: 10px 0 25px 0; 
+            font-size: 2.6rem; margin: 10px 0 30px 0; 
             text-align: center; font-weight: 700; text-decoration: underline;
         }
         
+        /* TEXTO JUSTIFICADO POR AMBOS LADOS */
         .lectura-box p { 
-            font-size: 1.7rem; line-height: 1.7; 
-            margin-bottom: 30px; text-align: left;
+            font-size: 1.7rem; 
+            line-height: 1.8; 
+            margin-bottom: 40px; 
+            text-align: justify; /* Justificado total */
+            text-justify: inter-word;
         }
 
-        /* Preguntas Escritura */
-        .pregunta-item { margin-bottom: 35px; font-size: 1.5rem; }
+        .pregunta-item { margin-bottom: 40px; font-size: 1.5rem; }
+        
         .pauta-doble-linea {
             width: 100%; height: 24px; 
             border-top: 1px solid #000; border-bottom: 1px solid #000;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
-        /* Preguntas V/F (Página 2) */
         .instruccion-vf {
-            font-size: 1.3rem; text-align: center; 
-            margin: 30px 0; font-family: sans-serif; font-weight: bold;
+            font-size: 1.4rem; text-align: center; 
+            margin: 40px 0; font-family: sans-serif; font-weight: bold;
+            text-decoration: underline;
         }
 
         .vf-item {
             display: flex; align-items: center; 
-            font-size: 1.7rem; margin-bottom: 30px;
+            font-size: 1.7rem; margin-bottom: 35px;
         }
 
         .cuadrado-respuesta {
-            width: 38px; height: 38px; border: 2px solid #000;
-            margin-right: 20px; flex-shrink: 0;
+            width: 38px; height: 38px; border: 2.2px solid #000;
+            margin-right: 25px; flex-shrink: 0;
         }
 
         .frase-motivacional {
             position: absolute; bottom: 30mm; left: 0; right: 0;
-            text-align: center; font-size: 1.7rem; font-style: italic; color: #333;
+            text-align: center; font-size: 1.8rem; font-style: italic; color: #333;
         }
 
-        /* Marca de Agua */
         .watermark {
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 11rem; color: rgba(0, 0, 0, 0.03);
+            font-size: 12rem; color: rgba(0, 0, 0, 0.03);
             font-family: sans-serif; font-weight: 900;
             z-index: 0; pointer-events: none; text-transform: uppercase;
         }
@@ -127,14 +128,7 @@
             <div class="lectura-box">
                 <h3>El gran examen de música</h3>
                 <p>
-                    Hoy Adela tiene un examen de música muy importante en clase. <br>
-                    Lleva su flauta de madera guardada en una funda de seda azul. <br>
-                    Adela ha practicado mucho en su casa con su papá y su mamá. <br>
-                    Sabe tocar una melodía muy linda, dulce y también muy alegre. <br>
-                    Cuando sopla su flauta, todos los niños se quedan en silencio. <br>
-                    El profesor está muy contento porque no ha fallado ninguna nota. <br>
-                    Al terminar, le pone un diez en su cuaderno y le da un aplauso. <br>
-                    Adela vuelve a su mesa muy feliz con su nota y su flauta nueva.
+                    Hoy Adela tiene un examen de música muy importante en clase. Lleva su flauta de madera guardada en una funda de seda azul. Adela ha practicado mucho en su casa con su papá y su mamá para que todo salga perfecto. Sabe tocar una melodía muy linda, dulce y también muy alegre. Cuando sopla su flauta, todos los niños se quedan en completo silencio. El profesor está muy contento porque Adela no ha fallado ninguna nota. Al terminar, le pone un diez en su cuaderno y le da un fuerte aplauso. Adela vuelve a su mesa muy feliz con su gran nota y su flauta nueva.
                 </p>
             </div>
 
@@ -142,8 +136,6 @@
                 <div class="pregunta-item">1. ¿Qué examen tiene hoy Adela en su clase? <div class="pauta-doble-linea"></div></div>
                 <div class="pregunta-item">2. ¿De qué material es la flauta que toca la niña? <div class="pauta-doble-linea"></div></div>
                 <div class="pregunta-item">3. ¿Con quién ha practicado Adela en su casa? <div class="pauta-doble-linea"></div></div>
-                <div class="pregunta-item">4. ¿Cómo es la melodía que sabe tocar Adela? <div class="pauta-doble-linea"></div></div>
-                <div class="pregunta-item">5. ¿Qué nota le pone el profesor en el cuaderno? <div class="pauta-doble-linea"></div></div>
             </div>
         </div>
     </div>
@@ -154,6 +146,11 @@
             <div class="header">
                 <span>COMPRENSIÓN (PARTE 2)</span>
                 <span>ACADEMIA ESPARTA</span>
+            </div>
+
+            <div class="preguntas-container">
+                <div class="pregunta-item">4. ¿Cómo es la melodía que sabe tocar Adela? <div class="pauta-doble-linea"></div></div>
+                <div class="pregunta-item">5. ¿Qué nota le pone el profesor en el cuaderno? <div class="pauta-doble-linea"></div></div>
             </div>
 
             <div class="instruccion-vf">Escribe V o F dentro del cuadro:</div>
