@@ -13,16 +13,16 @@
         .header { display: flex; justify-content: space-between; border-bottom: 2pt solid #0e9343; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: bold; color: #0e9343; }
         .datos { display: flex; justify-content: space-between; margin-bottom: 25pt; font-size: 11pt; }
         .campo { border-bottom: 1pt dashed #ccc; flex-grow: 1; margin-left: 5pt; height: 14pt; }
-        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 35pt; border: 2pt solid #0e9343; display: inline-block; padding: 8pt 20mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px; }
+        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 40pt; border: 2pt solid #0e9343; display: inline-block; padding: 10pt 25mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px; }
         
         .btn-print { position: fixed; top: 20px; right: 20px; background: #0e9343; color: white; border: none; padding: 15px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
-        /* REJILLA: 2 columnas x 3 filas (Máximo espacio) */
-        .grid-divi { display: grid; grid-template-columns: repeat(2, 1fr); gap: 120pt 40pt; padding-top: 20pt; }
+        /* REJILLA MAXIMIZADA: 2 columnas x 2 filas (Solo 4 operaciones) */
+        .grid-divi { display: grid; grid-template-columns: repeat(2, 1fr); gap: 180pt 40pt; padding-top: 30pt; }
 
-        .div-block { display: flex; align-items: flex-start; font-size: 30pt; font-weight: bold; margin: auto; }
-        .dividendo { padding-right: 15pt; padding-top: 2pt; letter-spacing: 5pt; }
-        .divisor-box { border-left: 3pt solid black; border-bottom: 3pt solid black; padding: 0 18pt 6pt 15pt; min-width: 60pt; text-align: center; }
+        .div-block { display: flex; align-items: flex-start; font-size: 32pt; font-weight: bold; margin: auto; }
+        .dividendo { padding-right: 18pt; padding-top: 2pt; letter-spacing: 6pt; }
+        .divisor-box { border-left: 3.5pt solid black; border-bottom: 3.5pt solid black; padding: 0 20pt 8pt 18pt; min-width: 70pt; text-align: center; }
 
         .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(14, 147, 67, 0.03); z-index: 0; pointer-events: none; font-family: sans-serif; }
     </style>
@@ -42,12 +42,11 @@
                     <div class="grid-divi">
             `);
             
-            for(let i=0; i<6; i++) {
-                let divisor = Math.floor(Math.random() * 899) + 100; // 100 al 999
-                // Dividendos de 5 o 6 cifras
+            // Solo 4 operaciones por página
+            for(let i=0; i<4; i++) {
+                let divisor = Math.floor(Math.random() * 800) + 101; // Evitamos divisores demasiado simples
                 let dividendo = Math.floor(Math.random() * 899999) + 10000; 
                 
-                // Aseguramos que sea mayor
                 if(dividendo < divisor) dividendo *= 10;
 
                 document.write(`
