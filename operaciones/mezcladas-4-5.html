@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mezcladas 4 y 5 Cifras - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 0; }
+        body { margin: 0; padding: 0; background: #f4f4f4; font-family: 'Kalam', cursive; -webkit-print-color-adjust: exact; }
+        
+        .page {
+            width: 210mm; min-height: 297mm; padding: 20mm; margin: 10mm auto;
+            background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative; page-break-after: always; box-sizing: border-box;
+        }
+
+        @media print {
+            body { background: white; }
+            .page { margin: 0; box-shadow: none; width: 100%; }
+            .btn-print { display: none; }
+        }
+
+        .header { display: flex; justify-content: space-between; border-bottom: 2pt solid #0e9343; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: bold; color: #0e9343; }
+        .datos { display: flex; justify-content: space-between; margin-bottom: 25pt; font-size: 11pt; }
+        .campo { border-bottom: 1pt dashed #ccc; flex-grow: 1; margin-left: 5pt; height: 14pt; }
+        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 30pt; border: 2pt solid #0e9343; display: inline-block; padding: 8pt 25mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 12px; }
+
+        .btn-print { position: fixed; top: 20px; right: 20px; background: #0e9343; color: white; border: none; padding: 15px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+        /* Cuadrícula ESPACIADA: 3 por fila */
+        .grid-ops { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 50pt 20pt; 
+            margin-top: 20pt;
+        }
+
+        .op-v { display: flex; flex-direction: column; align-items: flex-end; font-size: 26pt; font-weight: bold; position: relative; width: 120pt; margin: auto; }
+        .op-v .linea { width: 100%; border-bottom: 2.5pt solid black; margin: 5pt 0; }
+        .op-v .signo { position: absolute; left: -5pt; bottom: 35pt; font-size: 22pt; }
+        .numero { letter-spacing: 6pt; padding-right: 2pt; }
+
+        .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(14, 147, 67, 0.03); z-index: 0; pointer-events: none; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR PACK GRANDES CIFRAS (4 FOLIOS)</button>
+
+    <script>
+        // Generador que asegura mismo número de cifras arriba y abajo, sin ceros iniciales
+        function generarOperacion(cifras, esSuma) {
+            let n1_str = "", n2_str = "";
+            for(let i=0; i<cifras; i++) {
+                let d1 = Math.floor(Math.random() * 8) + 1; 
+                let d2 = Math.floor(Math.random() * 8) + 1;
+                n1_str += d1.toString();
+                n2_str += d2.toString();
+            }
+            // Para restas, asegurar que el de arriba sea mayor
+            if(!esSuma && parseInt(n1_str) < parseInt(n2_str)) {
+                [n1_str, n2_str] = [n2_str, n1_str];
+            }
+            return [n1_str, n2_str];
+        }
+
+        function crearFicha(folio, titulo, cifras) {
+            document.write(`
+                <div class="page">
+                    <div class="watermark">ESPARTA</div>
+                    <div class="header"><span>FICHA ${folio} - GRANDES OPERACIONES</span><span>ACADEMIA ESPARTA</span></div>
+                    <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
+                    <div class="titulo-ficha"><h3>${titulo}</h3></div>
+                    <div class="grid-ops">
+            `);
+            
+            for(let i=0; i<12; i++) {
+                let esSuma = Math.random() > 0.5;
+                let [a, b] = generarOperacion(cifras, esSuma);
+                document.write(`
+                    <div class="op-v">
+                        <span class="numero">${a}</span>
+                        <span class="signo">${esSuma ? '+' : '-'}</span>
+                        <span class="numero">${b}</span>
+                        <div class="linea"></div>
+                    </div>
+                `);
+            }
+            
+            document.write(`</div></div>`);
+        }
+
+        // 1 y 2: Cuatro cifras mezcladas
+        crearFicha("01", "OPERACIONES DE 4 CIFRAS", 4);
+        crearFicha("02", "OPERACIONES DE 4 CIFRAS", 4);
+
+        // 3 y 4: Cinco cifras mezcladas
+        crearFicha("03", "OPERACIONES DE 5 CIFRAS", 5);
+        crearFicha("04", "OPERACIONES DE 5 CIFRAS", 5);
+    </script>
+
+</body>
+</html>
