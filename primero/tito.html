@@ -2,38 +2,126 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lectura: Tito el pato - Academia Esparta</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; padding: 20px; line-height: 1.6; }
-        .container { max-width: 800px; margin: auto; border: 1px solid #eee; padding: 30px; border-radius: 12px; position: relative; }
-        .btn-print { position: absolute; top: 20px; right: 20px; background-color: #0e9343; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        @media print { .btn-print { display: none; } .container { border: none; } }
-        .header { display: flex; justify-content: space-between; border-bottom: 3px solid #0e9343; padding-bottom: 8px; margin-bottom: 30px; margin-top: 20px; }
-        .lectura-box { background-color: #f5fdf7; border-left: 6px solid #0e9343; padding: 25px; border-radius: 8px; margin-bottom: 25px; }
-        .lectura-box h3 { font-size: 2.2rem; color: #063c24; }
-        .lectura-box p { font-size: 1.8rem; letter-spacing: 1px; }
-        .preguntas { background-color: #fffde7; border: 1px solid #fbc02d; padding: 20px; border-radius: 8px; }
-        .pregunta-item { border-bottom: 1px dashed #ccc; padding-bottom: 15px; margin-bottom: 15px; font-size: 1.3rem; }
+        /* Estilo optimizado para impresión (Fondo Blanco) */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #ffffff; 
+            color: #000; 
+            padding: 20px; 
+            line-height: 1.6; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: auto; 
+            border: 1px solid #ddd; 
+            padding: 40px; 
+            border-radius: 0px; /* Más serio para imprimir */
+        }
+        
+        /* Botón PDF (no se imprime) */
+        .btn-print { 
+            float: right;
+            background-color: #0e9343; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            text-transform: uppercase;
+        }
+
+        @media print { 
+            .btn-print, .volver-link { display: none; } 
+            .container { border: none; padding: 0; }
+        }
+
+        /* Cabecera limpia */
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            border-bottom: 2px solid #000; 
+            padding-bottom: 10px; 
+            margin-bottom: 40px; 
+        }
+        .header span { font-weight: bold; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* Bloque de Lectura (Sin fondos verdes) */
+        .lectura-box h3 { 
+            font-size: 2.5rem; 
+            margin-bottom: 20px; 
+            color: #000;
+        }
+        .lectura-box p { 
+            font-size: 1.8rem; 
+            letter-spacing: 1px; 
+            line-height: 2.2;
+            margin-bottom: 50px;
+        }
+
+        /* Bloque de Preguntas con líneas de puntos */
+        .preguntas-container { margin-top: 40px; }
+        .pregunta-item { 
+            margin-bottom: 35px; 
+            font-size: 1.4rem; 
+        }
+        .linea-puntos {
+            margin-top: 15px;
+            border-bottom: 1px dotted #000;
+            height: 30px; /* Espacio para que el niño escriba */
+            width: 100%;
+        }
+
+        .volver-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <button class="btn-print" onclick="window.print()">📄 GENERAR PDF</button>
-        <div class="header">
-            <span style="font-weight:bold; color:#0e9343;">LECTURA COMPRENSIVA</span>
-            <span style="font-weight:bold; color:#0e9343;">ACADEMIA ESPARTA</span>
-        </div>
-        <div class="lectura-box">
-            <h3>Tito</h3>
-            <p>Tito es mi pato.<br>Tito toma su sopa.<br>Mi pato Tito es muy mono.</p>
-        </div>
-        <div class="preguntas">
-            <div class="pregunta-item">1. ¿Quién es Tito?</div>
-            <div class="pregunta-item">2. ¿Qué toma Tito?</div>
-            <div class="pregunta-item">3. ¿Cómo es el pato Tito?</div>
-        </div>
-        <br>
-        <a href="index.html" style="color:#666; text-decoration:none;">← Volver al listado</a>
+
+<div class="container">
+    <button class="btn-print" onclick="window.print()">📄 GENERAR PDF</button>
+
+    <div class="header">
+        <span>LECTURA COMPRENSIVA</span>
+        <span>ACADEMIA ESPARTA</span>
     </div>
+
+    <div class="lectura-box">
+        <h3>Tito</h3>
+        <p>
+            Tito es mi pato. <br>
+            Tito toma su sopa. <br>
+            Mi pato Tito es muy mono.
+        </p>
+    </div>
+
+    <div class="preguntas-container">
+        <div class="pregunta-item">
+            1. ¿Quién es Tito?
+            <div class="linea-puntos"></div>
+        </div>
+
+        <div class="pregunta-item">
+            2. ¿Qué toma Tito?
+            <div class="linea-puntos"></div>
+        </div>
+
+        <div class="pregunta-item">
+            3. ¿Cómo es el pato Tito?
+            <div class="linea-puntos"></div>
+        </div>
+    </div>
+
+    <a href="index.html" class="volver-link">← Volver al listado</a>
+</div>
+
 </body>
 </html>
