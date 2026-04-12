@@ -1,23 +1,154 @@
-<div class="lectura-box">
-    <h3>Mi mamá</h3>
-    <p>
-        Amo a mi mamá. <br>
-        Mi mamá me mima. <br>
-        Mamá mima a Mimí.
-    </p>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lectura: Mi mamá - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Kalam', cursive; 
+            background-color: #ffffff; 
+            color: #000; 
+            padding: 30px 40px; 
+            line-height: 1.4; 
+            overflow-x: hidden;
+        }
+        .container { 
+            max-width: 800px; 
+            margin: auto; 
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Botón PDF */
+        .btn-print { 
+            float: right;
+            background-color: #0e9343; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-family: sans-serif;
+        }
 
-<div class="preguntas-container">
-    <div class="pregunta-item">
-        1. ¿A quién amo?
-        <div class="pauta-doble-linea"></div>
+        @media print { 
+            .btn-print { display: none; } 
+            body { padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .container { max-width: 100%; }
+        }
+
+        /* Cabecera y Datos */
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            border-bottom: 2px solid #000; 
+            padding-bottom: 5px; 
+            margin-bottom: 20px; 
+            font-family: sans-serif;
+        }
+        .header span { font-weight: bold; text-transform: uppercase; font-size: 0.9rem; }
+
+        .datos-alumno {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+        .campo { border-bottom: 1px dashed #000; padding-bottom: 2px; }
+
+        /* Contenido de Lectura */
+        .lectura-box h3 { font-size: 2.4rem; margin: 10px 0 20px 0; text-align: center; font-weight: 700; }
+        .lectura-box p { font-size: 2.2rem; line-height: 2.1; margin-bottom: 40px; letter-spacing: -0.5px; }
+
+        /* Preguntas y Pauta */
+        .pregunta-item { margin-bottom: 40px; font-size: 1.6rem; }
+        .pauta-doble-linea {
+            margin-top: 10px;
+            width: 100%;
+            height: 22px; 
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+        .frase-motivacional {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: #333;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        /* Marca de Agua de Texto en Diagonal */
+        .watermark-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 12rem;
+            color: rgba(0, 0, 0, 0.03); /* Gris ultra suave */
+            font-family: sans-serif;
+            font-weight: 900;
+            white-space: nowrap;
+            z-index: 1;
+            pointer-events: none;
+            user-select: none;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="watermark-text">ESPARTA</div>
+
+    <div class="container">
+        <button class="btn-print" onclick="window.print()">📄 GENERAR PDF</button>
+
+        <div class="header">
+            <span>LECTURA COMPRENSIVA</span>
+            <span>ACADEMIA ESPARTA</span>
+        </div>
+
+        <div class="datos-alumno">
+            <div style="width: 50%;">Nombre: <span class="campo" style="display:inline-block; width:80%;"></span></div>
+            <div style="width: 25%;">Fecha: <span class="campo" style="display:inline-block; width:70%;"></span></div>
+            <div style="width: 20%;">Curso: <span class="campo" style="display:inline-block; width:60%;"></span></div>
+        </div>
+
+        <div class="lectura-box">
+            <h3>Mi mamá</h3>
+            <p>
+                Amo a mi mamá. <br>
+                Mi mamá me mima. <br>
+                Mamá mima a Mimí.
+            </p>
+        </div>
+
+        <div class="preguntas-container">
+            <div class="pregunta-item">
+                1. ¿A quién amo?
+                <div class="pauta-doble-linea"></div>
+            </div>
+
+            <div class="pregunta-item">
+                2. ¿Qué hace mi mamá?
+                <div class="pauta-doble-linea"></div>
+            </div>
+
+            <div class="pregunta-item">
+                3. ¿A quién mima mamá?
+                <div class="pauta-doble-linea"></div>
+            </div>
+        </div>
+
+        <div class="frase-motivacional">
+            ¡Eres un artista de la lectura, sigue así! 🌟
+        </div>
     </div>
-    <div class="pregunta-item">
-        2. ¿Qué hace mi mamá?
-        <div class="pauta-doble-linea"></div>
-    </div>
-    <div class="pregunta-item">
-        3. ¿A quién mima mamá?
-        <div class="pauta-doble-linea"></div>
-    </div>
-</div>
+
+</body>
+</html>
