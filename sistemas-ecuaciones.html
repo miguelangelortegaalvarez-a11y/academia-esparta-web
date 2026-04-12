@@ -33,7 +33,8 @@
         .desarrollo-seccion { border-left: 4px solid #fbc02d; padding-left: 25px; margin-left: 10px; margin-bottom: 40px; }
         .enunciado { font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; color: #000; }
         
-        .resultado-cuadro { background-color: #e8f5e9; border: 1px solid #4caf50; border-radius: 8px; padding: 10px; text-align: center; font-weight: bold; margin-top: 15px; color: #1b5e20; }
+        /* Estilo para el tachado pedagógico en LaTeX */
+        .cancel { color: #e53935; text-decoration: line-through; }
     </style>
 </head>
 <body>
@@ -42,76 +43,41 @@
     <button class="btn-print" onclick="window.print()">📄 Generar PDF para el alumno</button>
 
     <div class="header-ficha">
-        <span>Apuntes: Combinatoria (4º ESO)</span>
+        <span>Técnicas de Simplificación</span>
         <span>Academia Esparta</span>
     </div>
 
-    <p>Para resolver cualquier problema de combinatoria, el alumno debe hacerse siempre tres preguntas clave: 
-    <b>1. ¿Importa el orden? 2. ¿Participan todos los elementos? 3. ¿Se pueden repetir?</b></p>
-
-    <h2>1. Variaciones (Importa el orden)</h2>
-    <div class="logica-box">
-        <strong>¿Cuándo las usamos?</strong>
-        Cuando importa el orden de los elementos pero <b>no</b> usamos todos los disponibles del grupo.
-    </div>
-    
-    <div class="bloque-formula">
-        <span>Variaciones Ordinarias</span>
-        <span>$$V_{m,n} = \frac{m!}{(m-n)!}$$</span>
-    </div>
-
+    <h2>1. Variaciones Ordinarias</h2>
     <div class="desarrollo-seccion">
-        <div class="enunciado">Ejemplo A: En una carrera de 8 caballos, ¿de cuántas formas se pueden repartir el podio (1º, 2º y 3º puesto)?</div>
-        <p><b>Razonamiento:</b> Importa el orden (no es lo mismo ser 1º que 3º) y no participan todos (solo 3 de los 8).</p>
-        <p><b>Resolución:</b> $$V_{8,3} = 8 \cdot 7 \cdot 6 = 336$$</p>
-
-        <div class="enunciado" style="margin-top:20px;">Ejemplo B: Con los dígitos 1, 2, 3, 4 y 5, ¿cuántos números de 3 cifras distintas se pueden formar?</div>
-        <p><b>Resolución:</b> $$V_{5,3} = 5 \cdot 4 \cdot 3 = 60$$</p>
+        <div class="enunciado">Ejemplo: Podio de 3 puestos con 8 caballos.</div>
+        <p><b>Desarrollo con simplificación:</b></p>
+        <p>
+            $$V_{8,3} = \frac{8!}{(8-3)!} = \frac{8 \cdot 7 \cdot 6 \cdot \color{red}{\require{cancel}\cancel{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}}}{\color{red}{\cancel{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}}} = 8 \cdot 7 \cdot 6 = 336$$
+        </p>
+        <p><i>Nota: Tachamos el 5! de arriba con el 5! de abajo para trabajar solo con los números que quedan.</i></p>
     </div>
 
-    <h2>2. Permutaciones (Todos los elementos)</h2>
-    <div class="logica-box">
-        <strong>¿Cuándo las usamos?</strong>
-        Cuando importa el orden y usamos <b>todos</b> los elementos que tenemos. Básicamente es reordenar el grupo completo.
-    </div>
-    
-    <div class="bloque-formula">
-        <span>Permutaciones Ordinarias</span>
-        <span>$$P_n = n!$$</span>
-    </div>
-
+    <h2>2. Permutaciones con Repetición</h2>
     <div class="desarrollo-seccion">
-        <div class="enunciado">Ejemplo A: ¿De cuántas formas pueden sentarse 5 amigos en una fila de cine?</div>
-        <p><b>Razonamiento:</b> Importa el orden y usamos a los 5 amigos.</p>
-        <p><b>Resolución:</b> $$P_5 = 5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 120$$</p>
-
-        <div class="enunciado" style="margin-top:20px;">Ejemplo B: ¿Cuántas palabras distintas (con o sin sentido) se pueden formar con las letras de la palabra "LIBRO"?</div>
-        <p><b>Resolución:</b> $$P_5 = 120$$ formas distintas.</p>
+        <div class="enunciado">Ejemplo: Ordenar 4 vagones M y 2 vagones C (Total 6).</div>
+        <p><b>Desarrollo con simplificación:</b></p>
+        <p>
+            $$PR_{6}^{4,2} = \frac{6!}{4! \cdot 2!} = \frac{6 \cdot 5 \cdot \color{red}{\cancel{4 \cdot 3 \cdot 2 \cdot 1}}}{(\color{red}{\cancel{4 \cdot 3 \cdot 2 \cdot 1}}) \cdot (2 \cdot 1)} = \frac{30}{2} = 15$$
+        </p>
     </div>
 
-    <h2>3. Combinaciones (No importa el orden)</h2>
-    <div class="logica-box">
-        <strong>¿Cuándo las usamos?</strong>
-        Cuando el orden <b>no importa</b>. Solo nos interesa qué elementos elegimos, no en qué posición están.
-    </div>
-    
-    <div class="bloque-formula">
-        <span>Combinaciones Ordinarias</span>
-        <span>$$C_{m,n} = \binom{m}{n} = \frac{m!}{n! \cdot (m-n)!}$$</span>
-    </div>
-
+    <h2>3. Combinaciones</h2>
     <div class="desarrollo-seccion">
-        <div class="enunciado">Ejemplo A: En una clase de 20 alumnos, se quiere elegir un comité de 3 personas para una reunión. ¿Cuántos comités distintos hay?</div>
-        <p><b>Razonamiento:</b> No importa el orden (da igual ser el primer elegido que el tercero, el comité es el mismo).</p>
-        <p><b>Resolución:</b> $$C_{20,3} = \frac{20 \cdot 19 \cdot 18}{3 \cdot 2 \cdot 1} = 1.140$$</p>
-
-        <div class="enunciado" style="margin-top:20px;">Ejemplo B: Si tenemos 10 puntos en un papel y unimos 2 de ellos para formar un segmento, ¿cuántos segmentos distintos se pueden dibujar?</div>
-        <p><b>Resolución:</b> $$C_{10,2} = \frac{10 \cdot 9}{2 \cdot 1} = 45$$</p>
+        <div class="enunciado">Ejemplo: Elegir comité de 3 personas entre 20 alumnos.</div>
+        <p><b>Desarrollo con simplificación:</b></p>
+        <p>
+            $$C_{20,3} = \frac{20!}{3! \cdot 17!} = \frac{20 \cdot 19 \cdot 18 \cdot \color{red}{\cancel{17 \cdot 16 \dots 1}}}{(3 \cdot 2 \cdot 1) \cdot \color{red}{\cancel{17 \cdot 16 \dots 1}}} = \frac{20 \cdot 19 \cdot 18}{6} = 1.140$$
+        </p>
     </div>
 
-    <div class="resultado-cuadro">
-        RECUERDA: Si al cambiar el orden el resultado es distinto → VARIACIÓN / PERMUTACIÓN. <br>
-        Si al cambiar el orden el resultado es el mismo → COMBINACIÓN.
+    <div class="logica-box" style="margin-top: 50px;">
+        <strong>💡 TRUCO PARA EL EXAMEN:</strong>
+        <p>Desarrolla el factorial de arriba solo hasta que llegues al número más grande de abajo. En ese momento, ¡para y táchalos! Te ahorrarás multiplicar números enormes.</p>
     </div>
 </div>
 
