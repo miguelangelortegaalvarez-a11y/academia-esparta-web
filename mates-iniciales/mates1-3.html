@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mates 1.3: Dibujar Cantidades - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 1cm; }
+        body { 
+            font-family: 'Kalam', cursive; 
+            background-color: #ffffff; 
+            color: #000; 
+            margin: 0; 
+            padding: 15px 35px; 
+            line-height: 1.3; 
+            -webkit-print-color-adjust: exact; 
+        }
+        .btn-print { position: fixed; top: 10px; right: 10px; background-color: #2980b9; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 100; font-family: sans-serif; }
+        @media print { .btn-print { display: none; } body { padding: 0; margin: 0; } }
+        
+        .header { display: flex; justify-content: space-between; border-bottom: 1.5pt solid #2980b9; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 9pt; font-weight: bold; color: #2980b9; }
+        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 20pt; font-size: 12pt; }
+        .campo { border-bottom: 1pt dashed #000; flex-grow: 1; margin-left: 5pt; height: 12pt; }
+
+        .titulo-ficha { text-align: center; margin-bottom: 15pt; }
+        .titulo-ficha h3 { font-size: 22pt; text-decoration: underline; margin: 0; }
+        .instrucciones { font-size: 14pt; background: #f0f7fb; padding: 10px; border-radius: 10px; margin-bottom: 25pt; text-align: center; border-left: 5px solid #2980b9; }
+
+        /* Cuadrícula de dibujo */
+        .grid-dibujo { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+        }
+        .caja-ejercicio { 
+            border: 2pt solid #eee; 
+            border-radius: 15px; 
+            display: flex; 
+            height: 95pt; 
+            overflow: hidden;
+        }
+        .numero-lateral { 
+            background-color: #f0f7fb; 
+            width: 70pt; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 45pt; 
+            font-weight: bold; 
+            color: #2980b9; 
+            border-right: 2pt solid #eee;
+        }
+        .zona-dibujo { 
+            flex-grow: 1; 
+            background: #fff; 
+            position: relative;
+        }
+        /* Pequeña ayuda visual: puntos guía opcionales */
+        .zona-dibujo::after {
+            content: "Dibuja aquí";
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            font-size: 10pt;
+            color: #ccc;
+            font-family: sans-serif;
+        }
+
+        .frase-final { margin-top: 30pt; text-align: center; font-size: 14pt; font-style: italic; color: #333; }
+        .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 90pt; color: rgba(41, 128, 185, 0.03); font-family: sans-serif; font-weight: 900; z-index: -1; pointer-events: none; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <div class="watermark">ESPARTA</div>
+    <button class="btn-print" onclick="window.print()">📄 IMPRIMIR FICHA</button>
+
+    <div class="header">
+        <span>MATEMÁTICAS INICIALES</span>
+        <span>ACADEMIA ESPARTA</span>
+    </div>
+
+    <div class="datos-alumno">
+        <div style="width: 45%; display: flex;">Nombre: <div class="campo"></div></div>
+        <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
+        <div style="width: 20%; display: flex;">Curso: <div class="campo"></div></div>
+    </div>
+
+    <div class="titulo-ficha">
+        <h3>¡A dibujar cantidades!</h3>
+    </div>
+
+    <div class="instrucciones">
+        Mira el número de la izquierda y dibuja dentro del cuadro tantos círculos o bolitas como se indica.
+    </div>
+
+    <div class="grid-dibujo">
+        <div class="caja-ejercicio"><div class="numero-lateral">4</div><div class="zona-dibujo"></div></div>
+        <div class="caja-ejercicio"><div class="numero-lateral">7</div><div class="zona-dibujo"></div></div>
+        <div class="caja-ejercicio"><div class="numero-lateral">2</div><div class="zona-dibujo"></div></div>
+        <div class="caja-ejercicio"><div class="numero-lateral">5</div><div class="zona-dibujo"></div></div>
+        <div class="caja-ejercicio"><div class="numero-lateral">9</div><div class="zona-dibujo"></div></div>
+        <div class="caja-ejercicio"><div class="numero-lateral">3</div><div class="zona-dibujo"></div></div>
+        <div class="caja-ejercicio"><div class="numero-lateral">6</div><div class="zona-dibujo"></div></div>
+        <div class="caja-ejercicio"><div class="numero-lateral">8</div><div class="zona-dibujo"></div></div>
+    </div>
+
+    <div class="frase-final">¡Tus dibujos son fantásticos! 🎨</div>
+</body>
+</html>
