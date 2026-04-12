@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mates 1.2: Completar Series - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 1cm; }
+        body { 
+            font-family: 'Kalam', cursive; 
+            background-color: #ffffff; 
+            color: #000; 
+            margin: 0; 
+            padding: 15px 35px; 
+            line-height: 1.3; 
+            -webkit-print-color-adjust: exact; 
+        }
+        .btn-print { position: fixed; top: 10px; right: 10px; background-color: #2980b9; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 100; font-family: sans-serif; }
+        @media print { .btn-print { display: none; } body { padding: 0; margin: 0; } }
+        
+        .header { display: flex; justify-content: space-between; border-bottom: 1.5pt solid #2980b9; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 9pt; font-weight: bold; color: #2980b9; }
+        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 20pt; font-size: 12pt; }
+        .campo { border-bottom: 1pt dashed #000; flex-grow: 1; margin-left: 5pt; height: 12pt; }
+
+        .titulo-ficha { text-align: center; margin-bottom: 20pt; }
+        .titulo-ficha h3 { font-size: 22pt; text-decoration: underline; margin: 0; color: #000; }
+        .instrucciones { font-size: 15pt; background: #f0f7fb; padding: 10px; border-radius: 10px; margin-bottom: 30pt; text-align: center; border-left: 5px solid #2980b9; }
+
+        /* Contenedor de la serie numérica */
+        .serie-fila { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 12px; 
+            margin-bottom: 35pt; 
+        }
+        .circulo { 
+            width: 48pt; 
+            height: 48pt; 
+            border: 2pt solid #2980b9; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 22pt; 
+            font-weight: bold;
+            background: #fff;
+        }
+        .vacio { 
+            border-style: dashed; 
+            background-color: #fcfcfc; 
+            color: transparent; 
+        }
+
+        .flecha { font-size: 18pt; color: #2980b9; }
+
+        .frase-final { margin-top: 20pt; text-align: center; font-size: 14pt; font-style: italic; color: #333; }
+        .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 90pt; color: rgba(41, 128, 185, 0.03); font-family: sans-serif; font-weight: 900; z-index: -1; pointer-events: none; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <div class="watermark">ESPARTA</div>
+    <button class="btn-print" onclick="window.print()">📄 IMPRIMIR FICHA</button>
+
+    <div class="header">
+        <span>MATEMÁTICAS INICIALES</span>
+        <span>ACADEMIA ESPARTA</span>
+    </div>
+
+    <div class="datos-alumno">
+        <div style="width: 45%; display: flex;">Nombre: <div class="campo"></div></div>
+        <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
+        <div style="width: 20%; display: flex;">Curso: <div class="campo"></div></div>
+    </div>
+
+    <div class="titulo-ficha">
+        <h3>El camino de los números</h3>
+    </div>
+
+    <div class="instrucciones">
+        Escribe los números que faltan para completar el camino.
+    </div>
+
+    <div class="serie-fila">
+        <div class="circulo">1</div>
+        <div class="circulo vacio">?</div>
+        <div class="circulo">3</div>
+        <div class="circulo vacio">?</div>
+        <div class="circulo">5</div>
+    </div>
+
+    <div class="serie-fila">
+        <div class="circulo vacio">?</div>
+        <div class="circulo">7</div>
+        <div class="circulo">8</div>
+        <div class="circulo vacio">?</div>
+        <div class="circulo">10</div>
+    </div>
+
+    <div class="serie-fila">
+        <div class="circulo">4</div>
+        <div class="circulo">5</div>
+        <div class="circulo vacio">?</div>
+        <div class="circulo">7</div>
+        <div class="circulo vacio">?</div>
+    </div>
+
+    <div class="serie-fila">
+        <div class="circulo">5</div>
+        <div class="circulo vacio">?</div>
+        <div class="circulo vacio">?</div>
+        <div class="circulo">8</div>
+        <div class="circulo">9</div>
+    </div>
+
+    <div class="frase-final">¡Eres un experto en series numéricas! 🚀</div>
+</body>
+</html>
