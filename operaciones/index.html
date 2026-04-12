@@ -17,29 +17,39 @@
         h1 { color: var(--primary); text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
         .subtitulo { color: #666; margin-bottom: 40px; font-size: 1.1rem; }
 
+        .contenedor-niveles {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .seccion {
+            text-align: center;
+        }
+
         .seccion-titulo { 
-            margin-top: 30px; 
             color: var(--primary); 
             font-weight: bold; 
             text-transform: uppercase;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 2px solid rgba(14, 147, 67, 0.2);
             display: inline-block;
             padding: 0 30px 5px;
+            margin-bottom: 25px;
             letter-spacing: 1px;
             font-size: 0.9rem;
         }
 
+        /* GRID DE 3 COLUMNAS */
         .grid-operaciones { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 20px; 
-            max-width: 1200px; 
-            margin: 20px auto 50px; 
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
         }
 
         .card {
-            background: white; width: 260px; border-radius: 15px; padding: 25px 20px;
+            background: white; border-radius: 15px; padding: 30px 20px;
             text-align: center; border: 1px solid #e0e0e0;
             transition: all 0.3s ease; text-decoration: none; color: var(--dark);
             display: flex; flex-direction: column; align-items: center;
@@ -53,22 +63,30 @@
         }
 
         .card .icono { font-size: 3rem; margin-bottom: 15px; }
-        .card h4 { margin: 0; color: var(--primary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
-        .card p { margin: 10px 0; font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
+        .card h4 { margin: 0; color: var(--primary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .card p { margin: 12px 0; font-weight: 700; font-size: 1.1rem; line-height: 1.3; }
 
         .badge { 
-            font-size: 0.7rem; 
+            font-size: 0.65rem; 
             background: #f0f0f0; 
             color: #666; 
             padding: 4px 12px; 
             border-radius: 20px; 
-            margin-top: 10px; 
+            margin-top: auto; 
             font-weight: 600; 
             text-transform: uppercase; 
         }
         
-        .btn-volver { margin-top: 20px; display: inline-block; text-decoration: none; color: #888; font-weight: bold; transition: 0.3s; }
+        .btn-volver { margin-top: 50px; display: inline-block; text-decoration: none; color: #888; font-weight: bold; transition: 0.3s; }
         .btn-volver:hover { color: var(--primary); }
+
+        /* Ajuste para móviles */
+        @media (max-width: 900px) {
+            .grid-operaciones { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .grid-operaciones { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -76,58 +94,60 @@
     <h1>Generador de Operaciones</h1>
     <p class="subtitulo">Academia Esparta · Entrenamiento Matemático</p>
 
-    <div class="seccion-titulo">Cálculo Básico</div>
-    <div class="grid-operaciones">
-        <a href="suma-resta-1.html" class="card">
-            <div class="icono">🎯</div>
-            <h4>Tarjeta 1</h4>
-            <p>1 Cifra</p>
-            <span class="badge">Sumas y Restas</span>
-        </a>
-    </div>
+    <div class="contenedor-niveles">
+        
+        <div class="seccion">
+            <div class="seccion-titulo">Iniciación y Sin Llevadas</div>
+            <div class="grid-operaciones">
+                <a href="suma-resta-1.html" class="card">
+                    <div class="icono">🎯</div>
+                    <h4>Tarjeta 1</h4>
+                    <p>1 Cifra</p>
+                    <span class="badge">Sumas y Restas</span>
+                </a>
 
-    <div class="seccion-titulo">Operaciones Sin Llevadas</div>
-    <div class="grid-operaciones">
-        <a href="sumas-sin-llevada.html" class="card">
-            <div class="icono">🟢</div>
-            <h4>Tarjeta 2</h4>
-            <p>Sumas 2 y 3 Cifras</p>
-            <span class="badge">Bloques Estrictos</span>
-        </a>
+                <a href="sumas-sin-llevada.html" class="card">
+                    <div class="icono">🟢</div>
+                    <h4>Tarjeta 2</h4>
+                    <p>Sumas 2 y 3 Cifras</p>
+                    <span class="badge">Bloques Estrictos</span>
+                </a>
 
-        <a href="restas-sin-llevada.html" class="card">
-            <div class="icono">🔵</div>
-            <h4>Tarjeta 3</h4>
-            <p>Restas 2 y 3 Cifras</p>
-            <span class="badge">Bloques Estrictos</span>
-        </a>
-    </div>
+                <a href="restas-sin-llevada.html" class="card">
+                    <div class="icono">🔵</div>
+                    <h4>Tarjeta 3</h4>
+                    <p>Restas 2 y 3 Cifras</p>
+                    <span class="badge">Bloques Estrictos</span>
+                </a>
+            </div>
+        </div>
 
-    <div class="seccion-titulo">Operaciones Con Llevadas</div>
-    <div class="grid-operaciones">
-        <a href="sumas-con-llevada.html" class="card">
-            <div class="icono">🟠</div>
-            <h4>Tarjeta 4</h4>
-            <p>Sumas 2 y 3 Cifras</p>
-            <span class="badge">Con llevadas</span>
-        </a>
+        <div class="seccion">
+            <div class="seccion-titulo">Con Llevadas y Nivel Avanzado</div>
+            <div class="grid-operaciones">
+                <a href="sumas-con-llevada.html" class="card">
+                    <div class="icono">🟠</div>
+                    <h4>Tarjeta 4</h4>
+                    <p>Sumas 2 y 3 Cifras</p>
+                    <span class="badge">Con llevadas</span>
+                </a>
 
-        <a href="restas-con-llevada.html" class="card">
-            <div class="icono">🔴</div>
-            <h4>Tarjeta 5</h4>
-            <p>Restas 2 y 3 Cifras</p>
-            <span class="badge">Con llevadas</span>
-        </a>
-    </div>
+                <a href="restas-con-llevada.html" class="card">
+                    <div class="icono">🔴</div>
+                    <h4>Tarjeta 5</h4>
+                    <p>Restas 2 y 3 Cifras</p>
+                    <span class="badge">Con llevadas</span>
+                </a>
 
-    <div class="seccion-titulo">Nivel Avanzado</div>
-    <div class="grid-operaciones">
-        <a href="mezcladas-4-5.html" class="card">
-            <div class="icono">💎</div>
-            <h4>Tarjeta 6</h4>
-            <p>Mezcladas 4 y 5 Cifras</p>
-            <span class="badge">Formato Espaciado</span>
-        </a>
+                <a href="mezcladas-4-5.html" class="card">
+                    <div class="icono">💎</div>
+                    <h4>Tarjeta 6</h4>
+                    <p>Mezcladas 4 y 5 Cifras</p>
+                    <span class="badge">Formato Espaciado</span>
+                </a>
+            </div>
+        </div>
+
     </div>
 
     <a href="../index.html" class="btn-volver">← Volver al Inicio</a>
