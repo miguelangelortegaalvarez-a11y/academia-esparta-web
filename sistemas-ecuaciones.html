@@ -3,63 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reto de Matemáticas - Academia Esparta</title>
+    <title>Reto Matemático - Academia Esparta</title>
     <style>
-        body { font-family: 'Courier New', Courier, monospace; background-color: #f0f4f8; padding: 20px; text-align: center; }
-        .header { margin-bottom: 40px; }
-        .header h1 { color: #1a2a6c; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
-        .header p { color: #b21f1f; font-weight: bold; font-size: 1.2rem; font-style: italic; }
+        /* Fondo totalmente blanco */
+        body { 
+            font-family: 'Courier New', Courier, monospace; 
+            background-color: #ffffff; 
+            margin: 0; 
+            padding: 40px 20px; 
+            text-align: center; 
+            color: #000000;
+        }
+
+        /* Cabecera simple sin colores */
+        .header { margin-bottom: 50px; }
+        .header h1 { font-size: 2rem; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; }
+        .header p { font-size: 1.2rem; font-weight: bold; font-style: italic; margin-top: 0; }
         
+        /* Rejilla de sumas */
         .grid-sumas { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 40px; 
-            max-width: 900px; 
+            gap: 50px 20px; 
+            max-width: 800px; 
             margin: auto; 
-            background: white; 
-            padding: 40px; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 0;
         }
 
+        /* Estilo clásico de la operación vertical */
         .suma-box { 
-            font-size: 2rem; 
+            font-size: 2.2rem; 
             text-align: right; 
-            width: 150px; 
+            width: 140px; 
             margin: auto; 
-            padding: 10px;
-            border: 1px solid #eee;
-            border-radius: 5px;
+            letter-spacing: 2px;
         }
 
-        .linea { border-bottom: 3px solid #333; margin-bottom: 10px; }
-        .operador { float: left; padding-left: 10px; }
+        .operando { padding-right: 5px; }
         
-        input[type="number"] {
+        /* Línea de suma simple */
+        .linea { border-bottom: 3px solid #000000; margin-top: 5px; margin-bottom: 10px; }
+        
+        .signo { float: left; padding-left: 5px; }
+        
+        /* Línea simple para escribir (sin cuadrado) */
+        .resultado-linea {
             width: 100%;
-            font-size: 1.8rem;
-            text-align: right;
-            border: 2px solid #ccc;
-            border-radius: 5px;
+            height: 40px;
+            border: none;
+            border-bottom: 2px solid #000000; /* Solo línea inferior */
+            background: transparent;
             font-family: inherit;
-            background-color: #fffde7;
+            font-size: 2.2rem;
+            text-align: right;
+            outline: none; /* Quita el borde azul al pulsar */
+            padding: 0;
+            color: #000000;
         }
 
+        /* Elimina las flechas en inputs de número */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
 
-        .btn-verificar {
-            margin-top: 30px;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            background-color: #1a2a6c;
-            color: white;
-            border: none;
-            border-radius: 5px;
+        /* Botón invisible o muy discreto para verificar (opcional si lo quieres quitar) */
+        .btn-check {
+            margin-top: 60px;
+            background: none;
+            border: 1px solid #000;
+            padding: 10px 20px;
             cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
         }
-        
-        .btn-verificar:hover { background-color: #b21f1f; }
+        .btn-check:hover { background-color: #f0f0f0; }
+
     </style>
 </head>
 <body>
@@ -70,49 +88,60 @@
     </div>
 
     <div class="grid-sumas">
-        <div id="contenedor-sumas" style="display: contents;"></div>
+        <script>
+            const ejercicios = [
+                [458, 367], [279, 546], [885, 137],
+                [694, 228], [537, 475], [362, 589],
+                [156, 785], [429, 393], [748, 165],
+                [513, 298], [674, 147], [386, 456]
+            ];
+
+            ejercicios.forEach((num, index) => {
+                document.write(`
+                    <div class="suma-box">
+                        <div class="operando">${num[0]}</div>
+                        <div class="operando"><span class="signo">+</span>${num[1]}</div>
+                        <div class="linea"></div>
+                        <input type="number" class="resultado-linea" id="res-${index}">
+                    </div>
+                `);
+            });
+        </script>
     </div>
 
-    <button class="btn-verificar" onclick="verificar()">¿Habrás acertado, Lara? Ver resultados</button>
+    <button class="btn-check" onclick="verificar()">Verificar resultados</button>
 
     <script>
-        const ejercicios = [
-            [458, 367], [279, 546], [885, 137],
-            [694, 228], [537, 475], [362, 589],
-            [156, 785], [429, 393], [748, 165],
-            [513, 298], [674, 147], [386, 456]
-        ];
-
-        const contenedor = document.getElementById('contenedor-sumas');
-
-        ejercicios.forEach((num, index) => {
-            contenedor.innerHTML += `
-                <div class="suma-box">
-                    <div>${num[0]}</div>
-                    <div><span class="operador">+</span>${num[1]}</div>
-                    <div class="linea"></div>
-                    <input type="number" id="res-${index}" placeholder="?">
-                </div>
-            `;
-        });
-
         function verificar() {
             let aciertos = 0;
+            let completado = true;
             ejercicios.forEach((num, index) => {
                 const input = document.getElementById(`res-${index}`);
+                const valor = input.value;
+                if(valor === "") completado = false;
+                
                 const resultadoCorrecto = num[0] + num[1];
-                if (parseInt(input.value) === resultadoCorrecto) {
-                    input.style.backgroundColor = "#c8e6c9";
+                
+                // Mantiene el minimalismo: solo cambia el color de la línea si falla o acierta
+                if (parseInt(valor) === resultadoCorrecto) {
+                    input.style.borderBottomColor = "#2ecc71"; // Verde discreto en la línea
                     aciertos++;
+                } else if (valor !== "") {
+                    input.style.borderBottomColor = "#e74c3c"; // Rojo discreto en la línea
                 } else {
-                    input.style.backgroundColor = "#ffcdd2";
+                    input.style.borderBottomColor = "#000000"; // Negro si está vacío
                 }
             });
             
+            if(!completado) {
+                alert("Lara, te faltan sumas por terminar.");
+                return;
+            }
+
             if(aciertos === 12) {
-                alert("¡Increíble Lara! Las has hecho todas bien. ¡Eres una campeona!");
+                alert("¡Increíble Lara! Las 12 perfectas. ¡Eres una campeona!");
             } else {
-                alert("Has acertado " + aciertos + " de 12. ¡Sigue intentándolo, Lara!");
+                alert("Has acertado " + aciertos + " de 12. ¡Revisa las que tienen la línea roja!");
             }
         }
     </script>
