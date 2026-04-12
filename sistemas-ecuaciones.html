@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ficha de Combinatoria - Academia Esparta</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; color: #333; padding: 20px; line-height: 1.6; }
         .container { max-width: 850px; margin: auto; border: 1px solid #eee; padding: 30px; border-radius: 12px; position: relative; }
         
-        /* Botón de Impresión / PDF */
         .btn-print {
             position: absolute;
             top: 20px;
@@ -22,52 +24,31 @@
             font-weight: bold;
             text-transform: uppercase;
             font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .btn-print:hover { background-color: #1b5e20; }
-
-        /* Ocultar botón al imprimir */
-        @media print {
-            .btn-print { display: none; }
-            body { padding: 0; }
-            .container { border: none; }
         }
 
-        /* Cabecera */
+        @media print { .btn-print { display: none; } .container { border: none; } }
+
         .header-ficha { display: flex; justify-content: space-between; border-bottom: 3px solid #2e7d32; padding-bottom: 8px; margin-bottom: 35px; margin-top: 20px; }
         .header-ficha span { font-weight: bold; color: #2e7d32; text-transform: uppercase; font-size: 0.9rem; }
 
-        /* Enunciados */
         .enunciado-container { background-color: #f1f8e9; border-radius: 8px; padding: 20px; margin-bottom: 25px; border-left: 6px solid #4caf50; }
         .enunciado-container strong { color: #1b5e20; font-size: 1.1rem; display: block; margin-bottom: 10px; }
-        .texto-enunciado { font-size: 1.1rem; color: #000; }
 
-        /* Lógica del Profesor */
         .logica-box { background-color: #fffde7; border: 1px solid #fbc02d; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
         .logica-box strong { color: #c62828; text-transform: uppercase; display: block; margin-bottom: 10px; font-size: 0.9rem; }
 
-        /* Fórmulas */
         .bloque-formula { background-color: #4caf50; color: white; padding: 15px 25px; border-radius: 8px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
 
-        /* Desarrollo */
         .desarrollo-seccion { border-left: 4px solid #fbc02d; padding-left: 25px; margin-left: 10px; margin-bottom: 60px; }
         .titulo-paso { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; margin-top: 25px; margin-bottom: 15px; }
-        .paso-detalle { margin-bottom: 12px; font-size: 1.05rem; }
 
-        /* Resultado */
         .resultado-cuadro { background-color: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 20px; text-align: center; font-weight: bold; font-size: 1.2rem; color: #1b5e20; margin-top: 30px; }
-
-        .math { font-family: 'Times New Roman', serif; font-style: italic; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <button class="btn-print" onclick="window.print()">
-        📄 Generar PDF para enviar
-    </button>
+    <button class="btn-print" onclick="window.print()">📄 Generar PDF</button>
 
     <div class="header-ficha">
         <span>Análisis Combinatorio</span>
@@ -76,58 +57,49 @@
 
     <div class="enunciado-container">
         <strong>EJERCICIO 17</strong>
-        <div class="texto-enunciado">
-            En un aparcamiento de bicicletas hay 10 lugares que pueden estar ocupados (O) o libres (L). ¿Cuántas posiciones distintas se pueden encontrar en total?
-        </div>
+        <div>En un aparcamiento de bicicletas hay 10 lugares que pueden estar ocupados (O) o libres (L). ¿Cuántas posiciones distintas se pueden encontrar en total?</div>
     </div>
 
     <div class="logica-box">
         <strong>¿Por qué usamos Variaciones con Repetición?</strong>
-        <p>Usamos este método porque el <b>orden de las bicicletas importa</b> (no es lo mismo que la primera esté libre y la segunda ocupada, que al revés) y los estados (O y L) <b>se pueden repetir</b> en cada uno de los 10 lugares. No estamos moviendo objetos fijos, estamos rellenando espacios con opciones que siempre están disponibles.</p>
+        <p>El orden es relevante y los estados se repiten en cada posición. No movemos objetos fijos, rellenamos espacios con opciones disponibles en todo momento.</p>
     </div>
 
     <div class="bloque-formula">
         <span>VARIACIONES CON REPETICIÓN</span>
-        <span class="math">VR = m<sup>n</sup></span>
+        <span>$$VR_{m,n} = m^n$$</span>
     </div>
 
     <div class="desarrollo-seccion">
         <div class="titulo-paso">Estrategia y Resolución</div>
-        <div class="paso-detalle">1. <b>Opciones (m):</b> 2 (Ocupado o Libre).</div>
-        <div class="paso-detalle">2. <b>Espacios (n):</b> 10 lugares.</div>
-        <div class="paso-detalle">3. <b>Cálculo:</b> Multiplicamos las 2 opciones por sí mismas 10 veces (<span class="math">2<sup>10</sup></span>).</div>
-        
-        <div class="resultado-cuadro">
-            RESULTADO: 1.024 posiciones distintas.
-        </div>
+        <p>1. <b>Opciones (m):</b> 2 (Ocupado o Libre).</p>
+        <p>2. <b>Espacios (n):</b> 10 lugares.</p>
+        <p>3. <b>Cálculo:</b> $$2^{10} = 1024$$</p>
+        <div class="resultado-cuadro">RESULTADO: 1.024 posiciones distintas.</div>
     </div>
 
     <div class="enunciado-container">
         <strong>EJERCICIO 18</strong>
-        <div class="texto-enunciado">
-            Una locomotora arrastra 4 vagones de mercancía (M) y 2 de combustible (C). ¿De cuántas formas distintas pueden ordenarse los 6 vagones?
-        </div>
+        <div>Una locomotora arrastra 4 vagones de mercancía (M) y 2 de combustible (C). ¿De cuántas formas pueden ordenarse los 6 vagones?</div>
     </div>
 
     <div class="logica-box">
         <strong>¿Por qué usamos Permutaciones con Repetición?</strong>
-        <p>Usamos permutaciones porque vamos a <b>reordenar todos</b> los elementos del grupo (los 6 vagones). Es "con repetición" porque hay elementos <b>idénticos</b>: los 4 vagones M son iguales entre sí y los 2 C también. Al intercambiar dos vagones del mismo tipo, la fila no cambia visualmente, por lo que debemos descontar esos casos repetidos.</p>
+        <p>Reordenamos todos los elementos, pero hay vagones idénticos. Intercambiar dos vagones del mismo tipo no genera una fila nueva, por lo que debemos dividir por las repeticiones.</p>
     </div>
 
     <div class="bloque-formula">
         <span>PERMUTACIONES CON REPETICIÓN</span>
-        <span class="math">PR = n! / (a! · b!)</span>
+        <span>$$PR_{n}^{a,b} = \frac{n!}{a! \cdot b!}$$</span>
     </div>
 
     <div class="desarrollo-seccion">
         <div class="titulo-paso">Estrategia y Resolución</div>
-        <div class="paso-detalle">1. <b>Total (n):</b> 6 vagones.</div>
-        <div class="paso-detalle">2. <b>Repeticiones:</b> 4 de tipo M y 2 de tipo C.</div>
-        <div class="paso-detalle">3. <b>Cálculo:</b> <span class="math">6! / (4! · 2!) = 720 / (24 · 2) = 15</span>.</div>
-        
-        <div class="resultado-cuadro">
-            RESULTADO: 15 formas distintas de ordenarlos.
-        </div>
+        <p>1. <b>Total (n):</b> 6 vagones.</p>
+        <p>2. <b>Repeticiones:</b> 4 (M) y 2 (C).</p>
+        <p>3. <b>Cálculo paso a paso:</b></p>
+        <p>$$\frac{6!}{4! \cdot 2!} = \frac{720}{24 \cdot 2} = \frac{720}{48} = 15$$</p>
+        <div class="resultado-cuadro">RESULTADO: 15 formas distintas de ordenarlos.</div>
     </div>
 </div>
 
