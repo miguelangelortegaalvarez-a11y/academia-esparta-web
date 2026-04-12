@@ -11,7 +11,8 @@
             background-color: #ffffff; 
             color: #000; 
             margin: 0;
-            padding: 0;
+            padding: 20px 50px; /* Margen generoso para que respire */
+            line-height: 1.5;
         }
 
         .btn-print { 
@@ -21,152 +22,131 @@
             font-weight: bold; z-index: 100; font-family: sans-serif;
         }
 
-        /* Configuración de folios A4 */
-        .page {
-            width: 210mm;
-            height: 297mm;
-            padding: 15mm 25mm; /* Más margen lateral para que el justificado luzca */
-            margin: 0 auto;
-            box-sizing: border-box;
-            position: relative;
-            background: white;
-            page-break-after: always;
-            overflow: hidden;
-        }
-
         @media print {
             .btn-print { display: none; }
-            body { background: none; }
-            .page { margin: 0; border: none; width: 210mm; height: 297mm; }
+            body { padding: 0; margin: 15mm 20mm; }
         }
 
+        /* Cabecera única */
         .header { 
             display: flex; justify-content: space-between; 
             border-bottom: 2px solid #000; padding-bottom: 5px; 
-            margin-bottom: 20px; font-family: sans-serif;
-            text-transform: uppercase; font-size: 0.8rem; font-weight: bold;
+            margin-bottom: 30px; font-family: sans-serif;
+            text-transform: uppercase; font-size: 0.9rem; font-weight: bold;
         }
 
         .datos-alumno {
             display: flex; justify-content: space-between; 
-            margin-bottom: 30px; font-size: 1.1rem;
+            margin-bottom: 40px; font-size: 1.2rem;
         }
-        .campo { border-bottom: 1px dashed #000; flex-grow: 1; margin-left: 5px; height: 1.2rem; }
+        .campo { border-bottom: 1px dashed #000; flex-grow: 1; margin-left: 10px; height: 1.2rem; }
 
+        /* Título e Historia */
         .lectura-box h3 { 
-            font-size: 2.6rem; margin: 10px 0 30px 0; 
+            font-size: 3rem; margin: 0 0 35px 0; 
             text-align: center; font-weight: 700; text-decoration: underline;
         }
         
-        /* TEXTO JUSTIFICADO POR AMBOS LADOS */
         .lectura-box p { 
-            font-size: 1.7rem; 
+            font-size: 1.9rem; 
             line-height: 1.8; 
-            margin-bottom: 40px; 
-            text-align: justify; /* Justificado total */
-            text-justify: inter-word;
+            margin-bottom: 50px; 
+            text-align: justify; /* Justificado perfecto */
+            hyphens: auto;
         }
 
-        .pregunta-item { margin-bottom: 40px; font-size: 1.5rem; }
+        /* Preguntas de Escritura */
+        .preguntas-container { margin-top: 20px; }
+        
+        .pregunta-item { 
+            margin-bottom: 45px; 
+            font-size: 1.7rem; 
+            page-break-inside: avoid; /* Evita que una pregunta se corte a la mitad */
+        }
         
         .pauta-doble-linea {
-            width: 100%; height: 24px; 
+            width: 100%; height: 26px; 
             border-top: 1px solid #000; border-bottom: 1px solid #000;
-            margin-top: 12px;
+            margin-top: 15px;
         }
 
+        /* Bloque Verdadero/Falso */
         .instruccion-vf {
-            font-size: 1.4rem; text-align: center; 
-            margin: 40px 0; font-family: sans-serif; font-weight: bold;
+            font-size: 1.6rem; text-align: center; 
+            margin: 60px 0 40px 0; font-family: sans-serif; font-weight: bold;
             text-decoration: underline;
         }
 
         .vf-item {
             display: flex; align-items: center; 
-            font-size: 1.7rem; margin-bottom: 35px;
+            font-size: 1.8rem; margin-bottom: 35px;
+            page-break-inside: avoid;
         }
 
         .cuadrado-respuesta {
-            width: 38px; height: 38px; border: 2.2px solid #000;
+            width: 42px; height: 42px; border: 2.5px solid #000;
             margin-right: 25px; flex-shrink: 0;
         }
 
         .frase-motivacional {
-            position: absolute; bottom: 30mm; left: 0; right: 0;
+            margin-top: 80px;
             text-align: center; font-size: 1.8rem; font-style: italic; color: #333;
+            padding-bottom: 40px;
         }
 
+        /* Marca de Agua (Se repite en el fondo) */
         .watermark {
-            position: absolute; top: 50%; left: 50%;
+            position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 12rem; color: rgba(0, 0, 0, 0.03);
+            font-size: 14rem; color: rgba(0, 0, 0, 0.03);
             font-family: sans-serif; font-weight: 900;
-            z-index: 0; pointer-events: none; text-transform: uppercase;
+            z-index: -1; pointer-events: none; text-transform: uppercase;
         }
-        
-        .content { position: relative; z-index: 1; }
     </style>
 </head>
 <body>
 
+    <div class="watermark">ESPARTA</div>
     <button class="btn-print" onclick="window.print()">📄 GENERAR PDF</button>
 
-    <div class="page">
-        <div class="watermark">ESPARTA</div>
-        <div class="content">
-            <div class="header">
-                <span>LECTURA COMPRENSIVA</span>
-                <span>ACADEMIA ESPARTA</span>
-            </div>
-
-            <div class="datos-alumno">
-                <div style="width: 45%; display: flex;">Nombre: <div class="campo"></div></div>
-                <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
-                <div style="width: 20%; display: flex;">Curso: <div class="campo"></div></div>
-            </div>
-
-            <div class="lectura-box">
-                <h3>El gran examen de música</h3>
-                <p>
-                    Hoy Adela tiene un examen de música muy importante en clase. Lleva su flauta de madera guardada en una funda de seda azul. Adela ha practicado mucho en su casa con su papá y su mamá para que todo salga perfecto. Sabe tocar una melodía muy linda, dulce y también muy alegre. Cuando sopla su flauta, todos los niños se quedan en completo silencio. El profesor está muy contento porque Adela no ha fallado ninguna nota. Al terminar, le pone un diez en su cuaderno y le da un fuerte aplauso. Adela vuelve a su mesa muy feliz con su gran nota y su flauta nueva.
-                </p>
-            </div>
-
-            <div class="preguntas-container">
-                <div class="pregunta-item">1. ¿Qué examen tiene hoy Adela en su clase? <div class="pauta-doble-linea"></div></div>
-                <div class="pregunta-item">2. ¿De qué material es la flauta que toca la niña? <div class="pauta-doble-linea"></div></div>
-                <div class="pregunta-item">3. ¿Con quién ha practicado Adela en su casa? <div class="pauta-doble-linea"></div></div>
-            </div>
-        </div>
+    <div class="header">
+        <span>LECTURA COMPRENSIVA</span>
+        <span>ACADEMIA ESPARTA</span>
     </div>
 
-    <div class="page">
-        <div class="watermark">ESPARTA</div>
-        <div class="content">
-            <div class="header">
-                <span>COMPRENSIÓN (PARTE 2)</span>
-                <span>ACADEMIA ESPARTA</span>
-            </div>
+    <div class="datos-alumno">
+        <div style="width: 45%; display: flex;">Nombre: <div class="campo"></div></div>
+        <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
+        <div style="width: 20%; display: flex;">Curso: <div class="campo"></div></div>
+    </div>
 
-            <div class="preguntas-container">
-                <div class="pregunta-item">4. ¿Cómo es la melodía que sabe tocar Adela? <div class="pauta-doble-linea"></div></div>
-                <div class="pregunta-item">5. ¿Qué nota le pone el profesor en el cuaderno? <div class="pauta-doble-linea"></div></div>
-            </div>
+    <div class="lectura-box">
+        <h3>El gran examen de música</h3>
+        <p>
+            Hoy Adela tiene un examen de música muy importante en su clase. Lleva su flauta de madera guardada en una funda de seda azul. Adela ha practicado mucho en su casa con su papá y su mamá para que todo salga perfecto. Sabe tocar una melodía muy linda, dulce y también muy alegre. Cuando sopla su flauta, todos los niños se quedan en completo silencio. El profesor está muy contento porque Adela no ha fallado ninguna nota. Al terminar, le pone un diez en su cuaderno y le da un fuerte aplauso. Adela vuelve a su mesa muy feliz con su gran nota y su flauta nueva.
+        </p>
+    </div>
 
-            <div class="instruccion-vf">Escribe V o F dentro del cuadro:</div>
+    <div class="preguntas-container">
+        <div class="pregunta-item">1. ¿Qué examen tiene hoy Adela en su clase? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">2. ¿De qué material es la flauta que toca la niña? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">3. ¿Con quién ha practicado Adela en su casa? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">4. ¿Cómo es la melodía que sabe tocar Adela? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">5. ¿Qué nota le pone el profesor en el cuaderno? <div class="pauta-doble-linea"></div></div>
+    </div>
 
-            <div class="vf-container">
-                <div class="vf-item"><div class="cuadrado-respuesta"></div> 6. La funda de la flauta es de seda de color rojo.</div>
-                <div class="vf-item"><div class="cuadrado-respuesta"></div> 7. Los niños se quedan en silencio al oír la música.</div>
-                <div class="vf-item"><div class="cuadrado-respuesta"></div> 8. Adela ha fallado muchas notas en el examen.</div>
-                <div class="vf-item"><div class="cuadrado-respuesta"></div> 9. El profesor le da un fuerte aplauso al terminar.</div>
-                <div class="vf-item"><div class="cuadrado-respuesta"></div> 10. Adela vuelve a su mesa muy triste y sin su nota.</div>
-            </div>
+    <div class="instruccion-vf">Escribe V o F dentro del cuadro:</div>
 
-            <div class="frase-motivacional">
-                ¡Eres un experto en lectura! 🌟
-            </div>
-        </div>
+    <div class="vf-container">
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 6. La funda de la flauta es de seda de color rojo.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 7. Los niños se quedan en silencio al oír la música.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 8. Adela ha fallado muchas notas en el examen.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 9. El profesor le da un fuerte aplauso al terminar.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 10. Adela vuelve a su mesa muy triste y sin su nota.</div>
+    </div>
+
+    <div class="frase-motivacional">
+        ¡Eres un experto en lectura! 🌟
     </div>
 
 </body>
