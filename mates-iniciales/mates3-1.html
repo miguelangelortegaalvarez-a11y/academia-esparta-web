@@ -2,29 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mates 3.1: Problemas Visuales - Academia Esparta</title>
+    <title>Mates 3.1: Problemas y Cálculo - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @page { size: A4; margin: 1cm; }
-        body { font-family: 'Kalam', cursive; padding: 10px 30px; line-height: 1.2; -webkit-print-color-adjust: exact; }
+        @page { size: A4; margin: 0.8cm; }
+        body { font-family: 'Kalam', cursive; padding: 10px 25px; line-height: 1.2; -webkit-print-color-adjust: exact; }
         .btn-print { position: fixed; top: 10px; right: 10px; background-color: #2980b9; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 100; font-family: sans-serif; }
         @media print { .btn-print { display: none; } body { padding: 0; margin: 0; } }
         
         .header { display: flex; justify-content: space-between; border-bottom: 1.5pt solid #2980b9; padding-bottom: 5pt; margin-bottom: 10pt; font-family: sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: bold; color: #2980b9; }
-        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 15pt; font-size: 11pt; }
+        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 10pt; font-size: 11pt; }
         .campo { border-bottom: 1pt dashed #000; flex-grow: 1; margin-left: 5pt; height: 12pt; }
 
-        .titulo-ficha { text-align: center; margin-bottom: 10pt; }
-        .titulo-ficha h3 { font-size: 20pt; text-decoration: underline; margin: 0; }
-        .instrucciones { font-size: 12pt; background: #f0f7fb; padding: 8px; border-radius: 10px; margin-bottom: 15pt; text-align: center; border-left: 5px solid #2980b9; }
+        .titulo-ficha { text-align: center; margin-bottom: 8pt; }
+        .titulo-ficha h3 { font-size: 18pt; text-decoration: underline; margin: 0; }
+        .instrucciones { font-size: 11pt; background: #f0f7fb; padding: 8px; border-radius: 10px; margin-bottom: 15pt; text-align: center; border-left: 5px solid #2980b9; }
 
-        /* Cuadrícula para los problemas */
-        .grid-problemas { display: grid; grid-template-columns: 1fr; gap: 10px; }
-        .caja-problema { border: 1.2pt solid #eee; border-radius: 10px; padding: 12px; background: #fff; }
-        .texto-problema { font-size: 13pt; margin-bottom: 8px; }
-        .operacion-box { display: flex; justify-content: center; gap: 12px; align-items: center; font-weight: bold; font-size: 18pt; }
-        .caja-num { width: 35pt; height: 35pt; border: 2pt solid #2980b9; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #fff; }
+        .caja-problema { border: 1.2pt solid #eee; border-radius: 10px; padding: 10px; margin-bottom: 8px; background: #fff; }
+        .texto-problema { font-size: 12.5pt; margin-bottom: 8px; min-height: 15pt; }
+        .operacion-box { display: flex; justify-content: center; gap: 10px; align-items: center; font-weight: bold; font-size: 18pt; }
+        .caja-num { width: 32pt; height: 32pt; border: 2pt solid #2980b9; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #fff; }
         .resultado { background-color: #f0f7fb; border-color: #2980b9; }
+        .vacia { border-style: dashed; border-color: #ccc; }
 
         .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(41, 128, 185, 0.02); z-index: -1; pointer-events: none; text-transform: uppercase; }
     </style>
@@ -39,39 +38,57 @@
         <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
     </div>
 
-    <div class="titulo-ficha"><h3>Resolución de Problemas</h3></div>
-    <div class="instrucciones">Observa los dibujos y completa la operación correcta.</div>
+    <div class="titulo-ficha"><h3>Resolución de Problemas y Cálculo</h3></div>
+    <div class="instrucciones">Resuelve los problemas y completa las operaciones vacías con tus propios números.</div>
     
-    <div class="grid-problemas">
-        <div class="caja-problema">
-            <div class="texto-problema">1. Hay 6 pajaritos 🐦🐦🐦🐦🐦🐦 y se van 2 volando. ¿Cuántos quedan?</div>
-            <div class="operacion-box"><div class="caja-num">6</div> ➖ <div class="caja-num">2</div> ＝ <div class="caja-num resultado"></div></div>
-        </div>
+    <div class="caja-problema">
+        <div class="texto-problema">1. Hay 6 pajaritos 🐦🐦🐦 y se van 2 volando. ¿Cuántos quedan?</div>
+        <div class="operacion-box"><div class="caja-num">6</div> ➖ <div class="caja-num">2</div> ＝ <div class="caja-num resultado"></div></div>
+    </div>
 
-        <div class="caja-problema">
-            <div class="texto-problema">2. María tiene 4 manzanas 🍎🍎🍎🍎 y compra 3 más. ¿Cuántas tiene ahora?</div>
-            <div class="operacion-box"><div class="caja-num">4</div> ➕ <div class="caja-num">3</div> ＝ <div class="caja-num resultado"></div></div>
-        </div>
+    <div class="caja-problema">
+        <div class="texto-problema">2. María tiene 4 manzanas 🍎🍎🍎 y compra 3 más. ¿Cuántas tiene?</div>
+        <div class="operacion-box"><div class="caja-num">4</div> ➕ <div class="caja-num">3</div> ＝ <div class="caja-num resultado"></div></div>
+    </div>
 
-        <div class="caja-problema">
-            <div class="texto-problema">3. Había 8 globos 🎈🎈🎈🎈🎈🎈🎈🎈 y explotan 3. ¿Cuántos quedan?</div>
-            <div class="operacion-box"><div class="caja-num">8</div> ➖ <div class="caja-num">3</div> ＝ <div class="caja-num resultado"></div></div>
-        </div>
+    <div class="caja-problema">
+        <div class="texto-problema">3. Había 8 globos 🎈🎈🎈 y explotan 3. ¿Cuántos quedan?</div>
+        <div class="operacion-box"><div class="caja-num">8</div> ➖ <div class="caja-num">3</div> ＝ <div class="caja-num resultado"></div></div>
+    </div>
 
-        <div class="caja-problema">
-            <div class="texto-problema">4. En el jardín hay 5 mariposas 🦋🦋🦋🦋🦋 y llegan 4 más. ¿Cuántas hay?</div>
-            <div class="operacion-box"><div class="caja-num">5</div> ➕ <div class="caja-num">4</div> ＝ <div class="caja-num resultado"></div></div>
-        </div>
+    <div class="caja-problema">
+        <div class="texto-problema">4. Tengo 5 pegatinas ⭐⭐⭐ y me regalan 2 más. ¿Cuántas hay?</div>
+        <div class="operacion-box"><div class="caja-num">5</div> ➕ <div class="caja-num">2</div> ＝ <div class="caja-num resultado"></div></div>
+    </div>
 
-        <div class="caja-problema">
-            <div class="texto-problema">5. Tengo 7 caramelos 🍬🍬🍬🍬🍬🍬🍬 y me como 4. ¿Cuántos me quedan?</div>
-            <div class="operacion-box"><div class="caja-num">7</div> ➖ <div class="caja-num">4</div> ＝ <div class="caja-num resultado"></div></div>
-        </div>
+    <div class="caja-problema">
+        <div class="texto-problema">5. En el nido hay 7 huevos 🥚🥚🥚 y nacen 4 pollitos. ¿Cuántos quedan?</div>
+        <div class="operacion-box"><div class="caja-num">7</div> ➖ <div class="caja-num">4</div> ＝ <div class="caja-num resultado"></div></div>
+    </div>
 
-        <div class="caja-problema">
-            <div class="texto-problema">6. Hay 2 ranitas en la charca 🐸🐸 y saltan 6 más dentro. ¿Cuántas hay ahora?</div>
-            <div class="operacion-box"><div class="caja-num">2</div> ➕ <div class="caja-num">6</div> ＝ <div class="caja-num resultado"></div></div>
-        </div>
+    <div class="caja-problema">
+        <div class="texto-problema">6. Inventa una suma:</div>
+        <div class="operacion-box"><div class="caja-num vacia"></div> ➕ <div class="caja-num vacia"></div> ＝ <div class="caja-num resultado"></div></div>
+    </div>
+
+    <div class="caja-problema">
+        <div class="texto-problema">7. Inventa una resta:</div>
+        <div class="operacion-box"><div class="caja-num vacia"></div> ➖ <div class="caja-num vacia"></div> ＝ <div class="caja-num resultado"></div></div>
+    </div>
+
+    <div class="caja-problema">
+        <div class="texto-problema">8. Inventa una suma:</div>
+        <div class="operacion-box"><div class="caja-num vacia"></div> ➕ <div class="caja-num vacia"></div> ＝ <div class="caja-num resultado"></div></div>
+    </div>
+
+    <div class="caja-problema">
+        <div class="texto-problema">9. Inventa una resta:</div>
+        <div class="operacion-box"><div class="caja-num vacia"></div> ➖ <div class="caja-num vacia"></div> ＝ <div class="caja-num resultado"></div></div>
+    </div>
+
+    <div class="caja-problema">
+        <div class="texto-problema">10. Inventa una suma:</div>
+        <div class="operacion-box"><div class="caja-num vacia"></div> ➕ <div class="caja-num vacia"></div> ＝ <div class="caja-num resultado"></div></div>
     </div>
 
 </body>
