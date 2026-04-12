@@ -6,99 +6,103 @@
     <title>Lectura 9: El examen - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        /* Configuración de página A4 */
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
         body { 
             font-family: 'Kalam', cursive; 
             background-color: #ffffff; 
             color: #000; 
             margin: 0;
-            padding: 20px 50px; /* Margen generoso para que respire */
-            line-height: 1.5;
+            padding: 0;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
         }
 
         .btn-print { 
             position: fixed; top: 20px; right: 20px;
             background-color: #0e9343; color: white; border: none; 
-            padding: 12px 20px; border-radius: 8px; cursor: pointer; 
+            padding: 10px 15px; border-radius: 8px; cursor: pointer; 
             font-weight: bold; z-index: 100; font-family: sans-serif;
         }
 
         @media print {
             .btn-print { display: none; }
-            body { padding: 0; margin: 15mm 20mm; }
+            body { padding: 0; margin: 0; }
         }
 
-        /* Cabecera única */
+        /* Cabecera */
         .header { 
             display: flex; justify-content: space-between; 
-            border-bottom: 2px solid #000; padding-bottom: 5px; 
-            margin-bottom: 30px; font-family: sans-serif;
-            text-transform: uppercase; font-size: 0.9rem; font-weight: bold;
+            border-bottom: 1.5pt solid #000; padding-bottom: 5pt; 
+            margin-bottom: 25pt; font-family: sans-serif;
+            text-transform: uppercase; font-size: 10pt; font-weight: bold;
         }
 
         .datos-alumno {
             display: flex; justify-content: space-between; 
-            margin-bottom: 40px; font-size: 1.2rem;
+            margin-bottom: 30pt; font-size: 13pt;
         }
-        .campo { border-bottom: 1px dashed #000; flex-grow: 1; margin-left: 10px; height: 1.2rem; }
+        .campo { border-bottom: 1pt dashed #000; flex-grow: 1; margin-left: 5pt; height: 15pt; }
 
-        /* Título e Historia */
+        /* Bloque de Lectura a 14pt */
         .lectura-box h3 { 
-            font-size: 3rem; margin: 0 0 35px 0; 
+            font-size: 24pt; margin: 0 0 25pt 0; 
             text-align: center; font-weight: 700; text-decoration: underline;
         }
         
         .lectura-box p { 
-            font-size: 1.9rem; 
+            font-size: 14pt; /* Tamaño solicitado */
             line-height: 1.8; 
-            margin-bottom: 50px; 
-            text-align: justify; /* Justificado perfecto */
-            hyphens: auto;
+            margin-bottom: 35pt; 
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         /* Preguntas de Escritura */
-        .preguntas-container { margin-top: 20px; }
-        
         .pregunta-item { 
-            margin-bottom: 45px; 
-            font-size: 1.7rem; 
-            page-break-inside: avoid; /* Evita que una pregunta se corte a la mitad */
+            margin-bottom: 30pt; 
+            font-size: 14pt; 
+            page-break-inside: avoid;
         }
         
         .pauta-doble-linea {
-            width: 100%; height: 26px; 
-            border-top: 1px solid #000; border-bottom: 1px solid #000;
-            margin-top: 15px;
+            width: 100%; height: 24pt; 
+            border-top: 1pt solid #000; border-bottom: 1pt solid #000;
+            margin-top: 8pt;
         }
 
         /* Bloque Verdadero/Falso */
         .instruccion-vf {
-            font-size: 1.6rem; text-align: center; 
-            margin: 60px 0 40px 0; font-family: sans-serif; font-weight: bold;
+            font-size: 13pt; text-align: center; 
+            margin: 40pt 0 20pt 0; font-family: sans-serif; font-weight: bold;
             text-decoration: underline;
         }
 
         .vf-item {
             display: flex; align-items: center; 
-            font-size: 1.8rem; margin-bottom: 35px;
+            font-size: 14pt; margin-bottom: 22pt;
             page-break-inside: avoid;
         }
 
         .cuadrado-respuesta {
-            width: 42px; height: 42px; border: 2.5px solid #000;
-            margin-right: 25px; flex-shrink: 0;
+            width: 28pt; height: 28pt; border: 1.8pt solid #000;
+            margin-right: 18pt; flex-shrink: 0;
         }
 
         .frase-motivacional {
-            margin-top: 80px;
-            text-align: center; font-size: 1.8rem; font-style: italic; color: #333;
-            padding-bottom: 40px;
+            margin-top: 50pt;
+            text-align: center; font-size: 14pt; font-style: italic; color: #333;
+            padding-bottom: 30pt;
         }
 
-        /* Marca de Agua (Se repite en el fondo) */
         .watermark {
             position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 14rem; color: rgba(0, 0, 0, 0.03);
+            font-size: 120pt; color: rgba(0, 0, 0, 0.03);
             font-family: sans-serif; font-weight: 900;
             z-index: -1; pointer-events: none; text-transform: uppercase;
         }
