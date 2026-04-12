@@ -14,29 +14,32 @@
         .progress-container { width: 80%; background: #333; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid var(--esparta-oro); }
         #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #f1c40f, #ff4500); transition: width 0.5s ease; }
 
-        .main-stage { display: flex; align-items: center; gap: 40px; margin-top: 20px; width: 95%; max-width: 1100px; justify-content: center; flex-wrap: wrap; }
+        .main-stage { display: flex; align-items: center; gap: 40px; margin-top: 20px; width: 95%; max-width: 1200px; justify-content: center; flex-wrap: wrap; }
 
-        /* SECCIÓN DEL MUÑECO */
-        .character-box { width: 320px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .character-img { width: 100%; height: auto; transition: transform 0.3s ease; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+        /* SECCIÓN DEL MUÑECO - AUMENTADO TAMAÑO */
+        .character-box { width: 450px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .character-img { width: 100%; height: auto; transition: transform 0.3s ease; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
         
-        .img-super { filter: drop-shadow(0 0 30px #ffea00); animation: pulse-super 1.2s infinite alternate; }
+        .img-super { filter: drop-shadow(0 0 40px #ffea00); animation: pulse-super 1.2s infinite alternate; }
         @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.08); } }
 
-        /* SECCIÓN DE LA OPERACIÓN */
-        .game-container { background: #fff; padding: 40px; border-radius: 25px; box-shadow: 0 0 30px rgba(241, 196, 15, 0.2); border: 6px solid var(--esparta-verde); color: #222; min-width: 380px; }
+        /* SECCIÓN DE LA OPERACIÓN - REDUCIDO TAMAÑO GENERAL */
+        .game-container { background: #fff; padding: 30px; border-radius: 25px; box-shadow: 0 0 30px rgba(241, 196, 15, 0.2); border: 6px solid var(--esparta-verde); color: #222; min-width: 320px; }
         .fuego-activo { animation: fire-glow 1s infinite alternate; border-color: #ff4500 !important; }
         @keyframes fire-glow { from { box-shadow: 0 0 20px #ff4500; } to { box-shadow: 0 0 50px #ff8c00; } }
 
-        .op-grid { display: grid; grid-template-columns: 85px 85px 85px; text-align: center; font-size: 85px; font-weight: bold; line-height: 1; align-items: center; }
-        .col-signo { color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 75px; }
+        .op-grid { display: grid; grid-template-columns: 65px 65px 65px; text-align: center; font-size: 65px; font-weight: bold; line-height: 1.1; align-items: center; justify-items: center; }
+        .col-signo { color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 60px; grid-column: 1; text-align: right; width: 100%; padding-right: 10px; }
         
-        input { font-family: 'Kalam', cursive; font-size: 55px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 85px; height: 85px; outline: none; transition: 0.2s; background: #fff; }
+        /* CUADRADITOS DE RESPUESTA - AJUSTADO TAMAÑO Y SEPARACIÓN */
+        input { font-family: 'Kalam', cursive; font-size: 40px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 65px; height: 65px; outline: none; transition: 0.2s; background: #fff; margin: 0 5px; }
         input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; transform: scale(1.1); }
         input.wrong { background: #ffcdd2 !important; border-color: var(--esparta-rojo) !important; animation: shake 0.3s; }
 
-        #llevada { width: 65px; height: 65px; font-size: 38px; border: 4px dashed var(--esparta-rojo); visibility: hidden; grid-column: 2; margin: 0 auto 10px auto; color: var(--esparta-rojo); }
-        .linea-div { grid-column: 1 / span 3; border-bottom: 8px solid #333; margin: 15px 0; }
+        #llevada { width: 50px; height: 50px; font-size: 30px; border: 4px dashed var(--esparta-rojo); visibility: hidden; grid-column: 2; margin: 0 auto 10px auto; color: var(--esparta-rojo); }
+        
+        .linea-div { grid-column: 1 / span 3; border-bottom: 8px solid #333; margin: 15px 0; border-radius: 4px; }
+        .result-row { grid-column: 1 / span 3; display: flex; justify-content: center; width: 100%; }
 
         .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; }
         
@@ -68,7 +71,7 @@
     <div class="main-stage">
         <div class="character-box">
             <img src="camino-matematico/assets/warrior/warrior-idle.png.PNG" alt="Erik" class="character-img" id="hero-img">
-            <div style="font-family:'Bangers'; color:var(--esparta-oro); font-size:28px; margin-top:10px;">ESTADO: <span id="hero-status">Base</span></div>
+            <div style="font-family:'Bangers'; color:var(--esparta-oro); font-size:32px; margin-top:15px;">ESTADO: <span id="hero-status">Base</span></div>
         </div>
 
         <div class="game-container" id="box">
@@ -87,9 +90,11 @@
 
                 <div class="linea-div"></div>
 
-                <input type="number" id="res-centena">
-                <input type="number" id="res-decena">
-                <input type="number" id="res-unidad">
+                <div class="result-row">
+                    <input type="number" id="res-centena">
+                    <input type="number" id="res-decena">
+                    <input type="number" id="res-unidad">
+                </div>
             </div>
         </div>
     </div>
