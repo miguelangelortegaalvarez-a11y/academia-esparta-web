@@ -6,44 +6,71 @@
     <title>Ficha de Combinatoria - Academia Esparta</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; color: #333; padding: 20px; line-height: 1.6; }
-        .container { max-width: 850px; margin: auto; border: 1px solid #eee; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .container { max-width: 850px; margin: auto; border: 1px solid #eee; padding: 30px; border-radius: 12px; position: relative; }
         
+        /* Botón de Impresión / PDF */
+        .btn-print {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-print:hover { background-color: #1b5e20; }
+
+        /* Ocultar botón al imprimir */
+        @media print {
+            .btn-print { display: none; }
+            body { padding: 0; }
+            .container { border: none; }
+        }
+
         /* Cabecera */
-        .header-ficha { display: flex; justify-content: space-between; border-bottom: 3px solid #2e7d32; padding-bottom: 8px; margin-bottom: 35px; }
+        .header-ficha { display: flex; justify-content: space-between; border-bottom: 3px solid #2e7d32; padding-bottom: 8px; margin-bottom: 35px; margin-top: 20px; }
         .header-ficha span { font-weight: bold; color: #2e7d32; text-transform: uppercase; font-size: 0.9rem; }
 
-        /* Enunciados destacados */
+        /* Enunciados */
         .enunciado-container { background-color: #f1f8e9; border-radius: 8px; padding: 20px; margin-bottom: 25px; border-left: 6px solid #4caf50; }
         .enunciado-container strong { color: #1b5e20; font-size: 1.1rem; display: block; margin-bottom: 10px; }
-        .texto-enunciado { font-size: 1.1rem; color: #000; line-height: 1.4; }
+        .texto-enunciado { font-size: 1.1rem; color: #000; }
 
-        /* Bloque de Lógica Teórica */
+        /* Lógica del Profesor */
         .logica-box { background-color: #fffde7; border: 1px solid #fbc02d; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .logica-box strong { color: #c62828; text-transform: uppercase; display: block; margin-bottom: 10px; font-size: 0.95rem; letter-spacing: 0.5px; }
-        .logica-box p { margin: 0; font-size: 1rem; color: #444; }
+        .logica-box strong { color: #c62828; text-transform: uppercase; display: block; margin-bottom: 10px; font-size: 0.9rem; }
 
-        /* Identificador de Fórmula */
-        .bloque-formula { background-color: #4caf50; color: white; padding: 15px 25px; border-radius: 8px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.1rem; }
+        /* Fórmulas */
+        .bloque-formula { background-color: #4caf50; color: white; padding: 15px 25px; border-radius: 8px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
 
-        /* Contenedor de Resolución Paso a Paso */
+        /* Desarrollo */
         .desarrollo-seccion { border-left: 4px solid #fbc02d; padding-left: 25px; margin-left: 10px; margin-bottom: 60px; }
-        .titulo-paso { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 0.95rem; margin-top: 25px; margin-bottom: 15px; display: flex; align-items: center; }
-        .titulo-paso::before { content: "•"; margin-right: 10px; font-size: 1.5rem; }
-        
-        .paso-detalle { margin-bottom: 15px; font-size: 1.05rem; }
-        .paso-detalle b { color: #000; }
+        .titulo-paso { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; margin-top: 25px; margin-bottom: 15px; }
+        .paso-detalle { margin-bottom: 12px; font-size: 1.05rem; }
 
-        /* Resultado Final */
-        .resultado-cuadro { background-color: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 20px; text-align: center; font-weight: bold; font-size: 1.2rem; color: #1b5e20; margin-top: 30px; box-shadow: inset 0 0 10px rgba(76, 175, 80, 0.1); }
+        /* Resultado */
+        .resultado-cuadro { background-color: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 20px; text-align: center; font-weight: bold; font-size: 1.2rem; color: #1b5e20; margin-top: 30px; }
 
-        .math-style { font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 1.2rem; font-weight: bold; }
+        .math { font-family: 'Times New Roman', serif; font-style: italic; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <button class="btn-print" onclick="window.print()">
+        📄 Generar PDF para enviar
+    </button>
+
     <div class="header-ficha">
-        <span>Material de Estudio: Combinatoria</span>
+        <span>Análisis Combinatorio</span>
         <span>Academia Esparta</span>
     </div>
 
@@ -56,27 +83,22 @@
 
     <div class="logica-box">
         <strong>¿Por qué usamos Variaciones con Repetición?</strong>
-        <p>
-            En este caso, <b>el orden es determinante</b>: no es la misma situación que la primera bicicleta esté ocupada y la segunda libre, que viceversa. Además, los elementos (O y L) <b>se pueden repetir</b> en cada uno de los 10 lugares disponibles. Por tanto, no permutamos objetos fijos, sino que rellenamos huecos con opciones repetibles.
-        </p>
+        <p>Usamos este método porque el <b>orden de las bicicletas importa</b> (no es lo mismo que la primera esté libre y la segunda ocupada, que al revés) y los estados (O y L) <b>se pueden repetir</b> en cada uno de los 10 lugares. No estamos moviendo objetos fijos, estamos rellenando espacios con opciones que siempre están disponibles.</p>
     </div>
 
     <div class="bloque-formula">
         <span>VARIACIONES CON REPETICIÓN</span>
-        <span class="math-style">VR<sub>m,n</sub> = m<sup>n</sup></span>
+        <span class="math">VR = m<sup>n</sup></span>
     </div>
 
     <div class="desarrollo-seccion">
-        <div class="titulo-paso">Estrategia de planteamiento</div>
-        <div class="paso-detalle">1. <b>Opciones disponibles (m):</b> Tenemos 2 estados (Ocupado / Libre).</div>
-        <div class="paso-detalle">2. <b>Elementos a rellenar (n):</b> Tenemos 10 espacios en el aparcamiento.</div>
-
-        <div class="titulo-paso">Resolución detallada</div>
-        <div class="paso-detalle"><b>Paso 1:</b> Aplicamos el principio de multiplicación. Cada lugar tiene 2 posibilidades independientes.</div>
-        <div class="paso-detalle"><b>Paso 2:</b> Realizamos la operación matemática: <span class="math-style">2 · 2 · 2 · 2 · 2 · 2 · 2 · 2 · 2 · 2 = 2<sup>10</sup></span>.</div>
+        <div class="titulo-paso">Estrategia y Resolución</div>
+        <div class="paso-detalle">1. <b>Opciones (m):</b> 2 (Ocupado o Libre).</div>
+        <div class="paso-detalle">2. <b>Espacios (n):</b> 10 lugares.</div>
+        <div class="paso-detalle">3. <b>Cálculo:</b> Multiplicamos las 2 opciones por sí mismas 10 veces (<span class="math">2<sup>10</sup></span>).</div>
         
         <div class="resultado-cuadro">
-            RESULTADO FINAL: Se pueden encontrar 1.024 posiciones distintas.
+            RESULTADO: 1.024 posiciones distintas.
         </div>
     </div>
 
@@ -89,27 +111,22 @@
 
     <div class="logica-box">
         <strong>¿Por qué usamos Permutaciones con Repetición?</strong>
-        <p>
-            Usamos permutaciones porque estamos <b>reordenando todos</b> los elementos del conjunto (los 6 vagones). Sin embargo, como hay vagones que son <b>idénticos entre sí</b> (4 son M y 2 son C), intercambiar un vagón de mercancía por otro de mercancía no crea una fila visualmente distinta. Debemos usar la fórmula con repetición para eliminar esos casos duplicados.
-        </p>
+        <p>Usamos permutaciones porque vamos a <b>reordenar todos</b> los elementos del grupo (los 6 vagones). Es "con repetición" porque hay elementos <b>idénticos</b>: los 4 vagones M son iguales entre sí y los 2 C también. Al intercambiar dos vagones del mismo tipo, la fila no cambia visualmente, por lo que debemos descontar esos casos repetidos.</p>
     </div>
 
     <div class="bloque-formula">
         <span>PERMUTACIONES CON REPETICIÓN</span>
-        <span class="math-style">PR<sub>6</sub><sup>4,2</sup> = 6! / (4! · 2!)</span>
+        <span class="math">PR = n! / (a! · b!)</span>
     </div>
 
     <div class="desarrollo-seccion">
-        <div class="titulo-paso">Estrategia de planteamiento</div>
-        <div class="paso-detalle">1. <b>Total de elementos (n):</b> 6 vagones en la locomotora.</div>
-        <div class="paso-detalle">2. <b>Frecuencia de repetición:</b> El vagón M aparece 4 veces y el vagón C aparece 2 veces.</div>
-
-        <div class="titulo-paso">Resolución detallada</div>
-        <div class="paso-detalle"><b>Paso 1:</b> Calculamos el factorial del total de elementos para saber todas las permutaciones posibles: <span class="math-style">6! = 720</span>.</div>
-        <div class="paso-detalle"><b>Paso 2:</b> Dividimos por los factoriales de los grupos repetidos para ajustar el resultado: <span class="math-style">720 / (24 · 2) = 720 / 48</span>.</div>
+        <div class="titulo-paso">Estrategia y Resolución</div>
+        <div class="paso-detalle">1. <b>Total (n):</b> 6 vagones.</div>
+        <div class="paso-detalle">2. <b>Repeticiones:</b> 4 de tipo M y 2 de tipo C.</div>
+        <div class="paso-detalle">3. <b>Cálculo:</b> <span class="math">6! / (4! · 2!) = 720 / (24 · 2) = 15</span>.</div>
         
         <div class="resultado-cuadro">
-            RESULTADO FINAL: Los vagones se pueden ordenar de 15 formas distintas.
+            RESULTADO: 15 formas distintas de ordenarlos.
         </div>
     </div>
 </div>
