@@ -2,117 +2,138 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Sumas Sin Llevadas (2 y 3 Cifras) - Academia Esparta</title>
+    <title>Pack Fichas 1 Cifra - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Configuración de impresión: Cada sección .page es un folio A4 */
         @page { size: A4; margin: 0; }
-        body { margin: 0; padding: 0; background: #f4f4f4; font-family: 'Kalam', cursive; -webkit-print-color-adjust: exact; }
+        body { margin: 0; padding: 0; background: #eee; font-family: 'Kalam', cursive; }
         
         .page {
-            width: 210mm; min-height: 297mm; padding: 15mm; margin: 10mm auto;
-            background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            position: relative; page-break-after: always; box-sizing: border-box;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            page-break-after: always;
+            box-sizing: border-box;
         }
 
         @media print {
             body { background: white; }
-            .page { margin: 0; box-shadow: none; width: 100%; }
+            .page { margin: 0; box-shadow: none; }
             .btn-print { display: none; }
         }
 
+        /* Estilos comunes */
         .header { display: flex; justify-content: space-between; border-bottom: 2pt solid #0e9343; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: bold; color: #0e9343; }
         .datos { display: flex; justify-content: space-between; margin-bottom: 20pt; font-size: 11pt; }
         .campo { border-bottom: 1pt dashed #ccc; flex-grow: 1; margin-left: 5pt; height: 14pt; }
-        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 25pt; border: 2pt solid #0e9343; display: inline-block; padding: 5pt 20mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px; }
+        .titulo-ficha { text-align: center; color: #063c24; margin-bottom: 20pt; border: 2pt solid #0e9343; display: inline-block; padding: 5pt 20mm; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px; }
 
         .btn-print { position: fixed; top: 20px; right: 20px; background: #0e9343; color: white; border: none; padding: 15px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
-        /* Rejilla de operaciones */
-        .grid-20 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 35pt 10pt; }
-        .grid-12 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40pt 20pt; }
+        /* Formatos de celdas */
+        .grid-30 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 25pt 10pt; }
+        .grid-60 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15pt 5pt; }
 
         /* Operación Vertical */
-        .op-v { display: flex; flex-direction: column; align-items: flex-end; font-size: 24pt; font-weight: bold; position: relative; width: 80pt; margin: auto; }
-        .op-v .linea { width: 100%; border-bottom: 2pt solid black; margin: 3pt 0; }
-        .op-v .signo { position: absolute; left: -5pt; bottom: 30pt; font-size: 20pt; }
-        .numero { letter-spacing: 6pt; }
+        .op-v { display: flex; flex-direction: column; align-items: flex-end; font-size: 22pt; font-weight: bold; padding: 10pt; border: 1pt solid #eee; border-radius: 8px; position: relative; width: 60pt; margin: auto; }
+        .op-v .linea { width: 100%; border-bottom: 2pt solid black; margin: 2pt 0; }
+        .op-v .signo { position: absolute; left: 5pt; bottom: 35%; font-size: 16pt; }
+
+        /* Operación Horizontal */
+        .op-h { font-size: 18pt; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 5pt; border: 1px solid #f9f9f9; padding: 5pt; }
+        .res { width: 25pt; height: 25pt; border: 1.5pt solid #ccc; border-radius: 4px; }
 
         .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(14, 147, 67, 0.03); z-index: 0; pointer-events: none; font-family: sans-serif; }
     </style>
 </head>
 <body>
 
-    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR PACK (5 FOLIOS)</button>
+    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR LOS 5 FOLIOS</button>
 
-    <script>
-        // Función para generar números que NO tengan llevadas
-        function generarSinLlevada(cifras) {
-            let n1 = "", n2 = "";
-            for(let i=0; i<cifras; i++) {
-                let d1 = Math.floor(Math.random() * 5); // Máximo 4 para que al sumar no pase de 9
-                let d2 = Math.floor(Math.random() * (9 - d1 + 1));
-                n1 = d1.toString() + n1;
-                n2 = d2.toString() + n2;
-            }
-            return [parseInt(n1), parseInt(n2)];
-        }
+    <div class="page">
+        <div class="watermark">ESPARTA</div>
+        <div class="header"><span>FICHA 01 - CÁLCULO MENTAL</span><span>ACADEMIA ESPARTA</span></div>
+        <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
+        <div class="titulo-ficha"><h3>MARATÓN: 60 OPERACIONES RÁPIDAS</h3></div>
+        <div class="grid-60">
+            <div class="op-h">3+4=<div class="res"></div></div> <div class="op-h">9-2=<div class="res"></div></div>
+            <div class="op-h">5+5=<div class="res"></div></div> <div class="op-h">8-3=<div class="res"></div></div>
+            <div class="op-h">1+6=<div class="res"></div></div> <div class="op-h">7-4=<div class="res"></div></div>
+            <script>
+                for(let i=0; i<54; i++) {
+                    let a = Math.floor(Math.random()*9)+1;
+                    let b = Math.floor(Math.random()*9)+1;
+                    let esSuma = Math.random() > 0.5;
+                    if(!esSuma && a < b) [a, b] = [b, a];
+                    document.write(`<div class="op-h">${a}${esSuma?'+':'-'}${b}=<div class="res"></div></div>`);
+                }
+            </script>
+        </div>
+    </div>
 
-        function crearFicha(folio, titulo, cifras, cantidad, gridClass) {
-            document.write(`
-                <div class="page">
-                    <div class="watermark">ESPARTA</div>
-                    <div class="header"><span>FICHA ${folio} - OPERACIONES</span><span>ACADEMIA ESPARTA</span></div>
-                    <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
-                    <div class="titulo-ficha"><h3>${titulo}</h3></div>
-                    <div class="${gridClass}">
-            `);
-            
-            for(let i=0; i<cantidad; i++) {
-                let [a, b] = generarSinLlevada(cifras);
-                document.write(`
-                    <div class="op-v">
-                        <span class="numero">${a}</span>
-                        <span class="signo">+</span>
-                        <span class="numero">${b}</span>
-                        <div class="linea"></div>
-                    </div>
-                `);
-            }
-            
-            document.write(`</div></div>`);
-        }
+    <div class="page">
+        <div class="watermark">ESPARTA</div>
+        <div class="header"><span>FICHA 02 - SUMAS VERTICALES</span><span>ACADEMIA ESPARTA</span></div>
+        <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
+        <div class="titulo-ficha"><h3>SUMAS DE UNA CIFRA (NIVEL 1)</h3></div>
+        <div class="grid-30">
+            <script>
+                for(let i=0; i<30; i++) {
+                    let a = Math.floor(Math.random()*9)+1;
+                    let b = Math.floor(Math.random()*9)+1;
+                    document.write(`<div class="op-v"><span>${a}</span><span class="signo">+</span><span>${b}</span><div class="linea"></div></div>`);
+                }
+            </script>
+        </div>
+    </div>
 
-        // FOLIO 1: 2 Cifras (20 sumas)
-        crearFicha("01", "SUMAS 2 CIFRAS (NIVEL 1)", 2, 20, "grid-20");
+    <div class="page">
+        <div class="watermark">ESPARTA</div>
+        <div class="header"><span>FICHA 03 - RESTAS VERTICALES</span><span>ACADEMIA ESPARTA</span></div>
+        <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
+        <div class="titulo-ficha"><h3>RESTAS DE UNA CIFRA (NIVEL 1)</h3></div>
+        <div class="grid-30">
+            <script>
+                for(let i=0; i<30; i++) {
+                    let a = Math.floor(Math.random()*9)+1;
+                    let b = Math.floor(Math.random()*Math.min(a, 9));
+                    document.write(`<div class="op-v"><span>${a}</span><span class="signo">-</span><span>${b}</span><div class="linea"></div></div>`);
+                }
+            </script>
+        </div>
+    </div>
 
-        // FOLIO 2: 2 Cifras (20 sumas - Más práctica)
-        crearFicha("02", "SUMAS 2 CIFRAS (NIVEL 2)", 2, 20, "grid-20");
-
-        // FOLIO 3: 3 Cifras (12 sumas - Espacio amplio)
-        crearFicha("03", "SUMAS 3 CIFRAS (BÁSICO)", 3, 12, "grid-12");
-
-        // FOLIO 4: 3 Cifras (12 sumas - Consolidación)
-        crearFicha("04", "SUMAS 3 CIFRAS (AVANZADO)", 3, 12, "grid-12");
-
-        // FOLIO 5: Mixto 2 y 3 Cifras
-        document.write(`
-            <div class="page">
-                <div class="watermark">ESPARTA</div>
-                <div class="header"><span>FICHA 05 - REPASO MIXTO</span><span>ACADEMIA ESPARTA</span></div>
-                <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
-                <div class="titulo-ficha"><h3>REPASO SIN LLEVADAS</h3></div>
-                <div class="grid-20">
-        `);
-        for(let i=0; i<10; i++) {
-            let [a, b] = generarSinLlevada(2);
-            document.write(`<div class="op-v"><span class="numero">${a}</span><span class="signo">+</span><span class="numero">${b}</span><div class="linea"></div></div>`);
-        }
-        for(let i=0; i<8; i++) {
-            let [a, b] = generarSinLlevada(3);
-            document.write(`<div class="op-v"><span class="numero">${a}</span><span class="signo">+</span><span class="numero">${b}</span><div class="linea"></div></div>`);
-        }
-        document.write(`</div></div>`);
-    </script>
+    <div class="page">
+        <div class="watermark">ESPARTA</div>
+        <div class="header"><span>FICHA 04 - MIXTO</span><span>ACADEMIA ESPARTA</span></div>
+        <div class="datos"><div style="width: 60%; display: flex;">Alumno: <div class="campo"></div></div><div style="width: 30%; display: flex;">Fecha: <div class="campo"></div></div></div>
+        <div class="titulo-ficha"><h3>ENTRENAMIENTO MIXTO</h3></div>
+        <h4 style="color: #0e9343; border-bottom: 1px solid #0e9343;">BLOQUE A: VERTICAL</h4>
+        <div class="grid-30" style="grid-template-rows: repeat(2, 1fr); gap: 10pt;">
+            <script>
+                for(let i=0; i<10; i++) {
+                    let a = Math.floor(Math.random()*9)+1;
+                    let b = Math.floor(Math.random()*9)+1;
+                    document.write(`<div class="op-v"><span>${a}</span><span class="signo">+</span><span>${b}</span><div class="linea"></div></div>`);
+                }
+            </script>
+        </div>
+        <h4 style="color: #0e9343; border-bottom: 1px solid #0e9343; margin-top: 30pt;">BLOQUE B: HORIZONTAL</h4>
+        <div class="grid-60">
+            <script>
+                for(let i=0; i<30; i++) {
+                    let a = Math.floor(Math.random()*9)+1;
+                    let b = Math.floor(Math.random()*Math.min(a, 9));
+                    document.write(`<div class="op-h">${a}-${b}=<div class="res"></div></div>`);
+                }
+            </script>
+        </div>
+    </div>
 
 </body>
 </html>
