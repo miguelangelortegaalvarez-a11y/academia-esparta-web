@@ -7,48 +7,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Bangers&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --esparta-rojo: #e74c3c; }
-        body { font-family: 'Kalam', cursive; background: #1a1a1a; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; }
+        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --esparta-rojo: #e74c3c; --esparta-gris: #333; }
         
+        body { font-family: 'Kalam', cursive; background: #1a1a1a; color: white; margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+        
+        /* CABECERA Y PROGRESO */
         .header { background: var(--esparta-verde); width: 100%; text-align: center; padding: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.5); font-family: 'Bangers', cursive; letter-spacing: 2px; }
-        .progress-container { width: 80%; background: #333; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid var(--esparta-oro); }
+        .progress-container { width: 90%; max-width: 1000px; background: #333; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid var(--esparta-oro); }
         #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #f1c40f, #ff4500); transition: width 0.5s ease; }
 
-        .main-stage { display: flex; align-items: center; gap: 40px; margin-top: 20px; width: 95%; max-width: 1200px; justify-content: center; flex-wrap: wrap; }
+        /* MARCADOR */
+        .marcador { font-family:'Bangers'; font-size: 30px; margin-top: 10px; text-align: center; }
 
-        /* SECCIÓN DEL MUÑECO - AUMENTADO TAMAÑO */
-        .character-box { width: 450px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        .character-img { width: 100%; height: auto; transition: transform 0.3s ease; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
+        /* ESCENARIO PRINCIPAL - 2 COLUMNAS */
+        .main-stage { display: flex; width: 95%; max-width: 1300px; justify-content: center; align-items: flex-start; gap: 40px; margin-top: 20px; flex-wrap: nowrap; }
+
+        /* COLUMNA IZQUIERDA: EL MUÑECO GIGANTE */
+        .character-col { flex: 0 0 550px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+        .character-img { width: 100%; height: auto; transition: 0.3s; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
         
+        /* Efectos Superguerrero */
         .img-super { filter: drop-shadow(0 0 40px #ffea00); animation: pulse-super 1.2s infinite alternate; }
-        @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.08); } }
+        @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.06); } }
 
-        /* SECCIÓN DE LA OPERACIÓN - REDUCIDO TAMAÑO GENERAL */
-        .game-container { background: #fff; padding: 30px; border-radius: 25px; box-shadow: 0 0 30px rgba(241, 196, 15, 0.2); border: 6px solid var(--esparta-verde); color: #222; min-width: 320px; }
-        .fuego-activo { animation: fire-glow 1s infinite alternate; border-color: #ff4500 !important; }
+        /* COLUMNA DERECHA: LA OPERACIÓN COMPACTA */
+        .game-col { flex: 1; display: flex; justify-content: center; align-items: flex-start; padding-top: 20px; }
+        
+        .game-container { background: #fff; padding: 30px; border-radius: 25px; box-shadow: 0 0 30px rgba(241, 196, 15, 0.2); border: 6px solid var(--esparta-verde); color: #222; max-width: 450px; position: relative; }
+        
+        /* Efecto Fuego */
+        .fuego-activo { animation: fire-glow 1s infinite alternate; border-color: #ff4500 !important; box-shadow: 0 0 50px #ff4500 !important; }
         @keyframes fire-glow { from { box-shadow: 0 0 20px #ff4500; } to { box-shadow: 0 0 50px #ff8c00; } }
 
-        .op-grid { display: grid; grid-template-columns: 65px 65px 65px; text-align: center; font-size: 65px; font-weight: bold; line-height: 1.1; align-items: center; justify-items: center; }
-        .col-signo { color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 60px; grid-column: 1; text-align: right; width: 100%; padding-right: 10px; }
+        /* TABLA DE OPERACIÓN - ALINEACIÓN TOTAL */
+        .multiplication-table { font-size: 75px; font-weight: bold; line-height: 1.1; color: #2c3e50; table-layout: fixed; width: 100%; border-collapse: collapse; margin-right: -10px; }
+        .multiplication-table td { text-align: center; vertical-align: middle; padding: 0; width: 85px; height: 85px; }
+        .multiplication-table .align-right { text-align: right; }
         
-        /* CUADRADITOS DE RESPUESTA - AJUSTADO TAMAÑO Y SEPARACIÓN */
-        input { font-family: 'Kalam', cursive; font-size: 40px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 65px; height: 65px; outline: none; transition: 0.2s; background: #fff; margin: 0 5px; }
+        .signo { color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 70px; padding-right: 15px; text-align: center; }
+        
+        .linea { border-bottom: 8px solid #333; margin: 10px -5px; grid-column: 1 / span 3; }
+
+        /* CUADRADITOS DE RESPUESTA - SEPARADOS Y ALINEADOS */
+        .result-row { display: flex; gap: 12px; justify-content: flex-end; padding-top: 15px; }
+        
+        input { font-family: 'Kalam', cursive; font-size: 55px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 85px; height: 85px; outline: none; transition: 0.2s; background: #fff; box-sizing: border-box; }
+        input:focus { border-color: var(--esparta-oro); background: #fffde7; }
         input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; transform: scale(1.1); }
         input.wrong { background: #ffcdd2 !important; border-color: var(--esparta-rojo) !important; animation: shake 0.3s; }
 
-        #llevada { width: 50px; height: 50px; font-size: 30px; border: 4px dashed var(--esparta-rojo); visibility: hidden; grid-column: 2; margin: 0 auto 10px auto; color: var(--esparta-rojo); }
-        
-        .linea-div { grid-column: 1 / span 3; border-bottom: 8px solid #333; margin: 15px 0; border-radius: 4px; }
-        .result-row { grid-column: 1 / span 3; display: flex; justify-content: center; width: 100%; }
+        #llevada { width: 65px; height: 65px; font-size: 35px; border: 4px dashed var(--esparta-rojo); visibility: hidden; grid-column: 2; margin: 0 auto 10px auto; color: var(--esparta-rojo); }
 
-        .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; }
+        /* MENSAJES */
+        .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; width: 90%; }
         
-        #barca-msg { 
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(165, 0, 68, 0.98); color: #edbb00; font-family: 'Bangers';
-            font-size: 60px; padding: 40px; border-radius: 20px; border: 12px solid #004d98;
-            z-index: 1000; text-align: center; display: none; width: 85%; pointer-events: none;
-        }
+        #barca-msg { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(165, 0, 68, 0.98); color: #edbb00; font-family: 'Bangers'; font-size: 60px; padding: 40px; border-radius: 20px; border: 12px solid #004d98; z-index: 1000; text-align: center; display: none; width: 85%; pointer-events: none; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
     </style>
@@ -59,7 +72,7 @@
 
     <div class="header"><h1>GUERRERO ERIK: EL CAMINO DEL GUERRERO</h1></div>
     
-    <div style="font-family:'Bangers'; font-size: 30px; margin-top: 10px;">
+    <div class="marcador">
         ESCUDOS: <span id="score" style="color:var(--esparta-oro)">0</span> | 
         RACHA 🔥: <span id="streak" style="color:#ff4500">0</span>
     </div>
@@ -69,26 +82,34 @@
     </div>
 
     <div class="main-stage">
-        <div class="character-box">
+        
+        <div class="character-col">
             <img src="camino-matematico/assets/warrior/warrior-idle.png.PNG" alt="Erik" class="character-img" id="hero-img">
-            <div style="font-family:'Bangers'; color:var(--esparta-oro); font-size:32px; margin-top:15px;">ESTADO: <span id="hero-status">Base</span></div>
+            <div style="font-family:'Bangers'; color:var(--esparta-oro); font-size:35px; margin-top:20px;">ESTADO: <span id="hero-status">Base</span></div>
         </div>
 
-        <div class="game-container" id="box">
-            <div class="op-grid" id="op-text">
-                <div></div>
-                <input type="number" id="llevada" placeholder="?">
-                <div></div>
+        <div class="game-col">
+            <div class="game-container" id="box">
+                <div style="display: flex; justify-content: center; width: 100%;">
+                    <input type="number" id="llevada" placeholder="?">
+                </div>
 
-                <div></div>
-                <div id="d-arriba">--</div>
-                <div id="u-arriba">-</div>
-
-                <div class="col-signo">x</div>
-                <div></div>
-                <div id="num-abajo">-</div>
-
-                <div class="linea-div"></div>
+                <table class="multiplication-table" id="op-table">
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="align-right" id="d-arriba">4</td>
+                            <td class="align-right" id="u-arriba">7</td>
+                        </tr>
+                        <tr>
+                            <td class="signo">x</td>
+                            <td></td>
+                            <td class="align-right" id="num-abajo">6</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="linea"></div>
 
                 <div class="result-row">
                     <input type="number" id="res-centena">
@@ -124,20 +145,24 @@
         const heroStatus = document.getElementById('hero-status');
 
         function nuevaOperacion() {
+            // Generar 2 cifras x 1 cifra
             n1 = Math.floor(Math.random() * 90) + 10;
             n2 = Math.floor(Math.random() * 8) + 2;
             fallosEnEsta = 0;
             
+            // Llenar tabla
             document.getElementById('d-arriba').innerText = Math.floor(n1 / 10);
             document.getElementById('u-arriba').innerText = n1 % 10;
             document.getElementById('num-abajo').innerText = n2;
 
+            // Calcular reales
             uReal = (n1 % 10 * n2) % 10;
             llevadaReal = Math.floor((n1 % 10 * n2) / 10);
             let total = n1 * n2;
             cReal = Math.floor(total / 100);
             dReal = Math.floor((total % 100) / 10);
 
+            // Resetear inputs
             Object.values(inputs).forEach(i => {
                 i.value = ''; i.className = ''; i.disabled = true; i.style.visibility = 'visible';
             });
@@ -156,10 +181,12 @@
             document.getElementById('streak').innerText = streak;
             document.getElementById('box').classList.remove('fuego-activo');
             
+            // Erik se pone Triste
             heroImg.src = imagenes.sad;
-            heroImg.className = 'character-img';
-            heroStatus.innerText = "¡MÁS MALO QUE EL BARÇA!";
+            heroImg.className = 'character-img'; // Quitar efecto super
+            heroStatus.innerText = "¡MÁS MALO QUE EL BARÇA! 📉";
             
+            // Zasca del Barcelona
             const bMsg = document.getElementById('barca-msg');
             bMsg.style.display = 'block';
             setTimeout(() => { bMsg.style.display = 'none'; }, 2000);
@@ -171,8 +198,9 @@
                 heroImg.className = 'character-img';
                 heroStatus.innerText = "Guerrero";
             } else {
+                // Modo Superguerrero
                 heroImg.src = imagenes.super;
-                heroImg.classList.add('img-super');
+                heroImg.classList.add('img-super'); // Añadir brillo
                 heroStatus.innerText = "SUPER ER! 🔥";
             }
         }
@@ -224,7 +252,11 @@
             if(fallosEnEsta === 0) {
                 streak++;
                 document.getElementById('box').classList.add('fuego-activo');
+                document.getElementById('msg').innerText = "¡IMPRESIONANTE, ERIK! 🔥";
+            } else {
+                document.getElementById('msg').innerText = "¡BIEN HECHO, SIGUE ASÍ!";
             }
+            
             score++;
             document.getElementById('score').innerText = score;
             document.getElementById('streak').innerText = streak;
@@ -233,12 +265,13 @@
             if(score >= goal) {
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                 document.getElementById('msg').innerText = "¡ERIK, REY DEL OLIMPO!";
-                setTimeout(() => { score = 0; streak = 0; nuevaOperacion(); }, 5000);
+                setTimeout(() => { score = 0; streak = 0; document.getElementById('progress-bar').style.width = "0%"; nuevaOperacion(); }, 5000);
             } else {
                 setTimeout(nuevaOperacion, 1500);
             }
         }
 
+        actualizarImagen();
         nuevaOperacion();
     </script>
 </body>
