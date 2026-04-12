@@ -2,136 +2,120 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mates 3.2: Casitas de Números - Academia Esparta</title>
+    <title>Mates 3.3: Operaciones con Cuadros - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @page { size: A4; margin: 1cm; }
-        body { 
-            font-family: 'Kalam', cursive; 
-            padding: 10px 30px; 
-            line-height: 1.2;
-            background-color: #ffffff;
-            -webkit-print-color-adjust: exact; 
-        }
+        @page { size: A4; margin: 0.8cm; }
+        body { font-family: 'Kalam', cursive; padding: 10px 20px; line-height: 1.1; -webkit-print-color-adjust: exact; }
         .btn-print { position: fixed; top: 10px; right: 10px; background-color: #2980b9; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 100; font-family: sans-serif; }
         @media print { .btn-print { display: none; } body { padding: 0; margin: 0; } }
         
         .header { display: flex; justify-content: space-between; border-bottom: 1.5pt solid #2980b9; padding-bottom: 5pt; margin-bottom: 10pt; font-family: sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: bold; color: #2980b9; }
-        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 15pt; font-size: 11pt; }
+        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 10pt; font-size: 11pt; }
         .campo { border-bottom: 1pt dashed #000; flex-grow: 1; margin-left: 5pt; height: 12pt; }
 
-        .titulo-ficha { text-align: center; margin-bottom: 10pt; }
-        .titulo-ficha h3 { font-size: 20pt; text-decoration: underline; margin: 0; }
-        .instrucciones { font-size: 12pt; background: #f0f7fb; padding: 8px; border-radius: 10px; margin-bottom: 20pt; text-align: center; border-left: 5px solid #2980b9; }
+        .titulo-ficha { text-align: center; margin-bottom: 5pt; }
+        .titulo-ficha h3 { font-size: 18pt; text-decoration: underline; margin: 0; }
+        .instrucciones { font-size: 11pt; background: #fdf2e9; padding: 6px; border-radius: 8px; margin-bottom: 15pt; text-align: center; border-left: 5px solid #e67e22; }
 
-        /* Cuadrícula de 3 columnas */
-        .grid-casas { 
+        /* Cuadrícula de 2 columnas para que quepan las 10 */
+        .grid-operaciones { 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 20px; 
-            justify-items: center;
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
         }
 
-        .casa { 
-            border: 2.5pt solid #2980b9; 
-            width: 140px; 
-            border-radius: 12px; 
-            overflow: hidden; 
+        .caja-ejercicio { 
+            border: 1pt solid #ddd; 
+            border-radius: 10px; 
+            padding: 10px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
             background: #fff;
         }
-        .tejado { 
-            background: #2980b9; 
-            color: white; 
-            font-size: 28pt; 
-            padding: 5px; 
-            text-align: center; 
+        .num-ejercicio { font-size: 9pt; color: #7f8c8d; align-self: flex-start; margin-bottom: 5pt; font-family: sans-serif; }
+
+        .operacion-fila { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            font-size: 20pt; 
             font-weight: bold; 
         }
-        .piso { 
-            display: flex; 
-            border-bottom: 1.5pt solid #eee; 
-        }
-        .piso:last-child { border-bottom: none; }
-        .habitacion { 
-            width: 50%; 
-            height: 35pt; 
+
+        .cuadro { 
+            width: 40pt; 
+            height: 40pt; 
+            border: 2pt solid #2980b9; 
+            border-radius: 6px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 18pt; 
-            font-weight: bold; 
-            border-right: 1.5pt solid #eee; 
+            background: #fff;
         }
-        .habitacion:last-child { border-right: none; }
-        .vacia { background-color: #fcfcfc; }
+        .resultado { border-color: #27ae60; background-color: #f1f9f5; }
+        .vacio { border-style: dashed; border-color: #bdc3c7; }
 
         .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(41, 128, 185, 0.02); z-index: -1; pointer-events: none; text-transform: uppercase; }
-        .frase-final { margin-top: 25pt; text-align: center; font-size: 13pt; font-style: italic; color: #444; }
     </style>
 </head>
 <body>
     <div class="watermark">ESPARTA</div>
-    <button class="btn-print" onclick="window.print()">📄 IMPRIMIR FICHA</button>
+    <button class="btn-print" onclick="window.print()">📄 IMPRIMIR</button>
 
-    <div class="header"><span>MATEMÁTICAS INICIALES</span><span>ACADEMIA ESPARTA</span></div>
+    <div class="header"><span>CÁLCULO MATEMÁTICO</span><span>ACADEMIA ESPARTA</span></div>
     <div class="datos-alumno">
         <div style="width: 45%; display: flex;">Nombre: <div class="campo"></div></div>
         <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
     </div>
 
-    <div class="titulo-ficha"><h3>Las Casitas de Sumar</h3></div>
-    <div class="instrucciones">Escribe el número que falta en cada piso para que la suma sea igual al número del tejado.</div>
+    <div class="titulo-ficha"><h3>Cálculo con Cuadrados</h3></div>
+    <div class="instrucciones">Completa los cuadros vacíos con los números correctos.</div>
     
-    <div class="grid-casas">
-        <div class="casa"><div class="tejado">4</div>
-            <div class="piso"><div class="habitacion">1</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">2</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">3</div><div class="habitacion vacia"></div></div>
+    <div class="grid-operaciones">
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 1</span>
+            <div class="operacion-fila"><div class="cuadro">5</div> ➕ <div class="cuadro">2</div> ＝ <div class="cuadro resultado"></div></div>
         </div>
-        <div class="casa"><div class="tejado">5</div>
-            <div class="piso"><div class="habitacion">2</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">4</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">1</div><div class="habitacion vacia"></div></div>
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 2</span>
+            <div class="operacion-fila"><div class="cuadro">8</div> ➖ <div class="cuadro">3</div> ＝ <div class="cuadro resultado"></div></div>
         </div>
-        <div class="casa"><div class="tejado">6</div>
-            <div class="piso"><div class="habitacion">3</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">5</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">2</div><div class="habitacion vacia"></div></div>
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 3</span>
+            <div class="operacion-fila"><div class="cuadro">4</div> ➕ <div class="cuadro">4</div> ＝ <div class="cuadro resultado"></div></div>
         </div>
-
-        <div class="casa"><div class="tejado">7</div>
-            <div class="piso"><div class="habitacion">4</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">6</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">3</div><div class="habitacion vacia"></div></div>
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 4</span>
+            <div class="operacion-fila"><div class="cuadro">9</div> ➖ <div class="cuadro">6</div> ＝ <div class="cuadro resultado"></div></div>
         </div>
-        <div class="casa"><div class="tejado">8</div>
-            <div class="piso"><div class="habitacion">5</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">7</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">4</div><div class="habitacion vacia"></div></div>
-        </div>
-        <div class="casa"><div class="tejado">9</div>
-            <div class="piso"><div class="habitacion">6</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">8</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">5</div><div class="habitacion vacia"></div></div>
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 5</span>
+            <div class="operacion-fila"><div class="cuadro">1</div> ➕ <div class="cuadro">7</div> ＝ <div class="cuadro resultado"></div></div>
         </div>
 
-        <div class="casa"><div class="tejado">10</div>
-            <div class="piso"><div class="habitacion">5</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">2</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">7</div><div class="habitacion vacia"></div></div>
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 6 (Libre)</span>
+            <div class="operacion-fila"><div class="cuadro vacio"></div> ➕ <div class="cuadro vacio"></div> ＝ <div class="cuadro resultado"></div></div>
         </div>
-        <div class="casa"><div class="tejado">3</div>
-            <div class="piso"><div class="habitacion">1</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">2</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">0</div><div class="habitacion vacia"></div></div>
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 7 (Libre)</span>
+            <div class="operacion-fila"><div class="cuadro vacio"></div> ➖ <div class="cuadro vacio"></div> ＝ <div class="cuadro resultado"></div></div>
         </div>
-        <div class="casa"><div class="tejado">5</div>
-            <div class="piso"><div class="habitacion">0</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">3</div><div class="habitacion vacia"></div></div>
-            <div class="piso"><div class="habitacion">5</div><div class="habitacion vacia"></div></div>
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 8 (Libre)</span>
+            <div class="operacion-fila"><div class="cuadro vacio"></div> ➕ <div class="cuadro vacio"></div> ＝ <div class="cuadro resultado"></div></div>
+        </div>
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 9 (Libre)</span>
+            <div class="operacion-fila"><div class="cuadro vacio"></div> ➖ <div class="cuadro vacio"></div> ＝ <div class="cuadro resultado"></div></div>
+        </div>
+        <div class="caja-ejercicio">
+            <span class="num-ejercicio">Actividad 10 (Libre)</span>
+            <div class="operacion-fila"><div class="cuadro vacio"></div> ➕ <div class="cuadro vacio"></div> ＝ <div class="cuadro resultado"></div></div>
         </div>
     </div>
 
-    <div class="frase-final">¡Qué bien descompones los números! 🏠✨</div>
 </body>
 </html>
