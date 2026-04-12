@@ -3,103 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reto Academia Esparta - Combinatoria</title>
+    <title>Combinatoria Avanzada - Academia Esparta</title>
     <style>
-        body { font-family: 'Courier New', Courier, monospace; background-color: #ffffff; color: #000; padding: 40px 20px; text-align: center; }
-        .header { margin-bottom: 50px; }
-        .header h1 { text-transform: uppercase; letter-spacing: 2px; }
-        .header p { font-weight: bold; font-style: italic; }
-
-        .problema-container { max-width: 800px; margin: 0 auto 60px auto; text-align: left; border-bottom: 1px solid #eee; padding-bottom: 30px; }
-        .pregunta { font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #fff; padding: 20px; }
+        .container { max-width: 850px; margin: auto; border: 1px solid #ddd; padding: 25px; border-radius: 10px; }
         
-        .entrada-datos { margin: 20px 0; font-size: 1.3rem; }
-        input[type="number"] {
-            border: none;
-            border-bottom: 2px solid #000;
-            width: 120px;
-            font-size: 1.3rem;
-            text-align: center;
-            outline: none;
-            font-family: inherit;
-        }
+        .header-ficha { display: flex; justify-content: space-between; border-bottom: 3px solid #2e7d32; margin-bottom: 30px; }
+        .header-ficha span { font-weight: bold; color: #2e7d32; text-transform: uppercase; }
 
-        .feedback { display: none; margin-top: 15px; padding: 15px; border-radius: 5px; font-size: 0.95rem; }
-        .correcto { background-color: #d4edda; color: #155724; display: block; }
-        .incorrecto { background-color: #f8d7da; color: #721c24; display: block; }
-
-        button {
-            background: #000;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: inherit;
-            text-transform: uppercase;
-            margin-top: 10px;
-        }
-        button:hover { background: #333; }
+        .enunciado { background-color: #f4f4f4; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid #4caf50; font-size: 1.1rem; }
         
-        .explicacion-pro { margin-top: 10px; font-style: italic; color: #555; display: none; }
+        .bloque-verde { background-color: #4caf50; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; font-weight: bold; }
+
+        .logica-box { background-color: #fffde7; border: 1px solid #fbc02d; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .logica-box strong { color: #d32f2f; text-transform: uppercase; display: block; margin-bottom: 5px; }
+
+        .resolucion-container { border-left: 4px solid #fbc02d; padding-left: 20px; margin-bottom: 40px; }
+        .titulo-paso { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; margin: 15px 0 5px 0; }
+        
+        .resultado-final { background-color: #e8f5e9; border: 2px solid #4caf50; border-radius: 10px; padding: 15px; text-align: center; font-weight: bold; display: none; margin-top: 15px; }
+
+        input { border: none; border-bottom: 2px solid #2e7d32; font-size: 1.2rem; width: 80px; text-align: center; outline: none; }
+        button { background: #2e7d32; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Academia Esparta</h1>
-        <p>Reto de Combinatoria: ¿Serás capaz de resolverlos?</p>
+<div class="container">
+    <div class="header-ficha">
+        <span>Análisis Combinatorio</span>
+        <span>Academia Esparta</span>
     </div>
 
-    <div class="problema-container" id="p17">
-        <div class="pregunta">
-            <strong>Problema 17:</strong> En un aparcamiento de bicicletas hay 10 lugares que pueden estar ocupados (O) o libres (L). ¿Cuántas posiciones distintas se pueden encontrar en total?
-        </div>
-        <div class="entrada-datos">
-            Respuesta: <input type="number" id="input17" placeholder="???">
-            <button onclick="corregir(17, 1024)">Corregir</button>
-        </div>
-        <div id="feedback17" class="feedback"></div>
-        <div id="exp17" class="explicacion-pro">
-            <strong>Explicación:</strong> Cada uno de los 10 lugares tiene 2 opciones (O o L). Multiplicamos 2 por sí mismo diez veces: 2^10 = 1.024.
-        </div>
+    <div class="enunciado">
+        <strong>17.</strong> 10 lugares en un aparcamiento (Ocupado/Libre). ¿Cuántas posiciones totales?
     </div>
 
-    <div class="problema-container" id="p18">
-        <div class="pregunta">
-            <strong>Problema 18:</strong> Una locomotora arrastra 4 vagones de mercancía (M) y 2 vagones de depósitos de combustible (C). ¿De cuántas formas distintas pueden ordenarse los 6 vagones?
-        </div>
-        <div class="entrada-datos">
-            Respuesta: <input type="number" id="input18" placeholder="???">
-            <button onclick="corregir(18, 15)">Corregir</button>
-        </div>
-        <div id="feedback18" class="feedback"></div>
-        <div id="exp18" class="explicacion-pro">
-            <strong>Explicación:</strong> Es una permutación con repetición. Calculamos 6! / (4! * 2!). Esto es 720 / (24 * 2) = 15 formas.
-        </div>
+    <div class="bloque-verde">
+        <span>VARIACIONES CON REPETICIÓN</span>
+        <span>VR<sub>2,10</sub> = 2<sup>10</sup></span>
     </div>
 
-    <script>
-        function corregir(id, respuestaCorrecta) {
-            const userInput = document.getElementById('input' + id).value;
-            const feedbackDiv = document.getElementById('feedback' + id);
-            const explicacionDiv = document.getElementById('exp' + id);
+    <div class="logica-box">
+        <strong>¿Por qué usamos Variaciones con Repetición?</strong>
+        Usamos esta fórmula porque tenemos 10 posiciones donde el orden importa (no es lo mismo que la primera esté libre a que esté ocupada) y los elementos (O o L) se pueden repetir en cada posición.
+    </div>
 
-            if (userInput == "") {
-                alert("Por favor, introduce una respuesta.");
-                return;
-            }
+    <div class="resolucion-container">
+        <div class="titulo-paso">Resolución paso a paso</div>
+        <p>1. Identificamos 2 opciones por cada uno de los 10 lugares.</p>
+        <p>2. Aplicamos la potencia: 2 x 2 x 2... 10 veces.</p>
+        
+        <div style="margin-top: 20px;">
+            Introduce el resultado: <input type="number" id="ans17"> <button onclick="check(17, 1024)">CORREGIR</button>
+        </div>
+        <div class="resultado-final" id="res17">RESULTADO: 1.024 posiciones distintas.</div>
+    </div>
 
-            if (parseInt(userInput) === respuestaCorrecta) {
-                feedbackDiv.innerHTML = "✅ ¡Correcto! Eres un espartano de las matemáticas.";
-                feedbackDiv.className = "feedback correcto";
-            } else {
-                feedbackDiv.innerHTML = "❌ No es correcto. ¡Revisa la lógica!";
-                feedbackDiv.className = "feedback incorrecto";
-            }
-            
-            explicacionDiv.style.display = "block";
+    <div class="enunciado">
+        <strong>18.</strong> Ordenar 4 vagones de Mercancía (M) y 2 de Combustible (C).
+    </div>
+
+    <div class="bloque-verde">
+        <span>PERMUTACIONES CON REPETICIÓN</span>
+        <span>P<sub>6</sub><sup>4,2</sup> = 6! / (4! · 2!)</span>
+    </div>
+
+    <div class="logica-box">
+        <strong>¿Por qué usamos Permutaciones con Repetición?</strong>
+        Usamos permutaciones porque vamos a <u>reordenar</u> todos los elementos disponibles (los 6 vagones). Es "con repetición" porque hay vagones idénticos entre sí; mover un vagón M al sitio de otro vagón M no crea una configuración nueva.
+    </div>
+
+    <div class="resolucion-container">
+        <div class="titulo-paso">Resolución paso a paso</div>
+        <p>1. Total de elementos: 6! (Factorial de 6).</p>
+        <p>2. Dividimos por las repeticiones: 4! de mercancía y 2! de combustible.</p>
+        
+        <div style="margin-top: 20px;">
+            Introduce el resultado: <input type="number" id="ans18"> <button onclick="check(18, 15)">CORREGIR</button>
+        </div>
+        <div class="resultado-final" id="res18">RESULTADO: 15 formas distintas de ordenarlos.</div>
+    </div>
+</div>
+
+<script>
+    function check(id, correct) {
+        const val = document.getElementById('ans' + id).value;
+        if(parseInt(val) === correct) {
+            document.getElementById('res' + id).style.display = 'block';
+            alert("¡Correcto!");
+        } else {
+            alert("Revisa el cálculo.");
         }
-    </script>
+    }
+</script>
 
 </body>
 </html>
