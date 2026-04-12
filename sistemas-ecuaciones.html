@@ -3,103 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Combinatoria - Academia Esparta</title>
+    <title>Apuntes Combinatoria - Academia Esparta</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; color: #333; padding: 20px; line-height: 1.6; }
-        .container { max-width: 850px; margin: auto; border: 1px solid #eee; padding: 30px; border-radius: 12px; position: relative; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #ffffff; color: #333; padding: 20px; line-height: 1.6; }
+        .container { max-width: 900px; margin: auto; border: 1px solid #eee; padding: 40px; border-radius: 12px; position: relative; }
         
         .btn-print {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.8rem;
+            position: absolute; top: 20px; right: 20px;
+            background-color: #2e7d32; color: white; border: none;
+            padding: 10px 15px; border-radius: 5px; cursor: pointer;
+            font-weight: bold; text-transform: uppercase; font-size: 0.8rem;
         }
 
-        @media print { .btn-print { display: none; } .container { border: none; } }
+        @media print { .btn-print { display: none; } .container { border: none; } body { padding: 0; } }
 
-        .header-ficha { display: flex; justify-content: space-between; border-bottom: 3px solid #2e7d32; padding-bottom: 8px; margin-bottom: 35px; margin-top: 20px; }
-        .header-ficha span { font-weight: bold; color: #2e7d32; text-transform: uppercase; font-size: 0.9rem; }
+        .header-ficha { display: flex; justify-content: space-between; border-bottom: 3px solid #2e7d32; padding-bottom: 8px; margin-bottom: 40px; }
+        .header-ficha span { font-weight: bold; color: #2e7d32; text-transform: uppercase; }
 
-        .enunciado-container { background-color: #f1f8e9; border-radius: 8px; padding: 20px; margin-bottom: 25px; border-left: 6px solid #4caf50; }
-        .enunciado-container strong { color: #1b5e20; font-size: 1.1rem; display: block; margin-bottom: 10px; }
+        h2 { color: #1b5e20; border-bottom: 2px solid #4caf50; padding-bottom: 5px; margin-top: 40px; }
 
         .logica-box { background-color: #fffde7; border: 1px solid #fbc02d; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .logica-box strong { color: #c62828; text-transform: uppercase; display: block; margin-bottom: 10px; font-size: 0.9rem; }
+        .logica-box strong { color: #c62828; text-transform: uppercase; display: block; margin-bottom: 10px; }
 
-        .bloque-formula { background-color: #4caf50; color: white; padding: 15px 25px; border-radius: 8px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .bloque-formula { background-color: #4caf50; color: white; padding: 15px 25px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
 
-        .desarrollo-seccion { border-left: 4px solid #fbc02d; padding-left: 25px; margin-left: 10px; margin-bottom: 60px; }
-        .titulo-paso { color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; margin-top: 25px; margin-bottom: 15px; }
-
-        .resultado-cuadro { background-color: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 20px; text-align: center; font-weight: bold; font-size: 1.2rem; color: #1b5e20; margin-top: 30px; }
+        .desarrollo-seccion { border-left: 4px solid #fbc02d; padding-left: 25px; margin-left: 10px; margin-bottom: 40px; }
+        .enunciado { font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; color: #000; }
+        
+        .resultado-cuadro { background-color: #e8f5e9; border: 1px solid #4caf50; border-radius: 8px; padding: 10px; text-align: center; font-weight: bold; margin-top: 15px; color: #1b5e20; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <button class="btn-print" onclick="window.print()">📄 Generar PDF</button>
+    <button class="btn-print" onclick="window.print()">📄 Generar PDF para el alumno</button>
 
     <div class="header-ficha">
-        <span>Análisis Combinatorio</span>
+        <span>Apuntes: Combinatoria (4º ESO)</span>
         <span>Academia Esparta</span>
     </div>
 
-    <div class="enunciado-container">
-        <strong>EJERCICIO 17</strong>
-        <div>En un aparcamiento de bicicletas hay 10 lugares que pueden estar ocupados (O) o libres (L). ¿Cuántas posiciones distintas se pueden encontrar en total?</div>
-    </div>
+    <p>Para resolver cualquier problema de combinatoria, el alumno debe hacerse siempre tres preguntas clave: 
+    <b>1. ¿Importa el orden? 2. ¿Participan todos los elementos? 3. ¿Se pueden repetir?</b></p>
 
+    <h2>1. Variaciones (Importa el orden)</h2>
     <div class="logica-box">
-        <strong>¿Por qué usamos Variaciones con Repetición?</strong>
-        <p>El orden es relevante y los estados se repiten en cada posición. No movemos objetos fijos, rellenamos espacios con opciones disponibles en todo momento.</p>
+        <strong>¿Cuándo las usamos?</strong>
+        Cuando importa el orden de los elementos pero <b>no</b> usamos todos los disponibles del grupo.
     </div>
-
+    
     <div class="bloque-formula">
-        <span>VARIACIONES CON REPETICIÓN</span>
-        <span>$$VR_{m,n} = m^n$$</span>
+        <span>Variaciones Ordinarias</span>
+        <span>$$V_{m,n} = \frac{m!}{(m-n)!}$$</span>
     </div>
 
     <div class="desarrollo-seccion">
-        <div class="titulo-paso">Estrategia y Resolución</div>
-        <p>1. <b>Opciones (m):</b> 2 (Ocupado o Libre).</p>
-        <p>2. <b>Espacios (n):</b> 10 lugares.</p>
-        <p>3. <b>Cálculo:</b> $$2^{10} = 1024$$</p>
-        <div class="resultado-cuadro">RESULTADO: 1.024 posiciones distintas.</div>
+        <div class="enunciado">Ejemplo A: En una carrera de 8 caballos, ¿de cuántas formas se pueden repartir el podio (1º, 2º y 3º puesto)?</div>
+        <p><b>Razonamiento:</b> Importa el orden (no es lo mismo ser 1º que 3º) y no participan todos (solo 3 de los 8).</p>
+        <p><b>Resolución:</b> $$V_{8,3} = 8 \cdot 7 \cdot 6 = 336$$</p>
+
+        <div class="enunciado" style="margin-top:20px;">Ejemplo B: Con los dígitos 1, 2, 3, 4 y 5, ¿cuántos números de 3 cifras distintas se pueden formar?</div>
+        <p><b>Resolución:</b> $$V_{5,3} = 5 \cdot 4 \cdot 3 = 60$$</p>
     </div>
 
-    <div class="enunciado-container">
-        <strong>EJERCICIO 18</strong>
-        <div>Una locomotora arrastra 4 vagones de mercancía (M) y 2 de combustible (C). ¿De cuántas formas pueden ordenarse los 6 vagones?</div>
-    </div>
-
+    <h2>2. Permutaciones (Todos los elementos)</h2>
     <div class="logica-box">
-        <strong>¿Por qué usamos Permutaciones con Repetición?</strong>
-        <p>Reordenamos todos los elementos, pero hay vagones idénticos. Intercambiar dos vagones del mismo tipo no genera una fila nueva, por lo que debemos dividir por las repeticiones.</p>
+        <strong>¿Cuándo las usamos?</strong>
+        Cuando importa el orden y usamos <b>todos</b> los elementos que tenemos. Básicamente es reordenar el grupo completo.
     </div>
-
+    
     <div class="bloque-formula">
-        <span>PERMUTACIONES CON REPETICIÓN</span>
-        <span>$$PR_{n}^{a,b} = \frac{n!}{a! \cdot b!}$$</span>
+        <span>Permutaciones Ordinarias</span>
+        <span>$$P_n = n!$$</span>
     </div>
 
     <div class="desarrollo-seccion">
-        <div class="titulo-paso">Estrategia y Resolución</div>
-        <p>1. <b>Total (n):</b> 6 vagones.</p>
-        <p>2. <b>Repeticiones:</b> 4 (M) y 2 (C).</p>
-        <p>3. <b>Cálculo paso a paso:</b></p>
-        <p>$$\frac{6!}{4! \cdot 2!} = \frac{720}{24 \cdot 2} = \frac{720}{48} = 15$$</p>
-        <div class="resultado-cuadro">RESULTADO: 15 formas distintas de ordenarlos.</div>
+        <div class="enunciado">Ejemplo A: ¿De cuántas formas pueden sentarse 5 amigos en una fila de cine?</div>
+        <p><b>Razonamiento:</b> Importa el orden y usamos a los 5 amigos.</p>
+        <p><b>Resolución:</b> $$P_5 = 5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 120$$</p>
+
+        <div class="enunciado" style="margin-top:20px;">Ejemplo B: ¿Cuántas palabras distintas (con o sin sentido) se pueden formar con las letras de la palabra "LIBRO"?</div>
+        <p><b>Resolución:</b> $$P_5 = 120$$ formas distintas.</p>
+    </div>
+
+    <h2>3. Combinaciones (No importa el orden)</h2>
+    <div class="logica-box">
+        <strong>¿Cuándo las usamos?</strong>
+        Cuando el orden <b>no importa</b>. Solo nos interesa qué elementos elegimos, no en qué posición están.
+    </div>
+    
+    <div class="bloque-formula">
+        <span>Combinaciones Ordinarias</span>
+        <span>$$C_{m,n} = \binom{m}{n} = \frac{m!}{n! \cdot (m-n)!}$$</span>
+    </div>
+
+    <div class="desarrollo-seccion">
+        <div class="enunciado">Ejemplo A: En una clase de 20 alumnos, se quiere elegir un comité de 3 personas para una reunión. ¿Cuántos comités distintos hay?</div>
+        <p><b>Razonamiento:</b> No importa el orden (da igual ser el primer elegido que el tercero, el comité es el mismo).</p>
+        <p><b>Resolución:</b> $$C_{20,3} = \frac{20 \cdot 19 \cdot 18}{3 \cdot 2 \cdot 1} = 1.140$$</p>
+
+        <div class="enunciado" style="margin-top:20px;">Ejemplo B: Si tenemos 10 puntos en un papel y unimos 2 de ellos para formar un segmento, ¿cuántos segmentos distintos se pueden dibujar?</div>
+        <p><b>Resolución:</b> $$C_{10,2} = \frac{10 \cdot 9}{2 \cdot 1} = 45$$</p>
+    </div>
+
+    <div class="resultado-cuadro">
+        RECUERDA: Si al cambiar el orden el resultado es distinto → VARIACIÓN / PERMUTACIÓN. <br>
+        Si al cambiar el orden el resultado es el mismo → COMBINACIÓN.
     </div>
 </div>
 
