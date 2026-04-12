@@ -3,146 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reto Matemático - Academia Esparta</title>
+    <title>Reto Academia Esparta - Combinatoria</title>
     <style>
-        /* Fondo totalmente blanco */
-        body { 
-            font-family: 'Courier New', Courier, monospace; 
-            background-color: #ffffff; 
-            margin: 0; 
-            padding: 40px 20px; 
-            text-align: center; 
-            color: #000000;
-        }
-
-        /* Cabecera simple sin colores */
+        body { font-family: 'Courier New', Courier, monospace; background-color: #ffffff; color: #000; padding: 40px 20px; text-align: center; }
         .header { margin-bottom: 50px; }
-        .header h1 { font-size: 2rem; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; }
-        .header p { font-size: 1.2rem; font-weight: bold; font-style: italic; margin-top: 0; }
-        
-        /* Rejilla de sumas */
-        .grid-sumas { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 50px 20px; 
-            max-width: 800px; 
-            margin: auto; 
-            padding: 0;
-        }
+        .header h1 { text-transform: uppercase; letter-spacing: 2px; }
+        .header p { font-weight: bold; font-style: italic; }
 
-        /* Estilo clásico de la operación vertical */
-        .suma-box { 
-            font-size: 2.2rem; 
-            text-align: right; 
-            width: 140px; 
-            margin: auto; 
-            letter-spacing: 2px;
-        }
-
-        .operando { padding-right: 5px; }
+        .problema-container { max-width: 800px; margin: 0 auto 60px auto; text-align: left; border-bottom: 1px solid #eee; padding-bottom: 30px; }
+        .pregunta { font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; }
         
-        /* Línea de suma simple */
-        .linea { border-bottom: 3px solid #000000; margin-top: 5px; margin-bottom: 10px; }
-        
-        .signo { float: left; padding-left: 5px; }
-        
-        /* Línea simple para escribir (sin cuadrado) */
-        .resultado-linea {
-            width: 100%;
-            height: 40px;
+        .entrada-datos { margin: 20px 0; font-size: 1.3rem; }
+        input[type="number"] {
             border: none;
-            border-bottom: 2px solid #000000; /* Solo línea inferior */
-            background: transparent;
+            border-bottom: 2px solid #000;
+            width: 120px;
+            font-size: 1.3rem;
+            text-align: center;
+            outline: none;
             font-family: inherit;
-            font-size: 2.2rem;
-            text-align: right;
-            outline: none; /* Quita el borde azul al pulsar */
-            padding: 0;
-            color: #000000;
         }
 
-        /* Elimina las flechas en inputs de número */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
+        .feedback { display: none; margin-top: 15px; padding: 15px; border-radius: 5px; font-size: 0.95rem; }
+        .correcto { background-color: #d4edda; color: #155724; display: block; }
+        .incorrecto { background-color: #f8d7da; color: #721c24; display: block; }
 
-        /* Botón invisible o muy discreto para verificar (opcional si lo quieres quitar) */
-        .btn-check {
-            margin-top: 60px;
-            background: none;
-            border: 1px solid #000;
+        button {
+            background: #000;
+            color: #fff;
+            border: none;
             padding: 10px 20px;
             cursor: pointer;
             font-family: inherit;
-            font-size: 1rem;
+            text-transform: uppercase;
+            margin-top: 10px;
         }
-        .btn-check:hover { background-color: #f0f0f0; }
-
+        button:hover { background: #333; }
+        
+        .explicacion-pro { margin-top: 10px; font-style: italic; color: #555; display: none; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>Academia Esparta</h1>
-        <p>Lara, seguro que no eres capaz de hacerlas todas bien.</p>
+        <p>Reto de Combinatoria: ¿Serás capaz de resolverlos?</p>
     </div>
 
-    <div class="grid-sumas">
-        <script>
-            const ejercicios = [
-                [458, 367], [279, 546], [885, 137],
-                [694, 228], [537, 475], [362, 589],
-                [156, 785], [429, 393], [748, 165],
-                [513, 298], [674, 147], [386, 456]
-            ];
-
-            ejercicios.forEach((num, index) => {
-                document.write(`
-                    <div class="suma-box">
-                        <div class="operando">${num[0]}</div>
-                        <div class="operando"><span class="signo">+</span>${num[1]}</div>
-                        <div class="linea"></div>
-                        <input type="number" class="resultado-linea" id="res-${index}">
-                    </div>
-                `);
-            });
-        </script>
+    <div class="problema-container" id="p17">
+        <div class="pregunta">
+            <strong>Problema 17:</strong> En un aparcamiento de bicicletas hay 10 lugares que pueden estar ocupados (O) o libres (L). ¿Cuántas posiciones distintas se pueden encontrar en total?
+        </div>
+        <div class="entrada-datos">
+            Respuesta: <input type="number" id="input17" placeholder="???">
+            <button onclick="corregir(17, 1024)">Corregir</button>
+        </div>
+        <div id="feedback17" class="feedback"></div>
+        <div id="exp17" class="explicacion-pro">
+            <strong>Explicación:</strong> Cada uno de los 10 lugares tiene 2 opciones (O o L). Multiplicamos 2 por sí mismo diez veces: 2^10 = 1.024.
+        </div>
     </div>
 
-    <button class="btn-check" onclick="verificar()">Verificar resultados</button>
+    <div class="problema-container" id="p18">
+        <div class="pregunta">
+            <strong>Problema 18:</strong> Una locomotora arrastra 4 vagones de mercancía (M) y 2 vagones de depósitos de combustible (C). ¿De cuántas formas distintas pueden ordenarse los 6 vagones?
+        </div>
+        <div class="entrada-datos">
+            Respuesta: <input type="number" id="input18" placeholder="???">
+            <button onclick="corregir(18, 15)">Corregir</button>
+        </div>
+        <div id="feedback18" class="feedback"></div>
+        <div id="exp18" class="explicacion-pro">
+            <strong>Explicación:</strong> Es una permutación con repetición. Calculamos 6! / (4! * 2!). Esto es 720 / (24 * 2) = 15 formas.
+        </div>
+    </div>
 
     <script>
-        function verificar() {
-            let aciertos = 0;
-            let completado = true;
-            ejercicios.forEach((num, index) => {
-                const input = document.getElementById(`res-${index}`);
-                const valor = input.value;
-                if(valor === "") completado = false;
-                
-                const resultadoCorrecto = num[0] + num[1];
-                
-                // Mantiene el minimalismo: solo cambia el color de la línea si falla o acierta
-                if (parseInt(valor) === resultadoCorrecto) {
-                    input.style.borderBottomColor = "#2ecc71"; // Verde discreto en la línea
-                    aciertos++;
-                } else if (valor !== "") {
-                    input.style.borderBottomColor = "#e74c3c"; // Rojo discreto en la línea
-                } else {
-                    input.style.borderBottomColor = "#000000"; // Negro si está vacío
-                }
-            });
-            
-            if(!completado) {
-                alert("Lara, te faltan sumas por terminar.");
+        function corregir(id, respuestaCorrecta) {
+            const userInput = document.getElementById('input' + id).value;
+            const feedbackDiv = document.getElementById('feedback' + id);
+            const explicacionDiv = document.getElementById('exp' + id);
+
+            if (userInput == "") {
+                alert("Por favor, introduce una respuesta.");
                 return;
             }
 
-            if(aciertos === 12) {
-                alert("¡Increíble Lara! Las 12 perfectas. ¡Eres una campeona!");
+            if (parseInt(userInput) === respuestaCorrecta) {
+                feedbackDiv.innerHTML = "✅ ¡Correcto! Eres un espartano de las matemáticas.";
+                feedbackDiv.className = "feedback correcto";
             } else {
-                alert("Has acertado " + aciertos + " de 12. ¡Revisa las que tienen la línea roja!");
+                feedbackDiv.innerHTML = "❌ No es correcto. ¡Revisa la lógica!";
+                feedbackDiv.className = "feedback incorrecto";
             }
+            
+            explicacionDiv.style.display = "block";
         }
     </script>
 
