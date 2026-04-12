@@ -1,65 +1,121 @@
-    <h2 style="margin-top: 60px;">🧠 NIVEL EXPERTO: DISTINCIÓN DE SUBORDINADAS</h2>
-    <div class="ficha-box" style="border: 2px solid var(--primary); background: #fdfcf0;">
-        <p>Analiza estas oraciones e intenta distinguir si la proposición subordinada es **Sustantiva, Adjetiva o Adverbial**. Pulsa en el desplegable para ver el análisis profundo.</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto de Matemáticas - Academia Esparta</title>
+    <style>
+        body { font-family: 'Courier New', Courier, monospace; background-color: #f0f4f8; padding: 20px; text-align: center; }
+        .header { margin-bottom: 40px; }
+        .header h1 { color: #1a2a6c; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
+        .header p { color: #b21f1f; font-weight: bold; font-size: 1.2rem; font-style: italic; }
         
-        <div style="margin-bottom: 25px; padding: 15px; border-bottom: 2px solid #eee; background: white; border-radius: 8px;">
-            <p><b>1.</b> Los alumnos esperan que las notas se publiquen este viernes.</p>
-            <details style="cursor: pointer; color: var(--primary); font-weight: bold; margin-top: 10px;">
-                <summary>Ver análisis profundo</summary>
-                <div style="color: #333; font-weight: normal; padding: 15px; background: #f9f9f9; margin-top: 10px; border-radius: 5px; border-left: 4px solid var(--primary);">
-                    [span_0](start_span)[span_1](start_span)<p><b>TIPO:</b> Proposición Subordinada Sustantiva (Función: Complemento Directo)[span_0](end_span)[span_1](end_span).</p>
-                    [span_2](start_span)<p><b>EXPLICACIÓN:</b> Esta oración es sustantiva porque toda la proposición "que las notas se publiquen este viernes" funciona como un sustantivo dentro de la oración principal[span_2](end_span).
-                    [span_3](start_span)<br><b>La prueba definitiva:</b> Se puede sustituir por el pronombre "ESO" (<i>Los alumnos esperan <b>eso</b></i>)[span_3](end_span). [span_4](start_span)Además, se puede sustituir por el pronombre "LO" (<i>Los alumnos <b>lo</b> esperan</i>), lo que confirma su función de Complemento Directo[span_4](end_span). [span_5](start_span)El nexo "que" es una conjunción pura, no realiza ninguna función sintáctica interna y no tiene antecedente[span_5](end_span).</p>
-                </div>
-            </details>
-        </div>
+        .grid-sumas { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 40px; 
+            max-width: 900px; 
+            margin: auto; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-        <div style="margin-bottom: 25px; padding: 15px; border-bottom: 2px solid #eee; background: white; border-radius: 8px;">
-            <p><b>2.</b> La ciudad donde veraneábamos de niños ha cambiado mucho.</p>
-            <details style="cursor: pointer; color: var(--primary); font-weight: bold; margin-top: 10px;">
-                <summary>Ver análisis profundo</summary>
-                <div style="color: #333; font-weight: normal; padding: 15px; background: #f9f9f9; margin-top: 10px; border-radius: 5px; border-left: 4px solid var(--primary);">
-                    <p><b>TIPO:</b> Proposición Subordinada Adjetiva (o de Relativo).</p>
-                    [span_6](start_span)<p><b>EXPLICACIÓN:</b> Es adjetiva porque su función principal es calificar o complementar a un sustantivo anterior llamado <b>antecedente</b>, que en este caso es "La ciudad"[span_6](end_span).
-                    <br><b>La prueba definitiva:</b> El nexo "donde" es un relativo que se puede sustituir por "en la cual" (<i>La ciudad <b>en la cual</b> veraneábamos...</i>). A diferencia de las adverbiales de lugar, aquí "donde" tiene un nombre justo antes al que se refiere. [span_7](start_span)Sintácticamente, la subordinada actúa como un Adyacente del núcleo del sujeto[span_7](end_span).</p>
-                </div>
-            </details>
-        </div>
+        .suma-box { 
+            font-size: 2rem; 
+            text-align: right; 
+            width: 150px; 
+            margin: auto; 
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
 
-        <div style="margin-bottom: 25px; padding: 15px; border-bottom: 2px solid #eee; background: white; border-radius: 8px;">
-            <p><b>3.</b> Aunque no tenga dinero ahora, me compraré ese coche.</p>
-            <details style="cursor: pointer; color: var(--primary); font-weight: bold; margin-top: 10px;">
-                <summary>Ver análisis profundo</summary>
-                <div style="color: #333; font-weight: normal; padding: 15px; background: #f9f9f9; margin-top: 10px; border-radius: 5px; border-left: 4px solid var(--primary);">
-                    [span_8](start_span)<p><b>TIPO:</b> Proposición Subordinada Adverbial Concesiva[span_8](end_span).</p>
-                    [span_9](start_span)<p><b>EXPLICACIÓN:</b> Se clasifica como adverbial porque aporta una circunstancia (en este caso una objeción) a la acción principal, pero no funciona ni como sustantivo ni como adjetivo de un nombre[span_9](end_span).
-                    <br><b>La prueba definitiva:</b> El nexo "aunque" introduce una traba o obstáculo que no impide que se cumpla la oración principal (comprarse el coche). Se puede sustituir por el conector "a pesar de que". [span_10](start_span)Este tipo de oraciones son "lógicas" y no desempeñan una función de complemento directo o indirecto, sino que modifican a toda la oración principal[span_10](end_span).</p>
-                </div>
-            </details>
-        </div>
+        .linea { border-bottom: 3px solid #333; margin-bottom: 10px; }
+        .operador { float: left; padding-left: 10px; }
+        
+        input[type="number"] {
+            width: 100%;
+            font-size: 1.8rem;
+            text-align: right;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            background-color: #fffde7;
+        }
 
-        <div style="margin-bottom: 25px; padding: 15px; border-bottom: 2px solid #eee; background: white; border-radius: 8px;">
-            <p><b>4.</b> Es necesario que entreguéis el trabajo antes del lunes.</p>
-            <details style="cursor: pointer; color: var(--primary); font-weight: bold; margin-top: 10px;">
-                <summary>Ver análisis profundo</summary>
-                <div style="color: #333; font-weight: normal; padding: 15px; background: #f9f9f9; margin-top: 10px; border-radius: 5px; border-left: 4px solid var(--primary);">
-                    [span_11](start_span)<p><b>TIPO:</b> Proposición Subordinada Sustantiva (Función: Sujeto)[span_11](end_span).</p>
-                    [span_12](start_span)<p><b>EXPLICACIÓN:</b> Toda la proposición "que entreguéis el trabajo..." actúa como el sujeto de la oración principal cuyo verbo es "es"[span_12](end_span).
-                    <br><b>La prueba definitiva:</b> Si aplicamos la sustitución por "ESO", obtenemos <i>"Es necesario <b>eso</b>"</i>. Para confirmar que es sujeto y no CD, probamos el plural: <i>"Son necesarias <b>esas cosas</b>"</i>. Al cambiar el número del bloque sustituido, el verbo "es" se ve obligado a cambiar a "son". [span_13](start_span)Esa concordancia obligatoria es la marca inconfundible del Sujeto[span_13](end_span).</p>
-                </div>
-            </details>
-        </div>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-        <div style="margin-bottom: 25px; padding: 15px; border-bottom: 2px solid #eee; background: white; border-radius: 8px;">
-            <p><b>5.</b> Si estudias con constancia, aprobarás el examen de sintaxis.</p>
-            <details style="cursor: pointer; color: var(--primary); font-weight: bold; margin-top: 10px;">
-                <summary>Ver análisis profundo</summary>
-                <div style="color: #333; font-weight: normal; padding: 15px; background: #f9f9f9; margin-top: 10px; border-radius: 5px; border-left: 4px solid var(--primary);">
-                    [span_14](start_span)<p><b>TIPO:</b> Proposición Subordinada Adverbial Condicional[span_14](end_span).</p>
-                    [span_15](start_span)<p><b>EXPLICACIÓN:</b> Es una subordinada adverbial porque establece la condición necesaria para que se realice la acción del verbo principal[span_15](end_span).
-                    <br><b>La prueba definitiva:</b> Está introducida por el nexo condicional "si" (sin tilde). La estructura se divide en prótasis (la condición: <i>si estudias</i>) y apódosis (la consecuencia: <i>aprobarás</i>). [span_16](start_span)No se refiere a ningún nombre anterior ni se puede sustituir por "ESO" con sentido de objeto o sujeto, sino que indica el marco de posibilidad de la frase[span_16](end_span).</p>
-                </div>
-            </details>
-        </div>
+        .btn-verificar {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #1a2a6c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-verificar:hover { background-color: #b21f1f; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Academia Esparta</h1>
+        <p>Lara, seguro que no eres capaz de hacerlas todas bien.</p>
     </div>
-    <div class="footer-esparta">ACADEMIA ESPARTA</div>
+
+    <div class="grid-sumas">
+        <div id="contenedor-sumas" style="display: contents;"></div>
+    </div>
+
+    <button class="btn-verificar" onclick="verificar()">¿Habrás acertado, Lara? Ver resultados</button>
+
+    <script>
+        const ejercicios = [
+            [458, 367], [279, 546], [885, 137],
+            [694, 228], [537, 475], [362, 589],
+            [156, 785], [429, 393], [748, 165],
+            [513, 298], [674, 147], [386, 456]
+        ];
+
+        const contenedor = document.getElementById('contenedor-sumas');
+
+        ejercicios.forEach((num, index) => {
+            contenedor.innerHTML += `
+                <div class="suma-box">
+                    <div>${num[0]}</div>
+                    <div><span class="operador">+</span>${num[1]}</div>
+                    <div class="linea"></div>
+                    <input type="number" id="res-${index}" placeholder="?">
+                </div>
+            `;
+        });
+
+        function verificar() {
+            let aciertos = 0;
+            ejercicios.forEach((num, index) => {
+                const input = document.getElementById(`res-${index}`);
+                const resultadoCorrecto = num[0] + num[1];
+                if (parseInt(input.value) === resultadoCorrecto) {
+                    input.style.backgroundColor = "#c8e6c9";
+                    aciertos++;
+                } else {
+                    input.style.backgroundColor = "#ffcdd2";
+                }
+            });
+            
+            if(aciertos === 12) {
+                alert("¡Increíble Lara! Las has hecho todas bien. ¡Eres una campeona!");
+            } else {
+                alert("Has acertado " + aciertos + " de 12. ¡Sigue intentándolo, Lara!");
+            }
+        }
+    </script>
+
+</body>
+</html>
