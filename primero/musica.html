@@ -6,7 +6,6 @@
     <title>Lectura 9: El examen - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --pauta-color: #000; }
         body { 
             font-family: 'Kalam', cursive; 
             background-color: #ffffff; 
@@ -15,156 +14,105 @@
             padding: 0;
         }
 
-        /* Contenedor principal para pantalla */
-        .container { 
-            max-width: 850px; 
-            margin: auto; 
-            padding: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Estilo para impresión por páginas */
-        @media print {
-            .container { max-width: 100%; padding: 0; margin: 0; }
-            .page { 
-                height: 100vh; 
-                padding: 40px; 
-                box-sizing: border-box; 
-                page-break-after: always; /* Fuerza el salto de página */
-                position: relative;
-            }
-            .btn-print { display: none; }
-            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        }
-
-        /* Botón Generar PDF */
+        /* Botón solo visible en web */
         .btn-print { 
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #0e9343; 
-            color: white; 
-            border: none; 
-            padding: 12px 20px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: bold;
-            font-family: sans-serif;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: fixed; top: 20px; right: 20px;
+            background-color: #0e9343; color: white; border: none; 
+            padding: 12px 20px; border-radius: 8px; cursor: pointer; 
+            font-weight: bold; z-index: 100; font-family: sans-serif;
+        }
+
+        /* Estructura de Páginas */
+        .page {
+            width: 210mm; /* Ancho A4 */
+            min-height: 297mm; /* Alto A4 */
+            padding: 15mm 20mm;
+            margin: 0 auto;
+            box-sizing: border-box;
+            position: relative;
+            background: white;
+            page-break-after: always;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: none; }
+            .page { margin: 0; border: none; width: 100%; height: 100%; }
         }
 
         /* Cabecera */
         .header { 
-            display: flex; 
-            justify-content: space-between; 
-            border-bottom: 2px solid #000; 
-            padding-bottom: 5px; 
-            margin-bottom: 20px; 
-            font-family: sans-serif;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            font-weight: bold;
+            display: flex; justify-content: space-between; 
+            border-bottom: 2px solid #000; padding-bottom: 5px; 
+            margin-bottom: 15px; font-family: sans-serif;
+            text-transform: uppercase; font-size: 0.8rem; font-weight: bold;
         }
 
         .datos-alumno {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            font-size: 1.2rem;
+            display: flex; justify-content: space-between; 
+            margin-bottom: 25px; font-size: 1.1rem;
         }
         .campo { border-bottom: 1px dashed #000; flex-grow: 1; margin-left: 5px; height: 1.2rem; }
 
         /* Bloque de Lectura */
         .lectura-box h3 { 
-            font-size: 3rem; 
-            margin: 20px 0 40px 0; 
-            text-align: center; 
-            font-weight: 700;
-            text-decoration: underline;
+            font-size: 2.8rem; margin: 10px 0 25px 0; 
+            text-align: center; font-weight: 700; text-decoration: underline;
         }
         
         .lectura-box p { 
-            font-size: 1.8rem; 
-            line-height: 2; 
-            margin-bottom: 60px;
-            text-align: left;
-            padding: 0 20px;
+            font-size: 1.7rem; line-height: 1.7; 
+            margin-bottom: 30px; text-align: left;
         }
 
-        /* Preguntas de Escritura */
-        .pregunta-item { 
-            margin-bottom: 45px; 
-            font-size: 1.6rem; 
-        }
-        
+        /* Preguntas Escritura */
+        .pregunta-item { margin-bottom: 35px; font-size: 1.5rem; }
         .pauta-doble-linea {
-            width: 100%;
-            height: 25px; 
-            border-top: 1px solid var(--pauta-color);
-            border-bottom: 1px solid var(--pauta-color);
-            margin-top: 15px;
+            width: 100%; height: 24px; 
+            border-top: 1px solid #000; border-bottom: 1px solid #000;
+            margin-top: 10px;
         }
 
         /* Preguntas V/F (Página 2) */
         .instruccion-vf {
-            font-size: 1.4rem;
-            text-align: center;
-            margin: 40px 0;
-            font-family: sans-serif;
-            font-weight: bold;
-            text-decoration: underline;
+            font-size: 1.3rem; text-align: center; 
+            margin: 30px 0; font-family: sans-serif; font-weight: bold;
         }
 
         .vf-item {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            margin-bottom: 35px;
+            display: flex; align-items: center; 
+            font-size: 1.7rem; margin-bottom: 30px;
         }
 
         .cuadrado-respuesta {
-            width: 40px;
-            height: 40px;
-            border: 2px solid #000;
-            margin-right: 25px;
-            flex-shrink: 0;
+            width: 38px; height: 38px; border: 2px solid #000;
+            margin-right: 20px; flex-shrink: 0;
         }
 
         .frase-motivacional {
-            position: absolute;
-            bottom: 60px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 1.8rem;
-            font-style: italic;
-            color: #333;
+            position: absolute; bottom: 30mm; left: 0; right: 0;
+            text-align: center; font-size: 1.7rem; font-style: italic; color: #333;
         }
 
         /* Marca de Agua */
         .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 12rem;
-            color: rgba(0, 0, 0, 0.03);
-            font-family: sans-serif;
-            font-weight: 900;
-            z-index: -1;
-            pointer-events: none;
-            text-transform: uppercase;
+            font-size: 11rem; color: rgba(0, 0, 0, 0.03);
+            font-family: sans-serif; font-weight: 900;
+            z-index: 0; pointer-events: none; text-transform: uppercase;
         }
+        
+        .content { position: relative; z-index: 1; }
     </style>
 </head>
 <body>
 
     <button class="btn-print" onclick="window.print()">📄 GENERAR PDF</button>
 
-    <div class="container">
-        <div class="page">
-            <div class="watermark">ESPARTA</div>
+    <div class="page">
+        <div class="watermark">ESPARTA</div>
+        <div class="content">
             <div class="header">
                 <span>LECTURA COMPRENSIVA</span>
                 <span>ACADEMIA ESPARTA</span>
@@ -198,9 +146,11 @@
                 <div class="pregunta-item">5. ¿Qué nota le pone el profesor en el cuaderno? <div class="pauta-doble-linea"></div></div>
             </div>
         </div>
+    </div>
 
-        <div class="page">
-            <div class="watermark">ESPARTA</div>
+    <div class="page">
+        <div class="watermark">ESPARTA</div>
+        <div class="content">
             <div class="header">
                 <span>COMPRENSIÓN (PARTE 2)</span>
                 <span>ACADEMIA ESPARTA</span>
