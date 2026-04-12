@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Mejor Familia del Mundo - Quiz</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; transition: background-color 1s ease; }
         .container { max-width: 700px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #e74c3c; padding-bottom: 10px; }
         .question { margin-bottom: 25px; display: none; }
@@ -15,48 +15,48 @@
         .options li { margin-bottom: 10px; }
         button { width: 100%; padding: 12px; border: none; border-radius: 8px; background: #ecf0f1; cursor: pointer; transition: 0.3s; font-size: 1rem; text-align: left; }
         button:hover { background: #d5dbdb; }
-        button.correct { background: #2ecc71; color: white; }
-        button.incorrect { background: #e74c3c; color: white; }
-        #result-container { display: none; text-align: center; padding: 20px; background: #fdf2e9; border-radius: 10px; border: 2px dashed #e67e22; }
-        #result-container h2 { color: #e67e22; }
+        button.correct { background: #2ecc71 !important; color: white; }
+        button.incorrect { background: #e74c3c !important; color: white; }
+        #result-container { display: none; text-align: center; padding: 20px; background: #fdf2e9; border-radius: 10px; border: 2px dashed #e67e22; margin-top: 20px; }
+        #result-container h2 { color: #e67e22; font-size: 2rem; }
         .progress { font-size: 0.9rem; color: #7f8c8d; margin-bottom: 10px; text-align: right; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🌍 LA MEJOR FAMILIA DEL MUNDO</h1>
+    <h1 id="main-title">🌍 LA MEJOR FAMILIA DEL MUNDO</h1>
     <div id="quiz">
         </div>
 
     <div id="result-container">
-        <h2>🎉 ¡NIVEL EXPERTO COMPLETADO!</h2>
-        <p id="final-message"></p>
+        <h2 id="final-title">🎉 ¡NIVEL EXPERTO COMPLETADO!</h2>
+        <p id="final-message" style="font-size: 1.2rem; font-weight: 500;"></p>
     </div>
 </div>
 
 <script>
     const questions = [
         { q: "1. ¿Quién es la mejor madre del mundo?", a: "B", options: {A: "Javi", B: "Montse", C: "Antonio"} },
-        { q: "2. ¿Quién es el hortelano de la familia?", a: "C", options: {A: "Mickey", B: "Miguel Ángel", C: "Miguel"} },
+        { q: "2. ¿Quién es el hortelano de la familia?", a: "C", options: {A: "Mickey", B: "Javi", C: "Miguel"} },
         { q: "3. ¿Quién es el mejor tito del mundo y el colchonero número uno?", a: "A", options: {A: "Miguel Ángel", B: "Javi", C: "Antonio"} },
         { q: "4. ¿A quién acudirías si necesitas una segunda madre y un corazón infinito?", a: "C", options: {A: "Mickey", B: "Javi", C: "La tía Ana Mari"} },
         { q: "5. ¿Quién es el amor de la vida de Miguel?", a: "C", options: {A: "Su huerto", B: "El Atlético de Madrid", C: "Macu"} },
-        { q: "6. ¿Quién era famoso de chiquitillo por llorar por cualquier cosa?", a: "B", options: {A: "Miguel", B: "Antonio", C: "Mickey"} },
+        { q: "6. ¿Quién era famoso de chiquitillo por llorar por cualquier cosa?", a: "B", options: {A: "Mickey", B: "Antonio", C: "Javi"} },
         { q: "7. ¿Quién es la mujer recién casada y madre que lucha con tres niños?", a: "A", options: {A: "Elena", B: "Antonio", C: "Miguel"} },
         { q: "8. ¿Quién es el ingeniero informático e inteligente del grupo?", a: "B", options: {A: "Miguel Ángel", B: "Mickey", C: "Antonio"} },
         { q: "9. ¿Quién es la Diosa de los Tatuajes?", a: "A", options: {A: "Gema", B: "Rocío", C: "Coral (prima)"} },
-        { q: "10. ¿Quién es la persona que más whisky puede beber?", a: "B", options: {A: "Miguel Ángel", B: "Javi", C: "Miguel"} },
+        { q: "10. ¿Quién es la persona que más whisky puede beber?", a: "B", options: {A: "Antonio", B: "Javi", C: "Mickey"} },
         { q: "11. ¿Quién es la bondad personificada y la mujer del del whisky?", a: "C", options: {A: "Montse", B: "Macu", C: "Ana"} },
         { q: "12. ¿Quién es la Reina de la Paz y el Relax?", a: "A", options: {A: "La tía Coral", B: "Mari Carmen", C: "Ana Mari"} },
         { q: "13. ¿Quién es la jubilada más viajera del mundo?", a: "B", options: {A: "Montse", B: "La tía Mari Carmen", C: "Elena"} },
         { q: "14. ¿Quién es la caballista de la familia?", a: "C", options: {A: "Gema", B: "Coral (prima)", C: "Rocío"} },
         { q: "15. ¿Quién ama más la playa, las ahogadillas y la tierra?", a: "A", options: {A: "Coral (prima)", B: "La tía Coral", C: "Ana"} },
-        { q: "16. ¿A quién pedirías ayuda si se estropea el ordenador o el Wi-Fi?", a: "B", options: {A: "Antonio", B: "Mickey", C: "Miguel"} },
+        { q: "16. ¿A quién pedirías ayuda si se te estropea el ordenador o el Wi-Fi?", a: "B", options: {A: "Antonio", B: "Mickey", C: "Miguel"} },
         { q: "17. ¿Por qué lloraba Antonio de pequeño?", a: "B", options: {A: "Por el Atleti", B: "Por cualquier cosa", C: "Sin whisky"} },
         { q: "18. ¿Qué es lo que mejor sabe hacer la Tía Mari Carmen?", a: "B", options: {A: "Plantar lechugas", B: "Viajar por el mundo", C: "Programar"} },
         { q: "19. ¿Cuál es la mayor virtud de Ana?", a: "A", options: {A: "Su bondad y paciencia", B: "Tatuar", C: "Llorar"} },
-        { q: "20. ¿Qué frase define mejor a este grupo?", a: "B", options: {A: "Unos conocidos", B: "La mejor familia del mundo", C: "Amigos del hortelano"} }
+        { q: "20. ¿Qué frase define mejor a este grupo?", a: "B", options: {A: "Unos desconocidos", B: "La mejor familia del mundo", C: "Amigos del hortelano"} }
     ];
 
     let currentQuestion = 0;
@@ -94,17 +94,12 @@
         setTimeout(() => {
             currentQuestion++;
             loadQuestion();
-        }, 1500);
+        }, 1200);
     }
 
     function showResult() {
         quizContainer.style.display = 'none';
         document.getElementById('result-container').style.display = 'block';
         document.getElementById('final-message').innerText = "Se confirma lo que ya sabíamos: ni los viajes de Mari Carmen, ni la tecnología de Mickey, ni los whiskys de Javi pueden superar esto. Porque aunque Antonio llorara por todo y Miguel sea un hortelano solitario, esta familia es el mejor cultivo que se ha cosechado jamás. ¡A celebrarlo!";
-    }
-
-    loadQuestion();
-</script>
-
-</body>
-</html>
+        
+        // Cambios dinámicos finales
