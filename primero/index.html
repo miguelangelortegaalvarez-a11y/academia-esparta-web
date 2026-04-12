@@ -6,26 +6,41 @@
     <title>Lecturas 1º Primaria - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
     <style>
-        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; }
+        :root { 
+            --primary: #0e9343; 
+            --light: #f5fdf7; 
+            --dark: #063c24;
+            /* Colores de Dificultad */
+            --easy: #28a745;
+            --medium: #f39c12;
+            --hard: #c0392b;
+        }
         body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: var(--dark); margin: 0; padding: 40px 20px; text-align: center; }
         h1 { color: var(--primary); text-transform: uppercase; font-weight: 700; margin-bottom: 30px; }
         
-        .grid-lecturas { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1000px; margin: 40px auto; }
+        .grid-lecturas { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1100px; margin: 40px auto; }
 
         .card {
-            background: var(--light); width: 220px; border-radius: 15px; padding: 30px;
+            background: var(--light); width: 220px; border-radius: 15px; padding: 25px;
             text-align: center; border: 1px solid rgba(14, 147, 67, 0.2);
             transition: all 0.3s ease; text-decoration: none; color: var(--dark);
             display: flex; flex-direction: column; align-items: center;
+            position: relative;
         }
 
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: var(--primary); background: white; }
-        .card .icono { font-size: 3rem; margin-bottom: 10px; }
-        .card h4 { margin: 0; color: var(--primary); text-transform: uppercase; font-size: 0.9rem; }
-        .card .tipo { font-size: 0.7rem; background: var(--primary); color: white; padding: 2px 8px; border-radius: 10px; margin-top: 10px; font-weight: bold; }
+        .card .icono { font-size: 2.5rem; margin-bottom: 10px; }
+        .card h4 { margin: 0; color: var(--primary); text-transform: uppercase; font-size: 0.85rem; }
+        .card p { margin: 5px 0; font-weight: bold; }
 
-        /* Icono para V/F */
-        .card .icono.vf { color: var(--primary); }
+        /* Estilos de las etiquetas de dificultad */
+        .tipo { font-size: 0.65rem; color: white; padding: 3px 10px; border-radius: 10px; margin-top: 10px; font-weight: bold; text-transform: uppercase; }
+        
+        .nivel-1 { background-color: var(--easy); }
+        .nivel-2 { background-color: var(--medium); }
+        .nivel-3 { background-color: var(--hard); }
+
+        .dificultad-estrellas { font-size: 0.8rem; margin-top: 5px; }
 
         .btn-volver { margin-top: 50px; display: inline-block; text-decoration: none; color: #666; font-weight: bold; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
     </style>
@@ -33,7 +48,7 @@
 <body>
 
     <h1>Lecturas 1º Primaria</h1>
-    <p>Selecciona una lectura para comenzar:</p>
+    <p>Selecciona una lectura según su nivel de dificultad:</p>
 
     <div class="grid-lecturas">
         
@@ -41,57 +56,73 @@
             <div class="icono">📖</div>
             <h4>Lectura 1</h4>
             <p>Tito el pato</p>
-            <span class="tipo">ESCRITURA</span>
+            <div class="dificultad-estrellas">⭐</div>
+            <span class="tipo nivel-1">Fácil</span>
         </a>
 
         <a href="mama.html" class="card">
             <div class="icono">📖</div>
             <h4>Lectura 2</h4>
             <p>Mi mamá</p>
-            <span class="tipo">ESCRITURA</span>
+            <div class="dificultad-estrellas">⭐</div>
+            <span class="tipo nivel-1">Fácil</span>
         </a>
 
         <a href="pepe.html" class="card">
             <div class="icono">📖</div>
             <h4>Lectura 3</h4>
             <p>Pepe y papá</p>
-            <span class="tipo">ESCRITURA</span>
+            <div class="dificultad-estrellas">⭐</div>
+            <span class="tipo nivel-1">Fácil</span>
         </a>
 
         <a href="dado.html" class="card">
             <div class="icono">📖</div>
             <h4>Lectura 4</h4>
             <p>El nene y el dado</p>
-            <span class="tipo">ESCRITURA</span>
+            <div class="dificultad-estrellas">⭐</div>
+            <span class="tipo nivel-1">Fácil</span>
         </a>
 
         <a href="sol.html" class="card">
-            <div class="icono vf">✅❌</div>
+            <div class="icono">✅❌</div>
             <h4>Lectura 5</h4>
             <p>El Sol y el Cielo</p>
-            <span class="tipo">V / F</span>
+            <div class="dificultad-estrellas">⭐⭐</div>
+            <span class="tipo nivel-2">Intermedio</span>
         </a>
 
         <a href="aseo.html" class="card">
-            <div class="icono vf">✅❌</div>
+            <div class="icono">✅❌</div>
             <h4>Lectura 6</h4>
             <p>Me lavo cada día</p>
-            <span class="tipo">V / F</span>
+            <div class="dificultad-estrellas">⭐⭐</div>
+            <span class="tipo nivel-2">Intermedio</span>
         </a>
 
         <a href="fruta.html" class="card">
-            <div class="icono vf">✅❌</div>
+            <div class="icono">✅❌</div>
             <h4>Lectura 7</h4>
             <p>La Fruta Rica</p>
-            <span class="tipo">V / F</span>
+            <div class="dificultad-estrellas">⭐⭐</div>
+            <span class="tipo nivel-2">Intermedio</span>
         </a>
 
         <a href="perro.html" class="card">
-            <div class="icono vf">✅❌</div>
+            <div class="icono">✅❌</div>
             <h4>Lectura 8</h4>
             <p>Mi perro Lolo</p>
-            <span class="tipo">V / F</span>
+            <div class="dificultad-estrellas">⭐⭐</div>
+            <span class="tipo nivel-2">Intermedio</span>
         </a>
+
+        <div class="card" style="opacity: 0.6;">
+            <div class="icono">📝</div>
+            <h4>Lectura 9</h4>
+            <p>Próximamente...</p>
+            <div class="dificultad-estrellas">⭐⭐⭐</div>
+            <span class="tipo nivel-3">Avanzado</span>
+        </div>
 
     </div>
 
