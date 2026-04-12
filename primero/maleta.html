@@ -2,106 +2,155 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha Letra P - Caligrafía Escolar</title>
+    <title>Lectura 10: La maleta - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* IMPORTACIÓN DE FUENTE ESCOLAR LIGADA */
-        @font-face {
-            font-family: 'EscolarPunteada';
-            src: url('https://raw.githubusercontent.com/miguelsanchez/fonts/master/EscolarPunteada.woff') format('woff');
+        /* Configuración de página A4 */
+        @page {
+            size: A4;
+            margin: 2cm;
         }
 
-        @page { size: A4; margin: 1cm; }
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: white; color: #333; }
-        
+        body { 
+            font-family: 'Kalam', cursive; 
+            background-color: #ffffff; 
+            color: #000; 
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .btn-print { 
+            position: fixed; top: 20px; right: 20px;
+            background-color: #0e9343; color: white; border: none; 
+            padding: 10px 15px; border-radius: 8px; cursor: pointer; 
+            font-weight: bold; z-index: 100; font-family: sans-serif;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { padding: 0; margin: 0; }
+        }
+
         /* Cabecera */
-        .header { border-bottom: 2px solid #0e9343; padding: 10px; text-align: center; margin-bottom: 20px; }
-        .logo { color: #0e9343; font-weight: bold; font-size: 18px; margin: 0; }
-        .info { display: flex; justify-content: space-between; font-size: 12px; margin-top: 10px; }
-
-        h2 { font-size: 14px; margin: 20px 0 10px 0; color: #000; font-weight: bold; }
-
-        /* Cuadro de búsqueda inicial */
-        .search-box {
-            border: 2px solid #000;
-            padding: 15px;
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .search-box span { font-size: 28px; font-weight: bold; }
-
-        /* PAUTA MONTESSORI / ESCOLAR */
-        .pauta-contenedor {
-            margin-top: 20px;
-            position: relative;
+        .header { 
+            display: flex; justify-content: space-between; 
+            border-bottom: 1.5pt solid #000; padding-bottom: 5pt; 
+            margin-bottom: 25pt; font-family: sans-serif;
+            text-transform: uppercase; font-size: 10pt; font-weight: bold;
         }
 
-        .lineas-pauta {
-            height: 40px;
-            width: 100%;
-            background-image: 
-                linear-gradient(#eee 1px, transparent 1px), /* Línea superior */
-                linear-gradient(#999 1px, transparent 1px), /* Línea guía superior */
-                linear-gradient(#999 1px, transparent 1px), /* Línea guía inferior */
-                linear-gradient(#eee 1px, transparent 1px); /* Línea inferior */
-            background-size: 100% 40px;
-            background-position: 0 0, 0 10px, 0 30px, 0 40px;
-            background-repeat: repeat-y;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
+        .datos-alumno {
+            display: flex; justify-content: space-between; 
+            margin-bottom: 30pt; font-size: 13pt;
+        }
+        .campo { border-bottom: 1pt dashed #000; flex-grow: 1; margin-left: 5pt; height: 15pt; }
+
+        /* Título e Historia */
+        .lectura-box h3 { 
+            font-size: 24pt; margin: 0 0 25pt 0; 
+            text-align: center; font-weight: 700; text-decoration: underline;
+        }
+        
+        .lectura-box p { 
+            font-size: 14pt; 
+            line-height: 1.8; 
+            margin-bottom: 35pt; 
+            text-align: justify;
+            text-justify: inter-word;
         }
 
-        /* La Letra punteada ligada */
-        .letra-punteada {
-            font-family: 'EscolarPunteada', cursive;
-            font-size: 45px;
-            color: #aaa;
-            letter-spacing: 35px;
-            padding-left: 20px;
-            line-height: 40px;
+        /* Preguntas de Escritura */
+        .pregunta-item { 
+            margin-bottom: 30pt; 
+            font-size: 14pt; 
+            page-break-inside: avoid;
+        }
+        
+        .pauta-doble-linea {
+            width: 100%; height: 24pt; 
+            border-top: 1pt solid #000; border-bottom: 1pt solid #000;
+            margin-top: 8pt;
         }
 
-        .texto-instruccion { font-style: italic; font-size: 13px; color: #666; margin-bottom: 5px; }
+        /* Bloque Verdadero/Falso */
+        .instruccion-vf {
+            font-size: 13pt; text-align: center; 
+            margin: 40pt 0 20pt 0; font-family: sans-serif; font-weight: bold;
+            text-decoration: underline;
+        }
 
-        .footer { text-align: center; color: #0e9343; font-size: 10px; margin-top: 30px; border-top: 1px solid #eee; padding-top: 5px; }
+        .vf-item {
+            display: flex; align-items: center; 
+            font-size: 14pt; margin-bottom: 22pt;
+            page-break-inside: avoid;
+        }
+
+        .cuadrado-respuesta {
+            width: 28pt; height: 28pt; border: 1.8pt solid #000;
+            margin-right: 18pt; flex-shrink: 0;
+        }
+
+        .frase-motivacional {
+            margin-top: 50pt;
+            text-align: center; font-size: 14pt; font-style: italic; color: #333;
+            padding-bottom: 30pt;
+        }
+
+        .watermark {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 120pt; color: rgba(0, 0, 0, 0.03);
+            font-family: sans-serif; font-weight: 900;
+            z-index: -1; pointer-events: none; text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
+    <div class="watermark">ESPARTA</div>
+    <button class="btn-print" onclick="window.print()">📄 GENERAR PDF</button>
+
     <div class="header">
-        <p class="logo">ACADEMIA ESPARTA: CUADERNO DE CALIGRAFÍA</p>
-        <div class="info">
-            <span>NOMBRE: _________________________________________</span>
-            <span>FECHA: __________</span>
-        </div>
+        <span>LECTURA COMPRENSIVA</span>
+        <span>ACADEMIA ESPARTA</span>
     </div>
 
-    <h2>1. Busca y rodea las letras "P" y "p"</h2>
-    <div class="search-box">
-        <span>P</span> <span>b</span> <span>d</span> <span>p</span> <span>M</span> <span>P</span>
-        <span>q</span> <span>p</span> <span>P</span> <span>B</span> <span>g</span> <span>p</span>
-        <span>D</span> <span>P</span> <span>b</span> <span>P</span> <span>p</span> <span>q</span>
+    <div class="datos-alumno">
+        <div style="width: 45%; display: flex;">Nombre: <div class="campo"></div></div>
+        <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
+        <div style="width: 20%; display: flex;">Curso: <div class="campo"></div></div>
     </div>
 
-    <h2>2. Repasa y escribe siguiendo la pauta</h2>
-    
-    <div class="pauta-contenedor">
-        <div class="texto-instruccion">Mayúscula:</div>
-        <div class="lineas-pauta"><span class="letra-punteada">PPPPPP</span></div>
-        <div class="lineas-pauta"></div> <div class="texto-instruccion" style="margin-top:20px;">Minúscula ligada:</div>
-        <div class="lineas-pauta"><span class="letra-punteada" style="font-size:38px;">pppppp</span></div>
-        <div class="lineas-pauta"></div>
-
-        <div class="texto-instruccion" style="margin-top:20px;">Sílabas ligadas:</div>
-        <div class="lineas-pauta"><span class="letra-punteada" style="font-size:35px; letter-spacing: 25px;">pa pe pi po pu</span></div>
-        <div class="lineas-pauta"></div>
+    <div class="lectura-box">
+        <h3>La maleta de las vacaciones</h3>
+        <p>
+            Mañana por la mañana Lucas se va de viaje a la playa con toda su familia. Está muy emocionado y por eso prepara su maleta roja con mucho cuidado. Primero guarda sus dos bañadores favoritos y una toalla suave de color verde. Luego pone sus gafas de sol y una gorra para protegerse del sol fuerte. Su mamá le ayuda a doblar las camisetas y los pantalones cortos de algodón. No puede olvidar sus palas de madera para jugar en la arena con sus amigos. Lucas cierra la maleta con fuerza y la deja junto a la puerta de su casa. Esta noche no podrá dormir porque tiene muchas ganas de ver el mar azul y saltar todas las olas.
+        </p>
     </div>
 
-    <div class="footer">ACADEMIA ESPARTA - MATERIAL DE LECTOESCRITURA PROFESIONAL</div>
+    <div class="preguntas-container">
+        <div class="pregunta-item">1. ¿A qué lugar se va Lucas de viaje con su familia? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">2. ¿De qué color es la maleta que está preparando? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">3. ¿Qué objetos guarda Lucas para protegerse del sol? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">4. ¿Quién ayuda a Lucas a doblar toda su ropa limpia? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">5. ¿Por qué Lucas no podrá dormir durante esta noche? <div class="pauta-doble-linea"></div></div>
+    </div>
+
+    <div class="instruccion-vf">Escribe V o F dentro del cuadro:</div>
+
+    <div class="vf-container">
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 6. Lucas se va de viaje a la montaña mañana temprano.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 7. Guarda una toalla suave que es de color verde.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 8. Las palas para jugar en la arena son de madera.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 9. Lucas deja la maleta guardada dentro del armario.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 10. Lucas tiene muchas ganas de ver el mar azul.</div>
+    </div>
+
+    <div class="frase-motivacional">
+        ¡Eres un experto en lectura! 🌟
+    </div>
 
 </body>
 </html>
