@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erik: Guerrero de Fuego - Academia Esparta</title>
+    <title>Erik: El Camino del Guerrero - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Bangers&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
@@ -14,34 +14,37 @@
         .progress-container { width: 80%; background: #333; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid var(--esparta-oro); }
         #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #f1c40f, #ff4500); transition: width 0.5s ease; }
 
-        .game-container { background: #fff; padding: 40px; border-radius: 25px; box-shadow: 0 0 30px rgba(241, 196, 15, 0.2); border: 6px solid var(--esparta-verde); position: relative; margin-top: 20px; color: #222; min-width: 350px; }
+        .main-stage { display: flex; align-items: center; gap: 40px; margin-top: 20px; width: 95%; max-width: 1100px; justify-content: center; flex-wrap: wrap; }
+
+        /* SECCIÓN DEL MUÑECO */
+        .character-box { width: 320px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .character-img { width: 100%; height: auto; transition: transform 0.3s ease; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
         
-        /* MODO FUEGO */
-        .fuego-activo { animation: fire-glow 1s infinite alternate; border-color: #ff4500 !important; box-shadow: 0 0 50px #ff4500 !important; }
-        .fuego-texto { color: #ff4500 !important; text-shadow: 0 0 10px #ffa500, 0 0 20px #ff4500 !important; }
+        .img-super { filter: drop-shadow(0 0 30px #ffea00); animation: pulse-super 1.2s infinite alternate; }
+        @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.08); } }
+
+        /* SECCIÓN DE LA OPERACIÓN */
+        .game-container { background: #fff; padding: 40px; border-radius: 25px; box-shadow: 0 0 30px rgba(241, 196, 15, 0.2); border: 6px solid var(--esparta-verde); color: #222; min-width: 380px; }
+        .fuego-activo { animation: fire-glow 1s infinite alternate; border-color: #ff4500 !important; }
         @keyframes fire-glow { from { box-shadow: 0 0 20px #ff4500; } to { box-shadow: 0 0 50px #ff8c00; } }
 
-        /* ALINEACIÓN DE COLUMNAS */
-        .op-grid { display: grid; grid-template-columns: 80px 80px 80px; text-align: center; font-size: 75px; font-weight: bold; line-height: 1; align-items: center; }
-        .col-signo { color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 70px; display: flex; justify-content: center; }
+        .op-grid { display: grid; grid-template-columns: 85px 85px 85px; text-align: center; font-size: 85px; font-weight: bold; line-height: 1; align-items: center; }
+        .col-signo { color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 75px; }
         
-        input { font-family: 'Kalam', cursive; font-size: 50px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 80px; height: 80px; outline: none; transition: 0.2s; background: #fff; }
+        input { font-family: 'Kalam', cursive; font-size: 55px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 85px; height: 85px; outline: none; transition: 0.2s; background: #fff; }
         input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; transform: scale(1.1); }
         input.wrong { background: #ffcdd2 !important; border-color: var(--esparta-rojo) !important; animation: shake 0.3s; }
 
-        #llevada { width: 60px; height: 60px; font-size: 35px; border: 4px dashed var(--esparta-rojo); visibility: hidden; grid-column: 2; margin: 0 auto 10px auto; }
-        
-        .linea-div { grid-column: 1 / span 3; border-bottom: 8px solid #333; margin: 15px 0; border-radius: 4px; }
+        #llevada { width: 65px; height: 65px; font-size: 38px; border: 4px dashed var(--esparta-rojo); visibility: hidden; grid-column: 2; margin: 0 auto 10px auto; color: var(--esparta-rojo); }
+        .linea-div { grid-column: 1 / span 3; border-bottom: 8px solid #333; margin: 15px 0; }
 
-        .status-msg { margin-top: 25px; height: 50px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; }
+        .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; }
         
-        /* MENSAJE BARCELONA */
         #barca-msg { 
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(165, 0, 68, 0.95); color: #edbb00; font-family: 'Bangers';
-            font-size: 60px; padding: 40px; border-radius: 20px; border: 10px solid #004d98;
-            z-index: 1000; text-align: center; display: none; width: 80%; pointer-events: none;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            background: rgba(165, 0, 68, 0.98); color: #edbb00; font-family: 'Bangers';
+            font-size: 60px; padding: 40px; border-radius: 20px; border: 12px solid #004d98;
+            z-index: 1000; text-align: center; display: none; width: 85%; pointer-events: none;
         }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
@@ -51,36 +54,43 @@
 
     <div id="barca-msg">¡ERES MÁS MALO QUE EL BARCELONA! ⚽📉</div>
 
-    <div class="header"><h1>GUERRERO ERIK: MAESTRO DEL FUEGO</h1></div>
+    <div class="header"><h1>GUERRERO ERIK: EL CAMINO DEL GUERRERO</h1></div>
     
     <div style="font-family:'Bangers'; font-size: 30px; margin-top: 10px;">
         ESCUDOS: <span id="score" style="color:var(--esparta-oro)">0</span> | 
-        RACHA: <span id="streak" style="color:#ff4500">0</span> 🔥
+        RACHA 🔥: <span id="streak" style="color:#ff4500">0</span>
     </div>
     
     <div class="progress-container">
         <div id="progress-bar"></div>
     </div>
 
-    <div class="game-container" id="box">
-        <div class="op-grid" id="op-text">
-            <div></div>
-            <input type="number" id="llevada" placeholder="?">
-            <div></div>
+    <div class="main-stage">
+        <div class="character-box">
+            <img src="camino-matematico/assets/warrior/warrior-idle.png.PNG" alt="Erik" class="character-img" id="hero-img">
+            <div style="font-family:'Bangers'; color:var(--esparta-oro); font-size:28px; margin-top:10px;">ESTADO: <span id="hero-status">Base</span></div>
+        </div>
 
-            <div></div>
-            <div id="d-arriba">4</div>
-            <div id="u-arriba">7</div>
+        <div class="game-container" id="box">
+            <div class="op-grid" id="op-text">
+                <div></div>
+                <input type="number" id="llevada" placeholder="?">
+                <div></div>
 
-            <div class="col-signo">x</div>
-            <div></div>
-            <div id="num-abajo">6</div>
+                <div></div>
+                <div id="d-arriba">--</div>
+                <div id="u-arriba">-</div>
 
-            <div class="linea-div"></div>
+                <div class="col-signo">x</div>
+                <div></div>
+                <div id="num-abajo">-</div>
 
-            <input type="number" id="res-centena">
-            <input type="number" id="res-decena">
-            <input type="number" id="res-unidad">
+                <div class="linea-div"></div>
+
+                <input type="number" id="res-centena">
+                <input type="number" id="res-decena">
+                <input type="number" id="res-unidad">
+            </div>
         </div>
     </div>
 
@@ -88,10 +98,15 @@
 
     <script>
         let n1, n2, llevadaReal, uReal, dReal, cReal;
-        let score = 0;
-        let fallosEnEsta = 0;
-        let streak = 0;
+        let score = 0, fallosEnEsta = 0, streak = 0;
         const goal = 10;
+
+        // Rutas desde tu GitHub
+        const imagenes = {
+            base: 'camino-matematico/assets/warrior/warrior-idle.png.PNG',
+            sad: 'camino-matematico/assets/warrior/warrior-sad.png.PNG',
+            super: 'camino-matematico/assets/warrior/warrior-power.png.PNG'
+        };
 
         const inputs = {
             llevada: document.getElementById('llevada'),
@@ -99,6 +114,9 @@
             d: document.getElementById('res-decena'),
             c: document.getElementById('res-centena')
         };
+
+        const heroImg = document.getElementById('hero-img');
+        const heroStatus = document.getElementById('hero-status');
 
         function nuevaOperacion() {
             n1 = Math.floor(Math.random() * 90) + 10;
@@ -109,14 +127,11 @@
             document.getElementById('u-arriba').innerText = n1 % 10;
             document.getElementById('num-abajo').innerText = n2;
 
-            let uni_arriba = n1 % 10;
-            let mult_u = uni_arriba * n2;
-            uReal = mult_u % 10;
-            llevadaReal = Math.floor(mult_u / 10);
-            
-            let final_total = n1 * n2;
-            cReal = Math.floor(final_total / 100);
-            dReal = Math.floor((final_total % 100) / 10);
+            uReal = (n1 % 10 * n2) % 10;
+            llevadaReal = Math.floor((n1 % 10 * n2) / 10);
+            let total = n1 * n2;
+            cReal = Math.floor(total / 100);
+            dReal = Math.floor((total % 100) / 10);
 
             Object.values(inputs).forEach(i => {
                 i.value = ''; i.className = ''; i.disabled = true; i.style.visibility = 'visible';
@@ -126,6 +141,8 @@
             inputs.llevada.style.visibility = 'hidden';
             inputs.u.disabled = false;
             inputs.u.focus();
+
+            actualizarImagen();
         }
 
         function manejarError() {
@@ -133,11 +150,26 @@
             streak = 0;
             document.getElementById('streak').innerText = streak;
             document.getElementById('box').classList.remove('fuego-activo');
-            document.getElementById('op-text').classList.remove('fuego-texto');
+            
+            heroImg.src = imagenes.sad;
+            heroImg.className = 'character-img';
+            heroStatus.innerText = "¡MÁS MALO QUE EL BARÇA!";
             
             const bMsg = document.getElementById('barca-msg');
             bMsg.style.display = 'block';
-            setTimeout(() => { bMsg.style.display = 'none'; }, 1500);
+            setTimeout(() => { bMsg.style.display = 'none'; }, 2000);
+        }
+
+        function actualizarImagen() {
+            if(streak === 0) {
+                heroImg.src = imagenes.base;
+                heroImg.className = 'character-img';
+                heroStatus.innerText = "Guerrero";
+            } else {
+                heroImg.src = imagenes.super;
+                heroImg.classList.add('img-super');
+                heroStatus.innerText = "SUPER ER! 🔥";
+            }
         }
 
         inputs.u.oninput = function() {
@@ -146,12 +178,9 @@
                 if(llevadaReal > 0) {
                     inputs.llevada.style.visibility = 'visible';
                     inputs.llevada.disabled = false; inputs.llevada.focus();
-                } else {
-                    inputs.d.disabled = false; inputs.d.focus();
-                }
+                } else { inputs.d.disabled = false; inputs.d.focus(); }
             } else if(this.value.length >= 1) {
-                this.classList.add('wrong');
-                manejarError();
+                this.classList.add('wrong'); manejarError();
                 setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
             }
         };
@@ -161,8 +190,7 @@
                 this.classList.add('correct'); this.disabled = true;
                 inputs.d.disabled = false; inputs.d.focus();
             } else if(this.value.length >= 1) {
-                this.classList.add('wrong');
-                manejarError();
+                this.classList.add('wrong'); manejarError();
                 setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
             }
         };
@@ -172,8 +200,7 @@
                 this.classList.add('correct'); this.disabled = true;
                 if(cReal > 0) { inputs.c.disabled = false; inputs.c.focus(); } else { ganar(); }
             } else if(this.value.length >= 1) {
-                this.classList.add('wrong');
-                manejarError();
+                this.classList.add('wrong'); manejarError();
                 setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
             }
         };
@@ -183,8 +210,7 @@
                 this.classList.add('correct'); this.disabled = true;
                 ganar();
             } else if(this.value.length >= 1) {
-                this.classList.add('wrong');
-                manejarError();
+                this.classList.add('wrong'); manejarError();
                 setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
             }
         };
@@ -193,12 +219,7 @@
             if(fallosEnEsta === 0) {
                 streak++;
                 document.getElementById('box').classList.add('fuego-activo');
-                document.getElementById('op-text').classList.add('fuego-texto');
-                document.getElementById('msg').innerText = "¡ESTÁS EN LLAMAS, ERIK!";
-            } else {
-                document.getElementById('msg').innerText = "¡BIEN HECHO, SIGUE ASÍ!";
             }
-            
             score++;
             document.getElementById('score').innerText = score;
             document.getElementById('streak').innerText = streak;
@@ -207,7 +228,7 @@
             if(score >= goal) {
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                 document.getElementById('msg').innerText = "¡ERIK, REY DEL OLIMPO!";
-                setTimeout(() => { score = 0; streak = 0; document.getElementById('progress-bar').style.width = "0%"; nuevaOperacion(); }, 4000);
+                setTimeout(() => { score = 0; streak = 0; nuevaOperacion(); }, 5000);
             } else {
                 setTimeout(nuevaOperacion, 1500);
             }
