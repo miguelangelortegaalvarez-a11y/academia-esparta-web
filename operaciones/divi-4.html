@@ -17,12 +17,12 @@
         
         .btn-print { position: fixed; top: 20px; right: 20px; background: #0e9343; color: white; border: none; padding: 15px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
-        /* REJILLA MUY ESPACIADA: 3 columnas x 3 filas (9 operaciones) */
-        .grid-divi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 110pt 30pt; padding-top: 15pt; }
+        /* REJILLA AJUSTADA: 2 columnas x 3 filas */
+        .grid-divi { display: grid; grid-template-columns: repeat(2, 1fr); gap: 100pt 60pt; padding-top: 15pt; }
 
-        .div-block { display: flex; align-items: flex-start; font-size: 28pt; font-weight: bold; margin: auto; }
-        .dividendo { padding-right: 12pt; padding-top: 2pt; letter-spacing: 5pt; }
-        .divisor-box { border-left: 3pt solid black; border-bottom: 3pt solid black; padding: 0 15pt 5pt 12pt; min-width: 45pt; text-align: center; }
+        .div-block { display: flex; align-items: flex-start; font-size: 30pt; font-weight: bold; margin: auto; }
+        .dividendo { padding-right: 15pt; padding-top: 2pt; letter-spacing: 5pt; }
+        .divisor-box { border-left: 3pt solid black; border-bottom: 3pt solid black; padding: 0 18pt 6pt 15pt; min-width: 50pt; text-align: center; }
 
         .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 80pt; color: rgba(14, 147, 67, 0.03); z-index: 0; pointer-events: none; font-family: sans-serif; }
     </style>
@@ -42,13 +42,11 @@
                     <div class="grid-divi">
             `);
             
-            // 9 operaciones por página para máximo espacio de anotaciones laterales
-            for(let i=0; i<9; i++) {
+            // 6 operaciones por página (2x3)
+            for(let i=0; i<6; i++) {
                 let divisor = Math.floor(Math.random() * (maxDivisor - minDivisor + 1)) + minDivisor;
-                // Dividendo de 3 o 4 cifras
                 let dividendo = Math.floor(Math.random() * 8900) + 110; 
                 
-                // Aseguramos que el dividendo sea mayor que el divisor
                 if(dividendo < divisor) dividendo += divisor;
 
                 document.write(`
@@ -62,7 +60,6 @@
             document.write(`</div></div>`);
         }
 
-        // Generamos 8 folios progresivos
         crearFicha("01", "DIVISORES ENTRE 10 Y 12", 10, 12);
         crearFicha("02", "DIVISORES ENTRE 13 Y 15", 13, 15);
         crearFicha("03", "DIVISORES ENTRE 16 Y 19", 16, 19);
