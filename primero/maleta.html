@@ -2,59 +2,57 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lectura 10: La maleta - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Kalam', cursive; background-color: #ffffff; color: #000; padding: 20px 40px; line-height: 1.2; overflow-x: hidden; }
-        .container { max-width: 800px; margin: auto; position: relative; z-index: 2; }
-        .btn-print { float: right; background-color: #0e9343; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; font-family: sans-serif; }
-        @media print { .btn-print { display: none; } body { padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .container { max-width: 100%; } }
-        .header { display: flex; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 10px; font-family: sans-serif; }
-        .header span { font-weight: bold; text-transform: uppercase; font-size: 0.8rem; }
-        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1.1rem; }
-        .campo { border-bottom: 1px dashed #000; padding-bottom: 2px; }
-        .lectura-box h3 { font-size: 2rem; margin: 5px 0; text-align: center; font-weight: 700; }
-        .lectura-box p { font-size: 1.6rem; line-height: 1.5; margin-bottom: 15px; text-align: center; }
-        .preguntas-container { margin-top: 10px; text-align: left; }
-        .pregunta-item { margin-bottom: 10px; font-size: 1.25rem; }
-        .pauta-doble-linea { width: 100%; height: 20px; border-top: 1px solid #000; border-bottom: 1px solid #000; margin-top: 4px; }
-        .vf-item { margin-bottom: 8px; font-size: 1.25rem; display: flex; align-items: center; }
-        .respuesta-bloque { display: flex; align-items: center; margin-right: 12px; flex-shrink: 0; }
-        .cuadrado-respuesta { width: 28px; height: 28px; border: 2px solid #000; display: inline-block; }
-        .frase-motivacional { margin-top: 15px; text-align: center; font-size: 1.3rem; font-style: italic; color: #333; border-top: 1px solid #eee; padding-top: 8px; }
-        .watermark-text { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 12rem; color: rgba(0, 0, 0, 0.03); font-family: sans-serif; font-weight: 900; z-index: 1; pointer-events: none; text-transform: uppercase; }
+        @page { size: A4; margin: 2cm; }
+        body { font-family: 'Kalam', cursive; background-color: #ffffff; color: #000; margin: 0; padding: 0; line-height: 1.6; -webkit-print-color-adjust: exact; }
+        .btn-print { position: fixed; top: 20px; right: 20px; background-color: #0e9343; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 100; font-family: sans-serif; }
+        @media print { .btn-print { display: none; } body { padding: 0; margin: 0; } }
+        .header { display: flex; justify-content: space-between; border-bottom: 1.5pt solid #000; padding-bottom: 5pt; margin-bottom: 25pt; font-family: sans-serif; text-transform: uppercase; font-size: 10pt; font-weight: bold; }
+        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 30pt; font-size: 13pt; }
+        .campo { border-bottom: 1pt dashed #000; flex-grow: 1; margin-left: 5pt; height: 15pt; }
+        .lectura-box h3 { font-size: 24pt; margin: 0 0 25pt 0; text-align: center; font-weight: 700; text-decoration: underline; }
+        .lectura-box p { font-size: 14pt; line-height: 1.8; margin-bottom: 35pt; text-align: justify; text-justify: inter-word; }
+        .pregunta-item { margin-bottom: 30pt; font-size: 14pt; page-break-inside: avoid; }
+        .pauta-doble-linea { width: 100%; height: 24pt; border-top: 1pt solid #000; border-bottom: 1pt solid #000; margin-top: 8pt; }
+        .instruccion-vf { font-size: 13pt; text-align: center; margin: 40pt 0 20pt 0; font-family: sans-serif; font-weight: bold; text-decoration: underline; }
+        .vf-item { display: flex; align-items: center; font-size: 14pt; margin-bottom: 22pt; page-break-inside: avoid; }
+        .cuadrado-respuesta { width: 28pt; height: 28pt; border: 1.8pt solid #000; margin-right: 18pt; flex-shrink: 0; }
+        .frase-motivacional { margin-top: 50pt; text-align: center; font-size: 14pt; font-style: italic; color: #333; padding-bottom: 30pt; }
+        .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 120pt; color: rgba(0, 0, 0, 0.03); font-family: sans-serif; font-weight: 900; z-index: -1; pointer-events: none; text-transform: uppercase; }
     </style>
 </head>
 <body>
-    <div class="watermark-text">ESPARTA</div>
-    <div class="container">
-        <button class="btn-print" onclick="window.print()">📄 GENERAR PDF</button>
-        <div class="header"><span>LECTURA COMPRENSIVA</span><span>ACADEMIA ESPARTA</span></div>
-        <div class="datos-alumno">
-            <div style="width: 50%;">Nombre: <span class="campo" style="display:inline-block; width:80%;"></span></div>
-            <div style="width: 25%;">Fecha: <span class="campo" style="display:inline-block; width:70%;"></span></div>
-            <div style="width: 20%;">Curso: <span class="campo" style="display:inline-block; width:60%;"></span></div>
-        </div>
-        <div class="lectura-box">
-            <h3>La maleta de Tomás</h3>
-            <p>Tomás sale de viaje mañana a la montaña. Pone su ropa limpia en la maleta roja. No olvida su mapa ni un rico tomate. Tomás está muy emocionado por su aventura.</p>
-        </div>
-        <div class="preguntas-container">
-            <div class="pregunta-item">1. ¿A dónde viaja Tomás? <div class="pauta-doble-linea"></div></div>
-            <div class="pregunta-item">2. ¿Cuándo sale de viaje? <div class="pauta-doble-linea"></div></div>
-            <div class="pregunta-item">3. ¿De qué color es la maleta? <div class="pauta-doble-linea"></div></div>
-            <div class="pregunta-item">4. ¿Qué comida guarda Tomás? <div class="pauta-doble-linea"></div></div>
-            <div class="pregunta-item">5. ¿Cómo se siente Tomás? <div class="pauta-doble-linea"></div></div>
-            
-            <p style="font-size: 0.9rem; text-align: center; margin: 10px 0; font-family: sans-serif; font-weight: bold;">Escribe V o F en el cuadro:</p>
-            <div class="vf-item"><div class="respuesta-bloque"><div class="cuadrado-respuesta"></div></div><span>6. Tomás viaja a la playa.</span></div>
-            <div class="vf-item"><div class="respuesta-bloque"><div class="cuadrado-respuesta"></div></div><span>7. La maleta es de color azul.</span></div>
-            <div class="vf-item"><div class="respuesta-bloque"><div class="cuadrado-respuesta"></div></div><span>8. Guarda ropa limpia en la maleta.</span></div>
-            <div class="vf-item"><div class="respuesta-bloque"><div class="cuadrado-respuesta"></div></div><span>9. Se olvida el mapa en casa.</span></div>
-            <div class="vf-item"><div class="respuesta-bloque"><div class="cuadrado-respuesta"></div></div><span>10. Tomás está muy emocionado.</span></div>
-        </div>
-        <div class="frase-motivacional">¡Eres un experto en lectura! 🌟</div>
+    <div class="watermark">ESPARTA</div>
+    <button class="btn-print" onclick="window.print()">📄 GENERAR PDF</button>
+    <div class="header"><span>LECTURA COMPRENSIVA</span><span>ACADEMIA ESPARTA</span></div>
+    <div class="datos-alumno">
+        <div style="width: 45%; display: flex;">Nombre: <div class="campo"></div></div>
+        <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
+        <div style="width: 20%; display: flex;">Curso: <div class="campo"></div></div>
     </div>
+    <div class="lectura-box">
+        <h3>La maleta de las vacaciones</h3>
+        <p>
+            Mañana por la mañana Lucas se va de viaje a la playa con toda su familia. Está muy emocionado y por eso prepara su maleta roja con mucho cuidado. Primero guarda sus dos bañadores favoritos y una toalla suave de color verde. Luego pone sus gafas de sol y una gorra para protegerse del sol fuerte. Su mamá le ayuda a doblar las camisetas y los pantalones cortos de algodón. No puede olvidar sus palas de madera para jugar en la arena con sus amigos. Lucas cierra la maleta con fuerza y la deja junto a la puerta de su casa. Esta noche no podrá dormir porque tiene muchas ganas de ver el mar azul.
+        </p>
+    </div>
+    <div class="preguntas-container">
+        <div class="pregunta-item">1. ¿A qué lugar se va Lucas de viaje con su familia? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">2. ¿De qué color es la maleta que está preparando? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">3. ¿Qué objetos guarda Lucas para protegerse del sol? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">4. ¿Quién ayuda a Lucas a doblar toda su ropa? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">5. ¿Por qué Lucas no podrá dormir durante esta noche? <div class="pauta-doble-linea"></div></div>
+    </div>
+    <div class="instruccion-vf">Escribe V o F dentro del cuadro:</div>
+    <div class="vf-container">
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 6. Lucas se va de viaje a la montaña mañana.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 7. Guarda una toalla suave que es de color azul.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 8. Las palas para jugar en la arena son de madera.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 9. Lucas deja la maleta guardada dentro del armario.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 10. Lucas tiene muchas ganas de ver el mar azul.</div>
+    </div>
+    <div class="frase-motivacional">¡Eres un experto en lectura! 🌟</div>
 </body>
 </html>
