@@ -3,197 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes Maestro de Sintaxis - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <title>La Mejor Familia del Mundo - Quiz</title>
     <style>
-        :root {
-            --primary: #0e9343; /* Verde Academia Esparta */
-            --accent: #fbc02d; 
-            --bg-crema: #f9f9f9;
-            --dark-text: #333;
-        }
-
-        body {
-            font-family: 'Fredoka', sans-serif;
-            background-color: #ffffff;
-            margin: 0;
-            padding: 40px 20px;
-            color: var(--dark-text);
-            line-height: 1.6;
-        }
-
-        .container { max-width: 900px; margin: 0 auto; }
-
-        /* Cabeceras de Sección */
-        .page-header {
-            border-bottom: 2px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            margin-top: 50px;
-        }
-        .page-header h1 { margin: 0; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 1px; color: var(--dark-text); }
-        .page-header span { font-size: 0.8rem; color: var(--primary); font-weight: bold; text-transform: uppercase; }
-
-        /* Bloques de Texto (Fondos Grises) */
-        .bloque-intro {
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border: 1px solid #eee;
-        }
-
-        /* Bloque de Clasificación (Fondo Verde Suave) */
-        .clasificacion-box {
-            background-color: #f0fdf4;
-            border-left: 6px solid var(--primary);
-            padding: 25px;
-            border-radius: 0 10px 10px 0;
-            margin-bottom: 30px;
-        }
-
-        /* Caja de Definición (Verde Sólido) */
-        .definicion-box {
-            background-color: var(--primary);
-            color: white;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        /* Estilos de Reconocimiento y Flechas */
-        .reconocimiento-item {
-            margin-bottom: 25px;
-            padding-left: 30px;
-            position: relative;
-        }
-        .reconocimiento-item::before {
-            content: "➤";
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        .ejemplo-centro {
-            display: block;
-            text-align: center;
-            margin: 15px 0;
-            font-style: italic;
-        }
-
-        .pronombre-resaltado { color: #d32f2f; font-weight: bold; }
-
-        .analisis-lineas {
-            display: flex; 
-            justify-content: space-around; 
-            text-align: center; 
-            margin: 20px 0;
-        }
-
-        .footer-esparta { text-align: center; font-size: 0.8rem; color: #ccc; text-transform: uppercase; margin-top: 60px; letter-spacing: 2px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 700px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #e74c3c; padding-bottom: 10px; }
+        .question { margin-bottom: 25px; display: none; }
+        .question.active { display: block; }
+        .question-text { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
+        .options { list-style: none; padding: 0; }
+        .options li { margin-bottom: 10px; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 8px; background: #ecf0f1; cursor: pointer; transition: 0.3s; font-size: 1rem; text-align: left; }
+        button:hover { background: #d5dbdb; }
+        button.correct { background: #2ecc71; color: white; }
+        button.incorrect { background: #e74c3c; color: white; }
+        #result-container { display: none; text-align: center; padding: 20px; background: #fdf2e9; border-radius: 10px; border: 2px dashed #e67e22; }
+        #result-container h2 { color: #e67e22; }
+        .progress { font-size: 0.9rem; color: #7f8c8d; margin-bottom: 10px; text-align: right; }
     </style>
 </head>
 <body>
 
 <div class="container">
-
-    <div class="page-header">
-        <h1>SINTAXIS: LOS COMPLEMENTOS DEL VERBO</h1>
-        <span>ACADEMIA ESPARTA</span>
-    </div>
-
-    <h2 style="color: #e74c3c; text-align: center; font-size: 2rem; text-transform: uppercase;">Los Complementos Verbales</h2>
-
-    <div class="bloque-intro" style="text-align: center; font-size: 1.2rem;">
-        El núcleo del predicado, es decir, el <b>verbo</b>, puede ir acompañado de uno o más complementos que completan, restringen o enmarcan la información expresada por el verbo.
-    </div>
-
-    <div class="bloque-intro" style="text-align: center;">
-        <p>Los complementos verbales pueden ser:</p>
-        <ul style="list-style: none; color: #e74c3c; font-weight: bold; font-size: 1.2rem; padding: 0;">
-            <li>- C.D</li>
-            <li>- C.I</li>
-            <li>- C.C</li>
-            <li>- C. Agente</li>
-            <li>- Atributo</li>
-            <li>- Predicativo</li>
-            <li>- C. de Regimen</li>
-        </ul>
-    </div>
-
-    <div class="page-header">
-        <h1>Clasificación de los Complementos</h1>
-        <span>ACADEMIA ESPARTA</span>
-    </div>
-
-    <div class="clasificacion-box">
-        <p>Los complementos se clasifican en dos grandes grupos:</p>
-        <p>🛡️ <b>Exclusivos del predicado verbal:</b> C. Directo, C. de Régimen, C. Predicativo y C. Agente.</p>
-        <p>🌍 <b>Admitidos por cualquier predicado:</b> C. Indirecto y C. Circunstancial.</p>
-    </div>
-
-    <div class="page-header">
-        <h1>1. EL COMPLEMENTO DIRECTO (CD)</h1>
-        <span>SISTEMA DE ANÁLISIS</span>
-    </div>
-
-    <div class="definicion-box">
-        <b>DEFINICIÓN:</b><br>
-        Aparece para completar el significado del verbo y nombra al ser o al objeto sobre el que recae directamente la acción expresada por el verbo.
-    </div>
-
-    <div class="page-header">
-        <h1>EL COMPLEMENTO INDIRECTO</h1>
-        <span>ACADEMIA ESPARTA</span>
-    </div>
-
-    <div class="bloque-intro">
-        El <b>Complemento Indirecto</b> es el complemento verbal que <b>nombra al destinatario</b> de la acción del verbo.
-        <span class="ejemplo-centro">Regalan un coche <b>al ganador de la etapa</b>.</span>
-    </div>
-
-    <div class="bloque-intro">
-        El C. I. (Complemento Indirecto) puede acompañar a verbos que llevan C.D. o a verbos que no admiten C.D.
-        <div class="analisis-lineas">
-            <div><u>He comprado</u> <u>rosas</u> <u>para mi novia</u><br>N &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CI</div>
-            <div><u>Esa película</u> <u>gusta</u> <u>a los niños</u><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CI</div>
-        </div>
-    </div>
-
-    <div class="clasificacion-box">
-        <b style="color: var(--primary); text-transform: uppercase; font-size: 0.9rem; display: block; margin-bottom: 15px;">Las características que permiten reconocer un C. I. son:</b>
-        
-        <div class="reconocimiento-item">
-            El C.I. es un sintagma que <b>comienza siempre por la preposición A</b> o es un <b>pronombre átono</b>: <span class="pronombre-resaltado">me, te, le, nos, os, les, se</span>.
-            <div style="display: flex; justify-content: space-around; margin: 15px 0;">
-                <span><b>Me</b> ha pintado el estuche.</span>
-                <span>Hemos escrito una carta <b>a la jefa</b>.</span>
-            </div>
-            <p>Muchas veces, el C.I. introducido por la preposición A aparece reforzado por un pronombre átono. Entonces tenemos dos CI en la oración, pero siempre referidos a la misma persona.</p>
-            <span class="ejemplo-centro"><b>Le</b> dijo <b>a María</b> esa mentira.</span>
+    <h1>🌍 LA MEJOR FAMILIA DEL MUNDO</h1>
+    <div id="quiz">
         </div>
 
-        <div class="reconocimiento-item">
-            El C. I. <b>se puede sustituir</b> por los pronombres <span class="pronombre-resaltado">LE, LES</span>, cuando no es ya uno de ellos.
-            <div style="display: flex; justify-content: space-around; margin: 15px 0;">
-                <span>El dúo dedicó una canción <b>a su madre</b></span>
-                <span>El dúo <b>le</b> dedicó una canción.</span>
-            </div>
-        </div>
-
-        <div class="reconocimiento-item">
-            Si cambiamos la oración a <b>voz pasiva, el C.I. no varía</b>.
-            <span class="ejemplo-centro"><b>Le</b> concedieron el Premio Nobel <b>a Cela</b> en 1989. / El Premio Nobel <b>le</b> fue concedido <b>a Cela</b> en 1989.</span>
-        </div>
+    <div id="result-container">
+        <h2>🎉 ¡NIVEL EXPERTO COMPLETADO!</h2>
+        <p id="final-message"></p>
     </div>
-
-    <div class="footer-esparta">ACADEMIA ESPARTA - MATERIAL MAESTRO</div>
-
 </div>
+
+<script>
+    const questions = [
+        { q: "1. ¿Quién es la mejor madre del mundo?", a: "B", options: {A: "Javi", B: "Montse", C: "Antonio"} },
+        { q: "2. ¿Quién es el hortelano de la familia?", a: "C", options: {A: "Mickey", B: "Miguel Ángel", C: "Miguel"} },
+        { q: "3. ¿Quién es el mejor tito del mundo y el colchonero número uno?", a: "A", options: {A: "Miguel Ángel", B: "Javi", C: "Antonio"} },
+        { q: "4. ¿A quién acudirías si necesitas una segunda madre y un corazón infinito?", a: "C", options: {A: "Mickey", B: "Javi", C: "La tía Ana Mari"} },
+        { q: "5. ¿Quién es el amor de la vida de Miguel?", a: "C", options: {A: "Su huerto", B: "El Atlético de Madrid", C: "Macu"} },
+        { q: "6. ¿Quién era famoso de chiquitillo por llorar por cualquier cosa?", a: "B", options: {A: "Miguel", B: "Antonio", C: "Mickey"} },
+        { q: "7. ¿Quién es la mujer recién casada y madre que lucha con tres niños?", a: "A", options: {A: "Elena", B: "Antonio", C: "Miguel"} },
+        { q: "8. ¿Quién es el ingeniero informático e inteligente del grupo?", a: "B", options: {A: "Miguel Ángel", B: "Mickey", C: "Antonio"} },
+        { q: "9. ¿Quién es la Diosa de los Tatuajes?", a: "A", options: {A: "Gema", B: "Rocío", C: "Coral (prima)"} },
+        { q: "10. ¿Quién es la persona que más whisky puede beber?", a: "B", options: {A: "Miguel Ángel", B: "Javi", C: "Miguel"} },
+        { q: "11. ¿Quién es la bondad personificada y la mujer del del whisky?", a: "C", options: {A: "Montse", B: "Macu", C: "Ana"} },
+        { q: "12. ¿Quién es la Reina de la Paz y el Relax?", a: "A", options: {A: "La tía Coral", B: "Mari Carmen", C: "Ana Mari"} },
+        { q: "13. ¿Quién es la jubilada más viajera del mundo?", a: "B", options: {A: "Montse", B: "La tía Mari Carmen", C: "Elena"} },
+        { q: "14. ¿Quién es la caballista de la familia?", a: "C", options: {A: "Gema", B: "Coral (prima)", C: "Rocío"} },
+        { q: "15. ¿Quién ama más la playa, las ahogadillas y la tierra?", a: "A", options: {A: "Coral (prima)", B: "La tía Coral", C: "Ana"} },
+        { q: "16. ¿A quién pedirías ayuda si se estropea el ordenador o el Wi-Fi?", a: "B", options: {A: "Antonio", B: "Mickey", C: "Miguel"} },
+        { q: "17. ¿Por qué lloraba Antonio de pequeño?", a: "B", options: {A: "Por el Atleti", B: "Por cualquier cosa", C: "Sin whisky"} },
+        { q: "18. ¿Qué es lo que mejor sabe hacer la Tía Mari Carmen?", a: "B", options: {A: "Plantar lechugas", B: "Viajar por el mundo", C: "Programar"} },
+        { q: "19. ¿Cuál es la mayor virtud de Ana?", a: "A", options: {A: "Su bondad y paciencia", B: "Tatuar", C: "Llorar"} },
+        { q: "20. ¿Qué frase define mejor a este grupo?", a: "B", options: {A: "Unos conocidos", B: "La mejor familia del mundo", C: "Amigos del hortelano"} }
+    ];
+
+    let currentQuestion = 0;
+    const quizContainer = document.getElementById('quiz');
+
+    function loadQuestion() {
+        if (currentQuestion >= questions.length) {
+            showResult();
+            return;
+        }
+        const qData = questions[currentQuestion];
+        quizContainer.innerHTML = `
+            <div class="question active">
+                <div class="progress">Pregunta ${currentQuestion + 1} de ${questions.length}</div>
+                <div class="question-text">${qData.q}</div>
+                <ul class="options">
+                    <li><button onclick="checkAnswer('A')">A) ${qData.options.A}</button></li>
+                    <li><button onclick="checkAnswer('B')">B) ${qData.options.B}</button></li>
+                    <li><button onclick="checkAnswer('C')">C) ${qData.options.C}</button></li>
+                </ul>
+            </div>
+        `;
+    }
+
+    function checkAnswer(choice) {
+        const correct = questions[currentQuestion].a;
+        const buttons = document.querySelectorAll('.options button');
+        
+        buttons.forEach(btn => {
+            if (btn.innerText.startsWith(correct)) btn.classList.add('correct');
+            if (btn.innerText.startsWith(choice) && choice !== correct) btn.classList.add('incorrect');
+            btn.disabled = true;
+        });
+
+        setTimeout(() => {
+            currentQuestion++;
+            loadQuestion();
+        }, 1500);
+    }
+
+    function showResult() {
+        quizContainer.style.display = 'none';
+        document.getElementById('result-container').style.display = 'block';
+        document.getElementById('final-message').innerText = "Se confirma lo que ya sabíamos: ni los viajes de Mari Carmen, ni la tecnología de Mickey, ni los whiskys de Javi pueden superar esto. Porque aunque Antonio llorara por todo y Miguel sea un hortelano solitario, esta familia es el mejor cultivo que se ha cosechado jamás. ¡A celebrarlo!";
+    }
+
+    loadQuestion();
+</script>
 
 </body>
 </html>
