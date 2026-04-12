@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mates 1.1: Conteo - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 1cm; }
+        body { font-family: 'Kalam', cursive; background-color: #ffffff; color: #000; margin: 0; padding: 20px 40px; line-height: 1.4; -webkit-print-color-adjust: exact; }
+        .btn-print { position: fixed; top: 10px; right: 10px; background-color: #2980b9; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 100; font-family: sans-serif; }
+        @media print { .btn-print { display: none; } body { padding: 0; margin: 0; } }
+        
+        .header { display: flex; justify-content: space-between; border-bottom: 1.5pt solid #2980b9; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 10pt; font-weight: bold; color: #2980b9; }
+        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 25pt; font-size: 13pt; }
+        .campo { border-bottom: 1pt dashed #000; flex-grow: 1; margin-left: 5pt; height: 15pt; }
+
+        .titulo-ficha { text-align: center; margin-bottom: 30pt; }
+        .titulo-ficha h3 { font-size: 24pt; text-decoration: underline; margin: 0; }
+        .instrucciones { font-size: 16pt; background: #f0f7fb; padding: 10px; border-radius: 10px; margin-bottom: 30pt; text-align: center; border-left: 5px solid #2980b9; }
+
+        /* Contenedor de ejercicios */
+        .grid-ejercicios { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .item-conteo { display: flex; align-items: center; justify-content: space-between; background: #fff; border: 2px solid #eee; padding: 15px; border-radius: 15px; }
+        .iconos-conteo { font-size: 28pt; letter-spacing: 5pt; flex-grow: 1; }
+        .cuadro-numero { width: 50pt; height: 50pt; border: 2pt solid #2980b9; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20pt; color: #eee; }
+
+        .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 100pt; color: rgba(41, 128, 185, 0.03); font-family: sans-serif; font-weight: 900; z-index: -1; pointer-events: none; text-transform: uppercase; }
+        .frase-final { margin-top: 40pt; text-align: center; font-size: 16pt; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="watermark">ESPARTA</div>
+    <button class="btn-print" onclick="window.print()">📄 IMPRIMIR FICHA</button>
+
+    <div class="header">
+        <span>MATEMÁTICAS INICIALES</span>
+        <span>ACADEMIA ESPARTA</span>
+    </div>
+
+    <div class="datos-alumno">
+        <div style="width: 45%; display: flex;">Nombre: <div class="campo"></div></div>
+        <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
+        <div style="width: 20%; display: flex;">Curso: <div class="campo"></div></div>
+    </div>
+
+    <div class="titulo-ficha">
+        <h3>¿Cuántos hay?</h3>
+    </div>
+
+    <div class="instrucciones">
+        Cuenta los dibujos y escribe el número correcto en el cuadro azul.
+    </div>
+
+    <div class="grid-ejercicios">
+        <div class="item-conteo">
+            <div class="iconos-conteo">🍎 🍎 🍎</div>
+            <div class="cuadro-numero">?</div>
+        </div>
+        <div class="item-conteo">
+            <div class="iconos-conteo">🚗 🚗 🚗 🚗 🚗</div>
+            <div class="cucurso-numero" style="width: 50pt; height: 50pt; border: 2pt solid #2980b9; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20pt; color: #eee;">?</div>
+        </div>
+        <div class="item-conteo">
+            <div class="iconos-conteo">🐶 🐶</div>
+            <div class="cuadro-numero">?</div>
+        </div>
+        <div class="item-conteo">
+            <div class="iconos-conteo">⭐ ⭐ ⭐ ⭐</div>
+            <div class="cuadro-numero">?</div>
+        </div>
+        <div class="item-conteo">
+            <div class="iconos-conteo">🐸 🐸 🐸 🐸 🐸 🐸</div>
+            <div class="cuadro-numero">?</div>
+        </div>
+        <div class="item-conteo">
+            <div class="iconos-conteo">🎈</div>
+            <div class="cuadro-numero">?</div>
+        </div>
+        <div class="item-conteo">
+            <div class="iconos-conteo">🍦 🍦 🍦 🍦 🍦 🍦 🍦</div>
+            <div class="cuadro-numero">?</div>
+        </div>
+        <div class="item-conteo">
+            <div class="iconos-conteo">🐱 🐱 🐱 🐱 🐱 🐱 🐱 🐱</div>
+            <div class="cuadro-numero">?</div>
+        </div>
+    </div>
+
+    <div class="frase-final">
+        ¡Contar es muy divertido! 🌟
+    </div>
+</body>
+</html>
