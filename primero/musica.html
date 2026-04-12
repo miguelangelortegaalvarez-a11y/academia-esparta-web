@@ -2,156 +2,57 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lectura 9: El examen - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* Configuración de página A4 */
-        @page {
-            size: A4;
-            margin: 2cm;
-        }
-
-        body { 
-            font-family: 'Kalam', cursive; 
-            background-color: #ffffff; 
-            color: #000; 
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            -webkit-print-color-adjust: exact;
-        }
-
-        .btn-print { 
-            position: fixed; top: 20px; right: 20px;
-            background-color: #0e9343; color: white; border: none; 
-            padding: 10px 15px; border-radius: 8px; cursor: pointer; 
-            font-weight: bold; z-index: 100; font-family: sans-serif;
-        }
-
-        @media print {
-            .btn-print { display: none; }
-            body { padding: 0; margin: 0; }
-        }
-
-        /* Cabecera */
-        .header { 
-            display: flex; justify-content: space-between; 
-            border-bottom: 1.5pt solid #000; padding-bottom: 5pt; 
-            margin-bottom: 25pt; font-family: sans-serif;
-            text-transform: uppercase; font-size: 10pt; font-weight: bold;
-        }
-
-        .datos-alumno {
-            display: flex; justify-content: space-between; 
-            margin-bottom: 30pt; font-size: 13pt;
-        }
+        @page { size: A4; margin: 1cm; }
+        body { font-family: 'Kalam', cursive; background-color: #ffffff; color: #000; margin: 0; padding: 20px 40px; line-height: 1.4; -webkit-print-color-adjust: exact; }
+        .btn-print { position: fixed; top: 10px; right: 10px; background-color: #0e9343; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 100; font-family: sans-serif; }
+        @media print { .btn-print { display: none; } body { padding: 0; margin: 0; } }
+        .header { display: flex; justify-content: space-between; border-bottom: 1.5pt solid #000; padding-bottom: 5pt; margin-bottom: 15pt; font-family: sans-serif; text-transform: uppercase; font-size: 10pt; font-weight: bold; }
+        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 20pt; font-size: 13pt; }
         .campo { border-bottom: 1pt dashed #000; flex-grow: 1; margin-left: 5pt; height: 15pt; }
-
-        /* Bloque de Lectura a 14pt */
-        .lectura-box h3 { 
-            font-size: 24pt; margin: 0 0 25pt 0; 
-            text-align: center; font-weight: 700; text-decoration: underline;
-        }
-        
-        .lectura-box p { 
-            font-size: 14pt; /* Tamaño solicitado */
-            line-height: 1.8; 
-            margin-bottom: 35pt; 
-            text-align: justify;
-            text-justify: inter-word;
-        }
-
-        /* Preguntas de Escritura */
-        .pregunta-item { 
-            margin-bottom: 30pt; 
-            font-size: 14pt; 
-            page-break-inside: avoid;
-        }
-        
-        .pauta-doble-linea {
-            width: 100%; height: 24pt; 
-            border-top: 1pt solid #000; border-bottom: 1pt solid #000;
-            margin-top: 8pt;
-        }
-
-        /* Bloque Verdadero/Falso */
-        .instruccion-vf {
-            font-size: 13pt; text-align: center; 
-            margin: 40pt 0 20pt 0; font-family: sans-serif; font-weight: bold;
-            text-decoration: underline;
-        }
-
-        .vf-item {
-            display: flex; align-items: center; 
-            font-size: 14pt; margin-bottom: 22pt;
-            page-break-inside: avoid;
-        }
-
-        .cuadrado-respuesta {
-            width: 28pt; height: 28pt; border: 1.8pt solid #000;
-            margin-right: 18pt; flex-shrink: 0;
-        }
-
-        .frase-motivacional {
-            margin-top: 50pt;
-            text-align: center; font-size: 14pt; font-style: italic; color: #333;
-            padding-bottom: 30pt;
-        }
-
-        .watermark {
-            position: fixed; top: 50%; left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 120pt; color: rgba(0, 0, 0, 0.03);
-            font-family: sans-serif; font-weight: 900;
-            z-index: -1; pointer-events: none; text-transform: uppercase;
-        }
+        .lectura-box h3 { font-size: 22pt; margin: 0 0 15pt 0; text-align: center; font-weight: 700; text-decoration: underline; }
+        .lectura-box p { font-size: 16pt; line-height: 1.6; margin-bottom: 25pt; text-align: justify; }
+        .pregunta-item { margin-bottom: 18pt; font-size: 14pt; }
+        .pauta-doble-linea { width: 100%; height: 22pt; border-top: 1pt solid #000; border-bottom: 1pt solid #000; margin-top: 5pt; }
+        .instruccion-vf { font-size: 12pt; text-align: center; margin: 20pt 0 10pt 0; font-family: sans-serif; font-weight: bold; text-decoration: underline; }
+        .vf-item { display: flex; align-items: center; font-size: 14pt; margin-bottom: 12pt; }
+        .cuadrado-respuesta { width: 25pt; height: 25pt; border: 1.5pt solid #000; margin-right: 15pt; flex-shrink: 0; }
+        .frase-motivacional { margin-top: 20pt; text-align: center; font-size: 14pt; font-style: italic; color: #333; }
+        .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 100pt; color: rgba(0, 0, 0, 0.03); font-family: sans-serif; font-weight: 900; z-index: -1; pointer-events: none; text-transform: uppercase; }
     </style>
 </head>
 <body>
-
     <div class="watermark">ESPARTA</div>
     <button class="btn-print" onclick="window.print()">📄 GENERAR PDF</button>
-
-    <div class="header">
-        <span>LECTURA COMPRENSIVA</span>
-        <span>ACADEMIA ESPARTA</span>
-    </div>
-
+    <div class="header"><span>LECTURA COMPRENSIVA</span><span>ACADEMIA ESPARTA</span></div>
     <div class="datos-alumno">
         <div style="width: 45%; display: flex;">Nombre: <div class="campo"></div></div>
         <div style="width: 25%; display: flex;">Fecha: <div class="campo"></div></div>
         <div style="width: 20%; display: flex;">Curso: <div class="campo"></div></div>
     </div>
-
     <div class="lectura-box">
-        <h3>El gran examen de música</h3>
+        <h3>El examen de música</h3>
         <p>
-            Hoy Adela tiene un examen de música muy importante en su clase. Lleva su flauta de madera guardada en una funda de seda azul. Adela ha practicado mucho en su casa con su papá y su mamá para que todo salga perfecto. Sabe tocar una melodía muy linda, dulce y también muy alegre. Cuando sopla su flauta, todos los niños se quedan en completo silencio. El profesor está muy contento porque Adela no ha fallado ninguna nota. Al terminar, le pone un diez en su cuaderno y le da un fuerte aplauso. Adela vuelve a su mesa muy feliz con su gran nota y su flauta nueva.
+            Hoy Adela tiene un examen de música. Lleva su flauta de madera en una funda azul. Adela ha practicado mucho con su papá en casa. Toca una canción muy alegre y el profesor le pone un diez. Ella vuelve a su mesa muy feliz.
         </p>
     </div>
-
     <div class="preguntas-container">
-        <div class="pregunta-item">1. ¿Qué examen tiene hoy Adela en su clase? <div class="pauta-doble-linea"></div></div>
-        <div class="pregunta-item">2. ¿De qué material es la flauta que toca la niña? <div class="pauta-doble-linea"></div></div>
-        <div class="pregunta-item">3. ¿Con quién ha practicado Adela en su casa? <div class="pauta-doble-linea"></div></div>
-        <div class="pregunta-item">4. ¿Cómo es la melodía que sabe tocar Adela? <div class="pauta-doble-linea"></div></div>
-        <div class="pregunta-item">5. ¿Qué nota le pone el profesor en el cuaderno? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">1. ¿Qué examen tiene hoy Adela? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">2. ¿De qué material es su flauta? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">3. ¿Con quién ha practicado en casa? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">4. ¿Cómo es la canción que toca? <div class="pauta-doble-linea"></div></div>
+        <div class="pregunta-item">5. ¿Qué nota saca Adela al final? <div class="pauta-doble-linea"></div></div>
     </div>
-
     <div class="instruccion-vf">Escribe V o F dentro del cuadro:</div>
-
     <div class="vf-container">
-        <div class="vf-item"><div class="cuadrado-respuesta"></div> 6. La funda de la flauta es de seda de color rojo.</div>
-        <div class="vf-item"><div class="cuadrado-respuesta"></div> 7. Los niños se quedan en silencio al oír la música.</div>
-        <div class="vf-item"><div class="cuadrado-respuesta"></div> 8. Adela ha fallado muchas notas en el examen.</div>
-        <div class="vf-item"><div class="cuadrado-respuesta"></div> 9. El profesor le da un fuerte aplauso al terminar.</div>
-        <div class="vf-item"><div class="cuadrado-respuesta"></div> 10. Adela vuelve a su mesa muy triste y sin su nota.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 6. La flauta es de plástico verde.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 7. La funda de la flauta es azul.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 8. El profesor le pone un cinco.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 9. Adela está muy feliz con su nota.</div>
+        <div class="vf-item"><div class="cuadrado-respuesta"></div> 10. Ella toca una canción triste.</div>
     </div>
-
-    <div class="frase-motivacional">
-        ¡Eres un experto en lectura! 🌟
-    </div>
-
+    <div class="frase-motivacional">¡Lo has hecho genial! 🌟</div>
 </body>
 </html>
