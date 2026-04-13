@@ -7,61 +7,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Bangers&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --esparta-rojo: #e74c3c; --esparta-gris: #333; }
+        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --esparta-rojo: #e74c3c; }
         
         body { font-family: 'Kalam', cursive; background: #1a1a1a; color: white; margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
         
-        /* CABECERA Y PROGRESO */
         .header { background: var(--esparta-verde); width: 100%; text-align: center; padding: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.5); font-family: 'Bangers', cursive; letter-spacing: 2px; }
         .progress-container { width: 90%; max-width: 1000px; background: #333; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid var(--esparta-oro); }
         #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #f1c40f, #ff4500); transition: width 0.5s ease; }
 
-        /* MARCADOR */
         .marcador { font-family:'Bangers'; font-size: 30px; margin-top: 10px; text-align: center; }
 
-        /* ESCENARIO PRINCIPAL - 2 COLUMNAS */
-        .main-stage { display: flex; width: 95%; max-width: 1300px; justify-content: center; align-items: flex-start; gap: 40px; margin-top: 20px; flex-wrap: nowrap; }
+        .main-stage { display: flex; width: 95%; max-width: 1300px; justify-content: center; align-items: center; gap: 50px; margin-top: 20px; }
 
-        /* COLUMNA IZQUIERDA: EL MUÑECO GIGANTE */
-        .character-col { flex: 0 0 550px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-        .character-img { width: 100%; height: auto; transition: 0.3s; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
-        
-        /* Efectos Superguerrero */
-        .img-super { filter: drop-shadow(0 0 40px #ffea00); animation: pulse-super 1.2s infinite alternate; }
-        @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.06); } }
+        .character-col { flex: 0 0 500px; display: flex; flex-direction: column; align-items: center; }
+        .character-img { width: 100%; height: auto; transition: 0.3s; filter: drop-shadow(0 0 15px rgba(255,255,255,0.2)); }
+        .img-super { filter: drop-shadow(0 0 40px #ffea00); animation: pulse-super 0.8s infinite alternate; }
+        @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.05); } }
 
-        /* COLUMNA DERECHA: LA OPERACIÓN COMPACTA */
-        .game-col { flex: 1; display: flex; justify-content: center; align-items: flex-start; padding-top: 20px; }
+        .game-container { background: #fff; padding: 35px; border-radius: 25px; border: 6px solid var(--esparta-verde); color: #222; width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
-        .game-container { background: #fff; padding: 30px; border-radius: 25px; box-shadow: 0 0 30px rgba(241, 196, 15, 0.2); border: 6px solid var(--esparta-verde); color: #222; max-width: 450px; position: relative; }
-        
-        /* Efecto Fuego */
-        .fuego-activo { animation: fire-glow 1s infinite alternate; border-color: #ff4500 !important; box-shadow: 0 0 50px #ff4500 !important; }
-        @keyframes fire-glow { from { box-shadow: 0 0 20px #ff4500; } to { box-shadow: 0 0 50px #ff8c00; } }
+        .multiplication-table { font-size: 80px; font-weight: bold; line-height: 1.1; color: #2c3e50; width: 100%; border-collapse: collapse; }
+        .multiplication-table td { text-align: center; width: 90px; height: 90px; }
+        .signo { color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 75px; }
+        .linea { border-bottom: 8px solid #333; margin: 15px 0; }
 
-        /* TABLA DE OPERACIÓN - ALINEACIÓN TOTAL */
-        .multiplication-table { font-size: 75px; font-weight: bold; line-height: 1.1; color: #2c3e50; table-layout: fixed; width: 100%; border-collapse: collapse; margin-right: -10px; }
-        .multiplication-table td { text-align: center; vertical-align: middle; padding: 0; width: 85px; height: 85px; }
-        .multiplication-table .align-right { text-align: right; }
-        
-        .signo { color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 70px; padding-right: 15px; text-align: center; }
-        
-        .linea { border-bottom: 8px solid #333; margin: 10px -5px; grid-column: 1 / span 3; }
-
-        /* CUADRADITOS DE RESPUESTA - SEPARADOS Y ALINEADOS */
-        .result-row { display: flex; gap: 12px; justify-content: flex-end; padding-top: 15px; }
-        
-        input { font-family: 'Kalam', cursive; font-size: 55px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 85px; height: 85px; outline: none; transition: 0.2s; background: #fff; box-sizing: border-box; }
-        input:focus { border-color: var(--esparta-oro); background: #fffde7; }
-        input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; transform: scale(1.1); }
+        .result-row { display: flex; gap: 15px; justify-content: center; padding-top: 10px; }
+        input { font-family: 'Kalam', cursive; font-size: 55px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 90px; height: 90px; outline: none; background: #fff; color: #222; }
+        input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; }
         input.wrong { background: #ffcdd2 !important; border-color: var(--esparta-rojo) !important; animation: shake 0.3s; }
 
-        #llevada { width: 65px; height: 65px; font-size: 35px; border: 4px dashed var(--esparta-rojo); visibility: hidden; grid-column: 2; margin: 0 auto 10px auto; color: var(--esparta-rojo); }
+        #llevada { width: 65px; height: 65px; font-size: 35px; border: 4px dashed var(--esparta-rojo); visibility: hidden; margin: 0 auto 10px auto; color: var(--esparta-rojo); display: block; }
 
-        /* MENSAJES */
-        .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; width: 90%; }
+        .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; }
         
-        #barca-msg { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(165, 0, 68, 0.98); color: #edbb00; font-family: 'Bangers'; font-size: 60px; padding: 40px; border-radius: 20px; border: 12px solid #004d98; z-index: 1000; text-align: center; display: none; width: 85%; pointer-events: none; }
+        #barca-msg { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(165, 0, 68, 0.98); color: #edbb00; font-family: 'Bangers'; font-size: 50px; padding: 40px; border-radius: 20px; border: 10px solid #004d98; z-index: 1000; text-align: center; display: none; width: 80%; pointer-events: none; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
     </style>
@@ -72,50 +51,37 @@
 
     <div class="header"><h1>GUERRERO ERIK: EL CAMINO DEL GUERRERO</h1></div>
     
-    <div class="marcador">
-        ESCUDOS: <span id="score" style="color:var(--esparta-oro)">0</span> | 
-        RACHA 🔥: <span id="streak" style="color:#ff4500">0</span>
-    </div>
+    <div class="marcador">ESCUDOS: <span id="score" style="color:var(--esparta-oro)">0</span></div>
     
     <div class="progress-container">
         <div id="progress-bar"></div>
     </div>
 
     <div class="main-stage">
-        
         <div class="character-col">
             <img src="camino-matematico/assets/warrior/warrior-idle.png.PNG" alt="Erik" class="character-img" id="hero-img">
             <div style="font-family:'Bangers'; color:var(--esparta-oro); font-size:35px; margin-top:20px;">ESTADO: <span id="hero-status">Base</span></div>
         </div>
 
-        <div class="game-col">
-            <div class="game-container" id="box">
-                <div style="display: flex; justify-content: center; width: 100%;">
-                    <input type="number" id="llevada" placeholder="?">
-                </div>
-
-                <table class="multiplication-table" id="op-table">
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td class="align-right" id="d-arriba">4</td>
-                            <td class="align-right" id="u-arriba">7</td>
-                        </tr>
-                        <tr>
-                            <td class="signo">x</td>
-                            <td></td>
-                            <td class="align-right" id="num-abajo">6</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div class="linea"></div>
-
-                <div class="result-row">
-                    <input type="number" id="res-centena">
-                    <input type="number" id="res-decena">
-                    <input type="number" id="res-unidad">
-                </div>
+        <div class="game-container">
+            <input type="number" id="llevada" placeholder="?">
+            <table class="multiplication-table">
+                <tr>
+                    <td></td>
+                    <td id="d-arriba">4</td>
+                    <td id="u-arriba">7</td>
+                </tr>
+                <tr>
+                    <td class="signo">x</td>
+                    <td></td>
+                    <td id="num-abajo">6</td>
+                </tr>
+            </table>
+            <div class="linea"></div>
+            <div class="result-row">
+                <input type="number" id="res-centena">
+                <input type="number" id="res-decena">
+                <input type="number" id="res-unidad">
             </div>
         </div>
     </div>
@@ -124,10 +90,9 @@
 
     <script>
         let n1, n2, llevadaReal, uReal, dReal, cReal;
-        let score = 0, fallosEnEsta = 0, streak = 0;
+        let score = 0;
         const goal = 10;
 
-        // Rutas desde tu GitHub
         const imagenes = {
             base: 'camino-matematico/assets/warrior/warrior-idle.png.PNG',
             sad: 'camino-matematico/assets/warrior/warrior-sad.png.PNG',
@@ -145,24 +110,19 @@
         const heroStatus = document.getElementById('hero-status');
 
         function nuevaOperacion() {
-            // Generar 2 cifras x 1 cifra
             n1 = Math.floor(Math.random() * 90) + 10;
             n2 = Math.floor(Math.random() * 8) + 2;
-            fallosEnEsta = 0;
             
-            // Llenar tabla
             document.getElementById('d-arriba').innerText = Math.floor(n1 / 10);
             document.getElementById('u-arriba').innerText = n1 % 10;
             document.getElementById('num-abajo').innerText = n2;
 
-            // Calcular reales
             uReal = (n1 % 10 * n2) % 10;
             llevadaReal = Math.floor((n1 % 10 * n2) / 10);
             let total = n1 * n2;
             cReal = Math.floor(total / 100);
             dReal = Math.floor((total % 100) / 10);
 
-            // Resetear inputs
             Object.values(inputs).forEach(i => {
                 i.value = ''; i.className = ''; i.disabled = true; i.style.visibility = 'visible';
             });
@@ -171,107 +131,110 @@
             inputs.llevada.style.visibility = 'hidden';
             inputs.u.disabled = false;
             inputs.u.focus();
+        }
 
-            actualizarImagen();
+        function volverNormal() {
+            heroImg.src = imagenes.base;
+            heroImg.classList.remove('img-super');
+            heroStatus.innerText = "Guerrero";
         }
 
         function manejarError() {
-            fallosEnEsta++;
-            streak = 0;
-            document.getElementById('streak').innerText = streak;
-            document.getElementById('box').classList.remove('fuego-activo');
-            
-            // Erik se pone Triste
             heroImg.src = imagenes.sad;
-            heroImg.className = 'character-img'; // Quitar efecto super
+            heroImg.classList.remove('img-super');
             heroStatus.innerText = "¡MÁS MALO QUE EL BARÇA! 📉";
-            
-            // Zasca del Barcelona
-            const bMsg = document.getElementById('barca-msg');
-            bMsg.style.display = 'block';
-            setTimeout(() => { bMsg.style.display = 'none'; }, 2000);
+            document.getElementById('barca-msg').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('barca-msg').style.display = 'none';
+                volverNormal();
+            }, 3000);
         }
 
-        function actualizarImagen() {
-            if(streak === 0) {
-                heroImg.src = imagenes.base;
-                heroImg.className = 'character-img';
-                heroStatus.innerText = "Guerrero";
-            } else {
-                // Modo Superguerrero
-                heroImg.src = imagenes.super;
-                heroImg.classList.add('img-super'); // Añadir brillo
-                heroStatus.innerText = "SUPER ER! 🔥";
+        function verificarVictoria() {
+            // Si la centena es visible, debe estar correcta. Si no, solo decena.
+            const centenaOk = (cReal === 0) || (inputs.c.value == cReal && inputs.c.classList.contains('correct'));
+            const decenaOk = (inputs.d.value == dReal && inputs.d.classList.contains('correct'));
+
+            if (centenaOk && decenaOk) {
+                manejarAciertoFinal();
             }
         }
 
+        function manejarAciertoFinal() {
+            heroImg.src = imagenes.super;
+            heroImg.classList.add('img-super');
+            heroStatus.innerText = "SUPER ER! 🔥";
+            document.getElementById('msg').innerText = "¡IMPRESIONANTE, ERIK!";
+            score++;
+            document.getElementById('score').innerText = score;
+            document.getElementById('progress-bar').style.width = (score / goal) * 100 + "%";
+
+            if(score >= goal) {
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                setTimeout(() => { score = 0; document.getElementById('progress-bar').style.width = "0%"; }, 4000);
+            }
+
+            setTimeout(() => {
+                volverNormal();
+                nuevaOperacion();
+            }, 3000);
+        }
+
+        // UNIDADES
         inputs.u.oninput = function() {
             if(this.value == uReal) {
                 this.classList.add('correct'); this.disabled = true;
                 if(llevadaReal > 0) {
                     inputs.llevada.style.visibility = 'visible';
                     inputs.llevada.disabled = false; inputs.llevada.focus();
-                } else { inputs.d.disabled = false; inputs.d.focus(); }
+                } else {
+                    // Si no hay llevada, activamos Decenas y Centenas (si existe)
+                    inputs.d.disabled = false;
+                    if(cReal > 0) inputs.c.disabled = false;
+                    document.getElementById('msg').innerText = "¡Erik, elige: decenas o centenas!";
+                }
             } else if(this.value.length >= 1) {
                 this.classList.add('wrong'); manejarError();
                 setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
             }
         };
 
+        // LLEVADA
         inputs.llevada.oninput = function() {
             if(this.value == llevadaReal) {
                 this.classList.add('correct'); this.disabled = true;
-                inputs.d.disabled = false; inputs.d.focus();
+                // Al acertar llevada, activamos Decenas y Centenas (si existe)
+                inputs.d.disabled = false;
+                if(cReal > 0) inputs.c.disabled = false;
+                document.getElementById('msg').innerText = "¡Muy bien! Elige el orden ahora.";
             } else if(this.value.length >= 1) {
                 this.classList.add('wrong'); manejarError();
                 setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
             }
         };
 
+        // DECENAS
         inputs.d.oninput = function() {
             if(this.value == dReal) {
                 this.classList.add('correct'); this.disabled = true;
-                if(cReal > 0) { inputs.c.disabled = false; inputs.c.focus(); } else { ganar(); }
+                verificarVictoria();
             } else if(this.value.length >= 1) {
                 this.classList.add('wrong'); manejarError();
                 setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
             }
         };
 
+        // CENTENAS
         inputs.c.oninput = function() {
             if(this.value == cReal) {
                 this.classList.add('correct'); this.disabled = true;
-                ganar();
+                verificarVictoria();
             } else if(this.value.length >= 1) {
                 this.classList.add('wrong'); manejarError();
                 setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
             }
         };
 
-        function ganar() {
-            if(fallosEnEsta === 0) {
-                streak++;
-                document.getElementById('box').classList.add('fuego-activo');
-                document.getElementById('msg').innerText = "¡IMPRESIONANTE, ERIK! 🔥";
-            } else {
-                document.getElementById('msg').innerText = "¡BIEN HECHO, SIGUE ASÍ!";
-            }
-            
-            score++;
-            document.getElementById('score').innerText = score;
-            document.getElementById('streak').innerText = streak;
-            document.getElementById('progress-bar').style.width = (score / goal) * 100 + "%";
-            
-            if(score >= goal) {
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-                document.getElementById('msg').innerText = "¡ERIK, REY DEL OLIMPO!";
-                setTimeout(() => { score = 0; streak = 0; document.getElementById('progress-bar').style.width = "0%"; nuevaOperacion(); }, 5000);
-            } else {
-                setTimeout(nuevaOperacion, 1500);
-            }
-        }
-
-        actualizarImagen();
         nuevaOperacion();
     </script>
 </body>
