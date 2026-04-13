@@ -80,7 +80,20 @@
         .linea { border-bottom: 8px solid #333; margin: 15px 0; }
 
         .result-row { display: flex; gap: 15px; justify-content: center; padding-top: 10px; }
-        input { font-family: 'Kalam', cursive; font-size: 60px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 95px; height: 95px; outline: none; background: #fff; color: #222; }
+        
+        /* AJUSTE DE TAMAÑO: Cuadraditos más chicos para que no se salgan */
+        input { 
+            font-family: 'Kalam', cursive; 
+            font-size: 50px; /* Un poco más pequeña la fuente */
+            text-align: center; 
+            border: 4px solid #ccc; 
+            border-radius: 12px; 
+            width: 85px;  /* Ancho reducido */
+            height: 85px; /* Alto reducido */
+            outline: none; 
+            background: #fff; 
+            color: #222; 
+        }
         input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; }
         input.wrong { background: #ffcdd2 !important; border-color: var(--esparta-rojo) !important; animation: shake 0.3s; }
 
@@ -152,23 +165,17 @@
         };
 
         function nuevaOperacion() {
-            // Número de arriba aleatorio entre 10 y 99
             n1 = Math.floor(Math.random() * 90) + 10;
-            
-            // FILTRO TABLAS DEL 2, 3 Y 4
             const tablasPermitidas = [2, 3, 4];
             n2 = tablasPermitidas[Math.floor(Math.random() * tablasPermitidas.length)];
-
             document.getElementById('d-arriba').innerText = Math.floor(n1 / 10);
             document.getElementById('u-arriba').innerText = n1 % 10;
             document.getElementById('num-abajo').innerText = n2;
-
             uReal = (n1 % 10 * n2) % 10;
             llevadaReal = Math.floor((n1 % 10 * n2) / 10);
             let total = n1 * n2;
             cReal = Math.floor(total / 100);
             dReal = Math.floor((total % 100) / 10);
-
             Object.values(inputs).forEach(i => {
                 i.value = ''; i.className = ''; i.disabled = true; i.style.visibility = 'visible';
             });
@@ -215,7 +222,6 @@
             if (centenaOk && decenaOk) manejarAciertoFinal();
         }
 
-        // --- LÓGICA DE SALTOS ---
         inputs.u.oninput = function() {
             if(this.value == uReal) {
                 this.classList.add('correct'); this.disabled = true;
