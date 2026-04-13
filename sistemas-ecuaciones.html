@@ -40,13 +40,13 @@
 
         .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; }
         
-        /* CARTEL DE FALLO */
+        /* CARTEL DE ZASCA */
         #zasca-msg { 
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             background: rgba(165, 0, 68, 0.98); color: #edbb00; font-family: 'Bangers'; 
-            font-size: 45px; padding: 40px; border-radius: 20px; border: 10px solid #004d98; 
-            z-index: 1000; text-align: center; display: none; width: 80%; pointer-events: none; 
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            font-size: 50px; padding: 50px; border-radius: 20px; border: 12px solid #004d98; 
+            z-index: 1000; text-align: center; display: none; width: 85%; pointer-events: none;
+            box-shadow: 0 0 70px rgba(0,0,0,1);
         }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
@@ -106,12 +106,13 @@
             super: 'camino-matematico/assets/warrior/warrior-power.png.PNG'
         };
 
+        // LISTA DE FRASES ALEATORIAS
         const frasesFallo = [
-            "¡Erik, eres un paquete!",
+            "¡Erik, eres un manta!",
             "¡Erik, eres más malo que el Barcelona!",
-            "¡Vaya fallo, Erik! ¡Espabila!",
-            "¡Eso ha sido un churro, Erik!",
-            "¡Erik, mi abuela multiplica más rápido!"
+            "¡Menudo paquete estás hecho, Erik!",
+            "¡Vaya churro, Erik! ¡Espabila!",
+            "¡Erik, concéntrate que pareces un paquete!"
         ];
 
         const inputs = {
@@ -123,7 +124,7 @@
 
         const heroImg = document.getElementById('hero-img');
         const heroStatus = document.getElementById('hero-status');
-        const zascaDisplay = document.getElementById('zasca-msg');
+        const zascaBox = document.getElementById('zasca-msg');
 
         function nuevaOperacion() {
             n1 = Math.floor(Math.random() * 90) + 10;
@@ -160,13 +161,13 @@
             heroImg.classList.remove('img-super');
             heroStatus.innerText = "¡ZASCA! 📉";
             
-            // Elegir frase aleatoria
-            const randomFrase = frasesFallo[Math.floor(Math.random() * frasesFallo.length)];
-            zascaDisplay.innerText = randomFrase;
-            zascaDisplay.style.display = 'block';
+            // SELECCIÓN ALEATORIA DE FRASE
+            const fraseAzar = frasesFallo[Math.floor(Math.random() * frasesFallo.length)];
+            zascaBox.innerText = fraseAzar;
+            zascaBox.style.display = 'block';
             
             setTimeout(() => {
-                zascaDisplay.style.display = 'none';
+                zascaBox.style.display = 'none';
                 volverNormal();
             }, 3000);
         }
@@ -183,8 +184,9 @@
         function manejarAciertoFinal() {
             heroImg.src = imagenes.super;
             heroImg.classList.add('img-super');
-            heroStatus.innerText = "SUPER ERIK! 🔥";
-            document.getElementById('msg').innerText = "¡ASÍ SE HACE, ERIK!";
+            heroStatus.innerText = "SUPER ER! 🔥";
+            document.getElementById('msg').innerText = "¡IMPRESIONANTE, ERIK!";
+            
             score++;
             document.getElementById('score').innerText = score;
             document.getElementById('progress-bar').style.width = (score / goal) * 100 + "%";
@@ -200,7 +202,6 @@
             }, 3000);
         }
 
-        // INPUTS LOGIC
         inputs.u.oninput = function() {
             if(this.value == uReal) {
                 this.classList.add('correct'); this.disabled = true;
@@ -210,7 +211,6 @@
                 } else {
                     inputs.d.disabled = false;
                     if(cReal > 0) inputs.c.disabled = false;
-                    document.getElementById('msg').innerText = "¡Erik, dale a las decenas o centenas!";
                 }
             } else if(this.value.length >= 1) {
                 this.classList.add('wrong'); manejarError();
