@@ -11,14 +11,13 @@
             --esparta-verde: #0e9343; 
             --esparta-oro: #f1c40f; 
             --esparta-rojo: #ff3333; 
-            --fondo-suave: #e8f5e9; /* Nuevo fondo verde flojito */
-            --texto-oscuro: #1a1a1a;
+            --fondo-suave: #e8f5e9; 
         }
         
         body { 
             font-family: 'Kalam', cursive; 
-            background-color: var(--fondo-suave); /* Aplicación del nuevo fondo */
-            color: var(--texto-oscuro); /* Texto oscuro para contrastar */
+            background-color: var(--fondo-suave); 
+            color: #1a1a1a; 
             margin: 0; 
             min-height: 100vh; 
             display: flex; 
@@ -27,53 +26,84 @@
             overflow-x: hidden; 
         }
         
-        .header { background: var(--esparta-verde); width: 100%; text-align: center; padding: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: 'Bangers', cursive; letter-spacing: 2px; color: white; }
+        .header { 
+            background: var(--esparta-verde); 
+            width: 100%; 
+            text-align: center; 
+            padding: 15px 0; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            font-family: 'Bangers', cursive; 
+            color: white;
+        }
+        .header h1 { margin: 0; font-size: 2.2em; letter-spacing: 2px; }
+        .header .sub-brand { 
+            font-size: 0.6em; 
+            display: block; 
+            color: var(--esparta-oro); 
+            letter-spacing: 5px; 
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
         
         .progress-container { width: 90%; max-width: 1000px; background: #e0e0e0; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid var(--esparta-verde); }
         #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #f1c40f, #ff4500); transition: width 0.5s ease; }
 
         .marcador { font-family:'Bangers'; font-size: 30px; margin-top: 10px; text-align: center; color: var(--esparta-verde); }
 
-        /* ESCENARIO PRINCIPAL */
-        .main-stage { display: flex; width: 95%; max-width: 1400px; justify-content: flex-start; align-items: center; gap: 80px; margin-top: 20px; padding-left: 20px; }
+        .main-stage { 
+            display: flex; 
+            width: 98%; 
+            max-width: 1500px; 
+            justify-content: flex-start; 
+            align-items: center; 
+            gap: 100px; 
+            margin-top: 20px; 
+            padding-left: 20px; 
+        }
 
-        /* MUÑECO GIGANTE A LA IZQUIERDA */
-        .character-col { flex: 0 0 550px; display: flex; flex-direction: column; align-items: center; }
-        .character-img { width: 100%; height: auto; transition: 0.3s; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); }
-        .img-super { filter: drop-shadow(0 0 40px #ffea00); animation: pulse-super 0.8s infinite alternate; }
+        .character-col { 
+            flex: 0 0 600px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+        .character-img { width: 100%; height: auto; transition: 0.3s; filter: drop-shadow(0 5px 20px rgba(0,0,0,0.2)); }
+        .img-super { filter: drop-shadow(0 0 45px #ffea00); animation: pulse-super 0.8s infinite alternate; }
         
         @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.05); } }
 
-        /* CUADRO OPERACIÓN */
-        .game-container { background: #fff; padding: 35px; border-radius: 25px; border: 6px solid var(--esparta-verde); color: #222; width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .game-container { background: #fff; padding: 35px; border-radius: 25px; border: 6px solid var(--esparta-verde); color: #222; width: 420px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
         
-        .multiplication-table { font-size: 80px; font-weight: bold; line-height: 1.1; color: #2c3e50; width: 100%; border-collapse: collapse; }
-        .multiplication-table td { text-align: center; width: 90px; height: 90px; }
-        .signo { color: #e74c3c; font-family: 'Bangers'; font-size: 75px; }
+        .multiplication-table { font-size: 85px; font-weight: bold; line-height: 1.1; color: #2c3e50; width: 100%; border-collapse: collapse; }
+        .multiplication-table td { text-align: center; width: 95px; height: 95px; }
+        .signo { color: #e74c3c; font-family: 'Bangers'; font-size: 80px; }
         .linea { border-bottom: 8px solid #333; margin: 15px 0; }
 
         .result-row { display: flex; gap: 15px; justify-content: center; padding-top: 10px; }
-        input { font-family: 'Kalam', cursive; font-size: 55px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 90px; height: 90px; outline: none; background: #fff; color: #222; }
+        input { font-family: 'Kalam', cursive; font-size: 60px; text-align: center; border: 4px solid #ccc; border-radius: 12px; width: 95px; height: 95px; outline: none; background: #fff; color: #222; }
         input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; }
         input.wrong { background: #ffcdd2 !important; border-color: var(--esparta-rojo) !important; animation: shake 0.3s; }
 
-        #llevada { width: 65px; height: 65px; font-size: 35px; border: 4px dashed #e74c3c; visibility: hidden; margin: 0 auto 10px auto; color: #e74c3c; display: block; }
+        #llevada { width: 70px; height: 70px; font-size: 38px; border: 4px dashed #e74c3c; visibility: hidden; margin: 0 auto 10px auto; color: #e74c3c; display: block; }
 
-        .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-verde); text-align: center; font-family: 'Bangers'; min-height: 50px; }
+        .status-msg { margin-top: 25px; font-weight: bold; font-size: 34px; color: var(--esparta-verde); text-align: center; font-family: 'Bangers'; min-height: 55px; }
         .msg-fallo { color: var(--esparta-rojo); }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
 
-        /* RESPONSIVE PARA MÓVIL */
-        @media (max-width: 900px) {
-            .main-stage { flex-direction: column; align-items: center; padding-left: 0; gap: 30px; }
-            .character-col { flex: 0 0 auto; width: 250px; }
+        @media (max-width: 1000px) {
+            .main-stage { flex-direction: column; align-items: center; padding-left: 0; gap: 40px; }
+            .character-col { flex: 0 0 auto; width: 300px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header"><h1>GUERRERO ERIK: EL CAMINO DEL GUERRERO</h1></div>
+    <div class="header">
+        <h1>ERIK: EL CAMINO DEL GUERRERO</h1>
+        <span class="sub-brand">Academia Esparta</span>
+    </div>
+
     <div class="marcador">ESCUDOS: <span id="score" style="color:var(--esparta-verde)">0</span></div>
     <div class="progress-container"><div id="progress-bar"></div></div>
 
@@ -98,10 +128,9 @@
         </div>
     </div>
 
-    <div class="status-msg" id="msg">¡DEMUESTRA TU FUERZA, ERIK!</div>
+    <div class="status-msg" id="msg">¡DEMUESTRA TU PODER, ERIK!</div>
 
     <script>
-        // Lógica del juego permanece idéntica
         let n1, n2, llevadaReal, uReal, dReal, cReal;
         let score = 0;
         const goal = 10;
@@ -123,17 +152,23 @@
         };
 
         function nuevaOperacion() {
+            // Número de arriba aleatorio entre 10 y 99
             n1 = Math.floor(Math.random() * 90) + 10;
-            n2 = Math.floor(Math.random() * 8) + 2;
+            
+            // FILTRO TABLAS DEL 2, 3 Y 4
+            const tablasPermitidas = [2, 3, 4];
+            n2 = tablasPermitidas[Math.floor(Math.random() * tablasPermitidas.length)];
+
             document.getElementById('d-arriba').innerText = Math.floor(n1 / 10);
             document.getElementById('u-arriba').innerText = n1 % 10;
             document.getElementById('num-abajo').innerText = n2;
+
             uReal = (n1 % 10 * n2) % 10;
             llevadaReal = Math.floor((n1 % 10 * n2) / 10);
             let total = n1 * n2;
             cReal = Math.floor(total / 100);
             dReal = Math.floor((total % 100) / 10);
-            
+
             Object.values(inputs).forEach(i => {
                 i.value = ''; i.className = ''; i.disabled = true; i.style.visibility = 'visible';
             });
@@ -143,16 +178,20 @@
             inputs.u.focus();
         }
 
+        function volverNormal() {
+            document.getElementById('hero-img').src = imagenes.base;
+            document.getElementById('hero-img').classList.remove('img-super');
+            document.getElementById('hero-status').innerText = "GUERRERO BASE";
+            document.getElementById('msg').className = "status-msg";
+            document.getElementById('msg').innerText = "¡CONCÉNTRATE, ERIK!";
+        }
+
         function manejarError() {
             document.getElementById('hero-img').src = imagenes.sad;
             const msg = document.getElementById('msg');
             msg.innerText = frasesFallo[Math.floor(Math.random() * frasesFallo.length)];
             msg.className = "status-msg msg-fallo";
-            setTimeout(() => {
-                document.getElementById('hero-img').src = imagenes.base;
-                msg.className = "status-msg";
-                msg.innerText = "¡CONCÉNTRATE, ERIK!";
-            }, 3000);
+            setTimeout(volverNormal, 3000);
         }
 
         function manejarAciertoFinal() {
@@ -165,9 +204,7 @@
             document.getElementById('progress-bar').style.width = (score / goal) * 100 + "%";
             if(score >= goal) confetti();
             setTimeout(() => {
-                document.getElementById('hero-img').classList.remove('img-super');
-                document.getElementById('hero-img').src = imagenes.base;
-                document.getElementById('hero-status').innerText = "GUERRERO BASE";
+                volverNormal();
                 nuevaOperacion();
             }, 3000);
         }
@@ -178,6 +215,7 @@
             if (centenaOk && decenaOk) manejarAciertoFinal();
         }
 
+        // --- LÓGICA DE SALTOS ---
         inputs.u.oninput = function() {
             if(this.value == uReal) {
                 this.classList.add('correct'); this.disabled = true;
