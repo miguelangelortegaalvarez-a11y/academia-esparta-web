@@ -2,64 +2,90 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Práctica de Química: Hidróxidos y Sales</title>
+    <title>Ejercicios Química - Academia Esparta</title>
     <style>
-        body { font-family: sans-serif; background-color: #f4f40; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; text-align: center; }
-        .ejercicio { margin-bottom: 20px; padding: 15px; border-left: 5px solid #3498db; background: #ebf5fb; }
-        input { padding: 8px; width: 200px; border: 1px solid #ccc; border-radius: 4px; }
-        button { padding: 8px 15px; cursor: pointer; background: #27ae60; color: white; border: none; border-radius: 4px; }
-        .resultado { margin-top: 10px; font-weight: bold; }
-        .correcto { color: green; }
-        .incorrecto { color: red; }
+        :root { --primary: #2c3e50; --accent: #3498db; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+        .page { width: 210mm; min-height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        
+        /* Encabezado */
+        .header { border-bottom: 2px solid var(--primary); margin-bottom: 20px; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { margin: 0; color: var(--primary); font-size: 24px; }
+        .info-alumno { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; font-weight: bold; }
+        .info-alumno div { border-bottom: 1px solid #ccc; padding: 5px; }
+
+        /* Contenido */
+        h2 { background: var(--primary); color: white; padding: 5px 15px; font-size: 18px; border-radius: 4px; margin-top: 25px; }
+        .grid-ejercicios { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .item { border: 1px solid #eee; padding: 10px; border-radius: 4px; display: flex; flex-direction: column; }
+        .item span { font-size: 0.9em; color: #666; margin-bottom: 5px; }
+        .linea-respuesta { border-bottom: 1px dotted #000; margin-top: 10px; height: 20px; }
+
+        /* Estilos para Impresión */
+        @media print {
+            body { background: none; }
+            .page { margin: 0; box-shadow: none; width: 100%; }
+            .no-print { display: none; }
+            h2 { background: #eee !important; color: black !important; border: 1px solid #000; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Ejercicios de Formulación</h1>
-    <div id="quiz"></div>
-    <button onclick="verificar()">Verificar Respuestas</button>
+<div class="no-print" style="text-align: center; padding: 20px;">
+    <button onclick="window.print()" style="padding: 15px 30px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+        🖨️ Imprimir Ficha para Alumnos
+    </button>
+</div>
+
+<div class="page">
+    <div class="header">
+        <h1>ACADEMIA ESPARTA</h1>
+        <div style="text-align: right;"><strong>Ficha de Química:</strong> Hidróxidos y Sales</div>
+    </div>
+
+    <div class="info-alumno">
+        <div>Nombre: _________________________________</div>
+        <div>Curso: _________________</div>
+    </div>
+
+    <h2>Sección 1: Hidróxidos (20 ejercicios)</h2>
+    <div class="grid-ejercicios" id="hidroxidos"></div>
+
+    <h2>Sección 2: Sales Binarias (20 ejercicios)</h2>
+    <div class="grid-ejercicios" id="sales"></div>
 </div>
 
 <script>
-    const ejercicios = [
-        { tipo: "hidroxido", pregunta: "Fórmula del Hidróxido de Sodio", respuesta: "NaOH" },
-        { tipo: "hidroxido", pregunta: "Nombre de Ca(OH)2", respuesta: "Hidróxido de Calcio" },
-        { tipo: "sal", pregunta: "Fórmula del Cloruro de Sodio", respuesta: "NaCl" },
-        { tipo: "sal", pregunta: "Nombre de KBr", respuesta: "Bromuro de Potasio" },
-        { tipo: "sal", pregunta: "Fórmula del Sulfuro de Hierro (II)", respuesta: "FeS" }
+    const datosHidroxidos = [
+        "NaOH", "Hidróxido de potasio", "Ca(OH)2", "Hidróxido de aluminio", "Fe(OH)3", 
+        "Hidróxido de hierro (II)", "Cu(OH)2", "Hidróxido de litio", "Mg(OH)2", "Hidróxido de plata",
+        "Pb(OH)4", "Hidróxido de oro (III)", "Zn(OH)2", "Hidróxido de bario", "Ni(OH)2",
+        "Hidróxido de cobalto (III)", "Sn(OH)2", "Hidróxido de cromo (III)", "KOH", "Hidróxido de amonio"
     ];
 
-    function cargarEjercicios() {
-        const quizDiv = document.getElementById('quiz');
-        ejercicios.forEach((ej, index) => {
-            quizDiv.innerHTML += `
-                <div class="ejercicio">
-                    <p>${index + 1}. ${ej.pregunta}</p>
-                    <input type="text" id="resp-${index}" placeholder="Tu respuesta...">
-                    <div id="feedback-${index}" class="resultado"></div>
+    const datosSales = [
+        "NaCl", "Cloruro de potasio", "MgCl2", "Sulfuro de hierro (II)", "KBr", 
+        "Ioduro de plata", "FeCl3", "Fluoruro de calcio", "CuS", "Bromuro de aluminio",
+        "PbI2", "Nitruro de magnesio", "LiF", "Sulfuro de sodio", "AgCl",
+        "Cloruro de cobre (II)", "ZnS", "Ioduro de potasio", "AlCl3", "Bromuro de hierro (III)"
+    ];
+
+    function generar(lista, idContenedor) {
+        const cont = document.getElementById(idContenedor);
+        lista.forEach((item, i) => {
+            cont.innerHTML += `
+                <div class="item">
+                    <span>Ejercicio ${i + 1}:</span>
+                    <strong>${item}</strong>
+                    <div class="linea-respuesta"></div>
                 </div>
             `;
         });
     }
 
-    function verificar() {
-        ejercicios.forEach((ej, index) => {
-            const userRes = document.getElementById(`resp-${index}`).value.trim().toLowerCase();
-            const feedback = document.getElementById(`feedback-${index}`);
-            if (userRes === ej.respuesta.toLowerCase()) {
-                feedback.innerHTML = "¡Correcto!";
-                feedback.className = "resultado correcto";
-            } else {
-                feedback.innerHTML = `Incorrecto. La respuesta es: ${ej.respuesta}`;
-                feedback.className = "resultado incorrecto";
-            }
-        });
-    }
-
-    window.onload = cargarEjercicios;
+    generar(datosHidroxidos, "hidroxidos");
+    generar(datosSales, "sales");
 </script>
 
 </body>
