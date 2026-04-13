@@ -7,28 +7,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Bangers&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --esparta-rojo: #ff3333; }
+        :root { 
+            --esparta-verde: #0e9343; 
+            --esparta-oro: #f1c40f; 
+            --esparta-rojo: #ff3333; 
+            --fondo-suave: #e8f5e9; /* Nuevo fondo verde flojito */
+            --texto-oscuro: #1a1a1a;
+        }
         
-        body { font-family: 'Kalam', cursive; background: #1a1a1a; color: white; margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+        body { 
+            font-family: 'Kalam', cursive; 
+            background-color: var(--fondo-suave); /* Aplicación del nuevo fondo */
+            color: var(--texto-oscuro); /* Texto oscuro para contrastar */
+            margin: 0; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            overflow-x: hidden; 
+        }
         
-        .header { background: var(--esparta-verde); width: 100%; text-align: center; padding: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.5); font-family: 'Bangers', cursive; letter-spacing: 2px; }
-        .progress-container { width: 90%; max-width: 1000px; background: #333; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid var(--esparta-oro); }
+        .header { background: var(--esparta-verde); width: 100%; text-align: center; padding: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: 'Bangers', cursive; letter-spacing: 2px; color: white; }
+        
+        .progress-container { width: 90%; max-width: 1000px; background: #e0e0e0; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid var(--esparta-verde); }
         #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #f1c40f, #ff4500); transition: width 0.5s ease; }
 
-        .marcador { font-family:'Bangers'; font-size: 30px; margin-top: 10px; text-align: center; }
+        .marcador { font-family:'Bangers'; font-size: 30px; margin-top: 10px; text-align: center; color: var(--esparta-verde); }
 
         /* ESCENARIO PRINCIPAL */
         .main-stage { display: flex; width: 95%; max-width: 1400px; justify-content: flex-start; align-items: center; gap: 80px; margin-top: 20px; padding-left: 20px; }
 
         /* MUÑECO GIGANTE A LA IZQUIERDA */
         .character-col { flex: 0 0 550px; display: flex; flex-direction: column; align-items: center; }
-        .character-img { width: 100%; height: auto; transition: 0.3s; filter: drop-shadow(0 0 15px rgba(255,255,255,0.2)); }
+        .character-img { width: 100%; height: auto; transition: 0.3s; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); }
         .img-super { filter: drop-shadow(0 0 40px #ffea00); animation: pulse-super 0.8s infinite alternate; }
         
         @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.05); } }
 
         /* CUADRO OPERACIÓN */
-        .game-container { background: #fff; padding: 35px; border-radius: 25px; border: 6px solid var(--esparta-verde); color: #222; width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .game-container { background: #fff; padding: 35px; border-radius: 25px; border: 6px solid var(--esparta-verde); color: #222; width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
         .multiplication-table { font-size: 80px; font-weight: bold; line-height: 1.1; color: #2c3e50; width: 100%; border-collapse: collapse; }
         .multiplication-table td { text-align: center; width: 90px; height: 90px; }
@@ -42,14 +59,14 @@
 
         #llevada { width: 65px; height: 65px; font-size: 35px; border: 4px dashed #e74c3c; visibility: hidden; margin: 0 auto 10px auto; color: #e74c3c; display: block; }
 
-        .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; min-height: 50px; }
+        .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-verde); text-align: center; font-family: 'Bangers'; min-height: 50px; }
         .msg-fallo { color: var(--esparta-rojo); }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
 
         /* RESPONSIVE PARA MÓVIL */
         @media (max-width: 900px) {
-            .main-stage { flex-direction: column; align-items: center; padding-left: 0; }
+            .main-stage { flex-direction: column; align-items: center; padding-left: 0; gap: 30px; }
             .character-col { flex: 0 0 auto; width: 250px; }
         }
     </style>
@@ -57,13 +74,13 @@
 <body>
 
     <div class="header"><h1>GUERRERO ERIK: EL CAMINO DEL GUERRERO</h1></div>
-    <div class="marcador">ESCUDOS: <span id="score" style="color:var(--esparta-oro)">0</span></div>
+    <div class="marcador">ESCUDOS: <span id="score" style="color:var(--esparta-verde)">0</span></div>
     <div class="progress-container"><div id="progress-bar"></div></div>
 
     <div class="main-stage">
         <div class="character-col">
             <img src="camino-matematico/assets/warrior/warrior-idle.png.PNG" alt="Erik" class="character-img" id="hero-img">
-            <div style="font-family:'Bangers'; color:var(--esparta-oro); font-size:35px; margin-top:20px;" id="hero-status">GUERRERO BASE</div>
+            <div style="font-family:'Bangers'; color:var(--esparta-verde); font-size:35px; margin-top:20px;" id="hero-status">GUERRERO BASE</div>
         </div>
 
         <div class="game-container">
@@ -84,6 +101,7 @@
     <div class="status-msg" id="msg">¡DEMUESTRA TU FUERZA, ERIK!</div>
 
     <script>
+        // Lógica del juego permanece idéntica
         let n1, n2, llevadaReal, uReal, dReal, cReal;
         let score = 0;
         const goal = 10;
@@ -160,7 +178,6 @@
             if (centenaOk && decenaOk) manejarAciertoFinal();
         }
 
-        // --- LÓGICA DE SALTOS ---
         inputs.u.oninput = function() {
             if(this.value == uReal) {
                 this.classList.add('correct'); this.disabled = true;
