@@ -40,14 +40,21 @@
 
         .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; }
         
-        #barca-msg { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(165, 0, 68, 0.98); color: #edbb00; font-family: 'Bangers'; font-size: 50px; padding: 40px; border-radius: 20px; border: 10px solid #004d98; z-index: 1000; text-align: center; display: none; width: 80%; pointer-events: none; }
+        /* CARTEL DE FALLO */
+        #zasca-msg { 
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            background: rgba(165, 0, 68, 0.98); color: #edbb00; font-family: 'Bangers'; 
+            font-size: 45px; padding: 40px; border-radius: 20px; border: 10px solid #004d98; 
+            z-index: 1000; text-align: center; display: none; width: 80%; pointer-events: none; 
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
     </style>
 </head>
 <body>
 
-    <div id="barca-msg">¡ERES MÁS MALO QUE EL BARCELONA! ⚽📉</div>
+    <div id="zasca-msg">MENSAJE</div>
 
     <div class="header"><h1>GUERRERO ERIK: EL CAMINO DEL GUERRERO</h1></div>
     
@@ -99,6 +106,14 @@
             super: 'camino-matematico/assets/warrior/warrior-power.png.PNG'
         };
 
+        const frasesFallo = [
+            "¡Erik, eres un paquete!",
+            "¡Erik, eres más malo que el Barcelona!",
+            "¡Vaya fallo, Erik! ¡Espabila!",
+            "¡Eso ha sido un churro, Erik!",
+            "¡Erik, mi abuela multiplica más rápido!"
+        ];
+
         const inputs = {
             llevada: document.getElementById('llevada'),
             u: document.getElementById('res-unidad'),
@@ -108,6 +123,7 @@
 
         const heroImg = document.getElementById('hero-img');
         const heroStatus = document.getElementById('hero-status');
+        const zascaDisplay = document.getElementById('zasca-msg');
 
         function nuevaOperacion() {
             n1 = Math.floor(Math.random() * 90) + 10;
@@ -142,16 +158,20 @@
         function manejarError() {
             heroImg.src = imagenes.sad;
             heroImg.classList.remove('img-super');
-            heroStatus.innerText = "¡MÁS MALO QUE EL BARÇA! 📉";
-            document.getElementById('barca-msg').style.display = 'block';
+            heroStatus.innerText = "¡ZASCA! 📉";
+            
+            // Elegir frase aleatoria
+            const randomFrase = frasesFallo[Math.floor(Math.random() * frasesFallo.length)];
+            zascaDisplay.innerText = randomFrase;
+            zascaDisplay.style.display = 'block';
+            
             setTimeout(() => {
-                document.getElementById('barca-msg').style.display = 'none';
+                zascaDisplay.style.display = 'none';
                 volverNormal();
             }, 3000);
         }
 
         function verificarVictoria() {
-            // Si la centena es visible, debe estar correcta. Si no, solo decena.
             const centenaOk = (cReal === 0) || (inputs.c.value == cReal && inputs.c.classList.contains('correct'));
             const decenaOk = (inputs.d.value == dReal && inputs.d.classList.contains('correct'));
 
@@ -163,8 +183,8 @@
         function manejarAciertoFinal() {
             heroImg.src = imagenes.super;
             heroImg.classList.add('img-super');
-            heroStatus.innerText = "SUPER ER! 🔥";
-            document.getElementById('msg').innerText = "¡IMPRESIONANTE, ERIK!";
+            heroStatus.innerText = "SUPER ERIK! 🔥";
+            document.getElementById('msg').innerText = "¡ASÍ SE HACE, ERIK!";
             score++;
             document.getElementById('score').innerText = score;
             document.getElementById('progress-bar').style.width = (score / goal) * 100 + "%";
@@ -180,7 +200,7 @@
             }, 3000);
         }
 
-        // UNIDADES
+        // INPUTS LOGIC
         inputs.u.oninput = function() {
             if(this.value == uReal) {
                 this.classList.add('correct'); this.disabled = true;
@@ -188,10 +208,9 @@
                     inputs.llevada.style.visibility = 'visible';
                     inputs.llevada.disabled = false; inputs.llevada.focus();
                 } else {
-                    // Si no hay llevada, activamos Decenas y Centenas (si existe)
                     inputs.d.disabled = false;
                     if(cReal > 0) inputs.c.disabled = false;
-                    document.getElementById('msg').innerText = "¡Erik, elige: decenas o centenas!";
+                    document.getElementById('msg').innerText = "¡Erik, dale a las decenas o centenas!";
                 }
             } else if(this.value.length >= 1) {
                 this.classList.add('wrong'); manejarError();
@@ -199,21 +218,17 @@
             }
         };
 
-        // LLEVADA
         inputs.llevada.oninput = function() {
             if(this.value == llevadaReal) {
                 this.classList.add('correct'); this.disabled = true;
-                // Al acertar llevada, activamos Decenas y Centenas (si existe)
                 inputs.d.disabled = false;
                 if(cReal > 0) inputs.c.disabled = false;
-                document.getElementById('msg').innerText = "¡Muy bien! Elige el orden ahora.";
             } else if(this.value.length >= 1) {
                 this.classList.add('wrong'); manejarError();
                 setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
             }
         };
 
-        // DECENAS
         inputs.d.oninput = function() {
             if(this.value == dReal) {
                 this.classList.add('correct'); this.disabled = true;
@@ -224,7 +239,6 @@
             }
         };
 
-        // CENTENAS
         inputs.c.oninput = function() {
             if(this.value == cReal) {
                 this.classList.add('correct'); this.disabled = true;
