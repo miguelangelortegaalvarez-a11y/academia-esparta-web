@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Bangers&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --esparta-rojo: #e74c3c; }
+        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --esparta-rojo: #ff3333; }
         
         body { font-family: 'Kalam', cursive; background: #1a1a1a; color: white; margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
         
@@ -17,18 +17,19 @@
 
         .marcador { font-family:'Bangers'; font-size: 30px; margin-top: 10px; text-align: center; }
 
-        .main-stage { display: flex; width: 95%; max-width: 1300px; justify-content: center; align-items: center; gap: 50px; margin-top: 20px; }
+        .main-stage { display: flex; width: 95%; max-width: 1300px; justify-content: center; align-items: center; gap: 60px; margin-top: 20px; }
 
-        .character-col { flex: 0 0 500px; display: flex; flex-direction: column; align-items: center; }
+        .character-col { flex: 0 0 450px; display: flex; flex-direction: column; align-items: center; }
         .character-img { width: 100%; height: auto; transition: 0.3s; filter: drop-shadow(0 0 15px rgba(255,255,255,0.2)); }
         .img-super { filter: drop-shadow(0 0 40px #ffea00); animation: pulse-super 0.8s infinite alternate; }
         @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.05); } }
 
+        /* CUADRO OPERACIÓN SIEMPRE BLANCO */
         .game-container { background: #fff; padding: 35px; border-radius: 25px; border: 6px solid var(--esparta-verde); color: #222; width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
-        .multiplication-table { font-size: 80px; font-weight: bold; line-height: 1.1; color: #2c3e50; width: 100%; border-collapse: collapse; }
+        .multiplication-table { font-size: 85px; font-weight: bold; line-height: 1.1; color: #2c3e50; width: 100%; border-collapse: collapse; }
         .multiplication-table td { text-align: center; width: 90px; height: 90px; }
-        .signo { color: var(--esparta-rojo); font-family: 'Bangers'; font-size: 75px; }
+        .signo { color: #e74c3c; font-family: 'Bangers'; font-size: 80px; }
         .linea { border-bottom: 8px solid #333; margin: 15px 0; }
 
         .result-row { display: flex; gap: 15px; justify-content: center; padding-top: 10px; }
@@ -36,25 +37,17 @@
         input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; }
         input.wrong { background: #ffcdd2 !important; border-color: var(--esparta-rojo) !important; animation: shake 0.3s; }
 
-        #llevada { width: 65px; height: 65px; font-size: 35px; border: 4px dashed var(--esparta-rojo); visibility: hidden; margin: 0 auto 10px auto; color: var(--esparta-rojo); display: block; }
+        #llevada { width: 65px; height: 65px; font-size: 35px; border: 4px dashed #e74c3c; visibility: hidden; margin: 0 auto 10px auto; color: #e74c3c; display: block; }
 
-        .status-msg { margin-top: 25px; font-weight: bold; font-size: 32px; color: var(--esparta-oro); text-align: center; font-family: 'Bangers'; }
-        
-        /* CARTEL DE ZASCA */
-        #zasca-msg { 
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            background: rgba(165, 0, 68, 0.98); color: #edbb00; font-family: 'Bangers'; 
-            font-size: 50px; padding: 50px; border-radius: 20px; border: 12px solid #004d98; 
-            z-index: 1000; text-align: center; display: none; width: 85%; pointer-events: none;
-            box-shadow: 0 0 70px rgba(0,0,0,1);
-        }
+        /* MENSAJES ABAJO */
+        .status-msg { margin-top: 30px; font-weight: bold; font-size: 38px; text-align: center; font-family: 'Bangers'; min-height: 50px; transition: color 0.3s; }
+        .msg-acierto { color: var(--esparta-oro); }
+        .msg-fallo { color: var(--esparta-rojo); text-shadow: 0 0 10px rgba(255,0,0,0.3); }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
     </style>
 </head>
 <body>
-
-    <div id="zasca-msg">MENSAJE</div>
 
     <div class="header"><h1>GUERRERO ERIK: EL CAMINO DEL GUERRERO</h1></div>
     
@@ -67,7 +60,7 @@
     <div class="main-stage">
         <div class="character-col">
             <img src="camino-matematico/assets/warrior/warrior-idle.png.PNG" alt="Erik" class="character-img" id="hero-img">
-            <div style="font-family:'Bangers'; color:var(--esparta-oro); font-size:35px; margin-top:20px;">ESTADO: <span id="hero-status">Base</span></div>
+            <div style="font-family:'Bangers'; color:var(--esparta-oro); font-size:35px; margin-top:20px;">ESTADO: <span id="hero-status">Guerrero</span></div>
         </div>
 
         <div class="game-container">
@@ -75,13 +68,13 @@
             <table class="multiplication-table">
                 <tr>
                     <td></td>
-                    <td id="d-arriba">4</td>
-                    <td id="u-arriba">7</td>
+                    <td id="d-arriba">--</td>
+                    <td id="u-arriba">-</td>
                 </tr>
                 <tr>
-                    <td class="signo">x</td>
+                    <td class="signo">X</td>
                     <td></td>
-                    <td id="num-abajo">6</td>
+                    <td id="num-abajo">-</td>
                 </tr>
             </table>
             <div class="linea"></div>
@@ -93,7 +86,7 @@
         </div>
     </div>
 
-    <div class="status-msg" id="msg">¡DEMUESTRA TU FUERZA, ERIK!</div>
+    <div class="status-msg msg-acierto" id="msg">¡DEMUESTRA TU FUERZA, ERIK!</div>
 
     <script>
         let n1, n2, llevadaReal, uReal, dReal, cReal;
@@ -106,13 +99,12 @@
             super: 'camino-matematico/assets/warrior/warrior-power.png.PNG'
         };
 
-        // LISTA DE FRASES ALEATORIAS
         const frasesFallo = [
             "¡Erik, eres un manta!",
             "¡Erik, eres más malo que el Barcelona!",
             "¡Menudo paquete estás hecho, Erik!",
-            "¡Vaya churro, Erik! ¡Espabila!",
-            "¡Erik, concéntrate que pareces un paquete!"
+            "¡Erik, mi abuela multiplica mejor!",
+            "¡Vaya churro, Erik! ¡Espabila!"
         ];
 
         const inputs = {
@@ -124,7 +116,7 @@
 
         const heroImg = document.getElementById('hero-img');
         const heroStatus = document.getElementById('hero-status');
-        const zascaBox = document.getElementById('zasca-msg');
+        const mainMsg = document.getElementById('msg');
 
         function nuevaOperacion() {
             n1 = Math.floor(Math.random() * 90) + 10;
@@ -154,38 +146,28 @@
             heroImg.src = imagenes.base;
             heroImg.classList.remove('img-super');
             heroStatus.innerText = "Guerrero";
+            mainMsg.className = "status-msg msg-acierto";
+            mainMsg.innerText = "¡A POR LA SIGUIENTE, ERIK!";
         }
 
         function manejarError() {
             heroImg.src = imagenes.sad;
-            heroImg.classList.remove('img-super');
-            heroStatus.innerText = "¡ZASCA! 📉";
+            heroStatus.innerText = "¡ESTADO: MANTA! 😭";
             
-            // SELECCIÓN ALEATORIA DE FRASE
+            // Cambiar frase abajo y ponerla roja
             const fraseAzar = frasesFallo[Math.floor(Math.random() * frasesFallo.length)];
-            zascaBox.innerText = fraseAzar;
-            zascaBox.style.display = 'block';
+            mainMsg.innerText = fraseAzar;
+            mainMsg.className = "status-msg msg-fallo";
             
-            setTimeout(() => {
-                zascaBox.style.display = 'none';
-                volverNormal();
-            }, 3000);
-        }
-
-        function verificarVictoria() {
-            const centenaOk = (cReal === 0) || (inputs.c.value == cReal && inputs.c.classList.contains('correct'));
-            const decenaOk = (inputs.d.value == dReal && inputs.d.classList.contains('correct'));
-
-            if (centenaOk && decenaOk) {
-                manejarAciertoFinal();
-            }
+            setTimeout(volverNormal, 3000);
         }
 
         function manejarAciertoFinal() {
             heroImg.src = imagenes.super;
             heroImg.classList.add('img-super');
-            heroStatus.innerText = "SUPER ER! 🔥";
-            document.getElementById('msg').innerText = "¡IMPRESIONANTE, ERIK!";
+            heroStatus.innerText = "¡ESTADO: SUPER ER! 🔥";
+            mainMsg.innerText = "¡IMPRESIONANTE, ERIK!";
+            mainMsg.className = "status-msg msg-acierto";
             
             score++;
             document.getElementById('score').innerText = score;
@@ -202,6 +184,13 @@
             }, 3000);
         }
 
+        function verificarVictoria() {
+            const centenaOk = (cReal === 0) || (inputs.c.value == cReal && inputs.c.classList.contains('correct'));
+            const decenaOk = (inputs.d.value == dReal && inputs.d.classList.contains('correct'));
+            if (centenaOk && decenaOk) manejarAciertoFinal();
+        }
+
+        // LOGICA DE INPUTS
         inputs.u.oninput = function() {
             if(this.value == uReal) {
                 this.classList.add('correct'); this.disabled = true;
