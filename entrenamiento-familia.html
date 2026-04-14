@@ -3,138 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Cálculo - Academia Esparta</title>
+    <title>Desafío Espartano: El Tiro a Canasta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; }
-        
-        body { font-family: 'Kalam', cursive; background-color: #f4f9f4; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; color: #333; }
-
-        /* Interfaz Web */
-        .no-print-header { background: var(--esparta-verde); color: white; width: 100%; max-width: 800px; padding: 15px; text-align: center; border-radius: 15px; font-family: 'Bangers'; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .btn-imprimir { background: var(--esparta-oro); color: black; font-family: 'Bangers'; font-size: 20px; padding: 12px 35px; border: none; border-radius: 50px; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-
-        /* Formato Estándar PDF A4 */
-        .pagina { 
-            background: white; 
-            width: 210mm; 
-            height: 297mm; 
-            padding: 20mm; 
-            box-sizing: border-box; 
-            border: 1px solid #000; 
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header-sparta { text-align: center; border-bottom: 3px solid var(--esparta-verde); margin-bottom: 25px; padding-bottom: 10px; }
-        .header-sparta h1 { font-family: 'Bangers'; font-size: 42px; color: var(--esparta-verde); margin: 0; letter-spacing: 2px; }
-        .info-alumno { display: flex; justify-content: space-between; margin-bottom: 30px; font-size: 16px; font-weight: bold; }
-
-        /* Cuadrícula de Operaciones Estilo Estándar */
-        .grid-operaciones { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            column-gap: 50px; 
-            row-gap: 12px;
-        }
-
-        .operacion { 
-            display: flex; 
-            align-items: center; 
-            font-size: 22px; /* Tamaño estándar de ficha escolar */
-            border-bottom: 1px solid #f0f0f0;
-            padding: 8px 0;
-        }
-
-        .index { font-size: 12px; color: #888; width: 25px; font-family: sans-serif; }
-        .hueco { display: inline-block; width: 55px; border-bottom: 2px solid #000; margin: 0 8px; text-align: center; min-height: 28px; }
-
-        /* Pie de página */
-        .footer-frase { 
-            margin-top: auto; 
-            text-align: center; 
-            padding-top: 20px; 
-            border-top: 2px solid var(--esparta-oro);
-        }
-        .frase { font-family: 'Bangers'; font-size: 24px; color: var(--esparta-verde); margin-bottom: 5px; }
-        .sub-frase { font-size: 14px; font-style: italic; color: #666; }
-
-        @media print {
-            body { background: white; padding: 0; }
-            .btn-imprimir, .no-print-header { display: none !important; }
-            .pagina { border: none; width: 100%; height: 100vh; margin: 0; }
-        }
+        body { font-family: 'Kalam', cursive; background: #f4f9f4; padding: 20px; color: #333; }
+        .contenedor { max-width: 800px; background: white; margin: auto; padding: 25px; border-radius: 15px; border: 2px solid var(--esparta-verde); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        h1 { font-family: 'Bangers'; color: var(--esparta-verde); text-align: center; font-size: 35px; }
+        .paso { background: #e8f5e9; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 5px solid var(--esparta-oro); }
+        .resultado { font-weight: bold; font-size: 20px; text-align: center; padding: 15px; border: 2px dashed red; color: #b71c1c; }
+        canvas { background: #fff; margin: 20px 0; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
 
-    <div class="no-print-header">
-        <h1>FORMATO PDF ESTÁNDAR (40 EJERCICIOS)</h1>
+<div class="contenedor">
+    <h1>🏀 Análisis de Trayectoria Parabólica</h1>
+    
+    <div class="paso">
+        <strong>1. Datos del problema:</strong><br>
+        Lanzador: (0, 2) | Vértice (Altura máx): (2, 3) | Canasta: (5.5, 2)
     </div>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR FICHA</button>
+    <canvas id="graficaTiro"></canvas>
 
-    <div class="pagina">
-        <div class="header-sparta">
-            <h1>ACADEMIA ESPARTA</h1>
-            <p style="margin: 5px 0; font-weight: bold; text-transform: uppercase; color: #444;">Entrenamiento de Agilidad Numérica</p>
-        </div>
-
-        <div class="info-alumno">
-            <span>ALUMNO: ____________________________________</span>
-            <span>FECHA: ____/____/2026</span>
-        </div>
-
-        <div class="grid-operaciones">
-            <div class="operacion"><span class="index">1</span> 6 x <span class="hueco"></span> = 42</div>
-            <div class="operacion"><span class="index">2</span> <span class="hueco"></span> x 4 = 32</div>
-            <div class="operacion"><span class="index">3</span> 15 + <span class="hueco"></span> = 40</div>
-            <div class="operacion"><span class="index">4</span> 80 - <span class="hueco"></span> = 55</div>
-            <div class="operacion"><span class="index">5</span> 9 x 4 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">6</span> <span class="hueco"></span> x 7 = 63</div>
-            <div class="operacion"><span class="index">7</span> 25 + 25 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">8</span> 60 - <span class="hueco"></span> = 15</div>
-            <div class="operacion"><span class="index">9</span> 3 x <span class="hueco"></span> = 27</div>
-            <div class="operacion"><span class="index">10</span> <span class="hueco"></span> x 8 = 48</div>
-            <div class="operacion"><span class="index">11</span> 12 + 18 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">12</span> 45 - <span class="hueco"></span> = 30</div>
-            <div class="operacion"><span class="index">13</span> 7 x 7 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">14</span> <span class="hueco"></span> x 5 = 45</div>
-            <div class="operacion"><span class="index">15</span> 100 - <span class="hueco"></span> = 25</div>
-            <div class="operacion"><span class="index">16</span> 6 x 9 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">17</span> <span class="hueco"></span> + 35 = 50</div>
-            <div class="operacion"><span class="index">18</span> 8 x <span class="hueco"></span> = 56</div>
-            <div class="operacion"><span class="index">19</span> 90 - 45 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">20</span> 4 x <span class="hueco"></span> = 36</div>
-
-            <div class="operacion"><span class="index">21</span> <span class="hueco"></span> x 6 = 54</div>
-            <div class="operacion"><span class="index">22</span> 7 x 8 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">23</span> 55 + <span class="hueco"></span> = 100</div>
-            <div class="operacion"><span class="index">24</span> <span class="hueco"></span> - 20 = 80</div>
-            <div class="operacion"><span class="index">25</span> 9 x 9 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">26</span> 3 x <span class="hueco"></span> = 24</div>
-            <div class="operacion"><span class="index">27</span> <span class="hueco"></span> + 14 = 30</div>
-            <div class="operacion"><span class="index">28</span> 200 - <span class="hueco"></span> = 120</div>
-            <div class="operacion"><span class="index">29</span> 8 x 3 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">30</span> <span class="hueco"></span> x 7 = 28</div>
-            <div class="operacion"><span class="index">31</span> 18 + 12 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">32</span> 5 x <span class="hueco"></span> = 40</div>
-            <div class="operacion"><span class="index">33</span> <span class="hueco"></span> - 15 = 45</div>
-            <div class="operacion"><span class="index">34</span> 6 x 6 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">35</span> 7 x <span class="hueco"></span> = 49</div>
-            <div class="operacion"><span class="index">36</span> <span class="hueco"></span> + 22 = 60</div>
-            <div class="operacion"><span class="index">37</span> 4 x 8 = <span class="hueco"></span></div>
-            <div class="operacion"><span class="index">38</span> 10 x <span class="hueco"></span> = 70</div>
-            <div class="operacion"><span class="index">39</span> 150 - <span class="hueco"></span> = 100</div>
-            <div class="operacion"><span class="index">40</span> <span class="hueco"></span> x 2 = 18</div>
-        </div>
-
-        <div class="footer-frase">
-            <p class="frase">"La constancia es la base del éxito."</p>
-            <p class="sub-frase">Academia Esparta - Entrenando la mente del mañana</p>
-        </div>
+    <div class="paso">
+        <strong>2. Ecuación obtenida:</strong><br>
+        Usando la forma $y = a(x-h)^2 + k$, llegamos a: <br>
+        <span style="color:blue; font-size:1.2em">y = -0.25(x - 2)² + 3</span>
     </div>
+
+    <div class="resultado" id="conclusion">
+        Cargando conclusión...
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('graficaTiro').getContext('2d');
+    const puntosTrayectoria = [];
+    
+    // Generar puntos de la parábola
+    for (let x = 0; x <= 6; x += 0.1) {
+        let y = -0.25 * Math.pow(x - 2, 2) + 3;
+        if (y >= 0) puntosTrayectoria.push({x: x.toFixed(2), y: y.toFixed(2)});
+    }
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: 'Trayectoria del balón',
+                data: puntosTrayectoria,
+                borderColor: '#0e9343',
+                backgroundColor: 'rgba(14, 147, 67, 0.1)',
+                fill: true,
+                tension: 0.4
+            }, {
+                label: 'Lanzador (2m)',
+                data: [{x: 0, y: 2}],
+                pointBackgroundColor: 'blue',
+                pointRadius: 8
+            }, {
+                label: 'Canasta (2m)',
+                data: [{x: 5.5, y: 2}],
+                pointBackgroundColor: 'red',
+                pointRadius: 8,
+                pointStyle: 'rectRot'
+            }]
+        },
+        options: {
+            scales: {
+                x: { type: 'linear', position: 'bottom', title: {display: true, text: 'Distancia (m)'}, min: 0, max: 6 },
+                y: { title: {display: true, text: 'Altura (m)'}, min: 0, max: 4 }
+            }
+        }
+    });
+
+    // Calcular altura en la canasta para la conclusión
+    const xCanasta = 5.5;
+    const yEnCanasta = -0.25 * Math.pow(xCanasta - 2, 2) + 3;
+    
+    document.getElementById('conclusion').innerHTML = 
+        `❌ CONCLUSIÓN: A los 5.5m de distancia, la altura del balón es de ${yEnCanasta.toFixed(2)}m. <br> 
+        ¡El tiro se queda muy corto y no entra en la canasta!`;
+</script>
 
 </body>
 </html>
