@@ -3,115 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explicación Matemática: El Tiro a Canasta</title>
+    <title>Explicación Técnica: El Tiro Parabólico - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --fondo: #f4f9f4; }
-        body { font-family: 'Kalam', cursive; background: var(--fondo); padding: 20px; color: #333; line-height: 1.6; }
-        .contenedor { max-width: 900px; background: white; margin: auto; padding: 30px; border-radius: 20px; border: 3px solid var(--esparta-verde); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; }
         
-        header { text-align: center; border-bottom: 2px solid var(--esparta-oro); margin-bottom: 30px; padding-bottom: 10px; }
-        h1 { font-family: 'Bangers'; color: var(--esparta-verde); font-size: 40px; margin: 0; }
+        body { font-family: 'Kalam', cursive; background-color: #f4f9f4; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; color: #333; }
+
+        /* Botón de impresión (no sale en el papel) */
+        .btn-imprimir { 
+            background: var(--esparta-oro); 
+            color: black; 
+            font-family: 'Bangers'; 
+            font-size: 22px; 
+            padding: 15px 40px; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            margin-bottom: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .btn-imprimir:hover { transform: scale(1.05); }
+
+        /* Contenedor del Folio A4 */
+        .ficha-estudio { 
+            background: white; 
+            width: 210mm; 
+            min-height: 297mm; 
+            padding: 20mm; 
+            box-sizing: border-box; 
+            border: 2px solid var(--esparta-verde); 
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .header-estudio { text-align: center; border-bottom: 3px solid var(--esparta-oro); margin-bottom: 30px; padding-bottom: 10px; }
+        .header-estudio h1 { font-family: 'Bangers'; font-size: 45px; color: var(--esparta-verde); margin: 0; }
+
+        h2 { font-family: 'Bangers'; color: #222; border-bottom: 2px solid #eee; margin-top: 25px; }
         
-        .seccion-teoria { background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 8px solid var(--esparta-verde); box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
-        h2 { font-family: 'Bangers'; color: #222; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-        
-        .formula { background: #333; color: #fff; padding: 15px; border-radius: 8px; text-align: center; font-size: 22px; margin: 15px 0; font-family: 'Courier New', monospace; }
+        .caja-matematica { background: #f9f9f9; border-left: 5px solid var(--esparta-verde); padding: 15px; margin: 15px 0; font-size: 18px; line-height: 1.8; }
+        .formula { text-align: center; font-size: 26px; font-weight: bold; margin: 20px 0; color: #000; display: block; font-family: sans-serif; }
         .resaltado { color: var(--esparta-verde); font-weight: bold; }
 
-        canvas { background: #fff; border: 1px solid #ddd; margin: 20px 0; border-radius: 10px; }
+        canvas { max-width: 100%; height: auto; margin: 20px 0; border: 1px solid #ddd; border-radius: 8px; }
 
-        .conclusion-final { background: #ffebee; border: 2px solid #ef5350; padding: 20px; border-radius: 10px; text-align: center; font-weight: bold; font-size: 20px; color: #c62828; }
-        
-        @media print { .no-print { display: none; } .contenedor { border: none; box-shadow: none; width: 100%; } }
+        .conclusion-box { 
+            margin-top: 30px; 
+            padding: 20px; 
+            border: 3px dashed #c62828; 
+            background: #fff5f5; 
+            color: #c62828; 
+            text-align: center; 
+            font-size: 22px; 
+            font-weight: bold; 
+        }
+
+        /* Marca de agua para el profesor */
+        .watermark { position: absolute; bottom: 10mm; right: 20mm; font-size: 12px; color: #ccc; }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .btn-imprimir { display: none !important; }
+            .ficha-estudio { border: none; box-shadow: none; width: 100%; margin: 0; padding: 10mm; }
+            .formula { color: black !important; }
+        }
     </style>
 </head>
 <body>
 
-<div class="contenedor">
-    <header>
-        <h1>ACADEMIA ESPARTA: ANÁLISIS GEOMÉTRICO</h1>
-        <p>Ejercicio 4: Trayectoria del Balón de Baloncesto</p>
-    </header>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR EXPLICACIÓN CORREGIDA</button>
 
-    <div class="seccion-teoria">
-        <h2>1. Modelización con Coordenadas</h2>
-        <p>Para resolver el problema, situamos el lanzamiento en un eje cartesiano:</p>
+    <div class="ficha-estudio">
+        <div class="header-estudio">
+            <h1>ACADEMIA ESPARTA</h1>
+            <p><strong>Resolución Técnica Paso a Paso: El Tiro Parabólico (Ejercicio 4)</strong></p>
+        </div>
+
+        <h2>1. Análisis de Puntos Clave</h2>
+        <p>Modelizamos el problema situando el lanzamiento en un sistema cartesiano (distancia x, altura y):</p>
         <ul>
-            <li><strong>Punto inicial (Lanzamiento):</strong> (0, 2) metros.</li>
-            <li><strong>Vértice (Altura Máxima):</strong> (2, 3) metros.</li>
-            <li><strong>Punto Objetivo (Canasta):</strong> (5.5, 2) metros.</li>
+            <li><strong>Lanzamiento:</strong> Punto inicial A = <strong>(0, 2)</strong>. Sale a 2m de altura.</li>
+            <li><strong>Vértice (Altura Máx):</strong> Punto V = <strong>(2, 3)</strong>. A los 2m de distancia alcanza 3m de altura.</li>
+            <li><strong>Canasta (Objetivo):</strong> Punto C = <strong>(5.5, 2)</strong>. El aro está a 5.5m de distancia y 2m de altura.</li>
         </ul>
 
-        <h2>2. Aplicación de la Ecuación Canónica</h2>
-        <p>Como conocemos el vértice $(h, k)$, usamos la forma canónica de la parábola:</p>
-        <div class="formula">y = a(x - h)² + k</div>
-        <p>Sustituyendo el vértice (2, 3): <span class="resaltado">y = a(x - 2)² + 3</span></p>
+        <h2>2. Desarrollo del Modelo Matemático</h2>
+        <div class="caja-matematica">
+            Como conocemos el vértice, usamos la <strong>forma canónica</strong> de la función cuadrática (parábola):<br>
+            <span class="formula">y = a(x - h)² + k</span>
+            Sustituimos las coordenadas del vértice (h=2, k=3):<br>
+            <span class="formula">y = a(x - 2)² + 3</span>
+        </div>
 
-        <h2>3. Cálculo del Coeficiente 'a'</h2>
-        <p>Usamos el punto de lanzamiento (0, 2) para despejar la incógnita:</p>
-        <p>2 = a(0 - 2)² + 3  →  2 = 4a + 3  →  -1 = 4a  →  <span class="resaltado">a = -0.25</span></p>
-        <p>La función final que describe el vuelo es: <strong>f(x) = -0.25(x - 2)² + 3</strong></p>
+        <h2>3. Cálculo del Coeficiente de Apertura (a)</h2>
+        <p>Utilizamos el punto de salida A(0, 2) para despejar la incógnita 'a':</p>
+        <div class="caja-matematica">
+            Sustituimos x=0 e y=2:<br>
+            2 = a(0 - 2)² + 3<br>
+            2 = 4a + 3<br>
+            2 - 3 = 4a<br>
+            -1 = 4a  &rarr;  <strong>a = -1/4 = <span class="resaltado">-0.25</span></strong>
+        </div>
+
+        <h2>4. Representación Gráfica de la Trayectoria</h2>
+        <canvas id="graficaCorregida"></canvas>
+
+        <h2>5. Comprobación de Éxito (¿Encesta?)</h2>
+        <p>Evaluamos la función obtenida en la distancia de la canasta (x = 5.5):</p>
+        <div class="caja-matematica">
+            y = -0.25 &cdot; (5.5 - 2)² + 3<br>
+            y = -0.25 &cdot; (3.5)² + 3<br>
+            y = -0.25 &cdot; (12.25) + 3<br>
+            y = -3.0625 + 3 = <strong><span class="resaltado">-0.06 metros</span></strong>
+        </div>
+
+        <div class="conclusion-box">
+            ❌ CONCLUSIÓN FINAL: El balón NO encesta. <br>
+            A la distancia de 5.5m, la altura del balón es negativa (-0.06m). Esto significa que impacta contra el suelo antes de llegar a la canasta.
+        </div>
+
+        <div class="watermark">Academia Esparta - Resolución de Geometría Analítica</div>
     </div>
 
-    <h2>Visualización de la Trayectoria</h2>
-    <canvas id="graficaExplicativa"></canvas>
-
-    <div class="seccion-teoria">
-        <h2>4. Comprobación de éxito</h2>
-        <p>Evaluamos la función en la distancia de la canasta (x = 5.5):</p>
-        <p>f(5.5) = -0.25(5.5 - 2)² + 3</p>
-        <p>f(5.5) = -0.25(12.25) + 3 = -3.06 + 3 = <span class="resaltado">-0.06 metros</span></p>
-    </div>
-
-    <div class="conclusion-final">
-        ❌ RESULTADO: El balón impacta contra el suelo antes de llegar a la canasta. No encesta.
-    </div>
-
-    <button class="no-print" style="margin-top:20px; padding:10px 20px; cursor:pointer;" onclick="window.print()">🖨️ Imprimir explicación para el profesor</button>
-</div>
-
-<script>
-    const ctx = document.getElementById('graficaExplicativa').getContext('2d');
-    const puntos = [];
-    
-    // Generamos los puntos de la parábola
-    for (let x = 0; x <= 6; x += 0.1) {
-        let y = -0.25 * Math.pow(x - 2, 2) + 3;
-        if (y >= -0.5) puntos.push({x: x.toFixed(2), y: y.toFixed(2)});
-    }
-
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            datasets: [{
-                label: 'Vuelo del balón (Parábola)',
-                data: puntos,
-                borderColor: '#0e9343',
-                borderWidth: 3,
-                fill: false,
-                tension: 0.4
-            }, {
-                label: 'Canasta (Objetivo)',
-                data: [{x: 5.5, y: 2}],
-                pointBackgroundColor: 'red',
-                pointRadius: 10,
-                pointStyle: 'rectRot'
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: { type: 'linear', title: {display: true, text: 'Distancia Horizontal (m)'}, min: 0, max: 6 },
-                y: { title: {display: true, text: 'Altura (m)'}, min: 0, max: 4 }
-            },
-            plugins: {
-                legend: { labels: { font: { family: 'Kalam', size: 16 } } }
+    <script>
+        const ctx = document.getElementById('graficaCorregida').getContext('2d');
+        const puntosTrayectoria = [];
+        
+        // Generamos los puntos de la parábola para la gráfica
+        for (let x = 0; x <= 6; x += 0.1) {
+            let y = -0.25 * Math.pow(x - 2, 2) + 3;
+            // Solo dibujamos hasta que el balón toca el suelo (y>=0)
+            if (y >= 0) {
+                puntosTrayectoria.push({x: x.toFixed(2), y: y.toFixed(2)});
             }
         }
-    });
-</script>
+
+        // Configuración de Chart.js
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'Trayectoria del Balón',
+                    data: puntosTrayectoria,
+                    borderColor: '#0e9343',
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    fill: true,
+                    backgroundColor: 'rgba(14, 147, 67, 0.05)',
+                    tension: 0.4
+                }, {
+                    label: 'Aro de la Canasta',
+                    data: [{x: 5.5, y: 2}],
+                    pointBackgroundColor: 'red',
+                    pointRadius: 10,
+                    pointStyle: 'rectRot'
+                }]
+            },
+            options: {
+                scales: {
+                    x: { type: 'linear', title: {display: true, text: 'Distancia Horizontal (m)'}, min: 0, max: 6 },
+                    y: { title: {display: true, text: 'Altura (m)'}, min: 0, max: 4 }
+                },
+                plugins: {
+                    legend: { labels: { font: { family: 'Kalam', size: 14 } } }
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
