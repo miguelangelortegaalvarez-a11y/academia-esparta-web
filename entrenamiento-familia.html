@@ -3,216 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes de Física - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Actividades Interactivas - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0e9343;
             --accent: #f1c40f;
-            --bg: #f8f9fa;
+            --bg: #f4f7f4;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg);
-            margin: 0;
             padding: 20px;
             color: #2c3e50;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+        .card {
             background: white;
-            padding: 40px;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        header {
-            text-align: center;
-            border-bottom: 3px solid var(--primary);
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-        }
-
-        .academia-title {
-            font-weight: 600;
-            font-size: 1.5rem;
-            color: var(--primary);
-            text-transform: uppercase;
-        }
-
-        .motivation {
-            font-style: italic;
-            color: #666;
-            margin: 10px 0;
-        }
-
-        h2 {
-            color: var(--primary);
-            border-left: 5px solid var(--accent);
-            padding-left: 15px;
-            margin-top: 35px;
-        }
-
-        .formula-box {
-            background: #f1f8f4;
-            border: 1px solid var(--primary);
+        h2 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+        
+        .interactivo-box {
+            background: #f9f9f9;
             padding: 20px;
             border-radius: 10px;
-            text-align: center;
-            font-size: 1.4rem;
-            margin: 20px 0;
+            margin: 15px 0;
+            border: 1px solid #ddd;
         }
 
-        .problem-box {
-            background: #fffdf2;
-            border: 1px solid #e0e0e0;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            page-break-inside: avoid;
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100px;
+            margin: 5px;
         }
 
-        .tag-si { background: #e3f2fd; color: #1976d2; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
-        .tag-cambio { background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
-
-        .btn-print {
+        button {
             background: var(--primary);
             color: white;
-            padding: 12px 25px;
             border: none;
-            border-radius: 50px;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
-            display: block;
-            margin: 0 auto 30px;
-            font-size: 1rem;
+            font-weight: bold;
         }
 
-        .solution {
+        button:hover { background: #0a7033; }
+
+        .resultado {
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .feedback {
+            padding: 10px;
             margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed #ccc;
-            font-weight: 500;
-            line-height: 1.8;
+            border-radius: 5px;
+            display: none;
         }
 
-        .res-final { color: var(--primary); font-weight: bold; border-bottom: 2px solid var(--accent); }
+        .correcto { background: #d4edda; color: #155724; display: block; }
+        .incorrecto { background: #f8d7da; color: #721c24; display: block; }
 
         @media print {
-            .btn-print { display: none; }
-            body { background: white; padding: 0; }
-            .container { box-shadow: none; width: 100%; max-width: 100%; }
+            .no-print { display: none; }
         }
     </style>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div class="academia-title">Academia Esparta</div>
-        <h1>TEMA 6: CINEMÁTICA</h1>
-        <p class="motivation">"La medida de lo que somos es lo que hacemos con lo que tenemos."</p>
-    </header>
-
-    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR APUNTES CON MAGNITUDES</button>
-
-    <h2>1. Conceptos Fundamentales</h2>
-    <p>El movimiento es el cambio de posición de un cuerpo respecto a un sistema de referencia fijo. Para definirlo usamos magnitudes:</p>
-    <ul>
-        <li><strong>Velocidad (\(v\)):</strong> Rapidez con la que se cambia de posición. Se mide en metros por segundo (\(m/s\)).</li>
-        <li><strong>Aceleración (\(a\)):</strong> Rapidez con la que se cambia de velocidad. Se mide en metros por segundo al cuadrado (\(m/s^2\)).</li>
-    </ul>
-
-    <h2>2. Movimiento Rectilíneo Uniforme (MRU)</h2>
-    <p>Velocidad constante, sin aceleración.</p>
-    <div class="formula-box">\[ S = S_0 + v \cdot t \]</div>
-
-    <div class="problem-box">
-        <span class="tag-si">SISTEMA INTERNACIONAL</span>
-        <p><strong>P1 (Espacio):</strong> Un objeto se mueve a una velocidad de \(5\ m/s\) durante \(20\ s\). ¿Qué distancia recorre?</p>
-        <div class="solution">
-            Datos: \(v = 5\ m/s\); \(t = 20\ s\)<br>
-            Resolución: \(s = 5\ m/s \cdot 20\ s = \mathbf{100\ m}\)
-        </div>
-    </div>
-
-    <div class="problem-box">
-        <span class="tag-si">SISTEMA INTERNACIONAL</span>
-        <p><strong>P2 (Tiempo):</strong> Un móvil recorre \(500\ m\) a una velocidad constante de \(10\ m/s\). ¿Cuánto tiempo tarda?</p>
-        <div class="solution">
-            Datos: \(s = 500\ m\); \(v = 10\ m/s\)<br>
-            Resolución: \(t = \frac{500\ m}{10\ m/s} = \mathbf{50\ s}\)
-        </div>
-    </div>
-
-    <div class="problem-box">
-        <span class="tag-cambio">CAMBIO DE UNIDADES</span>
-        <p><strong>P3 (Velocidad):</strong> Un coche recorre \(180\ km\) en un tiempo de \(2\ h\). Calcula su velocidad en \(km/h\) y \(m/s\).</p>
-        <div class="solution">
-            Velocidad: \(v = \frac{180\ km}{2\ h} = \mathbf{90\ km/h}\)<br>
-            Cambio a S.I.: \(\frac{90\ km/h}{3.6} = \mathbf{25\ m/s}\)
-        </div>
-    </div>
-
-    <div class="problem-box">
-        <span class="tag-cambio">CAMBIO DE UNIDADES</span>
-        <p><strong>P4 (Espacio):</strong> Una moto viaja a \(120\ km/h\) durante \(0.25\ h\) (\(15\ min\)). ¿Cuánta distancia recorre?</p>
-        <div class="solution">
-            Datos: \(v = 120\ km/h\); \(t = 0.25\ h\)<br>
-            Resolución: \(s = 120\ km/h \cdot 0.25\ h = \mathbf{30\ km}\)
-        </div>
-    </div>
-
-    <h2>3. Movimiento Rectilíneo Uniformemente Acelerado (MRUA)</h2>
-    <p>La velocidad cambia de forma constante debido a la aceleración.</p>
-    <div class="formula-box">
-        \[ v_f = v_0 + a \cdot t \]
-        \[ S = S_0 + v_0 \cdot t + \frac{1}{2} a \cdot t^2 \]
-    </div>
-
-    <div class="problem-box">
-        <span class="tag-si">SISTEMA INTERNACIONAL</span>
-        <p><strong>P5 (Aceleración):</strong> Un coche parte del reposo (\(0\ m/s\)) y alcanza \(20\ m/s\) en \(4\ s\). ¿Cuál es su aceleración?</p>
-        <div class="solution">
-            Datos: \(v_0 = 0\ m/s\); \(v_f = 20\ m/s\); \(t = 4\ s\)<br>
-            Resolución: \(a = \frac{20\ m/s - 0\ m/s}{4\ s} = \mathbf{5\ m/s^2}\)
-        </div>
-    </div>
-
-    <div class="problem-box">
-        <span class="tag-si">SISTEMA INTERNACIONAL</span>
-        <p><strong>P6 (Velocidad Final):</strong> Un móvil tiene una aceleración de \(3\ m/s^2\). Si su velocidad inicial era de \(2\ m/s\), ¿qué velocidad tendrá a los \(5\ s\)?</p>
-        <div class="solution">
-            Datos: \(v_0 = 2\ m/s\); \(a = 3\ m/s^2\); \(t = 5\ s\)<br>
-            Resolución: \(v_f = 2\ m/s + (3\ m/s^2 \cdot 5\ s) = \mathbf{17\ m/s}\)
-        </div>
-    </div>
-
-    <div class="problem-box">
-        <span class="tag-cambio">CAMBIO DE UNIDADES</span>
-        <p><strong>P7 (Tiempo):</strong> Un vehículo circula a \(72\ km/h\) y frena con una aceleración de \(-2\ m/s^2\). ¿Cuánto tarda en pararse (\(0\ m/s\))?</p>
-        <div class="solution">
-            Conversión: \(72\ km/h = 20\ m/s\)<br>
-            Resolución: \(0\ m/s = 20\ m/s + (-2\ m/s^2 \cdot t) \rightarrow \mathbf{t = 10\ s}\)
-        </div>
-    </div>
-
-    <div class="problem-box">
-        <span class="tag-cambio">CAMBIO DE UNIDADES</span>
-        <p><strong>P8 (Aceleración):</strong> Un tren pasa de \(0\ km/h\) a \(108\ km/h\) en \(10\ s\). Calcula su aceleración en \(m/s^2\).</p>
-        <div class="solution">
-            Conversión: \(108\ km/h = 30\ m/s\)<br>
-            Resolución: \(a = \frac{30\ m/s - 0\ m/s}{10\ s} = \mathbf{3\ m/s^2}\)
-        </div>
-    </div>
-
-    <footer style="text-align: center; margin-top: 40px; color: #888;">
-        © 2026 Academia Esparta - Disciplina y Rigor
-    </footer>
+<div style="text-align: center;">
+    <h1 style="color: var(--primary);">ACADEMIA ESPARTA</h1>
+    <p>"Pon a prueba tus conocimientos de Cinemática"</p>
 </div>
+
+<div class="card">
+    <h2>1. Simulador de Laboratorio (MRU)</h2>
+    <p>Introduce la distancia y el tiempo para calcular la velocidad automáticamente con sus magnitudes.</p>
+    <div class="interactivo-box">
+        Distancia: <input type="number" id="dist" placeholder="m"> m <br>
+        Tiempo: <input type="number" id="time" placeholder="s"> s <br><br>
+        <button onclick="calcular()">CALCULAR VELOCIDAD</button>
+        <div id="res-lab" class="resultado"></div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>2. Reto de Unidades</h2>
+    <p>¿Sabrías pasar esta velocidad a m/s? (Recuerda dividir por 3.6)</p>
+    <div class="interactivo-box">
+        <p><strong>Velocidad: 108 km/h</strong></p>
+        Respuesta: <input type="number" id="ans-conv"> m/s 
+        <button onclick="checkConv()">COMPROBAR</button>
+        <div id="feed-conv" class="feedback"></div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>3. Test de Teoría</h2>
+    <p>¿Cómo se llama la línea imaginaria que describe un móvil al moverse?</p>
+    <div class="interactivo-box">
+        <input type="radio" name="preg1" value="inc"> Desplazamiento <br>
+        <input type="radio" name="preg1" value="cor"> Trayectoria <br>
+        <input type="radio" name="preg1" value="inc"> Posición <br><br>
+        <button onclick="checkTest()">ENVIAR RESPUESTA</button>
+        <div id="feed-test" class="feedback"></div>
+    </div>
+</div>
+
+<div style="text-align: center;" class="no-print">
+    <button onclick="window.print()" style="background: var(--accent); color: black;">🖨️ IMPRIMIR FICHA DE TRABAJO</button>
+</div>
+
+<script>
+    function calcular() {
+        const d = document.getElementById('dist').value;
+        const t = document.getElementById('time').value;
+        if(d && t && t != 0) {
+            const v = (d / t).toFixed(2);
+            document.getElementById('res-lab').innerHTML = "Resultado: " + v + " m/s";
+        } else {
+            document.getElementById('res-lab').innerHTML = "Por favor, introduce datos válidos.";
+        }
+    }
+
+    function checkConv() {
+        const ans = document.getElementById('ans-conv').value;
+        const feed = document.getElementById('feed-conv');
+        if(ans == 30) {
+            feed.innerHTML = "¡Correcto! 108 / 3.6 = 30 m/s";
+            feed.className = "feedback correcto";
+        } else {
+            feed.innerHTML = "Inténtalo de nuevo. Pista: Divide 108 entre 3.6";
+            feed.className = "feedback incorrecto";
+        }
+    }
+
+    function checkTest() {
+        const selected = document.querySelector('input[name="preg1"]:checked');
+        const feed = document.getElementById('feed-test');
+        if(selected && selected.value === "cor") {
+            feed.innerHTML = "¡Excelente! Es la trayectoria.";
+            feed.className = "feedback correcto";
+        } else {
+            feed.innerHTML = "Incorrecto. Repasa la definición de Trayectoria.";
+            feed.className = "feedback incorrecto";
+        }
+    }
+</script>
 
 </body>
 </html>
