@@ -509,6 +509,74 @@
         fill: #ffffff;
       }
 
+      /* NUEVOS ESTILOS PARA LA NAVEGACIÓN DE RECURSOS */
+      .btn-nav {
+          background: white;
+          border: 2px solid var(--primary);
+          padding: 1rem;
+          border-radius: 12px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 1rem;
+          color: var(--primary);
+          width: 100%;
+          display: block;
+          text-align: center;
+      }
+
+      .btn-nav:hover {
+          background: var(--primary);
+          color: white;
+          transform: translateY(-3px);
+      }
+
+      .btn-back {
+          background: #666;
+          color: white;
+          padding: 0.5rem 1rem;
+          border: none;
+          border-radius: 5px;
+          margin-bottom: 1.5rem;
+          cursor: pointer;
+          font-size: 0.9rem;
+      }
+
+      .resource-section { 
+          display: none; 
+          animation: fadeIn 0.4s ease-out; 
+      }
+      .resource-section.active { display: block; }
+
+      @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+
+      .grid-3 {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          margin-top: 1.5rem;
+      }
+
+      .card-recurso {
+          padding: 1.5rem 1rem;
+          border-radius: 10px;
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          text-decoration: none;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: 0.3s;
+      }
+
+      .bg-apuntes { background: #3498db; }
+      .bg-imprimibles { background: #e67e22; }
+      .bg-interactivo { background: #9b59b6; }
+      .card-recurso:hover { opacity: 0.85; transform: scale(1.02); }
+
       /* Responsive adjustments */
       @media (max-width: 768px) {
         .hero-content h1 { font-size: 2.2rem; }
@@ -519,6 +587,7 @@
         nav ul { flex-wrap: wrap; gap: 0.6rem; }
         .whatsapp-float { bottom: 16px; right: 16px; width: 52px; height: 52px; }
         .whatsapp-float svg { width: 28px; height: 28px; }
+        .grid-3 { grid-template-columns: 1fr; }
       }
     </style>
 
@@ -745,7 +814,48 @@
               </div>
 
           </div>
-      </div>
+
+          <div style="margin-top: 5rem; border-top: 2px solid var(--light); padding-top: 3rem;">
+              <h3 style="text-align:center; color: var(--primary); font-size:2rem; margin-bottom: 2rem;">Recursos por Niveles (ESO)</h3>
+              
+              <div id="niv-cursos" class="resource-section active">
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                      <button class="btn-nav" onclick="irARecurso('niv-asignaturas', '1º ESO')">1º ESO</button>
+                      <button class="btn-nav" onclick="irARecurso('niv-asignaturas', '2º ESO')">2º ESO</button>
+                      <button class="btn-nav" onclick="irARecurso('niv-asignaturas', '3º ESO')">3º ESO</button>
+                      <button class="btn-nav" onclick="irARecurso('niv-asignaturas', '4º ESO')">4º ESO</button>
+                  </div>
+              </div>
+
+              <div id="niv-asignaturas" class="resource-section">
+                  <button class="btn-back" onclick="irARecurso('niv-cursos')">← Volver a Cursos</button>
+                  <h4 id="txt-curso-sel" style="color: var(--primary); margin-bottom: 1.5rem;"></h4>
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                      <button class="btn-nav" onclick="irARecurso('niv-temas', 'Matemáticas')">Matemáticas</button>
+                  </div>
+              </div>
+
+              <div id="niv-temas" class="resource-section">
+                  <button class="btn-back" onclick="irARecurso('niv-asignaturas')">← Volver a Asignaturas</button>
+                  <h4 style="color: var(--primary); margin-bottom: 1.5rem;">Temas del 3er Trimestre</h4>
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                      <button class="btn-nav" onclick="irARecurso('niv-recursos', 'Geometría')">Geometría</button>
+                      <button class="btn-nav" onclick="irARecurso('niv-recursos', 'Estadística')">Estadística</button>
+                      <button class="btn-nav" onclick="irARecurso('niv-recursos', 'Probabilidad')">Probabilidad</button>
+                  </div>
+              </div>
+
+              <div id="niv-recursos" class="resource-section">
+                  <button class="btn-back" onclick="irARecurso('niv-temas')">← Volver a Temas</button>
+                  <h4 id="txt-tema-sel" style="color: var(--primary); margin-bottom: 1.5rem;"></h4>
+                  <div class="grid-3">
+                      <div class="card-recurso bg-apuntes" onclick="alert('Cargando zona de apuntes...')">📚 ZONA DE APUNTES</div>
+                      <div class="card-recurso bg-imprimibles" onclick="alert('Cargando actividades imprimibles...')">🖨️ ACTIVIDADES IMPRIMIBLES</div>
+                      <div class="card-recurso bg-interactivo" onclick="alert('Iniciando actividades interactivas...')">🎮 JUEGOS INTERACTIVOS</div>
+                  </div>
+              </div>
+          </div>
+          </div>
     </section>
 
     <section id="speech" class="light">
@@ -841,5 +951,23 @@
        aria-label="Contactar por WhatsApp">
       <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.1-3.2-5.5-.3-8.4 2.4-11.2 2.5-2.5 5.5-6.4 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
     </a>
+
+    <script>
+      function irARecurso(idSeccion, texto = "") {
+          // Ocultar todas las subsecciones de recursos
+          document.querySelectorAll('.resource-section').forEach(s => s.classList.remove('active'));
+          
+          // Mostrar la sección seleccionada
+          document.getElementById(idSeccion).classList.add('active');
+
+          // Actualizar textos dinámicos
+          if(texto && idSeccion === 'niv-asignaturas') {
+              document.getElementById('txt-curso-sel').innerText = "Seleccionado: " + texto;
+          }
+          if(texto && idSeccion === 'niv-recursos') {
+              document.getElementById('txt-tema-sel').innerText = "Tema: " + texto;
+          }
+      }
+    </script>
   </body>
 </html>
