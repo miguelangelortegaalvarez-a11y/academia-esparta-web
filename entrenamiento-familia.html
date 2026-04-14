@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reglas de Derivación - Academia Esparta</title>
+    <title>Reglas de Derivación con Explicación - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -25,16 +25,15 @@
         .header {
             background: var(--esparta-verde);
             width: 100%;
-            max-width: 850px;
+            max-width: 900px;
             text-align: center;
             padding: 20px;
             border-radius: 15px;
             color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
-        .header h1 { font-family: 'Bangers', cursive; margin: 0; font-size: 2.5rem; letter-spacing: 2px; }
-        .header p { margin: 5px 0 0; color: var(--esparta-oro); font-weight: bold; text-transform: uppercase; font-size: 1rem; }
+        .header h1 { font-family: 'Bangers', cursive; margin: 0; font-size: 2.5rem; }
 
         .btn-imprimir {
             background: var(--esparta-oro);
@@ -45,128 +44,113 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            margin-bottom: 25px;
-            transition: 0.3s;
+            margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        .btn-imprimir:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 
         .ficha {
             background: white;
             width: 100%;
-            max-width: 850px;
-            padding: 40px;
+            max-width: 900px;
+            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.05);
             box-sizing: border-box;
         }
 
-        h2 { font-family: 'Bangers', cursive; color: #333; border-bottom: 2px solid var(--esparta-verde); display: inline-block; padding-bottom: 5px; margin-top: 0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-        .instructor-note {
-            background: #fff3cd;
+        th {
+            background-color: var(--esparta-verde);
+            color: white;
+            font-family: 'Bangers', cursive;
+            padding: 12px;
+            font-size: 1.2rem;
+        }
+
+        td {
             padding: 15px;
-            border-left: 5px solid #ffc107;
-            margin-bottom: 30px;
-            font-size: 1rem;
-            color: #856404;
-        }
-
-        .ejercicios-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .item-ejercicio {
-            padding: 20px;
             border-bottom: 1px solid #eee;
-            font-size: 1.1rem; /* Un poco más grande para las fórmulas */
+            vertical-align: middle;
         }
 
-        .soluciones-seccion {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 3px dashed var(--esparta-verde);
-        }
-        .soluciones-seccion h2 { color: #555; border-color: #555; }
-        
-        .sol-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            font-size: 0.95rem;
-            color: #444;
-        }
+        .col-func { width: 25%; }
+        .col-der { width: 30%; font-weight: bold; color: #d32f2f; }
+        .col-exp { width: 45%; font-size: 0.9rem; color: #555; background-color: #f9f9f9; }
 
-        /* CONFIGURACIÓN DE IMPRESIÓN */
         @media print {
+            .btn-imprimir, .header { display: none !important; }
             body { background: white; padding: 0; }
-            .header, .btn-imprimir, .instructor-note { display: none !important; }
-            .ficha { box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
-            .soluciones-seccion { page-break-before: always; } /* Soluciones en hoja nueva */
-            .ejercicios-grid, .sol-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
-            .item-ejercicio { padding: 10px; }
+            .ficha { max-width: 100%; box-shadow: none; }
+            th { background-color: #eee !important; color: black; border: 1px solid #ccc; }
+            td { border: 1px solid #ccc; }
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>REGLAS DE DERIVACIÓN</h1>
-        <p>Entrenamiento de Guerreros - Academia Esparta</p>
+        <h1>REGLAS DE DERIVACIÓN: GUÍA PASO A PASO</h1>
+        <div style="color: var(--esparta-oro); font-weight: bold;">ACADEMIA ESPARTA</div>
     </div>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR O PDF</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR GUÍA COMPLETA</button>
 
     <div class="ficha">
-        <h2>Ejercicio 9</h2>
-        <div class="instructor-note">
-            Halla la derivada de cada una de las siguientes funciones aplicando las reglas correspondientes (potencia, producto, cociente, cadena).
-        </div>
-
-        <div class="ejercicios-grid">
-            <div class="item-ejercicio">a) \( f(x) = x^4 - 7x^2 + 9 \)</div>
-            <div class="item-ejercicio">c) \( f(x) = \frac{x+1}{x^2-4} \)</div>
-            <div class="item-ejercicio">e) \( f(x) = \frac{2x}{x+1} \)</div>
-            <div class="item-ejercicio">g) \( f(x) = x \cdot \text{sen}(x) \)</div>
-            <div class="item-ejercicio">i) \( f(x) = 3e^x + 5 \)</div>
-
-            <div class="item-ejercicio">b) \( f(x) = (x^2 + 1) \cdot e^x \)</div>
-            <div class="item-ejercicio">d) \( f(x) = x^2 \cdot \ln(x) \)</div>
-            <div class="item-ejercicio">f) \( f(x) = \frac{x^3+1}{x^2+2x+3} \)</div>
-            <div class="item-ejercicio">h) \( f(x) = 3\cos(x) + 2\text{tg}(x) \)</div>
-            <div class="item-ejercicio">j) \( f(x) = 2^x + \log_2(x) \)</div>
-        </div>
-
-        <div class="soluciones-seccion">
-            <h2>Clave de Soluciones</h2>
-            <div class="sol-grid">
-                <div>a) \( f'(x) = 4x^3 - 14x \)</div>
-                <div>c) \( f'(x) = \frac{-x^2-2x-4}{(x^2-4)^2} \)</div>
-                <div>e) \( f'(x) = \frac{2}{(x+1)^2} \)</div>
-                <div>g) \( f'(x) = \text{sen}(x) + x\cos(x) \)</div>
-                <div>i) \( f'(x) = 3e^x \)</div>
-
-                <div>b) \( f'(x) = e^x(x^2 + 2x + 1) \)</div>
-                <div>d) \( f'(x) = x(2\ln(x) + 1) \)</div>
-                <div>f) \( f'(x) = \frac{x^4+4x^3+9x^2-2x-2}{(x^2+2x+3)^2} \)</div>
-                <div>h) \( f'(x) = -3\text{sen}(x) + \frac{2}{\cos^2(x)} \)</div>
-                <div>j) \( f'(x) = 2^x\ln(2) + \frac{1}{x\ln(2)} \)</div>
-            </div>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Función \( f(x) \)</th>
+                    <th>Derivada \( f'(x) \)</th>
+                    <th>Explicación Espartana</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-func">\( x^4 - 7x^2 + 9 \)</td>
+                    <td class="col-der">\( 4x^3 - 14x \)</td>
+                    <td class="col-exp"><b>Regla de la potencia:</b> Bajamos el exponente multiplicando y restamos uno al grado. La derivada de una constante (9) es 0.</td>
+                </tr>
+                <tr>
+                    <td class="col-func">\( (x^2 + 1) e^x \)</td>
+                    <td class="col-der">\( e^x(x^2 + 2x + 1) \)</td>
+                    <td class="col-exp"><b>Regla del producto:</b> Derivada del primero por el segundo sin derivar + primero sin derivar por la derivada del segundo. Luego se saca factor común \( e^x \).</td>
+                </tr>
+                <tr>
+                    <td class="col-func">\( \frac{x+1}{x^2-4} \)</td>
+                    <td class="col-der">\( \frac{-x^2-2x-4}{(x^2-4)^2} \)</td>
+                    <td class="col-exp"><b>Regla del cociente:</b> (Derivada numerador × denominador) - (numerador × derivada denominador), todo partido por el denominador al cuadrado.</td>
+                </tr>
+                <tr>
+                    <td class="col-func">\( x^2 \ln x \)</td>
+                    <td class="col-der">\( x(2\ln x + 1) \)</td>
+                    <td class="col-exp"><b>Regla del producto:</b> Aplicamos \( u'v + uv' \). Como \( ( \ln x )' = 1/x \), al simplificar \( x^2 \cdot (1/x) \) queda solo \( x \).</td>
+                </tr>
+                <tr>
+                    <td class="col-func">\( \frac{2x}{x+1} \)</td>
+                    <td class="col-der">\( \frac{2}{(x+1)^2} \)</td>
+                    <td class="col-exp"><b>Regla del cociente:</b> Al operar el numerador \( 2(x+1) - 2x \), las \( 2x \) se cancelan y queda solo el 2.</td>
+                </tr>
+                <tr>
+                    <td class="col-func">\( x \cdot \text{sen } x \)</td>
+                    <td class="col-der">\( \text{sen } x + x \cos x \)</td>
+                    <td class="col-exp"><b>Producto simple:</b> Derivada de \( x \) es 1. Derivada de \( \text{sen } x \) es \( \cos x \).</td>
+                </tr>
+                <tr>
+                    <td class="col-func">\( 2^x + \log_2 x \)</td>
+                    <td class="col-der">\( 2^x \ln 2 + \frac{1}{x \ln 2} \)</td>
+                    <td class="col-exp"><b>Exponenciales y Logaritmos:</b> La derivada de \( a^x \) requiere el logaritmo natural de la base.</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-            }
-        };
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
 </body>
 </html>
