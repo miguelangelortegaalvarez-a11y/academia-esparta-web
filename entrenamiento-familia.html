@@ -33,23 +33,23 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
-        .header h1 { font-family: 'Bangers', cursive; margin: 0; font-size: 2.2rem; letter-spacing: 2px; }
-        .header p { margin: 5px 0 0; color: var(--esparta-oro); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; }
+        .header h1 { font-family: 'Bangers', cursive; margin: 0; font-size: 2.5rem; letter-spacing: 2px; }
+        .header p { margin: 5px 0 0; color: var(--esparta-oro); font-weight: bold; text-transform: uppercase; font-size: 1rem; }
 
         .btn-imprimir {
             background: var(--esparta-oro);
             color: black;
             font-family: 'Bangers', cursive;
-            font-size: 1.4rem;
-            padding: 12px 25px;
+            font-size: 1.5rem;
+            padding: 15px 30px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        .btn-imprimir:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
+        .btn-imprimir:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 
         .ficha {
             background: white;
@@ -57,50 +57,57 @@
             max-width: 850px;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            box-shadow: 0 0 25px rgba(0,0,0,0.05);
             box-sizing: border-box;
         }
 
+        h2 { font-family: 'Bangers', cursive; color: #333; border-bottom: 2px solid var(--esparta-verde); display: inline-block; padding-bottom: 5px; margin-top: 0; }
+
         .instructor-note {
             background: #fff3cd;
-            padding: 10px;
+            padding: 15px;
             border-left: 5px solid #ffc107;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            color: #856404;
         }
 
         .ejercicios-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
         .item-ejercicio {
-            padding: 15px;
+            padding: 20px;
             border-bottom: 1px solid #eee;
+            font-size: 1.1rem; /* Un poco más grande para las fórmulas */
         }
 
         .soluciones-seccion {
-            margin-top: 50px;
-            padding-top: 20px;
+            margin-top: 60px;
+            padding-top: 30px;
             border-top: 3px dashed var(--esparta-verde);
         }
-        .soluciones-seccion h2 { font-family: 'Bangers', cursive; color: #555; }
+        .soluciones-seccion h2 { color: #555; border-color: #555; }
         
         .sol-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            font-size: 0.85rem;
+            gap: 20px;
+            font-size: 0.95rem;
             color: #444;
         }
 
-        /* ESTILOS PARA IMPRESIÓN */
+        /* CONFIGURACIÓN DE IMPRESIÓN */
         @media print {
             body { background: white; padding: 0; }
             .header, .btn-imprimir, .instructor-note { display: none !important; }
             .ficha { box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
-            .soluciones-seccion { page-break-before: always; }
-            .ejercicios-grid, .sol-grid { grid-template-columns: 1fr 1fr; }
+            .soluciones-seccion { page-break-before: always; } /* Soluciones en hoja nueva */
+            .ejercicios-grid, .sol-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .item-ejercicio { padding: 10px; }
         }
     </style>
 </head>
@@ -108,47 +115,58 @@
 
     <div class="header">
         <h1>REGLAS DE DERIVACIÓN</h1>
-        <p>Entrenamiento Avanzado - Academia Esparta</p>
+        <p>Entrenamiento de Guerreros - Academia Esparta</p>
     </div>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ GENERAR PDF / IMPRIMIR</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR O PDF</button>
 
     <div class="ficha">
+        <h2>Ejercicio 9</h2>
         <div class="instructor-note">
-            <strong>Ejercicio 9:</strong> Halla la derivada de cada una de las siguientes funciones aplicando las reglas correspondientes (potencia, producto, cociente, cadena).
+            Halla la derivada de cada una de las siguientes funciones aplicando las reglas correspondientes (potencia, producto, cociente, cadena).
         </div>
 
         <div class="ejercicios-grid">
-            <div class="item-ejercicio">a) $f(x) = x^4 - 7x^2 + 9$</div>
-            <div class="item-ejercicio">b) $f(x) = (x^2 + 1) e^x$</div>
-            <div class="item-ejercicio">c) $f(x) = \frac{x+1}{x^2-4}$</div>
-            <div class="item-ejercicio">d) $f(x) = x^2 \ln x$</div>
-            <div class="item-ejercicio">e) $f(x) = \frac{2x}{x+1}$</div>
-            <div class="item-ejercicio">f) $f(x) = \frac{x^3+1}{x^2+2x+3}$</div>
-            <div class="item-ejercicio">g) $f(x) = x \text{ sen } x$</div>
-            <div class="item-ejercicio">h) $f(x) = 3 \cos x + 2\text{tg } x$</div>
-            <div class="item-ejercicio">i) $f(x) = 3e^x + 5$</div>
-            <div class="item-ejercicio">j) $f(x) = 2^x + \log_2 x$</div>
+            <div class="item-ejercicio">a) \( f(x) = x^4 - 7x^2 + 9 \)</div>
+            <div class="item-ejercicio">c) \( f(x) = \frac{x+1}{x^2-4} \)</div>
+            <div class="item-ejercicio">e) \( f(x) = \frac{2x}{x+1} \)</div>
+            <div class="item-ejercicio">g) \( f(x) = x \cdot \text{sen}(x) \)</div>
+            <div class="item-ejercicio">i) \( f(x) = 3e^x + 5 \)</div>
+
+            <div class="item-ejercicio">b) \( f(x) = (x^2 + 1) \cdot e^x \)</div>
+            <div class="item-ejercicio">d) \( f(x) = x^2 \cdot \ln(x) \)</div>
+            <div class="item-ejercicio">f) \( f(x) = \frac{x^3+1}{x^2+2x+3} \)</div>
+            <div class="item-ejercicio">h) \( f(x) = 3\cos(x) + 2\text{tg}(x) \)</div>
+            <div class="item-ejercicio">j) \( f(x) = 2^x + \log_2(x) \)</div>
         </div>
 
         <div class="soluciones-seccion">
             <h2>Clave de Soluciones</h2>
             <div class="sol-grid">
-                <div>a) $f'(x) = 4x^3 - 14x$</div>
-                <div>b) $f'(x) = e^x(x^2 + 2x + 1)$</div>
-                <div>c) $f'(x) = \frac{-x^2-2x-4}{(x^2-4)^2}$</div>
-                <div>d) $f'(x) = x(2\ln x + 1)$</div>
-                <div>e) $f'(x) = \frac{2}{(x+1)^2}$</div>
-                <div>f) $f'(x) = \frac{x^4+4x^3+9x^2-2x-2}{(x^2+2x+3)^2}$</div>
-                <div>g) $f'(x) = \text{sen } x + x \cos x$</div>
-                <div>h) $f'(x) = -3 \text{ sen } x + \frac{2}{\cos^2 x}$</div>
-                <div>i) $f'(x) = 3e^x$</div>
-                <div>j) $f'(x) = 2^x \ln 2 + \frac{1}{x \ln 2}$</div>
+                <div>a) \( f'(x) = 4x^3 - 14x \)</div>
+                <div>c) \( f'(x) = \frac{-x^2-2x-4}{(x^2-4)^2} \)</div>
+                <div>e) \( f'(x) = \frac{2}{(x+1)^2} \)</div>
+                <div>g) \( f'(x) = \text{sen}(x) + x\cos(x) \)</div>
+                <div>i) \( f'(x) = 3e^x \)</div>
+
+                <div>b) \( f'(x) = e^x(x^2 + 2x + 1) \)</div>
+                <div>d) \( f'(x) = x(2\ln(x) + 1) \)</div>
+                <div>f) \( f'(x) = \frac{x^4+4x^3+9x^2-2x-2}{(x^2+2x+3)^2} \)</div>
+                <div>h) \( f'(x) = -3\text{sen}(x) + \frac{2}{\cos^2(x)} \)</div>
+                <div>j) \( f'(x) = 2^x\ln(2) + \frac{1}{x\ln(2)} \)</div>
             </div>
         </div>
     </div>
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 </body>
 </html>
