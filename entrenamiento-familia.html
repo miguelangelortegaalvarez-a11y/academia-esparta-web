@@ -3,154 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reglas de Derivación con Explicación - Academia Esparta</title>
+    <title>Apuntes de Derivadas - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --esparta-verde: #0e9343;
             --esparta-oro: #f1c40f;
-            --fondo-suave: #e8f5e9;
+            --fondo-apuntes: #fcfcfc;
         }
 
         body {
             font-family: 'Kalam', cursive;
-            background-color: var(--fondo-suave);
+            background-color: #f0f2f0;
             margin: 0;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            color: #333;
+        }
+
+        .contenedor {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .header {
-            background: var(--esparta-verde);
-            width: 100%;
-            max-width: 900px;
             text-align: center;
-            padding: 20px;
-            border-radius: 15px;
+            background: var(--esparta-verde);
             color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
         }
-        .header h1 { font-family: 'Bangers', cursive; margin: 0; font-size: 2.5rem; }
+        .header h1 { font-family: 'Bangers', cursive; font-size: 3rem; margin: 0; }
+        .header p { font-size: 1.2rem; color: var(--esparta-oro); margin-top: 10px; text-transform: uppercase; letter-spacing: 2px; }
 
         .btn-imprimir {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 30px auto;
             background: var(--esparta-oro);
             color: black;
             font-family: 'Bangers', cursive;
-            font-size: 1.5rem;
-            padding: 15px 30px;
-            border: none;
+            padding: 15px 40px;
             border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            border: none;
             cursor: pointer;
-            margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .ficha {
-            background: white;
-            width: 100%;
-            max-width: 900px;
-            padding: 30px;
-            border-radius: 10px;
-            box-sizing: border-box;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th {
-            background-color: var(--esparta-verde);
-            color: white;
+        h2 {
+            color: var(--esparta-verde);
+            border-bottom: 3px solid var(--esparta-oro);
+            padding-bottom: 10px;
+            margin-top: 40px;
             font-family: 'Bangers', cursive;
-            padding: 12px;
-            font-size: 1.2rem;
+            font-size: 2rem;
         }
 
-        td {
+        .regla-box {
+            background: #f9f9f9;
+            border-left: 8px solid var(--esparta-verde);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .formula {
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 15px 0;
+            color: #d32f2f;
+        }
+
+        .ejemplos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .ejemplo-item {
+            background: white;
             padding: 15px;
-            border-bottom: 1px solid #eee;
-            vertical-align: middle;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
         }
 
-        .col-func { width: 25%; }
-        .col-der { width: 30%; font-weight: bold; color: #d32f2f; }
-        .col-exp { width: 45%; font-size: 0.9rem; color: #555; background-color: #f9f9f9; }
+        .ejemplo-item b { color: var(--esparta-verde); }
 
         @media print {
-            .btn-imprimir, .header { display: none !important; }
+            .btn-imprimir, .header p { display: none; }
             body { background: white; padding: 0; }
-            .ficha { max-width: 100%; box-shadow: none; }
-            th { background-color: #eee !important; color: black; border: 1px solid #ccc; }
-            td { border: 1px solid #ccc; }
+            .contenedor { box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
+            .regla-box { page-break-inside: avoid; border-color: black; }
         }
     </style>
+
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
-    <div class="header">
-        <h1>REGLAS DE DERIVACIÓN: GUÍA PASO A PASO</h1>
-        <div style="color: var(--esparta-oro); font-weight: bold;">ACADEMIA ESPARTA</div>
+    <div class="contenedor">
+        <div class="header">
+            <h1>MANUAL DEL GUERRERO: DERIVADAS</h1>
+            <p>Academia Esparta - El Arte de la Derivación</p>
+        </div>
+
+        <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR APUNTES</button>
+
+        <div class="regla-box">
+            <h2>1. Derivada de una Potencia</h2>
+            <div class="formula">
+                Si \( f(x) = x^n \) &rarr; \( f'(x) = n \cdot x^{n-1} \)
+            </div>
+            <div class="ejemplos">
+                <div class="ejemplo-item">
+                    <b>Guerrero Base:</b><br>
+                    \( f(x) = x^5 \)<br>
+                    \( f'(x) = 5x^4 \)
+                </div>
+                <div class="ejemplo-item">
+                    <b>Guerrero Élite:</b><br>
+                    \( f(x) = \frac{1}{x^3} = x^{-3} \)<br>
+                    \( f'(x) = -3x^{-4} = -\frac{3}{x^4} \)
+                </div>
+            </div>
+        </div>
+
+        <div class="regla-box">
+            <h2>2. Derivada de un Producto</h2>
+            <div class="formula">
+                Si \( f(x) = u \cdot v \) &rarr; \( f'(x) = u' \cdot v + u \cdot v' \)
+            </div>
+            <div class="ejemplos">
+                <div class="ejemplo-item">
+                    <b>Guerrero Base:</b><br>
+                    \( f(x) = x^2 \cdot \text{sen}(x) \)<br>
+                    \( f'(x) = 2x \cdot \text{sen}(x) + x^2 \cdot \cos(x) \)
+                </div>
+                <div class="ejemplo-item">
+                    <b>Guerrero Élite:</b><br>
+                    \( f(x) = e^x \cdot \ln(x) \)<br>
+                    \( f'(x) = e^x \ln(x) + e^x \cdot \frac{1}{x} \)
+                </div>
+            </div>
+        </div>
+
+        <div class="regla-box">
+            <h2>3. Derivada de un Cociente</h2>
+            <div class="formula">
+                Si \( f(x) = \frac{u}{v} \) &rarr; \( f'(x) = \frac{u' \cdot v - u \cdot v'}{v^2} \)
+            </div>
+            <div class="ejemplos">
+                <div class="ejemplo-item">
+                    <b>Guerrero Base:</b><br>
+                    \( f(x) = \frac{x+1}{x} \)<br>
+                    \( f'(x) = \frac{1 \cdot x - (x+1) \cdot 1}{x^2} = -\frac{1}{x^2} \)
+                </div>
+                <div class="ejemplo-item">
+                    <b>Guerrero Élite:</b><br>
+                    \( f(x) = \frac{e^x}{x^2} \)<br>
+                    \( f'(x) = \frac{e^x \cdot x^2 - e^x \cdot 2x}{x^4} = \frac{e^x(x-2)}{x^3} \)
+                </div>
+            </div>
+        </div>
+
+        <div class="regla-box">
+            <h2>4. Regla de la Cadena (Composición)</h2>
+            <div class="formula">
+                Si \( f(x) = g(h(x)) \) &rarr; \( f'(x) = g'(h(x)) \cdot h'(x) \)
+            </div>
+            <div class="ejemplos">
+                <div class="ejemplo-item">
+                    <b>Guerrero Base:</b><br>
+                    \( f(x) = \text{sen}(x^2) \)<br>
+                    \( f'(x) = \cos(x^2) \cdot 2x = 2x \cos(x^2) \)
+                </div>
+                <div class="ejemplo-item">
+                    <b>Guerrero Élite:</b><br>
+                    \( f(x) = \ln(x^3 + 2x) \)<br>
+                    \( f'(x) = \frac{1}{x^3 + 2x} \cdot (3x^2 + 2) \)
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR GUÍA COMPLETA</button>
-
-    <div class="ficha">
-        <table>
-            <thead>
-                <tr>
-                    <th>Función \( f(x) \)</th>
-                    <th>Derivada \( f'(x) \)</th>
-                    <th>Explicación Espartana</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="col-func">\( x^4 - 7x^2 + 9 \)</td>
-                    <td class="col-der">\( 4x^3 - 14x \)</td>
-                    <td class="col-exp"><b>Regla de la potencia:</b> Bajamos el exponente multiplicando y restamos uno al grado. La derivada de una constante (9) es 0.</td>
-                </tr>
-                <tr>
-                    <td class="col-func">\( (x^2 + 1) e^x \)</td>
-                    <td class="col-der">\( e^x(x^2 + 2x + 1) \)</td>
-                    <td class="col-exp"><b>Regla del producto:</b> Derivada del primero por el segundo sin derivar + primero sin derivar por la derivada del segundo. Luego se saca factor común \( e^x \).</td>
-                </tr>
-                <tr>
-                    <td class="col-func">\( \frac{x+1}{x^2-4} \)</td>
-                    <td class="col-der">\( \frac{-x^2-2x-4}{(x^2-4)^2} \)</td>
-                    <td class="col-exp"><b>Regla del cociente:</b> (Derivada numerador × denominador) - (numerador × derivada denominador), todo partido por el denominador al cuadrado.</td>
-                </tr>
-                <tr>
-                    <td class="col-func">\( x^2 \ln x \)</td>
-                    <td class="col-der">\( x(2\ln x + 1) \)</td>
-                    <td class="col-exp"><b>Regla del producto:</b> Aplicamos \( u'v + uv' \). Como \( ( \ln x )' = 1/x \), al simplificar \( x^2 \cdot (1/x) \) queda solo \( x \).</td>
-                </tr>
-                <tr>
-                    <td class="col-func">\( \frac{2x}{x+1} \)</td>
-                    <td class="col-der">\( \frac{2}{(x+1)^2} \)</td>
-                    <td class="col-exp"><b>Regla del cociente:</b> Al operar el numerador \( 2(x+1) - 2x \), las \( 2x \) se cancelan y queda solo el 2.</td>
-                </tr>
-                <tr>
-                    <td class="col-func">\( x \cdot \text{sen } x \)</td>
-                    <td class="col-der">\( \text{sen } x + x \cos x \)</td>
-                    <td class="col-exp"><b>Producto simple:</b> Derivada de \( x \) es 1. Derivada de \( \text{sen } x \) es \( \cos x \).</td>
-                </tr>
-                <tr>
-                    <td class="col-func">\( 2^x + \log_2 x \)</td>
-                    <td class="col-der">\( 2^x \ln 2 + \frac{1}{x \ln 2} \)</td>
-                    <td class="col-exp"><b>Exponenciales y Logaritmos:</b> La derivada de \( a^x \) requiere el logaritmo natural de la base.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 </html>
