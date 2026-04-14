@@ -1,92 +1,834 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Ejercicios Química - Academia Esparta</title>
+  <head>
+    <meta name="facebook-domain-verification" content="6pmrkbt48x8ehol0ilhrolp6331ide" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academia Esparta – Refuerzo y apoyo escolar en Torremolinos</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
-        :root { --primary: #2c3e50; --accent: #3498db; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
-        .page { width: 210mm; min-height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        
-        /* Encabezado */
-        .header { border-bottom: 2px solid var(--primary); margin-bottom: 20px; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .header h1 { margin: 0; color: var(--primary); font-size: 24px; }
-        .info-alumno { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; font-weight: bold; }
-        .info-alumno div { border-bottom: 1px solid #ccc; padding: 5px; }
+      :root {
+        --primary: #0e9343;
+        --secondary: #09834c;
+        --accent: #f16565;
+        --light: #f5fdf7;
+        --dark: #063c24;
+      }
 
-        /* Contenido */
-        h2 { background: var(--primary); color: white; padding: 5px 15px; font-size: 18px; border-radius: 4px; margin-top: 25px; }
-        .grid-ejercicios { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .item { border: 1px solid #eee; padding: 10px; border-radius: 4px; display: flex; flex-direction: column; }
-        .item span { font-size: 0.9em; color: #666; margin-bottom: 5px; }
-        .linea-respuesta { border-bottom: 1px dotted #000; margin-top: 10px; height: 20px; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        /* Estilos para Impresión */
-        @media print {
-            body { background: none; }
-            .page { margin: 0; box-shadow: none; width: 100%; }
-            .no-print { display: none; }
-            h2 { background: #eee !important; color: black !important; border: 1px solid #000; }
+      body {
+        line-height: 1.6;
+        color: var(--dark);
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .fa-brands {
+        font-family: "Font Awesome 6 Brands" !important;
+        font-weight: 400 !important;
+      }
+
+      .fa-solid {
+        font-family: "Font Awesome 6 Free" !important;
+        font-weight: 900 !important;
+      }
+
+      .fa-regular {
+        font-family: "Font Awesome 6 Free" !important;
+        font-weight: 400 !important;
+      }
+
+      header {
+        background: var(--light);
+        padding: 1rem 2rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+
+      header .logo {
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--primary);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1.2rem;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: var(--primary);
+      }
+
+      /* Hero section */
+      #hero {
+        background: url('hero.PNG') no-repeat center center / cover;
+        min-height: 75vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-overlay {
+        width: 100%;
+        min-height: 75vh;
+        background: rgba(6, 60, 36, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .hero-content {
+        max-width: 980px;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.22);
+        border: 1px solid rgba(255,255,255,0.34);
+        color: #ffffff;
+        padding: 0.62rem 1rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.38);
+      }
+
+      .hero-content h1 {
+        font-size: 3rem;
+        line-height: 1.12;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: 0 4px 14px rgba(0, 0, 0, 0.52);
+      }
+
+      .hero-content p {
+        font-size: 1.12rem;
+        margin-bottom: 1.5rem;
+        max-width: 850px;
+        margin-left: auto;
+        margin-right: auto;
+        color: rgba(255,255,255,0.96);
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.48);
+        font-weight: 500;
+      }
+
+      .hero-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.9rem;
+        flex-wrap: wrap;
+        margin-top: 0.8rem;
+      }
+
+      .hero-btn {
+        display: inline-block;
+        background: var(--primary);
+        color: #ffffff;
+        padding: 1rem 1.6rem;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      }
+
+      .hero-btn:hover {
+        background: var(--secondary);
+      }
+
+      .hero-btn-secondary {
+        display: inline-block;
+        background: rgba(6, 60, 36, 0.28);
+        border: 1.5px solid rgba(255,255,255,0.42);
+        color: #ffffff;
+        padding: 1rem 1.4rem;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      }
+
+      .hero-btn-secondary:hover {
+        background: rgba(6, 60, 36, 0.42);
+      }
+
+      .hero-tags {
+        margin-top: 1.4rem;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+
+      .hero-tags span {
+        display: inline-block;
+        padding: 0.48rem 0.95rem;
+        border-radius: 999px;
+        background: rgba(6, 60, 36, 0.24);
+        border: 1px solid rgba(255,255,255,0.30);
+        color: #ffffff;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.42);
+      }
+
+      section {
+        padding: 4rem 2rem;
+      }
+
+      section.light {
+        background: var(--light);
+      }
+
+      /* ABOUT / QUIÉNES SOMOS */
+      #about .container {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      #about .text {
+        flex: 1 1 520px;
+        max-width: 600px;
+        text-align: justify;
+        text-justify: inter-word;
+        line-height: 1.6;
+      }
+
+      #about .image {
+        flex: 0 0 360px;
+        max-width: 360px;
+      }
+
+      #about .image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        object-fit: contain;
+      }
+
+      #about h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      @media (min-width: 768px) and (max-width: 1180px) {
+        #about .image {
+          flex: 0 0 320px;
+          max-width: 320px;
+          margin-top: 4.5rem;
         }
+      }
+
+      @media (max-width: 767px) {
+        #about .container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        #about .image {
+          width: 100%;
+          max-width: 520px;
+        }
+      }
+
+      .img-primaria {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        object-position: center 30%;
+        border-radius: 8px;
+      }
+
+      .img-bachiller {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        object-position: center 20%;
+        border-radius: 8px;
+      }
+
+      .img-secundaria {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        object-position: center 20%;
+        border-radius: 8px;
+      }
+
+      /* Levels cards */
+      #levels .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      #levels .card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 280px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        text-align: center;
+      }
+
+      #levels .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      #levels .card h4 {
+        font-size: 1.25rem;
+        margin: 1rem 0 0.5rem;
+        color: var(--primary);
+      }
+
+      #levels .card p {
+        padding: 0 1rem 1rem;
+        font-size: 0.9rem;
+        color: #444;
+        text-align: justify;
+        text-justify: inter-word;
+        hyphens: auto;
+        -webkit-hyphens: auto;
+      }
+
+      /* Services sections */
+      .service {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 1.2rem;
+      }
+
+      #speech {
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+      }
+
+      #speech .service {
+        margin-bottom: 0rem !important;
+      }
+
+      #psychology {
+        padding-top: 0.6 !important;
+        margin-top: 0 !important;
+      }
+
+      .service .icon {
+        font-size: 3rem;
+        color: var(--primary);
+      }
+
+      .service .content {
+        max-width: 600px;
+      }
+
+      .service .content h3 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      .service .content p {
+        margin-bottom: 1rem;
+        text-align: justify;
+        text-justify: inter-word;
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        line-height: 1.6;
+      }
+
+      /* Contact */
+      #contact .contact-container {
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      #contact .info {
+        flex: 2;
+      }
+
+      #contact h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      #contact ul {
+        list-style: none;
+        margin-bottom: 1rem;
+      }
+
+      #contact ul li {
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+      }
+
+      #contact ul li i {
+        margin-right: 0.5rem;
+        color: var(--primary);
+        width: 20px;
+        text-align: center;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 2rem;
+      }
+
+      footer .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: space-between;
+      }
+
+      footer .footer-container div {
+        flex: 1 1 200px;
+      }
+
+      footer h4 {
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      footer a {
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      .social-icons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 0.5rem;
+      }
+
+      .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.95rem;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .social-icons a svg {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+
+      .social-icons a:hover {
+        transform: translateX(3px);
+      }
+
+      /* CLASES DE COLORES CORPORATIVOS */
+      .icon-instagram { fill: #E4405F; } /* Rosa/Rojo Instagram */
+      .icon-facebook { fill: #1877F2; }  /* Azul Facebook */
+      .icon-whatsapp { fill: #25D366; }  /* Verde WhatsApp */
+
+      /* WhatsApp flotante redondo */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: #25D366;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        z-index: 9999;
+        transition: all 0.3s ease;
+      }
+
+      .whatsapp-float:hover {
+        transform: scale(1.08);
+      }
+
+      .whatsapp-float svg {
+        width: 32px;
+        height: 32px;
+        fill: #ffffff;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .hero-content h1 { font-size: 2.2rem; }
+        .hero-content p { font-size: 1rem; }
+        .hero-buttons { flex-direction: column; gap: 0.75rem; }
+        .hero-btn, .hero-btn-secondary { width: 100%; max-width: 320px; }
+        header { flex-direction: column; align-items: flex-start; padding: 0.75rem 1rem; }
+        nav ul { flex-wrap: wrap; gap: 0.6rem; }
+        .whatsapp-float { bottom: 16px; right: 16px; width: 52px; height: 52px; }
+        .whatsapp-float svg { width: 28px; height: 28px; }
+      }
     </style>
-</head>
-<body>
 
-<div class="no-print" style="text-align: center; padding: 20px;">
-    <button onclick="window.print()" style="padding: 15px 30px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
-        🖨️ Imprimir Ficha para Alumnos
-    </button>
-</div>
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG">
+    <link rel="apple-touch-icon" href="/favicon.PNG">
+  </head>
+  <body>
+    <header>
+      <div class="logo">Academia Esparta</div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#about">Nosotros</a></li>
+          <li><a href="quienes-somos.html">Quiénes somos</a></li>
+          <li><a href="#recursos">Recursos</a></li>
+          <li><a href="#levels">Refuerzo escolar</a></li>
+          <li><a href="#speech">Logopedia</a></li>
+          <li><a href="#psychology">Psicología</a></li>
+          <li><a href="inscripcion.html">Inscripción</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<div class="page">
-    <div class="header">
-        <h1>ACADEMIA ESPARTA</h1>
-        <div style="text-align: right;"><strong>Ficha de Química:</strong> Hidróxidos y Sales</div>
-    </div>
+    <section id="hero">
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <div class="hero-badge">Más de 15 años ayudando a alumnos en Torremolinos</div>
+          <h1>Tu hijo puede mejorar sus notas y ganar seguridad</h1>
+          <p>Grupos reducidos, atención personalizada y acompañamiento real para Primaria, ESO, Bachillerato y EBAU.</p>
 
-    <div class="info-alumno">
-        <div>Nombre: _________________________________</div>
-        <div>Curso: _________________</div>
-    </div>
+          <div class="hero-buttons">
+            <a href="inscripcion.html" class="hero-btn">Reserva tu plaza</a>
+            <a href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases" class="hero-btn-secondary" target="_blank" rel="noopener">
+              Escríbenos por WhatsApp
+            </a>
+          </div>
 
-    <h2>Sección 1: Hidróxidos (20 ejercicios)</h2>
-    <div class="grid-ejercicios" id="hidroxidos"></div>
+          <div class="hero-tags">
+            <span>Primaria</span>
+            <span>ESO</span>
+            <span>Bachillerato</span>
+            <span>EBAU</span>
+            <span>Grupos reducidos</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <h2>Sección 2: Sales Binarias (20 ejercicios)</h2>
-    <div class="grid-ejercicios" id="sales"></div>
-</div>
+    <section id="about" class="light">
+      <div class="container">
+        <div class="text">
+          <h3>Nosotros</h3>
+          <p>
+            Somos un centro de apoyo y refuerzo escolar en Torremolinos con <strong>más de 15 años de experiencia</strong>, dedicado a acompañar a alumnos de todos los niveles: Primaria, Secundaria, Bachillerato y preparación de EBAU.
+          </p>
 
-<script>
-    const datosHidroxidos = [
-        "NaOH", "Hidróxido de potasio", "Ca(OH)2", "Hidróxido de aluminio", "Fe(OH)3", 
-        "Hidróxido de hierro (II)", "Cu(OH)2", "Hidróxido de litio", "Mg(OH)2", "Hidróxido de plata",
-        "Pb(OH)4", "Hidróxido de oro (III)", "Zn(OH)2", "Hidróxido de bario", "Ni(OH)2",
-        "Hidróxido de cobalto (III)", "Sn(OH)2", "Hidróxido de cromo (III)", "KOH", "Hidróxido de amonio"
-    ];
+          <p>
+            Trabajamos con grupos reducidos y con profesores especializados en cada materia para ofrecer una atención personalizada y adaptada a las necesidades de cada estudiante.
+          </p>
 
-    const datosSales = [
-        "NaCl", "Cloruro de potasio", "MgCl2", "Sulfuro de hierro (II)", "KBr", 
-        "Ioduro de plata", "FeCl3", "Fluoruro de calcio", "CuS", "Bromuro de aluminio",
-        "PbI2", "Nitruro de magnesio", "LiF", "Sulfuro de sodio", "AgCl",
-        "Cloruro de cobre (II)", "ZnS", "Ioduro de potasio", "AlCl3", "Bromuro de hierro (III)"
-    ];
+          <p>
+            Nuestro objetivo es proporcionar un acompañamiento académico integral, reforzando conocimientos, hábitos de estudio y motivación para que cada alumno alcance su máximo potencial.
+          </p>
 
-    function generar(lista, idContenedor) {
-        const cont = document.getElementById(idContenedor);
-        lista.forEach((item, i) => {
-            cont.innerHTML += `
-                <div class="item">
-                    <span>Ejercicio ${i + 1}:</span>
-                    <strong>${item}</strong>
-                    <div class="linea-respuesta"></div>
-                </div>
-            `;
-        });
-    }
+          <div style="margin-top:1.5rem; text-align:left;">
+            <a href="inscripcion.html" style="display:inline-block;background: var(--primary);color:#fff;padding: 0.9rem 1.35rem;border-radius: 10px;text-decoration:none;font-weight:700;">
+              Reserva tu plaza
+            </a>
 
-    generar(datosHidroxidos, "hidroxidos");
-    generar(datosSales, "sales");
-</script>
+            <a href="inscripcion.html" style="display:block;margin-top:0.55rem;color:var(--primary);text-decoration:none;font-weight:500;font-size:0.95rem;">
+              Inscripción
+            </a>
+          </div>
+        </div>
+        <div class="image">
+          <img src="quienes-somos.PNG" alt="Equipo y aula de Academia Esparta" />
+        </div>
+      </div>
+    </section>
 
-</body>
+    <section id="levels">
+      <h3 style="text-align:center; color: var(--primary); font-size:2rem;">Método Esparta por etapas educativas</h3>
+      <div class="cards">
+        <div class="card">
+          <img src="primaria.PNG" alt="Primaria" class="img-primaria" />
+          <h4>Primaria</h4>
+          <p>
+            Refuerzo en lectoescritura, matemáticas básicas e inglés, adaptado al ritmo de cada alumno.
+            En Primaria no todos aprenden igual, por eso trabajamos de forma cercana y personalizada
+            para que construyan una base sólida desde el inicio.
+          </p>
+        </div>
+        <div class="card">
+          <img src="secundaria.PNG" alt="Secundaria" class="img-secundaria" />
+          <h4>Secundaria</h4>
+          <p>
+            Acompañamiento académico integral en ESO con refuerzo de materias específicas y técnicas de estudio.
+            Enseñamos a organizarse, planificar tareas y preparar exámenes con método, para que el alumno gane
+            autonomía, seguridad y hábitos de trabajo sólidos.
+          </p>
+        </div>
+        <div class="card">
+          <img src="bachiller.PNG" alt="Bachillerato y EBAU" class="img-bachiller" />
+          <h4>Bachillerato & EBAU</h4>
+          <p>
+            En Bachillerato trabajamos desde el primer día con un objetivo claro: lograr la mejor nota posible
+            para abrir puertas de futuro, sin perder lo más importante: una formación sólida y bien asentada.
+            Preparamos la EBAU de forma específica con exámenes reales.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="juegos" class="light">
+      <div style="max-width:1000px; margin:0 auto;">
+        <h3 style="text-align:center; color: var(--primary); font-size:2rem;">Juegos interactivos</h3>
+        <p style="text-align:center; max-width:800px; margin: 0.75rem auto 0; color: var(--dark);">
+          Recursos interactivos para practicar de forma dinámica y divertida. Accede a nuestros juegos de matemáticas e inglés.
+        </p>
+
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; margin-top:2rem;">
+          <div style="background:#fff; width:300px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); overflow:hidden; text-align:center;">
+            <div style="padding:1.5rem;">
+              <h4 style="color:var(--primary); font-size:1.35rem; margin-bottom:0.75rem;">Juegos de matemáticas</h4>
+              <p style="font-size:0.95rem; color:#444; margin-bottom:1.2rem;">
+                Practica cálculo y agilidad mental con actividades interactivas adaptadas a distintas edades.
+              </p>
+              <a href="/camino-matematico/" style="display:inline-block; background:var(--accent); color:#fff; padding:0.85rem 1.2rem; border-radius:10px; text-decoration:none; font-weight:700;">
+                Entrar
+              </a>
+            </div>
+          </div>
+
+          <div style="background:#fff; width:300px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); overflow:hidden; text-align:center;">
+            <div style="padding:1.5rem;">
+              <h4 style="color:var(--primary); font-size:1.35rem; margin-bottom:0.75rem;">Inglés interactivo</h4>
+              <p style="font-size:0.95rem; color:#444; margin-bottom:1.2rem;">
+                Refuerza vocabulario y comprensión con recursos interactivos pensados para aprender jugando.
+              </p>
+              <a href="/camino-ingles/" style="display:inline-block; background:var(--primary); color:#fff; padding:0.85rem 1.2rem; border-radius:10px; text-decoration:none; font-weight:700;">
+                Entrar
+              </a>
+            </div>
+          </div>
+
+          <div style="background:#fff; width:300px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); overflow:hidden; text-align:center;">
+            <div style="padding:1.5rem;">
+              <h4 style="color:var(--primary); font-size:1.35rem; margin-bottom:0.75rem;">Conciencia fonológica</h4>
+              <p style="font-size:0.95rem; color:#444; margin-bottom:1.2rem;">
+                Aprende las vocales y mejora la articulación con actividades visuales y divertidas.
+              </p>
+              <a href="./camino-letras/" style="display:inline-block; background:var(--primary); color:#fff; padding:0.85rem 1.2rem; border-radius:10px; text-decoration:none; font-weight:700;">
+                Entrar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recursos" style="background: #fff; padding: 4rem 2rem;">
+      <div style="max-width: 1000px; margin: 0 auto;">
+          <h3 style="text-align:center; color: var(--primary); font-size:2rem; margin-bottom: 1rem;">Materiales y Recursos Didácticos</h3>
+          <p style="text-align:center; max-width:700px; margin: 0 auto 3rem; color: #444;">
+              Descarga nuestras fichas exclusivas diseñadas para reforzar el aprendizaje en casa. Material gratuito y listo para imprimir.
+          </p>
+
+          <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:2rem;">
+              
+              <div style="background: var(--light); width:320px; border-radius:15px; padding:2rem; text-align:center; border: 1px solid rgba(14, 147, 67, 0.2);">
+                  <div style="font-size: 3rem; margin-bottom: 1rem;">📚</div>
+                  <h4 style="color:var(--primary); font-size:1.4rem; margin-bottom:1rem;">Lectoescritura</h4>
+                  <p style="font-size:0.9rem; color:#444; margin-bottom:1.5rem;">
+                      Grafomotricidad, vocales y primeras sílabas para peques de Infantil y 1º de Primaria.
+                  </p>
+                  <a href="./lectoescritura/" style="display:inline-block; background:var(--primary); color:#fff; padding:0.8rem 1.5rem; border-radius:10px; text-decoration:none; font-weight:700;">
+                      Ver materiales
+                  </a>
+              </div>
+
+              <div style="background: var(--light); width:320px; border-radius:15px; padding:2rem; text-align:center; border: 1px solid rgba(14, 147, 67, 0.2);">
+                  <div style="font-size: 3rem; margin-bottom: 1rem;">🔢</div>
+                  <h4 style="color:var(--primary); font-size:1.4rem; margin-bottom:1rem;">Mates Iniciales</h4>
+                  <p style="font-size:0.9rem; color:#444; margin-bottom:1.5rem;">
+                      Números del 1 al 10, conceptos espaciales y formas geométricas.
+                  </p>
+                  <a href="./mates-iniciales/index.html" style="display:inline-block; background:var(--primary); color:#fff; padding:0.8rem 1.5rem; border-radius:10px; text-decoration:none; font-weight:700;">
+                      Entrar
+                  </a>
+              </div>
+
+              <div style="background: var(--light); width:320px; border-radius:15px; padding:2rem; text-align:center; border: 1px solid rgba(14, 147, 67, 0.2);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📖</div>
+                <h4 style="color:var(--primary); font-size:1.4rem; margin-bottom:1rem;">Comprensión Lectora</h4>
+                <p style="font-size:0.9rem; color:#444; margin-bottom:1.5rem;">
+                    Textos adaptados desde infantil hasta 6º de primaria con preguntas de repaso.
+                </p>
+                <a href="./lectura-comprensiva.html" style="display:inline-block; background:var(--primary); color:#fff; padding:0.8rem 1.5rem; border-radius:10px; text-decoration:none; font-weight:700;">
+                    Ver materiales
+                </a>
+              </div>
+
+              <div style="background: var(--light); width:320px; border-radius:15px; padding:2rem; text-align:center; border: 1px solid rgba(14, 147, 67, 0.2);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🎮</div>
+                <h4 style="color:var(--primary); font-size:1.4rem; margin-bottom:1rem;">Juegos Interactivos</h4>
+                <p style="font-size:0.9rem; color:#444; margin-bottom:1.5rem;">
+                    Accede a nuestras actividades interactivas para practicar Inglés, Matemáticas y Fonología.
+                </p>
+                <a href="#juegos" style="display:inline-block; background:var(--accent); color:#fff; padding:0.8rem 1.5rem; border-radius:10px; text-decoration:none; font-weight:700;">
+                    Jugar ahora
+                </a>
+              </div>
+
+          </div>
+      </div>
+    </section>
+
+    <section id="speech" class="light">
+      <div class="service">
+        <i class="fa-solid fa-user-graduate icon"></i>
+        <div class="content">
+          <h3>Logopedia</h3>
+          <p>
+            Potenciamos la <strong>comunicación</strong> y favorecemos un desarrollo más eficaz del <strong>habla y del lenguaje</strong>. A través de tareas guiadas y adaptadas a la edad, se interviene en aspectos como la <strong>articulación e inteligibilidad</strong>, la conciencia fonológica, el <strong>vocabulario</strong>, la <strong>morfosintaxis</strong> (organización de palabras y construcción de frases), y la <strong>comprensión y expresión oral</strong>.
+            <br><br>
+            El trabajo se realiza de manera <strong>personalizada e individualizada</strong>, definiendo objetivos claros y ajustando el ritmo y el nivel de apoyo a las necesidades del alumno, para mejorar la <strong>claridad</strong>, la <strong>precisión</strong> y la <strong>seguridad comunicativa</strong> en el aula y en su día a día.
+          </p>
+          <a class="hero-btn" href="#contact" style="padding: 0.6rem 1rem; border-radius: 8px;">Más información</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="psychology" class="light">
+      <div class="service">
+        <i class="fa-solid fa-sun icon"></i>
+        <div class="content">
+          <h3>Psicología</h3>
+          <p>
+            Acompañamos a <strong>niños y adultos</strong> en el desarrollo del bienestar personal y emocional, favoreciendo un mejor equilibrio entre lo que sienten, piensan y hacen en su día a día. El trabajo se centra en aspectos como la <strong>gestión emocional</strong>, la <strong>motivación</strong>, la <strong>autoestima</strong>, la <strong>regulación de la conducta</strong> y el fortalecimiento de <strong>habilidades personales y sociales</strong> que influyen directamente en el ámbito académico, familiar y personal.
+            <br><br>
+            La intervención se realiza de manera <strong>personalizada e individualizada</strong>, estableciendo objetivos claros y adaptando el proceso a las necesidades de cada persona. El objetivo es proporcionar herramientas prácticas que ayuden a afrontar dificultades, mejorar el bienestar emocional y favorecer un desarrollo personal más seguro y equilibrado.
+          </p>
+          <a class="hero-btn" href="#contact" style="padding: 0.6rem 1rem; border-radius: 8px;">Más información</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3>Contacto</h3>
+      <div class="contact-container">
+        <div class="info">
+          <ul>
+            <li><i class="fa-solid fa-map-marker-alt"></i> Calle Rafael Quintana Rosado 8, 29620 Torremolinos (Málaga)</li>
+
+            <li><i class="fa-solid fa-phone"></i> <strong>Llámanos 👉 </strong><a href="tel:659407023">659 407 023</a></li>
+
+            <li><i class="fa-solid fa-envelope"></i> <strong>Escríbenos ✉️ </strong><a href="mailto:academiaesparta2012@gmail.com">academiaesparta2012@gmail.com</a></li>
+
+            <li>
+               <svg class="icon-whatsapp" style="width:18px; height:18px; margin-right: 8px;" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.1-3.2-5.5-.3-8.4 2.4-11.2 2.5-2.5 5.5-6.4 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+               <strong>WhatsApp 💬 </strong><a href="https://wa.me/34659407023" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+            </li>
+
+            <li>
+               <svg class="icon-instagram" style="width:18px; height:18px; margin-right: 8px;" viewBox="0 0 448 512"><path d="M224.1 141c-43.6 0-79 35.4-79 79 0 43.6 35.4 79 79 79s79-35.4 79-79c0-43.6-35.4-79-79-79zm0 128.1c-27.1 0-49.1-22-49.1-49.1s22-49.1 49.1-49.1 49.1 22 49.1 49.1-22 49.1-49.1 49.1zm150.2-141c-8.5-21.3-28.7-41.5-50-50-24.7-9.8-82.8-7.6-100.2-7.6-17.5 0-75.5-2.2-100.2 7.6-21.3 8.5-41.5 28.7-50 50-9.8 24.7-7.6 82.8-7.6 100.2 0 17.5-2.2 75.5 7.6 100.2 8.5 21.3 28.7 41.5 50 50 24.7 9.8 82.8 7.6 100.2 7.6 17.5 0 75.5 2.2 100.2-7.6 21.3-8.5 41.5-28.7 50-50 9.8-24.7 7.6-82.8 7.6-100.2 0-17.5 2.2-75.5-7.6-100.2zm-23 209.7c-5.3 13.3-18.3 26.3-31.6 31.6-19.9 7.9-69.2 6.1-85.5 6.1s-65.6 1.8-85.5-6.1c-13.3-5.3-26.3-18.3-31.6-31.6-7.9-19.9-6.1-69.2-6.1-85.5s-1.8-65.6 6.1-85.5c5.3-13.3 18.3-26.3 31.6-31.6 19.9-7.9 69.2-6.1 85.5-6.1s65.6-1.8 85.5 6.1c13.3 5.3 26.3 18.3 31.6 31.6 7.9 19.9 6.1 69.2 6.1 85.5s1.8 65.6-6.1 85.5zm-22.6-188.1c0 10.2 8.2 18.4 18.4 18.4s18.4-8.2 18.4-18.4-8.2-18.4-18.4-18.4-18.4 8.2-18.4 18.4z"/></svg>
+               <strong>Instagram 📷 </strong><a href="https://www.instagram.com/academia_esparta_torremolinos/" target="_blank" rel="noopener">@academia_esparta_torremolinos</a>
+            </li>
+          </ul>
+          <h4>Horario de atención telefónica</h4>
+          <p>Lunes a viernes: 09:00–14:00 y 16:00–21:00</p>
+          <h4>Horario de clases</h4>
+          <p>Lunes a viernes: 16:00–22:00</p>
+        </div>
+      </div>
+      <div style="margin-top:2rem;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m12!1m3!1d3202.664448209867!2d-4.5028481!3d36.6224155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72fb6896220803%3A0x6b49e4871d530f2!2sC.%20Rafael%20Quintana%20Rosado%2C%208%2C%2029620%20Torremolinos%2C%20M%C3%A1laga!5e0!3m2!1ses!2ses!4v1712831800000!5m2!1ses!2ses" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-container">
+        <div>
+          <h4>Academia Esparta</h4>
+          <p>Centro de refuerzo y apoyo escolar en Torremolinos.</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p>Calle Rafael Quintana Rosado 8<br/>29620 Torremolinos (Málaga)</p>
+          <p><strong>Llámanos 👉 </strong><a href="tel:659407023">659 407 023</a></p>
+          <p><strong>Escríbenos ✉️ </strong><a href="mailto:academiaesparta2012@gmail.com">academiaesparta2012@gmail.com</a></p>
+          <p><strong>WhatsApp 💬 </strong><a href="https://wa.me/34659407023" target="_blank" rel="noopener">WhatsApp</a></p>
+        </div>
+        <div>
+          <h4>Síguenos</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/academia_esparta_torremolinos/" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/academiaesparta16" target="_blank">Facebook</a>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.8rem; text-align:center;">© 2025 Academia Esparta. Todos los derechos reservados.</p>
+    </footer>
+
+    <a href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases"
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener"
+       aria-label="Contactar por WhatsApp">
+      <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.1-3.2-5.5-.3-8.4 2.4-11.2 2.5-2.5 5.5-6.4 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </a>
+  </body>
 </html>
