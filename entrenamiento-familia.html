@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo Mental - Academia Esparta</title>
+    <title>Ficha de Cálculo - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
     <style>
         :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; }
@@ -12,120 +12,127 @@
 
         /* Interfaz Web */
         .no-print-header { background: var(--esparta-verde); color: white; width: 100%; max-width: 800px; padding: 15px; text-align: center; border-radius: 15px; font-family: 'Bangers'; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .btn-imprimir { background: var(--esparta-oro); color: black; font-family: 'Bangers'; font-size: 22px; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; }
-        .btn-imprimir:hover { transform: scale(1.05); }
+        .btn-imprimir { background: var(--esparta-oro); color: black; font-family: 'Bangers'; font-size: 20px; padding: 12px 35px; border: none; border-radius: 50px; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
-        /* Configuración de folio único A4 */
+        /* Formato Estándar PDF A4 */
         .pagina { 
             background: white; 
             width: 210mm; 
-            height: 296mm; 
-            padding: 15mm 20mm; 
+            height: 297mm; 
+            padding: 20mm; 
             box-sizing: border-box; 
-            border: 2px solid #333; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border: 1px solid #000; 
             position: relative;
             display: flex;
             flex-direction: column;
         }
 
-        .academia-header { text-align: center; border-bottom: 4px solid var(--esparta-verde); padding-bottom: 10px; margin-bottom: 20px; }
-        .academia-header h1 { font-family: 'Bangers'; font-size: 50px; color: var(--esparta-verde); margin: 0; letter-spacing: 3px; }
-        .subtitulo { font-size: 20px; font-weight: bold; text-transform: uppercase; color: #555; }
+        .header-sparta { text-align: center; border-bottom: 3px solid var(--esparta-verde); margin-bottom: 25px; padding-bottom: 10px; }
+        .header-sparta h1 { font-family: 'Bangers'; font-size: 42px; color: var(--esparta-verde); margin: 0; letter-spacing: 2px; }
+        .info-alumno { display: flex; justify-content: space-between; margin-bottom: 30px; font-size: 16px; font-weight: bold; }
 
-        /* Cuadrícula de 30 ejercicios */
+        /* Cuadrícula de Operaciones Estilo Estándar */
         .grid-operaciones { 
             display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px 40px; 
-            margin-top: 10px;
+            grid-template-columns: 1fr 1fr; 
+            column-gap: 50px; 
+            row-gap: 12px;
         }
 
-        .bloque-ejercicio { 
+        .operacion { 
             display: flex; 
             align-items: center; 
-            font-size: 26px; 
-            font-weight: bold; 
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+            font-size: 22px; /* Tamaño estándar de ficha escolar */
+            border-bottom: 1px solid #f0f0f0;
+            padding: 8px 0;
         }
 
-        .numero-orden { font-size: 14px; color: #999; margin-right: 15px; width: 25px; }
-        .hueco { display: inline-block; width: 65px; border-bottom: 3px solid #000; margin: 0 10px; text-align: center; min-height: 32px; }
+        .index { font-size: 12px; color: #888; width: 25px; font-family: sans-serif; }
+        .hueco { display: inline-block; width: 55px; border-bottom: 2px solid #000; margin: 0 8px; text-align: center; min-height: 28px; }
 
-        /* Frase Motivacional */
-        .frase-final { 
+        /* Pie de página */
+        .footer-frase { 
             margin-top: auto; 
             text-align: center; 
-            padding: 20px; 
+            padding-top: 20px; 
             border-top: 2px solid var(--esparta-oro);
         }
-        .frase-final p { font-family: 'Bangers'; font-size: 28px; color: var(--esparta-verde); margin: 0; }
-        .autor { font-size: 16px; font-style: italic; color: #666; }
+        .frase { font-family: 'Bangers'; font-size: 24px; color: var(--esparta-verde); margin-bottom: 5px; }
+        .sub-frase { font-size: 14px; font-style: italic; color: #666; }
 
         @media print {
             body { background: white; padding: 0; }
             .btn-imprimir, .no-print-header { display: none !important; }
-            .pagina { border: 2px solid #000; box-shadow: none; margin: 0; width: 100%; height: 100vh; }
-            .academia-header h1 { color: #000 !important; }
+            .pagina { border: none; width: 100%; height: 100vh; margin: 0; }
         }
     </style>
 </head>
 <body>
 
     <div class="no-print-header">
-        <h1>FORMATO NUEVO: ACADEMIA ESPARTA</h1>
+        <h1>FORMATO PDF ESTÁNDAR (40 EJERCICIOS)</h1>
     </div>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR FICHA NUEVA</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR FICHA</button>
 
     <div class="pagina">
-        <div class="academia-header">
+        <div class="header-sparta">
             <h1>ACADEMIA ESPARTA</h1>
-            <div class="subtitulo">Entrenamiento de Agilidad Mental</div>
+            <p style="margin: 5px 0; font-weight: bold; text-transform: uppercase; color: #444;">Entrenamiento de Agilidad Numérica</p>
         </div>
 
-        <div style="margin-bottom: 20px; font-size: 18px;">
-            <strong>Nombre:</strong> ____________________________________ <strong>Fecha:</strong> ____/____/____
+        <div class="info-alumno">
+            <span>ALUMNO: ____________________________________</span>
+            <span>FECHA: ____/____/2026</span>
         </div>
 
         <div class="grid-operaciones">
-            <div class="bloque-ejercicio"><span class="numero-orden">01.</span> 7 x <span class="hueco"></span> = 56</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">02.</span> 12 + <span class="hueco"></span> = 30</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">03.</span> <span class="hueco"></span> x 4 = 36</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">04.</span> 50 - <span class="hueco"></span> = 25</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">05.</span> 9 x 3 = <span class="hueco"></span></div>
-            <div class="bloque-ejercicio"><span class="numero-orden">06.</span> <span class="hueco"></span> + 15 = 40</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">07.</span> 6 x <span class="hueco"></span> = 42</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">08.</span> 100 - <span class="hueco"></span> = 75</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">09.</span> 8 x 4 = <span class="hueco"></span></div>
-            <div class="bloque-ejercicio"><span class="numero-orden">10.</span> <span class="hueco"></span> x 7 = 21</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">11.</span> 45 + <span class="hueco"></span> = 60</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">12.</span> 3 x <span class="hueco"></span> = 27</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">13.</span> <span class="hueco"></span> - 12 = 18</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">14.</span> 6 x 8 = <span class="hueco"></span></div>
-            <div class="bloque-ejercicio"><span class="numero-orden">15.</span> 5 x <span class="hueco"></span> = 35</div>
+            <div class="operacion"><span class="index">1</span> 6 x <span class="hueco"></span> = 42</div>
+            <div class="operacion"><span class="index">2</span> <span class="hueco"></span> x 4 = 32</div>
+            <div class="operacion"><span class="index">3</span> 15 + <span class="hueco"></span> = 40</div>
+            <div class="operacion"><span class="index">4</span> 80 - <span class="hueco"></span> = 55</div>
+            <div class="operacion"><span class="index">5</span> 9 x 4 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">6</span> <span class="hueco"></span> x 7 = 63</div>
+            <div class="operacion"><span class="index">7</span> 25 + 25 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">8</span> 60 - <span class="hueco"></span> = 15</div>
+            <div class="operacion"><span class="index">9</span> 3 x <span class="hueco"></span> = 27</div>
+            <div class="operacion"><span class="index">10</span> <span class="hueco"></span> x 8 = 48</div>
+            <div class="operacion"><span class="index">11</span> 12 + 18 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">12</span> 45 - <span class="hueco"></span> = 30</div>
+            <div class="operacion"><span class="index">13</span> 7 x 7 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">14</span> <span class="hueco"></span> x 5 = 45</div>
+            <div class="operacion"><span class="index">15</span> 100 - <span class="hueco"></span> = 25</div>
+            <div class="operacion"><span class="index">16</span> 6 x 9 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">17</span> <span class="hueco"></span> + 35 = 50</div>
+            <div class="operacion"><span class="index">18</span> 8 x <span class="hueco"></span> = 56</div>
+            <div class="operacion"><span class="index">19</span> 90 - 45 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">20</span> 4 x <span class="hueco"></span> = 36</div>
 
-            <div class="bloque-ejercicio"><span class="numero-orden">16.</span> <span class="hueco"></span> x 9 = 81</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">17.</span> 25 + 25 = <span class="hueco"></span></div>
-            <div class="bloque-ejercicio"><span class="numero-orden">18.</span> 4 x <span class="hueco"></span> = 32</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">19.</span> 80 - <span class="hueco"></span> = 40</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">20.</span> <span class="hueco"></span> x 6 = 54</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">21.</span> 7 x 3 = <span class="hueco"></span></div>
-            <div class="bloque-ejercicio"><span class="numero-orden">22.</span> <span class="hueco"></span> + 14 = 50</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">23.</span> 9 x <span class="hueco"></span> = 63</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">24.</span> 200 - <span class="hueco"></span> = 150</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">25.</span> 4 x 7 = <span class="hueco"></span></div>
-            <div class="bloque-ejercicio"><span class="numero-orden">26.</span> <span class="hueco"></span> x 5 = 45</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">27.</span> 18 + <span class="hueco"></span> = 40</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">28.</span> 2 x <span class="hueco"></span> = 18</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">29.</span> <span class="hueco"></span> - 30 = 70</div>
-            <div class="bloque-ejercicio"><span class="numero-orden">30.</span> 9 x 9 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">21</span> <span class="hueco"></span> x 6 = 54</div>
+            <div class="operacion"><span class="index">22</span> 7 x 8 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">23</span> 55 + <span class="hueco"></span> = 100</div>
+            <div class="operacion"><span class="index">24</span> <span class="hueco"></span> - 20 = 80</div>
+            <div class="operacion"><span class="index">25</span> 9 x 9 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">26</span> 3 x <span class="hueco"></span> = 24</div>
+            <div class="operacion"><span class="index">27</span> <span class="hueco"></span> + 14 = 30</div>
+            <div class="operacion"><span class="index">28</span> 200 - <span class="hueco"></span> = 120</div>
+            <div class="operacion"><span class="index">29</span> 8 x 3 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">30</span> <span class="hueco"></span> x 7 = 28</div>
+            <div class="operacion"><span class="index">31</span> 18 + 12 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">32</span> 5 x <span class="hueco"></span> = 40</div>
+            <div class="operacion"><span class="index">33</span> <span class="hueco"></span> - 15 = 45</div>
+            <div class="operacion"><span class="index">34</span> 6 x 6 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">35</span> 7 x <span class="hueco"></span> = 49</div>
+            <div class="operacion"><span class="index">36</span> <span class="hueco"></span> + 22 = 60</div>
+            <div class="operacion"><span class="index">37</span> 4 x 8 = <span class="hueco"></span></div>
+            <div class="operacion"><span class="index">38</span> 10 x <span class="hueco"></span> = 70</div>
+            <div class="operacion"><span class="index">39</span> 150 - <span class="hueco"></span> = 100</div>
+            <div class="operacion"><span class="index">40</span> <span class="hueco"></span> x 2 = 18</div>
         </div>
 
-        <div class="frase-final">
-            <p>"No cuentes los días, haz que los días cuenten."</p>
-            <div class="autor">Academia Esparta - El camino del guerrero</div>
+        <div class="footer-frase">
+            <p class="frase">"La constancia es la base del éxito."</p>
+            <p class="sub-frase">Academia Esparta - Entrenando la mente del mañana</p>
         </div>
     </div>
 
