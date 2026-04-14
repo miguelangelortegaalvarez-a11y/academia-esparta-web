@@ -3,121 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento de Tiempo - Academia Esparta</title>
+    <title>Entrenamiento Pro: Unidades de Tiempo - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
     <style>
         :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; }
         
         body { font-family: 'Kalam', cursive; background-color: #f4f9f4; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; color: #333; }
 
-        /* Estilos Web */
+        /* Estilos de Interfaz Web */
         .no-print-header { background: var(--esparta-verde); color: white; width: 100%; max-width: 800px; padding: 15px; text-align: center; border-radius: 15px; font-family: 'Bangers'; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .btn-imprimir { background: var(--esparta-oro); color: black; font-family: 'Bangers'; font-size: 20px; padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; z-index: 100; }
+        .btn-imprimir { background: var(--esparta-oro); color: black; font-family: 'Bangers'; font-size: 22px; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; position: sticky; top: 10px; z-index: 1000; }
         .btn-imprimir:hover { transform: scale(1.05); background: #d4ac0d; }
 
-        /* FICHA DE EJERCICIOS (Formato A4) */
-        .ficha { background: white; width: 210mm; min-height: 297mm; padding: 20mm; box-sizing: border-box; border: 1px solid #ddd; box-shadow: 0 0 20px rgba(0,0,0,0.05); position: relative; }
+        /* CONFIGURACIÓN DE PÁGINA (A4) */
+        .pagina { 
+            background: white; 
+            width: 210mm; 
+            height: 296mm; /* Ajuste para evitar cortes */
+            padding: 15mm 20mm; 
+            box-sizing: border-box; 
+            border: 1px solid #ddd; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.05); 
+            margin-bottom: 20px; 
+            position: relative;
+            page-break-after: always; /* Fuerza el salto de página al imprimir */
+        }
         
-        .header-ficha { display: flex; justify-content: space-between; border-bottom: 2px solid var(--esparta-verde); padding-bottom: 10px; margin-bottom: 30px; }
+        .header-ficha { display: flex; justify-content: space-between; border-bottom: 2px solid var(--esparta-verde); padding-bottom: 10px; margin-bottom: 20px; }
         .logo-esparta { font-family: 'Bangers'; font-size: 28px; color: var(--esparta-verde); }
-        .datos-alumno { font-size: 18px; }
+        .datos-alumno { font-size: 16px; }
 
-        .titulo-seccion { font-family: 'Bangers'; font-size: 32px; color: #333; margin-top: 30px; margin-bottom: 15px; text-decoration: underline var(--esparta-oro); }
-        .instrucciones { font-size: 18px; color: #555; margin-bottom: 25px; font-style: italic; }
+        .titulo-seccion { font-family: 'Bangers'; font-size: 26px; color: #1a1a1a; margin-top: 20px; margin-bottom: 10px; border-left: 5px solid var(--esparta-oro); padding-left: 10px; }
+        .instrucciones { font-size: 16px; color: #555; margin-bottom: 15px; font-style: italic; }
 
-        /* Estilos de los Ejercicios */
-        .ejercicio-bloque { margin-bottom: 40px; }
+        /* Cuadros de Ejercicios */
+        .ejercicio-box { margin-bottom: 25px; line-height: 1.6; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         
-        .tabla-equivalencias { width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 18px; }
-        .tabla-equivalencias td { border: 1px solid #eee; padding: 10px; text-align: left; }
-        .tabla-equivalencias tr:nth-child(even) { background-color: #f9f9f9; }
+        .tabla-tiempo { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .tabla-tiempo td { border: 1px solid #ccc; padding: 8px; text-align: center; }
         .resaltado { font-weight: bold; color: var(--esparta-verde); }
 
-        .operacion-linea { font-size: 24px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .linea-escribir { display: inline-block; width: 60px; border-bottom: 1px solid #000; height: 18px; margin: 0 5px; }
         
-        /* Inputs interactivos para la web */
-        input[type="number"] { font-family: 'Kalam', cursive; font-size: 20px; padding: 5px; width: 60px; text-align: center; border: 2px solid #ccc; border-radius: 5px; color: #333; }
-        input[type="number"]:focus { border-color: var(--esparta-verde); outline: none; }
+        /* Estilos específicos del libro (Anaya) */
+        .dibujo-repaso { border: 2px solid #eee; border-radius: 10px; padding: 10px; background: #fffdf0; margin-bottom: 15px; }
 
         /* MODO IMPRESIÓN */
         @media print {
             body { background: white; padding: 0; }
-            .btn-imprimir, .no-print-header, input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { display: none !important; }
-            .ficha { border: none; box-shadow: none; width: 100%; margin: 0; padding: 10mm; }
-            .operacion-linea { font-size: 20px; }
-            /* Ocultar inputs y mostrar línea para escribir en papel */
-            input[type="number"] { display: none !important; }
-            .linea-escribir { display: inline-block !important; width: 60px; border-bottom: 1px solid black; margin-right: 5px; height: 20px; }
-            .tabla-equivalencias { border: 1px solid black; }
-            .tabla-equivalencias td { border: 1px solid black; color: black !important; }
-        }
-
-        /* Ocultar línea de escribir en la web */
-        .linea-escribir { display: none; }
-
-        @media (max-width: 800px) {
-            .ficha { width: 95vw; padding: 10px; padding-top: 60px; }
-            .tabla-equivalencias { font-size: 14px; }
-            .operacion-linea { font-size: 18px; flex-wrap: wrap; }
+            .btn-imprimir, .no-print-header { display: none !important; }
+            .pagina { border: none; box-shadow: none; margin: 0; width: 100%; height: auto; }
+            .resaltado { color: black !important; }
         }
     </style>
 </head>
 <body>
 
     <div class="no-print-header">
-        <h1>GUERRERO ERIK: ENTRENAMIENTO DEL TIEMPO</h1>
+        <h1>ENTRENAMIENTO ELITE: UNIDADES DE TIEMPO (2 FOLIOS)</h1>
     </div>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR FICHA PARA EL NIÑO</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR LOS 2 FOLIOS</button>
 
-    <div class="ficha">
+    <div class="pagina">
         <div class="header-ficha">
-            <div class="logo-esparta">ACADEMIA ESPARTA</div>
+            <div class="logo-esparta">ACADEMIA ESPARTA - FOLIO 1</div>
             <div class="datos-alumno">NOMBRE: _______________________ FECHA: ___/___/___</div>
         </div>
 
-        <div class="titulo-seccion">1. RECUERDA LAS UNIDADES DE TIEMPO</div>
-        <p class="instrucciones">Lee atentamente estas equivalencias antes de empezar.</p>
-        
-        <table class="tabla-equivalencias">
-            <tr><td>1 <span class="resaltado">SEMANA</span> tiene</td><td>7 DÍAS</td></tr>
-            <tr><td>1 <span class="resaltado">QUINCENA</span> tiene</td><td>15 DÍAS</td></tr>
-            <tr><td>1 <span class="resaltado">MES</span> tiene (aprox.)</td><td>30 DÍAS</td></tr>
-            <tr><td>1 <span class="resaltado">TRIMESTRE</span> tiene</td><td>3 MESES</td></tr>
-        </table>
+        <div class="dibujo-repaso">
+            <div class="titulo-seccion" style="margin-top:0">REPASO DE GUERRERO: UNIDADES MENORES AL AÑO</div>
+            <p><strong>Rotación:</strong> La Tierra tarda <span class="resaltado">1 DÍA</span> en dar una vuelta sobre sí misma.</p>
+            <p><strong>Traslación:</strong> La Tierra tarda <span class="resaltado">1 AÑO</span> en dar una vuelta al Sol.</p>
+            <table class="tabla-tiempo">
+                <tr><td>1 Semana = 7 días</td><td>1 Quincena = 15 días</td><td>1 Mes = 30 días (aprox)</td></tr>
+                <tr><td>1 Trimestre = 3 meses</td><td>1 Semestre = 6 meses</td><td>1 Año = 12 meses</td></tr>
+            </table>
+        </div>
 
-        <div class="ejercicio-bloque">
-            <div class="titulo-seccion">2. COMPLETA LAS EQUIVALENCIAS</div>
-            <p class="instrucciones">Calcula y escribe el número correcto.</p>
-
-            <div class="operacion-linea">
-                a) 2 semanas son <input type="number" placeholder="?"><span class="linea-escribir"></span> días.
-            </div>
-            <div class="operacion-linea">
-                b) 1 quincena y 3 días son <input type="number" placeholder="?"><span class="linea-escribir"></span> días.
-            </div>
-            <div class="operacion-linea">
-                c) Un trimestre tiene <input type="number" placeholder="?"><span class="linea-escribir"></span> meses.
-            </div>
-            <div class="operacion-linea">
-                d) 2 meses (de 30 días) son <input type="number" placeholder="?"><span class="linea-escribir"></span> días.
+        <div class="ejercicio-box">
+            <div class="titulo-seccion">1. CÁLCULO RÁPIDO DE DÍAS</div>
+            <p class="instrucciones">¿Cuántos días hay en estas unidades?</p>
+            <div class="grid-2">
+                <div>• 3 semanas: <span class="linea-escribir"></span> días.</div>
+                <div>• 2 quincenas: <span class="linea-escribir"></span> días.</div>
+                <div>• 1 mes y 1 semana: <span class="linea-escribir"></span> días.</div>
+                <div>• 2 meses completos: <span class="linea-escribir"></span> días.</div>
+                <div>• 1 quincena y 3 días: <span class="linea-escribir"></span> días.</div>
+                <div>• Medio año (1 semestre): <span class="linea-escribir"></span> días.</div>
             </div>
         </div>
 
-        <div class="ejercicio-bloque">
-            <div class="titulo-seccion">3. ¡PIENSA COMO UN GUERRERO!</div>
-            <p class="instrucciones">Lee y resuelve.</p>
-            
-            <div class="operacion-linea" style="flex-direction: column; align-items: flex-start;">
-                <p>Erik tiene un examen dentro de <span class="resaltado">2 quincenas y 5 días</span>.</p>
-                <p>¿Cuántos días faltan para el examen?</p>
-                <p style="margin-left: 20px;">Faltan <input type="number" placeholder="?"><span class="linea-escribir"></span> días.</p>
+        <div class="ejercicio-box">
+            <div class="titulo-seccion">2. EL LABORATORIO DEL TIEMPO</div>
+            <p class="instrucciones">Completa la tabla de los meses del año (Ejercicio 5 de tu libro):</p>
+            <table class="tabla-tiempo">
+                <tr style="background:#eee"><td>Meses con menos de 30 días</td><td>Meses con 30 días</td><td>Meses con 31 días</td></tr>
+                <tr style="height:60px"><td></td><td></td><td></td></tr>
+            </table>
+        </div>
+
+        <div class="ejercicio-box">
+            <div class="titulo-seccion">3. CONVERSIÓN DE MESES</div>
+            <div class="grid-2">
+                <div>a) 4 bimestres = <span class="linea-escribir"></span> meses.</div>
+                <div>b) 3 trimestres = <span class="linea-escribir"></span> meses.</div>
+                <div>c) 2 cuatrimestres = <span class="linea-escribir"></span> meses.</div>
+                <div>d) 1 semestre = <span class="linea-escribir"></span> meses.</div>
             </div>
         </div>
 
-        <div style="margin-top: 50px; text-align: center; font-style: italic; color: #666; border-top: 1px solid #eee; padding-top: 20px;">
-            "La planificación es el escudo del estudiante. ¡Domina tu tiempo, domina tu destino!"
+        <div style="position: absolute; bottom: 15mm; left: 20mm; font-size: 12px; color: #999;">Academia Esparta - El Camino del Guerrero Erik</div>
+    </div>
+
+    <div class="pagina">
+        <div class="header-ficha">
+            <div class="logo-esparta">ACADEMIA ESPARTA - FOLIO 2</div>
+            <div class="datos-alumno">NOMBRE: _______________________ FECHA: ___/___/___</div>
         </div>
+
+        <div class="ejercicio-box">
+            <div class="titulo-seccion">4. LA CADUCIDAD (Ejercicio 6 de tu libro)</div>
+            <p class="instrucciones">Ordena estos productos del que caduca ANTES al que caduca DESPUÉS:</p>
+            <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                <div style="border: 1px solid #000; padding: 10px;">Leche: 06/06</div>
+                <div style="border: 1px solid #000; padding: 10px;">Atún: 11/10</div>
+                <div style="border: 1px solid #000; padding: 10px;">Tomate: 15/08</div>
+                <div style="border: 1px solid #000; padding: 10px;">Mermelada: 01/12</div>
+            </div>
+            <p>Orden: 1. ___________  2. ___________  3. ___________  4. ___________</p>
+        </div>
+
+        <div class="ejercicio-box">
+            <div class="titulo-seccion">5. RETO ESPARTANO: ¿QUIÉN CUMPLE ANTES?</div>
+            <p class="instrucciones">Resuelve el problema de la página 150:</p>
+            <p>• <strong>Niña:</strong> Mi cumple es dentro de 2 quincenas, 2 semanas y 5 días.</p>
+            <p>• <strong>Niño:</strong> Para el mío faltan 3 quincenas.</p>
+            <p><strong>Cálculos Niña:</strong> <span class="linea-escribir"></span> + <span class="linea-escribir"></span> + <span class="linea-escribir"></span> = <span class="linea-escribir"></span> días.</p>
+            <p><strong>Cálculos Niño:</strong> <span class="linea-escribir"></span> x 15 = <span class="linea-escribir"></span> días.</p>
+            <p><strong>Respuesta:</strong> Cumple años antes _____________________________________.</p>
+        </div>
+
+        <div class="ejercicio-box">
+            <div class="titulo-seccion">6. LAS ESTACIONES Y EL TIEMPO</div>
+            <p>¿Qué meses forman el segundo trimestre del año? __________________________________</p>
+            <p>¿En qué estación hace más calor y los días son más largos? ________________________</p>
+            <p>¿Qué día es el anterior al 1 de enero? ___________________________________________</p>
+        </div>
+
+        <div class="ejercicio-box">
+            <div class="titulo-seccion">7. INVESTIGACIÓN: EL AÑO BISIESTO</div>
+            <p>Si el año 2024 es bisiesto, ¿cuáles serán los tres siguientes años bisiestos?</p>
+            <p>Respuesta: <span class="linea-escribir"></span>, <span class="linea-escribir"></span> y <span class="linea-escribir"></span>.</p>
+            <p>¿Cuántos días tiene el mes de Febrero en un año bisiesto? <span class="linea-escribir"></span> días.</p>
+        </div>
+
+        <div style="margin-top: 40px; border: 2px solid var(--esparta-verde); padding: 15px; border-radius: 10px; background: #f0fff0;">
+            <p style="font-family:'Bangers'; font-size: 20px; margin: 0; color: var(--esparta-verde);">VALORACIÓN DEL MAESTRO:</p>
+            <p>⭐ Esfuerzo: _______ ⭐ Precisión: _______ ⭐ Orden: _______</p>
+            <p style="font-style: italic; font-size: 14px;">"¡Excelente trabajo, Guerrero Erik! Has dominado el tiempo."</p>
+        </div>
+
+        <div style="position: absolute; bottom: 15mm; left: 20mm; font-size: 12px; color: #999;">Academia Esparta - Entrenando Guerreros para el Éxito</div>
     </div>
 
 </body>
