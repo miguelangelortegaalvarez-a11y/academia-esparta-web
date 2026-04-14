@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes de Cinemática - Academia Esparta</title>
+    <title>Manual de Cinemática - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -23,7 +23,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             background: white;
             padding: 40px;
@@ -46,24 +46,31 @@
             letter-spacing: 2px;
         }
 
-        h1 {
-            color: var(--text);
-            font-size: 2.5rem;
-            margin: 10px 0;
-        }
+        h1 { font-size: 2.5rem; margin: 10px 0; }
+        .motivation { font-style: italic; color: #666; margin-bottom: 20px; }
 
-        .motivation {
-            font-style: italic;
-            color: #666;
-            margin-bottom: 20px;
+        .btn-print {
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: block;
+            margin: 0 auto 30px;
+            box-shadow: 0 4px 10px rgba(14, 147, 67, 0.3);
         }
 
         h2 {
-            color: var(--primary);
-            border-left: 5px solid var(--accent);
-            padding-left: 15px;
+            color: white;
+            background: var(--primary);
+            padding: 12px 20px;
+            border-radius: 5px;
             margin-top: 40px;
         }
+
+        h3 { color: var(--primary); border-bottom: 2px solid var(--accent); display: inline-block; }
 
         .formula-box {
             background: #f1f8f4;
@@ -71,55 +78,50 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin: 20px 0;
         }
 
         .problem-box {
-            background: #fffdf2;
-            border-left: 5px solid var(--accent);
+            border: 1px solid #e0e0e0;
             padding: 20px;
-            margin: 25px 0;
-            border-radius: 5px;
+            border-radius: 10px;
+            background: #fff;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
         }
 
-        .problem-title {
-            font-weight: 600;
-            color: #856404;
-            display: block;
+        .problem-tag {
+            display: inline-block;
+            background: var(--accent);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
             margin-bottom: 10px;
         }
 
-        .btn-print {
-            background: var(--primary);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1rem;
-            display: block;
-            margin: 0 auto 30px;
-            transition: 0.3s;
+        .solution {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
+            color: #444;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
         }
 
-        .btn-print:hover { background: #0a7033; }
+        .unit-badge { background: #eee; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
 
-        .unit-badge {
-            background: #eee;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
+        footer { text-align: center; margin-top: 50px; color: #999; border-top: 1px solid #eee; padding-top: 20px; }
 
         @media print {
-            .btn-print, header .motivation { display: none; }
+            .btn-print { display: none; }
             body { background: white; padding: 0; }
             .container { box-shadow: none; width: 100%; max-width: 100%; }
+            h2 { background: #eee !important; color: black; border: 1px solid #333; }
         }
     </style>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
@@ -127,82 +129,124 @@
 <div class="container">
     <header>
         <div class="logo-academia">Academia Esparta</div>
-        <h1>TEMA 6: CINEMÁTICA</h1>
-        <p class="motivation">"El éxito es la suma de pequeños esfuerzos repetidos día tras día."</p>
+        <h1>GUÍA MAESTRA DE CINEMÁTICA</h1>
+        <p class="motivation">"No te detengas hasta que estés orgulloso del resultado."</p>
     </header>
 
-    <button class="btn-print" onclick="window.print()">📥 Imprimir Apuntes / Guardar PDF</button>
+    <button class="btn-print" onclick="window.print()">📥 IMPRIMIR MANUAL COMPLETO (PDF)</button>
 
-    <h2>1. Conceptos Fundamentales</h2>
-    <p>Decimos que un cuerpo se mueve cuando cambia su posición con el tiempo. El movimiento es <strong>relativo</strong> porque depende del observador.</p>
+    <h2>1. Conceptos Teóricos</h2>
+    <p>La <strong>Cinemática</strong> estudia el movimiento de los cuerpos sin tener en cuenta las causas que lo producen.</p>
+    
+    <h3>Magnitudes Principales</h3>
     <ul>
-        <li><strong>Distancia recorrida:</strong> Espacio total recorrido por un móvil.</li>
-        <li><strong>Desplazamiento:</strong> Diferencia entre la posición inicial y la posición final.</li>
+        <li><strong>Posición:</strong> Lugar donde se encuentra el móvil en un instante determinado.</li>
+        <li><strong>Trayectoria:</strong> Línea imaginaria que describe el móvil (Rectilínea o Curvilínea).</li>
+        <li><strong>Desplazamiento:</strong> Distancia en línea recta entre el punto inicial y final.</li>
     </ul>
 
-    <h2>2. Velocidad y Aceleración</h2>
-    <p><strong>Velocidad:</strong> Mide la rapidez con la que un móvil cambia su posición. Se mide en <span class="unit-badge">m/s</span> (S.I.) o km/h.</p>
-    <div class="formula-box">
-        \[ v_m = \frac{\Delta s}{\Delta t} = \frac{\text{Posición}}{\text{Tiempo}} \]
-    </div>
+    <h3>Velocidad y Aceleración</h3>
+    <p>La <strong>Velocidad</strong> (\(v\)) mide la rapidez del cambio de posición. Unidad: <span class="unit-badge">m/s</span>.</p>
+    <div class="formula-box">\[ v = \frac{\Delta s}{\Delta t} \]</div>
 
-    <p><strong>Aceleración:</strong> Mide cómo cambia la velocidad. Se mide en <span class="unit-badge">m/s²</span>.</p>
-    <div class="formula-box">
-        \[ a = \frac{\Delta v}{\Delta t} \]
-    </div>
+    <p>La <strong>Aceleración</strong> (\(a\)) mide el cambio de velocidad en el tiempo. Unidad: <span class="unit-badge">m/s²</span>.</p>
+    <div class="formula-box">\[ a = \frac{v_f - v_0}{t} \]</div>
 
-    <h2>3. Tipos de Movimiento</h2>
-    <h3>Según la trayectoria:</h3>
-    <ul>
-        <li><strong>Rectilíneo:</strong> En línea recta.</li>
-        <li><strong>Curvilíneo:</strong> Curvas, circular, etc.</li>
-    </ul>
-    <h3>Según velocidad/aceleración:</h3>
-    <ul>
-        <li><strong>Uniforme (MRU):</strong> \( v = \text{cte} \) (Velocidad constante).</li>
-        <li><strong>Uniformemente Acelerado (MRUA):</strong> \( a = \text{cte} \) (Aceleración constante).</li>
-    </ul>
+    <h2>2. Ecuaciones del Movimiento</h2>
+    <h3>MRU (Velocidad Constante)</h3>
+    <div class="formula-box">\[ S = S_0 + v \cdot t \]</div>
 
-    <h2>4. Ecuaciones del Movimiento</h2>
-    <h3>Movimiento Rectilíneo Uniforme (MRU)</h3>
+    <h3>MRUA (Aceleración Constante)</h3>
     <div class="formula-box">
-        \[ S = S_0 + v \cdot t \]
-    </div>
-
-    <h3>Movimiento Rectilíneo Uniformemente Acelerado (MRUA)</h3>
-    <div class="formula-box">
-        \[ v = v_0 + a \cdot t \]
+        \[ v_f = v_0 + a \cdot t \]
         \[ S = S_0 + v_0 \cdot t + \frac{1}{2} a \cdot t^2 \]
     </div>
 
-    <h2>5. Problemas Resueltos</h2>
+    <h2>3. Problemas Resueltos</h2>
 
     <div class="problem-box">
-        <span class="problem-title">Problema 1: Radar de tramo</span>
-        <p>Un radar de tramo de 80 km/h tiene una limitación durante 2500m. Calcula el tiempo mínimo en segundos que se tiene que tardar en el tramo.</p>
-        <strong>Solución:</strong>
-        <p>Convertimos 80 km/h a m/s: \[ 80 \text{ km/h} = 22.22 \text{ m/s} \]</p>
-        <p>Usamos la fórmula del MRU: \[ t = \frac{S}{v} = \frac{2500}{22.22} = \mathbf{112.5 \text{ s}} \]</p>
+        <span class="problem-tag">BUSCAR: ESPACIO (s)</span>
+        <p><strong>P1.</strong> Un tren bala viaja a una velocidad constante de 250 km/h durante 3.25 horas. ¿Qué distancia recorre?</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( s = v \cdot t = 250 \cdot 3.25 = \mathbf{812.5 \text{ km}} \)
+        </div>
     </div>
 
     <div class="problem-box">
-        <span class="problem-title">Problema 2: Aceleración de un coche</span>
-        <p>Un coche parte del reposo y acelera a \( 3 \text{ m/s}^2 \) durante 5s. Calcula su velocidad final.</p>
-        <strong>Solución:</strong>
-        <p>\[ v = v_0 + a \cdot t \]</p>
-        <p>\[ v = 0 + 3 \cdot 5 = \mathbf{15 \text{ m/s}} \]</p>
+        <span class="problem-tag">BUSCAR: ESPACIO (s)</span>
+        <p><strong>P2.</strong> Un móvil parte del reposo con una aceleración de \( 2 \text{ m/s}^2 \). ¿Qué distancia recorre en 10 segundos?</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( s = \frac{1}{2} \cdot a \cdot t^2 = \frac{1}{2} \cdot 2 \cdot 10^2 = \mathbf{100 \text{ m}} \)
+        </div>
     </div>
 
     <div class="problem-box">
-        <span class="problem-title">Problema 3: Distancia Tierra - Sol</span>
-        <p>La velocidad de la luz es \( 3 \cdot 10^8 \text{ m/s} \). ¿Qué distancia hay entre la Tierra y el Sol sabiendo que la luz tarda 8 min y 18 s?</p>
-        <strong>Solución:</strong>
-        <p>Convertimos el tiempo a segundos: \[ t = 8 \cdot 60 + 18 = 498 \text{ s} \]</p>
-        <p>\[ S = v \cdot t = 3 \cdot 10^8 \cdot 498 = \mathbf{1.494 \cdot 10^{11} \text{ m}} \]</p>
+        <span class="problem-tag">BUSCAR: VELOCIDAD (v)</span>
+        <p><strong>P3.</strong> Un corredor completa 400 metros en 50 segundos. ¿A qué velocidad media corre?</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( v = \frac{s}{t} = \frac{400}{50} = \mathbf{8 \text{ m/s}} \) (28.8 km/h).
+        </div>
     </div>
 
-    <footer style="text-align: center; margin-top: 50px; color: #999; font-size: 0.8rem;">
-        © 2026 Academia Esparta - Material de apoyo escolar.
+    <div class="problem-box">
+        <span class="problem-tag">BUSCAR: VELOCIDAD (v)</span>
+        <p><strong>P4.</strong> Un coche recorre 150 km en 1.5 horas. ¿Cuál es su velocidad constante?</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( v = \frac{150}{1.5} = \mathbf{100 \text{ km/h}} \)
+        </div>
+    </div>
+
+    <div class="problem-box">
+        <span class="problem-tag">BUSCAR: TIEMPO (t)</span>
+        <p><strong>P5.</strong> ¿Cuánto tarda la luz del Sol (\( 3 \cdot 10^8 \text{ m/s} \)) en recorrer 150 millones de km?</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( t = \frac{s}{v} = \frac{1.5 \cdot 10^{11}}{3 \cdot 10^8} = 500 \text{ s} \approx \mathbf{8.3 \text{ min}} \)
+        </div>
+    </div>
+
+    <div class="problem-box">
+        <span class="problem-tag">BUSCAR: TIEMPO (t)</span>
+        <p><strong>P6.</strong> Un ciclista a 20 km/h quiere recorrer 5 km. ¿Cuánto tiempo tardará?</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( t = \frac{s}{v} = \frac{5}{20} = 0.25 \text{ h} = \mathbf{15 \text{ min}} \)
+        </div>
+    </div>
+
+    <div class="problem-box">
+        <span class="problem-tag">BUSCAR: ACELERACIÓN (a)</span>
+        <p><strong>P7.</strong> Un coche pasa de 10 m/s a 30 m/s en 5 segundos. Calcula su aceleración.</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( a = \frac{30 - 10}{5} = \frac{20}{5} = \mathbf{4 \text{ m/s}^2} \)
+        </div>
+    </div>
+
+    <div class="problem-box">
+        <span class="problem-tag">BUSCAR: ACELERACIÓN (a)</span>
+        <p><strong>P8.</strong> Un objeto frena de 20 m/s hasta detenerse en 4 segundos. ¿Qué aceleración tiene?</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( a = \frac{0 - 20}{4} = \mathbf{-5 \text{ m/s}^2} \) (negativa por frenado).
+        </div>
+    </div>
+
+    <div class="problem-box">
+        <span class="problem-tag">BUSCAR: VELOCIDAD FINAL (vf)</span>
+        <p><strong>P9.</strong> Un cuerpo cae libremente (\( a = 9.8 \text{ m/s}^2 \)) durante 3 segundos. ¿Qué velocidad alcanza?</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( v_f = a \cdot t = 9.8 \cdot 3 = \mathbf{29.4 \text{ m/s}} \)
+        </div>
+    </div>
+
+    <div class="problem-box">
+        <span class="problem-tag">BUSCAR: RADAR DE TRAMO</span>
+        <p><strong>P10.</strong> Un coche recorre un tramo de 2500m en 112.5s. Si el límite es 80 km/h, ¿lo ha superado?</p>
+        <div class="solution">
+            <strong>Solución:</strong> \( v = \frac{2500}{112.5} = 22.22 \text{ m/s} \). <br>
+            Convertimos: \( 22.22 \cdot 3.6 = \mathbf{80 \text{ km/h}} \). (Está justo en el límite).
+        </div>
+    </div>
+
+    <footer>
+        <p>Academia Esparta 2026 - Educación de Calidad</p>
     </footer>
 </div>
 
