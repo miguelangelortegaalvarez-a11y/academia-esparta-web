@@ -3,176 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explicación Técnica: El Tiro Parabólico - Academia Esparta</title>
+    <title>Reglas de Derivación - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; }
-        
-        body { font-family: 'Kalam', cursive; background-color: #f4f9f4; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; color: #333; }
+        :root {
+            --esparta-verde: #0e9343;
+            --esparta-oro: #f1c40f;
+            --fondo-suave: #e8f5e9;
+        }
 
-        /* Botón de impresión (no sale en el papel) */
-        .btn-imprimir { 
-            background: var(--esparta-oro); 
-            color: black; 
-            font-family: 'Bangers'; 
-            font-size: 22px; 
-            padding: 15px 40px; 
-            border: none; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            margin-bottom: 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        body {
+            font-family: 'Kalam', cursive;
+            background-color: var(--fondo-suave);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            background: var(--esparta-verde);
+            width: 100%;
+            max-width: 850px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .header h1 { font-family: 'Bangers', cursive; margin: 0; font-size: 2.2rem; letter-spacing: 2px; }
+        .header p { margin: 5px 0 0; color: var(--esparta-oro); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; }
+
+        .btn-imprimir {
+            background: var(--esparta-oro);
+            color: black;
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-bottom: 20px;
             transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        .btn-imprimir:hover { transform: scale(1.05); }
+        .btn-imprimir:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
 
-        /* Contenedor del Folio A4 */
-        .ficha-estudio { 
-            background: white; 
-            width: 210mm; 
-            min-height: 297mm; 
-            padding: 20mm; 
-            box-sizing: border-box; 
-            border: 2px solid var(--esparta-verde); 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            position: relative;
+        .ficha {
+            background: white;
+            width: 100%;
+            max-width: 850px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            box-sizing: border-box;
         }
 
-        .header-estudio { text-align: center; border-bottom: 3px solid var(--esparta-oro); margin-bottom: 30px; padding-bottom: 10px; }
-        .header-estudio h1 { font-family: 'Bangers'; font-size: 45px; color: var(--esparta-verde); margin: 0; }
+        .instructor-note {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 5px solid #ffc107;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
 
-        h2 { font-family: 'Bangers'; color: #222; border-bottom: 2px solid #eee; margin-top: 25px; }
+        .ejercicios-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .item-ejercicio {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .soluciones-seccion {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 3px dashed var(--esparta-verde);
+        }
+        .soluciones-seccion h2 { font-family: 'Bangers', cursive; color: #555; }
         
-        .caja-matematica { background: #f9f9f9; border-left: 5px solid var(--esparta-verde); padding: 15px; margin: 15px 0; font-size: 18px; line-height: 1.8; }
-        .formula { text-align: center; font-size: 26px; font-weight: bold; margin: 20px 0; color: #000; display: block; font-family: sans-serif; }
-        .resaltado { color: var(--esparta-verde); font-weight: bold; }
-
-        canvas { max-width: 100%; height: auto; margin: 20px 0; border: 1px solid #ddd; border-radius: 8px; }
-
-        .conclusion-box { 
-            margin-top: 30px; 
-            padding: 20px; 
-            border: 3px dashed #c62828; 
-            background: #fff5f5; 
-            color: #c62828; 
-            text-align: center; 
-            font-size: 22px; 
-            font-weight: bold; 
+        .sol-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            font-size: 0.85rem;
+            color: #444;
         }
 
-        /* Marca de agua para el profesor */
-        .watermark { position: absolute; bottom: 10mm; right: 20mm; font-size: 12px; color: #ccc; }
-
+        /* ESTILOS PARA IMPRESIÓN */
         @media print {
             body { background: white; padding: 0; }
-            .btn-imprimir { display: none !important; }
-            .ficha-estudio { border: none; box-shadow: none; width: 100%; margin: 0; padding: 10mm; }
-            .formula { color: black !important; }
+            .header, .btn-imprimir, .instructor-note { display: none !important; }
+            .ficha { box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
+            .soluciones-seccion { page-break-before: always; }
+            .ejercicios-grid, .sol-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR EXPLICACIÓN CORREGIDA</button>
-
-    <div class="ficha-estudio">
-        <div class="header-estudio">
-            <h1>ACADEMIA ESPARTA</h1>
-            <p><strong>Resolución Técnica Paso a Paso: El Tiro Parabólico (Ejercicio 4)</strong></p>
-        </div>
-
-        <h2>1. Análisis de Puntos Clave</h2>
-        <p>Modelizamos el problema situando el lanzamiento en un sistema cartesiano (distancia x, altura y):</p>
-        <ul>
-            <li><strong>Lanzamiento:</strong> Punto inicial A = <strong>(0, 2)</strong>. Sale a 2m de altura.</li>
-            <li><strong>Vértice (Altura Máx):</strong> Punto V = <strong>(2, 3)</strong>. A los 2m de distancia alcanza 3m de altura.</li>
-            <li><strong>Canasta (Objetivo):</strong> Punto C = <strong>(5.5, 2)</strong>. El aro está a 5.5m de distancia y 2m de altura.</li>
-        </ul>
-
-        <h2>2. Desarrollo del Modelo Matemático</h2>
-        <div class="caja-matematica">
-            Como conocemos el vértice, usamos la <strong>forma canónica</strong> de la función cuadrática (parábola):<br>
-            <span class="formula">y = a(x - h)² + k</span>
-            Sustituimos las coordenadas del vértice (h=2, k=3):<br>
-            <span class="formula">y = a(x - 2)² + 3</span>
-        </div>
-
-        <h2>3. Cálculo del Coeficiente de Apertura (a)</h2>
-        <p>Utilizamos el punto de salida A(0, 2) para despejar la incógnita 'a':</p>
-        <div class="caja-matematica">
-            Sustituimos x=0 e y=2:<br>
-            2 = a(0 - 2)² + 3<br>
-            2 = 4a + 3<br>
-            2 - 3 = 4a<br>
-            -1 = 4a  &rarr;  <strong>a = -1/4 = <span class="resaltado">-0.25</span></strong>
-        </div>
-
-        <h2>4. Representación Gráfica de la Trayectoria</h2>
-        <canvas id="graficaCorregida"></canvas>
-
-        <h2>5. Comprobación de Éxito (¿Encesta?)</h2>
-        <p>Evaluamos la función obtenida en la distancia de la canasta (x = 5.5):</p>
-        <div class="caja-matematica">
-            y = -0.25 &cdot; (5.5 - 2)² + 3<br>
-            y = -0.25 &cdot; (3.5)² + 3<br>
-            y = -0.25 &cdot; (12.25) + 3<br>
-            y = -3.0625 + 3 = <strong><span class="resaltado">-0.06 metros</span></strong>
-        </div>
-
-        <div class="conclusion-box">
-            ❌ CONCLUSIÓN FINAL: El balón NO encesta. <br>
-            A la distancia de 5.5m, la altura del balón es negativa (-0.06m). Esto significa que impacta contra el suelo antes de llegar a la canasta.
-        </div>
-
-        <div class="watermark">Academia Esparta - Resolución de Geometría Analítica</div>
+    <div class="header">
+        <h1>REGLAS DE DERIVACIÓN</h1>
+        <p>Entrenamiento Avanzado - Academia Esparta</p>
     </div>
 
-    <script>
-        const ctx = document.getElementById('graficaCorregida').getContext('2d');
-        const puntosTrayectoria = [];
-        
-        // Generamos los puntos de la parábola para la gráfica
-        for (let x = 0; x <= 6; x += 0.1) {
-            let y = -0.25 * Math.pow(x - 2, 2) + 3;
-            // Solo dibujamos hasta que el balón toca el suelo (y>=0)
-            if (y >= 0) {
-                puntosTrayectoria.push({x: x.toFixed(2), y: y.toFixed(2)});
-            }
-        }
+    <button class="btn-imprimir" onclick="window.print()">🖨️ GENERAR PDF / IMPRIMIR</button>
 
-        // Configuración de Chart.js
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                datasets: [{
-                    label: 'Trayectoria del Balón',
-                    data: puntosTrayectoria,
-                    borderColor: '#0e9343',
-                    borderWidth: 3,
-                    pointRadius: 0,
-                    fill: true,
-                    backgroundColor: 'rgba(14, 147, 67, 0.05)',
-                    tension: 0.4
-                }, {
-                    label: 'Aro de la Canasta',
-                    data: [{x: 5.5, y: 2}],
-                    pointBackgroundColor: 'red',
-                    pointRadius: 10,
-                    pointStyle: 'rectRot'
-                }]
-            },
-            options: {
-                scales: {
-                    x: { type: 'linear', title: {display: true, text: 'Distancia Horizontal (m)'}, min: 0, max: 6 },
-                    y: { title: {display: true, text: 'Altura (m)'}, min: 0, max: 4 }
-                },
-                plugins: {
-                    legend: { labels: { font: { family: 'Kalam', size: 14 } } }
-                }
-            }
-        });
-    </script>
+    <div class="ficha">
+        <div class="instructor-note">
+            <strong>Ejercicio 9:</strong> Halla la derivada de cada una de las siguientes funciones aplicando las reglas correspondientes (potencia, producto, cociente, cadena).
+        </div>
 
+        <div class="ejercicios-grid">
+            <div class="item-ejercicio">a) $f(x) = x^4 - 7x^2 + 9$</div>
+            <div class="item-ejercicio">b) $f(x) = (x^2 + 1) e^x$</div>
+            <div class="item-ejercicio">c) $f(x) = \frac{x+1}{x^2-4}$</div>
+            <div class="item-ejercicio">d) $f(x) = x^2 \ln x$</div>
+            <div class="item-ejercicio">e) $f(x) = \frac{2x}{x+1}$</div>
+            <div class="item-ejercicio">f) $f(x) = \frac{x^3+1}{x^2+2x+3}$</div>
+            <div class="item-ejercicio">g) $f(x) = x \text{ sen } x$</div>
+            <div class="item-ejercicio">h) $f(x) = 3 \cos x + 2\text{tg } x$</div>
+            <div class="item-ejercicio">i) $f(x) = 3e^x + 5$</div>
+            <div class="item-ejercicio">j) $f(x) = 2^x + \log_2 x$</div>
+        </div>
+
+        <div class="soluciones-seccion">
+            <h2>Clave de Soluciones</h2>
+            <div class="sol-grid">
+                <div>a) $f'(x) = 4x^3 - 14x$</div>
+                <div>b) $f'(x) = e^x(x^2 + 2x + 1)$</div>
+                <div>c) $f'(x) = \frac{-x^2-2x-4}{(x^2-4)^2}$</div>
+                <div>d) $f'(x) = x(2\ln x + 1)$</div>
+                <div>e) $f'(x) = \frac{2}{(x+1)^2}$</div>
+                <div>f) $f'(x) = \frac{x^4+4x^3+9x^2-2x-2}{(x^2+2x+3)^2}$</div>
+                <div>g) $f'(x) = \text{sen } x + x \cos x$</div>
+                <div>h) $f'(x) = -3 \text{ sen } x + \frac{2}{\cos^2 x}$</div>
+                <div>i) $f'(x) = 3e^x$</div>
+                <div>j) $f'(x) = 2^x \ln 2 + \frac{1}{x \ln 2}$</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 </html>
