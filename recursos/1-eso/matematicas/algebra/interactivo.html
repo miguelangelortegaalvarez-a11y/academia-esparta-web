@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío Algebraico - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        :root { --primary: #0e9343; --light: #f5fdf7; --dark: #063c24; --accent: #f39c12; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--light); color: var(--dark); text-align: center; padding: 20px; }
+        .game-container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary); font-size: 1.8rem; }
+        .stats { display: flex; justify-content: space-around; margin-bottom: 20px; font-weight: bold; }
+        .question { font-size: 2rem; margin: 30px 0; padding: 20px; background: #eee; border-radius: 10px; }
+        input { font-size: 1.5rem; width: 80px; padding: 10px; text-align: center; border: 2px solid var(--primary); border-radius: 10px; }
+        button { background: var(--primary); color: white; border: none; padding: 10px 20px; font-size: 1.2rem; border-radius: 10px; cursor: pointer; margin-left: 10px; }
+        button:hover { background: var(--dark); }
+        .feedback { margin-top: 20px; font-weight: bold; height: 24px; }
+        .btn-volver { display: inline-block; margin-top: 30px; text-decoration: none; color: #666; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>⚔️ Desafío Espartano: Álgebra</h1>
+        <p>Calcula el valor si <strong>x = 2</strong></p>
+        
+        <div class="stats">
+            <span>Puntos: <span id="score">0</span></span>
+            <span>Racha: <span id="streak">0</span></span>
+        </div>
+
+        <div class="question" id="problem">...</div>
+
+        <input type="number" id="answer" placeholder="?">
+        <button onclick="checkAnswer()">Enviar</button>
+
+        <div class="feedback" id="feedback"></div>
+
+        <a href="index.html" class="btn-volver">← Abandonar desafío</a>
+    </div>
+
+    <script>
+        let score = 0;
+        let streak = 0;
+        let currentResult = 0;
+
+        function generateProblem() {
+            const ops = [
+                { text: "3x + 4", res: 10 },
+                { text: "5x - 2", res: 8 },
+                { text: "x + 10", res: 12 },
+                { text: "2x + x", res: 6 },
+                { text: "x² + 1", res: 5 },
+                { text: "10 - x", res: 8 },
+                { text: "4x / 2", res: 4 }
+            ];
+            const prob = ops[Math.floor(Math.random() * ops.length)];
+            document.getElementById('problem').innerText = prob.text;
+            currentResult = prob.res;
+            document.getElementById('answer').value = '';
+            document.getElementById('answer').focus();
+        }
+
+        function checkAnswer() {
+            const userAns = document.getElementById('answer').value;
+            const feedback = document.getElementById('feedback');
+            
+            if (userAns == currentResult) {
+                score += 10;
+                streak++;
+                feedback.innerText = "¡Correcto! +10 puntos";
+                feedback.style.color = "green";
+            } else {
+                streak = 0;
+                feedback.innerText = "¡Casi! Era " + currentResult;
+                feedback.style.color = "red";
+            }
+            
+            document.getElementById('score').innerText = score;
+            document.getElementById('streak').innerText = streak;
+            setTimeout(generateProblem, 1500);
+        }
+
+        generateProblem();
+    </script>
+</body>
+</html>
