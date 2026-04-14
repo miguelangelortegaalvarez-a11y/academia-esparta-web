@@ -3,212 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes Maestros: Exponenciales - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
-    
+    <title>Apuntes de Cinemática - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --esparta-verde: #0e9343;
-            --esparta-oro: #f1c40f;
-            --fondo-apuntes: #ffffff;
-            --texto: #2c3e50;
+            --primary: #0e9343;
+            --accent: #f1c40f;
+            --bg: #f8f9fa;
+            --text: #2c3e50;
         }
 
         body {
-            font-family: 'Kalam', cursive;
-            background-color: #f4f7f4;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             margin: 0;
             padding: 20px;
-            color: var(--texto);
         }
 
-        .contenedor {
-            max-width: 1000px;
+        .container {
+            max-width: 900px;
             margin: 0 auto;
             background: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .header {
-            text-align: center;
-            background: var(--esparta-verde);
-            color: white;
             padding: 40px;
-            border-radius: 20px;
-            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .header h1 { font-family: 'Bangers', cursive; font-size: 3.5rem; margin: 0; letter-spacing: 2px; }
-        .header p { font-size: 1.3rem; color: var(--esparta-oro); margin-top: 10px; text-transform: uppercase; font-weight: bold; }
 
-        .btn-imprimir {
-            display: block;
-            width: fit-content;
-            margin: 0 auto 40px auto;
-            background: var(--esparta-oro);
-            color: black;
-            font-family: 'Bangers', cursive;
-            padding: 18px 45px;
-            border-radius: 50px;
-            font-size: 1.6rem;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            transition: 0.3s;
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
         }
-        .btn-imprimir:hover { transform: scale(1.05); background: #ffd700; }
+
+        .logo-academia {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            color: var(--text);
+            font-size: 2.5rem;
+            margin: 10px 0;
+        }
+
+        .motivation {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+        }
 
         h2 {
-            color: var(--esparta-verde);
-            border-bottom: 4px solid var(--esparta-oro);
-            padding-bottom: 10px;
-            margin-top: 50px;
-            font-family: 'Bangers', cursive;
-            font-size: 2.2rem;
+            color: var(--primary);
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            margin-top: 40px;
         }
 
-        .seccion-regla {
-            margin-bottom: 40px;
-            padding: 25px;
-            border-radius: 15px;
-            background: #fdfdfd;
-            border: 1px solid #eee;
-        }
-
-        .formula-maestra {
-            background: #fffafa;
-            border: 2px solid #ffeded;
-            padding: 25px;
-            text-align: center;
-            font-size: 1.8rem;
-            color: #d32f2f;
-            border-radius: 12px;
-            margin: 20px 0;
-            line-height: 1.6;
-        }
-
-        .tabla-ejemplos {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .tabla-ejemplos td {
+        .formula-box {
+            background: #f1f8f4;
+            border: 1px solid var(--primary);
             padding: 20px;
-            border-bottom: 1px solid #eee;
-            vertical-align: top;
-            width: 50%;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 20px 0;
         }
 
-        .nivel-label {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: bold;
+        .problem-box {
+            background: #fffdf2;
+            border-left: 5px solid var(--accent);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+
+        .problem-title {
+            font-weight: 600;
+            color: #856404;
+            display: block;
             margin-bottom: 10px;
         }
-        .label-base { background: #e3f2fd; color: #1976d2; }
-        .label-elite { background: #f3e5f5; color: #7b1fa2; }
 
-        .nota-espartana {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 15px;
-            margin-top: 15px;
-            font-size: 0.95rem;
+        .btn-print {
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: block;
+            margin: 0 auto 30px;
+            transition: 0.3s;
+        }
+
+        .btn-print:hover { background: #0a7033; }
+
+        .unit-badge {
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
 
         @media print {
-            .btn-imprimir, .header p { display: none; }
+            .btn-print, header .motivation { display: none; }
             body { background: white; padding: 0; }
-            .contenedor { box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
-            .seccion-regla { page-break-inside: avoid; }
+            .container { box-shadow: none; width: 100%; max-width: 100%; }
         }
     </style>
-
-    <script>
-        window.MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] }
-        };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
-    <div class="contenedor">
-        <div class="header">
-            <h1>EL PODER DEL NÚMERO $e$</h1>
-            <p>Manual de Supervivencia - Academia Esparta</p>
-        </div>
+<div class="container">
+    <header>
+        <div class="logo-academia">Academia Esparta</div>
+        <h1>TEMA 6: CINEMÁTICA</h1>
+        <p class="motivation">"El éxito es la suma de pequeños esfuerzos repetidos día tras día."</p>
+    </header>
 
-        <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR APUNTES EXPONENCIALES</button>
+    <button class="btn-print" onclick="window.print()">📥 Imprimir Apuntes / Guardar PDF</button>
 
-        <div class="seccion-regla">
-            <h2>Derivada de la Función Exponencial ($e$)</h2>
-            <p>El número $e$ es especial porque es el único cuya derivada es "él mismo", pero ¡cuidado! cuando el exponente es una función, debemos aplicar la regla de la cadena.</p>
-            
-            <div class="formula-maestra">
-                <b>Simple:</b> $f(x) = e^x \implies f'(x) = e^x$ <br>
-                <span style="color: var(--esparta-verde);"><b>Compuesta:</b> $f(x) = e^{u} \implies f'(x) = e^{u} \cdot u'$</span>
-            </div>
+    <h2>1. Conceptos Fundamentales</h2>
+    <p>Decimos que un cuerpo se mueve cuando cambia su posición con el tiempo. El movimiento es <strong>relativo</strong> porque depende del observador.</p>
+    <ul>
+        <li><strong>Distancia recorrida:</strong> Espacio total recorrido por un móvil.</li>
+        <li><strong>Desplazamiento:</strong> Diferencia entre la posición inicial y la posición final.</li>
+    </ul>
 
-            <table class="tabla-ejemplos">
-                <tr>
-                    <td>
-                        <span class="nivel-label label-base">GUERRERO BASE (Simple)</span><br>
-                        $f(x) = 3e^x$<br>
-                        $f'(x) = 3 \cdot e^x = \mathbf{3e^x}$
-                        <p><small>La constante se queda y la $e^x$ no cambia.</small></p>
-                    </td>
-                    <td>
-                        <span class="nivel-label label-elite">GUERRERO ÉLITE (Función)</span><br>
-                        $f(x) = e^{x^2 + 5x}$<br>
-                        $f'(x) = e^{x^2 + 5x} \cdot (2x + 5)$ <br>
-                        $\mathbf{f'(x) = (2x + 5)e^{x^2 + 5x}}$
-                        <p><small>Repetimos la función y multiplicamos por la derivada del exponente.</small></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="nivel-label label-elite">CASO TRIGONOMÉTRICO</span><br>
-                        $f(x) = e^{\text{sen } x}$<br>
-                        $f'(x) = e^{\text{sen } x} \cdot \cos x$<br>
-                        $\mathbf{f'(x) = \cos(x)e^{\text{sen } x}}$
-                    </td>
-                    <td>
-                        <span class="nivel-label label-elite">CASO RAÍZ</span><br>
-                        $f(x) = e^{\sqrt{x}}$<br>
-                        $f'(x) = e^{\sqrt{x}} \cdot \frac{1}{2\sqrt{x}}$<br>
-                        $\mathbf{f'(x) = \frac{e^{\sqrt{x}}}{2\sqrt{x}}}$
-                    </td>
-                </tr>
-            </table>
-
-            <div class="nota-espartana">
-                <strong>🛡️ CONSEJO DE INSTRUCTOR:</strong> Al escribir el resultado final, solemos poner la derivada del exponente ($u'$) **delante** de la $e$ para que se vea más ordenado y no se confunda con parte del exponente.
-            </div>
-        </div>
-
-        <div class="seccion-regla">
-            <h2>Otras bases (Cualquier número $a$)</h2>
-            <div class="formula-maestra">
-                $f(x) = a^u \implies f'(x) = a^u \cdot u' \cdot \ln(a)$
-            </div>
-            <table class="tabla-ejemplos">
-                <tr>
-                    <td style="width: 100%;">
-                        <span class="nivel-label label-elite">EJEMPLO COMPLETO</span><br>
-                        $f(x) = 5^{3x^2}$<br>
-                        $f'(x) = 5^{3x^2} \cdot (6x) \cdot \ln(5)$ <br>
-                        $\mathbf{f'(x) = 6x \cdot 5^{3x^2} \cdot \ln(5)}$
-                    </td>
-                </tr>
-            </table>
-        </div>
-
+    <h2>2. Velocidad y Aceleración</h2>
+    <p><strong>Velocidad:</strong> Mide la rapidez con la que un móvil cambia su posición. Se mide en <span class="unit-badge">m/s</span> (S.I.) o km/h.</p>
+    <div class="formula-box">
+        \[ v_m = \frac{\Delta s}{\Delta t} = \frac{\text{Posición}}{\text{Tiempo}} \]
     </div>
+
+    <p><strong>Aceleración:</strong> Mide cómo cambia la velocidad. Se mide en <span class="unit-badge">m/s²</span>.</p>
+    <div class="formula-box">
+        \[ a = \frac{\Delta v}{\Delta t} \]
+    </div>
+
+    <h2>3. Tipos de Movimiento</h2>
+    <h3>Según la trayectoria:</h3>
+    <ul>
+        <li><strong>Rectilíneo:</strong> En línea recta.</li>
+        <li><strong>Curvilíneo:</strong> Curvas, circular, etc.</li>
+    </ul>
+    <h3>Según velocidad/aceleración:</h3>
+    <ul>
+        <li><strong>Uniforme (MRU):</strong> \( v = \text{cte} \) (Velocidad constante).</li>
+        <li><strong>Uniformemente Acelerado (MRUA):</strong> \( a = \text{cte} \) (Aceleración constante).</li>
+    </ul>
+
+    <h2>4. Ecuaciones del Movimiento</h2>
+    <h3>Movimiento Rectilíneo Uniforme (MRU)</h3>
+    <div class="formula-box">
+        \[ S = S_0 + v \cdot t \]
+    </div>
+
+    <h3>Movimiento Rectilíneo Uniformemente Acelerado (MRUA)</h3>
+    <div class="formula-box">
+        \[ v = v_0 + a \cdot t \]
+        \[ S = S_0 + v_0 \cdot t + \frac{1}{2} a \cdot t^2 \]
+    </div>
+
+    <h2>5. Problemas Resueltos</h2>
+
+    <div class="problem-box">
+        <span class="problem-title">Problema 1: Radar de tramo</span>
+        <p>Un radar de tramo de 80 km/h tiene una limitación durante 2500m. Calcula el tiempo mínimo en segundos que se tiene que tardar en el tramo.</p>
+        <strong>Solución:</strong>
+        <p>Convertimos 80 km/h a m/s: \[ 80 \text{ km/h} = 22.22 \text{ m/s} \]</p>
+        <p>Usamos la fórmula del MRU: \[ t = \frac{S}{v} = \frac{2500}{22.22} = \mathbf{112.5 \text{ s}} \]</p>
+    </div>
+
+    <div class="problem-box">
+        <span class="problem-title">Problema 2: Aceleración de un coche</span>
+        <p>Un coche parte del reposo y acelera a \( 3 \text{ m/s}^2 \) durante 5s. Calcula su velocidad final.</p>
+        <strong>Solución:</strong>
+        <p>\[ v = v_0 + a \cdot t \]</p>
+        <p>\[ v = 0 + 3 \cdot 5 = \mathbf{15 \text{ m/s}} \]</p>
+    </div>
+
+    <div class="problem-box">
+        <span class="problem-title">Problema 3: Distancia Tierra - Sol</span>
+        <p>La velocidad de la luz es \( 3 \cdot 10^8 \text{ m/s} \). ¿Qué distancia hay entre la Tierra y el Sol sabiendo que la luz tarda 8 min y 18 s?</p>
+        <strong>Solución:</strong>
+        <p>Convertimos el tiempo a segundos: \[ t = 8 \cdot 60 + 18 = 498 \text{ s} \]</p>
+        <p>\[ S = v \cdot t = 3 \cdot 10^8 \cdot 498 = \mathbf{1.494 \cdot 10^{11} \text{ m}} \]</p>
+    </div>
+
+    <footer style="text-align: center; margin-top: 50px; color: #999; font-size: 0.8rem;">
+        © 2026 Academia Esparta - Material de apoyo escolar.
+    </footer>
+</div>
 
 </body>
 </html>
