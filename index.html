@@ -509,73 +509,76 @@
         fill: #ffffff;
       }
 
-      /* NUEVOS ESTILOS PARA LA NAVEGACIÓN DE RECURSOS */
-      .btn-nav {
-          background: white;
-          border: 2px solid var(--primary);
-          padding: 1rem;
-          border-radius: 12px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-size: 1rem;
-          color: var(--primary);
-          width: 100%;
-          display: block;
-          text-align: center;
+      /* ESTILOS NUEVA NAVEGACIÓN RECURSOS ESO */
+      .btn-nav-eso {
+        background: white;
+        border: 2px solid var(--primary);
+        padding: 1.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        color: var(--primary);
+        width: 100%;
+        display: block;
+        text-align: center;
       }
 
-      .btn-nav:hover {
-          background: var(--primary);
-          color: white;
-          transform: translateY(-3px);
+      .btn-nav-eso:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-3px);
       }
 
-      .btn-back {
-          background: #666;
-          color: white;
-          padding: 0.5rem 1rem;
-          border: none;
-          border-radius: 5px;
-          margin-bottom: 1.5rem;
-          cursor: pointer;
-          font-size: 0.9rem;
+      .btn-volver-eso {
+        background: none;
+        border: none;
+        color: #666;
+        cursor: pointer;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
-      .resource-section { 
-          display: none; 
-          animation: fadeIn 0.4s ease-out; 
-      }
-      .resource-section.active { display: block; }
-
-      @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
+      .resource-section-eso {
+        display: none;
+        animation: fadeInEso 0.4s ease-out;
       }
 
-      .grid-3 {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1rem;
-          margin-top: 1.5rem;
+      .resource-section-eso.active {
+        display: block;
       }
 
-      .card-recurso {
-          padding: 1.5rem 1rem;
-          border-radius: 10px;
-          color: white;
-          font-weight: bold;
-          text-align: center;
-          text-decoration: none;
-          font-size: 0.9rem;
-          cursor: pointer;
-          transition: 0.3s;
+      @keyframes fadeInEso {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
-      .bg-apuntes { background: #3498db; }
-      .bg-imprimibles { background: #e67e22; }
-      .bg-interactivo { background: #9b59b6; }
-      .card-recurso:hover { opacity: 0.85; transform: scale(1.02); }
+      .grid-recursos-final {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .card-recurso-final {
+        padding: 2rem 1rem;
+        border-radius: 10px;
+        color: white;
+        font-weight: 700;
+        text-align: center;
+        text-decoration: none;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+
+      .bg-apuntes-eso { background: #3498db; }
+      .bg-imprimibles-eso { background: #e67e22; }
+      .bg-interactivo-eso { background: #9b59b6; }
+      .card-recurso-final:hover { opacity: 0.85; transform: scale(1.02); }
 
       /* Responsive adjustments */
       @media (max-width: 768px) {
@@ -587,7 +590,7 @@
         nav ul { flex-wrap: wrap; gap: 0.6rem; }
         .whatsapp-float { bottom: 16px; right: 16px; width: 52px; height: 52px; }
         .whatsapp-float svg { width: 28px; height: 28px; }
-        .grid-3 { grid-template-columns: 1fr; }
+        .grid-recursos-final { grid-template-columns: 1fr; }
       }
     </style>
 
@@ -812,50 +815,53 @@
                     Jugar ahora
                 </a>
               </div>
-
           </div>
 
           <div style="margin-top: 5rem; border-top: 2px solid var(--light); padding-top: 3rem;">
-              <h3 style="text-align:center; color: var(--primary); font-size:2rem; margin-bottom: 2rem;">Recursos por Niveles (ESO)</h3>
+              <h3 style="text-align:center; color: var(--primary); font-size:2rem; margin-bottom: 2.5rem;">Recursos ESO - Tercer Trimestre</h3>
               
-              <div id="niv-cursos" class="resource-section active">
+              <div id="niv-cursos-eso" class="resource-section-eso active">
                   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-                      <button class="btn-nav" onclick="irARecurso('niv-asignaturas', '1º ESO')">1º ESO</button>
-                      <button class="btn-nav" onclick="irARecurso('niv-asignaturas', '2º ESO')">2º ESO</button>
-                      <button class="btn-nav" onclick="irARecurso('niv-asignaturas', '3º ESO')">3º ESO</button>
-                      <button class="btn-nav" onclick="irARecurso('niv-asignaturas', '4º ESO')">4º ESO</button>
+                      <button class="btn-nav-eso" onclick="irASeccionEso('niv-asignaturas-eso', '1º ESO')">1º ESO</button>
+                      <button class="btn-nav-eso" onclick="irASeccionEso('niv-asignaturas-eso', '2º ESO')">2º ESO</button>
+                      <button class="btn-nav-eso" onclick="irASeccionEso('niv-asignaturas-eso', '3º ESO')">3º ESO</button>
+                      <button class="btn-nav-eso" onclick="irASeccionEso('niv-asignaturas-eso', '4º ESO')">4º ESO</button>
                   </div>
               </div>
 
-              <div id="niv-asignaturas" class="resource-section">
-                  <button class="btn-back" onclick="irARecurso('niv-cursos')">← Volver a Cursos</button>
-                  <h4 id="txt-curso-sel" style="color: var(--primary); margin-bottom: 1.5rem;"></h4>
+              <div id="niv-asignaturas-eso" class="resource-section-eso">
+                  <button class="btn-volver-eso" onclick="irASeccionEso('niv-cursos-eso')">
+                    <i class="fa-solid fa-arrow-left"></i> Volver a Cursos
+                  </button>
+                  <h4 id="txt-curso-eso" style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;"></h4>
                   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-                      <button class="btn-nav" onclick="irARecurso('niv-temas', 'Matemáticas')">Matemáticas</button>
+                      <button class="btn-nav-eso" onclick="irASeccionEso('niv-temas-eso', 'Matemáticas')">Matemáticas</button>
                   </div>
               </div>
 
-              <div id="niv-temas" class="resource-section">
-                  <button class="btn-back" onclick="irARecurso('niv-asignaturas')">← Volver a Asignaturas</button>
-                  <h4 style="color: var(--primary); margin-bottom: 1.5rem;">Temas del 3er Trimestre</h4>
-                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-                      <button class="btn-nav" onclick="irARecurso('niv-recursos', 'Geometría')">Geometría</button>
-                      <button class="btn-nav" onclick="irARecurso('niv-recursos', 'Estadística')">Estadística</button>
-                      <button class="btn-nav" onclick="irARecurso('niv-recursos', 'Probabilidad')">Probabilidad</button>
+              <div id="niv-temas-eso" class="resource-section-eso">
+                  <button class="btn-volver-eso" onclick="irASeccionEso('niv-asignaturas-eso')">
+                    <i class="fa-solid fa-arrow-left"></i> Volver a Asignaturas
+                  </button>
+                  <h4 id="txt-asignatura-eso" style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;"></h4>
+                  <div id="contenedor-botones-temas" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                      <p style="text-align: center; color: #666; grid-column: 1 / -1;">Próximamente se añadirán los temas de este trimestre.</p>
                   </div>
               </div>
 
-              <div id="niv-recursos" class="resource-section">
-                  <button class="btn-back" onclick="irARecurso('niv-temas')">← Volver a Temas</button>
-                  <h4 id="txt-tema-sel" style="color: var(--primary); margin-bottom: 1.5rem;"></h4>
-                  <div class="grid-3">
-                      <div class="card-recurso bg-apuntes" onclick="alert('Cargando zona de apuntes...')">📚 ZONA DE APUNTES</div>
-                      <div class="card-recurso bg-imprimibles" onclick="alert('Cargando actividades imprimibles...')">🖨️ ACTIVIDADES IMPRIMIBLES</div>
-                      <div class="card-recurso bg-interactivo" onclick="alert('Iniciando actividades interactivas...')">🎮 JUEGOS INTERACTIVOS</div>
+              <div id="niv-final-eso" class="resource-section-eso">
+                  <button class="btn-volver-eso" onclick="irASeccionEso('niv-temas-eso')">
+                    <i class="fa-solid fa-arrow-left"></i> Volver a Temas
+                  </button>
+                  <h4 id="txt-tema-final" style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;"></h4>
+                  <div class="grid-recursos-final">
+                      <div class="card-recurso-final bg-apuntes-eso" onclick="alert('Zona de Apuntes en desarrollo')">📚 ZONA DE APUNTES</div>
+                      <div class="card-recurso-final bg-imprimibles-eso" onclick="alert('Actividades Imprimibles en desarrollo')">🖨️ IMPRIMIBLES (PDF)</div>
+                      <div class="card-recurso-final bg-interactivo-eso" onclick="alert('Actividades Interactivas en desarrollo')">🎮 INTERACTIVOS</div>
                   </div>
               </div>
           </div>
-          </div>
+      </div>
     </section>
 
     <section id="speech" class="light">
@@ -953,20 +959,23 @@
     </a>
 
     <script>
-      function irARecurso(idSeccion, texto = "") {
-          // Ocultar todas las subsecciones de recursos
-          document.querySelectorAll('.resource-section').forEach(s => s.classList.remove('active'));
-          
-          // Mostrar la sección seleccionada
-          document.getElementById(idSeccion).classList.add('active');
+      function irASeccionEso(idSeccion, info = "") {
+        // Ocultar todas las subsecciones de ESO
+        document.querySelectorAll('.resource-section-eso').forEach(s => s.classList.remove('active'));
+        
+        // Mostrar la sección deseada
+        document.getElementById(idSeccion).classList.add('active');
 
-          // Actualizar textos dinámicos
-          if(texto && idSeccion === 'niv-asignaturas') {
-              document.getElementById('txt-curso-sel').innerText = "Seleccionado: " + texto;
-          }
-          if(texto && idSeccion === 'niv-recursos') {
-              document.getElementById('txt-tema-sel').innerText = "Tema: " + texto;
-          }
+        // Actualizar textos informativos
+        if (info && idSeccion === 'niv-asignaturas-eso') {
+          document.getElementById('txt-curso-eso').innerText = "Recursos para " + info;
+        }
+        if (info && idSeccion === 'niv-temas-eso') {
+          document.getElementById('txt-asignatura-eso').innerText = "Temas de " + info;
+        }
+        if (info && idSeccion === 'niv-final-eso') {
+          document.getElementById('txt-tema-final').innerText = "Recursos de " + info;
+        }
       }
     </script>
   </body>
