@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento: Desafíos de Ecuaciones - Academia Esparta</title>
+    <title>Cálculo Mental (30) - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
     <style>
         :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; }
@@ -12,165 +12,95 @@
 
         /* Interfaz Web */
         .no-print-header { background: var(--esparta-verde); color: white; width: 100%; max-width: 800px; padding: 15px; text-align: center; border-radius: 15px; font-family: 'Bangers'; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .btn-imprimir { background: var(--esparta-oro); color: black; font-family: 'Bangers'; font-size: 22px; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; margin-bottom: 20px; position: sticky; top: 10px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .btn-imprimir { background: var(--esparta-oro); color: black; font-family: 'Bangers'; font-size: 22px; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
-        /* Configuración de folios A4 */
+        /* Configuración de folio único A4 */
         .pagina { 
             background: white; 
             width: 210mm; 
-            min-height: 296mm; 
-            padding: 10mm 15mm; 
+            height: 296mm; 
+            padding: 15mm 20mm; 
             box-sizing: border-box; 
             border: 1px solid #ddd; 
-            margin-bottom: 30px; 
-            page-break-after: always; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
             position: relative;
         }
 
-        .header-problemas { text-align: center; border-bottom: 3px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
-        .header-problemas h2 { font-family: 'Bangers'; font-size: 32px; margin: 0; letter-spacing: 1px; }
+        .header-calculo { background: #333; color: white; padding: 12px 25px; border-radius: 5px; margin-bottom: 20px; }
+        .header-calculo h2 { margin: 0; font-family: 'Bangers'; font-size: 36px; letter-spacing: 2px; }
         
-        .datos-alumno-row { display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 20px; border-bottom: 1px solid #000; padding-bottom: 5px; }
+        .instrucciones { font-weight: bold; font-size: 20px; margin-bottom: 30px; border-bottom: 3px solid #333; padding-bottom: 10px; }
 
-        /* Estructura del Problema (Formato Orientación Andújar) */
-        .problema-contenedor { border: 2px solid #000; padding: 15px; margin-bottom: 25px; page-break-inside: avoid; }
-        .enunciado { font-size: 18px; line-height: 1.4; margin-bottom: 15px; font-weight: bold; background: #f9f9f9; padding: 5px; }
+        /* Cuadrícula de 30 operaciones (2 columnas de 15) */
+        .contenedor-operaciones { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+        .columna { padding: 0 10px; }
         
-        .zonas-trabajo { display: flex; border-top: 1px solid #000; min-height: 180px; }
-        .zona-datos { flex: 1; border-right: 1px solid #000; padding: 10px; }
-        .zona-operaciones { flex: 2; padding: 10px; }
-        .etiqueta { font-family: 'Bangers'; font-size: 18px; text-decoration: underline; display: block; margin-bottom: 10px; }
-
-        .solucion-linea { border-top: 1px solid #000; padding: 10px; font-family: 'Bangers'; font-size: 20px; display: flex; align-items: center; }
-        .solucion-linea span { border-bottom: 1px solid #000; flex-grow: 1; margin-left: 10px; height: 25px; }
+        .fila-operacion { font-size: 28px; margin-bottom: 20px; display: flex; align-items: center; font-weight: bold; border-bottom: 1px dashed #eee; padding-bottom: 5px; }
+        .hueco { display: inline-block; width: 60px; border-bottom: 3px solid #000; margin: 0 10px; text-align: center; min-height: 30px; }
 
         @media print {
             body { background: white; padding: 0; }
             .btn-imprimir, .no-print-header { display: none !important; }
-            .pagina { border: none; box-shadow: none; margin: 0; width: 100%; }
+            .pagina { border: none; box-shadow: none; margin: 0; width: 100%; height: 100vh; }
+            .header-calculo { background: #000 !important; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
 
     <div class="no-print-header">
-        <h1>ENTRENAMIENTO: PROBLEMAS CON ECUACIONES</h1>
+        <h1>ENTRENAMIENTO RÁPIDO: AGILIDAD MENTAL</h1>
     </div>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR LOS 10 PROBLEMAS</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR 1 FOLIO (30 OPERACIONES)</button>
 
     <div class="pagina">
-        <div class="header-problemas">
-            <h2>PROBLEMAS CON ECUACIONES - ACADEMIA ESPARTA (2º ESO)</h2>
+        <div class="header-calculo">
+            <h2>Cálculo mental</h2>
         </div>
-        
-        <div class="datos-alumno-row">
-            <span>Nombre: _____________________________________</span>
-            <span>Fecha: ____/____/____</span>
-        </div>
+        <div class="instrucciones">Escribe el número que falta en cada espacio.</div>
 
-        <div class="problema-contenedor">
-            <div class="enunciado">1.- El triple de un número menos seis es igual a ocho. ¿De qué número se trata? (Ecuación: 3x - 6 = 8)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS (¿Quién es x?)</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
+        <div class="contenedor-operaciones">
+            <div class="columna">
+                <div class="fila-operacion">4 x <span class="hueco"></span> = 24</div>
+                <div class="fila-operacion">3 x <span class="hueco"></span> = 21</div>
+                <div class="fila-operacion"><span class="hueco"></span> x 6 = 18</div>
+                <div class="fila-operacion">5 x <span class="hueco"></span> = 45</div>
+                <div class="fila-operacion">2 x <span class="hueco"></span> = 16</div>
+                <div class="fila-operacion">6 x 3 = <span class="hueco"></span></div>
+                <div class="fila-operacion">8 x <span class="hueco"></span> = 40</div>
+                <div class="fila-operacion">9 x <span class="hueco"></span> = 18</div>
+                <div class="fila-operacion"><span class="hueco"></span> x 7 = 49</div>
+                <div class="fila-operacion">4 x 4 = <span class="hueco"></span></div>
+                <div class="fila-operacion">5 x <span class="hueco"></span> = 30</div>
+                <div class="fila-operacion">7 x <span class="hueco"></span> = 14</div>
+                <div class="fila-operacion"><span class="hueco"></span> x 3 = 12</div>
+                <div class="fila-operacion">9 x 9 = <span class="hueco"></span></div>
+                <div class="fila-operacion">2 x <span class="hueco"></span> = 20</div>
             </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
-        </div>
-
-        <div class="problema-contenedor">
-            <div class="enunciado">2.- Si a un número le sumas doce, obtienes el doble de dicho número. Halla el número. (Ecuación: x + 12 = 2x)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
+            
+            <div class="columna">
+                <div class="fila-operacion">6 x <span class="hueco"></span> = 36</div>
+                <div class="fila-operacion"><span class="hueco"></span> x 8 = 32</div>
+                <div class="fila-operacion">7 x <span class="hueco"></span> = 21</div>
+                <div class="fila-operacion">3 x 8 = <span class="hueco"></span></div>
+                <div class="fila-operacion">5 x <span class="hueco"></span> = 25</div>
+                <div class="fila-operacion"><span class="hueco"></span> x 4 = 12</div>
+                <div class="fila-operacion">8 x 8 = <span class="hueco"></span></div>
+                <div class="fila-operacion">9 x <span class="hueco"></span> = 63</div>
+                <div class="fila-operacion">2 x <span class="hueco"></span> = 14</div>
+                <div class="fila-operacion"><span class="hueco"></span> x 5 = 50</div>
+                <div class="fila-operacion">6 x <span class="hueco"></span> = 42</div>
+                <div class="fila-operacion">4 x <span class="hueco"></span> = 32</div>
+                <div class="fila-operacion">3 x 9 = <span class="hueco"></span></div>
+                <div class="fila-operacion">8 x <span class="hueco"></span> = 56</div>
+                <div class="fila-operacion"><span class="hueco"></span> x 6 = 54</div>
             </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
         </div>
 
-        <div class="problema-contenedor">
-            <div class="enunciado">3.- La suma de un número y su siguiente es igual a 31. ¿Cuáles son esos números? (Ecuación: x + x + 1 = 31)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
-            </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
+        <div style="position: absolute; bottom: 20mm; width: 80%; text-align: center; font-style: italic; color: #666;">
+            "La rapidez mental es el arma secreta del guerrero."
         </div>
-
-        <div class="problema-contenedor">
-            <div class="enunciado">4.- Erik tiene el doble de escudos que su amigo. Entre los dos tienen 150 escudos. ¿Cuántos tiene cada uno? (Ecuación: x + 2x = 150)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
-            </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
-        </div>
-
-        <div class="problema-contenedor">
-            <div class="enunciado">5.- Cinco veces un número es igual a ese mismo número menos 20. Calcula el número. (Ecuación: 5x = x - 20)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
-            </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
-        </div>
-    </div>
-
-    <div class="pagina">
-        <div class="header-problemas">
-            <h2>PROBLEMAS CON ECUACIONES - ACADEMIA ESPARTA (2º ESO)</h2>
-        </div>
-
-        <div class="datos-alumno-row">
-            <span>Nombre: _____________________________________</span>
-            <span>Fecha: ____/____/____</span>
-        </div>
-
-        <div class="problema-contenedor">
-            <div class="enunciado">6.- Si al cuádruple de un número le restas su doble, el resultado es 40. ¿Cuál es el número? (Ecuación: 4x - 2x = 40)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
-            </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
-        </div>
-
-        <div class="problema-contenedor">
-            <div class="enunciado">7.- Reparte 100€ entre dos personas de forma que una reciba 20€ más que la otra. (Ecuación: x + x + 20 = 100)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
-            </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
-        </div>
-
-        <div class="problema-contenedor">
-            <div class="enunciado">8.- El perímetro de un rectángulo es 40 cm. Si la base mide el triple que la altura, ¿cuánto mide cada lado? (Ecuación: 2x + 2(3x) = 40)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
-            </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
-        </div>
-
-        <div class="problema-contenedor">
-            <div class="enunciado">9.- La mitad de un número más su tercera parte es igual a 5. ¿Cuál es el número? (Ecuación: x/2 + x/3 = 5)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
-            </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
-        </div>
-
-        <div class="problema-contenedor">
-            <div class="enunciado">10.- En una granja hay gallinas y conejos. Hay 30 animales y 80 patas. ¿Cuántos animales hay de cada clase? (Ecuación: 2x + 4(30-x) = 80)</div>
-            <div class="zonas-trabajo">
-                <div class="zona-datos"><span class="etiqueta">DATOS</span></div>
-                <div class="zona-operaciones"><span class="etiqueta">RESOLUCIÓN DE LA ECUACIÓN</span></div>
-            </div>
-            <div class="solucion-linea">SOLUCIÓN: <span></span></div>
-        </div>
-
-        <div style="text-align: center; font-style: italic; margin-top: 15px;">"Para resolver un problema, primero hay que entender su lenguaje: el Álgebra."</div>
     </div>
 
 </body>
