@@ -3,51 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios Academia Esparta - Imprimible</title>
+    <title>Entrenamiento de Tiempo - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
     <style>
         :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; }
         
-        body { font-family: 'Kalam', cursive; background-color: #f4f9f4; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        body { font-family: 'Kalam', cursive; background-color: #f4f9f4; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; color: #333; }
 
-        /* Estilo del encabezado para la web */
+        /* Estilos Web */
         .no-print-header { background: var(--esparta-verde); color: white; width: 100%; max-width: 800px; padding: 15px; text-align: center; border-radius: 15px; font-family: 'Bangers'; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-imprimir { background: var(--esparta-oro); color: black; font-family: 'Bangers'; font-size: 20px; padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; z-index: 100; }
+        .btn-imprimir:hover { transform: scale(1.05); background: #d4ac0d; }
 
-        /* FICHA DE EJERCICIOS (Lo que se imprime) */
+        /* FICHA DE EJERCICIOS (Formato A4) */
         .ficha { background: white; width: 210mm; min-height: 297mm; padding: 20mm; box-sizing: border-box; border: 1px solid #ddd; box-shadow: 0 0 20px rgba(0,0,0,0.05); position: relative; }
         
         .header-ficha { display: flex; justify-content: space-between; border-bottom: 2px solid var(--esparta-verde); padding-bottom: 10px; margin-bottom: 30px; }
-        .logo-esparta { font-family: 'Bangers'; font-size: 24px; color: var(--esparta-verde); }
+        .logo-esparta { font-family: 'Bangers'; font-size: 28px; color: var(--esparta-verde); }
         .datos-alumno { font-size: 18px; }
 
-        .titulo-ejercicio { font-family: 'Bangers'; font-size: 28px; color: #333; margin-bottom: 20px; text-decoration: underline var(--esparta-oro); }
+        .titulo-seccion { font-family: 'Bangers'; font-size: 32px; color: #333; margin-top: 30px; margin-bottom: 15px; text-decoration: underline var(--esparta-oro); }
+        .instrucciones { font-size: 18px; color: #555; margin-bottom: 25px; font-style: italic; }
 
-        .cuadricula-ejercicios { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; }
+        /* Estilos de los Ejercicios */
+        .ejercicio-bloque { margin-bottom: 40px; }
         
-        .bloque-operacion { border: 1px dashed #ccc; padding: 20px; border-radius: 10px; text-align: center; font-size: 40px; letter-spacing: 5px; }
+        .tabla-equivalencias { width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 18px; }
+        .tabla-equivalencias td { border: 1px solid #eee; padding: 10px; text-align: left; }
+        .tabla-equivalencias tr:nth-child(even) { background-color: #f9f9f9; }
+        .resaltado { font-weight: bold; color: var(--esparta-verde); }
 
-        /* Botón de imprimir flotante */
-        .btn-imprimir { background: var(--esparta-oro); color: black; font-family: 'Bangers'; font-size: 20px; padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; }
-        .btn-imprimir:hover { transform: scale(1.05); background: #d4ac0d; }
+        .operacion-linea { font-size: 24px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        
+        /* Inputs interactivos para la web */
+        input[type="number"] { font-family: 'Kalam', cursive; font-size: 20px; padding: 5px; width: 60px; text-align: center; border: 2px solid #ccc; border-radius: 5px; color: #333; }
+        input[type="number"]:focus { border-color: var(--esparta-verde); outline: none; }
 
-        /* MODO IMPRESIÓN - AQUÍ ESTÁ LA MAGIA */
+        /* MODO IMPRESIÓN */
         @media print {
             body { background: white; padding: 0; }
-            .btn-imprimir, .no-print-header { display: none !important; }
+            .btn-imprimir, .no-print-header, input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { display: none !important; }
             .ficha { border: none; box-shadow: none; width: 100%; margin: 0; padding: 10mm; }
-            .bloque-operacion { border: 1px solid #eee; }
+            .operacion-linea { font-size: 20px; }
+            /* Ocultar inputs y mostrar línea para escribir en papel */
+            input[type="number"] { display: none !important; }
+            .linea-escribir { display: inline-block !important; width: 60px; border-bottom: 1px solid black; margin-right: 5px; height: 20px; }
+            .tabla-equivalencias { border: 1px solid black; }
+            .tabla-equivalencias td { border: 1px solid black; color: black !important; }
         }
 
+        /* Ocultar línea de escribir en la web */
+        .linea-escribir { display: none; }
+
         @media (max-width: 800px) {
-            .ficha { width: 95vw; padding: 10px; }
-            .cuadricula-ejercicios { grid-template-columns: 1fr; }
+            .ficha { width: 95vw; padding: 10px; padding-top: 60px; }
+            .tabla-equivalencias { font-size: 14px; }
+            .operacion-linea { font-size: 18px; flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
 
     <div class="no-print-header">
-        <h1>ENTRENAMIENTO FAMILIA: MODO IMPRESIÓN</h1>
+        <h1>GUERRERO ERIK: ENTRENAMIENTO DEL TIEMPO</h1>
     </div>
 
     <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR FICHA PARA EL NIÑO</button>
@@ -58,21 +76,47 @@
             <div class="datos-alumno">NOMBRE: _______________________ FECHA: ___/___/___</div>
         </div>
 
-        <div class="titulo-ejercicio">OPERACIONES DE ENTRENAMIENTO (TABLAS 2, 3 y 4)</div>
+        <div class="titulo-seccion">1. RECUERDA LAS UNIDADES DE TIEMPO</div>
+        <p class="instrucciones">Lee atentamente estas equivalencias antes de empezar.</p>
+        
+        <table class="tabla-equivalencias">
+            <tr><td>1 <span class="resaltado">SEMANA</span> tiene</td><td>7 DÍAS</td></tr>
+            <tr><td>1 <span class="resaltado">QUINCENA</span> tiene</td><td>15 DÍAS</td></tr>
+            <tr><td>1 <span class="resaltado">MES</span> tiene (aprox.)</td><td>30 DÍAS</td></tr>
+            <tr><td>1 <span class="resaltado">TRIMESTRE</span> tiene</td><td>3 MESES</td></tr>
+        </table>
 
-        <div class="cuadricula-ejercicios">
-            <div class="bloque-operacion"> 45 x 2 = <br><br> _____ </div>
-            <div class="bloque-operacion"> 32 x 3 = <br><br> _____ </div>
-            <div class="bloque-operacion"> 18 x 4 = <br><br> _____ </div>
-            <div class="bloque-operacion"> 67 x 2 = <br><br> _____ </div>
-            <div class="bloque-operacion"> 29 x 3 = <br><br> _____ </div>
-            <div class="bloque-operacion"> 54 x 4 = <br><br> _____ </div>
-            <div class="bloque-operacion"> 81 x 2 = <br><br> _____ </div>
-            <div class="bloque-operacion"> 13 x 3 = <br><br> _____ </div>
+        <div class="ejercicio-bloque">
+            <div class="titulo-seccion">2. COMPLETA LAS EQUIVALENCIAS</div>
+            <p class="instrucciones">Calcula y escribe el número correcto.</p>
+
+            <div class="operacion-linea">
+                a) 2 semanas son <input type="number" placeholder="?"><span class="linea-escribir"></span> días.
+            </div>
+            <div class="operacion-linea">
+                b) 1 quincena y 3 días son <input type="number" placeholder="?"><span class="linea-escribir"></span> días.
+            </div>
+            <div class="operacion-linea">
+                c) Un trimestre tiene <input type="number" placeholder="?"><span class="linea-escribir"></span> meses.
+            </div>
+            <div class="operacion-linea">
+                d) 2 meses (de 30 días) son <input type="number" placeholder="?"><span class="linea-escribir"></span> días.
+            </div>
         </div>
 
-        <div style="margin-top: 50px; text-align: center; font-style: italic; color: #666;">
-            "Un guerrero no se rinde, un guerrero practica hasta vencer."
+        <div class="ejercicio-bloque">
+            <div class="titulo-seccion">3. ¡PIENSA COMO UN GUERRERO!</div>
+            <p class="instrucciones">Lee y resuelve.</p>
+            
+            <div class="operacion-linea" style="flex-direction: column; align-items: flex-start;">
+                <p>Erik tiene un examen dentro de <span class="resaltado">2 quincenas y 5 días</span>.</p>
+                <p>¿Cuántos días faltan para el examen?</p>
+                <p style="margin-left: 20px;">Faltan <input type="number" placeholder="?"><span class="linea-escribir"></span> días.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; text-align: center; font-style: italic; color: #666; border-top: 1px solid #eee; padding-top: 20px;">
+            "La planificación es el escudo del estudiante. ¡Domina tu tiempo, domina tu destino!"
         </div>
     </div>
 
