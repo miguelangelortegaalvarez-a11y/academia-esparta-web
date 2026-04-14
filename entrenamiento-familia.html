@@ -3,111 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes de Derivadas - Academia Esparta</title>
+    <title>Apuntes Maestros de Derivadas - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --esparta-verde: #0e9343;
             --esparta-oro: #f1c40f;
-            --fondo-apuntes: #fcfcfc;
+            --fondo-apuntes: #ffffff;
+            --texto: #2c3e50;
         }
 
         body {
             font-family: 'Kalam', cursive;
-            background-color: #f0f2f0;
+            background-color: #f4f7f4;
             margin: 0;
             padding: 20px;
-            color: #333;
+            color: var(--texto);
         }
 
         .contenedor {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
         .header {
             text-align: center;
             background: var(--esparta-verde);
             color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
         }
-        .header h1 { font-family: 'Bangers', cursive; font-size: 3rem; margin: 0; }
-        .header p { font-size: 1.2rem; color: var(--esparta-oro); margin-top: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .header h1 { font-family: 'Bangers', cursive; font-size: 3.5rem; margin: 0; letter-spacing: 2px; }
+        .header p { font-size: 1.3rem; color: var(--esparta-oro); margin-top: 10px; text-transform: uppercase; font-weight: bold; }
 
         .btn-imprimir {
             display: block;
             width: fit-content;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 40px auto;
             background: var(--esparta-oro);
             color: black;
             font-family: 'Bangers', cursive;
-            padding: 15px 40px;
+            padding: 18px 45px;
             border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             border: none;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: 0.3s;
         }
+        .btn-imprimir:hover { transform: scale(1.05); background: #ffd700; }
 
         h2 {
             color: var(--esparta-verde);
-            border-bottom: 3px solid var(--esparta-oro);
+            border-bottom: 4px solid var(--esparta-oro);
             padding-bottom: 10px;
-            margin-top: 40px;
+            margin-top: 50px;
             font-family: 'Bangers', cursive;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
         }
 
-        .regla-box {
-            background: #f9f9f9;
-            border-left: 8px solid var(--esparta-verde);
+        .seccion-regla {
+            margin-bottom: 40px;
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 0 10px 10px 0;
+            border-radius: 15px;
+            background: #fdfdfd;
+            border: 1px solid #eee;
         }
 
-        .formula {
-            font-size: 1.4rem;
+        .formula-maestra {
+            background: #fffafa;
+            border: 2px solid #ffeded;
+            padding: 25px;
             text-align: center;
-            margin: 15px 0;
+            font-size: 1.6rem;
             color: #d32f2f;
+            border-radius: 12px;
+            margin: 20px 0;
         }
 
-        .ejemplos {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 15px;
+        .tabla-ejemplos {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        .ejemplo-item {
-            background: white;
-            padding: 15px;
-            border: 1px dashed #ccc;
-            border-radius: 8px;
+        .tabla-ejemplos th {
+            background: #f2f2f2;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid var(--esparta-verde);
         }
 
-        .ejemplo-item b { color: var(--esparta-verde); }
+        .tabla-ejemplos td {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+            width: 50%;
+        }
+
+        .nivel-label {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .label-base { background: #e3f2fd; color: #1976d2; }
+        .label-elite { background: #f3e5f5; color: #7b1fa2; }
 
         @media print {
             .btn-imprimir, .header p { display: none; }
             body { background: white; padding: 0; }
             .contenedor { box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
-            .regla-box { page-break-inside: avoid; border-color: black; }
+            .seccion-regla { page-break-inside: avoid; border: 1px solid #ccc; }
+            h2 { color: black; border-bottom-color: black; }
         }
     </style>
 
     <script>
         window.MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] }
         };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -116,86 +140,120 @@
 
     <div class="contenedor">
         <div class="header">
-            <h1>MANUAL DEL GUERRERO: DERIVADAS</h1>
-            <p>Academia Esparta - El Arte de la Derivación</p>
+            <h1>APUNTES ELITE: DERIVADAS</h1>
+            <p>Formación para Guerreros Matemáticos - Academia Esparta</p>
         </div>
 
-        <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR APUNTES</button>
+        <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR MANUAL COMPLETO</button>
 
-        <div class="regla-box">
-            <h2>1. Derivada de una Potencia</h2>
-            <div class="formula">
-                Si \( f(x) = x^n \) &rarr; \( f'(x) = n \cdot x^{n-1} \)
+        <div class="seccion-regla">
+            <h2>1. Constantes y Potencias</h2>
+            <div class="formula-maestra">
+                $f(x) = k \implies f'(x) = 0$ <br>
+                $f(x) = x^n \implies f'(x) = n \cdot x^{n-1}$
             </div>
-            <div class="ejemplos">
-                <div class="ejemplo-item">
-                    <b>Guerrero Base:</b><br>
-                    \( f(x) = x^5 \)<br>
-                    \( f'(x) = 5x^4 \)
-                </div>
-                <div class="ejemplo-item">
-                    <b>Guerrero Élite:</b><br>
-                    \( f(x) = \frac{1}{x^3} = x^{-3} \)<br>
-                    \( f'(x) = -3x^{-4} = -\frac{3}{x^4} \)
-                </div>
-            </div>
+            <table class="tabla-ejemplos">
+                <tr>
+                    <td>
+                        <span class="nivel-label label-base">GUERRERO BASE</span><br>
+                        $f(x) = 7x^3$<br>
+                        $f'(x) = 7 \cdot 3x^2 = \mathbf{21x^2}$
+                    </td>
+                    <td>
+                        <span class="nivel-label label-elite">GUERRERO ÉLITE</span><br>
+                        $f(x) = \frac{5}{x^4} = 5x^{-4}$<br>
+                        $f'(x) = 5(-4)x^{-5} = \mathbf{-\frac{20}{x^5}}$
+                    </td>
+                </tr>
+            </table>
         </div>
 
-        <div class="regla-box">
-            <h2>2. Derivada de un Producto</h2>
-            <div class="formula">
-                Si \( f(x) = u \cdot v \) &rarr; \( f'(x) = u' \cdot v + u \cdot v' \)
+        <div class="seccion-regla">
+            <h2>2. Raíces (Potencia de exponente fraccionario)</h2>
+            <div class="formula-maestra">
+                $f(x) = \sqrt[n]{x} \implies f'(x) = \frac{1}{n \cdot \sqrt[n]{x^{n-1}}}$
             </div>
-            <div class="ejemplos">
-                <div class="ejemplo-item">
-                    <b>Guerrero Base:</b><br>
-                    \( f(x) = x^2 \cdot \text{sen}(x) \)<br>
-                    \( f'(x) = 2x \cdot \text{sen}(x) + x^2 \cdot \cos(x) \)
-                </div>
-                <div class="ejemplo-item">
-                    <b>Guerrero Élite:</b><br>
-                    \( f(x) = e^x \cdot \ln(x) \)<br>
-                    \( f'(x) = e^x \ln(x) + e^x \cdot \frac{1}{x} \)
-                </div>
-            </div>
+            <table class="tabla-ejemplos">
+                <tr>
+                    <td>
+                        <span class="nivel-label label-base">GUERRERO BASE</span><br>
+                        $f(x) = \sqrt{x}$ (Raíz cuadrada)<br>
+                        $f'(x) = \mathbf{\frac{1}{2\sqrt{x}}}$
+                    </td>
+                    <td>
+                        <span class="nivel-label label-elite">GUERRERO ÉLITE</span><br>
+                        $f(x) = \sqrt[3]{x^2} = x^{2/3}$<br>
+                        $f'(x) = \frac{2}{3}x^{-1/3} = \mathbf{\frac{2}{3\sqrt[3]{x}}}$
+                    </td>
+                </tr>
+            </table>
         </div>
 
-        <div class="regla-box">
-            <h2>3. Derivada de un Cociente</h2>
-            <div class="formula">
-                Si \( f(x) = \frac{u}{v} \) &rarr; \( f'(x) = \frac{u' \cdot v - u \cdot v'}{v^2} \)
+        <div class="seccion-regla">
+            <h2>3. Exponenciales y Logaritmos</h2>
+            <div class="formula-maestra">
+                $f(x) = e^x \implies f'(x) = e^x$ <br>
+                $f(x) = \ln(x) \implies f'(x) = \frac{1}{x}$
             </div>
-            <div class="ejemplos">
-                <div class="ejemplo-item">
-                    <b>Guerrero Base:</b><br>
-                    \( f(x) = \frac{x+1}{x} \)<br>
-                    \( f'(x) = \frac{1 \cdot x - (x+1) \cdot 1}{x^2} = -\frac{1}{x^2} \)
-                </div>
-                <div class="ejemplo-item">
-                    <b>Guerrero Élite:</b><br>
-                    \( f(x) = \frac{e^x}{x^2} \)<br>
-                    \( f'(x) = \frac{e^x \cdot x^2 - e^x \cdot 2x}{x^4} = \frac{e^x(x-2)}{x^3} \)
-                </div>
-            </div>
+            <table class="tabla-ejemplos">
+                <tr>
+                    <td>
+                        <span class="nivel-label label-base">GUERRERO BASE</span><br>
+                        $f(x) = 5e^x$<br>
+                        $f'(x) = \mathbf{5e^x}$
+                    </td>
+                    <td>
+                        <span class="nivel-label label-elite">GUERRERO ÉLITE</span><br>
+                        $f(x) = \log_2(x)$<br>
+                        $f'(x) = \mathbf{\frac{1}{x \ln 2}}$
+                    </td>
+                </tr>
+            </table>
         </div>
 
-        <div class="regla-box">
-            <h2>4. Regla de la Cadena (Composición)</h2>
-            <div class="formula">
-                Si \( f(x) = g(h(x)) \) &rarr; \( f'(x) = g'(h(x)) \cdot h'(x) \)
+        <div class="seccion-regla">
+            <h2>4. Funciones Trigonométricas</h2>
+            <div class="formula-maestra">
+                $(\text{sen } x)' = \cos x$ <br>
+                $(\cos x)' = -\text{sen } x$ <br>
+                $(\text{tg } x)' = 1 + \text{tg}^2 x = \frac{1}{\cos^2 x}$
             </div>
-            <div class="ejemplos">
-                <div class="ejemplo-item">
-                    <b>Guerrero Base:</b><br>
-                    \( f(x) = \text{sen}(x^2) \)<br>
-                    \( f'(x) = \cos(x^2) \cdot 2x = 2x \cos(x^2) \)
-                </div>
-                <div class="ejemplo-item">
-                    <b>Guerrero Élite:</b><br>
-                    \( f(x) = \ln(x^3 + 2x) \)<br>
-                    \( f'(x) = \frac{1}{x^3 + 2x} \cdot (3x^2 + 2) \)
-                </div>
+            <table class="tabla-ejemplos">
+                <tr>
+                    <td>
+                        <span class="nivel-label label-base">GUERRERO BASE</span><br>
+                        $f(x) = 3 \text{ sen } x$<br>
+                        $f'(x) = \mathbf{3 \cos x}$
+                    </td>
+                    <td>
+                        <span class="nivel-label label-elite">GUERRERO ÉLITE</span><br>
+                        $f(x) = \frac{\cos x}{2}$<br>
+                        $f'(x) = \mathbf{-\frac{\text{sen } x}{2}}$
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="seccion-regla">
+            <h2>5. Regla de la Cadena (La Joya de la Corona)</h2>
+            <p><i>"Derivada de lo de fuera, manteniendo lo de dentro, por la derivada de lo de dentro".</i></p>
+            <div class="formula-maestra">
+                $f(x) = g(h(x)) \implies f'(x) = g'(h(x)) \cdot h'(x)$
             </div>
+            <table class="tabla-ejemplos">
+                <tr>
+                    <td>
+                        <span class="nivel-label label-base">GUERRERO BASE</span><br>
+                        $f(x) = (3x^2 + 1)^5$<br>
+                        $f'(x) = 5(3x^2 + 1)^4 \cdot (6x) = \mathbf{30x(3x^2 + 1)^4}$
+                    </td>
+                    <td>
+                        <span class="nivel-label label-elite">GUERRERO ÉLITE</span><br>
+                        $f(x) = \text{sen}(e^x)$<br>
+                        $f'(x) = \cos(e^x) \cdot e^x = \mathbf{e^x \cos(e^x)}$
+                    </td>
+                </tr>
+            </table>
         </div>
 
     </div>
