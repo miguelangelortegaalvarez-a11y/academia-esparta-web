@@ -3,93 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafío Espartano: El Tiro a Canasta</title>
+    <title>Explicación Matemática: El Tiro a Canasta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; }
-        body { font-family: 'Kalam', cursive; background: #f4f9f4; padding: 20px; color: #333; }
-        .contenedor { max-width: 800px; background: white; margin: auto; padding: 25px; border-radius: 15px; border: 2px solid var(--esparta-verde); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        h1 { font-family: 'Bangers'; color: var(--esparta-verde); text-align: center; font-size: 35px; }
-        .paso { background: #e8f5e9; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 5px solid var(--esparta-oro); }
-        .resultado { font-weight: bold; font-size: 20px; text-align: center; padding: 15px; border: 2px dashed red; color: #b71c1c; }
-        canvas { background: #fff; margin: 20px 0; border: 1px solid #ddd; }
+        :root { --esparta-verde: #0e9343; --esparta-oro: #f1c40f; --fondo: #f4f9f4; }
+        body { font-family: 'Kalam', cursive; background: var(--fondo); padding: 20px; color: #333; line-height: 1.6; }
+        .contenedor { max-width: 900px; background: white; margin: auto; padding: 30px; border-radius: 20px; border: 3px solid var(--esparta-verde); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        
+        header { text-align: center; border-bottom: 2px solid var(--esparta-oro); margin-bottom: 30px; padding-bottom: 10px; }
+        h1 { font-family: 'Bangers'; color: var(--esparta-verde); font-size: 40px; margin: 0; }
+        
+        .seccion-teoria { background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 8px solid var(--esparta-verde); box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
+        h2 { font-family: 'Bangers'; color: #222; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        
+        .formula { background: #333; color: #fff; padding: 15px; border-radius: 8px; text-align: center; font-size: 22px; margin: 15px 0; font-family: 'Courier New', monospace; }
+        .resaltado { color: var(--esparta-verde); font-weight: bold; }
+
+        canvas { background: #fff; border: 1px solid #ddd; margin: 20px 0; border-radius: 10px; }
+
+        .conclusion-final { background: #ffebee; border: 2px solid #ef5350; padding: 20px; border-radius: 10px; text-align: center; font-weight: bold; font-size: 20px; color: #c62828; }
+        
+        @media print { .no-print { display: none; } .contenedor { border: none; box-shadow: none; width: 100%; } }
     </style>
 </head>
 <body>
 
 <div class="contenedor">
-    <h1>🏀 Análisis de Trayectoria Parabólica</h1>
-    
-    <div class="paso">
-        <strong>1. Datos del problema:</strong><br>
-        Lanzamiento: (0, 2) | Altura Máxima (Vértice): (2, 3) | Objetivo (Canasta): (5.5, 2)
+    <header>
+        <h1>ACADEMIA ESPARTA: ANÁLISIS GEOMÉTRICO</h1>
+        <p>Ejercicio 4: Trayectoria del Balón de Baloncesto</p>
+    </header>
+
+    <div class="seccion-teoria">
+        <h2>1. Modelización con Coordenadas</h2>
+        <p>Para resolver el problema, situamos el lanzamiento en un eje cartesiano:</p>
+        <ul>
+            <li><strong>Punto inicial (Lanzamiento):</strong> (0, 2) metros.</li>
+            <li><strong>Vértice (Altura Máxima):</strong> (2, 3) metros.</li>
+            <li><strong>Punto Objetivo (Canasta):</strong> (5.5, 2) metros.</li>
+        </ul>
+
+        <h2>2. Aplicación de la Ecuación Canónica</h2>
+        <p>Como conocemos el vértice $(h, k)$, usamos la forma canónica de la parábola:</p>
+        <div class="formula">y = a(x - h)² + k</div>
+        <p>Sustituyendo el vértice (2, 3): <span class="resaltado">y = a(x - 2)² + 3</span></p>
+
+        <h2>3. Cálculo del Coeficiente 'a'</h2>
+        <p>Usamos el punto de lanzamiento (0, 2) para despejar la incógnita:</p>
+        <p>2 = a(0 - 2)² + 3  →  2 = 4a + 3  →  -1 = 4a  →  <span class="resaltado">a = -0.25</span></p>
+        <p>La función final que describe el vuelo es: <strong>f(x) = -0.25(x - 2)² + 3</strong></p>
     </div>
 
-    <canvas id="graficaTiro"></canvas>
+    <h2>Visualización de la Trayectoria</h2>
+    <canvas id="graficaExplicativa"></canvas>
 
-    <div class="paso">
-        <strong>2. Resolución Matemática:</strong><br>
-        Utilizamos la forma canónica: $y = a(x - h)^2 + k$.<br>
-        Tras hallar $a = -0.25$, la función es: <br>
-        <span style="color:blue; font-size:1.2em">f(x) = -0.25(x - 2)² + 3</span>
+    <div class="seccion-teoria">
+        <h2>4. Comprobación de éxito</h2>
+        <p>Evaluamos la función en la distancia de la canasta (x = 5.5):</p>
+        <p>f(5.5) = -0.25(5.5 - 2)² + 3</p>
+        <p>f(5.5) = -0.25(12.25) + 3 = -3.06 + 3 = <span class="resaltado">-0.06 metros</span></p>
     </div>
 
-    <div class="resultado" id="conclusion">
-        Calculando trayectoria...
+    <div class="conclusion-final">
+        ❌ RESULTADO: El balón impacta contra el suelo antes de llegar a la canasta. No encesta.
     </div>
+
+    <button class="no-print" style="margin-top:20px; padding:10px 20px; cursor:pointer;" onclick="window.print()">🖨️ Imprimir explicación para el profesor</button>
 </div>
 
 <script>
-    const ctx = document.getElementById('graficaTiro').getContext('2d');
-    const puntosTrayectoria = [];
+    const ctx = document.getElementById('graficaExplicativa').getContext('2d');
+    const puntos = [];
     
-    // Bucle para generar los puntos (x, y) de la función matemática
-    // x va desde 0 hasta 6 metros para cubrir toda la zona de juego
+    // Generamos los puntos de la parábola
     for (let x = 0; x <= 6; x += 0.1) {
-        // Aplicamos la fórmula: y = -0.25 * (x - 2)^2 + 3
         let y = -0.25 * Math.pow(x - 2, 2) + 3;
-        
-        // Solo guardamos puntos donde el balón no ha atravesado el suelo (y >= 0)
-        if (y >= 0) {
-            puntosTrayectoria.push({x: x.toFixed(2), y: y.toFixed(2)});
-        }
+        if (y >= -0.5) puntos.push({x: x.toFixed(2), y: y.toFixed(2)});
     }
 
-    // Configuración de la gráfica con Chart.js
     new Chart(ctx, {
         type: 'line',
         data: {
             datasets: [{
-                label: 'Vuelo del balón',
-                data: puntosTrayectoria,
+                label: 'Vuelo del balón (Parábola)',
+                data: puntos,
                 borderColor: '#0e9343',
+                borderWidth: 3,
                 fill: false,
-                tension: 0.4 // Suaviza la línea para que parezca una parábola real
+                tension: 0.4
             }, {
-                label: 'Punto de Canasta',
+                label: 'Canasta (Objetivo)',
                 data: [{x: 5.5, y: 2}],
                 pointBackgroundColor: 'red',
                 pointRadius: 10,
-                pointStyle: 'rectRot' // Forma de diamante para la canasta
+                pointStyle: 'rectRot'
             }]
         },
         options: {
+            responsive: true,
             scales: {
-                x: { type: 'linear', position: 'bottom', title: {display: true, text: 'Distancia Horizontal (m)'} },
-                y: { title: {display: true, text: 'Altura (m)'}, min: 0 }
+                x: { type: 'linear', title: {display: true, text: 'Distancia Horizontal (m)'}, min: 0, max: 6 },
+                y: { title: {display: true, text: 'Altura (m)'}, min: 0, max: 4 }
+            },
+            plugins: {
+                legend: { labels: { font: { family: 'Kalam', size: 16 } } }
             }
         }
     });
-
-    // Lógica final de comprobación
-    const xCanasta = 5.5;
-    const yCalculada = -0.25 * Math.pow(xCanasta - 2, 2) + 3;
-    
-    // Insertamos la conclusión en el HTML basándonos en el cálculo
-    document.getElementById('conclusion').innerHTML = 
-        `❌ RESULTADO: El balón llega a los 5.5m con una altura de ${yCalculada.toFixed(2)}m. <br> 
-        No encesta: la trayectoria es demasiado baja para el objetivo.`;
 </script>
 
 </body>
