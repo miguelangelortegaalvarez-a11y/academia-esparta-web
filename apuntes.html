@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes Completos: Ecuaciones 2º Grado - Academia Esparta</title>
+    <title>Manual Técnico: Ecuaciones 2º Grado - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -55,15 +55,22 @@
             background: #fff;
         }
         
-        .math-step {
-            display: block;
-            margin: 12px 0;
-            padding-left: 10px;
-            font-size: 1.1rem;
-        }
-
+        /* ESTRUCTURA EXPLICACIÓN DOBLE */
         .desarrollo-total { background: #fffdf2; border: 1px solid #eadd99; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #f39c12; page-break-inside: avoid; }
-        .paso-bloque { margin-bottom: 8px; display: block; font-weight: 600; color: var(--secondary); }
+        
+        .fila-paso {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+            align-items: center;
+            border-bottom: 1px solid rgba(243, 156, 18, 0.1);
+            padding-bottom: 10px;
+        }
+        
+        .math-part { font-size: 1.1rem; font-weight: 600; }
+        .text-part { font-size: 0.8rem; color: #555; font-style: italic; border-left: 2px solid #eadd99; padding-left: 10px; }
+
         .resaltado-final { background: #fff9db; font-weight: 700; padding: 6px 12px; border: 1px solid #f39c12; display: inline-block; margin-top: 15px; font-size: 1rem; }
 
         .btn-print { background: var(--primary); color: white; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; display: block; margin: 0 auto 20px; width: 100%; max-width: 300px; }
@@ -73,106 +80,106 @@
             .btn-print { display: none; } 
             body { background: white; padding: 0; }
             .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 5mm; }
+            .fila-paso { grid-template-columns: 1fr 1.2fr; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <button class="btn-print" onclick="window.print()">📥 Imprimir Material Completo (A4)</button>
+    <button class="btn-print" onclick="window.print()">📥 Imprimir Guía Maestra con Explicaciones (A4)</button>
 
     <div class="header">
         <h1>ACADEMIA ESPARTA</h1>
-        <p>Ecuaciones de 2º Grado: Guía Maestra de Resolución</p>
+        <p>Ecuaciones de 2º Grado: Resolución Visual y Narrativa</p>
     </div>
 
     <h2>1. ECUACIONES COMPLETAS: <span class="formula-texto">a x<sup>2</sup> + b x + c = 0</span></h2>
-    
-    <div class="teoria-box">
-        Se resuelven mediante la <strong>Fórmula General</strong>. El resultado de la raíz determinará cuántas soluciones existen.
-    </div>
     
     <div class="formula-display">
         $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
     </div>
 
-    <h3>Ejemplo 1: Dos soluciones reales (Discriminante positivo)</h3>
+    <h3>Ejemplo 1: Dos soluciones reales</h3>
     <div class="desarrollo-total">
         <strong>Ejercicio: x<sup>2</sup> - 5x + 6 = 0</strong><br><br>
-        <span class="paso-bloque">1. Identificamos:</span>
-        <div class="math-step">\(a = 1 \quad | \quad b = -5 \quad | \quad c = 6\)</div>
-        <span class="paso-bloque">2. Sustituimos:</span>
-        <div class="math-step">\(x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4 \cdot 1 \cdot 6}}{2 \cdot 1}\)</div>
-        <span class="paso-bloque">3. Operamos el interior:</span>
-        <div class="math-step">\(x = \frac{5 \pm \sqrt{25 - 24}}{2} = \frac{5 \pm \sqrt{1}}{2}\)</div>
-        <span class="paso-bloque">4. Resolvemos:</span>
-        <div class="math-step">\(x_1 = \frac{5 + 1}{2} = 3 \quad | \quad x_2 = \frac{5 - 1}{2} = 2\)</div>
+        <div class="fila-paso">
+            <div class="math-part">\(a = 1, b = -5, c = 6\)</div>
+            <div class="text-part">Identificamos los valores que acompañan a las letras y el número suelto.</div>
+        </div>
+        <div class="fila-paso">
+            <div class="math-part">\(x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4 \cdot 1 \cdot 6}}{2 \cdot 1}\)</div>
+            <div class="text-part">Cambiamos las letras de la fórmula por nuestros números. ¡Ojo con el doble signo menos!</div>
+        </div>
+        <div class="fila-paso">
+            <div class="math-part">\(\sqrt{25 - 24} = \sqrt{1}\)</div>
+            <div class="text-part">Calculamos el cuadrado y la multiplicación de dentro para restarlos.</div>
+        </div>
+        <div class="fila-paso">
+            <div class="math-part">\(x = \frac{5 \pm 1}{2}\)</div>
+            <div class="text-part">Resolvemos la raíz y nos preparamos para sacar los dos caminos.</div>
+        </div>
+        <div class="fila-paso">
+            <div class="math-part">\(x_1 = 3, x_2 = 2\)</div>
+            <div class="text-part">Sumamos por un lado (6/2) y restamos por otro (4/2) para obtener los resultados.</div>
+        </div>
         <div class="resaltado-final">RESULTADO: x = 3, x = 2</div>
     </div>
 
-    <h3>Ejemplo 2: Una solución única (Discriminante cero)</h3>
+    <h3>Ejemplo 2: Una solución única</h3>
     <div class="desarrollo-total">
         <strong>Ejercicio: x<sup>2</sup> - 4x + 4 = 0</strong><br><br>
-        <span class="paso-bloque">1. Identificamos:</span>
-        <div class="math-step">\(a = 1 \quad | \quad b = -4 \quad | \quad c = 4\)</div>
-        <span class="paso-bloque">2. Sustituimos:</span>
-        <div class="math-step">\(x = \frac{-(-4) \pm \sqrt{(-4)^2 - 4 \cdot 1 \cdot 4}}{2 \cdot 1}\)</div>
-        <span class="paso-bloque">3. Operamos el interior:</span>
-        <div class="math-step">\(x = \frac{4 \pm \sqrt{16 - 16}}{2} = \frac{4 \pm \sqrt{0}}{2}\)</div>
-        <span class="paso-bloque">4. Resultado único:</span>
-        <div class="math-step">\(x = \frac{4 \pm 0}{2} = 2\)</div>
-        <div class="resaltado-final">RESULTADO: x = 2</div>
+        <div class="fila-paso">
+            <div class="math-part">\(x = \frac{4 \pm \sqrt{16 - 16}}{2}\)</div>
+            <div class="text-part">Sustituimos y operamos la potencia y la multiplicación.</div>
+        </div>
+        <div class="fila-paso">
+            <div class="math-part">\(x = \frac{4 \pm 0}{2}\)</div>
+            <div class="text-part">Al restar el interior nos da cero. Sumar o restar cero no cambia nada.</div>
+        </div>
+        <div class="resaltado-final">RESULTADO ÚNICO: x = 2</div>
     </div>
 
-    <h3>Ejemplo 3: Sin solución real (Discriminante negativo)</h3>
+    <h3>Ejemplo 3: Sin solución real</h3>
     <div class="desarrollo-total">
         <strong>Ejercicio: x<sup>2</sup> + 2x + 5 = 0</strong><br><br>
-        <span class="paso-bloque">1. Identificamos:</span>
-        <div class="math-step">\(a = 1 \quad | \quad b = 2 \quad | \quad c = 5\)</div>
-        <span class="paso-bloque">2. Sustituimos:</span>
-        <div class="math-step">\(x = \frac{-2 \pm \sqrt{2^2 - 4 \cdot 1 \cdot 5}}{2 \cdot 1}\)</div>
-        <span class="paso-bloque">3. Operamos el interior:</span>
-        <div class="math-step">\(x = \frac{-2 \pm \sqrt{4 - 20}}{2} = \frac{-2 \pm \sqrt{-16}}{2}\)</div>
-        <p><em>Error: No existe la raíz de un número negativo en los números reales.</em></p>
-        <div class="resaltado-final">RESULTADO: No tiene solución real.</div>
+        <div class="fila-paso">
+            <div class="math-part">\(\sqrt{4 - 20} = \sqrt{-16}\)</div>
+            <div class="text-part">Calculamos el interior de la raíz y vemos que el resultado es negativo.</div>
+        </div>
+        <p><em>Explicación: No existe ningún número que multiplicado por sí mismo dé un valor negativo.</em></p>
+        <div class="resaltado-final">RESULTADO: Sin solución real.</div>
     </div>
 
     <h2>2. INCOMPLETAS TIPO 1: <span class="formula-texto">a x<sup>2</sup> + c = 0</span></h2>
-    
-    <h3>Ejercicio Fácil</h3>
     <div class="desarrollo-total">
-        <strong>Ejercicio: x<sup>2</sup> - 9 = 0</strong><br><br>
-        <div class="math-step">x<sup>2</sup> = 9</div>
-        <div class="math-step">x = \(\pm \sqrt{9}\)</div>
+        <strong>Fácil: x<sup>2</sup> - 9 = 0</strong><br><br>
+        <div class="fila-paso">
+            <div class="math-part">x<sup>2</sup> = 9</div>
+            <div class="text-part">Pasamos el número al otro lado del igual cambiándole el signo.</div>
+        </div>
+        <div class="fila-paso">
+            <div class="math-part">x = \(\pm \sqrt{9}\)</div>
+            <div class="text-part">Quitamos el cuadrado haciendo la raíz cuadrada del número.</div>
+        </div>
         <div class="resaltado-final">RESULTADO: x = 3, x = -3</div>
     </div>
 
-    <h3>Ejercicio Difícil</h3>
-    <div class="desarrollo-total">
-        <strong>Ejercicio: 2x<sup>2</sup> - 50 = 0</strong><br><br>
-        <div class="math-step">2x<sup>2</sup> = 50</div>
-        <div class="math-step">x<sup>2</sup> = 50 / 2 = 25</div>
-        <div class="math-step">x = \(\pm \sqrt{25}\)</div>
-        <div class="resaltado-final">RESULTADO: x = 5, x = -5</div>
-    </div>
-
     <h2>3. INCOMPLETAS TIPO 2: <span class="formula-texto">a x<sup>2</sup> + b x = 0</span></h2>
-
-    <h3>Ejercicio Fácil</h3>
     <div class="desarrollo-total">
-        <strong>Ejercicio: x<sup>2</sup> + 5x = 0</strong><br><br>
-        <div class="math-step">x · (x + 5) = 0</div>
-        <div class="math-step">x<sub>1</sub> = 0</div>
-        <div class="math-step">x + 5 = 0 \(\implies\) x<sub>2</sub> = -5</div>
-        <div class="resaltado-final">RESULTADO: x = 0, x = -5</div>
-    </div>
-
-    <h3>Ejercicio Difícil</h3>
-    <div class="desarrollo-total">
-        <strong>Ejercicio: 3x<sup>2</sup> - 12x = 0</strong><br><br>
-        <div class="math-step">3x · (x - 4) = 0</div>
-        <div class="math-step">3x = 0 \(\implies\) x<sub>1</sub> = 0</div>
-        <div class="math-step">x - 4 = 0 \(\implies\) x<sub>2</sub> = 4</div>
+        <strong>Difícil: 3x<sup>2</sup> - 12x = 0</strong><br><br>
+        <div class="fila-paso">
+            <div class="math-part">3x · (x - 4) = 0</div>
+            <div class="text-part">Sacamos "x" fuera porque está repetida en ambos términos.</div>
+        </div>
+        <div class="fila-paso">
+            <div class="math-part">3x = 0 \(\implies\) x = 0</div>
+            <div class="text-part">La primera solución siempre es cero porque anula la x de fuera.</div>
+        </div>
+        <div class="fila-paso">
+            <div class="math-part">x - 4 = 0 \(\implies\) x = 4</div>
+            <div class="text-part">La segunda solución sale de resolver el pequeño paréntesis que queda.</div>
+        </div>
         <div class="resaltado-final">RESULTADO: x = 0, x = 4</div>
     </div>
 </div>
