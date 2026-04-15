@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual Técnico Combinatoria - Academia Esparta</title>
+    <title>Ficha de Entrenamiento: Combinatoria - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -28,24 +28,24 @@
         
         .header { text-align: center; border-bottom: 2px solid var(--primary); margin-bottom: 20px; padding-bottom: 10px; }
         .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; font-size: 1.6rem; }
+        .info-alumno { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.8rem; font-weight: 600; color: #666; }
 
         h2 { color: var(--secondary); border-left: 4px solid var(--accent); padding-left: 12px; margin-top: 25px; background: var(--light); padding: 8px 12px; font-size: 1.1rem; text-transform: uppercase; border-bottom: 1px solid #eee; }
-        h3 { color: var(--primary); font-size: 0.95rem; margin-top: 20px; font-weight: 700; border-bottom: 1px solid #eee; padding-bottom: 3px; }
-
-        p, li, td, div { font-size: 0.82rem; }
-
-        .teoria-resaltada { background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid var(--primary); }
-        .formula-box { background: #fff; border: 2px solid var(--primary); padding: 10px; border-radius: 8px; text-align: center; margin: 10px 0; font-size: 1.1rem; color: var(--dark); font-weight: bold; }
         
-        .ejemplo-explicado { background: #fffdf2; border: 1px solid #eadd99; padding: 12px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f39c12; }
-        .paso-logico { color: var(--secondary); font-weight: 700; text-transform: uppercase; font-size: 0.75rem; display: block; margin-bottom: 2px; }
+        .instrucciones { font-size: 0.8rem; color: #555; font-style: italic; margin-bottom: 15px; border: 1px dashed #ccc; padding: 10px; border-radius: 5px; }
 
-        .comparativa-tabla { width: 100%; border-collapse: collapse; margin: 15px 0; }
-        .comparativa-tabla th { background: var(--primary); color: white; padding: 8px; font-size: 0.85rem; }
-        .comparativa-tabla td { border: 1px solid #eee; padding: 8px; text-align: center; }
-
-        .grid-dos-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; }
+        .grid-ejercicios { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; margin-top: 15px; }
         
+        .ej-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; font-size: 0.82rem; page-break-inside: avoid; }
+        .num-ej { font-weight: 700; color: var(--primary); margin-right: 5px; }
+        
+        .linea-rta { border-bottom: 1px solid #bbb; width: 100%; min-height: 25px; display: block; margin-top: 8px; }
+        
+        .nivel-tag { font-size: 0.65rem; font-weight: bold; padding: 2px 5px; border-radius: 4px; margin-bottom: 5px; display: inline-block; text-transform: uppercase; }
+        .f { background: #e3f2fd; color: #1976d2; } 
+        .m { background: #fff3e0; color: #f57c00; } 
+        .d { background: #ffebee; color: #d32f2f; } 
+
         .btn-print { background: var(--primary); color: white; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; display: block; margin: 0 auto 20px; width: 100%; max-width: 300px; }
         
         @page { size: A4; margin: 10mm; } 
@@ -59,121 +59,111 @@
 <body>
 
 <div class="container">
-    <button class="btn-print" onclick="window.print()">📥 Imprimir Manual Completo (A4)</button>
+    <button class="btn-print" onclick="window.print()">📥 Imprimir Ficha de Ejercicios (A4)</button>
 
     <div class="header">
         <h1>ACADEMIA ESPARTA</h1>
-        <p>Combinatoria: Permutaciones y Variaciones (Guía Técnica Detallada)</p>
+        <p>Ficha de Entrenamiento: Combinatoria I</p>
+        <div class="info-alumno">
+            <span>Alumno: _________________________________________________</span>
+            <span>Fecha: ____/____/2026</span>
+        </div>
     </div>
 
-    <h2>1. La Diferencia Fundamental: ¿Permutación o Variación?</h2>
-    <div class="teoria-resaltada">
-        Para identificar el método correcto, la pregunta clave es: <strong>¿Utilizo todos los elementos disponibles?</strong>
-        <ul>
-            <li><strong>PERMUTACIÓN:</strong> Sí, los usas <strong>TODOS</strong>. El objetivo es ver de cuántas formas puedes reordenar el grupo completo.</li>
-            <li><strong>VARIACIÓN:</strong> No, eliges solo una <strong>PARTE</strong> (subgrupo). El objetivo es elegir y ordenar a unos pocos del total.</li>
-        </ul>
+    <div class="instrucciones">
+        <strong>Instrucciones:</strong> Identifica primero si se trata de una Permutación o una Variación. Después, comprueba si hay repetición. Deja indicadas las operaciones antes del resultado final.
     </div>
 
-    <table class="comparativa-tabla">
-        <thead>
-            <tr>
-                <th>Concepto</th>
-                <th>¿Importa el orden?</th>
-                <th>¿Se usan todos?</th>
-                <th>Lógica de Aplicación</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td><strong>Permutación</strong></td><td>SÍ</td><td>SÍ</td><td>Barajar, ordenar, hacer filas completas.</td></tr>
-            <tr><td><strong>Variación</strong></td><td>SÍ</td><td>NO</td><td>Elegir cargos, podios, códigos parciales.</td></tr>
-        </tbody>
-    </table>
-
-    <div class="grid-dos-col">
-        <div>
-            <h2>2. Permutaciones (Uso Total)</h2>
-            
-            <h3>A. Sin Repetición (Elementos Únicos)</h3>
-            <div class="formula-box">$$P_n = n!$$</div>
-            
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 1</span>
-                <strong>3 Libros en estante:</strong> Se usan los 3 y son distintos.<br>
-                \(3 \cdot 2 \cdot 1 = \mathbf{6 \text{ formas}}\).
-            </div>
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 2</span>
-                <strong>Fila de 5 personas:</strong> Ordenamos al grupo completo.<br>
-                \(5! = 120\). <span class="resaltado">Importa la posición.</span>
-            </div>
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 3</span>
-                <strong>Letras de "SOL":</strong> 3 letras distintas, todas se usan.<br>
-                \(3! = \mathbf{6 \text{ palabras}}\).
-            </div>
-
-            <h3>B. Con Repetición (Elementos Iguales)</h3>
-            <div class="formula-box">$$PR_n^{a,b...} = \frac{n!}{a! \cdot b! ...}$$</div>
-            
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 1</span>
-                <strong>Palabra "COCO":</strong> 4 letras, pero 'C' y 'O' se repiten 2 veces.<br>
-                \(\frac{4!}{2! \cdot 2!} = \frac{24}{4} = \mathbf{6}\).
-            </div>
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 2</span>
-                <strong>Palabra "MAMA":</strong> 4 letras, 'M' x2, 'A' x2.<br>
-                \(\frac{4!}{2! \cdot 2!} = \mathbf{6}\).
-            </div>
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 3</span>
-                <strong>3 bolas blancas y 2 negras:</strong> Ordenarlas en fila.<br>
-                \(\frac{5!}{3! \cdot 2!} = \frac{120}{12} = \mathbf{10}\).
-            </div>
+    <h2>Bloque 1: Permutaciones y Variaciones (Nivel Básico e Intermedio)</h2>
+    <div class="grid-ejercicios">
+        <div class="ej-item">
+            <span class="nivel-tag f">Fácil</span><br>
+            <span class="num-ej">1.</span> ¿De cuántas formas pueden llegar a la meta 6 corredores en una carrera?
+            <span class="linea-rta"></span>
         </div>
-
-        <div>
-            <h2>3. Variaciones (Uso de Subgrupos)</h2>
-            
-            <h3>A. Sin Repetición (Selección Única)</h3>
-            <div class="formula-box">$$V_{m,n} = \frac{m!}{(m-n)!}$$</div>
-            
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 1</span>
-                <strong>Delegado y Sub de 20 alumnos:</strong> Elijo 2 de 20.<br>
-                \(20 \cdot 19 = \mathbf{380 \text{ formas}}\).
-            </div>
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 2</span>
-                <strong>Podio de 12 atletas (Oro, Plata, Bronce):</strong><br>
-                \(V_{12,3} = 12 \cdot 11 \cdot 10 = \mathbf{1320}\).
-            </div>
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 3</span>
-                <strong>Código de 2 letras de {A,B,C,D,E}:</strong><br>
-                \(5 \cdot 4 = \mathbf{20 \text{ códigos}}\).
-            </div>
-
-            <h3>B. Con Repetición (Selección Múltiple)</h3>
-            <div class="formula-box">$$VR_{m,n} = m^n$$</div>
-            
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 1</span>
-                <strong>PIN de móvil (4 cifras, 0-9):</strong> Se pueden repetir.<br>
-                \(10^4 = \mathbf{10.000 \text{ combinaciones}}\).
-            </div>
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 2</span>
-                <strong>Lanzar 3 monedas (Cara o Cruz):</strong> 2 opciones c/u.<br>
-                \(2^3 = 2 \cdot 2 \cdot 2 = \mathbf{8 \text{ resultados}}\).
-            </div>
-            <div class="ejemplo-explicado">
-                <span class="paso-logico">Ejercicio 3</span>
-                <strong>Nº de 2 cifras con {1,2,3,4,5}:</strong><br>
-                \(5^2 = \mathbf{25 \text{ números}}\).
-            </div>
+        <div class="ej-item">
+            <span class="nivel-tag f">Fácil</span><br>
+            <span class="num-ej">2.</span> ¿Cuántos números de 3 cifras distintas se pueden formar con los dígitos {1, 2, 3, 4, 5}?
+            <span class="linea-rta"></span>
         </div>
+        <div class="ej-item">
+            <span class="nivel-tag f">Fácil</span><br>
+            <span class="num-ej">3.</span> ¿De cuántas maneras se pueden colocar 7 libros diferentes en una balda?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag f">Fácil</span><br>
+            <span class="num-ej">4.</span> ¿Cuántos códigos de 2 letras se pueden formar con las letras {A, B, C, D} sin repetir ninguna?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag m">Medio</span><br>
+            <span class="num-ej">5.</span> ¿Cuántas palabras de 4 letras (con o sin sentido) se forman con la palabra "LAPIZ"?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag m">Medio</span><br>
+            <span class="num-ej">6.</span> Con los colores Rojo, Azul, Verde y Amarillo, ¿cuántas banderas de 3 franjas distintas se pueden hacer?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag m">Medio</span><br>
+            <span class="num-ej">7.</span> Un examen tiene 10 preguntas tipo test. Cada una tiene 3 opciones. ¿Cuántos exámenes diferentes se pueden entregar?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag m">Medio</span><br>
+            <span class="num-ej">8.</span> ¿De cuántas formas se pueden repartir los cargos de Presidente, Secretario y Tesorero en un grupo de 15 personas?
+            <span class="linea-rta"></span>
+        </div>
+    </div>
+
+    <h2>Bloque 2: Repetición y Casos Especiales (Nivel Avanzado)</h2>
+    <div class="grid-ejercicios">
+        <div class="ej-item">
+            <span class="nivel-tag m">Medio</span><br>
+            <span class="num-ej">9.</span> ¿Cuántas palabras diferentes se pueden formar con las letras de la palabra "BIBLIOTECA"?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag m">Medio</span><br>
+            <span class="num-ej">10.</span> ¿Cuántos números de 5 cifras se pueden formar usando solo los dígitos {1, 2}?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag d">Difícil</span><br>
+            <span class="num-ej">11.</span> En un código Morse, las señales son puntos (.) o rayas (-). ¿Cuántas señales distintas de 5 caracteres se pueden crear?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag d">Difícil</span><br>
+            <span class="num-ej">12.</span> ¿De cuántas formas se pueden ordenar en una estantería 4 libros de Matemáticas iguales y 3 de Lengua iguales?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag d">Difícil</span><br>
+            <span class="num-ej">13.</span> ¿Cuántos números de 3 cifras se pueden formar con {0, 1, 2, 3, 4, 5} si el primer dígito no puede ser 0?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag d">Difícil</span><br>
+            <span class="num-ej">14.</span> ¿De cuántas maneras pueden sentarse 6 personas en una mesa si dos de ellas deben estar siempre juntas?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag d">Difícil</span><br>
+            <span class="num-ej">15.</span> ¿Cuántos resultados posibles hay al lanzar 4 dados de colores diferentes?
+            <span class="linea-rta"></span>
+        </div>
+        <div class="ej-item">
+            <span class="nivel-tag d">Difícil</span><br>
+            <span class="num-ej">16.</span> ¿Cuántas palabras se forman con la palabra "MISSISSIPPI"?
+            <span class="linea-rta"></span>
+        </div>
+    </div>
+
+    <div style="margin-top: 30px; text-align: center; font-size: 0.7rem; color: #888;">
+        © Academia Esparta - Material de Entrenamiento para Alumnos. Prohibida su reproducción sin autorización.
     </div>
 </div>
 
