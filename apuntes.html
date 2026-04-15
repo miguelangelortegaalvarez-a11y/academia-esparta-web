@@ -229,28 +229,33 @@
                             filter: (item) => item.text !== undefined
                         }
                     },
-                    afterDraw: (chart) => {
+                    // CORRECCIÓN: Usar beforeDraw para asegurar que se pinten los ejes
+                    beforeDraw: (chart) => {
                         const ctx = chart.ctx;
                         const xAxis = chart.scales.x;
                         const yAxis = chart.scales.y;
 
                         ctx.save();
                         ctx.strokeStyle = '#000'; // Negro intenso para los ejes principales
-                        ctx.lineWidth = 2; // Eje principal un poco más grueso
+                        ctx.lineWidth = 3; // Eje principal un poco más grueso
 
                         // Dibujar Eje X (Y=0)
                         const yZero = yAxis.getPixelForValue(0);
-                        ctx.beginPath();
-                        ctx.moveTo(xAxis.left, yZero);
-                        ctx.lineTo(xAxis.right, yZero);
-                        ctx.stroke();
+                        if (yZero >= yAxis.top && yZero <= yAxis.bottom) {
+                            ctx.beginPath();
+                            ctx.moveTo(xAxis.left, yZero);
+                            ctx.lineTo(xAxis.right, yZero);
+                            ctx.stroke();
+                        }
 
                         // Dibujar Eje Y (X=0)
                         const xZero = xAxis.getPixelForValue(0);
-                        ctx.beginPath();
-                        ctx.moveTo(xZero, yAxis.top);
-                        ctx.lineTo(xZero, yAxis.bottom);
-                        ctx.stroke();
+                        if (xZero >= xAxis.left && xZero <= xAxis.right) {
+                            ctx.beginPath();
+                            ctx.moveTo(xZero, yAxis.top);
+                            ctx.lineTo(xZero, yAxis.bottom);
+                            ctx.stroke();
+                        }
 
                         ctx.restore();
                     }
