@@ -3,181 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual de Análisis: Academia Esparta</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']]
-        }
-      };
-    </script>
+    <title>Combinatoria: Variaciones y Permutaciones - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <style>
-        :root {
-            --primary: #27ae60; 
-            --accent: #ff8c00;
-            --bg-light: #f4f8f8;
-            --white: #ffffff;
-            --text-size: 0.9rem;
+        :root { 
+            --primary: #0e9343; --secondary: #09834c; --light: #f5fdf7; 
+            --dark: #063c24; --accent: #f39c12;
         }
-
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 40px 20px; display: flex; justify-content: center; line-height: 1.5; }
-        .main-container { background: var(--white); max-width: 700px; width: 100%; padding: 50px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative; font-size: var(--text-size); }
-
-        .print-button {
-            position: absolute; top: 15px; right: 15px; background-color: #eee;
-            color: #555; border: 1px solid #ddd; padding: 5px 10px; border-radius: 4px; cursor: pointer;
-            font-size: 0.75rem; font-weight: 600; display: flex; align-items: center; gap: 5px;
-        }
-
-        @media print {
-            .print-button { display: none; }
-            body { background-color: white; padding: 0; }
-            .main-container { box-shadow: none; border: none; max-width: 100%; padding: 20mm; }
-        }
-
-        .barca-header { text-align: center; font-weight: bold; color: #a50044; font-size: 1.1em; margin-bottom: 5px; }
-        .header-title { text-align: center; color: var(--primary); font-size: 1.6em; font-weight: 700; margin-top: 5px; }
-        .subtitle { text-align: center; color: #777; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 25px; font-size: 0.85em; }
-
-        h2.seccion-titulo { color: var(--primary); font-size: 1.15em; border-left: 4px solid var(--accent); padding-left: 12px; margin-top: 30px; font-weight: 600; }
-        h3.subseccion-titulo { color: var(--primary); font-size: 1em; margin-top: 20px; font-weight: 600; }
-
-        .formula-block { background: #f9f9f9; color: var(--primary); padding: 15px; border-radius: 4px; margin: 15px 0; text-align: center; font-size: 1.1em; border: 1px solid #eee; }
-        .procedimiento-mates { background: #fff; border: 1px dashed #ccc; padding: 15px; border-radius: 4px; margin: 15px 0; font-size: 0.9em; }
         
-        .tabla-signos { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85em; }
-        .tabla-signos th { background: var(--primary); color: white; padding: 10px; border: 1px solid #ddd; }
-        .tabla-signos td { padding: 10px; text-align: center; border: 1px solid #ddd; }
-        .col-intervalo { background: #fcfcfc; font-weight: 600; width: 25%; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; color: var(--dark); padding: 20px; line-height: 1.5; margin: 0; }
+        
+        /* FORMATO LIBRO A5 */
+        .container { 
+            max-width: 148mm; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-height: 210mm;
+        }
+        
+        .header { text-align: center; border-bottom: 2px solid var(--primary); margin-bottom: 20px; padding-bottom: 10px; }
+        .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; font-size: 1.3rem; }
+        .header p { font-weight: 600; color: #666; margin: 2px 0; font-size: 0.8rem; }
 
-        .grafica-box { margin-top: 30px; padding: 15px; background: #fff; border: 1px solid #eee; }
-        .canvas-container { width: 100%; max-width: 500px; margin: 0 auto; }
+        h2 { color: var(--secondary); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 25px; background: var(--light); padding: 5px 10px; font-size: 1rem; text-transform: uppercase; }
+        h3 { color: var(--primary); font-size: 0.9rem; margin-top: 15px; border-bottom: 1px solid #eee; }
 
-        footer { margin-top: 40px; text-align: center; border-top: 1px solid #eee; padding-top: 15px; color: #aaa; font-size: 0.75em; font-style: italic; }
+        .teoria-box { background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin: 10px 0; border-left: 4px solid var(--primary); font-size: 0.85rem; }
+        .formula { background: var(--dark); color: white; padding: 10px; border-radius: 8px; text-align: center; margin: 10px 0; font-size: 1.1rem; }
+        
+        .ejemplo-resuelto { background: #fff9db; border: 1px solid #f5d76e; padding: 15px; border-radius: 10px; margin: 10px 0; font-size: 0.85rem; }
+        .resaltado { color: var(--secondary); font-weight: bold; }
+
+        .ejercicio-lista { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+        .ej-item { background: #fafafa; border: 1px solid #eee; padding: 12px; border-radius: 8px; font-size: 0.85rem; }
+        .linea-rta { border-bottom: 1px solid #bbb; width: 100%; min-height: 25px; display: block; margin-top: 8px; }
+        
+        .btn-print { background: var(--primary); color: white; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; display: block; margin: 0 auto 20px; width: 100%; max-width: 250px; }
+        
+        @page { size: A5; margin: 0; } 
+        @media print { 
+            .btn-print { display: none; } 
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 12mm; }
+        }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <button class="print-button" onclick="window.print()"><span>🖨️</span> PDF / IMPRIMIR</button>
+<div class="container">
+    <button class="btn-print" onclick="window.print()">📥 Imprimir Ficha Combinatoria (A5)</button>
 
-    <div class="barca-header">💙 ❤️ Visca el Barça ❤️ 💙</div>
-    <div class="header-title">ANÁLISIS DE FUNCIONES</div>
-    <div class="subtitle">Material Académico: <strong>Los Charlatanes</strong></div>
-
-    <div style="text-align: center; font-size: 1.4em; margin: 20px 0; color: #222;">
-        $$f(x) = \frac{x^2+5}{x-3}$$
+    <div class="header">
+        <h1>ACADEMIA ESPARTA</h1>
+        <p>Entrenamiento: Variaciones y Permutaciones</p>
     </div>
 
-    <h2 class="seccion-titulo">1. Estudio del Dominio</h2>
-    <p>Para hallar el dominio, identificamos dónde el denominador se hace cero:</p>
-    <div class="procedimiento-mates">
-        Igualamos el denominador a cero: <br>
-        $x - 3 = 0$ <br>
-        Despejamos la $x$: <br>
-        $x = 3$
+    <h2>1. Permutaciones (Sin Repetición)</h2>
+    <div class="teoria-box">
+        Se usan cuando entran <strong>todos</strong> los elementos y solo importa el orden.
     </div>
-    <p><strong>Dominio:</strong> $\text{Dom } f = \mathbb{R} \setminus \{3\}$</p>
-
-    <h2 class="seccion-titulo">2. Comportamiento Asintótico</h2>
-    <h3 class="subseccion-titulo">A) Asíntota Vertical (A.V.)</h3>
-    <p>Evaluamos el comportamiento de la función cuando $x$ se aproxima a $3$ por ambos lados:</p>
-    
-    <div class="procedimiento-mates">
-        <strong>Por la derecha ($x \to 3^+$):</strong> <br>
-        Sustituimos por un valor ligeramente mayor (ej. $3.1$): <br>
-        $f(3.1) = \frac{(3.1)^2 + 5}{3.1 - 3} = \frac{9.61 + 5}{0.1} = \frac{14.61}{0.1} = 146.1 \implies \mathbf{+\infty}$ <br><br>
-        
-        <strong>Por la izquierda ($x \to 3^-$):</strong> <br>
-        Sustituimos por un valor ligeramente menor (ej. $2.9$): <br>
-        $f(2.9) = \frac{(2.9)^2 + 5}{2.9 - 3} = \frac{8.41 + 5}{-0.1} = \frac{13.41}{-0.1} = -134.1 \implies \mathbf{-\infty}$
+    <div class="formula">$$P_n = n!$$</div>
+    <div class="ejemplo-resuelto">
+        <strong>Ejemplo:</strong> ¿De cuántas formas se sientan 5 amigos en 5 sillas?<br>
+        <span class="resaltado">Solución:</span> \(P_5 = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = \mathbf{120}\)
     </div>
 
-    <h3 class="subseccion-titulo">B) Asíntota Oblicua (A.O.)</h3>
-    <p>Buscamos la recta $y = mx + n$ mediante el siguiente procedimiento:</p>
-    
-    <div class="procedimiento-mates">
-        <strong>Paso 1: Cálculo de la pendiente ($m$)</strong> <br>
-        $m = \lim_{x \to \infty} \frac{f(x)}{x} = \lim_{x \to \infty} \frac{x^2+5}{x(x-3)} = \lim_{x \to \infty} \frac{x^2+5}{x^2-3x}$ <br>
-        Dividimos los coeficientes de mayor grado: $\frac{1x^2}{1x^2} \implies \mathbf{m = 1}$ <br><br>
-        
-        <strong>Paso 2: Cálculo de la ordenada ($n$)</strong> <br>
-        $n = \lim_{x \to \infty} (f(x) - m \cdot x) = \lim_{x \to \infty} \left( \frac{x^2+5}{x-3} - 1x \right)$ <br>
-        Operamos la fracción: $\frac{x^2+5 - x(x-3)}{x-3} = \frac{x^2+5 - x^2 + 3x}{x-3} = \frac{3x+5}{x-3}$ <br>
-        Dividimos los coeficientes de mayor grado: $\frac{3x}{1x} \implies \mathbf{n = 3}$
+    <h2>2. Variaciones (Sin Repetición)</h2>
+    <div class="teoria-box">
+        Importa el orden, pero <strong>no</strong> usamos todos los elementos.
     </div>
-    <p>Ecuación de la asíntota: <strong>$y = x + 3$</strong>.</p>
-
-    <h2 class="seccion-titulo">3. Monotonía y Puntos Críticos</h2>
-    <p>Hallamos la primera derivada y sus raíces para determinar crecimiento:</p>
-    <div class="procedimiento-mates">
-        Aplicamos la regla del cociente $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$: <br>
-        $f'(x) = \frac{(2x)(x-3) - (x^2+5)(1)}{(x-3)^2} = \frac{2x^2 - 6x - x^2 - 5}{(x-3)^2} = \frac{x^2 - 6x - 5}{(x-3)^2}$ <br><br>
-        Igualamos el numerador a cero: $x^2 - 6x - 5 = 0$ <br>
-        Usamos la fórmula cuadrática: $x = \frac{6 \pm \sqrt{(-6)^2 - 4(1)(-5)}}{2(1)} = \frac{6 \pm \sqrt{36+20}}{2} = \frac{6 \pm \sqrt{56}}{2}$ <br>
-        <strong>$x_1 \approx 6.74$ ; $x_2 \approx -0.74$</strong>
+    <div class="formula">$$V_{m,n} = \frac{m!}{(m-n)!}$$</div>
+    <div class="ejemplo-resuelto">
+        <strong>Ejemplo:</strong> 10 corredores para 3 medallas (Oro, Plata, Bronce).<br>
+        <span class="resaltado">Solución:</span> \(V_{10,3} = 10 \cdot 9 \cdot 8 = \mathbf{720}\)
     </div>
 
-    <table class="tabla-signos">
-        <thead>
-            <tr><th>Intervalo</th><th>$(-\infty, -0.74)$</th><th>$(-0.74, 3)$</th><th>$(3, 6.74)$</th><th>$(6.74, \infty)$</th></tr>
-        </thead>
-        <tbody>
-            <tr><td class="col-intervalo">$f'(x)$</td><td>$+$</td><td>$-$</td><td>$-$</td><td>$+$</td></tr>
-            <tr><td class="col-intervalo">Función</td><td>↗ Crece</td><td>↘ Decrece</td><td>↘ Decrece</td><td>↗ Crece</td></tr>
-        </tbody>
-    </table>
-
-    <h2 class="seccion-titulo">4. Representación Gráfica</h2>
-    <div class="grafica-box">
-        <div class="canvas-container"><canvas id="miGrafica"></canvas></div>
+    <h2>3. ¿Y si hay Repetición?</h2>
+    <div class="teoria-box">
+        <strong>Variaciones:</strong> Se pueden repetir elementos en los huecos.<br>
+        <strong>Permutaciones:</strong> Hay elementos idénticos en el grupo.
+    </div>
+    <div class="ejemplo-resuelto">
+        <strong>Con letras (CASA):</strong> \(PR_4^{2} = \frac{4!}{2!} = \mathbf{12}\)<br>
+        <strong>Con números (3 cifras con 1,2,3):</strong> \(VR_{3,3} = 3^3 = \mathbf{27}\)
     </div>
 
-    <script>
-        const ctx = document.getElementById('miGrafica').getContext('2d');
-        const dIzq = [], dDer = [];
-        for (let x = -15; x < 2.8; x += 0.2) dIzq.push({x: x, y: (x*x+5)/(x-3)});
-        for (let x = 3.2; x <= 20; x += 0.2) dDer.push({x: x, y: (x*x+5)/(x-3)});
-
-        new Chart(ctx, {
-            type: 'scatter',
-            data: {
-                datasets: [
-                    { label: 'f(x)', data: dIzq, showLine: true, borderColor: '#27ae60', borderWidth: 2, pointRadius: 0, fill: false },
-                    { data: dDer, showLine: true, borderColor: '#27ae60', borderWidth: 2, pointRadius: 0, fill: false },
-                    { label: 'A.V.', data: [{x: 3, y: -40}, {x: 3, y: 40}], showLine: true, borderDash: [4, 4], borderColor: '#e74c3c', pointRadius: 0, fill: false },
-                    { label: 'A.O.', data: [{x: -15, y: -12}, {x: 20, y: 23}], showLine: true, borderDash: [4, 4], borderColor: '#3498db', pointRadius: 0, fill: false }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: { type: 'linear', min: -10, max: 15, grid: { color: '#f0f0f0' } },
-                    y: { min: -15, max: 25, grid: { color: '#f0f0f0' } }
-                },
-                plugins: { legend: { labels: { font: { size: 10 } } } }
-            },
-            plugins: [{
-                id: 'axis',
-                beforeDraw: (chart) => {
-                    const {ctx, chartArea: {left, top, width, height}, scales: {x, y}} = chart;
-                    ctx.save(); ctx.strokeStyle = '#222'; ctx.lineWidth = 1.5;
-                    const yZ = y.getPixelForValue(0); ctx.beginPath(); ctx.moveTo(left, yZ); ctx.lineTo(left+width, yZ); ctx.stroke();
-                    const xZ = x.getPixelForValue(0); ctx.beginPath(); ctx.moveTo(xZ, top); ctx.lineTo(xZ, top+height); ctx.stroke();
-                    ctx.restore();
-                }
-            }]
-        });
-    </script>
-
-    <footer>"Menos charla y más derivadas." - Academia Esparta</footer>
+    <h2>🛡️ Campo de Entrenamiento</h2>
+    <div class="ejercicio-lista">
+        <div class="ej-item">1) ¿Cuántas banderas de 3 franjas de colores distintos se pueden formar con 7 colores? <span class="linea-rta"></span></div>
+        <div class="ej-item">2) ¿De cuántas maneras se pueden colocar 6 libros distintos en una estantería? <span class="linea-rta"></span></div>
+        <div class="ej-item">3) ¿Cuántos números de 4 cifras se pueden formar con los dígitos {1, 2, 3, 4} permitiendo repeticiones? <span class="linea-rta"></span></div>
+        <div class="ej-item">4) ¿Cuántas palabras con o sin sentido se forman con las letras de "PELOTA"? <span class="linea-rta"></span></div>
+        <div class="ej-item">5) En una clase de 25 alumnos, ¿de cuántas formas se elige delegado y subdelegado? <span class="linea-rta"></span></div>
+        <div class="ej-item">6) ¿Cuántas combinaciones de 3 letras (pueden repetirse) existen usando el abecedario (26 letras)? <span class="linea-rta"></span></div>
+    </div>
 </div>
+
 </body>
 </html>
