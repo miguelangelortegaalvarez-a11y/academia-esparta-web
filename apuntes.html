@@ -77,31 +77,54 @@
     </div>
 
     <h2 class="seccion-titulo">1. Estudio del Dominio</h2>
-    <div class="formula-block">$x - 3 = 0 \implies x = 3$</div>
+    <p>Para hallar el dominio, identificamos dónde el denominador se hace cero:</p>
+    <div class="procedimiento-mates">
+        Igualamos el denominador a cero: <br>
+        $x - 3 = 0$ <br>
+        Despejamos la $x$: <br>
+        $x = 3$
+    </div>
     <p><strong>Dominio:</strong> $\text{Dom } f = \mathbb{R} \setminus \{3\}$</p>
 
     <h2 class="seccion-titulo">2. Comportamiento Asintótico</h2>
     <h3 class="subseccion-titulo">A) Asíntota Vertical (A.V.)</h3>
-    <p>Límites laterales en $x = 3$: $$\lim_{x \to 3^+} f(x) = +\infty \quad ; \quad \lim_{x \to 3^-} f(x) = -\infty$$</p>
-
-    <h3 class="subseccion-titulo">B) Asíntota Oblicua (A.O.)</h3>
-    <p>Buscamos la recta $y = mx + n$:</p>
+    <p>Evaluamos el comportamiento de la función cuando $x$ se aproxima a $3$ por ambos lados:</p>
     
     <div class="procedimiento-mates">
-        <strong>Paso 1: Cálculo de la pendiente ($m$)</strong>
-        $$m = \lim_{x \to \infty} \frac{f(x)}{x} = \lim_{x \to \infty} \frac{x^2+5}{x(x-3)} = \lim_{x \to \infty} \frac{x^2+5}{x^2-3x} = 1$$
+        <strong>Por la derecha ($x \to 3^+$):</strong> <br>
+        Sustituimos por un valor ligeramente mayor (ej. $3.1$): <br>
+        $f(3.1) = \frac{(3.1)^2 + 5}{3.1 - 3} = \frac{9.61 + 5}{0.1} = \frac{14.61}{0.1} = 146.1 \implies \mathbf{+\infty}$ <br><br>
         
-        <strong>Paso 2: Cálculo de la ordenada en el origen ($n$)</strong>
-        $$n = \lim_{x \to \infty} (f(x) - m \cdot x) = \lim_{x \to \infty} \left( \frac{x^2+5}{x-3} - 1 \cdot x \right)$$
-        $$n = \lim_{x \to \infty} \frac{x^2+5 - x(x-3)}{x-3} = \lim_{x \to \infty} \frac{x^2+5 - x^2 + 3x}{x-3}$$
-        $$n = \lim_{x \to \infty} \frac{3x+5}{x-3} = 3$$
+        <strong>Por la izquierda ($x \to 3^-$):</strong> <br>
+        Sustituimos por un valor ligeramente menor (ej. $2.9$): <br>
+        $f(2.9) = \frac{(2.9)^2 + 5}{2.9 - 3} = \frac{8.41 + 5}{-0.1} = \frac{13.41}{-0.1} = -134.1 \implies \mathbf{-\infty}$
     </div>
-    <p>Ecuación resultante: <strong>$y = x + 3$</strong>.</p>
 
-    <h2 class="seccion-titulo">3. Monotonía</h2>
-    <div style="text-align: center; margin: 15px 0;">
-        $$f'(x) = \frac{x^2 - 6x - 5}{(x-3)^2}$$
+    <h3 class="subseccion-titulo">B) Asíntota Oblicua (A.O.)</h3>
+    <p>Buscamos la recta $y = mx + n$ mediante el siguiente procedimiento:</p>
+    
+    <div class="procedimiento-mates">
+        <strong>Paso 1: Cálculo de la pendiente ($m$)</strong> <br>
+        $m = \lim_{x \to \infty} \frac{f(x)}{x} = \lim_{x \to \infty} \frac{x^2+5}{x(x-3)} = \lim_{x \to \infty} \frac{x^2+5}{x^2-3x}$ <br>
+        Dividimos los coeficientes de mayor grado: $\frac{1x^2}{1x^2} \implies \mathbf{m = 1}$ <br><br>
+        
+        <strong>Paso 2: Cálculo de la ordenada ($n$)</strong> <br>
+        $n = \lim_{x \to \infty} (f(x) - m \cdot x) = \lim_{x \to \infty} \left( \frac{x^2+5}{x-3} - 1x \right)$ <br>
+        Operamos la fracción: $\frac{x^2+5 - x(x-3)}{x-3} = \frac{x^2+5 - x^2 + 3x}{x-3} = \frac{3x+5}{x-3}$ <br>
+        Dividimos los coeficientes de mayor grado: $\frac{3x}{1x} \implies \mathbf{n = 3}$
     </div>
+    <p>Ecuación de la asíntota: <strong>$y = x + 3$</strong>.</p>
+
+    <h2 class="seccion-titulo">3. Monotonía y Puntos Críticos</h2>
+    <p>Hallamos la primera derivada y sus raíces para determinar crecimiento:</p>
+    <div class="procedimiento-mates">
+        Aplicamos la regla del cociente $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$: <br>
+        $f'(x) = \frac{(2x)(x-3) - (x^2+5)(1)}{(x-3)^2} = \frac{2x^2 - 6x - x^2 - 5}{(x-3)^2} = \frac{x^2 - 6x - 5}{(x-3)^2}$ <br><br>
+        Igualamos el numerador a cero: $x^2 - 6x - 5 = 0$ <br>
+        Usamos la fórmula cuadrática: $x = \frac{6 \pm \sqrt{(-6)^2 - 4(1)(-5)}}{2(1)} = \frac{6 \pm \sqrt{36+20}}{2} = \frac{6 \pm \sqrt{56}}{2}$ <br>
+        <strong>$x_1 \approx 6.74$ ; $x_2 \approx -0.74$</strong>
+    </div>
+
     <table class="tabla-signos">
         <thead>
             <tr><th>Intervalo</th><th>$(-\infty, -0.74)$</th><th>$(-0.74, 3)$</th><th>$(3, 6.74)$</th><th>$(6.74, \infty)$</th></tr>
@@ -112,21 +135,7 @@
         </tbody>
     </table>
 
-    <h2 class="seccion-titulo">4. Curvatura</h2>
-    <div style="text-align: center; margin: 15px 0;">
-        $$f''(x) = \frac{28}{(x-3)^3}$$
-    </div>
-    <table class="tabla-signos" style="max-width: 400px; margin: 0 auto;">
-        <thead>
-            <tr><th>Intervalo</th><th>$(-\infty, 3)$</th><th>$(3, \infty)$</th></tr>
-        </thead>
-        <tbody>
-            <tr><td class="col-intervalo">$f''(x)$</td><td>$-$</td><td>$+$</td></tr>
-            <tr><td class="col-intervalo">Forma</td><td>∩ Convexa</td><td>∪ Cóncava</td></tr>
-        </tbody>
-    </table>
-
-    <h2 class="seccion-titulo">5. Representación Gráfica</h2>
+    <h2 class="seccion-titulo">4. Representación Gráfica</h2>
     <div class="grafica-box">
         <div class="canvas-container"><canvas id="miGrafica"></canvas></div>
     </div>
