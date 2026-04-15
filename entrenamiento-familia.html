@@ -3,89 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incompletas 2º Grado - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Ejercicios de Combinatoria - Práctica</title>
     <style>
-        :root { 
-            --primary: #0e9343; --secondary: #09834c; --light: #f5fdf7; 
-            --dark: #063c24; --accent: #f39c12;
-        }
-        
-        * { box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; color: var(--dark); padding: 20px; line-height: 1.5; margin: 0; }
-        
-        /* TAMAÑO LIBRO A5 */
-        .container { 
-            max-width: 148mm; 
-            margin: 0 auto; 
+        /* ESTILOS DE PANTALLA */
+        body { font-family: 'Helvetica', Arial, sans-serif; background-color: #fcfaf0; padding: 20px; color: #333; }
+        .book-page { 
+            max-width: 600px; 
+            margin: auto; 
             background: white; 
-            padding: 25px; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            min-height: 210mm;
+            padding: 50px; 
+            border: 1px solid #ddd;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
         }
+        h1 { text-align: center; color: #d4a017; border-bottom: 2px solid #d4a017; padding-bottom: 10px; }
+        .header-info { margin-bottom: 40px; font-size: 0.9em; color: #666; display: flex; justify-content: space-between; }
         
-        .header { text-align: center; border-bottom: 2px solid var(--primary); margin-bottom: 20px; padding-bottom: 10px; }
-        .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; font-size: 1.3rem; }
-        .header p { font-weight: 600; color: #666; margin: 2px 0; font-size: 0.8rem; }
+        .ejercicio { margin-bottom: 40px; position: relative; }
+        .pregunta { font-weight: bold; font-size: 1.1em; line-height: 1.5; margin-bottom: 15px; }
+        
+        /* Espacio para escribir (líneas de cuaderno) */
+        .espacio-respuesta {
+            height: 80px;
+            border-bottom: 1px solid #eee;
+            background-image: linear-gradient(#eee 1px, transparent 1px);
+            background-size: 100% 25px; /* Crea líneas cada 25px */
+            margin-top: 10px;
+        }
 
-        h2 { color: var(--secondary); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 25px; background: var(--light); padding: 5px 10px; font-size: 1rem; text-transform: uppercase; }
-        
-        .instrucciones { font-size: 0.8rem; color: #555; font-style: italic; margin-bottom: 15px; }
+        .btn-print {
+            display: block; width: fit-content; margin: 0 auto 30px;
+            padding: 12px 25px; background: #d4a017; color: white;
+            border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
+        }
 
-        .ejercicio-lista { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
-        .ej-item { background: #fafafa; border: 1px solid #eee; padding: 12px; border-radius: 8px; font-size: 0.9rem; position: relative; }
-        
-        .linea-rta { border-bottom: 1px solid #bbb; width: 100%; min-height: 25px; display: block; margin-top: 8px; }
-        
-        .tag { font-size: 0.6rem; font-weight: bold; padding: 2px 5px; border-radius: 3px; float: right; text-transform: uppercase; }
-        .f { background: #e3f2fd; color: #1976d2; } 
-        .m { background: #fff3e0; color: #f57c00; } 
-        .d { background: #ffebee; color: #d32f2f; } 
-
-        .btn-print { background: var(--primary); color: white; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; display: block; margin: 0 auto 20px; width: 100%; max-width: 250px; }
-        
-        @page { size: A5; margin: 0; } 
-        @media print { 
-            .btn-print { display: none; } 
+        /* ESTILOS DE IMPRESIÓN */
+        @media print {
+            @page { size: A5; margin: 10mm; }
             body { background: white; padding: 0; }
-            .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 12mm; }
+            .book-page { border: none; box-shadow: none; width: 100%; padding: 0; }
+            .btn-print { display: none; }
+            .espacio-respuesta { border-left: 1px solid #eee; border-right: 1px solid #eee; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <button class="btn-print" onclick="window.print()">📥 Imprimir Ficha Incompletas (A5)</button>
+    <button class="btn-print" onclick="window.print()">🖨️ Imprimir Cuaderno (A5)</button>
 
-    <div class="header">
-        <h1>ACADEMIA ESPARTA</h1>
-        <p>Entrenamiento: Ecuaciones Incompletas</p>
+    <div class="book-page">
+        <h1>Ejercicios de Combinatoria</h1>
+        <div class="header-info">
+            <span>Nombre: ___________________________</span>
+            <span>Clase: Infantil 4 años A</span>
+        </div>
+
+        <div class="ejercicio">
+            <div class="pregunta">1. En el panal hay 5 puertas diferentes. ¿De cuántas formas puede entrar y salir una abeja si no quiere usar la misma puerta para ambas cosas?</div>
+            <div class="espacio-respuesta"></div>
+        </div>
+
+        <div class="ejercicio">
+            <div class="pregunta">2. Con las letras de la palabra "MIEL", ¿cuántas palabras de 3 letras diferentes se pueden formar (aunque no tengan sentido)?</div>
+            <div class="espacio-respuesta"></div>
+        </div>
+
+        <div class="ejercicio">
+            <div class="pregunta">3. Se van a repartir 3 premios diferentes entre 7 abejas ganadoras de un concurso de vuelo. ¿De cuántas formas pueden repartirse?</div>
+            <div class="espacio-respuesta"></div>
+        </div>
+
+        <div class="ejercicio">
+            <div class="pregunta">4. Un grupo de 4 abejas amigas quieren hacerse una foto juntas en fila. ¿De cuántas maneras pueden colocarse para la foto?</div>
+            <div class="espacio-respuesta"></div>
+        </div>
+
+        <div class="ejercicio">
+            <div class="pregunta">5. Si lanzamos un dado de 6 caras 2 veces, ¿cuántos resultados posibles podemos obtener en total?</div>
+            <div class="espacio-respuesta"></div>
+        </div>
     </div>
-
-    <h2>Tipo 1: Falta el término "b" (\(ax^2 + c = 0\))</h2>
-    <p class="instrucciones">Despeja la \(x^2\) y recuerda aplicar la raíz cuadrada (\(\pm \sqrt{}\)).</p>
-    
-    <div class="ejercicio-lista">
-        <div class="ej-item"><span class="tag f">Fácil</span> 1) \(x^2 - 25 = 0\) <span class="linea-rta"></span></div>
-        <div class="ej-item"><span class="tag f">Fácil</span> 2) \(2x^2 - 18 = 0\) <span class="linea-rta"></span></div>
-        <div class="ej-item"><span class="tag m">Medio</span> 3) \(x^2 + 1 = 10\) <span class="linea-rta"></span></div>
-        <div class="ej-item"><span class="tag m">Medio</span> 4) \(3x^2 - 75 = 0\) <span class="linea-rta"></span></div>
-        <div class="ej-item"><span class="tag d">Difícil</span> 5) \(5x^2 - 100 = 80\) <span class="linea-rta"></span></div>
-    </div>
-
-    <h2>Tipo 2: Falta el término "c" (\(ax^2 + bx = 0\))</h2>
-    <p class="instrucciones">Saca factor común \(x\). Una solución siempre es \(x = 0\).</p>
-
-    <div class="ejercicio-lista">
-        <div class="ej-item"><span class="tag f">Fácil</span> 6) \(x^2 - 6x = 0\) <span class="linea-rta"></span></div>
-        <div class="ej-item"><span class="tag f">Fácil</span> 7) \(x^2 + 4x = 0\) <span class="linea-rta"></span></div>
-        <div class="ej-item"><span class="tag m">Medio</span> 8) \(3x^2 - 12x = 0\) <span class="linea-rta"></span></div>
-        <div class="ej-item"><span class="tag m">Medio</span> 9) \(5x^2 + 5x = 0\) <span class="linea-rta"></span></div>
-        <div class="ej-item"><span class="tag d">Difícil</span> 10) \(2x^2 = 10x\) <span class="linea-rta"></span></div>
-    </div>
-</div>
 
 </body>
 </html>
