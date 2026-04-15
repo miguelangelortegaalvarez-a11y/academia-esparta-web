@@ -3,274 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erik: El Camino del Guerrero - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Bangers&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <title>Desafío Matemático: El Tiro Libre - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root { 
-            --esparta-verde: #0e9343; 
-            --esparta-oro: #f1c40f; 
-            --esparta-rojo: #ff3333; 
-            --fondo-suave: #e8f5e9; 
+            --primary: #0e9343; 
+            --secondary: #09834c;
+            --light: #f5fdf7; 
+            --dark: #063c24;
+            --accent: #f39c12;
         }
+        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: var(--dark); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         
-        body { 
-            font-family: 'Kalam', cursive; 
-            background-color: var(--fondo-suave); 
-            color: #1a1a1a; 
-            margin: 0; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            overflow-x: hidden; 
-        }
+        h1 { color: var(--primary); text-align: center; text-transform: uppercase; border-bottom: 3px solid var(--primary); padding-bottom: 10px; }
+        h2 { color: var(--secondary); margin-top: 30px; border-left: 5px solid var(--accent); padding-left: 15px; }
         
-        .header { 
-            background: var(--esparta-verde); 
-            width: 100%; 
-            text-align: center; 
-            padding: 15px 0; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
-            font-family: 'Bangers', cursive; 
-            color: white;
-        }
-        .header h1 { margin: 0; font-size: 2.2em; letter-spacing: 2px; }
-        .header .sub-brand { 
-            font-size: 0.6em; 
-            display: block; 
-            color: var(--esparta-oro); 
-            letter-spacing: 5px; 
-            margin-top: 5px;
-            text-transform: uppercase;
-        }
+        .enunciado { background: var(--light); padding: 25px; border-radius: 12px; border: 1px solid rgba(14, 147, 67, 0.2); font-style: italic; margin-bottom: 30px; }
+        .paso { margin-bottom: 25px; padding: 20px; border-bottom: 1px solid #eee; }
+        .destacado { color: var(--primary); font-weight: 700; }
         
-        .progress-container { width: 90%; max-width: 1000px; background: #e0e0e0; height: 25px; border-radius: 15px; margin: 20px 0; overflow: hidden; border: 3px solid var(--esparta-verde); }
-        #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #f1c40f, #ff4500); transition: width 0.5s ease; }
+        /* Estilos de la Gráfica */
+        .grafica-container { text-align: center; margin: 40px 0; background: #fdfdfd; border: 1px solid #eee; padding: 20px; border-radius: 15px; }
+        svg { max-width: 100%; height: auto; }
+        .eje { stroke: #333; stroke-width: 2; }
+        .parabola { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 5; }
+        .punto { fill: var(--primary); }
+        .texto-grafica { font-size: 12px; font-family: sans-serif; font-weight: bold; }
 
-        .marcador { font-family:'Bangers'; font-size: 30px; margin-top: 10px; text-align: center; color: var(--esparta-verde); }
-
-        .main-stage { 
-            display: flex; 
-            width: 98%; 
-            max-width: 1500px; 
-            justify-content: flex-start; 
-            align-items: center; 
-            gap: 100px; 
-            margin-top: 20px; 
-            padding-left: 20px; 
-        }
-
-        .character-col { 
-            flex: 0 0 600px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-        }
-        .character-img { width: 100%; height: auto; transition: 0.3s; filter: drop-shadow(0 5px 20px rgba(0,0,0,0.2)); }
-        .img-super { filter: drop-shadow(0 0 45px #ffea00); animation: pulse-super 0.8s infinite alternate; }
-        
-        @keyframes pulse-super { from { transform: scale(1); } to { transform: scale(1.05); } }
-
-        .game-container { background: #fff; padding: 35px; border-radius: 25px; border: 6px solid var(--esparta-verde); color: #222; width: 420px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
-        
-        .multiplication-table { font-size: 85px; font-weight: bold; line-height: 1.1; color: #2c3e50; width: 100%; border-collapse: collapse; }
-        .multiplication-table td { text-align: center; width: 95px; height: 95px; }
-        .signo { color: #e74c3c; font-family: 'Bangers'; font-size: 80px; }
-        .linea { border-bottom: 8px solid #333; margin: 15px 0; }
-
-        .result-row { display: flex; gap: 15px; justify-content: center; padding-top: 10px; }
-        
-        /* AJUSTE DE TAMAÑO: Cuadraditos más chicos para que no se salgan */
-        input { 
-            font-family: 'Kalam', cursive; 
-            font-size: 50px; /* Un poco más pequeña la fuente */
-            text-align: center; 
-            border: 4px solid #ccc; 
-            border-radius: 12px; 
-            width: 85px;  /* Ancho reducido */
-            height: 85px; /* Alto reducido */
-            outline: none; 
-            background: #fff; 
-            color: #222; 
-        }
-        input.correct { background: #c8e6c9 !important; border-color: var(--esparta-verde) !important; color: #1b5e20; }
-        input.wrong { background: #ffcdd2 !important; border-color: var(--esparta-rojo) !important; animation: shake 0.3s; }
-
-        #llevada { width: 70px; height: 70px; font-size: 38px; border: 4px dashed #e74c3c; visibility: hidden; margin: 0 auto 10px auto; color: #e74c3c; display: block; }
-
-        .status-msg { margin-top: 25px; font-weight: bold; font-size: 34px; color: var(--esparta-verde); text-align: center; font-family: 'Bangers'; min-height: 55px; }
-        .msg-fallo { color: var(--esparta-rojo); }
-
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
-
-        @media (max-width: 1000px) {
-            .main-stage { flex-direction: column; align-items: center; padding-left: 0; gap: 40px; }
-            .character-col { flex: 0 0 auto; width: 300px; }
-        }
+        .conclusion { background: #fff3cd; padding: 20px; border-radius: 10px; border: 1px solid #ffeeba; text-align: center; font-weight: 700; font-size: 1.2rem; }
+        .btn-volver { display: block; margin-top: 40px; text-align: center; text-decoration: none; color: #666; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>ERIK: EL CAMINO DEL GUERRERO</h1>
-        <span class="sub-brand">Academia Esparta</span>
+<div class="container">
+    <h1>⚔️ El Tiro del Espartano</h1>
+
+    <div class="enunciado">
+        <strong>Problema:</strong> Un alumno lanza un balón con trayectoria parabólica. Los datos son:
+        <ul>
+            <li>Posición del lanzador: a 2 metros de ti (tu posición es x=0).</li>
+            <li>Altura de lanzamiento: 1,30 metros.</li>
+            <li>Altura máxima (vértice): 3 metros, alcanzada a 2 metros del lanzador.</li>
+            <li>Objetivo: Canasta situada a 5,5 metros de ti y a 2 metros de altura.</li>
+        </ul>
+        <strong>¿Conseguirá encestar el alumno?</strong>
     </div>
 
-    <div class="marcador">ESCUDOS: <span id="score" style="color:var(--esparta-verde)">0</span></div>
-    <div class="progress-container"><div id="progress-bar"></div></div>
+    <h2>Desarrollo Paso a Paso</h2>
 
-    <div class="main-stage">
-        <div class="character-col">
-            <img src="camino-matematico/assets/warrior/warrior-idle.png.PNG" alt="Erik" class="character-img" id="hero-img">
-            <div style="font-family:'Bangers'; color:var(--esparta-verde); font-size:35px; margin-top:20px;" id="hero-status">GUERRERO BASE</div>
-        </div>
-
-        <div class="game-container">
-            <input type="number" id="llevada" placeholder="?">
-            <table class="multiplication-table">
-                <tr><td></td><td id="d-arriba">--</td><td id="u-arriba">-</td></tr>
-                <tr><td class="signo">X</td><td></td><td id="num-abajo">-</td></tr>
-            </table>
-            <div class="linea"></div>
-            <div class="result-row">
-                <input type="number" id="res-centena">
-                <input type="number" id="res-decena">
-                <input type="number" id="res-unidad">
-            </div>
-        </div>
+    <div class="paso">
+        <p><span class="destacado">Paso 1: Identificar los puntos clave.</span><br>
+        Tomando tu posición como el origen \( (0,0) \):
+        <ul>
+            <li>Punto de lanzamiento (A): \( (2, \ 1.3) \)</li>
+            <li>Punto de altura máxima (Vértice V): El lanzador está en \(x=2\) y el máximo ocurre 2m después, luego es en \(x=4\). Vértice: \( (4, \ 3) \)</li>
+        </ul>
+        </p>
     </div>
 
-    <div class="status-msg" id="msg">¡DEMUESTRA TU PODER, ERIK!</div>
+    <div class="paso">
+        <p><span class="destacado">Paso 2: Relación del Vértice.</span><br>
+        En la forma general \( y = ax^2 + bx + c \), la coordenada \(x\) del vértice es \( x_v = \frac{-b}{2a} \).<br>
+        Sustituyendo: \( 4 = \frac{-b}{2a} \implies -b = 8a \implies \mathbf{b = -8a} \).
+        </p>
+    </div>
 
-    <script>
-        let n1, n2, llevadaReal, uReal, dReal, cReal;
-        let score = 0;
-        const goal = 10;
-        const imagenes = {
-            base: 'camino-matematico/assets/warrior/warrior-idle.png.PNG',
-            sad: 'camino-matematico/assets/warrior/warrior-sad.png.PNG',
-            super: 'camino-matematico/assets/warrior/warrior-power.png.PNG'
-        };
-        const frasesFallo = [
-            "¡Erik, eres un manta!", "¡Erik, eres más malo que el Barça!",
-            "¡Menudo paquete, Erik!", "¡Espabila, Guerrero!"
-        ];
+    <div class="paso">
+        <p><span class="destacado">Paso 3: Crear el sistema de ecuaciones.</span><br>
+        Sustituimos los puntos A y V en la ecuación general:
+        <ol>
+            <li>\( 1.3 = a(2)^2 + b(2) + c \implies 4a + 2b + c = 1.3 \)</li>
+            <li>\( 3 = a(4)^2 + b(4) + c \implies 16a + 4b + c = 3 \)</li>
+        </ol>
+        Sustituimos \( b = -8a \) en ambas:
+        <ul>
+            <li>\( 4a + 2(-8a) + c = 1.3 \implies \mathbf{-12a + c = 1.3} \)</li>
+            <li>\( 16a + 4(-8a) + c = 3 \implies \mathbf{-16a + c = 3} \)</li>
+        </ul>
+        </p>
+    </div>
 
-        const inputs = {
-            llevada: document.getElementById('llevada'),
-            u: document.getElementById('res-unidad'),
-            d: document.getElementById('res-decena'),
-            c: document.getElementById('res-centena')
-        };
+    <div class="paso">
+        <p><span class="destacado">Paso 4: Resolver el sistema.</span><br>
+        Restando las dos ecuaciones anteriores:<br>
+        \( (-12a + c) - (-16a + c) = 1.3 - 3 \)<br>
+        \( 4a = -1.7 \implies \mathbf{a = -0.425} \)<br><br>
+        Calculamos \(b\): \( b = -8(-0.425) = \mathbf{3.4} \)<br>
+        Calculamos \(c\): \( -12(-0.425) + c = 1.3 \implies 5.1 + c = 1.3 \implies \mathbf{c = -3.8} \)
+        </p>
+    </div>
 
-        function nuevaOperacion() {
-            n1 = Math.floor(Math.random() * 90) + 10;
-            const tablasPermitidas = [2, 3, 4];
-            n2 = tablasPermitidas[Math.floor(Math.random() * tablasPermitidas.length)];
-            document.getElementById('d-arriba').innerText = Math.floor(n1 / 10);
-            document.getElementById('u-arriba').innerText = n1 % 10;
-            document.getElementById('num-abajo').innerText = n2;
-            uReal = (n1 % 10 * n2) % 10;
-            llevadaReal = Math.floor((n1 % 10 * n2) / 10);
-            let total = n1 * n2;
-            cReal = Math.floor(total / 100);
-            dReal = Math.floor((total % 100) / 10);
-            Object.values(inputs).forEach(i => {
-                i.value = ''; i.className = ''; i.disabled = true; i.style.visibility = 'visible';
-            });
-            if (cReal === 0) inputs.c.style.visibility = 'hidden';
-            inputs.llevada.style.visibility = 'hidden';
-            inputs.u.disabled = false;
-            inputs.u.focus();
-        }
+    <h2>Representación Gráfica</h2>
+    <div class="grafica-container">
+        <svg width="600" height="300" viewBox="0 0 600 300">
+            <line x1="50" y1="250" x2="550" y2="250" class="eje" /> <line x1="50" y1="250" x2="50" y2="50" class="eje" /> <circle cx="50" cy="250" r="5" fill="black" />
+            <text x="35" y="270" class="texto-grafica">TÚ (0,0)</text>
 
-        function volverNormal() {
-            document.getElementById('hero-img').src = imagenes.base;
-            document.getElementById('hero-img').classList.remove('img-super');
-            document.getElementById('hero-status').innerText = "GUERRERO BASE";
-            document.getElementById('msg').className = "status-msg";
-            document.getElementById('msg').innerText = "¡CONCÉNTRATE, ERIK!";
-        }
+            <circle cx="150" cy="185" r="5" class="punto" />
+            <text x="130" y="210" class="texto-grafica" fill="#0e9343">Lanzador (2; 1,3)</text>
 
-        function manejarError() {
-            document.getElementById('hero-img').src = imagenes.sad;
-            const msg = document.getElementById('msg');
-            msg.innerText = frasesFallo[Math.floor(Math.random() * frasesFallo.length)];
-            msg.className = "status-msg msg-fallo";
-            setTimeout(volverNormal, 3000);
-        }
+            <circle cx="250" cy="100" r="5" fill="#f39c12" />
+            <text x="230" y="85" class="texto-grafica" fill="#f39c12">Máximo (4; 3)</text>
 
-        function manejarAciertoFinal() {
-            document.getElementById('hero-img').src = imagenes.super;
-            document.getElementById('hero-img').classList.add('img-super');
-            document.getElementById('hero-status').innerText = "¡SUPER ERIK! 🔥";
-            document.getElementById('msg').innerText = "¡IMPRESIONANTE, ERIK!";
-            score++;
-            document.getElementById('score').innerText = score;
-            document.getElementById('progress-bar').style.width = (score / goal) * 100 + "%";
-            if(score >= goal) confetti();
-            setTimeout(() => {
-                volverNormal();
-                nuevaOperacion();
-            }, 3000);
-        }
+            <path d="M 150 185 Q 250 15, 350 250" class="parabola" />
 
-        function verificarVictoria() {
-            const centenaOk = (cReal === 0) || (inputs.c.value == cReal && inputs.c.classList.contains('correct'));
-            const decenaOk = (inputs.d.value == dReal && inputs.d.classList.contains('correct'));
-            if (centenaOk && decenaOk) manejarAciertoFinal();
-        }
+            <rect x="325" y="150" width="10" height="2" fill="red" />
+            <line x1="330" y1="150" x2="330" y2="250" stroke="black" stroke-width="1" />
+            <text x="310" y="140" class="texto-grafica" fill="red">Canasta (5,5; 2)</text>
+        </svg>
+    </div>
 
-        inputs.u.oninput = function() {
-            if(this.value == uReal) {
-                this.classList.add('correct'); this.disabled = true;
-                if(llevadaReal > 0) {
-                    inputs.llevada.style.visibility = 'visible';
-                    inputs.llevada.disabled = false; inputs.llevada.focus();
-                } else {
-                    if(cReal > 0) { inputs.c.disabled = false; inputs.c.focus(); }
-                    else { inputs.d.disabled = false; inputs.d.focus(); }
-                }
-            } else if(this.value.length >= 1) {
-                this.classList.add('wrong'); manejarError();
-                setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
-            }
-        };
+    <div class="conclusion">
+        <p>Sustituyendo \( x = 5.5 \) en la ecuación \( y = -0.425x^2 + 3.4x - 3.8 \):</p>
+        <p>\( y = 2.04375 \text{ metros} \)</p>
+        <p>¡ENCERSTADO! La pelota pasa por el centro del aro.</p>
+    </div>
 
-        inputs.llevada.oninput = function() {
-            if(this.value == llevadaReal) {
-                this.classList.add('correct'); this.disabled = true;
-                if(cReal > 0) { inputs.c.disabled = false; inputs.c.focus(); }
-                else { inputs.d.disabled = false; inputs.d.focus(); }
-            } else if(this.value.length >= 1) {
-                this.classList.add('wrong'); manejarError();
-                setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
-            }
-        };
+    <a href="index.html" class="btn-volver">← Volver al Aula Virtual</a>
+</div>
 
-        inputs.c.oninput = function() {
-            if(this.value == cReal) {
-                this.classList.add('correct'); this.disabled = true;
-                inputs.d.disabled = false; inputs.d.focus();
-                verificarVictoria();
-            } else if(this.value.length >= 1) {
-                this.classList.add('wrong'); manejarError();
-                setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
-            }
-        };
-
-        inputs.d.oninput = function() {
-            if(this.value == dReal) {
-                this.classList.add('correct'); this.disabled = true;
-                verificarVictoria();
-            } else if(this.value.length >= 1) {
-                this.classList.add('wrong'); manejarError();
-                setTimeout(() => { this.value = ''; this.classList.remove('wrong'); }, 300);
-            }
-        };
-
-        nuevaOperacion();
-    </script>
 </body>
 </html>
