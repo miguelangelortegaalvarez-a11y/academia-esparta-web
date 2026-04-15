@@ -3,163 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividades Interactivas - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Apuntes Álgebra - Candela Jiménez</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        :root {
-            --primary: #0e9343;
-            --accent: #f1c40f;
-            --bg: #f4f7f4;
+        :root { 
+            --primary: #0e9343; 
+            --secondary: #09834c;
+            --light: #f5fdf7; 
+            --dark: #063c24;
+            --accent: #f39c12;
+            --cloud-bg: #e1f5fe;
+            --cloud-border: #03a9f4;
         }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg);
-            padding: 20px;
-            color: #2c3e50;
-        }
-
-        .card {
-            background: white;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        h2 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: var(--dark); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 850px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; border: 1px solid #eee; }
         
-        .interactivo-box {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border: 1px solid #ddd;
-        }
+        .header { text-align: center; border-bottom: 3px solid var(--primary); margin-bottom: 40px; padding-bottom: 20px; }
+        .header h1 { color: var(--primary); margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+        .header p { font-weight: 600; color: #666; margin: 5px 0 0 0; }
 
-        input {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: 100px;
-            margin: 5px;
-        }
+        h2 { color: var(--secondary); border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 40px; }
+        h3 { color: var(--primary); margin-top: 25px; border-bottom: 1px solid #eee; display: inline-block; }
 
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        .traduccion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: var(--light); padding: 20px; border-radius: 12px; }
+        .traduccion-item { border-bottom: 1px solid rgba(0,0,0,0.05); padding: 5px 0; }
 
-        button:hover { background: #0a7033; }
+        /* Estilo de las Nubes de Recordatorio */
+        .nube-container { position: relative; background: var(--cloud-bg); border: 2px solid var(--cloud-border); padding: 20px; border-radius: 50px; margin: 30px 0; display: flex; align-items: center; box-shadow: 5px 5px 15px rgba(0,0,0,0.05); }
+        .nube-container::before { content: "☁️"; font-size: 2rem; margin-right: 15px; }
+        .nube-text { font-weight: 600; color: #0277bd; font-size: 0.95rem; }
 
-        .resultado {
-            margin-top: 15px;
-            font-weight: bold;
-            color: var(--primary);
-        }
+        .monomio-box { text-align: center; font-size: 1.5rem; padding: 20px; background: var(--dark); color: white; border-radius: 15px; margin: 20px 0; }
+        .resaltado-num { color: var(--accent); font-weight: bold; }
+        
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
 
-        .feedback {
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            display: none;
-        }
+        .operacion-box { background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin: 10px 0; }
 
-        .correcto { background: #d4edda; color: #155724; display: block; }
-        .incorrecto { background: #f8d7da; color: #721c24; display: block; }
-
-        @media print {
-            .no-print { display: none; }
-        }
+        @media print { .btn-print { display: none; } }
+        .btn-print { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: 700; margin-bottom: 20px; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div style="text-align: center;">
-    <h1 style="color: var(--primary);">ACADEMIA ESPARTA</h1>
-    <p>"Pon a prueba tus conocimientos de Cinemática"</p>
-</div>
+<div class="container">
+    <button class="btn-print" onclick="window.print()">📥 Imprimir para Candela</button>
 
-<div class="card">
-    <h2>1. Simulador de Laboratorio (MRU)</h2>
-    <p>Introduce la distancia y el tiempo para calcular la velocidad automáticamente con sus magnitudes.</p>
-    <div class="interactivo-box">
-        Distancia: <input type="number" id="dist" placeholder="m"> m <br>
-        Tiempo: <input type="number" id="time" placeholder="s"> s <br><br>
-        <button onclick="calcular()">CALCULAR VELOCIDAD</button>
-        <div id="res-lab" class="resultado"></div>
+    <div class="header">
+        <h1>ACADEMIA ESPARTA</h1>
+        <p>Material de estudio personalizado para: <strong>Candela Jiménez</strong></p>
+        <p>Tema: Álgebra Inicial (1º ESO)</p>
     </div>
-</div>
 
-<div class="card">
-    <h2>2. Reto de Unidades</h2>
-    <p>¿Sabrías pasar esta velocidad a m/s? (Recuerda dividir por 3.6)</p>
-    <div class="interactivo-box">
-        <p><strong>Velocidad: 108 km/h</strong></p>
-        Respuesta: <input type="number" id="ans-conv"> m/s 
-        <button onclick="checkConv()">COMPROBAR</button>
-        <div id="feed-conv" class="feedback"></div>
+    <h2>1. Guía de Traducción Algebraica</h2>
+    <p>El álgebra es el idioma de las matemáticas. Aquí tienes tu diccionario para traducir frases a expresiones:</p>
+    
+    <div class="traduccion-grid">
+        <div class="traduccion-item">Un número cualquiera: <strong>\(x\)</strong></div>
+        <div class="traduccion-item">Su doble: <strong>\(2x\)</strong></div>
+        <div class="traduccion-item">Su mitad: <strong>\(\frac{x}{2}\)</strong></div>
+        <div class="traduccion-item">Aumentado en 5: <strong>\(x + 5\)</strong></div>
+        <div class="traduccion-item">Suma de dos números: <strong>\(x + y\)</strong></div>
+        <div class="traduccion-item">Su cuadrado: <strong>\(x^2\)</strong></div>
+        <div class="traduccion-item">Consecutivos: <strong>\(x, x+1\)</strong></div>
+        <div class="traduccion-item">Diferencia de dos números: <strong>\(x - y\)</strong></div>
     </div>
-</div>
 
-<div class="card">
-    <h2>3. Test de Teoría</h2>
-    <p>¿Cómo se llama la línea imaginaria que describe un móvil al moverse?</p>
-    <div class="interactivo-box">
-        <input type="radio" name="preg1" value="inc"> Desplazamiento <br>
-        <input type="radio" name="preg1" value="cor"> Trayectoria <br>
-        <input type="radio" name="preg1" value="inc"> Posición <br><br>
-        <button onclick="checkTest()">ENVIAR RESPUESTA</button>
-        <div id="feed-test" class="feedback"></div>
+    <div class="nube-container">
+        <div class="nube-text">RECUERDA CANDELA: Si la \(x\) aparece sola, ¡lleva un 1 invisible delante! \(x = 1x\).</div>
     </div>
+
+    <h3>Nivel Experto 🚀</h3>
+    <ul>
+        <li><strong>El cuadrado de la suma de dos números:</strong> \((x + y)^2\)</li>
+        <li><strong>La suma de los cuadrados de dos números:</strong> \(x^2 + y^2\)</li>
+        <li><strong>La mitad de la suma de dos números:</strong> \(\frac{x + y}{2}\)</li>
+        <li><strong>El triple de la diferencia de dos números:</strong> \(3 \cdot (x - y)\)</li>
+    </ul>
+
+    <h2>2. El Monomio y sus partes</h2>
+    <p>Es un solo bloque donde números y letras se multiplican.</p>
+    
+    <div class="monomio-box">
+        Monomio: <span class="resaltado-num">-7</span>x<sup style="color:var(--accent)">4</sup>
+    </div>
+    
+    <ul>
+        <li><strong>Coeficiente:</strong> El número con su signo (\(-7\)).</li>
+        <li><strong>Parte Literal:</strong> Las letras con exponentes (\(x^4\)).</li>
+        <li><strong>Grado:</strong> El exponente total (\(4\)).</li>
+    </ul>
+
+    <div class="nube-container" style="border-color: #ff9800; background: #fff3e0;">
+        <div class="nube-text" style="color: #e65100;">Si hay varias letras como \(3ab^2\), suma los exponentes: \(1(a) + 2(b) = \text{Grado 3}\).</div>
+    </div>
+
+    <h2>3. Operaciones</h2>
+    
+    <h3>A. Suma y Resta</h3>
+    <p>¡Solo si son <strong>Semejantes</strong>! (Misma parte literal).</p>
+    <div class="operacion-box">
+        \(5x + 3x = 8x\) ✅ | \(7x + 2y = \text{No se puede}\) ❌
+    </div>
+
+    <h3>B. Multiplicación</h3>
+    <p>Multiplica números y <strong>suma</strong> exponentes de letras iguales.</p>
+    <div class="operacion-box">
+        \((3x^2) \cdot (4x^3) = 12x^5\)
+    </div>
+
+    <div class="nube-container">
+        <div class="nube-text">SIGNOS: \(+ \cdot + = +\) | \(- \cdot - = +\) | \(+ \cdot - = -\)</div>
+    </div>
+
+    <h3>C. División</h3>
+    <p>Divide números y <strong>resta</strong> exponentes de letras iguales.</p>
+    <div class="operacion-box">
+        \((20x^6) : (5x^2) = 4x^4\)
+    </div>
+
 </div>
 
-<div style="text-align: center;" class="no-print">
-    <button onclick="window.print()" style="background: var(--accent); color: black;">🖨️ IMPRIMIR FICHA DE TRABAJO</button>
+<div style="text-align: center; margin-top: 20px;">
+    <a href="index.html" style="color: #666; font-weight: bold; text-decoration: none;">← Volver al repositorio de Álgebra</a>
 </div>
-
-<script>
-    function calcular() {
-        const d = document.getElementById('dist').value;
-        const t = document.getElementById('time').value;
-        if(d && t && t != 0) {
-            const v = (d / t).toFixed(2);
-            document.getElementById('res-lab').innerHTML = "Resultado: " + v + " m/s";
-        } else {
-            document.getElementById('res-lab').innerHTML = "Por favor, introduce datos válidos.";
-        }
-    }
-
-    function checkConv() {
-        const ans = document.getElementById('ans-conv').value;
-        const feed = document.getElementById('feed-conv');
-        if(ans == 30) {
-            feed.innerHTML = "¡Correcto! 108 / 3.6 = 30 m/s";
-            feed.className = "feedback correcto";
-        } else {
-            feed.innerHTML = "Inténtalo de nuevo. Pista: Divide 108 entre 3.6";
-            feed.className = "feedback incorrecto";
-        }
-    }
-
-    function checkTest() {
-        const selected = document.querySelector('input[name="preg1"]:checked');
-        const feed = document.getElementById('feed-test');
-        if(selected && selected.value === "cor") {
-            feed.innerHTML = "¡Excelente! Es la trayectoria.";
-            feed.className = "feedback correcto";
-        } else {
-            feed.innerHTML = "Incorrecto. Repasa la definición de Trayectoria.";
-            feed.className = "feedback incorrecto";
-        }
-    }
-</script>
 
 </body>
 </html>
