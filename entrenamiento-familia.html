@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Álgebra: Apuntes y Ejercicios - Candela Jiménez</title>
+    <title>Álgebra: Apuntes y Entrenamiento - Candela Jiménez</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -45,6 +45,10 @@
         .ejercicio-bloque { margin-bottom: 30px; padding: 20px; border: 1px solid #eee; border-radius: 15px; background: #fafafa; }
         .grid-preguntas { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px; }
         .linea-rta { border-bottom: 1px solid #999; width: 100%; min-height: 20px; display: inline-block; margin-top: 5px; }
+        .nivel-tag { font-size: 0.7rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; margin-right: 5px; text-transform: uppercase; vertical-align: middle; }
+        .f { background: #e3f2fd; color: #1976d2; } /* Fácil */
+        .m { background: #fff3e0; color: #f57c00; } /* Medio */
+        .d { background: #ffebee; color: #d32f2f; } /* Difícil */
 
         .examen-final { border: 3px solid var(--dark); padding: 30px; border-radius: 20px; margin-top: 60px; background: #fff; position: relative; }
         .examen-final h2 { background: var(--dark); color: white; margin: -30px -30px 30px -30px; border-radius: 15px 15px 0 0; text-align: center; border: none; }
@@ -62,7 +66,7 @@
 <body>
 
 <div class="container">
-    <button class="btn-print" onclick="window.print()">📥 Imprimible Candela (Apuntes + Ejercicios)</button>
+    <button class="btn-print" onclick="window.print()">📥 Imprimible Candela (Apuntes + Entrenamiento)</button>
 
     <div class="header">
         <h1>ACADEMIA ESPARTA</h1>
@@ -172,19 +176,21 @@
             </tbody>
         </table>
 
-        <h3>B. Multiplicación</h3>
+        <h3>B. Multiplicación (Todos contra todos)</h3>
         <table class="tabla-esparta">
             <thead>
                 <tr>
                     <th>Signos</th>
                     <th>Operación</th>
                     <th>Resultado</th>
+                    <th>Explicación</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>\(+ \cdot +\)</td><td>\((3x^2) \cdot (2x^4)\)</td><td>\(6x^6\)</td></tr>
-                <tr><td>\(- \cdot -\)</td><td>\((-4a^3) \cdot (-2a^2)\)</td><td>\(8a^5\)</td></tr>
-                <tr><td>\(+ \cdot -\)</td><td>\((5b) \cdot (-3b^3)\)</td><td>\(-15b^4\)</td></tr>
+                <tr><td>\(+ \cdot +\)</td><td>\((3x^2) \cdot (2x^4)\)</td><td>\(6x^6\)</td><td>\(3 \cdot 2 = 6\) | \(x^{2+4}\)</td></tr>
+                <tr><td>\(- \cdot -\)</td><td>\((-4a^3) \cdot (-2a^2)\)</td><td>\(8a^5\)</td><td>\(-4 \cdot -2 = 8\) | \(a^{3+2}\)</td></tr>
+                <tr><td>\(+ \cdot -\)</td><td>\((5b) \cdot (-3b^3)\)</td><td>\(-15b^4\)</td><td>\(5 \cdot -3 = -15\) | \(b^{1+3}\)</td></tr>
+                <tr><td>\(- \cdot +\)</td><td>\((-2y^5) \cdot (4y)\)</td><td>\(-8y^6\)</td><td>\(-2 \cdot 4 = -8\) | \(y^{5+1}\)</td></tr>
             </tbody>
         </table>
 
@@ -195,11 +201,14 @@
                     <th>Signos</th>
                     <th>Operación</th>
                     <th>Resultado</th>
+                    <th>Explicación</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>\(+ : +\)</td><td>\((20x^6) : (5x^2)\)</td><td>\(4x^4\)</td></tr>
-                <tr><td>\(- : +\)</td><td>\((-10y^8) : (2y^3)\)</td><td>\(-5y^5\)</td></tr>
+                <tr><td>\(+ : +\)</td><td>\((20x^6) : (5x^2)\)</td><td>\(4x^4\)</td><td>\(20 : 5 = 4\) | \(x^{6-2}\)</td></tr>
+                <tr><td>\(- : -\)</td><td>\((-12a^4) : (-3a^2)\)</td><td>\(4a^2\)</td><td>\(-12 : -3 = 4\) | \(a^{4-2}\)</td></tr>
+                <tr><td>\(+ : -\)</td><td>\((15b^5) : (-3b^2)\)</td><td>\(-5b^3\)</td><td>\(15 : -3 = -5\) | \(b^{5-2}\)</td></tr>
+                <tr><td>\(- : +\)</td><td>\((-10y^8) : (2y^3)\)</td><td>\(-5y^5\)</td><td>\(-10 : 2 = -5\) | \(y^{8-3}\)</td></tr>
             </tbody>
         </table>
 
@@ -209,49 +218,71 @@
     </div>
 
     <div class="seccion-ejercicios">
-        <h1 style="text-align: center;">🛡️ CAMPO DE ENTRENAMIENTO</h1>
+        <h1 style="text-align: center;">🛡️ CAMPO DE ENTRENAMIENTO NIVELADO</h1>
 
         <div class="ejercicio-bloque">
             <h3>Ejercicio 1: Traducción Algebraica</h3>
             <div class="grid-preguntas">
-                <div>a) El triple de un número: <span class="linea-rta"></span></div>
-                <div>b) Un número aumentado en 8: <span class="linea-rta"></span></div>
-                <div>c) La mitad de la suma de dos números: <span class="linea-rta"></span></div>
-                <div>d) El cuadrado de un número menos 3: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag f">F</span> Un número menos doce: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag f">F</span> El doble de un número: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag f">F</span> La tercera parte de un número: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag m">M</span> El siguiente de un número: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag m">M</span> La suma de tres números: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag m">M</span> El cuadrado de un número más 5: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag d">D</span> El triple de la suma de dos números: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag d">D</span> La mitad de la diferencia de x e y: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag d">D</span> El cuadrado de la mitad de un número: <span class="linea-rta"></span></div>
+                <div><span class="nivel-tag d">D</span> La suma de los cubos de dos números: <span class="linea-rta"></span></div>
             </div>
         </div>
 
         <div class="ejercicio-bloque">
-            <h3>Ejercicio 2: Anatomía</h3>
+            <h3>Ejercicio 2: Anatomía del Monomio</h3>
             <table class="tabla-esparta" style="box-shadow: none; border: 1px solid #ddd;">
                 <thead>
-                    <tr><th>Monomio</th><th>Coeficiente</th><th>Parte Literal</th><th>Grado</th></tr>
+                    <tr><th>Dificultad</th><th>Monomio</th><th>Coeficiente</th><th>Parte Literal</th><th>Grado</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>\(8x^2\)</td><td></td><td></td><td></td></tr>
-                    <tr><td>\(-ab^3\)</td><td></td><td></td><td></td></tr>
-                    <tr><td>\(x\)</td><td></td><td></td><td></td></tr>
+                    <tr><td><span class="nivel-tag f">F</span></td><td>\(9x^5\)</td><td></td><td></td><td></td></tr>
+                    <tr><td><span class="nivel-tag f">F</span></td><td>\(-3a^2\)</td><td></td><td></td><td></td></tr>
+                    <tr><td><span class="nivel-tag m">M</span></td><td>\(x\)</td><td></td><td></td><td></td></tr>
+                    <tr><td><span class="nivel-tag m">M</span></td><td>\(-y^3\)</td><td></td><td></td><td></td></tr>
+                    <tr><td><span class="nivel-tag m">M</span></td><td>\(12ab\)</td><td></td><td></td><td></td></tr>
+                    <tr><td><span class="nivel-tag d">D</span></td><td>\(-5x^2yz^3\)</td><td></td><td></td><td></td></tr>
+                    <tr><td><span class="nivel-tag d">D</span></td><td>\(\frac{2}{3}a^4b\)</td><td></td><td></td><td></td></tr>
                 </tbody>
             </table>
         </div>
 
         <div class="ejercicio-bloque">
-            <h3>Ejercicio 3: Sumas y Restas</h3>
+            <h3>Ejercicio 3: Sumas y Restas (Agrupación)</h3>
             <div class="grid-preguntas">
-                <div>1) \(4x + 9x =\)</div>
-                <div>2) \(-10a - 5a =\)</div>
-                <div>3) \(2x - 7x + x =\)</div>
-                <div>4) \(5a + 3b - 2a =\)</div>
+                <div><span class="nivel-tag f">F</span> \(6x + 2x =\)</div>
+                <div><span class="nivel-tag f">F</span> \(9a - 5a =\)</div>
+                <div><span class="nivel-tag m">M</span> \(-3b - 7b =\)</div>
+                <div><span class="nivel-tag m">M</span> \(-10x^2 + 4x^2 =\)</div>
+                <div><span class="nivel-tag m">M</span> \(x + x + x =\)</div>
+                <div><span class="nivel-tag m">M</span> \(5a - 8a =\)</div>
+                <div><span class="nivel-tag d">D</span> \(4x + 2y - 3x + 5y =\)</div>
+                <div><span class="nivel-tag d">D</span> \(a + a - 5a + 2a =\)</div>
+                <div><span class="nivel-tag d">D</span> \(-3x^2 + x - 2x^2 + 5x =\)</div>
+                <div><span class="nivel-tag d">D</span> \(2ab + 3ab - 7ab =\)</div>
             </div>
         </div>
 
         <div class="ejercicio-bloque">
             <h3>Ejercicio 4: Multiplicación y División</h3>
             <div class="grid-preguntas">
-                <div>1) \((2x^2) \cdot (5x^3) =\)</div>
-                <div>2) \((-3a) \cdot (-4a^2) =\)</div>
-                <div>3) \((18x^5) : (2x^2) =\)</div>
-                <div>4) \((-10y^4) : (5y^2) =\)</div>
+                <div><span class="nivel-tag f">F</span> \((2x) \cdot (5x) =\)</div>
+                <div><span class="nivel-tag f">F</span> \((10a^4) : (2a^2) =\)</div>
+                <div><span class="nivel-tag m">M</span> \((-3a^2) \cdot (4a^3) =\)</div>
+                <div><span class="nivel-tag m">M</span> \((-20b^5) : (-5b^2) =\)</div>
+                <div><span class="nivel-tag m">M</span> \((6x^2) \cdot (-x) =\)</div>
+                <div><span class="nivel-tag m">M</span> \((8y) : (-8y) =\)</div>
+                <div><span class="nivel-tag d">D</span> \((-2ab) \cdot (3a^2b) =\)</div>
+                <div><span class="nivel-tag d">D</span> \((15x^3y^2) : (3xy) =\)</div>
+                <div><span class="nivel-tag d">D</span> \((-x^2) \cdot (-x^3) \cdot (-x) =\)</div>
+                <div><span class="nivel-tag d">D</span> \((a^2b^3) \cdot (3ab) =\)</div>
             </div>
         </div>
 
@@ -271,7 +302,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 </body>
