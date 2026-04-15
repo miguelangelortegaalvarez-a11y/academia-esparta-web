@@ -35,8 +35,10 @@
         .badge-si { background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
         .badge-no { background: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
 
-        .monomio-box { text-align: center; font-size: 1.8rem; padding: 25px; background: var(--dark); color: white; border-radius: 15px; margin: 20px 0; }
+        .monomio-box { text-align: center; font-size: 1.8rem; padding: 25px; background: var(--dark); color: white; border-radius: 15px; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
         .resaltado { color: var(--accent); font-weight: bold; }
+
+        .polinomio-warning { background: #fff5f5; border: 2px dashed #fc8181; padding: 20px; border-radius: 12px; margin-top: 20px; }
 
         .btn-print { background: var(--primary); color: white; padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; margin-bottom: 20px; }
         
@@ -99,27 +101,50 @@
 
     <h2>2. El Monomio y su estructura</h2>
     <div class="explicacion-pro">
-        Un monomio es un bloque de construcción. Está formado por un **producto** (multiplicación). Si no hay letras, es un término independiente. Si hay letras, es un monomio con parte literal.
+        Un monomio es un bloque de construcción. Está formado por un **único producto** (multiplicación) entre números y letras. Si hay sumas o restas separando bloques, ¡ya no es un monomio!
     </div>
     
     <div class="monomio-box">
-        Monomio: <span class="resaltado">-7</span>x<sup style="color:var(--accent)">4</sup>
+        <div style="font-size: 1rem; color: #aaa;">Ejemplo A (Simple)</div>
+        <div><span class="resaltado">-7</span>x<sup style="color:var(--accent)">4</sup></div>
+        <div style="font-size: 1rem; color: #aaa; margin-top: 15px;">Ejemplo B (Varias letras)</div>
+        <div><span class="resaltado">3</span>a<sup style="color:var(--accent)">2</sup>bc</div>
     </div>
     
     <table class="tabla-esparta">
         <thead>
             <tr>
-                <th>Parte</th>
-                <th>Descripción Matemática</th>
-                <th>Ejemplo</th>
+                <th>Monomio</th>
+                <th>Coeficiente</th>
+                <th>Parte Literal</th>
+                <th>Grado (Suma exponentes)</th>
             </tr>
         </thead>
         <tbody>
-            <tr><td>Coeficiente</td><td>El valor numérico constante.</td><td>\(-7\)</td></tr>
-            <tr><td>Parte Literal</td><td>La variable y su grado de potencia.</td><td>\(x^4\)</td></tr>
-            <tr><td>Grado</td><td>El número de factores que forman la parte literal.</td><td>\(4\)</td></tr>
+            <tr>
+                <td>\(-7x^4\)</td>
+                <td class="resaltado">-7</td>
+                <td>\(x^4\)</td>
+                <td><strong>4</strong></td>
+            </tr>
+            <tr>
+                <td>\(3a^2bc\)</td>
+                <td class="resaltado">3</td>
+                <td>\(a^2bc\)</td>
+                <td><strong>4</strong> <small>(2+1+1)</small></td>
+            </tr>
         </tbody>
     </table>
+
+    <div class="nube-container" style="border-color: #ff9800; background: #fff3e0;">
+        <div class="nube-text" style="color: #e65100;">CANDELA: Cuando una letra no tiene exponente (como la \(b\) o la \(c\)), su exponente es 1. ¡No lo olvides al sumar el grado!</div>
+    </div>
+
+    <div class="polinomio-warning">
+        <strong>⚠️ ¿Cuándo NO es un monomio?</strong><br>
+        Si ves sumas o restas de por medio, se llama <span class="resaltado">Polinomio</span>.<br>
+        Ejemplo: \(3x^2 + 5x - 2\) <span class="badge-no">NO ES UN MONOMIO</span> (Son 3 monomios juntos).
+    </div>
 
     <h2>3. Operaciones: La Lógica de los Monomios</h2>
 
