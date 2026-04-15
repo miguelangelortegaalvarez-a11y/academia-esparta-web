@@ -8,42 +8,35 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root { 
-            --primary: #0e9343; 
-            --secondary: #09834c;
-            --light: #f5fdf7; 
-            --dark: #063c24;
-            --accent: #f39c12;
-            --cloud-bg: #e1f5fe;
-            --cloud-border: #03a9f4;
+            --primary: #0e9343; --secondary: #09834c; --light: #f5fdf7; 
+            --dark: #063c24; --accent: #f39c12; --cloud-bg: #e1f5fe; --cloud-border: #03a9f4;
         }
-        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: var(--dark); margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 850px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; border: 1px solid #eee; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; color: var(--dark); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
         
         .header { text-align: center; border-bottom: 3px solid var(--primary); margin-bottom: 40px; padding-bottom: 20px; }
-        .header h1 { color: var(--primary); margin: 0; text-transform: uppercase; letter-spacing: 2px; }
-        .header p { font-weight: 600; color: #666; margin: 5px 0 0 0; }
-
-        h2 { color: var(--secondary); border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 40px; }
-        h3 { color: var(--primary); margin-top: 25px; border-bottom: 1px solid #eee; display: inline-block; }
-
-        .traduccion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: var(--light); padding: 20px; border-radius: 12px; }
-        .traduccion-item { border-bottom: 1px solid rgba(0,0,0,0.05); padding: 5px 0; }
-
-        /* Estilo de las Nubes de Recordatorio */
-        .nube-container { position: relative; background: var(--cloud-bg); border: 2px solid var(--cloud-border); padding: 20px; border-radius: 50px; margin: 30px 0; display: flex; align-items: center; box-shadow: 5px 5px 15px rgba(0,0,0,0.05); }
-        .nube-container::before { content: "☁️"; font-size: 2rem; margin-right: 15px; }
+        .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; }
+        
+        h2 { color: var(--secondary); border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 40px; background: var(--light); padding: 10px 15px; border-radius: 0 10px 10px 0; }
+        
+        /* Estilo de las Nubes */
+        .nube-container { background: var(--cloud-bg); border: 2px solid var(--cloud-border); padding: 15px 25px; border-radius: 30px; margin: 25px 0; display: flex; align-items: center; position: relative; }
+        .nube-container::before { content: "☁️"; font-size: 1.8rem; margin-right: 15px; }
         .nube-text { font-weight: 600; color: #0277bd; font-size: 0.95rem; }
 
-        .monomio-box { text-align: center; font-size: 1.5rem; padding: 20px; background: var(--dark); color: white; border-radius: 15px; margin: 20px 0; }
-        .resaltado-num { color: var(--accent); font-weight: bold; }
+        /* Tablas de Ejemplos */
+        .tabla-ejemplos { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .tabla-ejemplos th { background: var(--primary); color: white; padding: 12px; text-align: left; }
+        .tabla-ejemplos td { padding: 12px; border-bottom: 1px solid #eee; }
+        .tabla-ejemplos tr:nth-child(even) { background: #f9f9f9; }
         
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
+        .badge-si { background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
+        .badge-no { background: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
 
-        .operacion-box { background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin: 10px 0; }
-
-        @media print { .btn-print { display: none; } }
-        .btn-print { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: 700; margin-bottom: 20px; border: none; cursor: pointer; }
+        .resaltado { color: var(--accent); font-weight: bold; }
+        .btn-print { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 700; border: none; cursor: pointer; margin-bottom: 20px; }
+        
+        @media print { .btn-print, .btn-back { display: none; } }
     </style>
 </head>
 <body>
@@ -54,81 +47,82 @@
     <div class="header">
         <h1>ACADEMIA ESPARTA</h1>
         <p>Material de estudio personalizado para: <strong>Candela Jiménez</strong></p>
-        <p>Tema: Álgebra Inicial (1º ESO)</p>
     </div>
 
-    <h2>1. Guía de Traducción Algebraica</h2>
-    <p>El álgebra es el idioma de las matemáticas. Aquí tienes tu diccionario para traducir frases a expresiones:</p>
+    <h2>3. Operaciones con Monomios</h2>
+
+    <h3>A. Suma y Resta (Solo Semejantes)</h3>
+    <p>Para sumar o restar, la parte literal (las letras) debe ser <strong>idéntica</strong>. Si no lo es, la operación se deja indicada.</p>
     
-    <div class="traduccion-grid">
-        <div class="traduccion-item">Un número cualquiera: <strong>\(x\)</strong></div>
-        <div class="traduccion-item">Su doble: <strong>\(2x\)</strong></div>
-        <div class="traduccion-item">Su mitad: <strong>\(\frac{x}{2}\)</strong></div>
-        <div class="traduccion-item">Aumentado en 5: <strong>\(x + 5\)</strong></div>
-        <div class="traduccion-item">Suma de dos números: <strong>\(x + y\)</strong></div>
-        <div class="traduccion-item">Su cuadrado: <strong>\(x^2\)</strong></div>
-        <div class="traduccion-item">Consecutivos: <strong>\(x, x+1\)</strong></div>
-        <div class="traduccion-item">Diferencia de dos números: <strong>\(x - y\)</strong></div>
-    </div>
+    <table class="tabla-ejemplos">
+        <thead>
+            <tr>
+                <th>Operación</th>
+                <th>Resultado</th>
+                <th>¿Se puede?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>\(5x + 3x\)</td><td>\(8x\)</td><td><span class="badge-si">SÍ</span> (Positivo + Positivo)</td></tr>
+            <tr><td>\(-4a - 2a\)</td><td>\(-6a\)</td><td><span class="badge-si">SÍ</span> (Negativo + Negativo)</td></tr>
+            <tr><td>\(-7b + 10b\)</td><td>\(3b\)</td><td><span class="badge-si">SÍ</span> (Gana el positivo)</td></tr>
+            <tr><td>\(2x - 9x\)</td><td>\(-7x\)</td><td><span class="badge-si">SÍ</span> (Gana el negativo)</td></tr>
+            <tr><td>\(x + x + x\)</td><td>\(3x\)</td><td><span class="badge-si">SÍ</span> (Recuerda el 1 invisible)</td></tr>
+            <tr><td>\(5x + 2y\)</td><td>\(5x + 2y\)</td><td><span class="badge-no">NO</span> (Letras distintas)</td></tr>
+            <tr><td>\(3x^2 - 3x\)</td><td>\(3x^2 - 3x\)</td><td><span class="badge-no">NO</span> (Exponentes distintos)</td></tr>
+        </tbody>
+    </table>
 
     <div class="nube-container">
-        <div class="nube-text">RECUERDA CANDELA: Si la \(x\) aparece sola, ¡lleva un 1 invisible delante! \(x = 1x\).</div>
+        <div class="nube-text">CANDELA: Al sumar o restar, las letras NO CAMBIAN. Solo juegas con los números de delante.</div>
     </div>
 
-    <h3>Nivel Experto 🚀</h3>
-    <ul>
-        <li><strong>El cuadrado de la suma de dos números:</strong> \((x + y)^2\)</li>
-        <li><strong>La suma de los cuadrados de dos números:</strong> \(x^2 + y^2\)</li>
-        <li><strong>La mitad de la suma de dos números:</strong> \(\frac{x + y}{2}\)</li>
-        <li><strong>El triple de la diferencia de dos números:</strong> \(3 \cdot (x - y)\)</li>
-    </ul>
+    <h3>B. Multiplicación (Todos contra todos)</h3>
+    <p>Aquí multiplicamos los números (ojo a los signos) y <strong>sumamos</strong> los exponentes de las letras.</p>
 
-    <h2>2. El Monomio y sus partes</h2>
-    <p>Es un solo bloque donde números y letras se multiplican.</p>
-    
-    <div class="monomio-box">
-        Monomio: <span class="resaltado-num">-7</span>x<sup style="color:var(--accent)">4</sup>
-    </div>
-    
-    <ul>
-        <li><strong>Coeficiente:</strong> El número con su signo (\(-7\)).</li>
-        <li><strong>Parte Literal:</strong> Las letras con exponentes (\(x^4\)).</li>
-        <li><strong>Grado:</strong> El exponente total (\(4\)).</li>
-    </ul>
+    <table class="tabla-ejemplos">
+        <thead>
+            <tr>
+                <th>Operación</th>
+                <th>Resultado</th>
+                <th>Explicación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>\((3x^2) \cdot (2x^4)\)</td><td>\(6x^6\)</td><td>\(3 \cdot 2 = 6\) | \(x^{2+4}\)</td></tr>
+            <tr><td>\((-5x) \cdot (3x^2)\)</td><td>\(-15x^3\)</td><td>\(- \cdot + = -\) | \(x^{1+2}\)</td></tr>
+            <tr><td>\((-2a^3) \cdot (-4a^2)\)</td><td>\(8a^5\)</td><td>\(- \cdot - = +\) | \(a^{3+2}\)</td></tr>
+            <tr><td>\((6x) \cdot (-x)\)</td><td>\(-6x^2\)</td><td>\(6 \cdot (-1) = -6\) | \(x^{1+1}\)</td></tr>
+        </tbody>
+    </table>
 
-    <div class="nube-container" style="border-color: #ff9800; background: #fff3e0;">
-        <div class="nube-text" style="color: #e65100;">Si hay varias letras como \(3ab^2\), suma los exponentes: \(1(a) + 2(b) = \text{Grado 3}\).</div>
-    </div>
-
-    <h2>3. Operaciones</h2>
-    
-    <h3>A. Suma y Resta</h3>
-    <p>¡Solo si son <strong>Semejantes</strong>! (Misma parte literal).</p>
-    <div class="operacion-box">
-        \(5x + 3x = 8x\) ✅ | \(7x + 2y = \text{No se puede}\) ❌
-    </div>
-
-    <h3>B. Multiplicación</h3>
-    <p>Multiplica números y <strong>suma</strong> exponentes de letras iguales.</p>
-    <div class="operacion-box">
-        \((3x^2) \cdot (4x^3) = 12x^5\)
-    </div>
-
-    <div class="nube-container">
-        <div class="nube-text">SIGNOS: \(+ \cdot + = +\) | \(- \cdot - = +\) | \(+ \cdot - = -\)</div>
+    <div class="nube-container" style="background: #fff3e0; border-color: #ff9800;">
+        <div class="nube-text" style="color: #e65100;">SIGNOS: Amigos (+) y Enemigos (-). <br> Amigo de mi Enemigo (\(+\cdot-\)) es mi Enemigo (\(-\)). <br> Enemigo de mi Enemigo (\(-\cdot-\)) es mi Amigo (\(+\)).</div>
     </div>
 
     <h3>C. División</h3>
-    <p>Divide números y <strong>resta</strong> exponentes de letras iguales.</p>
-    <div class="operacion-box">
-        \((20x^6) : (5x^2) = 4x^4\)
-    </div>
+    <p>Dividimos los números y <strong>restamos</strong> los exponentes de las letras.</p>
+
+    <table class="tabla-ejemplos">
+        <thead>
+            <tr>
+                <th>Operación</th>
+                <th>Resultado</th>
+                <th>Explicación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>\((20x^6) : (5x^2)\)</td><td>\(4x^4\)</td><td>\(20 : 5 = 4\) | \(x^{6-2}\)</td></tr>
+            <tr><td>\((-12x^4) : (3x)\)</td><td>\(-4x^3\)</td><td>\(-12 : 3 = -4\) | \(x^{4-1}\)</td></tr>
+            <tr><td>\((-10x^5) : (-2x^5)\)</td><td>\(5\)</td><td>\(-10 : -2 = 5\) | \(x^{5-5} = 0\) (Desaparece)</td></tr>
+        </tbody>
+    </table>
 
 </div>
 
-<div style="text-align: center; margin-top: 20px;">
-    <a href="index.html" style="color: #666; font-weight: bold; text-decoration: none;">← Volver al repositorio de Álgebra</a>
-</div>
+<p style="text-align:center; margin-top:30px;">
+    <a href="index.html" class="btn-back" style="text-decoration:none; color: #666; font-weight:bold;">← Volver al repositorio</a>
+</p>
 
 </body>
 </html>
