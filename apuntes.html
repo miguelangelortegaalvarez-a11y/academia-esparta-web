@@ -7,61 +7,40 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+      };
+    </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
-        /* ESTILO CORPORATIVO ACADEMIA ESPARTA (RECREADO DE LA IMAGEN) */
         :root {
-            --primary: #1e7a5d; /* Verde oscuro corporativo */
-            --accent: #ff8c00; /* Naranja para títulos */
-            --bg-light: #f4f8f8; /* Fondo muy suave */
-            --border: #e0e0e0;
-            --text: #333333;
+            --primary: #1e7a5d;
+            --accent: #ff8c00;
+            --bg-light: #f4f8f8;
+            --dark-block: #2d3436;
         }
 
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; }
-        
-        /* Contenedor blanco con sombra, igual que en la imagen de Candela */
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
         .main-container { background: white; max-width: 850px; width: 100%; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
-        /* Cabecera del Barça */
-        .barca-header { text-align: center; font-weight: bold; color: #a50044; font-size: 1.5em; margin-bottom: 5px; text-transform: uppercase; }
-        .barca-header span { color: #004d98; } /* Azul para el 'Barça' */
+        .barca-header { text-align: center; font-weight: bold; color: #a50044; font-size: 1.4em; margin-bottom: 5px; text-transform: uppercase; }
+        .header-title { text-align: center; color: var(--primary); font-size: 2em; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
+        .subtitle { text-align: center; color: #666; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 30px; }
 
-        /* Título Principal */
-        .header-title { text-align: center; color: var(--primary); font-size: 2.2em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #666; font-size: 1.1em; margin-bottom: 30px; border-bottom: 2px solid var(--primary); padding-bottom: 20px; }
+        h2.seccion-titulo { color: var(--primary); font-size: 1.4em; border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 40px; }
+        h3.subseccion-titulo { color: var(--primary); font-size: 1.2em; margin-top: 25px; }
 
-        /* Secciones con borde naranja a la izquierda, calcado de la imagen */
-        h2.seccion-titulo { color: var(--primary); font-size: 1.4em; border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 40px; margin-bottom: 20px; font-weight: 600; }
-        h3.subseccion-titulo { color: var(--primary); font-size: 1.2em; margin-top: 25px; margin-bottom: 10px; font-weight: 600; }
+        .formula-block { background: var(--dark-block); color: #81ecec; padding: 15px; border-radius: 8px; border-left: 5px solid #3498db; margin: 20px 0; font-family: monospace; text-align: center; }
 
-        p { margin-bottom: 15px; }
-
-        /* Bloque de código/fórmula con fondo oscuro y borde azul, como en la imagen */
-        .formula-block { background: #2d3436; color: white; padding: 20px; border-radius: 8px; border-left: 5px solid #3498db; margin: 20px 0; font-family: monospace; }
-        .formula-block strong { color: #81ecec; } /* Resaltado de texto dentro del bloque */
-
-        /* Caja de MathJax: Asegurar que las fórmulas profesionales resalten */
-        .mjx-chtml { font-size: 110% !important; margin: 10px 0; }
-
-        /* Lista de límites */
-        ul.limites-list { list-serif: none; padding-left: 10px; }
-        ul.limites-list li { margin-bottom: 10px; }
-        ul.limites-list strong { color: var(--primary); }
-
-        /* Recta Numérica */
         .recta-container { display: flex; justify-content: center; margin: 20px 0; }
-        .recta-num { text-align: center; background: #fafafa; border: 2px dashed #004d98; color: #004d98; font-weight: bold; padding: 15px; border-radius: 10px; max-width: 400px; }
-
-        /* Infinito en rojo */
-        .infinito { color: #e74c3c; font-weight: bold; }
-
-        /* Imagen de gráfica */
-        .grafica-placeholder { text-align: center; margin-top: 50px; padding: 30px; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
+        .recta-num { text-align: center; background: #fafafa; border: 2px dashed #004d98; color: #004d98; padding: 15px; border-radius: 10px; min-width: 300px; }
 
         footer { margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; color: #999; font-style: italic; }
-
     </style>
 </head>
 <body>
@@ -69,88 +48,69 @@
 <div class="main-container">
     <div class="barca-header">💙 ❤️ Visca el Barça, campeón de Champions ❤️ 💙</div>
     <div class="header-title">ANÁLISIS DE FUNCIÓN RACIONAL</div>
-    <div class="subtitle">Material completo preparado para: <strong>Los Charlatanes</strong></div>
+    <div class="subtitle">Material preparado para: <strong>Los Charlatanes</strong></div>
 
-    <p>Para analizar la función, vamos a utilizar lenguaje matemático profesional (MathJax) para que veáis las fórmulas tal y como aparecen en los libros.</p>
-    
-    <div style="text-align: center; margin: 30px 0;">
+    <div style="text-align: center; font-size: 1.5em; margin: 20px 0;">
         $$f(x) = \frac{x+1}{x-2}$$
     </div>
 
     <h2 class="seccion-titulo">1. El Dominio</h2>
-    <p>Para evitar que la función "explote", el denominador no puede ser cero. Lo igualamos para encontrar el valor prohibido:</p>
-    
+    <p>Igualamos el denominador a cero para encontrar el punto donde la función no existe:</p>
     <div class="formula-block">
-        x - 2 = 0  =>  <strong>x = 2</strong>
+        x - 2 = 0 \quad \Rightarrow \quad x = 2
     </div>
-    
-    <p><strong>Dominio:</strong> D = ℝ \ {2}</p>
+    <p><strong>Dominio:</strong> $D = \mathbb{R} \setminus \{2\}$</p>
 
     <h2 class="seccion-titulo">2. Asíntotas y Límites</h2>
     
     <h3 class="subseccion-titulo">A) Asíntota Vertical (A.V.)</h3>
-    <p>Se encuentra en el fallo del dominio (x=2). Estudiamos los límites laterales para saber hacia dónde se dispara la función cuando nos acercamos:</p>
+    <p>Estudiamos los límites laterales en $x=2$:</p>
     
-    <ul class="limites-list">
-        <li><strong>Por la derecha:</strong> $$\lim_{x \to 2^+} f(x) = \frac{3}{0^+} = \span class="infinito">\infty\span$$</li>
-        <li><strong>Por la izquierda:</strong> $$\lim_{x \to 2^-} f(x) = \frac{3}{0^-} = \span class="infinito">-\infty\span$$</li>
-    </ul>
+    <div style="margin-left: 20px;">
+        <p>• <strong>Por la derecha:</strong> $$\lim_{x \to 2^+} f(x) = \frac{3}{0^+} = \color{red}{+\infty}$$</p>
+        <p>• <strong>Por la izquierda:</strong> $$\lim_{x \to 2^-} f(x) = \frac{3}{0^-} = \color{red}{-\infty}$$</p>
+    </div>
     
-    <p>Hay una <strong>A.V. en x = 2</strong>.</p>
+    <p>Hay una <strong>A.V. en $x = 2$</strong>.</p>
 
     <h3 class="subseccion-titulo">B) Asíntota Horizontal (A.H.)</h3>
-    <p>Calculamos los límites al infinito para ver cómo se estabiliza la función en los extremos:</p>
-    
-    <div style="text-align: center; margin: 15px 0;">
-        $$\lim_{x \to \pm\infty} \frac{x+1}{x-2} = \frac{1}{1} = 1$$
+    <p>Calculamos el límite al infinito:</p>
+    <div style="text-align: center;">
+        $$\lim_{x \to \pm\infty} \frac{x+1}{x-2} = 1$$
     </div>
-    
-    <p>Hay una <strong>A.H. en y = 1</strong>.</p>
+    <p>Hay una <strong>A.H. en $y = 1$</strong>.</p>
 
     <h3 class="subseccion-titulo">C) Asíntota Oblicua (A.O.)</h3>
-    <p>⚠️ <strong>¡Nota para Charlatanes!</strong> Como tenemos Horizontal, no hace falta buscar la Oblicua. No existe.</p>
+    <p>⚠️ <strong>Nota para Charlatanes:</strong> Al existir asíntota horizontal, no hay oblicua.</p>
 
-    <h2 class="seccion-titulo">3. Monotonía (Crecimiento y Decrecimiento)</h2>
-    <p>Necesitamos la <b>Primera Derivada</b>. Aplicamos la regla del cociente:</p>
-    
-    <div style="text-align: center; margin: 25px 0;">
-        $$f'(x) = \frac{1 \cdot (x-2) - (x+1) \cdot 1}{(x-2)^2}$$
-        $$f'(x) = \frac{x - 2 - x - 1}{(x-2)^2}$$
-        $$f'(x) = \frac{-3}{(x-2)^2}$$
+    <h2 class="seccion-titulo">3. Monotonía</h2>
+    <p>Calculamos la primera derivada:</p>
+    <div>
+        $$f'(x) = \frac{1 \cdot (x-2) - (x+1) \cdot 1}{(x-2)^2} = \frac{-3}{(x-2)^2}$$
     </div>
 
-    <p>Estudiamos el signo en la recta numérica (sustituyendo en <b>f'(x)</b>):</p>
     <div class="recta-container">
         <div class="recta-num">
-            <----- (f' < 0) -----> (2) <----- (f' < 0) -----> <br>
-            &nbsp;&searrow; DECRECE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&searrow; DECRECE
+            <--- f'(x) < 0 ---> (2) <--- f'(x) < 0 ---> <br>
+            ↘ DECRECE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↘ DECRECE
         </div>
     </div>
 
-    <h2 class="seccion-titulo">4. Curvatura (Cóncava y Convexa)</h2>
-    <p>Calculamos la <b>Segunda Derivada</b> derivando el resultado anterior:</p>
-    
-    <div style="text-align: center; margin: 25px 0;">
-        $$f''(x) = \frac{0 \cdot (x-2)^2 - (-3) \cdot 2(x-2)}{(x-2)^4}$$
-        $$f''(x) = \frac{6(x-2)}{(x-2)^4}$$
+    <h2 class="seccion-titulo">4. Curvatura</h2>
+    <p>Calculamos la segunda derivada:</p>
+    <div>
         $$f''(x) = \frac{6}{(x-2)^3}$$
     </div>
 
-    <p>Representamos en la recta y sustituimos valores en <b>f''(x)</b>:</p>
     <div class="recta-container">
         <div class="recta-num">
-            <----- (f'' < 0) -----> (2) <----- (f'' > 0) -----> <br>
-            &nbsp;&nbsp;&nbsp;∩ CONVEXA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∪ CÓNCAVA
+            <--- f''(x) < 0 ---> (2) <--- f''(x) > 0 ---> <br>
+            ∩ CONVEXA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ∪ CÓNCAVA
         </div>
     </div>
 
-    <div class="grafica-placeholder">
-        <h2 class="seccion-titulo">5. Representación Gráfica</h2>
-        <p>Juntando todas las piezas del puzzle, la función queda así:</p>
-            </div>
-
     <footer>
-        "Si habláis tanto como deriváis, el 10 está asegurado." - Profe Academia Esparta.
+        "Menos charla y más derivadas." - Academia Esparta.
     </footer>
 </div>
 
