@@ -17,19 +17,16 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
-    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
         :root {
-            /* VERDE MENTA CLARITO CORPORATIVO (Mantenido) */
             --primary: #27ae60; 
             --accent: #ff8c00;
             --bg-light: #f4f8f8;
             --white: #ffffff;
-            --blue-soft: #eaf4fb;
         }
 
-        /* ESTILOS CSS EXISTENTES (Mantenidos inalterados) */
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
         .main-container { background: var(--white); max-width: 850px; width: 100%; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
@@ -53,9 +50,9 @@
         .procedimiento-mates { background: #fafafa; border: 1px solid #eee; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid var(--primary); }
         .procedimiento-mates strong { color: var(--primary); }
 
-        /* ESTILOS PARA LA GRÁFICA (Mantenidos) */
-        .geogebra-container { text-align: center; margin-top: 50px; padding: 30px; background: #fafafa; border-radius: 15px; border: 1px solid #eee; position: relative; }
-        #ggb-element { margin: 0 auto; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        /* Contenedor de la gráfica automática */
+        .grafica-box { text-align: center; margin-top: 50px; padding: 20px; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
+        .canvas-container { width: 100%; max-width: 600px; margin: 0 auto; background: white; border-radius: 10px; padding: 10px; border: 1px solid #ddd; }
 
         footer { margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; color: #999; font-style: italic; }
     </style>
@@ -93,7 +90,7 @@
     <p>Hay una <strong>A.H. en $y = 1$</strong>.</p>
 
     <h3 class="subseccion-titulo">C) Asíntota Oblicua (A.O.)</h3>
-    <p>⚠️ <strong>Nota para Charlatanes:</strong> Al existir asíntota horizontal, no hay oblicua. ¡Un problema menos!</p>
+    <p>⚠️ <strong>Nota para Charlatanes:</strong> Al existir asíntota horizontal, no hay oblicua.</p>
 
     <h2 class="seccion-titulo">3. Monotonía (Crecimiento y Decrecimiento)</h2>
     <p>Calculamos la primera derivada usando la regla del cociente:</p>
@@ -103,32 +100,20 @@
 
     <div class="procedimiento-mates">
         <p><strong>Paso 1: Buscamos los puntos críticos.</strong> <br>
-        Para ello, igualamos la primera derivada a cero ($f'(x) = 0$):</p>
+        Igualamos la primera derivada a cero ($f'(x) = 0$):</p>
         <div style="text-align: center; margin: 15px 0;">
-            $$\frac{-3}{(x-2)^2} = 0 \implies -3 = 0 \cdot (x-2)^2 \implies -3 = 0$$
+            $$\frac{-3}{(x-2)^2} = 0 \implies -3 = 0$$
         </div>
-        <p>Llegamos a una contradicción ($-3 \neq 0$). Esto significa que no existen puntos críticos donde la pendiente sea cero.</p>
+        <p>Contradicción. No hay puntos críticos. Estudiamos el signo en $x = 2$:</p>
     </div>
 
     <table class="tabla-signos">
         <thead>
-            <tr>
-                <th>Intervalo</th>
-                <th>$(-\infty, 2)$</th>
-                <th>$(2, +\infty)$</th>
-            </tr>
+            <tr><th>Intervalo</th><th>$(-\infty, 2)$</th><th>$(2, +\infty)$</th></tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="col-intervalo">Signo de $f'(x)$</td>
-                <td class="signo-neg">$-$</td>
-                <td class="signo-neg">$-$</td>
-            </tr>
-            <tr>
-                <td class="col-intervalo">Resultado</td>
-                <td class="conclusion">↘ Decreciente</td>
-                <td class="conclusion">↘ Decreciente</td>
-            </tr>
+            <tr><td class="col-intervalo">Signo de $f'(x)$</td><td class="signo-neg">$-$</td><td class="signo-neg">$-$</td></tr>
+            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">↘ Decreciente</td><td class="conclusion">↘ Decreciente</td></tr>
         </tbody>
     </table>
 
@@ -144,69 +129,55 @@
         <div style="text-align: center; margin: 15px 0;">
             $$\frac{6}{(x-2)^3} = 0 \implies 6 = 0$$
         </div>
-        <p>Otra contradicción. No hay puntos de inflexión.</p>
+        <p>Contradicción. No hay puntos de inflexión. Estudiamos el cambio en $x = 2$:</p>
     </div>
 
     <table class="tabla-signos">
         <thead>
-            <tr>
-                <th>Intervalo</th>
-                <th>$(-\infty, 2)$</th>
-                <th>$(2, +\infty)$</th>
-            </tr>
+            <tr><th>Intervalo</th><th>$(-\infty, 2)$</th><th>$(2, +\infty)$</th></tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="col-intervalo">Signo de $f''(x)$</td>
-                <td class="signo-neg">$-$</td>
-                <td class="signo-pos">$+$</td>
-            </tr>
-            <tr>
-                <td class="col-intervalo">Resultado</td>
-                <td class="conclusion">∩ Convexa (Triste)</td>
-                <td class="conclusion">∪ Cóncava (Feliz)</td>
-            </tr>
+            <tr><td class="col-intervalo">Signo de $f''(x)$</td><td class="signo-neg">$-$</td><td class="signo-pos">$+$</td></tr>
+            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">∩ Convexa (Triste)</td><td class="conclusion">∪ Cóncava (Feliz)</td></tr>
         </tbody>
     </table>
 
-    <div class="geogebra-container">
-        <h2 class="seccion-titulo">5. Representación Geométrica</h2>
-        <p>A continuación tenéis el visor interactivo de GeoGebra para explorar la función. Se ha dibujado automáticamente la función en verde y las asíntotas en naranja:</p>
-        
-        <div id="ggb-element"></div>
+    <h2 class="seccion-titulo">5. Representación Gráfica</h2>
+    <p>A continuación se muestra la representación automática de la función analizada:</p>
+    
+    <div class="grafica-box">
+        <div class="canvas-container">
+            <canvas id="miGrafica"></canvas>
+        </div>
     </div>
 
     <script>
-        // Paso 1: Configurar los parámetros del Applet
-        var params = {
-            "appName": "graphing", // Usamos la calculadora gráfica
-            "width": 800,
-            "height": 500,
-            "showToolBar": false, // Ocultamos la barra de herramientas para limpieza
-            "showAlgebraInput": false, // Ocultamos la entrada para que no borren nada
-            "showMenuBar": false,
-            "enableLabelDrags": false,
-            "enableShiftDragZoom": true, // Permitimos zoom
-            "enableRightClick": false,
-            "showResetIcon": true, // Botón para reiniciar la vista
-            "language": "es",
-            // ESTA ES LA CLAVE: El comando que dibuja la función al cargar
-            "ggbBase64": "UEsDBBQAAAAIAI9lXlb8O5M4CgIAAB0EAAAXAAAAZ2VvZ2VicmFfZGVmYXVsdHMueG1sXTTVitNAFF59FvGfC+vO5N4M45S5q7CCuAuu8BvOJJkpnWlykjS+vrO5WfH54nS4Xb4f//w6v3fB6Gj43LhH9M5MhU376v7xN7b/M+I2E0XmS5mK2tZ+UofB8YhG9uIuF0XmY5mI2q3X9b83b3/u/tX67fntP//+/fvF9qf/P7jW9Dq3TfW470zGv/8+f139+G1W4T5mX9Q8U7NInS7D5/vH+8Xb/X71pPrHh5wVme9lKqpY9Vp7fC8iGtmb+VwUmfNlImqr//mB8K3m++wW5Y/3pM6tY2s6K8O+7eY/240jV6fM4fPj4/3L43bxpPqb4/H4q9q3SOf1FfR72/0A678+H9X++Ph7q2u4fXUf1G9tZ5mKGlZf6K+z5mPRjWw386EoMifLRAyfvjUevG0X+Xp9+D6eYVlkPt4S3rP+eNfHj8f65X6vWb45Ho+fVX9XzYv2X3Tj4Hbyh79Tj5X/KPrX5y/Ube469VvbuX1W8S6u+Pfjx90v2H63/oP5Xub79q4T0Xv8/v4A64O+F8Y3mY/LpU4K76nF8XwWveqY/fF5M764/9B9p6/4/v4X+S/UfXb9f2L7L7ofV/r7f4D1h74v2K9G7vOfvHhF5rN+K5K+9n5/u//xX1BLAwQUAAAACACPZV5WYq3U2pIBAADXAwAAFgAAAGdlb2dlYnJhX2phdmFzY3JpcHQuanNreS9JTispsSowUisuyS9KSS1S0InXLUgsKsnJL1LwKUrMzSspScyvVEitKCnKz8lMzkjNyS9XyK4pSU1L0VEAgSAt4S2F0uTkDKXU4pLMvJR4bUWrWAA=
-        };
+        const ctx = document.getElementById('miGrafica').getContext('2d');
+        const dataIzq = [], dataDer = [];
+        for (let x = -10; x < 1.9; x += 0.1) dataIzq.push({x: x, y: (x+1)/(x-2)});
+        for (let x = 2.1; x <= 10; x += 0.1) dataDer.push({x: x, y: (x+1)/(x-2)});
 
-        // Paso 2: Crear el objeto Applet
-        var applet = new GGBApplet(params, true);
-
-        // Paso 3: Inyectar el Applet cuando la ventana cargue
-        window.onload = function() { 
-            applet.inject('ggb-element'); 
-        };
+        new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    { label: 'f(x)', data: dataIzq, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
+                    { data: dataDer, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
+                    { label: 'A.V. (x=2)', data: [{x: 2, y: -20}, {x: 2, y: 20}], showLine: true, borderDash: [5, 5], borderColor: '#ff8c00', pointRadius: 0, fill: false },
+                    { label: 'A.H. (y=1)', data: [{x: -10, y: 1}, {x: 10, y: 1}], showLine: true, borderDash: [5, 5], borderColor: '#ff8c00', pointRadius: 0, fill: false }
+                ]
+            },
+            options: {
+                scales: {
+                    x: { type: 'linear', min: -10, max: 10 },
+                    y: { min: -10, max: 10 }
+                },
+                plugins: { legend: { labels: { filter: (item) => item.text !== undefined } } }
+            }
+        });
     </script>
 
-    <footer>
-        "Menos charla y más derivadas." - Academia Esparta.
-    </footer>
+    <footer>"Menos charla y más derivadas." - Academia Esparta.</footer>
 </div>
-
 </body>
 </html>
