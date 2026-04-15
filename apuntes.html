@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes Mates: Los Charlatanes - Academia Esparta</title>
+    <title>Manual de Análisis: Academia Esparta</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
@@ -24,119 +24,140 @@
             --accent: #ff8c00;
             --bg-light: #f4f8f8;
             --white: #ffffff;
+            --text-size: 0.9rem; /* Tamaño tipo libro (aprox 11pt) */
         }
 
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .main-container { background: var(--white); max-width: 850px; width: 100%; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--bg-light); 
+            color: #333; 
+            margin: 0; 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            line-height: 1.5;
+        }
 
+        .main-container { 
+            background: var(--white); 
+            max-width: 700px; /* Más estrecho, como una página de libro */
+            width: 100%; 
+            padding: 50px; 
+            border-radius: 5px; /* Menos redondeado, más formal */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            position: relative;
+            font-size: var(--text-size);
+        }
+
+        /* BOTÓN DE IMPRIMIR - MÁS DISCRETO */
         .print-button {
-            position: absolute; top: 20px; right: 20px; background-color: var(--primary);
-            color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer;
-            font-family: 'Poppins', sans-serif; font-weight: 600; display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: background 0.3s;
+            position: absolute; top: 15px; right: 15px; background-color: #eee;
+            color: #555; border: 1px solid #ddd; padding: 5px 10px; border-radius: 4px; cursor: pointer;
+            font-size: 0.75rem; font-weight: 600; display: flex; align-items: center; gap: 5px;
         }
-        .print-button:hover { background-color: #1e7a4d; }
+        .print-button:hover { background-color: #e0e0e0; }
 
         @media print {
             .print-button { display: none; }
             body { background-color: white; padding: 0; }
-            .main-container { box-shadow: none; border-radius: 0; max-width: 100%; padding: 0; }
+            .main-container { box-shadow: none; border: none; max-width: 100%; padding: 20mm; }
         }
 
-        .barca-header { text-align: center; font-weight: bold; color: #a50044; font-size: 1.4em; margin-bottom: 5px; text-transform: uppercase; }
-        .header-title { text-align: center; color: var(--primary); font-size: 2em; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
-        .subtitle { text-align: center; color: #666; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 30px; }
+        .barca-header { text-align: center; font-weight: bold; color: #a50044; font-size: 1.1em; margin-bottom: 5px; }
+        .header-title { text-align: center; color: var(--primary); font-size: 1.6em; font-weight: 700; margin-top: 5px; }
+        .subtitle { text-align: center; color: #777; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 25px; font-size: 0.85em; }
 
-        h2.seccion-titulo { color: var(--primary); font-size: 1.4em; border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 40px; font-weight: 600; }
-        h3.subseccion-titulo { color: var(--primary); font-size: 1.2em; margin-top: 25px; font-weight: 600; }
+        h2.seccion-titulo { color: var(--primary); font-size: 1.15em; border-left: 4px solid var(--accent); padding-left: 12px; margin-top: 30px; font-weight: 600; }
+        h3.subseccion-titulo { color: var(--primary); font-size: 1em; margin-top: 20px; font-weight: 600; }
 
-        .formula-block { background: var(--primary); color: white; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; font-size: 1.2em; }
+        /* FÓRMULAS TAMAÑO LIBRO */
+        .formula-block { 
+            background: #f9f9f9; 
+            color: var(--primary); 
+            padding: 15px; 
+            border-radius: 4px; 
+            margin: 15px 0; 
+            text-align: center; 
+            font-size: 1.1em; 
+            border: 1px solid #eee;
+        }
 
-        .tabla-signos { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .tabla-signos th { background: var(--primary); color: white; padding: 12px; font-weight: 600; border: 1px solid #eee; }
-        .tabla-signos td { padding: 15px; text-align: center; border: 1px solid #eee; font-weight: 500; }
-        .col-intervalo { background: var(--bg-light); font-weight: 700 !important; color: var(--primary); width: 30%; }
-        .signo-pos { color: #27ae60; font-weight: bold; font-size: 1.2em; }
-        .signo-neg { color: #e74c3c; font-weight: bold; font-size: 1.2em; }
-        .conclusion { font-style: italic; font-weight: 700; color: #2c3e50; }
+        .tabla-signos { 
+            width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85em;
+        }
+        .tabla-signos th { background: var(--primary); color: white; padding: 10px; border: 1px solid #ddd; }
+        .tabla-signos td { padding: 10px; text-align: center; border: 1px solid #ddd; }
+        .col-intervalo { background: #fcfcfc; font-weight: 600; width: 25%; }
 
-        .procedimiento-mates { background: #fafafa; border: 1px solid #eee; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid var(--primary); }
-        .procedimiento-mates strong { color: var(--primary); }
+        .procedimiento-mates { 
+            background: #fff; border: 1px dashed #ccc; padding: 15px; border-radius: 4px; margin: 15px 0; font-size: 0.9em;
+        }
 
-        .grafica-box { text-align: center; margin-top: 50px; padding: 20px; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
-        .canvas-container { width: 100%; max-width: 600px; margin: 0 auto; background: white; border-radius: 10px; padding: 10px; border: 1px solid #ddd; }
+        .grafica-box { margin-top: 30px; padding: 15px; background: #fff; border: 1px solid #eee; }
+        .canvas-container { width: 100%; max-width: 500px; margin: 0 auto; }
 
-        footer { margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; color: #999; font-style: italic; }
+        footer { margin-top: 40px; text-align: center; border-top: 1px solid #eee; padding-top: 15px; color: #aaa; font-size: 0.75em; font-style: italic; }
     </style>
 </head>
 <body>
 
 <div class="main-container">
-    <button class="print-button" onclick="window.print()"><span>🖨️</span> Imprimir / PDF</button>
+    <button class="print-button" onclick="window.print()"><span>🖨️</span> PDF / IMPRIMIR</button>
 
-    <div class="barca-header">💙 ❤️ Visca el Barça, campeón de Champions ❤️ 💙</div>
-    <div class="header-title">ANÁLISIS DE FUNCIÓN RACIONAL</div>
-    <div class="subtitle">Material preparado para: <strong>Los Charlatanes</strong></div>
+    <div class="barca-header">💙 ❤️ Visca el Barça ❤️ 💙</div>
+    <div class="header-title">ANÁLISIS DE FUNCIONES</div>
+    <div class="subtitle">Material Académico: <strong>Los Charlatanes</strong></div>
 
-    <div style="text-align: center; font-size: 1.8em; margin: 30px 0;">
+    <div style="text-align: center; font-size: 1.4em; margin: 20px 0; color: #222;">
         $$f(x) = \frac{x^2+5}{x-3}$$
     </div>
 
-    <h2 class="seccion-titulo">1. El Dominio</h2>
-    <p>Buscamos el valor que anula el denominador:</p>
+    <h2 class="seccion-titulo">1. Estudio del Dominio</h2>
+    <p>Determinamos los valores de $x$ para los cuales la función es real e indefinida:</p>
     <div class="formula-block">$x - 3 = 0 \implies x = 3$</div>
-    <p><strong>Dominio:</strong> $D = \mathbb{R} \setminus \{3\}$</p>
+    <p><strong>Dominio:</strong> $\text{Dom } f = \mathbb{R} \setminus \{3\}$</p>
 
-    <h2 class="seccion-titulo">2. Asíntotas y Límites</h2>
+    <h2 class="seccion-titulo">2. Comportamiento Asintótico</h2>
     <h3 class="subseccion-titulo">A) Asíntota Vertical (A.V.)</h3>
-    <div style="margin-left: 10px;">
-        <p>• <strong>Por la derecha:</strong> $$\lim_{x \to 3^+} f(x) = \frac{14}{0^+} = \color{red}{+\infty}$$</p>
-        <p>• <strong>Por la izquierda:</strong> $$\lim_{x \to 3^-} f(x) = \frac{14}{0^-} = \color{red}{-\infty}$$</p>
+    <p>Analizamos los límites laterales en el punto crítico $x = 3$:</p>
+    <div style="font-size: 0.95em;">
+        <p>• Por la derecha: $$\lim_{x \to 3^+} f(x) = +\infty$$</p>
+        <p>• Por la izquierda: $$\lim_{x \to 3^-} f(x) = -\infty$$</p>
     </div>
-    <p>Hay una <strong>A.V. en $x = 3$</strong>.</p>
 
-    <h3 class="subseccion-titulo">B) Asíntota Horizontal (A.H.)</h3>
-    <p>Grado Numerador (2) > Grado Denominador (1). <strong>No existe A.H.</strong></p>
-
-    <h3 class="subseccion-titulo">C) Asíntota Oblicua (A.O.)</h3>
+    <h3 class="subseccion-titulo">B) Asíntota Oblicua (A.O.)</h3>
+    <p>Dado que el grado del numerador supera en una unidad al del denominador, calculamos $y = mx + n$:</p>
     <div class="procedimiento-mates">
-        Realizamos la división o usamos límites ($y = mx + n$):
-        <p>$$m = \lim_{x \to \infty} \frac{f(x)}{x} = 1$$</p>
-        <p>$$n = \lim_{x \to \infty} (f(x) - x) = 3$$</p>
+        $$m = \lim_{x \to \infty} \frac{f(x)}{x} = 1 \quad ; \quad n = \lim_{x \to \infty} (f(x) - x) = 3$$
     </div>
-    <p>Hay una <strong>A.O. en $y = x + 3$</strong>.</p>
+    <p>Ecuación de la recta: <strong>$y = x + 3$</strong>.</p>
 
     <h2 class="seccion-titulo">3. Monotonía</h2>
-    <p>Derivamos la función:</p>
-    <div style="text-align: center; margin: 20px 0;">
+    <p>Derivamos mediante la regla del cociente para hallar los puntos críticos:</p>
+    <div style="text-align: center; margin: 15px 0;">
         $$f'(x) = \frac{x^2 - 6x - 5}{(x-3)^2}$$
     </div>
-    <div class="procedimiento-mates">
-        Igualamos $f'(x) = 0 \implies x^2 - 6x - 5 = 0$. <br>
-        Puntos críticos: <strong>$x \approx -0.74$</strong> y <strong>$x \approx 6.74$</strong>.
-    </div>
-
     <table class="tabla-signos">
         <thead>
             <tr><th>Intervalo</th><th>$(-\infty, -0.74)$</th><th>$(-0.74, 3)$</th><th>$(3, 6.74)$</th><th>$(6.74, \infty)$</th></tr>
         </thead>
         <tbody>
-            <tr><td class="col-intervalo">Signo $f'(x)$</td><td class="signo-pos">$+$</td><td class="signo-neg">$-$</td><td class="signo-neg">$-$</td><td class="signo-pos">$+$</td></tr>
-            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">↗ Creciente</td><td class="conclusion">↘ Decreciente</td><td class="conclusion">↘ Decreciente</td><td class="conclusion">↗ Creciente</td></tr>
+            <tr><td class="col-intervalo">$f'(x)$</td><td>$+$</td><td>$-$</td><td>$-$</td><td>$+$</td></tr>
+            <tr><td class="col-intervalo">Función</td><td>↗ Creciente</td><td>↘ Decreciente</td><td>↘ Decreciente</td><td>↗ Creciente</td></tr>
         </tbody>
     </table>
 
     <h2 class="seccion-titulo">4. Curvatura</h2>
-    <div style="text-align: center; margin: 20px 0;">
+    <div style="text-align: center; margin: 15px 0;">
         $$f''(x) = \frac{28}{(x-3)^3}$$
     </div>
-    <table class="tabla-signos">
+    <table class="tabla-signos" style="max-width: 400px; margin: 0 auto;">
         <thead>
-            <tr><th>Intervalo</th><th>$(-\infty, 3)$</th><th>$(3, +\infty)$</th></tr>
+            <tr><th>Intervalo</th><th>$(-\infty, 3)$</th><th>$(3, \infty)$</th></tr>
         </thead>
         <tbody>
-            <tr><td class="col-intervalo">Signo $f''(x)$</td><td class="signo-neg">$-$</td><td class="signo-pos">$+$</td></tr>
-            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">∩ Convexa</td><td class="conclusion">∪ Cóncava</td></tr>
+            <tr><td class="col-intervalo">$f''(x)$</td><td>$-$</td><td>$+$</td></tr>
+            <tr><td class="col-intervalo">Forma</td><td>∩ Convexa</td><td>∪ Cóncava</td></tr>
         </tbody>
     </table>
 
@@ -148,43 +169,41 @@
     <script>
         const ctx = document.getElementById('miGrafica').getContext('2d');
         const dIzq = [], dDer = [];
-        for (let x = -15; x < 2.8; x += 0.1) dIzq.push({x: x, y: (x*x+5)/(x-3)});
-        for (let x = 3.2; x <= 20; x += 0.1) dDer.push({x: x, y: (x*x+5)/(x-3)});
+        for (let x = -15; x < 2.8; x += 0.2) dIzq.push({x: x, y: (x*x+5)/(x-3)});
+        for (let x = 3.2; x <= 20; x += 0.2) dDer.push({x: x, y: (x*x+5)/(x-3)});
 
         new Chart(ctx, {
             type: 'scatter',
             data: {
                 datasets: [
-                    { label: 'f(x)', data: dIzq, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
-                    { data: dDer, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
-                    { label: 'A.V. (x=3)', data: [{x: 3, y: -40}, {x: 3, y: 40}], showLine: true, borderDash: [5, 5], borderColor: '#e74c3c', pointRadius: 0, fill: false },
-                    { label: 'A.O. (y=x+3)', data: [{x: -15, y: -12}, {x: 20, y: 23}], showLine: true, borderDash: [5, 5], borderColor: '#3498db', pointRadius: 0, fill: false }
+                    { label: 'f(x)', data: dIzq, showLine: true, borderColor: '#27ae60', borderWidth: 2, pointRadius: 0, fill: false },
+                    { data: dDer, showLine: true, borderColor: '#27ae60', borderWidth: 2, pointRadius: 0, fill: false },
+                    { label: 'A.V.', data: [{x: 3, y: -40}, {x: 3, y: 40}], showLine: true, borderDash: [4, 4], borderColor: '#e74c3c', pointRadius: 0, fill: false },
+                    { label: 'A.O.', data: [{x: -15, y: -12}, {x: 20, y: 23}], showLine: true, borderDash: [4, 4], borderColor: '#3498db', pointRadius: 0, fill: false }
                 ]
             },
             options: {
                 responsive: true,
                 scales: {
-                    x: { type: 'linear', min: -10, max: 15, grid: { color: '#eee' } },
-                    y: { min: -15, max: 25, grid: { color: '#eee' } }
+                    x: { type: 'linear', min: -10, max: 15, grid: { color: '#f0f0f0' } },
+                    y: { min: -15, max: 25, grid: { color: '#f0f0f0' } }
                 },
-                plugins: { legend: { labels: { filter: (item) => item.text !== undefined } } }
+                plugins: { legend: { labels: { font: { size: 10 } } } }
             },
             plugins: [{
-                id: 'custom_axis',
+                id: 'axis',
                 beforeDraw: (chart) => {
                     const {ctx, chartArea: {left, top, width, height}, scales: {x, y}} = chart;
-                    ctx.save(); ctx.strokeStyle = '#000000'; ctx.lineWidth = 3;
-                    const yZero = y.getPixelForValue(0);
-                    ctx.beginPath(); ctx.moveTo(left, yZero); ctx.lineTo(left + width, yZero); ctx.stroke();
-                    const xZero = x.getPixelForValue(0);
-                    ctx.beginPath(); ctx.moveTo(xZero, top); ctx.lineTo(xZero, top + height); ctx.stroke();
+                    ctx.save(); ctx.strokeStyle = '#222'; ctx.lineWidth = 1.5;
+                    const yZ = y.getPixelForValue(0); ctx.beginPath(); ctx.moveTo(left, yZ); ctx.lineTo(left+width, yZ); ctx.stroke();
+                    const xZ = x.getPixelForValue(0); ctx.beginPath(); ctx.moveTo(xZ, top); ctx.lineTo(xZ, top+height); ctx.stroke();
                     ctx.restore();
                 }
             }]
         });
     </script>
 
-    <footer>"Menos charla y más derivadas." - Academia Esparta.</footer>
+    <footer>"Menos charla y más derivadas." - Academia Esparta</footer>
 </div>
 </body>
 </html>
