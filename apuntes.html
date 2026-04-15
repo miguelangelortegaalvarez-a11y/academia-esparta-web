@@ -17,9 +17,11 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    
     <style>
         :root {
-            --primary: #27ae60; /* Verde menta clarito corporativo */
+            --primary: #27ae60; 
             --accent: #ff8c00;
             --bg-light: #f4f8f8;
             --white: #ffffff;
@@ -50,7 +52,7 @@
         
         /* CONTENEDOR GEOGÉBRICO */
         .geogebra-container { text-align: center; margin-top: 50px; padding: 20px; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
-        .geogebra-iframe { width: 100%; height: 500px; border: 0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        #ggb-element { margin: 0 auto; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
         footer { margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; color: #999; font-style: italic; }
     </style>
@@ -98,33 +100,20 @@
 
     <div class="procedimiento-mates">
         <p><strong>Paso 1: Buscamos los puntos críticos.</strong> <br>
-        Para ello, igualamos la primera derivada a cero ($f'(x) = 0$):</p>
+        Igualamos $f'(x) = 0$:</p>
         <div style="text-align: center; margin: 15px 0;">
-            $$\frac{-3}{(x-2)^2} = 0 \implies -3 = 0 \cdot (x-2)^2 \implies -3 = 0$$
+            $$\frac{-3}{(x-2)^2} = 0 \implies -3 = 0 \text{ (Imposible)}$$
         </div>
-        <p>Llegamos a una contradicción ($-3 \neq 0$). Esto significa que <strong>no existen puntos críticos</strong> donde la pendiente sea cero. <br>
-        Por tanto, el único punto que divide la recta real es el fallo del dominio, **$x = 2$**.</p>
+        <p>No existen puntos críticos. El único punto de estudio es **$x = 2$**.</p>
     </div>
 
     <table class="tabla-signos">
         <thead>
-            <tr>
-                <th>Intervalo</th>
-                <th>$(-\infty, 2)$</th>
-                <th>$(2, +\infty)$</th>
-            </tr>
+            <tr><th>Intervalo</th><th>$(-\infty, 2)$</th><th>$(2, +\infty)$</th></tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="col-intervalo">Signo de $f'(x)$</td>
-                <td class="signo-neg">$-$</td>
-                <td class="signo-neg">$-$</td>
-            </tr>
-            <tr>
-                <td class="col-intervalo">Resultado</td>
-                <td class="conclusion">↘ Decreciente</td>
-                <td class="conclusion">↘ Decreciente</td>
-            </tr>
+            <tr><td class="col-intervalo">Signo de $f'(x)$</td><td class="signo-neg">$-$</td><td class="signo-neg">$-$</td></tr>
+            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">↘ Decreciente</td><td class="conclusion">↘ Decreciente</td></tr>
         </tbody>
     </table>
 
@@ -136,42 +125,47 @@
 
     <div class="procedimiento-mates">
         <p><strong>Paso 1: Buscamos posibles puntos de inflexión.</strong> <br>
-        Igualamos la segunda derivada a cero ($f''(x) = 0$):</p>
+        Igualamos $f''(x) = 0$:</p>
         <div style="text-align: center; margin: 15px 0;">
-            $$\frac{6}{(x-2)^3} = 0 \implies 6 = 0$$
+            $$\frac{6}{(x-2)^3} = 0 \implies 6 = 0 \text{ (Imposible)}$$
         </div>
-        <p>Otra contradicción. <strong>No hay puntos de inflexión</strong>. El cambio de curvatura solo puede darse en el punto de discontinuidad, **$x = 2$**.</p>
+        <p>No hay puntos de inflexión. El cambio se da en **$x = 2$**.</p>
     </div>
 
     <table class="tabla-signos">
         <thead>
-            <tr>
-                <th>Intervalo</th>
-                <th>$(-\infty, 2)$</th>
-                <th>$(2, +\infty)$</th>
-            </tr>
+            <tr><th>Intervalo</th><th>$(-\infty, 2)$</th><th>$(2, +\infty)$</th></tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="col-intervalo">Signo de $f''(x)$</td>
-                <td class="signo-neg">$-$</td>
-                <td class="signo-pos">$+$</td>
-            </tr>
-            <tr>
-                <td class="col-intervalo">Resultado</td>
-                <td class="conclusion">∩ Convexa (Triste)</td>
-                <td class="conclusion">∪ Cóncava (Feliz)</td>
-            </tr>
+            <tr><td class="col-intervalo">Signo de $f''(x)$</td><td class="signo-neg">$-$</td><td class="signo-pos">$+$</td></tr>
+            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">∩ Convexa (Triste)</td><td class="conclusion">∪ Cóncava (Feliz)</td></tr>
         </tbody>
     </table>
 
     <div class="geogebra-container">
         <h2 class="seccion-titulo">5. Representación Geométrica</h2>
-        <p>A continuación tenéis el visor interactivo de GeoGebra para explorar la función:</p>
-        
-        <iframe scrolling="no" title="Función Racional SLL" src="https://www.geogebra.org/material/iframe/id/v8pkvp8d/width/800/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false" class="geogebra-iframe"> 
-        </iframe>
+        <p>Explora la función dinámicamente aquí:</p>
+        <div id="ggb-element"></div>
     </div>
+
+    <script>
+        var params = {
+            "appName": "graphing",
+            "width": 800,
+            "height": 500,
+            "showToolBar": false,
+            "showAlgebraInput": false,
+            "showMenuBar": false,
+            "content": "f(x) = (x+1)/(x-2)", // Cargamos la función directamente
+            "enableLabelDrags": false,
+            "enableShiftDragZoom": true,
+            "enableRightClick": false,
+            "showResetIcon": true,
+            "language": "es"
+        };
+        var applet = new GGBApplet(params, true);
+        window.onload = function() { applet.inject('ggb-element'); };
+    </script>
 
     <footer>
         "Menos charla y más derivadas." - Academia Esparta.
