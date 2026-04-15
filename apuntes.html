@@ -19,7 +19,8 @@
     
     <style>
         :root {
-            --primary: #1e7a5d;
+            /* NUEVO VERDE MENTA CLARITO CORPORATIVO (RECREADO DE LA FOTO) */
+            --primary: #27ae60; 
             --accent: #ff8c00;
             --bg-light: #f4f8f8;
             --white: #ffffff;
@@ -38,7 +39,7 @@
 
         .formula-block { background: var(--primary); color: white; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; font-size: 1.2em; }
 
-        /* NUEVO ESTILO DE TABLA DE SIGNOS */
+        /* ESTILO DE TABLA DE SIGNOS CON EL NUEVO VERDE */
         .tabla-signos { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .tabla-signos th { background: var(--primary); color: white; padding: 12px; font-weight: 600; border: 1px solid #eee; }
         .tabla-signos td { padding: 15px; text-align: center; border: 1px solid #eee; font-weight: 500; }
@@ -46,6 +47,10 @@
         .signo-pos { color: #27ae60; font-weight: bold; font-size: 1.2em; }
         .signo-neg { color: #e74c3c; font-weight: bold; font-size: 1.2em; }
         .conclusion { font-style: italic; font-weight: 700; color: #2c3e50; }
+
+        /* BLOQUE DETALLADO DE OPERACIONES MATEMÁTICAS */
+        .procedimiento-mates { background: #fafafa; border: 1px solid #eee; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid var(--primary); }
+        .procedimiento-mates strong { color: var(--primary); }
 
         footer { margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; color: #999; font-style: italic; }
     </style>
@@ -86,10 +91,19 @@
     <p>⚠️ <strong>Nota para Charlatanes:</strong> Al existir asíntota horizontal, no hay oblicua.</p>
 
     <h2 class="seccion-titulo">3. Monotonía (Crecimiento y Decrecimiento)</h2>
-    <p>Calculamos la primera derivada y estudiamos su signo en los intervalos definidos por el dominio:</p>
-    
+    <p>Calculamos la primera derivada usando la regla del cociente:</p>
     <div style="text-align: center; margin: 20px 0;">
         $$f'(x) = \frac{-3}{(x-2)^2}$$
+    </div>
+
+    <div class="procedimiento-mates">
+        <p><strong>Paso 1: Buscamos los puntos críticos.</strong> <br>
+        Para ello, igualamos la primera derivada a cero ($f'(x) = 0$):</p>
+        <div style="text-align: center; margin: 15px 0;">
+            $$\frac{-3}{(x-2)^2} = 0 \implies -3 = 0 \cdot (x-2)^2 \implies -3 = 0$$
+        </div>
+        <p>Llegamos a una contradicción ($-3 \neq 0$). Esto significa que <strong>no existen puntos críticos</strong> donde la pendiente sea cero. <br>
+        Por tanto, el único punto que divide la recta real es el fallo del dominio, **$x = 2$**.</p>
     </div>
 
     <table class="tabla-signos">
@@ -116,9 +130,17 @@
 
     <h2 class="seccion-titulo">4. Curvatura (Concavidad y Convexidad)</h2>
     <p>Calculamos la segunda derivada para analizar la forma de la curva:</p>
-    
     <div style="text-align: center; margin: 20px 0;">
         $$f''(x) = \frac{6}{(x-2)^3}$$
+    </div>
+
+    <div class="procedimiento-mates">
+        <p><strong>Paso 1: Buscamos posibles puntos de inflexión.</strong> <br>
+        Igualamos la segunda derivada a cero ($f''(x) = 0$):</p>
+        <div style="text-align: center; margin: 15px 0;">
+            $$\frac{6}{(x-2)^3} = 0 \implies 6 = 0$$
+        </div>
+        <p>Otra contradicción. <strong>No hay puntos de inflexión</strong>. El cambio de curvatura solo puede darse en el punto de discontinuidad, **$x = 2$**.</p>
     </div>
 
     <table class="tabla-signos">
