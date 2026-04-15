@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combinatoria: Variaciones y Permutaciones - Academia Esparta</title>
+    <title>Combinatoria Profesional - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -13,94 +13,115 @@
         }
         
         * { box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; color: var(--dark); padding: 20px; line-height: 1.5; margin: 0; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; color: var(--dark); padding: 40px 20px; line-height: 1.4; margin: 0; }
         
-        /* FORMATO LIBRO A5 */
+        /* TAMAÑO FOLIO A4 CON APARIENCIA DE LIBRO */
         .container { 
-            max-width: 148mm; 
+            max-width: 210mm; 
             margin: 0 auto; 
             background: white; 
-            padding: 25px; 
-            border-radius: 10px; 
+            padding: 40px; 
+            border-radius: 5px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            min-height: 210mm;
+            min-height: 297mm;
         }
         
-        .header { text-align: center; border-bottom: 2px solid var(--primary); margin-bottom: 20px; padding-bottom: 10px; }
-        .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; font-size: 1.3rem; }
-        .header p { font-weight: 600; color: #666; margin: 2px 0; font-size: 0.8rem; }
+        .header { text-align: center; border-bottom: 2px solid var(--primary); margin-bottom: 25px; padding-bottom: 10px; }
+        .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; font-size: 1.6rem; letter-spacing: 1px; }
+        .header p { font-weight: 600; color: #666; margin: 5px 0; font-size: 0.9rem; }
 
-        h2 { color: var(--secondary); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 25px; background: var(--light); padding: 5px 10px; font-size: 1rem; text-transform: uppercase; }
-        h3 { color: var(--primary); font-size: 0.9rem; margin-top: 15px; border-bottom: 1px solid #eee; }
-
-        .teoria-box { background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin: 10px 0; border-left: 4px solid var(--primary); font-size: 0.85rem; }
-        .formula { background: var(--dark); color: white; padding: 10px; border-radius: 8px; text-align: center; margin: 10px 0; font-size: 1.1rem; }
+        h2 { color: var(--secondary); border-left: 4px solid var(--accent); padding-left: 12px; margin-top: 30px; background: var(--light); padding: 8px 12px; font-size: 1.1rem; text-transform: uppercase; }
         
-        .ejemplo-resuelto { background: #fff9db; border: 1px solid #f5d76e; padding: 15px; border-radius: 10px; margin: 10px 0; font-size: 0.85rem; }
+        /* FUENTE TAMAÑO LIBRO (MÁS PEQUEÑA) */
+        .teoria-box { background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid var(--primary); font-size: 0.85rem; }
+        .formula { background: var(--dark); color: white; padding: 12px; border-radius: 6px; text-align: center; margin: 10px 0; font-size: 1.2rem; }
+        
+        .ejemplo-resuelto { background: #fff9db; border: 1px solid #f5d76e; padding: 15px; border-radius: 8px; margin: 10px 0; font-size: 0.82rem; }
         .resaltado { color: var(--secondary); font-weight: bold; }
 
-        .ejercicio-lista { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-        .ej-item { background: #fafafa; border: 1px solid #eee; padding: 12px; border-radius: 8px; font-size: 0.85rem; }
-        .linea-rta { border-bottom: 1px solid #bbb; width: 100%; min-height: 25px; display: block; margin-top: 8px; }
+        /* ORGANIZACIÓN DE EJERCICIOS EN COLUMNAS TIPO LIBRO */
+        .grid-ejercicios { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px 30px; 
+            margin-top: 15px; 
+        }
         
-        .btn-print { background: var(--primary); color: white; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; display: block; margin: 0 auto 20px; width: 100%; max-width: 250px; }
+        .ej-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; font-size: 0.82rem; display: flex; flex-direction: column; }
+        .linea-rta { border-bottom: 1px solid #ccc; width: 100%; min-height: 20px; display: block; margin-top: 5px; }
         
-        @page { size: A5; margin: 0; } 
+        .btn-print { background: var(--primary); color: white; padding: 14px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; display: block; margin: 0 auto 30px; width: 100%; max-width: 300px; }
+        
+        @page { size: A4; margin: 0; } 
         @media print { 
             .btn-print { display: none; } 
             body { background: white; padding: 0; }
-            .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 12mm; }
+            .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 20mm; }
+            .grid-ejercicios { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <button class="btn-print" onclick="window.print()">📥 Imprimir Ficha Combinatoria (A5)</button>
+    <button class="btn-print" onclick="window.print()">📥 Imprimir Entrenamiento Profesional (A4)</button>
 
     <div class="header">
         <h1>ACADEMIA ESPARTA</h1>
-        <p>Entrenamiento: Variaciones y Permutaciones</p>
+        <p>Unidad Didáctica: Combinatoria (Variaciones y Permutaciones)</p>
     </div>
 
-    <h2>1. Permutaciones (Sin Repetición)</h2>
+    <h2>1. Fundamentos Teóricos</h2>
     <div class="teoria-box">
-        Se usan cuando entran <strong>todos</strong> los elementos y solo importa el orden.
-    </div>
-    <div class="formula">$$P_n = n!$$</div>
-    <div class="ejemplo-resuelto">
-        <strong>Ejemplo:</strong> ¿De cuántas formas se sientan 5 amigos en 5 sillas?<br>
-        <span class="resaltado">Solución:</span> \(P_5 = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = \mathbf{120}\)
+        <strong>Permutaciones:</strong> Se aplican cuando intervienen todos los elementos del conjunto y el orden es el único factor diferenciador. <br>
+        <strong>Variaciones:</strong> Se aplican cuando se selecciona un subgrupo del total de elementos. El orden es relevante.
     </div>
 
-    <h2>2. Variaciones (Sin Repetición)</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+            <div class="formula">$$P_n = n!$$</div>
+            <div class="ejemplo-resuelto">
+                <strong>Permutación:</strong> 5 personas en fila.<br>
+                \(5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = \mathbf{120}\)
+            </div>
+        </div>
+        <div>
+            <div class="formula">$$V_{m,n} = \frac{m!}{(m-n)!}$$</div>
+            <div class="ejemplo-resuelto">
+                <strong>Variación:</strong> 10 atletas, 3 puestos.<br>
+                \(10 \cdot 9 \cdot 8 = \mathbf{720}\)
+            </div>
+        </div>
+    </div>
+
+    <h2>2. Casos con Repetición</h2>
     <div class="teoria-box">
-        Importa el orden, pero <strong>no</strong> usamos todos los elementos.
+        Cuando los elementos pueden figurar más de una vez en la misma agrupación o existen elementos idénticos en el origen.
     </div>
-    <div class="formula">$$V_{m,n} = \frac{m!}{(m-n)!}$$</div>
-    <div class="ejemplo-resuelto">
-        <strong>Ejemplo:</strong> 10 corredores para 3 medallas (Oro, Plata, Bronce).<br>
-        <span class="resaltado">Solución:</span> \(V_{10,3} = 10 \cdot 9 \cdot 8 = \mathbf{720}\)
-    </div>
-
-    <h2>3. ¿Y si hay Repetición?</h2>
-    <div class="teoria-box">
-        <strong>Variaciones:</strong> Se pueden repetir elementos en los huecos.<br>
-        <strong>Permutaciones:</strong> Hay elementos idénticos en el grupo.
-    </div>
-    <div class="ejemplo-resuelto">
-        <strong>Con letras (CASA):</strong> \(PR_4^{2} = \frac{4!}{2!} = \mathbf{12}\)<br>
-        <strong>Con números (3 cifras con 1,2,3):</strong> \(VR_{3,3} = 3^3 = \mathbf{27}\)
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div class="ejemplo-resuelto">
+            <strong>Repetición de Letras (PALO):</strong><br>
+            Si las letras se repiten, usamos \(VR_{m,n} = m^n\).
+        </div>
+        <div class="ejemplo-resuelto">
+            <strong>Elementos Idénticos (AABB):</strong><br>
+            Dividimos por el factorial de las repeticiones.
+        </div>
     </div>
 
-    <h2>🛡️ Campo de Entrenamiento</h2>
-    <div class="ejercicio-lista">
-        <div class="ej-item">1) ¿Cuántas banderas de 3 franjas de colores distintos se pueden formar con 7 colores? <span class="linea-rta"></span></div>
-        <div class="ej-item">2) ¿De cuántas maneras se pueden colocar 6 libros distintos en una estantería? <span class="linea-rta"></span></div>
-        <div class="ej-item">3) ¿Cuántos números de 4 cifras se pueden formar con los dígitos {1, 2, 3, 4} permitiendo repeticiones? <span class="linea-rta"></span></div>
-        <div class="ej-item">4) ¿Cuántas palabras con o sin sentido se forman con las letras de "PELOTA"? <span class="linea-rta"></span></div>
-        <div class="ej-item">5) En una clase de 25 alumnos, ¿de cuántas formas se elige delegado y subdelegado? <span class="linea-rta"></span></div>
-        <div class="ej-item">6) ¿Cuántas combinaciones de 3 letras (pueden repetirse) existen usando el abecedario (26 letras)? <span class="linea-rta"></span></div>
+    <h2>3. Batería de Ejercicios Aplicados</h2>
+    <div class="grid-ejercicios">
+        <div class="ej-item">1) ¿Cuántas banderas de 3 franjas verticales de colores distintos se pueden formar con los 7 colores del arcoíris? <span class="linea-rta"></span></div>
+        <div class="ej-item">2) Un grupo de 6 amigos va al cine. ¿De cuántas formas distintas pueden sentarse en una fila de 6 asientos? <span class="linea-rta"></span></div>
+        <div class="ej-item">3) ¿Cuántos números de 4 cifras se pueden formar con los dígitos impares {1, 3, 5, 7, 9} permitiendo repeticiones? <span class="linea-rta"></span></div>
+        <div class="ej-item">4) ¿Cuántas palabras diferentes de 6 letras se pueden formar con la palabra "ESPARTA" (considerando las 2 'A')? <span class="linea-rta"></span></div>
+        <div class="ej-item">5) En una competición con 15 participantes, ¿de cuántas formas se pueden asignar los puestos de primero, segundo y tercero? <span class="linea-rta"></span></div>
+        <div class="ej-item">6) Se lanzan un dado y una moneda. ¿Cuántos resultados posibles existen en total para esta experiencia aleatoria? <span class="linea-rta"></span></div>
+        <div class="ej-item">7) ¿De cuántas formas se pueden elegir un presidente, un secretario y un vocal en un club de 20 socios? <span class="linea-rta"></span></div>
+        <div class="ej-item">8) ¿Cuántos códigos de 3 letras se pueden crear con las letras {A, B, C, D} si se pueden repetir las letras? <span class="linea-rta"></span></div>
+        <div class="ej-item">9) ¿De cuántas formas pueden aparcar 4 coches en una zona de 7 plazas de garaje libres en línea? <span class="linea-rta"></span></div>
+        <div class="ej-item">10) ¿Cuántos resultados distintos pueden obtenerse al lanzar 3 monedas al aire simultáneamente? <span class="linea-rta"></span></div>
     </div>
 </div>
 
