@@ -3,305 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Álgebra: Apuntes y Entrenamiento - Candela Jiménez</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Apuntes Mates: El grupo que más habla de la academia</title>
     <style>
-        :root { 
-            --primary: #0e9343; --secondary: #09834c; --light: #f5fdf7; 
-            --dark: #063c24; --accent: #f39c12; --cloud-bg: #e1f5fe; --cloud-border: #03a9f4;
-        }
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; color: var(--dark); margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 950px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        
-        .header { text-align: center; border-bottom: 3px solid var(--primary); margin-bottom: 40px; padding-bottom: 20px; }
-        .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; letter-spacing: 2px; }
-        .header p { font-weight: 600; color: #666; margin: 5px 0; }
-
-        h2 { color: var(--secondary); border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 50px; background: var(--light); padding: 10px 15px; border-radius: 0 10px 10px 0; }
-        h3 { color: var(--primary); margin-top: 30px; border-bottom: 2px solid #eee; padding-bottom: 5px; }
-
-        .explicacion-pro { background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 12px; margin: 15px 0; border-left: 4px solid var(--primary); }
-        
-        .nube-container { background: var(--cloud-bg); border: 2px solid var(--cloud-border); padding: 15px 25px; border-radius: 30px; margin: 25px 0; display: flex; align-items: center; position: relative; }
-        .nube-container::before { content: "☁️"; font-size: 1.8rem; margin-right: 15px; }
-        .nube-text { font-weight: 600; color: #0277bd; font-size: 0.95rem; }
-
-        .tabla-esparta { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .tabla-esparta th { background: var(--primary); color: white; padding: 12px; text-align: left; }
-        .tabla-esparta td { padding: 12px; border-bottom: 1px solid #eee; }
-        .tabla-esparta tr:nth-child(even) { background: #f9f9f9; }
-        
-        .badge-si { background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
-        .badge-no { background: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
-
-        .monomio-box { text-align: center; font-size: 1.8rem; padding: 25px; background: var(--dark); color: white; border-radius: 15px; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
-        .resaltado { color: var(--accent); font-weight: bold; }
-
-        .polinomio-warning { background: #fff5f5; border: 2px dashed #fc8181; padding: 20px; border-radius: 12px; margin-top: 20px; }
-
-        /* Estilos Ejercicios */
-        .seccion-ejercicios { margin-top: 80px; border-top: 5px double var(--primary); padding-top: 40px; }
-        .ejercicio-bloque { margin-bottom: 30px; padding: 20px; border: 1px solid #eee; border-radius: 15px; background: #fafafa; }
-        .grid-preguntas { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px; }
-        .linea-rta { border-bottom: 1px solid #999; width: 100%; min-height: 20px; display: inline-block; margin-top: 5px; }
-        .nivel-tag { font-size: 0.7rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; margin-right: 5px; text-transform: uppercase; vertical-align: middle; }
-        .f { background: #e3f2fd; color: #1976d2; } /* Fácil */
-        .m { background: #fff3e0; color: #f57c00; } /* Medio */
-        .d { background: #ffebee; color: #d32f2f; } /* Difícil */
-
-        .examen-final { border: 3px solid var(--dark); padding: 30px; border-radius: 20px; margin-top: 60px; background: #fff; position: relative; }
-        .examen-final h2 { background: var(--dark); color: white; margin: -30px -30px 30px -30px; border-radius: 15px 15px 0 0; text-align: center; border: none; }
-
-        .btn-print { background: var(--primary); color: white; padding: 15px 30px; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; font-size: 1.1rem; margin-bottom: 20px; display: block; margin: 0 auto 30px; }
-        
-        @media print { 
-            .btn-print, .btn-back { display: none; } 
-            body { background: white; padding: 0; }
-            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; }
-            .seccion-ejercicios { page-break-before: always; }
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; }
+        .container { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-top: 10px solid #a50044; }
+        .header-barca { text-align: center; color: #a50044; font-size: 1.8em; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; border-bottom: 2px solid #dbbb3c; padding-bottom: 10px; }
+        h1 { color: #004d98; text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #7f8c8d; font-style: italic; margin-bottom: 30px; }
+        h2 { color: #2980b9; margin-top: 35px; border-left: 5px solid #a50044; padding-left: 15px; }
+        h3 { color: #2c3e50; margin-top: 20px; }
+        .formula { background: #2d3436; color: #dfe6e9; padding: 15px; border-radius: 6px; font-family: 'Courier New', monospace; overflow-x: auto; margin: 15px 0; border-left: 5px solid #3498db; }
+        .recta-num { font-weight: bold; font-size: 1.3em; letter-spacing: 3px; text-align: center; background: #f8f9fa; padding: 20px; border: 2px dashed #004d98; border-radius: 8px; margin: 20px 0; color: #004d98; }
+        .destacado { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 6px; margin: 20px 0; }
+        .infinito { font-weight: bold; color: #e74c3c; }
+        .grafica { text-align: center; margin-top: 40px; padding: 30px; border: 1px solid #eee; background: #fafafa; border-radius: 10px; }
+        footer { margin-top: 50px; text-align: center; font-size: 0.9em; color: #95a5a6; border-top: 1px solid #eee; padding-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <button class="btn-print" onclick="window.print()">📥 Imprimible Candela (Apuntes + Entrenamiento)</button>
+    <div class="header-barca">💙 ❤️ Visca el Barça, campeón de Champions ❤️ 💙</div>
+    <h1>📈 Análisis de Función: f(x) = (x+1) / (x-2)</h1>
+    <p class="subtitle">Apuntes especiales para "El grupo que más habla de la academia"</p>
 
-    <div class="header">
-        <h1>ACADEMIA ESPARTA</h1>
-        <p>Material completo para: <strong>Candela Jiménez</strong></p>
+    <h2>1. El Dominio</h2>
+    <p>Para que la función no explote, el denominador no puede ser cero. Lo igualamos para encontrar el valor prohibido:</p>
+    <div class="formula">x - 2 = 0  =>  x = 2</div>
+    <p><strong>Dominio:</strong> D = ℝ \ {2}</p>
+
+    <h2>2. Asíntotas y Límites</h2>
+    
+    <h3>A) Asíntota Vertical (A.V.)</h3>
+    <p>Se encuentra en el fallo del dominio (x=2). Estudiamos los límites laterales para saber hacia dónde se va el chisme:</p>
+    <ul>
+        <li><b>Límite por la derecha:</b> lim (x→2⁺) f(x) = 3 / 0⁺ = <span class="infinito">+∞</span></li>
+        <li><b>Límite por la izquierda:</b> lim (x→2⁻) f(x) = 3 / 0⁻ = <span class="infinito">-∞</span></li>
+    </ul>
+    <p>Hay una <b>A.V. en x = 2</b>.</p>
+
+    <h3>B) Asíntota Horizontal (A.H.)</h3>
+    <p>Miramos qué pasa cuando la x se vuelve loca (tiende a infinito):</p>
+    <div class="formula">lim (x→±∞) (x + 1) / (x - 2) = 1 / 1 = 1</div>
+    <p>Hay una <b>A.H. en y = 1</b>.</p>
+
+    <h3>C) Asíntota Oblicua (A.O.)</h3>
+    <p class="destacado">⚠️ <b>¡Aviso para charlatanes!</b> Como ya tenemos una Asíntota Horizontal, <b>no perdáis el tiempo:</b> no hay Oblicua.</p>
+
+    <h2>3. Monotonía (¿Sube o baja?)</h2>
+    <p>Realizamos la <b>Primera Derivada</b> siguiendo la regla del cociente:</p>
+    <div class="formula">
+        f'(x) = [ 1 · (x-2) - (x+1) · 1 ] / (x-2)² <br>
+        f'(x) = (x - 2 - x - 1) / (x-2)² <br>
+        f'(x) = -3 / (x-2)²
     </div>
 
-    <div id="seccion-apuntes">
-        <h2>1. El Lenguaje Algebraico: Conceptos Clave</h2>
-        
-        <div class="explicacion-pro">
-            <strong>¿Qué es una expresión algebraica?</strong><br>
-            Es un conjunto de números y letras unidos por signos. La letra se llama <span class="resaltado">Variable</span> porque puede tomar cualquier valor. En matemáticas, cuando un número y una letra están pegados (como \(2x\)), significa que se están <strong>multiplicando</strong>, pero el punto (\(\cdot\)) se omite para escribir más rápido.
-        </div>
+    <p>Para ver el signo, usamos la recta numérica (sustituimos valores en <b>f'(x)</b>):</p>
+    <div class="recta-num">
+        <----- (f' < 0) -----> (2) <----- (f' < 0) -----> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&searrow; DECRECE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&searrow; DECRECE
+    </div>
+    <p>Sustituimos por ejemplo x=0 (f'(0) = -3/4 < 0) y x=3 (f'(3) = -3/1 < 0).</p>
 
-        <table class="tabla-esparta">
-            <thead>
-                <tr>
-                    <th>Concepto Matemático</th>
-                    <th>Traducción Algebraica</th>
-                    <th>Explicación Teórica</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Un número cualquiera</td><td>\(x\)</td><td>La variable representa una cantidad desconocida.</td></tr>
-                <tr><td>El doble de un número</td><td>\(2x\)</td><td>Equivale a multiplicar el número por 2.</td></tr>
-                <tr><td>Un número aumentado en 5</td><td>\(x + 5\)</td><td>Añadimos una cantidad fija a una variable.</td></tr>
-                <tr><td>La mitad de un número</td><td>\(\frac{x}{2}\)</td><td>Repartir la variable en dos partes iguales.</td></tr>
-                <tr><td>Números consecutivos</td><td>\(x, x + 1\)</td><td>El siguiente de un número siempre es sumarle una unidad.</td></tr>
-            </tbody>
-        </table>
-
-        <div class="nube-container">
-            <div class="nube-text">CANDELA: El orden importa. No es lo mismo "el doble de un número más 1" (\(2x+1\)) que "el doble de la suma de un número y 1" (\(2(x+1)\)).</div>
-        </div>
-
-        <h3>Traducciones Avanzadas</h3>
-        <table class="tabla-esparta">
-            <thead>
-                <tr>
-                    <th>Frase Compleja</th>
-                    <th>Expresión</th>
-                    <th>Análisis Matemático</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>El cuadrado de la suma</td><td>\((x+y)^2\)</td><td>Primero sumamos, luego elevamos el resultado.</td></tr>
-                <tr><td>La suma de los cuadrados</td><td>\(x^2 + y^2\)</td><td>Elevamos cada uno por separado y luego sumamos.</td></tr>
-                <tr><td>La mitad de la suma</td><td>\(\frac{x+y}{2}\)</td><td>La raya de fracción actúa como un paréntesis para el numerador.</td></tr>
-            </tbody>
-        </table>
-
-        <h2>2. El Monomio y su estructura</h2>
-        <div class="explicacion-pro">
-            Un monomio es un bloque de construcción. Está formado por un **único producto** (multiplicación) entre números y letras. Si hay sumas o restas separando bloques, ¡ya no es un monomio!
-        </div>
-        
-        <div class="monomio-box">
-            <div style="font-size: 1rem; color: #aaa;">Ejemplo A (Simple)</div>
-            <div><span class="resaltado">-7</span>x<sup style="color:var(--accent)">4</sup></div>
-            <div style="font-size: 1rem; color: #aaa; margin-top: 15px;">Ejemplo B (Varias letras)</div>
-            <div><span class="resaltado">3</span>a<sup style="color:var(--accent)">2</sup>bc</div>
-        </div>
-        
-        <table class="tabla-esparta">
-            <thead>
-                <tr>
-                    <th>Monomio</th>
-                    <th>Coeficiente</th>
-                    <th>Parte Literal</th>
-                    <th>Grado (Suma exponentes)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>\(-7x^4\)</td><td class="resaltado">-7</td><td>\(x^4\)</td><td><strong>4</strong></td></tr>
-                <tr><td>\(3a^2bc\)</td><td class="resaltado">3</td><td>\(a^2bc\)</td><td><strong>4</strong> <small>(2+1+1)</small></td></tr>
-            </tbody>
-        </table>
-
-        <div class="nube-container" style="border-color: #ff9800; background: #fff3e0;">
-            <div class="nube-text" style="color: #e65100;">CANDELA: Cuando una letra no tiene exponente (como la \(b\) o la \(c\)), su exponente es 1. ¡No lo olvides al sumar el grado!</div>
-        </div>
-
-        <div class="polinomio-warning">
-            <strong>⚠️ ¿Cuándo NO es un monomio?</strong><br>
-            Si ves sumas o restas de por medio, se llama <span class="resaltado">Polinomio</span>.<br>
-            Ejemplo: \(3x^2 + 5x - 2\) <span class="badge-no">NO ES UN MONOMIO</span> (Son 3 monomios juntos).
-        </div>
-
-        <h2>3. Operaciones: La Lógica de los Monomios</h2>
-        <h3>A. Suma y Resta (Solo Semejantes)</h3>
-        <table class="tabla-esparta">
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Operación</th>
-                    <th>Resultado</th>
-                    <th>¿Se puede?</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Dos Positivos</td><td>\(5x + 3x\)</td><td>\(8x\)</td><td><span class="badge-si">SÍ</span></td></tr>
-                <tr><td>Dos Negativos</td><td>\(-4a - 2a\)</td><td>\(-6a\)</td><td><span class="badge-si">SÍ</span></td></tr>
-                <tr><td>Positivo y Negativo</td><td>\(10b - 7b\)</td><td>\(3b\)</td><td><span class="badge-si">SÍ</span></td></tr>
-                <tr><td>Negativo y Positivo</td><td>\(-9y + 2y\)</td><td>\(-7y\)</td><td><span class="badge-si">SÍ</span></td></tr>
-                <tr><td>Varios Términos</td><td>\(3x + 2x - 7x + x\)</td><td>\(-x\)</td><td><span class="badge-si">SÍ</span></td></tr>
-                <tr><td>Mezcla (Distintos)</td><td>\(5x + 2y\)</td><td>\(5x + 2y\)</td><td><span class="badge-no">NO</span></td></tr>
-            </tbody>
-        </table>
-
-        <h3>B. Multiplicación (Todos contra todos)</h3>
-        <table class="tabla-esparta">
-            <thead>
-                <tr>
-                    <th>Signos</th>
-                    <th>Operación</th>
-                    <th>Resultado</th>
-                    <th>Explicación</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>\(+ \cdot +\)</td><td>\((3x^2) \cdot (2x^4)\)</td><td>\(6x^6\)</td><td>\(3 \cdot 2 = 6\) | \(x^{2+4}\)</td></tr>
-                <tr><td>\(- \cdot -\)</td><td>\((-4a^3) \cdot (-2a^2)\)</td><td>\(8a^5\)</td><td>\(-4 \cdot -2 = 8\) | \(a^{3+2}\)</td></tr>
-                <tr><td>\(+ \cdot -\)</td><td>\((5b) \cdot (-3b^3)\)</td><td>\(-15b^4\)</td><td>\(5 \cdot -3 = -15\) | \(b^{1+3}\)</td></tr>
-                <tr><td>\(- \cdot +\)</td><td>\((-2y^5) \cdot (4y)\)</td><td>\(-8y^6\)</td><td>\(-2 \cdot 4 = -8\) | \(y^{5+1}\)</td></tr>
-            </tbody>
-        </table>
-
-        <h3>C. División</h3>
-        <table class="tabla-esparta">
-            <thead>
-                <tr>
-                    <th>Signos</th>
-                    <th>Operación</th>
-                    <th>Resultado</th>
-                    <th>Explicación</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>\(+ : +\)</td><td>\((20x^6) : (5x^2)\)</td><td>\(4x^4\)</td><td>\(20 : 5 = 4\) | \(x^{6-2}\)</td></tr>
-                <tr><td>\(- : -\)</td><td>\((-12a^4) : (-3a^2)\)</td><td>\(4a^2\)</td><td>\(-12 : -3 = 4\) | \(a^{4-2}\)</td></tr>
-                <tr><td>\(+ : -\)</td><td>\((15b^5) : (-3b^2)\)</td><td>\(-5b^3\)</td><td>\(15 : -3 = -5\) | \(b^{5-2}\)</td></tr>
-                <tr><td>\(- : +\)</td><td>\((-10y^8) : (2y^3)\)</td><td>\(-5y^5\)</td><td>\(-10 : 2 = -5\) | \(y^{8-3}\)</td></tr>
-            </tbody>
-        </table>
-
-        <div class="nube-container">
-            <div class="nube-text">LEY DE SIGNOS: Candela, recuerda que esto solo se aplica en MULTIPLICACIÓN y DIVISIÓN. En suma y resta mandan los "amigos y deudas".</div>
-        </div>
+    <h2>4. Curvatura (¿Feliz o Triste?)</h2>
+    <p>Calculamos la <b>Segunda Derivada</b> derivando el resultado anterior:</p>
+    <div class="formula">
+        f''(x) = [ 0 · (x-2)² - (-3) · 2(x-2) ] / (x-2)⁴ <br>
+        f''(x) = 6(x-2) / (x-2)⁴ <br>
+        f''(x) = 6 / (x-2)³
     </div>
 
-    <div class="seccion-ejercicios">
-        <h1 style="text-align: center;">🛡️ CAMPO DE ENTRENAMIENTO NIVELADO</h1>
-
-        <div class="ejercicio-bloque">
-            <h3>Ejercicio 1: Traducción Algebraica</h3>
-            <div class="grid-preguntas">
-                <div><span class="nivel-tag f">F</span> Un número menos doce: <span class="linea-rta"></span></div>
-                <div><span class="nivel-tag f">F</span> El doble de un número: <span class="linea-rta"></span></div>
-                <div><span class="nivel-tag f">F</span> La tercera parte de un número: <span class="linea-rta"></span></div>
-                <div><span class="nivel-tag m">M</span> El siguiente de un número: <span class="linea-rta"></span></div>
-                <div><span class="nivel-tag m">M</span> La suma de tres números: <span class="linea-rta"></span></div>
-                <div><span class="nivel-tag m">M</span> El cuadrado de un número más 5: <span class="linea-rta"></span></div>
-                <div><span class="nivel-tag d">D</span> El triple de la suma de dos números: <span class="linea-rta"></span></div>
-                <div><span class="nivel-tag d">D</span> La mitad de la diferencia de x e y: <span class="linea-rta"></span></div>
-                <div><span class="nivel-tag d">D</span> El cuadrado de la mitad de un número: <span class="linea-rta"></span></div>
-                <div><span class="nivel-tag d">D</span> La suma de los cubos de dos números: <span class="linea-rta"></span></div>
-            </div>
-        </div>
-
-        <div class="ejercicio-bloque">
-            <h3>Ejercicio 2: Anatomía del Monomio</h3>
-            <table class="tabla-esparta" style="box-shadow: none; border: 1px solid #ddd;">
-                <thead>
-                    <tr><th>Dificultad</th><th>Monomio</th><th>Coeficiente</th><th>Parte Literal</th><th>Grado</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><span class="nivel-tag f">F</span></td><td>\(9x^5\)</td><td></td><td></td><td></td></tr>
-                    <tr><td><span class="nivel-tag f">F</span></td><td>\(-3a^2\)</td><td></td><td></td><td></td></tr>
-                    <tr><td><span class="nivel-tag m">M</span></td><td>\(x\)</td><td></td><td></td><td></td></tr>
-                    <tr><td><span class="nivel-tag m">M</span></td><td>\(-y^3\)</td><td></td><td></td><td></td></tr>
-                    <tr><td><span class="nivel-tag m">M</span></td><td>\(12ab\)</td><td></td><td></td><td></td></tr>
-                    <tr><td><span class="nivel-tag d">D</span></td><td>\(-5x^2yz^3\)</td><td></td><td></td><td></td></tr>
-                    <tr><td><span class="nivel-tag d">D</span></td><td>\(\frac{2}{3}a^4b\)</td><td></td><td></td><td></td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="ejercicio-bloque">
-            <h3>Ejercicio 3: Sumas y Restas (Agrupación)</h3>
-            <div class="grid-preguntas">
-                <div><span class="nivel-tag f">F</span> \(6x + 2x =\)</div>
-                <div><span class="nivel-tag f">F</span> \(9a - 5a =\)</div>
-                <div><span class="nivel-tag m">M</span> \(-3b - 7b =\)</div>
-                <div><span class="nivel-tag m">M</span> \(-10x^2 + 4x^2 =\)</div>
-                <div><span class="nivel-tag m">M</span> \(x + x + x =\)</div>
-                <div><span class="nivel-tag m">M</span> \(5a - 8a =\)</div>
-                <div><span class="nivel-tag d">D</span> \(4x + 2y - 3x + 5y =\)</div>
-                <div><span class="nivel-tag d">D</span> \(a + a - 5a + 2a =\)</div>
-                <div><span class="nivel-tag d">D</span> \(-3x^2 + x - 2x^2 + 5x =\)</div>
-                <div><span class="nivel-tag d">D</span> \(2ab + 3ab - 7ab =\)</div>
-            </div>
-        </div>
-
-        <div class="ejercicio-bloque">
-            <h3>Ejercicio 4: Multiplicación y División</h3>
-            <div class="grid-preguntas">
-                <div><span class="nivel-tag f">F</span> \((2x) \cdot (5x) =\)</div>
-                <div><span class="nivel-tag f">F</span> \((10a^4) : (2a^2) =\)</div>
-                <div><span class="nivel-tag m">M</span> \((-3a^2) \cdot (4a^3) =\)</div>
-                <div><span class="nivel-tag m">M</span> \((-20b^5) : (-5b^2) =\)</div>
-                <div><span class="nivel-tag m">M</span> \((6x^2) \cdot (-x) =\)</div>
-                <div><span class="nivel-tag m">M</span> \((8y) : (-8y) =\)</div>
-                <div><span class="nivel-tag d">D</span> \((-2ab) \cdot (3a^2b) =\)</div>
-                <div><span class="nivel-tag d">D</span> \((15x^3y^2) : (3xy) =\)</div>
-                <div><span class="nivel-tag d">D</span> \((-x^2) \cdot (-x^3) \cdot (-x) =\)</div>
-                <div><span class="nivel-tag d">D</span> \((a^2b^3) \cdot (3ab) =\)</div>
-            </div>
-        </div>
-
-        <div class="examen-final">
-            <h2>📝 EXAMEN DE CONTROL (10 Preguntas)</h2>
-            <div style="font-size: 0.95rem;">
-                <p><strong>1.</strong> Expresa: "El cuadrado de la suma de x e y": ________________</p>
-                <p><strong>2.</strong> Coeficiente del monomio \(-5x\): ________________</p>
-                <p><strong>3.</strong> Grado de \(2a^2b^2\): ________________</p>
-                <p><strong>4.</strong> Reduce: \(3x - 10x + x\): ________________</p>
-                <p><strong>5.</strong> Multiplica: \((-2a^2) \cdot (4a)\): ________________</p>
-                <p><strong>6.</strong> Divide: \((-15x^4) : (-3x^2)\): ________________</p>
-                <p><strong>7.</strong> ¿Es \(2x + 1\) un monomio? ________________</p>
-                <p><strong>8.</strong> Parte literal de \(x^3\): ________________</p>
-                <p><strong>9.</strong> Opera: \(4a + 2b - 4a\): ________________</p>
-                <p><strong>10.</strong> Multiplica: \((x) \cdot (x^2) \cdot (x^3)\): ________________</p>
-            </div>
-        </div>
+    <p>Representamos en la recta y <b>sustituimos en f''(x)</b>:</p>
+    <div class="recta-num">
+        <----- (f'' < 0) -----> (2) <----- (f'' > 0) -----> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∩ CONVEXA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∪ CÓNCAVA
     </div>
+
+    <div class="grafica">
+        <h2>5. Representación Gráfica</h2>
+        <p>Juntando las piezas del puzzle:</p>
+        
+    </div>
+
+    <footer>
+        "Si habláis tanto como deriváis, el 10 está asegurado." - El Profe.
+    </footer>
 </div>
 
 </body>
