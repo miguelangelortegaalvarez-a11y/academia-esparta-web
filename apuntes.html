@@ -21,12 +21,14 @@
     
     <style>
         :root {
+            /* COLORES CORPORATIVOS (Inalterados) */
             --primary: #27ae60; 
             --accent: #ff8c00;
             --bg-light: #f4f8f8;
             --white: #ffffff;
         }
 
+        /* ESTILOS CSS GENERALES (Inalterados) */
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
         .main-container { background: var(--white); max-width: 850px; width: 100%; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
@@ -50,7 +52,7 @@
         .procedimiento-mates { background: #fafafa; border: 1px solid #eee; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid var(--primary); }
         .procedimiento-mates strong { color: var(--primary); }
 
-        /* Contenedor de la gráfica automática */
+        /* Contenedor de la gráfica (Inalterado) */
         .grafica-box { text-align: center; margin-top: 50px; padding: 20px; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
         .canvas-container { width: 100%; max-width: 600px; margin: 0 auto; background: white; border-radius: 10px; padding: 10px; border: 1px solid #ddd; }
 
@@ -143,7 +145,7 @@
     </table>
 
     <h2 class="seccion-titulo">5. Representación Gráfica</h2>
-    <p>A continuación se muestra la representación automática de la función analizada:</p>
+    <p>A continuación se muestra la representación de la función con los ejes principales en negro y las asíntotas discontinuas en color:</p>
     
     <div class="grafica-box">
         <div class="canvas-container">
@@ -153,6 +155,8 @@
 
     <script>
         const ctx = document.getElementById('miGrafica').getContext('2d');
+        
+        // Generación de datos (Inalterado)
         const dataIzq = [], dataDer = [];
         for (let x = -10; x < 1.9; x += 0.1) dataIzq.push({x: x, y: (x+1)/(x-2)});
         for (let x = 2.1; x <= 10; x += 0.1) dataDer.push({x: x, y: (x+1)/(x-2)});
@@ -161,18 +165,96 @@
             type: 'scatter',
             data: {
                 datasets: [
+                    // Función principal (Mantiene color verde esmeralda)
                     { label: 'f(x)', data: dataIzq, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
                     { data: dataDer, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
-                    { label: 'A.V. (x=2)', data: [{x: 2, y: -20}, {x: 2, y: 20}], showLine: true, borderDash: [5, 5], borderColor: '#ff8c00', pointRadius: 0, fill: false },
-                    { label: 'A.H. (y=1)', data: [{x: -10, y: 1}, {x: 10, y: 1}], showLine: true, borderDash: [5, 5], borderColor: '#ff8c00', pointRadius: 0, fill: false }
+                    // Asíntota Vertical (ROJA y DISCONTINUA)
+                    { label: 'A.V. (x=2)', data: [{x: 2, y: -10}, {x: 2, y: 10}], showLine: true, borderDash: [5, 5], borderColor: '#e74c3c', pointRadius: 0, fill: false },
+                    // Asíntota Horizontal (AZUL y DISCONTINUA)
+                    { label: 'A.H. (y=1)', data: [{x: -10, y: 1}, {x: 10, y: 1}], showLine: true, borderDash: [5, 5], borderColor: '#3498db', pointRadius: 0, fill: false }
                 ]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: true,
                 scales: {
-                    x: { type: 'linear', min: -10, max: 10 },
-                    y: { min: -10, max: 10 }
+                    x: {
+                        type: 'linear',
+                        min: -10,
+                        max: 10,
+                        grid: {
+                            // Cuadrícula de fondo suave
+                            color: '#eee',
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            callback: function(value, index, values) {
+                                // Resaltar el 0 en negro intenso
+                                if (value === 0) {
+                                    return {
+                                        color: '#000',
+                                        font: { weight: 'bold' }
+                                    };
+                                }
+                                return value;
+                            }
+                        }
+                    },
+                    y: {
+                        min: -10,
+                        max: 10,
+                        grid: {
+                            // Cuadrícula de fondo suave
+                            color: '#eee',
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            callback: function(value, index, values) {
+                                // Resaltar el 0 en negro intenso
+                                if (value === 0) {
+                                    return {
+                                        color: '#000',
+                                        font: { weight: 'bold' }
+                                    };
+                                }
+                                return value;
+                            }
+                        }
+                    }
                 },
-                plugins: { legend: { labels: { filter: (item) => item.text !== undefined } } }
+                // Plugin para dibujar los ejes principales en negro intenso
+                plugins: {
+                    legend: {
+                        labels: {
+                            filter: (item) => item.text !== undefined
+                        }
+                    },
+                    afterDraw: (chart) => {
+                        const ctx = chart.ctx;
+                        const xAxis = chart.scales.x;
+                        const yAxis = chart.scales.y;
+
+                        ctx.save();
+                        ctx.strokeStyle = '#000'; // Negro intenso para los ejes principales
+                        ctx.lineWidth = 2; // Eje principal un poco más grueso
+
+                        // Dibujar Eje X (Y=0)
+                        const yZero = yAxis.getPixelForValue(0);
+                        ctx.beginPath();
+                        ctx.moveTo(xAxis.left, yZero);
+                        ctx.lineTo(xAxis.right, yZero);
+                        ctx.stroke();
+
+                        // Dibujar Eje Y (X=0)
+                        const xZero = xAxis.getPixelForValue(0);
+                        ctx.beginPath();
+                        ctx.moveTo(xZero, yAxis.top);
+                        ctx.lineTo(xZero, yAxis.bottom);
+                        ctx.stroke();
+
+                        ctx.restore();
+                    }
+                }
             }
         });
     </script>
