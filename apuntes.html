@@ -21,40 +21,160 @@
     
     <style>
         :root {
-            --primary: #27ae60; 
-            --accent: #ff8c00;
+            --primary: #27ae60; /* Verde menta clarito Academia Esparta */
+            --accent: #ff8c00; /* Naranja de títulos */
             --bg-light: #f4f8f8;
             --white: #ffffff;
+            --danger: #e74c3c;
         }
 
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .main-container { background: var(--white); max-width: 850px; width: 100%; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--bg-light); 
+            color: #333; 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+        }
 
-        .barca-header { text-align: center; font-weight: bold; color: #a50044; font-size: 1.4em; margin-bottom: 5px; text-transform: uppercase; }
-        .header-title { text-align: center; color: var(--primary); font-size: 2em; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
-        .subtitle { text-align: center; color: #666; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 30px; }
+        .main-container { 
+            background: var(--white); 
+            max-width: 850px; 
+            width: 100%; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
 
-        h2.seccion-titulo { color: var(--primary); font-size: 1.4em; border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 40px; font-weight: 600; }
-        h3.subseccion-titulo { color: var(--primary); font-size: 1.2em; margin-top: 25px; font-weight: 600; }
+        /* Cabecera personalizada */
+        .barca-header { 
+            text-align: center; 
+            font-weight: bold; 
+            color: #a50044; 
+            font-size: 1.4em; 
+            margin-bottom: 5px; 
+            text-transform: uppercase; 
+        }
 
-        .formula-block { background: var(--primary); color: white; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; font-size: 1.2em; }
+        .header-title { 
+            text-align: center; 
+            color: var(--primary); 
+            font-size: 2.2em; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-top: 10px; 
+        }
 
-        .tabla-signos { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .tabla-signos th { background: var(--primary); color: white; padding: 12px; font-weight: 600; border: 1px solid #eee; }
-        .tabla-signos td { padding: 15px; text-align: center; border: 1px solid #eee; font-weight: 500; }
-        .col-intervalo { background: var(--bg-light); font-weight: 700 !important; color: var(--primary); width: 30%; }
-        .signo-neg { color: #e74c3c; font-weight: bold; font-size: 1.2em; }
-        .signo-pos { color: #27ae60; font-weight: bold; font-size: 1.2em; }
+        .subtitle { 
+            text-align: center; 
+            color: #666; 
+            border-bottom: 2px solid var(--primary); 
+            padding-bottom: 20px; 
+            margin-bottom: 30px; 
+        }
+
+        /* Secciones con borde naranja lateral */
+        h2.seccion-titulo { 
+            color: var(--primary); 
+            font-size: 1.5em; 
+            border-left: 6px solid var(--accent); 
+            padding-left: 15px; 
+            margin-top: 45px; 
+            font-weight: 600;
+        }
+
+        h3.subseccion-titulo { 
+            color: var(--primary); 
+            font-size: 1.25em; 
+            margin-top: 25px; 
+            font-weight: 600;
+        }
+
+        .formula-block { 
+            background: var(--primary); 
+            color: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin: 20px 0; 
+            text-align: center; 
+            font-size: 1.3em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Estilo de las tablas de signos */
+        .tabla-signos { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 25px 0; 
+            background: #fff; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+        }
+        
+        .tabla-signos th { 
+            background: var(--primary); 
+            color: white; 
+            padding: 15px; 
+            font-weight: 600; 
+            border: 1px solid #eee; 
+        }
+
+        .tabla-signos td { 
+            padding: 18px; 
+            text-align: center; 
+            border: 1px solid #eee; 
+            font-weight: 500; 
+        }
+
+        .col-intervalo { 
+            background: var(--bg-light); 
+            font-weight: 700 !important; 
+            color: var(--primary); 
+            width: 35%; 
+        }
+
+        .signo-neg { color: var(--danger); font-weight: bold; font-size: 1.3em; }
+        .signo-pos { color: var(--primary); font-weight: bold; font-size: 1.3em; }
         .conclusion { font-style: italic; font-weight: 700; color: #2c3e50; }
 
-        .procedimiento-mates { background: #fafafa; border: 1px solid #eee; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid var(--primary); }
-        .procedimiento-mates strong { color: var(--primary); }
-        
-        /* CONTENEDOR GEOGÉBRICO */
-        .geogebra-container { text-align: center; margin-top: 50px; padding: 20px; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
-        #ggb-element { margin: 0 auto; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        /* Bloques de procedimiento matemático */
+        .procedimiento-mates { 
+            background: #fafafa; 
+            border: 1px solid #eee; 
+            padding: 25px; 
+            border-radius: 12px; 
+            margin: 20px 0; 
+            border-left: 6px solid var(--primary); 
+        }
 
-        footer { margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; color: #999; font-style: italic; }
+        .procedimiento-mates strong { color: var(--primary); }
+
+        .geogebra-container { 
+            text-align: center; 
+            margin-top: 50px; 
+            padding: 25px; 
+            background: #f9f9f9; 
+            border-radius: 20px; 
+            border: 1px solid #ddd; 
+        }
+
+        #ggb-element { 
+            margin: 0 auto; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15); 
+        }
+
+        footer { 
+            margin-top: 80px; 
+            text-align: center; 
+            border-top: 1px solid #eee; 
+            padding-top: 30px; 
+            color: #bbb; 
+            font-style: italic; 
+        }
     </style>
 </head>
 <body>
@@ -62,89 +182,117 @@
 <div class="main-container">
     <div class="barca-header">💙 ❤️ Visca el Barça, campeón de Champions ❤️ 💙</div>
     <div class="header-title">ANÁLISIS DE FUNCIÓN RACIONAL</div>
-    <div class="subtitle">Material preparado para: <strong>Los Charlatanes</strong></div>
+    <div class="subtitle">Material completo preparado para: <strong>Los Charlatanes</strong></div>
 
-    <div style="text-align: center; font-size: 1.8em; margin: 30px 0;">
+    <div style="text-align: center; font-size: 2em; margin: 35px 0;">
         $$f(x) = \frac{x+1}{x-2}$$
     </div>
 
     <h2 class="seccion-titulo">1. El Dominio</h2>
-    <p>Igualamos el denominador a cero para encontrar el punto donde la función no existe:</p>
+    <p>Para analizar dónde existe la función, igualamos el denominador a cero para encontrar el "punto prohibido":</p>
     <div class="formula-block">
         $x - 2 = 0 \implies x = 2$
     </div>
+    <p>Por lo tanto, la función existe en todos los números reales excepto en el 2.</p>
     <p><strong>Dominio:</strong> $D = \mathbb{R} \setminus \{2\}$</p>
 
     <h2 class="seccion-titulo">2. Asíntotas y Límites</h2>
+    
     <h3 class="subseccion-titulo">A) Asíntota Vertical (A.V.)</h3>
-    <div style="margin-left: 10px;">
-        <p>• <strong>Por la derecha:</strong> $$\lim_{x \to 2^+} f(x) = \frac{3}{0^+} = \color{red}{+\infty}$$</p>
-        <p>• <strong>Por la izquierda:</strong> $$\lim_{x \to 2^-} f(x) = \frac{3}{0^-} = \color{red}{-\infty}$$</p>
+    <p>Se encuentra en el fallo del dominio. Estudiamos el comportamiento acercándonos por ambos lados:</p>
+    <div style="margin-left: 15px;">
+        <p>• <strong>Por la derecha:</strong> $$\lim_{x \to 2^+} \frac{x+1}{x-2} = \frac{3}{0^+} = \color{red}{+\infty}$$</p>
+        <p>• <strong>Por la izquierda:</strong> $$\lim_{x \to 2^-} \frac{x+1}{x-2} = \frac{3}{0^-} = \color{red}{-\infty}$$</p>
     </div>
-    <p>Hay una <strong>A.V. en $x = 2$</strong>.</p>
+    <p>Conclusión: Existe una <strong>Asíntota Vertical en $x = 2$</strong>.</p>
 
     <h3 class="subseccion-titulo">B) Asíntota Horizontal (A.H.)</h3>
+    <p>Analizamos qué ocurre cuando $x$ tiende a valores muy grandes o muy pequeños:</p>
     <div style="text-align: center; margin: 20px 0;">
         $$\lim_{x \to \pm\infty} \frac{x+1}{x-2} = 1$$
     </div>
-    <p>Hay una <strong>A.H. en $y = 1$</strong>.</p>
+    <p>Conclusión: Existe una <strong>Asíntota Horizontal en $y = 1$</strong>.</p>
 
     <h3 class="subseccion-titulo">C) Asíntota Oblicua (A.O.)</h3>
-    <p>⚠️ <strong>Nota para Charlatanes:</strong> Al existir asíntota horizontal, no hay oblicua.</p>
+    <p>⚠️ <strong>Nota para Charlatanes:</strong> Recordad que si existe una asíntota horizontal, automáticamente <strong>no hay asíntota oblicua</strong> en funciones racionales.</p>
 
     <h2 class="seccion-titulo">3. Monotonía (Crecimiento y Decrecimiento)</h2>
-    <p>Calculamos la primera derivada usando la regla del cociente:</p>
-    <div style="text-align: center; margin: 20px 0;">
-        $$f'(x) = \frac{-3}{(x-2)^2}$$
+    <p>Derivamos la función utilizando la regla del cociente:</p>
+    <div style="text-align: center; margin: 25px 0;">
+        $$f'(x) = \frac{1 \cdot (x-2) - (x+1) \cdot 1}{(x-2)^2} = \frac{-3}{(x-2)^2}$$
     </div>
 
     <div class="procedimiento-mates">
-        <p><strong>Paso 1: Buscamos los puntos críticos.</strong> <br>
-        Igualamos $f'(x) = 0$:</p>
+        <p><strong>Paso 1: Buscamos puntos críticos.</strong></p>
+        <p>Igualamos la primera derivada a cero para ver si hay máximos o mínimos:</p>
         <div style="text-align: center; margin: 15px 0;">
-            $$\frac{-3}{(x-2)^2} = 0 \implies -3 = 0 \text{ (Imposible)}$$
+            $$\frac{-3}{(x-2)^2} = 0 \implies -3 = 0 \cdot (x-2)^2 \implies -3 = 0$$
         </div>
-        <p>No existen puntos críticos. El único punto de estudio es **$x = 2$**.</p>
+        <p>Como $-3$ nunca puede ser igual a $0$, <strong>no hay puntos críticos</strong>. El único valor que separa nuestra tabla es el $x=2$ (del dominio).</p>
     </div>
 
     <table class="tabla-signos">
         <thead>
-            <tr><th>Intervalo</th><th>$(-\infty, 2)$</th><th>$(2, +\infty)$</th></tr>
+            <tr>
+                <th>Intervalo</th>
+                <th>$(-\infty, 2)$</th>
+                <th>$(2, +\infty)$</th>
+            </tr>
         </thead>
         <tbody>
-            <tr><td class="col-intervalo">Signo de $f'(x)$</td><td class="signo-neg">$-$</td><td class="signo-neg">$-$</td></tr>
-            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">↘ Decreciente</td><td class="conclusion">↘ Decreciente</td></tr>
+            <tr>
+                <td class="col-intervalo">Signo de $f'(x)$</td>
+                <td class="signo-neg">$-$</td>
+                <td class="signo-neg">$-$</td>
+            </tr>
+            <tr>
+                <td class="col-intervalo">Resultado</td>
+                <td class="conclusion">↘ Decreciente</td>
+                <td class="conclusion">↘ Decreciente</td>
+            </tr>
         </tbody>
     </table>
 
     <h2 class="seccion-titulo">4. Curvatura (Concavidad y Convexidad)</h2>
-    <p>Calculamos la segunda derivada para analizar la forma de la curva:</p>
-    <div style="text-align: center; margin: 20px 0;">
+    <p>Derivamos la primera derivada para obtener la segunda:</p>
+    <div style="text-align: center; margin: 25px 0;">
         $$f''(x) = \frac{6}{(x-2)^3}$$
     </div>
 
     <div class="procedimiento-mates">
-        <p><strong>Paso 1: Buscamos posibles puntos de inflexión.</strong> <br>
-        Igualamos $f''(x) = 0$:</p>
+        <p><strong>Paso 1: Buscamos puntos de inflexión.</strong></p>
+        <p>Igualamos la segunda derivada a cero:</p>
         <div style="text-align: center; margin: 15px 0;">
-            $$\frac{6}{(x-2)^3} = 0 \implies 6 = 0 \text{ (Imposible)}$$
+            $$\frac{6}{(x-2)^3} = 0 \implies 6 = 0$$
         </div>
-        <p>No hay puntos de inflexión. El cambio se da en **$x = 2$**.</p>
+        <p>De nuevo, una contradicción. No hay puntos de inflexión; solo estudiamos el cambio de forma en **$x = 2$**.</p>
     </div>
 
     <table class="tabla-signos">
         <thead>
-            <tr><th>Intervalo</th><th>$(-\infty, 2)$</th><th>$(2, +\infty)$</th></tr>
+            <tr>
+                <th>Intervalo</th>
+                <th>$(-\infty, 2)$</th>
+                <th>$(2, +\infty)$</th>
+            </tr>
         </thead>
         <tbody>
-            <tr><td class="col-intervalo">Signo de $f''(x)$</td><td class="signo-neg">$-$</td><td class="signo-pos">$+$</td></tr>
-            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">∩ Convexa (Triste)</td><td class="conclusion">∪ Cóncava (Feliz)</td></tr>
+            <tr>
+                <td class="col-intervalo">Signo de $f''(x)$</td>
+                <td class="signo-neg">$-$</td>
+                <td class="signo-pos">$+$</td>
+            </tr>
+            <tr>
+                <td class="col-intervalo">Resultado</td>
+                <td class="conclusion">∩ Convexa (Triste)</td>
+                <td class="conclusion">∪ Cóncava (Feliz)</td>
+            </tr>
         </tbody>
     </table>
 
     <div class="geogebra-container">
         <h2 class="seccion-titulo">5. Representación Geométrica</h2>
-        <p>Explora la función dinámicamente aquí:</p>
+        <p>Interactúa con la función y observa las asíntotas en el eje cartesiano:</p>
         <div id="ggb-element"></div>
     </div>
 
@@ -152,11 +300,11 @@
         var params = {
             "appName": "graphing",
             "width": 800,
-            "height": 500,
+            "height": 550,
             "showToolBar": false,
             "showAlgebraInput": false,
             "showMenuBar": false,
-            "content": "f(x) = (x+1)/(x-2)", // Cargamos la función directamente
+            "content": "f(x) = (x+1)/(x-2)",
             "enableLabelDrags": false,
             "enableShiftDragZoom": true,
             "enableRightClick": false,
@@ -164,7 +312,9 @@
             "language": "es"
         };
         var applet = new GGBApplet(params, true);
-        window.onload = function() { applet.inject('ggb-element'); };
+        window.onload = function() { 
+            applet.inject('ggb-element'); 
+        };
     </script>
 
     <footer>
