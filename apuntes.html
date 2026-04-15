@@ -24,38 +24,17 @@
             --accent: #ff8c00;
             --bg-light: #f4f8f8;
             --white: #ffffff;
-            --text-size: 0.9rem; /* Tamaño tipo libro (aprox 11pt) */
+            --text-size: 0.9rem;
         }
 
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background-color: var(--bg-light); 
-            color: #333; 
-            margin: 0; 
-            padding: 40px 20px; 
-            display: flex; 
-            justify-content: center; 
-            line-height: 1.5;
-        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 40px 20px; display: flex; justify-content: center; line-height: 1.5; }
+        .main-container { background: var(--white); max-width: 700px; width: 100%; padding: 50px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative; font-size: var(--text-size); }
 
-        .main-container { 
-            background: var(--white); 
-            max-width: 700px; /* Más estrecho, como una página de libro */
-            width: 100%; 
-            padding: 50px; 
-            border-radius: 5px; /* Menos redondeado, más formal */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
-            position: relative;
-            font-size: var(--text-size);
-        }
-
-        /* BOTÓN DE IMPRIMIR - MÁS DISCRETO */
         .print-button {
             position: absolute; top: 15px; right: 15px; background-color: #eee;
             color: #555; border: 1px solid #ddd; padding: 5px 10px; border-radius: 4px; cursor: pointer;
             font-size: 0.75rem; font-weight: 600; display: flex; align-items: center; gap: 5px;
         }
-        .print-button:hover { background-color: #e0e0e0; }
 
         @media print {
             .print-button { display: none; }
@@ -70,28 +49,13 @@
         h2.seccion-titulo { color: var(--primary); font-size: 1.15em; border-left: 4px solid var(--accent); padding-left: 12px; margin-top: 30px; font-weight: 600; }
         h3.subseccion-titulo { color: var(--primary); font-size: 1em; margin-top: 20px; font-weight: 600; }
 
-        /* FÓRMULAS TAMAÑO LIBRO */
-        .formula-block { 
-            background: #f9f9f9; 
-            color: var(--primary); 
-            padding: 15px; 
-            border-radius: 4px; 
-            margin: 15px 0; 
-            text-align: center; 
-            font-size: 1.1em; 
-            border: 1px solid #eee;
-        }
-
-        .tabla-signos { 
-            width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85em;
-        }
+        .formula-block { background: #f9f9f9; color: var(--primary); padding: 15px; border-radius: 4px; margin: 15px 0; text-align: center; font-size: 1.1em; border: 1px solid #eee; }
+        .procedimiento-mates { background: #fff; border: 1px dashed #ccc; padding: 15px; border-radius: 4px; margin: 15px 0; font-size: 0.9em; }
+        
+        .tabla-signos { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85em; }
         .tabla-signos th { background: var(--primary); color: white; padding: 10px; border: 1px solid #ddd; }
         .tabla-signos td { padding: 10px; text-align: center; border: 1px solid #ddd; }
         .col-intervalo { background: #fcfcfc; font-weight: 600; width: 25%; }
-
-        .procedimiento-mates { 
-            background: #fff; border: 1px dashed #ccc; padding: 15px; border-radius: 4px; margin: 15px 0; font-size: 0.9em;
-        }
 
         .grafica-box { margin-top: 30px; padding: 15px; background: #fff; border: 1px solid #eee; }
         .canvas-container { width: 100%; max-width: 500px; margin: 0 auto; }
@@ -113,27 +77,28 @@
     </div>
 
     <h2 class="seccion-titulo">1. Estudio del Dominio</h2>
-    <p>Determinamos los valores de $x$ para los cuales la función es real e indefinida:</p>
     <div class="formula-block">$x - 3 = 0 \implies x = 3$</div>
     <p><strong>Dominio:</strong> $\text{Dom } f = \mathbb{R} \setminus \{3\}$</p>
 
     <h2 class="seccion-titulo">2. Comportamiento Asintótico</h2>
     <h3 class="subseccion-titulo">A) Asíntota Vertical (A.V.)</h3>
-    <p>Analizamos los límites laterales en el punto crítico $x = 3$:</p>
-    <div style="font-size: 0.95em;">
-        <p>• Por la derecha: $$\lim_{x \to 3^+} f(x) = +\infty$$</p>
-        <p>• Por la izquierda: $$\lim_{x \to 3^-} f(x) = -\infty$$</p>
-    </div>
+    <p>Límites laterales en $x = 3$: $$\lim_{x \to 3^+} f(x) = +\infty \quad ; \quad \lim_{x \to 3^-} f(x) = -\infty$$</p>
 
     <h3 class="subseccion-titulo">B) Asíntota Oblicua (A.O.)</h3>
-    <p>Dado que el grado del numerador supera en una unidad al del denominador, calculamos $y = mx + n$:</p>
+    <p>Buscamos la recta $y = mx + n$:</p>
+    
     <div class="procedimiento-mates">
-        $$m = \lim_{x \to \infty} \frac{f(x)}{x} = 1 \quad ; \quad n = \lim_{x \to \infty} (f(x) - x) = 3$$
+        <strong>Paso 1: Cálculo de la pendiente ($m$)</strong>
+        $$m = \lim_{x \to \infty} \frac{f(x)}{x} = \lim_{x \to \infty} \frac{x^2+5}{x(x-3)} = \lim_{x \to \infty} \frac{x^2+5}{x^2-3x} = 1$$
+        
+        <strong>Paso 2: Cálculo de la ordenada en el origen ($n$)</strong>
+        $$n = \lim_{x \to \infty} (f(x) - m \cdot x) = \lim_{x \to \infty} \left( \frac{x^2+5}{x-3} - 1 \cdot x \right)$$
+        $$n = \lim_{x \to \infty} \frac{x^2+5 - x(x-3)}{x-3} = \lim_{x \to \infty} \frac{x^2+5 - x^2 + 3x}{x-3}$$
+        $$n = \lim_{x \to \infty} \frac{3x+5}{x-3} = 3$$
     </div>
-    <p>Ecuación de la recta: <strong>$y = x + 3$</strong>.</p>
+    <p>Ecuación resultante: <strong>$y = x + 3$</strong>.</p>
 
     <h2 class="seccion-titulo">3. Monotonía</h2>
-    <p>Derivamos mediante la regla del cociente para hallar los puntos críticos:</p>
     <div style="text-align: center; margin: 15px 0;">
         $$f'(x) = \frac{x^2 - 6x - 5}{(x-3)^2}$$
     </div>
@@ -143,7 +108,7 @@
         </thead>
         <tbody>
             <tr><td class="col-intervalo">$f'(x)$</td><td>$+$</td><td>$-$</td><td>$-$</td><td>$+$</td></tr>
-            <tr><td class="col-intervalo">Función</td><td>↗ Creciente</td><td>↘ Decreciente</td><td>↘ Decreciente</td><td>↗ Creciente</td></tr>
+            <tr><td class="col-intervalo">Función</td><td>↗ Crece</td><td>↘ Decrece</td><td>↘ Decrece</td><td>↗ Crece</td></tr>
         </tbody>
     </table>
 
