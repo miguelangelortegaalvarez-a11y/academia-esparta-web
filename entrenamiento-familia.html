@@ -3,116 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Combinatoria - Academia Esparta</title>
+    <title>Incompletas 2º Grado - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        :root { --primario: #2c3e50; --secundario: #3498db; --exito: #27ae60; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 20px; color: #333; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: var(--primario); border-bottom: 3px solid var(--secundario); padding-bottom: 10px; }
+        :root { 
+            --primary: #0e9343; --secondary: #09834c; --light: #f5fdf7; 
+            --dark: #063c24; --accent: #f39c12;
+        }
         
-        .grid-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
-        .input-group { display: flex; flex-direction: column; }
-        label { font-weight: bold; margin-bottom: 5px; }
-        input { padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 16px; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; color: var(--dark); padding: 20px; line-height: 1.5; margin: 0; }
+        
+        /* TAMAÑO LIBRO A5 */
+        .container { 
+            max-width: 148mm; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-height: 210mm;
+        }
+        
+        .header { text-align: center; border-bottom: 2px solid var(--primary); margin-bottom: 20px; padding-bottom: 10px; }
+        .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; font-size: 1.3rem; }
+        .header p { font-weight: 600; color: #666; margin: 2px 0; font-size: 0.8rem; }
 
-        .resultados { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .card { background: #f8f9fa; border: 1px solid #e1e4e8; padding: 15px; border-radius: 8px; transition: 0.3s; }
-        .card:hover { border-color: var(--secundario); background: #f1f7ff; }
-        .card h3 { margin: 0 0 10px 0; color: var(--secundario); font-size: 1.1em; }
-        .formula { font-family: 'Courier New', monospace; background: #eee; padding: 2px 5px; border-radius: 3px; font-size: 0.9em; }
-        .valor { display: block; margin-top: 10px; font-size: 1.4em; font-weight: bold; color: var(--primario); }
+        h2 { color: var(--secondary); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 25px; background: var(--light); padding: 5px 10px; font-size: 1rem; text-transform: uppercase; }
         
-        .teoria { margin-top: 30px; padding: 20px; background: #eef9f1; border-radius: 8px; border-left: 5px solid var(--exito); }
+        .instrucciones { font-size: 0.8rem; color: #555; font-style: italic; margin-bottom: 15px; }
+
+        .ejercicio-lista { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+        .ej-item { background: #fafafa; border: 1px solid #eee; padding: 12px; border-radius: 8px; font-size: 0.9rem; position: relative; }
+        
+        .linea-rta { border-bottom: 1px solid #bbb; width: 100%; min-height: 25px; display: block; margin-top: 8px; }
+        
+        .tag { font-size: 0.6rem; font-weight: bold; padding: 2px 5px; border-radius: 3px; float: right; text-transform: uppercase; }
+        .f { background: #e3f2fd; color: #1976d2; } 
+        .m { background: #fff3e0; color: #f57c00; } 
+        .d { background: #ffebee; color: #d32f2f; } 
+
+        .btn-print { background: var(--primary); color: white; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; display: block; margin: 0 auto 20px; width: 100%; max-width: 250px; }
+        
+        @page { size: A5; margin: 0; } 
+        @media print { 
+            .btn-print { display: none; } 
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 12mm; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Academia Esparta: Combinatoria</h1>
+    <button class="btn-print" onclick="window.print()">📥 Imprimir Ficha Incompletas (A5)</button>
+
+    <div class="header">
+        <h1>ACADEMIA ESPARTA</h1>
+        <p>Entrenamiento: Ecuaciones Incompletas</p>
+    </div>
+
+    <h2>Tipo 1: Falta el término "b" (\(ax^2 + c = 0\))</h2>
+    <p class="instrucciones">Despeja la \(x^2\) y recuerda aplicar la raíz cuadrada (\(\pm \sqrt{}\)).</p>
     
-    <div class="grid-inputs">
-        <div class="input-group">
-            <label for="n">Total de elementos (n):</label>
-            <input type="number" id="n" value="5" min="1" oninput="calcular()">
-        </div>
-        <div class="input-group">
-            <label for="r">Elementos elegidos (r):</label>
-            <input type="number" id="r" value="3" min="1" oninput="calcular()">
-        </div>
+    <div class="ejercicio-lista">
+        <div class="ej-item"><span class="tag f">Fácil</span> 1) \(x^2 - 25 = 0\) <span class="linea-rta"></span></div>
+        <div class="ej-item"><span class="tag f">Fácil</span> 2) \(2x^2 - 18 = 0\) <span class="linea-rta"></span></div>
+        <div class="ej-item"><span class="tag m">Medio</span> 3) \(x^2 + 1 = 10\) <span class="linea-rta"></span></div>
+        <div class="ej-item"><span class="tag m">Medio</span> 4) \(3x^2 - 75 = 0\) <span class="linea-rta"></span></div>
+        <div class="ej-item"><span class="tag d">Difícil</span> 5) \(5x^2 - 100 = 80\) <span class="linea-rta"></span></div>
     </div>
 
-    <div class="resultados">
-        <div class="card">
-            <h3>Permutación (Sin rep.)</h3>
-            <span class="formula">n!</span>
-            <span id="res-p" class="valor">-</span>
-            <small>*Usa todos los elementos (n=r)</small>
-        </div>
-        <div class="card">
-            <h3>Variación (Sin rep.)</h3>
-            <span class="formula">n! / (n-r)!</span>
-            <span id="res-v" class="valor">-</span>
-        </div>
-        <div class="card">
-            <h3>Variación (Con rep.)</h3>
-            <span class="formula">n^r</span>
-            <span id="res-vr" class="valor">-</span>
-        </div>
-        <div class="card">
-            <h3>Combinación (Sin rep.)</h3>
-            <span class="formula">n! / [r!(n-r)!]</span>
-            <span id="res-c" class="valor">-</span>
-        </div>
-    </div>
+    <h2>Tipo 2: Falta el término "c" (\(ax^2 + bx = 0\))</h2>
+    <p class="instrucciones">Saca factor común \(x\). Una solución siempre es \(x = 0\).</p>
 
-    <div class="teoria">
-        <h3>💡 Recordatorio Rápido</h3>
-        <ul>
-            <li><strong>¿Importa el orden?</strong> Si la respuesta es SÍ, es Permutación o Variación.</li>
-            <li><strong>¿Usas todos los elementos?</strong> Si es SÍ, es Permutación. Si es NO, es Variación.</li>
-            <li><strong>Combinaciones:</strong> Úsalas cuando el orden NO importa (ej: elegir 2 frutas para un zumo).</li>
-        </ul>
+    <div class="ejercicio-lista">
+        <div class="ej-item"><span class="tag f">Fácil</span> 6) \(x^2 - 6x = 0\) <span class="linea-rta"></span></div>
+        <div class="ej-item"><span class="tag f">Fácil</span> 7) \(x^2 + 4x = 0\) <span class="linea-rta"></span></div>
+        <div class="ej-item"><span class="tag m">Medio</span> 8) \(3x^2 - 12x = 0\) <span class="linea-rta"></span></div>
+        <div class="ej-item"><span class="tag m">Medio</span> 9) \(5x^2 + 5x = 0\) <span class="linea-rta"></span></div>
+        <div class="ej-item"><span class="tag d">Difícil</span> 10) \(2x^2 = 10x\) <span class="linea-rta"></span></div>
     </div>
 </div>
-
-<script>
-    function factorial(num) {
-        if (num < 0) return 0;
-        if (num === 0) return 1;
-        let res = 1;
-        for (let i = 1; i <= num; i++) res *= i;
-        return res;
-    }
-
-    function calcular() {
-        const n = parseInt(document.getElementById('n').value);
-        const r = parseInt(document.getElementById('r').value);
-
-        if (isNaN(n) || isNaN(r)) return;
-
-        // Permutación (n!)
-        document.getElementById('res-p').innerText = factorial(n).toLocaleString();
-
-        // Variación n! / (n-r)!
-        if (n >= r) {
-            const v = factorial(n) / factorial(n - r);
-            document.getElementById('res-v').innerText = v.toLocaleString();
-            
-            // Combinación n! / (r! * (n-r)!)
-            const c = v / factorial(r);
-            document.getElementById('res-c').innerText = c.toLocaleString();
-        } else {
-            document.getElementById('res-v').innerText = "n debe ser ≥ r";
-            document.getElementById('res-c').innerText = "n debe ser ≥ r";
-        }
-
-        // Variación con repetición n^r
-        document.getElementById('res-vr').innerText = Math.pow(n, r).toLocaleString();
-    }
-
-    // Inicializar
-    calcular();
-</script>
 
 </body>
 </html>
