@@ -14,7 +14,7 @@
         
         * { box-sizing: border-box; }
         html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; color: var(--dark); padding: 20px; line-height: 1.6; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; color: var(--dark); padding: 20px; line-height: 1.7; }
         
         .container { 
             max-width: 210mm; 
@@ -30,17 +30,39 @@
         .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; font-size: 1.6rem; }
 
         h2 { color: var(--secondary); border-left: 4px solid var(--accent); padding-left: 12px; margin-top: 30px; background: var(--light); padding: 8px 12px; font-size: 1.1rem; text-transform: uppercase; border-bottom: 1px solid #eee; }
+        
+        /* SOLUCIÓN AL TÍTULO PEGADO */
+        .titulo-seccion-math {
+            display: inline-block;
+            padding: 0 5px;
+        }
+
         h3 { color: var(--primary); font-size: 1rem; margin-top: 20px; font-weight: 700; border-bottom: 1px solid #eee; }
 
         p, li, div { font-size: 0.85rem; }
 
         .teoria-box { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid var(--primary); }
-        .formula-display { border: 2px solid var(--primary); padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0; font-size: 1.5rem; background: #fff; }
         
+        .formula-display { 
+            border: 2px solid var(--primary); 
+            padding: 25px 10px; 
+            border-radius: 8px; 
+            text-align: center; 
+            margin: 25px 0; 
+            font-size: 1.6rem; 
+            background: #fff;
+        }
+        
+        .math-step {
+            display: block;
+            margin: 15px 0;
+            padding-left: 10px;
+            font-size: 1.1rem;
+        }
+
         .desarrollo-total { background: #fffdf2; border: 1px solid #eadd99; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #f39c12; }
-        .paso-bloque { margin-bottom: 15px; display: block; }
-        .operacion-linea { display: block; margin: 8px 0; font-family: "Courier New", Courier, monospace; font-weight: 600; color: #333; }
-        .resaltado-final { background: #fff9db; font-weight: 700; padding: 4px 10px; border: 1px solid #f39c12; display: inline-block; margin-top: 10px; }
+        .paso-bloque { margin-bottom: 10px; display: block; font-weight: 600; color: var(--secondary); }
+        .resaltado-final { background: #fff9db; font-weight: 700; padding: 6px 12px; border: 1px solid #f39c12; display: inline-block; margin-top: 15px; font-size: 1rem; }
 
         .btn-print { background: var(--primary); color: white; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; display: block; margin: 0 auto 20px; width: 100%; max-width: 300px; }
         
@@ -55,16 +77,17 @@
 <body>
 
 <div class="container">
-    <button class="btn-print" onclick="window.print()">📥 Imprimir Guía Detallada (A4)</button>
+    <button class="btn-print" onclick="window.print()">📥 Imprimir Guía Corregida (A4)</button>
 
     <div class="header">
         <h1>ACADEMIA ESPARTA</h1>
-        <p>Ecuaciones de 2º Grado: Resolución Paso a Paso sin Saltos</p>
+        <p>Ecuaciones de 2º Grado: Manual de Resolución Técnica</p>
     </div>
 
-    <h2>1. Ecuaciones Completas: \(ax^2 + bx + c = 0\)</h2>
+    <h2>1. ECUACIONES COMPLETAS: <span class="titulo-seccion-math">\(a x^2 \, + \, b x \, + \, c \, = \, 0\)</span></h2>
+    
     <div class="teoria-box">
-        Para resolver estas ecuaciones usamos la <strong>Fórmula General</strong>. Es vital identificar bien los signos de <em>a</em>, <em>b</em> y <em>c</em>.
+        Para las completas usamos la <strong>Fórmula General</strong>. Hemos separado los cálculos para evitar errores con los signos y las raíces.
     </div>
     
     <div class="formula-display">
@@ -74,87 +97,68 @@
     <h3>A. Caso con 2 Soluciones Reales</h3>
     <div class="desarrollo-total">
         <strong>Ejercicio: \(x^2 - 5x + 6 = 0\)</strong><br><br>
-        <span class="paso-bloque"><strong>Paso 1:</strong> Identificar coeficientes.</span>
-        <span class="operacion-linea">a = 1 | b = -5 | c = 6</span>
         
-        <span class="paso-bloque"><strong>Paso 2:</strong> Sustituir en la fórmula.</span>
-        <span class="operacion-linea">\(x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4 \cdot 1 \cdot 6}}{2 \cdot 1}\)</span>
+        <span class="paso-bloque">1. Valores de los coeficientes:</span>
+        <div class="math-step">\(a = 1 \quad | \quad b = -5 \quad | \quad c = 6\)</div>
         
-        <span class="paso-bloque"><strong>Paso 3:</strong> Calcular el interior de la raíz (Discriminante).</span>
-        <span class="operacion-linea">Potencia: \((-5)^2 = 25\)</span>
-        <span class="operacion-linea">Multiplicación: \(4 \cdot 1 \cdot 6 = 24\)</span>
-        <span class="operacion-linea">Resta: \(25 - 24 = 1\)</span>
+        <span class="paso-bloque">2. Aplicación de la fórmula:</span>
+        <div class="math-step">\(x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4 \cdot 1 \cdot 6}}{2 \cdot 1}\)</div>
         
-        <span class="paso-bloque"><strong>Paso 4:</strong> Resolver la raíz y simplificar.</span>
-        <span class="operacion-linea">\(x = \frac{5 \pm \sqrt{1}}{2} \implies x = \frac{5 \pm 1}{2}\)</span>
+        <span class="paso-bloque">3. Desarrollo del interior de la raíz:</span>
+        <div class="math-step">\(b^2 = (-5)^2 = 25\)</div>
+        <div class="math-step">\(4 \cdot a \cdot c = 4 \cdot 1 \cdot 6 = 24\)</div>
+        <div class="math-step">\(25 - 24 = 1\)</div>
         
-        <span class="paso-bloque"><strong>Paso 5:</strong> Separar los dos caminos (+ y -).</span>
-        <span class="operacion-linea">Camino positivo: \(x_1 = \frac{5 + 1}{2} = \frac{6}{2} = 3\)</span>
-        <span class="operacion-linea">Camino negativo: \(x_2 = \frac{5 - 1}{2} = \frac{4}{2} = 2\)</span>
-        <span class="resaltado-final">RESULTADO: x = 3, x = 2</span>
+        <span class="paso-bloque">4. Simplificación final:</span>
+        <div class="math-step">\(x = \frac{5 \pm \sqrt{1}}{2} \implies x = \frac{5 \pm 1}{2}\)</div>
+        
+        <span class="paso-bloque">5. Obtención de soluciones:</span>
+        <div class="math-step">\(x_1 = \frac{5 + 1}{2} = \frac{6}{2} = 3\)</div>
+        <div class="math-step">\(x_2 = \frac{5 - 1}{2} = \frac{4}{2} = 2\)</div>
+        
+        <div class="resaltado-final">RESULTADO: x = 3, x = 2</div>
     </div>
 
-    <h3>B. Caso con 1 Solución Única</h3>
+    <h3>B. Caso con Solución Única</h3>
     <div class="desarrollo-total">
         <strong>Ejercicio: \(x^2 - 6x + 9 = 0\)</strong><br><br>
-        <span class="operacion-linea">a = 1 | b = -6 | c = 9</span>
-        <span class="operacion-linea">\(x = \frac{-(-6) \pm \sqrt{(-6)^2 - 4 \cdot 1 \cdot 9}}{2 \cdot 1}\)</span>
-        <span class="operacion-linea">Raíz: \(\sqrt{36 - 36} = \sqrt{0} = 0\)</span>
-        <span class="operacion-linea">\(x = \frac{6 \pm 0}{2} = \frac{6}{2} = 3\)</span>
-        <span class="resaltado-final">RESULTADO: x = 3 (Solución doble)</span>
+        <div class="math-step">\(a = 1 \quad | \quad b = -6 \quad | \quad c = 9\)</div>
+        <div class="math-step">\(x = \frac{-(-6) \pm \sqrt{(-6)^2 - 4 \cdot 1 \cdot 9}}{2 \cdot 1}\)</div>
+        <div class="math-step">\(x = \frac{6 \pm \sqrt{36 - 36}}{2} = \frac{6 \pm \sqrt{0}}{2}\)</div>
+        <div class="math-step">\(x = \frac{6 \pm 0}{2} = 3\)</div>
+        <div class="resaltado-final">RESULTADO: x = 3 (Doble)</div>
     </div>
 
-    <h3>C. Caso Sin Solución</h3>
+    <h3>C. Caso Sin Solución Real</h3>
     <div class="desarrollo-total">
         <strong>Ejercicio: \(x^2 + 2x + 5 = 0\)</strong><br><br>
-        <span class="operacion-linea">a = 1 | b = 2 | c = 5</span>
-        <span class="operacion-linea">\(x = \frac{-2 \pm \sqrt{2^2 - 4 \cdot 1 \cdot 5}}{2 \cdot 1}\)</span>
-        <span class="operacion-linea">Raíz: \(\sqrt{4 - 20} = \sqrt{-16}\)</span>
-        <span class="paso-bloque">Como no existe la raíz de un número negativo en los números reales:</span>
-        <span class="resaltado-final">RESULTADO: No tiene solución real.</span>
+        <div class="math-step">\(a = 1 \quad | \quad b = 2 \quad | \quad c = 5\)</div>
+        <div class="math-step">\(x = \frac{-2 \pm \sqrt{2^2 - 4 \cdot 1 \cdot 5}}{2 \cdot 1}\)</div>
+        <div class="math-step">\(x = \frac{-2 \pm \sqrt{4 - 20}}{2} = \frac{-2 \pm \sqrt{-16}}{2}\)</div>
+        <p><em>Como no existe la raíz de un número negativo en el campo de los números reales:</em></p>
+        <div class="resaltado-final">RESULTADO: Sin solución real.</div>
     </div>
 
-    <h2>2. Incompletas Tipo 1: \(ax^2 + c = 0\)</h2>
-    <div class="teoria-box">Se resuelven despejando la \(x^2\) como si fuera una ecuación normal y al final se hace la raíz.</div>
+    <h2>2. INCOMPLETAS TIPO 1: <span class="titulo-seccion-math">\(a x^2 \, + \, c \, = \, 0\)</span></h2>
+    <div class="teoria-box">Despejamos el término al cuadrado y aplicamos raíz al final.</div>
 
-    <h3>Fácil</h3>
     <div class="desarrollo-total">
-        <strong>Ejercicio: \(x^2 - 25 = 0\)</strong><br><br>
-        <span class="operacion-linea">1. Pasamos el 25 sumando: \(x^2 = 25\)</span>
-        <span class="operacion-linea">2. Hacemos raíz cuadrada: \(x = \pm \sqrt{25}\)</span>
-        <span class="resaltado-final">RESULTADO: x = 5, x = -5</span>
+        <strong>Ejemplo Difícil: \(3x^2 - 48 = 0\)</strong><br><br>
+        <div class="math-step">\(3x^2 = 48\)</div>
+        <div class="math-step">\(x^2 = \frac{48}{3} = 16\)</div>
+        <div class="math-step">\(x = \pm \sqrt{16}\)</div>
+        <div class="resaltado-final">RESULTADO: x = 4, x = -4</div>
     </div>
 
-    <h3>Difícil</h3>
-    <div class="desarrollo-total">
-        <strong>Ejercicio: \(3x^2 - 48 = 0\)</strong><br><br>
-        <span class="operacion-linea">1. Pasamos el 48: \(3x^2 = 48\)</span>
-        <span class="operacion-linea">2. El 3 pasa dividiendo: \(x^2 = \frac{48}{3}\)</span>
-        <span class="operacion-linea">3. Resolvemos división: \(x^2 = 16\)</span>
-        <span class="operacion-linea">4. Raíz: \(x = \pm \sqrt{16}\)</span>
-        <span class="resaltado-final">RESULTADO: x = 4, x = -4</span>
-    </div>
+    <h2>3. INCOMPLETAS TIPO 2: <span class="titulo-seccion-math">\(a x^2 \, + \, b x \, = \, 0\)</span></h2>
+    <div class="teoria-box">Extraemos factor común \(x\). Recuerda que una solución siempre es 0.</div>
 
-    <h2>3. Incompletas Tipo 2: \(ax^2 + bx = 0\)</h2>
-    <div class="teoria-box">Se resuelven sacando <strong>Factor Común</strong>. Recuerda: una solución siempre es cero.</div>
-
-    <h3>Fácil</h3>
     <div class="desarrollo-total">
-        <strong>Ejercicio: \(x^2 - 7x = 0\)</strong><br><br>
-        <span class="operacion-linea">1. Sacamos x fuera: \(x \cdot (x - 7) = 0\)</span>
-        <span class="paso-bloque">2. Para que una multiplicación de cero, uno de los dos debe ser cero:</span>
-        <span class="operacion-linea">Solución 1: x = 0</span>
-        <span class="operacion-linea">Solución 2: x - 7 = 0 \(\implies\) x = 7</span>
-        <span class="resaltado-final">RESULTADO: x = 0, x = 7</span>
-    </div>
-
-    <h3>Difícil</h3>
-    <div class="desarrollo-total">
-        <strong>Ejercicio: \(5x^2 + 20x = 0\)</strong><br><br>
-        <span class="operacion-linea">1. Sacamos factor común (5x): \(5x \cdot (x + 4) = 0\)</span>
-        <span class="operacion-linea">2. Igualamos la primera parte: \(5x = 0 \implies x = \frac{0}{5} = 0\)</span>
-        <span class="operacion-linea">3. Igualamos la segunda: \(x + 4 = 0 \implies x = -4\)</span>
-        <span class="resaltado-final">RESULTADO: x = 0, x = -4</span>
+        <strong>Ejemplo Difícil: \(5x^2 + 20x = 0\)</strong><br><br>
+        <div class="math-step">\(5x \cdot (x + 4) = 0\)</div>
+        <div class="math-step">\(5x = 0 \implies x = 0\)</div>
+        <div class="math-step">\(x + 4 = 0 \implies x = -4\)</div>
+        <div class="resaltado-final">RESULTADO: x = 0, x = -4</div>
     </div>
 </div>
 
