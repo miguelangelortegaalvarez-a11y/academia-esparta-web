@@ -17,9 +17,11 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
         :root {
-            /* NUEVO VERDE MENTA CLARITO CORPORATIVO (RECREADO DE LA FOTO) */
+            /* VERDE MENTA CLARITO CORPORATIVO (RECREADO DE LA FOTO) */
             --primary: #27ae60; 
             --accent: #ff8c00;
             --bg-light: #f4f8f8;
@@ -51,6 +53,10 @@
         /* BLOQUE DETALLADO DE OPERACIONES MATEMÁTICAS */
         .procedimiento-mates { background: #fafafa; border: 1px solid #eee; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid var(--primary); }
         .procedimiento-mates strong { color: var(--primary); }
+
+        /* ESTILOS PARA LA GRÁFICA */
+        .grafica-container { text-align: center; margin-top: 50px; padding: 30px; background: #fafafa; border-radius: 15px; border: 1px solid #eee; position: relative; }
+        .canvas-wrapper { max-width: 600px; margin: 0 auto; }
 
         footer { margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; color: #999; font-style: italic; }
     </style>
@@ -164,6 +170,159 @@
             </tr>
         </tbody>
     </table>
+
+    <div class="grafica-container">
+        <h2 class="seccion-titulo">5. Representación Gráfica</h2>
+        <p>Juntando todas las piezas del puzzle, la función queda representada de la siguiente manera. Podéis ver claramente la Asíntota Vertical en x=2 y la Horizontal en y=1:</p>
+        
+        <div class="canvas-wrapper">
+            <canvas id="graficaFuncion"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Paso 1: Generar los datos de la función
+        // Necesitamos dos series de datos porque la función se rompe en x=2
+        const generarDatos = () => {
+            const datosRamaIzquierda = []; // Para x < 2
+            const datosRamaDerecha = [];   // Para x > 2
+            
+            const minX = -10;
+            const maxX = 10;
+            const paso = 0.1; // Precisión del dibujo
+            const asintotaX = 2;
+            const margenAV = 0.2; // Evitar el fallo del dominio
+
+            // Rama izquierda
+            for (let x = minX; x <= asintotaX - margenAV; x += paso) {
+                const y = (x + 1) / (x - 2);
+                datosRamaIzquierda.push({x: parseFloat(x.toFixed(2)), y: parseFloat(y.toFixed(2))});
+            }
+
+            // Rama derecha
+            for (let x = asintotaX + margenAV; x <= maxX; x += paso) {
+                const y = (x + 1) / (x - 2);
+                datosRamaDerecha.push({x: parseFloat(x.toFixed(2)), y: parseFloat(y.toFixed(2))});
+            }
+
+            return { izq: datosRamaIzquierda, der: datosRamaDerecha };
+        };
+
+        const { izq, der } = generarDatos();
+
+        // Paso 2: Configurar Chart.js
+        const ctx = document.getElementById('graficaFuncion').getContext('2d');
+        const graficaFuncion = new Chart(ctx, {
+            type: 'scatter', // Usamos scatter para unir puntos libremente
+            data: {
+                datasets: [
+                    {
+                        label: 'f(x) = (x+1)/(x-2)',
+                        data: izq,
+                        showLine: true,
+                        fill: false,
+                        borderColor: '#27ae60', // NUEVO VERDE MENTA ESPARTA
+                        backgroundColor: '#27ae60',
+                        borderWidth: 3,
+                        pointRadius: 0, // No dibujar los puntos, solo la línea
+                    },
+                    {
+                        // Segunda rama para no unir puntos a través de la asíntota
+                        data: der,
+                        showLine: true,
+                        fill: false,
+                        borderColor: '#27ae60', // NUEVO VERDE MENTA ESPARTA
+                        backgroundColor: '#27ae60',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                    },
+                    // Línea de la Asíntota Vertical
+                    {
+                        label: 'A.V. x = 2',
+                        data: [{x: 2, y: -20}, {x: 2, y: 20}],
+                        showLine: true,
+                        fill: false,
+                        borderColor: '#ff8c00', // Naranja para asíntotas
+                        borderDash: [5, 5], // Línea discontinua
+                        borderWidth: 2,
+                        pointRadius: 0,
+                    },
+                    // Línea de la Asíntota Horizontal
+                    {
+                        label: 'A.H. y = 1',
+                        data: [{x: -10, y: 1}, {x: 10, y: 1}],
+                        showLine: true,
+                        fill: false,
+                        borderColor: '#ff8c00',
+                        borderDash: [5, 5],
+                        borderWidth: 2,
+                        pointRadius: 0,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        min: -10,
+                        max: 10,
+                        grid: {
+                            color: '#eee',
+                            lineWidth: 1
+                        },
+                        title: {
+                            display: true,
+                            text: 'Eje X',
+                            color: '#666',
+                            font: { family: 'Poppins', size: 14 }
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        min: -10, // Limitamos el eje Y para que se vea bien
+                        max: 10,
+                        grid: {
+                            color: '#eee',
+                            lineWidth: 1
+                        },
+                        title: {
+                            display: true,
+                            text: 'Eje Y',
+                            color: '#666',
+                            font: { family: 'Poppins', size: 14 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: { family: 'Poppins' },
+                            filter: function(item, chart) {
+                                // Ocultar el label de la segunda rama para no repetirlo
+                                return item.text.includes('f(x)') || item.text.includes('A.V.') || item.text.includes('A.H.');
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        callbacks: {
+                            label: function(context) {
+                                if (context.dataset.label && context.dataset.label.includes('f(x)')) {
+                                    return `(${context.parsed.x}, ${context.parsed.y})`;
+                                }
+                                return context.dataset.label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 
     <footer>
         "Menos charla y más derivadas." - Academia Esparta.
