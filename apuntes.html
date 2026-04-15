@@ -16,7 +16,6 @@
       };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
@@ -30,28 +29,14 @@
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
         .main-container { background: var(--white); max-width: 850px; width: 100%; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; }
 
-        /* BOTÓN DE IMPRIMIR */
         .print-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: background 0.3s;
+            position: absolute; top: 20px; right: 20px; background-color: var(--primary);
+            color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer;
+            font-family: 'Poppins', sans-serif; font-weight: 600; display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: background 0.3s;
         }
         .print-button:hover { background-color: #1e7a4d; }
 
-        /* OCULTAR BOTÓN AL IMPRIMIR */
         @media print {
             .print-button { display: none; }
             body { background-color: white; padding: 0; }
@@ -87,133 +72,108 @@
 <body>
 
 <div class="main-container">
-    <button class="print-button" onclick="window.print()">
-        <span>🖨️</span> Imprimir / Pasar a PDF
-    </button>
+    <button class="print-button" onclick="window.print()"><span>🖨️</span> Imprimir / PDF</button>
 
     <div class="barca-header">💙 ❤️ Visca el Barça, campeón de Champions ❤️ 💙</div>
     <div class="header-title">ANÁLISIS DE FUNCIÓN RACIONAL</div>
     <div class="subtitle">Material preparado para: <strong>Los Charlatanes</strong></div>
 
     <div style="text-align: center; font-size: 1.8em; margin: 30px 0;">
-        $$f(x) = \frac{x+1}{x-2}$$
+        $$f(x) = \frac{x^2+5}{x-3}$$
     </div>
 
     <h2 class="seccion-titulo">1. El Dominio</h2>
-    <p>Igualamos el denominador a cero para encontrar el punto donde la función no existe:</p>
-    <div class="formula-block">
-        $x - 2 = 0 \implies x = 2$
-    </div>
-    <p><strong>Dominio:</strong> $D = \mathbb{R} \setminus \{2\}$</p>
+    <p>Buscamos el valor que anula el denominador:</p>
+    <div class="formula-block">$x - 3 = 0 \implies x = 3$</div>
+    <p><strong>Dominio:</strong> $D = \mathbb{R} \setminus \{3\}$</p>
 
     <h2 class="seccion-titulo">2. Asíntotas y Límites</h2>
     <h3 class="subseccion-titulo">A) Asíntota Vertical (A.V.)</h3>
     <div style="margin-left: 10px;">
-        <p>• <strong>Por la derecha:</strong> $$\lim_{x \to 2^+} f(x) = \frac{3}{0^+} = \color{red}{+\infty}$$</p>
-        <p>• <strong>Por la izquierda:</strong> $$\lim_{x \to 2^-} f(x) = \frac{3}{0^-} = \color{red}{-\infty}$$</p>
+        <p>• <strong>Por la derecha:</strong> $$\lim_{x \to 3^+} f(x) = \frac{14}{0^+} = \color{red}{+\infty}$$</p>
+        <p>• <strong>Por la izquierda:</strong> $$\lim_{x \to 3^-} f(x) = \frac{14}{0^-} = \color{red}{-\infty}$$</p>
     </div>
-    <p>Hay una <strong>A.V. en $x = 2$</strong>.</p>
+    <p>Hay una <strong>A.V. en $x = 3$</strong>.</p>
 
     <h3 class="subseccion-titulo">B) Asíntota Horizontal (A.H.)</h3>
-    <div style="text-align: center; margin: 20px 0;">
-        $$\lim_{x \to \pm\infty} \frac{x+1}{x-2} = 1$$
-    </div>
-    <p>Hay una <strong>A.H. en $y = 1$</strong>.</p>
+    <p>Grado Numerador (2) > Grado Denominador (1). <strong>No existe A.H.</strong></p>
 
     <h3 class="subseccion-titulo">C) Asíntota Oblicua (A.O.)</h3>
-    <p>⚠️ <strong>Nota para Charlatanes:</strong> Al existir asíntota horizontal, no hay oblicua.</p>
-
-    <h2 class="seccion-titulo">3. Monotonía (Crecimiento y Decrecimiento)</h2>
-    <p>Calculamos la primera derivada usando la regla del cociente:</p>
-    <div style="text-align: center; margin: 20px 0;">
-        $$f'(x) = \frac{-3}{(x-2)^2}$$
-    </div>
-
     <div class="procedimiento-mates">
-        <p><strong>Paso 1: Buscamos los puntos críticos.</strong> <br>
-        Igualamos $f'(x) = 0$:</p>
-        <div style="text-align: center; margin: 15px 0;">
-            $$\frac{-3}{(x-2)^2} = 0 \implies -3 = 0$$
-        </div>
-        <p>Contradicción. No hay puntos críticos. Estudiamos el signo en $x = 2$:</p>
+        Realizamos la división o usamos límites ($y = mx + n$):
+        <p>$$m = \lim_{x \to \infty} \frac{f(x)}{x} = 1$$</p>
+        <p>$$n = \lim_{x \to \infty} (f(x) - x) = 3$$</p>
+    </div>
+    <p>Hay una <strong>A.O. en $y = x + 3$</strong>.</p>
+
+    <h2 class="seccion-titulo">3. Monotonía</h2>
+    <p>Derivamos la función:</p>
+    <div style="text-align: center; margin: 20px 0;">
+        $$f'(x) = \frac{x^2 - 6x - 5}{(x-3)^2}$$
+    </div>
+    <div class="procedimiento-mates">
+        Igualamos $f'(x) = 0 \implies x^2 - 6x - 5 = 0$. <br>
+        Puntos críticos: <strong>$x \approx -0.74$</strong> y <strong>$x \approx 6.74$</strong>.
     </div>
 
     <table class="tabla-signos">
         <thead>
-            <tr><th>Intervalo</th><th>$(-\infty, 2)$</th><th>$(2, +\infty)$</th></tr>
+            <tr><th>Intervalo</th><th>$(-\infty, -0.74)$</th><th>$(-0.74, 3)$</th><th>$(3, 6.74)$</th><th>$(6.74, \infty)$</th></tr>
         </thead>
         <tbody>
-            <tr><td class="col-intervalo">Signo de $f'(x)$</td><td class="signo-neg">$-$</td><td class="signo-neg">$-$</td></tr>
-            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">↘ Decreciente</td><td class="conclusion">↘ Decreciente</td></tr>
+            <tr><td class="col-intervalo">Signo $f'(x)$</td><td class="signo-pos">$+$</td><td class="signo-neg">$-$</td><td class="signo-neg">$-$</td><td class="signo-pos">$+$</td></tr>
+            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">↗ Creciente</td><td class="conclusion">↘ Decreciente</td><td class="conclusion">↘ Decreciente</td><td class="conclusion">↗ Creciente</td></tr>
         </tbody>
     </table>
 
-    <h2 class="seccion-titulo">4. Curvatura (Concavidad y Convexidad)</h2>
-    <p>Calculamos la segunda derivada para analizar la forma de la curva:</p>
+    <h2 class="seccion-titulo">4. Curvatura</h2>
     <div style="text-align: center; margin: 20px 0;">
-        $$f''(x) = \frac{6}{(x-2)^3}$$
+        $$f''(x) = \frac{28}{(x-3)^3}$$
     </div>
-
-    <div class="procedimiento-mates">
-        <p><strong>Paso 1: Buscamos posibles puntos de inflexión.</strong> <br>
-        Igualamos $f''(x) = 0$:</p>
-        <div style="text-align: center; margin: 15px 0;">
-            $$\frac{6}{(x-2)^3} = 0 \implies 6 = 0$$
-        </div>
-        <p>Contradicción. No hay puntos de inflexión. Estudiamos el cambio en $x = 2$:</p>
-    </div>
-
     <table class="tabla-signos">
         <thead>
-            <tr><th>Intervalo</th><th>$(-\infty, 2)$</th><th>$(2, +\infty)$</th></tr>
+            <tr><th>Intervalo</th><th>$(-\infty, 3)$</th><th>$(3, +\infty)$</th></tr>
         </thead>
         <tbody>
-            <tr><td class="col-intervalo">Signo de $f''(x)$</td><td class="signo-neg">$-$</td><td class="signo-pos">$+$</td></tr>
-            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">∩ Convexa (Triste)</td><td class="conclusion">∪ Cóncava (Feliz)</td></tr>
+            <tr><td class="col-intervalo">Signo $f''(x)$</td><td class="signo-neg">$-$</td><td class="signo-pos">$+$</td></tr>
+            <tr><td class="col-intervalo">Resultado</td><td class="conclusion">∩ Convexa</td><td class="conclusion">∪ Cóncava</td></tr>
         </tbody>
     </table>
 
     <h2 class="seccion-titulo">5. Representación Gráfica</h2>
     <div class="grafica-box">
-        <div class="canvas-container">
-            <canvas id="miGrafica"></canvas>
-        </div>
+        <div class="canvas-container"><canvas id="miGrafica"></canvas></div>
     </div>
 
     <script>
         const ctx = document.getElementById('miGrafica').getContext('2d');
-        const dataIzq = [], dataDer = [];
-        for (let x = -10; x < 1.9; x += 0.1) dataIzq.push({x: x, y: (x+1)/(x-2)});
-        for (let x = 2.1; x <= 10; x += 0.1) dataDer.push({x: x, y: (x+1)/(x-2)});
+        const dIzq = [], dDer = [];
+        for (let x = -15; x < 2.8; x += 0.1) dIzq.push({x: x, y: (x*x+5)/(x-3)});
+        for (let x = 3.2; x <= 20; x += 0.1) dDer.push({x: x, y: (x*x+5)/(x-3)});
 
         new Chart(ctx, {
             type: 'scatter',
             data: {
                 datasets: [
-                    { label: 'f(x)', data: dataIzq, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
-                    { data: dataDer, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
-                    { label: 'A.V. (x=2)', data: [{x: 2, y: -10}, {x: 2, y: 10}], showLine: true, borderDash: [5, 5], borderColor: '#e74c3c', pointRadius: 0, fill: false },
-                    { label: 'A.H. (y=1)', data: [{x: -10, y: 1}, {x: 10, y: 1}], showLine: true, borderDash: [5, 5], borderColor: '#3498db', pointRadius: 0, fill: false }
+                    { label: 'f(x)', data: dIzq, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
+                    { data: dDer, showLine: true, borderColor: '#27ae60', borderWidth: 3, pointRadius: 0, fill: false },
+                    { label: 'A.V. (x=3)', data: [{x: 3, y: -40}, {x: 3, y: 40}], showLine: true, borderDash: [5, 5], borderColor: '#e74c3c', pointRadius: 0, fill: false },
+                    { label: 'A.O. (y=x+3)', data: [{x: -15, y: -12}, {x: 20, y: 23}], showLine: true, borderDash: [5, 5], borderColor: '#3498db', pointRadius: 0, fill: false }
                 ]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
                 scales: {
-                    x: { type: 'linear', min: -10, max: 10, grid: { color: '#eee' } },
-                    y: { min: -10, max: 10, grid: { color: '#eee' } }
+                    x: { type: 'linear', min: -10, max: 15, grid: { color: '#eee' } },
+                    y: { min: -15, max: 25, grid: { color: '#eee' } }
                 },
-                plugins: {
-                    legend: { labels: { filter: (item) => item.text !== undefined } }
-                }
+                plugins: { legend: { labels: { filter: (item) => item.text !== undefined } } }
             },
             plugins: [{
                 id: 'custom_axis',
                 beforeDraw: (chart) => {
                     const {ctx, chartArea: {left, top, width, height}, scales: {x, y}} = chart;
-                    ctx.save();
-                    ctx.strokeStyle = '#000000';
-                    ctx.lineWidth = 3;
+                    ctx.save(); ctx.strokeStyle = '#000000'; ctx.lineWidth = 3;
                     const yZero = y.getPixelForValue(0);
                     ctx.beginPath(); ctx.moveTo(left, yZero); ctx.lineTo(left + width, yZero); ctx.stroke();
                     const xZero = x.getPixelForValue(0);
