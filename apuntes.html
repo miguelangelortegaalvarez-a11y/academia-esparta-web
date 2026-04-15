@@ -19,114 +19,35 @@
     
     <style>
         :root {
-            --primary: #1e7a5d; /* Verde corporativo Esparta */
-            --accent: #ff8c00; /* Naranja corporativo */
+            --primary: #1e7a5d;
+            --accent: #ff8c00;
             --bg-light: #f4f8f8;
             --white: #ffffff;
+            --blue-soft: #eaf4fb;
         }
 
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background-color: var(--bg-light); 
-            color: #333; 
-            margin: 0; 
-            padding: 20px; 
-            display: flex; 
-            justify-content: center; 
-        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .main-container { background: var(--white); max-width: 850px; width: 100%; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
-        .main-container { 
-            background: var(--white); 
-            max-width: 850px; 
-            width: 100%; 
-            padding: 40px; 
-            border-radius: 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-        }
+        .barca-header { text-align: center; font-weight: bold; color: #a50044; font-size: 1.4em; margin-bottom: 5px; text-transform: uppercase; }
+        .header-title { text-align: center; color: var(--primary); font-size: 2em; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
+        .subtitle { text-align: center; color: #666; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 30px; }
 
-        .barca-header { 
-            text-align: center; 
-            font-weight: bold; 
-            color: #a50044; 
-            font-size: 1.4em; 
-            margin-bottom: 5px; 
-            text-transform: uppercase; 
-        }
+        h2.seccion-titulo { color: var(--primary); font-size: 1.4em; border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 40px; font-weight: 600; }
+        h3.subseccion-titulo { color: var(--primary); font-size: 1.2em; margin-top: 25px; font-weight: 600; }
 
-        .header-title { 
-            text-align: center; 
-            color: var(--primary); 
-            font-size: 2em; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            margin-top: 10px; 
-        }
+        .formula-block { background: var(--primary); color: white; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; font-size: 1.2em; }
 
-        .subtitle { 
-            text-align: center; 
-            color: #666; 
-            border-bottom: 2px solid var(--primary); 
-            padding-bottom: 20px; 
-            margin-bottom: 30px; 
-        }
+        /* NUEVO ESTILO DE TABLA DE SIGNOS */
+        .tabla-signos { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .tabla-signos th { background: var(--primary); color: white; padding: 12px; font-weight: 600; border: 1px solid #eee; }
+        .tabla-signos td { padding: 15px; text-align: center; border: 1px solid #eee; font-weight: 500; }
+        .col-intervalo { background: var(--bg-light); font-weight: 700 !important; color: var(--primary); width: 30%; }
+        .signo-pos { color: #27ae60; font-weight: bold; font-size: 1.2em; }
+        .signo-neg { color: #e74c3c; font-weight: bold; font-size: 1.2em; }
+        .conclusion { font-style: italic; font-weight: 700; color: #2c3e50; }
 
-        h2.seccion-titulo { 
-            color: var(--primary); 
-            font-size: 1.4em; 
-            border-left: 5px solid var(--accent); 
-            padding-left: 15px; 
-            margin-top: 40px; 
-            font-weight: 600;
-        }
-
-        h3.subseccion-titulo { 
-            color: var(--primary); 
-            font-size: 1.2em; 
-            margin-top: 25px; 
-            font-weight: 600;
-        }
-
-        /* CUADRO VERDE CORPORATIVO CORREGIDO */
-        .formula-block { 
-            background: var(--primary); 
-            color: white; 
-            padding: 20px; 
-            border-radius: 8px; 
-            margin: 20px 0; 
-            text-align: center;
-            font-size: 1.2em;
-        }
-
-        .recta-container { 
-            display: flex; 
-            justify-content: center; 
-            margin: 20px 0; 
-        }
-
-        .recta-num { 
-            text-align: center; 
-            background: #fafafa; 
-            border: 2px dashed #004d98; 
-            color: #004d98; 
-            padding: 15px; 
-            border-radius: 10px; 
-            min-width: 320px; 
-            font-weight: 600;
-        }
-
-        footer { 
-            margin-top: 60px; 
-            text-align: center; 
-            border-top: 1px solid #eee; 
-            padding-top: 20px; 
-            color: #999; 
-            font-style: italic; 
-        }
-
-        /* Estilo para los puntos de la lista de límites */
-        .limites-list {
-            margin-left: 10px;
-        }
+        footer { margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; color: #999; font-style: italic; }
     </style>
 </head>
 <body>
@@ -142,60 +63,85 @@
 
     <h2 class="seccion-titulo">1. El Dominio</h2>
     <p>Igualamos el denominador a cero para encontrar el punto donde la función no existe:</p>
-    
     <div class="formula-block">
         $x - 2 = 0 \implies x = 2$
     </div>
-    
     <p><strong>Dominio:</strong> $D = \mathbb{R} \setminus \{2\}$</p>
 
     <h2 class="seccion-titulo">2. Asíntotas y Límites</h2>
-    
     <h3 class="subseccion-titulo">A) Asíntota Vertical (A.V.)</h3>
-    <p>Estudiamos los límites laterales en $x = 2$:</p>
-    
-    <div class="limites-list">
+    <div style="margin-left: 10px;">
         <p>• <strong>Por la derecha:</strong> $$\lim_{x \to 2^+} f(x) = \frac{3}{0^+} = \color{red}{+\infty}$$</p>
         <p>• <strong>Por la izquierda:</strong> $$\lim_{x \to 2^-} f(x) = \frac{3}{0^-} = \color{red}{-\infty}$$</p>
     </div>
-    
     <p>Hay una <strong>A.V. en $x = 2$</strong>.</p>
 
     <h3 class="subseccion-titulo">B) Asíntota Horizontal (A.H.)</h3>
-    <p>Calculamos el límite cuando $x$ tiende a infinito:</p>
     <div style="text-align: center; margin: 20px 0;">
         $$\lim_{x \to \pm\infty} \frac{x+1}{x-2} = 1$$
     </div>
     <p>Hay una <strong>A.H. en $y = 1$</strong>.</p>
 
     <h3 class="subseccion-titulo">C) Asíntota Oblicua (A.O.)</h3>
-    <p>⚠️ <strong>Nota para Charlatanes:</strong> Como existe asíntota horizontal, no hay oblicua. ¡Un problema menos!</p>
+    <p>⚠️ <strong>Nota para Charlatanes:</strong> Al existir asíntota horizontal, no hay oblicua.</p>
 
     <h2 class="seccion-titulo">3. Monotonía (Crecimiento y Decrecimiento)</h2>
-    <p>Calculamos la primera derivada usando la regla del cociente:</p>
+    <p>Calculamos la primera derivada y estudiamos su signo en los intervalos definidos por el dominio:</p>
+    
     <div style="text-align: center; margin: 20px 0;">
-        $$f'(x) = \frac{1 \cdot (x-2) - (x+1) \cdot 1}{(x-2)^2} = \frac{-3}{(x-2)^2}$$
+        $$f'(x) = \frac{-3}{(x-2)^2}$$
     </div>
 
-    <div class="recta-container">
-        <div class="recta-num">
-            <--- $f'(x) < 0$ ---> (2) <--- $f'(x) < 0$ ---> <br>
-            ↘ DECRECE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↘ DECRECE
-        </div>
-    </div>
+    <table class="tabla-signos">
+        <thead>
+            <tr>
+                <th>Intervalo</th>
+                <th>$(-\infty, 2)$</th>
+                <th>$(2, +\infty)$</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-intervalo">Signo de $f'(x)$</td>
+                <td class="signo-neg">$-$</td>
+                <td class="signo-neg">$-$</td>
+            </tr>
+            <tr>
+                <td class="col-intervalo">Resultado</td>
+                <td class="conclusion">↘ Decreciente</td>
+                <td class="conclusion">↘ Decreciente</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <h2 class="seccion-titulo">4. Curvatura</h2>
-    <p>Calculamos la segunda derivada para ver la forma de la función:</p>
+    <h2 class="seccion-titulo">4. Curvatura (Concavidad y Convexidad)</h2>
+    <p>Calculamos la segunda derivada para analizar la forma de la curva:</p>
+    
     <div style="text-align: center; margin: 20px 0;">
         $$f''(x) = \frac{6}{(x-2)^3}$$
     </div>
 
-    <div class="recta-container">
-        <div class="recta-num">
-            <--- $f''(x) < 0$ ---> (2) <--- $f''(x) > 0$ ---> <br>
-            ∩ CONVEXA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ∪ CÓNCAVA
-        </div>
-    </div>
+    <table class="tabla-signos">
+        <thead>
+            <tr>
+                <th>Intervalo</th>
+                <th>$(-\infty, 2)$</th>
+                <th>$(2, +\infty)$</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-intervalo">Signo de $f''(x)$</td>
+                <td class="signo-neg">$-$</td>
+                <td class="signo-pos">$+$</td>
+            </tr>
+            <tr>
+                <td class="col-intervalo">Resultado</td>
+                <td class="conclusion">∩ Convexa (Triste)</td>
+                <td class="conclusion">∪ Cóncava (Feliz)</td>
+            </tr>
+        </tbody>
+    </table>
 
     <footer>
         "Menos charla y más derivadas." - Academia Esparta.
