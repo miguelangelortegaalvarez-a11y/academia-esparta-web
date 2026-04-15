@@ -21,16 +21,42 @@
     
     <style>
         :root {
-            /* COLORES CORPORATIVOS (Inalterados) */
             --primary: #27ae60; 
             --accent: #ff8c00;
             --bg-light: #f4f8f8;
             --white: #ffffff;
         }
 
-        /* ESTILOS CSS GENERALES (Inalterados) */
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .main-container { background: var(--white); max-width: 850px; width: 100%; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .main-container { background: var(--white); max-width: 850px; width: 100%; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; }
+
+        /* BOTÓN DE IMPRIMIR */
+        .print-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+        .print-button:hover { background-color: #1e7a4d; }
+
+        /* OCULTAR BOTÓN AL IMPRIMIR */
+        @media print {
+            .print-button { display: none; }
+            body { background-color: white; padding: 0; }
+            .main-container { box-shadow: none; border-radius: 0; max-width: 100%; padding: 0; }
+        }
 
         .barca-header { text-align: center; font-weight: bold; color: #a50044; font-size: 1.4em; margin-bottom: 5px; text-transform: uppercase; }
         .header-title { text-align: center; color: var(--primary); font-size: 2em; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
@@ -52,7 +78,6 @@
         .procedimiento-mates { background: #fafafa; border: 1px solid #eee; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid var(--primary); }
         .procedimiento-mates strong { color: var(--primary); }
 
-        /* Contenedor de la gráfica (Inalterado) */
         .grafica-box { text-align: center; margin-top: 50px; padding: 20px; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
         .canvas-container { width: 100%; max-width: 600px; margin: 0 auto; background: white; border-radius: 10px; padding: 10px; border: 1px solid #ddd; }
 
@@ -62,6 +87,10 @@
 <body>
 
 <div class="main-container">
+    <button class="print-button" onclick="window.print()">
+        <span>🖨️</span> Imprimir / Pasar a PDF
+    </button>
+
     <div class="barca-header">💙 ❤️ Visca el Barça, campeón de Champions ❤️ 💙</div>
     <div class="header-title">ANÁLISIS DE FUNCIÓN RACIONAL</div>
     <div class="subtitle">Material preparado para: <strong>Los Charlatanes</strong></div>
@@ -102,7 +131,7 @@
 
     <div class="procedimiento-mates">
         <p><strong>Paso 1: Buscamos los puntos críticos.</strong> <br>
-        Para ello, igualamos la primera derivada a cero ($f'(x) = 0$):</p>
+        Igualamos $f'(x) = 0$:</p>
         <div style="text-align: center; margin: 15px 0;">
             $$\frac{-3}{(x-2)^2} = 0 \implies -3 = 0$$
         </div>
@@ -127,7 +156,7 @@
 
     <div class="procedimiento-mates">
         <p><strong>Paso 1: Buscamos posibles puntos de inflexión.</strong> <br>
-        Igualamos la segunda derivada a cero ($f''(x) = 0$):</p>
+        Igualamos $f''(x) = 0$:</p>
         <div style="text-align: center; margin: 15px 0;">
             $$\frac{6}{(x-2)^3} = 0 \implies 6 = 0$$
         </div>
@@ -145,8 +174,6 @@
     </table>
 
     <h2 class="seccion-titulo">5. Representación Gráfica</h2>
-    <p>A continuación se muestra la representación de la función con los ejes principales en negro y las asíntotas discontinuas en color:</p>
-    
     <div class="grafica-box">
         <div class="canvas-container">
             <canvas id="miGrafica"></canvas>
@@ -155,7 +182,6 @@
 
     <script>
         const ctx = document.getElementById('miGrafica').getContext('2d');
-        
         const dataIzq = [], dataDer = [];
         for (let x = -10; x < 1.9; x += 0.1) dataIzq.push({x: x, y: (x+1)/(x-2)});
         for (let x = 2.1; x <= 10; x += 0.1) dataDer.push({x: x, y: (x+1)/(x-2)});
@@ -174,52 +200,24 @@
                 responsive: true,
                 maintainAspectRatio: true,
                 scales: {
-                    x: {
-                        type: 'linear',
-                        min: -10,
-                        max: 10,
-                        grid: { color: '#eee', lineWidth: 1 },
-                        ticks: { color: '#666' }
-                    },
-                    y: {
-                        min: -10,
-                        max: 10,
-                        grid: { color: '#eee', lineWidth: 1 },
-                        ticks: { color: '#666' }
-                    }
+                    x: { type: 'linear', min: -10, max: 10, grid: { color: '#eee' } },
+                    y: { min: -10, max: 10, grid: { color: '#eee' } }
                 },
                 plugins: {
                     legend: { labels: { filter: (item) => item.text !== undefined } }
                 }
             },
             plugins: [{
-                id: 'custom_canvas_background_color',
+                id: 'custom_axis',
                 beforeDraw: (chart) => {
-                    const ctx = chart.ctx;
-                    const {left, top, width, height} = chart.chartArea;
-                    const xAxis = chart.scales.x;
-                    const yAxis = chart.scales.y;
-
+                    const {ctx, chartArea: {left, top, width, height}, scales: {x, y}} = chart;
                     ctx.save();
-                    
-                    // EJE X (Y=0)
-                    const yZero = yAxis.getPixelForValue(0);
-                    ctx.beginPath();
                     ctx.strokeStyle = '#000000';
                     ctx.lineWidth = 3;
-                    ctx.moveTo(left, yZero);
-                    ctx.lineTo(left + width, yZero);
-                    ctx.stroke();
-
-                    // EJE Y (X=0)
-                    const xZero = xAxis.getPixelForValue(0);
-                    ctx.beginPath();
-                    ctx.strokeStyle = '#000000';
-                    ctx.lineWidth = 3;
-                    ctx.moveTo(xZero, top);
-                    ctx.lineTo(xZero, top + height);
-                    ctx.stroke();
-
+                    const yZero = y.getPixelForValue(0);
+                    ctx.beginPath(); ctx.moveTo(left, yZero); ctx.lineTo(left + width, yZero); ctx.stroke();
+                    const xZero = x.getPixelForValue(0);
+                    ctx.beginPath(); ctx.moveTo(xZero, top); ctx.lineTo(xZero, top + height); ctx.stroke();
                     ctx.restore();
                 }
             }]
