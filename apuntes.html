@@ -3,154 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Quiz Sectores - Alba del Cid</title>
+    <title>Desafío por Niveles: Los Sectores - Alba del Cid</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
-        :root {
-            --primary: #4CAF50; --secondary: #FFC107; --bg: #f4f7f6; --text: #333;
-        }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text); padding: 20px; }
-        .quiz-container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        :root { --primary: #4CAF50; --secondary: #FFC107; --bg: #f0f4f8; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; }
+        .game-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative; }
         
-        h1 { color: var(--primary); text-align: center; margin-bottom: 10px; }
-        .nav-tabs { display: flex; justify-content: space-around; margin-bottom: 30px; border-bottom: 2px solid #eee; }
-        .tab-btn { padding: 10px 15px; border: none; background: none; cursor: pointer; font-weight: 600; color: #888; transition: 0.3s; }
-        .tab-btn.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
+        /* Barra de Progreso */
+        .progress-container { width: 100%; background: #eee; height: 20px; border-radius: 10px; margin-bottom: 30px; overflow: hidden; }
+        #progress-bar { width: 0%; height: 100%; background: var(--primary); transition: width 0.4s ease; }
 
-        .block-section { display: none; }
-        .block-section.active { display: block; }
+        .level-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .level-title { color: var(--primary); font-weight: 700; font-size: 1.4rem; }
+        .points { font-weight: 600; color: #666; }
 
-        .question-card { background: #fff; border: 1px solid #eee; padding: 20px; border-radius: 15px; margin-bottom: 20px; }
-        .question-text { font-weight: 600; margin-bottom: 15px; color: #444; }
+        .question-box { margin-bottom: 25px; }
+        .question-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; }
+
+        .options-grid { display: grid; gap: 12px; }
+        .option-btn { padding: 15px; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; background: white; transition: 0.2s; font-size: 1rem; text-align: left; font-weight: 500; }
+        .option-btn:hover { border-color: #bbb; background: #f9f9f9; }
         
-        .options-list { display: grid; gap: 10px; }
-        .option { 
-            padding: 12px; border: 2px solid #f0f0f0; border-radius: 10px; cursor: pointer; 
-            transition: 0.2s; font-size: 0.95rem; 
-        }
-        .option:hover { background: #f9f9f9; border-color: #ddd; }
-        
-        .correct { background: #e8f5e9 !important; border-color: #4CAF50 !important; color: #2e7d32; font-weight: 700; }
+        .correct { background: #e8f5e9 !important; border-color: var(--primary) !important; color: #2e7d32; }
         .wrong { background: #ffebee !important; border-color: #f44336 !important; color: #c62828; }
 
-        .feedback { margin-top: 10px; font-size: 0.85rem; display: none; font-style: italic; }
-        
-        .footer-msg { text-align: center; margin-top: 40px; padding: 20px; border-top: 1px dashed #ccc; color: var(--primary); font-weight: 600; }
+        /* Pantallas de paso de nivel */
+        #level-complete { display: none; text-align: center; padding: 20px; }
+        .congrats-text { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+        .next-btn { background: var(--primary); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 1.1rem; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <h1>🏆 Super Quiz: Los Sectores</h1>
-    <p style="text-align:center">¡Demuestra que eres una experta, Alba!</p>
-
-    <div class="nav-tabs">
-        <button class="tab-btn active" onclick="showBlock('b-general')">General</button>
-        <button class="tab-btn" onclick="showBlock('b-primario')">Primario</button>
-        <button class="tab-btn" onclick="showBlock('b-secundario')">Secundario</button>
-        <button class="tab-btn" onclick="showBlock('b-terciario')">Terciario</button>
+<div class="game-container">
+    <div class="progress-container"><div id="progress-bar"></div></div>
+    
+    <div id="quiz-content">
+        <div class="level-header">
+            <div id="current-level-label" class="level-title">NIVEL 1: Conceptos Generales</div>
+            <div class="points">Pregunta <span id="q-number">1</span>/5</div>
+        </div>
+        
+        <div class="question-box">
+            <div id="question-text" class="question-text">¿Cómo se llaman las tareas que hacemos las personas para cubrir necesidades?</div>
+            <div id="options-container" class="options-grid"></div>
+        </div>
     </div>
 
-    <div id="b-general" class="block-section active">
-        <div class="question-card">
-            <div class="question-text">1. ¿Cómo se llaman las tareas que hacemos para cubrir necesidades?</div>
-            <div class="options-list">
-                <div class="option" onclick="check(this, true)">Trabajo</div>
-                <div class="option" onclick="check(this, false)">Juego</div>
-                <div class="option" onclick="check(this, false)">Sueño</div>
-            </div>
-            <div class="feedback">¡Correcto! El trabajo produce lo que necesitamos.</div>
-        </div>
-        <div class="question-card">
-            <div class="question-text">2. ¿Cuántos sectores económicos hay?</div>
-            <div class="options-list">
-                <div class="option" onclick="check(this, false)">Uno</div>
-                <div class="option" onclick="check(this, true)">Tres (Primario, Secundario y Terciario)</div>
-                <div class="option" onclick="check(this, false)">Cinco</div>
-            </div>
-        </div>
-        </div>
-
-    <div id="b-primario" class="block-section">
-        <div class="question-card">
-            <div class="question-text">1. ¿Qué agricultura usa solo agua de lluvia?</div>
-            <div class="options-list">
-                <div class="option" onclick="check(this, true)">Secano</div>
-                <div class="option" onclick="check(this, false)">Regadío</div>
-            </div>
-        </div>
-        <div class="question-card">
-            <div class="question-text">2. ¿Qué ganado es el de las ovejas?</div>
-            <div class="options-list">
-                <div class="option" onclick="check(this, false)">Vacuno</div>
-                <div class="option" onclick="check(this, true)">Ovino</div>
-                <div class="option" onclick="check(this, false)">Porcino</div>
-            </div>
-        </div>
-        </div>
-
-    <div id="b-secundario" class="block-section">
-        <div class="question-card">
-            <div class="question-text">1. ¿Dónde trabajan los artesanos?</div>
-            <div class="options-list">
-                <div class="option" onclick="check(this, false)">Fábricas</div>
-                <div class="option" onclick="check(this, true)">Talleres</div>
-            </div>
-        </div>
-        <div class="question-card">
-            <div class="question-text">2. ¿Qué industria hace ropa?</div>
-            <div class="options-list">
-                <div class="option" onclick="check(this, false)">Metalúrgica</div>
-                <div class="option" onclick="check(this, true)">Textil</div>
-            </div>
-        </div>
-        </div>
-
-    <div id="b-terciario" class="block-section">
-        <div class="question-card">
-            <div class="question-text">1. ¿Qué sector ofrece servicios a las personas?</div>
-            <div class="options-list">
-                <div class="option" onclick="check(this, false)">Primario</div>
-                <div class="option" onclick="check(this, true)">Terciario</div>
-            </div>
-        </div>
-        <div class="question-card">
-            <div class="question-text">2. ¿A qué servicio pertenecen los maestros?</div>
-            <div class="options-list">
-                <div class="option" onclick="check(this, false)">Sanitario</div>
-                <div class="option" onclick="check(this, true)">Educativo</div>
-            </div>
-        </div>
-        </div>
-
-    <div class="footer-msg">
-        🌟 ¡Eres una campeona, Alba! ¡A por el sobresaliente! 🏆
+    <div id="level-complete">
+        <div class="congrats-text">¡Muy bien hecho, Alba! 🌟</div>
+        <p>Has superado este nivel con éxito.</p>
+        <button class="next-btn" onclick="nextLevel()">Pasar al Siguiente Nivel</button>
     </div>
 </div>
 
 <script>
-    function showBlock(id) {
-        document.querySelectorAll('.block-section').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        event.currentTarget.classList.add('active');
+    const quizData = [
+        {
+            title: "NIVEL 1: Conceptos Generales",
+            questions: [
+                { q: "¿Qué es el trabajo?", a: ["Tareas para cubrir necesidades", "Jugar en el parque", "Dormir la siesta"], c: 0 },
+                { q: "¿En cuántos sectores se dividen los trabajos?", a: ["En 2", "En 3", "En 5"], c: 1 },
+                { q: "¿Qué sector trabaja con la naturaleza?", a: ["Primario", "Secundario", "Terciario"], c: 0 },
+                { q: "¿Qué es un oficio?", a: ["Un chiste", "Un tipo de coche", "Un trabajo que requiere conocer tareas"], c: 2 },
+                { q: "¿A qué sector pertenecen las fábricas?", a: ["Primario", "Secundario", "Terciario"], c: 1 }
+            ]
+        },
+        {
+            title: "NIVEL 2: La Cadena de Trabajo",
+            questions: [
+                { q: "En la cadena del pan, ¿quién cultiva el trigo?", a: ["El panadero", "El campesino", "El tendero"], c: 1 },
+                { q: "¿Qué hace el transportista?", a: ["Lleva los productos de un sitio a otro", "Fabrica juguetes", "Planta olivos"], c: 0 },
+                { q: "En la cadena del jamón, ¿qué hace el granjero?", a: ["Vende el jamón", "Hace el control sanitario", "Cría al cerdo"], c: 2 },
+                { q: "¿Qué es la cadena de trabajo?", a: ["Un adorno de hierro", "El camino que sigue un producto", "Un tipo de industria"], c: 1 },
+                { q: "Si el tendero no vende el pan, ¿termina la cadena?", a: ["No, falta que Alba se lo coma", "Sí, ya está listo", "La cadena no existe"], c: 0 }
+            ]
+        },
+        {
+            title: "NIVEL 3: Sector Primario",
+            questions: [
+                { q: "¿Qué agricultura usa solo agua de lluvia?", a: ["Regadío", "Secundario", "Secano"], c: 2 },
+                { q: "El ganado ovino es el de...", a: ["Las vacas", "Las ovejas", "Los cerdos"], c: 1 },
+                { q: "¿Dónde viven los animales en la ganadería estabulada?", a: ["En el campo libre", "En establos o granjas", "En el mar"], c: 1 },
+                { q: "¿Qué es la acuicultura?", a: ["Pesca de altura", "Cría de peces en granjas marinas", "Minería de agua"], c: 1 },
+                { q: "¿De dónde obtenemos el corcho?", a: ["De la minería", "De la silvicultura (bosques)", "De la pesca"], c: 1 }
+            ]
+        },
+        {
+            title: "NIVEL 4: Sector Secundario",
+            questions: [
+                { q: "¿Dónde trabajan los artesanos?", a: ["En talleres", "En fábricas", "En minas"], c: 0 },
+                { q: "¿Qué industria fabrica medicinas?", a: ["Metalúrgica", "Textil", "Química"], c: 2 },
+                { q: "¿Cómo es el trabajo artesanal?", a: ["Con grandes robots", "Manual, pieza a pieza", "En cadena"], c: 1 },
+                { q: "¿Qué se usa en las fábricas para trabajar?", a: ["Solo las manos", "Máquinas y energía", "Pinceles"], c: 1 },
+                { q: "¿Qué industria imprime libros?", a: ["Alimentaria", "Suministro", "Artes Gráficas"], c: 2 }
+            ]
+        },
+        {
+            title: "NIVEL 5: Sector Terciario y Servicios",
+            questions: [
+                { q: "¿Qué ofrece el Sector Terciario?", a: ["Productos naturales", "Servicios a personas", "Materiales de construcción"], c: 1 },
+                { q: "¿Quién organiza los servicios públicos?", a: ["El Estado o Ayuntamientos", "Empresas privadas", "Los niños"], c: 0 },
+                { q: "El servicio que cuida la salud es el...", a: ["Educativo", "Social", "Sanitario"], c: 2 },
+                { q: "¿Qué servicio nos trae agua y luz a casa?", a: ["Transporte", "Suministro", "Financiero"], c: 1 },
+                { q: "La televisión e Internet son medios de...", a: ["Turismo", "Comunicación", "Minería"], c: 1 }
+            ]
+        }
+    ];
+
+    let currentLevel = 0;
+    let currentQuestion = 0;
+
+    function loadQuestion() {
+        const level = quizData[currentLevel];
+        const q = level.questions[currentQuestion];
+        
+        document.getElementById('current-level-label').innerText = level.title;
+        document.getElementById('q-number').innerText = currentQuestion + 1;
+        document.getElementById('question-text').innerText = q.q;
+        
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        
+        q.a.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(index, q.c);
+            container.appendChild(btn);
+        });
+
+        // Actualizar barra de progreso
+        const totalQ = level.questions.length;
+        const progress = (currentQuestion / totalQ) * 100;
+        document.getElementById('progress-bar').style.width = progress + "%";
     }
 
-    function check(element, isCorrect) {
-        const parent = element.parentElement;
-        const options = parent.querySelectorAll('.option');
-        const feedback = parent.parentElement.querySelector('.feedback');
-
-        options.forEach(o => o.classList.remove('correct', 'wrong'));
-
-        if(isCorrect) {
-            element.classList.add('correct');
-            if(feedback) feedback.style.display = 'block';
+    function checkAnswer(selected, correct) {
+        const btns = document.querySelectorAll('.option-btn');
+        if (selected === correct) {
+            btns[selected].classList.add('correct');
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < quizData[currentLevel].questions.length) {
+                    loadQuestion();
+                } else {
+                    showWinScreen();
+                }
+            }, 600);
         } else {
-            element.classList.add('wrong');
-            if(feedback) feedback.style.display = 'none';
+            btns[selected].classList.add('wrong');
         }
     }
+
+    function showWinScreen() {
+        document.getElementById('progress-bar').style.width = "100%";
+        document.getElementById('quiz-content').style.display = 'none';
+        document.getElementById('level-complete').style.display = 'block';
+    }
+
+    function nextLevel() {
+        currentLevel++;
+        if (currentLevel < quizData.length) {
+            currentQuestion = 0;
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('level-complete').style.display = 'none';
+            loadQuestion();
+        } else {
+            document.getElementById('level-complete').innerHTML = "<div class='congrats-text'>🏆 ¡ERES UNA EXPERTA TOTAL! 🏆</div><p>Has completado todos los niveles. ¡Vas a sacar un 10!</p>";
+        }
+    }
+
+    loadQuestion();
 </script>
 
 </body>
