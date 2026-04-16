@@ -18,32 +18,45 @@
         .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.1rem; line-height: 1.4; }
         .guide-box::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 15px solid var(--guia-text); }
 
-        .division-table { font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #333; border-collapse: collapse; position: relative; margin-bottom: 20px; table-layout: fixed; width: 100%; max-width: 400px; }
-        .division-table td { padding: 5px; text-align: center; width: 25%; position: relative; }
+        /* Contenedor de la división para control de posicionamiento */
+        .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #333; margin-bottom: 20px; }
         
-        .dividend-cell { font-size: 3.8rem; text-align: right !important; padding-right: 20px !important; }
-        .divisor-cell { border-left: 5px solid #333; border-bottom: 5px solid #333; text-align: center !important; }
-        .quotient-cell { color: var(--primary); font-size: 3.5rem; text-align: center !important; vertical-align: top; }
+        /* El ARCO corregido sobre el 45 */
+        .arco-superior { 
+            position: absolute; 
+            top: -10px; 
+            left: -5px; /* Ajuste manual para que caiga sobre el 45 */
+            width: 2.2ch; /* Ancho para cubrir dos cifras */
+            height: 15px; 
+            border: 5px solid var(--wrong); 
+            border-bottom: none; 
+            border-radius: 20px 20px 0 0; 
+            z-index: 10; 
+            transition: opacity 0.5s;
+        }
+
+        .division-table { border-collapse: collapse; table-layout: fixed; }
+        .division-table td { padding: 5px; text-align: center; vertical-align: middle; position: relative; }
         
-        .arco-superior { position: absolute; top: -15px; left: 2ch; width: 3.2ch; height: 18px; border: 5px solid var(--wrong); border-bottom: none; border-radius: 20px 20px 0 0; z-index: 10; }
+        .dividend { font-size: 3.8rem; letter-spacing: 2px; text-align: left; padding-right: 20px; }
+        .divisor-box { border-left: 5px solid #333; border-bottom: 5px solid #333; min-width: 80px; }
+        .quotient-area { color: var(--primary); font-size: 3.5rem; padding-top: 10px; }
 
         .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.8rem; padding: 2px; text-align: center; border: 3px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; }
         .math-input:focus { outline: none; border-color: var(--primary); }
         .math-input.correct { border-color: var(--primary); color: #2e7d32; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        #input-42 { width: 2.5ch; display: none; position: absolute; left: 2ch; top: 10px; }
-        #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 3.2ch; top: 15px; }
-        #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 4.2ch; top: 25px; }
+        /* Posiciones de los inputs de resta y restos */
+        #input-42 { width: 2.5ch; display: none; position: absolute; left: 0px; top: 10px; }
+        #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
+        #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.2ch; top: 25px; }
         
-        .bajada-6-text { font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #555; display: none; position: absolute; left: 4.2ch; top: 15px; }
-        .cociente-val { display: none; }
+        .bajada-6 { color: #555; display: none; position: absolute; left: 2.2ch; top: 15px; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 
-        #final-msg { display: none; text-align: center; margin-top: 20px; padding: 20px; border: 2px solid var(--primary); border-radius: 15px; background-color: #e8f5e9; width: 90%; }
-        .congrats-text { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
-
+        #final-msg { display: none; text-align: center; margin-top: 20px; padding: 20px; border: 2px solid var(--primary); border-radius: 15px; background-color: #e8f5e9; width: 100%; }
     </style>
 </head>
 <body>
@@ -58,26 +71,26 @@
             Venga, Alba, piensa... ¿Por cuánto multiplico 6 para que me dé 45 o se acerque sin pasarse?
         </div>
 
-        <div style="position: relative; width: 100%; display: flex; justify-content: center;">
+        <div class="division-wrapper">
             <div id="arco" class="arco-superior"></div>
             <table class="division-table">
                 <tr>
-                    <td class="dividend-cell">456</td>
-                    <td class="divisor-cell">6</td>
+                    <td class="dividend">456</td>
+                    <td class="divisor-box">6</td>
                 </tr>
                 <tr>
                     <td>
                         <input type="text" id="input-42" class="math-input" maxlength="2" autocomplete="off">
                     </td>
-                    <td class="quotient-cell">
-                        <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="display:inline-block; width:1.2ch;">
+                    <td class="quotient-area">
+                        <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch;">
                         <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off" style="display:none; width:1.2ch;">
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <input type="text" id="input-resto-3" class="math-input" maxlength="1" autocomplete="off">
-                        <span id="bajada-6" class="bajada-6-text">6</span>
+                        <span id="bajada-6" class="bajada-6">6</span>
                         <input type="text" id="input-resto-final" class="math-input" maxlength="1" autocomplete="off">
                     </td>
                     <td></td>
@@ -86,9 +99,9 @@
         </div>
 
         <div id="final-msg">
-            <div class="congrats-text">¡EXCELENTE TRABAJO, ALBA! 🏆</div>
+            <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">¡EXCELENTE TRABAJO, ALBA! 🏆</div>
             <p>Has terminado la división perfectamente. ¡Eres una experta!</p>
-            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:700;" onclick="location.reload()">Repetir</button>
+            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:700; font-family:'Poppins';" onclick="location.reload()">Repetir</button>
         </div>
     </div>
 
@@ -114,38 +127,4 @@
             input.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     if (input.value === step.val) {
-                        input.classList.add('correct');
-                        input.disabled = true;
-                        next();
-                    } else {
-                        input.classList.add('wrong');
-                        setTimeout(() => input.classList.remove('wrong'), 500);
-                    }
-                }
-            });
-        }
-
-        function next() {
-            currentStep++;
-            if (currentStep < steps.length) {
-                const step = steps[currentStep];
-                document.getElementById('guide-text').innerHTML = step.msg;
-                
-                if (step.action === 'show') {
-                    document.getElementById('bajada-6').style.display = 'inline';
-                    document.getElementById('arco').style.opacity = '0';
-                    next();
-                } else {
-                    setupInput(step);
-                }
-            } else {
-                document.getElementById('guide-text').style.display = 'none';
-                document.getElementById('final-msg').style.display = 'block';
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            }
-        }
-
-        setupInput(steps[0]);
-    </script>
-</body>
-</html>
+                        input.classList.add('
