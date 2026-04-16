@@ -31,7 +31,7 @@
             max-width: 210mm; /* Ancho A4 */
             margin: 0 auto;
             background-color: var(--box-bg);
-            padding: 20mm;
+            padding: 15mm; /* Un poco menos de padding para ganar espacio */
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
@@ -39,7 +39,7 @@
         h1 {
             color: var(--primary-color);
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 5px;
         }
 
@@ -47,40 +47,46 @@
             text-align: center;
             font-weight: 600;
             color: #666;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
         }
 
         h2 {
             color: var(--primary-color);
             border-bottom: 3px solid var(--secondary-color);
             padding-bottom: 10px;
-            margin-top: 40px;
-            font-size: 1.6rem;
+            margin-top: 30px;
+            font-size: 1.5rem;
         }
 
-        /* --- Estilos para el ESQUEMA --- */
+        /* --- Estilos para el ESQUEMA OPTIMIZADO --- */
         .esquema-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 10px; /* Espacio reducido entre cajas */
             margin-top: 20px;
         }
 
+        /* CAJAS ESTRECHAS Y HORIZONTALES */
         .esquema-box {
             background-color: #e8f5e9;
             border: 2px solid var(--primary-color);
-            border-radius: 10px;
-            padding: 15px 25px;
-            width: 80%;
+            border-radius: 50px; /* Forma de cápsula para que se vea menos pesado */
+            padding: 8px 30px; 
+            width: auto; /* Se ajusta al texto */
+            min-width: 280px;
             text-align: center;
             font-weight: 600;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            font-size: 0.95rem;
         }
 
         .esquema-arrow {
-            font-size: 2rem;
+            font-size: 1.5rem; /* Flecha más pequeña */
             color: var(--primary-color);
+            margin: 0;
+            line-height: 1;
         }
 
         .sectores-container {
@@ -88,6 +94,7 @@
             justify-content: space-around;
             width: 100%;
             gap: 15px;
+            margin-top: 5px;
         }
 
         .sector-card {
@@ -109,15 +116,23 @@
             font-weight: 700;
             color: #795548;
             margin-bottom: 5px;
+            font-size: 0.9rem;
         }
 
         .sector-desc {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            line-height: 1.3;
         }
 
         /* --- Estilos para el RESUMEN --- */
         .resumen-content p {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .resumen-content li {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
         }
 
         .resaltado {
@@ -134,25 +149,27 @@
 
         /* --- Estilos para las ACTIVIDADES --- */
         .actividad {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             border: 1px solid #ddd;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
         }
 
         .pregunta-titulo {
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: #555;
+            font-size: 0.95rem;
         }
 
         .opciones-multiples {
             list-style: none;
             padding: 0;
+            font-size: 0.9rem;
         }
 
         .opciones-multiples li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .casilla {
@@ -169,14 +186,10 @@
             border: none;
             border-bottom: 2px solid #ccc;
             padding: 2px 5px;
-            font-size: 1rem;
-            width: 150px;
+            font-size: 0.9rem;
+            width: 140px;
             text-align: center;
-        }
-
-        .input-hueco:focus {
-            outline: none;
-            border-bottom-color: var(--primary-color);
+            background: transparent;
         }
 
         .une-con-flechas {
@@ -189,7 +202,7 @@
             width: 45%;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
 
         .une-item {
@@ -198,47 +211,29 @@
             padding: 10px;
             border-radius: 5px;
             text-align: center;
+            font-size: 0.85rem;
         }
 
         .btn-imprimir {
             display: block;
             width: 200px;
-            margin: 40px auto;
-            padding: 15px 25px;
+            margin: 20px auto;
+            padding: 12px 25px;
             background-color: var(--primary-color);
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: background-color 0.3s;
         }
 
-        .btn-imprimir:hover {
-            background-color: var(--secondary-color);
-        }
-
-        /* Ocultar botón al imprimir */
         @media print {
-            .btn-imprimir {
-                display: none;
-            }
-            body {
-                background-color: white;
-                padding: 0;
-            }
-            .container {
-                box-shadow: none;
-                border: none;
-                width: 100%;
-                margin: 0;
-                padding: 10mm;
-            }
-            h2 {
-                margin-top: 25px;
-            }
+            .btn-imprimir { display: none; }
+            body { background-color: white; padding: 0; }
+            .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 5mm; }
+            h2 { margin-top: 20px; }
         }
     </style>
 </head>
@@ -289,7 +284,7 @@
         </div>
 
         <h2>🧠 Actividades para practicar</h2>
-        <p class="subtitle">¡Demuestra todo lo que has aprendido!</p>
+        <p class="subtitle" style="margin-bottom: 15px;">¡Demuestra todo lo que has aprendido!</p>
 
         <div class="actividad">
             <div class="pregunta-titulo">1. Colorea o marca la respuesta correcta: ¿Cuántos sectores económicos hay?</div>
@@ -324,17 +319,4 @@
         </div>
 
         <div class="actividad">
-            <div class="pregunta-titulo">4. Escribe un ejemplo más de un trabajo para cada sector:</div>
-            <p>Sector Primario: ____________________________________</p>
-            <p>Sector Secundario: ____________________________________</p>
-            <p>Sector Terciario: ____________________________________</p>
-        </div>
-
-        <div style="margin-top: 40px; text-align: center; color: #888; border-top: 1px dashed #ccc; padding-top: 20px;">
-            <em>© Material preparado para Alba del Cid - Academia Esparta 🛡️</em>
-        </div>
-
-    </div>
-
-</body>
-</html>
+            <div class="pregunta-titulo">4
