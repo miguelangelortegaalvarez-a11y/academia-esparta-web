@@ -15,24 +15,12 @@
 
         .game-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; }
 
-        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.1rem; line-height: 1.4; }
+        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.1rem; line-height: 1.4; min-height: 60px; display: flex; align-items: center; justify-content: center; }
         .guide-box::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 15px solid var(--guia-text); }
 
-        .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #333; margin-bottom: 20px; }
+        .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #333; margin-bottom: 20px; margin-top: 10px; }
         
-        /* EL ARCO PERFECTO */
-        .arco-superior { 
-            position: absolute; 
-            top: -10px; 
-            left: -5px; 
-            width: 2.2ch; 
-            height: 15px; 
-            border: 5px solid var(--wrong); 
-            border-bottom: none; 
-            border-radius: 20px 20px 0 0; 
-            z-index: 10; 
-            transition: opacity 0.5s;
-        }
+        .arco-superior { position: absolute; top: -10px; left: -5px; width: 2.2ch; height: 15px; border: 5px solid var(--wrong); border-bottom: none; border-radius: 20px 20px 0 0; z-index: 10; transition: opacity 0.5s; }
 
         .division-table { border-collapse: collapse; table-layout: fixed; }
         .division-table td { padding: 5px; text-align: center; vertical-align: middle; position: relative; }
@@ -41,11 +29,11 @@
         .divisor-box { border-left: 5px solid #333; border-bottom: 5px solid #333; min-width: 80px; }
         .quotient-area { color: var(--primary); font-size: 3.5rem; padding-top: 10px; }
 
-        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.8rem; padding: 2px; text-align: center; border: 3px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; }
-        .math-input:focus { outline: none; border-color: var(--primary); }
+        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.8rem; padding: 2px; text-align: center; border: 3px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; outline: none; }
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
+        /* Posicionamiento de los campos */
         #input-42 { width: 2.5ch; display: none; position: absolute; left: 0px; top: 10px; }
         #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
         #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.2ch; top: 25px; }
@@ -104,11 +92,10 @@
     </div>
 
     <script>
-        // Definición de los pasos
         const steps = [
             { id: 'cociente-1', val: '7', msg: '¡Genial! 7 x 6 son 42. Ponlo debajo del 45.' },
             { id: 'input-42', val: '42', msg: '¡Eso es! Ahora resta: de 42 a 45... ¿Cuántas van?' },
-            { id: 'input-resto-3', val: '3', msg: '¡Muy bien! Ahora baja el 6 al lado del 3.' },
+            { id: 'input-resto-3', val: '3', msg: '¡Muy bien! El resto es 3. Ahora baja el 6 al lado del 3.' },
             { id: 'bajada-6', action: 'show', msg: '¡Perfecto! Ahora tenemos el 36. ¿6 por cuánto da 36?' },
             { id: 'cociente-2', val: '6', msg: '¡Exacto! Y para terminar... ¿cuánto sobra de 36 a 36?' },
             { id: 'input-resto-final', val: '0', final: true }
@@ -120,28 +107,28 @@
             if (index >= steps.length) return;
             
             const step = steps[index];
-            const input = document.getElementById(step.id);
             
             if (step.action === 'show') {
-                document.getElementById('bajada-6').style.display = 'inline-block';
-                document.getElementById('arco').style.opacity = '0';
-                currentIdx++;
-                initStep(currentIdx);
+                setTimeout(() => {
+                    document.getElementById('bajada-6').style.display = 'inline-block';
+                    document.getElementById('arco').style.opacity = '0';
+                    currentIdx++;
+                    document.getElementById('guide-text').innerHTML = steps[currentIdx].msg;
+                    initStep(currentIdx);
+                }, 500);
                 return;
             }
 
+            const input = document.getElementById(step.id);
             input.style.display = 'inline-block';
             input.focus();
 
-            // Eliminar listeners antiguos por si acaso
-            const newInput = input.cloneNode(true);
-            input.parentNode.replaceChild(newInput, input);
-
-            newInput.addEventListener('keypress', (e) => {
+            // Usamos un listener limpio
+            input.onkeypress = (e) => {
                 if (e.key === 'Enter') {
-                    if (newInput.value === step.val) {
-                        newInput.classList.add('correct');
-                        newInput.disabled = true;
+                    if (input.value === step.val) {
+                        input.classList.add('correct');
+                        input.disabled = true;
                         
                         if (step.final) {
                             document.getElementById('guide-text').style.display = 'none';
@@ -153,14 +140,13 @@
                             initStep(currentIdx);
                         }
                     } else {
-                        newInput.classList.add('wrong');
-                        setTimeout(() => newInput.classList.remove('wrong'), 500);
+                        input.classList.add('wrong');
+                        setTimeout(() => input.classList.remove('wrong'), 500);
                     }
                 }
-            });
+            };
         }
 
-        // Arrancamos el primer paso
         initStep(0);
     </script>
 </body>
