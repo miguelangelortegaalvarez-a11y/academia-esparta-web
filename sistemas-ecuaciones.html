@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha 21: Desafío de Compra - Academia Esparta</title>
+    <title>Desafío de Geometría: Ángulos y Medidas - Academia Esparta</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f6; padding: 20px; margin: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; padding: 20px; margin: 0; }
         .hoja { 
             width: 210mm; 
             min-height: 297mm; 
@@ -13,52 +13,38 @@
             background: #fff; 
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             box-sizing: border-box;
+            position: relative;
         }
         
-        .main-header { text-align: center; margin-bottom: 10px; }
-        .main-header h1 { margin: 0; color: #2E7D32; font-size: 2.2rem; letter-spacing: 3px; text-transform: uppercase; }
+        /* CABECERA */
+        .header-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2E7D32; padding-bottom: 5px; margin-bottom: 15px; }
+        .portfolio-tag { color: #2E7D32; font-weight: bold; font-size: 1.2rem; text-transform: uppercase; }
+        .titulo-principal { font-size: 1.8rem; color: #333; font-weight: bold; }
 
-        .header-top { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #333; border-bottom: 2px solid #333; padding: 5px 0; margin-bottom: 20px; }
-        .ficha-num { background: #444; color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
-        .titulo-seccion { font-style: italic; font-size: 1.5rem; color: #333; font-weight: bold; }
-        .refuerzo-tag { font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
-
-        .datos-alumno { margin-bottom: 25px; border-bottom: 1px dotted #ccc; padding-bottom: 10px; font-weight: bold; }
+        .datos-alumno { margin-bottom: 20px; border-bottom: 1px dotted #ccc; padding-bottom: 10px; font-weight: bold; }
         
-        .enunciado { display: flex; align-items: flex-start; gap: 10px; font-weight: bold; color: #333; margin-bottom: 20px; }
-        .num-ej { background: #444; color: #fff; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-
-        .escaparate { display: flex; justify-content: space-around; align-items: flex-end; margin-bottom: 40px; padding: 20px; border: 2px dashed #2E7D32; border-radius: 15px; background: #f9fff9; }
-        .producto { text-align: center; position: relative; }
-        .img-placeholder { font-size: 3.5rem; margin-bottom: 10px; }
-        .nombre-prod { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: #666; margin-bottom: 5px; }
-        .precio-burbuja { background: #fff; border: 2px solid #2E7D32; border-radius: 15px; padding: 5px 12px; font-size: 0.9rem; font-weight: bold; color: #333; }
-
-        .bloque-calculo { margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
-        .pregunta { font-weight: bold; color: #2E7D32; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
-        .fila-desglose { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-weight: 600; }
-        .input-mini { border: 1px solid #999; width: 45px; height: 28px; border-radius: 5px; background: #fff; }
-        .input-total-cts { border: 2px solid #333; width: 75px; height: 35px; border-radius: 8px; margin: 0 10px; text-align: center; }
+        .ejercicio { margin-bottom: 25px; line-height: 1.4; }
+        .enunciado { font-weight: bold; color: #333; margin-bottom: 10px; display: flex; gap: 8px; }
+        .num-ej { color: #2E7D32; font-weight: 900; }
 
-        .operacion-y-resultado { display: flex; justify-content: space-around; align-items: center; margin-top: 25px; }
+        /* GRÁFICOS SIMULADOS */
+        .dibujo-box { border: 1px solid #eee; border-radius: 8px; height: 120px; margin: 10px 0; position: relative; display: flex; align-items: center; justify-content: center; background: #fafafa; }
+        .linea-base { width: 80px; height: 2px; background: #000; position: absolute; bottom: 30px; }
         
-        /* DISEÑO DE CUADROS PARA LA SUMA VERTICAL TOTALMENTE LIMPIOS */
-        .suma-vertical-box { border: 1px solid #ccc; padding: 25px 20px 20px 20px; border-radius: 15px; background: #fff; position: relative; min-width: 150px; }
-        .signo-mas { position: absolute; left: 15px; top: 45px; font-size: 2rem; font-weight: bold; color: #333; }
-        
-        .cuadricula-suma { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; margin-left: 35px; }
-        .espacio-numero { width: 120px; height: 40px; border: 1px solid #bbb; border-radius: 5px; background: #fcfcfc; }
-        .linea-suma-negra { border-top: 3px solid #000; width: 130px; margin: 5px 0; }
-        .resultado-vacio { width: 120px; height: 45px; border: 2px solid #333; border-radius: 5px; }
+        /* TABLAS Y ESPACIOS */
+        .input-linea { border-bottom: 1px solid #000; display: inline-block; width: 60px; margin: 0 5px; height: 15px; }
+        .caja-texto { border: 1px solid #ccc; border-radius: 4px; padding: 10px; min-height: 60px; margin-top: 10px; background: #fdfdfd; }
 
-        .recuadro-final { border: 2px solid #2E7D32; border-radius: 12px; padding: 20px; font-weight: bold; background: #f1f8f1; font-size: 1.1rem; text-align: center; }
-
-        .footer { text-align: center; margin-top: 50px; font-size: 0.8rem; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
+        /* SEMÁFORO FINAL */
+        .semaforo { margin-top: 30px; border: 2px solid #2E7D32; padding: 15px; border-radius: 10px; font-size: 0.9rem; }
+        .emoji-list { display: flex; gap: 20px; margin-top: 10px; }
 
         @media print {
             .no-print { display: none; }
             .hoja { box-shadow: none; margin: 0; width: 100%; }
+            body { background: white; }
         }
     </style>
 </head>
@@ -66,112 +52,95 @@
 
     <div class="no-print" style="text-align: center; margin: 20px;">
         <button onclick="window.print()" style="padding: 10px 30px; background: #2E7D32; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold;">
-            🖨️ IMPRIMIR DESAFÍO DE COMPRA
+            🖨️ IMPRIMIR FICHA GEOMETRÍA
         </button>
     </div>
 
     <div class="hoja">
-        <div class="main-header">
-            <h1>ACADEMIA ESPARTA</h1>
-        </div>
-
         <div class="header-top">
-            <div class="ficha-num">FICHA 21</div>
-            <div class="titulo-seccion">Situaciones de compra</div>
-            <div class="refuerzo-tag">Refuerzo</div>
+            <div class="portfolio-tag">ACADEMIA ESPARTA</div>
+            <div class="titulo-principal">¿Qué he aprendido?</div>
         </div>
 
         <div class="datos-alumno">
             NOMBRE: _________________________________________ FECHA: ____ / ____ / 2026
         </div>
 
-        <div class="ejercicio">
-            <div class="enunciado">
-                <div class="num-ej">></div>
-                <span>Calcula el precio total de estos equipos de entrenamiento.</span>
-            </div>
-
-            <div class="escaparate">
-                <div class="producto">
-                    <div class="nombre-prod">Casco</div>
-                    <div class="img-placeholder">🪖</div>
-                    <div class="precio-burbuja">4 € y 75 cts</div>
-                </div>
-                <div class="producto">
-                    <div class="nombre-prod">Capa</div>
-                    <div class="img-placeholder">🧥</div>
-                    <div class="precio-burbuja">3 € y 85 cts</div>
-                </div>
-                <div class="producto">
-                    <div class="nombre-prod">Arco</div>
-                    <div class="img-placeholder">🏹</div>
-                    <div class="precio-burbuja">6 € y 25 cts</div>
-                </div>
-                <div class="producto">
-                    <div class="nombre-prod">Carcaj</div>
-                    <div class="img-placeholder">🎒</div>
-                    <div class="precio-burbuja">2 € y 50 cts</div>
-                </div>
-            </div>
-
-            <div class="bloque-calculo">
-                <div class="pregunta">● ¿Cuánto cuesta el CASCO y la CAPA en total?</div>
-                
-                <div class="fila-desglose">
-                    🪖 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
-                </div>
-                <div class="fila-desglose">
-                    🧥 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
-                </div>
-
-                <div class="operacion-y-resultado">
-                    <div class="suma-vertical-box">
-                        <span class="signo-mas">+</span>
-                        <div class="cuadricula-suma">
-                            <div class="espacio-numero"></div>
-                            <div class="espacio-numero"></div>
-                            <div class="linea-suma-negra"></div>
-                            <div class="resultado-vacio"></div>
-                        </div>
+        <div class="grid-container">
+            <div class="col-1">
+                <div class="ejercicio">
+                    <div class="enunciado"><span class="num-ej">1</span> Mide estos ángulos con tu transportador y clasifícalos:</div>
+                    <div class="dibujo-box">
+                        <div style="transform: rotate(-45deg); border-bottom: 2px solid blue; width: 60px; position: absolute;"></div>
+                        <div style="border-bottom: 2px solid blue; width: 60px;"></div>
+                        <span style="position: absolute; top: 10px; left: 10px;">Â</span>
                     </div>
+                    <div class="dibujo-box">
+                        <div style="transform: rotate(-120deg); border-bottom: 2px solid red; width: 60px; position: absolute;"></div>
+                        <div style="border-bottom: 2px solid red; width: 60px;"></div>
+                        <span style="position: absolute; top: 10px; left: 10px;">Ĉ</span>
+                    </div>
+                </div>
 
-                    <div class="recuadro-final">
-                        Total: <div class="input-mini" style="display:inline-block"></div> € y <div class="input-mini" style="display:inline-block"></div> céntimos.
+                <div class="ejercicio">
+                    <div class="enunciado"><span class="num-ej">2</span> Dibuja estos ángulos:</div>
+                    <p>a) Â = 65° &nbsp;&nbsp;&nbsp; b) B̂ = 150°</p>
+                    <div class="dibujo-box" style="height: 180px;"></div>
+                </div>
+
+                <div class="ejercicio">
+                    <div class="enunciado"><span class="num-ej">3</span> Completa la medida de B̂ y Ĉ sin usar el transportador:</div>
+                    <div class="dibujo-box">
+                        <p>Si Â = 35° y el total es un ángulo recto... B̂ = <span class="input-linea"></span></p>
                     </div>
                 </div>
             </div>
 
-            <div class="bloque-calculo">
-                <div class="pregunta">● ¿Cuánto cuesta el ARCO y el CARCAJ en total?</div>
-                
-                <div class="fila-desglose">
-                    🏹 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
-                </div>
-                <div class="fila-desglose">
-                    🎒 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
+            <div class="col-2">
+                <div class="ejercicio">
+                    <div class="enunciado"><span class="num-ej">6</span> Expresa en segundos y ordena de menor a mayor:</div>
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <span style="background: #eee; padding: 5px; border-radius: 5px;">2° 15' 10''</span>
+                        <span style="background: #eee; padding: 5px; border-radius: 5px;">1° 50' 45''</span>
+                    </div>
+                    <div class="caja-texto"></div>
                 </div>
 
-                <div class="operacion-y-resultado">
-                    <div class="suma-vertical-box">
-                        <span class="signo-mas">+</span>
-                        <div class="cuadricula-suma">
-                            <div class="espacio-numero"></div>
-                            <div class="espacio-numero"></div>
-                            <div class="linea-suma-negra"></div>
-                            <div class="resultado-vacio"></div>
-                        </div>
-                    </div>
+                <div class="ejercicio">
+                    <div class="enunciado"><span class="num-ej">7</span> Expresa en grados, minutos y segundos:</div>
+                    <p>a) 15.680'' = <span class="input-linea" style="width: 150px;"></span></p>
+                    <p>b) 32.415'' = <span class="input-linea" style="width: 150px;"></span></p>
+                </div>
 
-                    <div class="recuadro-final">
-                        Total: <div class="input-mini" style="display:inline-block"></div> € y <div class="input-mini" style="display:inline-block"></div> céntimos.
+                <div class="ejercicio">
+                    <div class="enunciado"><span class="num-ej">8</span> ¿Cuánto mide el tercer ángulo del triángulo?</div>
+                    <div class="dibujo-box" style="flex-direction: column;">
+                        <p>Ángulo 1: 55° | Ángulo 2: 70°</p>
+                        <p><strong>Tercer ángulo (?) =</strong> <span class="input-linea"></span></p>
                     </div>
+                </div>
+
+                <div class="ejercicio">
+                    <div class="enunciado"><span class="num-ej">9</span> Piensa y resuelve:</div>
+                    <p style="font-size: 0.85rem;">a) Un molino ha girado <strong>175° 20'</strong>. ¿Cuánto le falta para completar una vuelta entera (360°)?</p>
+                    <div class="caja-texto"></div>
+                    <p style="font-size: 0.85rem; margin-top: 10px;">b) Un tren sale a las <strong>14:20:00</strong> y llega a las <strong>17:45:30</strong>. ¿Cuánto ha durado el viaje?</p>
+                    <div class="caja-texto"></div>
                 </div>
             </div>
-
         </div>
 
-        <div class="footer">
-            MATEMÁTICAS 2. PRIMARIA - ACADEMIA ESPARTA
+        <div class="semaforo">
+            <strong>El semáforo.</strong> Junto a cada actividad, colorea así:
+            <div class="emoji-list">
+                <span>🟢 Si lo has sabido responder</span>
+                <span>🟡 Si has necesitado ayuda</span>
+                <span>🔴 Si no has sabido responder</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px; color: #2E7D32; font-weight: bold; font-style: italic;">
+            "En la Academia Esparta, la precisión es nuestra fuerza"
         </div>
     </div>
 
