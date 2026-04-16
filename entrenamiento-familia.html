@@ -3,82 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia Esparta: Alba del Cid</title>
+    <title>Academia Esparta: Entrenamiento de Divisiones</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --primary: #4CAF50; --bg: #f0f4f8; --text: #333; --wrong: #f44336; --guia: #e3f2fd; --guia-text: #1976d2; --highlight: #f44336; }
+        :root { --primary: #4CAF50; --primary-dark: #2E7D32; --bg: #f0f4f8; --text: #333; --wrong: #f44336; --guia: #e3f2fd; --guia-text: #1976d2; --highlight: #f44336; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; overflow-x: hidden; }
         
-        .academia-header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; width: 100%; max-width: 700px; }
-        .academia-header h1 { color: var(--primary); margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px; }
+        /* CABECERA ESTILIZADA */
+        .academia-header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--primary); padding-bottom: 15px; width: 100%; max-width: 600px; }
+        .academia-header h1 { color: var(--primary-dark); margin: 0; font-size: 2.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
+        .academia-header p { color: #666; font-weight: 600; margin: 5px 0 0; font-size: 1.1rem; }
 
-        .game-container { background: white; width: 100%; max-width: 700px; padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; min-height: 600px; }
+        .game-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; }
 
-        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 40px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.2rem; line-height: 1.4; min-height: 80px; display: flex; align-items: center; justify-content: center; }
-        .guide-box::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 15px solid var(--guia-text); }
+        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1rem; line-height: 1.4; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+        .guide-box::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 12px solid var(--guia-text); }
 
-        .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 4rem; color: #333; margin-bottom: 40px; }
-        .division-table { border-collapse: collapse; table-layout: fixed; width: 450px; }
-        .division-table td { padding: 15px; text-align: center; vertical-align: middle; position: relative; height: 80px; }
+        /* REDUCCIÓN DE TAMAÑO DE LA DIVISIÓN */
+        .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 2.8rem; color: #333; margin-bottom: 20px; }
         
-        .dividend { font-size: 4.5rem; letter-spacing: 5px; text-align: left; padding-right: 30px; }
-        .dividend span { transition: color 0.3s ease; border-top: 6px solid transparent; padding-top: 5px; }
+        .division-table { border-collapse: collapse; table-layout: fixed; }
+        .division-table td { padding: 5px; text-align: center; vertical-align: middle; position: relative; height: 60px; }
+        
+        .dividend { font-size: 3rem; letter-spacing: 2px; text-align: left; padding-right: 20px; }
+        .dividend span { transition: color 0.3s ease; border-top: 4px solid transparent; padding-top: 3px; }
         .active-num { color: var(--highlight); border-top-color: var(--highlight) !important; }
 
-        .divisor-box { border-left: 6px solid #333; border-bottom: 6px solid #333; min-width: 100px; }
-        .quotient-area { color: var(--primary); font-size: 4rem; padding-top: 20px; }
+        .divisor-box { border-left: 4px solid #333; border-bottom: 4px solid #333; min-width: 70px; }
+        .quotient-area { color: var(--primary); font-size: 2.8rem; padding-top: 10px; }
 
-        .math-input { font-family: 'Roboto Mono', monospace; font-size: 3rem; padding: 5px; text-align: center; border: 3px solid #ccc; border-radius: 10px; transition: 0.3s; background: transparent; color: #333; outline: none; }
+        /* INPUTS MÁS PEQUEÑOS Y "CURIOSOS" */
+        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.2rem; padding: 3px; text-align: center; border: 2px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; outline: none; }
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        .signo-menos { position: absolute; left: -30px; top: 15px; color: var(--highlight); font-size: 3rem; display: none; }
-        .raya-resta { border-top: 4px solid #333; width: 100%; position: absolute; bottom: 0; left: 0; display: none; }
+        .signo-menos { position: absolute; left: -25px; top: 10px; color: var(--highlight); font-size: 2.5rem; display: none; }
+        .raya-resta { border-top: 3px solid #333; width: 100%; position: absolute; bottom: 0; left: 0; display: none; }
 
-        #input-m1 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 15px; }
-        .row-container { letter-spacing: 0px; display: inline-flex; gap: 5px; position: absolute; left: 1.1ch; top: 15px; }
-        #input-mf { width: 2.5ch; display: none; position: absolute; left: 1.1ch; top: 20px; }
-        #input-rf { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 35px; }
+        /* Ajustes de posición para 515 / 6 con tamaño reducido */
+        #input-mult-1 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 10px; }
+        #input-resto-1 { width: 1.2ch; display: none; position: absolute; left: 1ch; top: 10px; }
+        #input-baja-cifra { width: 1.2ch; display: none; position: absolute; left: 2ch; top: 10px; }
+        #input-mult-2 { width: 2.5ch; display: none; position: absolute; left: 1ch; top: 15px; }
+        #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2ch; top: 25px; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-        #final-msg { display: none; text-align: center; margin-top: 20px; padding: 25px; border: 2px solid var(--primary); border-radius: 20px; background-color: #e8f5e9; width: 100%; }
-        
-        .btn-siguiente { position: absolute; bottom: 20px; right: 20px; background-color: var(--guia-text); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-family: 'Poppins'; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        #final-msg { display: none; text-align: center; margin-top: 20px; padding: 20px; border: 2px solid var(--primary); border-radius: 15px; background-color: #e8f5e9; width: 100%; }
     </style>
 </head>
 <body>
 
     <div class="academia-header">
         <h1>ACADEMIA ESPARTA</h1>
-        <p id="sub-header" style="color:#666; font-weight:600;">División 1 de 2</p>
+        <p>Entrenamiento de Divisiones Paso a Paso</p>
     </div>
 
     <div class="game-container">
-        <div id="guide-text" class="guide-box">Cargando...</div>
+        <div id="guide-text" class="guide-box">
+            Venga, Alba, piensa... ¿Por cuánto multiplico 6 para que me dé 51 o se acerque sin pasarse?<br>(Mira los números en rojo 😉)
+        </div>
 
         <div class="division-wrapper">
             <table class="division-table">
                 <tr>
-                    <td id="div-display" class="dividend"></td>
-                    <td id="divisor-display" class="divisor-box"></td>
+                    <td class="dividend">
+                        <span id="num-4" class="active-num">5</span><span id="num-5" class="active-num">1</span><span id="num-6">5</span>
+                    </td>
+                    <td class="divisor-box">6</td>
                 </tr>
                 <tr>
                     <td>
                         <span id="menos-1" class="signo-menos">−</span>
-                        <input type="text" id="input-m1" class="math-input" maxlength="2" autocomplete="off">
+                        <input type="text" id="input-mult-1" class="math-input" maxlength="2" autocomplete="off">
                         <div id="raya-1" class="raya-resta"></div>
                     </td>
                     <td class="quotient-area">
-                        <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.5ch;">
-                        <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off" style="display:none; width:1.5ch;">
+                        <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch;">
+                        <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off" style="display:none; width:1.2ch;">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div id="row-mid" class="row-container" style="display:none;">
-                            <input type="text" id="input-r1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
-                            <input type="text" id="input-b1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
+                        <div style="position: absolute; left: 1ch; top: 10px; display: flex; gap: 5px;">
+                            <input type="text" id="input-resto-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
+                            <input type="text" id="input-baja-cifra" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
                         </div>
                     </td>
                     <td></td>
@@ -86,14 +95,14 @@
                 <tr>
                     <td>
                         <span id="menos-2" class="signo-menos">−</span>
-                        <input type="text" id="input-mf" class="math-input" maxlength="2" autocomplete="off">
+                        <input type="text" id="input-mult-2" class="math-input" maxlength="2" autocomplete="off">
                         <div id="raya-2" class="raya-resta"></div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" id="input-rf" class="math-input" maxlength="1" autocomplete="off">
+                        <input type="text" id="input-resto-final" class="math-input" maxlength="1" autocomplete="off">
                     </td>
                     <td></td>
                 </tr>
@@ -101,92 +110,57 @@
         </div>
 
         <div id="final-msg">
-            <div id="congrats-text" style="font-size: 2rem; font-weight: 700; color: var(--primary);">¡EXCELENTE TRABAJO! 🏆</div>
-            <p id="final-p" style="font-size: 1.2rem;">¿Listo para el siguiente reto?</p>
-            <button id="btn-final-action" style="background:var(--primary); color:white; border:none; padding:15px 30px; border-radius:30px; cursor:pointer; font-weight:700;" onclick="loadNext()">Siguiente</button>
+            <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">¡EXCELENTE TRABAJO, ALBA! 🏆</div>
+            <p>Has terminado la división perfectamente. ¡Eres una experta!</p>
+            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:700;" onclick="location.reload()">Repetir</button>
         </div>
-
-        <button id="skip-btn" class="btn-siguiente" onclick="loadNext()">Siguiente →</button>
     </div>
 
     <script>
-        const misiones = [
-            {
-                id: 1,
-                dividendoHtml: '<span id="num-0" class="active-num">4</span><span id="num-1" class="active-num">5</span><span id="num-2">6</span>',
-                divisor: '6',
-                steps: [
-                    { id: 'cociente-1', val: '7', msg: 'Venga, Alba... ¿6 por cuánto da 45 o se acerca?' },
-                    { id: 'input-m1', val: '42', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Ponlo debajo del 45.' },
-                    { id: 'input-r1', val: '3', msg: '¡Exacto! Ahora resta: ¿cuánto es 45 - 42? Ponlo abajo.' },
-                    { id: 'input-b1', val: '6', msg: '¡Eso es! Ahora baja la cifra que queda (el 6) para seguir.' },
-                    { id: 'cociente-2', val: '6', msg: '¡Perfecto! Ya tenemos 36. ¿6 por cuánto da 36?' },
-                    { id: 'input-mf', val: '36', msg: '¡Genial! Multiplica: ¿cuánto es 6 x 6? Ponlo debajo del 36.' },
-                    { id: 'input-rf', val: '0', final: true, msg: '¡Y para terminar! ¿Cuánto sobra de 36 a 36?' }
-                ]
-            },
-            {
-                id: 2,
-                dividendoHtml: '<span id="num-0" class="active-num">5</span><span id="num-1" class="active-num">1</span><span id="num-2">5</span>',
-                divisor: '6',
-                steps: [
-                    { id: 'cociente-1', val: '8', msg: '¡A por la segunda! ¿Por cuánto multiplico 6 para acercarme a 51?' },
-                    { id: 'input-m1', val: '48', msg: '¡Muy bien! ¿Cuánto es 6 x 8? Ponlo debajo del 51.' },
-                    { id: 'input-r1', val: '3', msg: '¡Exacto! Ahora resta: ¿cuánto es 51 - 48?' },
-                    { id: 'input-b1', val: '5', msg: '¡Perfecto! El resto es 3. Ahora baja la última cifra (el 5).' },
-                    { id: 'cociente-2', val: '5', msg: '¡Genial! Ya tenemos 35. ¿6 por cuánto se acerca?' },
-                    { id: 'input-mf', val: '30', msg: '¡Eso es! 6 x 5 son 30. Ponlo debajo del 35.' },
-                    { id: 'input-rf', val: '5', final: true, msg: '¡Y para terminar! De 30 a 35... ¿cuántas van?' }
-                ]
-            }
+        const steps = [
+            { id: 'cociente-1', val: '8', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 8? Escribe el resultado debajo del 51.' },
+            { id: 'input-mult-1', val: '48', msg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 51 - 48? Pon el resto abajo.' },
+            { id: 'input-resto-1', val: '3', msg: '¡Muy bien! El resto es 3. Ahora baja la cifra que queda (el 5) al lado del 3.' },
+            { id: 'input-baja-cifra', val: '5', msg: '¡Perfecto! Ya tenemos 35. ¿Por cuánto multiplico 6 para que me dé 35 o se acerque?' },
+            { id: 'cociente-2', val: '5', msg: '¡Genial! 6 x 5 son 30. Escríbelo abajo del 35 para restar.' },
+            { id: 'input-mult-2', val: '30', msg: '¡Eso es! Y para terminar... de 30 a 35... ¿cuántas van?' },
+            { id: 'input-resto-final', val: '5', final: true }
         ];
 
-        let currentMisionIdx = 0;
-        let currentStepIdx = 0;
+        let currentIdx = 0;
 
-        function initMision(idx) {
-            const mision = misiones[idx];
-            currentStepIdx = 0;
-            document.getElementById('sub-header').innerText = `División ${mision.id} de ${misiones.length}`;
-            document.getElementById('div-display').innerHTML = mision.dividendoHtml;
-            document.getElementById('divisor-display').innerText = mision.divisor;
-            document.getElementById('final-msg').style.display = 'none';
-            document.getElementById('skip-btn').style.display = 'block';
-            
-            const inputs = document.querySelectorAll('.math-input');
-            inputs.forEach(i => { i.value = ''; i.disabled = false; i.style.display = 'none'; i.classList.remove('correct'); });
-            document.getElementById('menos-1').style.display = 'none';
-            document.getElementById('raya-1').style.display = 'none';
-            document.getElementById('menos-2').style.display = 'none';
-            document.getElementById('raya-2').style.display = 'none';
-            document.getElementById('row-mid').style.display = 'none';
-            runStep(0);
-        }
-
-        function runStep(idx) {
-            const step = misiones[currentMisionIdx].steps[idx];
+        function initStep(index) {
+            if (index >= steps.length) return;
+            const step = steps[index];
             const input = document.getElementById(step.id);
             
-            document.getElementById('guide-text').innerHTML = step.msg;
             input.style.display = 'inline-block';
             input.focus();
 
-            if(step.id === 'input-r1' || step.id === 'input-b1') document.getElementById('row-mid').style.display = 'inline-flex';
-            if(step.id === 'input-b1') {
-                document.getElementById('num-0').classList.remove('active-num');
-                document.getElementById('num-1').classList.remove('active-num');
-                document.getElementById('num-2').classList.add('active-num');
+            if (step.id === 'input-baja-cifra') {
+                document.getElementById('num-4').classList.remove('active-num');
+                document.getElementById('num-5').classList.remove('active-num');
+                document.getElementById('num-6').classList.add('active-num');
             }
-            if(step.id === 'cociente-2') document.getElementById('num-2').classList.remove('active-num');
+            
+            if (step.id === 'cociente-2') {
+                document.getElementById('num-6').classList.remove('active-num');
+            }
 
             input.onkeypress = (e) => {
                 if (e.key === 'Enter') {
                     if (input.value === step.val) {
                         input.classList.add('correct');
                         input.disabled = true;
-                        if(step.id === 'input-m1') { document.getElementById('menos-1').style.display = 'block'; document.getElementById('raya-1').style.display = 'block'; }
-                        if(step.id === 'input-mf') { document.getElementById('menos-2').style.display = 'block'; document.getElementById('raya-2').style.display = 'block'; }
-                        if (step.final) { showFinish(); } else { runStep(idx + 1); }
+                        if (step.final) {
+                            document.getElementById('guide-text').style.display = 'none';
+                            document.getElementById('final-msg').style.display = 'block';
+                            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                        } else {
+                            currentIdx++;
+                            document.getElementById('guide-text').innerHTML = steps[currentIdx].msg;
+                            initStep(currentIdx);
+                        }
                     } else {
                         input.classList.add('wrong');
                         setTimeout(() => input.classList.remove('wrong'), 500);
@@ -195,21 +169,7 @@
             };
         }
 
-        function showFinish() {
-            document.getElementById('guide-text').style.display = 'none';
-            document.getElementById('skip-btn').style.display = 'none';
-            document.getElementById('final-msg').style.display = 'block';
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-        }
-
-        function loadNext() {
-            currentMisionIdx++;
-            if(currentMisionIdx >= misiones.length) currentMisionIdx = 0;
-            document.getElementById('guide-text').style.display = 'flex';
-            initMision(currentMisionIdx);
-        }
-
-        initMision(0);
+        initStep(0);
     </script>
 </body>
 </html>
