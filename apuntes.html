@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repaso Alba - Publicidad y Consumo</title>
+    <title>Repaso Alba - El Sector Primario</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
         :root {
@@ -22,30 +22,38 @@
         .subtitle { text-align: center; font-weight: 600; color: #666; margin-bottom: 20px; font-size: 0.9rem; }
         h2 { color: var(--primary-color); border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; margin-top: 30px; font-size: 1.5rem; }
 
-        /* --- ESTILO ESQUEMA PUBLICIDAD --- */
-        .esquema-horizontal { display: flex; justify-content: space-between; gap: 15px; margin: 20px 0; }
-        .caja-tipo { flex: 1; background-color: #e8f5e9; border: 2px solid var(--primary-color); border-radius: 15px; padding: 15px; text-align: center; }
-        .caja-tipo b { color: var(--primary-color); display: block; margin-bottom: 8px; font-size: 1rem; }
-        .caja-tipo p { font-size: 0.85rem; margin: 0; }
+        /* --- ESQUEMA COMPACTO --- */
+        .esquema-container { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 20px 0; }
+        .esquema-box-compacta {
+            background-color: #e8f5e9; border: 2px solid var(--primary-color); border-radius: 50px;
+            padding: 5px 30px; width: auto; min-width: 300px; text-align: center; font-weight: 700; font-size: 1rem;
+        }
+        .esquema-arrow { font-size: 1.5rem; color: var(--primary-color); line-height: 1; margin: 2px 0; }
 
-        /* --- CONSUMO RESPONSABLE --- */
-        .consejos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .consejo-card { background-color: #fff8e1; border: 1px solid var(--secondary-color); border-radius: 10px; padding: 12px; display: flex; align-items: center; gap: 10px; }
-        .consejo-icon { font-size: 1.5rem; }
-        .consejo-text { font-size: 0.9rem; font-weight: 600; }
+        .tipos-container { display: flex; justify-content: space-around; width: 100%; gap: 15px; margin-top: 10px; }
+        .tipo-card {
+            background-color: #fff8e1; border: 2px solid var(--secondary-color); border-radius: 12px;
+            padding: 15px; width: 48%; text-align: center; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+        .tipo-title { font-weight: 700; color: #795548; margin-bottom: 5px; font-size: 1rem; }
+        .tipo-desc { font-size: 0.85rem; line-height: 1.3; }
+
+        /* --- CONTENIDO --- */
+        .resumen-content p { margin-bottom: 12px; }
+        .resaltado { background-color: #fff9c4; padding: 2px 5px; border-radius: 4px; font-weight: 600; }
+        .icono-check { color: var(--primary-color); margin-right: 5px; }
 
         /* --- ACTIVIDADES --- */
-        .actividad { margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 10px; }
-        .pregunta-titulo { font-weight: 600; margin-bottom: 10px; color: #555; font-size: 0.95rem; }
-        
-        .linea-escribir { border-bottom: 1px solid #ccc; height: 25px; margin-bottom: 10px; }
-        .casilla { display: inline-block; width: 18px; height: 18px; border: 2px solid #aaa; border-radius: 3px; margin-right: 8px; vertical-align: middle; }
+        .actividad { margin-bottom: 25px; border: 1px solid #ddd; padding: 20px; border-radius: 12px; background-color: #fff; }
+        .pregunta-titulo { font-weight: 600; margin-bottom: 15px; color: #444; font-size: 1rem; }
+        .casilla { display: inline-block; width: 22px; height: 22px; border: 2px solid #aaa; border-radius: 4px; margin-right: 10px; vertical-align: middle; }
+        .input-hueco { border: none; border-bottom: 2px solid #ccc; padding: 2px 5px; font-size: 1rem; width: 160px; text-align: center; background: transparent; }
 
-        .btn-imprimir { display: block; width: 200px; margin: 20px auto; padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: 50px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        .btn-imprimir { display: block; width: 200px; margin: 0 auto 30px; padding: 15px; background-color: var(--primary-color); color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; }
 
         @media print {
             .btn-imprimir { display: none; }
-            body { background-color: white; padding: 0; }
+            body { padding: 0; background-color: white; }
             .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 5mm; }
         }
     </style>
@@ -53,71 +61,73 @@
 <body>
 
     <div class="container">
-        <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Material</button>
+        <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Alba</button>
 
         <h1>Ficha de Repaso: Alba del Cid</h1>
-        <p class="subtitle">Bloque 3: La Publicidad y el Consumo Responsable</p>
+        <p class="subtitle">Bloque 3: El Sector Primario (Agricultura y Ganadería)</p>
 
-        <h2>📢 La Publicidad</h2>
-        <p style="font-size: 0.95rem;">La publicidad sirve para darnos a conocer un producto o un servicio. Puede ser de dos tipos:</p>
-        
-        <div class="esquema-horizontal">
-            <div class="caja-tipo">
-                <b>📺 Publicidad Comercial</b>
-                <p>Su objetivo es convencernos para que <b>compremos</b> algo (juguetes, comida, ropa...).</p>
-            </div>
-            <div class="caja-tipo">
-                <b>🏥 Publicidad Institucional</b>
-                <p>Su objetivo es darnos <b>consejos</b> importantes (salud, cuidar el agua, seguridad vial...).</p>
+        <h2>🔍 Esquema de la Agricultura</h2>
+        <div class="esquema-container">
+            <div class="esquema-box-compacta">🚜 LA AGRICULTURA</div>
+            <div class="esquema-arrow">⬇️</div>
+            <div class="tipos-container">
+                <div class="tipo-card">
+                    <div class="tipo-title">SECANO ☀️</div>
+                    <p class="tipo-desc">Solo recibe el agua de la <b>lluvia</b> (trigo, olivo, vid).</p>
+                </div>
+                <div class="tipo-card">
+                    <div class="tipo-title">REGADÍO 💧</div>
+                    <p class="tipo-desc">Recibe agua de <b>ríos o pozos</b> mediante riegos (arroz, hortalizas).</p>
+                </div>
             </div>
         </div>
 
-        <h2>🛒 Consumo Responsable</h2>
-        <p style="font-size: 0.95rem;">Ser un consumidor responsable significa comprar solo lo que necesitamos y cuidar el planeta. ¡Sigue estos consejos!</p>
-        
-        <div class="consejos-grid">
-            <div class="consejo-card">
-                <span class="consejo-icon">📝</span>
-                <span class="consejo-text">Haz una lista antes de comprar.</span>
-            </div>
-            <div class="consejo-card">
-                <span class="consejo-icon">💰</span>
-                <span class="consejo-text">Compara precios y calidad.</span>
-            </div>
-            <div class="consejo-card">
-                <span class="consejo-icon">🍎</span>
-                <span class="consejo-text">Elige productos saludables.</span>
-            </div>
-            <div class="consejo-card">
-                <span class="consejo-icon">♻️</span>
-                <span class="consejo-text">Reutiliza y recicla los envases.</span>
+        <h2>🔍 Esquema de la Ganadería</h2>
+        <div class="esquema-container">
+            <div class="esquema-box-compacta">🐄 LA GANADERÍA</div>
+            <div class="esquema-arrow">⬇️</div>
+            <div class="tipos-container">
+                <div class="tipo-card">
+                    <div class="tipo-title">ESTABULADA 🏠</div>
+                    <div class="tipo-desc">El ganado vive dentro de <b>establos o granjas</b>.</div>
+                </div>
+                <div class="tipo-card">
+                    <div class="tipo-title">NO ESTABULADA 🌳</div>
+                    <div class="tipo-desc">El ganado pasta libre en el <b>campo</b> bajo vigilancia.</div>
+                </div>
             </div>
         </div>
 
-        <h2>🧠 Actividades</h2>
+        <h2>📖 Resumen para estudiar</h2>
+        <div class="resumen-content">
+            <p><span class="icono-check">✔️</span> La <span class="resaltado">agricultura</span> consiste en cultivar la tierra para obtener alimentos (frutas, verduras) y materias primas (algodón).</p>
+            <p><span class="icono-check">✔️</span> La <span class="resaltado">ganadería</span> consiste en la cría y comercio de animales para obtener alimentos (carne, leche) o productos (lana, cuero).</p>
+            <p><span class="icono-check">✔️</span> El ganado puede ser: <b>vacuno</b> (vacas), <b>porcino</b> (cerdos), <b>ovino</b> (ovejas), <b>caprino</b> (cabras) o <b>avícola</b> (aves).</p>
+        </div>
+
+        <h2>🧠 Actividades para practicar</h2>
 
         <div class="actividad">
-            <div class="pregunta-titulo">1. ¿Para qué sirve la publicidad?</div>
-            <div class="linea-escribir"></div>
-            <div class="linea-escribir"></div>
-        </div>
-
-        <div class="actividad">
-            <div class="pregunta-titulo">2. Clasifica estos anuncios (Comercial o Institucional):</div>
-            <p>A. Anuncio de una marca de zapatillas: ____________________</p>
-            <p>B. Anuncio que nos pide reciclar papel: ____________________</p>
-            <p>C. Anuncio de un nuevo videojuego: ____________________</p>
+            <div class="pregunta-titulo">1. ¿Cómo se llama la agricultura que solo usa el agua de la lluvia?</div>
+            <p><span class="casilla"></span> Agricultura de Regadío.</p>
+            <p><span class="casilla"></span> Agricultura de Secano.</p>
         </div>
 
         <div class="actividad">
-            <div class="pregunta-titulo">3. Marca con una X qué hace un consumidor responsable:</div>
-            <p><span class="casilla"></span> Comprar muchas cosas aunque no las necesite.</p>
-            <p><span class="casilla"></span> Mirar la fecha de caducidad de los alimentos.</p>
-            <p><span class="casilla"></span> Comparar el precio de dos libretas antes de elegir.</p>
+            <div class="pregunta-titulo">2. Une cada animal con su tipo de ganado:</div>
+            <p>Vaca 🐄 &nbsp; ➔ &nbsp; Ganado <input type="text" class="input-hueco" placeholder="..."></p>
+            <p>Oveja 🐑 &nbsp; ➔ &nbsp; Ganado <input type="text" class="input-hueco" placeholder="..."></p>
+            <p>Cerdo 🐖 &nbsp; ➔ &nbsp; Ganado <input type="text" class="input-hueco" placeholder="..."></p>
         </div>
 
-        <div style="margin-top: 30px; text-align: center; color: var(--primary-color); border-top: 1px dashed #ccc; padding-top: 15px; font-weight: 600;">
-            ¡Sigue así, Alba! ¡Eres una experta! 🌟
+        <div class="actividad">
+            <div class="pregunta-titulo">3. Completa las frases:</div>
+            <p>A. En la ganadería <input type="text" class="input-hueco" placeholder="..."> los animales viven en granjas.</p>
+            <p>B. En la ganadería no estabulada los animales pastan en el <input type="text" class="input-hueco" placeholder="...">.</p>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center; color: var(--primary-color); border-top: 1px dashed #ccc; padding-top: 15px; font-weight: 600; font-size: 1.1rem;">
+            ¡Sigue así, Alba! ¡Lo estás haciendo fenomenal! 🌟
         </div>
 
     </div>
