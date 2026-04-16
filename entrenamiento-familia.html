@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento Infinito: Alba del Cid</title>
+    <title>Entrenamiento 30 Divisiones: Alba del Cid</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root { --primary: #4CAF50; --bg: #f0f4f8; --text: #333; --wrong: #f44336; --guia: #e3f2fd; --guia-text: #1976d2; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; overflow-x: hidden; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
         
         .academia-header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; width: 100%; max-width: 700px; }
         .academia-header h1 { color: var(--primary); margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px; }
@@ -32,18 +32,15 @@
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        /* Posiciones */
-        .pos-mult1 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 15px; }
-        .pos-resto1 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
-        .pos-baja { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 15px; } 
+        /* Posiciones exactas */
+        #input-mult-1 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 15px; }
+        #input-mult-2 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 15px; }
         
-        .pos-mult2 { width: 2.5ch; display: none; position: absolute; left: 1.2ch; top: 15px; }
-        .pos-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 25px; }
-
-        .row-36 { letter-spacing: 0px; display: inline-flex; gap: 5px; position: absolute; left: 1.1ch; top: 15px; }
+        .row-middle { letter-spacing: 0px; display: inline-flex; gap: 8px; position: absolute; left: 1.1ch; top: 15px; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         #final-msg { display: none; text-align: center; margin-top: 20px; padding: 25px; border: 3px solid var(--primary); border-radius: 20px; background-color: #e8f5e9; width: 100%; }
+        .counter { margin-bottom: 10px; font-weight: 700; color: #666; }
     </style>
 </head>
 <body>
@@ -53,18 +50,20 @@
         <p style="color:#666; font-weight:600;">Preparación examen Alba</p>
     </div>
 
+    <div class="counter" id="division-counter">División 1 de 30</div>
+
     <div class="game-container">
-        <div id="guide-text" class="guide-box">Cargando desafío...</div>
+        <div id="guide-text" class="guide-box">Cargando...</div>
 
         <div class="division-wrapper">
             <div id="arco" class="arco-superior"></div>
             <table class="division-table">
                 <tr>
-                    <td id="val-dividend" class="dividend">456</td>
-                    <td id="val-divisor" class="divisor-box">6</td>
+                    <td id="val-dividend" class="dividend">---</td>
+                    <td id="val-divisor" class="divisor-box">-</td>
                 </tr>
                 <tr>
-                    <td><input type="text" id="input-mult-1" class="math-input pos-mult1" maxlength="2" autocomplete="off"></td>
+                    <td><input type="text" id="input-mult-1" class="math-input" maxlength="2" autocomplete="off"></td>
                     <td class="quotient-area">
                         <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.5ch; display:none;">
                         <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off" style="display:none; width:1.5ch;">
@@ -72,79 +71,99 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="row-middle" style="position: absolute; left: 1.1ch; top: 15px; display: flex; gap: 5px;">
-                            <input type="text" id="input-resto-1" class="math-input" style="width:1.2ch; display:none;" maxlength="1" autocomplete="off">
-                            <input type="text" id="input-baja-cifra" class="math-input" style="width:1.2ch; display:none;" maxlength="1" autocomplete="off">
+                        <div id="row-36" class="row-middle" style="display:none;">
+                            <input type="text" id="input-resto-1" class="math-input" style="width:1.2ch;" maxlength="1" autocomplete="off">
+                            <input type="text" id="input-baja-cifra" class="math-input" style="width:1.2ch;" maxlength="1" autocomplete="off">
                         </div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><input type="text" id="input-mult-2" class="math-input pos-mult2" maxlength="2" autocomplete="off"></td>
+                    <td><input type="text" id="input-mult-2" class="math-input" maxlength="2" autocomplete="off"></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><input type="text" id="input-resto-final" class="math-input pos-resto-final" maxlength="2" autocomplete="off"></td>
+                    <td><input type="text" id="input-resto-final" class="math-input" style="width:1.5ch; display:none; position:absolute; left:2.6ch; top:25px;" maxlength="2" autocomplete="off"></td>
                     <td></td>
                 </tr>
             </table>
         </div>
 
         <div id="final-msg">
-            <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">¡EXCELENTE TRABAJO, ALBA! 🏆</div>
-            <p>Has resuelto la división perfectamente.</p>
-            <button style="background:var(--primary); color:white; border:none; padding:15px 30px; border-radius:30px; cursor:pointer; font-weight:700;" onclick="generateDivision()">Nueva división</button>
+            <div id="final-title" style="font-size: 2rem; font-weight: 700; color: var(--primary);">¡EXCELENTE TRABAJO! 🏆</div>
+            <p id="final-p">Has terminado esta división. ¿Lista para la siguiente?</p>
+            <button id="btn-next" style="background:var(--primary); color:white; border:none; padding:15px 30px; border-radius:30px; cursor:pointer; font-weight:700;" onclick="nextDivision()">Siguiente división</button>
         </div>
     </div>
 
     <script>
-        let data = {};
+        // BATERÍA DE 30 DIVISIONES (Dividendo, Divisor)
+        const bateria = [
+            [456, 6], [258, 3], [745, 5], [148, 2], [639, 9],
+            [324, 4], [856, 8], [917, 7], [525, 5], [216, 6],
+            [489, 7], [352, 4], [678, 9], [895, 8], [127, 3],
+            [946, 5], [431, 6], [289, 4], [754, 8], [365, 7],
+            [542, 9], [211, 2], [888, 7], [643, 5], [199, 3],
+            [444, 6], [777, 8], [999, 9], [555, 4], [222, 5]
+        ];
 
-        function generateDivision() {
+        let currentIdx = 0;
+        let steps = [];
+        let currentStepIdx = 0;
+
+        function loadDivision(index) {
+            const [D, d] = bateria[index];
+            document.getElementById('division-counter').innerText = `División ${index + 1} de ${bateria.length}`;
+            document.getElementById('val-dividend').innerText = D;
+            document.getElementById('val-divisor').innerText = d;
+            
+            // Reset visual
             document.getElementById('final-msg').style.display = 'none';
-            document.getElementById('guide-text').style.display = 'flex';
             document.getElementById('arco').style.opacity = '1';
             const inputs = document.querySelectorAll('.math-input');
             inputs.forEach(i => { i.value = ''; i.disabled = false; i.style.display = 'none'; i.classList.remove('correct', 'wrong'); });
+            document.getElementById('row-36').style.display = 'none';
 
-            // Generar valores: Dividendo 3 cifras, Divisor 1 cifra
-            const divisor = Math.floor(Math.random() * 7) + 3; // 3-9
-            const c1 = Math.floor(Math.random() * 8) + 1; // Primer cociente
-            const r1 = Math.floor(Math.random() * divisor); // Resto parcial
-            const d1 = (divisor * c1) + r1; 
-            
-            const c2 = Math.floor(Math.random() * 9) + 1; 
-            const rFinal = Math.floor(Math.random() * divisor);
-            const numBajo = (divisor * c2) + rFinal;
-            const cifraBaja = numBajo % 10;
-            
-            const dividendoFinal = parseInt(d1.toString() + cifraBaja.toString());
-            
-            data = {
-                steps: [
-                    { id: 'cociente-1', val: c1.toString(), msg: `Venga, Alba... ¿Por cuánto multiplico ${divisor} para acercarme a ${d1}?` },
-                    { id: 'input-mult-1', val: (c1*divisor).toString(), msg: `¡Muy bien! Ahora, ¿cuánto es ${divisor} x ${c1}? Ponlo debajo del ${d1}.` },
-                    { id: 'input-resto-1', val: r1.toString(), msg: `¡Exacto! Ahora toca restar: ¿cuánto es ${d1} - ${c1*divisor}?` },
-                    { id: 'input-baja-cifra', val: cifraBaja.toString(), msg: `¡Eso es! Ahora baja la siguiente cifra (el ${cifraBaja}) para seguir.` },
-                    { id: 'cociente-2', val: c2.toString(), msg: `¡Perfecto! Ya tenemos ${numBajo}. ¿Por cuánto multiplico ${divisor} para llegar?` },
-                    { id: 'input-mult-2', val: (c2*divisor).toString(), msg: `¡Genial! ¿Cuánto es ${divisor} x ${c2}? Escríbelo abajo para restar.` },
-                    { id: 'input-resto-final', val: rFinal.toString(), final: true }
-                ]
-            };
+            // Cálculos automáticos para los pasos
+            const d1 = parseInt(D.toString().substring(0, 2));
+            const cifraBaja = D.toString().substring(2, 3);
+            const q1 = Math.floor(d1 / d);
+            const m1 = q1 * d;
+            const r1 = d1 - m1;
+            const d2 = parseInt(r1.toString() + cifraBaja);
+            const q2 = Math.floor(d2 / d);
+            const m2 = q2 * d;
+            const rf = d2 - m2;
 
-            document.getElementById('val-dividend').innerText = dividendoFinal;
-            document.getElementById('val-divisor').innerText = divisor;
+            steps = [
+                { id: 'cociente-1', val: q1.toString(), msg: `Venga, Alba... ¿Por cuánto multiplico ${d} para acercarme a ${d1}?` },
+                { id: 'input-mult-1', val: m1.toString(), msg: `¡Muy bien! Ahora, ¿cuánto es ${d} x ${q1}? Escríbelo debajo del ${d1}.` },
+                { id: 'input-resto-1', val: r1.toString(), msg: `¡Exacto! Ahora toca restar: ¿cuánto es ${d1} - ${m1}?` },
+                { id: 'input-baja-cifra', val: cifraBaja, msg: `¡Eso es! Ahora baja la siguiente cifra (el ${cifraBaja}) para seguir.` },
+                { id: 'cociente-2', val: q2.toString(), msg: `¡Perfecto! Ya tenemos ${d2}. ¿Por cuánto multiplico ${d} para llegar?` },
+                { id: 'input-mult-2', val: m2.toString(), msg: `¡Genial! ¿Cuánto es ${d} x ${q2}? Escríbelo abajo para restar.` },
+                { id: 'input-resto-final', val: rf.toString(), final: true }
+            ];
+
+            currentStepIdx = 0;
             runStep(0);
         }
 
         function runStep(index) {
-            const step = data.steps[index];
+            const step = steps[index];
             const input = document.getElementById(step.id);
-            document.getElementById('guide-text').innerHTML = step.msg || `¿Cuánto sobra de la resta?`;
+            
+            if(step.id === 'input-resto-1' || step.id === 'input-baja-cifra') {
+                document.getElementById('row-36').style.display = 'inline-flex';
+            }
+            
+            document.getElementById('guide-text').innerHTML = step.msg || `¿Cuánto es el resto final?`;
             input.style.display = 'inline-block';
             input.focus();
 
-            if (step.id === 'input-baja-cifra') document.getElementById('arco').style.opacity = '0';
+            if (step.id === 'input-baja-cifra') {
+                document.getElementById('arco').style.opacity = '0';
+            }
 
             input.onkeypress = (e) => {
                 if (e.key === 'Enter') {
@@ -152,10 +171,10 @@
                         input.classList.add('correct');
                         input.disabled = true;
                         if (step.final) {
-                            document.getElementById('guide-text').style.display = 'none';
-                            document.getElementById('final-msg').style.display = 'block';
-                            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-                        } else { runStep(index + 1); }
+                            showEnd();
+                        } else {
+                            runStep(index + 1);
+                        }
                     } else {
                         input.classList.add('wrong');
                         setTimeout(() => input.classList.remove('wrong'), 500);
@@ -163,7 +182,28 @@
                 }
             };
         }
-        generateDivision();
+
+        function showEnd() {
+            document.getElementById('guide-text').style.display = 'none';
+            const msg = document.getElementById('final-msg');
+            msg.style.display = 'block';
+            
+            if (currentIdx === bateria.length - 1) {
+                document.getElementById('final-title').innerText = "¡ERES LA REINA DE LAS DIVISIONES! 👑";
+                document.getElementById('final-p').innerText = "Has completado la batería de 30 ejercicios. ¡Increíble!";
+                document.getElementById('btn-next').innerText = "Empezar de nuevo";
+            }
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        }
+
+        function nextDivision() {
+            currentIdx++;
+            if (currentIdx >= bateria.length) currentIdx = 0;
+            loadDivision(currentIdx);
+            document.getElementById('guide-text').style.display = 'flex';
+        }
+
+        loadDivision(0);
     </script>
 </body>
 </html>
