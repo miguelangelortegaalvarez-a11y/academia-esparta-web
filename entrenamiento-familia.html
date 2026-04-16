@@ -3,40 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reto de División: Alba del Cid</title>
+    <title>Entrenamiento División: Alba del Cid</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --primary: #4CAF50; --bg: #f0f4f8; --text: #333; --wrong: #f44336; }
+        :root { --primary: #4CAF50; --bg: #f0f4f8; --text: #333; --wrong: #f44336; --guia: #e3f2fd; --guia-text: #1976d2; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
         
         h1 { color: var(--primary); text-align: center; margin-bottom: 5px; }
         .subtitle { color: #666; font-weight: 600; margin-bottom: 30px; }
 
-        .game-container { background: white; width: 100%; max-width: 800px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; }
+        .game-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; }
 
-        /* Estilo de la división visual */
-        .division-visual { font-family: 'Roboto Mono', monospace; font-size: 3rem; color: #333; display: grid; grid-template-columns: repeat(5, 1ch); gap: 5px; margin-bottom: 30px; position: relative; padding: 10px; border: 2px solid #eee; border-radius: 10px; }
-        .dividend { grid-column: 1 / 4; text-align: right; }
-        .divisor { grid-column: 5; text-align: center; position: relative; }
-        .divisor::before { content: ''; position: absolute; left: -10px; top: 0; bottom: 0; width: 3px; background-color: #333; } /* Línea vertical cajón */
-        .divisor::after { content: ''; position: absolute; left: -10px; bottom: -5px; right: 0; height: 3px; background-color: #333; } /* Línea horizontal cajón */
-        .quotient { grid-column: 5; grid-row: 2; text-align: center; color: var(--primary); }
+        /* Globo de texto guía */
+        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1rem; line-height: 1.4; box-shadow: 0 4px 10px rgba(25, 118, 210, 0.1); }
+        .guide-box::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 15px solid var(--guia-text); }
 
-        /* Estilo de los pasos y restas */
-        .steps-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; }
-        .step-row { display: flex; align-items: center; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 10px; border: 1px solid #eee; }
-        .step-label { font-size: 1.2rem; font-weight: 600; color: #555; width: 120px; text-align: right; }
+        /* Estilo de la división visual limpia (Tabla) */
+        .division-table { font-family: 'Roboto Mono', monospace; font-size: 3rem; color: #333; border-collapse: collapse; position: relative; margin-bottom: 20px; }
+        .division-table td { padding: 5px 10ch 5px 1ch; text-align: center; width: 2ch; position: relative; }
         
-        .math-input { font-family: 'Roboto Mono', monospace; font-size: 1.5rem; width: 80px; padding: 8px; text-align: center; border: 2px solid #ccc; border-radius: 8px; transition: 0.3s; }
-        .math-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px rgba(74, 175, 80, 0.2); }
-        .math-input.correct { border-color: var(--primary); background-color: #e8f5e9; color: #2e7d32; }
-        .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
+        /* El "Arquito" */
+        .arco-superior { position: absolute; top: -15px; left: 5px; width: 3.5ch; height: 15px; border: 4px solid var(--wrong); border-bottom: none; border-radius: 20px 20px 0 0; opacity: 1; transition: opacity 0.5s; }
 
-        .help-text { font-size: 0.9rem; color: #888; font-style: italic; flex: 1; }
+        .dividend-cell { font-size: 3.2rem; }
+        .divisor-cell { border-left: 4px solid #333; border-bottom: 4px solid #333; }
+        .quotient-cell { color: var(--primary); font-size: 3rem; }
+        
+        /* Campos de entrada en la división */
+        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.5rem; width: 1.2ch; padding: 2px; text-align: center; border: 3px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; }
+        .math-input:focus { outline: none; border-color: var(--primary); }
+        .math-input.correct { border-color: var(--primary); color: #2e7d32; font-weight: 700; background-color: #e8f5e9; }
+        .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 
+        /* Mensaje final */
         #final-msg { display: none; text-align: center; margin-top: 30px; }
         .congrats-text { font-size: 2rem; font-weight: 700; color: var(--primary); }
         .trophy { font-size: 5rem; }
@@ -46,53 +48,43 @@
 <body>
 
     <h1>ACADEMIA ESPARTA</h1>
-    <p class="subtitle">Reto de División con Resta: Alba del Cid</p>
+    <p class="subtitle">Desafío de División Guiado: Alba del Cid</p>
 
     <div class="game-container">
-        <div class="division-visual">
-            <div class="dividend">456</div>
-            <div class="divisor">6</div>
-            <div id="visual-quotient" class="quotient"></div>
+        <div id="guide-text" class="guide-box">
+            Venga, Alba, piensa... ¿Por cuánto multiplico 6 para que me dé 45 o se acerque sin pasarse?<br>(Mira el arquito rojo 😉)
         </div>
 
-        <div class="steps-container">
-            
-            <div id="step-1" class="step-row">
-                <label class="step-label">6 x 7 =</label>
-                <input type="text" id="in-1" class="math-input" maxlength="2" autocomplete="off">
-                <span id="help-1" class="help-text">¿Cuánto es 6 por 7? Escribe el resultado aquí.</span>
-            </div>
-
-            <div id="step-2" class="step-row" style="display:none;">
-                <label class="step-label">45 - 42 =</label>
-                <input type="text" id="in-2" class="math-input" maxlength="1" autocomplete="off">
-                <span id="help-2" class="help-text">Ahora resta 5 menos 2. ¿Qué número queda?</span>
-            </div>
-
-            <div id="step-3" class="step-row" style="display:none;">
-                <label class="step-label">Bajo el...</label>
-                <input type="text" id="in-3" class="math-input" maxlength="1" autocomplete="off">
-                <span id="help-3" class="help-text">¿Qué número "baja" al lado del 3? Mira el dividendo.</span>
-            </div>
-
-            <div id="step-4" class="step-row" style="display:none;">
-                <label class="step-label">6 x 6 =</label>
-                <input type="text" id="in-4" class="math-input" maxlength="2" autocomplete="off">
-                <span id="help-4" class="help-text">¿Cuánto es 6 por 6? Es el último número del cociente.</span>
-            </div>
-
-            <div id="step-5" class="step-row" style="display:none;">
-                <label class="step-label">Resto =</label>
-                <input type="text" id="in-5" class="math-input" maxlength="1" autocomplete="off">
-                <span id="help-5" class="help-text">Resta 36 menos 36. ¿Cuál es el resto final?</span>
-            </div>
-
+        <div style="position: relative;">
+            <div id="arco" class="arco-superior"></div>
+            <table class="division-table">
+                <tr>
+                    <td class="dividend-cell">456</td>
+                    <td class="divisor-cell">6</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="resto-1" class="math-input" maxlength="1" autocomplete="off" style="display:none; position:absolute; left: 2.2ch; top: 10px;">
+                        <span id="bajada-6" style="display:none; position:absolute; left: 3.2ch; top: 10px; color:#555;">6</span>
+                    </td>
+                    <td class="quotient-cell">
+                        <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off">
+                        <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off" style="display:none;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="resto-final" class="math-input" maxlength="1" autocomplete="off" style="display:none; position:absolute; left: 3.2ch; top: 20px;">
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
         </div>
 
         <div id="final-msg">
             <span class="trophy">🏆</span>
             <div class="congrats-text">¡EXCELENTE TRABAJO, ALBA!</div>
-            <p style="font-size: 1.2rem;">Has completado la división 456 ÷ 6 = 76 perfecta con el método de la resta. ¡El 10 es tuyo! 🛡️✨</p>
+            <p style="font-size: 1.2rem;">Has completado la división 456 ÷ 6 = 76 perfectamente paso a paso. ¡El 10 es tuyo! 🛡️✨</p>
             <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-family:'Poppins';" onclick="location.reload()">Volver a intentar</button>
         </div>
 
@@ -100,18 +92,21 @@
 
     <script>
         const steps = [
-            { inputId: 'in-1', helpId: 'help-1', correct: '42', nextStep: 'step-2', nextInput: 'in-2', quotientPart: '7', wrongHelp: 'Pista: 6 x 6 es 36, suma 6 más...' },
-            { inputId: 'in-2', helpId: 'help-2', correct: '3', nextStep: 'step-3', nextInput: 'in-3', wrongHelp: 'Pista: Tienes 5 caramelos y comes 2, quedan...' },
-            { inputId: 'in-3', helpId: 'help-3', correct: '6', nextStep: 'step-4', nextInput: 'in-4', wrongHelp: 'Pista: Mira el último número del dividend (45<b>6</b>).' },
-            { inputId: 'in-4', helpId: 'help-4', correct: '36', nextStep: 'step-5', nextInput: 'in-5', quotientPart: '6', wrongHelp: 'Pista: Es 6 x 5 (30) más otros 6...' },
-            { inputId: 'in-5', helpId: 'help-5', correct: '0', final: true, wrongHelp: 'Pista: Si a 36 le quitas 36, no queda...' }
+            { inputId: 'cociente-1', correct: '7', guide: '¡Genial! Ahora multiplica: ¿7 x 6 son...?<br>Calcula el resto de 45 menos ese número y escríbelo abajo.' },
+            { inputId: 'resto-1', correct: '3', guide: '¡Perfecto! El resto es 3.<br>Ahora "baja" el siguiente número del dividendo (el 6) al lado del 3.' },
+            { inputId: 'bajada-6', action: 'show', guide: '¡Muy bien! Ahora tenemos el 36.<br>Venga, piensa de nuevo... ¿Por cuánto multiplico 6 para que me dé 36?' },
+            { inputId: 'cociente-2', correct: '6', guide: '¡Exacto! 6 x 6 es 36.<br>Ahora calcula el resto final de 36 menos 36 y escríbelo abajo.' },
+            { inputId: 'resto-final', correct: '0', final: true }
         ];
 
-        let visualQuotient = "";
-
         steps.forEach((step, index) => {
+            if(step.action === 'show') {
+                // Paso especial para mostrar la bajada del 6
+                // Esto se activa al acertar el resto-1
+                return; 
+            }
+
             const input = document.getElementById(step.inputId);
-            const help = document.getElementById(step.helpId);
 
             input.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
@@ -120,37 +115,45 @@
                         input.classList.remove('wrong');
                         input.classList.add('correct');
                         input.disabled = true; // Bloquear campo
-                        
-                        // Actualizar cociente visual si toca
-                        if(step.quotientPart) {
-                            visualQuotient += step.quotientPart;
-                            document.getElementById('visual-quotient').innerText = visualQuotient;
-                        }
 
                         if (step.final) {
                             // FIN DEL JUEGO
-                            showFinal();
+                            document.getElementById('guide-text').style.display = 'none';
+                            document.getElementById('final-msg').style.display = 'block';
+                            confetti({ particleCount: 150, spread: spreadForConfetti(), origin: { y: 0.6 } });
                         } else {
                             // MOSTRAR SIGUIENTE PASO
-                            document.getElementById(step.nextStep).style.display = 'flex';
-                            document.getElementById(step.nextInput).focus();
+                            document.getElementById('guide-text').innerHTML = step.guide;
+                            const nextStep = steps[index + 1];
+                            
+                            if(nextStep.action === 'show') {
+                                // Caso especial: Mostrar bajada del 6 y pasar al cociente-2
+                                setTimeout(() => {
+                                    document.getElementById('bajada-6').style.display = 'inline';
+                                    document.getElementById('arco').style.opacity = '0'; // Quitar arquito
+                                    document.getElementById('cociente-2').style.display = 'inline';
+                                    document.getElementById('cociente-2').focus();
+                                }, 500);
+                            } else {
+                                // Caso normal: Mostrar input y hacer focus
+                                const nextInput = document.getElementById(nextStep.inputId);
+                                nextInput.style.display = 'inline';
+                                nextInput.focus();
+                            }
                         }
                     } else {
                         // ERROR
                         input.classList.add('wrong');
-                        help.innerText = step.wrongHelp; // Cambiar ayuda por pista
-                        help.style.color = 'var(--wrong)';
                         setTimeout(() => { input.classList.remove('wrong'); }, 500);
                     }
                 }
             });
         });
 
-        function showFinal() {
-            document.querySelector('.steps-container').style.display = 'none';
-            document.getElementById('final-msg').style.display = 'block';
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-        }
+        // Iniciar primer focus
+        document.getElementById('cociente-1').focus();
+
+        function spreadForConfetti() { return window.innerWidth > 600 ? 90 : 50; }
     </script>
 
 </body>
