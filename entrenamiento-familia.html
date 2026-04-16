@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root { --primary: #4CAF50; --bg: #f0f4f8; --text: #333; --wrong: #f44336; --guia: #e3f2fd; --guia-text: #1976d2; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; overflow-x: hidden; position: relative; }
         
         .academia-header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; width: 100%; max-width: 600px; }
         .academia-header h1 { color: var(--primary); margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px; }
@@ -33,7 +33,7 @@
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        #input-42 { width: 2.5ch; display: none; position: absolute; left: 0px; top: 10px; }
+        #input-mult { width: 2.5ch; display: none; position: absolute; left: 0px; top: 10px; }
         #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
         #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.2ch; top: 25px; }
         
@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" id="input-42" class="math-input" maxlength="2" autocomplete="off">
+                        <input type="text" id="input-mult" class="math-input" maxlength="2" autocomplete="off">
                     </td>
                     <td class="quotient-area">
                         <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch;">
@@ -92,11 +92,11 @@
 
     <script>
         const steps = [
-            { id: 'cociente-1', val: '7', msg: '¡Genial! 7 x 6 son 42. Colócalo debajo del 45.' },
-            { id: 'input-42', val: '42', msg: '¡Eso es! Ahora resta: de 42 a 45... ¿Cuántas van? Escribe el resto abajo.' },
-            { id: 'input-resto-3', val: '3', msg: '¡Muy bien! Recuerda que ahora baja la siguiente cifra (el 6).' },
-            { id: 'bajada-6', action: 'show', msg: '¡Perfecto! Ahora tenemos el 36. ¿6 por cuánto da 36?' },
-            { id: 'cociente-2', val: '6', msg: '¡Exacto! Y para terminar... ¿cuánto sobra de 36 a 36?' },
+            { id: 'cociente-1', val: '7', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Escribe el resultado debajo del 45.' },
+            { id: 'input-mult', val: '42', msg: '¡Exacto! Ahora resta: de 42 a 45... ¿Cuántas van? Pon el resto abajo.' },
+            { id: 'input-resto-3', val: '3', msg: '¡Perfecto! El resto es 3. Ahora recuerda bajar la siguiente cifra (el 6).' },
+            { id: 'bajada-6', action: 'show', msg: '¡Eso es! Ahora tenemos el 36. ¿6 por cuánto da 36?' },
+            { id: 'cociente-2', val: '6', msg: '¡Genial! Y para terminar... ¿cuánto sobra de 36 a 36?' },
             { id: 'input-resto-final', val: '0', final: true }
         ];
 
@@ -113,7 +113,7 @@
                     currentIdx++;
                     document.getElementById('guide-text').innerHTML = steps[currentIdx].msg;
                     initStep(currentIdx);
-                }, 500);
+                }, 800);
                 return;
             }
 
