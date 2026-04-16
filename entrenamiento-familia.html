@@ -15,11 +15,10 @@
 
         .game-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; }
 
-        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.1rem; line-height: 1.4; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.1rem; line-height: 1.4; min-height: 80px; display: flex; align-items: center; justify-content: center; }
         .guide-box::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 15px solid var(--guia-text); }
 
         .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #333; margin-bottom: 20px; margin-top: 10px; }
-        
         .arco-superior { position: absolute; top: -10px; left: -5px; width: 2.2ch; height: 15px; border: 5px solid var(--wrong); border-bottom: none; border-radius: 20px 20px 0 0; z-index: 10; transition: opacity 0.5s; }
 
         .division-table { border-collapse: collapse; table-layout: fixed; }
@@ -33,7 +32,7 @@
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        /* Posiciones exactas */
+        /* Espaciado de los inputs */
         #input-42 { width: 2.5ch; display: none; position: absolute; left: 0px; top: 10px; }
         #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
         #input-baja-6 { width: 1.2ch; display: none; position: absolute; left: 2.2ch; top: 15px; }
@@ -53,7 +52,7 @@
 
     <div class="game-container">
         <div id="guide-text" class="guide-box">
-            Venga, Alba, piensa... ¿Por cuánto multiplico 6 para que me dé 45 o se acerque sin pasarse?
+            Venga, Alba, piensa... ¿Por cuánto multiplico 6 para que me dé 45 o se acerque sin pasarse?<br>(Mira el arquito rojo 😉)
         </div>
 
         <div class="division-wrapper">
@@ -91,46 +90,73 @@
     </div>
 
     <script>
+        // Secuencia estricta de instrucciones
         const steps = [
-            { id: 'cociente-1', val: '7', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Ponlo debajo del 45.' },
-            { id: 'input-42', val: '42', msg: '¡Exacto! Ahora toca restar: ¿cuánto es 45 - 42?' },
-            { id: 'input-resto-3', val: '3', msg: '¡Eso es! Ahora baja la siguiente cifra (el 6) para seguir.' },
-            { id: 'input-baja-6', val: '6', msg: '¡Perfecto! Ya tenemos 36. ¿Por cuánto multiplico 6 para que me dé 36?' },
-            { id: 'cociente-2', val: '6', msg: '¡Genial! Y para terminar... ¿cuánto sobra de 36 a 36?' },
-            { id: 'input-resto-final', val: '0', final: true }
+            { 
+                id: 'cociente-1', 
+                val: '7', 
+                nextMsg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Escribe el resultado debajo del 45.' 
+            },
+            { 
+                id: 'input-42', 
+                val: '42', 
+                nextMsg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 45 - 42? Ponlo abajo.' 
+            },
+            { 
+                id: 'input-resto-3', 
+                val: '3', 
+                nextMsg: '¡Eso es! Ahora baja la siguiente cifra (el 6) para seguir con la división.' 
+            },
+            { 
+                id: 'input-baja-6', 
+                val: '6', 
+                nextMsg: '¡Perfecto! Ya tenemos 36. ¿Por cuánto multiplico 6 para que me dé 36?' 
+            },
+            { 
+                id: 'cociente-2', 
+                val: '6', 
+                nextMsg: '¡Genial! Y para terminar... ¿cuánto sobra de 36 a 36? Pon el resto final.' 
+            },
+            { 
+                id: 'input-resto-final', 
+                val: '0', 
+                final: true 
+            }
         ];
 
-        let currentIdx = 0;
+        let currentStepIndex = 0;
 
-        function initStep(index) {
-            if (index >= steps.length) return;
+        function runStep(index) {
             const step = steps[index];
             const input = document.getElementById(step.id);
             
             input.style.display = 'inline-block';
             input.focus();
 
-            // Quitar arquito cuando se baja el 6
-            if(step.id === 'input-baja-6') {
+            // Quitamos el arco solo cuando Alba baja el 6
+            if (step.id === 'input-baja-6') {
                 document.getElementById('arco').style.opacity = '0';
             }
 
             input.onkeypress = (e) => {
                 if (e.key === 'Enter') {
                     if (input.value === step.val) {
+                        // ACIERTO
                         input.classList.add('correct');
                         input.disabled = true;
-                        
+
                         if (step.final) {
                             document.getElementById('guide-text').style.display = 'none';
                             document.getElementById('final-msg').style.display = 'block';
                             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                         } else {
-                            currentIdx++;
-                            document.getElementById('guide-text').innerHTML = steps[currentIdx].msg;
-                            initStep(currentIdx);
+                            // PASAMOS AL SIGUIENTE: Actualizamos mensaje y activamos siguiente input
+                            currentStepIndex++;
+                            document.getElementById('guide-text').innerHTML = step.nextMsg;
+                            runStep(currentStepIndex);
                         }
                     } else {
+                        // ERROR
                         input.classList.add('wrong');
                         setTimeout(() => input.classList.remove('wrong'), 500);
                     }
@@ -138,7 +164,8 @@
             };
         }
 
-        initStep(0);
+        // Iniciar el juego
+        runStep(0);
     </script>
 </body>
 </html>
