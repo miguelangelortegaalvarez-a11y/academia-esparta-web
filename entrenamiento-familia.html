@@ -18,15 +18,14 @@
         .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.1rem; line-height: 1.4; }
         .guide-box::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 15px solid var(--guia-text); }
 
-        /* Contenedor de la división para control de posicionamiento */
         .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #333; margin-bottom: 20px; }
         
-        /* El ARCO corregido sobre el 45 */
+        /* EL ARCO PERFECTO */
         .arco-superior { 
             position: absolute; 
             top: -10px; 
-            left: -5px; /* Ajuste manual para que caiga sobre el 45 */
-            width: 2.2ch; /* Ancho para cubrir dos cifras */
+            left: -5px; 
+            width: 2.2ch; 
             height: 15px; 
             border: 5px solid var(--wrong); 
             border-bottom: none; 
@@ -44,10 +43,9 @@
 
         .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.8rem; padding: 2px; text-align: center; border: 3px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; }
         .math-input:focus { outline: none; border-color: var(--primary); }
-        .math-input.correct { border-color: var(--primary); color: #2e7d32; font-weight: 700; background-color: #e8f5e9; }
+        .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        /* Posiciones de los inputs de resta y restos */
         #input-42 { width: 2.5ch; display: none; position: absolute; left: 0px; top: 10px; }
         #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
         #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.2ch; top: 25px; }
@@ -106,6 +104,7 @@
     </div>
 
     <script>
+        // Definición de los pasos
         const steps = [
             { id: 'cociente-1', val: '7', msg: '¡Genial! 7 x 6 son 42. Ponlo debajo del 45.' },
             { id: 'input-42', val: '42', msg: '¡Eso es! Ahora resta: de 42 a 45... ¿Cuántas van?' },
@@ -115,16 +114,54 @@
             { id: 'input-resto-final', val: '0', final: true }
         ];
 
-        let currentStep = 0;
+        let currentIdx = 0;
 
-        function setupInput(step) {
-            const input = document.getElementById(step.id);
-            if (!input) return;
+        function initStep(index) {
+            if (index >= steps.length) return;
             
+            const step = steps[index];
+            const input = document.getElementById(step.id);
+            
+            if (step.action === 'show') {
+                document.getElementById('bajada-6').style.display = 'inline-block';
+                document.getElementById('arco').style.opacity = '0';
+                currentIdx++;
+                initStep(currentIdx);
+                return;
+            }
+
             input.style.display = 'inline-block';
             input.focus();
 
-            input.addEventListener('keypress', (e) => {
+            // Eliminar listeners antiguos por si acaso
+            const newInput = input.cloneNode(true);
+            input.parentNode.replaceChild(newInput, input);
+
+            newInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    if (input.value === step.val) {
-                        input.classList.add('
+                    if (newInput.value === step.val) {
+                        newInput.classList.add('correct');
+                        newInput.disabled = true;
+                        
+                        if (step.final) {
+                            document.getElementById('guide-text').style.display = 'none';
+                            document.getElementById('final-msg').style.display = 'block';
+                            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                        } else {
+                            currentIdx++;
+                            document.getElementById('guide-text').innerHTML = steps[currentIdx].msg;
+                            initStep(currentIdx);
+                        }
+                    } else {
+                        newInput.classList.add('wrong');
+                        setTimeout(() => newInput.classList.remove('wrong'), 500);
+                    }
+                }
+            });
+        }
+
+        // Arrancamos el primer paso
+        initStep(0);
+    </script>
+</body>
+</html>
