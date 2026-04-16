@@ -7,11 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --primary: #4CAF50; --secondary: #FFC107; --bg: #f0f4f8; --dark: #2e7d32; }
+        :root { --primary: #4CAF50; --secondary: #FFC107; --bg-card: #ffffff; --dark: #2e7d32; --bg-page: #e8f5e9; /* Verde muy clarito para el fondo de página */ }
         
         body { 
             font-family: 'Poppins', sans-serif; 
-            background-color: var(--bg); 
+            background-color: var(--bg-page); /* Fondo de página verde clarito */
             display: flex; 
             flex-direction: column; 
             align-items: center; 
@@ -21,25 +21,6 @@
             overflow-x: hidden;
             position: relative;
         }
-
-        /* --- DECORACIÓN LATERAL --- */
-        .side-decor {
-            position: fixed;
-            font-size: 3.5rem;
-            opacity: 0.12;
-            z-index: 0;
-            user-select: none;
-            pointer-events: none;
-            filter: grayscale(30%);
-        }
-        /* Iconos Izquierda */
-        .decor-1 { top: 10%; left: 5%; transform: rotate(-15deg); }
-        .decor-2 { top: 40%; left: 3%; transform: rotate(10deg); }
-        .decor-3 { bottom: 10%; left: 6%; transform: rotate(-20deg); }
-        /* Iconos Derecha */
-        .decor-4 { top: 15%; right: 5%; transform: rotate(15deg); }
-        .decor-5 { top: 45%; right: 4%; transform: rotate(-10deg); }
-        .decor-6 { bottom: 15%; right: 7%; transform: rotate(25deg); }
 
         /* Header Academia */
         .academia-header { 
@@ -56,7 +37,7 @@
         .academia-header p { margin: 5px 0 0; color: #666; font-weight: 600; font-size: 0.9rem; }
 
         .game-container { 
-            background: white; 
+            background: var(--bg-card); /* Recuadro blanco para el quiz */
             width: 100%; 
             max-width: 600px; 
             padding: 30px; 
@@ -88,22 +69,11 @@
         .next-btn { background: var(--primary); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 1.1rem; margin-top: 15px; box-shadow: 0 4px 15px rgba(74, 175, 80, 0.3); }
         .next-btn:hover { background: var(--dark); transform: scale(1.05); }
 
+        /* Pantalla Final */
         .trophy { font-size: 5rem; margin-bottom: 20px; display: block; }
-
-        /* Ajuste para móviles */
-        @media (max-width: 800px) {
-            .side-decor { display: none; }
-        }
     </style>
 </head>
 <body>
-
-<div class="side-decor decor-1">🚜</div>
-<div class="side-decor decor-2">🏭</div>
-<div class="side-decor decor-3">🚑</div>
-<div class="side-decor decor-4">🌾</div>
-<div class="side-decor decor-5">🛠️</div>
-<div class="side-decor decor-6">🏫</div>
 
 <div class="academia-header">
     <h1>ACADEMIA ESPARTA</h1>
