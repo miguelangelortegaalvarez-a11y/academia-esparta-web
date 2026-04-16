@@ -44,6 +44,10 @@
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         #final-msg { display: none; text-align: center; margin-top: 20px; padding: 25px; border: 2px solid var(--primary); border-radius: 20px; background-color: #e8f5e9; width: 100%; }
+
+        /* Estilo para el botón de Siguiente */
+        .btn-siguiente { position: absolute; bottom: 20px; right: 20px; background-color: var(--guia-text); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-family: 'Poppins'; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-siguiente:hover { background-color: #1565c0; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -108,12 +112,14 @@
             <p style="font-size: 1.2rem;">Has terminado la división perfectamente. ¡Eres una experta!</p>
             <button style="background:var(--primary); color:white; border:none; padding:15px 30px; border-radius:30px; cursor:pointer; font-weight:700; font-size:1.1rem;" onclick="location.reload()">Repetir entrenamiento</button>
         </div>
+
+        <button class="btn-siguiente" onclick="location.reload()">Siguiente →</button>
     </div>
 
     <script>
         const steps = [
             { id: 'cociente-1', val: '7', nextMsg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Escribe el resultado debajo del 45.' },
-            { id: 'input-42', val: '42', nextMsg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 45 - 42? Pon el resto abajo.' },
+            { id: 'input-42', val: '42', nextMsg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 45 - 42? Ponlo abajo.' },
             { id: 'input-resto-3', val: '3', nextMsg: '¡Eso es! Ahora baja la siguiente cifra (el 6) para seguir. Fíjate que ahora se pone en rojo.' },
             { id: 'input-baja-6', val: '6', nextMsg: '¡Perfecto! Ya tenemos 36. ¿Por cuánto multiplico 6 para que me dé 36?' },
             { id: 'cociente-2', val: '6', nextMsg: '¡Genial! Ahora multiplica: ¿cuánto es 6 x 6? Ponlo debajo del 36.' },
@@ -127,7 +133,6 @@
             const step = steps[index];
             const input = document.getElementById(step.id);
             
-            // Si es el paso de la resta o el de bajar cifra, aseguramos que el contenedor de la fila esté visible
             if(step.id === 'input-resto-3' || step.id === 'input-baja-6') {
                 document.getElementById('row-36').style.display = 'inline-flex';
             }
@@ -135,7 +140,6 @@
             input.style.display = 'inline-block';
             input.focus();
 
-            // Lógica de colores del dividendo
             if (step.id === 'input-baja-6') {
                 document.getElementById('num-4').classList.remove('active-num');
                 document.getElementById('num-5').classList.remove('active-num');
