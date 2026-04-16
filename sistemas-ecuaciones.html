@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Entrenamiento de Derivadas: Academia Esparta</title>
+    <title>Entrenamiento Avanzado de Derivadas - Academia Esparta</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; padding: 20px; margin: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; padding: 20px; margin: 0; }
         .hoja { 
             width: 210mm; 
             min-height: 297mm; 
@@ -15,84 +16,100 @@
             box-sizing: border-box;
         }
         
-        /* CABECERA */
         .header { text-align: center; border-bottom: 4px solid #2E7D32; padding-bottom: 10px; margin-bottom: 20px; }
-        .header h1 { color: #2E7D32; margin: 0; font-size: 26pt; text-transform: uppercase; letter-spacing: 2px; }
-        .header p { color: #555; font-size: 12pt; font-weight: bold; margin: 5px 0; }
+        .header h1 { color: #2E7D32; margin: 0; font-size: 24pt; text-transform: uppercase; letter-spacing: 2px; }
+        .header p { color: #555; font-size: 11pt; font-weight: bold; margin: 5px 0; }
 
-        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px dotted #ccc; padding-bottom: 10px; font-weight: bold; }
+        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px dotted #ccc; padding-bottom: 10px; font-weight: bold; }
         
-        h2 { background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 8px; font-size: 14pt; border-left: 6px solid #2e7d32; margin-top: 30px; }
+        h2 { background: #e8f5e9; color: #2e7d32; padding: 8px; border-radius: 6px; font-size: 13pt; border-left: 6px solid #2e7d32; margin-top: 25px; }
         
-        /* GRID DE EJERCICIOS */
-        .grid-derivadas { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 15px 0; }
-        .ejercicio { border: 1px solid #eee; padding: 15px; border-radius: 10px; position: relative; min-height: 80px; display: flex; flex-direction: column; justify-content: center; }
-        .num-ej { font-weight: bold; color: #2e7d32; margin-right: 10px; font-size: 1.1rem; }
-        .formula { font-family: "Times New Roman", Times, serif; font-style: italic; font-size: 1.3rem; margin-left: 25px; }
+        .grid-derivadas { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 10px 0; }
+        .ejercicio { border: 1px solid #eee; padding: 12px; border-radius: 8px; display: flex; align-items: center; min-height: 60px; }
+        .num-ej { font-weight: bold; color: #2e7d32; margin-right: 15px; min-width: 25px; }
         
-        .espacio-solucion { margin-top: 15px; border-top: 1px dashed #ccc; height: 50px; }
-
-        .footer { text-align: center; margin-top: 40px; color: #2E7D32; font-weight: bold; font-style: italic; border-top: 1px solid #eee; padding-top: 10px; }
+        .footer { text-align: center; margin-top: 30px; color: #2E7D32; font-weight: bold; font-style: italic; font-size: 10pt; }
 
         @media print {
             .no-print { display: none; }
             .hoja { box-shadow: none; margin: 0; width: 100%; }
-            body { background: white; }
         }
     </style>
 </head>
 <body>
 
     <div class="no-print" style="text-align: center; margin: 20px;">
-        <button onclick="window.print()" style="padding: 12px 35px; background: #2E7D32; color: white; border: none; border-radius: 25px; font-size: 16px; cursor: pointer; font-weight: bold;">
-            🖨️ IMPRIMIR FICHA DE DERIVADAS
+        <button onclick="window.print()" style="padding: 12px 30px; background: #2E7D32; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold;">
+            🖨️ IMPRIMIR ENTRENAMIENTO PRO
         </button>
     </div>
 
     <div class="hoja">
         <div class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>Unidad: Cálculo Diferencial (Entrenamiento Progresivo)</p>
+            <p>Cálculo Diferencial: Entrenamiento de Alto Rendimiento (Sin Trigonométricas)</p>
         </div>
 
         <div class="datos-alumno">
-            <span>ALUMNO/A: __________________________________________________</span>
+            <span>ALUMNO/A: _________________________________</span>
             <span>FECHA: ____/____/2026</span>
         </div>
 
-        <h2>Nivel 1: Derivadas Inmediatas (Constantes y Potencias simples)</h2>
+        <h2>Nivel 1: Polinomios, Exponentes Negativos y Fraccionarios</h2>
         <div class="grid-derivadas">
-            <div class="ejercicio"><span class="num-ej">1.</span> <span class="formula">f(x) = 15</span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">2.</span> <span class="formula">f(x) = x<sup>4</sup></span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">3.</span> <span class="formula">f(x) = 5x<sup>3</sup></span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">4.</span> <span class="formula">f(x) = -2x<sup>7</sup></span> <div class="espacio-solucion"></div></div>
+            <div class="ejercicio"><span class="num-ej">1.</span> \(f(x) = 3x^5 - 4x^2 + 7x - 9\)</div>
+            <div class="ejercicio"><span class="num-ej">2.</span> \(f(x) = \frac{1}{2}x^4 - \frac{2}{3}x^3 + 5\)</div>
+            <div class="ejercicio"><span class="num-ej">3.</span> \(f(x) = x^{-3} + 4x^{-1}\)</div>
+            <div class="ejercicio"><span class="num-ej">4.</span> \(f(x) = 6x^2 - \sqrt{x}\)</div>
+            <div class="ejercicio"><span class="num-ej">5.</span> \(f(x) = \frac{4}{x^2} + 3x\)</div>
+            <div class="ejercicio"><span class="num-ej">6.</span> \(f(x) = 2x^6 - 5x^4 + \frac{x^2}{2}\)</div>
+            <div class="ejercicio"><span class="num-ej">7.</span> \(f(x) = \sqrt[3]{x} + x^2\)</div>
+            <div class="ejercicio"><span class="num-ej">8.</span> \(f(x) = \frac{1}{x^5} - x^{-2}\)</div>
+            <div class="ejercicio"><span class="num-ej">9.</span> \(f(x) = \pi x^3 + e x\)</div>
+            <div class="ejercicio"><span class="num-ej">10.</span> \(f(x) = \frac{x^3 - 2x^2}{x}\)</div>
+            <div class="ejercicio"><span class="num-ej">11.</span> \(f(x) = 5\sqrt{x^3}\)</div>
+            <div class="ejercicio"><span class="num-ej">12.</span> \(f(x) = (x+1)(x-1)\)</div>
+            <div class="ejercicio"><span class="num-ej">13.</span> \(f(x) = -x^8 + 12x^5 - x\)</div>
+            <div class="ejercicio"><span class="num-ej">14.</span> \(f(x) = \frac{3}{4}x^4 - \frac{x^3}{6}\)</div>
         </div>
 
-        <h2>Nivel 2: Sumas, Restas y Polinomios Completo</h2>
+        <h2>Nivel 2: Reglas del Producto y del Cociente</h2>
         <div class="grid-derivadas">
-            <div class="ejercicio"><span class="num-ej">5.</span> <span class="formula">f(x) = x<sup>3</sup> + x<sup>2</sup> + x + 1</span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">6.</span> <span class="formula">f(x) = 4x<sup>5</sup> - 3x<sup>2</sup> + 8x</span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">7.</span> <span class="formula">f(x) = (1/2)x<sup>4</sup> - 5x</span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">8.</span> <span class="formula">f(x) = 2x<sup>-3</sup> + 4x<sup>2</sup></span> <div class="espacio-solucion"></div></div>
+            <div class="ejercicio"><span class="num-ej">15.</span> \(f(x) = (x^2+2)(x^3-1)\)</div>
+            <div class="ejercicio"><span class="num-ej">16.</span> \(f(x) = \frac{x+5}{x-2}\)</div>
+            <div class="ejercicio"><span class="num-ej">17.</span> \(f(x) = 3x^2 \cdot \sqrt{x}\)</div>
+            <div class="ejercicio"><span class="num-ej">18.</span> \(f(x) = \frac{2x^2}{x^2+1}\)</div>
+            <div class="ejercicio"><span class="num-ej">19.</span> \(f(x) = (x^4-3x)(2x+5)\)</div>
+            <div class="ejercicio"><span class="num-ej">20.</span> \(f(x) = \frac{x^2-4}{x+2}\)</div>
+            <div class="ejercicio"><span class="num-ej">21.</span> \(f(x) = \frac{1}{x^2-3x}\)</div>
+            <div class="ejercicio"><span class="num-ej">22.</span> \(f(x) = \sqrt{x} \cdot (x^2-1)\)</div>
+            <div class="ejercicio"><span class="num-ej">23.</span> \(f(x) = \frac{5x-2}{x^3}\)</div>
+            <div class="ejercicio"><span class="num-ej">24.</span> \(f(x) = (2x^3+x)(x^2-5)\)</div>
+            <div class="ejercicio"><span class="num-ej">25.</span> \(f(x) = \frac{\sqrt{x}}{x+1}\)</div>
+            <div class="ejercicio"><span class="num-ej">26.</span> \(f(x) = \frac{x^3+1}{x^3-1}\)</div>
+            <div class="ejercicio"><span class="num-ej">27.</span> \(f(x) = x^2 \cdot \sqrt[3]{x^2}\)</div>
+            <div class="ejercicio"><span class="num-ej">28.</span> \(f(x) = \frac{x^2+3x+2}{x}\)</div>
         </div>
 
-        <h2>Nivel 3: Productos y Cocientes</h2>
+        <h2>Nivel 3: Regla de la Cadena (Funciones Compuestas)</h2>
         <div class="grid-derivadas">
-            <div class="ejercicio"><span class="num-ej">9.</span> <span class="formula">f(x) = (x<sup>2</sup> + 1) · (x - 3)</span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">10.</span> <span class="formula">f(x) = 3x<sup>2</sup> · (2x + 5)</span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">11.</span> <span class="formula">f(x) = (x + 2) / (x - 1)</span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">12.</span> <span class="formula">f(x) = (2x<sup>2</sup>) / (x<sup>2</sup> + 4)</span> <div class="espacio-solucion"></div></div>
+            <div class="ejercicio"><span class="num-ej">29.</span> \(f(x) = (x^2+3x)^4\)</div>
+            <div class="ejercicio"><span class="num-ej">30.</span> \(f(x) = \sqrt{5x^2-x}\)</div>
+            <div class="ejercicio"><span class="num-ej">31.</span> \(f(x) = (4x-1)^{10}\)</div>
+            <div class="ejercicio"><span class="num-ej">32.</span> \(f(x) = \sqrt[3]{x^3+8}\)</div>
+            <div class="ejercicio"><span class="num-ej">33.</span> \(f(x) = \frac{1}{(x^2+1)^3}\)</div>
+            <div class="ejercicio"><span class="num-ej">34.</span> \(f(x) = (2x^2-5x+1)^2\)</div>
+            <div class="ejercicio"><span class="num-ej">35.</span> \(f(x) = \sqrt{\frac{x}{x+1}}\)</div>
+            <div class="ejercicio"><span class="num-ej">36.</span> \(f(x) = (x^3-2)^{-5}\)</div>
+            <div class="ejercicio"><span class="num-ej">37.</span> \(f(x) = \sqrt[5]{(x^2+1)^2}\)</div>
+            <div class="ejercicio"><span class="num-ej">38.</span> \(f(x) = (x + \sqrt{x})^3\)</div>
+            <div class="ejercicio"><span class="num-ej">39.</span> \(f(x) = \left(\frac{2x}{3x-1}\right)^2\)</div>
+            <div class="ejercicio"><span class="num-ej">40.</span> \(f(x) = \sqrt{1+\sqrt{x}}\)</div>
+            <div class="ejercicio"><span class="num-ej">41.</span> \(f(x) = (x^4 - 2x^2 + 5)^6\)</div>
+            <div class="ejercicio"><span class="num-ej">42.</span> \(f(x) = \frac{1}{\sqrt{x^2+4}}\)</div>
         </div>
 
-        <h2>Nivel 4: Regla de la Cadena (Potencias y Radicales)</h2>
-        <div class="grid-derivadas">
-            <div class="ejercicio"><span class="num-ej">13.</span> <span class="formula">f(x) = (3x<sup>2</sup> + 5)<sup>4</sup></span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">14.</span> <span class="formula">f(x) = (2x - 1)<sup>10</sup></span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">15.</span> <span class="formula">f(x) = &radic;(x<sup>2</sup> + 3x)</span> <div class="espacio-solucion"></div></div>
-            <div class="ejercicio"><span class="num-ej">16.</span> <span class="formula">f(x) = <sup>3</sup>&radic;(5x<sup>4</sup> - 2)</span> <div class="espacio-solucion"></div></div>
-        </div>
-
-        <div class="footer">"En la Academia Esparta, derivamos hasta la victoria"</div>
+        <div class="footer">"En la Academia Esparta, la constancia vence a la inteligencia"</div>
     </div>
 
 </body>
