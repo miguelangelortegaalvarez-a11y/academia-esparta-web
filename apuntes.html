@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repaso Alba - Los Servicios</title>
+    <title>Repaso Alba - Otros Servicios</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
         :root {
@@ -22,34 +22,32 @@
         .subtitle { text-align: center; font-weight: 600; color: #666; margin-bottom: 20px; font-size: 0.9rem; }
         h2 { color: var(--primary-color); border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; margin-top: 30px; font-size: 1.5rem; }
 
-        /* --- ESQUEMA SERVICIOS --- */
-        .esquema-container { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 20px 0; }
-        .esquema-box-compacta {
-            background-color: #e8f5e9; border: 2px solid var(--primary-color); border-radius: 50px;
-            padding: 8px 30px; width: auto; min-width: 300px; text-align: center; font-weight: 700; font-size: 1.1rem;
+        /* --- ESQUEMA OTROS SERVICIOS --- */
+        .grid-servicios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .card-final {
+            background-color: #f1f8e9; border: 1px solid var(--primary-color); border-radius: 10px;
+            padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .esquema-arrow { font-size: 1.5rem; color: var(--primary-color); line-height: 1; margin: 2px 0; }
-
-        .tipos-container { display: flex; justify-content: space-around; width: 100%; gap: 15px; margin-top: 10px; }
-        .card-servicio {
-            background-color: #fff8e1; border: 2px solid var(--secondary-color); border-radius: 12px;
-            padding: 15px; width: 48%; text-align: center; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-        }
-        .card-title { font-weight: 700; color: #795548; margin-bottom: 5px; font-size: 0.95rem; }
-        .card-desc { font-size: 0.8rem; line-height: 1.3; }
+        .icon-final { font-size: 1.8rem; margin-bottom: 5px; }
+        .title-final { font-weight: 700; color: #2e7d32; font-size: 0.8rem; text-transform: uppercase; }
 
         /* --- RESUMEN --- */
-        .resumen-content p { margin-bottom: 12px; font-size: 0.95rem; }
+        .resumen-content p { margin-bottom: 10px; font-size: 0.9rem; }
         .resaltado { background-color: #fff9c4; padding: 2px 5px; border-radius: 4px; font-weight: 600; }
         .icono-check { color: var(--primary-color); margin-right: 5px; }
 
         /* --- ACTIVIDADES --- */
-        .actividad { margin-bottom: 25px; border: 1px solid #ddd; padding: 15px; border-radius: 12px; background-color: #fff; }
-        .pregunta-titulo { font-weight: 600; margin-bottom: 12px; color: #444; font-size: 0.95rem; }
-        .casilla { display: inline-block; width: 20px; height: 20px; border: 2px solid #aaa; border-radius: 4px; margin-right: 10px; vertical-align: middle; }
+        .actividad { margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 12px; background-color: #fff; }
+        .pregunta-titulo { font-weight: 600; margin-bottom: 10px; color: #444; font-size: 0.95rem; }
+        .casilla { display: inline-block; width: 18px; height: 18px; border: 2px solid #aaa; border-radius: 4px; margin-right: 10px; vertical-align: middle; }
         .input-hueco { border: none; border-bottom: 2px solid #ccc; padding: 2px 5px; font-size: 0.9rem; width: 150px; text-align: center; background: transparent; }
 
         .btn-imprimir { display: block; width: 200px; margin: 20px auto; padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: 50px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+
+        .felicitacion {
+            background-color: #fff9c4; border: 2px dashed var(--secondary-color); padding: 20px;
+            border-radius: 15px; text-align: center; margin-top: 30px;
+        }
 
         @media print {
             .btn-imprimir { display: none; }
@@ -61,68 +59,83 @@
 <body>
 
     <div class="container">
-        <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Alba</button>
+        <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Bloque Final</button>
 
         <h1>Ficha de Repaso: Alba del Cid</h1>
-        <p class="subtitle">Bloque 7: El Sector Terciario (Los Servicios)</p>
+        <p class="subtitle">Bloque 8: Otros Servicios del Sector Terciario</p>
 
-        <h2>🔍 Esquema de los Servicios</h2>
-        <div class="esquema-container">
-            <div class="esquema-box-compacta">💁 SECTOR TERCIARIO</div>
-            <div class="esquema-arrow">⬇️</div>
-            <div class="tipos-container">
-                <div class="card-servicio">
-                    <div class="card-title">PÚBLICOS 🏛️</div>
-                    <p class="card-desc">Los organiza el Estado o Ayuntamiento para que <b>todo el mundo</b> tenga acceso.</p>
-                </div>
-                <div class="card-servicio">
-                    <div class="card-title">PRIVADOS 🏢</div>
-                    <p class="card-desc">Los ofrecen <b>empresas particulares</b> y personas independientes.</p>
-                </div>
+        <h2>🔍 Esquema de Otros Servicios</h2>
+        <div class="grid-servicios">
+            <div class="card-final">
+                <div class="icon-final">💰</div>
+                <div class="title-final">Financieros</div>
+            </div>
+            <div class="card-final">
+                <div class="icon-final">🎭</div>
+                <div class="title-final">Culturales</div>
+            </div>
+            <div class="card-final">
+                <div class="icon-final">🏖️</div>
+                <div class="title-final">Turísticos</div>
+            </div>
+            <div class="card-final">
+                <div class="icon-final">🚰</div>
+                <div class="title-final">Suministro</div>
+            </div>
+            <div class="card-final">
+                <div class="icon-final">🚌</div>
+                <div class="title-final">Transporte</div>
+            </div>
+            <div class="card-final">
+                <div class="icon-final">📱</div>
+                <div class="title-final">Comunicación</div>
             </div>
         </div>
 
-        <h2>📖 Resumen: Servicios Básicos</h2>
+        <h2>📖 Resumen: ¿Para qué sirven?</h2>
         <div class="resumen-content">
-            <p><span class="icono-check">✔️</span> En el <span class="resaltado">Sector Terciario</span> no se obtienen productos naturales ni se fabrican objetos, se ofrece un <b>servicio</b> a las personas.</p>
-            <p><span class="icono-check">✔️</span> Hay tres tipos de servicios básicos que son fundamentales:</p>
-            <ul>
-                <li><b>Sanitarios:</b> Cuidan nuestra salud. (Hospitales, médicos, cirujanos).</li>
-                <li><b>Educativos:</b> Permiten que aprendamos. (Colegios, maestros, profesores).</li>
-                <li><b>Sociales:</b> Ayudan a quienes más lo necesitan. (Asistencia a mayores, comedores).</li>
-            </ul>
+            <p><span class="icono-check">✔️</span> <span class="resaltado">Financieros:</span> Se encargan del dinero (bancos y cajas de ahorro).</p>
+            <p><span class="icono-check">✔️</span> <span class="resaltado">Culturales:</span> Para disfrutar del cine, museos, teatros o música.</p>
+            <p><span class="icono-check">✔️</span> <span class="resaltado">Turísticos:</span> Para viajar y descansar (hoteles, campings, guías).</p>
+            <p><span class="icono-check">✔️</span> <span class="resaltado">Suministro:</span> Nos traen agua potable, electricidad y gas a casa.</p>
+            <p><span class="icono-check">✔️</span> <span class="resaltado">Transporte:</span> Mueven personas y mercancías por carretera, aire o mar.</p>
+            <p><span class="icono-check">✔️</span> <span class="resaltado">Comunicación:</span> Dan información por radio, TV, prensa e Internet.</p>
         </div>
 
-        <h2>🧠 Actividades para practicar</h2>
+        <h2>🧠 Actividades Finales</h2>
 
         <div class="actividad">
-            <div class="pregunta-titulo">1. ¿Qué se ofrece en el Sector Terciario?</div>
-            <p><span class="casilla"></span> Alimentos de la naturaleza.</p>
-            <p><span class="casilla"></span> Un servicio a las personas.</p>
-        </div>
-
-        <div class="actividad">
-            <div class="pregunta-titulo">2. Escribe si el servicio es SANITARIO, EDUCATIVO o SOCIAL:</div>
-            <p>• Una cirujana que opera en un hospital: _________________________</p>
-            <p>• Un maestro que enseña matemáticas: _________________________</p>
-            <p>• Una asistenta que ayuda a un abuelito: _________________________</p>
+            <div class="pregunta-titulo">1. ¿Dónde guardan las personas su dinero y piden préstamos?</div>
+            <p><span class="casilla"></span> En el museo (Servicio Cultural).</p>
+            <p><span class="casilla"></span> En el banco (Servicio Financiero).</p>
         </div>
 
         <div class="actividad">
-            <div class="pregunta-titulo">3. ¿Cuál es la diferencia entre un servicio público y uno privado?</div>
-            <p>Los servicios <input type="text" class="input-hueco" placeholder="..."> los organiza el Estado para todos.</p>
-            <p>Los servicios <input type="text" class="input-hueco" placeholder="..."> los ofrecen empresas particulares.</p>
+            <div class="pregunta-titulo">2. Escribe un ejemplo de medio de comunicación:</div>
+            <p>Ejemplo: <input type="text" class="input-hueco" placeholder="..."></p>
         </div>
 
         <div class="actividad">
-            <div class="pregunta-titulo">4. Relaciona con flechas:</div>
-            <p>Comerciante 🛒 &nbsp; ➔ &nbsp; Sector <input type="text" class="input-hueco" placeholder="..."></p>
-            <p>Agricultor 🌾 &nbsp; ➔ &nbsp; Sector <input type="text" class="input-hueco" placeholder="..."></p>
-            <p>Obrero de fábrica 🏭 &nbsp; ➔ &nbsp; Sector <input type="text" class="input-hueco" placeholder="..."></p>
+            <div class="pregunta-titulo">3. Une con flechas el servicio con su ejemplo:</div>
+            <p>Turístico 🏖️ &nbsp; ➔ &nbsp; <input type="text" class="input-hueco" placeholder="Hotel"></p>
+            <p>Suministro ⚡ &nbsp; ➔ &nbsp; <input type="text" class="input-hueco" placeholder="Luz"></p>
+            <p>Transporte ✈️ &nbsp; ➔ &nbsp; <input type="text" class="input-hueco" placeholder="Avión"></p>
         </div>
 
-        <div style="margin-top: 30px; text-align: center; color: var(--primary-color); border-top: 1px dashed #ccc; padding-top: 15px; font-weight: 600; font-size: 1.1rem;">
-            ¡Enhorabuena, Alba! ¡Has completado todos los sectores! 🌟🏆
+        <div class="actividad">
+            <div class="pregunta-titulo">4. ¿A qué sector pertenecen todos estos servicios?</div>
+            <p><span class="casilla"></span> Sector Primario.</p>
+            <p><span class="casilla"></span> Sector Secundario.</p>
+            <p><span class="casilla"></span> Sector Terciario.</p>
+        </div>
+
+        <div class="felicitacion">
+            <h3>🎊 ¡FELICIDADES, ALBA! 🎊</h3>
+            <p>Has terminado de repasar todo el tema. ¡Lo vas a hacer genial en el examen! 🌟🏆</p>
+        </div>
+
+        <div style="margin-top: 20px; text-align: center; color: #888; border-top: 1px dashed #ccc; padding-top: 10px; font-size: 0.7rem;">
+            <em>© Academia Esparta 🛡️ - Material Final de Repaso para Alba del Cid</em>
         </div>
 
     </div>
