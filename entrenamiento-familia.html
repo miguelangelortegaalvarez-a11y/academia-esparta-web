@@ -36,20 +36,15 @@
         .signo-menos { position: absolute; left: -30px; top: 15px; color: var(--highlight); font-size: 3rem; display: none; }
         .raya-resta { border-top: 4px solid #333; width: 100%; position: absolute; bottom: 0; left: 0; display: none; }
 
-        /* Posiciones dinámicas controladas por clase */
-        .pos-m1 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 15px; }
-        .pos-r1 { width: 1.2ch; display: none; }
-        .pos-b1 { width: 1.2ch; display: none; }
-        .pos-mf { width: 2.5ch; display: none; position: absolute; left: 1.1ch; top: 20px; }
-        .pos-rf { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 35px; }
-
+        #input-m1 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 15px; }
         .row-container { letter-spacing: 0px; display: inline-flex; gap: 5px; position: absolute; left: 1.1ch; top: 15px; }
+        #input-mf { width: 2.5ch; display: none; position: absolute; left: 1.1ch; top: 20px; }
+        #input-rf { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 35px; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         #final-msg { display: none; text-align: center; margin-top: 20px; padding: 25px; border: 2px solid var(--primary); border-radius: 20px; background-color: #e8f5e9; width: 100%; }
         
         .btn-siguiente { position: absolute; bottom: 20px; right: 20px; background-color: var(--guia-text); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-family: 'Poppins'; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .btn-siguiente:hover { background-color: #1565c0; }
     </style>
 </head>
 <body>
@@ -71,7 +66,7 @@
                 <tr>
                     <td>
                         <span id="menos-1" class="signo-menos">−</span>
-                        <input type="text" id="input-m1" class="math-input pos-m1" maxlength="2" autocomplete="off">
+                        <input type="text" id="input-m1" class="math-input" maxlength="2" autocomplete="off">
                         <div id="raya-1" class="raya-resta"></div>
                     </td>
                     <td class="quotient-area">
@@ -82,8 +77,8 @@
                 <tr>
                     <td>
                         <div id="row-mid" class="row-container" style="display:none;">
-                            <input type="text" id="input-r1" class="math-input pos-r1" maxlength="1" autocomplete="off">
-                            <input type="text" id="input-b1" class="math-input pos-b1" maxlength="1" autocomplete="off">
+                            <input type="text" id="input-r1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
+                            <input type="text" id="input-b1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
                         </div>
                     </td>
                     <td></td>
@@ -91,14 +86,14 @@
                 <tr>
                     <td>
                         <span id="menos-2" class="signo-menos">−</span>
-                        <input type="text" id="input-mf" class="math-input pos-mf" maxlength="2" autocomplete="off">
+                        <input type="text" id="input-mf" class="math-input" maxlength="2" autocomplete="off">
                         <div id="raya-2" class="raya-resta"></div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" id="input-rf" class="math-input pos-rf" maxlength="1" autocomplete="off">
+                        <input type="text" id="input-rf" class="math-input" maxlength="1" autocomplete="off">
                     </td>
                     <td></td>
                 </tr>
@@ -107,7 +102,7 @@
 
         <div id="final-msg">
             <div id="congrats-text" style="font-size: 2rem; font-weight: 700; color: var(--primary);">¡EXCELENTE TRABAJO! 🏆</div>
-            <p id="final-p" style="font-size: 1.2rem;">¿Lista para el siguiente reto?</p>
+            <p id="final-p" style="font-size: 1.2rem;">¿Listo para el siguiente reto?</p>
             <button id="btn-final-action" style="background:var(--primary); color:white; border:none; padding:15px 30px; border-radius:30px; cursor:pointer; font-weight:700;" onclick="loadNext()">Siguiente</button>
         </div>
 
@@ -115,20 +110,19 @@
     </div>
 
     <script>
-        // CONFIGURACIÓN DE LAS DIVISIONES
         const misiones = [
             {
                 id: 1,
                 dividendoHtml: '<span id="num-0" class="active-num">4</span><span id="num-1" class="active-num">5</span><span id="num-2">6</span>',
                 divisor: '6',
                 steps: [
-                    { id: 'cociente-1', val: '7', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Ponlo debajo del 45.' },
-                    { id: 'input-m1', val: '42', msg: '¡Exacto! Ahora resta: ¿cuánto es 45 - 42?' },
-                    { id: 'input-r1', val: '3', msg: '¡Eso es! Ahora baja la siguiente cifra (el 6). Fíjate que se pone en rojo.' },
-                    { id: 'input-b1', val: '6', msg: '¡Perfecto! Ya tenemos 36. ¿6 por cuánto da 36?' },
-                    { id: 'cociente-2', val: '6', msg: '¡Genial! Multiplica: ¿cuánto es 6 x 6? Ponlo debajo del 36.' },
-                    { id: 'input-mf', val: '36', msg: '¡Eso es! Y para terminar... ¿cuánto sobra de 36 a 36?' },
-                    { id: 'input-rf', val: '0', final: true }
+                    { id: 'cociente-1', val: '7', msg: 'Venga, Alba... ¿6 por cuánto da 45 o se acerca?' },
+                    { id: 'input-m1', val: '42', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Ponlo debajo del 45.' },
+                    { id: 'input-r1', val: '3', msg: '¡Exacto! Ahora resta: ¿cuánto es 45 - 42? Ponlo abajo.' },
+                    { id: 'input-b1', val: '6', msg: '¡Eso es! Ahora baja la cifra que queda (el 6) para seguir.' },
+                    { id: 'cociente-2', val: '6', msg: '¡Perfecto! Ya tenemos 36. ¿6 por cuánto da 36?' },
+                    { id: 'input-mf', val: '36', msg: '¡Genial! Multiplica: ¿cuánto es 6 x 6? Ponlo debajo del 36.' },
+                    { id: 'input-rf', val: '0', final: true, msg: '¡Y para terminar! ¿Cuánto sobra de 36 a 36?' }
                 ]
             },
             {
@@ -138,11 +132,11 @@
                 steps: [
                     { id: 'cociente-1', val: '8', msg: '¡A por la segunda! ¿Por cuánto multiplico 6 para acercarme a 51?' },
                     { id: 'input-m1', val: '48', msg: '¡Muy bien! ¿Cuánto es 6 x 8? Ponlo debajo del 51.' },
-                    { id: 'input-r1', val: '3', msg: '¡Eso es! Ahora resta: de 48 a 51... ¿Cuántas van?' },
+                    { id: 'input-r1', val: '3', msg: '¡Exacto! Ahora resta: ¿cuánto es 51 - 48?' },
                     { id: 'input-b1', val: '5', msg: '¡Perfecto! El resto es 3. Ahora baja la última cifra (el 5).' },
-                    { id: 'cociente-2', val: '5', msg: '¡Genial! Ya tenemos 35. ¿Por cuánto multiplico 6 para acercarme?' },
+                    { id: 'cociente-2', val: '5', msg: '¡Genial! Ya tenemos 35. ¿6 por cuánto se acerca?' },
                     { id: 'input-mf', val: '30', msg: '¡Eso es! 6 x 5 son 30. Ponlo debajo del 35.' },
-                    { id: 'input-rf', val: '5', final: true }
+                    { id: 'input-rf', val: '5', final: true, msg: '¡Y para terminar! De 30 a 35... ¿cuántas van?' }
                 ]
             }
         ];
@@ -153,15 +147,12 @@
         function initMision(idx) {
             const mision = misiones[idx];
             currentStepIdx = 0;
-            
-            // UI Reset
             document.getElementById('sub-header').innerText = `División ${mision.id} de ${misiones.length}`;
             document.getElementById('div-display').innerHTML = mision.dividendoHtml;
             document.getElementById('divisor-display').innerText = mision.divisor;
             document.getElementById('final-msg').style.display = 'none';
             document.getElementById('skip-btn').style.display = 'block';
             
-            // Reset de todos los inputs y elementos visuales
             const inputs = document.querySelectorAll('.math-input');
             inputs.forEach(i => { i.value = ''; i.disabled = false; i.style.display = 'none'; i.classList.remove('correct'); });
             document.getElementById('menos-1').style.display = 'none';
@@ -169,22 +160,18 @@
             document.getElementById('menos-2').style.display = 'none';
             document.getElementById('raya-2').style.display = 'none';
             document.getElementById('row-mid').style.display = 'none';
-
             runStep(0);
         }
 
-        function runStep(stepIdx) {
-            const mision = misiones[currentMisionIdx];
-            const step = mision.steps[stepIdx];
+        function runStep(idx) {
+            const step = misiones[currentMisionIdx].steps[idx];
             const input = document.getElementById(step.id);
             
             document.getElementById('guide-text').innerHTML = step.msg;
             input.style.display = 'inline-block';
             input.focus();
 
-            // Lógica de visibilidad de filas y colores
             if(step.id === 'input-r1' || step.id === 'input-b1') document.getElementById('row-mid').style.display = 'inline-flex';
-            
             if(step.id === 'input-b1') {
                 document.getElementById('num-0').classList.remove('active-num');
                 document.getElementById('num-1').classList.remove('active-num');
@@ -197,17 +184,9 @@
                     if (input.value === step.val) {
                         input.classList.add('correct');
                         input.disabled = true;
-
-                        // Activar signos de resta
                         if(step.id === 'input-m1') { document.getElementById('menos-1').style.display = 'block'; document.getElementById('raya-1').style.display = 'block'; }
                         if(step.id === 'input-mf') { document.getElementById('menos-2').style.display = 'block'; document.getElementById('raya-2').style.display = 'block'; }
-
-                        if (step.final) {
-                            showFinish();
-                        } else {
-                            currentStepIdx++;
-                            runStep(currentStepIdx);
-                        }
+                        if (step.final) { showFinish(); } else { runStep(idx + 1); }
                     } else {
                         input.classList.add('wrong');
                         setTimeout(() => input.classList.remove('wrong'), 500);
@@ -221,12 +200,6 @@
             document.getElementById('skip-btn').style.display = 'none';
             document.getElementById('final-msg').style.display = 'block';
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            
-            if(currentMisionIdx === misiones.length - 1) {
-                document.getElementById('congrats-text').innerText = "¡MAESTRA DE LAS DIVISIONES! 👑";
-                document.getElementById('final-p').innerText = "Has completado todas las misiones de hoy.";
-                document.getElementById('btn-final-action').innerText = "Volver a empezar";
-            }
         }
 
         function loadNext() {
