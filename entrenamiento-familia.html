@@ -20,7 +20,7 @@
         .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1rem; line-height: 1.4; min-height: 60px; display: flex; align-items: center; justify-content: center; }
         .guide-box::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 12px solid var(--guia-text); }
 
-        /* REDUCCIÓN DE TAMAÑO DE LA DIVISIÓN */
+        /* TAMAÑO ESTILIZADO DE LA DIVISIÓN */
         .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 2.8rem; color: #333; margin-bottom: 20px; }
         
         .division-table { border-collapse: collapse; table-layout: fixed; }
@@ -33,7 +33,6 @@
         .divisor-box { border-left: 4px solid #333; border-bottom: 4px solid #333; min-width: 70px; }
         .quotient-area { color: var(--primary); font-size: 2.8rem; padding-top: 10px; }
 
-        /* INPUTS MÁS PEQUEÑOS Y "CURIOSOS" */
         .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.2rem; padding: 3px; text-align: center; border: 2px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; outline: none; }
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
@@ -41,15 +40,16 @@
         .signo-menos { position: absolute; left: -25px; top: 10px; color: var(--highlight); font-size: 2.5rem; display: none; }
         .raya-resta { border-top: 3px solid #333; width: 100%; position: absolute; bottom: 0; left: 0; display: none; }
 
-        /* Ajustes de posición para 515 / 6 con tamaño reducido */
-        #input-mult-1 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 10px; }
-        #input-resto-1 { width: 1.2ch; display: none; position: absolute; left: 1ch; top: 10px; }
-        #input-baja-cifra { width: 1.2ch; display: none; position: absolute; left: 2ch; top: 10px; }
-        #input-mult-2 { width: 2.5ch; display: none; position: absolute; left: 1ch; top: 15px; }
+        /* Ajustes de posición para 456 / 6 */
+        #input-42 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 10px; }
+        #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 1ch; top: 10px; }
+        #input-baja-6 { width: 1.2ch; display: none; position: absolute; left: 2ch; top: 10px; }
+        #input-mult-final { width: 2.5ch; display: none; position: absolute; left: 1ch; top: 15px; }
         #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2ch; top: 25px; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         #final-msg { display: none; text-align: center; margin-top: 20px; padding: 20px; border: 2px solid var(--primary); border-radius: 15px; background-color: #e8f5e9; width: 100%; }
+        .btn-siguiente { position: absolute; bottom: 20px; right: 20px; background-color: var(--guia-text); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-family: 'Poppins'; font-weight: 600; cursor: pointer; transition: 0.3s; }
     </style>
 </head>
 <body>
@@ -61,21 +61,21 @@
 
     <div class="game-container">
         <div id="guide-text" class="guide-box">
-            Venga, Alba, piensa... ¿Por cuánto multiplico 6 para que me dé 51 o se acerque sin pasarse?<br>(Mira los números en rojo 😉)
+            Venga, Alba, piensa... ¿Por cuánto multiplico 6 para que me dé 45 o se acerque sin pasarse?<br>(Mira los números en rojo 😉)
         </div>
 
         <div class="division-wrapper">
             <table class="division-table">
                 <tr>
                     <td class="dividend">
-                        <span id="num-4" class="active-num">5</span><span id="num-5" class="active-num">1</span><span id="num-6">5</span>
+                        <span id="num-4" class="active-num">4</span><span id="num-5" class="active-num">5</span><span id="num-6">6</span>
                     </td>
                     <td class="divisor-box">6</td>
                 </tr>
                 <tr>
                     <td>
                         <span id="menos-1" class="signo-menos">−</span>
-                        <input type="text" id="input-mult-1" class="math-input" maxlength="2" autocomplete="off">
+                        <input type="text" id="input-42" class="math-input" maxlength="2" autocomplete="off">
                         <div id="raya-1" class="raya-resta"></div>
                     </td>
                     <td class="quotient-area">
@@ -86,8 +86,8 @@
                 <tr>
                     <td>
                         <div style="position: absolute; left: 1ch; top: 10px; display: flex; gap: 5px;">
-                            <input type="text" id="input-resto-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
-                            <input type="text" id="input-baja-cifra" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
+                            <input type="text" id="input-resto-3" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
+                            <input type="text" id="input-baja-6" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
                         </div>
                     </td>
                     <td></td>
@@ -95,7 +95,7 @@
                 <tr>
                     <td>
                         <span id="menos-2" class="signo-menos">−</span>
-                        <input type="text" id="input-mult-2" class="math-input" maxlength="2" autocomplete="off">
+                        <input type="text" id="input-mult-final" class="math-input" maxlength="2" autocomplete="off">
                         <div id="raya-2" class="raya-resta"></div>
                     </td>
                     <td></td>
@@ -114,30 +114,31 @@
             <p>Has terminado la división perfectamente. ¡Eres una experta!</p>
             <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:700;" onclick="location.reload()">Repetir</button>
         </div>
+
+        <button class="btn-siguiente" onclick="location.reload()">Siguiente →</button>
     </div>
 
     <script>
         const steps = [
-            { id: 'cociente-1', val: '8', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 8? Escribe el resultado debajo del 51.' },
-            { id: 'input-mult-1', val: '48', msg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 51 - 48? Pon el resto abajo.' },
-            { id: 'input-resto-1', val: '3', msg: '¡Muy bien! El resto es 3. Ahora baja la cifra que queda (el 5) al lado del 3.' },
-            { id: 'input-baja-cifra', val: '5', msg: '¡Perfecto! Ya tenemos 35. ¿Por cuánto multiplico 6 para que me dé 35 o se acerque?' },
-            { id: 'cociente-2', val: '5', msg: '¡Genial! 6 x 5 son 30. Escríbelo abajo del 35 para restar.' },
-            { id: 'input-mult-2', val: '30', msg: '¡Eso es! Y para terminar... de 30 a 35... ¿cuántas van?' },
-            { id: 'input-resto-final', val: '5', final: true }
+            { id: 'cociente-1', val: '7', nextMsg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Escribe el resultado debajo del 45.' },
+            { id: 'input-42', val: '42', nextMsg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 45 - 42? Ponlo abajo.' },
+            { id: 'input-resto-3', val: '3', nextMsg: '¡Eso es! Ahora baja la siguiente cifra (el 6) para seguir. Fíjate que ahora se pone en rojo.' },
+            { id: 'input-baja-6', val: '6', nextMsg: '¡Perfecto! Ya tenemos 36. ¿Por cuánto multiplico 6 para que me dé 36?' },
+            { id: 'cociente-2', val: '6', nextMsg: '¡Genial! Ahora multiplica: ¿cuánto es 6 x 6? Ponlo debajo del 36.' },
+            { id: 'input-mult-final', val: '36', nextMsg: '¡Eso es! Y para terminar... de 36 a 36... ¿cuántas van? Pon el resto final.' },
+            { id: 'input-resto-final', val: '0', final: true }
         ];
 
-        let currentIdx = 0;
+        let currentStepIndex = 0;
 
-        function initStep(index) {
-            if (index >= steps.length) return;
+        function runStep(index) {
             const step = steps[index];
             const input = document.getElementById(step.id);
             
             input.style.display = 'inline-block';
             input.focus();
 
-            if (step.id === 'input-baja-cifra') {
+            if (step.id === 'input-baja-6') {
                 document.getElementById('num-4').classList.remove('active-num');
                 document.getElementById('num-5').classList.remove('active-num');
                 document.getElementById('num-6').classList.add('active-num');
@@ -152,14 +153,24 @@
                     if (input.value === step.val) {
                         input.classList.add('correct');
                         input.disabled = true;
+
+                        if(step.id === 'input-42') {
+                            document.getElementById('menos-1').style.display = 'block';
+                            document.getElementById('raya-1').style.display = 'block';
+                        }
+                        if(step.id === 'input-mult-final') {
+                            document.getElementById('menos-2').style.display = 'block';
+                            document.getElementById('raya-2').style.display = 'block';
+                        }
+
                         if (step.final) {
                             document.getElementById('guide-text').style.display = 'none';
                             document.getElementById('final-msg').style.display = 'block';
                             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                         } else {
-                            currentIdx++;
-                            document.getElementById('guide-text').innerHTML = steps[currentIdx].msg;
-                            initStep(currentIdx);
+                            currentStepIndex++;
+                            document.getElementById('guide-text').innerHTML = step.nextMsg;
+                            runStep(currentStepIndex);
                         }
                     } else {
                         input.classList.add('wrong');
@@ -169,7 +180,7 @@
             };
         }
 
-        initStep(0);
+        runStep(0);
     </script>
 </body>
 </html>
