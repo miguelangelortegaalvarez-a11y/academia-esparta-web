@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root { --primary: #4CAF50; --bg: #f0f4f8; --text: #333; --wrong: #f44336; --guia: #e3f2fd; --guia-text: #1976d2; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; overflow-x: hidden; position: relative; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; overflow-x: hidden; }
         
         .academia-header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; width: 100%; max-width: 600px; }
         .academia-header h1 { color: var(--primary); margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px; }
@@ -33,11 +33,11 @@
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        #input-mult { width: 2.5ch; display: none; position: absolute; left: 0px; top: 10px; }
+        /* Posiciones exactas */
+        #input-42 { width: 2.5ch; display: none; position: absolute; left: 0px; top: 10px; }
         #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
+        #input-baja-6 { width: 1.2ch; display: none; position: absolute; left: 2.2ch; top: 15px; }
         #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.2ch; top: 25px; }
-        
-        .bajada-6 { color: #555; display: none; position: absolute; left: 2.2ch; top: 15px; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 
@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" id="input-mult" class="math-input" maxlength="2" autocomplete="off">
+                        <input type="text" id="input-42" class="math-input" maxlength="2" autocomplete="off">
                     </td>
                     <td class="quotient-area">
                         <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch;">
@@ -75,7 +75,7 @@
                 <tr>
                     <td>
                         <input type="text" id="input-resto-3" class="math-input" maxlength="1" autocomplete="off">
-                        <span id="bajada-6" class="bajada-6">6</span>
+                        <input type="text" id="input-baja-6" class="math-input" maxlength="1" autocomplete="off">
                         <input type="text" id="input-resto-final" class="math-input" maxlength="1" autocomplete="off">
                     </td>
                     <td></td>
@@ -86,16 +86,16 @@
         <div id="final-msg">
             <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">¡EXCELENTE TRABAJO, ALBA! 🏆</div>
             <p>Has terminado la división perfectamente. ¡Eres una experta!</p>
-            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:700; font-family:'Poppins';" onclick="location.reload()">Repetir</button>
+            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:700;" onclick="location.reload()">Repetir</button>
         </div>
     </div>
 
     <script>
         const steps = [
-            { id: 'cociente-1', val: '7', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Escribe el resultado debajo del 45.' },
-            { id: 'input-mult', val: '42', msg: '¡Exacto! Ahora resta: de 42 a 45... ¿Cuántas van? Pon el resto abajo.' },
-            { id: 'input-resto-3', val: '3', msg: '¡Perfecto! El resto es 3. Ahora recuerda bajar la siguiente cifra (el 6).' },
-            { id: 'bajada-6', action: 'show', msg: '¡Eso es! Ahora tenemos el 36. ¿6 por cuánto da 36?' },
+            { id: 'cociente-1', val: '7', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Ponlo debajo del 45.' },
+            { id: 'input-42', val: '42', msg: '¡Exacto! Ahora toca restar: ¿cuánto es 45 - 42?' },
+            { id: 'input-resto-3', val: '3', msg: '¡Eso es! Ahora baja la siguiente cifra (el 6) para seguir.' },
+            { id: 'input-baja-6', val: '6', msg: '¡Perfecto! Ya tenemos 36. ¿Por cuánto multiplico 6 para que me dé 36?' },
             { id: 'cociente-2', val: '6', msg: '¡Genial! Y para terminar... ¿cuánto sobra de 36 a 36?' },
             { id: 'input-resto-final', val: '0', final: true }
         ];
@@ -105,21 +105,15 @@
         function initStep(index) {
             if (index >= steps.length) return;
             const step = steps[index];
-            
-            if (step.action === 'show') {
-                setTimeout(() => {
-                    document.getElementById('bajada-6').style.display = 'inline-block';
-                    document.getElementById('arco').style.opacity = '0';
-                    currentIdx++;
-                    document.getElementById('guide-text').innerHTML = steps[currentIdx].msg;
-                    initStep(currentIdx);
-                }, 800);
-                return;
-            }
-
             const input = document.getElementById(step.id);
+            
             input.style.display = 'inline-block';
             input.focus();
+
+            // Quitar arquito cuando se baja el 6
+            if(step.id === 'input-baja-6') {
+                document.getElementById('arco').style.opacity = '0';
+            }
 
             input.onkeypress = (e) => {
                 if (e.key === 'Enter') {
