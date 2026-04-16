@@ -34,7 +34,6 @@
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        /* Estilos para el signo menos y la raya */
         .signo-menos { position: absolute; left: -30px; top: 15px; color: var(--highlight); font-size: 3rem; display: none; }
         .raya-resta { border-top: 4px solid #333; width: 100%; position: absolute; bottom: 0; left: 0; display: none; }
 
@@ -81,8 +80,8 @@
                 <tr>
                     <td>
                         <div class="row-36" id="row-36" style="display:none;">
-                            <input type="text" id="input-resto-3" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch;">
-                            <input type="text" id="input-baja-6" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch;">
+                            <input type="text" id="input-resto-3" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
+                            <input type="text" id="input-baja-6" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
                         </div>
                     </td>
                     <td></td>
@@ -114,7 +113,7 @@
     <script>
         const steps = [
             { id: 'cociente-1', val: '7', nextMsg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Escribe el resultado debajo del 45.' },
-            { id: 'input-42', val: '42', nextMsg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 45 - 42? Ponlo abajo.' },
+            { id: 'input-42', val: '42', nextMsg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 45 - 42? Pon el resto abajo.' },
             { id: 'input-resto-3', val: '3', nextMsg: '¡Eso es! Ahora baja la siguiente cifra (el 6) para seguir. Fíjate que ahora se pone en rojo.' },
             { id: 'input-baja-6', val: '6', nextMsg: '¡Perfecto! Ya tenemos 36. ¿Por cuánto multiplico 6 para que me dé 36?' },
             { id: 'cociente-2', val: '6', nextMsg: '¡Genial! Ahora multiplica: ¿cuánto es 6 x 6? Ponlo debajo del 36.' },
@@ -128,6 +127,7 @@
             const step = steps[index];
             const input = document.getElementById(step.id);
             
+            // Si es el paso de la resta o el de bajar cifra, aseguramos que el contenedor de la fila esté visible
             if(step.id === 'input-resto-3' || step.id === 'input-baja-6') {
                 document.getElementById('row-36').style.display = 'inline-flex';
             }
@@ -152,7 +152,6 @@
                         input.classList.add('correct');
                         input.disabled = true;
 
-                        // Mostrar signo menos y raya después de poner la multiplicación
                         if(step.id === 'input-42') {
                             document.getElementById('menos-1').style.display = 'block';
                             document.getElementById('raya-1').style.display = 'block';
