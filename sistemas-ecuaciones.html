@@ -3,127 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafío Matemático: El Tiro Libre - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Academia Esparta: Reto de Matemáticas 2º Primaria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { 
-            --primary: #0e9343; 
-            --secondary: #09834c;
-            --light: #f5fdf7; 
-            --dark: #063c24;
-            --accent: #f39c12;
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #2E7D32;
+            --secondary: #FF9800; /* Naranja para resaltar dinero */
+            --bg: #fdfdfd;
+            --wrong: #f44336;
+            --guia: #e3f2fd;
+            --guia-text: #1976d2;
         }
-        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: var(--dark); margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        
-        h1 { color: var(--primary); text-align: center; text-transform: uppercase; border-bottom: 3px solid var(--primary); padding-bottom: 10px; }
-        h2 { color: var(--secondary); margin-top: 30px; border-left: 5px solid var(--accent); padding-left: 15px; }
-        
-        .enunciado { background: var(--light); padding: 25px; border-radius: 12px; border: 1px solid rgba(14, 147, 67, 0.2); font-style: italic; margin-bottom: 30px; }
-        .paso { margin-bottom: 25px; padding: 20px; border-bottom: 1px solid #eee; }
-        .destacado { color: var(--primary); font-weight: 700; }
-        
-        /* Estilos de la Gráfica */
-        .grafica-container { text-align: center; margin: 40px 0; background: #fdfdfd; border: 1px solid #eee; padding: 20px; border-radius: 15px; }
-        svg { max-width: 100%; height: auto; }
-        .eje { stroke: #333; stroke-width: 2; }
-        .parabola { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 5; }
-        .punto { fill: var(--primary); }
-        .texto-grafica { font-size: 12px; font-family: sans-serif; font-weight: bold; }
 
-        .conclusion { background: #fff3cd; padding: 20px; border-radius: 10px; border: 1px solid #ffeeba; text-align: center; font-weight: 700; font-size: 1.2rem; }
-        .btn-volver { display: block; margin-top: 40px; text-align: center; text-decoration: none; color: #666; font-weight: bold; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .academia-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 10px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .academia-header h1 {
+            color: var(--primary-dark);
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+        }
+
+        .academia-header p {
+            color: #555;
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 25px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .problema-box {
+            background-color: var(--guia);
+            color: var(--guia-text);
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            border: 2px solid #bbdefb;
+            line-height: 1.6;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        /* DISEÑO DE LA RESTA VERTICAL */
+        .resta-vertical {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: fit-content;
+            margin: 20px auto;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .linea-resta {
+            border-top: 5px solid #333;
+            width: 140%;
+            margin-top: 5px;
+            position: relative;
+        }
+
+        .signo-menos {
+            position: absolute;
+            left: -50px;
+            top: 50px;
+            color: var(--wrong);
+        }
+
+        .llevada-input {
+            width: 1.2ch;
+            font-size: 1.2rem;
+            border: 2px solid #ffcdd2;
+            border-radius: 50%;
+            text-align: center;
+            position: absolute;
+            background: #fff;
+            color: var(--wrong);
+            outline: none;
+        }
+
+        /* Posiciones de las llevadas */
+        #llevada-uni { top: -20px; right: 10px; }
+        #llevada-dec { top: -20px; right: 55px; }
+
+        .math-input {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2.8rem;
+            width: 1.2ch;
+            text-align: center;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            margin: 5px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .math-input.correct {
+            border-color: var(--primary);
+            background-color: #e8f5e9;
+            color: var(--primary-dark);
+        }
+
+        .math-input.wrong {
+            border-color: var(--wrong);
+            background-color: #ffebee;
+            animation: shake 0.3s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .btn-next {
+            display: none;
+            margin: 20px auto 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .label-moneda {
+            font-size: 1.5rem;
+            color: #888;
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>⚔️ El Tiro del Espartano</h1>
-
-    <div class="enunciado">
-        <strong>Problema:</strong> Un alumno lanza un balón con trayectoria parabólica. Los datos son:
-        <ul>
-            <li>Posición del lanzador: a 2 metros de ti (tu posición es x=0).</li>
-            <li>Altura de lanzamiento: 1,30 metros.</li>
-            <li>Altura máxima (vértice): 3 metros, alcanzada a 2 metros del lanzador.</li>
-            <li>Objetivo: Canasta situada a 5,5 metros de ti y a 2 metros de altura.</li>
-        </ul>
-        <strong>¿Conseguirá encestar el alumno?</strong>
+    <div class="academia-header">
+        <h1>ACADEMIA ESPARTA</h1>
+        <p>Reto: El Supermercado de Alba (2º Primaria)</p>
     </div>
 
-    <h2>Desarrollo Paso a Paso</h2>
+    <div class="container">
+        <div id="problema" class="problema-box">
+            Alba tiene <span class="price-tag">85 €</span> para comprar un regalo. 
+            Si el regalo cuesta <span class="price-tag">47 €</span>, 
+            ¿cuántos euros le sobran?
+        </div>
 
-    <div class="paso">
-        <p><span class="destacado">Paso 1: Identificar los puntos clave.</span><br>
-        Tomando tu posición como el origen \( (0,0) \):
-        <ul>
-            <li>Punto de lanzamiento (A): \( (2, \ 1.3) \)</li>
-            <li>Punto de altura máxima (Vértice V): El lanzador está en \(x=2\) y el máximo ocurre 2m después, luego es en \(x=4\). Vértice: \( (4, \ 3) \)</li>
-        </ul>
-        </p>
+        <div class="resta-vertical">
+            <input type="text" id="llevada-uni" class="llevada-input" maxlength="1" placeholder="º">
+            
+            <div style="letter-spacing: 15px;">
+                85<span class="label-moneda">€</span>
+            </div>
+            <div style="letter-spacing: 15px;">
+                <span class="signo-menos">−</span>
+                47<span class="label-moneda">€</span>
+            </div>
+            <div class="linea-resta"></div>
+            
+            <div style="display: flex; justify-content: flex-end;">
+                <input type="text" id="res-dec" class="math-input" maxlength="1" autocomplete="off">
+                <input type="text" id="res-uni" class="math-input" maxlength="1" autocomplete="off">
+                <span class="label-moneda" style="line-height: 80px;">€</span>
+            </div>
+        </div>
+
+        <button id="next-btn" class="btn-next" onclick="nextLevel()">¡Siguiente Problema! →</button>
     </div>
 
-    <div class="paso">
-        <p><span class="destacado">Paso 2: Relación del Vértice.</span><br>
-        En la forma general \( y = ax^2 + bx + c \), la coordenada \(x\) del vértice es \( x_v = \frac{-b}{2a} \).<br>
-        Sustituyendo: \( 4 = \frac{-b}{2a} \implies -b = 8a \implies \mathbf{b = -8a} \).
-        </p>
-    </div>
+    <script>
+        const levels = [
+            {
+                text: 'Alba tiene <span class="price-tag">85 €</span>. Compra un libro que cuesta <span class="price-tag">47 €</span>. ¿Cuánto dinero le queda?',
+                num1: '85',
+                num2: '47',
+                ansUni: '8',
+                ansDec: '3',
+                llevada: '1'
+            },
+            {
+                text: 'Alba va con <span class="price-tag">92 €</span>. Compra una mochila de <span class="price-tag">54 €</span>. ¿Cuánto le sobra?',
+                num1: '92',
+                num2: '54',
+                ansUni: '8',
+                ansDec: '3',
+                llevada: '1'
+            }
+        ];
 
-    <div class="paso">
-        <p><span class="destacado">Paso 3: Crear el sistema de ecuaciones.</span><br>
-        Sustituimos los puntos A y V en la ecuación general:
-        <ol>
-            <li>\( 1.3 = a(2)^2 + b(2) + c \implies 4a + 2b + c = 1.3 \)</li>
-            <li>\( 3 = a(4)^2 + b(4) + c \implies 16a + 4b + c = 3 \)</li>
-        </ol>
-        Sustituimos \( b = -8a \) en ambas:
-        <ul>
-            <li>\( 4a + 2(-8a) + c = 1.3 \implies \mathbf{-12a + c = 1.3} \)</li>
-            <li>\( 16a + 4(-8a) + c = 3 \implies \mathbf{-16a + c = 3} \)</li>
-        </ul>
-        </p>
-    </div>
+        let currentLevel = 0;
 
-    <div class="paso">
-        <p><span class="destacado">Paso 4: Resolver el sistema.</span><br>
-        Restando las dos ecuaciones anteriores:<br>
-        \( (-12a + c) - (-16a + c) = 1.3 - 3 \)<br>
-        \( 4a = -1.7 \implies \mathbf{a = -0.425} \)<br><br>
-        Calculamos \(b\): \( b = -8(-0.425) = \mathbf{3.4} \)<br>
-        Calculamos \(c\): \( -12(-0.425) + c = 1.3 \implies 5.1 + c = 1.3 \implies \mathbf{c = -3.8} \)
-        </p>
-    </div>
+        function check() {
+            const u = document.getElementById('res-uni');
+            const d = document.getElementById('res-dec');
+            const l = document.getElementById('llevada-uni');
+            const level = levels[currentLevel];
 
-    <h2>Representación Gráfica</h2>
-    <div class="grafica-container">
-        <svg width="600" height="300" viewBox="0 0 600 300">
-            <line x1="50" y1="250" x2="550" y2="250" class="eje" /> <line x1="50" y1="250" x2="50" y2="50" class="eje" /> <circle cx="50" cy="250" r="5" fill="black" />
-            <text x="35" y="270" class="texto-grafica">TÚ (0,0)</text>
+            // Verificamos paso a paso como en la escuela
+            if (u.value === level.ansUni && d.value === level.ansDec) {
+                u.classList.add('correct');
+                d.classList.add('correct');
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                document.getElementById('next-btn').style.display = 'block';
+            } else {
+                if (u.value !== '' && u.value !== level.ansUni) u.classList.add('wrong');
+                if (d.value !== '' && d.value !== level.ansDec) d.classList.add('wrong');
+                setTimeout(() => {
+                    u.classList.remove('wrong');
+                    d.classList.remove('wrong');
+                }, 500);
+            }
+        }
 
-            <circle cx="150" cy="185" r="5" class="punto" />
-            <text x="130" y="210" class="texto-grafica" fill="#0e9343">Lanzador (2; 1,3)</text>
+        document.getElementById('res-uni').addEventListener('keyup', (e) => {
+            if(e.key === 'Enter') document.getElementById('res-dec').focus();
+        });
 
-            <circle cx="250" cy="100" r="5" fill="#f39c12" />
-            <text x="230" y="85" class="texto-grafica" fill="#f39c12">Máximo (4; 3)</text>
+        document.getElementById('res-dec').addEventListener('keyup', (e) => {
+            if(e.key === 'Enter') check();
+        });
 
-            <path d="M 150 185 Q 250 15, 350 250" class="parabola" />
-
-            <rect x="325" y="150" width="10" height="2" fill="red" />
-            <line x1="330" y1="150" x2="330" y2="250" stroke="black" stroke-width="1" />
-            <text x="310" y="140" class="texto-grafica" fill="red">Canasta (5,5; 2)</text>
-        </svg>
-    </div>
-
-    <div class="conclusion">
-        <p>Sustituyendo \( x = 5.5 \) en la ecuación \( y = -0.425x^2 + 3.4x - 3.8 \):</p>
-        <p>\( y = 2.04375 \text{ metros} \)</p>
-        <p>¡ENCERSTADO! La pelota pasa por el centro del aro.</p>
-    </div>
-
-    <a href="index.html" class="btn-volver">← Volver al Aula Virtual</a>
-</div>
-
+        function nextLevel() {
+            alert("¡Perfecto! Has distinguido muy bien los euros y has resuelto la resta con llevada. ¡Sigue así!");
+            location.reload(); // Para este ejemplo recargamos, pero aquí podrías cambiar los datos dinámicamente.
+        }
+    </script>
 </body>
 </html>
