@@ -24,10 +24,7 @@
         .division-table td { padding: 15px; text-align: center; vertical-align: middle; position: relative; height: 80px; }
         
         .dividend { font-size: 4.5rem; letter-spacing: 5px; text-align: left; padding-right: 30px; }
-        
-        /* Estilos para el resaltado de números */
         .dividend span { transition: color 0.3s ease; border-top: 6px solid transparent; padding-top: 5px; }
-        /* CAMBIO: Ahora la línea roja aparece ARRIBA del número */
         .active-num { color: var(--highlight); border-top-color: var(--highlight) !important; }
 
         .divisor-box { border-left: 6px solid #333; border-bottom: 6px solid #333; min-width: 100px; }
@@ -37,15 +34,16 @@
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
+        /* Estilos para el signo menos y la raya */
+        .signo-menos { position: absolute; left: -30px; top: 15px; color: var(--highlight); font-size: 3rem; display: none; }
+        .raya-resta { border-top: 4px solid #333; width: 100%; position: absolute; bottom: 0; left: 0; display: none; }
+
         #input-42 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 15px; }
-        
         .row-36 { letter-spacing: 0px; display: inline-flex; gap: 5px; position: absolute; left: 1.1ch; top: 15px; }
-        
         #input-mult-final { width: 2.5ch; display: none; position: absolute; left: 1.1ch; top: 20px; }
         #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 35px; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-
         #final-msg { display: none; text-align: center; margin-top: 20px; padding: 25px; border: 2px solid var(--primary); border-radius: 20px; background-color: #e8f5e9; width: 100%; }
     </style>
 </head>
@@ -71,7 +69,9 @@
                 </tr>
                 <tr>
                     <td>
+                        <span id="menos-1" class="signo-menos">−</span>
                         <input type="text" id="input-42" class="math-input" maxlength="2" autocomplete="off">
+                        <div id="raya-1" class="raya-resta"></div>
                     </td>
                     <td class="quotient-area">
                         <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.5ch;">
@@ -89,7 +89,9 @@
                 </tr>
                 <tr>
                     <td>
+                        <span id="menos-2" class="signo-menos">−</span>
                         <input type="text" id="input-mult-final" class="math-input" maxlength="2" autocomplete="off">
+                        <div id="raya-2" class="raya-resta"></div>
                     </td>
                     <td></td>
                 </tr>
@@ -133,6 +135,7 @@
             input.style.display = 'inline-block';
             input.focus();
 
+            // Lógica de colores del dividendo
             if (step.id === 'input-baja-6') {
                 document.getElementById('num-4').classList.remove('active-num');
                 document.getElementById('num-5').classList.remove('active-num');
@@ -148,6 +151,16 @@
                     if (input.value === step.val) {
                         input.classList.add('correct');
                         input.disabled = true;
+
+                        // Mostrar signo menos y raya después de poner la multiplicación
+                        if(step.id === 'input-42') {
+                            document.getElementById('menos-1').style.display = 'block';
+                            document.getElementById('raya-1').style.display = 'block';
+                        }
+                        if(step.id === 'input-mult-final') {
+                            document.getElementById('menos-2').style.display = 'block';
+                            document.getElementById('raya-2').style.display = 'block';
+                        }
 
                         if (step.final) {
                             document.getElementById('guide-text').style.display = 'none';
