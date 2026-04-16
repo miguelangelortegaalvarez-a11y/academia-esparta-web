@@ -3,331 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repaso Alba - Las Actividades Económicas</title>
+    <title>Repaso Alba - La Cadena de Trabajo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
         :root {
-            --primary-color: #4CAF50; /* Verde principal para el tema */
-            --secondary-color: #FFC107; /* Amarillo para resaltar */
-            --bg-color: #f9f9f9;
+            --primary-color: #2196F3; /* Azul para este bloque de "procesos" */
+            --secondary-color: #FF9800; /* Naranja para las flechas de acción */
+            --bg-color: #f0f7ff;
             --text-color: #333;
             --box-bg: #fff;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 210mm; margin: 0 auto; background-color: var(--box-bg); padding: 15mm; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        h1 { color: var(--primary-color); text-align: center; font-size: 2rem; margin: 0; }
+        .subtitle { text-align: center; font-weight: 600; color: #666; margin-bottom: 20px; font-size: 0.9rem; }
+        h2 { color: var(--primary-color); border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; margin-top: 30px; font-size: 1.5rem; }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
+        .teoria-box { background-color: #e3f2fd; border: 2px solid var(--primary-color); border-radius: 12px; padding: 15px; margin-bottom: 25px; font-size: 0.95rem; }
 
-        .container {
-            max-width: 210mm; /* Ancho A4 */
-            margin: 0 auto;
-            background-color: var(--box-bg);
-            padding: 15mm; 
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            text-align: center;
-            font-weight: 600;
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-top: 30px;
-            font-size: 1.5rem;
-        }
-
-        /* --- Estilos para el ESQUEMA OPTIMIZADO --- */
-        .esquema-container {
+        /* --- ESTILO DE LA CADENA DE TRABAJO --- */
+        .cadena-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 20px 0; }
+        
+        .paso-cadena {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 10px;
-            margin-top: 20px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            padding: 10px 20px;
+            width: 90%;
+            transition: transform 0.2s;
         }
+        
+        .paso-cadena:hover { transform: scale(1.02); border-color: var(--primary-color); }
 
-        .esquema-box {
-            background-color: #e8f5e9;
-            border: 2px solid var(--primary-color);
-            border-radius: 50px;
-            padding: 8px 30px; 
-            width: auto;
-            min-width: 280px;
-            text-align: center;
-            font-weight: 600;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-            font-size: 0.95rem;
-        }
+        .paso-icon { font-size: 2rem; margin-right: 15px; min-width: 50px; text-align: center; }
+        .paso-info b { color: var(--primary-color); display: block; font-size: 0.95rem; }
+        .paso-info span { font-size: 0.85rem; color: #555; }
 
-        .esquema-arrow {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin: 0;
-            line-height: 1;
-        }
+        .arrow-down { font-size: 1.5rem; color: var(--secondary-color); font-weight: bold; }
 
-        .sectores-container {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            gap: 15px;
-            margin-top: 5px;
-        }
+        /* --- ACTIVIDADES --- */
+        .actividad { margin-bottom: 25px; border: 1px solid #eee; padding: 15px; border-radius: 10px; background-color: #fafafa; }
+        .pregunta-titulo { font-weight: 600; margin-bottom: 12px; color: #444; font-size: 0.95rem; }
+        
+        .box-respuesta { border: 2px dashed #bbb; border-radius: 10px; height: 60px; display: flex; align-items: center; justify-content: center; margin-top: 10px; color: #999; }
 
-        .sector-card {
-            background-color: #fff8e1;
-            border: 2px solid var(--secondary-color);
-            border-radius: 10px;
-            padding: 15px;
-            width: 30%;
-            text-align: center;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .sector-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .sector-title {
-            font-weight: 700;
-            color: #795548;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-        }
-
-        .sector-desc {
-            font-size: 0.8rem;
-            line-height: 1.3;
-        }
-
-        /* --- Estilos para el RESUMEN --- */
-        .resumen-content p {
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-
-        .resumen-content li {
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        .resaltado {
-            background-color: #fff9c4;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .icono-check {
-            color: var(--primary-color);
-            margin-right: 5px;
-        }
-
-        /* --- Estilos para las ACTIVIDADES --- */
-        .actividad {
-            margin-bottom: 25px;
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        .pregunta-titulo {
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #555;
-            font-size: 0.95rem;
-        }
-
-        .opciones-multiples {
-            list-style: none;
-            padding: 0;
-            font-size: 0.9rem;
-        }
-
-        .opciones-multiples li {
-            margin-bottom: 8px;
-        }
-
-        .casilla {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #aaa;
-            border-radius: 4px;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        .input-hueco {
-            border: none;
-            border-bottom: 2px solid #ccc;
-            padding: 2px 5px;
-            font-size: 0.9rem;
-            width: 140px;
-            text-align: center;
-            background: transparent;
-        }
-
-        .une-con-flechas {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-
-        .une-columna {
-            width: 45%;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .une-item {
-            background-color: #f1f8e9;
-            border: 1px solid #c5e1a5;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        .btn-imprimir {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
-            padding: 12px 25px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+        .btn-imprimir { display: block; width: 200px; margin: 20px auto; padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: 50px; font-size: 1rem; font-weight: 600; cursor: pointer; }
 
         @media print {
             .btn-imprimir { display: none; }
             body { background-color: white; padding: 0; }
             .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 5mm; }
-            h2 { margin-top: 20px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Material</button>
+        <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Bloque 2</button>
 
         <h1>Ficha de Repaso: Alba del Cid</h1>
-        <p class="subtitle">Bloque 1: Las actividades económicas y el trabajo de las personas</p>
+        <p class="subtitle">Bloque 2: La Cadena de Trabajo</p>
 
-        <h2>🔍 Esquema para recordar</h2>
-        <div class="esquema-container">
-            <div class="esquema-box">👥 EL TRABAJO DE LAS PERSONAS</div>
-            <div class="esquema-arrow">⬇️</div>
-            <div class="esquema-box">Se clasifican en TRES SECTORES económicos:</div>
-            <div class="esquema-arrow">⬇️</div>
+        <div class="teoria-box">
+            <b>¿Qué es la Cadena de Trabajo?</b> 🤝<br>
+            Es el camino que sigue un producto desde que se obtiene de la naturaleza hasta que llega a nosotros. ¡Muchos trabajadores colaboran en equipo para que tengamos lo que necesitamos!
+        </div>
 
-            <div class="sectores-container">
-                <div class="sector-card">
-                    <div class="icon">🌾🐄</div>
-                    <div class="sector-title">SECTOR PRIMARIO</div>
-                    <p class="sector-desc">Obtienen productos directamente de la <b>Naturaleza</b>.</p>
+        <h2>🥖 El viaje de tu bocadillo</h2>
+        <div class="cadena-container">
+            
+            <div class="paso-cadena">
+                <div class="paso-icon">👨‍🌾</div>
+                <div class="paso-info">
+                    <b>1. EL CAMPESINO</b>
+                    <span>Cultiva el trigo en el campo (Sector Primario).</span>
                 </div>
-                <div class="sector-card">
-                    <div class="icon">🏭🛠️</div>
-                    <div class="sector-title">SECTOR SECUNDARIO</div>
-                    <p class="sector-desc">Transforman los productos en <b>productos elaborados</b>.</p>
+            </div>
+
+            <div class="arrow-down">⬇️</div>
+
+            <div class="paso-cadena">
+                <div class="paso-icon">🚚</div>
+                <div class="paso-info">
+                    <b>2. EL TRANSPORTISTA</b>
+                    <span>Lleva los sacos de trigo a la fábrica o al molino.</span>
                 </div>
-                <div class="sector-card">
-                    <div class="icon">🚚🏫</div>
-                    <div class="sector-title">SECTOR TERCIARIO</div>
-                    <p class="sector-desc">Ofrecen un <b>Servicio</b> a las demás personas.</p>
+            </div>
+
+            <div class="arrow-down">⬇️</div>
+
+            <div class="paso-cadena">
+                <div class="paso-icon">👨‍🍳</div>
+                <div class="paso-info">
+                    <b>3. EL PANADERO</b>
+                    <span>Amasa y cocina el pan en el horno (Sector Secundario).</span>
+                </div>
+            </div>
+
+            <div class="arrow-down">⬇️</div>
+
+            <div class="paso-cadena">
+                <div class="paso-icon">🏪</div>
+                <div class="paso-info">
+                    <b>4. EL TENDERO</b>
+                    <span>Vende el pan en la tienda o supermercado (Sector Terciario).</span>
+                </div>
+            </div>
+
+            <div class="arrow-down">⬇️</div>
+
+            <div class="paso-cadena" style="border-color: var(--secondary-color); background-color: #fffde7;">
+                <div class="paso-icon">😋</div>
+                <div class="paso-info">
+                    <b>5. ¡ALBA!</b>
+                    <span>¡Ya puedes disfrutar de tu bocadillo recién hecho!</span>
                 </div>
             </div>
         </div>
 
-        <h2>📖 Resumen para estudiar</h2>
-        <div class="resumen-content">
-            <p><span class="icono-check">✔️</span>El <span class="resaltado">trabajo</span> son todas las tareas que hacemos las personas para cubrir nuestras necesidades.</p>
-            <p><span class="icono-check">✔️</span>Para trabajar, es necesario conocer un <span class="resaltado">oficio</span>.</p>
-            <p><span class="icono-check">✔️</span>Los trabajos se dividen en <span class="resaltado">tres sectores</span>:</p>
-            <ul>
-                <li><strong>Sector Primario:</strong> Trabajan con la naturaleza. Ejemplos: agricultores, ganaderos, pescadores, mineros, leñadores.</li>
-                <li><strong>Sector Secundario:</strong> Transforman la materia prima. Ejemplos: panaderos (convierten harina en pan), carpinteros (madera en muebles), obreros de fábricas.</li>
-                <li><strong>Sector Terciario:</strong> Dan servicios. Ejemplos: camioneros (transportan mercancías), comerciantes (venden productos), maestros (educan).</li>
-            </ul>
-        </div>
-
-        <h2>🧠 Actividades para practicar</h2>
-        <p class="subtitle" style="margin-bottom: 15px;">¡Demuestra todo lo que has aprendido!</p>
+        <h2>🧠 ¿Lo has entendido, Alba?</h2>
 
         <div class="actividad">
-            <div class="pregunta-titulo">1. Colorea o marca la respuesta correcta: ¿Cuántos sectores económicos hay?</div>
-            <ul class="opciones-multiples">
-                <li><span class="casilla"></span> Un sector.</li>
-                <li><span class="casilla"></span> Dos sectores.</li>
-                <li><span class="casilla"></span> Tres sectores.</li>
-            </ul>
+            <div class="pregunta-titulo">1. ¿Qué pasaría si el transportista no llevara el trigo al panadero?</div>
+            <p style="font-size: 0.9rem;">__________________________________________________________________</p>
         </div>
 
         <div class="actividad">
-            <div class="pregunta-titulo">2. Rellena los huecos con la palabra correcta: NATURALEZA, SERVICIO, ELABORADOS.</div>
-            <p>A. El Sector Secundario fabrica productos <input type="text" class="input-hueco" placeholder="..."></p>
-            <p>B. El Sector Primario saca productos de la <input type="text" class="input-hueco" placeholder="..."></p>
-            <p>C. El Sector Terciario ofrece un <input type="text" class="input-hueco" placeholder="..."></p>
+            <div class="pregunta-titulo">2. Ordena la cadena del JAMÓN escribiendo 1, 2 y 3:</div>
+            <p> ( ___ ) El carnicero vende el jamón en la tienda.</p>
+            <p> ( ___ ) El granjero cría al cerdito en la granja.</p>
+            <p> ( ___ ) El fabricante prepara el jamón en la fábrica.</p>
         </div>
 
-        <div class="actividad">
-            <div class="pregunta-titulo">3. Une con flechas cada oficio con su sector económico:</div>
-            <div class="une-con-flechas">
-                <div class="une-columna">
-                    <div class="une-item">Agricultora 🌾</div>
-                    <div class="une-item">Maestra 🏫</div>
-                    <div class="une-item">Carpintero 🛠️</div>
-                </div>
-                <div class="une-columna">
-                    <div class="une-item">Sector Secundario</div>
-                    <div class="une-item">Sector Terciario</div>
-                    <div class="une-item">Sector Primario</div>
-                </div>
-            </div>
+        <div style="margin-top: 30px; text-align: center; color: var(--primary-color); border-top: 1px dashed #ccc; padding-top: 15px; font-weight: 600;">
+            ¡Gran trabajo! El esfuerzo de todos nos ayuda a ser felices. 🌟
         </div>
-
-        <div class="actividad">
-            <div class="pregunta-titulo">4. Escribe un ejemplo más de un trabajo para cada sector:</div>
-            <p>Sector Primario: ____________________________________</p>
-            <p>Sector Secundario: ____________________________________</p>
-            <p>Sector Terciario: ____________________________________</p>
-        </div>
-
-        <div style="margin-top: 30px; text-align: center; color: var(--primary-color); border-top: 1px dashed #ccc; padding-top: 15px; font-weight: 600; font-size: 1.1rem;">
-            ¡Lo estás haciendo fenomenal, Alba! ¡A por todas! 🌟
-        </div>
-
     </div>
 
 </body>
