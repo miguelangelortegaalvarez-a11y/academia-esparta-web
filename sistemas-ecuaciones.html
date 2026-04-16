@@ -28,36 +28,37 @@
         .enunciado { display: flex; align-items: flex-start; gap: 10px; font-weight: bold; color: #333; margin-bottom: 20px; }
         .num-ej { background: #444; color: #fff; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-        /* ESCAPARATE DE PRODUCTOS NUEVOS */
         .escaparate { display: flex; justify-content: space-around; align-items: flex-end; margin-bottom: 40px; padding: 20px; border: 2px dashed #2E7D32; border-radius: 15px; background: #f9fff9; }
         .producto { text-align: center; position: relative; }
-        .img-placeholder { font-size: 3.5rem; margin-bottom: 10px; filter: drop-shadow(2px 2px 2px #ccc); }
+        .img-placeholder { font-size: 3.5rem; margin-bottom: 10px; }
         .nombre-prod { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: #666; margin-bottom: 5px; }
         .precio-burbuja { background: #fff; border: 2px solid #2E7D32; border-radius: 15px; padding: 5px 12px; font-size: 0.9rem; font-weight: bold; color: #333; }
 
-        /* ESTRUCTURA DE CÁLCULO */
         .bloque-calculo { margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
         .pregunta { font-weight: bold; color: #2E7D32; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
         
         .fila-desglose { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-weight: 600; }
         .input-mini { border: 1px solid #999; width: 45px; height: 28px; border-radius: 5px; background: #fff; }
-        .input-total-cts { border: 2px solid #333; width: 70px; height: 35px; border-radius: 8px; margin: 0 10px; text-align: center; }
+        .input-total-cts { border: 2px solid #333; width: 75px; height: 35px; border-radius: 8px; margin: 0 10px; text-align: center; }
 
         .operacion-y-resultado { display: flex; justify-content: space-around; align-items: center; margin-top: 25px; }
         
-        .suma-vertical-box { border: 1px dotted #ccc; padding: 20px; border-radius: 10px; }
-        .suma-vertical { display: flex; flex-direction: column; align-items: flex-end; font-family: 'Courier New', monospace; font-size: 2rem; width: 120px; position: relative; }
-        .linea-suma { border-top: 3px solid #000; width: 100%; margin: 5px 0; }
-        .signo-mas { position: absolute; left: -30px; top: 40px; font-weight: bold; }
+        /* DISEÑO DE CUADROS PARA LA SUMA VERTICAL TOTALMENTE LIMPIOS */
+        .suma-vertical-box { border: 1px solid #ccc; padding: 25px 20px 20px 20px; border-radius: 15px; background: #fff; position: relative; min-width: 150px; }
+        .signo-mas { position: absolute; left: 15px; top: 45px; font-size: 2rem; font-weight: bold; color: #333; }
+        
+        .cuadricula-suma { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; margin-left: 35px; }
+        .espacio-numero { width: 120px; height: 40px; border: 1px solid #bbb; border-radius: 5px; background: #fcfcfc; }
+        .linea-suma-negra { border-top: 3px solid #000; width: 130px; margin: 5px 0; }
+        .resultado-vacio { width: 120px; height: 45px; border: 2px solid #333; border-radius: 5px; }
 
-        .recuadro-final { border: 3px double #2E7D32; border-radius: 12px; padding: 20px; font-weight: bold; background: #f1f8f1; font-size: 1.1rem; }
+        .recuadro-final { border: 2px solid #2E7D32; border-radius: 12px; padding: 20px; font-weight: bold; background: #f1f8f1; font-size: 1.1rem; text-align: center; }
 
         .footer { text-align: center; margin-top: 50px; font-size: 0.8rem; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
 
         @media print {
             .no-print { display: none; }
             .hoja { box-shadow: none; margin: 0; width: 100%; }
-            body { background: white; }
         }
     </style>
 </head>
@@ -102,14 +103,14 @@
                     <div class="precio-burbuja">3 € y 85 cts</div>
                 </div>
                 <div class="producto">
-                    <div class="nombre-prod">Escudo</div>
-                    <div class="img-placeholder">🛡️</div>
-                    <div class="precio-burbuja">5 € y 30 cts</div>
+                    <div class="nombre-prod">Arco</div>
+                    <div class="img-placeholder">🏹</div>
+                    <div class="precio-burbuja">6 € y 25 cts</div>
                 </div>
                 <div class="producto">
-                    <div class="nombre-prod">Espada</div>
-                    <div class="img-placeholder">⚔️</div>
-                    <div class="precio-burbuja">2 € y 95 cts</div>
+                    <div class="nombre-prod">Carcaj</div>
+                    <div class="img-placeholder">🎒</div>
+                    <div class="precio-burbuja">2 € y 50 cts</div>
                 </div>
             </div>
 
@@ -117,22 +118,20 @@
                 <div class="pregunta">● ¿Cuánto cuesta el CASCO y la CAPA en total?</div>
                 
                 <div class="fila-desglose">
-                    🪖 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = 
-                    <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
+                    🪖 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
                 </div>
                 <div class="fila-desglose">
-                    🧥 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = 
-                    <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
+                    🧥 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
                 </div>
 
                 <div class="operacion-y-resultado">
                     <div class="suma-vertical-box">
-                        <div class="suma-vertical">
-                            <span class="signo-mas">+</span>
-                            <div style="letter-spacing: 5px;">____</div>
-                            <div style="letter-spacing: 5px;">____</div>
-                            <div class="linea-suma"></div>
-                            <div style="height: 30px;"></div>
+                        <span class="signo-mas">+</span>
+                        <div class="cuadricula-suma">
+                            <div class="espacio-numero"></div>
+                            <div class="espacio-numero"></div>
+                            <div class="linea-suma-negra"></div>
+                            <div class="resultado-vacio"></div>
                         </div>
                     </div>
 
@@ -143,25 +142,23 @@
             </div>
 
             <div class="bloque-calculo">
-                <div class="pregunta">● ¿Cuánto cuesta el ESCUDO y la ESPADA en total?</div>
+                <div class="pregunta">● ¿Cuánto cuesta el ARCO y el CARCAJ en total?</div>
                 
                 <div class="fila-desglose">
-                    🛡️ <div class="input-mini"></div> € y <div class="input-mini"></div> cts = 
-                    <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
+                    🏹 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
                 </div>
                 <div class="fila-desglose">
-                    ⚔️ <div class="input-mini"></div> € y <div class="input-mini"></div> cts = 
-                    <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
+                    🎒 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
                 </div>
 
                 <div class="operacion-y-resultado">
                     <div class="suma-vertical-box">
-                        <div class="suma-vertical">
-                            <span class="signo-mas">+</span>
-                            <div style="letter-spacing: 5px;">____</div>
-                            <div style="letter-spacing: 5px;">____</div>
-                            <div class="linea-suma"></div>
-                            <div style="height: 30px;"></div>
+                        <span class="signo-mas">+</span>
+                        <div class="cuadricula-suma">
+                            <div class="espacio-numero"></div>
+                            <div class="espacio-numero"></div>
+                            <div class="linea-suma-negra"></div>
+                            <div class="resultado-vacio"></div>
                         </div>
                     </div>
 
