@@ -3,47 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento Infinito: Alba del Cid</title>
+    <title>Entrenamiento División: Alba del Cid</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root { --primary: #4CAF50; --bg: #f0f4f8; --text: #333; --wrong: #f44336; --guia: #e3f2fd; --guia-text: #1976d2; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; overflow-x: hidden; }
         
-        .academia-header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; width: 100%; max-width: 700px; }
+        .academia-header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; width: 100%; max-width: 600px; }
         .academia-header h1 { color: var(--primary); margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        .game-container { background: white; width: 100%; max-width: 700px; padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; }
+        .game-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; }
 
-        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 40px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.2rem; line-height: 1.4; min-height: 80px; display: flex; align-items: center; justify-content: center; }
+        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.1rem; line-height: 1.4; min-height: 80px; display: flex; align-items: center; justify-content: center; }
         .guide-box::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 15px solid var(--guia-text); }
 
-        .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 4rem; color: #333; margin-bottom: 40px; }
-        .arco-superior { position: absolute; top: -15px; left: 20px; width: 2.2ch; height: 18px; border: 6px solid var(--wrong); border-bottom: none; border-radius: 20px 20px 0 0; z-index: 10; transition: opacity 0.5s; }
+        .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #333; margin-bottom: 20px; }
+        .arco-superior { position: absolute; top: -10px; left: 20px; width: 2.2ch; height: 15px; border: 5px solid var(--wrong); border-bottom: none; border-radius: 20px 20px 0 0; z-index: 10; transition: opacity 0.5s; }
 
-        .division-table { border-collapse: collapse; table-layout: fixed; width: 450px; }
-        .division-table td { padding: 15px; text-align: center; vertical-align: middle; position: relative; height: 80px; }
+        .division-table { border-collapse: collapse; table-layout: fixed; }
+        .division-table td { padding: 5px; text-align: center; vertical-align: middle; position: relative; }
         
-        .dividend { font-size: 4.5rem; letter-spacing: 5px; text-align: left; padding-right: 30px; }
-        .divisor-box { border-left: 6px solid #333; border-bottom: 6px solid #333; min-width: 100px; }
-        .quotient-area { color: var(--primary); font-size: 4rem; padding-top: 20px; }
+        .dividend { font-size: 3.8rem; letter-spacing: 2px; text-align: left; padding-right: 20px; }
+        .divisor-box { border-left: 5px solid #333; border-bottom: 5px solid #333; min-width: 80px; }
+        .quotient-area { color: var(--primary); font-size: 3.5rem; padding-top: 10px; }
 
-        .math-input { font-family: 'Roboto Mono', monospace; font-size: 3rem; padding: 5px; text-align: center; border: 3px solid #ccc; border-radius: 10px; transition: 0.3s; background: transparent; color: #333; outline: none; }
+        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.8rem; padding: 2px; text-align: center; border: 3px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; outline: none; }
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        /* Posiciones */
-        .pos-mult1 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 15px; }
-        .pos-resto1 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
-        .pos-baja { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 15px; } 
-        
-        .pos-mult2 { width: 2.5ch; display: none; position: absolute; left: 1.2ch; top: 15px; }
-        .pos-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 25px; }
-
-        .row-36 { letter-spacing: 0px; display: inline-flex; gap: 5px; position: absolute; left: 1.1ch; top: 15px; }
+        /* Ajustes de posición para 515 / 6 */
+        #input-mult-1 { width: 2.5ch; display: none; position: absolute; left: 20px; top: 10px; }
+        #input-resto-1 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
+        #input-baja-cifra { width: 1.2ch; display: none; position: absolute; left: 2.2ch; top: 15px; }
+        #input-mult-2 { width: 2.5ch; display: none; position: absolute; left: 1.2ch; top: 20px; }
+        #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.2ch; top: 30px; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-        #final-msg { display: none; text-align: center; margin-top: 20px; padding: 25px; border: 3px solid var(--primary); border-radius: 20px; background-color: #e8f5e9; width: 100%; }
+        #final-msg { display: none; text-align: center; margin-top: 20px; padding: 20px; border: 2px solid var(--primary); border-radius: 15px; background-color: #e8f5e9; width: 100%; }
     </style>
 </head>
 <body>
@@ -54,97 +51,75 @@
     </div>
 
     <div class="game-container">
-        <div id="guide-text" class="guide-box">Cargando desafío...</div>
+        <div id="guide-text" class="guide-box">
+            Venga, Alba, piensa... ¿Por cuánto multiplico 6 para que me dé 51 o se acerque sin pasarse?
+        </div>
 
         <div class="division-wrapper">
             <div id="arco" class="arco-superior"></div>
             <table class="division-table">
                 <tr>
-                    <td id="val-dividend" class="dividend">456</td>
-                    <td id="val-divisor" class="divisor-box">6</td>
+                    <td class="dividend">515</td>
+                    <td class="divisor-box">6</td>
                 </tr>
                 <tr>
-                    <td><input type="text" id="input-mult-1" class="math-input pos-mult1" maxlength="2" autocomplete="off"></td>
+                    <td><input type="text" id="input-mult-1" class="math-input" maxlength="2" autocomplete="off"></td>
                     <td class="quotient-area">
-                        <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.5ch; display:none;">
-                        <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off" style="display:none; width:1.5ch;">
+                        <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch;">
+                        <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off" style="display:none; width:1.2ch;">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div class="row-middle" style="position: absolute; left: 1.1ch; top: 15px; display: flex; gap: 5px;">
-                            <input type="text" id="input-resto-1" class="math-input" style="width:1.2ch; display:none;" maxlength="1" autocomplete="off">
-                            <input type="text" id="input-baja-cifra" class="math-input" style="width:1.2ch; display:none;" maxlength="1" autocomplete="off">
+                        <div style="position: absolute; left: 1.1ch; top: 15px; display: flex; gap: 8px;">
+                            <input type="text" id="input-resto-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
+                            <input type="text" id="input-baja-cifra" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
                         </div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><input type="text" id="input-mult-2" class="math-input pos-mult2" maxlength="2" autocomplete="off"></td>
+                    <td><input type="text" id="input-mult-2" class="math-input" maxlength="2" autocomplete="off"></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><input type="text" id="input-resto-final" class="math-input pos-resto-final" maxlength="2" autocomplete="off"></td>
+                    <td><input type="text" id="input-resto-final" class="math-input" maxlength="1" autocomplete="off"></td>
                     <td></td>
                 </tr>
             </table>
         </div>
 
         <div id="final-msg">
-            <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">¡EXCELENTE TRABAJO, ALBA! 🏆</div>
-            <p>Has resuelto la división perfectamente.</p>
-            <button style="background:var(--primary); color:white; border:none; padding:15px 30px; border-radius:30px; cursor:pointer; font-weight:700;" onclick="generateDivision()">Nueva división</button>
+            <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">¡EXCELENTE TRABAJO, ALBA! 🏆</div>
+            <p>Has terminado la división perfectamente. ¡Eres una experta!</p>
+            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:700;" onclick="location.reload()">Repetir</button>
         </div>
     </div>
 
     <script>
-        let data = {};
+        const steps = [
+            { id: 'cociente-1', val: '8', msg: '¡Muy bien! Ahora, ¿cuánto es 6 x 8? Escribe el resultado debajo del 51.' },
+            { id: 'input-mult-1', val: '48', msg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 51 - 48? Pon el resto abajo.' },
+            { id: 'input-resto-1', val: '3', msg: '¡Muy bien! El resto es 3. Ahora baja la cifra que queda (el 5) al lado del 3.' },
+            { id: 'input-baja-cifra', val: '5', msg: '¡Perfecto! Ya tenemos 35. ¿Por cuánto multiplico 6 para que me dé 35 o se acerque?' },
+            { id: 'cociente-2', val: '5', msg: '¡Genial! 6 x 5 son 30. Escríbelo abajo del 35 para restar.' },
+            { id: 'input-mult-2', val: '30', msg: '¡Eso es! Y para terminar... de 30 a 35... ¿cuántas van?' },
+            { id: 'input-resto-final', val: '5', final: true }
+        ];
 
-        function generateDivision() {
-            document.getElementById('final-msg').style.display = 'none';
-            document.getElementById('guide-text').style.display = 'flex';
-            document.getElementById('arco').style.opacity = '1';
-            const inputs = document.querySelectorAll('.math-input');
-            inputs.forEach(i => { i.value = ''; i.disabled = false; i.style.display = 'none'; i.classList.remove('correct', 'wrong'); });
+        let currentIdx = 0;
 
-            // Generar valores: Dividendo 3 cifras, Divisor 1 cifra
-            const divisor = Math.floor(Math.random() * 7) + 3; // 3-9
-            const c1 = Math.floor(Math.random() * 8) + 1; // Primer cociente
-            const r1 = Math.floor(Math.random() * divisor); // Resto parcial
-            const d1 = (divisor * c1) + r1; 
-            
-            const c2 = Math.floor(Math.random() * 9) + 1; 
-            const rFinal = Math.floor(Math.random() * divisor);
-            const numBajo = (divisor * c2) + rFinal;
-            const cifraBaja = numBajo % 10;
-            
-            const dividendoFinal = parseInt(d1.toString() + cifraBaja.toString());
-            
-            data = {
-                steps: [
-                    { id: 'cociente-1', val: c1.toString(), msg: `Venga, Alba... ¿Por cuánto multiplico ${divisor} para acercarme a ${d1}?` },
-                    { id: 'input-mult-1', val: (c1*divisor).toString(), msg: `¡Muy bien! Ahora, ¿cuánto es ${divisor} x ${c1}? Ponlo debajo del ${d1}.` },
-                    { id: 'input-resto-1', val: r1.toString(), msg: `¡Exacto! Ahora toca restar: ¿cuánto es ${d1} - ${c1*divisor}?` },
-                    { id: 'input-baja-cifra', val: cifraBaja.toString(), msg: `¡Eso es! Ahora baja la siguiente cifra (el ${cifraBaja}) para seguir.` },
-                    { id: 'cociente-2', val: c2.toString(), msg: `¡Perfecto! Ya tenemos ${numBajo}. ¿Por cuánto multiplico ${divisor} para llegar?` },
-                    { id: 'input-mult-2', val: (c2*divisor).toString(), msg: `¡Genial! ¿Cuánto es ${divisor} x ${c2}? Escríbelo abajo para restar.` },
-                    { id: 'input-resto-final', val: rFinal.toString(), final: true }
-                ]
-            };
-
-            document.getElementById('val-dividend').innerText = dividendoFinal;
-            document.getElementById('val-divisor').innerText = divisor;
-            runStep(0);
-        }
-
-        function runStep(index) {
-            const step = data.steps[index];
+        function initStep(index) {
+            if (index >= steps.length) return;
+            const step = steps[index];
             const input = document.getElementById(step.id);
-            document.getElementById('guide-text').innerHTML = step.msg || `¿Cuánto sobra de la resta?`;
+            
             input.style.display = 'inline-block';
             input.focus();
 
-            if (step.id === 'input-baja-cifra') document.getElementById('arco').style.opacity = '0';
+            if (step.id === 'input-baja-cifra') {
+                document.getElementById('arco').style.opacity = '0';
+            }
 
             input.onkeypress = (e) => {
                 if (e.key === 'Enter') {
@@ -155,7 +130,11 @@
                             document.getElementById('guide-text').style.display = 'none';
                             document.getElementById('final-msg').style.display = 'block';
                             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-                        } else { runStep(index + 1); }
+                        } else {
+                            currentIdx++;
+                            document.getElementById('guide-text').innerHTML = steps[currentIdx].msg;
+                            initStep(currentIdx);
+                        }
                     } else {
                         input.classList.add('wrong');
                         setTimeout(() => input.classList.remove('wrong'), 500);
@@ -163,7 +142,8 @@
                 }
             };
         }
-        generateDivision();
+
+        initStep(0);
     </script>
 </body>
 </html>
