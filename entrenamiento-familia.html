@@ -10,7 +10,6 @@
         :root { --primary: #4CAF50; --primary-dark: #2E7D32; --bg: #f0f4f8; --text: #333; --wrong: #f44336; --guia: #e3f2fd; --guia-text: #1976d2; --highlight: #f44336; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; overflow-x: hidden; }
         
-        /* CABECERA ESTILIZADA */
         .academia-header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--primary); padding-bottom: 15px; width: 100%; max-width: 600px; }
         .academia-header h1 { color: var(--primary-dark); margin: 0; font-size: 2.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
         .academia-header p { color: #666; font-weight: 600; margin: 5px 0 0; font-size: 1.1rem; }
@@ -20,9 +19,7 @@
         .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1rem; line-height: 1.4; min-height: 60px; display: flex; align-items: center; justify-content: center; }
         .guide-box::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 12px solid var(--guia-text); }
 
-        /* TAMAÑO ESTILIZADO DE LA DIVISIÓN */
         .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 2.8rem; color: #333; margin-bottom: 20px; }
-        
         .division-table { border-collapse: collapse; table-layout: fixed; }
         .division-table td { padding: 5px; text-align: center; vertical-align: middle; position: relative; height: 60px; }
         
@@ -40,15 +37,15 @@
         .signo-menos { position: absolute; left: -25px; top: 10px; color: var(--highlight); font-size: 2.5rem; display: none; }
         .raya-resta { border-top: 3px solid #333; width: 100%; position: absolute; bottom: 0; left: 0; display: none; }
 
-        /* Ajustes de posición para 456 / 6 */
+        /* Ajustes de posición para 456 / 6 con tamaño reducido */
         #input-42 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 10px; }
         
-        /* CORRECCIÓN DE ESPACIO PARA EL 36 Y EL 3-6 */
-        #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 1ch; top: 10px; }
-        #input-baja-6 { width: 1.2ch; display: none; position: absolute; left: 2.3ch; top: 10px; } /* Aumentado de 2ch a 2.3ch */
-        #input-mult-final { width: 2.8ch; display: none; position: absolute; left: 1ch; top: 15px; letter-spacing: 4px; } /* Ajustado espacio interno del 36 final */
+        /* CORRECCIÓN: El resto 3 se desplaza a la izquierda (de 1ch a 0.7ch) para alinear con el 5 */
+        #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 0.7ch; top: 10px; }
+        #input-baja-6 { width: 1.2ch; display: none; position: absolute; left: 2.1ch; top: 10px; } 
         
-        #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.3ch; top: 25px; } /* Alineado con el 6 de arriba */
+        #input-mult-final { width: 2.8ch; display: none; position: absolute; left: 0.7ch; top: 15px; letter-spacing: 4px; } 
+        #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.1ch; top: 25px; } 
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         #final-msg { display: none; text-align: center; margin-top: 20px; padding: 20px; border: 2px solid var(--primary); border-radius: 15px; background-color: #e8f5e9; width: 100%; }
@@ -88,7 +85,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <div style="position: absolute; left: 1ch; top: 10px; display: flex; gap: 8px;"> <input type="text" id="input-resto-3" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
+                        <div style="position: absolute; left: 0.7ch; top: 10px; display: flex; gap: 10px;">
+                            <input type="text" id="input-resto-3" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
                             <input type="text" id="input-baja-6" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
                         </div>
                     </td>
@@ -123,7 +121,7 @@
     <script>
         const steps = [
             { id: 'cociente-1', val: '7', nextMsg: '¡Muy bien! Ahora, ¿cuánto es 6 x 7? Escribe el resultado debajo del 45.' },
-            { id: 'input-42', val: '42', nextMsg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 45 - 42? Ponlo abajo.' },
+            { id: 'input-42', val: '42', nextMsg: '¡Exacto! Ahora toca restar: ¿cuánto es la resta de 45 - 42? Pon el resto abajo.' },
             { id: 'input-resto-3', val: '3', nextMsg: '¡Eso es! Ahora baja la siguiente cifra (el 6) para seguir. Fíjate que ahora se pone en rojo.' },
             { id: 'input-baja-6', val: '6', nextMsg: '¡Perfecto! Ya tenemos 36. ¿Por cuánto multiplico 6 para que me dé 36?' },
             { id: 'cociente-2', val: '6', nextMsg: '¡Genial! Ahora multiplica: ¿cuánto es 6 x 6? Ponlo debajo del 36.' },
