@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha de Trabajo General: Academia Esparta</title>
+    <title>Ficha Academia Esparta: Centenas y Monedas</title>
     <style>
         body { font-family: 'Poppins', Arial, sans-serif; background: #f0f0f0; padding: 20px; margin: 0; }
         .hoja { 
@@ -24,19 +24,23 @@
         
         h2 { background: #e3f2fd; color: #1976d2; padding: 10px; border-radius: 8px; font-size: 14pt; border-left: 6px solid #1976d2; margin-top: 25px; }
         
-        /* BLOQUE DE OPERACIONES */
-        .grid-restas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin: 20px 0; }
-        .resta { font-family: 'Courier New', monospace; font-size: 22pt; display: flex; flex-direction: column; align-items: flex-end; position: relative; width: 80px; margin: auto; }
-        .linea { border-top: 3px solid #000; width: 100%; margin-top: 5px; }
-        .signo { position: absolute; left: -25px; top: 35px; font-weight: bold; }
-        .circulo-llevada { width: 18px; height: 18px; border: 1.5px solid #f44336; border-radius: 50%; position: absolute; top: -15px; right: 2px; }
+        /* RESTAS DE 3 CIFRAS SIN CÍRCULOS */
+        .grid-restas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 35px; margin: 20px 0; }
+        .resta { font-family: 'Courier New', monospace; font-size: 24pt; display: flex; flex-direction: column; align-items: flex-end; position: relative; width: 100px; margin: auto; letter-spacing: 3px; }
+        .linea { border-top: 3.5px solid #000; width: 110%; margin-top: 5px; }
+        .signo { position: absolute; left: -30px; top: 40px; font-weight: bold; }
 
-        /* BLOQUE DE PROBLEMAS */
-        .problema { border: 1px solid #e0e0e0; padding: 15px; border-radius: 10px; margin-bottom: 15px; font-size: 11pt; line-height: 1.5; }
-        .precio-tag { background: #FF9800; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
-        .espacio-respuesta { border-bottom: 1px dotted #999; margin-top: 10px; height: 40px; }
+        /* JUEGO DE LAS MONEDAS */
+        .bolsa-contenedor { border: 2px dashed #FF9800; border-radius: 20px; padding: 15px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; }
+        .bolsa { width: 120px; height: 140px; border: 3px solid #FF9800; border-radius: 50% 50% 40% 40%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; background: #fffde7; }
+        .monedas-opciones { display: flex; gap: 10px; flex-wrap: wrap; width: 70%; }
+        .moneda-dibujo { width: 45px; height: 45px; border: 2px solid #999; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; background: #eee; }
 
-        .footer { text-align: center; margin-top: 30px; color: #4CAF50; font-weight: bold; font-style: italic; }
+        .problema { border: 1px solid #e0e0e0; padding: 15px; border-radius: 10px; margin-bottom: 15px; font-size: 12pt; line-height: 1.6; }
+        .precio-tag { background: #FF9800; color: white; padding: 2px 8px; border-radius: 5px; font-weight: bold; }
+        .espacio-respuesta { border-bottom: 1px dotted #999; margin-top: 15px; height: 40px; }
+
+        .footer { text-align: center; margin-top: 40px; color: #4CAF50; font-weight: bold; font-style: italic; }
 
         @media print {
             body { background: #fff; padding: 0; }
@@ -48,7 +52,7 @@
 <body>
 
     <div class="no-print" style="text-align: center; margin-bottom: 20px;">
-        <button onclick="window.print()" style="padding: 15px 40px; background: #2E7D32; color: white; border: none; border-radius: 30px; font-size: 18px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <button onclick="window.print()" style="padding: 15px 40px; background: #2E7D32; color: white; border: none; border-radius: 30px; font-size: 18px; cursor: pointer; font-weight: bold;">
             🖨️ IMPRIMIR ENTRENAMIENTO COMPLETO
         </button>
     </div>
@@ -56,76 +60,83 @@
     <div class="hoja">
         <div class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>Entrenamiento de Matemáticas: Operaciones con Llevada</p>
+            <p>Entrenamiento de Matemáticas: Centenas (Sin ayudas)</p>
         </div>
 
         <div class="datos-alumno">
             <span>ALUMNO/A: __________________________________________________</span>
-            <span>FECHA: ____/____/____</span>
+            <span>FECHA: ____/____/2026</span>
         </div>
 
-        <h2>1. Resuelve las siguientes restas. ¡Cuidado con las llevadas!</h2>
+        <h2>1. Resuelve estas restas de tres cifras.</h2>
         <div class="grid-restas">
-            <div class="resta"><div class="circulo-llevada"></div> 91<br><span class="signo">−</span>34 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 82<br><span class="signo">−</span>56 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 73<br><span class="signo">−</span>28 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 64<br><span class="signo">−</span>19 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 55<br><span class="signo">−</span>37 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 42<br><span class="signo">−</span>15 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 80<br><span class="signo">−</span>43 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 93<br><span class="signo">−</span>74 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 71<br><span class="signo">−</span>22 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 60<br><span class="signo">−</span>31 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 52<br><span class="signo">−</span>18 <div class="linea"></div><br></div>
-            <div class="resta"><div class="circulo-llevada"></div> 44<br><span class="signo">−</span>29 <div class="linea"></div><br></div>
+            <div class="resta"> 542<br><span class="signo">−</span>128 <div class="linea"></div><br></div>
+            <div class="resta"> 761<br><span class="signo">−</span>345 <div class="linea"></div><br></div>
+            <div class="resta"> 890<br><span class="signo">−</span>456 <div class="linea"></div><br></div>
+            <div class="resta"> 623<br><span class="signo">−</span>274 <div class="linea"></div><br></div>
+            <div class="resta"> 415<br><span class="signo">−</span>197 <div class="linea"></div><br></div>
+            <div class="resta"> 934<br><span class="signo">−</span>586 <div class="linea"></div><br></div>
+            <div class="resta"> 352<br><span class="signo">−</span>168 <div class="linea"></div><br></div>
+            <div class="resta"> 805<br><span class="signo">−</span>439 <div class="linea"></div><br></div>
+            <div class="resta"> 710<br><span class="signo">−</span>225 <div class="linea"></div><br></div>
+            <div class="resta"> 600<br><span class="signo">−</span>341 <div class="linea"></div><br></div>
+            <div class="resta"> 527<br><span class="signo">−</span>189 <div class="linea"></div><br></div>
+            <div class="resta"> 441<br><span class="signo">−</span>262 <div class="linea"></div><br></div>
         </div>
 
-        <h2>2. Escritura de Precios. ¿Cómo se leen?</h2>
-        <div style="margin-left: 20px;">
-            <p><strong>12,40 €:</strong> _________________________________________________________________</p>
-            <p><strong>5,08 €:</strong> __________________________________________________________________</p>
-            <p><strong>0,75 €:</strong> __________________________________________________________________</p>
-            <p><strong>24,10 €:</strong> _________________________________________________________________</p>
+        <h2>2. Escritura de Precios: ¿Cómo se leen?</h2>
+        <div style="margin-left: 20px; line-height: 2.5;">
+            <p><strong>135,20 €:</strong> ________________________________________________________________</p>
+            <p><strong>48,05 €:</strong> _________________________________________________________________</p>
+            <p><strong>0,95 €:</strong> __________________________________________________________________</p>
         </div>
 
-        <div class="footer">"En la Academia Esparta, cada número es una victoria"</div>
+        <div class="footer">"En la Academia Esparta, el esfuerzo es la clave"</div>
     </div>
 
     <div class="hoja">
         <div class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>Entrenamiento de Matemáticas: El Valor del Dinero</p>
+            <p>Entrenamiento: Manejo de Euros y Céntimos</p>
         </div>
 
-        <h2>3. Problemas de compra y devolución</h2>
+        <h2>3. Juego: ¿Qué monedas necesito? (Rodea las necesarias)</h2>
+        
+        <p><strong>A) Quiero meter en la bolsa: <span class="precio-tag">2 €</span></strong></p>
+        <div class="bolsa-contenedor">
+            <div class="bolsa">2 €</div>
+            <div class="monedas-opciones">
+                <div class="moneda-dibujo">1 €</div> <div class="moneda-dibujo">50c</div> <div class="moneda-dibujo">50c</div>
+                <div class="moneda-dibujo">20c</div> <div class="moneda-dibujo">20c</div> <div class="moneda-dibujo">10c</div>
+                <div class="moneda-dibujo">2 €</div> <div class="moneda-dibujo">1 €</div>
+            </div>
+        </div>
+
+        <p><strong>B) Quiero meter en la bolsa: <span class="precio-tag">1 € y 50 céntimos</span></strong></p>
+        <div class="bolsa-contenedor">
+            <div class="bolsa">1,50 €</div>
+            <div class="monedas-opciones">
+                <div class="moneda-dibujo">1 €</div> <div class="moneda-dibujo">50c</div> <div class="moneda-dibujo">20c</div>
+                <div class="moneda-dibujo">20c</div> <div class="moneda-dibujo">10c</div> <div class="moneda-dibujo">50c</div>
+                <div class="moneda-dibujo">2 €</div> <div class="moneda-dibujo">20c</div>
+            </div>
+        </div>
+
+        <h2>4. Problemas de la vida real</h2>
         
         <div class="problema">
-            <strong>1.</strong> Un juguete cuesta <span class="precio-tag">27 €</span>. Si pago con un billete de <span class="precio-tag">50 €</span>, ¿cuánto me tienen que devolver?
+            <strong>1.</strong> Una mochila de la Academia cuesta <span class="precio-tag">35 €</span> y un estuche cuesta <span class="precio-tag">12 €</span>. Si pago con un billete de <span class="precio-tag">50 €</span>, ¿cuánto me sobra?
             <div class="espacio-respuesta">Operación:</div>
             <div class="espacio-respuesta">Respuesta:</div>
         </div>
 
         <div class="problema">
-            <strong>2.</strong> Tengo <span class="precio-tag">85 céntimos</span> en mi monedero. Compro una piruleta de <span class="precio-tag">30 céntimos</span>. ¿Cuánto me queda?
+            <strong>2.</strong> Tengo en mi hucha <span class="precio-tag">120 €</span>. Compro un juego que vale <span class="precio-tag">45 €</span>. ¿Cuánto dinero me queda?
             <div class="espacio-respuesta">Operación:</div>
             <div class="espacio-respuesta">Respuesta:</div>
         </div>
 
-        <div class="problema">
-            <strong>3.</strong> Una mochila cuesta <span class="precio-tag">42 €</span> y un estuche <span class="precio-tag">15 €</span>. ¿Cuánto cuestan las dos cosas juntas?
-            <div class="espacio-respuesta">Operación:</div>
-            <div class="espacio-respuesta">Respuesta:</div>
-        </div>
-
-        <h2>4. Suma de Monedas</h2>
-        <p>Calcula el total de estas bolsas de dinero:</p>
-        <div style="margin-left: 20px; line-height: 2;">
-            <p>A) 2 monedas de 2€ + 1 moneda de 50 cts = ___________</p>
-            <p>B) 1 billete de 10€ + 3 monedas de 1€ = ___________</p>
-            <p>C) 5 monedas de 20 cts + 1 moneda de 10 cts = ___________</p>
-        </div>
-
-        <div class="footer" style="margin-top: 150px;">¡Excelente trabajo, recluta! Ficha completada.</div>
+        <div class="footer" style="margin-top: 100px;">¡Misión cumplida! Eres una experta en centenas y dinero.</div>
     </div>
 
 </body>
