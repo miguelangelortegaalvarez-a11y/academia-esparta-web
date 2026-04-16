@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha de Refuerzo: Academia Esparta</title>
+    <title>Ficha 21: Desafío de Compra - Academia Esparta</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; margin: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f6; padding: 20px; margin: 0; }
         .hoja { 
             width: 210mm; 
             min-height: 297mm; 
@@ -19,39 +19,45 @@
         .main-header h1 { margin: 0; color: #2E7D32; font-size: 2.2rem; letter-spacing: 3px; text-transform: uppercase; }
 
         .header-top { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #333; border-bottom: 2px solid #333; padding: 5px 0; margin-bottom: 20px; }
-        .ficha-num { background: #666; color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
-        .titulo-seccion { font-style: italic; font-size: 1.4rem; color: #333; font-weight: bold; }
+        .ficha-num { background: #444; color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+        .titulo-seccion { font-style: italic; font-size: 1.5rem; color: #333; font-weight: bold; }
         .refuerzo-tag { font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
 
-        .datos-alumno { margin-bottom: 30px; border-bottom: 1px dotted #ccc; padding-bottom: 10px; font-weight: bold; }
+        .datos-alumno { margin-bottom: 25px; border-bottom: 1px dotted #ccc; padding-bottom: 10px; font-weight: bold; }
         
-        .ejercicio { margin-bottom: 40px; }
-        .enunciado { display: flex; align-items: flex-start; gap: 10px; font-weight: bold; color: #444; margin-bottom: 20px; }
-        .num-ej { background: #666; color: #fff; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .enunciado { display: flex; align-items: flex-start; gap: 10px; font-weight: bold; color: #333; margin-bottom: 20px; }
+        .num-ej { background: #444; color: #fff; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-        .grid-restas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
-        .resta-box { display: flex; flex-direction: column; align-items: center; }
-        .llevadas-espacio { border: 1px solid #ccc; width: 40px; height: 20px; margin-bottom: 5px; border-radius: 4px; }
-        .cifras { font-family: 'Courier New', monospace; font-size: 1.8rem; letter-spacing: 8px; line-height: 1.2; text-align: right; width: 80px; position: relative; }
-        .linea-operacion { border-top: 2px solid #000; width: 100px; margin: 5px 0; }
-        .signo { position: absolute; left: -20px; top: 20px; }
-        .resultado-caja { border: 1px solid #ccc; width: 100px; height: 40px; border-radius: 10px; margin-top: 5px; }
+        /* ESCAPARATE DE PRODUCTOS NUEVOS */
+        .escaparate { display: flex; justify-content: space-around; align-items: flex-end; margin-bottom: 40px; padding: 20px; border: 2px dashed #2E7D32; border-radius: 15px; background: #f9fff9; }
+        .producto { text-align: center; position: relative; }
+        .img-placeholder { font-size: 3.5rem; margin-bottom: 10px; filter: drop-shadow(2px 2px 2px #ccc); }
+        .nombre-prod { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; color: #666; margin-bottom: 5px; }
+        .precio-burbuja { background: #fff; border: 2px solid #2E7D32; border-radius: 15px; padding: 5px 12px; font-size: 0.9rem; font-weight: bold; color: #333; }
 
-        .problema-container { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .col-titulo { font-weight: bold; color: #2E7D32; font-size: 0.9rem; margin-bottom: 10px; text-transform: uppercase; }
-        .caja-blanca { border: 1px dotted #999; border-radius: 10px; padding: 15px; min-height: 120px; }
-
-        /* RECUADRO DE OPERACIÓN TOTALMENTE LIMPIO */
-        .operacion-vacia { height: 100%; width: 100%; }
-
-        .bolsa-dibujo { width: 60px; height: 70px; border: 2px solid #333; border-radius: 40% 40% 45% 45%; display: flex; align-items: center; justify-content: center; font-weight: bold; background: #fafafa; }
+        /* ESTRUCTURA DE CÁLCULO */
+        .bloque-calculo { margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
+        .pregunta { font-weight: bold; color: #2E7D32; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
         
+        .fila-desglose { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-weight: 600; }
+        .input-mini { border: 1px solid #999; width: 45px; height: 28px; border-radius: 5px; background: #fff; }
+        .input-total-cts { border: 2px solid #333; width: 70px; height: 35px; border-radius: 8px; margin: 0 10px; text-align: center; }
+
+        .operacion-y-resultado { display: flex; justify-content: space-around; align-items: center; margin-top: 25px; }
+        
+        .suma-vertical-box { border: 1px dotted #ccc; padding: 20px; border-radius: 10px; }
+        .suma-vertical { display: flex; flex-direction: column; align-items: flex-end; font-family: 'Courier New', monospace; font-size: 2rem; width: 120px; position: relative; }
+        .linea-suma { border-top: 3px solid #000; width: 100%; margin: 5px 0; }
+        .signo-mas { position: absolute; left: -30px; top: 40px; font-weight: bold; }
+
+        .recuadro-final { border: 3px double #2E7D32; border-radius: 12px; padding: 20px; font-weight: bold; background: #f1f8f1; font-size: 1.1rem; }
+
         .footer { text-align: center; margin-top: 50px; font-size: 0.8rem; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
 
         @media print {
-            body { background: #fff; padding: 0; }
-            .hoja { box-shadow: none; margin: 0; width: 100%; }
             .no-print { display: none; }
+            .hoja { box-shadow: none; margin: 0; width: 100%; }
+            body { background: white; }
         }
     </style>
 </head>
@@ -59,7 +65,7 @@
 
     <div class="no-print" style="text-align: center; margin: 20px;">
         <button onclick="window.print()" style="padding: 10px 30px; background: #2E7D32; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold;">
-            🖨️ IMPRIMIR FICHA ACADEMIA ESPARTA
+            🖨️ IMPRIMIR DESAFÍO DE COMPRA
         </button>
     </div>
 
@@ -69,8 +75,8 @@
         </div>
 
         <div class="header-top">
-            <div class="ficha-num">FICHA 1</div>
-            <div class="titulo-seccion">Restas llevando</div>
+            <div class="ficha-num">FICHA 21</div>
+            <div class="titulo-seccion">Situaciones de compra</div>
             <div class="refuerzo-tag">Refuerzo</div>
         </div>
 
@@ -81,82 +87,90 @@
         <div class="ejercicio">
             <div class="enunciado">
                 <div class="num-ej">></div>
-                <span>Resuelve estas restas. ¡No olvides anotar las que te llevas!</span>
+                <span>Calcula el precio total de estos equipos de entrenamiento.</span>
             </div>
-            <div class="grid-restas">
-                <div class="resta-box">
-                    <div class="llevadas-espacio"></div>
-                    <div class="cifras"><span class="signo">−</span>462<br>135</div>
-                    <div class="linea-operacion"></div>
-                    <div class="resultado-caja"></div>
-                </div>
-                <div class="resta-box">
-                    <div class="llevadas-espacio"></div>
-                    <div class="cifras"><span class="signo">−</span>517<br>284</div>
-                    <div class="linea-operacion"></div>
-                    <div class="resultado-caja"></div>
-                </div>
-                <div class="resta-box">
-                    <div class="llevadas-espacio"></div>
-                    <div class="cifras"><span class="signo">−</span>624<br>357</div>
-                    <div class="linea-operacion"></div>
-                    <div class="resultado-caja"></div>
-                </div>
-                <div class="resta-box">
-                    <div class="llevadas-espacio"></div>
-                    <div class="cifras"><span class="signo">−</span>831<br>465</div>
-                    <div class="linea-operacion"></div>
-                    <div class="resultado-caja"></div>
-                </div>
-            </div>
-        </div>
 
-        <div class="ejercicio">
-            <div class="enunciado">
-                <div class="num-ej">></div>
-                <span>Lee y calcula.</span>
-            </div>
-            <p>En el almacén de la Academia Esparta tenemos <strong>245 balones</strong>. Si para el entrenamiento de hoy hemos inflado <strong>38 balones</strong>, ¿cuántos nos quedan por inflar?</p>
-            
-            <div class="problema-container">
-                <div>
-                    <div class="col-titulo">Datos</div>
-                    <div class="caja-blanca">
-                        Tenemos _____ balones.<br><br>
-                        Se inflan _____ balones.
-                    </div>
+            <div class="escaparate">
+                <div class="producto">
+                    <div class="nombre-prod">Casco</div>
+                    <div class="img-placeholder">🪖</div>
+                    <div class="precio-burbuja">4 € y 75 cts</div>
                 </div>
-                <div>
-                    <div class="col-titulo">Operación</div>
-                    <div class="caja-blanca">
-                        <div class="operacion-vacia"></div>
-                    </div>
+                <div class="producto">
+                    <div class="nombre-prod">Capa</div>
+                    <div class="img-placeholder">🧥</div>
+                    <div class="precio-burbuja">3 € y 85 cts</div>
                 </div>
-                <div>
-                    <div class="col-titulo">Solución</div>
-                    <div class="caja-blanca">
-                        Quedan ________ balones por inflar.
-                    </div>
+                <div class="producto">
+                    <div class="nombre-prod">Escudo</div>
+                    <div class="img-placeholder">🛡️</div>
+                    <div class="precio-burbuja">5 € y 30 cts</div>
+                </div>
+                <div class="producto">
+                    <div class="nombre-prod">Espada</div>
+                    <div class="img-placeholder">⚔️</div>
+                    <div class="precio-burbuja">2 € y 95 cts</div>
                 </div>
             </div>
-        </div>
 
-        <div class="ejercicio">
-            <div class="enunciado">
-                <div class="num-ej">></div>
-                <span>Completa las bolsas para llegar a 2 €. Rodea las monedas que necesitas.</span>
-            </div>
-            <div style="display: flex; gap: 50px; align-items: center; justify-content: center; border: 1px solid #eee; padding: 20px; border-radius: 15px;">
-                <div class="bolsa-dibujo">2 €</div>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; max-width: 300px;">
-                    <div style="width:40px; height:40px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem;">1 €</div>
-                    <div style="width:35px; height:35px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem;">50c</div>
-                    <div style="width:35px; height:35px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem;">50c</div>
-                    <div style="width:30px; height:30px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem;">20c</div>
-                    <div style="width:30px; height:30px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem;">20c</div>
-                    <div style="width:30px; height:30px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem;">10c</div>
+            <div class="bloque-calculo">
+                <div class="pregunta">● ¿Cuánto cuesta el CASCO y la CAPA en total?</div>
+                
+                <div class="fila-desglose">
+                    🪖 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = 
+                    <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
+                </div>
+                <div class="fila-desglose">
+                    🧥 <div class="input-mini"></div> € y <div class="input-mini"></div> cts = 
+                    <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
+                </div>
+
+                <div class="operacion-y-resultado">
+                    <div class="suma-vertical-box">
+                        <div class="suma-vertical">
+                            <span class="signo-mas">+</span>
+                            <div style="letter-spacing: 5px;">____</div>
+                            <div style="letter-spacing: 5px;">____</div>
+                            <div class="linea-suma"></div>
+                            <div style="height: 30px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="recuadro-final">
+                        Total: <div class="input-mini" style="display:inline-block"></div> € y <div class="input-mini" style="display:inline-block"></div> céntimos.
+                    </div>
                 </div>
             </div>
+
+            <div class="bloque-calculo">
+                <div class="pregunta">● ¿Cuánto cuesta el ESCUDO y la ESPADA en total?</div>
+                
+                <div class="fila-desglose">
+                    🛡️ <div class="input-mini"></div> € y <div class="input-mini"></div> cts = 
+                    <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
+                </div>
+                <div class="fila-desglose">
+                    ⚔️ <div class="input-mini"></div> € y <div class="input-mini"></div> cts = 
+                    <div class="input-mini"></div> + <div class="input-mini"></div> = <div class="input-total-cts"></div> cts.
+                </div>
+
+                <div class="operacion-y-resultado">
+                    <div class="suma-vertical-box">
+                        <div class="suma-vertical">
+                            <span class="signo-mas">+</span>
+                            <div style="letter-spacing: 5px;">____</div>
+                            <div style="letter-spacing: 5px;">____</div>
+                            <div class="linea-suma"></div>
+                            <div style="height: 30px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="recuadro-final">
+                        Total: <div class="input-mini" style="display:inline-block"></div> € y <div class="input-mini" style="display:inline-block"></div> céntimos.
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="footer">
