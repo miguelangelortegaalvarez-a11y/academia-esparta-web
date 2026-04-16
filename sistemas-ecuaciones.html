@@ -2,99 +2,130 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha de Trabajo: Academia Esparta (2º Primaria)</title>
+    <title>Ficha de Trabajo General: Academia Esparta</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; padding: 0; margin: 0; }
-        .hoja { width: 210mm; min-height: 297mm; padding: 15mm; margin: auto; border: 1px solid #eee; box-sizing: border-box; position: relative; }
+        body { font-family: 'Poppins', Arial, sans-serif; background: #f0f0f0; padding: 20px; margin: 0; }
+        .hoja { 
+            width: 210mm; 
+            min-height: 297mm; 
+            padding: 15mm; 
+            margin: 20px auto; 
+            background: #fff; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            page-break-after: always;
+        }
         
-        /* CABECERA ACADEMIA ESPARTA */
-        .header { text-align: center; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; margin-bottom: 30px; }
-        .header h1 { color: #2E7D32; margin: 0; font-size: 28pt; letter-spacing: 2px; }
-        .header p { color: #555; font-size: 14pt; margin: 5px 0; font-weight: bold; }
+        .header { text-align: center; border-bottom: 4px solid #4CAF50; padding-bottom: 10px; margin-bottom: 20px; }
+        .header h1 { color: #2E7D32; margin: 0; font-size: 26pt; text-transform: uppercase; letter-spacing: 2px; }
+        .header p { color: #666; font-size: 12pt; margin: 5px 0; font-weight: bold; }
         
-        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 30px; border: 1px solid #ccc; padding: 10px; border-radius: 10px; }
+        .datos-alumno { display: flex; justify-content: space-between; margin-bottom: 25px; border: 2px solid #eee; padding: 10px; border-radius: 10px; font-weight: bold; }
         
-        h2 { background: #e3f2fd; color: #1976d2; padding: 8px; border-radius: 5px; font-size: 16pt; border-left: 5px solid #1976d2; }
+        h2 { background: #e3f2fd; color: #1976d2; padding: 10px; border-radius: 8px; font-size: 14pt; border-left: 6px solid #1976d2; margin-top: 25px; }
         
-        /* DISEÑO DE LAS RESTAS */
-        .contenedor-restas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
-        .resta { font-family: 'Courier New', Courier, monospace; font-size: 26pt; display: flex; flex-direction: column; align-items: flex-end; position: relative; width: 100px; margin: auto; }
+        /* BLOQUE DE OPERACIONES */
+        .grid-restas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin: 20px 0; }
+        .resta { font-family: 'Courier New', monospace; font-size: 22pt; display: flex; flex-direction: column; align-items: flex-end; position: relative; width: 80px; margin: auto; }
         .linea { border-top: 3px solid #000; width: 100%; margin-top: 5px; }
-        .signo { position: absolute; left: -30px; top: 45px; }
-        .circulo-llevada { width: 20px; height: 20px; border: 1.5px solid #f44336; border-radius: 50%; position: absolute; top: -15px; right: 5px; }
+        .signo { position: absolute; left: -25px; top: 35px; font-weight: bold; }
+        .circulo-llevada { width: 18px; height: 18px; border: 1.5px solid #f44336; border-radius: 50%; position: absolute; top: -15px; right: 2px; }
 
-        /* PROBLEMAS */
-        .problema { background: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 5px solid #FF9800; margin-bottom: 20px; font-size: 13pt; }
-        .hueco-respuesta { border-bottom: 1px dashed #000; width: 100%; height: 80px; margin-top: 10px; }
-        
-        .precio { background: #FF9800; color: #fff; padding: 2px 8px; border-radius: 5px; font-weight: bold; }
+        /* BLOQUE DE PROBLEMAS */
+        .problema { border: 1px solid #e0e0e0; padding: 15px; border-radius: 10px; margin-bottom: 15px; font-size: 11pt; line-height: 1.5; }
+        .precio-tag { background: #FF9800; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .espacio-respuesta { border-bottom: 1px dotted #999; margin-top: 10px; height: 40px; }
+
+        .footer { text-align: center; margin-top: 30px; color: #4CAF50; font-weight: bold; font-style: italic; }
 
         @media print {
-            .hoja { border: none; margin: 0; padding: 10mm; }
-            button { display: none; }
-            body { background: #fff; }
+            body { background: #fff; padding: 0; }
+            .hoja { margin: 0; border: none; box-shadow: none; width: 100%; }
+            .no-print { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div style="text-align: center; padding: 20px;">
-        <button onclick="window.print()" style="padding: 15px 30px; background: #4CAF50; color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; font-weight: bold;">
-            🖨️ CLIC AQUÍ PARA IMPRIMIR FICHA
+    <div class="no-print" style="text-align: center; margin-bottom: 20px;">
+        <button onclick="window.print()" style="padding: 15px 40px; background: #2E7D32; color: white; border: none; border-radius: 30px; font-size: 18px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            🖨️ IMPRIMIR ENTRENAMIENTO COMPLETO
         </button>
     </div>
 
     <div class="hoja">
         <div class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>Ficha de Matemáticas: Operaciones y Dinero (2º Primaria)</p>
+            <p>Entrenamiento de Matemáticas: Operaciones con Llevada</p>
         </div>
 
         <div class="datos-alumno">
-            <span><strong>NOMBRE:</strong> Alba del Cid</span>
-            <span><strong>FECHA:</strong> ____ / ____ / 2026</span>
+            <span>ALUMNO/A: __________________________________________________</span>
+            <span>FECHA: ____/____/____</span>
         </div>
 
-        <h2>1. Resuelve estas restas con llevada (No olvides el circulito)</h2>
-        <div class="contenedor-restas">
-            <div class="resta">
-                <div class="circulo-llevada"></div>
-                85<br><span class="signo">−</span>47
-                <div class="linea"></div>
-            </div>
-            <div class="resta">
-                <div class="circulo-llevada"></div>
-                92<br><span class="signo">−</span>54
-                <div class="linea"></div>
-            </div>
-            <div class="resta">
-                <div class="circulo-llevada"></div>
-                61<br><span class="signo">−</span>38
-                <div class="linea"></div>
-            </div>
+        <h2>1. Resuelve las siguientes restas. ¡Cuidado con las llevadas!</h2>
+        <div class="grid-restas">
+            <div class="resta"><div class="circulo-llevada"></div> 91<br><span class="signo">−</span>34 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 82<br><span class="signo">−</span>56 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 73<br><span class="signo">−</span>28 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 64<br><span class="signo">−</span>19 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 55<br><span class="signo">−</span>37 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 42<br><span class="signo">−</span>15 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 80<br><span class="signo">−</span>43 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 93<br><span class="signo">−</span>74 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 71<br><span class="signo">−</span>22 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 60<br><span class="signo">−</span>31 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 52<br><span class="signo">−</span>18 <div class="linea"></div><br></div>
+            <div class="resta"><div class="circulo-llevada"></div> 44<br><span class="signo">−</span>29 <div class="linea"></div><br></div>
         </div>
 
-        <h2>2. Problemas con dinero (€ y céntimos)</h2>
+        <h2>2. Escritura de Precios. ¿Cómo se leen?</h2>
+        <div style="margin-left: 20px;">
+            <p><strong>12,40 €:</strong> _________________________________________________________________</p>
+            <p><strong>5,08 €:</strong> __________________________________________________________________</p>
+            <p><strong>0,75 €:</strong> __________________________________________________________________</p>
+            <p><strong>24,10 €:</strong> _________________________________________________________________</p>
+        </div>
+
+        <div class="footer">"En la Academia Esparta, cada número es una victoria"</div>
+    </div>
+
+    <div class="hoja">
+        <div class="header">
+            <h1>ACADEMIA ESPARTA</h1>
+            <p>Entrenamiento de Matemáticas: El Valor del Dinero</p>
+        </div>
+
+        <h2>3. Problemas de compra y devolución</h2>
         
         <div class="problema">
-            <strong>Problema A:</strong> Alba quiere comprar una muñeca que cuesta <span class="precio">36 €</span>. Si paga con un billete de <span class="precio">50 €</span>, ¿cuánto dinero le devuelven?
-            <div class="hueco-respuesta">Operación y respuesta:</div>
+            <strong>1.</strong> Un juguete cuesta <span class="precio-tag">27 €</span>. Si pago con un billete de <span class="precio-tag">50 €</span>, ¿cuánto me tienen que devolver?
+            <div class="espacio-respuesta">Operación:</div>
+            <div class="espacio-respuesta">Respuesta:</div>
         </div>
 
         <div class="problema">
-            <strong>Problema B:</strong> En la hucha tengo <span class="precio">72 céntimos</span>. Compro un chicle de <span class="precio">15 céntimos</span>. ¿Cuántos céntimos me quedan ahora?
-            <div class="hueco-respuesta">Operación y respuesta:</div>
+            <strong>2.</strong> Tengo <span class="precio-tag">85 céntimos</span> en mi monedero. Compro una piruleta de <span class="precio-tag">30 céntimos</span>. ¿Cuánto me queda?
+            <div class="espacio-respuesta">Operación:</div>
+            <div class="espacio-respuesta">Respuesta:</div>
         </div>
 
-        <h2>3. Interpreta el precio</h2>
-        <p>Escribe con letras cómo se leen estos precios:</p>
-        <p>a) 12,50 € : _________________________________________________________</p>
-        <p>b) 5,05 € : __________________________________________________________</p>
-        <p>c) 0,80 € : __________________________________________________________</p>
-
-        <div style="margin-top: 50px; text-align: center; color: #4CAF50; font-weight: bold; border-top: 1px solid #eee; padding-top: 10px;">
-            ¡Ánimo Alba, eres la mejor de la Academia Esparta! 🏆
+        <div class="problema">
+            <strong>3.</strong> Una mochila cuesta <span class="precio-tag">42 €</span> y un estuche <span class="precio-tag">15 €</span>. ¿Cuánto cuestan las dos cosas juntas?
+            <div class="espacio-respuesta">Operación:</div>
+            <div class="espacio-respuesta">Respuesta:</div>
         </div>
+
+        <h2>4. Suma de Monedas</h2>
+        <p>Calcula el total de estas bolsas de dinero:</p>
+        <div style="margin-left: 20px; line-height: 2;">
+            <p>A) 2 monedas de 2€ + 1 moneda de 50 cts = ___________</p>
+            <p>B) 1 billete de 10€ + 3 monedas de 1€ = ___________</p>
+            <p>C) 5 monedas de 20 cts + 1 moneda de 10 cts = ___________</p>
+        </div>
+
+        <div class="footer" style="margin-top: 150px;">¡Excelente trabajo, recluta! Ficha completada.</div>
     </div>
 
 </body>
