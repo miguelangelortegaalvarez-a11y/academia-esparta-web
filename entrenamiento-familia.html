@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento División: Alba del Cid</title>
+    <title>Entrenamiento División Paso a Paso: Alba del Cid</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
@@ -16,32 +16,44 @@
         .game-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; }
 
         /* Globo de texto guía */
-        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1rem; line-height: 1.4; box-shadow: 0 4px 10px rgba(25, 118, 210, 0.1); }
+        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1.1rem; line-height: 1.4; box-shadow: 0 4px 10px rgba(25, 118, 210, 0.1); }
         .guide-box::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 15px solid var(--guia-text); }
 
         /* Estilo de la división visual limpia (Tabla) */
-        .division-table { font-family: 'Roboto Mono', monospace; font-size: 3rem; color: #333; border-collapse: collapse; position: relative; margin-bottom: 20px; }
-        .division-table td { padding: 5px 10ch 5px 1ch; text-align: center; width: 2ch; position: relative; }
+        .division-table { font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #333; border-collapse: collapse; position: relative; margin-bottom: 20px; table-layout: fixed; width: 100%; max-width: 400px; }
+        .division-table td { padding: 5px; text-align: center; width: 25%; position: relative; }
         
-        /* El "Arquito" */
-        .arco-superior { position: absolute; top: -15px; left: 5px; width: 3.5ch; height: 15px; border: 4px solid var(--wrong); border-bottom: none; border-radius: 20px 20px 0 0; opacity: 1; transition: opacity 0.5s; }
+        /* Alineación dividend */
+        .dividend-cell { font-size: 3.8rem; text-align: right !important; padding-right: 20px !important; }
+        /* Cajón divisor */
+        .divisor-cell { border-left: 5px solid #333; border-bottom: 5px solid #333; text-align: center !important; }
+        /* Cociente */
+        .quotient-cell { color: var(--primary); font-size: 3.5rem; text-align: center !important; vertical-align: top; }
+        
+        /* El "Arquito" - Posición y ancho ajustados al 45 */
+        .arco-superior { position: absolute; top: -15px; left: 2ch; width: 3.2ch; height: 18px; border: 5px solid var(--wrong); border-bottom: none; border-radius: 20px 20px 0 0; opacity: 1; transition: opacity 0.5s; z-index: 10; }
 
-        .dividend-cell { font-size: 3.2rem; }
-        .divisor-cell { border-left: 4px solid #333; border-bottom: 4px solid #333; }
-        .quotient-cell { color: var(--primary); font-size: 3rem; }
-        
         /* Campos de entrada en la división */
-        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.5rem; width: 1.2ch; padding: 2px; text-align: center; border: 3px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; }
+        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.8rem; padding: 2px; text-align: center; border: 3px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; }
         .math-input:focus { outline: none; border-color: var(--primary); }
         .math-input.correct { border-color: var(--primary); color: #2e7d32; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
+        /* Estilos específicos para inputs */
+        #cociente-1, #cociente-2 { width: 1.2ch; display: none; }
+        #input-42 { width: 2.5ch; display: none; position: absolute; left: 2ch; top: 10px; } /* Campo para el '42' debajo del 45 */
+        #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 3.2ch; top: 15px; } /* Campo para el '3' resto */
+        
+        /* Bajada del 6 */
+        .bajada-6-text { font-family: 'Roboto Mono', monospace; font-size: 3.5rem; color: #555; display: none; position: absolute; left: 4.2ch; top: 15px; }
+
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 
         /* Mensaje final */
-        #final-msg { display: none; text-align: center; margin-top: 30px; }
-        .congrats-text { font-size: 2rem; font-weight: 700; color: var(--primary); }
-        .trophy { font-size: 5rem; }
+        #final-msg { display: none; text-align: center; margin-top: 30px; padding: 20px; border: 2px solid var(--primary); border-radius: 15px; background-color: #e8f5e9; }
+        .congrats-text { font-size: 2.2rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+        .trophy { font-size: 6rem; display: block; margin-bottom: 15px; }
+        .final-p { font-size: 1.3rem; margin-bottom: 20px; }
 
     </style>
 </head>
@@ -55,7 +67,7 @@
             Venga, Alba, piensa... ¿Por cuánto multiplico 6 para que me dé 45 o se acerque sin pasarse?<br>(Mira el arquito rojo 😉)
         </div>
 
-        <div style="position: relative;">
+        <div style="position: relative; width: 100%; display: flex; justify-content: center;">
             <div id="arco" class="arco-superior"></div>
             <table class="division-table">
                 <tr>
@@ -64,17 +76,17 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" id="resto-1" class="math-input" maxlength="1" autocomplete="off" style="display:none; position:absolute; left: 2.2ch; top: 10px;">
-                        <span id="bajada-6" style="display:none; position:absolute; left: 3.2ch; top: 10px; color:#555;">6</span>
+                        <input type="text" id="input-42" class="math-input" maxlength="2" autocomplete="off">
                     </td>
                     <td class="quotient-cell">
                         <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off">
-                        <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off" style="display:none;">
+                        <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" id="resto-final" class="math-input" maxlength="1" autocomplete="off" style="display:none; position:absolute; left: 3.2ch; top: 20px;">
+                        <input type="text" id="input-resto-3" class="math-input" maxlength="1" autocomplete="off">
+                        <span id="bajada-6" class="bajada-6-text">6</span>
                     </td>
                     <td></td>
                 </tr>
@@ -84,27 +96,23 @@
         <div id="final-msg">
             <span class="trophy">🏆</span>
             <div class="congrats-text">¡EXCELENTE TRABAJO, ALBA!</div>
-            <p style="font-size: 1.2rem;">Has completado la división 456 ÷ 6 = 76 perfectamente paso a paso. ¡El 10 es tuyo! 🛡️✨</p>
-            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-family:'Poppins';" onclick="location.reload()">Volver a intentar</button>
+            <p class="final-p">Has completado la división 456 ÷ 6 = 76 perfectamente paso a paso. ¡Eres una guerrera de los números! 🛡️✨</p>
+            <button style="background:var(--primary); color:white; border:none; padding:15px 30px; border-radius:30px; cursor:pointer; font-family:'Poppins'; font-weight:700; font-size:1.1rem;" onclick="location.reload()">Volver a intentar</button>
         </div>
 
     </div>
 
     <script>
         const steps = [
-            { inputId: 'cociente-1', correct: '7', guide: '¡Genial! Ahora multiplica: ¿7 x 6 son...?<br>Calcula el resto de 45 menos ese número y escríbelo abajo.' },
-            { inputId: 'resto-1', correct: '3', guide: '¡Perfecto! El resto es 3.<br>Ahora "baja" el siguiente número del dividendo (el 6) al lado del 3.' },
-            { inputId: 'bajada-6', action: 'show', guide: '¡Muy bien! Ahora tenemos el 36.<br>Venga, piensa de nuevo... ¿Por cuánto multiplico 6 para que me dé 36?' },
-            { inputId: 'cociente-2', correct: '6', guide: '¡Exacto! 6 x 6 es 36.<br>Ahora calcula el resto final de 36 menos 36 y escríbelo abajo.' },
-            { inputId: 'resto-final', correct: '0', final: true }
+            { inputId: 'cociente-1', correct: '7', guide: '¡Genial! 7 x 6 son 42.<br>Escribe el 42 justo debajo del 45 y pulsa Enter.' },
+            { inputId: 'input-42', correct: '42', guide: '¡Perfecto! Ahora resta: de 42 a 45... ¿Cuántas van?<br>Escribe el resto abajo.' },
+            { inputId: 'input-resto-3', correct: '3', guide: '¡Muy bien! El resto es 3.<br>Ahora "baja" el siguiente número del dividendo (el 6) al lado del 3.' },
+            { inputId: 'bajada-6', action: 'show', guide: '¡Eso es! Ahora tenemos el 36.<br>Venga, Alba... ¿Por cuánto multiplico 6 para que me dé 36?' },
+            { inputId: 'cociente-2', correct: '6', final: true }
         ];
 
         steps.forEach((step, index) => {
-            if(step.action === 'show') {
-                // Paso especial para mostrar la bajada del 6
-                // Esto se activa al acertar el resto-1
-                return; 
-            }
+            if(step.action === 'show') { return; }
 
             const input = document.getElementById(step.inputId);
 
@@ -119,8 +127,9 @@
                         if (step.final) {
                             // FIN DEL JUEGO
                             document.getElementById('guide-text').style.display = 'none';
+                            document.querySelector('.division-table').parentElement.style.display = 'none'; // Ocultar división
                             document.getElementById('final-msg').style.display = 'block';
-                            confetti({ particleCount: 150, spread: spreadForConfetti(), origin: { y: 0.6 } });
+                            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
                         } else {
                             // MOSTRAR SIGUIENTE PASO
                             document.getElementById('guide-text').innerHTML = step.guide;
@@ -131,8 +140,12 @@
                                 setTimeout(() => {
                                     document.getElementById('bajada-6').style.display = 'inline';
                                     document.getElementById('arco').style.opacity = '0'; // Quitar arquito
-                                    document.getElementById('cociente-2').style.display = 'inline';
-                                    document.getElementById('cociente-2').focus();
+                                    // Siguiente paso real
+                                    document.getElementById('guide-text').innerHTML = nextStep.guide;
+                                    const finalCocienteStep = steps[index + 2];
+                                    const cociente2Input = document.getElementById(finalCocienteStep.inputId);
+                                    cociente2Input.style.display = 'inline';
+                                    cociente2Input.focus();
                                 }, 500);
                             } else {
                                 // Caso normal: Mostrar input y hacer focus
@@ -151,9 +164,9 @@
         });
 
         // Iniciar primer focus
+        document.getElementById('cociente-1').style.display = 'inline';
         document.getElementById('cociente-1').focus();
 
-        function spreadForConfetti() { return window.innerWidth > 600 ? 90 : 50; }
     </script>
 
 </body>
