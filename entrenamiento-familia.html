@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia Esparta: Entrenamiento de Divisiones</title>
+    <title>Academia Esparta: Generador de Divisiones</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
@@ -12,81 +12,65 @@
         
         .academia-header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--primary); padding-bottom: 15px; width: 100%; max-width: 600px; }
         .academia-header h1 { color: var(--primary-dark); margin: 0; font-size: 2.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
-        .academia-header p { color: #666; font-weight: 600; margin: 5px 0 0; font-size: 1.1rem; }
 
         .game-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; }
 
-        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; font-size: 1rem; line-height: 1.4; min-height: 60px; display: flex; align-items: center; justify-content: center; }
-        .guide-box::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 12px solid var(--guia-text); }
+        .guide-box { background-color: var(--guia); border: 2px solid var(--guia-text); color: var(--guia-text); padding: 15px; border-radius: 15px; margin-bottom: 30px; width: 90%; text-align: center; position: relative; font-weight: 600; min-height: 60px; display: flex; align-items: center; justify-content: center; }
 
         .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 2.8rem; color: #333; margin-bottom: 20px; }
-        .division-table { border-collapse: collapse; table-layout: fixed; }
-        .division-table td { padding: 5px; text-align: center; vertical-align: middle; position: relative; height: 60px; }
+        .division-table td { padding: 5px; text-align: center; vertical-align: middle; position: relative; height: 65px; }
         
-        .dividend { font-size: 3rem; letter-spacing: 2px; text-align: left; padding-right: 20px; }
-        .dividend span { transition: color 0.3s ease; border-top: 4px solid transparent; padding-top: 3px; }
-        .active-num { color: var(--highlight); border-top-color: var(--highlight) !important; }
+        .dividend { font-size: 3.2rem; letter-spacing: 5px; text-align: left; padding-right: 20px; }
+        .active-num { color: var(--highlight); border-top: 4px solid var(--highlight); padding-top: 2px; }
 
-        .divisor-box { border-left: 4px solid #333; border-bottom: 4px solid #333; min-width: 70px; }
-        .quotient-area { color: var(--primary); font-size: 2.8rem; padding-top: 10px; }
-
-        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.2rem; padding: 3px; text-align: center; border: 2px solid #ccc; border-radius: 8px; transition: 0.3s; background: transparent; color: #333; outline: none; }
+        .divisor-box { border-left: 4px solid #333; border-bottom: 4px solid #333; min-width: 80px; }
+        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.2rem; padding: 3px; text-align: center; border: 2px solid #ccc; border-radius: 8px; background: transparent; width: 1.2ch; outline: none; }
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        .signo-menos { position: absolute; left: -25px; top: 10px; color: var(--highlight); font-size: 2.5rem; display: none; }
+        .signo-menos { position: absolute; left: -30px; top: 10px; color: var(--highlight); font-size: 2.5rem; display: none; }
         .raya-resta { border-top: 3px solid #333; width: 100%; position: absolute; bottom: 0; left: 0; display: none; }
 
-        /* Ajustes específicos para 58 / 4 */
-        #input-sub-4 { width: 1.2ch; display: none; position: absolute; left: 0.3ch; top: 10px; }
-        
-        #input-resto-1 { width: 1.2ch; display: none; position: absolute; left: 0.3ch; top: 10px; }
-        #input-baja-8 { width: 1.2ch; display: none; position: absolute; left: 2.1ch; top: 10px; } 
-        
-        #input-sub-16 { width: 2.8ch; display: none; position: absolute; left: 0.3ch; top: 15px; letter-spacing: 4px; } 
-        #input-resto-final { width: 1.2ch; display: none; position: absolute; left: 2.1ch; top: 25px; } 
+        #final-msg { display: none; text-align: center; margin-top: 20px; padding: 20px; border: 2px solid var(--primary); border-radius: 15px; background-color: #e8f5e9; width: 100%; }
+        .btn-reset { background: var(--primary); color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-weight: 700; margin-top: 15px; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-        #final-msg { display: none; text-align: center; margin-top: 20px; padding: 20px; border: 2px solid var(--primary); border-radius: 15px; background-color: #e8f5e9; width: 100%; }
-        .btn-siguiente { position: absolute; bottom: 20px; right: 20px; background-color: var(--guia-text); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-family: 'Poppins'; font-weight: 600; cursor: pointer; transition: 0.3s; }
     </style>
 </head>
 <body>
 
     <div class="academia-header">
         <h1>ACADEMIA ESPARTA</h1>
-        <p>Entrenamiento de Divisiones Paso a Paso</p>
+        <p>Entrenamiento Infinito de Divisiones</p>
     </div>
 
     <div class="game-container">
-        <div id="guide-text" class="guide-box">
-            ¡Hola Alba! Empezamos por el 5. ¿Por cuánto multiplico 4 para que me dé 5 o se acerque sin pasarse?<br>(Mira el número en rojo 😉)
-        </div>
+        <div id="guide-text" class="guide-box">Cargando desafío...</div>
 
         <div class="division-wrapper">
             <table class="division-table">
                 <tr>
                     <td class="dividend">
-                        <span id="num-5" class="active-num">5</span><span id="num-8">8</span>
+                        <span id="d1">5</span><span id="d2">8</span>
                     </td>
-                    <td class="divisor-box">4</td>
+                    <td id="divisor" class="divisor-box">4</td>
                 </tr>
                 <tr>
                     <td>
                         <span id="menos-1" class="signo-menos">−</span>
-                        <input type="text" id="input-sub-4" class="math-input" maxlength="1" autocomplete="off">
+                        <input type="text" id="sub-1" class="math-input" style="display:none;">
                         <div id="raya-1" class="raya-resta"></div>
                     </td>
-                    <td class="quotient-area">
-                        <input type="text" id="cociente-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch;">
-                        <input type="text" id="cociente-2" class="math-input" maxlength="1" autocomplete="off" style="display:none; width:1.2ch;">
+                    <td>
+                        <input type="text" id="q-1" class="math-input" style="display:none;">
+                        <input type="text" id="q-2" class="math-input" style="display:none;">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div style="position: absolute; left: 0.3ch; top: 10px; display: flex; gap: 18px;">
-                            <input type="text" id="input-resto-1" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
-                            <input type="text" id="input-baja-8" class="math-input" maxlength="1" autocomplete="off" style="width:1.2ch; display:none;">
+                        <div style="position: absolute; left: 0.3ch; top: 10px; display: flex; gap: 15px;">
+                            <input type="text" id="r-1" class="math-input" style="display:none;">
+                            <input type="text" id="baja-2" class="math-input" style="display:none;">
                         </div>
                     </td>
                     <td></td>
@@ -94,91 +78,35 @@
                 <tr>
                     <td>
                         <span id="menos-2" class="signo-menos">−</span>
-                        <input type="text" id="input-sub-16" class="math-input" maxlength="2" autocomplete="off">
+                        <input type="text" id="sub-2" class="math-input" style="display:none; width:2.2ch;">
                         <div id="raya-2" class="raya-resta"></div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>
-                        <input type="text" id="input-resto-final" class="math-input" maxlength="1" autocomplete="off">
-                    </td>
+                    <td><input type="text" id="r-final" class="math-input" style="display:none;"></td>
                     <td></td>
                 </tr>
             </table>
         </div>
 
         <div id="final-msg">
-            <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">¡ERES UNA MÁQUINA, ALBA! 🏆</div>
-            <p>Has resuelto 58 ÷ 4 a la perfección. ¡Sigue así!</p>
-            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:700;" onclick="location.reload()">Repetir</button>
+            <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">¡MISIÓN CUMPLIDA! 🏆</div>
+            <p id="result-summary"></p>
+            <button class="btn-reset" onclick="initGame()">Siguiente División →</button>
         </div>
-
-        <button class="btn-siguiente" onclick="location.reload()">Siguiente →</button>
     </div>
 
     <script>
-        const steps = [
-            { id: 'cociente-1', val: '1', nextMsg: '¡Muy bien! Ahora, ¿cuánto es 4 x 1? Escribe el resultado debajo del 5.' },
-            { id: 'input-sub-4', val: '4', nextMsg: '¡Exacto! Ahora toca restar: ¿cuánto es 5 - 4? Pon el resto abajo.' },
-            { id: 'input-resto-1', val: '1', nextMsg: '¡Eso es! Ahora baja la siguiente cifra (el 8) para seguir. Fíjate que ahora se pone en rojo.' },
-            { id: 'input-baja-8', val: '8', nextMsg: '¡Perfecto! Ya tenemos 18. ¿Por cuánto multiplico 4 para que me dé 18 o se acerque sin pasarse?' },
-            { id: 'cociente-2', val: '4', nextMsg: '¡Genial! Ahora multiplica: ¿cuánto es 4 x 4? Ponlo debajo del 18.' },
-            { id: 'input-sub-16', val: '16', nextMsg: '¡Eso es! Y para terminar... de 16 hasta 18... ¿cuántas van? Pon el resto final.' },
-            { id: 'input-resto-final', val: '2', final: true }
-        ];
+        let config = {};
+        let currentStep = 0;
+        let steps = [];
 
-        let currentStepIndex = 0;
+        function initGame() {
+            // 1. Generar números aleatorios
+            const divisor = Math.floor(Math.random() * 8) + 2; // 2 al 9
+            const d1 = Math.floor(Math.random() * 8) + 1; // 1 al 9
+            const d2 = Math.floor(Math.random() * 10); // 0 al 9
+            const dividendo = parseInt(`${d1}${d2}`);
 
-        function runStep(index) {
-            const step = steps[index];
-            const input = document.getElementById(step.id);
-            
-            input.style.display = 'inline-block';
-            input.focus();
-
-            if (step.id === 'input-baja-8') {
-                document.getElementById('num-5').classList.remove('active-num');
-                document.getElementById('num-8').classList.add('active-num');
-            }
-            
-            if (step.id === 'cociente-2') {
-                document.getElementById('num-8').classList.remove('active-num');
-            }
-
-            input.onkeypress = (e) => {
-                if (e.key === 'Enter') {
-                    if (input.value === step.val) {
-                        input.classList.add('correct');
-                        input.disabled = true;
-
-                        if(step.id === 'input-sub-4') {
-                            document.getElementById('menos-1').style.display = 'block';
-                            document.getElementById('raya-1').style.display = 'block';
-                        }
-                        if(step.id === 'input-sub-16') {
-                            document.getElementById('menos-2').style.display = 'block';
-                            document.getElementById('raya-2').style.display = 'block';
-                        }
-
-                        if (step.final) {
-                            document.getElementById('guide-text').style.display = 'none';
-                            document.getElementById('final-msg').style.display = 'block';
-                            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-                        } else {
-                            currentStepIndex++;
-                            document.getElementById('guide-text').innerHTML = step.nextMsg;
-                            runStep(currentStepIndex);
-                        }
-                    } else {
-                        input.classList.add('wrong');
-                        setTimeout(() => input.classList.remove('wrong'), 500);
-                    }
-                }
-            };
-        }
-
-        runStep(0);
-    </script>
-</body>
-</html>
+            // Asegurar que el primer número es divisible o mayor
