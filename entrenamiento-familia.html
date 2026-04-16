@@ -20,12 +20,12 @@
 
         .division-wrapper { position: relative; font-family: 'Roboto Mono', monospace; font-size: 4rem; color: #333; margin-bottom: 40px; }
         
-        /* CORRECCIÓN: Posicionamiento del ARCO sobre el 45 */
+        /* CORRECCIÓN: Arco desplazado un poquito más a la derecha */
         .arco-superior { 
             position: absolute; 
             top: -15px; 
-            left: 5px; /* Ajuste para alinear con el inicio del 45 */
-            width: 2.2ch; /* Cubre 45 */
+            left: 20px; /* Ajustado un poco más a la derecha */
+            width: 2.2ch; 
             height: 18px; 
             border: 6px solid var(--wrong); 
             border-bottom: none; 
@@ -45,14 +45,13 @@
         .math-input.correct { border-color: var(--primary); color: #2e7d32 !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        /* Posiciones ajustadas y CORRECCIÓN de espaciado del 36 */
-        #input-42 { width: 2.5ch; display: none; position: absolute; left: 0px; top: 15px; }
+        /* CORRECCIÓN: El 42 desplazado un poquito más a la derecha */
+        #input-42 { width: 2.5ch; display: none; position: absolute; left: 15px; top: 15px; }
         
         #input-resto-3 { width: 1.2ch; display: none; position: absolute; left: 1.1ch; top: 15px; }
         
-        #input-baja-6 { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 15px; } /* Separado del 3 */
+        #input-baja-6 { width: 1.2ch; display: none; position: absolute; left: 2.6ch; top: 15px; } 
         
-        /* Contenedor para la fila del 36 para controlar espaciado visual */
         .row-36 { letter-spacing: 0px; display: inline-flex; gap: 5px; position: absolute; left: 1.1ch; top: 15px; }
         .row-36 #input-resto-3, .row-36 #input-baja-6 { position: static; display: none; }
 
@@ -132,7 +131,6 @@
             const step = steps[index];
             const input = document.getElementById(step.id);
             
-            // Si el input está dentro de row-36, mostrar el contenedor primero
             if(step.id === 'input-resto-3' || step.id === 'input-baja-6') {
                 document.querySelector('.row-36').style.display = 'inline-flex';
             }
