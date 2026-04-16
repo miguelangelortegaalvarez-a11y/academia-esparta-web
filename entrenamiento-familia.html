@@ -3,85 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios de Combinatoria - Práctica</title>
+    <title>Reto de División: Alba del Cid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        /* ESTILOS DE PANTALLA */
-        body { font-family: 'Helvetica', Arial, sans-serif; background-color: #fcfaf0; padding: 20px; color: #333; }
-        .book-page { 
-            max-width: 600px; 
-            margin: auto; 
-            background: white; 
-            padding: 50px; 
-            border: 1px solid #ddd;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
-        }
-        h1 { text-align: center; color: #d4a017; border-bottom: 2px solid #d4a017; padding-bottom: 10px; }
-        .header-info { margin-bottom: 40px; font-size: 0.9em; color: #666; display: flex; justify-content: space-between; }
+        :root { --primary: #4CAF50; --bg: #f0f4f8; --text: #333; --wrong: #f44336; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
         
-        .ejercicio { margin-bottom: 40px; position: relative; }
-        .pregunta { font-weight: bold; font-size: 1.1em; line-height: 1.5; margin-bottom: 15px; }
+        h1 { color: var(--primary); text-align: center; margin-bottom: 5px; }
+        .subtitle { color: #666; font-weight: 600; margin-bottom: 30px; }
+
+        .game-container { background: white; width: 100%; max-width: 800px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; }
+
+        /* Estilo de la división visual */
+        .division-visual { font-family: 'Roboto Mono', monospace; font-size: 3rem; color: #333; display: grid; grid-template-columns: repeat(5, 1ch); gap: 5px; margin-bottom: 30px; position: relative; padding: 10px; border: 2px solid #eee; border-radius: 10px; }
+        .dividend { grid-column: 1 / 4; text-align: right; }
+        .divisor { grid-column: 5; text-align: center; position: relative; }
+        .divisor::before { content: ''; position: absolute; left: -10px; top: 0; bottom: 0; width: 3px; background-color: #333; } /* Línea vertical cajón */
+        .divisor::after { content: ''; position: absolute; left: -10px; bottom: -5px; right: 0; height: 3px; background-color: #333; } /* Línea horizontal cajón */
+        .quotient { grid-column: 5; grid-row: 2; text-align: center; color: var(--primary); }
+
+        /* Estilo de los pasos y restas */
+        .steps-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; }
+        .step-row { display: flex; align-items: center; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 10px; border: 1px solid #eee; }
+        .step-label { font-size: 1.2rem; font-weight: 600; color: #555; width: 120px; text-align: right; }
         
-        /* Espacio para escribir (líneas de cuaderno) */
-        .espacio-respuesta {
-            height: 80px;
-            border-bottom: 1px solid #eee;
-            background-image: linear-gradient(#eee 1px, transparent 1px);
-            background-size: 100% 25px; /* Crea líneas cada 25px */
-            margin-top: 10px;
-        }
+        .math-input { font-family: 'Roboto Mono', monospace; font-size: 1.5rem; width: 80px; padding: 8px; text-align: center; border: 2px solid #ccc; border-radius: 8px; transition: 0.3s; }
+        .math-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px rgba(74, 175, 80, 0.2); }
+        .math-input.correct { border-color: var(--primary); background-color: #e8f5e9; color: #2e7d32; }
+        .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
 
-        .btn-print {
-            display: block; width: fit-content; margin: 0 auto 30px;
-            padding: 12px 25px; background: #d4a017; color: white;
-            border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
-        }
+        .help-text { font-size: 0.9rem; color: #888; font-style: italic; flex: 1; }
 
-        /* ESTILOS DE IMPRESIÓN */
-        @media print {
-            @page { size: A5; margin: 10mm; }
-            body { background: white; padding: 0; }
-            .book-page { border: none; box-shadow: none; width: 100%; padding: 0; }
-            .btn-print { display: none; }
-            .espacio-respuesta { border-left: 1px solid #eee; border-right: 1px solid #eee; }
-        }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+        #final-msg { display: none; text-align: center; margin-top: 30px; }
+        .congrats-text { font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .trophy { font-size: 5rem; }
+
     </style>
 </head>
 <body>
 
-    <button class="btn-print" onclick="window.print()">🖨️ Imprimir Cuaderno (A5)</button>
+    <h1>ACADEMIA ESPARTA</h1>
+    <p class="subtitle">Reto de División con Resta: Alba del Cid</p>
 
-    <div class="book-page">
-        <h1>Ejercicios de Combinatoria</h1>
-        <div class="header-info">
-            <span>Nombre: ___________________________</span>
-            <span>Clase: Infantil 4 años A</span>
+    <div class="game-container">
+        <div class="division-visual">
+            <div class="dividend">456</div>
+            <div class="divisor">6</div>
+            <div id="visual-quotient" class="quotient"></div>
         </div>
 
-        <div class="ejercicio">
-            <div class="pregunta">1. En el panal hay 5 puertas diferentes. ¿De cuántas formas puede entrar y salir una abeja si no quiere usar la misma puerta para ambas cosas?</div>
-            <div class="espacio-respuesta"></div>
+        <div class="steps-container">
+            
+            <div id="step-1" class="step-row">
+                <label class="step-label">6 x 7 =</label>
+                <input type="text" id="in-1" class="math-input" maxlength="2" autocomplete="off">
+                <span id="help-1" class="help-text">¿Cuánto es 6 por 7? Escribe el resultado aquí.</span>
+            </div>
+
+            <div id="step-2" class="step-row" style="display:none;">
+                <label class="step-label">45 - 42 =</label>
+                <input type="text" id="in-2" class="math-input" maxlength="1" autocomplete="off">
+                <span id="help-2" class="help-text">Ahora resta 5 menos 2. ¿Qué número queda?</span>
+            </div>
+
+            <div id="step-3" class="step-row" style="display:none;">
+                <label class="step-label">Bajo el...</label>
+                <input type="text" id="in-3" class="math-input" maxlength="1" autocomplete="off">
+                <span id="help-3" class="help-text">¿Qué número "baja" al lado del 3? Mira el dividendo.</span>
+            </div>
+
+            <div id="step-4" class="step-row" style="display:none;">
+                <label class="step-label">6 x 6 =</label>
+                <input type="text" id="in-4" class="math-input" maxlength="2" autocomplete="off">
+                <span id="help-4" class="help-text">¿Cuánto es 6 por 6? Es el último número del cociente.</span>
+            </div>
+
+            <div id="step-5" class="step-row" style="display:none;">
+                <label class="step-label">Resto =</label>
+                <input type="text" id="in-5" class="math-input" maxlength="1" autocomplete="off">
+                <span id="help-5" class="help-text">Resta 36 menos 36. ¿Cuál es el resto final?</span>
+            </div>
+
         </div>
 
-        <div class="ejercicio">
-            <div class="pregunta">2. Con las letras de la palabra "MIEL", ¿cuántas palabras de 3 letras diferentes se pueden formar (aunque no tengan sentido)?</div>
-            <div class="espacio-respuesta"></div>
+        <div id="final-msg">
+            <span class="trophy">🏆</span>
+            <div class="congrats-text">¡EXCELENTE TRABAJO, ALBA!</div>
+            <p style="font-size: 1.2rem;">Has completado la división 456 ÷ 6 = 76 perfecta con el método de la resta. ¡El 10 es tuyo! 🛡️✨</p>
+            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-family:'Poppins';" onclick="location.reload()">Volver a intentar</button>
         </div>
 
-        <div class="ejercicio">
-            <div class="pregunta">3. Se van a repartir 3 premios diferentes entre 7 abejas ganadoras de un concurso de vuelo. ¿De cuántas formas pueden repartirse?</div>
-            <div class="espacio-respuesta"></div>
-        </div>
-
-        <div class="ejercicio">
-            <div class="pregunta">4. Un grupo de 4 abejas amigas quieren hacerse una foto juntas en fila. ¿De cuántas maneras pueden colocarse para la foto?</div>
-            <div class="espacio-respuesta"></div>
-        </div>
-
-        <div class="ejercicio">
-            <div class="pregunta">5. Si lanzamos un dado de 6 caras 2 veces, ¿cuántos resultados posibles podemos obtener en total?</div>
-            <div class="espacio-respuesta"></div>
-        </div>
     </div>
+
+    <script>
+        const steps = [
+            { inputId: 'in-1', helpId: 'help-1', correct: '42', nextStep: 'step-2', nextInput: 'in-2', quotientPart: '7', wrongHelp: 'Pista: 6 x 6 es 36, suma 6 más...' },
+            { inputId: 'in-2', helpId: 'help-2', correct: '3', nextStep: 'step-3', nextInput: 'in-3', wrongHelp: 'Pista: Tienes 5 caramelos y comes 2, quedan...' },
+            { inputId: 'in-3', helpId: 'help-3', correct: '6', nextStep: 'step-4', nextInput: 'in-4', wrongHelp: 'Pista: Mira el último número del dividend (45<b>6</b>).' },
+            { inputId: 'in-4', helpId: 'help-4', correct: '36', nextStep: 'step-5', nextInput: 'in-5', quotientPart: '6', wrongHelp: 'Pista: Es 6 x 5 (30) más otros 6...' },
+            { inputId: 'in-5', helpId: 'help-5', correct: '0', final: true, wrongHelp: 'Pista: Si a 36 le quitas 36, no queda...' }
+        ];
+
+        let visualQuotient = "";
+
+        steps.forEach((step, index) => {
+            const input = document.getElementById(step.inputId);
+            const help = document.getElementById(step.helpId);
+
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    if (input.value === step.correct) {
+                        // ACIERTO
+                        input.classList.remove('wrong');
+                        input.classList.add('correct');
+                        input.disabled = true; // Bloquear campo
+                        
+                        // Actualizar cociente visual si toca
+                        if(step.quotientPart) {
+                            visualQuotient += step.quotientPart;
+                            document.getElementById('visual-quotient').innerText = visualQuotient;
+                        }
+
+                        if (step.final) {
+                            // FIN DEL JUEGO
+                            showFinal();
+                        } else {
+                            // MOSTRAR SIGUIENTE PASO
+                            document.getElementById(step.nextStep).style.display = 'flex';
+                            document.getElementById(step.nextInput).focus();
+                        }
+                    } else {
+                        // ERROR
+                        input.classList.add('wrong');
+                        help.innerText = step.wrongHelp; // Cambiar ayuda por pista
+                        help.style.color = 'var(--wrong)';
+                        setTimeout(() => { input.classList.remove('wrong'); }, 500);
+                    }
+                }
+            });
+        });
+
+        function showFinal() {
+            document.querySelector('.steps-container').style.display = 'none';
+            document.getElementById('final-msg').style.display = 'block';
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        }
+    </script>
 
 </body>
 </html>
