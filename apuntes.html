@@ -10,7 +10,6 @@
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; }
         .game-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative; }
         
-        /* Barra de Progreso */
         .progress-container { width: 100%; background: #eee; height: 20px; border-radius: 10px; margin-bottom: 30px; overflow: hidden; }
         #progress-bar { width: 0%; height: 100%; background: var(--primary); transition: width 0.4s ease; }
 
@@ -28,7 +27,6 @@
         .correct { background: #e8f5e9 !important; border-color: var(--primary) !important; color: #2e7d32; }
         .wrong { background: #ffebee !important; border-color: #f44336 !important; color: #c62828; }
 
-        /* Pantallas de paso de nivel */
         #level-complete { display: none; text-align: center; padding: 20px; }
         .congrats-text { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
         .next-btn { background: var(--primary); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 1.1rem; margin-top: 15px; }
@@ -46,7 +44,7 @@
         </div>
         
         <div class="question-box">
-            <div id="question-text" class="question-text">¿Cómo se llaman las tareas que hacemos las personas para cubrir necesidades?</div>
+            <div id="question-text" class="question-text">¿Qué es el trabajo?</div>
             <div id="options-container" class="options-grid"></div>
         </div>
     </div>
@@ -63,10 +61,10 @@
         {
             title: "NIVEL 1: Conceptos Generales",
             questions: [
-                { q: "¿Qué es el trabajo?", a: ["Tareas para cubrir necesidades", "Jugar en el parque", "Dormir la siesta"], c: 0 },
+                { q: "¿Qué es el trabajo?", a: ["Cualquiera de las tareas que hacemos para cubrir nuestras necesidades", "Extraer productos solo de la naturaleza", "El tiempo que dedicamos a jugar y descansar"], c: 0 },
                 { q: "¿En cuántos sectores se dividen los trabajos?", a: ["En 2", "En 3", "En 5"], c: 1 },
                 { q: "¿Qué sector trabaja con la naturaleza?", a: ["Primario", "Secundario", "Terciario"], c: 0 },
-                { q: "¿Qué es un oficio?", a: ["Un chiste", "Un tipo de coche", "Un trabajo que requiere conocer tareas"], c: 2 },
+                { q: "¿Qué es un oficio?", a: ["Un regalo que nos dan", "Un tipo de herramienta", "Lo que debemos conocer para realizar un trabajo"], c: 2 },
                 { q: "¿A qué sector pertenecen las fábricas?", a: ["Primario", "Secundario", "Terciario"], c: 1 }
             ]
         },
@@ -134,7 +132,6 @@
             container.appendChild(btn);
         });
 
-        // Actualizar barra de progreso
         const totalQ = level.questions.length;
         const progress = (currentQuestion / totalQ) * 100;
         document.getElementById('progress-bar').style.width = progress + "%";
