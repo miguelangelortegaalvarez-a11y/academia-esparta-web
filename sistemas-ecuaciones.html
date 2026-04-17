@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solucionario Ejercicio 3 - Academia Esparta</title>
+    <title>Solucionario Ejercicio 4 - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -25,7 +25,6 @@
         .paso h4 { margin: 0 0 10px 0; color: var(--primary); text-transform: uppercase; font-size: 0.95rem; }
         .formula-display { background: #f9f9f9; padding: 20px; border-radius: 10px; text-align: center; font-size: 1.4rem; margin: 15px 0; border: 1px solid #ddd; color: #000; }
         .conclusion { background: #e8f5e9; padding: 20px; border-radius: 10px; border: 2px solid var(--primary); margin-top: 20px; }
-        .conclusion b { color: var(--dark); }
         @media print {
             @page { margin: 1.5cm; }
             body { background: white; padding: 0; }
@@ -41,61 +40,49 @@
 
     <div class="container">
         <div class="header">
-            <h1>SOLUCIONARIO: EJERCICIO 3</h1>
-            <p>Optimización - El Consumo de Batería de Daniel Vegas</p>
+            <h1>SOLUCIONARIO: EJERCICIO 4</h1>
+            <p>Análisis de Funciones - La Remontada de Daniela Torres</p>
         </div>
 
         <div class="solucion-card">
-            <div class="solucion-header">Análisis del Consumo Energético</div>
+            <div class="solucion-header">Estudio del Rendimiento Académico</div>
             <div class="enunciado-original">
-                <b>Enunciado:</b> El consumo de batería \( C \) del móvil de Daniel Vegas sigue la función: 
-                <div style="text-align: center; margin-top: 10px; font-weight: bold;">\( C(x) = x^2 - 12x + 60 \)</div>
-                Donde \( x \) representa el nivel de optimización de recursos.
+                <b>Enunciado:</b> El rendimiento académico \( R \) de Daniela Torres sigue la función: 
+                <div style="text-align: center; margin-top: 10px; font-weight: bold;">\( R(t) = \frac{4t}{t + 2} \)</div>
+                Donde \( t \) es el tiempo en semanas y \( t \ge 0 \).
             </div>
 
             <div class="paso-paso">
                 <div class="paso">
-                    <h4>1. Tipo de función y Geometría</h4>
-                    <p>Estamos ante una función cuadrática (parábola). En este caso, el coeficiente de \( x^2 \) es positivo (\( +1 \)), lo que significa que la parábola abre hacia arriba. Geométricamente, esto nos asegura que el vértice de la función corresponde a un <b>mínimo absoluto</b>.</p>
-                </div>
-
-                <div class="paso">
-                    <h4>2. Cálculo de la Primera Derivada</h4>
-                    <p>Para hallar el punto de consumo mínimo, derivamos la función término a término:</p>
+                    <h4>1. Análisis de la Tendencia (Monotonía)</h4>
+                    <p>Para saber si el rendimiento de Daniela sube o baja, calculamos la primera derivada usando la regla del cociente:</p>
                     <div class="formula-display">
-                        \( C'(x) = 2x - 12 \)
+                        \( R'(t) = \frac{4(t+2) - 4t(1)}{(t+2)^2} = \frac{4t + 8 - 4t}{(t+2)^2} \) <br>
+                        \( R'(t) = \frac{8}{(t+2)^2} \)
                     </div>
+                    <p>Como el numerador (8) y el denominador (al estar al cuadrado) son siempre positivos, sabemos que \( R'(t) > 0 \) para todo \( t \). Esto significa que <b>el rendimiento de Daniela es siempre creciente</b>.</p>
                 </div>
 
                 <div class="paso">
-                    <h4>3. Búsqueda del Punto Crítico</h4>
-                    <p>Buscamos el valor de \( x \) donde la pendiente de la función es nula (recta tangente horizontal):</p>
+                    <h4>2. Análisis del Ritmo de Mejora (Curvatura)</h4>
+                    <p>Calculamos la segunda derivada para ver si su mejora acelera o se estabiliza. Derivamos \( R'(t) = 8(t+2)^{-2} \):</p>
                     <div class="formula-display">
-                        \( 2x - 12 = 0 \) <br>
-                        \( 2x = 12 \) <br>
-                        \( x = \frac{12}{2} \implies \mathbf{x = 6} \)
+                        \( R''(t) = -16(t+2)^{-3} = \frac{-16}{(t+2)^3} \)
                     </div>
+                    <p>Para \( t \ge 0 \), el resultado de la segunda derivada es siempre negativo (\( R''(t) < 0 \)). Esto indica que la función es <b>cóncava</b>, es decir, Daniela mejora, pero cada vez a un ritmo más lento (el esfuerzo necesario para subir el nivel es mayor cada vez).</p>
                 </div>
 
                 <div class="paso">
-                    <h4>4. Cálculo del Consumo Mínimo Alcanzado</h4>
-                    <p>Para saber cuánta energía se consume en ese punto óptimo, sustituimos \( x = 6 \) en la función original \( C(x) \):</p>
+                    <h4>3. Límite a Largo Plazo (Asíntota Horizontal)</h4>
+                    <p>Si el curso durase años (\( t \to \infty \)), calculamos el límite para ver el tope de Daniela:</p>
                     <div class="formula-display">
-                        \( C(6) = (6)^2 - 12(6) + 60 \) <br>
-                        \( C(6) = 36 - 72 + 60 \) <br>
-                        \( C(6) = -36 + 60 = \mathbf{24 \text{ unidades}} \)
+                        \( \lim_{t \to \infty} \frac{4t}{t + 2} = \frac{4}{1} = 4 \)
                     </div>
-                </div>
-
-                <div class="paso">
-                    <h4>5. Verificación de Mínimo (Criterio de la 2ª Derivada)</h4>
-                    <p>Realizamos la segunda derivada para confirmar la curvatura:</p>
-                    <div class="formula-display">\( C''(x) = 2 \)</div>
-                    <p>Al ser \( C''(x) > 0 \) (resultado positivo), se confirma matemáticamente que en \( x = 6 \) existe un <b>mínimo relativo</b>.</p>
+                    <p>Esto indica que existe una <b>asíntota horizontal en R = 4</b>.</p>
                 </div>
 
                 <div class="conclusion">
-                    <b>Conclusión Final:</b> Para que Daniel Vegas tenga el menor consumo posible en su móvil, debe ajustar el nivel de optimización a <b>6</b>. En ese momento, el consumo será de tan solo <b>24 unidades</b>, el punto más eficiente de toda la función.
+                    <b>Conclusión Final:</b> Daniela Torres tiene una trayectoria de éxito constante (siempre crece), pero su rendimiento no es infinito; tiende a estabilizarse en un valor máximo de <b>4</b>. Su mayor "explosión" de mejora ocurre al principio, y luego se mantiene en la excelencia de forma constante.
                 </div>
             </div>
         </div>
