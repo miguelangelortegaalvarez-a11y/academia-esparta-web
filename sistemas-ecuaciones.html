@@ -11,14 +11,23 @@
 
     <style>
         :root { --primary: #0e9343; --dark: #063c24; --accent: #f16565; --bg: #f0f7f2; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: #333; line-height: 1.6; padding: 20px; }
         
-        .container { max-width: 1000px; margin: auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: #333; line-height: 1.6; padding: 20px; margin: 0; }
+        
+        .container { max-width: 900px; width: 95%; margin: auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); box-sizing: border-box; }
         
         .header { text-align: center; border-bottom: 4px solid var(--primary); padding-bottom: 20px; margin-bottom: 40px; }
-        .header h1 { color: var(--primary); margin: 0; text-transform: uppercase; }
+        .header h1 { color: var(--primary); margin: 0; text-transform: uppercase; letter-spacing: 1px; }
 
-        .solucion-card { border: 2px solid #eee; border-radius: 15px; margin-bottom: 50px; overflow: hidden; }
+        .btn-print { 
+            display: block; width: fit-content; margin: 0 auto 30px; background: var(--primary); 
+            color: white; border: none; padding: 12px 30px; border-radius: 30px; 
+            cursor: pointer; font-weight: 700; font-size: 1rem; transition: 0.3s; 
+            box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3);
+        }
+        .btn-print:hover { background: var(--dark); transform: scale(1.05); }
+
+        .solucion-card { border: 2px solid #eee; border-radius: 15px; margin-bottom: 50px; overflow: hidden; page-break-inside: avoid; }
         .solucion-header { background: var(--dark); color: white; padding: 15px 20px; font-weight: 700; font-size: 1.2rem; }
         
         .enunciado-original { background: #fffde7; padding: 15px; border-bottom: 2px solid #fff59d; font-weight: 600; font-size: 1.1rem; text-align: center; color: #5d4037; }
@@ -27,137 +36,129 @@
         .paso { margin-bottom: 25px; padding-left: 20px; border-left: 3px solid var(--primary); }
         .paso h4 { margin: 0 0 10px 0; color: var(--primary); text-transform: uppercase; font-size: 0.9rem; }
 
-        .formula-display { background: #f9f9f9; padding: 20px; border-radius: 10px; text-align: center; font-size: 1.3rem; margin: 15px 0; border: 1px solid #ddd; color: #000; }
+        .formula-display { background: #f9f9f9; padding: 20px; border-radius: 10px; text-align: center; font-size: 1.3rem; margin: 15px 0; border: 1px solid #ddd; color: #000; overflow-x: auto; }
         
         .explicacion-pro { background: #e8f5e9; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9; font-size: 0.95rem; margin-top: 10px; }
 
         .resultado-final { background: var(--primary); color: white; padding: 15px; border-radius: 10px; text-align: center; font-size: 1.4rem; font-weight: 700; margin-top: 20px; }
 
+        /* AJUSTES PARA PDF / IMPRESIÓN */
         @media print {
+            @page { margin: 1.5cm; }
             body { background: white; padding: 0; }
-            .container { box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
-            .solucion-card { page-break-inside: avoid; border: 1px solid #ccc; }
+            .btn-print { display: none; }
+            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; margin: 0; }
+            .solucion-card { border: 1px solid #ccc; margin-bottom: 30px; }
+            .formula-display { border: 1px solid #eee; background: none; }
         }
     </style>
 </head>
 <body>
 
+    <button class="btn-print" onclick="window.print()">🖨️ Descargar en PDF / Imprimir</button>
+
     <div class="container">
         <div class="header">
             <h1>SOLUCIONARIO: DERIVADAS PASO A PASO</h1>
-            <p>Academia Esparta - El camino hacia el éxito</p>
+            <p>Academia Esparta - El que mañana no calle, va a la calle.</p>
         </div>
 
         <div class="solucion-card">
             <div class="solucion-header">Ejercicio 1 - Apartado A</div>
-            <div class="enunciado-original">Función a derivar: \( f(x) = \frac{\sqrt{x} \cdot x^3}{x^4} \)</div>
+            <div class="enunciado-original">Función original: \( f(x) = \frac{\sqrt{x} \cdot x^3}{x^4} \)</div>
             <div class="paso-paso">
                 <div class="paso">
-                    <h4>1. Simplificación de potencias</h4>
-                    <p>Antes de aplicar reglas de derivación, simplificamos la expresión usando las leyes de los exponentes:</p>
-                    <div class="formula-display">\( f(x) = \frac{\sqrt{x} \cdot x^3}{x^4} = \frac{\sqrt{x}}{x^{4-3}} = \frac{\sqrt{x}}{x} \)</div>
+                    <h4>1. Simplificación previa</h4>
+                    <p>Simplificamos las potencias de \( x \) antes de derivar para facilitar el trabajo:</p>
+                    <div class="formula-display">\( f(x) = \frac{\sqrt{x} \cdot x^3}{x^4} \implies f(x) = \frac{\sqrt{x}}{x} \)</div>
                 </div>
                 <div class="paso">
                     <h4>2. Aplicación de la Regla del Cociente</h4>
-                    <p>Identificamos numerador (\( u \)) y denominador (\( v \)) y sus derivadas:</p>
+                    <p>Usamos la fórmula \( \frac{u'v - uv'}{v^2} \) con las fórmulas directas:</p>
                     <div class="explicacion-pro">
+                        <b>Identificamos:</b><br>
                         \( u = \sqrt{x} \implies u' = \frac{1}{2\sqrt{x}} \)<br>
                         \( v = x \implies v' = 1 \)
                     </div>
-                    <p>Aplicamos la fórmula \( \frac{u'v - uv'}{v^2} \):</p>
                     <div class="formula-display">\( f'(x) = \frac{\left(\frac{1}{2\sqrt{x}}\right) \cdot x - \sqrt{x} \cdot 1}{x^2} \)</div>
                 </div>
                 <div class="paso">
-                    <h4>3. Operación y Simplificación Final</h4>
-                    <p>Multiplicamos \( \frac{1}{2\sqrt{x}} \cdot x \), lo cual da como resultado \( \frac{\sqrt{x}}{2} \):</p>
-                    <div class="formula-display">\( f'(x) = \frac{\frac{\sqrt{x}}{2} - \sqrt{x}}{x^2} = \frac{\frac{\sqrt{x} - 2\sqrt{x}}{2}}{x^2} = \frac{-\sqrt{x}}{2x^2} \)</div>
+                    <h4>3. Desarrollo algebraico</h4>
+                    <p>Operamos el numerador recordando que \( \frac{x}{\sqrt{x}} = \sqrt{x} \):</p>
+                    <div class="formula-display">\( f'(x) = \frac{\frac{\sqrt{x}}{2} - \sqrt{x}}{x^2} = \frac{-\frac{\sqrt{x}}{2}}{x^2} \)</div>
                 </div>
-                <div class="resultado-final">Resultado: \( f'(x) = -\frac{\sqrt{x}}{2x^2} \)</div>
+                <div class="resultado-final">\( f'(x) = -\frac{\sqrt{x}}{2x^2} \)</div>
             </div>
         </div>
 
         <div class="solucion-card">
             <div class="solucion-header">Ejercicio 1 - Apartado B</div>
-            <div class="enunciado-original">Función a derivar: \( f(x) = 4x^3 - 5x + \sqrt[3]{x^2} \)</div>
+            <div class="enunciado-original">Función original: \( f(x) = 4x^3 - 5x + \sqrt[3]{x^2} \)</div>
             <div class="paso-paso">
                 <div class="paso">
-                    <h4>1. Derivación término a término</h4>
-                    <p>Derivamos los sumandos por separado. Para la raíz, aplicamos la fórmula directa de la raíz de índice \( n \):</p>
-                    <div class="formula-display">\( (4x^3)' = 12x^2 \quad | \quad (-5x)' = -5 \)</div>
+                    <h4>1. Derivación de polinomios</h4>
+                    <div class="formula-display">\( (4x^3)' = 12x^2 \quad \text{y} \quad (-5x)' = -5 \)</div>
                 </div>
                 <div class="paso">
                     <h4>2. Derivada de la raíz cúbica</h4>
-                    <p>Usamos \( (\sqrt[n]{x^m})' = \frac{m}{n\sqrt[n]{x^{n-m}}} \) con \( n=3 \) y \( m=2 \):</p>
+                    <p>Usamos la fórmula directa \( \frac{m}{n\sqrt[n]{x^{n-m}}} \) donde \( n=3 \) y \( m=2 \):</p>
                     <div class="formula-display">\( (\sqrt[3]{x^2})' = \frac{2}{3\sqrt[3]{x^{3-2}}} = \frac{2}{3\sqrt[3]{x}} \)</div>
                 </div>
-                <div class="resultado-final">Resultado: \( f'(x) = 12x^2 - 5 + \frac{2}{3\sqrt[3]{x}} \)</div>
+                <div class="resultado-final">\( f'(x) = 12x^2 - 5 + \frac{2}{3\sqrt[3]{x}} \)</div>
             </div>
         </div>
 
         <div class="solucion-card">
             <div class="solucion-header">Ejercicio 1 - Apartado C</div>
-            <div class="enunciado-original">Función a derivar: \( f(x) = \ln(x^2 - 3x + 1)^3 \)</div>
+            <div class="enunciado-original">Función original: \( f(x) = \ln(x^2 - 3x + 1)^3 \)</div>
             <div class="paso-paso">
                 <div class="paso">
-                    <h4>1. Propiedad de Logaritmos</h4>
-                    <p>Bajamos el exponente multiplicando para simplificar la estructura:</p>
-                    <div class="formula-display">\( f(x) = 3 \cdot \ln(x^2 - 3x + 1) \)</div>
+                    <h4>1. Propiedad de logaritmos</h4>
+                    <p>Bajamos el exponente: \( f(x) = 3 \cdot \ln(x^2 - 3x + 1) \)</p>
                 </div>
                 <div class="paso">
-                    <h4>2. Regla de la Cadena (\( \ln u \))</h4>
-                    <p>Aplicamos \( (\ln u)' = \frac{u'}{u} \):</p>
+                    <h4>2. Aplicar \( \frac{u'}{u} \)</h4>
                     <div class="explicacion-pro">
                         \( u = x^2 - 3x + 1 \implies u' = 2x - 3 \)
                     </div>
                     <div class="formula-display">\( f'(x) = 3 \cdot \frac{2x - 3}{x^2 - 3x + 1} \)</div>
                 </div>
-                <div class="resultado-final">Resultado: \( f'(x) = \frac{6x - 9}{x^2 - 3x + 1} \)</div>
+                <div class="resultado-final">\( f'(x) = \frac{6x - 9}{x^2 - 3x + 1} \)</div>
             </div>
         </div>
 
         <div class="solucion-card">
             <div class="solucion-header">Ejercicio 1 - Apartado D</div>
-            <div class="enunciado-original">Función a derivar: \( f(x) = e^{2x} \cdot (x^2 - 1) \)</div>
+            <div class="enunciado-original">Función original: \( f(x) = e^{2x} \cdot (x^2 - 1) \)</div>
             <div class="paso-paso">
                 <div class="paso">
-                    <h4>1. Regla del Producto</h4>
-                    <p>Identificamos los dos factores de la multiplicación:</p>
+                    <h4>1. Regla del producto</h4>
                     <div class="explicacion-pro">
                         \( u = e^{2x} \implies u' = 2e^{2x} \)<br>
                         \( v = x^2 - 1 \implies v' = 2x \)
                     </div>
                 </div>
                 <div class="paso">
-                    <h4>2. Aplicación de la fórmula \( u'v + uv' \)</h4>
-                    <div class="formula-display">\( f'(x) = (2e^{2x}) \cdot (x^2 - 1) + (e^{2x}) \cdot (2x) \)</div>
+                    <h4>2. Aplicar \( u'v + uv' \) y Factor Común</h4>
+                    <div class="formula-display">\( f'(x) = 2e^{2x}(x^2 - 1) + e^{2x}(2x) \)</div>
                 </div>
-                <div class="paso">
-                    <h4>3. Extracción de Factor Común</h4>
-                    <p>Sacamos el término común \( e^{2x} \) para dejar la solución terminada:</p>
-                    <div class="formula-display">\( f'(x) = e^{2x} [2(x^2 - 1) + 2x] = e^{2x} [2x^2 - 2 + 2x] \)</div>
-                </div>
-                <div class="resultado-final">Resultado: \( f'(x) = e^{2x}(2x^2 + 2x - 2) \)</div>
+                <div class="resultado-final">\( f'(x) = e^{2x}(2x^2 + 2x - 2) \)</div>
             </div>
         </div>
 
         <div class="solucion-card">
             <div class="solucion-header">Ejercicio 1 - Apartado E</div>
-            <div class="enunciado-original">Función a derivar: \( f(x) = \ln\left(\frac{x+2}{x^2}\right) \)</div>
+            <div class="enunciado-original">Función original: \( f(x) = \ln\left(\frac{x+2}{x^2}\right) \)</div>
             <div class="paso-paso">
                 <div class="paso">
-                    <h4>1. Logaritmo de un cociente</h4>
-                    <p>Usamos la propiedad \( \ln(a/b) = \ln(a) - \ln(b) \):</p>
+                    <h4>1. Resta de logaritmos</h4>
                     <div class="formula-display">\( f(x) = \ln(x + 2) - \ln(x^2) \)</div>
                 </div>
                 <div class="paso">
-                    <h4>2. Derivación directa</h4>
+                    <h4>2. Derivar término a término</h4>
                     <div class="formula-display">\( f'(x) = \frac{1}{x+2} - \frac{2x}{x^2} = \frac{1}{x+2} - \frac{2}{x} \)</div>
                 </div>
-                <div class="paso">
-                    <h4>3. Mínimo Común Denominador</h4>
-                    <div class="formula-display">\( f'(x) = \frac{1 \cdot x - 2(x+2)}{x(x+2)} = \frac{x - 2x - 4}{x^2 + 2x} \)</div>
-                </div>
-                <div class="resultado-final">Resultado: \( f'(x) = \frac{-x-4}{x^2 + 2x} \)</div>
+                <div class="resultado-final">\( f'(x) = \frac{-x-4}{x^2 + 2x} \)</div>
             </div>
         </div>
 
