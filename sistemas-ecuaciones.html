@@ -2,90 +2,168 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Solucionario Completo de Derivadas - Academia Esparta</title>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Refuerzo: Decimales y Ángulos - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; padding: 20px; margin: 0; }
-        .hoja { 
-            width: 210mm; 
-            padding: 15mm; 
-            margin: auto; 
-            background: #fff; 
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        :root { --primary: #0e9343; --dark: #063c24; --light: #f5fdf7; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; color: #333; }
+        
+        .hoja {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             box-sizing: border-box;
+            position: relative;
         }
-        .header { text-align: center; border-bottom: 4px solid #2E7D32; padding-bottom: 10px; margin-bottom: 20px; }
-        .header h1 { color: #2E7D32; margin: 0; font-size: 24pt; text-transform: uppercase; }
-        .header p { color: #d32f2f; font-size: 14pt; font-weight: bold; }
-        h2 { background: #e8f5e9; color: #2e7d32; padding: 8px; border-radius: 6px; font-size: 13pt; border-left: 6px solid #2e7d32; margin-top: 25px; }
-        .solucion-bloque { border-bottom: 1px solid #eee; padding: 12px 0; }
-        .enunciado { font-weight: bold; color: #333; margin-bottom: 5px; }
-        .desarrollo { color: #1565c0; background: #f1f8ff; padding: 8px; border-radius: 5px; font-size: 0.95rem; margin: 5px 0; }
-        .resultado-final { color: #d32f2f; font-weight: bold; }
-        .num-ej { font-weight: bold; color: #2e7d32; }
-        @media print { .no-print { display: none; } .hoja { box-shadow: none; margin: 0; width: 100%; } }
+
+        .header-print { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header-print h1 { color: var(--primary); margin: 0; font-size: 24px; }
+        
+        .datos-alumno { margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-weight: bold; }
+        .linea-puntos { border-bottom: 1px dotted #000; display: inline-block; width: 70%; }
+
+        h2 { color: var(--primary); font-size: 18px; border-left: 5px solid var(--primary); padding-left: 10px; margin-top: 30px; }
+        
+        .ejercicio { margin-bottom: 25px; line-height: 1.6; }
+        .enunciado { font-weight: bold; margin-bottom: 10px; color: var(--dark); }
+
+        /* Cuadrículas para operaciones */
+        .grid-operaciones { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; }
+        .caja-suma { border: 1px dashed #ccc; height: 150px; position: relative; padding: 10px; font-family: monospace; font-size: 20px; }
+
+        /* Estilos para decimales */
+        .tabla-descomposicion { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .tabla-descomposicion th, .tabla-descomposicion td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        .tabla-descomposicion th { background: var(--light); color: var(--primary); }
+
+        .comparacion-item { display: inline-block; width: 45%; margin-bottom: 10px; }
+        .circulo-vacio { display: inline-block; width: 30px; height: 30px; border: 1px solid #333; border-radius: 50%; vertical-align: middle; margin: 0 10px; }
+
+        /* Botón de impresión */
+        .no-print { text-align: center; margin-bottom: 20px; }
+        .btn-print { 
+            background: var(--primary); color: white; border: none; padding: 12px 25px; 
+            border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: 700;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s;
+        }
+        .btn-print:hover { background: var(--dark); transform: scale(1.05); }
+
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; }
+            .hoja { box-shadow: none; margin: 0; width: 100%; }
+        }
     </style>
 </head>
 <body>
-    <div class="no-print" style="text-align: center; margin: 20px;">
-        <button onclick="window.print()" style="padding: 12px 30px; background: #d32f2f; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold;">🖨️ IMPRIMIR SOLUCIONARIO TOTAL</button>
+
+    <div class="no-print">
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Ficha Espartana</button>
+        <p style="color: #666; font-size: 0.9rem;">(Se imprimirá automáticamente en tamaño A4)</p>
     </div>
 
     <div class="hoja">
-        <div class="header">
-            <h1>ACADEMIA ESPARTA</h1>
-            <p>SOLUCIONARIO INTEGRAL (42 EJERCICIOS)</p>
+        <div class="header-print">
+            <div>
+                <h1>ACADEMIA ESPARTA</h1>
+                <p style="margin:0; font-weight:bold; color: #555;">Refuerzo de Matemáticas - 4º Primaria</p>
+            </div>
+            <div style="text-align: right;">
+                <p style="margin:0;">Ficha Nº: 42-D</p>
+                <p style="margin:0;">Tema: Decimales y Geometría</p>
+            </div>
         </div>
 
-        <h2>Nivel 1: Polinomios y Potencias</h2>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">1.</span> \(f(x) = 3x^5 - 4x^2 + 7x - 9\)</div><div class="desarrollo">\(3(5x^4) - 4(2x) + 7(1) - 0\)</div><div class="resultado-final">\(f'(x) = 15x^4 - 8x + 7\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">2.</span> \(f(x) = \frac{1}{2}x^4 - \frac{2}{3}x^3 + 5\)</div><div class="desarrollo">\(\frac{1}{2}(4x^3) - \frac{2}{3}(3x^2) + 0\)</div><div class="resultado-final">\(f'(x) = 2x^3 - 2x^2\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">3.</span> \(f(x) = x^{-3} + 4x^{-1}\)</div><div class="desarrollo">\(-3x^{-4} + 4(-1)x^{-2}\)</div><div class="resultado-final">\(f'(x) = -3x^{-4} - 4x^{-2} = -\frac{3}{x^4} - \frac{4}{x^2}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">4.</span> \(f(x) = 6x^2 - \sqrt{x}\)</div><div class="desarrollo">\(12x - \frac{1}{2}x^{-1/2}\)</div><div class="resultado-final">\(f'(x) = 12x - \frac{1}{2\sqrt{x}}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">5.</span> \(f(x) = \frac{4}{x^2} + 3x\)</div><div class="desarrollo">\(4x^{-2} + 3x \rightarrow 4(-2x^{-3}) + 3\)</div><div class="resultado-final">\(f'(x) = -\frac{8}{x^3} + 3\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">6.</span> \(f(x) = 2x^6 - 5x^4 + \frac{x^2}{2}\)</div><div class="desarrollo">\(2(6x^5) - 5(4x^3) + \frac{1}{2}(2x)\)</div><div class="resultado-final">\(f'(x) = 12x^5 - 20x^3 + x\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">7.</span> \(f(x) = \sqrt[3]{x} + x^2\)</div><div class="desarrollo">\(x^{1/3} + x^2 \rightarrow \frac{1}{3}x^{-2/3} + 2x\)</div><div class="resultado-final">\(f'(x) = \frac{1}{3\sqrt[3]{x^2}} + 2x\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">8.</span> \(f(x) = \frac{1}{x^5} - x^{-2}\)</div><div class="desarrollo">\(x^{-5} - x^{-2} \rightarrow -5x^{-6} - (-2)x^{-3}\)</div><div class="resultado-final">\(f'(x) = -\frac{5}{x^6} + \frac{2}{x^3}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">9.</span> \(f(x) = \pi x^3 + e x\)</div><div class="desarrollo">\(\pi(3x^2) + e(1)\)</div><div class="resultado-final">\(f'(x) = 3\pi x^2 + e\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">10.</span> \(f(x) = \frac{x^3 - 2x^2}{x}\)</div><div class="desarrollo">Simplificamos: \(x^2 - 2x \rightarrow 2x - 2\)</div><div class="resultado-final">\(f'(x) = 2x - 2\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">11.</span> \(f(x) = 5\sqrt{x^3}\)</div><div class="desarrollo">\(5x^{3/2} \rightarrow 5 \cdot \frac{3}{2}x^{1/2}\)</div><div class="resultado-final">\(f'(x) = \frac{15}{2}\sqrt{x}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">12.</span> \(f(x) = (x+1)(x-1)\)</div><div class="desarrollo">Simplificamos: \(x^2 - 1 \rightarrow 2x\)</div><div class="resultado-final">\(f'(x) = 2x\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">13.</span> \(f(x) = -x^8 + 12x^5 - x\)</div><div class="desarrollo">\(-8x^7 + 12(5x^4) - 1\)</div><div class="resultado-final">\(f'(x) = -8x^7 + 60x^4 - 1\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">14.</span> \(f(x) = \frac{3}{4}x^4 - \frac{x^3}{6}\)</div><div class="desarrollo">\(\frac{3}{4}(4x^3) - \frac{1}{6}(3x^2)\)</div><div class="resultado-final">\(f'(x) = 3x^3 - \frac{x^2}{2}\)</div></div>
+        <div class="datos-alumno">
+            <div>NOMBRE: <span class="linea-puntos"></span></div>
+            <div>FECHA: <span class="linea-puntos"></span></div>
+        </div>
 
-        <h2>Nivel 2: Productos y Cocientes</h2>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">15.</span> \(f(x) = (x^2+2)(x^3-1)\)</div><div class="desarrollo">\((2x)(x^3-1) + (x^2+2)(3x^2)\)</div><div class="resultado-final">\(f'(x) = 5x^4 + 6x^2 - 2x\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">16.</span> \(f(x) = \frac{x+5}{x-2}\)</div><div class="desarrollo">\(\frac{1(x-2) - (x+5)1}{(x-2)^2}\)</div><div class="resultado-final">\(f'(x) = \frac{-7}{(x-2)^2}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">17.</span> \(f(x) = 3x^2 \cdot \sqrt{x}\)</div><div class="desarrollo">\(3x^{5/2} \rightarrow 3 \cdot \frac{5}{2}x^{3/2}\)</div><div class="resultado-final">\(f'(x) = \frac{15}{2}\sqrt{x^3}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">18.</span> \(f(x) = \frac{2x^2}{x^2+1}\)</div><div class="desarrollo">\(\frac{4x(x^2+1) - (2x^2)(2x)}{(x^2+1)^2}\)</div><div class="resultado-final">\(f'(x) = \frac{4x}{(x^2+1)^2}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">19.</span> \(f(x) = (x^4-3x)(2x+5)\)</div><div class="desarrollo">\((4x^3-3)(2x+5) + (x^4-3x)2\)</div><div class="resultado-final">\(f'(x) = 10x^4 + 20x^3 - 12x - 15\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">20.</span> \(f(x) = \frac{x^2-4}{x+2}\)</div><div class="desarrollo">Simplificamos: \(x-2 \rightarrow 1\)</div><div class="resultado-final">\(f'(x) = 1\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">21.</span> \(f(x) = \frac{1}{x^2-3x}\)</div><div class="desarrollo">\(\frac{0 - (2x-3)}{(x^2-3x)^2}\)</div><div class="resultado-final">\(f'(x) = \frac{3-2x}{(x^2-3x)^2}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">22.</span> \(f(x) = \sqrt{x}(x^2-1)\)</div><div class="desarrollo">\(\frac{1}{2\sqrt{x}}(x^2-1) + \sqrt{x}(2x)\)</div><div class="resultado-final">\(f'(x) = \frac{5x^2-1}{2\sqrt{x}}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">23.</span> \(f(x) = \frac{5x-2}{x^3}\)</div><div class="desarrollo">\(\frac{5(x^3) - (5x-2)3x^2}{x^6}\)</div><div class="resultado-final">\(f'(x) = \frac{6-10x}{x^4}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">24.</span> \(f(x) = (2x^3+x)(x^2-5)\)</div><div class="desarrollo">\((6x^2+1)(x^2-5) + (2x^3+x)2x\)</div><div class="resultado-final">\(f'(x) = 10x^4 - 27x^2 - 5\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">25.</span> \(f(x) = \frac{\sqrt{x}}{x+1}\)</div><div class="desarrollo">\(\frac{\frac{1}{2\sqrt{x}}(x+1) - \sqrt{x}}{(x+1)^2}\)</div><div class="resultado-final">\(f'(x) = \frac{1-x}{2\sqrt{x}(x+1)^2}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">26.</span> \(f(x) = \frac{x^3+1}{x^3-1}\)</div><div class="desarrollo">\(\frac{3x^2(x^3-1) - (x^3+1)3x^2}{(x^3-1)^2}\)</div><div class="resultado-final">\(f'(x) = \frac{-6x^2}{(x^3-1)^2}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">27.</span> \(f(x) = x^2 \cdot \sqrt[3]{x^2}\)</div><div class="desarrollo">\(x^{8/3} \rightarrow \frac{8}{3}x^{5/3}\)</div><div class="resultado-final">\(f'(x) = \frac{8}{3}\sqrt[3]{x^5}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">28.</span> \(f(x) = \frac{x^2+3x+2}{x}\)</div><div class="desarrollo">Simplificamos: \(x + 3 + 2x^{-1} \rightarrow 1 - 2x^{-2}\)</div><div class="resultado-final">\(f'(x) = 1 - \frac{2}{x^2}\)</div></div>
+        <h2>1. NÚMEROS DECIMALES: LECTURA Y DESCOMPOSICIÓN</h2>
+        
+        <div class="ejercicio">
+            <div class="enunciado">1.1 Escribe cómo se leen estos números y descompón según su valor:</div>
+            <table class="tabla-descomposicion">
+                <tr>
+                    <th>Número</th>
+                    <th>C - D - U , d - c</th>
+                    <th>Se lee...</th>
+                </tr>
+                <tr>
+                    <td>23,64</td>
+                    <td>2D + 3U + 6d + 4c</td>
+                    <td>23 unidades y 64 centésimas</td>
+                </tr>
+                <tr>
+                    <td>15,08</td>
+                    <td style="height:30px"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7,92</td>
+                    <td style="height:30px"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>142,5</td>
+                    <td style="height:30px"></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
 
-        <h2>Nivel 3: Regla de la Cadena</h2>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">29.</span> \(f(x) = (x^2+3x)^4\)</div><div class="desarrollo">\(4(x^2+3x)^3(2x+3)\)</div><div class="resultado-final">\(f'(x) = (8x+12)(x^2+3x)^3\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">30.</span> \(f(x) = \sqrt{5x^2-x}\)</div><div class="desarrollo">\(\frac{10x-1}{2\sqrt{5x^2-x}}\)</div><div class="resultado-final">\(f'(x) = \frac{10x-1}{2\sqrt{5x^2-x}}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">31.</span> \(f(x) = (4x-1)^{10}\)</div><div class="desarrollo">\(10(4x-1)^9(4)\)</div><div class="resultado-final">\(f'(x) = 40(4x-1)^9\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">32.</span> \(f(x) = \sqrt[3]{x^3+8}\)</div><div class="desarrollo">\(\frac{1}{3}(x^3+8)^{-2/3}(3x^2)\)</div><div class="resultado-final">\(f'(x) = \frac{x^2}{\sqrt[3]{(x^3+8)^2}}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">33.</span> \(f(x) = \frac{1}{(x^2+1)^3}\)</div><div class="desarrollo">\(-3(x^2+1)^{-4}(2x)\)</div><div class="resultado-final">\(f'(x) = \frac{-6x}{(x^2+1)^4}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">34.</span> \(f(x) = (2x^2-5x+1)^2\)</div><div class="desarrollo">\(2(2x^2-5x+1)(4x-5)\)</div><div class="resultado-final">\(f'(x) = (8x-10)(2x^2-5x+1)\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">35.</span> \(f(x) = \sqrt{\frac{x}{x+1}}\)</div><div class="desarrollo">\(\frac{1}{2\sqrt{\frac{x}{x+1}}} \cdot \frac{1}{(x+1)^2}\)</div><div class="resultado-final">\(f'(x) = \frac{1}{2(x+1)^2}\sqrt{\frac{x+1}{x}}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">36.</span> \(f(x) = (x^3-2)^{-5}\)</div><div class="desarrollo">\(-5(x^3-2)^{-6}(3x^2)\)</div><div class="resultado-final">\(f'(x) = \frac{-15x^2}{(x^3-2)^6}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">37.</span> \(f(x) = \sqrt[5]{(x^2+1)^2}\)</div><div class="desarrollo">\(\frac{2}{5}(x^2+1)^{-3/5}(2x)\)</div><div class="resultado-final">\(f'(x) = \frac{4x}{5\sqrt[5]{(x^2+1)^3}}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">38.</span> \(f(x) = (x + \sqrt{x})^3\)</div><div class="desarrollo">\(3(x+\sqrt{x})^2(1 + \frac{1}{2\sqrt{x}})\)</div><div class="resultado-final">\(f'(x) = 3(x+\sqrt{x})^2(1 + \frac{1}{2\sqrt{x}})\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">39.</span> \(f(x) = \left(\frac{2x}{3x-1}\right)^2\)</div><div class="desarrollo">\(2\left(\frac{2x}{3x-1}\right) \cdot \frac{-2}{(3x-1)^2}\)</div><div class="resultado-final">\(f'(x) = \frac{-8x}{(3x-1)^3}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">40.</span> \(f(x) = \sqrt{1+\sqrt{x}}\)</div><div class="desarrollo">\(\frac{1}{2\sqrt{1+\sqrt{x}}} \cdot \frac{1}{2\sqrt{x}}\)</div><div class="resultado-final">\(f'(x) = \frac{1}{4\sqrt{x}\sqrt{1+\sqrt{x}}}\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">41.</span> \(f(x) = (x^4 - 2x^2 + 5)^6\)</div><div class="desarrollo">\(6(x^4 - 2x^2 + 5)^5(4x^3 - 4x)\)</div><div class="resultado-final">\(f'(x) = (24x^3-24x)(x^4-2x^2+5)^5\)</div></div>
-        <div class="solucion-bloque"><div class="enunciado"><span class="num-ej">42.</span> \(f(x) = \frac{1}{\sqrt{x^2+4}}\)</div><div class="desarrollo">\(-\frac{1}{2}(x^2+4)^{-3/2}(2x)\)</div><div class="resultado-final">\(f'(x) = \frac{-x}{\sqrt{(x^2+4)^3}}\)</div></div>
+        <div class="ejercicio">
+            <div class="enunciado">1.2 Compara los siguientes números usando los signos &gt; o &lt;</div>
+            <div class="comparacion-item">15,8 <span class="circulo-vacio"></span> 9,3</div>
+            <div class="comparacion-item">12,73 <span class="circulo-vacio"></span> 12,76</div>
+            <div class="comparacion-item">36,59 <span class="circulo-vacio"></span> 34,81</div>
+            <div class="comparacion-item">70,4 <span class="circulo-vacio"></span> 70,46</div>
+            <div class="comparacion-item">4,28 <span class="circulo-vacio"></span> 4,6</div>
+            <div class="comparacion-item">28,3 <span class="circulo-vacio"></span> 21,95</div>
+        </div>
 
-        <div class="footer">"Misión Cumplida. Academia Esparta."</div>
+        <h2>2. OPERACIONES CON DECIMALES</h2>
+        <div class="ejercicio">
+            <div class="enunciado">2.1 Coloca en vertical y resuelve estas sumas (recuerda alinear la coma):</div>
+            <div class="grid-operaciones">
+                <div>a) 37,92 + 15,46<div class="caja-suma"></div></div>
+                <div>b) 263,8 + 84,52<div class="caja-suma"></div></div>
+                <div>c) 73,4 + 89,5<div class="caja-suma"></div></div>
+                <div>d) 362,8 + 175,34<div class="caja-suma"></div></div>
+            </div>
+        </div>
+
+        <h2>3. GEOMETRÍA: ÁNGULOS Y TIEMPO</h2>
+        <div class="ejercicio">
+            <div class="enunciado">3.1 Completa la medida de los ángulos sin usar transportador:</div>
+            <p>• Si el ángulo Â = 25º y está dentro de un ángulo recto (90º), ¿cuánto mide el ángulo B?</p>
+            <p>Respuesta B = ___________º</p>
+            <p>• Si el ángulo C y el ángulo D de 140º forman un ángulo llano (180º), ¿cuánto mide C?</p>
+            <p>Respuesta C = ___________º</p>
+        </div>
+
+        <div class="ejercicio">
+            <div class="enunciado">3.2 Problema de tiempo:</div>
+            <p>Johana tarda 2 h 17 min 48 s en llegar a Málaga. Pedro tarda 3 h en autocar. Si salen a la vez, ¿cuánto tiempo antes llegará Johana? (Realiza la resta).</p>
+            <div class="caja-suma" style="height: 100px; width: 50%;"></div>
+        </div>
+
+        <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px; font-size: 12px; text-align: center; color: #999;">
+            "En la Academia Esparta, la constancia vence a la inteligencia" - www.academiaesparta.es
+        </div>
     </div>
+
 </body>
 </html>
