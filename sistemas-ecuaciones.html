@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Especial Decimales: 4º Primaria - Academia Esparta</title>
+    <title>Batería Pro Decimales - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #0e9343; --dark: #063c24; --light: #f5fdf7; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Poppins', sans-serif; background-color: #e9ecef; margin: 0; padding: 20px; color: #333; }
         
         .hoja {
             background: white;
             width: 210mm;
             min-height: 297mm;
-            padding: 20mm;
+            padding: 15mm;
             margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
             box-sizing: border-box;
         }
 
@@ -24,61 +24,64 @@
             justify-content: space-between; 
             align-items: center; 
             border-bottom: 3px solid var(--primary);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
         }
 
-        .header-print h1 { color: var(--primary); margin: 0; font-size: 24px; }
+        .header-print h1 { color: var(--primary); margin: 0; font-size: 22px; text-transform: uppercase; }
         
-        .datos-alumno { margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-weight: bold; }
-        .linea-puntos { border-bottom: 1px dotted #000; display: inline-block; width: 70%; }
+        .datos-alumno { margin-bottom: 20px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 10px; font-weight: bold; font-size: 14px; }
+        .linea-puntos { border-bottom: 1px dotted #000; display: inline-block; width: 75%; }
 
-        h2 { color: white; background: var(--primary); font-size: 16px; padding: 5px 10px; margin-top: 30px; border-radius: 5px; }
+        h2 { color: white; background: var(--primary); font-size: 14px; padding: 4px 10px; margin-top: 20px; border-radius: 4px; text-transform: uppercase; }
         
-        .ejercicio { margin-bottom: 25px; line-height: 1.6; }
-        .enunciado { font-weight: bold; margin-bottom: 10px; color: var(--dark); border-bottom: 1px solid #eee; }
+        .ejercicio { margin-bottom: 15px; line-height: 1.4; font-size: 14px; }
+        .enunciado { font-weight: bold; margin-bottom: 8px; color: var(--dark); border-left: 3px solid var(--primary); padding-left: 8px; }
 
-        .tabla-decimales { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
-        .tabla-decimales th, .tabla-decimales td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        .tabla-decimales { width: 100%; border-collapse: collapse; margin: 5px 0; font-size: 13px; }
+        .tabla-decimales th, .tabla-decimales td { border: 1px solid #ccc; padding: 6px; text-align: center; }
         .tabla-decimales th { background: var(--light); color: var(--primary); }
 
-        .grid-cuadros { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 15px; }
-        .cuadro-operacion { border: 1px solid #bbb; height: 180px; position: relative; background-image: radial-gradient(#ddd 1px, transparent 1px); background-size: 20px 20px; }
+        .grid-cuadros { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 10px; }
+        .cuadro-operacion { border: 1px solid #aaa; height: 140px; background-image: radial-gradient(#eee 1px, transparent 1px); background-size: 15px 15px; }
 
-        .comparacion-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-        .circulo { display: inline-block; width: 25px; height: 25px; border: 1px solid #333; border-radius: 50%; vertical-align: middle; margin: 0 5px; }
+        .comparacion-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; font-size: 13px; }
+        .circulo { display: inline-block; width: 22px; height: 22px; border: 1px solid #333; border-radius: 50%; vertical-align: middle; }
 
-        .problema-box { background: var(--light); padding: 15px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; }
+        .recta-numerica { width: 100%; height: 60px; border-bottom: 2px solid #333; position: relative; margin: 30px 0; }
+        .marca { position: absolute; bottom: 0; height: 15px; border-left: 2px solid #333; }
+        .label { position: absolute; top: 20px; font-size: 12px; font-weight: bold; transform: translateX(-50%); }
 
-        .no-print { text-align: center; margin-bottom: 20px; }
+        .problema-box { background: #fafafa; padding: 10px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; font-size: 13px; }
+
+        .no-print { text-align: center; margin-bottom: 15px; }
         .btn-print { 
-            background: var(--primary); color: white; border: none; padding: 12px 25px; 
-            border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: 700;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s;
+            background: var(--primary); color: white; border: none; padding: 10px 20px; 
+            border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 700;
         }
 
         @media print {
             .no-print { display: none; }
             body { background: white; padding: 0; }
-            .hoja { box-shadow: none; margin: 0; width: 100%; }
+            .hoja { box-shadow: none; margin: 0; width: 100%; height: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div class="no-print">
-        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Ficha de Decimales</button>
+        <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR FICHA EXTENDIDA</button>
     </div>
 
     <div class="hoja">
         <div class="header-print">
             <div>
                 <h1>ACADEMIA ESPARTA</h1>
-                <p style="margin:0; font-weight:bold; color: #555;">Entrenamiento Intensivo: Números Decimales</p>
+                <p style="margin:0; font-size: 12px; color: #666;">Entrenamiento Intensivo Decimales - 4º Primaria</p>
             </div>
-            <div style="text-align: right;">
-                <p style="margin:0;">4º Primaria</p>
-                <p style="margin:0;">Matemáticas</p>
+            <div style="text-align: right; font-size: 12px;">
+                <p style="margin:0;">Ficha acumulativa</p>
+                <p style="margin:0;">Nivel: Avanzado</p>
             </div>
         </div>
 
@@ -87,93 +90,89 @@
             <div>FECHA: <span class="linea-puntos"></span></div>
         </div>
 
-        <h2>1. LECTURA, ESCRITURA Y DESCOMPOSICIÓN</h2>
+        <h2>1. DOMINIO DE LA POSICIÓN Y LECTURA</h2>
         <div class="ejercicio">
-            <div class="enunciado">1.1 Completa la tabla siguiendo el ejemplo:</div>
-            <table class="tabla-decimales">
-                <tr>
-                    <th>Número</th>
-                    <th>Parte Entera</th>
-                    <th>Parte Decimal</th>
-                    <th>Se lee...</th>
-                </tr>
-                <tr>
-                    <td>4,25</td>
-                    <td>4 unidades</td>
-                    <td>25 centésimas</td>
-                    <td>Cuatro unidades y veinticinco centésimas</td>
-                </tr>
-                <tr>
-                    <td>12,8</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>0,56</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>103,04</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>9,7</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
+            <div class="enunciado">1.1 Descompón estos números como en el ejemplo:</div>
+            <p>Ejemplo: 8,36 = 8U + 3d + 6c = 8 + 0,3 + 0,06</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div>a) 15,42 = ____________________________</div>
+                <div>b) 7,09 = _____________________________</div>
+                <div>c) 124,5 = ____________________________</div>
+                <div>d) 0,68 = _____________________________</div>
+            </div>
         </div>
 
-        <h2>2. COMPARACIÓN DE DECIMALES</h2>
         <div class="ejercicio">
-            <div class="enunciado">2.1 Utiliza los signos > (mayor que) o < (menor que):</div>
+            <div class="enunciado">1.2 Escribe el número decimal correspondiente:</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div>• 5 U, 3 d y 8 c = __________</div>
+                <div>• 12 U y 5 c = __________</div>
+                <div>• 9 d y 4 c = __________</div>
+                <div>• 3 C, 2 D, 1 U y 6 d = __________</div>
+            </div>
+        </div>
+
+        <h2>2. ORDEN Y COMPARACIÓN (¡ATENCIÓN A LOS DETALLES!)</h2>
+        <div class="ejercicio">
+            <div class="enunciado">2.1 Compara usando &gt; , &lt; o = :</div>
             <div class="comparacion-grid">
-                <div>6,4 <span class="circulo"></span> 6,7</div>
-                <div>12,50 <span class="circulo"></span> 12,5</div>
-                <div>0,92 <span class="circulo"></span> 1,1</div>
-                <div>45,03 <span class="circulo"></span> 45,30</div>
-                <div>7,81 <span class="circulo"></span> 7,8</div>
-                <div>24,6 <span class="circulo"></span> 24,59</div>
-                <div>3,09 <span class="circulo"></span> 3,10</div>
-                <div>15,2 <span class="circulo"></span> 15,18</div>
-                <div>8,44 <span class="circulo"></span> 8,4</div>
+                <div>9,5 <span class="circulo"></span> 9,50</div>
+                <div>4,28 <span class="circulo"></span> 4,3</div>
+                <div>15,1 <span class="circulo"></span> 15,09</div>
+                <div>0,7 <span class="circulo"></span> 0,70</div>
+                <div>6,32 <span class="circulo"></span> 6,23</div>
+                <div>1,99 <span class="circulo"></span> 2,01</div>
+                <div>10,4 <span class="circulo"></span> 10,40</div>
+                <div>8,65 <span class="circulo"></span> 8,7</div>
             </div>
         </div>
 
-        <h2>3. CÁLCULO: SUMAS Y RESTAS (¡OJO CON LA COMA!)</h2>
         <div class="ejercicio">
-            <div class="enunciado">3.1 Coloca en vertical y resuelve:</div>
-            <div class="grid-cuadros">
-                <div>a) 45,72 + 8,39 = <div class="cuadro-operacion"></div></div>
-                <div>b) 124,5 + 37,28 = <div class="cuadro-operacion"></div></div>
-                <div>c) 89,4 - 15,26 = <div class="cuadro-operacion"></div></div>
-                <div>d) 305,12 - 48,9 = <div class="cuadro-operacion"></div></div>
+            <div class="enunciado">2.2 Sitúa en la recta numérica los siguientes números: 0,3 | 0,8 | 1,2 | 1,7 | 2,1</div>
+            <div class="recta-numerica">
+                <div class="marca" style="left: 0%"><span class="label">0</span></div>
+                <div class="marca" style="left: 20%"><span class="label">0,5</span></div>
+                <div class="marca" style="left: 40%"><span class="label">1</span></div>
+                <div class="marca" style="left: 60%"><span class="label">1,5</span></div>
+                <div class="marca" style="left: 80%"><span class="label">2</span></div>
+                <div class="marca" style="left: 100%"><span class="label">2,5</span></div>
             </div>
         </div>
 
-        <h2>4. PROBLEMAS CON DECIMALES</h2>
+        <h2>3. OPERACIONES VERTICALES (SUMAS Y RESTAS)</h2>
+        <div class="ejercicio">
+            <div class="enunciado">3.1 Coloca y resuelve (Alinea bien la coma):</div>
+            <div class="grid-cuadros">
+                <div>a) 125,6 + 48,37<div class="cuadro-operacion"></div></div>
+                <div>b) 74,9 + 126,05<div class="cuadro-operacion"></div></div>
+                <div>c) 9,82 + 15,4<div class="cuadro-operacion"></div></div>
+                <div>d) 86,45 - 23,21<div class="cuadro-operacion"></div></div>
+                <div>e) 150,3 - 48,75<div class="cuadro-operacion"></div></div>
+                <div>f) 62,1 - 15,84<div class="cuadro-operacion"></div></div>
+            </div>
+        </div>
+
+        <h2>4. DESAFÍOS Y PROBLEMAS</h2>
         <div class="ejercicio">
             <div class="problema-box">
-                <strong>Problema A:</strong> Alba ha ido a la papelería y ha comprado un cuaderno por 3,45 € y un estuche por 8,90 €. Si paga con un billete de 20 €, ¿cuánto dinero le devuelven?
-                <br><br><i>Operaciones:</i> <div style="height: 60px; border-bottom: 1px dotted #ccc;"></div>
-                <br><i>Solución:</i> ____________________________________________________
+                <strong>4.1 La Merienda:</strong> Alba compra un zumo por 1,35 €, un sándwich por 2,80 € y una manzana por 0,65 €. 
+                <br>a) ¿Cuánto gasta en total? __________________
+                <br>b) Si paga con 10 €, ¿cuánto le sobra? __________________
             </div>
             
             <div class="problema-box">
-                <strong>Problema B:</strong> Un atleta ha corrido tres tramos. En el primero hizo 12,55 km, en el segundo 9,8 km y en el tercero 10,45 km. ¿Cuántos kilómetros ha recorrido en total?
-                <br><br><i>Operaciones:</i> <div style="height: 60px; border-bottom: 1px dotted #ccc;"></div>
-                <br><i>Solución:</i> ____________________________________________________
+                <strong>4.2 Alturas:</strong> Pedro mide 1,45 m y su hermana Lucía mide 1,28 m. ¿Cuál es la diferencia de altura entre los dos?
+                <br>Resultado: __________________
+            </div>
+
+            <div class="problema-box">
+                <strong>4.3 El depósito:</strong> Un depósito tiene 45,5 litros de agua. Sacamos 12,75 litros y luego echamos 8,4 litros. ¿Cuánta agua hay ahora?
+                <br>Resultado: __________________
             </div>
         </div>
 
-        <div style="text-align: center; color: #999; font-size: 11px; margin-top: 30px;">
-            "En la Academia Esparta, entrenamos para el éxito." - Material de Refuerzo 4º Primaria
+        <div style="text-align: center; color: #999; font-size: 10px; margin-top: 15px;">
+            "Entrena duro, espartano/a" - Ficha técnica de Academia Esparta.
         </div>
     </div>
 </body>
