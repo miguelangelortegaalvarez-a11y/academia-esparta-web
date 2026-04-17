@@ -3,111 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solucionario Ejercicio 5 - Academia Esparta</title>
+    <title>Solucionario Completo y Gráfico - Ejercicio 5</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         :root { --primary: #0e9343; --dark: #063c24; --accent: #f16565; --bg: #f0f7f2; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: #333; line-height: 1.6; padding: 20px; margin: 0; }
-        .container { max-width: 950px; width: 95%; margin: auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); box-sizing: border-box; }
+        .container { max-width: 1000px; width: 95%; margin: auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); box-sizing: border-box; }
         .header { text-align: center; border-bottom: 4px solid var(--primary); padding-bottom: 20px; margin-bottom: 40px; }
         .header h1 { color: var(--primary); margin: 0; text-transform: uppercase; }
-        .btn-print { display: block; width: fit-content; margin: 0 auto 30px; background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer; font-weight: 700; transition: 0.3s; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3); }
-        .btn-print:hover { background: var(--dark); transform: scale(1.05); }
-        .solucion-card { border: 2px solid #eee; border-radius: 15px; margin-bottom: 50px; overflow: hidden; }
-        .solucion-header { background: var(--dark); color: white; padding: 15px 20px; font-weight: 700; font-size: 1.2rem; }
-        .enunciado-original { background: #fffde7; padding: 20px; border-bottom: 2px solid #fff59d; font-size: 1.1rem; text-align: center; color: #5d4037; }
-        .paso-paso { padding: 25px; }
-        .paso { margin-bottom: 35px; padding-left: 20px; border-left: 3px solid var(--primary); }
-        .paso h4 { margin: 0 0 10px 0; color: var(--primary); text-transform: uppercase; font-size: 0.95rem; }
-        .formula-display { background: #f9f9f9; padding: 20px; border-radius: 10px; text-align: center; font-size: 1.3rem; margin: 15px 0; border: 1px solid #ddd; color: #000; overflow-x: auto; }
+        
+        .solucion-card { border: 2px solid #eee; border-radius: 15px; margin-bottom: 50px; overflow: hidden; display: flex; flex-wrap: wrap; }
+        .solucion-analitica { flex: 1; min-width: 300px; padding: 25px; border-right: 1px solid #eee; }
+        .solucion-grafica { flex: 1; min-width: 300px; padding: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #fbfbfb; }
+        
+        .solucion-header { background: var(--dark); color: white; padding: 15px 20px; font-weight: 700; font-size: 1.2rem; width: 100%; }
+        
+        .paso { margin-bottom: 25px; padding-left: 15px; border-left: 3px solid var(--primary); }
+        .paso h4 { margin: 0 0 5px 0; color: var(--primary); text-transform: uppercase; font-size: 0.9rem; }
+        
+        .formula-display { background: white; padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem; margin: 10px 0; border: 1px solid #ddd; }
         .destacado { color: var(--dark); font-weight: 700; background: #e8f5e9; padding: 2px 5px; border-radius: 4px; }
+
+        /* Estilos del Canvas de la gráfica */
+        #graficaCanvas { max-width: 100%; height: 500px; }
+
         @media print {
-            @page { margin: 1.5cm; }
             body { background: white; padding: 0; }
-            .btn-print { display: none; }
-            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; margin: 0; }
-            .solucion-card { border: 1px solid #ccc; page-break-inside: avoid; }
+            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; }
+            .solucion-card { flex-direction: column; border: 1px solid #ccc; page-break-inside: avoid; }
+            .solucion-analitica { border-right: none; border-bottom: 1px solid #eee; }
+            #graficaCanvas { height: 400px; }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-print" onclick="window.print()">🖨️ Descargar Solución Completa (PDF)</button>
-
     <div class="container">
         <div class="header">
-            <h1>SOLUCIONARIO: EJERCICIO 5</h1>
-            <p>Estudio Completo de la Función Racional - El Reto Espartano</p>
+            <h1>SOLUCIONARIO INTEGRAL: EJERCICIO 5</h1>
+            <p>Estudio Analítico y Representación Gráfica Interactiva</p>
         </div>
 
         <div class="solucion-card">
-            <div class="solucion-header">Análisis Global de \( f(x) = \frac{x^2}{x-1} \)</div>
-            <div class="enunciado-original">
-                Estudio de dominio, asíntotas, monotonía y curvatura.
-            </div>
-
-            <div class="paso-paso">
+            <div class="solucion-header">Estudio Detallado de \( f(x) = \frac{x^2}{x-1} \)</div>
+            
+            <div class="solucion-analitica">
                 <div class="paso">
                     <h4>1. Dominio</h4>
-                    <p>Al ser una función racional, el dominio son todos los reales excepto los valores que anulan el denominador:</p>
-                    <div class="formula-display">\( x - 1 = 0 \implies x = 1 \)</div>
-                    <p>Por tanto: <span class="destacado">Dom(f) = \(\mathbb{R} - \{1\}\)</span></p>
+                    <p>Punto crítico en el denominador: \( x - 1 = 0 \implies x = 1 \).</p>
+                    <p>El dominio es <span class="destacado">Dom(f) = \(\mathbb{R} - \{1\}\)</span>.</p>
                 </div>
 
                 <div class="paso">
                     <h4>2. Asíntotas Verticales</h4>
-                    <p>Estudiamos el comportamiento en el punto de discontinuidad \( x = 1 \):</p>
+                    <p>Estudio de los límites laterales en \( x = 1 \):</p>
                     <div class="formula-display">
-                        \( \lim_{x \to 1^-} \frac{x^2}{x-1} = \frac{1}{0^-} = -\infty \) <br>
-                        \( \lim_{x \to 1^+} \frac{x^2}{x-1} = \frac{1}{0^+} = +\infty \)
+                        \( \lim_{x \to 1^-} \frac{x^2}{x-1} = -\infty \) <br>
+                        \( \lim_{x \to 1^+} \frac{x^2}{x-1} = +\infty \)
                     </div>
-                    <p>Existe una <span class="destacado">Asíntota Vertical en \( x = 1 \)</span>.</p>
+                    <p><span class="destacado">A.V. en \( x = 1 \)</span>.</p>
                 </div>
 
                 <div class="paso">
-                    <h4>3. Asíntotas Horizontales y Oblicuas</h4>
-                    <p><b>Horizontales:</b> \( \lim_{x \to \infty} \frac{x^2}{x-1} = \infty \). No tiene horizontales.</p>
-                    <p><b>Oblicuas (\( y = mx + n \)):</b> Al ser el grado del numerador uno más que el del denominador, calculamos:</p>
+                    <h4>3. Asíntota Oblicua</h4>
+                    <p>Al ser Grado(Num) = Grado(Den) + 1, calculamos \( y = mx + n \):</p>
                     <div class="formula-display">
-                        \( m = \lim_{x \to \infty} \frac{f(x)}{x} = \lim_{x \to \infty} \frac{x^2}{x^2 - x} = 1 \) <br>
-                        \( n = \lim_{x \to \infty} (f(x) - mx) = \lim_{x \to \infty} \left(\frac{x^2}{x-1} - x\right) = \lim_{x \to \infty} \frac{x}{x-1} = 1 \)
+                        \( m = \lim_{x \to \infty} \frac{f(x)}{x} = 1 \) <br>
+                        \( n = \lim_{x \to \infty} (f(x) - x) = 1 \)
                     </div>
-                    <p>Existe una <span class="destacado">Asíntota Oblicua en \( y = x + 1 \)</span>.</p>
+                    <p><span class="destacado">A.O. en \( y = x + 1 \)</span>.</p>
                 </div>
 
                 <div class="paso">
-                    <h4>4. Monotonía (Crecimiento y Máximos/Mínimos)</h4>
-                    <p>Calculamos la primera derivada y la igualamos a cero:</p>
-                    <div class="formula-display">
-                        \( f'(x) = \frac{2x(x-1) - x^2(1)}{(x-1)^2} = \frac{x^2 - 2x}{(x-1)^2} \) <br>
-                        \( x^2 - 2x = 0 \implies x(x-2) = 0 \implies x=0, x=2 \)
-                    </div>
-                    <p><b>Intervalos:</b><br>
-                    - \((-\infty, 0)\): \( f' > 0 \) (Crece) | - \((0, 2)\): \( f' < 0 \) (Decrece) | - \((2, \infty)\): \( f' > 0 \) (Crece)</p>
-                    <p><span class="destacado">Máximo en (0, 0)</span> y <span class="destacado">Mínimo en (2, 4)</span>.</p>
+                    <h4>4. Monotonía (Máx/Mín)</h4>
+                    <p>Derivada: \( f'(x) = \frac{x^2 - 2x}{(x-1)^2} \). Puntos críticos en \( x=0, x=2 \).</p>
+                    <ul>
+                        <li><span class="destacado">Máximo relativo en (0, 0)</span>.</li>
+                        <li><span class="destacado">Mínimo relativo en (2, 4)</span>.</li>
+                    </ul>
                 </div>
+            </div>
 
-                <div class="paso">
-                    <h4>5. Curvatura</h4>
-                    <p>Calculamos la segunda derivada para estudiar la concavidad:</p>
-                    <div class="formula-display">
-                        \( f''(x) = \frac{(2x-2)(x-1)^2 - (x^2-2x) \cdot 2(x-1)}{(x-1)^4} = \frac{2}{(x-1)^3} \)
-                    </div>
-                    <p>Como el numerador es 2, nunca se anula. No hay puntos de inflexión.</p>
-                    <p>- Si \( x < 1 \): \( f'' < 0 \) (Convexa \(\cap\)) | - Si \( x > 1 \): \( f'' > 0 \) (Cóncava \(\cup\))</p>
-                </div>
-
-                <div class="paso" style="border: none;">
-                    <h4>6. Representación Gráfica</h4>
-                    <p>Para el dibujo, unimos los puntos clave: el máximo (0,0), el mínimo (2,4), la pared vertical en \( x=1 \) y la rampa oblicua \( y=x+1 \).</p>
-                </div>
+            <div class="solucion-grafica">
+                <h4>Visualización de la Función</h4>
+                <canvas id="graficaCanvas"></canvas>
+                <p style="font-size: 0.8rem; color: #666; font-style: italic; margin-top: 10px; text-align: center;">
+                    Curva verde: Función | Línea roja: A. Vertical | Puntos: Máx/Mín
+                </p>
             </div>
         </div>
     </div>
+
+    <script>
+        // --- SCRIPT DE GENERACIÓN DE LA GRÁFICA (Chart.js) ---
+        const ctx = document.getElementById('graficaCanvas').getContext('2d');
+
+        // Generar puntos para la función f(x) = x^2 / (x-1)
+        function generarPuntosFuncion() {
+            const puntos1 = [];
+            const puntos2 = [];
+            // Rama izquierda (evitando x=1)
+            for (let x = -6; x < 0.95; x += 0.05) {
+                puntos1.push({x: x, y: (x*x) / (x-1)});
+            }
+            // Rama derecha
+            for (let x = 1.05; x <= 8; x += 0.05) {
+                puntos2.push({x: x, y: (x*x) / (x-1)});
+            }
+            return {puntos1, puntos2};
+        }
+
+        // Generar puntos para la asíntota oblicua y = x + 1
+        function generarPuntosOblicua() {
+            const puntos = [];
+            for (let x = -6; x <= 8; x += 1) {
+                puntos.push({x: x, y: x + 1});
+            }
+            return puntos;
+        }
+
+        const datosFuncion = generarPuntosFuncion();
+
+        new Chart(ctx, {
+            type: 'scatter', // Usamos scatter para dibujar puntos unidos por líneas
+            data: {
+                datasets: [
+                    // Dataset de la Función (Rama 1)
+                    {
+                        label: 'f(x) = x² / (x-1)',
+                        data: datosFuncion.puntos1,
+                        borderColor: '#0e9343', // Verde Esparta
+                        borderWidth: 3,
+                        showLine: true, // Unir puntos con línea
+                        fill: false,
+                        pointRadius: 0, // Ocultar puntos individuales
+                        tension: 0.2 // Suavizar curva
+                    },
+                    // Dataset de la Función (Rama 2)
+                    {
+                        data: datosFuncion.puntos2,
+                        borderColor: '#0e9343',
+                        borderWidth: 3,
+                        showLine: true,
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0.2,
+                        showLabel: false // No repetir en la leyenda
+                    },
+                    // Dataset Asíntota Vertical (x=1)
+                    {
+                        label: 'Asíntota Vertical (x=1)',
+                        data: [{x: 1, y: -15}, {x: 1, y: 20}],
+                        borderColor: '#f16565', // Rojo acento
+                        borderWidth: 2,
+                        borderDash: [5, 5], // Línea discontinua
+                        showLine: true,
+                        fill: false,
+                        pointRadius: 0
+                    },
+                    // Dataset Asíntota Oblicua (y=x+1)
+                    {
+                        label: 'Asíntota Oblicua (y=x+1)',
+                        data: generarPuntosOblicua(),
+                        borderColor: '#063c24', // Verde oscuro
+                        borderWidth: 1.5,
+                        borderDash: [3, 3], // Puntos
+                        showLine: true,
+                        fill: false,
+                        pointRadius: 0
+                    },
+                    // Dataset Puntos Críticos (Máx/Mín)
+                    {
+                        label: 'Puntos Críticos (Máx/Mín)',
+                        data: [{x: 0, y: 0}, {x: 2, y: 4}],
+                        backgroundColor: 'blue',
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        min: -5,
+                        max: 7,
+                        title: { display: true, text: 'Eje X' },
+                        grid: { color: '#eee' }
+                    },
+                    y: {
+                        min: -10,
+                        max: 15,
+                        title: { display: true, text: 'Eje Y' },
+                        grid: { color: '#eee' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            filter: function(item, chart) {
+                                // Ocultar datasets sin label (la segunda rama de la función)
+                                return item.text !== undefined;
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `(${context.parsed.x.toFixed(2)}, ${context.parsed.y.toFixed(2)})`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
