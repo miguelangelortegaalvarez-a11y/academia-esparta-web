@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento de Divisiones - Academia Esparta</title>
+    <title>Entrenamiento de Divisiones (2 Cifras) - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
@@ -19,21 +19,12 @@
 
         .guide-box { background-color: #e3f2fd; border: 2px solid var(--blue); color: var(--blue); padding: 15px; border-radius: 15px; margin-bottom: 25px; width: 90%; text-align: center; font-weight: 600; min-height: 50px; display: flex; align-items: center; justify-content: center; }
 
-        /* Estética de la División */
-        .division-area { font-family: 'Roboto Mono', monospace; font-size: 3rem; position: relative; margin-bottom: 20px; }
-        .division-table td { padding: 5px 15px; text-align: center; vertical-align: middle; position: relative; }
-        .divisor-box { border-left: 4px solid #333; border-bottom: 4px solid #333; min-width: 80px; }
+        .division-area { font-family: 'Roboto Mono', monospace; font-size: 3.5rem; margin-bottom: 20px; }
+        .divisor-box { border-left: 4px solid #333; border-bottom: 4px solid #333; min-width: 80px; padding-left: 15px; }
         
-        .dividend span { transition: color 0.3s; border-top: 4px solid transparent; }
-        .active-num { color: var(--highlight); border-top-color: var(--highlight) !important; }
-
-        /* Inputs */
-        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.2rem; padding: 5px; text-align: center; border: 2px solid #ccc; border-radius: 10px; background: transparent; width: 1.2ch; outline: none; transition: 0.3s; }
+        .math-input { font-family: 'Roboto Mono', monospace; font-size: 2.5rem; padding: 5px; text-align: center; border: 2px solid #ccc; border-radius: 10px; background: transparent; width: 1.5ch; outline: none; transition: 0.3s; }
         .math-input.correct { border-color: var(--primary); color: var(--primary) !important; font-weight: 700; background-color: #e8f5e9; }
         .math-input.wrong { border-color: var(--wrong); background-color: #ffebee; animation: shake 0.3s; }
-
-        .signo { position: absolute; left: -25px; top: 10px; color: var(--highlight); font-size: 2.5rem; display: none; }
-        .linea-resta { border-top: 3px solid #333; width: 100%; position: absolute; bottom: 0; left: 0; display: none; }
 
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         
@@ -42,114 +33,70 @@
 </head>
 <body>
 
-    <a href="entrenamiento-esparta.html" class="btn-volver">← Volver a Niveles</a>
+    <a href="#" class="btn-volver">← Volver a Niveles</a>
 
     <div class="game-container">
-        <div id="badge-nivel" class="info-badge">Nivel 1</div>
-        <div id="guide-text" class="guide-box">Cargando...</div>
+        <div id="badge-nivel" class="info-badge">Nivel 2 Cifras</div>
+        <div id="guide-text" class="guide-box">¡Prepárate!</div>
 
         <div class="division-area">
-            <table style="border-collapse: collapse;">
+            <table>
                 <tr>
-                    <td class="dividend" id="dividend-display"></td>
+                    <td id="dividend-display" style="padding-right: 20px;"></td>
                     <td class="divisor-box" id="divisor-display"></td>
                 </tr>
                 <tr>
-                    <td id="fila-paso-1" style="height: 60px;">
-                        <span id="signo-resta" class="signo">−</span>
-                        <input type="text" id="input-sub" class="math-input" style="display:none;">
-                        <div id="raya" class="linea-resta"></div>
-                    </td>
-                    <td id="cociente-area">
-                        <input type="text" id="q-1" class="math-input" style="display:none;">
-                        <input type="text" id="q-2" class="math-input" style="display:none;">
-                    </td>
-                </tr>
-                <tr>
-                    <td style="height: 60px;">
-                        <div style="display: flex; justify-content: center; gap: 10px;">
-                            <input type="text" id="r-1" class="math-input" style="display:none;">
-                            <input type="text" id="baja" class="math-input" style="display:none;">
-                        </div>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td id="final-res-area" style="height: 60px;">
+                    <td style="text-align: right; padding-top: 10px;">
                         <input type="text" id="r-final" class="math-input" style="display:none;">
                     </td>
-                    <td></td>
+                    <td style="padding-top: 10px;">
+                        <input type="text" id="q-final" class="math-input" style="display:none;">
+                    </td>
                 </tr>
             </table>
         </div>
 
         <div id="final-msg">
-            <h2 style="color: var(--primary); margin: 0;">¡ESPARTANO/A NIVEL PRO! 🏆</h2>
+            <h2 style="color: var(--primary); margin: 0;">¡EXCELENTE ESPARTANO! 🏆</h2>
             <p id="summary-text"></p>
-            <button class="btn-volver" onclick="location.reload()" style="margin-top:10px;">Siguiente División →</button>
+            <button class="btn-volver" onclick="location.reload()" style="margin-top:10px;">Otra división →</button>
         </div>
     </div>
 
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const nivel = parseInt(params.get('nivel')) || 1;
-        const cifrasDivisor = parseInt(params.get('cifras')) || 1;
-        const metodo = params.get('metodo') || 'con';
-
-        document.getElementById('badge-nivel').innerText = `Nivel ${nivel} - ${metodo.toUpperCase()} RESTA`;
-
         let config = {};
         let steps = [];
         let currentStep = 0;
 
         function init() {
-            // Generar números según dificultad del nivel
-            let div;
-            if(cifrasDivisor === 1) div = Math.floor(Math.random() * 8) + 2;
-            else if(cifrasDivisor === 2) div = Math.floor(Math.random() * 90) + 10;
-            else div = Math.floor(Math.random() * 900) + 100;
-
-            const qVal = Math.floor(Math.random() * 80) + 12; // Cociente de 2 cifras
-            const dividendo = div * qVal + Math.floor(Math.random() * div);
-            const dStr = dividendo.toString();
+            // Generamos dividendo de 2 cifras (10-99)
+            const dividendo = Math.floor(Math.random() * 90) + 10;
+            // Divisor de 1 cifra (2-9)
+            const divisor = Math.floor(Math.random() * 8) + 2;
             
-            // Lógica de pasos (Simplificada para 2 cifras en cociente)
-            const dPart1 = parseInt(dStr.substring(0, dStr.length - 1));
-            const dPart2 = dStr[dStr.length - 1];
+            const cociente = Math.floor(dividendo / divisor);
+            const resto = dividendo % divisor;
+
+            config = { dividendo, divisor, cociente, resto };
+
+            document.getElementById('dividend-display').innerText = dividendo;
+            document.getElementById('divisor-display').innerText = divisor;
+
+            // Pasos para una división directa de 2 cifras
+            steps = [
+                { 
+                    id: 'q-final', 
+                    val: cociente.toString(), 
+                    msg: `¿Cuántas veces cabe ${divisor} en ${dividendo}? (Cociente)` 
+                },
+                { 
+                    id: 'r-final', 
+                    val: resto.toString(), 
+                    msg: `¡Bien! Ahora, ¿cuánto sobra? (Resto)`, 
+                    final: true 
+                }
+            ];
             
-            const q1 = Math.floor(dPart1 / div);
-            const sub1 = q1 * div;
-            const r1 = dPart1 - sub1;
-            const formado = parseInt(`${r1}${dPart2}`);
-            const q2 = Math.floor(formado / div);
-            const sub2 = q2 * div;
-            const rFinal = formado - sub2;
-
-            config = { dividendo, div, q1, q2, sub1, sub2, r1, dPart2, rFinal };
-
-            document.getElementById('dividend-display').innerHTML = dStr.split('').map((n, i) => `<span id="n-${i}">${n}</span>`).join('');
-            document.getElementById('divisor-display').innerText = div;
-
-            // Definir pasos según método
-            if(metodo === 'con') {
-                steps = [
-                    { id: 'q-1', val: q1.toString(), msg: `¿Cuántas veces cabe ${div} en las primeras cifras?` },
-                    { id: 'input-sub', val: sub1.toString(), msg: `¡Bien! Multiplica ${q1} x ${div} y ponlo para restar.` },
-                    { id: 'r-1', val: r1.toString(), msg: `Resta y pon cuánto sobra.` },
-                    { id: 'baja', val: dPart2.toString(), msg: `Baja la siguiente cifra.` },
-                    { id: 'q-2', val: q2.toString(), msg: `¿Cuántas veces cabe ${div} en ${formado}?` },
-                    { id: 'r-final', val: rFinal.toString(), msg: `¡Último esfuerzo! Pon el resto final.`, final: true }
-                ];
-            } else {
-                // MÉTODO SIN RESTA
-                steps = [
-                    { id: 'q-1', val: q1.toString(), msg: `¿Cuántas veces cabe ${div} en las primeras cifras?` },
-                    { id: 'r-1', val: r1.toString(), msg: `¿Cuánto sobra de la primera división?` },
-                    { id: 'baja', val: dPart2.toString(), msg: `Baja la cifra.` },
-                    { id: 'q-2', val: q2.toString(), msg: `¿Cuántas veces cabe ${div} en el nuevo número?` },
-                    { id: 'r-final', val: rFinal.toString(), msg: `¿Cuál es el resto final?`, final: true }
-                ];
-            }
             showStep();
         }
 
@@ -159,11 +106,6 @@
             document.getElementById('guide-text').innerText = step.msg;
             el.style.display = 'inline-block';
             el.focus();
-
-            if(step.id === 'input-sub') {
-                document.getElementById('signo-resta').style.display = 'block';
-                document.getElementById('raya').style.display = 'block';
-            }
 
             el.onkeyup = () => {
                 if(el.value === step.val) {
@@ -177,7 +119,10 @@
                     }
                 } else if(el.value.length >= step.val.length) {
                     el.classList.add('wrong');
-                    setTimeout(() => { el.classList.remove('wrong'); el.value = ''; }, 500);
+                    setTimeout(() => { 
+                        el.classList.remove('wrong'); 
+                        el.value = ''; 
+                    }, 500);
                 }
             };
         }
@@ -185,7 +130,8 @@
         function finish() {
             document.getElementById('guide-text').style.display = 'none';
             document.getElementById('final-msg').style.display = 'block';
-            document.getElementById('summary-text').innerText = `Resultado: ${config.q1}${config.q2} y sobran ${config.rFinal}`;
+            document.getElementById('summary-text').innerText = 
+                `${config.dividendo} ÷ ${config.divisor} = ${config.cociente} (Resto: ${config.resto})`;
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         }
 
