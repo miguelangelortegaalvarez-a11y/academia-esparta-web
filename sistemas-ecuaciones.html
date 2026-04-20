@@ -3,231 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solucionario Completo y Gráfico - Ejercicio 5</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Valor Absoluto Cuadrático - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        :root { --primary: #0e9343; --dark: #063c24; --accent: #f16565; --bg: #f0f7f2; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: #333; line-height: 1.6; padding: 20px; margin: 0; }
-        .container { max-width: 1000px; width: 95%; margin: auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); box-sizing: border-box; }
-        .header { text-align: center; border-bottom: 4px solid var(--primary); padding-bottom: 20px; margin-bottom: 40px; }
-        .header h1 { color: var(--primary); margin: 0; text-transform: uppercase; }
+        :root { --esparta-green: #0e9343; --danger: #d32f2f; --blue: #2980b9; --line-color: #e0e0e0; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f5fdf7; margin: 0; padding: 20px; display: flex; justify-content: center; }
         
-        .solucion-card { border: 2px solid #eee; border-radius: 15px; margin-bottom: 50px; overflow: hidden; display: flex; flex-wrap: wrap; }
-        .solucion-analitica { flex: 1; min-width: 300px; padding: 25px; border-right: 1px solid #eee; }
-        .solucion-grafica { flex: 1; min-width: 300px; padding: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #fbfbfb; }
-        
-        .solucion-header { background: var(--dark); color: white; padding: 15px 20px; font-weight: 700; font-size: 1.2rem; width: 100%; }
-        
-        .paso { margin-bottom: 25px; padding-left: 15px; border-left: 3px solid var(--primary); }
-        .paso h4 { margin: 0 0 5px 0; color: var(--primary); text-transform: uppercase; font-size: 0.9rem; }
-        
-        .formula-display { background: white; padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem; margin: 10px 0; border: 1px solid #ddd; }
-        .destacado { color: var(--dark); font-weight: 700; background: #e8f5e9; padding: 2px 5px; border-radius: 4px; }
-
-        /* Estilos del Canvas de la gráfica */
-        #graficaCanvas { max-width: 100%; height: 500px; }
-
-        @media print {
-            body { background: white; padding: 0; }
-            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; }
-            .solucion-card { flex-direction: column; border: 1px solid #ccc; page-break-inside: avoid; }
-            .solucion-analitica { border-right: none; border-bottom: 1px solid #eee; }
-            #graficaCanvas { height: 400px; }
+        .notebook-page {
+            background-color: white; width: 100%; max-width: 900px; padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); border: 1px solid #ddd;
+            background-image: linear-gradient(var(--line-color) 1px, transparent 1px), linear-gradient(90deg, var(--line-color) 1px, transparent 1px);
+            background-size: 25px 25px;
         }
+
+        .header { border-bottom: 3px solid var(--esparta-green); margin-bottom: 30px; text-align: center; }
+        .header h1 { color: var(--esparta-green); margin: 0; text-transform: uppercase; }
+
+        .example-title { font-family: 'Kalam', cursive; font-size: 1.8rem; color: var(--danger); text-decoration: underline; margin-bottom: 20px; }
+        
+        .teoria-box { background: rgba(232, 245, 233, 0.8); border: 2px solid var(--esparta-green); padding: 20px; border-radius: 10px; margin-bottom: 30px; }
+        
+        .canvas-container { background: white; padding: 20px; border: 1px solid #ccc; border-radius: 10px; margin-top: 20px; }
+
+        .step { margin-bottom: 30px; padding-left: 15px; border-left: 4px solid var(--blue); }
+        .step h3 { font-family: 'Kalam', cursive; color: var(--blue); margin-top: 0; }
+
+        @media print { .btn-print { display: none; } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <h1>SOLUCIONARIO INTEGRAL: EJERCICIO 5</h1>
-            <p>Estudio Analítico y Representación Gráfica Interactiva</p>
-        </div>
+<div class="notebook-page">
+    <div class="header">
+        <h1>ACADEMIA ESPARTA</h1>
+        <p><i>"Entendiendo el Valor Absoluto en Funciones Cuadráticas"</i></p>
+    </div>
 
-        <div class="solucion-card">
-            <div class="solucion-header">Estudio Detallado de \( f(x) = \frac{x^2}{x-1} \)</div>
-            
-            <div class="solucion-analitica">
-                <div class="paso">
-                    <h4>1. Dominio</h4>
-                    <p>Punto crítico en el denominador: \( x - 1 = 0 \implies x = 1 \).</p>
-                    <p>El dominio es <span class="destacado">Dom(f) = \(\mathbb{R} - \{1\}\)</span>.</p>
-                </div>
+    <div class="example-title">Example: \( f(x) = |x^2 - 4| \)</div>
 
-                <div class="paso">
-                    <h4>2. Asíntotas Verticales</h4>
-                    <p>Estudio de los límites laterales en \( x = 1 \):</p>
-                    <div class="formula-display">
-                        \( \lim_{x \to 1^-} \frac{x^2}{x-1} = -\infty \) <br>
-                        \( \lim_{x \to 1^+} \frac{x^2}{x-1} = +\infty \)
-                    </div>
-                    <p><span class="destacado">A.V. en \( x = 1 \)</span>.</p>
-                </div>
+    <div class="teoria-box">
+        <b>Recordatorio Espartano:</b> El valor absoluto de algo es ese mismo algo si es positivo, pero <b>cambiado de signo</b> si es negativo.
+        $$ |f(x)| = \begin{cases} f(x) & \text{si } f(x) \ge 0 \\ -f(x) & \text{si } f(x) < 0 \end{cases} $$
+    </div>
 
-                <div class="paso">
-                    <h4>3. Asíntota Oblicua</h4>
-                    <p>Al ser Grado(Num) = Grado(Den) + 1, calculamos \( y = mx + n \):</p>
-                    <div class="formula-display">
-                        \( m = \lim_{x \to \infty} \frac{f(x)}{x} = 1 \) <br>
-                        \( n = \lim_{x \to \infty} (f(x) - x) = 1 \)
-                    </div>
-                    <p><span class="destacado">A.O. en \( y = x + 1 \)</span>.</p>
-                </div>
+    <div class="step">
+        <h3>1. Buscamos los "puntos de cambio"</h3>
+        <p>Igualamos lo de dentro a cero para saber dónde cambia de signo:</p>
+        <p> \( x^2 - 4 = 0 \longrightarrow x^2 = 4 \longrightarrow \mathbf{x = \pm 2} \)</p>
+    </div>
 
-                <div class="paso">
-                    <h4>4. Monotonía (Máx/Mín)</h4>
-                    <p>Derivada: \( f'(x) = \frac{x^2 - 2x}{(x-1)^2} \). Puntos críticos en \( x=0, x=2 \).</p>
-                    <ul>
-                        <li><span class="destacado">Máximo relativo en (0, 0)</span>.</li>
-                        <li><span class="destacado">Mínimo relativo en (2, 4)</span>.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="solucion-grafica">
-                <h4>Visualización de la Función</h4>
-                <canvas id="graficaCanvas"></canvas>
-                <p style="font-size: 0.8rem; color: #666; font-style: italic; margin-top: 10px; text-align: center;">
-                    Curva verde: Función | Línea roja: A. Vertical | Puntos: Máx/Mín
-                </p>
-            </div>
+    <div class="step">
+        <h3>2. Definimos la función a trozos</h3>
+        <p>Estudiamos el signo de \( x^2 - 4 \) en los intervalos:</p>
+        <ul>
+            <li>En \( (-\infty, -2] \): Es positivo. Se queda igual.</li>
+            <li>En \( (-2, 2) \): <b>¡Es negativo!</b> Multiplicamos por \(-1\).</li>
+            <li>En \( [2, \infty) \): Es positivo. Se queda igual.</li>
+        </ul>
+        <div style="font-size: 1.3rem; background: #fff; padding: 10px; border: 2px solid #000; display: inline-block;">
+            $$ f(x) = \begin{cases} x^2 - 4 & \text{si } x \le -2 \\ -(x^2 - 4) & \text{si } -2 < x < 2 \\ x^2 - 4 & \text{si } x \ge 2 \end{cases} $$
         </div>
     </div>
 
-    <script>
-        // --- SCRIPT DE GENERACIÓN DE LA GRÁFICA (Chart.js) ---
-        const ctx = document.getElementById('graficaCanvas').getContext('2d');
+    <div class="step">
+        <h3>3. Representación Visual</h3>
+        <p>Mira cómo la parte negativa (la curva que bajaría a -4) "rebota" y se vuelve positiva:</p>
+        <div class="canvas-container">
+            <canvas id="graficaAbs"></canvas>
+        </div>
+    </div>
+</div>
 
-        // Generar puntos para la función f(x) = x^2 / (x-1)
-        function generarPuntosFuncion() {
-            const puntos1 = [];
-            const puntos2 = [];
-            // Rama izquierda (evitando x=1)
-            for (let x = -6; x < 0.95; x += 0.05) {
-                puntos1.push({x: x, y: (x*x) / (x-1)});
-            }
-            // Rama derecha
-            for (let x = 1.05; x <= 8; x += 0.05) {
-                puntos2.push({x: x, y: (x*x) / (x-1)});
-            }
-            return {puntos1, puntos2};
-        }
+<script>
+    const ctx = document.getElementById('graficaAbs').getContext('2d');
+    
+    const labels = [];
+    const dataNormal = [];
+    const dataAbs = [];
 
-        // Generar puntos para la asíntota oblicua y = x + 1
-        function generarPuntosOblicua() {
-            const puntos = [];
-            for (let x = -6; x <= 8; x += 1) {
-                puntos.push({x: x, y: x + 1});
-            }
-            return puntos;
-        }
+    for (let x = -4; x <= 4; x += 0.1) {
+        labels.push(x.toFixed(1));
+        let y = x*x - 4;
+        dataNormal.push(y);
+        dataAbs.push(Math.abs(y));
+    }
 
-        const datosFuncion = generarPuntosFuncion();
-
-        new Chart(ctx, {
-            type: 'scatter', // Usamos scatter para dibujar puntos unidos por líneas
-            data: {
-                datasets: [
-                    // Dataset de la Función (Rama 1)
-                    {
-                        label: 'f(x) = x² / (x-1)',
-                        data: datosFuncion.puntos1,
-                        borderColor: '#0e9343', // Verde Esparta
-                        borderWidth: 3,
-                        showLine: true, // Unir puntos con línea
-                        fill: false,
-                        pointRadius: 0, // Ocultar puntos individuales
-                        tension: 0.2 // Suavizar curva
-                    },
-                    // Dataset de la Función (Rama 2)
-                    {
-                        data: datosFuncion.puntos2,
-                        borderColor: '#0e9343',
-                        borderWidth: 3,
-                        showLine: true,
-                        fill: false,
-                        pointRadius: 0,
-                        tension: 0.2,
-                        showLabel: false // No repetir en la leyenda
-                    },
-                    // Dataset Asíntota Vertical (x=1)
-                    {
-                        label: 'Asíntota Vertical (x=1)',
-                        data: [{x: 1, y: -15}, {x: 1, y: 20}],
-                        borderColor: '#f16565', // Rojo acento
-                        borderWidth: 2,
-                        borderDash: [5, 5], // Línea discontinua
-                        showLine: true,
-                        fill: false,
-                        pointRadius: 0
-                    },
-                    // Dataset Asíntota Oblicua (y=x+1)
-                    {
-                        label: 'Asíntota Oblicua (y=x+1)',
-                        data: generarPuntosOblicua(),
-                        borderColor: '#063c24', // Verde oscuro
-                        borderWidth: 1.5,
-                        borderDash: [3, 3], // Puntos
-                        showLine: true,
-                        fill: false,
-                        pointRadius: 0
-                    },
-                    // Dataset Puntos Críticos (Máx/Mín)
-                    {
-                        label: 'Puntos Críticos (Máx/Mín)',
-                        data: [{x: 0, y: 0}, {x: 2, y: 4}],
-                        backgroundColor: 'blue',
-                        pointRadius: 6,
-                        pointHoverRadius: 8
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        type: 'linear',
-                        position: 'bottom',
-                        min: -5,
-                        max: 7,
-                        title: { display: true, text: 'Eje X' },
-                        grid: { color: '#eee' }
-                    },
-                    y: {
-                        min: -10,
-                        max: 15,
-                        title: { display: true, text: 'Eje Y' },
-                        grid: { color: '#eee' }
-                    }
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Función Original (x² - 4)',
+                    data: dataNormal,
+                    borderColor: '#ccc',
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0
                 },
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            filter: function(item, chart) {
-                                // Ocultar datasets sin label (la segunda rama de la función)
-                                return item.text !== undefined;
-                            }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return `(${context.parsed.x.toFixed(2)}, ${context.parsed.y.toFixed(2)})`;
-                            }
-                        }
-                    }
+                {
+                    label: 'Con Valor Absoluto |x² - 4|',
+                    data: dataAbs,
+                    borderColor: '#0e9343',
+                    borderWidth: 3,
+                    fill: false,
+                    pointRadius: 0
                 }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { min: -5, max: 12 },
+                x: { ticks: { callback: function(val, index) { return index % 10 === 0 ? this.getLabelForValue(val) : ''; } } }
             }
-        });
-    </script>
+        }
+    });
+</script>
 
 </body>
 </html>
