@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Función a Trozos (Lineal-Cuadrática-Lineal) - Academia Esparta</title>
+    <title>Lección: Función a Trozos - Cecilia Herrera</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        :root { --esparta-green: #0e9343; --danger: #d32f2f; --blue: #2980b9; --line-color: #e0e0e0; }
+        :root { --esparta-green: #0e9343; --danger: #d32f2f; --blue: #1976d2; --purple: #7b1fa2; --line-color: #e0e0e0; }
         
         body { font-family: 'Poppins', sans-serif; background-color: #f5fdf7; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         
@@ -28,12 +28,14 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.1); border: 1px solid #ddd;
             background-image: linear-gradient(var(--line-color) 1px, transparent 1px), linear-gradient(90deg, var(--line-color) 1px, transparent 1px);
             background-size: 25px 25px; box-sizing: border-box;
+            position: relative;
         }
 
         .header { border-bottom: 3px solid var(--esparta-green); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
         .header h1 { color: var(--esparta-green); margin: 0; text-transform: uppercase; font-size: 2rem; }
+        .student-name { position: absolute; top: 20px; right: 40px; font-family: 'Kalam', cursive; font-size: 1.4rem; color: var(--blue); }
 
-        .example-title { font-family: 'Kalam', cursive; font-size: 1.8rem; color: var(--danger); text-decoration: underline; margin-bottom: 20px; }
+        .exercise-title { font-family: 'Kalam', cursive; font-size: 1.8rem; color: var(--danger); text-decoration: underline; margin-bottom: 20px; }
         
         .step { margin-bottom: 40px; padding-left: 15px; border-left: 4px solid var(--esparta-green); page-break-inside: avoid; }
         .step h3 { font-family: 'Kalam', cursive; color: var(--blue); margin-top: 0; }
@@ -43,8 +45,6 @@
         .tabla-independiente th { background-color: #333; color: white; padding: 8px; border: 1px solid #000; font-size: 0.9rem; }
         .tabla-independiente td { padding: 8px; border: 1px solid #ccc; text-align: center; font-weight: 600; }
         
-        .destacado-tramo { background-color: #fff9c4; }
-
         .canvas-container { background: white; padding: 20px; border: 1px solid #ccc; border-radius: 10px; margin-top: 20px; }
 
         @media print {
@@ -57,70 +57,69 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar PDF de la Lección</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar PDF para Cecilia Herrera</button>
 
     <div class="notebook-page">
+        <div class="student-name">Para la alumna: Cecilia Herrera</div>
+
         <div class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p><i>"Domina los trozos: Lineal, Cuadrática y Lineal"</i></p>
+            <p><i>"Donde cada punto cuenta: Abiertos vs Cerrados"</i></p>
         </div>
 
-        <div class="example-title">Example: Función Compuesta \( f(x) \)</div>
+        <div class="exercise-title">Ejercicio: Función Definida a Trozos</div>
 
         <div class="step">
-            <h3>1. Definición Analítica de la Función</h3>
-            <p>Fijaos bien en los puntos de cambio (\(x = -2\) y \(x = 2\)). Ahí es donde la función "salta" de una fórmula a otra:</p>
+            <h3>1. Definición Analítica</h3>
+            <p>Presta atención a los símbolos de desigualdad ($<$ frente a $\le$):</p>
             <div style="font-size: 1.3rem; background: #f9f9f9; padding: 20px; border: 1px solid #ddd; display: inline-block;">
                 $$ f(x) = \begin{cases} x + 4 & \text{si } x < -2 \\ x^2 - 2 & \text{si } -2 \le x \le 2 \\ 2 & \text{si } x > 2 \end{cases} $$
             </div>
+            <p><i>Nota:</i> Si tiene el signo igual ($\le$), el punto es <b>cerrado</b> (relleno). Si no lo tiene ($<$), el punto es <b>abierto</b> (vacío).</p>
         </div>
 
         <div class="step">
-            <h3>2. Tablas de Valores por Tramo</h3>
-            <p>Calculamos cada trozo de forma independiente respetando su dominio:</p>
-            
+            <h3>2. Tablas de Valores</h3>
             <div class="tables-container">
                 <table class="tabla-independiente">
-                    <thead><tr><th colspan="2" style="background: #1976d2;">Tramo 1: \( x < -2 \) (Recta)</th></tr><tr><th>x</th><th>\( y = x + 4 \)</th></tr></thead>
+                    <thead><tr><th colspan="2" style="background: var(--blue);">Tramo 1 (Lineal)</th></tr><tr><th>x</th><th>\( y = x + 4 \)</th></tr></thead>
                     <tbody>
                         <tr><td>-4</td><td>0</td></tr>
                         <tr><td>-3</td><td>1</td></tr>
-                        <tr style="color: #666;"><td>-2</td><td>(2)*</td></tr>
+                        <tr style="background: #e3f2fd;"><td>-2</td><td>2 (Abierto)</td></tr>
                     </tbody>
                 </table>
 
                 <table class="tabla-independiente" style="border: 2px solid var(--esparta-green);">
-                    <thead><tr><th colspan="2" style="background: var(--esparta-green);">Tramo 2: \( -2 \le x \le 2 \) (Parábola)</th></tr><tr><th>x</th><th>\( y = x^2 - 2 \)</th></tr></thead>
+                    <thead><tr><th colspan="2" style="background: var(--esparta-green);">Tramo 2 (Cuadrático)</th></tr><tr><th>x</th><th>\( y = x^2 - 2 \)</th></tr></thead>
                     <tbody>
-                        <tr><td>-2</td><td>2</td></tr>
+                        <tr style="background: #e8f5e9;"><td>-2</td><td>2 (Cerrado)</td></tr>
                         <tr><td>0</td><td>-2</td></tr>
-                        <tr><td>2</td><td>2</td></tr>
+                        <tr style="background: #e8f5e9;"><td>2</td><td>2 (Cerrado)</td></tr>
                     </tbody>
                 </table>
 
                 <table class="tabla-independiente">
-                    <thead><tr><th colspan="2" style="background: #7b1fa2;">Tramo 3: \( x > 2 \) (Constante)</th></tr><tr><th>x</th><th>\( y = 2 \)</th></tr></thead>
+                    <thead><tr><th colspan="2" style="background: var(--purple);">Tramo 3 (Lineal)</th></tr><tr><th>x</th><th>\( y = 2 \)</th></tr></thead>
                     <tbody>
+                        <tr style="background: #f3e5f5;"><td>2</td><td>2 (Abierto)</td></tr>
                         <tr><td>3</td><td>2</td></tr>
                         <tr><td>4</td><td>2</td></tr>
-                        <tr><td>5</td><td>2</td></tr>
                     </tbody>
                 </table>
             </div>
-            <p><small>* El valor (2) en el primer tramo es un "punto abierto", pero nos ayuda a ver hacia dónde va la recta.</small></p>
         </div>
 
         <div class="step">
-            <h3>3. Representación Gráfica (Ejes en Negro)</h3>
-            <p>Observad cómo se unen los tres tramos. Los ejes están resaltados para que situéis bien los puntos de cambio.</p>
+            <h3>3. Gráfica con Puntos de Continuidad</h3>
             <div class="canvas-container">
-                <canvas id="graficaTrozos"></canvas>
+                <canvas id="graficaPuntos"></canvas>
             </div>
         </div>
     </div>
 
     <script>
-        const ctx = document.getElementById('graficaTrozos').getContext('2d');
+        const ctx = document.getElementById('graficaPuntos').getContext('2d');
         
         const labels = [];
         const dataT1 = [];
@@ -128,23 +127,18 @@
         const dataT3 = [];
 
         for (let x = -6; x <= 6; x += 0.1) {
-            labels.push(x.toFixed(1));
             let valX = parseFloat(x.toFixed(1));
+            labels.push(valX);
             
-            // Tramo 1: x < -2
             if (valX < -2) {
                 dataT1.push(valX + 4);
                 dataT2.push(null);
                 dataT3.push(null);
-            } 
-            // Tramo 2: -2 <= x <= 2
-            else if (valX >= -2 && valX <= 2) {
+            } else if (valX >= -2 && valX <= 2) {
                 dataT1.push(null);
                 dataT2.push(valX * valX - 2);
                 dataT3.push(null);
-            } 
-            // Tramo 3: x > 2
-            else {
+            } else {
                 dataT1.push(null);
                 dataT2.push(null);
                 dataT3.push(2);
@@ -157,61 +151,67 @@
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Tramo 1 (Lineal)',
+                        label: 'Tramo 1 (x < -2)',
                         data: dataT1,
                         borderColor: '#1976d2',
                         borderWidth: 3,
-                        fill: false,
-                        pointRadius: 0
+                        pointRadius: 0,
+                        fill: false
                     },
                     {
-                        label: 'Tramo 2 (Cuadrático)',
+                        label: 'Tramo 2 (-2 ≤ x ≤ 2)',
                         data: dataT2,
                         borderColor: '#0e9343',
                         borderWidth: 3,
-                        fill: false,
-                        pointRadius: 0
+                        pointRadius: 0,
+                        fill: false
                     },
                     {
-                        label: 'Tramo 3 (Lineal/Constante)',
+                        label: 'Tramo 3 (x > 2)',
                         data: dataT3,
                         borderColor: '#7b1fa2',
                         borderWidth: 3,
-                        fill: false,
-                        pointRadius: 0
+                        pointRadius: 0,
+                        fill: false
+                    },
+                    // Puntos Abiertos
+                    {
+                        label: 'Puntos Abiertos',
+                        data: labels.map(x => (x === -2) ? 2 : (x === 2.1) ? 2 : null),
+                        borderColor: '#1976d2',
+                        backgroundColor: 'white',
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        showLine: false,
+                        pointStyle: 'circle'
+                    },
+                    // Puntos Cerrados
+                    {
+                        label: 'Puntos Cerrados',
+                        data: labels.map(x => (x === -2 || x === 2) ? 2 : null),
+                        borderColor: '#0e9343',
+                        backgroundColor: '#0e9343',
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        showLine: false,
+                        pointStyle: 'circle'
                     }
                 ]
             },
             options: {
                 responsive: true,
-                animation: false,
                 scales: {
                     y: { 
                         min: -4, max: 6,
-                        grid: {
-                            color: function(context) {
-                                if (context.tick.value === 0) return '#000000'; 
-                                return '#e0e0e0';
-                            },
-                            lineWidth: function(context) {
-                                if (context.tick.value === 0) return 3;
-                                return 1;
-                            }
-                        }
+                        grid: { color: c => c.tick.value === 0 ? '#000' : '#e0e0e0', lineWidth: c => c.tick.value === 0 ? 3 : 1 }
                     },
                     x: { 
-                        grid: {
-                            color: function(context) {
-                                if (context.tick.value === 0) return '#000000'; 
-                                return '#e0e0e0';
-                            },
-                            lineWidth: function(context) {
-                                if (context.tick.value === 0) return 3;
-                                return 1;
-                            }
-                        },
-                        ticks: { callback: function(val, index) { return index % 10 === 0 ? this.getLabelForValue(val) : ''; } }
+                        grid: { color: c => c.tick.value === 0 ? '#000' : '#e0e0e0', lineWidth: c => c.tick.value === 0 ? 3 : 1 },
+                        ticks: { callback: (val, index) => index % 10 === 0 ? labels[index] : '' }
                     }
+                },
+                plugins: {
+                    legend: { display: true, labels: { filter: item => !item.text.includes('Puntos') } }
                 }
             }
         });
