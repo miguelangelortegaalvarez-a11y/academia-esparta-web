@@ -3,135 +3,142 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lectura Comprensiva · Academia Esparta</title>
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Short+Stack&family=Poppins:wght@400;800&display=swap" rel="stylesheet">
+  <title>Lectura Comprensiva Completa · Academia Esparta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Short+Stack&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #0e9343;
-      --primary-soft: #eaf8ef;
+      --primary-soft: #f0f9f4;
+      --danger: #d32f2f;
       --border: #b9dec4;
-      --text: #1f1f1f;
-      --font-escolar: 'Patrick Hand', cursive; /* Fuente tipo escritura */
-      --font-base: 'Poppins', sans-serif;
+      --text: #333;
+      --font-profesor: 'Kalam', cursive;
+      --font-ninos: 'Short Stack', cursive;
     }
 
     body { 
-      margin: 0; padding: 0; background: #f3f3f3; 
-      font-family: var(--font-base); color: var(--text); 
+      margin: 0; padding: 0; background: #f0f0f0; 
+      font-family: var(--font-ninos); color: var(--text); 
     }
 
     .page {
-      width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
-      padding: 15mm; box-sizing: border-box; position: relative;
+      width: 210mm; min-height: 297mm; margin: 10mm auto; background: #fff;
+      padding: 15mm; box-sizing: border-box; border-radius: 5px;
     }
 
-    /* Marca de agua o logo sutil */
-    .page::before {
-        content: "ACADEMIA ESPARTA";
-        position: absolute; top: 10mm; right: 15mm;
-        font-size: 10px; color: #ccc; letter-spacing: 2px;
-    }
-
-    .sheet-header { text-align: center; margin-bottom: 25px; }
+    .sheet-header { text-align: center; border-bottom: 2px dashed var(--primary); margin-bottom: 20px; padding-bottom: 10px; }
+    .academy { font-size: 12px; color: var(--primary); letter-spacing: 2px; font-weight: bold; }
+    
+    /* Título con la fuente KALAM que pediste */
     .main-title { 
-        font-family: var(--font-escolar); 
-        font-size: 42px; /* Más grande por ser fuente manuscrita */
-        color: var(--primary); margin: 5px 0; 
+        font-family: var(--font-profesor); 
+        font-size: 38px; color: var(--danger); margin: 5px 0; 
+        text-decoration: underline;
     }
-    .subtitle { font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
-    .student-row { display: flex; gap: 20px; margin: 20px 0; font-family: var(--font-escolar); font-size: 20px; }
-    .field { flex: 1; border-bottom: 1.5px dashed #555; height: 30px; display: flex; align-items: flex-end; }
+    .student-info { 
+        display: flex; gap: 20px; margin-bottom: 25px; 
+        font-family: var(--font-profesor); font-size: 20px; color: #555;
+    }
+    .field-line { flex: 1; border-bottom: 1.5px solid #aaa; height: 25px; }
 
     .section {
-      border: 2.5px solid var(--border); border-radius: 20px;
-      padding: 20px; margin-bottom: 20px; background: #fff; page-break-inside: avoid;
+      border: 2px solid var(--border); border-radius: 15px;
+      padding: 18px; margin-bottom: 15px; page-break-inside: avoid;
     }
 
     .section-title {
-      display: inline-block; padding: 6px 18px; border-radius: 25px;
-      background: var(--primary); color: white;
-      font-size: 18px; font-weight: 800; margin-bottom: 15px;
+      font-family: var(--font-profesor);
+      display: inline-block; padding: 2px 12px; border-radius: 10px;
+      background: var(--primary-soft); color: var(--primary);
+      font-size: 22px; font-weight: 700; margin-bottom: 12px;
     }
 
-    /* ESTILO LECTURA ESCOLAR */
-    .reading-text { 
-        font-family: var(--font-escolar); 
-        font-size: 30px; /* Tamaño ideal para 1º y 2º */
-        line-height: 1.5; 
-        color: #333;
-        word-spacing: 4px;
+    .reading-box { font-size: 26px; line-height: 1.6; color: #000; }
+
+    /* Estilos para "Unir con Flechas" */
+    .match-container { display: flex; justify-content: space-around; margin-top: 10px; }
+    .match-col { display: flex; flex-direction: column; gap: 15px; }
+    .match-item { 
+        padding: 8px 15px; border: 1.5px solid #eee; border-radius: 8px; 
+        background: #fafafa; font-size: 20px;
     }
 
-    .q-item { 
-        font-family: var(--font-escolar); 
-        font-size: 22px; 
-        margin-bottom: 20px; 
-    }
-    .q-line { 
-        display: block; 
-        border-bottom: 1px solid #aaa; 
-        height: 35px; /* Espacio para que el niño escriba */
-        margin-top: 5px; 
-    }
+    /* Preguntas y V/F */
+    .question { font-size: 22px; margin-bottom: 15px; }
+    .ans-line { border-bottom: 1px solid #ccc; height: 30px; margin-top: 5px; width: 100%; display: block; }
 
-    .vf-item { 
-        display: flex; justify-content: space-between; align-items: center; 
-        margin-bottom: 12px; font-family: var(--font-escolar); font-size: 22px; 
-    }
-    .box { width: 30px; height: 30px; border: 2px solid var(--primary); border-radius: 8px; }
+    .vf-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 20px; }
+    .check-box { width: 25px; height: 25px; border: 2px solid var(--primary); border-radius: 5px; display: inline-block; vertical-align: middle; }
 
-    .draw-box { 
-        height: 180px; border: 2px dashed #ccc; border-radius: 15px; 
-        background: #fafafa; display: flex; align-items: center; justify-content: center;
-        color: #aaa; font-family: var(--font-escolar);
-    }
+    .draw-area { height: 140px; border: 2px dashed #ddd; border-radius: 15px; margin-top: 10px; background: #fffcf0; }
 
     @media print {
       body { background: white; }
-      .page { margin: 0; border: none; }
+      .page { margin: 0; }
+      .btn-print { display: none; }
     }
   </style>
 </head>
 <body>
+
   <div class="page">
     <header class="sheet-header">
-      <p class="subtitle">Lectura Comprensiva · Nivel Inicial</p>
-      <h1 class="main-title">El Dragón y su Comida</h1>
+      <div class="academy">ACADEMIA ESPARTA</div>
+      <h1 class="main-title">Lectura: El Gato con Botas</h1>
     </header>
 
-    <div class="student-row">
-      <div class="field">Nombre:</div>
-      <div class="field" style="max-width: 180px;">Fecha:</div>
+    <div class="student-info">
+      <span>Nombre:</span> <div class="field-line"></div>
+      <span>Fecha:</span> <div class="field-line" style="max-width: 150px;"></div>
     </div>
 
     <section class="section">
-      <span class="section-title">¡A LEER!</span>
-      <div class="reading-text">
-        El dragón verde tiene mucha hambre.  
-        El dragón come manzanas rojas.  
-        Después, el dragón vuela muy alto.  
-        ¡Qué feliz es el dragón!
+      <span class="section-title">1. Lee con atención</span>
+      <div class="reading-box">
+        El gato de mi abuela es muy divertido.  
+        Se pone unas botas mágicas y sale al jardín.  
+        El gato salta sobre las flores rojas.  
+        ¡A todos nos hace reír mucho!
       </div>
     </section>
 
     <section class="section">
-      <span class="section-title">PREGUNTAS</span>
-      <div class="q-item">1. ¿De qué color es el dragón?<span class="q-line"></span></div>
-      <div class="q-item">2. ¿Qué come el dragón?<span class="q-line"></span></div>
+      <span class="section-title">2. Responde</span>
+      <div class="question">¿De quién es el gato?<span class="ans-line"></span></div>
+      <div class="question">¿Qué se pone el gato?<span class="ans-line"></span></div>
+      <div class="question">¿Por dónde sale el gato?<span class="ans-line"></span></div>
     </section>
 
     <section class="section">
-      <span class="section-title">VERDADERO O FALSO</span>
-      <div class="vf-item"><span>El dragón come manzanas.</span> <div style="display:flex; gap:10px;">V <div class="box"></div> F <div class="box"></div></div></div>
-      <div class="vf-item"><span>El dragón está triste.</span> <div style="display:flex; gap:10px;">V <div class="box"></div> F <div class="box"></div></div></div>
+      <span class="section-title">3. Unir con flechas</span>
+      <div class="match-container">
+        <div class="match-col">
+          <div class="match-item">Gato</div>
+          <div class="match-item">Botas</div>
+          <div class="match-item">Flores</div>
+        </div>
+        <div class="match-col" style="justify-content: space-around;">
+          <div class="match-item">Rojas</div>
+          <div class="match-item">Divertido</div>
+          <div class="match-item">Mágicas</div>
+        </div>
+      </div>
     </section>
 
     <section class="section">
-      <span class="section-title">DIBUJO</span>
-      <p style="font-family: var(--font-escolar); font-size: 20px; margin: 0 0 10px;">Dibuja al dragón volando:</p>
-      <div class="draw-box">Haz tu dibujo aquí</div>
+      <span class="section-title">4. Verdadero o Falso</span>
+      <div class="vf-row"><span>El gato está en la cocina.</span> <div>V <div class="check-box"></div> F <div class="check-box"></div></div></div>
+      <div class="vf-row"><span>Las flores son de color rojo.</span> <div>V <div class="check-box"></div> F <div class="check-box"></div></div></div>
+      <div class="vf-row"><span>El gato tiene botas mágicas.</span> <div>V <div class="check-box"></div> F <div class="check-box"></div></div></div>
+    </section>
+
+    <section class="section">
+      <span class="section-title">5. ¡A dibujar!</span>
+      <p style="margin:0; font-size: 18px; color: #666;">Dibuja al gato saltando sobre las flores:</p>
+      <div class="draw-area"></div>
     </section>
   </div>
+
 </body>
 </html>
