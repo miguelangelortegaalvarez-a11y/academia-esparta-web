@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección: Valor Absoluto Cuadrático - David Redondo</title>
+    <title>Función a Trozos (Lineal-Cuadrática-Lineal) - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -17,15 +17,9 @@
         
         .btn-imprimir {
             background-color: var(--esparta-green);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3);
-            transition: 0.3s;
+            color: white; border: none; padding: 12px 25px; border-radius: 30px;
+            font-weight: 700; cursor: pointer; margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3); transition: 0.3s;
         }
         .btn-imprimir:hover { background-color: #063c24; transform: scale(1.05); }
 
@@ -33,14 +27,11 @@
             background-color: white; width: 100%; max-width: 950px; padding: 40px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1); border: 1px solid #ddd;
             background-image: linear-gradient(var(--line-color) 1px, transparent 1px), linear-gradient(90deg, var(--line-color) 1px, transparent 1px);
-            background-size: 25px 25px;
-            box-sizing: border-box;
-            position: relative;
+            background-size: 25px 25px; box-sizing: border-box;
         }
 
         .header { border-bottom: 3px solid var(--esparta-green); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
         .header h1 { color: var(--esparta-green); margin: 0; text-transform: uppercase; font-size: 2rem; }
-        .student-name { position: absolute; top: 20px; right: 40px; font-family: 'Kalam', cursive; font-size: 1.4rem; color: var(--blue); }
 
         .example-title { font-family: 'Kalam', cursive; font-size: 1.8rem; color: var(--danger); text-decoration: underline; margin-bottom: 20px; }
         
@@ -52,7 +43,7 @@
         .tabla-independiente th { background-color: #333; color: white; padding: 8px; border: 1px solid #000; font-size: 0.9rem; }
         .tabla-independiente td { padding: 8px; border: 1px solid #ccc; text-align: center; font-weight: 600; }
         
-        .cambio-signo { color: var(--danger); background-color: #fff5f5; }
+        .destacado-tramo { background-color: #fff9c4; }
 
         .canvas-container { background: white; padding: 20px; border: 1px solid #ccc; border-radius: 10px; margin-top: 20px; }
 
@@ -66,86 +57,98 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar PDF para David Redondo</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar PDF de la Lección</button>
 
     <div class="notebook-page">
-        <div class="student-name">Para el alumno: David Redondo</div>
-        
         <div class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p><i>"Donde el Eje Y nunca conoce los negativos"</i></p>
+            <p><i>"Domina los trozos: Lineal, Cuadrática y Lineal"</i></p>
         </div>
 
-        <div class="example-title">Example: \( f(x) = |x^2 - 2x - 3| \)</div>
+        <div class="example-title">Example: Función Compuesta \( f(x) \)</div>
 
         <div class="step">
-            <h3>1. Puntos de Corte: El límite del "suelo"</h3>
-            <p>Para saber dónde la gráfica va a intentar bajar a los negativos, calculamos sus puntos de corte con el Eje X (donde \( y = 0 \)):</p>
-            <div style="background: #f9f9f9; padding: 15px; border: 1px solid #ddd; margin: 10px 0;">
-                $$ x^2 - 2x - 3 = 0 $$
-                $$ x = \frac{-(-2) \pm \sqrt{(-2)^2 - 4(1)(-3)}}{2(1)} = \frac{2 \pm \sqrt{16}}{2} \longrightarrow \begin{cases} \mathbf{x = 3} \\ \mathbf{x = -1} \end{cases} $$
+            <h3>1. Definición Analítica de la Función</h3>
+            <p>Fijaos bien en los puntos de cambio (\(x = -2\) y \(x = 2\)). Ahí es donde la función "salta" de una fórmula a otra:</p>
+            <div style="font-size: 1.3rem; background: #f9f9f9; padding: 20px; border: 1px solid #ddd; display: inline-block;">
+                $$ f(x) = \begin{cases} x + 4 & \text{si } x < -2 \\ x^2 - 2 & \text{si } -2 \le x \le 2 \\ 2 & \text{si } x > 2 \end{cases} $$
             </div>
-            <p><b>Explicación:</b> En \(x = -1\) y \(x = 3\) la función vale exactamente **0**. Por debajo de estos puntos, la parábola original sería negativa, pero el Valor Absoluto la obligará a rebotar hacia arriba.</p>
         </div>
 
         <div class="step">
-            <h3>2. Definición a trozos y Tablas Independientes</h3>
-            <p>Dividimos la función en tres tramos. Fijaos cómo en el tramo central **cambiamos el signo** para que el resultado sea positivo.</p>
+            <h3>2. Tablas de Valores por Tramo</h3>
+            <p>Calculamos cada trozo de forma independiente respetando su dominio:</p>
             
-            <div style="font-size: 1.2rem; margin-bottom: 20px;">
-                $$ f(x) = \begin{cases} x^2 - 2x - 3 & \text{si } x \le -1 \\ \color{red}{-(x^2 - 2x - 3)} & \text{si } -1 < x < 3 \\ x^2 - 2x - 3 & \text{si } x \ge 3 \end{cases} $$
-            </div>
-
             <div class="tables-container">
                 <table class="tabla-independiente">
-                    <thead><tr><th colspan="2">Tramo 1: \( x \le -1 \)</th></tr><tr><th>x</th><th>\( x^2 - 2x - 3 \)</th></tr></thead>
+                    <thead><tr><th colspan="2" style="background: #1976d2;">Tramo 1: \( x < -2 \) (Recta)</th></tr><tr><th>x</th><th>\( y = x + 4 \)</th></tr></thead>
                     <tbody>
-                        <tr><td>-3</td><td>12</td></tr>
-                        <tr><td>-2</td><td>5</td></tr>
-                        <tr><td>-1</td><td>0</td></tr>
+                        <tr><td>-4</td><td>0</td></tr>
+                        <tr><td>-3</td><td>1</td></tr>
+                        <tr style="color: #666;"><td>-2</td><td>(2)*</td></tr>
                     </tbody>
                 </table>
 
-                <table class="tabla-independiente" style="border: 2px solid var(--danger);">
-                    <thead><tr><th colspan="2" style="background: var(--danger);">Tramo 2: \( -1 < x < 3 \)</th></tr><tr><th>x</th><th>\( -(x^2 - 2x - 3) \)</th></tr></thead>
+                <table class="tabla-independiente" style="border: 2px solid var(--esparta-green);">
+                    <thead><tr><th colspan="2" style="background: var(--esparta-green);">Tramo 2: \( -2 \le x \le 2 \) (Parábola)</th></tr><tr><th>x</th><th>\( y = x^2 - 2 \)</th></tr></thead>
                     <tbody>
-                        <tr class="cambio-signo"><td>0</td><td>3</td></tr>
-                        <tr class="cambio-signo"><td>1</td><td>4</td></tr>
-                        <tr class="cambio-signo"><td>2</td><td>3</td></tr>
+                        <tr><td>-2</td><td>2</td></tr>
+                        <tr><td>0</td><td>-2</td></tr>
+                        <tr><td>2</td><td>2</td></tr>
                     </tbody>
                 </table>
 
                 <table class="tabla-independiente">
-                    <thead><tr><th colspan="2">Tramo 3: \( x \ge 3 \)</th></tr><tr><th>x</th><th>\( x^2 - 2x - 3 \)</th></tr></thead>
+                    <thead><tr><th colspan="2" style="background: #7b1fa2;">Tramo 3: \( x > 2 \) (Constante)</th></tr><tr><th>x</th><th>\( y = 2 \)</th></tr></thead>
                     <tbody>
-                        <tr><td>3</td><td>0</td></tr>
-                        <tr><td>4</td><td>5</td></tr>
-                        <tr><td>5</td><td>12</td></tr>
+                        <tr><td>3</td><td>2</td></tr>
+                        <tr><td>4</td><td>2</td></tr>
+                        <tr><td>5</td><td>2</td></tr>
                     </tbody>
                 </table>
             </div>
+            <p><small>* El valor (2) en el primer tramo es un "punto abierto", pero nos ayuda a ver hacia dónde va la recta.</small></p>
         </div>
 
         <div class="step">
             <h3>3. Representación Gráfica (Ejes en Negro)</h3>
-            <p>Observad cómo el **Eje X** actúa como un suelo infranqueable gracias al cambio de signo en el tramo central.</p>
+            <p>Observad cómo se unen los tres tramos. Los ejes están resaltados para que situéis bien los puntos de cambio.</p>
             <div class="canvas-container">
-                <canvas id="graficaAbsFinal"></canvas>
+                <canvas id="graficaTrozos"></canvas>
             </div>
         </div>
     </div>
 
     <script>
-        const ctx = document.getElementById('graficaAbsFinal').getContext('2d');
+        const ctx = document.getElementById('graficaTrozos').getContext('2d');
+        
         const labels = [];
-        const dataNormal = [];
-        const dataAbs = [];
+        const dataT1 = [];
+        const dataT2 = [];
+        const dataT3 = [];
 
-        for (let x = -4; x <= 6; x += 0.1) {
+        for (let x = -6; x <= 6; x += 0.1) {
             labels.push(x.toFixed(1));
-            let y = x*x - 2*x - 3;
-            dataNormal.push(y);
-            dataAbs.push(Math.abs(y));
+            let valX = parseFloat(x.toFixed(1));
+            
+            // Tramo 1: x < -2
+            if (valX < -2) {
+                dataT1.push(valX + 4);
+                dataT2.push(null);
+                dataT3.push(null);
+            } 
+            // Tramo 2: -2 <= x <= 2
+            else if (valX >= -2 && valX <= 2) {
+                dataT1.push(null);
+                dataT2.push(valX * valX - 2);
+                dataT3.push(null);
+            } 
+            // Tramo 3: x > 2
+            else {
+                dataT1.push(null);
+                dataT2.push(null);
+                dataT3.push(2);
+            }
         }
 
         new Chart(ctx, {
@@ -154,17 +157,25 @@
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Parábola Original (Punteada)',
-                        data: dataNormal,
-                        borderColor: '#bbb',
-                        borderDash: [5, 5],
+                        label: 'Tramo 1 (Lineal)',
+                        data: dataT1,
+                        borderColor: '#1976d2',
+                        borderWidth: 3,
                         fill: false,
                         pointRadius: 0
                     },
                     {
-                        label: 'Función Valor Absoluto',
-                        data: dataAbs,
+                        label: 'Tramo 2 (Cuadrático)',
+                        data: dataT2,
                         borderColor: '#0e9343',
+                        borderWidth: 3,
+                        fill: false,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Tramo 3 (Lineal/Constante)',
+                        data: dataT3,
+                        borderColor: '#7b1fa2',
                         borderWidth: 3,
                         fill: false,
                         pointRadius: 0
@@ -176,7 +187,7 @@
                 animation: false,
                 scales: {
                     y: { 
-                        min: -5, max: 15,
+                        min: -4, max: 6,
                         grid: {
                             color: function(context) {
                                 if (context.tick.value === 0) return '#000000'; 
