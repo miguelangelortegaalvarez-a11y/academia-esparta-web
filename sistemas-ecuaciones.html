@@ -1,123 +1,355 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Lectura 1º Primaria</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lectura Comprensiva · 1º Primaria</title>
+  <style>
+    :root {
+      --primary: #0e9343;
+      --primary-soft: #eaf8ef;
+      --border: #b9dec4;
+      --text: #1f1f1f;
+      --muted: #5b5b5b;
+      --bg: #ffffff;
+    }
 
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    background: white;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.header {
-    text-align: center;
-    margin-bottom: 20px;
-}
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+    }
 
-.title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #0e9343;
-}
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: var(--bg);
+      padding: 16mm 14mm 14mm;
+    }
 
-.student {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-}
+    .sheet-header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
 
-.block {
-    margin-top: 25px;
-}
+    .academy {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
 
-.block h2 {
-    color: #0e9343;
-    border-bottom: 2px solid #0e9343;
-}
+    .main-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 0 0 10px;
+      line-height: 1.15;
+    }
 
-.reading {
-    font-size: 20px;
-    line-height: 1.8;
-}
+    .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
 
-.questions p {
-    font-size: 18px;
-}
+    .student-row {
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
 
-.vocab p {
-    font-size: 18px;
-}
+    .line-field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
 
-.match {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
+    .line-field span {
+      white-space: nowrap;
+      font-weight: 700;
+    }
 
-.box {
-    border: 1px solid black;
-    padding: 10px;
-    width: 40%;
-}
-</style>
+    .line {
+      flex: 1;
+      border-bottom: 2px solid #444;
+      height: 22px;
+    }
+
+    .section {
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+
+    .section-title {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .reading-box {
+      font-size: 24px;
+      line-height: 1.7;
+      letter-spacing: 0.2px;
+    }
+
+    .reading-box p {
+      margin: 0;
+    }
+
+    .help-text {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .vocab-list,
+    .question-list,
+    .vf-list,
+    .match-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .vocab-list li,
+    .question-list li,
+    .vf-list li,
+    .match-list li {
+      margin-bottom: 10px;
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .vocab-word {
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .question-answer-line {
+      display: block;
+      margin-top: 8px;
+      border-bottom: 2px solid #999;
+      height: 20px;
+    }
+
+    .vf-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .vf-text {
+      flex: 1;
+    }
+
+    .vf-boxes {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .mini-box {
+      width: 28px;
+      height: 28px;
+      border: 2px solid #666;
+      border-radius: 6px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+
+    .match-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .match-column {
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      min-height: 120px;
+    }
+
+    .match-column h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .activity-box {
+      min-height: 110px;
+      border: 2px dashed #bcbcbc;
+      border-radius: 14px;
+      background: #fcfcfc;
+      padding: 14px;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    .footer-note {
+      margin-top: 8px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        margin: 0;
+        width: 210mm;
+        min-height: 297mm;
+        box-shadow: none;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="page">
+    <header class="sheet-header">
+      <div class="academy">ACADEMIA ESPARTA</div>
+      <h1 class="main-title">El perro en la granja</h1>
+      <p class="subtitle">Lectura comprensiva · 1º de Primaria</p>
+    </header>
 
-<div class="header">
-    <div class="title">El perro en la granja</div>
-
-    <div class="student">
-        <span>Nombre: ____________</span>
-        <span>Fecha: ____________</span>
+    <div class="student-row">
+      <div class="line-field">
+        <span>Nombre:</span>
+        <div class="line"></div>
+      </div>
+      <div class="line-field" style="max-width: 220px;">
+        <span>Fecha:</span>
+        <div class="line"></div>
+      </div>
     </div>
-</div>
 
-<div class="block">
-    <h2>Lectura</h2>
-    <div class="reading">
-        El perro está en la granja.  
-        El perro corre por el campo.  
-        La gallina mira al perro.  
-        El perro ladra fuerte.
-    </div>
-</div>
+    <section class="section">
+      <h2 class="section-title">Lectura</h2>
+      <div class="reading-box">
+        <p>
+          El perro está en la granja.  
+          El perro corre por el campo.  
+          La gallina mira al perro.  
+          El perro ladra fuerte.
+        </p>
+      </div>
+    </section>
 
-<div class="block vocab">
-    <h2>Palabras</h2>
-    <p>Granja → lugar con animales</p>
-    <p>Ladrar → hacer guau guau</p>
-</div>
+    <section class="section">
+      <h2 class="section-title">Palabras clave</h2>
+      <ul class="vocab-list">
+        <li><span class="vocab-word">Granja:</span> lugar donde viven animales.</li>
+        <li><span class="vocab-word">Ladrar:</span> hacer “guau, guau”.</li>
+      </ul>
+    </section>
 
-<div class="block questions">
-    <h2>Responde</h2>
-    <p>1. ¿Dónde está el perro?</p>
-    <p>2. ¿Qué hace el perro?</p>
-    <p>3. ¿Quién mira al perro?</p>
-</div>
+    <section class="section">
+      <h2 class="section-title">Responde</h2>
+      <ol class="question-list">
+        <li>
+          ¿Dónde está el perro?
+          <span class="question-answer-line"></span>
+        </li>
+        <li>
+          ¿Qué hace el perro?
+          <span class="question-answer-line"></span>
+        </li>
+        <li>
+          ¿Quién mira al perro?
+          <span class="question-answer-line"></span>
+        </li>
+      </ol>
+    </section>
 
-<div class="block">
-    <h2>Une con flechas</h2>
+    <section class="section">
+      <h2 class="section-title">Verdadero o falso</h2>
+      <ul class="vf-list">
+        <li class="vf-item">
+          <div class="vf-text">El perro está en la granja.</div>
+          <div class="vf-boxes">
+            V <span class="mini-box"></span>
+            F <span class="mini-box"></span>
+          </div>
+        </li>
+        <li class="vf-item">
+          <div class="vf-text">La gallina corre por el campo.</div>
+          <div class="vf-boxes">
+            V <span class="mini-box"></span>
+            F <span class="mini-box"></span>
+          </div>
+        </li>
+        <li class="vf-item">
+          <div class="vf-text">El perro ladra fuerte.</div>
+          <div class="vf-boxes">
+            V <span class="mini-box"></span>
+            F <span class="mini-box"></span>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-    <div class="match">
-        <div class="box">
-            Perro<br>
-            Gallina
+    <section class="section">
+      <h2 class="section-title">Une con flechas</h2>
+      <div class="match-grid">
+        <div class="match-column">
+          <h3>Palabras</h3>
+          <ul class="match-list">
+            <li>Perro</li>
+            <li>Gallina</li>
+          </ul>
         </div>
 
-        <div class="box">
-            Animal que ladra<br>
-            Animal que pone huevos
+        <div class="match-column">
+          <h3>Significados</h3>
+          <ul class="match-list">
+            <li>Animal que pone huevos</li>
+            <li>Animal que ladra</li>
+          </ul>
         </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Actividad final</h2>
+      <div class="activity-box">
+        Dibuja al perro en la granja.
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Academia Esparta · Lectura inicial · 1º de Primaria
     </div>
-</div>
-
-<div class="block">
-    <h2>Actividad</h2>
-    <p>Dibuja al perro en la granja.</p>
-</div>
-
+  </div>
 </body>
 </html>
