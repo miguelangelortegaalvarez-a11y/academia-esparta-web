@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valor Absoluto con Tabla - Academia Esparta</title>
+    <title>Valor Absoluto Cuadrática Completa - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -15,7 +15,7 @@
         body { font-family: 'Poppins', sans-serif; background-color: #f5fdf7; margin: 0; padding: 20px; display: flex; justify-content: center; }
         
         .notebook-page {
-            background-color: white; width: 100%; max-width: 900px; padding: 40px;
+            background-color: white; width: 100%; max-width: 950px; padding: 40px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1); border: 1px solid #ddd;
             background-image: linear-gradient(var(--line-color) 1px, transparent 1px), linear-gradient(90deg, var(--line-color) 1px, transparent 1px);
             background-size: 25px 25px;
@@ -29,11 +29,11 @@
         .step { margin-bottom: 35px; padding-left: 15px; border-left: 4px solid var(--blue); }
         .step h3 { font-family: 'Kalam', cursive; color: var(--blue); margin-top: 0; }
 
-        /* Estilos de la Tabla */
         .tabla-valores { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; font-family: 'Poppins', sans-serif; }
-        .tabla-valores th { background: var(--dark); background-color: #333; color: white; padding: 10px; border: 1px solid #000; }
+        .tabla-valores th { background-color: #333; color: white; padding: 10px; border: 1px solid #000; }
         .tabla-valores td { padding: 10px; border: 1px solid #ccc; text-align: center; font-weight: 600; }
-        .rebote { color: var(--danger); background-color: #fff5f5; }
+        
+        .rebote { color: var(--danger); background-color: #fff5f5; border: 2px solid var(--danger) !important; }
         .normal { color: var(--esparta-green); }
 
         .canvas-container { background: white; padding: 20px; border: 1px solid #ccc; border-radius: 10px; margin-top: 20px; }
@@ -44,61 +44,73 @@
 <div class="notebook-page">
     <div class="header">
         <h1>ACADEMIA ESPARTA</h1>
-        <p><i>"Dominando el Valor Absoluto: De la Tabla a la Gráfica"</i></p>
+        <p><i>"Estudio de Valor Absoluto en una Ecuación Cuadrática Completa"</i></p>
     </div>
 
-    <div class="example-title">Example: \( f(x) = |x^2 - 4| \)</div>
+    <div class="example-title">Example: \( f(x) = |x^2 - 2x - 3| \)</div>
 
     <div class="step">
-        <h3>1. Tabla de Valores Comparativa</h3>
-        <p>Observad qué pasa cuando el resultado de \( x^2 - 4 \) es negativo. El valor absoluto <b>"obliga"</b> al número a ser positivo:</p>
+        <h3>1. Puntos de Corte y Vértice</h3>
+        <p>Primero analizamos la función interior \( g(x) = x^2 - 2x - 3 \) para saber dónde "cae" por debajo de cero.</p>
+        <p><b>A) Puntos de Corte (Raíces):</b> \( x^2 - 2x - 3 = 0 \longrightarrow \) Usando la fórmula general:</p>
+        $$ x = \frac{-(-2) \pm \sqrt{(-2)^2 - 4(1)(-3)}}{2(1)} = \frac{2 \pm \sqrt{16}}{2} \longrightarrow \mathbf{x = 3} \text{ y } \mathbf{x = -1} $$
+        <p><b>B) Vértice:</b> \( x_v = \frac{-b}{2a} = \frac{-(-2)}{2(1)} = \mathbf{1} \). Calculamos \( g(1) = 1^2 - 2(1) - 3 = \mathbf{-4} \).</p>
+        <p><i>Nota espartana:</i> El vértice de la parábola original está en (1, -4). El valor absoluto lo "rebota" a (1, 4).</p>
+    </div>
+
+    <div class="step">
+        <h3>2. Tabla de Valores Comparativa</h3>
+        <p>Al igual que en tu libreta, comparamos los valores. Fijaos cómo en el intervalo entre las raíces (\(x=-1\) y \(x=3\)), los valores negativos se vuelven positivos.</p>
         
         <table class="tabla-valores">
             <thead>
                 <tr>
                     <th>\( x \)</th>
-                    <th>\( x^2 - 4 \) (Sin Valor Absoluto)</th>
-                    <th>\( |x^2 - 4| \) (CON Valor Absoluto)</th>
-                    <th>¿Qué ha pasado?</th>
+                    <th>\( x^2 - 2x - 3 \) (Original)</th>
+                    <th>\( |x^2 - 2x - 3| \) (Valor Absoluto)</th>
+                    <th>Comportamiento</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>-3</td><td>5</td><td class="normal">5</td><td>Se queda igual</td></tr>
-                <tr><td>-2</td><td>0</td><td class="normal">0</td><td>Punto de corte</td></tr>
-                <tr><td>-1</td><td>-3</td><td class="rebote">3</td><td>¡Cambia signo!</td></tr>
-                <tr><td>0</td><td>-4</td><td class="rebote">4</td><td>¡Cambia signo!</td></tr>
-                <tr><td>1</td><td>-3</td><td class="rebote">3</td><td>¡Cambia signo!</td></tr>
-                <tr><td>2</td><td>0</td><td class="normal">0</td><td>Punto de corte</td></tr>
-                <tr><td>3</td><td>5</td><td class="normal">5</td><td>Se queda igual</td></tr>
+                <tr><td>-2</td><td>5</td><td class="normal">5</td><td>Positivo (igual)</td></tr>
+                <tr><td>-1</td><td>0</td><td class="normal">0</td><td>Corte (raíz)</td></tr>
+                <tr><td>0</td><td>-3</td><td class="rebote">3</td><td>¡Cambia Signo! \(\cap\)</td></tr>
+                <tr><td>1 (Vértice)</td><td>-4</td><td class="rebote">4</td><td>¡Máximo Rebote! \(\cap\)</td></tr>
+                <tr><td>2</td><td>-3</td><td class="rebote">3</td><td>¡Cambia Signo! \(\cap\)</td></tr>
+                <tr><td>3</td><td>0</td><td class="normal">0</td><td>Corte (raíz)</td></tr>
+                <tr><td>4</td><td>5</td><td class="normal">5</td><td>Positivo (igual)</td></tr>
             </tbody>
         </table>
     </div>
 
     <div class="step">
-        <h3>2. Definición a trozos</h3>
-        <p>Dependiendo de los valores de la tabla, la función se escribe así:</p>
-        <div style="font-size: 1.2rem; background: #fff; padding: 15px; border: 2px solid #000; display: inline-block;">
-            $$ f(x) = \begin{cases} x^2 - 4 & \text{si } x \le -2 \\ \color{red}{-(x^2 - 4)} & \text{si } -2 < x < 2 \\ x^2 - 4 & \text{si } x \ge 2 \end{cases} $$
+        <h3>3. Función Definida a Trozos</h3>
+        <p>Basándonos en la tabla, definimos la función según el signo de lo de dentro:</p>
+        <div style="font-size: 1.15rem; background: #fff; padding: 15px; border: 2px solid #000; display: inline-block;">
+            $$ f(x) = \begin{cases} x^2 - 2x - 3 & \text{si } x \le -1 \\ \color{red}{-(x^2 - 2x - 3)} & \text{si } -1 < x < 3 \\ x^2 - 2x - 3 & \text{si } x \ge 3 \end{cases} $$
         </div>
+        <p><i>Recordatorio:</i> \(-(x^2 - 2x - 3)\) es lo mismo que \(-x^2 + 2x + 3\).</p>
     </div>
 
     <div class="step">
-        <h3>3. Resultado Final</h3>
+        <h3>4. Representación Gráfica Interactiva</h3>
+        <p>En gris punteado la parábola completa original. En verde Esparta, la función final con el rebote central.</p>
         <div class="canvas-container">
-            <canvas id="graficaAbs"></canvas>
+            <canvas id="graficaAbsCompleta"></canvas>
         </div>
     </div>
 </div>
 
 <script>
-    const ctx = document.getElementById('graficaAbs').getContext('2d');
+    const ctx = document.getElementById('graficaAbsCompleta').getContext('2d');
     const labels = [];
     const dataNormal = [];
     const dataAbs = [];
 
-    for (let x = -4; x <= 4; x += 0.1) {
+    // Generar datos desde x=-3 hasta x=5 para captar bien las raíces y el vértice
+    for (let x = -3; x <= 5; x += 0.1) {
         labels.push(x.toFixed(1));
-        let y = x*x - 4;
+        let y = x*x - 2*x - 3;
         dataNormal.push(y);
         dataAbs.push(Math.abs(y));
     }
@@ -109,7 +121,7 @@
             labels: labels,
             datasets: [
                 {
-                    label: 'Parábola original (Punteada)',
+                    label: 'Parábola Original (x² - 2x - 3)',
                     data: dataNormal,
                     borderColor: '#bbb',
                     borderDash: [5, 5],
@@ -117,7 +129,7 @@
                     pointRadius: 0
                 },
                 {
-                    label: 'Valor Absoluto (REBOTE)',
+                    label: 'Función f(x) = |x² - 2x - 3|',
                     data: dataAbs,
                     borderColor: '#0e9343',
                     borderWidth: 3,
@@ -129,8 +141,17 @@
         options: {
             responsive: true,
             scales: {
-                y: { min: -5, max: 12 },
-                x: { ticks: { callback: function(val, index) { return index % 10 === 0 ? this.getLabelForValue(val) : ''; } } }
+                y: { min: -5, max: 15, title: { display: true, text: 'y' } },
+                x: { ticks: { callback: function(val, index) { return index % 10 === 0 ? this.getLabelForValue(val) : ''; } }, title: { display: true, text: 'x' } }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: (${context.parsed.x.toFixed(1)}, ${context.parsed.y.toFixed(1)})`;
+                        }
+                    }
+                }
             }
         }
     });
