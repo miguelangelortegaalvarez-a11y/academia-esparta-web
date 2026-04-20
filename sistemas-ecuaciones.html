@@ -1,101 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aprende las Letras · Academia Esparta</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Short+Stack&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #0e9343;
-      --danger: #d32f2f;
-      --border: #b9dec4;
-      --font-profesor: 'Kalam', cursive;
-      --font-ninos: 'Short Stack', cursive;
-    }
-
-    body { margin: 0; padding: 0; background: #fff; font-family: var(--font-ninos); color: #333; }
-    .page { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 15mm; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caligrafía Inicial - Cecilia Herrera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Short+Stack&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     
-    .header-letra { 
-        text-align: center; margin-bottom: 20px; border: 4px dashed var(--primary);
-        border-radius: 20px; padding: 10px;
-    }
-    .letra-protagonista { 
-        font-family: var(--font-profesor); font-size: 80px; 
-        color: var(--danger); line-height: 1; margin: 0;
-    }
-    
-    .main-title { font-family: var(--font-profesor); font-size: 30px; color: var(--primary); margin: 5px 0; }
-    .linea-nombre { display: flex; gap: 10px; margin-bottom: 30px; font-family: var(--font-profesor); font-size: 22px; }
-    .hueco { flex: 1; border-bottom: 2px solid #ccc; }
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    .bloque { border: 3px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
-    .titulo-bloque { font-family: var(--font-profesor); color: var(--primary); font-size: 24px; margin-bottom: 15px; display: block; }
+    <style>
+        :root { --esparta-green: #0e9343; --danger: #d32f2f; --blue: #2980b9; --line-color: #e0e0e0; --pauta-color: #eee; }
+        
+        body { font-family: 'Poppins', sans-serif; background-color: #f5fdf7; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        .btn-imprimir { background-color: var(--esparta-green); color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: 700; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3); transition: 0.3s; }
+        .btn-imprimir:hover { background-color: #063c24; transform: scale(1.05); }
 
-    /* LECTURA CON LETRA RESALTADA */
-    .lectura-silabica { font-size: 36px; line-height: 1.8; text-align: center; }
-    .resaltar { color: var(--danger); font-weight: bold; text-decoration: underline; }
+        .notebook-page { background-color: white; width: 100%; max-width: 950px; padding: 40px; box-shadow: 0 0 20px rgba(0,0,0,0.1); border: 1px solid #ddd; background-image: linear-gradient(var(--line-color) 1px, transparent 1px), linear-gradient(90deg, var(--line-color) 1px, transparent 1px); background-size: 25px 25px; box-sizing: border-box; position: relative; }
 
-    .grid-silabas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; text-align: center; margin-top: 10px; }
-    .silaba-box { border: 2px solid #eee; border-radius: 10px; padding: 10px; font-size: 30px; background: #fafafa; }
+        .header { border-bottom: 3px solid var(--esparta-green); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
+        .header h1 { color: var(--esparta-green); margin: 0; text-transform: uppercase; font-size: 2rem; }
+        .student-name { position: absolute; top: 20px; right: 40px; font-family: 'Kalam', cursive; font-size: 1.4rem; color: var(--blue); }
 
-    .box-dibujo { width: 100%; height: 180px; border: 3px dashed #ddd; border-radius: 20px; margin-top: 10px; }
+        .exercise-title { font-family: 'Kalam', cursive; font-size: 1.8rem; color: var(--esparta-green); text-decoration: underline; margin-bottom: 20px; }
+        
+        .step { margin-bottom: 40px; padding-left: 15px; border-left: 4px solid var(--esparta-green); page-break-inside: avoid; }
+        .step h3 { font-family: 'Kalam', cursive; color: var(--blue); margin-top: 0; }
 
-    @media print { .page { margin: 0; } .btn-print { display: none; } }
-  </style>
+        /* Silabas y copia debajo */
+        .silabas-container { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .silabas-row { display: flex; justify-content: space-around; gap: 10px; }
+        .silaba-letra { font-family: 'Short Stack', cursive; font-size: 40px; color: var(--esparta-green); }
+        .silaba-pauta { width: 100px; height: 100px; border: 2px dashed #bbb; border-radius: 10px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
+
+        /* Pauta Caligráfica Profesional */
+        .pauta-escribir { border-bottom: 1px solid #ddd; height: 40px; width: 100%; display: flex; align-items: flex-end; position: relative; }
+        .pauta-escribir::after { content: ".................................................................................................................................."; position: absolute; left: 0; bottom: 10px; color: #ddd; letter-spacing: 5px; font-size: 10px; }
+
+        /* Leo, Copio, Dibujo */
+        .lectura-caligrafia { width: 100%; border-collapse: collapse; margin-top: 20px; font-family: 'Short Stack', cursive; }
+        .lectura-caligrafia td { border: 1px solid #ccc; padding: 15px; vertical-align: middle; }
+        .col-palabra { font-size: 30px; color: var(--esparta-green); text-align: center; width: 30%; }
+        .col-copia { width: 45%; padding-top: 20px; }
+        .col-dibujo { width: 25%; text-align: center; }
+        .cuadro-dibujo { width: 100px; height: 100px; border: 2px dashed #ddd; border-radius: 10px; background: #fafafa; margin: auto; }
+
+        @media print { @page { margin: 1cm; } body { background-color: white; padding: 0; } .btn-imprimir { display: none; } .notebook-page { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 20px; } }
+    </style>
 </head>
 <body>
 
-  <div class="page">
-    <header class="header-letra">
-      <div class="letra-protagonista">M m</div>
-      <h1 class="main-title">La letra de Mamá</h1>
-    </header>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar Caligrafía de Cecilia Herrera</button>
 
-    <div class="linea-nombre">
-      <span>Mi nombre:</span> <div class="hueco"></div>
+    <div class="notebook-page">
+        <div class="student-name">Para la alumna: Cecilia Herrera</div>
+        
+        <div class="header">
+            <h1>ACADEMIA ESPARTA</h1>
+            <p><i>"Leo, Escribo y Dibujo: Paso a Paso"</i></p>
+        </div>
+
+        <div class="exercise-title">Ejercicio: Caligrafía con la Letra "M"</div>
+
+        <div class="step">
+            <h3>1. Lee las sílabas y cópialas debajo</h3>
+            <p>Primero léelas en alto y luego escríbelas **exactamente igual** en el cuadro punteado.</p>
+            <div class="silabas-container">
+                <div class="silabas-row">
+                    <span class="silaba-letra">ma</span><span class="silaba-letra">me</span><span class="silaba-letra">mi</span><span class="silaba-letra">mo</span><span class="silaba-letra">mu</span>
+                </div>
+                <div class="silabas-row">
+                    <div class="silaba-pauta"></div><div class="silaba-pauta"></div><div class="silaba-pauta"></div><div class="silaba-pauta"></div><div class="silaba-pauta"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>2. Leo mis primeras palabras y las copio en la pauta</h3>
+            <p>Observad el ejemplo: leemos, escribimos y dibujamos para que la cabeza y la mano trabajen juntas.</p>
+            
+            <table class="lectura-caligrafia">
+                <thead><tr><th>Palabra</th><th>Leo y Copio</th><th>Dibujo</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="col-palabra">ma - má</td>
+                        <td class="col-copia">
+                            <div class="pauta-escribir"></div>
+                        </td>
+                        <td class="col-dibujo">
+                            <div class="cuadro-dibujo"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-palabra">me - sa</td>
+                        <td class="col-copia">
+                            <div class="pauta-escribir"></div>
+                        </td>
+                        <td class="col-dibujo">
+                            <div class="cuadro-dibujo"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-palabra">mi - el</td>
+                        <td class="col-copia">
+                            <div class="pauta-escribir"></div>
+                        </td>
+                        <td class="col-dibujo">
+                            <div class="cuadro-dibujo"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
-
-    <section class="bloque">
-      <span class="titulo-bloque">1. Lee las sílabas</span>
-      <div class="grid-silabas">
-        <div class="silaba-box">ma</div>
-        <div class="silaba-box">me</div>
-        <div class="silaba-box">mi</div>
-        <div class="silaba-box">mo</div>
-        <div class="silaba-box">mu</div>
-      </div>
-    </section>
-
-    <section class="bloque">
-      <span class="titulo-bloque">2. Leo mis primeras palabras</span>
-      <div class="lectura-silabica">
-        <span class="resaltar">M</span>i <span class="resaltar">m</span>a<span class="resaltar">m</span>á <span class="resaltar">m</span>e a<span class="resaltar">m</span>a. <br>
-        A<span class="resaltar">m</span>o a <span class="resaltar">m</span>i <span class="resaltar">m</span>a<span class="resaltar">m</span>á. <br>
-        <span class="resaltar">M</span>i<span class="resaltar">m</span>í <span class="resaltar">m</span>e <span class="resaltar">m</span>i<span class="resaltar">m</span>a.
-      </div>
-    </section>
-
-    <section class="bloque">
-      <span class="titulo-bloque">3. Escribe y dibuja</span>
-      <div style="display: flex; justify-content: space-around; align-items: center; font-size: 24px;">
-        <div style="text-align: center;">
-            <span>Miel</span>
-            <div style="width:100px; height:100px; border:1px solid #ccc; margin-top:5px;"></div>
-        </div>
-        <div style="text-align: center;">
-            <span>Mesa</span>
-            <div style="width:100px; height:100px; border:1px solid #ccc; margin-top:5px;"></div>
-        </div>
-        <div style="text-align: center;">
-            <span>Mano</span>
-            <div style="width:100px; height:100px; border:1px solid #ccc; margin-top:5px;"></div>
-        </div>
-      </div>
-    </section>
-
-  </div>
 
 </body>
 </html>
