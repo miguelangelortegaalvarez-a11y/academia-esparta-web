@@ -71,11 +71,11 @@
 
         <div class="step">
             <h3>1. Definición Analítica</h3>
-            <p>Presta atención a los símbolos de desigualdad ($<$ frente a $\le$):</p>
+            <p>Presta atención a los símbolos de desigualdad (\( < \) frente a \( \le \)):</p>
             <div style="font-size: 1.3rem; background: #f9f9f9; padding: 20px; border: 1px solid #ddd; display: inline-block;">
                 $$ f(x) = \begin{cases} x + 4 & \text{si } x < -2 \\ x^2 - 2 & \text{si } -2 \le x \le 2 \\ 2 & \text{si } x > 2 \end{cases} $$
             </div>
-            <p><i>Nota:</i> Si tiene el signo igual ($\le$), el punto es <b>cerrado</b> (relleno). Si no lo tiene ($<$), el punto es <b>abierto</b> (vacío).</p>
+            <p>Nota: Si tiene el signo igual (\( \le \)), el punto es <b>cerrado</b> (relleno). Si no lo tiene (\( < \)), el punto es <b>abierto</b> (vacío).</p>
         </div>
 
         <div class="step">
@@ -174,25 +174,25 @@
                         pointRadius: 0,
                         fill: false
                     },
-                    // Puntos Abiertos
+                    // PUNTOS ABIERTOS (VACIÓS)
                     {
                         label: 'Puntos Abiertos',
-                        data: labels.map(x => (x === -2) ? 2 : (x === 2.1) ? 2 : null),
-                        borderColor: '#1976d2',
+                        // Solo en el final del tramo 1 y el inicio del tramo 3
+                        data: labels.map(x => (x === -2.0) ? 2 : (x === 2.1) ? 2 : null),
+                        borderColor: (context) => context.raw === 2 && labels[context.dataIndex] < 0 ? '#1976d2' : '#7b1fa2',
                         backgroundColor: 'white',
                         pointRadius: 6,
-                        pointHoverRadius: 8,
                         showLine: false,
                         pointStyle: 'circle'
                     },
-                    // Puntos Cerrados
+                    // PUNTOS CERRADOS (RELLENOS)
                     {
                         label: 'Puntos Cerrados',
-                        data: labels.map(x => (x === -2 || x === 2) ? 2 : null),
+                        // Ahora sí: Cerrado tanto en -2 como en 2 para la parábola
+                        data: labels.map(x => (x === -2.0 || x === 2.0) ? 2 : null),
                         borderColor: '#0e9343',
                         backgroundColor: '#0e9343',
                         pointRadius: 6,
-                        pointHoverRadius: 8,
                         showLine: false,
                         pointStyle: 'circle'
                     }
