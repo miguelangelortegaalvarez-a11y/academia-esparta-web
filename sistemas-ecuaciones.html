@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1º Bachillerato - Recta Tangente - Academia Esparta</title>
+    <title>1º Bachillerato CCSS - Recta Tangente - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -11,127 +11,123 @@
 
     <style>
         :root { 
-            --esparta-gold: #b8860b; 
-            --esparta-red: #8b0000; 
+            --esparta-blue: #0d47a1; /* Azul Corporativo */
+            --esparta-gold: #ffab00; /* Dorado Corporativo */
             --esparta-dark: #1a1a1a;
-            --text-main: #333;
+            --white: #ffffff;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; color: var(--text-main); }
+        body { font-family: 'Montserrat', sans-serif; background-color: #e0e0e0; margin: 0; padding: 20px; color: #333; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
-            background-color: var(--esparta-red); color: white; border: none; padding: 12px 30px; border-radius: 5px;
-            font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+            background-color: var(--esparta-blue); color: var(--white); border: 2px solid var(--esparta-gold); 
+            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; 
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
         }
-        .btn-imprimir:hover { background-color: black; transform: translateY(-2px); }
+        .btn-imprimir:hover { background-color: var(--esparta-dark); border-color: var(--white); }
 
         .page { 
-            background-color: white; width: 210mm; min-height: 297mm; padding: 20mm; 
-            box-shadow: 0 0 30px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
-            border-top: 10px solid var(--esparta-red);
+            background-color: var(--white); width: 210mm; min-height: 297mm; padding: 20mm; 
+            box-shadow: 0 0 25px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
+            border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
         }
 
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--esparta-dark); padding-bottom: 10px; margin-bottom: 30px; }
-        .header-title h1 { font-weight: 900; font-size: 28px; margin: 0; color: var(--esparta-dark); }
-        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-red); margin: 0; font-size: 18px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 30px; }
+        .header-title h1 { font-weight: 900; font-size: 30px; margin: 0; color: var(--esparta-blue); letter-spacing: -1px; }
+        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 18px; font-weight: 700; }
         
-        .level-badge { background: var(--esparta-dark); color: white; padding: 5px 15px; font-weight: 700; border-radius: 3px; font-size: 12px; }
+        .level-badge { background: var(--esparta-blue); color: var(--white); padding: 8px 15px; font-weight: 700; border-radius: 4px; font-size: 12px; border: 1px solid var(--esparta-gold); }
 
-        .section-header { display: flex; align-items: center; margin: 25px 0 15px; }
-        .section-header h2 { font-size: 20px; font-weight: 900; text-transform: uppercase; color: var(--esparta-red); margin: 0; letter-spacing: 1px; }
-        .section-header .line { flex-grow: 1; height: 2px; background: #eee; margin-left: 15px; }
+        .section-header { display: flex; align-items: center; margin: 30px 0 15px; }
+        .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
+        .section-header .gold-line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; border-radius: 2px; }
 
-        .teoria-container { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 25px; }
+        .teoria-box { background: #f0f4f8; padding: 20px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 25px; font-size: 14px; line-height: 1.6; }
         
-        .formula-box { 
-            background: var(--esparta-dark); color: white; text-align: center; padding: 20px; border-radius: 8px; margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        .formula-main { 
+            background: var(--esparta-dark); color: var(--white); text-align: center; padding: 25px; border-radius: 8px; margin: 25px 0;
+            border: 2px solid var(--esparta-gold); box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
 
-        .ejemplo-box { border-left: 5px solid var(--esparta-gold); padding: 10px 20px; background: #fffcf2; margin: 20px 0; }
-        .paso { font-weight: 700; color: var(--esparta-red); margin-right: 10px; }
+        .ejemplo-card { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fffdf5; margin: 20px 0; position: relative; }
+        .ejemplo-card::before { content: "EJEMPLO RESUELTO"; position: absolute; top: -10px; left: 20px; background: var(--esparta-gold); color: var(--esparta-dark); padding: 2px 10px; font-size: 10px; font-weight: 900; border-radius: 3px; }
 
-        .ejercicio-area { border: 2px dashed #ccc; border-radius: 10px; padding: 20px; margin-top: 20px; position: relative; }
-        .ejercicio-area::after { content: "Espacio para resolución técnica"; position: absolute; bottom: 10px; right: 10px; font-size: 10px; color: #aaa; text-transform: uppercase; }
+        .paso-id { color: var(--esparta-blue); font-weight: 900; }
 
-        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #777; border-top: 1px solid #eee; padding-top: 10px; }
+        .ejercicio-container { border: 2px dashed var(--esparta-blue); border-radius: 10px; padding: 20px; margin-top: 25px; background: #fafafa; }
+        .ejercicio-container b { color: var(--esparta-blue); }
+
+        .footer { text-align: center; margin-top: 50px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; font-weight: 600; }
 
         @media print {
             body { background: white; padding: 0; }
             .btn-imprimir { display: none; }
-            .page { box-shadow: none; border: none; margin: 0; width: 100%; padding: 10mm; }
+            .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; padding: 10mm; }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Bachillerato</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Corporativa</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>"Vencer o Morir en el Examen"</p>
+                <p>Formando Líderes en Ciencias Sociales</p>
             </div>
-            <div class="level-badge">1º BACHILLERATO - CIENCIAS</div>
+            <div class="level-badge">1º BACHILLERATO CCSS</div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>Fundamento Teórico</h2>
-                <div class="line"></div>
+                <h2>Cálculo de la Recta Tangente</h2>
+                <div class="gold-line"></div>
             </div>
-            <div class="teoria-container">
-                La <b>Recta Tangente</b> a una función \(f(x)\) en el punto de abscisa \(x = a\) representa la aproximación lineal de primer orden de la función en dicho entorno. Su pendiente coincide con el valor de la derivada instantánea.
-                <br><br>
-                <b>Elementos necesarios:</b>
-                <ul>
-                    <li><b>Punto de contacto:</b> \((a, f(a))\)</li>
-                    <li><b>Pendiente:</b> \(m = f'(a)\)</li>
-                </ul>
+            <div class="teoria-box">
+                La <b>Recta Tangente</b> es la herramienta fundamental para entender la variación local de una función. En Ciencias Sociales, la pendiente de esta recta representa la <b>tasa de cambio marginal</b> (cómo varía el beneficio, el coste o el ingreso ante un pequeño incremento en la producción \(x\)).
             </div>
 
-            <div class="formula-box">
-                <span style="color: var(--esparta-gold); font-size: 14px; display: block; margin-bottom: 10px;">Ecuación Punto-Pendiente</span>
+            <div class="formula-main">
+                <span style="color: var(--esparta-gold); font-size: 13px; text-transform: uppercase; letter-spacing: 2px;">Ecuación del Modelo</span>
                 \[ y - f(a) = f'(a) \cdot (x - a) \]
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>Aplicación Práctica (Modelado)</h2>
-                <div class="line"></div>
+                <h2>Procedimiento Estándar</h2>
+                <div class="gold-line"></div>
             </div>
-            <div class="ejemplo-box">
-                <b>Problema:</b> Hallar la recta tangente a \(f(x) = \frac{x^2}{x-1}\) en \(x = 2\).
+            <div class="ejemplo-card">
+                <b>Enunciado:</b> Calcula la recta tangente a \(f(x) = x^2 - 6x + 8\) en el punto de abscisa \(x = 4\).
                 <br><br>
-                <span class="paso">I. Punto:</span> \(f(2) = \frac{2^2}{2-1} = 4 \rightarrow \mathbf{P(2, 4)}\)<br>
-                <span class="paso">II. Derivada:</span> \(f'(x) = \frac{2x(x-1) - x^2 \cdot 1}{(x-1)^2} = \frac{x^2-2x}{(x-1)^2}\)<br>
-                <span class="paso">III. Pendiente:</span> \(f'(2) = \frac{2^2 - 2(2)}{(2-1)^2} = 0\)<br>
-                <span class="paso">IV. Recta:</span> \(y - 4 = 0(x - 2) \rightarrow \mathbf{y = 4}\) (Recta horizontal)
+                <span class="paso-id">1. Imagen del punto:</span> \(f(4) = 4^2 - 6(4) + 8 = 16 - 24 + 8 = \mathbf{0}\). Punto \(\mathbf{(4, 0)}\).<br>
+                <span class="paso-id">2. Pendiente marginal:</span> Derivamos \(f'(x) = 2x - 6\). Evaluamos: \(f'(4) = 2(4) - 6 = \mathbf{2}\).<br>
+                <span class="paso-id">3. Ecuación:</span> \(y - 0 = 2(x - 4) \rightarrow \mathbf{y = 2x - 8}\).
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>Entrenamiento Espartano</h2>
+                <h2>Área de Entrenamiento</h2>
                 <div class="line"></div>
             </div>
             
-            <div class="ejercicio-area">
-                <b>EJERCICIO 1.</b> Determina la ecuación de la recta tangente a la curva \(f(x) = e^x \cdot \ln(x)\) en el punto de abscisa \(x = 1\). 
-                <br><br><br><br><br><br><br><br>
+            <div class="ejercicio-container">
+                <b>EJERCICIO 1.</b> Una función de ingresos viene dada por \(I(x) = -2x^2 + 12x\). Determina la tendencia de los ingresos (recta tangente) en el punto donde se producen 2 unidades (\(x=2\)).
+                <br><br><br><br><br><br>
             </div>
 
-            <div class="ejercicio-area">
-                <b>EJERCICIO 2.</b> Halla los puntos de la función \(f(x) = x^3 - 3x + 2\) en los que la recta tangente es paralela al eje de abscisas.
-                <br><br><br><br><br><br><br><br>
+            <div class="ejercicio-container">
+                <b>EJERCICIO 2.</b> Halla la ecuación de la recta tangente a la curva \(f(x) = \frac{4}{x}\) en el punto \(x = 2\). 
+                <br><br><br><br><br><br>
             </div>
         </section>
 
         <footer class="footer">
-            Academia Esparta S.L. · Departamento de Matemáticas Avanzadas · 2026
+            © 2026 Academia Esparta · Departamento de Matemáticas Aplicadas · Excelencia Académica
         </footer>
     </div>
 
