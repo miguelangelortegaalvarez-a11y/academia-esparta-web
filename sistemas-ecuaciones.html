@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciación al Álgebra - Pablo</title>
+    <title>Batería de Álgebra (35 Ejercicios) - Pablo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -11,126 +11,102 @@
 
     <style>
         :root { --primary: #0e9343; --accent: #ff9800; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
         
         .btn-imprimir {
+            display: block; width: fit-content; margin: 0 auto 20px;
             background-color: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px;
-            font-weight: 700; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.2); transition: 0.3s;
+            font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.2); transition: 0.3s;
         }
         .btn-imprimir:hover { background-color: #063c24; transform: scale(1.05); }
 
         .page { 
-            background-color: white; width: 210mm; min-height: 297mm; padding: 20mm; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08); box-sizing: border-box; position: relative; 
+            background-color: white; width: 210mm; min-height: 297mm; padding: 15mm 20mm; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); box-sizing: border-box; position: relative; margin: 0 auto;
         }
 
-        .header { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
-        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 38px; text-transform: uppercase; }
+        .header { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; text-align: center; }
+        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 32px; text-transform: uppercase; }
 
-        .student-tag { position: absolute; top: 15mm; right: 20mm; font-family: 'Kalam', cursive; color: #555; font-size: 1.3rem; }
+        .student-tag { position: absolute; top: 15mm; right: 20mm; font-family: 'Kalam', cursive; color: #555; font-size: 1.1rem; }
 
-        .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: #333; background: #e8f5e9; padding: 5px 15px; border-radius: 10px; display: inline-block; margin-bottom: 20px; }
+        .instruction-box { background: #e8f5e9; padding: 10px 15px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; border-left: 5px solid var(--primary); }
 
-        .diccionario-box { background: #fff3e0; border: 1px dashed var(--accent); padding: 15px; border-radius: 10px; margin-bottom: 30px; font-size: 14px; }
-        .diccionario-box b { color: #e65100; }
-
-        .tabla-ejercicios { width: 100%; border-collapse: collapse; }
-        .tabla-ejercicios td { border-bottom: 1px solid #eee; padding: 15px; vertical-align: middle; }
-        .num-ej { font-weight: 800; color: var(--primary); margin-right: 10px; }
-        .espacio-respuesta { font-family: 'Roboto Mono', monospace; color: var(--accent); font-weight: bold; border-bottom: 2px solid #ccc; width: 150px; display: inline-block; text-align: center; min-height: 25px; margin-left: 10px; }
-
-        .footer { text-align: center; font-size: 11px; color: #bbb; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px; }
+        .ejercicios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+        .ej-item { border-bottom: 1px solid #eee; padding: 8px 0; display: flex; justify-content: space-between; align-items: flex-end; font-size: 13px; }
+        .num { font-weight: 800; color: var(--primary); margin-right: 5px; min-width: 25px; display: inline-block; }
+        .texto-ej { flex-grow: 1; line-height: 1.2; }
+        .linea-resp { border-bottom: 1px solid #aaa; width: 80px; height: 18px; margin-left: 10px; flex-shrink: 0; }
 
         @media print {
             body { background: white; padding: 0; }
             .btn-imprimir { display: none; }
-            .page { box-shadow: none; border: none; margin: 0; width: 100%; }
+            .page { box-shadow: none; border: none; margin: 0; width: 100%; padding: 10mm; }
+            .ejercicios-grid { gap: 10px 40px; }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha para Pablo</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Entrenamiento (35 Ejercicios)</button>
 
     <div class="page">
         <div class="student-tag">Alumno: Pablo</div>
         
         <header class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>"El lenguaje de las matemáticas es el comienzo de grandes descubrimientos"</p>
+            <p>Traducción a Lenguaje Algebraico</p>
         </header>
 
-        <div class="diccionario-box">
-            <b>Pequeño Diccionario Matemático:</b><br>
-            - "Un número": Se escribe <b>x</b> (o cualquier letra).<br>
-            - "Doble": Se escribe <b>2x</b>. &nbsp;&nbsp; - "Triple": Se escribe <b>3x</b>.<br>
-            - "Aumentado/Sumado": Significa <b>+</b>. &nbsp;&nbsp; - "Disminuido/Resta": Significa <b>-</b>.<br>
-            - "Siguiente de un número": Se escribe <b>x + 1</b>.
+        <div class="instruction-box">
+            <b>Instrucciones:</b> Escribe la expresión matemática para cada enunciado. Utiliza la letra <b>x</b> para representar "un número".
         </div>
 
-        <section>
-            <span class="section-title">Reto 1: Traduce a Lenguaje Algebraico</span>
-            <table class="tabla-ejercicios">
-                <tr>
-                    <td><span class="num-ej">1.</span> Un número cualquiera disminuido en 5 unidades:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-                <tr>
-                    <td><span class="num-ej">2.</span> El doble de un número:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-                <tr>
-                    <td><span class="num-ej">3.</span> Un número aumentado en 10:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-                <tr>
-                    <td><span class="num-ej">4.</span> El triple de un número menos 2 unidades:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-                <tr>
-                    <td><span class="num-ej">5.</span> La mitad de un número:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-                <tr>
-                    <td><span class="num-ej">6.</span> El cuadrado de un número:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-                <tr>
-                    <td><span class="num-ej">7.</span> La suma de un número y su siguiente:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-                <tr>
-                    <td><span class="num-ej">8.</span> El doble de un número más su mitad:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-                <tr>
-                    <td><span class="num-ej">9.</span> Los años de Pablo dentro de 12 años:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-                <tr>
-                    <td><span class="num-ej">10.</span> El precio de "x" kilos de manzanas a 2€ el kilo:</td>
-                    <td><div class="espacio-respuesta"></div></td>
-                </tr>
-            </table>
-        </section>
+        <div class="ejercicios-grid">
+            <div class="ej-item"><span class="num">1.</span> <span class="texto-ej">Un número cualquiera.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">2.</span> <span class="texto-ej">El triple de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">3.</span> <span class="texto-ej">Un número más ocho.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">4.</span> <span class="texto-ej">La mitad de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">5.</span> <span class="texto-ej">Un número menos doce.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">6.</span> <span class="texto-ej">El doble de un número más siete.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">7.</span> <span class="texto-ej">El cuadrado de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">8.</span> <span class="texto-ej">El siguiente de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">9.</span> <span class="texto-ej">El anterior de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">10.</span> <span class="texto-ej">La suma de dos números distintos.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">11.</span> <span class="texto-ej">Un número par (2 por algo).</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">12.</span> <span class="texto-ej">Un número impar.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">13.</span> <span class="texto-ej">La cuarta parte de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">14.</span> <span class="texto-ej">El triple de un número menos cinco.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">15.</span> <span class="texto-ej">El cubo de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">16.</span> <span class="texto-ej">Un número al que se le quita su mitad.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">17.</span> <span class="texto-ej">El doble del siguiente de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">18.</span> <span class="texto-ej">El triple de la suma de x más 2.</span> <div class="linea-resp"></div></div>
 
-        <section style="margin-top: 30px;">
-            <span class="section-title">Reto 2: Pensamiento Lógico</span>
-            <p style="font-size: 14px; color: #444;">Si <b>x</b> es la edad actual de Pablo, escribe cómo dirías:</p>
-            <ul style="list-style-type: square; color: #555; line-height: 2;">
-                <li>La edad que tenía el año pasado: <span class="espacio-respuesta" style="width: 80px;"></span></li>
-                <li>La edad que tendrá cuando pasen el doble de años que ahora: <span class="espacio-respuesta" style="width: 80px;"></span></li>
-            </ul>
-        </section>
+            <div class="ej-item"><span class="num">19.</span> <span class="texto-ej">La suma de tres números seguidos.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">20.</span> <span class="texto-ej">Un número más su mitad.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">21.</span> <span class="texto-ej">El cuadrado de la suma de x y 3.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">22.</span> <span class="texto-ej">La diferencia de dos cuadrados.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">23.</span> <span class="texto-ej">El 10% de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">24.</span> <span class="texto-ej">El precio de x bolis a 1,50€.</span> <div class="line-resp"></div></div>
+            <div class="ej-item"><span class="num">25.</span> <span class="texto-ej">Edad de Pablo dentro de 20 años.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">26.</span> <span class="texto-ej">Edad de Pablo hace 5 años.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">27.</span> <span class="texto-ej">La mitad del triple de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">28.</span> <span class="texto-ej">Suma de un número y su cuadrado.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">29.</span> <span class="texto-ej">Perímetro de un cuadrado de lado x.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">30.</span> <span class="texto-ej">Área de un cuadrado de lado x.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">31.</span> <span class="texto-ej">Un número aumentado en su doble.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">32.</span> <span class="texto-ej">Triple de un número más su cuarta parte.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">33.</span> <span class="texto-ej">La raíz cuadrada de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">34.</span> <span class="texto-ej">Cinco menos el doble de un número.</span> <div class="linea-resp"></div></div>
+            <div class="ej-item"><span class="num">35.</span> <span class="texto-ej">El producto de un número y su siguiente.</span> <div class="linea-resp"></div></div>
+        </div>
 
-        <section style="margin-top: 30px; text-align: center;">
-            <p style="font-family: 'Kalam', cursive; font-size: 1.2rem; color: var(--primary);">
-                "Pablo, recuerda: la x es solo un número que aún no conocemos. ¡Tú puedes!"
-            </p>
-        </section>
+        <div style="margin-top: 30px; text-align: center; font-family: 'Kalam', cursive; color: #777;">
+            "Pablo, el álgebra es como un idioma nuevo. ¡Practica y lo hablarás perfecto!"
+        </div>
 
-        <footer class="footer">
-            Academia Esparta · Introducción al Álgebra · 1º ESO
+        <footer style="text-align: center; font-size: 10px; color: #bbb; margin-top: 20px;">
+            Academia Esparta · Álgebra 1º ESO · 2026
         </footer>
     </div>
 
