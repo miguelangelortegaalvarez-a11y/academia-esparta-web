@@ -3,30 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Súper Ficha Letra D - Academia Esparta</title>
+    <title>Refuerzo Letra D - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Short+Stack&display=swap" rel="stylesheet">
     
     <style>
         :root { 
             --esparta-green: #0e9343; 
             --soft-gray: #f9f9f9;
-            --border-color: #d1e7dd;
             --font-profe: 'Kalam', cursive;
             --font-ninos: 'Short Stack', cursive;
         }
         
-        body { 
-            font-family: var(--font-ninos); 
-            background-color: #fff; 
-            margin: 0; padding: 0; 
-            color: #333;
-        }
+        body { font-family: var(--font-ninos); background-color: #fff; margin: 0; padding: 0; }
 
         .btn-imprimir {
             display: block; width: fit-content; margin: 20px auto;
             background-color: var(--esparta-green); color: white;
             border: none; padding: 12px 25px; border-radius: 30px;
-            font-weight: 700; cursor: pointer; font-family: var(--font-ninos);
+            font-weight: 700; cursor: pointer;
         }
 
         .page { 
@@ -35,130 +29,100 @@
             border: 1px solid #eee;
         }
 
-        .header { text-align: center; border-bottom: 2px solid var(--esparta-green); margin-bottom: 20px; padding-bottom: 10px; }
-        .header h1 { font-family: var(--font-profe); color: var(--esparta-green); margin: 0; font-size: 40px; }
+        .header { text-align: center; border-bottom: 2px solid var(--esparta-green); margin-bottom: 20px; }
+        .header h1 { font-family: var(--font-profe); color: var(--esparta-green); margin: 0; font-size: 45px; }
 
-        .section { margin-bottom: 25px; page-break-inside: avoid; }
+        .section { margin-bottom: 30px; page-break-inside: avoid; }
         .section-title { 
-            font-family: var(--font-profe); font-size: 26px; 
-            color: var(--esparta-green); border-bottom: 2px solid var(--border-color);
+            font-family: var(--font-profe); font-size: 28px; 
+            color: var(--esparta-green); border-bottom: 2px solid #eee;
             display: block; margin-bottom: 15px;
         }
 
-        /* Lectura */
-        .lectura-box { 
-            font-size: 28px; line-height: 1.6; text-align: center; 
-            background: var(--soft-gray); padding: 20px; border-radius: 15px;
-            border: 2px dashed var(--border-color);
+        /* Ejercicio 1: Encontrar la D */
+        .sopa-letras { 
+            display: flex; justify-content: space-around; font-size: 50px; 
+            font-weight: bold; background: #fffceb; padding: 20px; border-radius: 20px;
+            border: 2px dashed #ffc107;
         }
+        .sopa-letras span { padding: 0 10px; }
 
-        /* Ejercicios de completar */
-        .completar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 24px; text-align: center; }
-        .palabra-hueco { border-bottom: 2px solid #333; width: 60px; display: inline-block; height: 30px; }
+        /* Ejercicio 2: Sílabas Gigantes */
+        .silabas-grandes { display: flex; justify-content: space-around; font-size: 60px; color: var(--esparta-green); font-weight: bold; }
 
-        /* Verdadero o Falso */
-        .vf-item { display: flex; justify-content: space-between; align-items: center; font-size: 22px; margin-bottom: 12px; }
-        .box-vf { border: 2px solid #555; padding: 5px 10px; border-radius: 8px; font-size: 18px; font-weight: bold; }
+        /* Ejercicio 3: Unir Emojis */
+        .unir-facil { display: flex; justify-content: space-around; font-size: 40px; margin-top: 10px; }
+        .col { display: flex; flex-direction: column; gap: 20px; }
 
-        /* Unir con flechas */
-        .unir-container { display: flex; justify-content: space-around; font-size: 24px; padding: 10px 0; border: 1px solid #eee; border-radius: 15px; }
-        .columna { display: flex; flex-direction: column; gap: 15px; }
-
-        /* Caligrafía de Frases */
-        .frase-unidad { margin-bottom: 20px; }
-        .frase-leer { font-size: 26px; color: #000; margin-bottom: 5px; }
-        .pauta-copia { 
-            height: 40px; border-bottom: 1px solid #999; position: relative; width: 100%;
+        /* Ejercicio 4: Copia de palabras cortas */
+        .pauta-simple { 
+            height: 60px; border-bottom: 2px solid #ccc; position: relative; width: 100%; margin-top: 10px;
         }
-        .pauta-copia::before {
-            content: ""; position: absolute; top: 50%; left: 0; right: 0;
-            border-top: 1px dashed #ddd;
-        }
+        .pauta-simple::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; border-top: 1px dashed #ddd; }
+        .palabra-guia { font-size: 40px; margin-bottom: 5px; }
 
         @media print {
-            body { background: white; padding: 0; }
             .btn-imprimir { display: none; }
-            .page { width: 100%; margin: 0; border: none; padding: 10mm; }
+            .page { width: 100%; margin: 0; border: none; }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Súper Ficha Letra D</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Refuerzo Letra D</button>
 
     <div class="page">
         <header class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p style="font-family: var(--font-profe); font-size: 22px;">Entrenamiento de la Letra D</p>
+            <p style="font-family: var(--font-profe); font-size: 24px;">¡Hoy aprendo la letra D!</p>
         </header>
 
         <section class="section">
-            <span class="section-title">1. Lee la historia de Dani</span>
-            <div class="lectura-box">
-                Dani tiene un dado morado. <br>
-                A Dani le duele un dedo. <br>
-                Su mamá le da una pomada. <br>
-                Dani saluda a la dama y se va.
+            <span class="section-title">1. Rodea con un círculo todas las letras "d"</span>
+            <div class="sopa-letras">
+                <span>d</span> <span>b</span> <span>p</span> <span>d</span> <span>q</span> <span>d</span> <span>b</span> <span>d</span> <span>p</span> <span>d</span>
             </div>
         </section>
 
         <section class="section">
-            <span class="section-title">2. ¿Qué ha pasado? Marca SÍ o NO</span>
-            <div class="vf-item"><span>Dani tiene un dado verde.</span> <span class="box-vf">SÍ / NO</span></div>
-            <div class="vf-item"><span>A Dani le duele un dedo.</span> <span class="box-vf">SÍ / NO</span></div>
-            <div class="vf-item"><span>Mamá le da una pomada.</span> <span class="box-vf">SÍ / NO</span></div>
-            <div class="vf-item"><span>Dani saluda a un perro.</span> <span class="box-vf">SÍ / NO</span></div>
+            <span class="section-title">2. Di estas sílabas muy fuerte</span>
+            <div class="silabas-grandes">
+                <span>da</span> <span>de</span> <span>di</span> <span>do</span> <span>du</span>
+            </div>
         </section>
 
         <section class="section">
-            <span class="section-title">3. Une cada palabra con su dibujo</span>
-            <div class="unir-container">
-                <div class="columna">
+            <span class="section-title">3. Une con una línea</span>
+            <div class="unir-facil">
+                <div class="col">
                     <span>Dado</span>
                     <span>Dedo</span>
-                    <span>Dama</span>
-                    <span>Dinosaurio</span>
+                    <span>Dos</span>
                 </div>
-                <div class="columna">
-                    <span>☝️</span>
+                <div class="col">
+                    <span>2️⃣</span>
                     <span>🎲</span>
-                    <span>🦖</span>
-                    <span>👩</span>
+                    <span>☝️</span>
                 </div>
             </div>
         </section>
 
         <section class="section">
-            <span class="section-title">4. Escribe la sílaba que falta (da, de, di, do, du)</span>
-            <div class="completar-grid">
-                <div><span class="palabra-hueco"></span>do</div>
-                <div>He-la-<span class="palabra-hueco"></span></div>
-                <div><span class="palabra-hueco"></span>no-sau-rio</div>
-                <div>Mo-ra-<span class="palabra-hueco"></span></div>
-            </div>
-        </section>
-
-        <section class="section">
-            <span class="section-title">5. Lee y copia con tu mejor letra</span>
+            <span class="section-title">4. Escribe estas palabras tú sola</span>
             
-            <div class="frase-unidad">
-                <div class="frase-leer">Dora tiene dos dados.</div>
-                <div class="pauta-copia"></div>
+            <div style="margin-bottom: 40px;">
+                <div class="palabra-guia">da - do</div>
+                <div class="pauta-simple"></div>
             </div>
 
-            <div class="frase-unidad">
-                <div class="frase-leer">El delfín nada en el mar.</div>
-                <div class="pauta-copia"></div>
+            <div style="margin-bottom: 40px;">
+                <div class="palabra-guia">de - do</div>
+                <div class="pauta-simple"></div>
             </div>
 
-            <div class="frase-unidad">
-                <div class="frase-leer">Mi dominó es muy divertido.</div>
-                <div class="pauta-copia"></div>
-            </div>
-
-            <div class="frase-unidad">
-                <div class="frase-leer">Dame el dinero de la duda.</div>
-                <div class="pauta-copia"></div>
+            <div style="margin-bottom: 40px;">
+                <div class="palabra-guia">da - ma</div>
+                <div class="pauta-simple"></div>
             </div>
         </section>
 
