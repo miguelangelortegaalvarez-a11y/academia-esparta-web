@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rescate en Alta Mar: Ángulos de Depresión - Carla Caicedo</title>
+    <title>Diseño de Accesibilidad: Rampas - Carla Caicedo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --primary: #0e9343; --accent: #1565c0; --danger: #c62828; --faro: #546e7a; }
-        
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f2f0; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        :root { --primary: #0e9343; --accent: #1565c0; --danger: #c62828; --warning: #f39c12; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
         .btn-imprimir {
             background-color: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px;
@@ -33,16 +32,16 @@
         .section { margin-bottom: 30px; page-break-inside: avoid; }
         .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: #fff; background: var(--primary); padding: 5px 20px; border-radius: 10px; display: inline-block; margin-bottom: 15px; }
 
-        .enunciado-box { background: #e1f5fe; border-left: 5px solid var(--accent); padding: 15px; margin-bottom: 20px; font-style: italic; font-size: 14px; }
+        .enunciado-box { background: #fff9c4; border-left: 5px solid var(--warning); padding: 15px; margin-bottom: 20px; font-style: italic; font-size: 14px; }
 
-        .diagrama-container { text-align: center; margin: 20px 0; background: #f5f5f5; border-radius: 15px; padding: 15px; border: 1px solid #ddd; }
+        .diagrama-svg { text-align: center; margin: 20px 0; background: #fafafa; border-radius: 15px; padding: 10px; border: 1px solid #ddd; }
 
-        .paso-resolucion { margin-bottom: 25px; border-left: 3px solid var(--primary); padding-left: 15px; }
-        .paso-resolucion h3 { font-size: 16px; color: var(--primary); margin: 0 0 10px 0; }
+        .paso-resolucion { margin-bottom: 25px; border-left: 3px solid var(--accent); padding-left: 15px; }
+        .paso-resolucion h3 { font-size: 16px; color: var(--accent); margin: 0 0 10px 0; }
         
-        .math-box { font-family: 'Roboto Mono', monospace; font-size: 18px; text-align: center; background: #fff; padding: 15px; border-radius: 10px; margin: 10px 0; border: 1px solid #ccc; box-shadow: inset 0 0 5px rgba(0,0,0,0.05); }
+        .math-result { font-family: 'Roboto Mono', monospace; font-size: 19px; text-align: center; background: #fff; padding: 15px; border-radius: 10px; margin: 10px 0; border: 1px solid #ccc; }
 
-        .highlight-final { font-size: 22px; font-weight: 800; color: var(--danger); text-align: center; margin-top: 20px; border: 2px solid var(--danger); padding: 10px; border-radius: 10px; }
+        .alerta-roja { background: #ffebee; border: 2px solid var(--danger); padding: 15px; border-radius: 10px; color: var(--danger); font-weight: bold; text-align: center; margin-top: 20px; }
 
         @media print {
             body { background: white; padding: 0; }
@@ -53,79 +52,74 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Rescate</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Proyecto Accesibilidad</button>
 
     <div class="page">
         <div class="student-tag">Carla Caicedo - 4º ESO</div>
         
         <header class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>Trigonometría Aplicada: Ángulos de Depresión</p>
+            <p>Trigonometría Aplicada: Diseño de Accesibilidad (Pendiente)</p>
         </header>
 
         <section class="section">
             <span class="section-title">1. El Problema</span>
             <div class="enunciado-box">
-                "Desde un faro a <b>80 metros</b> sobre el nivel del mar, un vigilante observa dos botes alineados. El ángulo de depresión hacia el primer bote es de <b>35°</b> y hacia el segundo es de <b>15°</b>. ¿Qué distancia separa a ambos botes?"
+                "La normativa municipal exige que las rampas para sillas de ruedas no superen un ángulo de inclinación de <b>5°</b>. Un centro comercial necesita salvar un escalón de <b>1,2 metros</b> de altura."
             </div>
         </section>
 
         <section class="section">
-            <span class="section-title">2. Esquema del Rescate</span>
-            <div class="diagrama-container">
-                <svg width="400" height="200" viewBox="0 0 400 200">
-                    <rect x="0" y="170" width="400" height="30" fill="#bbdefb" />
-                    <rect x="20" y="50" width="30" height="120" fill="#546e7a" />
-                    <circle cx="35" cy="50" r="10" fill="#ffeb3b" />
-                    <line x1="35" y1="50" x2="350" y2="50" stroke="#999" stroke-dasharray="4" />
-                    <line x1="35" y1="50" x2="150" y2="170" stroke="red" stroke-width="2" /> <line x1="35" y1="50" x2="330" y2="170" stroke="red" stroke-width="2" /> <path d="M 140 170 L 160 170 L 155 180 L 145 180 Z" fill="#333" />
-                    <path d="M 320 170 L 340 170 L 335 180 L 325 180 Z" fill="#333" />
-                    <text x="5" y="110" font-family="Kalam" font-size="12" transform="rotate(-90 5,110)">Altura = 80m</text>
-                    <text x="140" y="160" font-family="Kalam" font-size="12">35°</text>
-                    <text x="320" y="160" font-family="Kalam" font-size="12">15°</text>
-                    <text x="210" y="195" font-family="Kalam" font-size="14" fill="blue">¿Distancia (d)?</text>
+            <span class="section-title">2. Esquema de Diseño</span>
+            <div class="diagrama-svg">
+                                <svg width="400" height="150" viewBox="0 0 400 150">
+                    <line x1="50" y1="120" x2="350" y2="120" stroke="#666" stroke-width="2" />
+                    <line x1="350" y1="120" x2="350" y2="40" stroke="black" stroke-width="3" />
+                    <line x1="50" y1="120" x2="350" y2="40" stroke="#f39c12" stroke-width="4" />
+                    <path d="M 80 120 A 30 30 0 0 0 78 108" fill="none" stroke="red" stroke-width="2" />
+                    <text x="360" y="80" font-family="Kalam" font-size="14">1,2m (Opuesto)</text>
+                    <text x="180" y="70" font-family="Kalam" font-size="14" fill="#f39c12" transform="rotate(-15 180,70)">Rampa (L?)</text>
+                    <text x="85" y="115" font-family="Kalam" font-size="14" fill="red">5°</text>
+                    <text x="180" y="140" font-family="Kalam" font-size="14">Base en la acera (x?)</text>
                 </svg>
             </div>
-            <p style="font-size: 13px; color: #666;"><i>Nota: Por geometría, el ángulo de depresión desde el faro es igual al ángulo de elevación desde el bote al faro.</i></p>
         </section>
 
         <section class="section">
-            <span class="section-title">3. Resolución Paso a Paso</span>
+            <span class="section-title">3. Tarea 1: Cálculo de la Longitud (L)</span>
             
             <div class="paso-resolucion">
-                <h3>Paso 1: Distancia al primer bote (\(x_1\))</h3>
-                Usamos la tangente con el ángulo de 35°:
-                <div class="math-box">
-                    \[ \tan(35^\circ) = \frac{80}{x_1} \rightarrow x_1 = \frac{80}{\tan(35^\circ)} \]
-                    \[ x_1 \approx \frac{80}{0,7002} \approx 114,25 \text{ metros} \]
+                <h3>Identificación de la razón trigonométrica</h3>
+                Tenemos el <b>Cateto Opuesto</b> (1,2m) y el <b>Ángulo</b> (5°). Queremos hallar la <b>Hipotenusa</b> (la longitud real de la rampa). <br>
+                Usamos el <b>Seno</b>:
+                <div class="math-result">
+                    \[ \sin(5^\circ) = \frac{1,2}{L} \rightarrow L = \frac{1,2}{\sin(5^\circ)} \]
+                    \[ L \approx \frac{1,2}{0,08715} \approx 13,77 \text{ metros} \]
                 </div>
+                <b>Respuesta 1:</b> La longitud mínima de la rampa debe ser de <b>13,77 metros</b>.
             </div>
+        </section>
 
+        <section class="section">
+            <span class="section-title">4. Tarea 2: Estudio de Viabilidad (Acera)</span>
+            
             <div class="paso-resolucion">
-                <h3>Paso 2: Distancia al segundo bote (\(x_2\))</h3>
-                Usamos la tangente con el ángulo de 15°:
-                <div class="math-box">
-                    \[ \tan(15^\circ) = \frac{80}{x_2} \rightarrow x_2 = \frac{80}{\tan(15^\circ)} \]
-                    \[ x_2 \approx \frac{80}{0,2679} \approx 298,62 \text{ metros} \]
+                <h3>¿Cabe la rampa en 10 metros de acera?</h3>
+                Para saber cuánto espacio ocupa la rampa en el suelo, calculamos el <b>Cateto Contiguo (x)</b>. Usamos la <b>Tangente</b>:
+                <div class="math-result">
+                    \[ \tan(5^\circ) = \frac{1,2}{x} \rightarrow x = \frac{1,2}{\tan(5^\circ)} \]
+                    \[ x \approx \frac{1,2}{0,08748} \approx 13,71 \text{ metros} \]
                 </div>
             </div>
 
-            <div class="paso-resolucion">
-                <h3>Paso 3: Calcular la separación (\(d\))</h3>
-                La distancia entre los botes es la resta de las dos distancias horizontales:
-                <div class="math-box">
-                    \[ d = x_2 - x_1 \]
-                    \[ d = 298,62 - 114,25 \]
-                </div>
-            </div>
-
-            <div class="highlight-final">
-                Distancia entre los botes = 184,37 metros
+            <div class="alerta-roja">
+                CONCLUSIÓN TÉCNICA: NO SE PUEDE CONSTRUIR.<br>
+                <span style="font-size: 14px; font-weight: 400; color: #333;">Justificación: Matemáticamente, para cumplir con el ángulo de 5°, la rampa necesita proyectarse 13,71 metros sobre la acera. Como solo disponemos de 10 metros, la rampa sobrepasaría el espacio permitido o tendría una pendiente excesiva (peligrosa).</span>
             </div>
         </section>
 
         <footer style="text-align: center; font-size: 11px; color: #bbb; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
-            Academia Esparta · Trigonometría 4º ESO · Carla Caicedo
+            Academia Esparta · Normativa de Accesibilidad · Carla Caicedo
         </footer>
     </div>
 
