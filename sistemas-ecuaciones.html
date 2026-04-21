@@ -3,130 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eficiencia Energética: Soporte de Panel - Carla Caicedo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>1º Bachillerato - Recta Tangente - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --primary: #0e9343; --accent: #1565c0; --solar: #fbc02d; --tejado: #8d6e63; }
+        :root { 
+            --esparta-gold: #b8860b; 
+            --esparta-red: #8b0000; 
+            --esparta-dark: #1a1a1a;
+            --text-main: #333;
+        }
         
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f2f0; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; color: var(--text-main); }
         
         .btn-imprimir {
-            background-color: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px;
-            font-weight: 700; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3); transition: 0.3s;
+            display: block; width: fit-content; margin: 0 auto 20px;
+            background-color: var(--esparta-red); color: white; border: none; padding: 12px 30px; border-radius: 5px;
+            font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
         }
-        .btn-imprimir:hover { background-color: #063c24; transform: scale(1.05); }
+        .btn-imprimir:hover { background-color: black; transform: translateY(-2px); }
 
         .page { 
-            background-color: white; width: 210mm; min-height: 297mm; padding: 15mm; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08); box-sizing: border-box; position: relative; 
+            background-color: white; width: 210mm; min-height: 297mm; padding: 20mm; 
+            box-shadow: 0 0 30px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
+            border-top: 10px solid var(--esparta-red);
         }
 
-        .header { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 25px; text-align: center; }
-        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 35px; text-transform: uppercase; }
-
-        .student-tag { position: absolute; top: 10mm; right: 15mm; font-family: 'Kalam', cursive; color: var(--accent); font-size: 1.2rem; }
-
-        .section-title { font-family: 'Kalam', cursive; font-size: 20px; color: #fff; background: var(--primary); padding: 5px 20px; border-radius: 10px; display: inline-block; margin-bottom: 15px; }
-
-        .metodo-tag { background: var(--accent); color: white; padding: 3px 10px; border-radius: 5px; font-size: 12px; font-weight: bold; margin-left: 10px; vertical-align: middle; }
-
-        .enunciado-box { background: #fffde7; border-left: 5px solid var(--solar); padding: 15px; margin-bottom: 20px; font-size: 14px; line-height: 1.5; }
-
-        .diagrama-container { text-align: center; margin: 20px 0; background: #fafafa; border-radius: 15px; padding: 15px; border: 1px solid #ddd; }
-
-        .paso-box { margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 15px; }
-        .paso-box h3 { font-size: 15px; color: var(--accent); margin: 0 0 5px 0; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--esparta-dark); padding-bottom: 10px; margin-bottom: 30px; }
+        .header-title h1 { font-weight: 900; font-size: 28px; margin: 0; color: var(--esparta-dark); }
+        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-red); margin: 0; font-size: 18px; }
         
-        .math-result { font-family: 'Roboto Mono', monospace; font-size: 18px; text-align: center; background: #f1f8e9; padding: 12px; border-radius: 10px; margin: 10px 0; border: 1px solid var(--primary); }
+        .level-badge { background: var(--esparta-dark); color: white; padding: 5px 15px; font-weight: 700; border-radius: 3px; font-size: 12px; }
 
-        .conclusion-box { background: #e3f2fd; border: 2px solid var(--accent); padding: 15px; border-radius: 10px; margin-top: 25px; text-align: center; }
+        .section-header { display: flex; align-items: center; margin: 25px 0 15px; }
+        .section-header h2 { font-size: 20px; font-weight: 900; text-transform: uppercase; color: var(--esparta-red); margin: 0; letter-spacing: 1px; }
+        .section-header .line { flex-grow: 1; height: 2px; background: #eee; margin-left: 15px; }
+
+        .teoria-container { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 25px; }
+        
+        .formula-box { 
+            background: var(--esparta-dark); color: white; text-align: center; padding: 20px; border-radius: 8px; margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+
+        .ejemplo-box { border-left: 5px solid var(--esparta-gold); padding: 10px 20px; background: #fffcf2; margin: 20px 0; }
+        .paso { font-weight: 700; color: var(--esparta-red); margin-right: 10px; }
+
+        .ejercicio-area { border: 2px dashed #ccc; border-radius: 10px; padding: 20px; margin-top: 20px; position: relative; }
+        .ejercicio-area::after { content: "Espacio para resolución técnica"; position: absolute; bottom: 10px; right: 10px; font-size: 10px; color: #aaa; text-transform: uppercase; }
+
+        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #777; border-top: 1px solid #eee; padding-top: 10px; }
 
         @media print {
             body { background: white; padding: 0; }
             .btn-imprimir { display: none; }
-            .page { box-shadow: none; border: none; margin: 0; width: 100%; }
+            .page { box-shadow: none; border: none; margin: 0; width: 100%; padding: 10mm; }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Resolución</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Bachillerato</button>
 
     <div class="page">
-        <div class="student-tag">Carla Caicedo - 4º ESO</div>
-        
         <header class="header">
-            <h1>ACADEMIA ESPARTA</h1>
-            <p>Trigonometría: Ejercicio 5 - Eficiencia Energética</p>
+            <div class="header-title">
+                <h1>ACADEMIA ESPARTA</h1>
+                <p>"Vencer o Morir en el Examen"</p>
+            </div>
+            <div class="level-badge">1º BACHILLERATO - CIENCIAS</div>
         </header>
 
-        <section class="section">
-            <span class="section-title">El Desafío</span>
-            <div class="enunciado-box">
-                Un panel solar de <b>2 metros</b> se instala sobre un tejado que tiene una inclinación de <b>20°</b>. Para captar mejor la luz, el panel se levanta hasta un ángulo de <b>45°</b> respecto a la horizontal. Calcula la longitud del soporte vertical (h).
+        <section>
+            <div class="section-header">
+                <h2>Fundamento Teórico</h2>
+                <div class="line"></div>
+            </div>
+            <div class="teoria-container">
+                La <b>Recta Tangente</b> a una función \(f(x)\) en el punto de abscisa \(x = a\) representa la aproximación lineal de primer orden de la función en dicho entorno. Su pendiente coincide con el valor de la derivada instantánea.
+                <br><br>
+                <b>Elementos necesarios:</b>
+                <ul>
+                    <li><b>Punto de contacto:</b> \((a, f(a))\)</li>
+                    <li><b>Pendiente:</b> \(m = f'(a)\)</li>
+                </ul>
+            </div>
+
+            <div class="formula-box">
+                <span style="color: var(--esparta-gold); font-size: 14px; display: block; margin-bottom: 10px;">Ecuación Punto-Pendiente</span>
+                \[ y - f(a) = f'(a) \cdot (x - a) \]
             </div>
         </section>
 
-        <section class="section">
-            <span class="section-title">Estrategia Visual</span> <span class="metodo-tag">Método de Resta de Alturas</span>
-            <div class="diagrama-container">
-                <svg width="400" height="200" viewBox="0 0 400 200">
-                    <line x1="50" y1="180" x2="350" y2="180" stroke="#999" stroke-width="1" stroke-dasharray="4" />
-                    <line x1="50" y1="180" x2="320" y2="90" stroke="#8d6e63" stroke-width="3" />
-                    <line x1="50" y1="180" x2="250" y2="40" stroke="#fbc02d" stroke-width="5" />
-                    <line x1="250" y1="40" x2="250" y2="114" stroke="red" stroke-width="2" />
-                    <line x1="250" y1="40" x2="250" y2="180" stroke="#ccc" stroke-dasharray="2" />
-                    <text x="110" y="175" font-family="Kalam" font-size="12" fill="#8d6e63">20°</text>
-                    <text x="75" y="155" font-family="Kalam" font-size="12" fill="#fbc02d">45°</text>
-                    <text x="255" y="80" font-family="Kalam" font-size="14" fill="red">h?</text>
-                    <text x="120" y="90" font-family="Kalam" font-size="12" fill="#fbc02d" transform="rotate(-35 120,90)">Panel 2m</text>
-                </svg>
+        <section>
+            <div class="section-header">
+                <h2>Aplicación Práctica (Modelado)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="ejemplo-box">
+                <b>Problema:</b> Hallar la recta tangente a \(f(x) = \frac{x^2}{x-1}\) en \(x = 2\).
+                <br><br>
+                <span class="paso">I. Punto:</span> \(f(2) = \frac{2^2}{2-1} = 4 \rightarrow \mathbf{P(2, 4)}\)<br>
+                <span class="paso">II. Derivada:</span> \(f'(x) = \frac{2x(x-1) - x^2 \cdot 1}{(x-1)^2} = \frac{x^2-2x}{(x-1)^2}\)<br>
+                <span class="paso">III. Pendiente:</span> \(f'(2) = \frac{2^2 - 2(2)}{(2-1)^2} = 0\)<br>
+                <span class="paso">IV. Recta:</span> \(y - 4 = 0(x - 2) \rightarrow \mathbf{y = 4}\) (Recta horizontal)
             </div>
         </section>
 
-        <section class="section">
-            <span class="section-title">Resolución Paso a Paso</span>
+        <section>
+            <div class="section-header">
+                <h2>Entrenamiento Espartano</h2>
+                <div class="line"></div>
+            </div>
             
-            <div class="paso-box">
-                <h3>1. Calculamos la altura de la punta del panel (y1)</h3>
-                El panel es la hipotenusa (2m) de un triángulo con 45°. Su altura total respecto al suelo es:
-                \[ y_1 = 2 \cdot \sin(45^\circ) = 2 \cdot 0,707 = \mathbf{1,414 \text{ m}} \]
+            <div class="ejercicio-area">
+                <b>EJERCICIO 1.</b> Determina la ecuación de la recta tangente a la curva \(f(x) = e^x \cdot \ln(x)\) en el punto de abscisa \(x = 1\). 
+                <br><br><br><br><br><br><br><br>
             </div>
 
-            <div class="paso-box">
-                <h3>2. Calculamos la distancia horizontal (x)</h3>
-                Necesitamos saber a qué distancia del origen está la punta para ver cuánto ha subido el tejado ahí:
-                \[ x = 2 \cdot \cos(45^\circ) = 2 \cdot 0,707 = \mathbf{1,414 \text{ m}} \]
-            </div>
-
-            <div class="paso-box">
-                <h3>3. Calculamos la altura del tejado en ese punto (y2)</h3>
-                El tejado sube con 20°. A una distancia de 1,414m, su altura es:
-                \[ \tan(20^\circ) = \frac{y_2}{1,414} \rightarrow y_2 = 1,414 \cdot \tan(20^\circ) \]
-                \[ y_2 = 1,414 \cdot 0,364 = \mathbf{0,515 \text{ m}} \]
-            </div>
-
-            <div class="paso-box">
-                <h3>4. Diferencia de alturas (h)</h3>
-                El soporte es el hueco entre la punta del panel y el tejado:
-                <div class="math-result">
-                    \[ h = y_1 - y_2 \]
-                    \[ h = 1,414 - 0,515 = 0,899 \text{ m} \]
-                </div>
+            <div class="ejercicio-area">
+                <b>EJERCICIO 2.</b> Halla los puntos de la función \(f(x) = x^3 - 3x + 2\) en los que la recta tangente es paralela al eje de abscisas.
+                <br><br><br><br><br><br><br><br>
             </div>
         </section>
 
-        <div class="conclusion-box">
-            <strong>RESULTADO FINAL:</strong><br>
-            La longitud del soporte vertical debe ser de aproximadamente <b>90 centímetros</b> (0,90 m).
-        </div>
-
-        <footer style="text-align: center; font-size: 11px; color: #bbb; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
-            Academia Esparta · Física y Matemáticas 4º ESO · Carla Caicedo
+        <footer class="footer">
+            Academia Esparta S.L. · Departamento de Matemáticas Avanzadas · 2026
         </footer>
     </div>
 
