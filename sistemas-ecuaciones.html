@@ -10,17 +10,32 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --primary: #2e7d32; --danger: #c62828; --blue: #1565c0; --bg-gray: #fcfcfc; }
+        :root { --primary: #0e9343; --danger: #c62828; --blue: #1565c0; --bg-gray: #fcfcfc; }
         
         body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
+        .btn-imprimir {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3);
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn-imprimir:hover { background-color: #063c24; transform: scale(1.05); }
+
         .page { 
             background-color: white; width: 210mm; min-height: 297mm; padding: 20mm; 
             box-shadow: 0 4px 20px rgba(0,0,0,0.08); box-sizing: border-box; position: relative; 
         }
 
         .header { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
-        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 32px; }
+        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 38px; text-transform: uppercase; }
         .header p { color: #666; font-style: italic; margin-top: 5px; }
 
         .student-tag { position: absolute; top: 15mm; right: 20mm; font-family: 'Kalam', cursive; color: var(--blue); font-size: 1.3rem; }
@@ -49,17 +64,20 @@
 
         @media print {
             body { background: white; padding: 0; }
+            .btn-imprimir { display: none; }
             .page { box-shadow: none; border: none; margin: 0; width: 100%; }
         }
     </style>
 </head>
 <body>
 
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar Ficha para Candela</button>
+
     <div class="page">
         <div class="student-tag">Para: Candela Jiménez</div>
         
         <header class="header">
-            <h1>Estrategias de Álgebra: Identidades Notables</h1>
+            <h1>ACADEMIA ESPARTA</h1>
             <p>"El éxito es la suma de pequeños esfuerzos repetidos día tras día"</p>
         </header>
 
