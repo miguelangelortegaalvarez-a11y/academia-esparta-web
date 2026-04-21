@@ -3,143 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenador de Fracciones · Academia Esparta</title>
+    <title>Entrenador de Identidades Notables · Candela García</title>
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
-        :root { --primary: #0e9343; --danger: #d32f2f; --accent: #2980b9; }
-        body { font-family: 'Poppins', sans-serif; background: #f4f7f6; display: flex; justify-content: center; padding: 20px; }
+        :root { --primary: #0e9343; --danger: #d32f2f; --accent: #2980b9; --bg: #fdfdfd; }
+        body { font-family: 'Poppins', sans-serif; background: #f0f4f1; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
-        .container { background: white; width: 100%; max-width: 700px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid var(--primary); }
+        .card { background: white; width: 100%; max-width: 800px; padding: 40px; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-top: 10px solid var(--primary); position: relative; }
         
-        .header { text-align: center; border-bottom: 2px dashed var(--primary); margin-bottom: 25px; padding-bottom: 10px; }
-        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 32px; }
-
-        .setup-box { background: #f9f9f9; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px; }
-        .fraction-input { display: inline-block; vertical-align: middle; text-align: center; margin: 0 10px; }
-        input { padding: 8px; font-size: 18px; width: 70px; text-align: center; border: 2px solid #ddd; border-radius: 8px; display: block; margin: 5px auto; }
-        .divider { border-top: 2px solid #333; width: 80px; margin: 5px auto; }
-
-        .interactive-area { min-height: 300px; padding: 25px; background: #fffcf0; border-radius: 15px; border: 1px solid #e6db55; display: none; }
+        .student-name { position: absolute; top: 15px; right: 30px; font-family: 'Kalam', cursive; color: var(--accent); font-size: 1.2rem; }
         
-        .explanation { font-family: 'Kalam', cursive; font-size: 22px; color: #444; margin-bottom: 20px; line-height: 1.4; border-left: 4px solid var(--primary); padding-left: 15px; }
-        .math-display { font-size: 28px; text-align: center; margin: 25px 0; padding: 20px; background: white; border-radius: 10px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); overflow-x: auto; }
+        .header { text-align: center; border-bottom: 2px dashed var(--primary); margin-bottom: 30px; padding-bottom: 10px; }
+        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 35px; }
 
-        .btn-group { text-align: center; margin-top: 20px; }
-        .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn:hover { transform: scale(1.05); background: #063c24; }
-        .btn-next { background: var(--accent); }
+        .selector-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .type-btn { padding: 10px 20px; border: 2px solid var(--primary); border-radius: 15px; background: white; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .type-btn.active { background: var(--primary); color: white; }
 
-        .step-indicator { font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
-        .highlight { color: var(--danger); font-weight: 800; }
+        .training-zone { background: #fffcf0; padding: 25px; border-radius: 20px; border: 1px solid #e6db55; min-height: 400px; }
+        
+        .explanation { font-family: 'Kalam', cursive; font-size: 22px; color: #444; margin-bottom: 20px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        .formula-display { font-size: 32px; text-align: center; margin: 30px 0; padding: 20px; background: white; border-radius: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
+
+        .controls { text-align: center; margin-top: 30px; }
+        .btn { background: var(--primary); color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 18px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(14, 147, 67, 0.3); }
+        .btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .input-group { text-align: center; margin-bottom: 20px; font-size: 24px; }
+        .math-input { width: 80px; padding: 10px; font-size: 20px; text-align: center; border: 2px solid #ddd; border-radius: 10px; font-family: 'Poppins', sans-serif; }
+        
+        .step-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; background: #eee; font-size: 12px; margin-bottom: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="card">
+    <div class="student-name">Alumna: Candela García</div>
+    
     <div class="header">
-        <h1>Entrenador Espartano</h1>
-        <p>Suma de Fracciones con \(x\)</p>
+        <h1>Entrenador de Álgebra</h1>
+        <p>Domina las Identidades Notables paso a paso</p>
     </div>
 
-    <div class="setup-box" id="setup">
-        <p>Configura la operación: \(\frac{A}{B} + \frac{C}{D}\)</p>
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <div class="fraction-input">
-                <input type="text" id="num1" placeholder="x">
-                <div class="divider"></div>
-                <input type="number" id="den1" placeholder="4">
-            </div>
-            <span style="font-size: 30px;">+</span>
-            <div class="fraction-input">
-                <input type="text" id="num2" placeholder="2x">
-                <div class="divider"></div>
-                <input type="number" id="den2" placeholder="6">
-            </div>
-        </div>
-        <button class="btn" style="margin-top: 20px;" onclick="startStepByStep()">Iniciar Paso a Paso</button>
+    <div class="selector-box">
+        <button class="type-btn active" id="btnSuma" onclick="changeType('suma')">Suma al Cuadrado</button>
+        <button class="type-btn" id="btnResta" onclick="changeType('resta')">Resta al Cuadrado</button>
+        <button class="type-btn" id="btnDiferencia" onclick="changeType('dif')">Suma por Diferencia</button>
     </div>
 
-    <div class="interactive-area" id="trainingArea">
-        <span class="step-indicator" id="stepCounter"></span>
+    <div class="input-group" id="inputSection">
+        <span id="labelParentesis">(</span>
+        <input type="text" id="valA" class="math-input" placeholder="a" value="x">
+        <span id="labelSigno"> + </span>
+        <input type="text" id="valB" class="math-input" placeholder="b" value="3">
+        <span id="labelCierre">)²</span>
+        <br>
+        <button class="btn" style="margin-top: 20px;" onclick="iniciar()">Iniciar Explicación</button>
+    </div>
+
+    <div class="training-zone" id="trainingArea" style="display: none;">
+        <span class="step-pill" id="pillStep">PASO 1</span>
         <div class="explanation" id="guideText"></div>
-        <div class="math-display" id="mathOutput"></div>
+        <div class="formula-display" id="mathDisplay"></div>
         
-        <div class="btn-group">
-            <button class="btn btn-next" id="nextBtn" onclick="processNext()">Siguiente Paso</button>
-            <button class="btn" id="resetBtn" style="display:none; background: #666;" onclick="reset()">Probar otro</button>
+        <div class="controls">
+            <button class="btn" id="btnNext" onclick="siguiente()">Siguiente Paso →</button>
+            <button class="btn" id="btnReset" onclick="reiniciar()" style="display: none; background: #666;">Probar otra</button>
         </div>
     </div>
 </div>
 
 <script>
-    let step = 0;
-    let n1, d1, n2, d2, commonDen;
+    let currentStep = 1;
+    let type = 'suma';
+    let a, b;
 
-    function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
-    function lcm(a, b) { return (a * b) / gcd(a, b); }
-
-    function startStepByStep() {
-        n1 = document.getElementById('num1').value || 'x';
-        d1 = parseInt(document.getElementById('den1').value) || 4;
-        n2 = document.getElementById('num2').value || '2x';
-        d2 = parseInt(document.getElementById('den2').value) || 6;
-        
-        commonDen = lcm(d1, d2);
-        
-        document.getElementById('setup').style.display = 'none';
-        document.getElementById('trainingArea').style.display = 'block';
-        step = 1;
-        updateUI();
+    function changeType(newType) {
+        type = newType;
+        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+        if(newType === 'suma') {
+            document.getElementById('btnSuma').classList.add('active');
+            document.getElementById('labelSigno').innerText = ' + ';
+            document.getElementById('labelCierre').innerText = ')²';
+        } else if(newType === 'resta') {
+            document.getElementById('btnResta').classList.add('active');
+            document.getElementById('labelSigno').innerText = ' - ';
+            document.getElementById('labelCierre').innerText = ')²';
+        } else {
+            document.getElementById('btnDiferencia').classList.add('active');
+            document.getElementById('labelSigno').innerText = ' + ';
+            document.getElementById('labelCierre').innerText = ') · (a - b)';
+        }
+        reiniciar();
     }
 
-    function updateUI() {
-        const guide = document.getElementById('guideText');
-        const math = document.getElementById('mathOutput');
-        const counter = document.getElementById('stepCounter');
-        
-        counter.innerHTML = `Paso ${step} de 4`;
+    function iniciar() {
+        a = document.getElementById('valA').value || 'a';
+        b = document.getElementById('valB').value || 'b';
+        document.getElementById('inputSection').style.display = 'none';
+        document.getElementById('trainingArea').style.display = 'block';
+        currentStep = 1;
+        mostrarPaso();
+    }
 
-        switch(step) {
-            case 1:
-                guide.innerHTML = `Calculamos el <span class='highlight'>m.c.m.</span> de los denominadores (${d1} y ${d2}) para tener un suelo igual.`;
-                math.innerHTML = `\\[ \\text{m.c.m.}(${d1}, ${d2}) = ${commonDen} \\]`;
-                break;
-            case 2:
-                let mult1 = commonDen / d1;
-                let mult2 = commonDen / d2;
-                guide.innerHTML = `¡Ajustamos los de arriba! Dividimos ${commonDen} entre el de abajo y multiplicamos por el de arriba. <br> 
-                                   <small>(${commonDen}÷${d1}=${mult1}) y (${commonDen}÷${d2}=${mult2})</small>`;
-                math.innerHTML = `\\[ \\frac{${mult1} \\cdot (${n1})}{${commonDen}} + \frac{${mult2} \\cdot (${n2})}{${commonDen}} \\]`;
-                break;
-            case 3:
-                guide.innerHTML = `Ahora que el suelo es el mismo, <span class='highlight'>juntamos todo</span> en una sola fracción.`;
-                math.innerHTML = `\\[ \\frac{${commonDen/d1} \\cdot (${n1}) + ${commonDen/d2} \\cdot (${n2})}{${commonDen}} \\]`;
-                break;
-            case 4:
-                guide.innerHTML = `Operamos el numerador final. ¡Victoria espartana!`;
-                // Intento simple de simplificación visual
-                let finalNum = `${commonDen/d1}${n1} + ${commonDen/d2}${n2}`;
-                math.innerHTML = `\\[ \\frac{${finalNum}}{${commonDen}} \\]`;
-                document.getElementById('nextBtn').style.display = 'none';
-                document.getElementById('resetBtn').style.display = 'inline-block';
-                break;
+    function mostrarPaso() {
+        const guide = document.getElementById('guideText');
+        const math = document.getElementById('mathDisplay');
+        const pill = document.getElementById('pillStep');
+        
+        pill.innerText = `PASO ${currentStep}`;
+
+        if (type === 'suma' || type === 'resta') {
+            const signo = type === 'suma' ? '+' : '-';
+            switch(currentStep) {
+                case 1:
+                    guide.innerHTML = "Primero, calculamos el <span style='color:var(--danger)'>cuadrado del primero</span>. <br>Recuerda Candela: Todo lo que sea 'a' se eleva a 2.";
+                    math.innerHTML = `\\[ (${a})^2 \\]`;
+                    break;
+                case 2:
+                    guide.innerHTML = `Ahora añadimos el <span style='color:var(--danger)'>doble del primero por el segundo</span>. <br>Multiplicamos 2 por "${a}" y por "${b}".`;
+                    math.innerHTML = `\\[ (${a})^2 ${signo} 2 \\cdot (${a}) \\cdot (${b}) \\]`;
+                    break;
+                case 3:
+                    guide.innerHTML = "Por último, sumamos el <span style='color:var(--danger)'>cuadrado del segundo</span>. <br>Elevamos la 'b' a 2.";
+                    math.innerHTML = `\\[ (${a})^2 ${signo} 2 \\cdot (${a}) \\cdot (${b}) + (${b})^2 \\]`;
+                    document.getElementById('btnNext').innerText = "Ver resultado final";
+                    break;
+                case 4:
+                    guide.innerHTML = "¡Resultado estructurado! Ahora solo faltaría simplificar los números.";
+                    math.innerHTML = `\\[ ${a}^2 ${signo} 2${a}${b} + ${b}^2 \\]`;
+                    document.getElementById('btnNext').style.display = 'none';
+                    document.getElementById('btnReset').style.display = 'inline-block';
+                    break;
+            }
+        } else {
+            // Suma por diferencia
+            switch(currentStep) {
+                case 1:
+                    guide.innerHTML = "En la suma por diferencia, el resultado es el <span style='color:var(--danger)'>cuadrado del primero</span>...";
+                    math.innerHTML = `\\[ (${a})^2 \\]`;
+                    break;
+                case 2:
+                    guide.innerHTML = "... <span style='color:var(--danger)'>MENOS el cuadrado del segundo</span>. <br>Es la identidad más rápida de Candela.";
+                    math.innerHTML = `\\[ (${a})^2 - (${b})^2 \\]`;
+                    document.getElementById('btnNext').innerText = "Ver resultado final";
+                    break;
+                case 3:
+                    guide.innerHTML = "¡Listo! Siempre queda una resta de cuadrados.";
+                    math.innerHTML = `\\[ ${a}^2 - ${b}^2 \\]`;
+                    document.getElementById('btnNext').style.display = 'none';
+                    document.getElementById('btnReset').style.display = 'inline-block';
+                    break;
+            }
         }
         MathJax.typeset();
     }
 
-    function processNext() {
-        step++;
-        updateUI();
+    function siguiente() {
+        currentStep++;
+        mostrarPaso();
     }
 
-    function reset() {
-        document.getElementById('setup').style.display = 'block';
+    function reiniciar() {
+        document.getElementById('inputSection').style.display = 'block';
         document.getElementById('trainingArea').style.display = 'none';
-        document.getElementById('nextBtn').style.display = 'inline-block';
-        document.getElementById('resetBtn').style.display = 'none';
+        document.getElementById('btnNext').style.display = 'inline-block';
+        document.getElementById('btnNext').innerText = "Siguiente Paso →";
+        document.getElementById('btnReset').style.display = 'none';
     }
 </script>
 
