@@ -3,28 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operaciones de Álgebra - Sofía Millán</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Álgebra Avanzada - Sofía Millán</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --primary: #0e9343; --accent: #1565c0; --bg-gray: #fcfcfc; }
-        
+        :root { --primary: #0e9343; --accent: #1565c0; }
         body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
         .btn-imprimir {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3);
-            transition: 0.3s;
+            background-color: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px;
+            font-weight: 700; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3); transition: 0.3s;
         }
         .btn-imprimir:hover { background-color: #063c24; transform: scale(1.05); }
 
@@ -35,24 +26,17 @@
 
         .header { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
         .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 38px; text-transform: uppercase; }
-        .header p { color: #666; font-style: italic; margin-top: 5px; }
 
         .student-tag { position: absolute; top: 15mm; right: 20mm; font-family: 'Kalam', cursive; color: var(--accent); font-size: 1.3rem; }
 
-        .section { margin-bottom: 40px; page-break-inside: avoid; }
-        .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: #333; background: #e8f5e9; padding: 5px 15px; border-radius: 10px; display: inline-block; margin-bottom: 15px; }
+        .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: #333; background: #fff3e0; padding: 5px 15px; border-radius: 10px; display: inline-block; margin-bottom: 20px; }
 
-        .expl-box { 
-            background: #f1f8e9; border-left: 5px solid var(--primary); 
-            padding: 20px; margin: 15px 0; line-height: 1.6; font-size: 15px;
-        }
-
-        .motivation-quote { font-family: 'Kalam', cursive; color: #777; font-size: 1.1rem; text-align: center; margin: 20px 0; }
-
-        .tabla-ejercicios { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .tabla-ejercicios td { border: 1px solid #eee; padding: 30px; width: 50%; vertical-align: top; }
+        .tabla-ejercicios { width: 100%; border-collapse: collapse; }
+        .tabla-ejercicios td { border: 1px solid #eee; padding: 35px; width: 50%; vertical-align: top; }
         .num-ej { font-weight: 800; color: var(--primary); margin-right: 10px; }
-        .espacio-resolver { border-bottom: 1px dashed #ccc; height: 100px; margin-top: 15px; }
+        .espacio-resolver { border-bottom: 1px dashed #ddd; height: 120px; margin-top: 20px; }
+
+        .tip-box { background: #e3f2fd; border-left: 5px solid var(--accent); padding: 15px; margin-bottom: 30px; font-size: 14px; border-radius: 0 10px 10px 0; }
 
         @media print {
             body { background: white; padding: 0; }
@@ -63,70 +47,64 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar Ficha para Sofía</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar Batería Nivel Pro</button>
 
     <div class="page">
-        <div class="student-tag">Sofía Millán - 1º ESO</div>
+        <div class="student-tag">Sofía Millán - Entrenamiento Avanzado</div>
         
         <header class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>"Cree en ti misma y serás imparable"</p>
+            <p>"La disciplina es el puente entre las metas y los logros"</p>
         </header>
 
-        <section class="section">
-            <span class="section-title">Guía: Ecuaciones con Paréntesis</span>
-            <div class="expl-box">
-                <b>Ejemplo guiado:</b> \( 2(x - 4) + 3 = 3(2x + 5) \)<br><br>
-                <b>1. Quitar paréntesis:</b> El número de fuera multiplica a TODO lo de dentro.<br>
-                \( 2x - 8 + 3 = 6x + 15 \)<br><br>
-                <b>2. Agrupar números:</b> Resolvemos lo que se pueda antes de mover cosas.<br>
-                \( 2x - 5 = 6x + 15 \)<br><br>
-                <b>3. Trasponer términos:</b> Las \( x \) a un lado y los números al otro (si cambian de lado, cambian de signo).<br>
-                \( 2x - 6x = 15 + 5 \)<br><br>
-                <b>4. Resolver y despejar:</b><br>
-                \( -4x = 20 \rightarrow x = \frac{20}{-4} \rightarrow \mathbf{x = -5} \)
-            </div>
-            <div class="motivation-quote">"No importa lo lento que vayas, siempre y cuando no te detengas"</div>
-        </section>
+        <div class="tip-box">
+            <b>💡 ¡Ojo, Sofía!:</b> Si tienes un signo menos delante de un paréntesis, como en \( -2(x - 3) \), recuerda que cambia el signo de TODO lo de dentro: \( -2x + 6 \). ¡No te dejes engañar!
+        </div>
 
-        <section class="section">
-            <span class="section-title">Entrenamiento de Ecuaciones</span>
+        <section>
+            <span class="section-title">Nivel 2: Ecuaciones de Combate</span>
             <table class="tabla-ejercicios">
                 <tr>
                     <td>
-                        <span class="num-ej">1.</span> \( 2(x - 4) + 3 = 3(2x + 5) \)
+                        <span class="num-ej">1.</span> \( 5(x - 3) - 2(x + 1) = 4 \)
                         <div class="espacio-resolver"></div>
                     </td>
                     <td>
-                        <span class="num-ej">2.</span> \( 4(x + 2) - 5 = 2(x - 1) \)
-                        <div class="espacio-resolver"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="num-ej">3.</span> \( 3(2x - 1) + 2 = 5(x + 4) \)
-                        <div class="espacio-resolver"></div>
-                    </td>
-                    <td>
-                        <span class="num-ej">4.</span> \( 2(3x + 2) = 4(x - 3) + 6 \)
+                        <span class="num-ej">2.</span> \( 3(2x + 4) = 2(x - 1) + 10 \)
                         <div class="espacio-resolver"></div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span class="num-ej">5.</span> \( 5(x - 2) - 3(x + 1) = 1 \)
+                        <span class="num-ej">3.</span> \( 4(3x - 2) - 5x = 2(x + 3) \)
                         <div class="espacio-resolver"></div>
                     </td>
                     <td>
-                        <span class="num-ej">6.</span> \( 10 + 2(x - 5) = 3(x + 1) \)
+                        <span class="num-ej">4.</span> \( 2(x + 6) - 3(2x - 1) = 1 \)
+                        <div class="espacio-resolver"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="num-ej">5.</span> \( 6x - (x + 4) = 2(3x - 5) + 1 \)
+                        <div class="espacio-resolver"></div>
+                    </td>
+                    <td>
+                        <span class="num-ej">6.</span> \( 3(x - 1) - 2(2x + 3) = 4(x + 5) + 2 \)
                         <div class="espacio-resolver"></div>
                     </td>
                 </tr>
             </table>
         </section>
 
-        <footer style="text-align: center; font-size: 12px; color: #aaa; margin-top: 30px;">
-            Academia Esparta · Matemáticas 1º ESO · Preparado para Sofía Millán
+        <section style="margin-top: 40px; text-align: center;">
+            <p style="font-family: 'Kalam', cursive; font-size: 1.2rem; color: #666;">
+                "Cada ejercicio resuelto es una victoria. ¡A por ellos!"
+            </p>
+        </section>
+
+        <footer style="text-align: center; font-size: 11px; color: #bbb; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px;">
+            Academia Esparta · Matemáticas ESO · Material para Sofía Millán
         </footer>
     </div>
 
