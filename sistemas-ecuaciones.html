@@ -3,119 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento: Fracciones con X - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Kalam:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
-    
+    <title>Entrenador de Fracciones · Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+    
     <style>
-        :root { --esparta-green: #0e9343; --danger: #d32f2f; --blue: #2980b9; --line-color: #e0e0e0; }
+        :root { --primary: #0e9343; --danger: #d32f2f; --accent: #2980b9; }
+        body { font-family: 'Poppins', sans-serif; background: #f4f7f6; display: flex; justify-content: center; padding: 20px; }
         
-        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; margin: 0; padding: 20px; color: #333; }
+        .container { background: white; width: 100%; max-width: 700px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid var(--primary); }
         
-        .page { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 15mm; box-sizing: border-box; border: 1px solid #eee; }
+        .header { text-align: center; border-bottom: 2px dashed var(--primary); margin-bottom: 25px; padding-bottom: 10px; }
+        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 32px; }
 
-        .header { border-bottom: 3px solid var(--esparta-green); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
-        .header h1 { font-family: 'Kalam', cursive; color: var(--esparta-green); margin: 0; font-size: 35px; }
+        .setup-box { background: #f9f9f9; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px; }
+        .fraction-input { display: inline-block; vertical-align: middle; text-align: center; margin: 0 10px; }
+        input { padding: 8px; font-size: 18px; width: 70px; text-align: center; border: 2px solid #ddd; border-radius: 8px; display: block; margin: 5px auto; }
+        .divider { border-top: 2px solid #333; width: 80px; margin: 5px auto; }
 
-        .teoria-box { background: #f0f9f4; border-left: 5px solid var(--esparta-green); padding: 20px; margin-bottom: 30px; border-radius: 0 15px 15px 0; }
-        .teoria-box h2 { font-family: 'Kalam', cursive; margin-top: 0; color: var(--esparta-green); }
+        .interactive-area { min-height: 300px; padding: 25px; background: #fffcf0; border-radius: 15px; border: 1px solid #e6db55; display: none; }
+        
+        .explanation { font-family: 'Kalam', cursive; font-size: 22px; color: #444; margin-bottom: 20px; line-height: 1.4; border-left: 4px solid var(--primary); padding-left: 15px; }
+        .math-display { font-size: 28px; text-align: center; margin: 25px 0; padding: 20px; background: white; border-radius: 10px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); overflow-x: auto; }
 
-        .step-card { border: 2px solid #eee; border-radius: 15px; padding: 15px; margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; }
-        .step-num { background: var(--esparta-green); color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        .btn-group { text-align: center; margin-top: 20px; }
+        .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn:hover { transform: scale(1.05); background: #063c24; }
+        .btn-next { background: var(--accent); }
 
-        .ejercicio-container { margin-top: 40px; }
-        .ejercicio-item { margin-bottom: 50px; page-break-inside: avoid; }
-        .enunciado { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: block; }
-
-        .guia-resolucion { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .guia-resolucion td { border: 1px dashed #ccc; padding: 20px; text-align: center; width: 33%; vertical-align: top; }
-        .label-guia { font-size: 12px; color: #888; text-transform: uppercase; display: block; margin-bottom: 10px; font-family: 'Poppins', sans-serif; }
-
-        .footer { text-align: center; margin-top: 50px; font-size: 12px; color: #aaa; border-top: 1px solid #eee; padding-top: 10px; }
-
-        @media print {
-            body { padding: 0; }
-            .page { border: none; margin: 0; }
-        }
+        .step-indicator { font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
+        .highlight { color: var(--danger); font-weight: 800; }
     </style>
 </head>
 <body>
 
-    <div class="page">
-        <header class="header">
-            <h1>ACADEMIA ESPARTA</h1>
-            <p>Suma y Resta de Fracciones con Incógnitas</p>
-        </header>
+<div class="container">
+    <div class="header">
+        <h1>Entrenador Espartano</h1>
+        <p>Suma de Fracciones con \(x\)</p>
+    </div>
 
-        <section class="teoria-box">
-            <h2>El Plan de Batalla</h2>
-            <div class="step-card">
-                <div class="step-num">1</div>
-                <div><strong>Mínimo Común Múltiplo (mcm):</strong> Buscamos un denominador común para todas las fracciones. Es el "suelo" sobre el que lucharemos.</div>
+    <div class="setup-box" id="setup">
+        <p>Configura la operación: \(\frac{A}{B} + \frac{C}{D}\)</p>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <div class="fraction-input">
+                <input type="text" id="num1" placeholder="x">
+                <div class="divider"></div>
+                <input type="number" id="den1" placeholder="4">
             </div>
-            <div class="step-card">
-                <div class="step-num">2</div>
-                <div><strong>Ajuste de Numeradores:</strong> Por cada fracción: cogemos el nuevo mcm, lo <b>dividimos por el de abajo</b> y el resultado lo <b>multiplicamos por el de arriba</b>.</div>
-            </div>
-            <div class="step-card">
-                <div class="step-num">3</div>
-                <div><strong>Operación Final:</strong> Dejamos el denominador igual y sumamos o restamos los numeradores con cuidado (¡ojo con los signos!).</div>
-            </div>
-        </section>
-
-        <div class="ejercicio-container">
-            <h2 style="font-family: 'Kalam', cursive; color: var(--danger);">¡A las armas! Ejercicios guiados</h2>
-
-            <div class="ejercicio-item">
-                <span class="enunciado">1. \(\frac{x}{4} + \frac{2x}{6}\)</span>
-                <table class="guia-resolucion">
-                    <tr>
-                        <td>
-                            <span class="label-guia">Paso 1: mcm(4, 6)</span>
-                            <div style="font-size: 20px; margin-top: 10px;">_____</div>
-                        </td>
-                        <td>
-                            <span class="label-guia">Paso 2: Divide y multiplica</span>
-                            <div style="font-size: 18px;">\(\frac{ \dots }{ \text{mcm} } + \frac{ \dots }{ \text{mcm} }\)</div>
-                        </td>
-                        <td>
-                            <span class="label-guia">Paso 3: Resultado</span>
-                            <div style="font-size: 20px; border: 1px solid #000; padding: 10px;"></div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="ejercicio-item">
-                <span class="enunciado">2. \(\frac{3x + 1}{2} - \frac{x - 2}{3}\)</span>
-                <p><small><i>Consejo: Pon paréntesis en los numeradores para no liarte con el signo menos.</i></small></p>
-                <table class="guia-resolucion">
-                    <tr>
-                        <td><span class="label-guia">mcm(2, 3)</span><br><br>____</td>
-                        <td><span class="label-guia">Numeradores ajustados</span><br><br>\(\frac{3 \cdot (\dots)}{6} - \frac{2 \cdot (\dots)}{6}\)</td>
-                        <td><span class="label-guia">Resultado final</span><br><br><div style="height: 40px; border: 1px solid #000;"></div></td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="ejercicio-item">
-                <span class="enunciado">3. \(\frac{x}{5} - \frac{x}{10} + \frac{3}{2}\)</span>
-                <table class="guia-resolucion">
-                    <tr>
-                        <td><span class="label-guia">Paso 1: mcm</span></td>
-                        <td><span class="label-guia">Paso 2: Fracciones</span></td>
-                        <td><span class="label-guia">Paso 3: Operación</span></td>
-                    </tr>
-                </table>
+            <span style="font-size: 30px;">+</span>
+            <div class="fraction-input">
+                <input type="text" id="num2" placeholder="2x">
+                <div class="divider"></div>
+                <input type="number" id="den2" placeholder="6">
             </div>
         </div>
-
-        <footer class="footer">
-            Academia Esparta · Entrenamiento de Álgebra · 2026
-        </footer>
+        <button class="btn" style="margin-top: 20px;" onclick="startStepByStep()">Iniciar Paso a Paso</button>
     </div>
+
+    <div class="interactive-area" id="trainingArea">
+        <span class="step-indicator" id="stepCounter"></span>
+        <div class="explanation" id="guideText"></div>
+        <div class="math-display" id="mathOutput"></div>
+        
+        <div class="btn-group">
+            <button class="btn btn-next" id="nextBtn" onclick="processNext()">Siguiente Paso</button>
+            <button class="btn" id="resetBtn" style="display:none; background: #666;" onclick="reset()">Probar otro</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let step = 0;
+    let n1, d1, n2, d2, commonDen;
+
+    function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+    function lcm(a, b) { return (a * b) / gcd(a, b); }
+
+    function startStepByStep() {
+        n1 = document.getElementById('num1').value || 'x';
+        d1 = parseInt(document.getElementById('den1').value) || 4;
+        n2 = document.getElementById('num2').value || '2x';
+        d2 = parseInt(document.getElementById('den2').value) || 6;
+        
+        commonDen = lcm(d1, d2);
+        
+        document.getElementById('setup').style.display = 'none';
+        document.getElementById('trainingArea').style.display = 'block';
+        step = 1;
+        updateUI();
+    }
+
+    function updateUI() {
+        const guide = document.getElementById('guideText');
+        const math = document.getElementById('mathOutput');
+        const counter = document.getElementById('stepCounter');
+        
+        counter.innerHTML = `Paso ${step} de 4`;
+
+        switch(step) {
+            case 1:
+                guide.innerHTML = `Calculamos el <span class='highlight'>m.c.m.</span> de los denominadores (${d1} y ${d2}) para tener un suelo igual.`;
+                math.innerHTML = `\\[ \\text{m.c.m.}(${d1}, ${d2}) = ${commonDen} \\]`;
+                break;
+            case 2:
+                let mult1 = commonDen / d1;
+                let mult2 = commonDen / d2;
+                guide.innerHTML = `¡Ajustamos los de arriba! Dividimos ${commonDen} entre el de abajo y multiplicamos por el de arriba. <br> 
+                                   <small>(${commonDen}÷${d1}=${mult1}) y (${commonDen}÷${d2}=${mult2})</small>`;
+                math.innerHTML = `\\[ \\frac{${mult1} \\cdot (${n1})}{${commonDen}} + \frac{${mult2} \\cdot (${n2})}{${commonDen}} \\]`;
+                break;
+            case 3:
+                guide.innerHTML = `Ahora que el suelo es el mismo, <span class='highlight'>juntamos todo</span> en una sola fracción.`;
+                math.innerHTML = `\\[ \\frac{${commonDen/d1} \\cdot (${n1}) + ${commonDen/d2} \\cdot (${n2})}{${commonDen}} \\]`;
+                break;
+            case 4:
+                guide.innerHTML = `Operamos el numerador final. ¡Victoria espartana!`;
+                // Intento simple de simplificación visual
+                let finalNum = `${commonDen/d1}${n1} + ${commonDen/d2}${n2}`;
+                math.innerHTML = `\\[ \\frac{${finalNum}}{${commonDen}} \\]`;
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('resetBtn').style.display = 'inline-block';
+                break;
+        }
+        MathJax.typeset();
+    }
+
+    function processNext() {
+        step++;
+        updateUI();
+    }
+
+    function reset() {
+        document.getElementById('setup').style.display = 'block';
+        document.getElementById('trainingArea').style.display = 'none';
+        document.getElementById('nextBtn').style.display = 'inline-block';
+        document.getElementById('resetBtn').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
