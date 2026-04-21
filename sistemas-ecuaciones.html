@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafío Trigonometría: Torre Delta - Carla Caicedo</title>
+    <title>Rescate en Alta Mar: Ángulos de Depresión - Carla Caicedo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --primary: #0e9343; --accent: #1565c0; --danger: #c62828; --bg: #fdfdfd; }
+        :root { --primary: #0e9343; --accent: #1565c0; --danger: #c62828; --faro: #546e7a; }
         
         body { font-family: 'Poppins', sans-serif; background-color: #f0f2f0; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
@@ -33,17 +33,16 @@
         .section { margin-bottom: 30px; page-break-inside: avoid; }
         .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: #fff; background: var(--primary); padding: 5px 20px; border-radius: 10px; display: inline-block; margin-bottom: 15px; }
 
-        .enunciado-box { background: #f1f8e9; border-left: 5px solid var(--primary); padding: 15px; margin-bottom: 20px; font-style: italic; font-size: 14px; }
+        .enunciado-box { background: #e1f5fe; border-left: 5px solid var(--accent); padding: 15px; margin-bottom: 20px; font-style: italic; font-size: 14px; }
 
-        .diagrama-container { text-align: center; margin: 20px 0; border: 1px solid #eee; border-radius: 15px; padding: 10px; background: #fafafa; }
-        .diagrama-label { font-family: 'Kalam', cursive; font-size: 14px; color: #666; }
+        .diagrama-container { text-align: center; margin: 20px 0; background: #f5f5f5; border-radius: 15px; padding: 15px; border: 1px solid #ddd; }
 
-        .paso-box { margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 15px; }
-        .paso-box h3 { font-size: 16px; color: var(--accent); margin: 0 0 5px 0; }
+        .paso-resolucion { margin-bottom: 25px; border-left: 3px solid var(--primary); padding-left: 15px; }
+        .paso-resolucion h3 { font-size: 16px; color: var(--primary); margin: 0 0 10px 0; }
         
-        .math-result { font-family: 'Roboto Mono', monospace; font-size: 20px; text-align: center; background: #e3f2fd; padding: 15px; border-radius: 10px; margin: 15px 0; border: 1px solid var(--accent); }
+        .math-box { font-family: 'Roboto Mono', monospace; font-size: 18px; text-align: center; background: #fff; padding: 15px; border-radius: 10px; margin: 10px 0; border: 1px solid #ccc; box-shadow: inset 0 0 5px rgba(0,0,0,0.05); }
 
-        .criterio-d { background: #fff3e0; border: 2px dashed #ff9800; padding: 15px; border-radius: 10px; margin-top: 20px; }
+        .highlight-final { font-size: 22px; font-weight: 800; color: var(--danger); text-align: center; margin-top: 20px; border: 2px solid var(--danger); padding: 10px; border-radius: 10px; }
 
         @media print {
             body { background: white; padding: 0; }
@@ -54,72 +53,74 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Resolución para Carla</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Rescate</button>
 
     <div class="page">
         <div class="student-tag">Carla Caicedo - 4º ESO</div>
         
         <header class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>Aplicación de Trigonometría: El Desafío del Rascacielos</p>
+            <p>Trigonometría Aplicada: Ángulos de Depresión</p>
         </header>
 
         <section class="section">
             <span class="section-title">1. El Problema</span>
             <div class="enunciado-box">
-                "En una visita de estudios, alumnos del PAI quieren medir la altura de la <b>Torre Delta</b>. Observan que su sombra mide <b>45 metros</b> y el ángulo de elevación desde el extremo de la sombra hasta la punta es de <b>72°</b>."
+                "Desde un faro a <b>80 metros</b> sobre el nivel del mar, un vigilante observa dos botes alineados. El ángulo de depresión hacia el primer bote es de <b>35°</b> y hacia el segundo es de <b>15°</b>. ¿Qué distancia separa a ambos botes?"
             </div>
         </section>
 
         <section class="section">
-            <span class="section-title">2. Esquema Visual</span>
+            <span class="section-title">2. Esquema del Rescate</span>
             <div class="diagrama-container">
-                <svg width="300" height="200" viewBox="0 0 300 200">
-                    <line x1="50" y1="180" x2="250" y2="180" stroke="black" stroke-width="2" />
-                    <rect x="50" y="30" width="40" height="150" fill="#ddd" stroke="#333" />
-                    <line x1="90" y1="180" x2="240" y2="180" stroke="blue" stroke-width="3" stroke-dasharray="5,5" />
-                    <line x1="90" y1="30" x2="240" y2="180" stroke="red" stroke-width="2" />
-                    <path d="M 220 180 A 20 20 0 0 0 228 165" fill="none" stroke="red" stroke-width="2" />
-                    <text x="150" y="195" font-family="Kalam" font-size="14">Sombra = 45m (C. Contiguo)</text>
-                    <text x="10" y="100" font-family="Kalam" font-size="14" transform="rotate(-90 20,100)">Altura = h (C. Opuesto)</text>
-                    <text x="195" y="160" font-family="Kalam" font-size="14" fill="red">72°</text>
+                <svg width="400" height="200" viewBox="0 0 400 200">
+                    <rect x="0" y="170" width="400" height="30" fill="#bbdefb" />
+                    <rect x="20" y="50" width="30" height="120" fill="#546e7a" />
+                    <circle cx="35" cy="50" r="10" fill="#ffeb3b" />
+                    <line x1="35" y1="50" x2="350" y2="50" stroke="#999" stroke-dasharray="4" />
+                    <line x1="35" y1="50" x2="150" y2="170" stroke="red" stroke-width="2" /> <line x1="35" y1="50" x2="330" y2="170" stroke="red" stroke-width="2" /> <path d="M 140 170 L 160 170 L 155 180 L 145 180 Z" fill="#333" />
+                    <path d="M 320 170 L 340 170 L 335 180 L 325 180 Z" fill="#333" />
+                    <text x="5" y="110" font-family="Kalam" font-size="12" transform="rotate(-90 5,110)">Altura = 80m</text>
+                    <text x="140" y="160" font-family="Kalam" font-size="12">35°</text>
+                    <text x="320" y="160" font-family="Kalam" font-size="12">15°</text>
+                    <text x="210" y="195" font-family="Kalam" font-size="14" fill="blue">¿Distancia (d)?</text>
                 </svg>
-                <div class="diagrama-label">Representación del triángulo rectángulo formado</div>
             </div>
+            <p style="font-size: 13px; color: #666;"><i>Nota: Por geometría, el ángulo de depresión desde el faro es igual al ángulo de elevación desde el bote al faro.</i></p>
         </section>
 
         <section class="section">
-            <span class="section-title">3. Procedimiento Paso a Paso</span>
+            <span class="section-title">3. Resolución Paso a Paso</span>
             
-            <div class="paso-box">
-                <h3>Paso 1: Identificar datos y razones trigonométricas</h3>
-                Tenemos el <b>Cateto Contiguo</b> (la sombra, 45m) y el <b>Ángulo</b> (72°). Buscamos el <b>Cateto Opuesto</b> (la altura \(h\)).<br>
-                La razón que relaciona ambos es la <b>Tangente</b>.
+            <div class="paso-resolucion">
+                <h3>Paso 1: Distancia al primer bote (\(x_1\))</h3>
+                Usamos la tangente con el ángulo de 35°:
+                <div class="math-box">
+                    \[ \tan(35^\circ) = \frac{80}{x_1} \rightarrow x_1 = \frac{80}{\tan(35^\circ)} \]
+                    \[ x_1 \approx \frac{80}{0,7002} \approx 114,25 \text{ metros} \]
+                </div>
             </div>
 
-            <div class="paso-box">
-                <h3>Paso 2: Plantear la ecuación</h3>
-                \[ \tan(72^\circ) = \frac{\text{Cateto Opuesto}}{\text{Cateto Contiguo}} \]
-                \[ \tan(72^\circ) = \frac{h}{45} \]
+            <div class="paso-resolucion">
+                <h3>Paso 2: Distancia al segundo bote (\(x_2\))</h3>
+                Usamos la tangente con el ángulo de 15°:
+                <div class="math-box">
+                    \[ \tan(15^\circ) = \frac{80}{x_2} \rightarrow x_2 = \frac{80}{\tan(15^\circ)} \]
+                    \[ x_2 \approx \frac{80}{0,2679} \approx 298,62 \text{ metros} \]
+                </div>
             </div>
 
-            <div class="paso-box">
-                <h3>Paso 3: Despejar y calcular</h3>
-                \[ h = 45 \cdot \tan(72^\circ) \]
-                Usando la calculadora: \( \tan(72^\circ) \approx 3,077 \)
-                \[ h = 45 \cdot 3,077 \]
+            <div class="paso-resolucion">
+                <h3>Paso 3: Calcular la separación (\(d\))</h3>
+                La distancia entre los botes es la resta de las dos distancias horizontales:
+                <div class="math-box">
+                    \[ d = x_2 - x_1 \]
+                    \[ d = 298,62 - 114,25 \]
+                </div>
             </div>
 
-            <div class="math-result">
-                Altura de la Torre Delta \(\approx\) 138,47 metros
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="criterio-d">
-                <strong>Criterio D: Análisis de Coherencia</strong><br>
-                El resultado de <b>138,47 metros</b> es <b>totalmente coherente</b> para un rascacielos moderno. <br>
-                Como referencia, los rascacielos suelen superar los 100-150 metros (por ejemplo, la Torre Sevilla mide 180m). Un edificio de esta altura tendría aproximadamente unas 35-40 plantas, lo cual es estándar en ciudades modernas.
+            <div class="highlight-final">
+                Distancia entre los botes = 184,37 metros
             </div>
         </section>
 
