@@ -3,152 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento: Identidades Notables - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Kalam:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
-    
+    <title>Entrenador de Identidades Notables · Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+    
     <style>
-        :root { --esparta-green: #0e9343; --danger: #d32f2f; --blue: #2980b9; --line-color: #e0e0e0; }
+        :root { --primary: #0e9343; --danger: #d32f2f; --accent: #2980b9; }
+        body { font-family: 'Poppins', sans-serif; background: #f0f4f1; display: flex; justify-content: center; padding: 20px; }
         
-        body { font-family: 'Poppins', sans-serif; background-color: #f5fdf7; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid var(--primary); }
         
-        .btn-imprimir { background-color: var(--esparta-green); color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: 700; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3); transition: 0.3s; }
-        .btn-imprimir:hover { background-color: #063c24; transform: scale(1.05); }
+        .header { text-align: center; border-bottom: 2px dashed var(--primary); margin-bottom: 25px; padding-bottom: 10px; }
+        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 32px; }
 
-        .notebook-page { background-color: white; width: 100%; max-width: 900px; padding: 40px; box-shadow: 0 0 20px rgba(0,0,0,0.1); border: 1px solid #ddd; box-sizing: border-box; position: relative; }
-
-        .header { border-bottom: 3px solid var(--esparta-green); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
-        .header h1 { color: var(--esparta-green); margin: 0; text-transform: uppercase; font-size: 2rem; }
-
-        .section { margin-bottom: 50px; page-break-inside: avoid; }
-        .section-title { font-family: 'Kalam', cursive; font-size: 1.8rem; color: var(--danger); text-decoration: underline; margin-bottom: 15px; display: block; }
-
-        .formula-box { background: #f9f9f9; border: 2px solid #333; padding: 15px; text-align: center; font-size: 1.5rem; border-radius: 10px; margin-bottom: 20px; }
-
-        /* Estilo de los pasos guiados */
-        .guia-pasos { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        .guia-pasos th { background: var(--esparta-green); color: white; padding: 10px; border: 1px solid #000; font-size: 0.9rem; }
-        .guia-pasos td { border: 1px solid #ccc; padding: 15px; text-align: center; vertical-align: middle; }
-
-        .input-box { border-bottom: 2px solid #aaa; height: 30px; min-width: 100px; display: inline-block; }
+        .setup-box { background: #f9f9f9; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center; }
+        input { padding: 10px; font-size: 18px; width: 60px; text-align: center; border: 2px solid #ddd; border-radius: 8px; }
         
-        .pauta-final { font-family: 'Roboto Mono', monospace; font-size: 1.2rem; background: #fffcf0; border: 1px dashed #ccc; padding: 10px; margin-top: 10px; min-height: 40px; }
+        .interactive-area { min-height: 200px; padding: 20px; background: #fffcf0; border-radius: 15px; border: 1px solid #e6db55; margin-top: 20px; display: none; }
+        
+        .explanation { font-family: 'Kalam', cursive; font-size: 20px; color: #444; margin-bottom: 15px; line-height: 1.4; }
+        .math-display { font-size: 24px; text-align: center; margin: 20px 0; padding: 10px; background: white; border-radius: 10px; box-shadow: inset 0 0 5px rgba(0,0,0,0.05); }
 
-        @media print {
-            body { background: white; padding: 0; }
-            .btn-imprimir { display: none; }
-            .notebook-page { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 10px; }
-        }
+        .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn:hover { transform: scale(1.05); background: #063c24; }
+        .btn-next { background: var(--accent); }
+
+        .highlight { color: var(--danger); font-weight: 800; }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Generar Ficha de Entrenamiento (PDF)</button>
-
-    <div class="notebook-page">
-        <div class="header">
-            <h1>ACADEMIA ESPARTA</h1>
-            <p><i>Entrenamiento de Identidades Notables: "No calcules, domina la estructura"</i></p>
-        </div>
-
-        <section class="section">
-            <span class="section-title">1. Cuadrado de una Suma</span>
-            <div class="formula-box">
-                $$(a + b)^2 = a^2 + 2ab + b^2$$
-            </div>
-            
-            <p><b>Ejemplo guiado:</b> Resuelve $(x + 3)^2$</p>
-            <table class="guia-pasos">
-                <thead>
-                    <tr>
-                        <th>Identifica \(a\)</th>
-                        <th>Identifica \(b\)</th>
-                        <th>Aplica el Doble Producto (\(2 \cdot a \cdot b\))</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>\(a = x\)</td>
-                        <td>\(b = 3\)</td>
-                        <td>\(2 \cdot x \cdot 3 = 6x\)</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="pauta-final">Resultado: \(x^2 + 6x + 9\)</div>
-
-            <p style="margin-top: 20px;"><b>Ahora tú:</b> Resuelve $(2x + 5)^2$</p>
-            <table class="guia-pasos">
-                <thead>
-                    <tr>
-                        <th>Identifica \(a\)</th>
-                        <th>Identifica \(b\)</th>
-                        <th>Calcula \(a^2\)</th>
-                        <th>Calcula \(2ab\)</th>
-                        <th>Calcula \(b^2\)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><div class="input-box"></div></td>
-                        <td><div class="input-box"></div></td>
-                        <td><div class="input-box"></div></td>
-                        <td><div class="input-box"></div></td>
-                        <td><div class="input-box"></div></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="section">
-            <span class="section-title">2. Cuadrado de una Resta</span>
-            <div class="formula-box" style="border-color: var(--danger);">
-                $$(a - b)^2 = a^2 - 2ab + b^2$$
-            </div>
-            <p><i>¡Ojo espartano! El único signo que cambia es el del medio.</i></p>
-
-            <p><b>Practica:</b> Resuelve $(x - 4)^2$</p>
-            <div class="pauta-final" style="height: 60px;">Planteamiento: <br> (...)</div>
-        </section>
-
-        <section class="section">
-            <span class="section-title">3. Suma por Diferencia</span>
-            <div class="formula-box" style="border-color: var(--blue);">
-                $$(a + b) \cdot (a - b) = a^2 - b^2$$
-            </div>
-            
-            <p><b>Guía rápida:</b> El resultado es siempre el primero al cuadrado MENOS el segundo al cuadrado.</p>
-            <table class="guia-pasos">
-                <thead>
-                    <tr>
-                        <th>Ejercicio</th>
-                        <th>¿Quién es \(a\)?</th>
-                        <th>¿Quién es \(b\)?</th>
-                        <th>Resultado Final (\(a^2 - b^2\))</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>\((x + 5)(x - 5)\)</td>
-                        <td>\(x\)</td>
-                        <td>\(5\)</td>
-                        <td>\(x^2 - 25\)</td>
-                    </tr>
-                    <tr>
-                        <td>\((3x + 2)(3x - 2)\)</td>
-                        <td><div class="input-box"></div></td>
-                        <td><div class="input-box"></div></td>
-                        <td><div class="input-box"></div></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <div style="text-align: center; color: #888; font-size: 0.8rem; margin-top: 20px;">
-            Academia Esparta - Material de Entrenamiento de Álgebra
-        </div>
+<div class="container">
+    <div class="header">
+        <h1>Entrenador Espartano</h1>
+        <p>Identidades Notables: \((a + b)^2\)</p>
     </div>
+
+    <div class="setup-box" id="setup">
+        <p>Introduce los valores para \((a + b)^2\)</p>
+        <div style="font-size: 22px;">
+            ( <input type="text" id="valA" placeholder="x"> + <input type="text" id="valB" placeholder="3"> )²
+        </div>
+        <button class="btn" onclick="startTraining()">¡Empezar Entrenamiento!</button>
+    </div>
+
+    <div class="interactive-area" id="trainingArea">
+        <div class="explanation" id="guideText"></div>
+        <div class="math-display" id="mathOutput"></div>
+        <button class="btn btn-next" id="nextBtn" onclick="nextStep()">Siguiente Paso</button>
+        <button class="btn" id="resetBtn" style="display:none; background: #666;" onclick="reset()">Reiniciar</button>
+    </div>
+</div>
+
+<script>
+    let step = 0;
+    let a, b;
+
+    function startTraining() {
+        a = document.getElementById('valA').value || 'x';
+        b = document.getElementById('valB').value || '3';
+        document.getElementById('setup').style.display = 'none';
+        document.getElementById('trainingArea').style.display = 'block';
+        showStep();
+    }
+
+    function showStep() {
+        const guide = document.getElementById('guideText');
+        const math = document.getElementById('mathOutput');
+        
+        switch(step) {
+            case 0:
+                guide.innerHTML = "Paso 1: <span class='highlight'>El primero al cuadrado.</span> <br> Cogemos la \(a\) y la elevamos a 2.";
+                math.innerHTML = `\\[ (${a})^2 \\]`;
+                break;
+            case 1:
+                guide.innerHTML = "Paso 2: <span class='highlight'>El doble del primero por el segundo.</span> <br> Multiplicamos 2 por \(a\) y por \(b\).";
+                math.innerHTML = `\\[ (${a})^2 + 2 \\cdot (${a}) \\cdot (${b}) \\]`;
+                break;
+            case 2:
+                guide.innerHTML = "Paso 3: <span class='highlight'>El segundo al cuadrado.</span> <br> Sumamos la \(b\) elevada a 2.";
+                math.innerHTML = `\\[ (${a})^2 + 2 \\cdot (${a}) \\cdot (${b}) + (${b})^2 \\]`;
+                break;
+            case 3:
+                guide.innerHTML = "¡Y aquí tienes el resultado listo para simplificar!";
+                math.innerHTML = `\\[ ${a}^2 + ${isNaN(a) && !isNaN(b) ? 2*b : '2\\cdot '+a+'\\cdot '+b} + ${!isNaN(b) ? b*b : b+'^2'} \\]`;
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('resetBtn').style.display = 'inline-block';
+                break;
+        }
+        MathJax.typeset();
+    }
+
+    function nextStep() {
+        step++;
+        showStep();
+    }
+
+    function reset() {
+        step = 0;
+        document.getElementById('setup').style.display = 'block';
+        document.getElementById('trainingArea').style.display = 'none';
+        document.getElementById('nextBtn').style.display = 'inline-block';
+        document.getElementById('resetBtn').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
