@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vectores Avanzados - Academia Esparta</title>
+    <title>Sistemas de Ecuaciones - Marta 4º ESO</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --primary: #0e9343; --accent: #1565c0; --danger: #c62828; }
+        :root { --primary: #0e9343; --accent: #1565c0; --danger: #c62828; --warning: #f57c00; }
+        
         body { font-family: 'Poppins', sans-serif; background-color: #f4f7f4; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
         .btn-imprimir {
@@ -24,18 +25,20 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.08); box-sizing: border-box; position: relative; 
         }
 
-        .header { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; text-align: center; }
+        .header { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 25px; text-align: center; }
         .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 35px; text-transform: uppercase; }
 
-        .section { margin-bottom: 30px; page-break-inside: avoid; }
+        .student-tag { position: absolute; top: 10mm; right: 15mm; font-family: 'Kalam', cursive; color: var(--accent); font-size: 1.2rem; }
+
+        .section { margin-bottom: 35px; page-break-inside: avoid; }
         .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: #fff; background: var(--accent); padding: 5px 20px; border-radius: 10px; display: inline-block; margin-bottom: 15px; }
 
-        .teoria-box { background: #e3f2fd; border-left: 5px solid var(--accent); padding: 15px; margin: 10px 0; font-size: 14px; line-height: 1.5; }
+        .teoria-box { background: #f8f9fa; border-left: 5px solid var(--accent); padding: 15px; margin: 10px 0; font-size: 14px; line-height: 1.5; }
         
         .ejemplo-resuelto { background: #f1f8e9; border: 1px solid var(--primary); border-radius: 10px; padding: 15px; margin: 10px 0; font-family: 'Roboto Mono', monospace; font-size: 13px; }
+        .paso-num { color: var(--danger); font-weight: bold; }
 
         .caja-ejercicio { border: 2px dashed #ccc; border-radius: 10px; padding: 15px; margin-top: 10px; background: #fafafa; }
-        .formula { background: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; color: var(--danger); }
 
         @media print {
             body { background: white; padding: 0; }
@@ -46,75 +49,79 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar Ficha de Vectores (Parte 2)</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Generar Ficha para Marta</button>
 
     <div class="page">
+        <div class="student-tag">Marta - 4º ESO</div>
+        
         <header class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>Vectores: Operaciones, Punto Medio y Producto Escalar</p>
+            <p>Sistemas de Ecuaciones Lineales: Los 3 Métodos</p>
         </header>
 
         <section class="section">
-            <span class="section-title">1. El Punto Medio de un Segmento</span>
+            <span class="section-title">1. Método de Sustitución</span>
             <div class="teoria-box">
-                El <b>punto medio \(M\)</b> es el punto que divide a un segmento \(AB\) en dos partes iguales. Se calcula haciendo la media aritmética de las coordenadas de los extremos:
-                <br><br>
-                <span class="formula">\(M = \left( \frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2} \right)\)</span>
+                Es ideal cuando una de las incógnitas tiene coeficiente 1 o -1. <br>
+                <b>Estrategia:</b> Despejamos una letra en una ecuación y metemos su "valor" en la otra.
             </div>
             
             <div class="ejemplo-resuelto">
-                <b>Ejemplo:</b> Hallar el punto medio entre \(A(-2, 4)\) y \(B(6, 2)\). <br>
-                \(M = \left( \frac{-2 + 6}{2}, \frac{4 + 2}{2} \right) = \left( \frac{4}{2}, \frac{6}{2} \right) = (2, 3)\)
+                <b>Ejemplo:</b> \( \begin{cases} x + 2y = 8 \\ 3x - y = 3 \end{cases} \)<br>
+                <span class="paso-num">1.</span> Despejo \(x\) en la 1ª: \(x = 8 - 2y\)<br>
+                <span class="paso-num">2.</span> Sustituyo en la 2ª: \(3(8 - 2y) - y = 3\)<br>
+                <span class="paso-num">3.</span> Resuelvo: \(24 - 6y - y = 3 \rightarrow -7y = -21 \rightarrow y = 3\)<br>
+                <span class="paso-num">4.</span> Calculo \(x\): \(x = 8 - 2(3) = 2\). Solución: <b>(2, 3)</b>.
             </div>
 
             <div class="caja-ejercicio">
-                <b>Ejercicio 1:</b> Si los extremos de un segmento son \(P(5, -1)\) y \(Q(-3, 7)\), ¿cuál es su punto medio?
+                <b>Ejercicio 1:</b> Resuelve por <u>Sustitución</u>: \( \begin{cases} 2x + y = 7 \\ 3x - 2y = 0 \end{cases} \)
                 <div style="height: 60px; border-bottom: 1px dashed #ccc; margin-top: 10px;"></div>
             </div>
         </section>
 
         <section class="section">
-            <span class="section-title">2. Operaciones Combinadas (Suma y Escalar)</span>
+            <span class="section-title">2. Método de Igualación</span>
             <div class="teoria-box">
-                Podemos sumar vectores (coordenada a coordenada) y multiplicarlos por un número real (\(k\)). <br>
-                Si \(\vec{u} = (u_1, u_2)\) y \(\vec{v} = (v_1, v_2)\), entonces: <br>
-                <b>\(k \cdot \vec{u} + \vec{v} = (k \cdot u_1 + v_1, k \cdot u_2 + v_2)\)</b>
+                Muy útil si es fácil despejar la misma incógnita en ambas ecuaciones. <br>
+                <b>Estrategia:</b> Despejamos la misma letra arriba y abajo, e igualamos los resultados.
             </div>
 
             <div class="ejemplo-resuelto">
-                <b>Ejemplo:</b> Sean \(\vec{u} = (1, -2)\) y \(\vec{v} = (3, 5)\). Calcula \(2\vec{u} - \vec{v}\). <br>
-                \(2\vec{u} = (2 \cdot 1, 2 \cdot (-2)) = (2, -4)\) <br>
-                \(2\vec{u} - \vec{v} = (2 - 3, -4 - 5) = (-1, -9)\)
+                <b>Ejemplo:</b> \( \begin{cases} y = 2x - 1 \\ y = 5x - 7 \end{cases} \)<br>
+                <span class="paso-num">1.</span> Como \(y = y\), entonces: \(2x - 1 = 5x - 7\)<br>
+                <span class="paso-num">2.</span> Agrupo \(x\): \(7 - 1 = 5x - 2x \rightarrow 6 = 3x \rightarrow x = 2\)<br>
+                <span class="paso-num">3.</span> Calculo \(y\): \(y = 2(2) - 1 = 3\). Solución: <b>(2, 3)</b>.
             </div>
 
             <div class="caja-ejercicio">
-                <b>Ejercicio 2:</b> Dados \(\vec{a} = (-4, 2)\) y \(\vec{b} = (1, 3)\), calcula el vector resultante de \(3\vec{a} + 2\vec{b}\).
+                <b>Ejercicio 2:</b> Resuelve por <u>Igualación</u>: \( \begin{cases} x = 3y + 2 \\ x = 2y + 5 \end{cases} \)
                 <div style="height: 60px; border-bottom: 1px dashed #ccc; margin-top: 10px;"></div>
             </div>
         </section>
 
         <section class="section">
-            <span class="section-title">3. Producto Escalar y Ortogonalidad</span>
+            <span class="section-title">3. Método de Reducción (El más potente)</span>
             <div class="teoria-box">
-                El producto escalar da como resultado un <b>número</b>. <br>
-                \(\vec{u} \cdot \vec{v} = u_1 \cdot v_1 + u_2 \cdot v_2\) <br>
-                <b>¡Importante!:</b> Si el producto escalar es <b>CERO (0)</b>, los vectores son <b>perpendiculares</b> (ortogonales).
+                Consiste en preparar las ecuaciones para que, al sumarlas, una letra desaparezca. <br>
+                <b>Estrategia:</b> Multiplicamos una o ambas ecuaciones por números para tener coeficientes opuestos.
             </div>
 
             <div class="ejemplo-resuelto">
-                <b>Ejemplo:</b> ¿Son perpendiculares \(\vec{u} = (3, 2)\) y \(\vec{v} = (-2, 3)\)? <br>
-                \(\vec{u} \cdot \vec{v} = (3 \cdot -2) + (2 \cdot 3) = -6 + 6 = 0\). <br>
-                <b>Respuesta:</b> Sí, son perpendiculares.
+                <b>Ejemplo:</b> \( \begin{cases} 2x + 3y = 7 \\ 5x - 6y = 4 \end{cases} \)<br>
+                <span class="paso-num">1.</span> Multiplico la 1ª por 2 para tener \(+6y\): \( \begin{cases} 4x + 6y = 14 \\ 5x - 6y = 4 \end{cases} \)<br>
+                <span class="paso-num">2.</span> Sumo las ecuaciones: \(9x = 18 \rightarrow x = 2\)<br>
+                <span class="paso-num">3.</span> Sustituyo \(x\) en la 1ª: \(2(2) + 3y = 7 \rightarrow 3y = 3 \rightarrow y = 1\). Solución: <b>(2, 1)</b>.
             </div>
 
             <div class="caja-ejercicio">
-                <b>Ejercicio 3:</b> Comprueba si los vectores \(\vec{u} = (5, 1)\) y \(\vec{v} = (-1, 5)\) son perpendiculares. Calcula también el producto escalar de \(\vec{w} = (2, 4)\) y \(\vec{z} = (1, -3)\).
-                <div style="height: 80px; border-bottom: 1px dashed #ccc; margin-top: 10px;"></div>
+                <b>Ejercicio 3:</b> Resuelve por <u>Reducción</u>: \( \begin{cases} 3x + 2y = 7 \\ 4x - 3y = -2 \end{cases} \)
+                <div style="height: 60px; border-bottom: 1px dashed #ccc; margin-top: 10px;"></div>
             </div>
         </section>
 
         <footer style="text-align: center; font-size: 11px; color: #bbb; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
-            Academia Esparta · Matemáticas 4º ESO · Entrenamiento Avanzado
+            Academia Esparta · Sistemas de Ecuaciones 4º ESO · Marta Jiménez
         </footer>
     </div>
 
