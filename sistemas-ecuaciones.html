@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diseño de Accesibilidad: Rampas - Carla Caicedo</title>
+    <title>Eficiencia Energética: Paneles Solares - Carla Caicedo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --primary: #0e9343; --accent: #1565c0; --danger: #c62828; --warning: #f39c12; }
+        :root { --primary: #0e9343; --accent: #1565c0; --solar: #fbc02d; --tejado: #8d6e63; }
+        
         body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
         .btn-imprimir {
@@ -32,16 +33,16 @@
         .section { margin-bottom: 30px; page-break-inside: avoid; }
         .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: #fff; background: var(--primary); padding: 5px 20px; border-radius: 10px; display: inline-block; margin-bottom: 15px; }
 
-        .enunciado-box { background: #fff9c4; border-left: 5px solid var(--warning); padding: 15px; margin-bottom: 20px; font-style: italic; font-size: 14px; }
+        .enunciado-box { background: #fffde7; border-left: 5px solid var(--solar); padding: 15px; margin-bottom: 20px; font-style: italic; font-size: 14px; }
 
         .diagrama-svg { text-align: center; margin: 20px 0; background: #fafafa; border-radius: 15px; padding: 10px; border: 1px solid #ddd; }
 
-        .paso-resolucion { margin-bottom: 25px; border-left: 3px solid var(--accent); padding-left: 15px; }
-        .paso-resolucion h3 { font-size: 16px; color: var(--accent); margin: 0 0 10px 0; }
+        .paso-box { margin-bottom: 25px; border-left: 3px solid var(--solar); padding-left: 15px; }
+        .paso-box h3 { font-size: 16px; color: #f9a825; margin: 0 0 10px 0; }
         
         .math-result { font-family: 'Roboto Mono', monospace; font-size: 19px; text-align: center; background: #fff; padding: 15px; border-radius: 10px; margin: 10px 0; border: 1px solid #ccc; }
 
-        .alerta-roja { background: #ffebee; border: 2px solid var(--danger); padding: 15px; border-radius: 10px; color: var(--danger); font-weight: bold; text-align: center; margin-top: 20px; }
+        .footer { text-align: center; font-size: 11px; color: #bbb; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; }
 
         @media print {
             body { background: white; padding: 0; }
@@ -52,74 +53,78 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Proyecto Accesibilidad</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Proyecto Energía Solar</button>
 
     <div class="page">
         <div class="student-tag">Carla Caicedo - 4º ESO</div>
         
         <header class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>Trigonometría Aplicada: Diseño de Accesibilidad (Pendiente)</p>
+            <p>Trigonometría Mixta: Optimización de Panel Solar</p>
         </header>
 
         <section class="section">
             <span class="section-title">1. El Problema</span>
             <div class="enunciado-box">
-                "La normativa municipal exige que las rampas para sillas de ruedas no superen un ángulo de inclinación de <b>5°</b>. Un centro comercial necesita salvar un escalón de <b>1,2 metros</b> de altura."
+                "Un panel solar de <b>2 metros</b> se instala sobre un tejado inclinado <b>20°</b>. Para maximizar la energía, el panel debe levantarse hasta formar un ángulo total de <b>45°</b> respecto a la horizontal. ¿Qué longitud debe tener el soporte vertical entre el panel y el tejado?"
             </div>
         </section>
 
         <section class="section">
-            <span class="section-title">2. Esquema de Diseño</span>
+            <span class="section-title">2. Análisis Geométrico</span>
             <div class="diagrama-svg">
-                                <svg width="400" height="150" viewBox="0 0 400 150">
-                    <line x1="50" y1="120" x2="350" y2="120" stroke="#666" stroke-width="2" />
-                    <line x1="350" y1="120" x2="350" y2="40" stroke="black" stroke-width="3" />
-                    <line x1="50" y1="120" x2="350" y2="40" stroke="#f39c12" stroke-width="4" />
-                    <path d="M 80 120 A 30 30 0 0 0 78 108" fill="none" stroke="red" stroke-width="2" />
-                    <text x="360" y="80" font-family="Kalam" font-size="14">1,2m (Opuesto)</text>
-                    <text x="180" y="70" font-family="Kalam" font-size="14" fill="#f39c12" transform="rotate(-15 180,70)">Rampa (L?)</text>
-                    <text x="85" y="115" font-family="Kalam" font-size="14" fill="red">5°</text>
-                    <text x="180" y="140" font-family="Kalam" font-size="14">Base en la acera (x?)</text>
+                                <svg width="400" height="200" viewBox="0 0 400 200">
+                    <line x1="50" y1="180" x2="350" y2="180" stroke="#ccc" stroke-width="1" stroke-dasharray="4" />
+                    <line x1="50" y1="180" x2="300" y2="100" stroke="#8d6e63" stroke-width="4" />
+                    <line x1="50" y1="180" x2="250" y2="40" stroke="#fbc02d" stroke-width="5" />
+                    <line x1="250" y1="40" x2="250" y2="116" stroke="red" stroke-width="2" />
+                    <text x="110" y="175" font-family="Kalam" font-size="12" fill="#8d6e63">20°</text>
+                    <text x="70" y="150" font-family="Kalam" font-size="12" fill="#fbc02d">45°</text>
+                    <text x="110" y="90" font-family="Kalam" font-size="14" fill="#fbc02d" transform="rotate(-35 110,90)">Panel = 2m</text>
+                    <text x="255" y="80" font-family="Kalam" font-size="14" fill="red">Soporte (h)?</text>
                 </svg>
             </div>
+            <p style="font-size: 13px; color: #666;">Observamos que el ángulo interno entre el panel y el tejado es la resta: \( 45^\circ - 20^\circ = 25^\circ \).</p>
         </section>
 
         <section class="section">
-            <span class="section-title">3. Tarea 1: Cálculo de la Longitud (L)</span>
+            <span class="section-title">3. Resolución con Teorema del Seno</span>
             
-            <div class="paso-resolucion">
-                <h3>Identificación de la razón trigonométrica</h3>
-                Tenemos el <b>Cateto Opuesto</b> (1,2m) y el <b>Ángulo</b> (5°). Queremos hallar la <b>Hipotenusa</b> (la longitud real de la rampa). <br>
-                Usamos el <b>Seno</b>:
-                <div class="math-result">
-                    \[ \sin(5^\circ) = \frac{1,2}{L} \rightarrow L = \frac{1,2}{\sin(5^\circ)} \]
-                    \[ L \approx \frac{1,2}{0,08715} \approx 13,77 \text{ metros} \]
-                </div>
-                <b>Respuesta 1:</b> La longitud mínima de la rampa debe ser de <b>13,77 metros</b>.
+            <div class="paso-box">
+                <h3>Paso 1: Determinar los ángulos internos del triángulo</h3>
+                Consideramos el triángulo formado por el panel, el tejado y el soporte:
+                <ul>
+                    <li>Ángulo en la base (\(A\)): \( 45^\circ - 20^\circ = 25^\circ \).</li>
+                    <li>El soporte es vertical, y el tejado sube 20°. El ángulo entre la vertical y el tejado (\(B\)) es el complementario del tejado: \( 90^\circ - 20^\circ = 70^\circ \).</li>
+                    <li>Ángulo superior (\(C\)): \( 180^\circ - (25^\circ + 70^\circ) = 85^\circ \).</li>
+                </ul>
             </div>
-        </section>
 
-        <section class="section">
-            <span class="section-title">4. Tarea 2: Estudio de Viabilidad (Acera)</span>
-            
-            <div class="paso-resolucion">
-                <h3>¿Cabe la rampa en 10 metros de acera?</h3>
-                Para saber cuánto espacio ocupa la rampa en el suelo, calculamos el <b>Cateto Contiguo (x)</b>. Usamos la <b>Tangente</b>:
+            <div class="paso-box">
+                <h3>Paso 2: Aplicar el Teorema del Seno</h3>
+                Relacionamos el lado del panel (2m) con su ángulo opuesto (70°) y el soporte (\(h\)) con su ángulo opuesto (25°):
                 <div class="math-result">
-                    \[ \tan(5^\circ) = \frac{1,2}{x} \rightarrow x = \frac{1,2}{\tan(5^\circ)} \]
-                    \[ x \approx \frac{1,2}{0,08748} \approx 13,71 \text{ metros} \]
+                    \[ \frac{h}{\sin(25^\circ)} = \frac{2}{\sin(70^\circ)} \]
+                    \[ h = \frac{2 \cdot \sin(25^\circ)}{\sin(70^\circ)} \]
                 </div>
             </div>
 
-            <div class="alerta-roja">
-                CONCLUSIÓN TÉCNICA: NO SE PUEDE CONSTRUIR.<br>
-                <span style="font-size: 14px; font-weight: 400; color: #333;">Justificación: Matemáticamente, para cumplir con el ángulo de 5°, la rampa necesita proyectarse 13,71 metros sobre la acera. Como solo disponemos de 10 metros, la rampa sobrepasaría el espacio permitido o tendría una pendiente excesiva (peligrosa).</span>
+            <div class="paso-box">
+                <h3>Paso 3: Cálculo final</h3>
+                \[ \sin(25^\circ) \approx 0,4226 \]
+                \[ \sin(70^\circ) \approx 0,9397 \]
+                <div class="math-result">
+                    \[ h \approx \frac{2 \cdot 0,4226}{0,9397} \approx 0,899 \text{ metros} \]
+                </div>
+            </div>
+
+            <div style="font-size: 22px; font-weight: 800; color: var(--primary); text-align: center; border: 2px solid var(--primary); padding: 15px; border-radius: 10px;">
+                Longitud del soporte vertical \(\approx\) 90 cm
             </div>
         </section>
 
         <footer style="text-align: center; font-size: 11px; color: #bbb; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
-            Academia Esparta · Normativa de Accesibilidad · Carla Caicedo
+            Academia Esparta · Eficiencia Energética 4º ESO · Carla Caicedo
         </footer>
     </div>
 
