@@ -3,179 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenador de Identidades Notables · Candela García</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Masterclass: Identidades Notables - Candela García</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <style>
-        :root { --primary: #0e9343; --danger: #d32f2f; --accent: #2980b9; --bg: #fdfdfd; }
-        body { font-family: 'Poppins', sans-serif; background: #f0f4f1; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        :root { --primary: #0e9343; --danger: #d32f2f; --blue: #1976d2; --bg-gray: #f9f9f9; }
         
-        .card { background: white; width: 100%; max-width: 800px; padding: 40px; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-top: 10px solid var(--primary); position: relative; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f3f3f3; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
-        .student-name { position: absolute; top: 15px; right: 30px; font-family: 'Kalam', cursive; color: var(--accent); font-size: 1.2rem; }
-        
-        .header { text-align: center; border-bottom: 2px dashed var(--primary); margin-bottom: 30px; padding-bottom: 10px; }
-        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 35px; }
+        .page { 
+            background-color: white; width: 210mm; min-height: 297mm; padding: 20mm; 
+            box-shadow: 0 0 15px rgba(0,0,0,0.1); box-sizing: border-box; position: relative; 
+        }
 
-        .selector-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .type-btn { padding: 10px 20px; border: 2px solid var(--primary); border-radius: 15px; background: white; cursor: pointer; font-weight: 600; transition: 0.3s; }
-        .type-btn.active { background: var(--primary); color: white; }
+        .header { border-bottom: 4px solid var(--primary); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
+        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 32px; }
+        .student-tag { position: absolute; top: 15mm; right: 20mm; font-family: 'Kalam', cursive; color: var(--blue); font-size: 1.2rem; }
 
-        .training-zone { background: #fffcf0; padding: 25px; border-radius: 20px; border: 1px solid #e6db55; min-height: 400px; }
-        
-        .explanation { font-family: 'Kalam', cursive; font-size: 22px; color: #444; margin-bottom: 20px; border-left: 5px solid var(--primary); padding-left: 15px; }
-        .formula-display { font-size: 32px; text-align: center; margin: 30px 0; padding: 20px; background: white; border-radius: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
+        .section { margin-bottom: 40px; page-break-inside: avoid; }
+        .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: var(--danger); background: var(--bg-gray); padding: 5px 15px; border-radius: 10px; display: inline-block; margin-bottom: 15px; }
 
-        .controls { text-align: center; margin-top: 30px; }
-        .btn { background: var(--primary); color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 18px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(14, 147, 67, 0.3); }
-        .btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+        .formula-box { 
+            border: 2px solid #333; padding: 20px; text-align: center; font-size: 24px; 
+            background: #fff; border-radius: 15px; margin: 15px 0; box-shadow: 4px 4px 0px var(--primary);
+        }
 
-        .input-group { text-align: center; margin-bottom: 20px; font-size: 24px; }
-        .math-input { width: 80px; padding: 10px; font-size: 20px; text-align: center; border: 2px solid #ddd; border-radius: 10px; font-family: 'Poppins', sans-serif; }
-        
-        .step-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; background: #eee; font-size: 12px; margin-bottom: 10px; font-weight: bold; }
+        .expl-text { line-height: 1.6; margin-bottom: 15px; font-size: 15px; }
+        .expl-text b { color: var(--primary); }
+
+        .example-card { 
+            background: #f0f9f4; border-left: 5px solid var(--primary); 
+            padding: 15px; margin: 15px 0; font-family: 'Roboto Mono', monospace; 
+        }
+
+        /* Tabla de ejercicios */
+        .tabla-ejercicios { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .tabla-ejercicios td { border: 1px solid #ddd; padding: 25px; width: 50%; vertical-align: top; }
+        .num-ej { font-weight: 800; color: var(--primary); margin-right: 10px; }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .page { box-shadow: none; border: none; margin: 0; width: 100%; }
+        }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="student-name">Alumna: Candela García</div>
-    
-    <div class="header">
-        <h1>Entrenador de Álgebra</h1>
-        <p>Domina las Identidades Notables paso a paso</p>
-    </div>
-
-    <div class="selector-box">
-        <button class="type-btn active" id="btnSuma" onclick="changeType('suma')">Suma al Cuadrado</button>
-        <button class="type-btn" id="btnResta" onclick="changeType('resta')">Resta al Cuadrado</button>
-        <button class="type-btn" id="btnDiferencia" onclick="changeType('dif')">Suma por Diferencia</button>
-    </div>
-
-    <div class="input-group" id="inputSection">
-        <span id="labelParentesis">(</span>
-        <input type="text" id="valA" class="math-input" placeholder="a" value="x">
-        <span id="labelSigno"> + </span>
-        <input type="text" id="valB" class="math-input" placeholder="b" value="3">
-        <span id="labelCierre">)²</span>
-        <br>
-        <button class="btn" style="margin-top: 20px;" onclick="iniciar()">Iniciar Explicación</button>
-    </div>
-
-    <div class="training-zone" id="trainingArea" style="display: none;">
-        <span class="step-pill" id="pillStep">PASO 1</span>
-        <div class="explanation" id="guideText"></div>
-        <div class="formula-display" id="mathDisplay"></div>
+    <div class="page">
+        <div class="student-tag">Candela García</div>
         
-        <div class="controls">
-            <button class="btn" id="btnNext" onclick="siguiente()">Siguiente Paso →</button>
-            <button class="btn" id="btnReset" onclick="reiniciar()" style="display: none; background: #666;">Probar otra</button>
-        </div>
+        <header class="header">
+            <h1>ACADEMIA ESPARTA: Identidades Notables</h1>
+            <p><i>"La estructura es el camino a la victoria"</i></p>
+        </header>
+
+        <section class="section">
+            <span class="section-title">1. Cuadrado de una Suma</span>
+            <div class="formula-box">
+                $$(a + b)^2 = a^2 + 2ab + b^2$$
+            </div>
+            <div class="expl-text">
+                <b>Profundidad:</b> Esta identidad nos dice que el área de un cuadrado de lado \((a+b)\) se compone de un cuadrado grande (\(a^2\)), dos rectángulos iguales (\(ab + ab = 2ab\)) y un cuadrado pequeño (\(b^2\)). <br>
+                <b>Regla de Oro:</b> No olvides NUNCA el término central (el doble producto).
+            </div>
+            <div class="example-card">
+                <b>Ejemplo Paso a Paso:</b> \((2x + 3)^2\)<br>
+                1. Cuadrado del 1º: \((2x)^2 = 4x^2\)<br>
+                2. Doble del 1º por el 2º: \(2 \cdot (2x) \cdot 3 = 12x\)<br>
+                3. Cuadrado del 2º: \(3^2 = 9\)<br>
+                <b>Resultado:</b> \(4x^2 + 12x + 9\)
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section-title">2. Cuadrado de una Resta</span>
+            <div class="formula-box" style="box-shadow: 4px 4px 0px var(--danger);">
+                $$(a - b)^2 = a^2 - 2ab + b^2$$
+            </div>
+            <div class="expl-text">
+                <b>Profundidad:</b> Es idéntica a la suma, pero el término central es negativo. El último término (\(b^2\)) <b>siempre es positivo</b> porque cualquier número al cuadrado (negativo o positivo) da positivo.
+            </div>
+            <div class="example-card" style="border-left-color: var(--danger);">
+                <b>Ejemplo Paso a Paso:</b> \((x - 5)^2\)<br>
+                1. Cuadrado del 1º: \(x^2\)<br>
+                2. Doble del 1º por el 2º: \(2 \cdot x \cdot (-5) = -10x\)<br>
+                3. Cuadrado del 2º: \((-5)^2 = 25\)<br>
+                <b>Resultado:</b> \(x^2 - 10x + 25\)
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section-title">3. Suma por Diferencia (Diferencia de Cuadrados)</span>
+            <div class="formula-box" style="box-shadow: 4px 4px 0px var(--blue);">
+                $$(a + b) \cdot (a - b) = a^2 - b^2$$
+            </div>
+            <div class="expl-text">
+                <b>Profundidad:</b> Es la más sencilla. Los términos centrales se anulan entre sí, por lo que solo nos queda el "primero al cuadrado menos el segundo al cuadrado".
+            </div>
+            <div class="example-card" style="border-left-color: var(--blue);">
+                <b>Ejemplo Paso a Paso:</b> \((3x + 4)(3x - 4)\)<br>
+                1. Cuadrado del 1º: \((3x)^2 = 9x^2\)<br>
+                2. Cuadrado del 2º: \(4^2 = 16\)<br>
+                3. Unir con un menos: \(9x^2 - 16\)
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section-title" style="background: var(--primary); color: white;">Zona de Entrenamiento: ¡A por ellos, Candela!</span>
+            <table class="tabla-ejercicios">
+                <tr>
+                    <td><span class="num-ej">1.</span> \((x + 6)^2\)</td>
+                    <td><span class="num-ej">2.</span> \((x - 7)^2\)</td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">3.</span> \((2x + 1)^2\)</td>
+                    <td><span class="num-ej">4.</span> \((3x - 2)^2\)</td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">5.</span> \((x + 5)(x - 5)\)</td>
+                    <td><span class="num-ej">6.</span> \((4x + 3)(4x - 3)\)</td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">7.</span> \((5x - 1)^2\)</td>
+                    <td><span class="num-ej">8.</span> \((2x^2 + 3)^2\)</td>
+                </tr>
+            </table>
+        </section>
+
+        <footer style="text-align: center; font-size: 12px; color: #aaa; margin-top: 20px;">
+            Academia Esparta · Material para Candela García · 2026
+        </footer>
     </div>
-</div>
-
-<script>
-    let currentStep = 1;
-    let type = 'suma';
-    let a, b;
-
-    function changeType(newType) {
-        type = newType;
-        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-        if(newType === 'suma') {
-            document.getElementById('btnSuma').classList.add('active');
-            document.getElementById('labelSigno').innerText = ' + ';
-            document.getElementById('labelCierre').innerText = ')²';
-        } else if(newType === 'resta') {
-            document.getElementById('btnResta').classList.add('active');
-            document.getElementById('labelSigno').innerText = ' - ';
-            document.getElementById('labelCierre').innerText = ')²';
-        } else {
-            document.getElementById('btnDiferencia').classList.add('active');
-            document.getElementById('labelSigno').innerText = ' + ';
-            document.getElementById('labelCierre').innerText = ') · (a - b)';
-        }
-        reiniciar();
-    }
-
-    function iniciar() {
-        a = document.getElementById('valA').value || 'a';
-        b = document.getElementById('valB').value || 'b';
-        document.getElementById('inputSection').style.display = 'none';
-        document.getElementById('trainingArea').style.display = 'block';
-        currentStep = 1;
-        mostrarPaso();
-    }
-
-    function mostrarPaso() {
-        const guide = document.getElementById('guideText');
-        const math = document.getElementById('mathDisplay');
-        const pill = document.getElementById('pillStep');
-        
-        pill.innerText = `PASO ${currentStep}`;
-
-        if (type === 'suma' || type === 'resta') {
-            const signo = type === 'suma' ? '+' : '-';
-            switch(currentStep) {
-                case 1:
-                    guide.innerHTML = "Primero, calculamos el <span style='color:var(--danger)'>cuadrado del primero</span>. <br>Recuerda Candela: Todo lo que sea 'a' se eleva a 2.";
-                    math.innerHTML = `\\[ (${a})^2 \\]`;
-                    break;
-                case 2:
-                    guide.innerHTML = `Ahora añadimos el <span style='color:var(--danger)'>doble del primero por el segundo</span>. <br>Multiplicamos 2 por "${a}" y por "${b}".`;
-                    math.innerHTML = `\\[ (${a})^2 ${signo} 2 \\cdot (${a}) \\cdot (${b}) \\]`;
-                    break;
-                case 3:
-                    guide.innerHTML = "Por último, sumamos el <span style='color:var(--danger)'>cuadrado del segundo</span>. <br>Elevamos la 'b' a 2.";
-                    math.innerHTML = `\\[ (${a})^2 ${signo} 2 \\cdot (${a}) \\cdot (${b}) + (${b})^2 \\]`;
-                    document.getElementById('btnNext').innerText = "Ver resultado final";
-                    break;
-                case 4:
-                    guide.innerHTML = "¡Resultado estructurado! Ahora solo faltaría simplificar los números.";
-                    math.innerHTML = `\\[ ${a}^2 ${signo} 2${a}${b} + ${b}^2 \\]`;
-                    document.getElementById('btnNext').style.display = 'none';
-                    document.getElementById('btnReset').style.display = 'inline-block';
-                    break;
-            }
-        } else {
-            // Suma por diferencia
-            switch(currentStep) {
-                case 1:
-                    guide.innerHTML = "En la suma por diferencia, el resultado es el <span style='color:var(--danger)'>cuadrado del primero</span>...";
-                    math.innerHTML = `\\[ (${a})^2 \\]`;
-                    break;
-                case 2:
-                    guide.innerHTML = "... <span style='color:var(--danger)'>MENOS el cuadrado del segundo</span>. <br>Es la identidad más rápida de Candela.";
-                    math.innerHTML = `\\[ (${a})^2 - (${b})^2 \\]`;
-                    document.getElementById('btnNext').innerText = "Ver resultado final";
-                    break;
-                case 3:
-                    guide.innerHTML = "¡Listo! Siempre queda una resta de cuadrados.";
-                    math.innerHTML = `\\[ ${a}^2 - ${b}^2 \\]`;
-                    document.getElementById('btnNext').style.display = 'none';
-                    document.getElementById('btnReset').style.display = 'inline-block';
-                    break;
-            }
-        }
-        MathJax.typeset();
-    }
-
-    function siguiente() {
-        currentStep++;
-        mostrarPaso();
-    }
-
-    function reiniciar() {
-        document.getElementById('inputSection').style.display = 'block';
-        document.getElementById('trainingArea').style.display = 'none';
-        document.getElementById('btnNext').style.display = 'inline-block';
-        document.getElementById('btnNext').innerText = "Siguiente Paso →";
-        document.getElementById('btnReset').style.display = 'none';
-    }
-</script>
 
 </body>
 </html>
