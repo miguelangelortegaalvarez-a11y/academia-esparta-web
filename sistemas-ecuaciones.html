@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Álgebra Avanzada - Sofía Millán</title>
+    <title>Iniciación al Álgebra - Pablo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --primary: #0e9343; --accent: #1565c0; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        :root { --primary: #0e9343; --accent: #ff9800; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
         .btn-imprimir {
             background-color: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px;
-            font-weight: 700; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3); transition: 0.3s;
+            font-weight: 700; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.2); transition: 0.3s;
         }
         .btn-imprimir:hover { background-color: #063c24; transform: scale(1.05); }
 
@@ -27,16 +27,19 @@
         .header { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
         .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 38px; text-transform: uppercase; }
 
-        .student-tag { position: absolute; top: 15mm; right: 20mm; font-family: 'Kalam', cursive; color: var(--accent); font-size: 1.3rem; }
+        .student-tag { position: absolute; top: 15mm; right: 20mm; font-family: 'Kalam', cursive; color: #555; font-size: 1.3rem; }
 
-        .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: #333; background: #fff3e0; padding: 5px 15px; border-radius: 10px; display: inline-block; margin-bottom: 20px; }
+        .section-title { font-family: 'Kalam', cursive; font-size: 22px; color: #333; background: #e8f5e9; padding: 5px 15px; border-radius: 10px; display: inline-block; margin-bottom: 20px; }
+
+        .diccionario-box { background: #fff3e0; border: 1px dashed var(--accent); padding: 15px; border-radius: 10px; margin-bottom: 30px; font-size: 14px; }
+        .diccionario-box b { color: #e65100; }
 
         .tabla-ejercicios { width: 100%; border-collapse: collapse; }
-        .tabla-ejercicios td { border: 1px solid #eee; padding: 35px; width: 50%; vertical-align: top; }
+        .tabla-ejercicios td { border-bottom: 1px solid #eee; padding: 15px; vertical-align: middle; }
         .num-ej { font-weight: 800; color: var(--primary); margin-right: 10px; }
-        .espacio-resolver { border-bottom: 1px dashed #ddd; height: 120px; margin-top: 20px; }
+        .espacio-respuesta { font-family: 'Roboto Mono', monospace; color: var(--accent); font-weight: bold; border-bottom: 2px solid #ccc; width: 150px; display: inline-block; text-align: center; min-height: 25px; margin-left: 10px; }
 
-        .tip-box { background: #e3f2fd; border-left: 5px solid var(--accent); padding: 15px; margin-bottom: 30px; font-size: 14px; border-radius: 0 10px 10px 0; }
+        .footer { text-align: center; font-size: 11px; color: #bbb; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px; }
 
         @media print {
             body { background: white; padding: 0; }
@@ -47,64 +50,87 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar Batería Nivel Pro</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha para Pablo</button>
 
     <div class="page">
-        <div class="student-tag">Sofía Millán - Entrenamiento Avanzado</div>
+        <div class="student-tag">Alumno: Pablo</div>
         
         <header class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p>"La disciplina es el puente entre las metas y los logros"</p>
+            <p>"El lenguaje de las matemáticas es el comienzo de grandes descubrimientos"</p>
         </header>
 
-        <div class="tip-box">
-            <b>💡 ¡Ojo, Sofía!:</b> Si tienes un signo menos delante de un paréntesis, como en \( -2(x - 3) \), recuerda que cambia el signo de TODO lo de dentro: \( -2x + 6 \). ¡No te dejes engañar!
+        <div class="diccionario-box">
+            <b>Pequeño Diccionario Matemático:</b><br>
+            - "Un número": Se escribe <b>x</b> (o cualquier letra).<br>
+            - "Doble": Se escribe <b>2x</b>. &nbsp;&nbsp; - "Triple": Se escribe <b>3x</b>.<br>
+            - "Aumentado/Sumado": Significa <b>+</b>. &nbsp;&nbsp; - "Disminuido/Resta": Significa <b>-</b>.<br>
+            - "Siguiente de un número": Se escribe <b>x + 1</b>.
         </div>
 
         <section>
-            <span class="section-title">Nivel 2: Ecuaciones de Combate</span>
+            <span class="section-title">Reto 1: Traduce a Lenguaje Algebraico</span>
             <table class="tabla-ejercicios">
                 <tr>
-                    <td>
-                        <span class="num-ej">1.</span> \( 5(x - 3) - 2(x + 1) = 4 \)
-                        <div class="espacio-resolver"></div>
-                    </td>
-                    <td>
-                        <span class="num-ej">2.</span> \( 3(2x + 4) = 2(x - 1) + 10 \)
-                        <div class="espacio-resolver"></div>
-                    </td>
+                    <td><span class="num-ej">1.</span> Un número cualquiera disminuido en 5 unidades:</td>
+                    <td><div class="espacio-respuesta"></div></td>
                 </tr>
                 <tr>
-                    <td>
-                        <span class="num-ej">3.</span> \( 4(3x - 2) - 5x = 2(x + 3) \)
-                        <div class="espacio-resolver"></div>
-                    </td>
-                    <td>
-                        <span class="num-ej">4.</span> \( 2(x + 6) - 3(2x - 1) = 1 \)
-                        <div class="espacio-resolver"></div>
-                    </td>
+                    <td><span class="num-ej">2.</span> El doble de un número:</td>
+                    <td><div class="espacio-respuesta"></div></td>
                 </tr>
                 <tr>
-                    <td>
-                        <span class="num-ej">5.</span> \( 6x - (x + 4) = 2(3x - 5) + 1 \)
-                        <div class="espacio-resolver"></div>
-                    </td>
-                    <td>
-                        <span class="num-ej">6.</span> \( 3(x - 1) - 2(2x + 3) = 4(x + 5) + 2 \)
-                        <div class="espacio-resolver"></div>
-                    </td>
+                    <td><span class="num-ej">3.</span> Un número aumentado en 10:</td>
+                    <td><div class="espacio-respuesta"></div></td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">4.</span> El triple de un número menos 2 unidades:</td>
+                    <td><div class="espacio-respuesta"></div></td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">5.</span> La mitad de un número:</td>
+                    <td><div class="espacio-respuesta"></div></td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">6.</span> El cuadrado de un número:</td>
+                    <td><div class="espacio-respuesta"></div></td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">7.</span> La suma de un número y su siguiente:</td>
+                    <td><div class="espacio-respuesta"></div></td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">8.</span> El doble de un número más su mitad:</td>
+                    <td><div class="espacio-respuesta"></div></td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">9.</span> Los años de Pablo dentro de 12 años:</td>
+                    <td><div class="espacio-respuesta"></div></td>
+                </tr>
+                <tr>
+                    <td><span class="num-ej">10.</span> El precio de "x" kilos de manzanas a 2€ el kilo:</td>
+                    <td><div class="espacio-respuesta"></div></td>
                 </tr>
             </table>
         </section>
 
-        <section style="margin-top: 40px; text-align: center;">
-            <p style="font-family: 'Kalam', cursive; font-size: 1.2rem; color: #666;">
-                "Cada ejercicio resuelto es una victoria. ¡A por ellos!"
+        <section style="margin-top: 30px;">
+            <span class="section-title">Reto 2: Pensamiento Lógico</span>
+            <p style="font-size: 14px; color: #444;">Si <b>x</b> es la edad actual de Pablo, escribe cómo dirías:</p>
+            <ul style="list-style-type: square; color: #555; line-height: 2;">
+                <li>La edad que tenía el año pasado: <span class="espacio-respuesta" style="width: 80px;"></span></li>
+                <li>La edad que tendrá cuando pasen el doble de años que ahora: <span class="espacio-respuesta" style="width: 80px;"></span></li>
+            </ul>
+        </section>
+
+        <section style="margin-top: 30px; text-align: center;">
+            <p style="font-family: 'Kalam', cursive; font-size: 1.2rem; color: var(--primary);">
+                "Pablo, recuerda: la x es solo un número que aún no conocemos. ¡Tú puedes!"
             </p>
         </section>
 
-        <footer style="text-align: center; font-size: 11px; color: #bbb; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px;">
-            Academia Esparta · Matemáticas ESO · Material para Sofía Millán
+        <footer class="footer">
+            Academia Esparta · Introducción al Álgebra · 1º ESO
         </footer>
     </div>
 
