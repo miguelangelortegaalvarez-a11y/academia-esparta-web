@@ -3,129 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refuerzo Letra D - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Short+Stack&display=swap" rel="stylesheet">
+    <title>Geometría Analítica: Vectores y Rectas - Carla Caicedo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <style>
-        :root { 
-            --esparta-green: #0e9343; 
-            --soft-gray: #f9f9f9;
-            --font-profe: 'Kalam', cursive;
-            --font-ninos: 'Short Stack', cursive;
-        }
-        
-        body { font-family: var(--font-ninos); background-color: #fff; margin: 0; padding: 0; }
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+    <style>
+        :root { --primary: #0e9343; --accent: #1565c0; --danger: #c62828; --bg: #fdfdfd; }
+        
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f2f0; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        
         .btn-imprimir {
-            display: block; width: fit-content; margin: 20px auto;
-            background-color: var(--esparta-green); color: white;
-            border: none; padding: 12px 25px; border-radius: 30px;
-            font-weight: 700; cursor: pointer;
+            background-color: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px;
+            font-weight: 700; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(14, 147, 67, 0.3); transition: 0.3s;
         }
+        .btn-imprimir:hover { background-color: #063c24; transform: scale(1.05); }
 
         .page { 
-            width: 210mm; min-height: 297mm; margin: 0 auto; 
-            padding: 15mm; box-sizing: border-box; background: white;
-            border: 1px solid #eee;
+            background-color: white; width: 210mm; min-height: 297mm; padding: 20mm; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); box-sizing: border-box; position: relative; 
         }
 
-        .header { text-align: center; border-bottom: 2px solid var(--esparta-green); margin-bottom: 20px; }
-        .header h1 { font-family: var(--font-profe); color: var(--esparta-green); margin: 0; font-size: 45px; }
+        .header { border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 30px; text-align: center; }
+        .header h1 { font-family: 'Kalam', cursive; color: var(--primary); margin: 0; font-size: 35px; text-transform: uppercase; }
 
-        .section { margin-bottom: 30px; page-break-inside: avoid; }
-        .section-title { 
-            font-family: var(--font-profe); font-size: 28px; 
-            color: var(--esparta-green); border-bottom: 2px solid #eee;
-            display: block; margin-bottom: 15px;
-        }
+        .student-tag { position: absolute; top: 15mm; right: 20mm; font-family: 'Kalam', cursive; color: var(--accent); font-size: 1.3rem; }
 
-        /* Ejercicio 1: Encontrar la D */
-        .sopa-letras { 
-            display: flex; justify-content: space-around; font-size: 50px; 
-            font-weight: bold; background: #fffceb; padding: 20px; border-radius: 20px;
-            border: 2px dashed #ffc107;
-        }
-        .sopa-letras span { padding: 0 10px; }
+        .section { margin-bottom: 40px; page-break-inside: avoid; }
+        .section-title { font-family: 'Kalam', cursive; font-size: 24px; color: #fff; background: var(--primary); padding: 5px 20px; border-radius: 10px; display: inline-block; margin-bottom: 15px; }
 
-        /* Ejercicio 2: Sílabas Gigantes */
-        .silabas-grandes { display: flex; justify-content: space-around; font-size: 60px; color: var(--esparta-green); font-weight: bold; }
+        .teoria-box { background: #f1f8e9; border-left: 5px solid var(--primary); padding: 20px; margin: 15px 0; font-size: 14px; line-height: 1.6; }
+        .teoria-box b { color: var(--accent); }
 
-        /* Ejercicio 3: Unir Emojis */
-        .unir-facil { display: flex; justify-content: space-around; font-size: 40px; margin-top: 10px; }
-        .col { display: flex; flex-direction: column; gap: 20px; }
+        .ejercicio-resuelto { background: #e3f2fd; border: 1px solid var(--accent); border-radius: 10px; padding: 15px; margin: 15px 0; font-family: 'Roboto Mono', monospace; font-size: 13px; }
 
-        /* Ejercicio 4: Copia de palabras cortas */
-        .pauta-simple { 
-            height: 60px; border-bottom: 2px solid #ccc; position: relative; width: 100%; margin-top: 10px;
-        }
-        .pauta-simple::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; border-top: 1px dashed #ddd; }
-        .palabra-guia { font-size: 40px; margin-bottom: 5px; }
+        .ejercicio-propuesto { border: 2px dashed #ccc; border-radius: 15px; padding: 20px; margin-top: 10px; }
+        .num-ej { font-weight: 800; color: var(--danger); font-size: 18px; }
+
+        .footer { text-align: center; font-size: 11px; color: #bbb; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px; }
 
         @media print {
+            body { background: white; padding: 0; }
             .btn-imprimir { display: none; }
-            .page { width: 100%; margin: 0; border: none; }
+            .page { box-shadow: none; border: none; margin: 0; width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Refuerzo Letra D</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Descargar Ficha para Carla Caicedo</button>
 
     <div class="page">
+        <div class="student-tag">Carla Caicedo - 4º ESO</div>
+        
         <header class="header">
             <h1>ACADEMIA ESPARTA</h1>
-            <p style="font-family: var(--font-profe); font-size: 24px;">¡Hoy aprendo la letra D!</p>
+            <p>"La geometría es el arte de razonar bien sobre figuras mal hechas"</p>
         </header>
 
         <section class="section">
-            <span class="section-title">1. Rodea con un círculo todas las letras "d"</span>
-            <div class="sopa-letras">
-                <span>d</span> <span>b</span> <span>p</span> <span>d</span> <span>q</span> <span>d</span> <span>b</span> <span>d</span> <span>p</span> <span>d</span>
+            <span class="section-title">1. Vectores en el Plano</span>
+            <div class="teoria-box">
+                Un <b>vector</b> \(\vec{v}\) es un segmento orientado que va desde un punto \(A\) (origen) hasta un punto \(B\) (extremo). <br>
+                Sus componentes se calculan restando: \(\vec{AB} = B - A = (x_2 - x_1, y_2 - y_1)\). <br>
+                El <b>módulo</b> es su longitud y se calcula con Pitágoras: \(|\vec{v}| = \sqrt{v_x^2 + v_y^2}\).
             </div>
-        </section>
-
-        <section class="section">
-            <span class="section-title">2. Di estas sílabas muy fuerte</span>
-            <div class="silabas-grandes">
-                <span>da</span> <span>de</span> <span>di</span> <span>do</span> <span>du</span>
-            </div>
-        </section>
-
-        <section class="section">
-            <span class="section-title">3. Une con una línea</span>
-            <div class="unir-facil">
-                <div class="col">
-                    <span>Dado</span>
-                    <span>Dedo</span>
-                    <span>Dos</span>
-                </div>
-                <div class="col">
-                    <span>2️⃣</span>
-                    <span>🎲</span>
-                    <span>☝️</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <span class="section-title">4. Escribe estas palabras tú sola</span>
             
-            <div style="margin-bottom: 40px;">
-                <div class="palabra-guia">da - do</div>
-                <div class="pauta-simple"></div>
+            <div class="ejercicio-resuelto">
+                <b>Ejemplo:</b> Hallar el vector \(\vec{AB}\) siendo \(A(1, -2)\) y \(B(4, 2)\). <br>
+                \(\vec{AB} = (4 - 1, 2 - (-2)) = (3, 4)\) <br>
+                Módulo: \(|\vec{AB}| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = 5\).
             </div>
 
-            <div style="margin-bottom: 40px;">
-                <div class="palabra-guia">de - do</div>
-                <div class="pauta-simple"></div>
-            </div>
-
-            <div style="margin-bottom: 40px;">
-                <div class="palabra-guia">da - ma</div>
-                <div class="pauta-simple"></div>
+            <div class="ejercicio-propuesto">
+                <span class="num-ej">Reto 1:</span> Dados los puntos \(P(-3, 5)\) y \(Q(2, -7)\), calcula las componentes del vector \(\vec{PQ}\) y su módulo.
+                <div style="height: 80px; border-bottom: 1px dashed #ccc; margin-top: 10px;"></div>
             </div>
         </section>
 
+        <section class="section">
+            <span class="section-title">2. Posiciones Relativas de las Rectas</span>
+            <div class="teoria-box">
+                Para comparar dos rectas, lo más fácil es mirar sus <b>pendientes (\(m\))</b>:
+                <ul>
+                    <li><b>Secantes:</b> Tienen distinta pendiente (\(m_1 \neq m_2\)). Se cortan en un punto.</li>
+                    <li><b>Paralelas:</b> Tienen la misma pendiente (\(m_1 = m_2\)) pero distinta ordenada en el origen.</li>
+                    <li><b>Coincidentes:</b> Tienen todo igual. Son la misma recta.</li>
+                    <li><b>Perpendiculares:</b> Si sus pendientes cumplen que \(m_1 \cdot m_2 = -1\).</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-resuelto">
+                <b>Ejemplo:</b> ¿Cómo son las rectas \(r: y = 2x + 1\) y \(s: y = 2x - 5\)? <br>
+                Ambas tienen \(m = 2\). Como las pendientes son iguales, son <b>Paralelas</b>.
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <span class="num-ej">Reto 2:</span> Estudia la posición relativa de las siguientes rectas: <br>
+                \(r: 3x - y + 2 = 0\) <br>
+                \(s: y = 3x + 5\)
+                <p><small><i>(Consejo: Despeja la "y" en ambas para ver la pendiente fácilmente)</i></small></p>
+                <div style="height: 100px; border-bottom: 1px dashed #ccc; margin-top: 10px;"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section-title">3. La Recta que pasa por un punto</span>
+            <div class="teoria-box">
+                La ecuación <b>punto-pendiente</b> es la más útil: \(y - y_0 = m(x - x_0)\). <br>
+                Si te dan dos puntos, primero calculas la pendiente: \(m = \frac{y_2 - y_1}{x_2 - x_1}\).
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <span class="num-ej">Reto 3:</span> Halla la ecuación de la recta que pasa por el punto \(A(2, -1)\) y es paralela a la recta \(y = 4x + 2\).
+                <div style="height: 100px; border-bottom: 1px dashed #ccc; margin-top: 10px;"></div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            Academia Esparta · Geometría Analítica 4º ESO · Preparado para Carla Caicedo
+        </footer>
     </div>
 
 </body>
