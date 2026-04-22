@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6º Primaria - Resta Visual de Tiempo - Academia Esparta</title>
+    <title>4º ESO - Dominios Avanzados - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         :root { 
             --esparta-blue: #0d47a1; 
@@ -30,108 +33,81 @@
         }
 
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 30px; }
-        .header-title h1 { font-weight: 900; font-size: 30px; margin: 0; color: var(--esparta-blue); letter-spacing: -1px; }
-        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 18px; font-weight: 700; }
-        
+        .header-title h1 { font-weight: 900; font-size: 26px; margin: 0; color: var(--esparta-blue); }
+        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 16px; }
+
         .section-header { display: flex; align-items: center; margin: 30px 0 15px; }
         .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
         .section-header .gold-line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        /* Estilos del Ejemplo Visual */
-        .visual-example {
-            background: #fffdf5; border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin: 20px 0;
-            font-family: 'Roboto Mono', monospace; font-size: 18px;
-        }
-        .tachado { text-decoration: line-through; color: #cc0000; font-weight: bold; }
-        .nuevo-valor { color: #008800; font-weight: bold; background: #e8f5e9; padding: 2px 5px; border-radius: 4px; }
-        .flecha-prestamo { color: var(--esparta-blue); font-weight: bold; font-size: 22px; }
+        .teoria-box { background: #f0f4f8; padding: 15px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 20px; font-size: 14px; }
+        
+        .ejercicio-box { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fffdf5; margin: 20px 0; }
+        .paso-id { color: var(--esparta-blue); font-weight: 900; font-size: 13px; }
 
-        .operacion-vertical { font-size: 24px; text-align: center; margin: 20px 0; line-height: 2; }
-        .linea-resta { border-bottom: 3px solid var(--esparta-dark); width: 350px; margin: 0 auto; }
+        .area-resolucion { border: 2px dashed #ccc; border-radius: 10px; padding: 15px; margin-top: 15px; min-height: 150px; background: #fafafa; }
 
-        .ejercicio-container { border: 2px dashed var(--esparta-blue); border-radius: 10px; padding: 25px; margin-top: 25px; background: #fafafa; }
+        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
 
-        .footer { text-align: center; margin-top: 50px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
-
-        @media print {
-            .btn-imprimir { display: none; }
-            .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; padding: 10mm; }
-        }
+        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; } }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Carla</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Dominios</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Matemáticas: El Arte de "Pedir Prestado" (Resta)</p>
+                <p>Cálculo de Dominios: Nivel Avanzado</p>
             </div>
-            <div style="background: var(--esparta-blue); color: white; padding: 5px 12px; font-weight: 700; border-radius: 4px;">6º PRIMARIA</div>
+            <div style="background: var(--esparta-blue); color: white; padding: 5px 10px; font-weight: 700; border-radius: 4px;">4º ESO</div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>Ejemplo Paso a Paso (Observa los cambios)</h2>
+                <h2>Reto 1: Función Racional de Grado 3</h2>
                 <div class="gold-line"></div>
             </div>
-            
-            <div class="visual-example">
-                <p><b>Queremos restar: 4h 10min 15s - 1h 30min 40s</b></p>
-                
-                <div style="margin-bottom: 20px;">
-                    <span style="color: var(--esparta-blue);">1. SEGUNDOS:</span> ¿A 15s le puedo quitar 40s? <b>NO</b>. <br>
-                    Le pido 1 min a los 10min. <br>
-                    <span class="flecha-prestamo">↳</span> Minutos: <span class="tachado">10</span> → <span class="nuevo-valor">09 min</span><br>
-                    <span class="flecha-prestamo">↳</span> Segundos: 15s + 60s = <span class="nuevo-valor">75s</span>
-                </div>
-
-                <div style="margin-bottom: 20px;">
-                    <span style="color: var(--esparta-blue);">2. MINUTOS:</span> ¿A 09min le puedo quitar 30min? <b>NO</b>. <br>
-                    Le pido 1 hora a las 4h. <br>
-                    <span class="flecha-prestamo">↳</span> Horas: <span class="tachado">4</span> → <span class="nuevo-valor">3 h</span><br>
-                    <span class="flecha-prestamo">↳</span> Minutos: 09min + 60min = <span class="nuevo-valor">69 min</span>
-                </div>
-
-                <p><b>Así queda la cuenta para Carla:</b></p>
-                <div class="operacion-vertical">
-                    &nbsp;&nbsp;<span class="nuevo-valor">3h</span> <span class="nuevo-valor">69min</span> <span class="nuevo-valor">75s</span><br>
-                    - 1h 30min 40s<br>
-                    <div class="linea-resta"></div>
-                    &nbsp;&nbsp;<b>2h 39min 35s</b>
-                </div>
+            <div class="teoria-box">
+                <b>Regla de Oro:</b> En las funciones fraccionarias, el denominador <b>nunca</b> puede ser cero. Debes igualar el denominador a 0 y quitar esos valores de \(\mathbb{R}\).
+            </div>
+            <div class="ejercicio-box">
+                Calcula el dominio de: 
+                \[ f(x) = \frac{2x - 5}{x^3 - 4x^2 + x + 6} \]
+                <br>
+                <span class="paso-id">Pista Espartana:</span>
+                1. Igualar el denominador a 0.<br>
+                2. Como es de grado 3, usa <b>Ruffini</b> para encontrar la primera raíz.<br>
+                3. Usa la <b>Ecuación de 2º Grado</b> para las raíces restantes.
+                <div class="area-resolucion"></div>
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>¡Tu turno, Carla! Usa el mismo método</h2>
+                <h2>Reto 2: Logaritmo en el Denominador</h2>
                 <div class="gold-line"></div>
             </div>
-            
-            <div class="ejercicio-container">
-                <b>Ejercicio 1.</b> Tacha y escribe el nuevo valor cuando pidas prestado:<br><br>
-                <div class="operacion-vertical">
-                    &nbsp;&nbsp;6h 15min 20s<br>
-                    - 3h 40min 45s<br>
-                    <div class="linea-resta"></div>
-                </div>
+            <div class="teoria-box">
+                <b>Doble Restricción:</b> <br>
+                1. El argumento del logaritmo debe ser <b>positivo</b> (\(> 0\)).<br>
+                2. El denominador no puede ser 0 (recuerda que \(\log(1) = 0\)).
             </div>
-
-            <div class="ejercicio-container">
-                <b>Ejercicio 2.</b> <br><br>
-                <div class="operacion-vertical">
-                    &nbsp;&nbsp;5h 05min 10s<br>
-                    - 1h 20min 30s<br>
-                    <div class="linea-resta"></div>
-                </div>
+            <div class="ejercicio-box">
+                Calcula el dominio de: 
+                \[ g(x) = \frac{x + 1}{\log(x - 4)} \]
+                <br>
+                <span class="paso-id">Pista Espartana:</span>
+                1. ¿Cuándo existe el logaritmo? Resuelve la inecuación \(x - 4 > 0\).<br>
+                2. ¿Cuándo se hace 0 el denominador? Resuelve \(\log(x - 4) = 0\).
+                <div class="area-resolucion"></div>
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · Tacha y gana · Preparado para Carla
+            © 2026 Academia Esparta · No hay gloria sin esfuerzo · Preparado para Carla
         </footer>
     </div>
 
