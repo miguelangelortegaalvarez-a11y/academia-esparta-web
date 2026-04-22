@@ -3,122 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3º ESO - Problemas Guiados de Sistemas - Lidia Jiménez</title>
+    <title>5º Primaria - El Maestro de las Áreas - David</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
     <style>
         :root { 
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
+            --esparta-dark: #1a1a1a;
             --white: #ffffff;
+            --bg-light: #f8f9fa;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #e0e0e0; margin: 0; padding: 20px; color: #333; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
             background-color: var(--esparta-blue); color: var(--white); border: 2px solid var(--esparta-gold); 
-            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase;
+            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; 
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
         }
 
         .page { 
             background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
-            box-shadow: 0 0 25px rgba(0,0,0,0.1); box-sizing: border-box; position: relative; margin: 0 auto;
+            box-shadow: 0 0 25px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
             border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
         }
 
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
-        .header-title h1 { font-weight: 900; font-size: 24px; margin: 0; color: var(--esparta-blue); }
-        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 16px; }
-
-        .section-header { display: flex; align-items: center; margin: 20px 0 10px; }
-        .section-header h2 { font-size: 17px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
-        .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
-
-        .guia-box { background: #fffdf5; border: 1px solid var(--esparta-gold); padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .paso-titulo { color: var(--esparta-blue); font-weight: 800; font-size: 13px; text-transform: uppercase; display: block; margin-top: 10px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+        .header-title h1 { font-weight: 900; font-size: 26px; margin: 0; color: var(--esparta-blue); }
+        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 18px; font-weight: 700; }
         
-        .rellenar { color: #999; border-bottom: 1px dashed #999; display: inline-block; min-width: 50px; }
+        .level-badge { background: var(--esparta-blue); color: var(--white); padding: 8px 15px; font-weight: 700; border-radius: 4px; font-size: 12px; border: 1px solid var(--esparta-gold); }
 
-        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
+        .formula-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 20px 0; }
+        .formula-card { background: var(--bg-light); border: 1px solid #ddd; border-radius: 10px; padding: 10px; text-align: center; }
+        .formula-card h3 { font-size: 14px; color: var(--esparta-blue); margin-top: 0; }
+        .formula-text { font-family: 'Roboto Mono', monospace; font-weight: 700; color: #d32f2f; font-size: 13px; }
 
-        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; } }
+        .ejercicio-box { border: 2px dashed #ccc; border-radius: 10px; padding: 20px; margin-bottom: 20px; background: #fafafa; }
+        .figura-draw { text-align: center; margin: 10px 0; }
+        
+        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
+
+        @media print {
+            .btn-imprimir { display: none; }
+            .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; padding: 10mm; }
+        }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Guía de Problemas - Lidia</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha para David</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Estrategia de Resolución de Problemas</p>
+                <p>Geometría: El Maestro de las Áreas</p>
             </div>
-            <div style="background: var(--esparta-blue); color: white; padding: 5px 15px; font-weight: 700; border-radius: 4px;">LIDIA JIMÉNEZ - 3º ESO</div>
+            <div class="level-badge">DAVID - 5º PRIMARIA</div>
         </header>
 
         <section>
-            <div class="section-header">
-                <h2>1. El Método del Éxito</h2>
-                <div class="line"></div>
-            </div>
-            <div style="font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
-                Para que un sistema no te venza, Lidia, sigue siempre este orden:<br>
-                <b>1.</b> Pon nombre a las incógnitas (\(x\) e \(y\)). <br>
-                <b>2.</b> Busca la frase del "total de cosas" (Ecuación 1). <br>
-                <b>3.</b> Busca la frase del "valor o dinero" (Ecuación 2).
-            </div>
-        </section>
-
-        <section>
-            <div class="section-header">
-                <h2>2. Problema Guiado A: El Concierto</h2>
-                <div class="line"></div>
-            </div>
-            <div class="guia-box">
-                <b>Enunciado:</b> Se han vendido 250 entradas para un concierto. Las de "Pista" cuestan 20€ y las de "Grada" 30€. Si se han recaudado 5.500€ en total, ¿cuántas entradas se vendieron de cada tipo?
-                <br><br>
-                <span class="paso-titulo">Paso 1: Identificación</span>
-                \(x\) = Número de entradas de <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
-                \(y\) = Número de entradas de <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <br>
-                <span class="paso-titulo">Paso 2: Planteamiento</span>
-                Ecuación de cantidad total: \(x + y = \) <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
-                Ecuación de dinero total: <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span> \(\cdot x + \) <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span> \(\cdot y = 5.500\)
-                <br>
-                <span class="paso-titulo">Paso 3: Resolución</span>
-                <i>(Usa el método que prefieras: Sustitución, Igualación o Reducción)</i>
-                <div style="height: 100px;"></div>
+            <h2 style="font-size: 18px; color: var(--esparta-blue); text-transform: uppercase;">1. Guía de Fórmulas Rápidas</h2>
+            <div class="formula-grid">
+                <div class="formula-card">
+                    <h3>Cuadrado</h3>
+                    <svg width="60" height="60" viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#333" stroke-width="2"/></svg>
+                    <div class="formula-text">L × L</div>
+                </div>
+                <div class="formula-card">
+                    <h3>Rectángulo</h3>
+                    <svg width="60" height="60" viewBox="0 0 80 60"><rect x="10" y="15" width="60" height="30" fill="none" stroke="#333" stroke-width="2"/></svg>
+                    <div class="formula-text">b × h</div>
+                </div>
+                <div class="formula-card">
+                    <h3>Triángulo</h3>
+                    <svg width="60" height="60" viewBox="0 0 60 60"><path d="M 30 10 L 55 50 L 5 50 Z" fill="none" stroke="#333" stroke-width="2"/></svg>
+                    <div class="formula-text">(b × h) / 2</div>
+                </div>
             </div>
         </section>
 
         <section>
-            <div class="section-header">
-                <h2>3. Problema Guiado B: Las Huchas</h2>
-                <div class="line"></div>
+            <h2 style="font-size: 18px; color: var(--esparta-blue); text-transform: uppercase;">2. Desafíos de Área</h2>
+            
+            <div class="ejercicio-box">
+                <b>1. El Patio de David:</b> David quiere saber cuántos baldosines de 1 metro cuadrado necesita para cubrir su patio cuadrado, que mide <b>8 metros</b> de lado.
+                <div class="figura-draw">
+                    <svg width="100" height="100" viewBox="0 0 100 100">
+                        <rect x="20" y="20" width="60" height="60" fill="#ffe0b2" stroke="#e65100" stroke-width="2"/>
+                        <text x="45" y="95" font-size="12">8 m</text>
+                    </svg>
+                </div>
+                <p><b>Cálculo:</b> _________________________________</p>
+                <p><b>Resultado:</b> ________ m²</p>
             </div>
-            <div class="guia-box">
-                <b>Enunciado:</b> Martina tiene 15 billetes en su hucha, unos son de 5€ y otros de 10€. Si en total tiene 110€, ¿cuántos billetes tiene de cada clase?
-                <br><br>
-                <span class="paso-titulo">Paso 1: Identificación</span>
-                \(x\) = Billetes de 5€ <br>
-                \(y\) = <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <br>
-                <span class="paso-titulo">Paso 2: Planteamiento</span>
-                Total de billetes: \(x + y = \) <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
-                Total de dinero: \(5x + \) <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span> \( = 110\)
-                <br>
-                <span class="paso-titulo">Paso 3: Resolución</span>
-                <div style="height: 120px;"></div>
+
+            <div class="ejercicio-box">
+                <b>2. La Piscina:</b> En el polideportivo hay una piscina rectangular de <b>12 metros</b> de largo y <b>6 metros</b> de ancho. ¿Cuál es el área de la superficie del agua?
+                <div class="figura-draw">
+                    <svg width="150" height="80" viewBox="0 0 150 80">
+                        <rect x="25" y="20" width="100" height="40" fill="#bbdefb" stroke="#0d47a1" stroke-width="2"/>
+                        <text x="65" y="75" font-size="12">12 m</text>
+                        <text x="130" y="45" font-size="12">6 m</text>
+                    </svg>
+                </div>
+                <p><b>Cálculo:</b> _________________________________</p>
+                <p><b>Resultado:</b> ________ m²</p>
+            </div>
+
+            <div class="ejercicio-box">
+                <b>3. La Vela del Barco:</b> David está dibujando un barco pirata. La vela tiene forma de triángulo con una base de <b>10 metros</b> y una altura de <b>14 metros</b>. ¿Qué área tiene la vela?
+                <div class="figura-draw">
+                    <svg width="120" height="100" viewBox="0 0 120 100">
+                        <path d="M 60 10 L 100 80 L 20 80 Z" fill="#cfd8dc" stroke="#455a64" stroke-width="2"/>
+                        <line x1="60" y1="10" x2="60" y2="80" stroke="red" stroke-dasharray="4"/>
+                        <text x="50" y="95" font-size="12">10 m</text>
+                        <text x="65" y="50" font-size="12" fill="red">14 m</text>
+                    </svg>
+                </div>
+                <p><b>Cálculo:</b> _________________________________</p>
+                <p><b>Resultado:</b> ________ m²</p>
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · Paso a paso hasta el 10 · Lidia Jiménez
+            © 2026 Academia Esparta · Fuerza en la mente, victoria en el papel · David
         </footer>
     </div>
 
