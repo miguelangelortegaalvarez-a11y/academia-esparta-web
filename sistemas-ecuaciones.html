@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6º Primaria - Resta de Tiempo - Academia Esparta</title>
+    <title>6º Primaria - Resta Visual de Tiempo - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -22,7 +22,6 @@
             padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; 
             text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
         }
-        .btn-imprimir:hover { background-color: var(--esparta-dark); border-color: var(--white); }
 
         .page { 
             background-color: var(--white); width: 210mm; min-height: 297mm; padding: 20mm; 
@@ -34,29 +33,27 @@
         .header-title h1 { font-weight: 900; font-size: 30px; margin: 0; color: var(--esparta-blue); letter-spacing: -1px; }
         .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 18px; font-weight: 700; }
         
-        .level-badge { background: var(--esparta-blue); color: var(--white); padding: 8px 15px; font-weight: 700; border-radius: 4px; font-size: 12px; border: 1px solid var(--esparta-gold); }
-
         .section-header { display: flex; align-items: center; margin: 30px 0 15px; }
         .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
-        .section-header .gold-line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; border-radius: 2px; }
+        .section-header .gold-line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        .teoria-box { background: #fff4f4; padding: 20px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 25px; font-size: 14px; line-height: 1.6; }
-        
-        .ejemplo-card { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fffdf5; margin: 20px 0; position: relative; }
-        .ejemplo-card::before { content: "EL MÉTODO DEL PRÉSTAMO"; position: absolute; top: -10px; left: 20px; background: var(--esparta-gold); color: var(--esparta-dark); padding: 2px 10px; font-size: 10px; font-weight: 900; border-radius: 3px; }
+        /* Estilos del Ejemplo Visual */
+        .visual-example {
+            background: #fffdf5; border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin: 20px 0;
+            font-family: 'Roboto Mono', monospace; font-size: 18px;
+        }
+        .tachado { text-decoration: line-through; color: #cc0000; font-weight: bold; }
+        .nuevo-valor { color: #008800; font-weight: bold; background: #e8f5e9; padding: 2px 5px; border-radius: 4px; }
+        .flecha-prestamo { color: var(--esparta-blue); font-weight: bold; font-size: 22px; }
 
-        .operacion-vertical { font-family: 'Roboto Mono', monospace; font-size: 24px; text-align: center; margin: 20px 0; line-height: 1.5; }
-        .linea-resta { border-bottom: 3px solid var(--esparta-dark); width: 300px; margin: 0 auto; }
-
-        .paso-id { color: var(--esparta-blue); font-weight: 900; }
+        .operacion-vertical { font-size: 24px; text-align: center; margin: 20px 0; line-height: 2; }
+        .linea-resta { border-bottom: 3px solid var(--esparta-dark); width: 350px; margin: 0 auto; }
 
         .ejercicio-container { border: 2px dashed var(--esparta-blue); border-radius: 10px; padding: 25px; margin-top: 25px; background: #fafafa; }
-        .ejercicio-container b { color: var(--esparta-blue); font-size: 18px; }
 
-        .footer { text-align: center; margin-top: 50px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; font-weight: 600; }
+        .footer { text-align: center; margin-top: 50px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
 
         @media print {
-            body { background: white; padding: 0; }
             .btn-imprimir { display: none; }
             .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; padding: 10mm; }
         }
@@ -70,76 +67,71 @@
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Matemáticas: Restas en el Sistema Sexagesimal</p>
+                <p>Matemáticas: El Arte de "Pedir Prestado" (Resta)</p>
             </div>
-            <div class="level-badge">6º PRIMARIA</div>
+            <div style="background: var(--esparta-blue); color: white; padding: 5px 12px; font-weight: 700; border-radius: 4px;">6º PRIMARIA</div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>¿Cómo restamos cuando no nos alcanza?</h2>
+                <h2>Ejemplo Paso a Paso (Observa los cambios)</h2>
                 <div class="gold-line"></div>
             </div>
-            <div class="teoria-box">
-                ¡Atención Carla! Si el número de arriba es más pequeño que el de abajo, tienes que <b>pedir prestado</b>:
-                <br>1. Si no puedes restar los segundos, pides <b>1 minuto</b> prestado. Ese minuto se convierte en <b>60 segundos</b> que sumas a los que ya tenías.
-                <br>2. Si no puedes restar los minutos, pides <b>1 hora</b> prestada. Esa hora se convierte en <b>60 minutos</b> que sumas a los que ya tenías.
+            
+            <div class="visual-example">
+                <p><b>Queremos restar: 4h 10min 15s - 1h 30min 40s</b></p>
+                
+                <div style="margin-bottom: 20px;">
+                    <span style="color: var(--esparta-blue);">1. SEGUNDOS:</span> ¿A 15s le puedo quitar 40s? <b>NO</b>. <br>
+                    Le pido 1 min a los 10min. <br>
+                    <span class="flecha-prestamo">↳</span> Minutos: <span class="tachado">10</span> → <span class="nuevo-valor">09 min</span><br>
+                    <span class="flecha-prestamo">↳</span> Segundos: 15s + 60s = <span class="nuevo-valor">75s</span>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <span style="color: var(--esparta-blue);">2. MINUTOS:</span> ¿A 09min le puedo quitar 30min? <b>NO</b>. <br>
+                    Le pido 1 hora a las 4h. <br>
+                    <span class="flecha-prestamo">↳</span> Horas: <span class="tachado">4</span> → <span class="nuevo-valor">3 h</span><br>
+                    <span class="flecha-prestamo">↳</span> Minutos: 09min + 60min = <span class="nuevo-valor">69 min</span>
+                </div>
+
+                <p><b>Así queda la cuenta para Carla:</b></p>
+                <div class="operacion-vertical">
+                    &nbsp;&nbsp;<span class="nuevo-valor">3h</span> <span class="nuevo-valor">69min</span> <span class="nuevo-valor">75s</span><br>
+                    - 1h 30min 40s<br>
+                    <div class="linea-resta"></div>
+                    &nbsp;&nbsp;<b>2h 39min 35s</b>
+                </div>
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>Ejemplo Paso a Paso</h2>
-                <div class="gold-line"></div>
-            </div>
-            <div class="ejemplo-card">
-                <b>Restamos: 3h 10min 15s - 1h 40min 50s</b>
-                <br><br>
-                <span class="paso-id">Paso 1:</span> Intentamos restar los segundos (15 - 50). ¡No se puede! <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Pedimos 1 min a los 10 min. Ahora quedan 9 min.<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Sumamos 60 a los segundos: 15 + 60 = <b>75s</b>. <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Ahora: 75s - 50s = <b>25s</b>.
-                <br><br>
-                <span class="paso-id">Paso 2:</span> Ahora los minutos (9 - 40). ¡Tampoco se puede! <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Pedimos 1 hora a las 3h. Ahora quedan 2h.<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Sumamos 60 a los minutos: 9 + 60 = <b>69min</b>. <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Ahora: 69min - 40min = <b>29min</b>.
-                <br><br>
-                <span class="paso-id">Paso 3:</span> Restamos las horas que quedan: 2h - 1h = <b>1h</b>.
-                <br><br>
-                <b>Resultado Final: 1h 29min 25s</b>
-            </div>
-        </section>
-
-        <section>
-            <div class="section-header">
-                <h2>¡Demuestra tu fuerza, Carla!</h2>
+                <h2>¡Tu turno, Carla! Usa el mismo método</h2>
                 <div class="gold-line"></div>
             </div>
             
             <div class="ejercicio-container">
-                <b>Ejercicio 1.</b> Realiza la siguiente resta pidiendo prestado si es necesario:<br><br>
+                <b>Ejercicio 1.</b> Tacha y escribe el nuevo valor cuando pidas prestado:<br><br>
                 <div class="operacion-vertical">
-                    &nbsp;&nbsp;5h 20min 10s<br>
-                    - 2h 45min 35s<br>
+                    &nbsp;&nbsp;6h 15min 20s<br>
+                    - 3h 40min 45s<br>
                     <div class="linea-resta"></div>
                 </div>
-                <br><br><br>
             </div>
 
             <div class="ejercicio-container">
-                <b>Ejercicio 2.</b> Realiza la siguiente resta pidiendo prestado si es necesario:<br><br>
+                <b>Ejercicio 2.</b> <br><br>
                 <div class="operacion-vertical">
-                    &nbsp;&nbsp;4h 15min 05s<br>
-                    - 1h 30min 20s<br>
+                    &nbsp;&nbsp;5h 05min 10s<br>
+                    - 1h 20min 30s<br>
                     <div class="linea-resta"></div>
                 </div>
-                <br><br><br>
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · No te rindas, Carla · Excelencia Académica
+            © 2026 Academia Esparta · Tacha y gana · Preparado para Carla
         </footer>
     </div>
 
