@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4º ESO - Dominios Avanzados - Academia Esparta</title>
+    <title>4º ESO - Funciones a Trozos - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -13,101 +13,104 @@
         :root { 
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
-            --esparta-dark: #1a1a1a;
             --white: #ffffff;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #e0e0e0; margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
             background-color: var(--esparta-blue); color: var(--white); border: 2px solid var(--esparta-gold); 
-            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; 
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase;
         }
 
         .page { 
-            background-color: var(--white); width: 210mm; min-height: 297mm; padding: 20mm; 
-            box-shadow: 0 0 25px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
+            background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
+            box-shadow: 0 0 25px rgba(0,0,0,0.1); box-sizing: border-box; position: relative; margin: 0 auto;
             border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
         }
 
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 30px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
         .header-title h1 { font-weight: 900; font-size: 26px; margin: 0; color: var(--esparta-blue); }
         .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 16px; }
 
-        .section-header { display: flex; align-items: center; margin: 30px 0 15px; }
+        .section-header { display: flex; align-items: center; margin: 25px 0 15px; }
         .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
-        .section-header .gold-line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
+        .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        .teoria-box { background: #f0f4f8; padding: 15px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 20px; font-size: 14px; }
+        .teoria-box { background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 20px; font-size: 13px; }
         
         .ejercicio-box { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fffdf5; margin: 20px 0; }
-        .paso-id { color: var(--esparta-blue); font-weight: 900; font-size: 13px; }
+        .function-display { font-size: 20px; text-align: center; margin: 15px 0; font-family: 'Roboto Mono', monospace; }
 
-        .area-resolucion { border: 2px dashed #ccc; border-radius: 10px; padding: 15px; margin-top: 15px; min-height: 150px; background: #fafafa; }
+        .graph-area { border: 1px solid #ccc; height: 300px; margin-top: 15px; background-image: 
+            linear-gradient(#eee 1px, transparent 1px),
+            linear-gradient(90deg, #eee 1px, transparent 1px);
+            background-size: 20px 20px; position: relative; }
+        
+        .graph-area::before { content: ""; position: absolute; top: 50%; width: 100%; height: 2px; background: #999; }
+        .graph-area::after { content: ""; position: absolute; left: 50%; width: 2px; height: 100%; background: #999; }
 
-        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
+        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
 
         @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; } }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Dominios</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Funciones</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Cálculo de Dominios: Nivel Avanzado</p>
+                <p>Funciones a Trozos: Lineales y Cuadráticas</p>
             </div>
-            <div style="background: var(--esparta-blue); color: white; padding: 5px 10px; font-weight: 700; border-radius: 4px;">4º ESO</div>
+            <div style="background: var(--esparta-blue); color: white; padding: 5px 10px; font-weight: 700; border-radius: 4px;">4º ESO / 1º BACH</div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>Reto 1: Función Racional de Grado 3</h2>
-                <div class="gold-line"></div>
+                <h2>Recordatorio Estratégico</h2>
+                <div class="line"></div>
             </div>
             <div class="teoria-box">
-                <b>Regla de Oro:</b> En las funciones fraccionarias, el denominador <b>nunca</b> puede ser cero. Debes igualar el denominador a 0 y quitar esos valores de \(\mathbb{R}\).
-            </div>
-            <div class="ejercicio-box">
-                Calcula el dominio de: 
-                \[ f(x) = \frac{2x - 5}{x^3 - 4x^2 + x + 6} \]
-                <br>
-                <span class="paso-id">Pista Espartana:</span>
-                1. Igualar el denominador a 0.<br>
-                2. Como es de grado 3, usa <b>Ruffini</b> para encontrar la primera raíz.<br>
-                3. Usa la <b>Ecuación de 2º Grado</b> para las raíces restantes.
-                <div class="area-resolucion"></div>
+                <b>1. Tramos:</b> Identifica dónde empieza y acaba cada trozo en el eje X.<br>
+                <b>2. Puntos:</b> Si el símbolo es \(<\) o \(>\), el punto es <b>ABIERTO</b> (círculo vacío). Si es \(\leq\) o \(\geq\), es <b>CERRADO</b> (círculo relleno).<br>
+                <b>3. Parábolas:</b> No olvides calcular el vértice (\(v_x = -b/2a\)) y algunos puntos auxiliares.
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>Reto 2: Logaritmo en el Denominador</h2>
-                <div class="gold-line"></div>
-            </div>
-            <div class="teoria-box">
-                <b>Doble Restricción:</b> <br>
-                1. El argumento del logaritmo debe ser <b>positivo</b> (\(> 0\)).<br>
-                2. El denominador no puede ser 0 (recuerda que \(\log(1) = 0\)).
+                <h2>Ejercicio 1: El Salto de la Parábola</h2>
+                <div class="line"></div>
             </div>
             <div class="ejercicio-box">
-                Calcula el dominio de: 
-                \[ g(x) = \frac{x + 1}{\log(x - 4)} \]
-                <br>
-                <span class="paso-id">Pista Espartana:</span>
-                1. ¿Cuándo existe el logaritmo? Resuelve la inecuación \(x - 4 > 0\).<br>
-                2. ¿Cuándo se hace 0 el denominador? Resuelve \(\log(x - 4) = 0\).
-                <div class="area-resolucion"></div>
+                Representa gráficamente la siguiente función y estudia su <b>continuidad</b>:
+                <div class="function-display">
+                    \[ f(x) = \begin{cases} x + 4 & \text{si } x \leq -2 \\ x^2 - 1 & \text{si } -2 < x < 2 \\ 3 & \text{si } x \geq 2 \end{cases} \]
+                </div>
+                <div class="graph-area"></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Ejercicio 2: La Parábola Negativa</h2>
+                <div class="line"></div>
+            </div>
+            <div class="ejercicio-box">
+                Representa gráficamente la siguiente función y halla su <b>Dominio y Recorrido</b>:
+                <div class="function-display">
+                    \[ g(x) = \begin{cases} -2 & \text{si } x < -3 \\ -x^2 + 4 & \text{si } -3 \leq x < 1 \\ x + 1 & \text{si } x \geq 1 \end{cases} \]
+                </div>
+                <div class="graph-area"></div>
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · No hay gloria sin esfuerzo · Preparado para Carla
+            © 2026 Academia Esparta · Dominando el Análisis de Funciones · Carla Caicedo
         </footer>
     </div>
 
