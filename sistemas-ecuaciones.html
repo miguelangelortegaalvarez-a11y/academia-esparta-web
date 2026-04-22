@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3º ESO - Entrenamiento de Sistemas - Lidia Jiménez</title>
+    <title>3º ESO - Problemas Guiados de Sistemas - Lidia Jiménez</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -13,124 +13,112 @@
         :root { 
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
-            --esparta-dark: #1a1a1a;
             --white: #ffffff;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #f0f2f0; margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
             background-color: var(--esparta-blue); color: var(--white); border: 2px solid var(--esparta-gold); 
-            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; 
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase;
         }
 
         .page { 
             background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
-            box-shadow: 0 0 25px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
+            box-shadow: 0 0 25px rgba(0,0,0,0.1); box-sizing: border-box; position: relative; margin: 0 auto;
             border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
         }
 
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
-        .header-title h1 { font-weight: 900; font-size: 26px; margin: 0; color: var(--esparta-blue); }
-        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 18px; font-weight: 700; }
-        
-        .level-badge { background: var(--esparta-blue); color: var(--white); padding: 8px 15px; font-weight: 700; border-radius: 4px; font-size: 12px; border: 1px solid var(--esparta-gold); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
+        .header-title h1 { font-weight: 900; font-size: 24px; margin: 0; color: var(--esparta-blue); }
+        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 16px; }
 
-        .section-header { display: flex; align-items: center; margin: 25px 0 10px; }
-        .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
+        .section-header { display: flex; align-items: center; margin: 20px 0 10px; }
+        .section-header h2 { font-size: 17px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
         .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        .teoria-box { background: #f0f4f8; padding: 15px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 20px; font-size: 14px; }
+        .guia-box { background: #fffdf5; border: 1px solid var(--esparta-gold); padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .paso-titulo { color: var(--esparta-blue); font-weight: 800; font-size: 13px; text-transform: uppercase; display: block; margin-top: 10px; }
         
-        .ejemplo-card { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fffdf5; margin: 20px 0; }
-        .paso-id { color: var(--esparta-blue); font-weight: 900; font-size: 13px; text-transform: uppercase; }
+        .rellenar { color: #999; border-bottom: 1px dashed #999; display: inline-block; min-width: 50px; }
 
-        .ejercicio-container { border: 2px dashed #ccc; border-radius: 10px; padding: 20px; margin-top: 15px; background: #fafafa; }
-        .equation { font-size: 20px; text-align: center; margin: 15px 0; font-family: 'Roboto Mono', monospace; color: var(--esparta-blue); }
+        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
 
-        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
-
-        @media print {
-            .btn-imprimir { display: none; }
-            .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; padding: 10mm; }
-        }
+        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; } }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Entrenamiento - Lidia</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Guía de Problemas - Lidia</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Dominando el Método de Reducción</p>
+                <p>Estrategia de Resolución de Problemas</p>
             </div>
-            <div class="level-badge">LIDIA JIMÉNEZ - 3º ESO</div>
+            <div style="background: var(--esparta-blue); color: white; padding: 5px 15px; font-weight: 700; border-radius: 4px;">LIDIA JIMÉNEZ - 3º ESO</div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>1. Ejemplo Táctico: "Eliminar para Vencer"</h2>
+                <h2>1. El Método del Éxito</h2>
                 <div class="line"></div>
             </div>
-            <div class="teoria-box">
-                El <b>Método de Reducción</b> consiste en preparar las ecuaciones para que, al sumarlas, una de las incógnitas desaparezca. 
-            </div>
-            <div class="ejemplo-card">
-                <b>Sistema:</b> 
-                \[ \begin{cases} 2x + 3y = 7 \\ 3x - y = 5 \end{cases} \]
-                <br>
-                <span class="paso-id">Paso 1: Preparar las ecuaciones</span><br>
-                Queremos eliminar la \(y\). Multiplicamos la segunda ecuación por 3 para que tenga \(-3y\):<br>
-                \[ \begin{cases} 2x + 3y = 7 \\ 3(3x - y = 5) \rightarrow 9x - 3y = 15 \end{cases} \]
-                <br>
-                <span class="paso-id">Paso 2: Sumar verticalmente</span><br>
-                \[ (2x + 9x) + (3y - 3y) = 7 + 15 \]
-                \[ 11x = 22 \rightarrow \mathbf{x = 2} \]
-                <br>
-                <span class="paso-id">Paso 3: Calcular la otra incógnita</span><br>
-                Sustituimos \(x=2\) en la más fácil: \(3(2) - y = 5 \rightarrow 6 - y = 5 \rightarrow \mathbf{y = 1}\).
-                <br><br>
-                <b>Resultado: (2, 1)</b>
+            <div style="font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
+                Para que un sistema no te venza, Lidia, sigue siempre este orden:<br>
+                <b>1.</b> Pon nombre a las incógnitas (\(x\) e \(y\)). <br>
+                <b>2.</b> Busca la frase del "total de cosas" (Ecuación 1). <br>
+                <b>3.</b> Busca la frase del "valor o dinero" (Ecuación 2).
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>2. Batería de Ejercicios</h2>
+                <h2>2. Problema Guiado A: El Concierto</h2>
                 <div class="line"></div>
             </div>
-            
-            <div class="ejercicio-container">
-                <b>Reto A: Directo (Suma y listo)</b>
-                <div class="equation">
-                    \[ \begin{cases} x + y = 10 \\ x - y = 4 \end{cases} \]
-                </div>
-                <div style="height: 100px; border-bottom: 1px dashed #ddd;"></div>
+            <div class="guia-box">
+                <b>Enunciado:</b> Se han vendido 250 entradas para un concierto. Las de "Pista" cuestan 20€ y las de "Grada" 30€. Si se han recaudado 5.500€ en total, ¿cuántas entradas se vendieron de cada tipo?
+                <br><br>
+                <span class="paso-titulo">Paso 1: Identificación</span>
+                \(x\) = Número de entradas de <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                \(y\) = Número de entradas de <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <br>
+                <span class="paso-titulo">Paso 2: Planteamiento</span>
+                Ecuación de cantidad total: \(x + y = \) <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                Ecuación de dinero total: <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span> \(\cdot x + \) <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span> \(\cdot y = 5.500\)
+                <br>
+                <span class="paso-titulo">Paso 3: Resolución</span>
+                <i>(Usa el método que prefieras: Sustitución, Igualación o Reducción)</i>
+                <div style="height: 100px;"></div>
             </div>
+        </section>
 
-            <div class="ejercicio-container">
-                <b>Reto B: Nivel Intermedio (Prepara una ecuación)</b>
-                <div class="equation">
-                    \[ \begin{cases} 2x + y = 8 \\ x - 2y = -1 \end{cases} \]
-                </div>
-                <div style="height: 100px; border-bottom: 1px dashed #ddd;"></div>
+        <section>
+            <div class="section-header">
+                <h2>3. Problema Guiado B: Las Huchas</h2>
+                <div class="line"></div>
             </div>
-
-            <div class="ejercicio-container">
-                <b>Reto C: Nivel Espartano (Prepara las dos)</b>
-                <div class="equation">
-                    \[ \begin{cases} 3x + 2y = 7 \\ 4x - 3y = -2 \end{cases} \]
-                </div>
-                <div style="height: 100px; border-bottom: 1px dashed #ddd;"></div>
+            <div class="guia-box">
+                <b>Enunciado:</b> Martina tiene 15 billetes en su hucha, unos son de 5€ y otros de 10€. Si en total tiene 110€, ¿cuántos billetes tiene de cada clase?
+                <br><br>
+                <span class="paso-titulo">Paso 1: Identificación</span>
+                \(x\) = Billetes de 5€ <br>
+                \(y\) = <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <br>
+                <span class="paso-titulo">Paso 2: Planteamiento</span>
+                Total de billetes: \(x + y = \) <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                Total de dinero: \(5x + \) <span class="rellenar">&nbsp;&nbsp;&nbsp;&nbsp;</span> \( = 110\)
+                <br>
+                <span class="paso-titulo">Paso 3: Resolución</span>
+                <div style="height: 120px;"></div>
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · No hay gloria sin práctica · Lidia Jiménez
+            © 2026 Academia Esparta · Paso a paso hasta el 10 · Lidia Jiménez
         </footer>
     </div>
 
