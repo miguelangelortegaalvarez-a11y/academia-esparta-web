@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4º ESO - Funciones a Trozos - Academia Esparta</title>
+    <title>2º ESO - Ecuaciones con Fracciones - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,18 +38,13 @@
         .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
         .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        .teoria-box { background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 20px; font-size: 13px; }
+        .teoria-box { background: #fffde7; padding: 15px; border-radius: 8px; border-left: 6px solid var(--esparta-gold); margin-bottom: 20px; font-size: 14px; }
         
-        .ejercicio-box { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fffdf5; margin: 20px 0; }
-        .function-display { font-size: 20px; text-align: center; margin: 15px 0; font-family: 'Roboto Mono', monospace; }
+        .ejemplo-box { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fff; margin: 20px 0; }
+        .paso { color: var(--esparta-blue); font-weight: 800; margin-top: 10px; display: block; }
 
-        .graph-area { border: 1px solid #ccc; height: 300px; margin-top: 15px; background-image: 
-            linear-gradient(#eee 1px, transparent 1px),
-            linear-gradient(90deg, #eee 1px, transparent 1px);
-            background-size: 20px 20px; position: relative; }
-        
-        .graph-area::before { content: ""; position: absolute; top: 50%; width: 100%; height: 2px; background: #999; }
-        .graph-area::after { content: ""; position: absolute; left: 50%; width: 2px; height: 100%; background: #999; }
+        .ejercicio-container { border: 2px dashed #ccc; border-radius: 10px; padding: 20px; margin-top: 25px; background: #fafafa; }
+        .equation { font-size: 22px; text-align: center; margin: 15px 0; font-family: 'Roboto Mono', monospace; color: var(--esparta-blue); }
 
         .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
 
@@ -58,59 +53,77 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Funciones</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Ecuaciones</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Funciones a Trozos: Lineales y Cuadráticas</p>
+                <p>Ecuaciones de 1º Grado con Denominadores</p>
             </div>
-            <div style="background: var(--esparta-blue); color: white; padding: 5px 10px; font-weight: 700; border-radius: 4px;">4º ESO / 1º BACH</div>
+            <div style="background: var(--esparta-blue); color: white; padding: 5px 10px; font-weight: 700; border-radius: 4px;">2º ESO</div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>Recordatorio Estratégico</h2>
+                <h2>El Método Espartano: Adiós Fracciones</h2>
                 <div class="line"></div>
             </div>
             <div class="teoria-box">
-                <b>1. Tramos:</b> Identifica dónde empieza y acaba cada trozo en el eje X.<br>
-                <b>2. Puntos:</b> Si el símbolo es \(<\) o \(>\), el punto es <b>ABIERTO</b> (círculo vacío). Si es \(\leq\) o \(\geq\), es <b>CERRADO</b> (círculo relleno).<br>
-                <b>3. Parábolas:</b> No olvides calcular el vértice (\(v_x = -b/2a\)) y algunos puntos auxiliares.
+                Para resolver estas ecuaciones, el secreto es <b>limpiar el camino</b>:
+                <br>1. Hallamos el <b>m.c.m.</b> de todos los denominadores.
+                <br>2. Multiplicamos cada término por el m.c.m. (o dividimos m.c.m entre el de abajo y multiplicamos por el de arriba).
+                <br>3. <b>¡Cuidado con los signos menos!</b> Si hay un menos delante de una fracción, afecta a TODO el numerador.
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>Ejercicio 1: El Salto de la Parábola</h2>
+                <h2>Ejemplo Paso a Paso</h2>
                 <div class="line"></div>
             </div>
-            <div class="ejercicio-box">
-                Representa gráficamente la siguiente función y estudia su <b>continuidad</b>:
-                <div class="function-display">
-                    \[ f(x) = \begin{cases} x + 4 & \text{si } x \leq -2 \\ x^2 - 1 & \text{si } -2 < x < 2 \\ 3 & \text{si } x \geq 2 \end{cases} \]
-                </div>
-                <div class="graph-area"></div>
+            <div class="ejemplo-box">
+                Resolver: \[ \frac{x - 1}{2} - \frac{x + 3}{3} = \frac{x}{6} \]
+                
+                <span class="paso">Paso 1: m.c.m(2, 3, 6) = 6</span>
+                Ponemos el 6 como denominador común en todo:
+                \[ \frac{3(x - 1)}{6} - \frac{2(x + 3)}{6} = \frac{x}{6} \]
+                
+                <span class="paso">Paso 2: Tachamos denominadores</span>
+                \[ 3(x - 1) - 2(x + 3) = x \]
+                
+                <span class="paso">Paso 3: Quitamos paréntesis y resolvemos</span>
+                \[ 3x - 3 - 2x - 6 = x \]
+                \[ x - 9 = x \rightarrow 0x = 9 \]
+                <b>Resultado:</b> En este caso particular, la ecuación no tendría solución. (¡Asegúrate siempre de repasar los signos!).
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>Ejercicio 2: La Parábola Negativa</h2>
+                <h2>¡A por la Victoria, Carla!</h2>
                 <div class="line"></div>
             </div>
-            <div class="ejercicio-box">
-                Representa gráficamente la siguiente función y halla su <b>Dominio y Recorrido</b>:
-                <div class="function-display">
-                    \[ g(x) = \begin{cases} -2 & \text{si } x < -3 \\ -x^2 + 4 & \text{si } -3 \leq x < 1 \\ x + 1 & \text{si } x \geq 1 \end{cases} \]
+            
+            <div class="ejercicio-container">
+                <b>Ejercicio 1:</b> Resuelve paso a paso quitando primero denominadores.
+                <div class="equation">
+                    \[ \frac{x + 2}{3} - \frac{x - 1}{4} = 2 \]
                 </div>
-                <div class="graph-area"></div>
+                <div style="height: 150px;"></div>
+            </div>
+
+            <div class="ejercicio-container">
+                <b>Ejercicio 2:</b> Cuidado con el signo menos delante de la fracción.
+                <div class="equation">
+                    \[ \frac{3x - 1}{2} - \frac{x + 5}{5} = \frac{x}{2} + 1 \]
+                </div>
+                <div style="height: 150px;"></div>
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · Dominando el Análisis de Funciones · Carla Caicedo
+            © 2026 Academia Esparta · Fuerza y Honor en las Matemáticas · Carla Caicedo
         </footer>
     </div>
 
