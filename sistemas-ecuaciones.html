@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5º Primaria - El Maestro de las Áreas - David</title>
+    <title>2º ESO - Ecuaciones de 2º Grado - Alejandra - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         :root { 
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
             --esparta-dark: #1a1a1a;
             --white: #ffffff;
-            --bg-light: #f8f9fa;
         }
         
         body { font-family: 'Montserrat', sans-serif; background-color: #e0e0e0; margin: 0; padding: 20px; color: #333; }
@@ -25,28 +27,36 @@
         }
 
         .page { 
-            background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
+            background-color: var(--white); width: 210mm; min-height: 297mm; padding: 20mm; 
             box-shadow: 0 0 25px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
             border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
         }
 
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 30px; }
         .header-title h1 { font-weight: 900; font-size: 26px; margin: 0; color: var(--esparta-blue); }
-        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 18px; font-weight: 700; }
-        
-        .level-badge { background: var(--esparta-blue); color: var(--white); padding: 8px 15px; font-weight: 700; border-radius: 4px; font-size: 12px; border: 1px solid var(--esparta-gold); }
+        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 16px; }
 
-        .formula-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 20px 0; }
-        .formula-card { background: var(--bg-light); border: 1px solid #ddd; border-radius: 10px; padding: 10px; text-align: center; }
-        .formula-card h3 { font-size: 14px; color: var(--esparta-blue); margin-top: 0; }
-        .formula-text { font-family: 'Roboto Mono', monospace; font-weight: 700; color: #d32f2f; font-size: 13px; }
+        .section-header { display: flex; align-items: center; margin: 30px 0 15px; }
+        .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
+        .section-header .gold-line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; border-radius: 2px; }
 
-        .ejercicio-box { border: 2px dashed #ccc; border-radius: 10px; padding: 20px; margin-bottom: 20px; background: #fafafa; }
-        .figura-draw { text-align: center; margin: 10px 0; }
+        .teoria-box { background: #f0f4f8; padding: 20px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 25px; font-size: 14px; }
         
-        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
+        .formula-main { 
+            background: var(--esparta-dark); color: var(--white); text-align: center; padding: 25px; border-radius: 8px; margin: 25px 0;
+            border: 2px solid var(--esparta-gold); box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .ejemplo-card { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fffdf5; margin: 20px 0; }
+        .paso-id { color: var(--esparta-blue); font-weight: 900; }
+
+        .ejercicio-container { border: 2px dashed var(--esparta-blue); border-radius: 10px; padding: 20px; margin-top: 25px; background: #fafafa; }
+        .equation { font-size: 24px; text-align: center; margin: 20px 0; font-family: 'Roboto Mono', monospace; color: var(--esparta-blue); }
+
+        .footer { text-align: center; margin-top: 50px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; font-weight: 600; }
 
         @media print {
+            body { background: white; padding: 0; }
             .btn-imprimir { display: none; }
             .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; padding: 10mm; }
         }
@@ -54,83 +64,76 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha para David</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Alejandra</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Geometría: El Maestro de las Áreas</p>
+                <p>Matemáticas: Ecuaciones de Segundo Grado Completas</p>
             </div>
-            <div class="level-badge">DAVID - 5º PRIMARIA</div>
+            <div style="background: var(--esparta-blue); color: white; padding: 8px 15px; font-weight: 700; border-radius: 4px; border: 1px solid var(--esparta-gold);">ALEJANDRA - 2º ESO</div>
         </header>
 
         <section>
-            <h2 style="font-size: 18px; color: var(--esparta-blue); text-transform: uppercase;">1. Guía de Fórmulas Rápidas</h2>
-            <div class="formula-grid">
-                <div class="formula-card">
-                    <h3>Cuadrado</h3>
-                    <svg width="60" height="60" viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#333" stroke-width="2"/></svg>
-                    <div class="formula-text">L × L</div>
-                </div>
-                <div class="formula-card">
-                    <h3>Rectángulo</h3>
-                    <svg width="60" height="60" viewBox="0 0 80 60"><rect x="10" y="15" width="60" height="30" fill="none" stroke="#333" stroke-width="2"/></svg>
-                    <div class="formula-text">b × h</div>
-                </div>
-                <div class="formula-card">
-                    <h3>Triángulo</h3>
-                    <svg width="60" height="60" viewBox="0 0 60 60"><path d="M 30 10 L 55 50 L 5 50 Z" fill="none" stroke="#333" stroke-width="2"/></svg>
-                    <div class="formula-text">(b × h) / 2</div>
-                </div>
+            <div class="section-header">
+                <h2>La Herramienta Maestra</h2>
+                <div class="gold-line"></div>
+            </div>
+            <div class="teoria-box">
+                ¡Atención Alejandra! Toda ecuación de segundo grado tiene la forma: \(ax^2 + bx + c = 0\). <br>
+                Para vencerlas, utilizamos la <b>Fórmula General</b>:
+            </div>
+
+            <div class="formula-main">
+                \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
             </div>
         </section>
 
         <section>
-            <h2 style="font-size: 18px; color: var(--esparta-blue); text-transform: uppercase;">2. Desafíos de Área</h2>
+            <div class="section-header">
+                <h2>Ejemplo Paso a Paso</h2>
+                <div class="gold-line"></div>
+            </div>
+            <div class="ejemplo-card">
+                <b>Resolver: \(x^2 - 5x + 6 = 0\)</b>
+                <br><br>
+                <span class="paso-id">1. Identificar coeficientes:</span> \(a = 1, \quad b = -5, \quad c = 6\).<br><br>
+                <span class="paso-id">2. Sustituir en la fórmula:</span><br>
+                \[ x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4 \cdot 1 \cdot 6}}{2 \cdot 1} \]
+                \[ x = \frac{5 \pm \sqrt{25 - 24}}{2} = \frac{5 \pm \sqrt{1}}{2} \]
+                <br>
+                <span class="paso-id">3. Calcular soluciones:</span><br>
+                \(x_1 = \frac{5 + 1}{2} = \frac{6}{2} = \mathbf{3}\)<br>
+                \(x_2 = \frac{5 - 1}{2} = \frac{4}{2} = \mathbf{2}\)
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Entrenamiento espartano</h2>
+                <div class="gold-line"></div>
+            </div>
             
-            <div class="ejercicio-box">
-                <b>1. El Patio de David:</b> David quiere saber cuántos baldosines de 1 metro cuadrado necesita para cubrir su patio cuadrado, que mide <b>8 metros</b> de lado.
-                <div class="figura-draw">
-                    <svg width="100" height="100" viewBox="0 0 100 100">
-                        <rect x="20" y="20" width="60" height="60" fill="#ffe0b2" stroke="#e65100" stroke-width="2"/>
-                        <text x="45" y="95" font-size="12">8 m</text>
-                    </svg>
+            <div class="ejercicio-container">
+                <b>Ejercicio 1.</b> Halla las soluciones paso a paso:
+                <div class="equation">
+                    \[ x^2 - 7x + 10 = 0 \]
                 </div>
-                <p><b>Cálculo:</b> _________________________________</p>
-                <p><b>Resultado:</b> ________ m²</p>
+                <div style="height: 150px; border-bottom: 1px dashed #ddd;"></div>
             </div>
 
-            <div class="ejercicio-box">
-                <b>2. La Piscina:</b> En el polideportivo hay una piscina rectangular de <b>12 metros</b> de largo y <b>6 metros</b> de ancho. ¿Cuál es el área de la superficie del agua?
-                <div class="figura-draw">
-                    <svg width="150" height="80" viewBox="0 0 150 80">
-                        <rect x="25" y="20" width="100" height="40" fill="#bbdefb" stroke="#0d47a1" stroke-width="2"/>
-                        <text x="65" y="75" font-size="12">12 m</text>
-                        <text x="130" y="45" font-size="12">6 m</text>
-                    </svg>
+            <div class="ejercicio-container">
+                <b>Ejercicio 2.</b> ¡Cuidado con los signos negativos!
+                <div class="equation">
+                    \[ x^2 + 2x - 8 = 0 \]
                 </div>
-                <p><b>Cálculo:</b> _________________________________</p>
-                <p><b>Resultado:</b> ________ m²</p>
-            </div>
-
-            <div class="ejercicio-box">
-                <b>3. La Vela del Barco:</b> David está dibujando un barco pirata. La vela tiene forma de triángulo con una base de <b>10 metros</b> y una altura de <b>14 metros</b>. ¿Qué área tiene la vela?
-                <div class="figura-draw">
-                    <svg width="120" height="100" viewBox="0 0 120 100">
-                        <path d="M 60 10 L 100 80 L 20 80 Z" fill="#cfd8dc" stroke="#455a64" stroke-width="2"/>
-                        <line x1="60" y1="10" x2="60" y2="80" stroke="red" stroke-dasharray="4"/>
-                        <text x="50" y="95" font-size="12">10 m</text>
-                        <text x="65" y="50" font-size="12" fill="red">14 m</text>
-                    </svg>
-                </div>
-                <p><b>Cálculo:</b> _________________________________</p>
-                <p><b>Resultado:</b> ________ m²</p>
+                <div style="height: 150px; border-bottom: 1px dashed #ddd;"></div>
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · Fuerza en la mente, victoria en el papel · David
+            © 2026 Academia Esparta · No te rindas, Alejandra · Fuerza y Honor
         </footer>
     </div>
 
