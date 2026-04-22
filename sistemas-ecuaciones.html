@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5º Primaria - Tarea Competencial: El Polideportivo - David</title>
+    <title>3º ESO - Entrenamiento de Sistemas - Lidia Jiménez</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         :root { 
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
             --esparta-dark: #1a1a1a;
             --white: #ffffff;
-            --grass: #4caf50;
         }
         
         body { font-family: 'Montserrat', sans-serif; background-color: #f0f2f0; margin: 0; padding: 20px; color: #333; }
@@ -36,17 +38,17 @@
         
         .level-badge { background: var(--esparta-blue); color: var(--white); padding: 8px 15px; font-weight: 700; border-radius: 4px; font-size: 12px; border: 1px solid var(--esparta-gold); }
 
-        .intro-box { background: #fff9c4; border: 2px dashed #fbc02d; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 14px; line-height: 1.4; }
+        .section-header { display: flex; align-items: center; margin: 25px 0 10px; }
+        .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
+        .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        .plano-container { text-align: center; margin: 20px 0; border: 1px solid #ccc; border-radius: 10px; padding: 10px; background: #fafafa; }
+        .teoria-box { background: #f0f4f8; padding: 15px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 20px; font-size: 14px; }
         
-        .pregunta { margin-bottom: 25px; padding-left: 40px; position: relative; }
-        .num { position: absolute; left: 0; top: 0; background: var(--esparta-gold); color: var(--esparta-dark); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; }
-        .pregunta-texto { font-size: 14px; font-weight: 600; color: var(--esparta-dark); }
+        .ejemplo-card { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fffdf5; margin: 20px 0; }
+        .paso-id { color: var(--esparta-blue); font-weight: 900; font-size: 13px; text-transform: uppercase; }
 
-        .tabla-precios { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
-        .tabla-precios th { background: var(--esparta-blue); color: white; padding: 8px; }
-        .tabla-precios td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        .ejercicio-container { border: 2px dashed #ccc; border-radius: 10px; padding: 20px; margin-top: 15px; background: #fafafa; }
+        .equation { font-size: 20px; text-align: center; margin: 15px 0; font-family: 'Roboto Mono', monospace; color: var(--esparta-blue); }
 
         .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
 
@@ -58,83 +60,77 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Tarea para David</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Entrenamiento - Lidia</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Tarea Competencial: Reforma en el Polideportivo</p>
+                <p>Dominando el Método de Reducción</p>
             </div>
-            <div class="level-badge">DAVID - 5º PRIMARIA</div>
+            <div class="level-badge">LIDIA JIMÉNEZ - 3º ESO</div>
         </header>
 
-        <div class="intro-box">
-            <b>Situación:</b> David ha sido nombrado encargado de las reformas del polideportivo de su barrio. Debe ayudar a calcular los materiales, el tiempo y el presupuesto para que todo esté listo para el torneo de verano. ¡Ayúdale con tus cálculos!
-        </div>
-
-        <div class="plano-container">
-            <svg viewBox="0 0 400 200" width="100%" height="150">
-                <rect x="50" y="20" width="200" height="120" fill="#a5d6a7" stroke="#2e7d32" stroke-width="2" />
-                <text x="110" y="85" font-family="Montserrat" font-weight="900" fill="#2e7d32">Pista de Fútbol</text>
-                <text x="130" y="155" font-family="Kalam" font-size="12">20 m</text> <text x="10" y="85" font-family="Kalam" font-size="12" transform="rotate(-90 10,85)">12 m</text> <rect x="250" y="20" width="100" height="60" fill="#cfd8dc" stroke="#455a64" stroke-width="2" />
-                <text x="260" y="55" font-family="Montserrat" font-size="12" font-weight="700">Vestuarios</text>
-                <text x="285" y="15" font-family="Kalam" font-size="10">10 m</text>
-
-                <rect x="250" y="80" width="100" height="60" fill="#ffe0b2" stroke="#e65100" stroke-width="2" />
-                <text x="270" y="115" font-family="Montserrat" font-size="12" font-weight="700">Almacén</text>
-            </svg>
-            <p style="font-size: 11px; color: #666;"><i>Plano del Polideportivo (Medidas en metros)</i></p>
-        </div>
-
-        <div class="pregunta">
-            <div class="num">1</div>
-            <div class="pregunta-texto">
-                La reforma debe empezar el <b>15 de mayo</b> y tiene que estar terminada para el torneo el <b>20 de junio</b>. Indica de cuántos días dispone David para organizar las obras.
+        <section>
+            <div class="section-header">
+                <h2>1. Ejemplo Táctico: "Eliminar para Vencer"</h2>
+                <div class="line"></div>
             </div>
-            <div style="height: 40px; border-bottom: 1px solid #eee;"></div>
-        </div>
-
-        <div class="pregunta">
-            <div class="num">2</div>
-            <div class="pregunta-texto">
-                David quiere poner césped artificial nuevo en la pista de fútbol (el rectángulo verde). 
-                Si el césped cuesta <b>12 € por cada metro cuadrado (m²)</b>, ¿cuánto dinero costará cubrir toda la pista?
+            <div class="teoria-box">
+                El <b>Método de Reducción</b> consiste en preparar las ecuaciones para que, al sumarlas, una de las incógnitas desaparezca. 
             </div>
-            <p style="font-size: 12px; font-style: italic;">(Recuerda: Área = largo × ancho)</p>
-            <div style="height: 60px; border-bottom: 1px solid #eee;"></div>
-        </div>
-
-        <div class="pregunta">
-            <div class="num">3</div>
-            <div class="pregunta-texto">
-                Para que no se escapen los balones, David va a poner una valla alrededor de <b>toda la pista de fútbol</b>. ¿Cuántos metros de valla debe comprar?
+            <div class="ejemplo-card">
+                <b>Sistema:</b> 
+                \[ \begin{cases} 2x + 3y = 7 \\ 3x - y = 5 \end{cases} \]
+                <br>
+                <span class="paso-id">Paso 1: Preparar las ecuaciones</span><br>
+                Queremos eliminar la \(y\). Multiplicamos la segunda ecuación por 3 para que tenga \(-3y\):<br>
+                \[ \begin{cases} 2x + 3y = 7 \\ 3(3x - y = 5) \rightarrow 9x - 3y = 15 \end{cases} \]
+                <br>
+                <span class="paso-id">Paso 2: Sumar verticalmente</span><br>
+                \[ (2x + 9x) + (3y - 3y) = 7 + 15 \]
+                \[ 11x = 22 \rightarrow \mathbf{x = 2} \]
+                <br>
+                <span class="paso-id">Paso 3: Calcular la otra incógnita</span><br>
+                Sustituimos \(x=2\) en la más fácil: \(3(2) - y = 5 \rightarrow 6 - y = 5 \rightarrow \mathbf{y = 1}\).
+                <br><br>
+                <b>Resultado: (2, 1)</b>
             </div>
-            <div style="height: 40px; border-bottom: 1px solid #eee;"></div>
-        </div>
+        </section>
 
-        <div class="pregunta">
-            <div class="num">4</div>
-            <div class="pregunta-texto">
-                David necesita comprar balones nuevos. Observa la tabla y elige la opción que le permita comprar 10 balones gastando <b>menos de 150 €</b>. ¿Cuál encaja en su presupuesto?
+        <section>
+            <div class="section-header">
+                <h2>2. Batería de Ejercicios</h2>
+                <div class="line"></div>
             </div>
-            <table class="tabla-precios">
-                <tr><th>Tipo de Balón</th><th>Marca A</th><th>Marca B</th><th>Marca C</th></tr>
-                <tr><td>Precio por unidad</td><td>14 €</td><td>16 €</td><td>18 €</td></tr>
-            </table>
-            <div style="height: 40px; border-bottom: 1px solid #eee;"></div>
-        </div>
+            
+            <div class="ejercicio-container">
+                <b>Reto A: Directo (Suma y listo)</b>
+                <div class="equation">
+                    \[ \begin{cases} x + y = 10 \\ x - y = 4 \end{cases} \]
+                </div>
+                <div style="height: 100px; border-bottom: 1px dashed #ddd;"></div>
+            </div>
 
-        <div class="pregunta">
-            <div class="num">5</div>
-            <div class="pregunta-texto">
-                David tenía ahorrados <b>3.000 €</b> para la reforma. Si ya se ha gastado 240 € en la valla y 140 € en balones, ¿cuánto dinero le queda disponible para pagar a los obreros?
+            <div class="ejercicio-container">
+                <b>Reto B: Nivel Intermedio (Prepara una ecuación)</b>
+                <div class="equation">
+                    \[ \begin{cases} 2x + y = 8 \\ x - 2y = -1 \end{cases} \]
+                </div>
+                <div style="height: 100px; border-bottom: 1px dashed #ddd;"></div>
             </div>
-            <div style="height: 60px; border-bottom: 1px solid #eee;"></div>
-        </div>
+
+            <div class="ejercicio-container">
+                <b>Reto C: Nivel Espartano (Prepara las dos)</b>
+                <div class="equation">
+                    \[ \begin{cases} 3x + 2y = 7 \\ 4x - 3y = -2 \end{cases} \]
+                </div>
+                <div style="height: 100px; border-bottom: 1px dashed #ddd;"></div>
+            </div>
+        </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · No te rindas, David · ¡Eres el mejor encargado!
+            © 2026 Academia Esparta · No hay gloria sin práctica · Lidia Jiménez
         </footer>
     </div>
 
