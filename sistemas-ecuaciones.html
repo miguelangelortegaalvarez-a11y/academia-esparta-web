@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2º ESO - Ecuaciones de 2º Grado - Alejandra - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Entrenamiento Extra 2º ESO - Alejandra - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -13,127 +13,79 @@
         :root { 
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
-            --esparta-dark: #1a1a1a;
             --white: #ffffff;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #e0e0e0; margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; font-size: 14px; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
-            background-color: var(--esparta-blue); color: var(--white); border: 2px solid var(--esparta-gold); 
-            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; 
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+            background-color: var(--esparta-blue); color: white; border: 2px solid var(--esparta-gold); 
+            padding: 10px 25px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase;
         }
 
         .page { 
-            background-color: var(--white); width: 210mm; min-height: 297mm; padding: 20mm; 
-            box-shadow: 0 0 25px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
-            border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
+            background-color: white; width: 210mm; min-height: 297mm; padding: 15mm; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); margin: 0 auto;
+            border-top: 10px solid var(--esparta-blue);
         }
 
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 30px; }
-        .header-title h1 { font-weight: 900; font-size: 26px; margin: 0; color: var(--esparta-blue); }
-        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 16px; }
+        .header { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; text-align: center; }
+        .header h1 { font-weight: 900; color: var(--esparta-blue); margin: 0; }
 
-        .section-header { display: flex; align-items: center; margin: 30px 0 15px; }
-        .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
-        .section-header .gold-line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; border-radius: 2px; }
+        .section-title { background: var(--esparta-blue); color: white; padding: 5px 15px; display: inline-block; font-weight: 900; margin-bottom: 15px; }
 
-        .teoria-box { background: #f0f4f8; padding: 20px; border-radius: 8px; border-left: 6px solid var(--esparta-blue); margin-bottom: 25px; font-size: 14px; }
+        .ejercicio-card { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #fafafa; }
+        .equation { font-family: 'Roboto Mono', monospace; font-size: 22px; text-align: center; color: var(--esparta-blue); margin: 15px 0; }
         
-        .formula-main { 
-            background: var(--esparta-dark); color: var(--white); text-align: center; padding: 25px; border-radius: 8px; margin: 25px 0;
-            border: 2px solid var(--esparta-gold); box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
+        .espacio-resolucion { height: 120px; border-bottom: 1px dashed #ccc; }
 
-        .ejemplo-card { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #fffdf5; margin: 20px 0; }
-        .paso-id { color: var(--esparta-blue); font-weight: 900; }
+        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #999; }
 
-        .ejercicio-container { border: 2px dashed var(--esparta-blue); border-radius: 10px; padding: 20px; margin-top: 25px; background: #fafafa; }
-        .equation { font-size: 24px; text-align: center; margin: 20px 0; font-family: 'Roboto Mono', monospace; color: var(--esparta-blue); }
-
-        .footer { text-align: center; margin-top: 50px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; font-weight: 600; }
-
-        @media print {
-            body { background: white; padding: 0; }
-            .btn-imprimir { display: none; }
-            .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; padding: 10mm; }
-        }
+        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; } }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Alejandra</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Batería Extra</button>
 
     <div class="page">
-        <header class="header">
-            <div class="header-title">
-                <h1>ACADEMIA ESPARTA</h1>
-                <p>Matemáticas: Ecuaciones de Segundo Grado Completas</p>
-            </div>
-            <div style="background: var(--esparta-blue); color: white; padding: 8px 15px; font-weight: 700; border-radius: 4px; border: 1px solid var(--esparta-gold);">ALEJANDRA - 2º ESO</div>
-        </header>
+        <div class="header">
+            <h1>ACADEMIA ESPARTA</h1>
+            <p>Batería de Refuerzo: Ecuaciones de 2º Grado</p>
+            <p><b>Alumna: Alejandra</b></p>
+        </div>
 
-        <section>
-            <div class="section-header">
-                <h2>La Herramienta Maestra</h2>
-                <div class="gold-line"></div>
-            </div>
-            <div class="teoria-box">
-                ¡Atención Alejandra! Toda ecuación de segundo grado tiene la forma: \(ax^2 + bx + c = 0\). <br>
-                Para vencerlas, utilizamos la <b>Fórmula General</b>:
-            </div>
+        <span class="section-title">Nivel 1: Dominio de la Fórmula</span>
+        <div class="ejercicio-card">
+            <b>Ejercicio 3.</b> Resuelve identificando bien los coeficientes:
+            <div class="equation">\[ x^2 - 8x + 15 = 0 \]</div>
+            <div class="espacio-resolucion"></div>
+        </div>
 
-            <div class="formula-main">
-                \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
-            </div>
-        </section>
+        <span class="section-title">Nivel 2: Cuidado con los Signos</span>
+        <div class="ejercicio-card">
+            <b>Ejercicio 4.</b> Recuerda que \(b\) puede ser positivo:
+            <div class="equation">\[ x^2 + 5x + 4 = 0 \]</div>
+            <div class="espacio-resolucion"></div>
+        </div>
 
-        <section>
-            <div class="section-header">
-                <h2>Ejemplo Paso a Paso</h2>
-                <div class="gold-line"></div>
-            </div>
-            <div class="ejemplo-card">
-                <b>Resolver: \(x^2 - 5x + 6 = 0\)</b>
-                <br><br>
-                <span class="paso-id">1. Identificar coeficientes:</span> \(a = 1, \quad b = -5, \quad c = 6\).<br><br>
-                <span class="paso-id">2. Sustituir en la fórmula:</span><br>
-                \[ x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4 \cdot 1 \cdot 6}}{2 \cdot 1} \]
-                \[ x = \frac{5 \pm \sqrt{25 - 24}}{2} = \frac{5 \pm \sqrt{1}}{2} \]
-                <br>
-                <span class="paso-id">3. Calcular soluciones:</span><br>
-                \(x_1 = \frac{5 + 1}{2} = \frac{6}{2} = \mathbf{3}\)<br>
-                \(x_2 = \frac{5 - 1}{2} = \frac{4}{2} = \mathbf{2}\)
-            </div>
-        </section>
+        <span class="section-title">Nivel 3: El Discriminante Crítico</span>
+        <div class="ejercicio-card">
+            <b>Ejercicio 5.</b> Presta atención a la resta dentro de la raíz:
+            <div class="equation">\[ x^2 - 4x - 5 = 0 \]</div>
+            <div class="espacio-resolucion"></div>
+        </div>
 
-        <section>
-            <div class="section-header">
-                <h2>Entrenamiento espartano</h2>
-                <div class="gold-line"></div>
-            </div>
-            
-            <div class="ejercicio-container">
-                <b>Ejercicio 1.</b> Halla las soluciones paso a paso:
-                <div class="equation">
-                    \[ x^2 - 7x + 10 = 0 \]
-                </div>
-                <div style="height: 150px; border-bottom: 1px dashed #ddd;"></div>
-            </div>
-
-            <div class="ejercicio-container">
-                <b>Ejercicio 2.</b> ¡Cuidado con los signos negativos!
-                <div class="equation">
-                    \[ x^2 + 2x - 8 = 0 \]
-                </div>
-                <div style="height: 150px; border-bottom: 1px dashed #ddd;"></div>
-            </div>
-        </section>
+        <span class="section-title">Nivel 4: Reto Espartano</span>
+        <div class="ejercicio-card">
+            <b>Ejercicio 6.</b> ¿Qué pasa si el resultado de la raíz es 0?
+            <div class="equation">\[ x^2 - 6x + 9 = 0 \]</div>
+            <div class="espacio-resolucion"></div>
+        </div>
 
         <footer class="footer">
-            © 2026 Academia Esparta · No te rindas, Alejandra · Fuerza y Honor
+            © 2026 Academia Esparta · La práctica hace al maestro · Alejandra
         </footer>
     </div>
 
