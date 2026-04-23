@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento de Élite - Erik & Mbappé - Academia Esparta</title>
+    <title>Entrenamiento Variado - Erik & Mbappé - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -19,134 +19,134 @@
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
             background-color: var(--esparta-blue); color: var(--white); border: 2px solid var(--esparta-gold); 
-            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; 
-            text-transform: uppercase; transition: 0.3s;
+            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase;
         }
 
         .page { 
             background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
             box-shadow: 0 0 25px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
-            border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
+            border-top: 10px solid var(--esparta-blue); border-bottom: 10px solid var(--esparta-gold);
         }
 
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
-        .header-title h1 { font-weight: 900; font-size: 26px; margin: 0; color: var(--esparta-blue); }
+        .header-title h1 { font-weight: 900; font-size: 24px; margin: 0; color: var(--esparta-blue); }
         
-        .mbappe-shout { background: #fff3e0; border: 3px solid var(--esparta-red); padding: 15px; border-radius: 15px; margin-bottom: 25px; position: relative; }
-        .mbappe-shout b { color: var(--esparta-red); font-size: 18px; text-transform: uppercase; }
+        .mbappe-box { background: #e3f2fd; border: 2px solid var(--esparta-blue); padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; }
 
-        .section-header { display: flex; align-items: center; margin: 25px 0 15px; }
-        .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
-        .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
+        .section-header { display: flex; align-items: center; margin: 20px 0 10px; }
+        .section-header h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
+        .section-header .line { flex-grow: 1; height: 2px; background: var(--esparta-gold); margin-left: 10px; }
 
-        .serie-container { display: flex; gap: 8px; justify-content: center; margin: 15px 0; flex-wrap: wrap; }
-        .serie-box { width: 40px; height: 40px; border: 2px solid var(--esparta-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; background: white; font-size: 16px; }
-        .serie-empty { border: 2px dashed var(--esparta-red); }
+        /* Estilo Rueda */
+        .wheel-container { display: flex; justify-content: space-around; margin: 20px 0; }
+        .wheel { width: 150px; height: 150px; border: 5px solid var(--esparta-blue); border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; font-weight: 900; }
+        .wheel-center { font-size: 24px; color: var(--esparta-red); }
+        .wheel-spoke { position: absolute; font-size: 14px; }
 
-        .operaciones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin: 30px 0; }
-        .mult-vertical { font-family: 'Roboto Mono', monospace; font-size: 32px; text-align: right; width: 120px; margin: 0 auto; position: relative; }
-        .linea-mult { border-bottom: 4px solid var(--esparta-dark); margin-top: 5px; width: 100%; }
-        .signo-mult { position: absolute; left: -25px; bottom: 45px; font-size: 28px; font-weight: bold; }
+        /* Estilo Tabla Mixta */
+        .tabla-mixta { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .tabla-mixta td { border: 1px solid #ddd; padding: 10px; text-align: center; width: 50%; }
+        .tabla-mixta b { color: var(--esparta-blue); font-size: 18px; }
 
-        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
+        .mult-vertical { font-family: 'Roboto Mono', monospace; font-size: 28px; text-align: right; width: 110px; margin: 0 auto; position: relative; padding: 10px; }
+        .linea-mult { border-bottom: 3px solid #333; margin-top: 5px; }
+        .signo-mult { position: absolute; left: -10px; bottom: 25px; font-weight: bold; }
 
-        @media print {
-            .btn-imprimir { display: none; }
-            .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; padding: 10mm; }
-        }
+        .footer { text-align: center; margin-top: 30px; font-size: 10px; color: #999; }
+
+        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; } }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Entrenamiento Corregido</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Nuevo Entrenamiento</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Erik: ¡Corre hacia atrás y marca gol!</p>
+                <p>Erik: Circuito de Agilidad Mental</p>
             </div>
-            <div style="background: var(--esparta-blue); color: white; padding: 8px 15px; font-weight: 700; border-radius: 4px;">DESAFÍO MBAPPÉ</div>
+            <div style="font-weight: 900; color: var(--esparta-red);">ERIK</div>
         </header>
 
-        <div class="mbappe-shout">
-            <b>📢 ¡OJO ERIK, QUE TE QUEDAS FUERA!</b><br>
-            "¡No seas manta! En el campo hay que saber correr para adelante y para atrás. Ahora completa estas series restando y resuelve estas cuentas. ¡Fíjate bien en la raya y no te olvides de las que te llevas!"
+        <div class="mbappe-box">
+            <b>⚽ CHARLA TÁCTICA DE MBAPPÉ:</b><br>
+            "¡Erik! Los defensas ya se saben tus trucos. Tienes que cambiar de juego. Si fallas estas ruedas de multiplicar, te pondré a hacer flexiones. ¡Demuéstrame que no eres un manta y que las tablas del 4 y del 5 son tuyas!"
         </div>
 
         <section>
             <div class="section-header">
-                <h2>1. Series Marcha Atrás (Resistencia)</h2>
+                <h2>1. Las Ruedas de Fuego (Multiplica el centro)</h2>
                 <div class="line"></div>
             </div>
-            <p><b>Resta de 4 en 4 (Desde el 40 al 0):</b></p>
-            <div class="serie-container">
-                <div class="serie-box">40</div><div class="serie-box">36</div><div class="serie-box serie-empty"></div>
-                <div class="serie-box">28</div><div class="serie-box serie-empty"></div><div class="serie-box">20</div>
-                <div class="serie-box serie-empty"></div><div class="serie-box">12</div><div class="serie-box serie-empty"></div>
-                <div class="serie-box">4</div><div class="serie-box">0</div>
-            </div>
-
-            <p><b>Resta de 5 en 5 (Desde el 50 al 0):</b></p>
-            <div class="serie-container">
-                <div class="serie-box">50</div><div class="serie-box">45</div><div class="serie-box serie-empty"></div>
-                <div class="serie-box">35</div><div class="serie-box serie-empty"></div><div class="serie-box">25</div>
-                <div class="serie-box serie-empty"></div><div class="serie-box">15</div><div class="serie-box serie-empty"></div>
-                <div class="serie-box">5</div><div class="serie-box">0</div>
-            </div>
-        </section>
-
-        <section>
-            <div class="section-header">
-                <h2>2. Potencia de Tiro (Multiplicaciones Verticales)</h2>
-                <div class="line"></div>
-            </div>
-            
-            <div class="operaciones-grid">
-                <div class="mult-vertical">
-                    <span class="signo-mult">×</span>
-                    &nbsp;&nbsp;36<br>&nbsp;&nbsp;&nbsp;4<br><div class="linea-mult"></div>
+            <div class="wheel-container">
+                <div>
+                    <p style="text-align: center; font-weight: 700;">Tabla del 4</p>
+                    <div class="wheel">
+                        <span class="wheel-center">x 4</span>
+                        <div style="top: 5px;">2 → __</div>
+                        <div style="right: 5px; top: 60px;">5 → __</div>
+                        <div style="bottom: 5px;">8 → __</div>
+                        <div style="left: 5px; top: 60px;">3 → __</div>
+                    </div>
                 </div>
-                <div class="mult-vertical">
-                    <span class="signo-mult">×</span>
-                    &nbsp;&nbsp;42<br>&nbsp;&nbsp;&nbsp;5<br><div class="linea-mult"></div>
-                </div>
-                <div class="mult-vertical">
-                    <span class="signo-mult">×</span>
-                    &nbsp;&nbsp;15<br>&nbsp;&nbsp;&nbsp;4<br><div class="linea-mult"></div>
-                </div>
-            </div>
-
-            <div class="operaciones-grid">
-                <div class="mult-vertical">
-                    <span class="signo-mult">×</span>
-                    &nbsp;&nbsp;28<br>&nbsp;&nbsp;&nbsp;5<br><div class="linea-mult"></div>
-                </div>
-                <div class="mult-vertical">
-                    <span class="signo-mult">×</span>
-                    &nbsp;&nbsp;53<br>&nbsp;&nbsp;&nbsp;4<br><div class="linea-mult"></div>
-                </div>
-                <div class="mult-vertical">
-                    <span class="signo-mult">×</span>
-                    &nbsp;&nbsp;19<br>&nbsp;&nbsp;&nbsp;5<br><div class="linea-mult"></div>
+                <div>
+                    <p style="text-align: center; font-weight: 700;">Tabla del 5</p>
+                    <div class="wheel">
+                        <span class="wheel-center" style="color: var(--esparta-blue);">x 5</span>
+                        <div style="top: 5px;">4 → __</div>
+                        <div style="right: 5px; top: 60px;">7 → __</div>
+                        <div style="bottom: 5px;">9 → __</div>
+                        <div style="left: 5px; top: 60px;">6 → __</div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>3. El Último Minuto</h2>
+                <h2>2. Tiro de Precisión (2 Cifras x 1)</h2>
                 <div class="line"></div>
             </div>
-            <div style="background: #fafafa; border: 2px solid var(--esparta-gold); padding: 15px; border-radius: 10px; font-size: 14px;">
-                <p><b>Penalti definitivo:</b> Si Erik entrena <b>25 minutos</b> cada día y entrena durante <b>4 días</b>... ¿Cuántos minutos ha entrenado en total?</p>
-                <p>Operación: __________________________________</p>
-                <p>Resultado: ________ Minutos de entrenamiento Pro.</p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div class="mult-vertical">
+                    <span class="signo-mult">×</span> 54<br>&nbsp;&nbsp;4<br><div class="linea-mult"></div>
+                </div>
+                <div class="mult-vertical">
+                    <span class="signo-mult">×</span> 62<br>&nbsp;&nbsp;5<br><div class="linea-mult"></div>
+                </div>
+                <div class="mult-vertical">
+                    <span class="signo-mult">×</span> 37<br>&nbsp;&nbsp;4<br><div class="linea-mult"></div>
+                </div>
+                <div class="mult-vertical">
+                    <span class="signo-mult">×</span> 81<br>&nbsp;&nbsp;5<br><div class="linea-mult"></div>
+                </div>
+                <div class="mult-vertical">
+                    <span class="signo-mult">×</span> 29<br>&nbsp;&nbsp;4<br><div class="linea-mult"></div>
+                </div>
+                <div class="mult-vertical">
+                    <span class="signo-mult">×</span> 46<br>&nbsp;&nbsp;5<br><div class="linea-mult"></div>
+                </div>
             </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>3. El Contraataque (Relaciona con flechas)</h2>
+                <div class="line"></div>
+            </div>
+            <table class="tabla-mixta">
+                <tr><td><b>4 x 6</b></td><td><b>20</b></td></tr>
+                <tr><td><b>5 x 4</b></td><td><b>45</b></td></tr>
+                <tr><td><b>4 x 8</b></td><td><b>24</b></td></tr>
+                <tr><td><b>5 x 9</b></td><td><b>32</b></td></tr>
+                <tr><td><b>5 x 7</b></td><td><b>35</b></td></tr>
+            </table>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · Erik vs Mbappé · ¡Prohibido rendirse!
+            © 2026 Academia Esparta · Erik: O mejoras o al banquillo · ¡Fuerza y Honor!
         </footer>
     </div>
 
