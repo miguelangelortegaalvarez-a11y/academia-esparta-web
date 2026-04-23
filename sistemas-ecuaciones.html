@@ -3,89 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento Extra 2º ESO - Alejandra - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Entrenamiento de Élite - Erik & Mbappé - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Kalam:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
     <style>
         :root { 
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
+            --esparta-dark: #1a1a1a;
             --white: #ffffff;
+            --soccer-green: #2e7d32;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; font-size: 14px; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #e0e0e0; margin: 0; padding: 20px; color: #333; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
-            background-color: var(--esparta-blue); color: white; border: 2px solid var(--esparta-gold); 
-            padding: 10px 25px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase;
+            background-color: var(--esparta-blue); color: var(--white); border: 2px solid var(--esparta-gold); 
+            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; 
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
         }
 
         .page { 
-            background-color: white; width: 210mm; min-height: 297mm; padding: 15mm; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1); margin: 0 auto;
-            border-top: 10px solid var(--esparta-blue);
+            background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
+            box-shadow: 0 0 25px rgba(0,0,0,0.2); box-sizing: border-box; position: relative; margin: 0 auto;
+            border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
+            background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
         }
 
-        .header { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; text-align: center; }
-        .header h1 { font-weight: 900; color: var(--esparta-blue); margin: 0; }
-
-        .section-title { background: var(--esparta-blue); color: white; padding: 5px 15px; display: inline-block; font-weight: 900; margin-bottom: 15px; }
-
-        .ejercicio-card { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #fafafa; }
-        .equation { font-family: 'Roboto Mono', monospace; font-size: 22px; text-align: center; color: var(--esparta-blue); margin: 15px 0; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+        .header-title h1 { font-weight: 900; font-size: 26px; margin: 0; color: var(--esparta-blue); }
+        .header-title p { font-family: 'Kalam', cursive; color: var(--esparta-gold); margin: 0; font-size: 18px; font-weight: 700; }
         
-        .espacio-resolucion { height: 120px; border-bottom: 1px dashed #ccc; }
+        .mbappe-msg { background: #e8f5e9; border: 2px solid var(--soccer-green); padding: 15px; border-radius: 15px; margin-bottom: 25px; position: relative; }
+        .mbappe-msg b { color: var(--soccer-green); font-size: 16px; }
+        .mbappe-msg::after { content: '⚽'; position: absolute; right: 10px; top: 10px; font-size: 30px; }
 
-        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #999; }
+        .section-header { display: flex; align-items: center; margin: 25px 0 15px; }
+        .section-header h2 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
+        .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; } }
+        .serie-container { display: flex; gap: 10px; justify-content: center; margin: 15px 0; }
+        .serie-box { width: 40px; height: 40px; border: 2px solid var(--esparta-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; background: white; }
+        .serie-empty { border: 2px dashed #999; background: #fafafa; }
+
+        .tablas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 20px 0; }
+        .tabla-card { background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; }
+        .tabla-card h3 { text-align: center; color: var(--esparta-blue); margin-top: 0; border-bottom: 2px solid var(--esparta-gold); padding-bottom: 5px; }
+        .operacion { font-family: 'Roboto Mono', monospace; font-size: 20px; margin: 10px 0; text-align: center; }
+
+        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
+
+        @media print {
+            .btn-imprimir { display: none; }
+            .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; padding: 10mm; }
+        }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Batería Extra</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Entrenamiento para Erik</button>
 
     <div class="page">
-        <div class="header">
-            <h1>ACADEMIA ESPARTA</h1>
-            <p>Batería de Refuerzo: Ecuaciones de 2º Grado</p>
-            <p><b>Alumna: Alejandra</b></p>
+        <header class="header">
+            <div class="header-title">
+                <h1>ACADEMIA ESPARTA</h1>
+                <p>Erik: Entrenamiento de Máximo Nivel</p>
+            </div>
+            <div style="background: var(--esparta-blue); color: white; padding: 8px 15px; font-weight: 700; border-radius: 4px; border: 1px solid var(--esparta-gold);">ERIK - 2º PRIMARIA</div>
+        </header>
+
+        <div class="mbappe-msg">
+            <b>MENSAJE DE MBAPPÉ:</b><br>
+            "¡Hola Erik! En el fútbol, como en las mates, la rapidez es la clave. Para ser un campeón necesitas dominar las tablas del 4 y del 5. ¡Completa este entrenamiento y nos vemos en la final! ¡Allez!"
         </div>
 
-        <span class="section-title">Nivel 1: Dominio de la Fórmula</span>
-        <div class="ejercicio-card">
-            <b>Ejercicio 3.</b> Resuelve identificando bien los coeficientes:
-            <div class="equation">\[ x^2 - 8x + 15 = 0 \]</div>
-            <div class="espacio-resolucion"></div>
-        </div>
+        <section>
+            <div class="section-header">
+                <h2>1. Calentamiento: Series Numéricas</h2>
+                <div class="line"></div>
+            </div>
+            <p>Completa las series saltando como si estuvieras regateando defensas:</p>
+            
+            <p><b>A) Salto de 4 en 4 (Tabla del 4):</b></p>
+            <div class="serie-container">
+                <div class="serie-box">4</div>
+                <div class="serie-box">8</div>
+                <div class="serie-box serie-empty"></div>
+                <div class="serie-box">16</div>
+                <div class="serie-box serie-empty"></div>
+                <div class="serie-box">24</div>
+                <div class="serie-box serie-empty"></div>
+                <div class="serie-box">32</div>
+            </div>
 
-        <span class="section-title">Nivel 2: Cuidado con los Signos</span>
-        <div class="ejercicio-card">
-            <b>Ejercicio 4.</b> Recuerda que \(b\) puede ser positivo:
-            <div class="equation">\[ x^2 + 5x + 4 = 0 \]</div>
-            <div class="espacio-resolucion"></div>
-        </div>
+            <p><b>B) Salto de 5 en 5 (Tabla del 5):</b></p>
+            <div class="serie-container">
+                <div class="serie-box">5</div>
+                <div class="serie-box serie-empty"></div>
+                <div class="serie-box">15</div>
+                <div class="serie-box">20</div>
+                <div class="serie-box serie-empty"></div>
+                <div class="serie-box">30</div>
+                <div class="serie-box serie-empty"></div>
+                <div class="serie-box">40</div>
+            </div>
+        </section>
 
-        <span class="section-title">Nivel 3: El Discriminante Crítico</span>
-        <div class="ejercicio-card">
-            <b>Ejercicio 5.</b> Presta atención a la resta dentro de la raíz:
-            <div class="equation">\[ x^2 - 4x - 5 = 0 \]</div>
-            <div class="espacio-resolucion"></div>
-        </div>
+        <section>
+            <div class="section-header">
+                <h2>2. ¡Tiro a Puerta! (Multiplicaciones)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="tablas-grid">
+                <div class="tabla-card">
+                    <h3>Tabla del 4</h3>
+                    <div class="operacion">4 x 3 = ____</div>
+                    <div class="operacion">4 x 5 = ____</div>
+                    <div class="operacion">4 x 7 = ____</div>
+                    <div class="operacion">4 x 9 = ____</div>
+                    <div class="operacion">4 x 10 = ____</div>
+                </div>
+                <div class="tabla-card">
+                    <h3>Tabla del 5</h3>
+                    <div class="operacion">5 x 2 = ____</div>
+                    <div class="operacion">5 x 4 = ____</div>
+                    <div class="operacion">5 x 6 = ____</div>
+                    <div class="operacion">5 x 8 = ____</div>
+                    <div class="operacion">5 x 0 = ____</div>
+                </div>
+            </div>
+        </section>
 
-        <span class="section-title">Nivel 4: Reto Espartano</span>
-        <div class="ejercicio-card">
-            <b>Ejercicio 6.</b> ¿Qué pasa si el resultado de la raíz es 0?
-            <div class="equation">\[ x^2 - 6x + 9 = 0 \]</div>
-            <div class="espacio-resolucion"></div>
-        </div>
+        <section>
+            <div class="section-header">
+                <h2>3. El Desafío Final de Mbappé</h2>
+                <div class="line"></div>
+            </div>
+            <div style="background: #fafafa; border: 1px dashed #ccc; padding: 15px; border-radius: 10px;">
+                <p><b>El problema del estadio:</b> Erik ha comprado 4 paquetes de cromos. Si cada paquete trae 5 cromos de futbolistas, ¿cuántos cromos tiene Erik en total?</p>
+                <p>Operación: __________________________________</p>
+                <p>Resultado: ________ cromos.</p>
+            </div>
+        </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · La práctica hace al maestro · Alejandra
+            © 2026 Academia Esparta · Erik, ¡el próximo número 1! · Mbappé Training
         </footer>
     </div>
 
