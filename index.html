@@ -458,6 +458,50 @@
         font-size: 0.95rem;
         line-height: 1.6;
       }
+      .story-stepper {
+        display: flex;
+        align-items: center;
+        max-width: 1060px;
+        margin: 0 auto 1.2rem;
+        padding: 0 0.5rem;
+      }
+      .stepper-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        flex-shrink: 0;
+      }
+      .stepper-circle {
+        width: 34px; height: 34px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.10);
+        border: 2px solid rgba(255,255,255,0.22);
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 800;
+        display: flex; align-items: center; justify-content: center;
+        letter-spacing: 0.02em;
+      }
+      .stepper-node.pandemic .stepper-circle { border-color: #f87171; background: rgba(220,38,38,0.2); color: #fca5a5; }
+      .stepper-node.present  .stepper-circle { border-color: #86efac; background: rgba(14,147,67,0.3); color: #86efac; }
+      .stepper-label {
+        font-size: 0.6rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.38);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+      }
+      .stepper-node.pandemic .stepper-label { color: rgba(252,165,165,0.7); }
+      .stepper-node.present  .stepper-label { color: rgba(134,239,172,0.7); }
+      .stepper-line {
+        flex: 1;
+        height: 1.5px;
+        background: rgba(255,255,255,0.14);
+        margin: 0 0.3rem;
+        margin-bottom: 1.2rem;
+      }
       .story-cards-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -480,26 +524,28 @@
         border-color: rgba(255,255,255,0.22);
         transform: translateY(-3px);
       }
-      .story-card.pandemic {
-        border-color: rgba(248,113,113,0.35);
-        background: rgba(220,38,38,0.09);
-      }
+      .story-card.pandemic { border-color: rgba(248,113,113,0.35); background: rgba(220,38,38,0.09); }
       .story-card.pandemic:hover { background: rgba(220,38,38,0.15); }
-      .story-card.present {
-        border-color: rgba(134,239,172,0.35);
-        background: rgba(14,147,67,0.15);
-      }
-      .story-card.present:hover { background: rgba(14,147,67,0.22); }
+      .story-card.present  { border-color: rgba(134,239,172,0.35); background: rgba(14,147,67,0.15); }
+      .story-card.present:hover  { background: rgba(14,147,67,0.22); }
       .story-card-top {
         display: flex;
         align-items: center;
-        gap: 0.7rem;
+        gap: 0.75rem;
         margin-bottom: 0.2rem;
       }
-      .story-card-icon {
-        font-size: 1.4rem;
+      .story-card-icon-wrap {
+        width: 38px; height: 38px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.10);
+        border: 1.5px solid rgba(255,255,255,0.18);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.95rem;
+        color: #fff;
         flex-shrink: 0;
       }
+      .story-card.pandemic .story-card-icon-wrap { background: rgba(220,38,38,0.2); border-color: #f87171; color: #fca5a5; }
+      .story-card.present  .story-card-icon-wrap { background: rgba(14,147,67,0.3); border-color: #86efac; color: #86efac; }
       .story-card-badge {
         font-size: 0.68rem;
         font-weight: 700;
@@ -1015,11 +1061,26 @@
         <p>Esta es la historia de dos amigos de toda la vida que apostaron por lo que creían, sin red de seguridad y sin saber lo que les venía encima.</p>
       </div>
 
+      <!-- Stepper timeline -->
+      <div class="story-stepper">
+        <div class="stepper-node"><div class="stepper-circle">01</div><span class="stepper-label">Inicio</span></div>
+        <div class="stepper-line"></div>
+        <div class="stepper-node"><div class="stepper-circle">02</div><span class="stepper-label">Lucha</span></div>
+        <div class="stepper-line"></div>
+        <div class="stepper-node"><div class="stepper-circle">03</div><span class="stepper-label">Cambio</span></div>
+        <div class="stepper-line"></div>
+        <div class="stepper-node pandemic"><div class="stepper-circle">04</div><span class="stepper-label">Pandemia</span></div>
+        <div class="stepper-line"></div>
+        <div class="stepper-node"><div class="stepper-circle">05</div><span class="stepper-label">Despegue</span></div>
+        <div class="stepper-line"></div>
+        <div class="stepper-node present"><div class="stepper-circle">06</div><span class="stepper-label">Hoy</span></div>
+      </div>
+
       <div class="story-cards-grid">
 
         <div class="story-card reveal">
           <div class="story-card-top">
-            <span class="story-card-icon">🌱</span>
+            <div class="story-card-icon-wrap"><i class="fa-solid fa-seedling"></i></div>
             <span class="story-card-badge">El inicio · 2011</span>
           </div>
           <h3>Un local pequeño, dos amigos, una visión clara</h3>
@@ -1029,7 +1090,7 @@
 
         <div class="story-card reveal">
           <div class="story-card-top">
-            <span class="story-card-icon">💪</span>
+            <div class="story-card-icon-wrap"><i class="fa-solid fa-hand-fist"></i></div>
             <span class="story-card-badge">Años difíciles</span>
           </div>
           <h3>Confianza en nosotros mismos</h3>
@@ -1038,7 +1099,7 @@
 
         <div class="story-card reveal">
           <div class="story-card-top">
-            <span class="story-card-icon">📈</span>
+            <div class="story-card-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
             <span class="story-card-badge">El cambio · 2016</span>
           </div>
           <h3>Crecimiento que exigía crecer</h3>
@@ -1047,27 +1108,27 @@
 
         <div class="story-card pandemic reveal">
           <div class="story-card-top">
-            <span class="story-card-icon">⚡</span>
+            <div class="story-card-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
             <span class="story-card-badge">Pandemia · 2020</span>
           </div>
           <h3>Adaptarse o desaparecer. Eligieron seguir.</h3>
           <p>Mientras otros cerraban, Academia Esparta se reinventó. Aulas virtuales, formación urgente, cero parones. Cuando confían en ti, encuentras la manera de estar ahí.</p>
-          <span class="story-card-metric">⚡ Transformación en 48 horas</span>
+          <span class="story-card-metric"><i class="fa-solid fa-bolt"></i> Transformación en 48 horas</span>
         </div>
 
         <div class="story-card reveal">
           <div class="story-card-top">
-            <span class="story-card-icon">🚀</span>
+            <div class="story-card-icon-wrap"><i class="fa-solid fa-rocket"></i></div>
             <span class="story-card-badge">Crecimiento exponencial</span>
           </div>
           <h3>De la supervivencia a la escalabilidad</h3>
           <p>Volvieron más fuertes. Nuevas áreas, profesores en expansión, familias que traían a sus amigos. La confianza construida durante años empezó a multiplicarse sola.</p>
-          <span class="story-card-metric">👨‍👩‍👧 350+ alumnos activos</span>
+          <span class="story-card-metric"><i class="fa-solid fa-users"></i> 350+ alumnos activos</span>
         </div>
 
         <div class="story-card present reveal">
           <div class="story-card-top">
-            <span class="story-card-icon">🏆</span>
+            <div class="story-card-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
             <span class="story-card-badge">Hoy</span>
           </div>
           <h3>La academia que soñaban desde el primer día</h3>
