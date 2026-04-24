@@ -176,13 +176,29 @@
       /* =============================================
          4. HERO
          ============================================= */
+      @keyframes kenBurns {
+        from { transform: scale(1); }
+        to   { transform: scale(1.12); }
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0; }
+      }
       #hero {
-        background: url('hero.PNG') no-repeat center center / cover;
         min-height: 82vh;
         display: flex;
         align-items: center;
         position: relative;
         padding-top: 68px;
+        overflow: hidden;
+      }
+      #hero::before {
+        content: '';
+        position: absolute;
+        inset: -6%;
+        background: url('hero.PNG') no-repeat center center / cover;
+        animation: kenBurns 18s ease-out infinite alternate;
+        z-index: 0;
       }
       .hero-overlay {
         position: absolute;
@@ -191,6 +207,13 @@
           rgba(6,60,36,0.74) 0%,
           rgba(6,60,36,0.50) 55%,
           rgba(6,60,36,0.30) 100%);
+        z-index: 1;
+      }
+      .typing-cursor::after {
+        content: '|';
+        color: rgba(255,255,255,0.85);
+        animation: blink 0.65s infinite;
+        font-weight: 300;
       }
       .hero-inner {
         position: relative;
@@ -684,10 +707,6 @@
         <span class="stat-label">Años de experiencia</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">≤5</span>
-        <span class="stat-label">Alumnos por grupo</span>
-      </div>
-      <div class="stat-item">
         <span class="stat-number">4</span>
         <span class="stat-label">Etapas educativas</span>
       </div>
@@ -1058,6 +1077,33 @@
           nav.classList.remove('open');
           hamburger.classList.remove('open');
           hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Typewriter effect
+      function typeWriter(el, text, speed, onDone) {
+        el.textContent = '';
+        el.classList.add('typing-cursor');
+        let i = 0;
+        const t = setInterval(() => {
+          el.textContent += text[i++];
+          if (i >= text.length) {
+            clearInterval(t);
+            el.classList.remove('typing-cursor');
+            if (onDone) setTimeout(onDone, 200);
+          }
+        }, speed);
+      }
+
+      window.addEventListener('load', () => {
+        const h1 = document.querySelector('#hero h1');
+        const p  = document.querySelector('#hero p');
+        const h1Text = h1.textContent.trim();
+        const pText  = p.textContent.trim();
+        h1.textContent = '';
+        p.textContent  = '';
+        typeWriter(h1, h1Text, 45, () => {
+          typeWriter(p, pText, 22, null);
         });
       });
 
