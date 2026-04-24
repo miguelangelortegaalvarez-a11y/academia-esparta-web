@@ -1,156 +1,125 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha Didáctica: Sumas y Restas de Fracciones | Academia Esparta</title>
-    <!-- Colores corporativos: azul #17375e y dorado #c9b037 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecuaciones de 2º Grado Completas - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f7f8fa;
+        :root { 
+            --esparta-blue: #0d47a1; 
+            --esparta-gold: #ffab00; 
+            --esparta-dark: #1a1a1a;
+            --white: #ffffff;
         }
-        .esparta-header {
-            background: #17375e;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            letter-spacing: 2px;
+        
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
+        
+        .btn-imprimir {
+            display: block; width: fit-content; margin: 0 auto 20px;
+            background-color: var(--esparta-blue); color: var(--white); border: 2px solid var(--esparta-gold); 
+            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase;
         }
-        .esparta-header h1 {
-            margin: 0;
-            font-size: 2.6em;
-            letter-spacing: 2px;
+
+        .page { 
+            background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
+            box-shadow: 0 0 25px rgba(0,0,0,0.1); box-sizing: border-box; position: relative; margin: 0 auto;
+            border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
         }
-        .esparta-header h2 {
-            margin: 5px 0 0 0;
-            font-size: 1.3em;
-            color: #c9b037;
-            letter-spacing: 1px;
-        }
-        .main-container {
-            max-width: 720px;
-            background: #fff;
-            margin: 32px auto;
-            border-radius: 9px;
-            box-shadow: 0 3px 12px #17375e33;
-            padding: 40px;
-        }
-        .motivational {
-            font-size: 1.1em;
-            font-style: italic;
-            text-align: right;
-            color: #c9b037;
-            margin-bottom: 25px;
-        }
-        .section-title {
-            color: #17375e;
-            border-left: 6px solid #c9b037;
-            padding-left: 12px;
-            margin-bottom: 16px;
-            margin-top: 35px;
-            font-size: 1.3em;
-        }
-        .explanation {
-            background: #eaf0f6;
-            border-left: 4px solid #c9b037;
-            padding: 14px 18px;
-            margin-bottom: 27px;
-            font-size: 1em;
-        }
-        .ejercicios-list {
-            font-size: 1.13em;
-            margin-left: 18px;
-        }
-        .ejercicios-list li {
-            margin: 19px 0;
-        }
-        .btn-print {
-            background: #c9b037;
-            color: #17375e;
-            padding: 12px 33px;
-            margin: 24px auto 6px auto;
-            font-size: 1.15em;
-            border: none;
-            border-radius: 5px;
-            display: block;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.15s;
-        }
-        .btn-print:hover {
-            background: #a6892b;
-        }
-        @media print {
-            .btn-print { display:none; }
-            .main-container {
-                box-shadow: none;
-                border-radius: 0;
-                margin: 0;
-                padding: 0;
-            }
-            body {
-                background: #fff;
-            }
-        }
+
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+        .header-title h1 { font-weight: 900; font-size: 24px; margin: 0; color: var(--esparta-blue); }
+
+        .section-header { display: flex; align-items: center; margin: 25px 0 10px; }
+        .section-header h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
+        .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
+
+        .formula-box { background: var(--esparta-dark); color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0; border: 2px solid var(--esparta-gold); }
+        
+        .paso-a-paso { background: #fffdf5; border-left: 6px solid var(--esparta-gold); padding: 15px; border-radius: 4px; margin-bottom: 20px; font-size: 14px; }
+        .paso-num { color: var(--esparta-blue); font-weight: 900; margin-right: 5px; }
+
+        .ejercicio-card { border: 1px solid #ddd; border-radius: 10px; padding: 15px; margin-bottom: 20px; background: #fafafa; }
+        .equation { font-family: 'Roboto Mono', monospace; font-size: 22px; text-align: center; color: var(--esparta-blue); margin: 15px 0; }
+        .info-badge { font-size: 10px; background: #eee; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; font-weight: 700; color: #666; }
+
+        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
+
+        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; } }
     </style>
-    <!-- MathJax CDN -->
-    <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        }
-      };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 </head>
 <body>
-    <header class="esparta-header">
-        <h1>Academia Esparta</h1>
-        <h2>Ficha Didáctica de Matemáticas – 1º de ESO</h2>
-    </header>
-    <main class="main-container">
-        <div class="motivational">
-            <span>“La perseverancia convierte lo imposible en posible. ¡Sigue adelante!”</span>
-        </div>
 
-        <div class="section-title">Sumas y Restas de Fracciones</div>
-        <div class="explanation">
-            <b>¿Cómo se suman y restan fracciones?</b><br>
-            <ul>
-                <li>
-                    <b>Si tienen el mismo denominador:</b> solo se suman o restan los numeradores y se mantiene el denominador.<br>
-                    Ejemplo: $\\frac{3}{7} + \\frac{2}{7} = \\frac{5}{7}$
-                </li>
-                <li>
-                    <b>Si tienen diferente denominador:</b> busca el <b>mínimo común múltiplo (mcm)</b> de los denominadores, transforma las fracciones a denominador común, y suma o resta los numeradores.<br>
-                    Ejemplo: $\\frac{1}{4} + \\frac{1}{6} = \\frac{3}{12} + \\frac{2}{12} = \\frac{5}{12}$
-                </li>
-                <li>
-                    <b>Simplifica</b> siempre el resultado si es posible.
-                </li>
-            </ul>
-        </div>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Ecuaciones</button>
 
-        <div class="section-title">Ejercicios</div>
-        <p>Resuelve las siguientes operaciones de suma y resta de fracciones. ¡No olvides simplificar siempre que puedas!</p>
-        <ol class="ejercicios-list">
-            <li> $\displaystyle \frac{2}{5} + \frac{1}{5} =$</li>
-            <li> $\displaystyle \frac{3}{8} - \frac{1}{8} =$</li>
-            <li> $\displaystyle \frac{1}{6} + \frac{1}{2} =$</li>
-            <li> $\displaystyle \frac{4}{9} - \frac{1}{3} =$</li>
-            <li> $\displaystyle \frac{7}{10} + \frac{1}{4} =$</li>
-            <li> $\displaystyle \frac{5}{12} - \frac{1}{6} =$</li>
-            <li> $\displaystyle \frac{3}{7} + \frac{2}{3} =$</li>
-            <li> $\displaystyle \frac{5}{8} + \frac{1}{2} =$</li>
-            <li> $\displaystyle \frac{7}{15} - \frac{2}{5} =$</li>
-            <li> $\displaystyle \frac{4}{9} + \frac{5}{18} =$</li>
-        </ol>
+    <div class="page">
+        <header class="header">
+            <div class="header-title">
+                <h1>ACADEMIA ESPARTA</h1>
+                <p>Ecuaciones de 2º Grado Completas: \( ax^2 + bx + c = 0 \)</p>
+            </div>
+        </header>
 
-        <button class="btn-print" onclick="window.print()">Imprimir ficha</button>
-    </main>
+        <section>
+            <div class="section-header">
+                <h2>1. La Fórmula Maestra</h2>
+                <div class="line"></div>
+            </div>
+            <div class="formula-box">
+                \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \ \]
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>2. Guía de Resolución Paso a Paso</h2>
+                <div class="line"></div>
+            </div>
+            <div class="paso-a-paso">
+                <b>Ejemplo: \( x^2 - 5x + 6 = 0 \)</b><br><br>
+                <span class="paso-num">Paso 1:</span> Identifica los coeficientes: \( a = 1 \), \( b = -5 \), \( c = 6 \).<br>
+                <span class="paso-num">Paso 2:</span> Sustituye en la fórmula: \( x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4 \cdot 1 \cdot 6}}{2 \cdot 1} \).<br>
+                <span class="paso-num">Paso 3:</span> Calcula el discriminante (lo de dentro de la raíz): \( \sqrt{25 - 24} = \sqrt{1} \).<br>
+                <span class="paso-num">Paso 4:</span> Separa las dos soluciones:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp; \( x_1 = \frac{5 + 1}{2} = 3 \) <br>
+                &nbsp;&nbsp;&nbsp;&nbsp; \( x_2 = \frac{5 - 1}{2} = 2 \)
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>3. Entrenamiento: Los 3 Casos Posibles</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="ejercicio-card">
+                <span class="info-badge">Reto A: Dos soluciones distintas</span>
+                <div class="equation">\( x^2 - 7x + 10 = 0 \)</div>
+                <div style="height: 120px; border-bottom: 1px dashed #ccc;"></div>
+            </div>
+
+            <div class="ejercicio-card">
+                <span class="info-badge">Reto B: Una única solución (Raíz doble)</span>
+                <div class="equation">\( x^2 - 6x + 9 = 0 \)</div>
+                <div style="height: 120px; border-bottom: 1px dashed #ccc;"></div>
+            </div>
+
+            <div class="ejercicio-card">
+                <span class="info-badge">Reto C: Sin solución real</span>
+                <div class="equation">\( x^2 + 2x + 5 = 0 \)</div>
+                <div style="height: 120px;"></div>
+                <p style="font-size: 11px; color: #d32f2f; font-style: italic;">Pista: Observa qué ocurre cuando el número dentro de la raíz es negativo.</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            © 2026 Academia Esparta · Fuerza y Honor en las Matemáticas
+        </footer>
+    </div>
+
 </body>
 </html>
-```
