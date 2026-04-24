@@ -364,10 +364,44 @@
         color: #9ca3af;
         font-weight: 500;
       }
-      .testimonials-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
+      /* Carousel */
+      .tc-outer { position: relative; }
+      .tc-viewport { overflow: hidden; }
+      .tc-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+      .tc-slide { flex: 0 0 calc(100% / 3); padding: 0 0.75rem; box-sizing: border-box; }
+      .tc-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        margin-top: 2rem;
+      }
+      .tc-btn {
+        width: 38px; height: 38px;
+        border-radius: 50%;
+        border: 2px solid rgba(14,147,67,0.25);
+        background: #fff;
+        color: var(--primary);
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: var(--ease);
+        flex-shrink: 0;
+      }
+      .tc-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+      .tc-dots { display: flex; gap: 0.45rem; align-items: center; }
+      .tc-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: #d1d5db;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s;
+        padding: 0;
+      }
+      .tc-dot.active { background: var(--primary); transform: scale(1.3); }
+      @media (max-width: 767px) {
+        .tc-slide { flex: 0 0 100%; }
       }
       .t-card {
         background: var(--light);
@@ -925,7 +959,7 @@
          ============================================= */
       @media (max-width: 900px) {
         .story-header h2 { font-size: 1.3rem; }
-        .testimonials-grid { grid-template-columns: 1fr; }
+        /* tc-slide overridden by its own media query */
         .contact-grid { grid-template-columns: 1fr; }
         .footer-grid  { grid-template-columns: 1fr 1fr; }
         .grid-recursos-final { grid-template-columns: 1fr; }
@@ -1136,45 +1170,108 @@
           <p class="rating-count-label">Basado en 53 reseñas verificadas</p>
         </div>
 
-        <!-- Tres tarjetas en grid -->
-        <div class="testimonials-grid">
+        <!-- Carrusel automático -->
+        <div class="tc-outer reveal">
+          <div class="tc-viewport">
+            <div class="tc-track" id="tc-track">
 
-          <div class="t-card reveal">
-            <div class="t-card-stars">★★★★★</div>
-            <p class="t-card-text">"Estoy muy contenta con la academia, los profesores son un encanto y muy profesionales, mis niñas tienen unas notas de 10 gracias a ellos."</p>
-            <div class="t-card-author">
-              <div class="author-avatar">L</div>
-              <div>
-                <span class="author-name">Luz Marina Tarradelles</span>
-                <span class="author-meta">Local Guide · Google</span>
+              <div class="tc-slide">
+                <div class="t-card">
+                  <div class="t-card-stars">★★★★★</div>
+                  <p class="t-card-text">"Llevamos 4 años con Miguel y Javi y no podemos estar más contentos. Personalmente a mi hijo le han guiado y acompañado todos estos años hasta el día de hoy y gracias a ellos mi hijo está muy contento y seguro."</p>
+                  <div class="t-card-author">
+                    <div class="author-avatar">B</div>
+                    <div><span class="author-name">Beatriz López</span><span class="author-meta">Google</span></div>
+                  </div>
+                </div>
               </div>
+
+              <div class="tc-slide">
+                <div class="t-card">
+                  <div class="t-card-stars">★★★★★</div>
+                  <p class="t-card-text">"No solo hay buenos profesores que se adaptan y ayudan a los chicos a aprobar con la mejor nota, sino que también hay un ambiente de confianza y entendimiento. No podría haber una mejor academia."</p>
+                  <div class="t-card-author">
+                    <div class="author-avatar">E</div>
+                    <div><span class="author-name">Emma Watson</span><span class="author-meta">Google</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tc-slide">
+                <div class="t-card">
+                  <div class="t-card-stars">★★★★★</div>
+                  <p class="t-card-text">"Estoy muy contenta con la academia, los profesores son un encanto y muy profesionales, mis niñas tienen unas notas de 10 gracias a ellos."</p>
+                  <div class="t-card-author">
+                    <div class="author-avatar">L</div>
+                    <div><span class="author-name">Luz Marina Tarradelles</span><span class="author-meta">Local Guide · Google</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tc-slide">
+                <div class="t-card">
+                  <div class="t-card-stars">★★★★★</div>
+                  <p class="t-card-text">"Quería dar las gracias a la Academia Esparta por su buen hacer y profesionalidad con el alumnado. Hemos notado la evolución y la motivación desde el primer día."</p>
+                  <div class="t-card-author">
+                    <div class="author-avatar">M</div>
+                    <div><span class="author-name">Mercedes Gomariz Caro</span><span class="author-meta">Google</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tc-slide">
+                <div class="t-card">
+                  <div class="t-card-stars">★★★★★</div>
+                  <p class="t-card-text">"Llevo bastante tiempo llevando a mis dos hijos a Academia Esparta y la verdad es que estamos muy contentos. Han mejorado muchísimo."</p>
+                  <div class="t-card-author">
+                    <div class="author-avatar">R</div>
+                    <div><span class="author-name">Rocío Villanueva Ortega</span><span class="author-meta">Google</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tc-slide">
+                <div class="t-card">
+                  <div class="t-card-stars">★★★★★</div>
+                  <p class="t-card-text">"Unos profesores fantásticos, explican súper bien y con mucha calma y amabilidad. Son cercanos y se adaptan a tus necesidades."</p>
+                  <div class="t-card-author">
+                    <div class="author-avatar">L</div>
+                    <div><span class="author-name">Lucia Moreno</span><span class="author-meta">Local Guide · Google</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tc-slide">
+                <div class="t-card">
+                  <div class="t-card-stars">★★★★★</div>
+                  <p class="t-card-text">"La mejor academia para apoyo y seguimiento del curso escolar. Un equipo de docentes motivadores y con resultados, por lo menos en mi caso, espectaculares."</p>
+                  <div class="t-card-author">
+                    <div class="author-avatar">M</div>
+                    <div><span class="author-name">Marta Cabeza García</span><span class="author-meta">Local Guide · Google</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tc-slide">
+                <div class="t-card">
+                  <div class="t-card-stars">★★★★★</div>
+                  <p class="t-card-text">"Excelentes profesionales que saben atender y adaptarse a las necesidades de sus alumnos a nivel de enseñanza, motivación, etc."</p>
+                  <div class="t-card-author">
+                    <div class="author-avatar">D</div>
+                    <div><span class="author-name">David Martínez</span><span class="author-meta">Google</span></div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <div class="t-card reveal">
-            <div class="t-card-stars">★★★★★</div>
-            <p class="t-card-text">"Quería dar las gracias a la Academia Esparta por su buen hacer y profesionalidad con el alumnado. Hemos notado la evolución y la motivación desde el primer día."</p>
-            <div class="t-card-author">
-              <div class="author-avatar">M</div>
-              <div>
-                <span class="author-name">Mercedes Gomariz Caro</span>
-                <span class="author-meta">Google</span>
-              </div>
-            </div>
+          <!-- Controles -->
+          <div class="tc-controls">
+            <button class="tc-btn tc-btn-prev" aria-label="Anterior">&#8592;</button>
+            <div class="tc-dots" id="tc-dots"></div>
+            <button class="tc-btn tc-btn-next" aria-label="Siguiente">&#8594;</button>
           </div>
-
-          <div class="t-card reveal">
-            <div class="t-card-stars">★★★★★</div>
-            <p class="t-card-text">"Llevo bastante tiempo llevando a mis dos hijos a Academia Esparta y la verdad es que estamos muy contentos. Han mejorado muchísimo."</p>
-            <div class="t-card-author">
-              <div class="author-avatar">R</div>
-              <div>
-                <span class="author-name">Rocío Villanueva Ortega</span>
-                <span class="author-meta">Google</span>
-              </div>
-            </div>
-          </div>
-
         </div>
 
       </div>
@@ -1654,6 +1751,106 @@
         if (info && idSeccion === 'niv-final-eso')
           document.getElementById('txt-tema-final').innerText = 'Recursos de ' + info;
       }
+
+      // ── Testimonials carousel ──
+      (function() {
+        const track = document.getElementById('tc-track');
+        const dotsEl = document.getElementById('tc-dots');
+        if (!track) return;
+
+        const origSlides = Array.from(track.children);
+        const N = origSlides.length; // 8
+        let PV = window.innerWidth >= 768 ? 3 : 1;
+        let idx = PV;
+        let busy = false;
+        let autoTimer;
+
+        function buildClones() {
+          track.querySelectorAll('[data-clone]').forEach(c => c.remove());
+          PV = window.innerWidth >= 768 ? 3 : 1;
+          // Prepend clones of last PV originals
+          for (let i = N - PV; i < N; i++) {
+            const cl = origSlides[i].cloneNode(true);
+            cl.dataset.clone = '1';
+            track.insertBefore(cl, track.firstChild);
+          }
+          // Append clones of first PV originals
+          for (let i = 0; i < PV; i++) {
+            const cl = origSlides[i].cloneNode(true);
+            cl.dataset.clone = '1';
+            track.appendChild(cl);
+          }
+        }
+
+        function sw() {
+          const allS = track.children;
+          return allS[0] ? allS[0].getBoundingClientRect().width : 0;
+        }
+
+        function setPos(animate) {
+          track.style.transition = animate ? 'transform 0.5s cubic-bezier(0.4,0,0.2,1)' : 'none';
+          track.style.transform = 'translateX(' + (-idx * sw()) + 'px)';
+        }
+
+        function realIdx() { return ((idx - PV) % N + N) % N; }
+
+        function updateDots() {
+          const ri = realIdx();
+          document.querySelectorAll('.tc-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === ri);
+          });
+        }
+
+        function goTo(newIdx, animate) {
+          if (animate === undefined) animate = true;
+          idx = newIdx;
+          setPos(animate);
+          updateDots();
+        }
+
+        track.addEventListener('transitionend', function() {
+          busy = false;
+          if (idx >= N + PV) goTo(idx - N, false);
+          else if (idx < PV)  goTo(idx + N, false);
+        });
+
+        function next() { if (busy) return; busy = true; goTo(idx + 1); }
+        function prev() { if (busy) return; busy = true; goTo(idx - 1); }
+
+        document.querySelector('.tc-btn-next').addEventListener('click', function(){ next(); resetAuto(); });
+        document.querySelector('.tc-btn-prev').addEventListener('click', function(){ prev(); resetAuto(); });
+
+        // Build dots
+        for (let i = 0; i < N; i++) {
+          const d = document.createElement('button');
+          d.className = 'tc-dot' + (i === 0 ? ' active' : '');
+          d.setAttribute('aria-label', 'Reseña ' + (i+1));
+          d.addEventListener('click', function(){ goTo(PV + i); resetAuto(); });
+          dotsEl.appendChild(d);
+        }
+
+        function startAuto() { autoTimer = setInterval(next, 4500); }
+        function resetAuto() { clearInterval(autoTimer); startAuto(); }
+
+        const vp = track.parentElement;
+        vp.addEventListener('mouseenter', function(){ clearInterval(autoTimer); });
+        vp.addEventListener('mouseleave', startAuto);
+
+        buildClones();
+        requestAnimationFrame(function() { setPos(false); updateDots(); });
+        startAuto();
+
+        let rTimer;
+        window.addEventListener('resize', function() {
+          clearTimeout(rTimer);
+          rTimer = setTimeout(function() {
+            buildClones();
+            idx = PV;
+            setPos(false);
+            updateDots();
+          }, 200);
+        });
+      })();
     </script>
   </body>
 </html>
