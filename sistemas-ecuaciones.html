@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Probabilidad - Academia Esparta</title>
+    <title>Probabilidad Avanzada - Leire - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -16,7 +16,7 @@
             --white: #ffffff;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; font-size: 13px; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
@@ -30,20 +30,17 @@
             border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
         }
 
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
         .header-title h1 { font-weight: 900; font-size: 24px; margin: 0; color: var(--esparta-blue); }
 
-        .section-header { display: flex; align-items: center; margin: 20px 0 10px; }
+        .section-header { display: flex; align-items: center; margin: 25px 0 10px; }
         .section-header h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
         .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        .ejercicio-box { border: 1px solid #eee; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa; line-height: 1.5; }
-        .ejercicio-box b { color: var(--esparta-blue); }
-        
-        .tabla-contingencia { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 12px; }
-        .tabla-contingencia th, .tabla-contingencia td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-        .tabla-contingencia th { background: #f0f4f8; color: var(--esparta-blue); }
-        .total-cell { background: #fff9c4; font-weight: bold; }
+        .analisis-box { background: #fff9c4; border-radius: 8px; padding: 20px; border-left: 6px solid var(--esparta-gold); margin-bottom: 25px; }
+        .paso-titulo { color: var(--esparta-blue); font-weight: 800; text-transform: uppercase; font-size: 13px; display: block; margin-top: 10px; }
+
+        .ejercicio-reserva { border: 2px dashed #ddd; border-radius: 10px; padding: 20px; margin-top: 20px; background: #fafafa; }
 
         .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
 
@@ -52,111 +49,67 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Probabilidad</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Leire</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Estadística y Probabilidad: Entrenamiento Intensivo</p>
+                <p>Análisis en Profundidad: Probabilidad Compuesta</p>
             </div>
+            <div style="background: var(--esparta-blue); color: white; padding: 5px 15px; font-weight: 900; border-radius: 4px;">LEIRE - 4º ESO</div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>Experimentos con Barajas y Dados</h2>
+                <h2>Análisis del Ejercicio 7</h2>
                 <div class="line"></div>
             </div>
 
-            <div class="ejercicio-box">
-                <b>7. Baraja Española (40 cartas):</b> 
-                <br>a) Extraemos una carta de dos barajas distintas. Halla la probabilidad de que:
-                <br> - Ambas sean un 7.
-                <br> - Ambas sean figuras (Sota, Caballo, Rey).
-                <br><br>
-                b) De una sola baraja extraemos dos cartas sin devolución. Halla la probabilidad de que:
-                <br> - Ambas sean un 7.
-                <br> - Ambas sean figuras.
-            </div>
-
-            <div class="ejercicio-box">
-                <b>8. Tres Dados:</b> Lanzamos tres dados simultáneamente. ¿Cuál es la probabilidad de que las tres puntuaciones obtenidas sean menores que 5?
-            </div>
-        </section>
-
-        <section>
-            <div class="section-header">
-                <h2>Urnas y Extracciones</h2>
-                <div class="line"></div>
-            </div>
-
-            <div class="ejercicio-box">
-                <b>9. Urnas A y B:</b> Tenemos la Urna A (3R, 2N) y la Urna B (2R, 2N, 1V). Extraemos una bola de cada una. Halla la probabilidad de que:
-                <br>a) Ambas sean rojas. &nbsp;&nbsp; b) Ambas sean negras. &nbsp;&nbsp; c) Alguna sea verde.
-            </div>
-
-            <div class="ejercicio-box">
-                <b>10. Extracción sin reemplazo:</b> En una urna hay 3 bolas rojas y 2 verdes. Sacamos dos bolas una tras otra sin devolver la primera. Halla:
-                <br>P[2 Rojas] y P[2 Verdes]
-            </div>
-
-            <div class="ejercicio-box">
-                <b>11. El suceso contrario:</b> Lanzamos dados al aire. Calcula la probabilidad de conseguir "algún 6" al lanzar:
-                <br>a) Dos dados. &nbsp;&nbsp;&nbsp;&nbsp; b) Tres dados.
-            </div>
-        </section>
-
-        <section>
-            <div class="section-header">
-                <h2>Tablas de Contingencia</h2>
-                <div class="line"></div>
-            </div>
-
-            <div class="ejercicio-box">
-                <b>12. Análisis de datos:</b> Completa la siguiente tabla sobre los deportes preferidos de 100 alumnos y responde:
+            <div class="analisis-box">
+                <p>En este ejercicio aprendemos la diferencia vital entre <b>independencia</b> y <b>dependencia</b>.</p>
                 
-                <table class="tabla-contingencia">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Baloncesto</th>
-                            <th>Voleibol</th>
-                            <th>Fútbol</th>
-                            <th class="total-cell">TOTAL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>Chicas</th>
-                            <td>17</td>
-                            <td>20</td>
-                            <td>15</td>
-                            <td class="total-cell"></td>
-                        </tr>
-                        <tr>
-                            <th>Chicos</th>
-                            <td>26</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td class="total-cell"></td>
-                        </tr>
-                        <tr>
-                            <th class="total-cell">TOTAL</th>
-                            <td class="total-cell"></td>
-                            <td class="total-cell"></td>
-                            <td class="total-cell"></td>
-                            <td class="total-cell">100</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <span class="paso-titulo">Caso A: Sucesos Independientes (Dos barajas)</span>
+                Lo que pase en la primera baraja no afecta a la segunda. Si sacamos un 7 en la Baraja 1, la probabilidad de sacar un 7 en la Baraja 2 sigue siendo la misma. 
+                <br><b>Fórmula:</b> \( P(A \cap B) = P(A) \cdot P(B) \)
+                <br><em>Resultado:</em> \( \frac{4}{40} \cdot \frac{4}{40} = \frac{1}{100} \)
+                
+                <span class="paso-titulo">Caso B: Sucesos Dependientes (Una baraja - Sin devolución)</span>
+                Aquí, la primera carta que sacas <b>cambia el total</b> de cartas que quedan. Si sacas un 7, ya no hay 40 cartas, hay 39. Y ya no hay cuatro sietes, quedan 3.
+                <br><b>Fórmula:</b> \( P(A \cap B) = P(A) \cdot P(B/A) \)
+                <br><em>Resultado:</em> \( \frac{4}{40} \cdot \frac{3}{39} = \frac{12}{1560} = \frac{1}{130} \)
+            </div>
+        </section>
 
-                Si elegimos un alumno al azar, halla la probabilidad de que:
-                <br>a) Sea chico. &nbsp;&nbsp; b) Juegue al Voleibol. &nbsp;&nbsp; c) Sea chica y juegue al Baloncesto. &nbsp;&nbsp; d) Sea chico, sabiendo que juega al fútbol.
+        <section>
+            <div class="section-header">
+                <h2>Entrenamiento para Leire</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="ejercicio-reserva">
+                <b>Ejercicio 1: El Casino Espartano</b><br>
+                Tenemos una baraja francesa de 52 cartas (donde hay 4 Ases y 13 cartas de cada palo: Corazones, Diamantes, Tréboles y Picas).
+                <br><br>
+                a) Si extraemos una carta de dos barajas diferentes, ¿cuál es la probabilidad de que ambas sean Ases?
+                <br><br>
+                b) Si de una sola baraja extraemos dos cartas <b>sin devolución</b>, ¿cuál es la probabilidad de que ambas sean del palo de Corazones?
+                <div style="height: 100px;"></div>
+            </div>
+
+            <div class="ejercicio-reserva">
+                <b>Ejercicio 2: Las Urnas de Cristal</b><br>
+                Una urna contiene 6 bolas azules y 4 bolas blancas. 
+                <br><br>
+                a) Si sacamos una bola, anotamos el color, <b>la devolvemos</b> y sacamos otra, ¿cuál es la probabilidad de que las dos sean azules?
+                <br><br>
+                b) Si sacamos dos bolas <b>a la vez</b> (es decir, sin devolver la primera), ¿cuál es la probabilidad de que la primera sea blanca y la segunda azul?
+                <div style="height: 100px;"></div>
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · "Fuerza y Honor en cada cálculo"
+            © 2026 Academia Esparta · "Fuerza en la mente, victoria en el examen" · Leire
         </footer>
     </div>
 
