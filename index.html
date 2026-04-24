@@ -295,30 +295,129 @@
          5. STATS BAR
          ============================================= */
       .stats-bar {
-        background: var(--primary);
+        background: #fff;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
+        box-shadow: 0 6px 32px rgba(0,0,0,0.08);
+        position: relative;
+        z-index: 10;
       }
       .stat-item {
         text-align: center;
-        padding: 1.6rem 2.8rem;
-        border-right: 1px solid rgba(255,255,255,0.18);
+        padding: 1.8rem 3.2rem;
+        border-right: 1px solid #e8f0eb;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
       }
       .stat-item:last-child { border-right: none; }
       .stat-number {
         display: block;
-        font-size: 2rem;
+        font-size: 2.3rem;
         font-weight: 800;
-        color: #fff;
+        color: var(--primary);
         line-height: 1;
       }
       .stat-label {
         display: block;
-        font-size: 0.8rem;
-        color: rgba(255,255,255,0.85);
-        margin-top: 0.25rem;
+        font-size: 0.82rem;
+        color: #6b7280;
+        font-weight: 500;
+        margin-top: 0.1rem;
       }
+
+      /* =============================================
+         5b. TESTIMONIOS
+         ============================================= */
+      .testimonials-section { background: var(--light); }
+      .testimonials-wrap {
+        position: relative;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .testimonial-track {
+        overflow: hidden;
+        border-radius: var(--radius);
+      }
+      .testimonial-card {
+        display: none;
+        background: #fff;
+        border-radius: var(--radius);
+        padding: 2.6rem 2.8rem;
+        box-shadow: var(--shadow);
+        animation: fadeSlide 0.45s ease;
+      }
+      .testimonial-card.active { display: block; }
+      @keyframes fadeSlide {
+        from { opacity: 0; transform: translateY(14px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .testimonial-stars { color: #f59e0b; font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 1.2rem; }
+      .testimonial-text {
+        font-size: 1.08rem;
+        color: #374151;
+        line-height: 1.75;
+        font-style: italic;
+        margin-bottom: 1.6rem;
+      }
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .author-avatar {
+        width: 46px; height: 46px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 800;
+        font-size: 1.1rem;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .author-name { display: block; font-weight: 700; color: var(--dark); font-size: 0.95rem; }
+      .author-meta { display: block; font-size: 0.78rem; color: #9ca3af; margin-top: 0.1rem; }
+      .testimonial-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.8rem;
+      }
+      .t-btn {
+        background: #fff;
+        border: 1.5px solid #d1fae5;
+        color: var(--primary);
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: var(--ease);
+        display: flex; align-items: center; justify-content: center;
+      }
+      .t-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+      .t-dots { display: flex; gap: 0.5rem; }
+      .t-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: #d1fae5;
+        border: none;
+        cursor: pointer;
+        transition: var(--ease);
+      }
+      .t-dot.active { background: var(--primary); transform: scale(1.3); }
+      .google-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        color: #6b7280;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      .google-badge strong { color: var(--primary); font-size: 1rem; }
 
       /* =============================================
          6. ABOUT
@@ -627,8 +726,8 @@
         .hero-buttons { flex-direction: column; }
         .hero-btn-primary, .hero-btn-ghost { width: 100%; max-width: 300px; text-align: center; }
 
-        .stat-item { padding: 1.2rem 1.5rem; width: 50%; border-bottom: 1px solid rgba(255,255,255,0.12); }
-        .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.18); }
+        .stat-item { padding: 1.2rem 1.5rem; width: 50%; border-bottom: 1px solid #e8f0eb; }
+        .stat-item:nth-child(odd) { border-right: 1px solid #e8f0eb; }
         .stat-item:nth-last-child(-n+2) { border-bottom: none; }
         .stat-item:last-child { border-right: none; }
 
@@ -640,7 +739,7 @@
       }
 
       @media (max-width: 480px) {
-        .stat-item { width: 100%; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.12) !important; }
+        .stat-item { width: 100%; border-right: none !important; border-bottom: 1px solid #e8f0eb !important; }
         .stat-item:last-child { border-bottom: none !important; }
       }
 
@@ -703,15 +802,19 @@
     <!-- ==================== STATS BAR ==================== -->
     <div class="stats-bar">
       <div class="stat-item">
-        <span class="stat-number">15+</span>
+        <span class="stat-number" data-target="15" data-suffix="+">15+</span>
         <span class="stat-label">Años de experiencia</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">4</span>
+        <span class="stat-number" data-target="53" data-suffix="">53</span>
+        <span class="stat-label">Reseñas en Google</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="4" data-suffix="">4</span>
         <span class="stat-label">Etapas educativas</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">100%</span>
+        <span class="stat-number" data-target="100" data-suffix="%">100%</span>
         <span class="stat-label">Atención personalizada</span>
       </div>
     </div>
@@ -738,6 +841,74 @@
           </div>
           <div class="about-image">
             <img src="quienes-somos.PNG" alt="Equipo y aula de Academia Esparta" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TESTIMONIOS ==================== -->
+    <section id="testimonios" class="section testimonials-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Lo que dicen las familias</h2>
+          <p>Más de 53 reseñas verificadas en Google</p>
+        </div>
+        <div class="testimonials-wrap">
+          <div class="testimonial-track">
+
+            <div class="testimonial-card active">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Estoy muy contenta con la academia, los profesores son un encanto y muy profesionales, mis niñas tienen unas notas de 10 gracias a ellos."</p>
+              <div class="testimonial-author">
+                <div class="author-avatar">L</div>
+                <div>
+                  <span class="author-name">Luz Marina Tarradelles</span>
+                  <span class="author-meta">Local Guide · Google</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Quería dar las gracias a la Academia Esparta por su buen hacer y profesionalidad con el alumnado. Hemos notado la evolución y la motivación desde el primer día."</p>
+              <div class="testimonial-author">
+                <div class="author-avatar">M</div>
+                <div>
+                  <span class="author-name">Mercedes Gomariz Caro</span>
+                  <span class="author-meta">Google</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Llevo bastante tiempo llevando a mis dos hijos a Academia Esparta y la verdad es que estamos muy contentos. Han mejorado muchísimo."</p>
+              <div class="testimonial-author">
+                <div class="author-avatar">R</div>
+                <div>
+                  <span class="author-name">Rocío Villanueva Ortega</span>
+                  <span class="author-meta">Google</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="testimonial-nav">
+            <button class="t-btn" id="t-prev" aria-label="Anterior">&#8249;</button>
+            <div class="t-dots">
+              <button class="t-dot active" data-idx="0"></button>
+              <button class="t-dot" data-idx="1"></button>
+              <button class="t-dot" data-idx="2"></button>
+            </div>
+            <button class="t-btn" id="t-next" aria-label="Siguiente">&#8250;</button>
+          </div>
+
+          <div style="text-align:center; margin-top:1.4rem;">
+            <span class="google-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+              <strong>4,8</strong> sobre 5 · 53 reseñas verificadas
+            </span>
           </div>
         </div>
       </div>
@@ -1079,6 +1250,56 @@
           hamburger.setAttribute('aria-expanded', 'false');
         });
       });
+
+      // Contador animado en stats
+      const statNums = document.querySelectorAll('.stat-number[data-target]');
+      const statObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = +el.dataset.target;
+          const suffix = el.dataset.suffix ?? '';
+          let current = 0;
+          const duration = 1200;
+          const steps = 50;
+          const increment = target / steps;
+          const interval = duration / steps;
+          const timer = setInterval(() => {
+            current = Math.min(current + increment, target);
+            el.textContent = Math.round(current) + suffix;
+            if (current >= target) clearInterval(timer);
+          }, interval);
+          statObserver.unobserve(el);
+        });
+      }, { threshold: 0.6 });
+      statNums.forEach(n => statObserver.observe(n));
+
+      // Carrusel de testimonios
+      const cards = document.querySelectorAll('.testimonial-card');
+      const dots  = document.querySelectorAll('.t-dot');
+      let current = 0, autoTimer;
+
+      function showCard(idx) {
+        cards[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (idx + cards.length) % cards.length;
+        cards[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      function startAuto() {
+        autoTimer = setInterval(() => showCard(current + 1), 4500);
+      }
+
+      function resetAuto() {
+        clearInterval(autoTimer);
+        startAuto();
+      }
+
+      document.getElementById('t-next').addEventListener('click', () => { showCard(current + 1); resetAuto(); });
+      document.getElementById('t-prev').addEventListener('click', () => { showCard(current - 1); resetAuto(); });
+      dots.forEach(dot => dot.addEventListener('click', () => { showCard(+dot.dataset.idx); resetAuto(); }));
+      startAuto();
 
       // Typewriter effect
       function typeWriter(el, text, speed, onDone) {
