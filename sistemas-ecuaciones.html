@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistemas de Ecuaciones - Comprobación - Academia Esparta</title>
+    <title>Apuntes 2º Grado - Martina - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -13,10 +13,11 @@
         :root { 
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
+            --esparta-dark: #1a1a1a;
             --white: #ffffff;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; color: #333; line-height: 1.5; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
@@ -30,18 +31,20 @@
             border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
         }
 
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
         .header-title h1 { font-weight: 900; font-size: 24px; margin: 0; color: var(--esparta-blue); }
 
-        .section-header { display: flex; align-items: center; margin: 25px 0 10px; }
+        .section-header { display: flex; align-items: center; margin: 20px 0 10px; }
         .section-header h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
         .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        .teoria-box { background: #f0f7ff; border-radius: 8px; padding: 15px; border-left: 6px solid var(--esparta-blue); margin-bottom: 20px; font-size: 13px; }
+        .formula-box { background: var(--esparta-dark); color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 15px 0; border: 2px solid var(--esparta-gold); }
         
-        .ejercicio-box { border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin-bottom: 20px; background: #fafafa; }
-        .sistema { font-family: 'Roboto Mono', monospace; font-size: 18px; color: var(--esparta-blue); margin: 10px 0; }
-        .valores { background: #eee; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        .teoria-highlight { background: #fffde7; border-left: 5px solid var(--esparta-gold); padding: 10px; margin: 10px 0; font-size: 13px; }
+        
+        .ejemplo-box { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #fafafa; }
+        .paso { color: var(--esparta-blue); font-weight: bold; }
+        .res-final { color: #2e7d32; font-weight: bold; background: #e8f5e9; padding: 2px 5px; }
 
         .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
 
@@ -50,72 +53,81 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Comprobación</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Apuntes para Martina</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Sistemas: Entrenamiento de Verificación</p>
+                <p>Matemáticas: Ecuaciones de 2º Grado (Completas)</p>
             </div>
+            <div style="background: var(--esparta-blue); color: white; padding: 5px 15px; font-weight: 900; border-radius: 4px;">MARTINA</div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>¿Cómo saber si es la solución?</h2>
+                <h2>1. La Estructura y la Fórmula</h2>
                 <div class="line"></div>
             </div>
-            <div class="teoria-box">
-                Para comprobar si un par de valores \((x, y)\) es la solución de un sistema, debes <b>sustituir</b> las letras por los números en las <b>dos ecuaciones</b>. 
-                <br><br>
-                ✅ Es solución si las dos igualdades se cumplen (ej: 5=5).
-                <br>
-                ❌ NO es solución si falla al menos una de ellas (ej: 5=7).
+            <p>Toda ecuación de segundo grado completa tiene esta forma: <b>\( ax^2 + bx + c = 0 \)</b></p>
+            <div class="formula-box">
+                \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+            </div>
+            <div class="teoria-highlight">
+                <b>El Discriminante (\(\Delta\)):</b> Es el valor dentro de la raíz (\( b^2 - 4ac \)).
+                <ul>
+                    <li>Si es <b>positivo</b>: Hay 2 soluciones.</li>
+                    <li>Si es <b>cero</b>: Hay 1 solución (doble).</li>
+                    <li>Si es <b>negativo</b>: No hay solución real.</li>
+                </ul>
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>Batería de Ejercicios</h2>
+                <h2>2. Caso 1: Dos Soluciones Reales</h2>
                 <div class="line"></div>
             </div>
-
-            <div class="ejercicio-box">
-                <b>1. Comprueba si los valores <span class="valores">x = 3, y = 2</span> son solución de:</b>
-                <div class="sistema">
-                    \[ \begin{cases} 2x + y = 8 \\ x - y = 1 \end{cases} \]
-                </div>
-                <div style="height: 80px; border-bottom: 1px dashed #ccc;">Escribe aquí la comprobación...</div>
+            <div class="ejemplo-box">
+                <b>Ecuación: \( x^2 - 5x + 6 = 0 \)</b><br>
+                1. <span class="paso">Identificar:</span> \( a = 1, b = -5, c = 6 \).<br>
+                2. <span class="paso">Sustituir:</span> \( x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4(1)(6)}}{2(1)} \)<br>
+                3. <span class="paso">Operar:</span> \( x = \frac{5 \pm \sqrt{25 - 24}}{2} = \frac{5 \pm \sqrt{1}}{2} = \frac{5 \pm 1}{2} \)<br>
+                4. <span class="paso">Resultados:</span><br>
+                &nbsp;&nbsp;&nbsp; \( x_1 = \frac{5+1}{2} = \mathbf{3} \) | \( x_2 = \frac{5-1}{2} = \mathbf{2} \)
             </div>
+        </section>
 
-            <div class="ejercicio-box">
-                <b>2. Comprueba si los valores <span class="valores">x = 1, y = 5</span> son solución de:</b>
-                <div class="sistema">
-                    \[ \begin{cases} x + y = 6 \\ 3x - y = -2 \end{cases} \]
-                </div>
-                <div style="height: 80px; border-bottom: 1px dashed #ccc;">Escribe aquí la comprobación...</div>
+        <section>
+            <div class="section-header">
+                <h2>3. Caso 2: Una Solución (Doble)</h2>
+                <div class="line"></div>
             </div>
-
-            <div class="ejercicio-box">
-                <b>3. Comprueba si los valores <span class="valores">x = 2, y = -1</span> son solución de:</b>
-                <div class="sistema">
-                    \[ \begin{cases} 4x + 3y = 5 \\ x + 2y = 4 \end{cases} \]
-                </div>
-                <div style="height: 80px; border-bottom: 1px dashed #ccc;">Escribe aquí la comprobación...</div>
+            <div class="ejemplo-box">
+                <b>Ecuación: \( x^2 - 4x + 4 = 0 \)</b><br>
+                1. <span class="paso">Identificar:</span> \( a = 1, b = -4, c = 4 \).<br>
+                2. <span class="paso">Sustituir:</span> \( x = \frac{4 \pm \sqrt{(-4)^2 - 4(1)(4)}}{2} \)<br>
+                3. <span class="paso">Operar:</span> \( x = \frac{4 \pm \sqrt{16 - 16}}{2} = \frac{4 \pm 0}{2} \)<br>
+                4. <span class="paso">Resultado:</span> \( x = \frac{4}{2} = \mathbf{2} \) (Solución única).
             </div>
+        </section>
 
-            <div class="ejercicio-box">
-                <b>4. Comprueba si los valores <span class="valores">x = 0, y = 4</span> son solución de:</b>
-                <div class="sistema">
-                    \[ \begin{cases} 5x - y = -4 \\ 2x + y = 4 \end{cases} \]
-                </div>
-                <div style="height: 80px; border-bottom: 1px dashed #ccc;">Escribe aquí la comprobación...</div>
+        <section>
+            <div class="section-header">
+                <h2>4. Caso 3: Sin Solución Real</h2>
+                <div class="line"></div>
             </div>
-
+            <div class="ejemplo-box">
+                <b>Ecuación: \( x^2 + 2x + 5 = 0 \)</b><br>
+                1. <span class="paso">Identificar:</span> \( a = 1, b = 2, c = 5 \).<br>
+                2. <span class="paso">Sustituir:</span> \( x = \frac{-2 \pm \sqrt{2^2 - 4(1)(5)}}{2} \)<br>
+                3. <span class="paso">Operar:</span> \( x = \frac{-2 \pm \sqrt{4 - 20}}{2} = \frac{-2 \pm \sqrt{-16}}{2} \)<br>
+                4. <span class="paso">Conclusión:</span> Como la raíz de un número negativo no existe en los reales, <b>No tiene solución</b>.
+            </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · "Verificar es vencer"
+            © 2026 Academia Esparta · "No hay gloria sin esfuerzo" · Martina
         </footer>
     </div>
 
