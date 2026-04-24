@@ -420,21 +420,38 @@
       .google-badge strong { color: var(--primary); font-size: 1rem; }
 
       /* =============================================
-         6. ABOUT
+         6. ABOUT — split screen
          ============================================= */
-      .about-grid {
+      #about {
+        padding: 0 !important;
+        background: none !important;
         display: grid;
-        grid-template-columns: 1fr 340px;
-        gap: 3.5rem;
-        align-items: center;
+        grid-template-columns: 1fr 1fr;
+        min-height: 520px;
+        overflow: hidden;
       }
-      .about-text h2 { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 1.2rem; }
-      .about-text p  { color: var(--gray); margin-bottom: 1rem; line-height: 1.72; }
-      .about-image img {
-        width: 100%;
-        border-radius: var(--radius);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.11);
+      .about-text-side {
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 5rem 4rem;
+      }
+      .about-text-inner { max-width: 500px; width: 100%; }
+      .about-text-inner h2 { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 1.3rem; }
+      .about-text-inner p  { color: var(--gray); margin-bottom: 1rem; line-height: 1.72; }
+      .about-image-side {
+        position: relative;
+        overflow: hidden;
+        background: var(--primary-darker);
+        min-height: 420px;
+      }
+      .about-image-side img {
+        width: 100%; height: 100%;
         object-fit: cover;
+        display: block;
+        opacity: 0.82;
+        mix-blend-mode: luminosity;
       }
 
       /* =============================================
@@ -765,9 +782,9 @@
          14. RESPONSIVE
          ============================================= */
       @media (max-width: 900px) {
-        .about-grid   { grid-template-columns: 1fr; }
-        .about-image  { order: -1; }
-        .about-image img { max-height: 300px; object-fit: cover; }
+        #about { grid-template-columns: 1fr; }
+        .about-image-side { min-height: 280px; order: -1; }
+        .about-text-side { justify-content: flex-start; padding: 3rem 1.5rem; }
         .contact-grid { grid-template-columns: 1fr; }
         .footer-grid  { grid-template-columns: 1fr 1fr; }
         .grid-recursos-final { grid-template-columns: 1fr; }
@@ -886,30 +903,31 @@
     </div>
 
     <!-- ==================== ABOUT ==================== -->
-    <section id="about" class="section section-light">
-      <div class="container">
-        <div class="about-grid">
-          <div class="about-text">
-            <h2>Nosotros</h2>
-            <p>
-              Somos un centro de apoyo y refuerzo escolar en Torremolinos con <strong>más de 15 años de experiencia</strong>,
-              dedicado a acompañar a alumnos de todos los niveles: Primaria, Secundaria, Bachillerato y preparación de EBAU.
-            </p>
-            <p>
-              Trabajamos con grupos reducidos y con profesores especializados en cada materia para ofrecer una atención
-              personalizada y adaptada a las necesidades de cada estudiante.
-            </p>
-            <p>
-              Nuestro objetivo es proporcionar un acompañamiento académico integral, reforzando conocimientos, hábitos
-              de estudio y motivación para que cada alumno alcance su máximo potencial.
-            </p>
-            <a href="inscripcion.html" class="btn btn-primary" style="margin-top:1.5rem;">Reserva tu plaza</a>
-          </div>
-          <div class="about-image">
-            <img src="quienes-somos.PNG" alt="Equipo y aula de Academia Esparta" />
-          </div>
+    <section id="about">
+
+      <div class="about-text-side reveal">
+        <div class="about-text-inner">
+          <h2>Nosotros</h2>
+          <p>
+            Somos un centro de apoyo y refuerzo escolar en Torremolinos con <strong>más de 15 años de experiencia</strong>,
+            dedicado a acompañar a alumnos de todos los niveles: Primaria, Secundaria, Bachillerato y preparación de EBAU.
+          </p>
+          <p>
+            Trabajamos con grupos reducidos y con profesores especializados en cada materia para ofrecer una atención
+            personalizada y adaptada a las necesidades de cada estudiante.
+          </p>
+          <p>
+            Nuestro objetivo es proporcionar un acompañamiento académico integral, reforzando conocimientos, hábitos
+            de estudio y motivación para que cada alumno alcance su máximo potencial.
+          </p>
+          <a href="inscripcion.html" class="btn btn-primary" style="margin-top:1.5rem;">Reserva tu plaza</a>
         </div>
       </div>
+
+      <div class="about-image-side reveal">
+        <img src="quienes-somos.PNG" alt="Equipo y aula de Academia Esparta" />
+      </div>
+
     </section>
 
     <!-- ==================== TESTIMONIOS ==================== -->
