@@ -3,188 +3,154 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha de Proporcionalidad - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Ficha Didáctica: Sumas y Restas de Fracciones | Academia Esparta</title>
+    <!-- Colores corporativos: azul #17375e y dorado #c9b037 -->
     <style>
-        :root {
-            --azul-esparta: #14396E;
-            --naranja-esparta: #F9A825;
-            --gris-fondo: #F4F6F7;
-        }
         body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: var(--gris-fondo);
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background: #f7f8fa;
         }
-        .ficha {
-            background: #fff;
-            max-width: 820px;
-            margin: 40px auto 40px auto;
-            padding: 32px 48px;
-            border-radius: 14px;
-            box-shadow: 0 0 20px rgba(20, 57, 110, 0.08);
-        }
-        .encabezado {
-            display: flex;
-            align-items: center;
-            margin-bottom: 32px;
-        }
-        .logo {
-            width: 60px;
-            height: 60px;
-            background: var(--azul-esparta);
-            border-radius: 50%;
+        .esparta-header {
+            background: #17375e;
             color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 2.3rem;
-            margin-right: 24px;
+            padding: 20px 0;
+            text-align: center;
             letter-spacing: 2px;
         }
-        .titulo {
-            color: var(--azul-esparta);
-            font-size: 2.1rem;
-            font-weight: 700;
-            margin-bottom: 4px;
+        .esparta-header h1 {
+            margin: 0;
+            font-size: 2.6em;
+            letter-spacing: 2px;
         }
-        .subtitulo {
-            color: #424242;
-            font-size: 1.15rem;
-            font-weight: 400;
-        }
-        .motivacional {
-            margin-top: 6px;
-            margin-left: 84px;
-            color: var(--naranja-esparta);
-            font-weight: 700;
-            font-size: 1.1rem;
-            font-style: italic;
+        .esparta-header h2 {
+            margin: 5px 0 0 0;
+            font-size: 1.3em;
+            color: #c9b037;
             letter-spacing: 1px;
         }
-        .info-alumno {
-            margin-bottom: 28px;
-            margin-top: 4px;
-            margin-left: 84px;
-            color: #333;
-            font-size: 1.07rem;
-            padding-bottom: 8px;
-            border-bottom: 1.5px solid var(--azul-esparta);
-            width: 340px;
+        .main-container {
+            max-width: 720px;
+            background: #fff;
+            margin: 32px auto;
+            border-radius: 9px;
+            box-shadow: 0 3px 12px #17375e33;
+            padding: 40px;
         }
-        h2 {
-            color: var(--azul-esparta);
-            margin-top: 32px;
-            margin-bottom: 12px;
-            font-size: 1.4rem;
-            border-bottom: 1px solid #eee;
-            display: inline-block;
+        .motivational {
+            font-size: 1.1em;
+            font-style: italic;
+            text-align: right;
+            color: #c9b037;
+            margin-bottom: 25px;
         }
-        .problemas {
-            margin-top: 16px;
-            font-size: 1.13rem;
+        .section-title {
+            color: #17375e;
+            border-left: 6px solid #c9b037;
+            padding-left: 12px;
+            margin-bottom: 16px;
+            margin-top: 35px;
+            font-size: 1.3em;
         }
-        .problemas li {
-            margin-bottom: 26px;
-            line-height: 1.57;
-            color: #303030;
+        .explanation {
+            background: #eaf0f6;
+            border-left: 4px solid #c9b037;
+            padding: 14px 18px;
+            margin-bottom: 27px;
+            font-size: 1em;
         }
-        .space-result {
-            display: block;
-            height: 28px;
-            border-bottom: 1px dashed #aaa;
-            margin-top: 6px;
-            width: 90%;
+        .ejercicios-list {
+            font-size: 1.13em;
+            margin-left: 18px;
         }
-        .print-btn {
-            background: var(--naranja-esparta);
-            color: #fff;
+        .ejercicios-list li {
+            margin: 19px 0;
+        }
+        .btn-print {
+            background: #c9b037;
+            color: #17375e;
+            padding: 12px 33px;
+            margin: 24px auto 6px auto;
+            font-size: 1.15em;
             border: none;
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-weight: 700;
-            font-size: 1.07rem;
-            border-radius: 6px;
-            padding: 12px 32px;
-            margin-top: 30px;
+            border-radius: 5px;
+            display: block;
             cursor: pointer;
-            box-shadow: 0 3px 12px rgba(249, 168, 37, 0.15);
-            transition: background .2s;
+            font-weight: bold;
+            transition: background 0.15s;
         }
-        .print-btn:hover {
-            background: #d48d18;
+        .btn-print:hover {
+            background: #a6892b;
         }
         @media print {
-            body { background: none; }
-            .ficha {
+            .btn-print { display:none; }
+            .main-container {
                 box-shadow: none;
+                border-radius: 0;
                 margin: 0;
-                max-width: 100%;
-                padding: 24px;
+                padding: 0;
             }
-            .print-btn {
-                display: none;
+            body {
+                background: #fff;
             }
         }
     </style>
+    <!-- MathJax CDN -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 </head>
 <body>
-    <div class="ficha">
-        <div class="encabezado">
-            <div class="logo">AE</div>
-            <div>
-                <div class="titulo">Academia Esparta</div>
-                <div class="subtitulo">Ficha de Matemáticas - Proporcionalidad</div>
-            </div>
+    <header class="esparta-header">
+        <h1>Academia Esparta</h1>
+        <h2>Ficha Didáctica de Matemáticas – 1º de ESO</h2>
+    </header>
+    <main class="main-container">
+        <div class="motivational">
+            <span>“La perseverancia convierte lo imposible en posible. ¡Sigue adelante!”</span>
         </div>
-        <div class="motivacional">
-            "¡El esfuerzo de hoy es el éxito de mañana!"
+
+        <div class="section-title">Sumas y Restas de Fracciones</div>
+        <div class="explanation">
+            <b>¿Cómo se suman y restan fracciones?</b><br>
+            <ul>
+                <li>
+                    <b>Si tienen el mismo denominador:</b> solo se suman o restan los numeradores y se mantiene el denominador.<br>
+                    Ejemplo: $\\frac{3}{7} + \\frac{2}{7} = \\frac{5}{7}$
+                </li>
+                <li>
+                    <b>Si tienen diferente denominador:</b> busca el <b>mínimo común múltiplo (mcm)</b> de los denominadores, transforma las fracciones a denominador común, y suma o resta los numeradores.<br>
+                    Ejemplo: $\\frac{1}{4} + \\frac{1}{6} = \\frac{3}{12} + \\frac{2}{12} = \\frac{5}{12}$
+                </li>
+                <li>
+                    <b>Simplifica</b> siempre el resultado si es posible.
+                </li>
+            </ul>
         </div>
-        <div class="info-alumno">
-            Alumna: <strong>Luisa</strong><br>
-            Curso: <strong>1º de la ESO</strong><br>
-            Fecha: _____ / _____ / 202__
-        </div>
-        <h2>Problemas de Proporcionalidad</h2>
-        <ol class="problemas">
-            <li>
-                Un coche recorre 180&nbsp;km en 2 horas.<br>
-                <b>¿Cuántos kilómetros recorrerá en 5 horas a la misma velocidad?</b>
-                <span class="space-result"></span>
-            </li>
-            <li>
-                Para hacer 12 galletas se necesitan 300&nbsp;g de harina.<br>
-                <b>¿Cuánta harina se necesitará para hacer 48 galletas?</b>
-                <span class="space-result"></span>
-            </li>
-            <li>
-                Un grifo llena 30 litros de agua en 4 minutos.<br>
-                <b>¿Cuánto tardará en llenar 105 litros?</b>
-                <span class="space-result"></span>
-            </li>
-            <li>
-                Si 5 cuadernos cuestan 12&nbsp;€, <b>¿cuánto costarán 8 cuadernos?</b>
-                <span class="space-result"></span>
-            </li>
-            <li>
-                Para pintar una habitación hacen falta 2 botes de pintura para una superficie de 18&nbsp;m².<br>
-                <b>¿Cuántos botes se necesitarán para pintar una superficie de 54&nbsp;m²?</b>
-                <span class="space-result"></span>
-            </li>
-            <li>
-                En una receta para 3 personas se usan 150&nbsp;g de arroz.<br>
-                <b>¿Cuánto arroz se necesita para 10 personas?</b>
-                <span class="space-result"></span>
-            </li>
+
+        <div class="section-title">Ejercicios</div>
+        <p>Resuelve las siguientes operaciones de suma y resta de fracciones. ¡No olvides simplificar siempre que puedas!</p>
+        <ol class="ejercicios-list">
+            <li> $\displaystyle \frac{2}{5} + \frac{1}{5} =$</li>
+            <li> $\displaystyle \frac{3}{8} - \frac{1}{8} =$</li>
+            <li> $\displaystyle \frac{1}{6} + \frac{1}{2} =$</li>
+            <li> $\displaystyle \frac{4}{9} - \frac{1}{3} =$</li>
+            <li> $\displaystyle \frac{7}{10} + \frac{1}{4} =$</li>
+            <li> $\displaystyle \frac{5}{12} - \frac{1}{6} =$</li>
+            <li> $\displaystyle \frac{3}{7} + \frac{2}{3} =$</li>
+            <li> $\displaystyle \frac{5}{8} + \frac{1}{2} =$</li>
+            <li> $\displaystyle \frac{7}{15} - \frac{2}{5} =$</li>
+            <li> $\displaystyle \frac{4}{9} + \frac{5}{18} =$</li>
         </ol>
-        <button class="print-btn" onclick="window.print()">Imprimir ficha</button>
-    </div>
+
+        <button class="btn-print" onclick="window.print()">Imprimir ficha</button>
+    </main>
 </body>
 </html>
 ```
-**Esta ficha cumple con las normas de Academia Esparta: incluye tu imagen corporativa, frase motivacional, sección de datos del alumno, los 6 problemas de proporcionalidad para 1º de la ESO y un botón limpio para imprimir. MathJax está preparado si quieres añadir ecuaciones en futuros problemas.**
-
-¿Quieres la ficha con soluciones al dorso o con espacio de desarrollo? 😊
