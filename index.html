@@ -424,10 +424,10 @@
       .google-badge strong { color: var(--primary); font-size: 1rem; }
 
       /* =============================================
-         6. ABOUT — historia en grid
+         6. ABOUT — snake timeline
          ============================================= */
       #about {
-        padding: 3.5rem 2rem;
+        padding: 3.5rem 2rem 4rem;
         background: var(--primary-darker);
         position: relative;
         overflow: hidden;
@@ -444,7 +444,7 @@
       .story-header {
         text-align: center;
         max-width: 700px;
-        margin: 0 auto 2.5rem;
+        margin: 0 auto 3rem;
       }
       .story-header h2 {
         font-size: clamp(1.4rem, 2.8vw, 2rem);
@@ -458,182 +458,125 @@
         font-size: 0.95rem;
         line-height: 1.6;
       }
-      .story-stepper {
-        display: flex;
-        align-items: center;
-        max-width: 1060px;
-        margin: 0 auto 1.2rem;
-        padding: 0 0.5rem;
-      }
-      .stepper-node {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.3rem;
-        flex-shrink: 0;
-      }
-      .stepper-circle {
-        width: 34px; height: 34px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.10);
-        border: 2px solid rgba(255,255,255,0.22);
-        color: #fff;
-        font-size: 0.68rem;
-        font-weight: 800;
-        display: flex; align-items: center; justify-content: center;
-        letter-spacing: 0.02em;
-      }
-      .stepper-node.pandemic .stepper-circle { border-color: #f87171; background: rgba(220,38,38,0.2); color: #fca5a5; }
-      .stepper-node.present  .stepper-circle { border-color: #86efac; background: rgba(14,147,67,0.3); color: #86efac; }
-      .stepper-label {
-        font-size: 0.6rem;
-        font-weight: 600;
-        color: rgba(255,255,255,0.38);
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        white-space: nowrap;
-      }
-      .stepper-node.pandemic .stepper-label { color: rgba(252,165,165,0.7); }
-      .stepper-node.present  .stepper-label { color: rgba(134,239,172,0.7); }
-      .stepper-line {
-        flex: 1;
-        height: 1.5px;
-        background: rgba(255,255,255,0.14);
-        margin: 0 0.3rem;
-        margin-bottom: 1.2rem;
-      }
-      .story-cards-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.2rem;
-        max-width: 1060px;
+
+      /* ── Snake timeline ── */
+      .snake-tl {
+        max-width: 980px;
         margin: 0 auto;
       }
-      .story-card {
-        position: relative;
-        background: rgba(255,255,255,0.07);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.13);
-        padding: 1.6rem 1.5rem 1.4rem;
-        transition: var(--ease);
+      .srow {
+        display: flex;
+        align-items: flex-start;
+      }
+      .sitem {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 0.55rem;
-        overflow: hidden;
-        margin-top: 14px;
+        align-items: center;
+        text-align: center;
+        padding: 0 0.6rem;
+        min-width: 0;
       }
-      /* Formas asimétricas únicas por posición */
-      .story-card:nth-child(1) { border-radius: 28px 8px 28px 8px; }
-      .story-card:nth-child(2) { border-radius: 8px 28px 8px 28px; }
-      .story-card:nth-child(3) { border-radius: 28px 28px 8px 28px; }
-      .story-card:nth-child(4) { border-radius: 28px 8px 8px 28px; }
-      .story-card:nth-child(5) { border-radius: 8px 28px 28px 8px; }
-      .story-card:nth-child(6) { border-radius: 8px 8px 28px 28px; }
-
-      .story-card:hover {
-        background: rgba(255,255,255,0.96) !important;
-        border-color: rgba(255,255,255,0.5) !important;
-        transform: translateY(-4px) scale(1.01);
-      }
-      .story-card:hover h3 { color: var(--primary-darker); }
-      .story-card:hover p  { color: #374151; }
-      .story-card:hover .story-card-metric { background: var(--light); border-color: var(--primary); color: var(--primary-darker); }
-      .story-card:hover .story-card-icon-wrap { background: var(--light-mid); border-color: var(--primary); color: var(--primary); }
-      .story-card:hover .story-card-watermark { color: rgba(6,60,36,0.06); }
-      .story-card.pandemic:hover h3 { color: #991b1b; }
-      .story-card.pandemic:hover .story-card-icon-wrap { color: #dc2626; border-color: #dc2626; background: #fee2e2; }
-      .story-card.pandemic:hover .story-card-metric { color: #dc2626; border-color: #dc2626; background: #fee2e2; }
-      .story-card.present:hover h3 { color: var(--primary-darker); }
-      .story-card.pandemic { border-color: rgba(248,113,113,0.40); background: rgba(220,38,38,0.10); }
-      .story-card.pandemic:hover { background: rgba(220,38,38,0.17); }
-      .story-card.present  { border-color: rgba(134,239,172,0.40); background: rgba(14,147,67,0.16); }
-      .story-card.present:hover  { background: rgba(14,147,67,0.24); }
-
-      /* Número watermark */
-      .story-card-watermark {
-        position: absolute;
-        bottom: -0.5rem;
-        right: 0.8rem;
-        font-size: 5.5rem;
-        font-weight: 900;
-        color: rgba(255,255,255,0.05);
-        line-height: 1;
-        pointer-events: none;
-        user-select: none;
-        letter-spacing: -4px;
-      }
-
-      /* Ticket flotante encima */
-      .story-card-ribbon {
-        position: absolute;
-        top: -13px;
-        left: 1.2rem;
-        background: rgba(255,255,255,0.12);
-        backdrop-filter: blur(6px);
-        border: 1px solid rgba(255,255,255,0.22);
-        color: rgba(255,255,255,0.85);
-        font-size: 0.62rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        padding: 0.18rem 0.65rem;
-        border-radius: 999px;
-        white-space: nowrap;
-      }
-      .story-card.pandemic .story-card-ribbon { background: rgba(220,38,38,0.25); border-color: #f87171; color: #fca5a5; }
-      .story-card.present  .story-card-ribbon { background: rgba(14,147,67,0.30); border-color: #86efac; color: #86efac; }
-
-      .story-card-top {
+      .semoji-wrap {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        font-size: 2.1rem;
+        background: rgba(255,255,255,0.09);
+        border: 2px solid rgba(255,255,255,0.22);
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.1rem;
-      }
-      .story-card-icon-wrap {
-        width: 36px; height: 36px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.10);
-        border: 1.5px solid rgba(255,255,255,0.18);
-        display: flex; align-items: center; justify-content: center;
-        font-size: 0.9rem;
-        color: #fff;
+        justify-content: center;
+        margin-bottom: 0.85rem;
+        transition: transform 0.28s ease, background 0.28s ease;
+        cursor: default;
         flex-shrink: 0;
       }
-      .story-card.pandemic .story-card-icon-wrap { background: rgba(220,38,38,0.2); border-color: #f87171; color: #fca5a5; }
-      .story-card.present  .story-card-icon-wrap { background: rgba(14,147,67,0.3); border-color: #86efac; color: #86efac; }
-      .story-card-badge { display: none; }
-      .story-card h3 {
-        font-size: 0.96rem;
+      .sitem:hover .semoji-wrap {
+        transform: scale(1.14);
+        background: rgba(255,255,255,0.18);
+      }
+      .sitem.pandemic .semoji-wrap { border-color: #f87171; background: rgba(220,38,38,0.15); }
+      .sitem.present  .semoji-wrap { border-color: #86efac; background: rgba(14,147,67,0.22); }
+      .sitem-year {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.38);
+        margin-bottom: 0.25rem;
+      }
+      .sitem.pandemic .sitem-year { color: rgba(252,165,165,0.7); }
+      .sitem.present  .sitem-year { color: rgba(134,239,172,0.7); }
+      .sitem h3 {
+        font-size: 0.88rem;
         font-weight: 800;
         color: #fff;
         line-height: 1.3;
+        margin-bottom: 0.4rem;
       }
-      .story-card p {
-        font-size: 0.81rem;
-        color: rgba(255,255,255,0.65);
-        line-height: 1.65;
-        flex: 1;
+      .sitem p {
+        font-size: 0.78rem;
+        color: rgba(255,255,255,0.60);
+        line-height: 1.6;
       }
-      .story-card-metric {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.15);
-        color: rgba(255,255,255,0.9);
-        font-size: 0.73rem;
-        font-weight: 700;
-        padding: 0.2rem 0.72rem;
-        border-radius: 999px;
-        margin-top: 0.1rem;
-        width: fit-content;
+
+      /* Horizontal connector line with arrowhead */
+      .sline {
+        flex: 0 0 auto;
+        width: 6%;
+        height: 2px;
+        background: rgba(255,255,255,0.20);
+        align-self: flex-start;
+        margin-top: 35px;
+        position: relative;
+        flex-shrink: 0;
       }
-      .story-card.pandemic .story-card-metric { border-color: #f87171; color: #fca5a5; }
-      .story-card.present  .story-card-metric { border-color: #86efac; color: #86efac; }
+      .sline-r::after {
+        content: '';
+        position: absolute;
+        right: -1px;
+        top: -4px;
+        border-left: 7px solid rgba(255,255,255,0.35);
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+      }
+      .sline-l::after {
+        content: '';
+        position: absolute;
+        left: -1px;
+        top: -4px;
+        border-right: 7px solid rgba(255,255,255,0.35);
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+      }
+
+      /* Vertical connector on right side (row 1 → row 2) */
+      .sv-wrap {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: calc(100% / 6 / 2);
+        margin: 0.6rem 0;
+      }
+      .sv-line {
+        width: 2px;
+        height: 2.8rem;
+        background: rgba(255,255,255,0.20);
+        position: relative;
+      }
+      .sv-line::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: -4px;
+        border-top: 7px solid rgba(255,255,255,0.35);
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+      }
+
       .story-cta {
         text-align: center;
-        margin-top: 2.5rem;
+        margin-top: 3rem;
       }
       .story-cta p {
         color: rgba(255,255,255,0.55);
@@ -981,12 +924,16 @@
          14. RESPONSIVE
          ============================================= */
       @media (max-width: 900px) {
-        .story-cards-grid { grid-template-columns: 1fr 1fr; }
         .story-header h2 { font-size: 1.3rem; }
         .testimonials-grid { grid-template-columns: 1fr; }
         .contact-grid { grid-template-columns: 1fr; }
         .footer-grid  { grid-template-columns: 1fr 1fr; }
         .grid-recursos-final { grid-template-columns: 1fr; }
+        /* Snake: stack vertically on tablet */
+        .srow { flex-direction: column; align-items: center; gap: 1.6rem; }
+        .sline { display: none; }
+        .sv-wrap { display: none; }
+        .sitem { max-width: 340px; }
       }
 
       @media (max-width: 768px) {
@@ -1109,84 +1056,60 @@
         <p>Esta es la historia de dos amigos de toda la vida que apostaron por lo que creían, sin red de seguridad y sin saber lo que les venía encima.</p>
       </div>
 
-      <!-- Stepper timeline -->
-      <div class="story-stepper">
-        <div class="stepper-node"><div class="stepper-circle">01</div><span class="stepper-label">Inicio</span></div>
-        <div class="stepper-line"></div>
-        <div class="stepper-node"><div class="stepper-circle">02</div><span class="stepper-label">Lucha</span></div>
-        <div class="stepper-line"></div>
-        <div class="stepper-node"><div class="stepper-circle">03</div><span class="stepper-label">Cambio</span></div>
-        <div class="stepper-line"></div>
-        <div class="stepper-node pandemic"><div class="stepper-circle">04</div><span class="stepper-label">Pandemia</span></div>
-        <div class="stepper-line"></div>
-        <div class="stepper-node"><div class="stepper-circle">05</div><span class="stepper-label">Despegue</span></div>
-        <div class="stepper-line"></div>
-        <div class="stepper-node present"><div class="stepper-circle">06</div><span class="stepper-label">Hoy</span></div>
-      </div>
+      <!-- Snake timeline -->
+      <div class="snake-tl reveal">
 
-      <div class="story-cards-grid">
-
-        <div class="story-card reveal">
-          <span class="story-card-ribbon">El inicio · 2011</span>
-          <div class="story-card-watermark">01</div>
-          <div class="story-card-top">
-            <div class="story-card-icon-wrap"><i class="fa-solid fa-seedling"></i></div>
+        <!-- Fila 1: izquierda → derecha -->
+        <div class="srow">
+          <div class="sitem">
+            <div class="semoji-wrap">🌱</div>
+            <span class="sitem-year">2011 · Inicio</span>
+            <h3>Un local pequeño, dos amigos, una visión clara</h3>
+            <p>Dos aulas, mucha convicción. Compaginando la academia con otros trabajos, sin red de seguridad.</p>
           </div>
-          <h3>Un local pequeño, dos amigos, una visión clara</h3>
-          <p>Dos aulas, dos amigos, mucha convicción. Compaginando la academia con otros trabajos y sin red de seguridad, solo la certeza de que podían marcar la diferencia.</p>
-          <span class="story-card-metric"><i class="fa-solid fa-door-open"></i> 2 aulas de sueño</span>
+          <div class="sline sline-r"></div>
+          <div class="sitem">
+            <div class="semoji-wrap">💪</div>
+            <span class="sitem-year">Años difíciles</span>
+            <h3>Confianza en nosotros mismos</h3>
+            <p>Años duros que se convirtieron en razones para creer más en el proyecto. La convicción cambia las reglas del juego.</p>
+          </div>
+          <div class="sline sline-r"></div>
+          <div class="sitem">
+            <div class="semoji-wrap">📈</div>
+            <span class="sitem-year">2016 · El cambio</span>
+            <h3>Crecimiento que exigía crecer</h3>
+            <p>El primer local se quedó pequeño. Nuevo espacio, nuevos compañeros, más familias que confiaban.</p>
+          </div>
         </div>
 
-        <div class="story-card reveal">
-          <span class="story-card-ribbon">Años difíciles</span>
-          <div class="story-card-watermark">02</div>
-          <div class="story-card-top">
-            <div class="story-card-icon-wrap"><i class="fa-solid fa-hand-fist"></i></div>
-          </div>
-          <h3>Confianza en nosotros mismos</h3>
-          <p>Años duros, pero cada obstáculo se convirtió en una razón para creer más en el proyecto. Luchar por algo en lo que crees con convicción cambia las reglas del juego.</p>
+        <!-- Conector vertical a la derecha -->
+        <div class="sv-wrap">
+          <div class="sv-line"></div>
         </div>
 
-        <div class="story-card reveal">
-          <span class="story-card-ribbon">El cambio · 2016</span>
-          <div class="story-card-watermark">03</div>
-          <div class="story-card-top">
-            <div class="story-card-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+        <!-- Fila 2: derecha → izquierda -->
+        <div class="srow">
+          <div class="sitem pandemic">
+            <div class="semoji-wrap">⚡</div>
+            <span class="sitem-year">Pandemia · 2020</span>
+            <h3>Adaptarse o desaparecer. Eligieron seguir.</h3>
+            <p>Mientras otros cerraban, Esparta se reinventó. Aulas virtuales, cero parones. Transformación en 48 horas.</p>
           </div>
-          <h3>Crecimiento que exigía crecer</h3>
-          <p>El primer local se quedó pequeño. Nuevo espacio, nuevos compañeros en el equipo, más familias que confiaban. El proyecto empezaba a tomar la forma que habían soñado.</p>
-        </div>
-
-        <div class="story-card pandemic reveal">
-          <span class="story-card-ribbon">Pandemia · 2020</span>
-          <div class="story-card-watermark">04</div>
-          <div class="story-card-top">
-            <div class="story-card-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
+          <div class="sline sline-l"></div>
+          <div class="sitem">
+            <div class="semoji-wrap">🚀</div>
+            <span class="sitem-year">Crecimiento exponencial</span>
+            <h3>De la supervivencia a la escalabilidad</h3>
+            <p>Volvieron más fuertes. Nuevas áreas, +350 alumnos activos, familias que traían a sus amigos.</p>
           </div>
-          <h3>Adaptarse o desaparecer. Eligieron seguir.</h3>
-          <p>Mientras otros cerraban, Academia Esparta se reinventó. Aulas virtuales, formación urgente, cero parones. Cuando confían en ti, encuentras la manera de estar ahí.</p>
-          <span class="story-card-metric"><i class="fa-solid fa-bolt"></i> Transformación en 48 horas</span>
-        </div>
-
-        <div class="story-card reveal">
-          <span class="story-card-ribbon">Crecimiento exponencial</span>
-          <div class="story-card-watermark">05</div>
-          <div class="story-card-top">
-            <div class="story-card-icon-wrap"><i class="fa-solid fa-rocket"></i></div>
+          <div class="sline sline-l"></div>
+          <div class="sitem present">
+            <div class="semoji-wrap">🏆</div>
+            <span class="sitem-year">Hoy</span>
+            <h3>La academia que soñaban desde el primer día</h3>
+            <p>7 aulas, +40 alumnos por hora, equipo de 10 personas. Refuerzo escolar, logopedia y psicología.</p>
           </div>
-          <h3>De la supervivencia a la escalabilidad</h3>
-          <p>Volvieron más fuertes. Nuevas áreas, profesores en expansión, familias que traían a sus amigos. La confianza construida durante años empezó a multiplicarse sola.</p>
-          <span class="story-card-metric"><i class="fa-solid fa-users"></i> 350+ alumnos activos</span>
-        </div>
-
-        <div class="story-card present reveal">
-          <span class="story-card-ribbon">Hoy</span>
-          <div class="story-card-watermark">06</div>
-          <div class="story-card-top">
-            <div class="story-card-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
-          </div>
-          <h3>La academia que soñaban desde el primer día</h3>
-          <p>7 aulas, +40 alumnos por hora, equipo de más de 10 personas. Refuerzo escolar, logopedia y psicología. Alumnos que aprueban, padres que respiran.</p>
         </div>
 
       </div>
