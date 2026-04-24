@@ -505,64 +505,112 @@
       .story-cards-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
+        gap: 1.2rem;
         max-width: 1060px;
         margin: 0 auto;
       }
       .story-card {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.11);
-        border-radius: var(--radius);
-        padding: 1.4rem 1.5rem;
+        position: relative;
+        background: rgba(255,255,255,0.07);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.13);
+        padding: 1.6rem 1.5rem 1.4rem;
         transition: var(--ease);
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.55rem;
+        overflow: hidden;
+        margin-top: 14px;
       }
+      /* Formas asimétricas únicas por posición */
+      .story-card:nth-child(1) { border-radius: 28px 8px 28px 8px; }
+      .story-card:nth-child(2) { border-radius: 8px 28px 8px 28px; }
+      .story-card:nth-child(3) { border-radius: 28px 28px 8px 28px; }
+      .story-card:nth-child(4) { border-radius: 28px 8px 8px 28px; }
+      .story-card:nth-child(5) { border-radius: 8px 28px 28px 8px; }
+      .story-card:nth-child(6) { border-radius: 8px 8px 28px 28px; }
+
       .story-card:hover {
-        background: rgba(255,255,255,0.11);
-        border-color: rgba(255,255,255,0.22);
-        transform: translateY(-3px);
+        background: rgba(255,255,255,0.96) !important;
+        border-color: rgba(255,255,255,0.5) !important;
+        transform: translateY(-4px) scale(1.01);
       }
-      .story-card.pandemic { border-color: rgba(248,113,113,0.35); background: rgba(220,38,38,0.09); }
-      .story-card.pandemic:hover { background: rgba(220,38,38,0.15); }
-      .story-card.present  { border-color: rgba(134,239,172,0.35); background: rgba(14,147,67,0.15); }
-      .story-card.present:hover  { background: rgba(14,147,67,0.22); }
+      .story-card:hover h3 { color: var(--primary-darker); }
+      .story-card:hover p  { color: #374151; }
+      .story-card:hover .story-card-metric { background: var(--light); border-color: var(--primary); color: var(--primary-darker); }
+      .story-card:hover .story-card-icon-wrap { background: var(--light-mid); border-color: var(--primary); color: var(--primary); }
+      .story-card:hover .story-card-watermark { color: rgba(6,60,36,0.06); }
+      .story-card.pandemic:hover h3 { color: #991b1b; }
+      .story-card.pandemic:hover .story-card-icon-wrap { color: #dc2626; border-color: #dc2626; background: #fee2e2; }
+      .story-card.pandemic:hover .story-card-metric { color: #dc2626; border-color: #dc2626; background: #fee2e2; }
+      .story-card.present:hover h3 { color: var(--primary-darker); }
+      .story-card.pandemic { border-color: rgba(248,113,113,0.40); background: rgba(220,38,38,0.10); }
+      .story-card.pandemic:hover { background: rgba(220,38,38,0.17); }
+      .story-card.present  { border-color: rgba(134,239,172,0.40); background: rgba(14,147,67,0.16); }
+      .story-card.present:hover  { background: rgba(14,147,67,0.24); }
+
+      /* Número watermark */
+      .story-card-watermark {
+        position: absolute;
+        bottom: -0.5rem;
+        right: 0.8rem;
+        font-size: 5.5rem;
+        font-weight: 900;
+        color: rgba(255,255,255,0.05);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+        letter-spacing: -4px;
+      }
+
+      /* Ticket flotante encima */
+      .story-card-ribbon {
+        position: absolute;
+        top: -13px;
+        left: 1.2rem;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255,255,255,0.22);
+        color: rgba(255,255,255,0.85);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.18rem 0.65rem;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+      .story-card.pandemic .story-card-ribbon { background: rgba(220,38,38,0.25); border-color: #f87171; color: #fca5a5; }
+      .story-card.present  .story-card-ribbon { background: rgba(14,147,67,0.30); border-color: #86efac; color: #86efac; }
+
       .story-card-top {
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.1rem;
       }
       .story-card-icon-wrap {
-        width: 38px; height: 38px;
+        width: 36px; height: 36px;
         border-radius: 50%;
         background: rgba(255,255,255,0.10);
         border: 1.5px solid rgba(255,255,255,0.18);
         display: flex; align-items: center; justify-content: center;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         color: #fff;
         flex-shrink: 0;
       }
       .story-card.pandemic .story-card-icon-wrap { background: rgba(220,38,38,0.2); border-color: #f87171; color: #fca5a5; }
       .story-card.present  .story-card-icon-wrap { background: rgba(14,147,67,0.3); border-color: #86efac; color: #86efac; }
-      .story-card-badge {
-        font-size: 0.68rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.45);
-      }
-      .story-card.pandemic .story-card-badge { color: #fca5a5; }
-      .story-card.present  .story-card-badge { color: #86efac; }
+      .story-card-badge { display: none; }
       .story-card h3 {
-        font-size: 0.97rem;
+        font-size: 0.96rem;
         font-weight: 800;
         color: #fff;
         line-height: 1.3;
       }
       .story-card p {
-        font-size: 0.82rem;
+        font-size: 0.81rem;
         color: rgba(255,255,255,0.65);
         line-height: 1.65;
         flex: 1;
@@ -574,11 +622,11 @@
         background: rgba(255,255,255,0.08);
         border: 1px solid rgba(255,255,255,0.15);
         color: rgba(255,255,255,0.9);
-        font-size: 0.75rem;
+        font-size: 0.73rem;
         font-weight: 700;
-        padding: 0.22rem 0.75rem;
+        padding: 0.2rem 0.72rem;
         border-radius: 999px;
-        margin-top: 0.2rem;
+        margin-top: 0.1rem;
         width: fit-content;
       }
       .story-card.pandemic .story-card-metric { border-color: #f87171; color: #fca5a5; }
@@ -1079,37 +1127,41 @@
       <div class="story-cards-grid">
 
         <div class="story-card reveal">
+          <span class="story-card-ribbon">El inicio · 2011</span>
+          <div class="story-card-watermark">01</div>
           <div class="story-card-top">
             <div class="story-card-icon-wrap"><i class="fa-solid fa-seedling"></i></div>
-            <span class="story-card-badge">El inicio · 2011</span>
           </div>
           <h3>Un local pequeño, dos amigos, una visión clara</h3>
           <p>Dos aulas, dos amigos, mucha convicción. Compaginando la academia con otros trabajos y sin red de seguridad, solo la certeza de que podían marcar la diferencia.</p>
-          <span class="story-card-metric">🏠 2 aulas de sueño</span>
+          <span class="story-card-metric"><i class="fa-solid fa-door-open"></i> 2 aulas de sueño</span>
         </div>
 
         <div class="story-card reveal">
+          <span class="story-card-ribbon">Años difíciles</span>
+          <div class="story-card-watermark">02</div>
           <div class="story-card-top">
             <div class="story-card-icon-wrap"><i class="fa-solid fa-hand-fist"></i></div>
-            <span class="story-card-badge">Años difíciles</span>
           </div>
           <h3>Confianza en nosotros mismos</h3>
           <p>Años duros, pero cada obstáculo se convirtió en una razón para creer más en el proyecto. Luchar por algo en lo que crees con convicción cambia las reglas del juego.</p>
         </div>
 
         <div class="story-card reveal">
+          <span class="story-card-ribbon">El cambio · 2016</span>
+          <div class="story-card-watermark">03</div>
           <div class="story-card-top">
             <div class="story-card-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
-            <span class="story-card-badge">El cambio · 2016</span>
           </div>
           <h3>Crecimiento que exigía crecer</h3>
           <p>El primer local se quedó pequeño. Nuevo espacio, nuevos compañeros en el equipo, más familias que confiaban. El proyecto empezaba a tomar la forma que habían soñado.</p>
         </div>
 
         <div class="story-card pandemic reveal">
+          <span class="story-card-ribbon">Pandemia · 2020</span>
+          <div class="story-card-watermark">04</div>
           <div class="story-card-top">
             <div class="story-card-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
-            <span class="story-card-badge">Pandemia · 2020</span>
           </div>
           <h3>Adaptarse o desaparecer. Eligieron seguir.</h3>
           <p>Mientras otros cerraban, Academia Esparta se reinventó. Aulas virtuales, formación urgente, cero parones. Cuando confían en ti, encuentras la manera de estar ahí.</p>
@@ -1117,9 +1169,10 @@
         </div>
 
         <div class="story-card reveal">
+          <span class="story-card-ribbon">Crecimiento exponencial</span>
+          <div class="story-card-watermark">05</div>
           <div class="story-card-top">
             <div class="story-card-icon-wrap"><i class="fa-solid fa-rocket"></i></div>
-            <span class="story-card-badge">Crecimiento exponencial</span>
           </div>
           <h3>De la supervivencia a la escalabilidad</h3>
           <p>Volvieron más fuertes. Nuevas áreas, profesores en expansión, familias que traían a sus amigos. La confianza construida durante años empezó a multiplicarse sola.</p>
@@ -1127,9 +1180,10 @@
         </div>
 
         <div class="story-card present reveal">
+          <span class="story-card-ribbon">Hoy</span>
+          <div class="story-card-watermark">06</div>
           <div class="story-card-top">
             <div class="story-card-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
-            <span class="story-card-badge">Hoy</span>
           </div>
           <h3>La academia que soñaban desde el primer día</h3>
           <p>7 aulas, +40 alumnos por hora, equipo de más de 10 personas. Refuerzo escolar, logopedia y psicología. Alumnos que aprueban, padres que respiran.</p>
