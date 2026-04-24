@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecuaciones de 2º Grado Completas - Academia Esparta</title>
+    <title>Probabilidad - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -13,11 +13,10 @@
         :root { 
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
-            --esparta-dark: #1a1a1a;
             --white: #ffffff;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; font-size: 13px; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
@@ -34,18 +33,17 @@
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
         .header-title h1 { font-weight: 900; font-size: 24px; margin: 0; color: var(--esparta-blue); }
 
-        .section-header { display: flex; align-items: center; margin: 25px 0 10px; }
+        .section-header { display: flex; align-items: center; margin: 20px 0 10px; }
         .section-header h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); margin: 0; }
         .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
-        .formula-box { background: var(--esparta-dark); color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0; border: 2px solid var(--esparta-gold); }
+        .ejercicio-box { border: 1px solid #eee; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa; line-height: 1.5; }
+        .ejercicio-box b { color: var(--esparta-blue); }
         
-        .paso-a-paso { background: #fffdf5; border-left: 6px solid var(--esparta-gold); padding: 15px; border-radius: 4px; margin-bottom: 20px; font-size: 14px; }
-        .paso-num { color: var(--esparta-blue); font-weight: 900; margin-right: 5px; }
-
-        .ejercicio-card { border: 1px solid #ddd; border-radius: 10px; padding: 15px; margin-bottom: 20px; background: #fafafa; }
-        .equation { font-family: 'Roboto Mono', monospace; font-size: 22px; text-align: center; color: var(--esparta-blue); margin: 15px 0; }
-        .info-badge { font-size: 10px; background: #eee; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; font-weight: 700; color: #666; }
+        .tabla-contingencia { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 12px; }
+        .tabla-contingencia th, .tabla-contingencia td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        .tabla-contingencia th { background: #f0f4f8; color: var(--esparta-blue); }
+        .total-cell { background: #fff9c4; font-weight: bold; }
 
         .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
 
@@ -54,70 +52,111 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Ecuaciones</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Probabilidad</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Ecuaciones de 2º Grado Completas: \( ax^2 + bx + c = 0 \)</p>
+                <p>Estadística y Probabilidad: Entrenamiento Intensivo</p>
             </div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>1. La Fórmula Maestra</h2>
+                <h2>Experimentos con Barajas y Dados</h2>
                 <div class="line"></div>
             </div>
-            <div class="formula-box">
-                \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \ \]
+
+            <div class="ejercicio-box">
+                <b>7. Baraja Española (40 cartas):</b> 
+                <br>a) Extraemos una carta de dos barajas distintas. Halla la probabilidad de que:
+                <br> - Ambas sean un 7.
+                <br> - Ambas sean figuras (Sota, Caballo, Rey).
+                <br><br>
+                b) De una sola baraja extraemos dos cartas sin devolución. Halla la probabilidad de que:
+                <br> - Ambas sean un 7.
+                <br> - Ambas sean figuras.
+            </div>
+
+            <div class="ejercicio-box">
+                <b>8. Tres Dados:</b> Lanzamos tres dados simultáneamente. ¿Cuál es la probabilidad de que las tres puntuaciones obtenidas sean menores que 5?
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>2. Guía de Resolución Paso a Paso</h2>
+                <h2>Urnas y Extracciones</h2>
                 <div class="line"></div>
             </div>
-            <div class="paso-a-paso">
-                <b>Ejemplo: \( x^2 - 5x + 6 = 0 \)</b><br><br>
-                <span class="paso-num">Paso 1:</span> Identifica los coeficientes: \( a = 1 \), \( b = -5 \), \( c = 6 \).<br>
-                <span class="paso-num">Paso 2:</span> Sustituye en la fórmula: \( x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4 \cdot 1 \cdot 6}}{2 \cdot 1} \).<br>
-                <span class="paso-num">Paso 3:</span> Calcula el discriminante (lo de dentro de la raíz): \( \sqrt{25 - 24} = \sqrt{1} \).<br>
-                <span class="paso-num">Paso 4:</span> Separa las dos soluciones:<br>
-                &nbsp;&nbsp;&nbsp;&nbsp; \( x_1 = \frac{5 + 1}{2} = 3 \) <br>
-                &nbsp;&nbsp;&nbsp;&nbsp; \( x_2 = \frac{5 - 1}{2} = 2 \)
+
+            <div class="ejercicio-box">
+                <b>9. Urnas A y B:</b> Tenemos la Urna A (3R, 2N) y la Urna B (2R, 2N, 1V). Extraemos una bola de cada una. Halla la probabilidad de que:
+                <br>a) Ambas sean rojas. &nbsp;&nbsp; b) Ambas sean negras. &nbsp;&nbsp; c) Alguna sea verde.
+            </div>
+
+            <div class="ejercicio-box">
+                <b>10. Extracción sin reemplazo:</b> En una urna hay 3 bolas rojas y 2 verdes. Sacamos dos bolas una tras otra sin devolver la primera. Halla:
+                <br>P[2 Rojas] y P[2 Verdes]
+            </div>
+
+            <div class="ejercicio-box">
+                <b>11. El suceso contrario:</b> Lanzamos dados al aire. Calcula la probabilidad de conseguir "algún 6" al lanzar:
+                <br>a) Dos dados. &nbsp;&nbsp;&nbsp;&nbsp; b) Tres dados.
             </div>
         </section>
 
         <section>
             <div class="section-header">
-                <h2>3. Entrenamiento: Los 3 Casos Posibles</h2>
+                <h2>Tablas de Contingencia</h2>
                 <div class="line"></div>
             </div>
 
-            <div class="ejercicio-card">
-                <span class="info-badge">Reto A: Dos soluciones distintas</span>
-                <div class="equation">\( x^2 - 7x + 10 = 0 \)</div>
-                <div style="height: 120px; border-bottom: 1px dashed #ccc;"></div>
-            </div>
+            <div class="ejercicio-box">
+                <b>12. Análisis de datos:</b> Completa la siguiente tabla sobre los deportes preferidos de 100 alumnos y responde:
+                
+                <table class="tabla-contingencia">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Baloncesto</th>
+                            <th>Voleibol</th>
+                            <th>Fútbol</th>
+                            <th class="total-cell">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Chicas</th>
+                            <td>17</td>
+                            <td>20</td>
+                            <td>15</td>
+                            <td class="total-cell"></td>
+                        </tr>
+                        <tr>
+                            <th>Chicos</th>
+                            <td>26</td>
+                            <td>12</td>
+                            <td>10</td>
+                            <td class="total-cell"></td>
+                        </tr>
+                        <tr>
+                            <th class="total-cell">TOTAL</th>
+                            <td class="total-cell"></td>
+                            <td class="total-cell"></td>
+                            <td class="total-cell"></td>
+                            <td class="total-cell">100</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <div class="ejercicio-card">
-                <span class="info-badge">Reto B: Una única solución (Raíz doble)</span>
-                <div class="equation">\( x^2 - 6x + 9 = 0 \)</div>
-                <div style="height: 120px; border-bottom: 1px dashed #ccc;"></div>
-            </div>
-
-            <div class="ejercicio-card">
-                <span class="info-badge">Reto C: Sin solución real</span>
-                <div class="equation">\( x^2 + 2x + 5 = 0 \)</div>
-                <div style="height: 120px;"></div>
-                <p style="font-size: 11px; color: #d32f2f; font-style: italic;">Pista: Observa qué ocurre cuando el número dentro de la raíz es negativo.</p>
+                Si elegimos un alumno al azar, halla la probabilidad de que:
+                <br>a) Sea chico. &nbsp;&nbsp; b) Juegue al Voleibol. &nbsp;&nbsp; c) Sea chica y juegue al Baloncesto. &nbsp;&nbsp; d) Sea chico, sabiendo que juega al fútbol.
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · Fuerza y Honor en las Matemáticas
+            © 2026 Academia Esparta · "Fuerza y Honor en cada cálculo"
         </footer>
     </div>
 
