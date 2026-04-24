@@ -424,10 +424,10 @@
       .google-badge strong { color: var(--primary); font-size: 1rem; }
 
       /* =============================================
-         6. ABOUT — historia
+         6. ABOUT — historia en grid
          ============================================= */
       #about {
-        padding: 5rem 2rem;
+        padding: 3.5rem 2rem;
         background: var(--primary-darker);
         position: relative;
         overflow: hidden;
@@ -437,121 +437,114 @@
         position: absolute;
         inset: 0;
         background: url('quienes-somos.PNG') no-repeat center center / cover;
-        opacity: 0.10;
+        opacity: 0.08;
         z-index: 0;
       }
       #about > * { position: relative; z-index: 1; }
       .story-header {
         text-align: center;
-        max-width: 680px;
-        margin: 0 auto 4rem;
+        max-width: 700px;
+        margin: 0 auto 2.5rem;
       }
       .story-header h2 {
-        font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+        font-size: clamp(1.4rem, 2.8vw, 2rem);
         font-weight: 800;
         color: #fff;
         line-height: 1.2;
-        margin-bottom: 1rem;
+        margin-bottom: 0.7rem;
       }
       .story-header p {
-        color: rgba(255,255,255,0.75);
-        font-size: 1.05rem;
+        color: rgba(255,255,255,0.68);
+        font-size: 0.95rem;
         line-height: 1.6;
       }
-      .story-timeline {
-        position: relative;
-        max-width: 680px;
+      .story-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        max-width: 1060px;
         margin: 0 auto;
-        padding-left: 3.5rem;
       }
-      .story-timeline::before {
-        content: '';
-        position: absolute;
-        left: 20px;
-        top: 22px;
-        bottom: 22px;
-        width: 2px;
-        background: rgba(255,255,255,0.15);
+      .story-card {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.11);
+        border-radius: var(--radius);
+        padding: 1.4rem 1.5rem;
+        transition: var(--ease);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
       }
-      .timeline-item {
-        position: relative;
-        margin-bottom: 3rem;
+      .story-card:hover {
+        background: rgba(255,255,255,0.11);
+        border-color: rgba(255,255,255,0.22);
+        transform: translateY(-3px);
       }
-      .timeline-item:last-child { margin-bottom: 0; }
-      .timeline-dot {
-        position: absolute;
-        left: -3.7rem;
-        top: 0;
-        width: 44px; height: 44px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.08);
-        border: 2px solid rgba(255,255,255,0.22);
-        display: flex; align-items: center; justify-content: center;
-        font-size: 1.2rem;
-        z-index: 1;
+      .story-card.pandemic {
+        border-color: rgba(248,113,113,0.35);
+        background: rgba(220,38,38,0.09);
       }
-      .timeline-item.pandemic .timeline-dot {
-        background: rgba(220,38,38,0.25);
-        border-color: #f87171;
+      .story-card.pandemic:hover { background: rgba(220,38,38,0.15); }
+      .story-card.present {
+        border-color: rgba(134,239,172,0.35);
+        background: rgba(14,147,67,0.15);
       }
-      .timeline-item.present .timeline-dot {
-        background: var(--primary);
-        border-color: #86efac;
+      .story-card.present:hover { background: rgba(14,147,67,0.22); }
+      .story-card-top {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin-bottom: 0.2rem;
       }
-      .timeline-badge {
-        display: block;
-        font-size: 0.72rem;
+      .story-card-icon {
+        font-size: 1.4rem;
+        flex-shrink: 0;
+      }
+      .story-card-badge {
+        font-size: 0.68rem;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: rgba(255,255,255,0.48);
-        margin-bottom: 0.45rem;
+        color: rgba(255,255,255,0.45);
       }
-      .timeline-item.pandemic .timeline-badge { color: #fca5a5; }
-      .timeline-item.present  .timeline-badge { color: #86efac; }
-      .timeline-item h3 {
-        font-size: 1.15rem;
+      .story-card.pandemic .story-card-badge { color: #fca5a5; }
+      .story-card.present  .story-card-badge { color: #86efac; }
+      .story-card h3 {
+        font-size: 0.97rem;
         font-weight: 800;
         color: #fff;
-        margin-bottom: 0.65rem;
         line-height: 1.3;
       }
-      .timeline-item p {
-        font-size: 0.9rem;
-        color: rgba(255,255,255,0.70);
-        line-height: 1.74;
-        margin-bottom: 0.75rem;
+      .story-card p {
+        font-size: 0.82rem;
+        color: rgba(255,255,255,0.65);
+        line-height: 1.65;
+        flex: 1;
       }
-      .timeline-metric {
+      .story-card-metric {
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.35rem;
         background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.18);
-        color: #fff;
-        font-size: 0.8rem;
+        border: 1px solid rgba(255,255,255,0.15);
+        color: rgba(255,255,255,0.9);
+        font-size: 0.75rem;
         font-weight: 700;
-        padding: 0.3rem 0.85rem;
+        padding: 0.22rem 0.75rem;
         border-radius: 999px;
+        margin-top: 0.2rem;
+        width: fit-content;
       }
-      .timeline-item.pandemic .timeline-metric {
-        background: rgba(220,38,38,0.15);
-        border-color: #f87171;
-        color: #fca5a5;
-      }
-      .timeline-item.present .timeline-metric {
-        background: rgba(14,147,67,0.25);
-        border-color: #86efac;
-        color: #86efac;
-      }
+      .story-card.pandemic .story-card-metric { border-color: #f87171; color: #fca5a5; }
+      .story-card.present  .story-card-metric { border-color: #86efac; color: #86efac; }
       .story-cta {
         text-align: center;
-        margin-top: 4rem;
+        margin-top: 2.5rem;
       }
       .story-cta p {
-        color: rgba(255,255,255,0.65);
-        font-size: 1rem;
-        margin-bottom: 1.2rem;
+        color: rgba(255,255,255,0.55);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
         font-style: italic;
       }
       .story-cta a {
@@ -559,10 +552,10 @@
         background: #fff;
         color: var(--primary-darker);
         font-weight: 700;
-        padding: 0.9rem 2rem;
+        padding: 0.8rem 1.8rem;
         border-radius: var(--radius-sm);
         transition: var(--ease);
-        font-size: 0.95rem;
+        font-size: 0.92rem;
       }
       .story-cta a:hover { background: rgba(255,255,255,0.88); transform: translateY(-2px); }
 
@@ -894,8 +887,8 @@
          14. RESPONSIVE
          ============================================= */
       @media (max-width: 900px) {
-        .story-timeline { padding-left: 2.8rem; }
-        .timeline-dot { left: -3rem; width: 38px; height: 38px; font-size: 1rem; }
+        .story-cards-grid { grid-template-columns: 1fr 1fr; }
+        .story-header h2 { font-size: 1.3rem; }
         .testimonials-grid { grid-template-columns: 1fr; }
         .contact-grid { grid-template-columns: 1fr; }
         .footer-grid  { grid-template-columns: 1fr 1fr; }
@@ -1022,51 +1015,63 @@
         <p>Esta es la historia de dos amigos de toda la vida que apostaron por lo que creían, sin red de seguridad y sin saber lo que les venía encima.</p>
       </div>
 
-      <div class="story-timeline">
+      <div class="story-cards-grid">
 
-        <div class="timeline-item reveal">
-          <div class="timeline-dot">🌱</div>
-          <span class="timeline-badge">El inicio · 2011</span>
+        <div class="story-card reveal">
+          <div class="story-card-top">
+            <span class="story-card-icon">🌱</span>
+            <span class="story-card-badge">El inicio · 2011</span>
+          </div>
           <h3>Un local pequeño, dos amigos, una visión clara</h3>
-          <p>2011. Un local diminuto, dos aulas. Dos amigos de toda la vida dispuestos a hacer lo que fuera necesario, compaginando la academia con otros trabajos. Sin inversores, sin certezas — solo la convicción de que los alumnos necesitaban algo diferente.</p>
-          <span class="timeline-metric">🏠 2 aulas de sueño</span>
+          <p>Dos aulas, dos amigos, mucha convicción. Compaginando la academia con otros trabajos y sin red de seguridad, solo la certeza de que podían marcar la diferencia.</p>
+          <span class="story-card-metric">🏠 2 aulas de sueño</span>
         </div>
 
-        <div class="timeline-item reveal">
-          <div class="timeline-dot">💪</div>
-          <span class="timeline-badge">Años difíciles</span>
+        <div class="story-card reveal">
+          <div class="story-card-top">
+            <span class="story-card-icon">💪</span>
+            <span class="story-card-badge">Años difíciles</span>
+          </div>
           <h3>Confianza en nosotros mismos</h3>
-          <p>Fueron años duros. Pero confiamos en nosotros mismos y decidimos luchar por algo en lo que creíamos con convicción. Cada obstáculo fue una razón para creer más en el proyecto.</p>
+          <p>Años duros, pero cada obstáculo se convirtió en una razón para creer más en el proyecto. Luchar por algo en lo que crees con convicción cambia las reglas del juego.</p>
         </div>
 
-        <div class="timeline-item reveal">
-          <div class="timeline-dot">📈</div>
-          <span class="timeline-badge">El cambio · 2016</span>
+        <div class="story-card reveal">
+          <div class="story-card-top">
+            <span class="story-card-icon">📈</span>
+            <span class="story-card-badge">El cambio · 2016</span>
+          </div>
           <h3>Crecimiento que exigía crecer</h3>
-          <p>2016. El crecimiento nos llevó a abandonar ese primer local. Nos mudamos a un espacio más grande, incorporamos compañeros al equipo y empezamos a atender a muchas más familias.</p>
+          <p>El primer local se quedó pequeño. Nuevo espacio, nuevos compañeros en el equipo, más familias que confiaban. El proyecto empezaba a tomar la forma que habían soñado.</p>
         </div>
 
-        <div class="timeline-item pandemic reveal">
-          <div class="timeline-dot">⚡</div>
-          <span class="timeline-badge">Pandemia · Marzo 2020</span>
+        <div class="story-card pandemic reveal">
+          <div class="story-card-top">
+            <span class="story-card-icon">⚡</span>
+            <span class="story-card-badge">Pandemia · 2020</span>
+          </div>
           <h3>Adaptarse o desaparecer. Eligieron seguir.</h3>
-          <p>Mientras otros cerraban, Academia Esparta desmontó todo para seguir adelante. Aulas virtuales, plataformas, formación urgente. Los alumnos no se detuvieron — nosotros tampoco. Ese momento mostró algo: cuando confían en ti, encuentras la manera de estar ahí.</p>
-          <span class="timeline-metric">⚡ Transformación en 48 horas</span>
+          <p>Mientras otros cerraban, Academia Esparta se reinventó. Aulas virtuales, formación urgente, cero parones. Cuando confían en ti, encuentras la manera de estar ahí.</p>
+          <span class="story-card-metric">⚡ Transformación en 48 horas</span>
         </div>
 
-        <div class="timeline-item reveal">
-          <div class="timeline-dot">🚀</div>
-          <span class="timeline-badge">Crecimiento exponencial</span>
+        <div class="story-card reveal">
+          <div class="story-card-top">
+            <span class="story-card-icon">🚀</span>
+            <span class="story-card-badge">Crecimiento exponencial</span>
+          </div>
           <h3>De la supervivencia a la escalabilidad</h3>
-          <p>Después de la pandemia, algo cambió. Volvimos más fuertes. Nuevas áreas de especialización, profesores en expansión, familias que traían a sus amigos porque confiaban en nosotros.</p>
-          <span class="timeline-metric">👨‍👩‍👧 350+ alumnos activos</span>
+          <p>Volvieron más fuertes. Nuevas áreas, profesores en expansión, familias que traían a sus amigos. La confianza construida durante años empezó a multiplicarse sola.</p>
+          <span class="story-card-metric">👨‍👩‍👧 350+ alumnos activos</span>
         </div>
 
-        <div class="timeline-item present reveal">
-          <div class="timeline-dot">🏆</div>
-          <span class="timeline-badge">Hoy</span>
-          <h3>La academia que soñamos desde el primer día</h3>
-          <p>7 aulas, más de 40 alumnos por hora, un equipo de más de 10 personas. Refuerzo escolar, logopedia y psicología. Resultados que hablan solos: alumnos que aprueban, padres que respiran, familias que nos recomiendan.</p>
+        <div class="story-card present reveal">
+          <div class="story-card-top">
+            <span class="story-card-icon">🏆</span>
+            <span class="story-card-badge">Hoy</span>
+          </div>
+          <h3>La academia que soñaban desde el primer día</h3>
+          <p>7 aulas, +40 alumnos por hora, equipo de más de 10 personas. Refuerzo escolar, logopedia y psicología. Alumnos que aprueban, padres que respiran.</p>
         </div>
 
       </div>
