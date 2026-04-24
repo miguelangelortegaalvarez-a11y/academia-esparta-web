@@ -454,67 +454,101 @@
         font-size: 1.05rem;
         line-height: 1.6;
       }
-      .story-steps {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0;
-        max-width: 1060px;
-        margin: 0 auto;
+      .story-timeline {
         position: relative;
+        max-width: 680px;
+        margin: 0 auto;
+        padding-left: 3.5rem;
       }
-      .story-steps::before {
+      .story-timeline::before {
         content: '';
         position: absolute;
-        top: 36px;
-        left: calc(16.66% + 1px);
-        right: calc(16.66% + 1px);
-        height: 2px;
-        background: rgba(255,255,255,0.20);
-        z-index: 0;
+        left: 20px;
+        top: 22px;
+        bottom: 22px;
+        width: 2px;
+        background: rgba(255,255,255,0.15);
       }
-      .story-step {
-        padding: 0 2rem;
-        text-align: center;
+      .timeline-item {
         position: relative;
+        margin-bottom: 3rem;
       }
-      .story-icon {
-        width: 72px; height: 72px;
+      .timeline-item:last-child { margin-bottom: 0; }
+      .timeline-dot {
+        position: absolute;
+        left: -3.7rem;
+        top: 0;
+        width: 44px; height: 44px;
         border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        border: 2px solid rgba(255,255,255,0.22);
         display: flex; align-items: center; justify-content: center;
-        font-size: 1.8rem;
-        margin: 0 auto 1.5rem;
-        position: relative;
+        font-size: 1.2rem;
         z-index: 1;
-        border: 3px solid rgba(255,255,255,0.25);
-        transition: var(--ease);
       }
-      .story-step:nth-child(1) .story-icon { background: rgba(255,255,255,0.10); }
-      .story-step:nth-child(2) .story-icon { background: rgba(14,147,67,0.50); }
-      .story-step:nth-child(3) .story-icon { background: var(--primary); }
-      .story-badge {
-        display: inline-block;
+      .timeline-item.pandemic .timeline-dot {
+        background: rgba(220,38,38,0.25);
+        border-color: #f87171;
+      }
+      .timeline-item.present .timeline-dot {
+        background: var(--primary);
+        border-color: #86efac;
+      }
+      .timeline-badge {
+        display: block;
         font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: rgba(255,255,255,0.55);
-        margin-bottom: 0.7rem;
+        color: rgba(255,255,255,0.48);
+        margin-bottom: 0.45rem;
       }
-      .story-step h3 {
+      .timeline-item.pandemic .timeline-badge { color: #fca5a5; }
+      .timeline-item.present  .timeline-badge { color: #86efac; }
+      .timeline-item h3 {
         font-size: 1.15rem;
         font-weight: 800;
         color: #fff;
-        margin-bottom: 0.9rem;
+        margin-bottom: 0.65rem;
         line-height: 1.3;
       }
-      .story-step p {
-        font-size: 0.88rem;
-        color: rgba(255,255,255,0.72);
-        line-height: 1.7;
+      .timeline-item p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.70);
+        line-height: 1.74;
+        margin-bottom: 0.75rem;
+      }
+      .timeline-metric {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.18);
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 0.3rem 0.85rem;
+        border-radius: 999px;
+      }
+      .timeline-item.pandemic .timeline-metric {
+        background: rgba(220,38,38,0.15);
+        border-color: #f87171;
+        color: #fca5a5;
+      }
+      .timeline-item.present .timeline-metric {
+        background: rgba(14,147,67,0.25);
+        border-color: #86efac;
+        color: #86efac;
       }
       .story-cta {
         text-align: center;
-        margin-top: 3.5rem;
+        margin-top: 4rem;
+      }
+      .story-cta p {
+        color: rgba(255,255,255,0.65);
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+        font-style: italic;
       }
       .story-cta a {
         display: inline-block;
@@ -856,10 +890,8 @@
          14. RESPONSIVE
          ============================================= */
       @media (max-width: 900px) {
-        .story-steps { grid-template-columns: 1fr; }
-        .story-steps::before { display: none; }
-        .story-step { padding: 0 0 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .story-step:last-child { border-bottom: none; padding-bottom: 0; }
+        .story-timeline { padding-left: 2.8rem; }
+        .timeline-dot { left: -3rem; width: 38px; height: 38px; font-size: 1rem; }
         .contact-grid { grid-template-columns: 1fr; }
         .footer-grid  { grid-template-columns: 1fr 1fr; }
         .grid-recursos-final { grid-template-columns: 1fr; }
@@ -985,33 +1017,58 @@
         <p>Esta es la historia de dos amigos de toda la vida que apostaron por lo que creían, sin red de seguridad y sin saber lo que les venía encima.</p>
       </div>
 
-      <div class="story-steps">
+      <div class="story-timeline">
 
-        <div class="story-step reveal">
-          <div class="story-icon">🌱</div>
-          <span class="story-badge">El inicio</span>
-          <h3>Dos amigos, una idea y muchas ganas</h3>
-          <p>Empezamos en un local pequeño con dos aulas, solo los dos, compaginando la academia con otros trabajos. Sin inversores, sin certezas — solo la convicción de que podíamos ayudar a los alumnos de otra manera.</p>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">🌱</div>
+          <span class="timeline-badge">El inicio · 2011</span>
+          <h3>Un local pequeño, dos amigos, una visión clara</h3>
+          <p>2011. Un local diminuto, dos aulas. Dos amigos de toda la vida dispuestos a hacer lo que fuera necesario, compaginando la academia con otros trabajos. Sin inversores, sin certezas — solo la convicción de que los alumnos necesitaban algo diferente.</p>
+          <span class="timeline-metric">🏠 2 aulas de sueño</span>
         </div>
 
-        <div class="story-step reveal">
-          <div class="story-icon">📈</div>
-          <span class="story-badge">El crecimiento</span>
-          <h3>Las familias empezaron a confiar</h3>
-          <p>La academia fue creciendo sola, impulsada por la confianza de las familias. Nos mudamos a un local más grande, el equipo empezó a crecer, nuevos profesores se unieron al proyecto y los servicios se ampliaron.</p>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">💪</div>
+          <span class="timeline-badge">Años difíciles</span>
+          <h3>Confianza en nosotros mismos</h3>
+          <p>Fueron años duros. Pero confiamos en nosotros mismos y decidimos luchar por algo en lo que creíamos con convicción. Cada obstáculo fue una razón para creer más en el proyecto.</p>
         </div>
 
-        <div class="story-step reveal">
-          <div class="story-icon">🏆</div>
-          <span class="story-badge">Hoy</span>
-          <h3>7 aulas, +40 alumnos por hora, más de 10 personas</h3>
-          <p>Lo que empezó como un sueño es hoy una academia con áreas especializadas de refuerzo escolar, logopedia y psicología. Seguimos siendo los mismos dos amigos — rodeados de un equipo que comparte lo mismo que nosotros creíamos desde el principio.</p>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">📈</div>
+          <span class="timeline-badge">El cambio · 2016</span>
+          <h3>Crecimiento que exigía crecer</h3>
+          <p>2016. El crecimiento nos llevó a abandonar ese primer local. Nos mudamos a un espacio más grande, incorporamos compañeros al equipo y empezamos a atender a muchas más familias.</p>
+        </div>
+
+        <div class="timeline-item pandemic reveal">
+          <div class="timeline-dot">⚡</div>
+          <span class="timeline-badge">Pandemia · Marzo 2020</span>
+          <h3>Adaptarse o desaparecer. Eligieron seguir.</h3>
+          <p>Mientras otros cerraban, Academia Esparta desmontó todo para seguir adelante. Aulas virtuales, plataformas, formación urgente. Los alumnos no se detuvieron — nosotros tampoco. Ese momento mostró algo: cuando confían en ti, encuentras la manera de estar ahí.</p>
+          <span class="timeline-metric">⚡ Transformación en 48 horas</span>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">🚀</div>
+          <span class="timeline-badge">Crecimiento exponencial</span>
+          <h3>De la supervivencia a la escalabilidad</h3>
+          <p>Después de la pandemia, algo cambió. Volvimos más fuertes. Nuevas áreas de especialización, profesores en expansión, familias que traían a sus amigos porque confiaban en nosotros.</p>
+          <span class="timeline-metric">👨‍👩‍👧 350+ alumnos activos</span>
+        </div>
+
+        <div class="timeline-item present reveal">
+          <div class="timeline-dot">🏆</div>
+          <span class="timeline-badge">Hoy</span>
+          <h3>La academia que soñamos desde el primer día</h3>
+          <p>7 aulas, más de 40 alumnos por hora, un equipo de más de 10 personas. Refuerzo escolar, logopedia y psicología. Resultados que hablan solos: alumnos que aprueban, padres que respiran, familias que nos recomiendan.</p>
         </div>
 
       </div>
 
       <div class="story-cta reveal">
-        <a href="inscripcion.html">Únete a las familias que confían en nosotros →</a>
+        <p>¿La historia de tu hijo podría empezar aquí?</p>
+        <a href="inscripcion.html">Conoce nuestro proyecto →</a>
       </div>
 
     </section>
