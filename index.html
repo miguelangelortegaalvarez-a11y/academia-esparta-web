@@ -827,13 +827,13 @@
       .portal-card:hover { transform: translateY(-8px) scale(1.02); }
 
       .portal-recursos {
-        background: linear-gradient(145deg, var(--primary-darker) 0%, var(--primary) 100%);
-        box-shadow: 0 14px 50px rgba(6,60,36,0.28);
+        background: linear-gradient(145deg, #064e3b 0%, #059669 100%);
+        box-shadow: 0 14px 50px rgba(6,78,59,0.28);
         animation: pulseGreen 5s ease-in-out infinite alternate;
       }
       @keyframes pulseGreen {
-        from { box-shadow: 0 14px 50px rgba(6,60,36,0.28); }
-        to   { box-shadow: 0 20px 66px rgba(14,147,67,0.46); }
+        from { box-shadow: 0 14px 50px rgba(6,78,59,0.28); }
+        to   { box-shadow: 0 20px 66px rgba(5,150,105,0.46); }
       }
       .portal-juegos {
         background: linear-gradient(145deg, #065f46 0%, #10b981 100%);
@@ -899,6 +899,18 @@
         text-shadow: 0 0 12px rgba(255,255,255,0.6);
       }
       .eq-ans.show { opacity: 1; }
+
+      /* Word typewriter box (Recursos) — reuses eq-box style */
+      .word-cursor {
+        display: inline-block;
+        width: 2px;
+        height: 1.1em;
+        background: rgba(255,255,255,0.85);
+        margin-left: 2px;
+        vertical-align: middle;
+        animation: cursorBlink 0.7s ease-in-out infinite alternate;
+      }
+      @keyframes cursorBlink { from { opacity: 1; } to { opacity: 0; } }
 
       .rp-deco {
         position: absolute;
@@ -1683,8 +1695,25 @@
           <a href="materiales.html" class="portal-card portal-recursos">
             <div class="rp-deco rp-deco-1"></div>
             <div class="rp-deco rp-deco-2"></div>
+
+            <!-- Sílabas y palabras flotando de fondo -->
+            <div class="math-floats">
+              <span class="mf" style="--x:6%;  --delay:0s;   --dur:5.2s">ma</span>
+              <span class="mf" style="--x:18%; --delay:1.3s; --dur:4.5s">le·er</span>
+              <span class="mf" style="--x:32%; --delay:0.5s; --dur:5.8s">sí·la·ba</span>
+              <span class="mf" style="--x:48%; --delay:2.2s; --dur:4.2s">es·cri·bir</span>
+              <span class="mf" style="--x:62%; --delay:0.8s; --dur:6s">voz</span>
+              <span class="mf" style="--x:76%; --delay:1.7s; --dur:4.8s">pa·la·bra</span>
+              <span class="mf" style="--x:88%; --delay:3.1s; --dur:5s">A·B·C</span>
+              <span class="mf" style="--x:24%; --delay:2.8s; --dur:3.9s">poe·sí·a</span>
+              <span class="mf" style="--x:55%; --delay:1.0s; --dur:5.5s">tex·to</span>
+            </div>
+
             <div class="rp-inner">
-              <span class="rp-emoji">📚</span>
+              <!-- Palabra que se deletrea letra a letra -->
+              <div class="eq-box">
+                <span id="word-display"></span><span class="word-cursor"></span>
+              </div>
               <h2 class="rp-title">Materiales y Recursos</h2>
               <p class="rp-desc">Fichas, ejercicios y apuntes organizados por nivel y materia. Gratuitos y listos para imprimir.</p>
               <div class="rp-cats">
@@ -1934,6 +1963,38 @@
         if (info && idSeccion === 'niv-final-eso')
           document.getElementById('txt-tema-final').innerText = 'Recursos de ' + info;
       }
+
+      // ── Word typewriter animation (Recursos) ──
+      (function() {
+        var el = document.getElementById('word-display');
+        if (!el) return;
+        var words = ['Lectura', 'Escritura', 'Vocabulario', 'Comprensión', 'Fonología', 'Gramática', 'Dictado', 'Sílabas'];
+        var wi = 0, ci = 0, deleting = false, pauseTimer;
+        function tick() {
+          var word = words[wi % words.length];
+          if (!deleting) {
+            ci++;
+            el.textContent = word.slice(0, ci);
+            if (ci === word.length) {
+              deleting = true;
+              pauseTimer = setTimeout(tick, 1800);
+              return;
+            }
+            setTimeout(tick, 110);
+          } else {
+            ci--;
+            el.textContent = word.slice(0, ci);
+            if (ci === 0) {
+              deleting = false;
+              wi++;
+              setTimeout(tick, 350);
+              return;
+            }
+            setTimeout(tick, 55);
+          }
+        }
+        setTimeout(tick, 600);
+      })();
 
       // ── Equation solver animation ──
       (function() {
