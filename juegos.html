@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juegos Interactivos – Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --primary: #0e9343;
+        --primary-darker: #063c24;
+        --game: #4f46e5;
+        --game-dark: #1e1b4b;
+        --dark: #111827;
+        --gray: #4b5563;
+        --light: #f5f3ff;
+        --white: #ffffff;
+        --radius: 16px;
+        --radius-sm: 10px;
+        --shadow-hover: 0 12px 36px rgba(0,0,0,0.14);
+        --ease: all 0.28s cubic-bezier(0.4,0,0.2,1);
+      }
+      body { font-family: 'Poppins', sans-serif; color: var(--dark); background: #fff; }
+      a { text-decoration: none; }
+
+      /* ── Header ── */
+      .header {
+        background: #fff;
+        padding: 0.85rem 2rem;
+        position: fixed;
+        width: 100%; top: 0; left: 0;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      }
+      .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); letter-spacing: -0.5px; }
+      .header-back {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        color: var(--gray); font-size: 0.88rem; font-weight: 600;
+        transition: color 0.2s;
+      }
+      .header-back:hover { color: var(--game); }
+
+      /* ── Hero ── */
+      .hero {
+        background: linear-gradient(140deg, var(--game-dark) 0%, var(--game) 100%);
+        padding: 7rem 2rem 4.5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        width: 500px; height: 500px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.05);
+        top: -150px; right: -100px;
+      }
+      .hero::after {
+        content: '';
+        position: absolute;
+        width: 280px; height: 280px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.04);
+        bottom: -80px; left: -60px;
+      }
+      .hero-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+      .hero-emoji { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
+      .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 0.8rem; }
+      .hero p  { color: rgba(255,255,255,0.70); font-size: 1rem; line-height: 1.65; }
+
+      /* ── Game cards ── */
+      .games-section {
+        padding: 3rem 2rem 5rem;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+      .game-card {
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--radius);
+        overflow: hidden;
+        text-decoration: none;
+        color: var(--dark);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+        border: 1.5px solid rgba(79,70,229,0.1);
+        transition: var(--ease);
+        background: #fff;
+      }
+      .game-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-hover);
+        border-color: var(--game);
+      }
+      .game-card-header {
+        padding: 2.2rem 1.8rem 1.6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        text-align: center;
+      }
+      .game-emoji-circle {
+        width: 80px; height: 80px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 2.4rem;
+        transition: transform 0.3s ease;
+      }
+      .game-card:hover .game-emoji-circle { transform: scale(1.12) rotate(-5deg); }
+      .gc-blue   .game-emoji-circle { background: #eff6ff; }
+      .gc-green  .game-emoji-circle { background: #f0fdf4; }
+      .gc-purple .game-emoji-circle { background: #faf5ff; }
+      .gc-orange .game-emoji-circle { background: #fff7ed; }
+      .gc-red    .game-emoji-circle { background: #fef2f2; }
+
+      .game-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--dark); line-height: 1.25; }
+      .game-card-body {
+        padding: 0 1.8rem 1.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex: 1;
+      }
+      .game-card p { font-size: 0.83rem; color: var(--gray); line-height: 1.6; flex: 1; }
+      .game-tag {
+        display: inline-flex; align-items: center; gap: 0.3rem;
+        font-size: 0.72rem; font-weight: 700;
+        padding: 0.22rem 0.65rem;
+        border-radius: 999px;
+        width: fit-content;
+      }
+      .tag-blue   { background: #eff6ff; color: #2563eb; }
+      .tag-green  { background: #f0fdf4; color: #16a34a; }
+      .tag-purple { background: #faf5ff; color: #7c3aed; }
+      .tag-orange { background: #fff7ed; color: #ea580c; }
+
+      .game-btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+        padding: 0.7rem 1.3rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.85rem; font-weight: 700;
+        transition: var(--ease);
+        border: 2px solid var(--game);
+        color: var(--game);
+        background: transparent;
+      }
+      .game-btn:hover { background: var(--game); color: #fff; }
+      .game-btn.filled { background: var(--game); color: #fff; }
+      .game-btn.filled:hover { background: var(--game-dark); border-color: var(--game-dark); }
+
+      /* ── Pronto ── */
+      .coming-soon {
+        opacity: 0.55;
+        pointer-events: none;
+        filter: grayscale(0.4);
+      }
+      .tag-soon { background: #f3f4f6; color: #9ca3af; }
+
+      /* ── CTA ── */
+      .games-cta {
+        text-align: center;
+        padding: 3rem 2rem 5rem;
+        border-top: 1px solid rgba(79,70,229,0.1);
+      }
+      .games-cta p { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.2rem; }
+      .btn-cta {
+        display: inline-flex; align-items: center; gap: 0.6rem;
+        background: var(--primary); color: #fff;
+        font-weight: 700; padding: 0.85rem 2rem;
+        border-radius: var(--radius-sm);
+        transition: var(--ease); font-size: 0.95rem;
+      }
+      .btn-cta:hover { background: var(--primary-darker); transform: translateY(-2px); }
+
+      /* ── Reveal ── */
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+      .reveal.visible { opacity: 1; transform: none; }
+
+      /* ── Responsive ── */
+      @media (max-width: 768px) { .games-grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 480px) { .games-grid { grid-template-columns: 1fr; } }
+    </style>
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG">
+  </head>
+  <body>
+
+    <header class="header">
+      <a href="index.html" class="logo">Academia Esparta</a>
+      <a href="index.html" class="header-back"><i class="fa-solid fa-arrow-left"></i> Volver a inicio</a>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-inner">
+        <span class="hero-emoji">🎮</span>
+        <h1>Juegos Interactivos</h1>
+        <p>Aprende jugando con actividades diseñadas por nuestros profesores. Matemáticas, inglés, fonología y más.</p>
+      </div>
+    </div>
+
+    <!-- Games -->
+    <div class="games-section">
+      <div class="games-grid">
+
+        <a href="entrenamiento-esparta.html" class="game-card gc-blue reveal">
+          <div class="game-card-header">
+            <div class="game-emoji-circle">🏋️</div>
+            <h3>Gimnasio de Cálculo</h3>
+          </div>
+          <div class="game-card-body">
+            <p>Sumas, restas, multiplicaciones y divisiones en modo entrenamiento. ¡Cronometrado y con niveles!</p>
+            <span class="game-tag tag-blue">🔢 Matemáticas</span>
+            <a class="game-btn filled">Empezar a entrenar →</a>
+          </div>
+        </a>
+
+        <a href="/camino-ingles/" class="game-card gc-green reveal">
+          <div class="game-card-header">
+            <div class="game-emoji-circle">🇬🇧</div>
+            <h3>Inglés Interactivo</h3>
+          </div>
+          <div class="game-card-body">
+            <p>Refuerza vocabulario y comprensión lectora con recursos diseñados para aprender inglés jugando.</p>
+            <span class="game-tag tag-green">🇬🇧 Inglés</span>
+            <a class="game-btn filled">Entrar al camino →</a>
+          </div>
+        </a>
+
+        <a href="./camino-letras/" class="game-card gc-purple reveal">
+          <div class="game-card-header">
+            <div class="game-emoji-circle">🔤</div>
+            <h3>Conciencia Fonológica</h3>
+          </div>
+          <div class="game-card-body">
+            <p>Aprende las vocales, mejora la articulación y desarrolla la conciencia fonológica con actividades visuales.</p>
+            <span class="game-tag tag-purple">🔤 Lenguaje</span>
+            <a class="game-btn filled">Jugar ahora →</a>
+          </div>
+        </a>
+
+        <a href="./camino-matematico/" class="game-card gc-orange reveal">
+          <div class="game-card-header">
+            <div class="game-emoji-circle">🧮</div>
+            <h3>Camino Matemático</h3>
+          </div>
+          <div class="game-card-body">
+            <p>Recorre el camino de las mates resolviendo retos por niveles. Para Primaria y ESO.</p>
+            <span class="game-tag tag-orange">🔢 Matemáticas</span>
+            <a class="game-btn filled">Entrar →</a>
+          </div>
+        </a>
+
+        <a href="./cuento-pirata-mario/" class="game-card gc-blue reveal">
+          <div class="game-card-header">
+            <div class="game-emoji-circle">🏴‍☠️</div>
+            <h3>Cuento Pirata Mario</h3>
+          </div>
+          <div class="game-card-body">
+            <p>Una aventura interactiva de lectoescritura y comprensión lectora para los más peques.</p>
+            <span class="game-tag tag-purple">📖 Lectura</span>
+            <a class="game-btn filled">Comenzar aventura →</a>
+          </div>
+        </a>
+
+        <div class="game-card gc-red coming-soon reveal">
+          <div class="game-card-header">
+            <div class="game-emoji-circle">🚀</div>
+            <h3>Próximamente…</h3>
+          </div>
+          <div class="game-card-body">
+            <p>Nuevos juegos en preparación. ¡Síguenos para enterarte cuando lleguen!</p>
+            <span class="game-tag tag-soon">🔜 Próximamente</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="games-cta">
+      <p>¿Quieres que creemos un juego específico para tu hijo? Escríbenos.</p>
+      <a href="index.html#contact" class="btn-cta"><i class="fa-solid fa-comment"></i> Contactar con la academia</a>
+    </div>
+
+    <script>
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+  </body>
+</html>
