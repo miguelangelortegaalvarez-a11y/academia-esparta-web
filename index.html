@@ -914,14 +914,61 @@
         padding: 0.36rem 0.82rem;
         border-radius: 999px;
         transition: var(--ease);
-        cursor: default;
+        cursor: help;
+        position: relative;
       }
       #speech .service-chip { background: #f0fdf4; }
       .service-chip:hover {
         background: var(--primary);
         color: #fff;
         border-color: var(--primary);
-        transform: translateY(-2px);
+        transform: translateY(-4px);
+        z-index: 10;
+      }
+
+      /* Tooltip */
+      .service-chip::before {
+        content: attr(data-tip);
+        position: absolute;
+        bottom: calc(100% + 11px);
+        left: 50%;
+        transform: translateX(-50%) translateY(6px);
+        background: var(--primary-darker);
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 500;
+        font-style: normal;
+        line-height: 1.55;
+        letter-spacing: 0;
+        padding: 0.7rem 1rem;
+        border-radius: 10px;
+        width: 210px;
+        text-align: left;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.22s ease, transform 0.22s ease;
+        z-index: 200;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+        white-space: normal;
+      }
+      /* Arrow */
+      .service-chip::after {
+        content: '';
+        position: absolute;
+        bottom: calc(100% + 5px);
+        left: 50%;
+        transform: translateX(-50%) translateY(6px);
+        border: 5px solid transparent;
+        border-top-color: var(--primary-darker);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.22s ease, transform 0.22s ease;
+        z-index: 200;
+      }
+      .service-chip:hover::before,
+      .service-chip:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
       }
 
       /* =============================================
@@ -1457,14 +1504,14 @@
           <h3>Hablar mejor para aprender mejor</h3>
           <p>Intervenimos de forma <strong>personalizada</strong> en todas las áreas del lenguaje oral y escrito, adaptando el ritmo y los objetivos a cada alumno para lograr resultados reales y duraderos.</p>
           <div class="service-chips">
-            <span class="service-chip">🗣️ Articulación</span>
-            <span class="service-chip">📖 Lectoescritura</span>
-            <span class="service-chip">👂 Comprensión oral</span>
-            <span class="service-chip">💬 Expresión oral</span>
-            <span class="service-chip">📝 Vocabulario</span>
-            <span class="service-chip">🔤 Morfosintaxis</span>
-            <span class="service-chip">🔊 Fonología</span>
-            <span class="service-chip">🧩 Conciencia fonológica</span>
+            <span class="service-chip" data-tip="Corrección de la pronunciación de sonidos y palabras para una comunicación más clara y natural.">🗣️ Articulación</span>
+            <span class="service-chip" data-tip="Trabajo sobre lectura y escritura: dislexia, disgrafía y otras dificultades del aprendizaje escrito.">📖 Lectoescritura</span>
+            <span class="service-chip" data-tip="Entender mensajes, instrucciones y textos escuchados con mayor precisión y efectividad.">👂 Comprensión oral</span>
+            <span class="service-chip" data-tip="Comunicarse con fluidez, coherencia y corrección en distintas situaciones del día a día.">💬 Expresión oral</span>
+            <span class="service-chip" data-tip="Ampliar el repertorio de palabras para expresarse con mayor riqueza y precisión en el lenguaje.">📝 Vocabulario</span>
+            <span class="service-chip" data-tip="Construir frases correctas usando bien los tiempos verbales, concordancias y estructuras gramaticales.">🔤 Morfosintaxis</span>
+            <span class="service-chip" data-tip="Distinguir y producir correctamente los sonidos del lenguaje hablado de la lengua.">🔊 Fonología</span>
+            <span class="service-chip" data-tip="Reconocer y manipular los sonidos de las palabras, base fundamental para aprender a leer y escribir.">🧩 Conciencia fonológica</span>
           </div>
           <a href="logopedia.html" class="btn btn-primary" style="width:fit-content;">Saber más sobre logopedia →</a>
         </div>
@@ -1479,14 +1526,14 @@
           <h3>Bienestar emocional y crecimiento personal</h3>
           <p>Acompañamos a <strong>niños y adultos</strong> con herramientas prácticas y objetivos claros para lograr un desarrollo más seguro, equilibrado y autónomo dentro y fuera del aula.</p>
           <div class="service-chips">
-            <span class="service-chip">❤️ Gestión emocional</span>
-            <span class="service-chip">⭐ Autoestima</span>
-            <span class="service-chip">🎯 Motivación</span>
-            <span class="service-chip">🤝 Habilidades sociales</span>
-            <span class="service-chip">🛡️ Regulación conducta</span>
-            <span class="service-chip">🌱 Bienestar personal</span>
-            <span class="service-chip">📚 Hábitos de estudio</span>
-            <span class="service-chip">🧘 Gestión del estrés</span>
+            <span class="service-chip" data-tip="Identificar, comprender y regular emociones para responder de forma equilibrada ante cualquier situación.">❤️ Gestión emocional</span>
+            <span class="service-chip" data-tip="Construir una imagen positiva de uno mismo, con confianza y seguridad en las propias capacidades.">⭐ Autoestima</span>
+            <span class="service-chip" data-tip="Despertar el interés y el esfuerzo hacia los objetivos académicos y personales de forma sostenida.">🎯 Motivación</span>
+            <span class="service-chip" data-tip="Relacionarse con los demás de forma asertiva, empática y respetuosa en distintos contextos sociales.">🤝 Habilidades sociales</span>
+            <span class="service-chip" data-tip="Manejar impulsos y comportamientos para actuar de forma más reflexiva y adaptada al entorno.">🛡️ Regulación conducta</span>
+            <span class="service-chip" data-tip="Desarrollar hábitos y actitudes que favorecen la salud emocional, el equilibrio y la satisfacción personal.">🌱 Bienestar personal</span>
+            <span class="service-chip" data-tip="Organizar el tiempo y el espacio de trabajo para estudiar con más eficacia y menos esfuerzo.">📚 Hábitos de estudio</span>
+            <span class="service-chip" data-tip="Estrategias prácticas para afrontar la presión académica y las situaciones difíciles con calma.">🧘 Gestión del estrés</span>
           </div>
           <a href="psicologia.html" class="btn btn-primary" style="width:fit-content;">Saber más sobre psicología →</a>
         </div>
