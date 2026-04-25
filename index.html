@@ -830,94 +830,69 @@
       /* =============================================
          10. SERVICES
          ============================================= */
-      /* ── Service split layout ── */
-      .service-split {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        min-height: 440px;
-        align-items: stretch;
-      }
-      .service-split-reverse { direction: rtl; }
-      .service-split-reverse > * { direction: ltr; }
+      /* ── Service row layout ── */
+      .svc-section { padding: 4rem 2rem; }
+      #speech  { background: var(--light); }
+      #psychology { background: #fff; }
 
-      .service-visual {
-        background: linear-gradient(145deg, var(--primary-darker) 0%, var(--primary) 100%);
+      .svc-row {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 3.5rem;
+        max-width: 960px;
+        margin: 0 auto;
+        align-items: start;
+      }
+      .svc-row-reverse { grid-template-columns: 1fr 260px; }
+      .svc-row-reverse .svc-card { order: 2; }
+      .svc-row-reverse .svc-details { order: 1; }
+
+      .svc-card {
+        background: linear-gradient(150deg, var(--primary-darker) 0%, var(--primary) 100%);
+        border-radius: 20px;
+        padding: 2.5rem 1.8rem;
+        text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        padding: 3rem 2.5rem;
-        gap: 1.4rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
+        gap: 1rem;
+        position: sticky;
+        top: 90px;
+        box-shadow: 0 12px 36px rgba(14,147,67,0.28);
       }
-      .service-visual::before {
-        content: '';
-        position: absolute;
-        width: 260px; height: 260px;
+      .svc-card-emoji {
+        font-size: 3.4rem;
+        width: 90px; height: 90px;
         border-radius: 50%;
-        border: 1px solid rgba(255,255,255,0.08);
-        top: -60px; right: -60px;
-      }
-      .service-visual::after {
-        content: '';
-        position: absolute;
-        width: 180px; height: 180px;
-        border-radius: 50%;
-        border: 1px solid rgba(255,255,255,0.06);
-        bottom: -40px; left: -40px;
-      }
-      .svc-emoji-circle {
-        width: 110px; height: 110px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.14);
         border: 2px solid rgba(255,255,255,0.28);
         display: flex; align-items: center; justify-content: center;
-        font-size: 3.8rem;
-        position: relative; z-index: 1;
-        transition: transform 0.4s ease;
+        transition: transform 0.3s ease;
       }
-      .service-visual:hover .svc-emoji-circle { transform: scale(1.08); }
-      .service-visual h2 {
-        color: #fff;
-        font-size: 2rem;
-        font-weight: 800;
-        position: relative; z-index: 1;
-      }
-      .service-visual-sub {
-        color: rgba(255,255,255,0.65);
-        font-size: 0.9rem;
-        line-height: 1.55;
-        max-width: 200px;
-        position: relative; z-index: 1;
-      }
+      .svc-card:hover .svc-card-emoji { transform: scale(1.1) rotate(-4deg); }
+      .svc-card h2 { color: #fff; font-size: 1.55rem; font-weight: 800; }
+      .svc-card p  { color: rgba(255,255,255,0.65); font-size: 0.82rem; line-height: 1.5; }
 
-      .service-content {
-        padding: 3.5rem 3.5rem;
+      .svc-details {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        gap: 1.4rem;
-        background: #fff;
+        gap: 1.2rem;
       }
-      #speech .service-content { background: var(--light); }
-
-      .service-content-label {
-        font-size: 0.72rem;
+      .svc-label {
+        font-size: 0.7rem;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--primary);
-        margin-bottom: -0.6rem;
       }
-      .service-content h3 {
-        font-size: 1.5rem;
+      .svc-details h3 {
+        font-size: 1.65rem;
         font-weight: 800;
         color: var(--dark);
-        line-height: 1.25;
+        line-height: 1.2;
+        margin-top: -0.3rem;
       }
-      .service-content p {
+      .svc-details p {
         font-size: 0.95rem;
         color: var(--gray);
         line-height: 1.72;
@@ -925,23 +900,23 @@
       .service-chips {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.55rem;
+        gap: 0.5rem;
       }
       .service-chip {
         display: inline-flex;
         align-items: center;
         gap: 0.35rem;
         background: #fff;
-        border: 1.5px solid rgba(14,147,67,0.22);
+        border: 1.5px solid rgba(14,147,67,0.2);
         color: var(--primary-darker);
-        font-size: 0.82rem;
+        font-size: 0.81rem;
         font-weight: 600;
-        padding: 0.38rem 0.85rem;
+        padding: 0.36rem 0.82rem;
         border-radius: 999px;
         transition: var(--ease);
         cursor: default;
       }
-      #speech .service-chip { background: #fff; }
+      #speech .service-chip { background: #f0fdf4; }
       .service-chip:hover {
         background: var(--primary);
         color: #fff;
@@ -1092,10 +1067,10 @@
         .stat-item:nth-last-child(-n+2) { border-bottom: none; }
         .stat-item:last-child { border-right: none; }
 
-        .service-split { grid-template-columns: 1fr; min-height: auto; }
-        .service-split-reverse { direction: ltr; }
-        .service-visual { min-height: 280px; }
-        .service-content { padding: 2.5rem 1.8rem; }
+        .svc-row, .svc-row-reverse { grid-template-columns: 1fr; gap: 2rem; }
+        .svc-row-reverse .svc-card { order: 0; }
+        .svc-row-reverse .svc-details { order: 1; }
+        .svc-card { position: static; }
 
         .section { padding: 3.5rem 1.5rem; }
         .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -1470,15 +1445,15 @@
 
     <!-- ==================== LOGOPEDIA ==================== -->
     <!-- ==================== LOGOPEDIA ==================== -->
-    <section id="speech" style="overflow:hidden;">
-      <div class="service-split">
-        <div class="service-visual">
-          <div class="svc-emoji-circle">🗣️</div>
+    <section id="speech" class="svc-section">
+      <div class="svc-row">
+        <div class="svc-card">
+          <div class="svc-card-emoji">🗣️</div>
           <h2>Logopedia</h2>
-          <p class="service-visual-sub">Comunicación, lenguaje y habla para cada alumno</p>
+          <p>Comunicación, lenguaje y habla para cada alumno</p>
         </div>
-        <div class="service-content reveal">
-          <span class="service-content-label">Especialidad</span>
+        <div class="svc-details reveal">
+          <span class="svc-label">Especialidad</span>
           <h3>Hablar mejor para aprender mejor</h3>
           <p>Intervenimos de forma <strong>personalizada</strong> en todas las áreas del lenguaje oral y escrito, adaptando el ritmo y los objetivos a cada alumno para lograr resultados reales y duraderos.</p>
           <div class="service-chips">
@@ -1497,10 +1472,10 @@
     </section>
 
     <!-- ==================== PSICOLOGÍA ==================== -->
-    <section id="psychology" style="overflow:hidden;">
-      <div class="service-split service-split-reverse">
-        <div class="service-content reveal">
-          <span class="service-content-label">Especialidad</span>
+    <section id="psychology" class="svc-section">
+      <div class="svc-row svc-row-reverse">
+        <div class="svc-details reveal">
+          <span class="svc-label">Especialidad</span>
           <h3>Bienestar emocional y crecimiento personal</h3>
           <p>Acompañamos a <strong>niños y adultos</strong> con herramientas prácticas y objetivos claros para lograr un desarrollo más seguro, equilibrado y autónomo dentro y fuera del aula.</p>
           <div class="service-chips">
@@ -1515,10 +1490,10 @@
           </div>
           <a href="psicologia.html" class="btn btn-primary" style="width:fit-content;">Saber más sobre psicología →</a>
         </div>
-        <div class="service-visual">
-          <div class="svc-emoji-circle">🧠</div>
+        <div class="svc-card">
+          <div class="svc-card-emoji">🧠</div>
           <h2>Psicología</h2>
-          <p class="service-visual-sub">Bienestar emocional y desarrollo personal</p>
+          <p>Bienestar emocional y desarrollo personal</p>
         </div>
       </div>
     </section>
