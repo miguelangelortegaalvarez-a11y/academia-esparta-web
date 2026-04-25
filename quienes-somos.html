@@ -103,39 +103,63 @@
       flex-direction: column;
       align-items: center;
     }
+    /* Outer glow ring around frame */
+    .photo-wrap {
+      position: relative;
+      width: 300px;
+      padding: 5px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, var(--primary), var(--primary-darker));
+      box-shadow: 0 0 0 1px rgba(14,147,67,0.15), 0 20px 60px rgba(14,147,67,0.28);
+    }
     .photo-frame {
       position: relative;
-      width: 280px; height: 320px;
+      width: 100%;
+      aspect-ratio: 5/6;
       border-radius: 18px;
       overflow: hidden;
-      background: linear-gradient(160deg, #f0fdf4 0%, #dcfce7 100%);
-      box-shadow: 0 12px 40px rgba(14,147,67,0.18);
+      background: linear-gradient(160deg, var(--primary-darker) 0%, #065f46 60%, #047857 100%);
     }
+    /* Large decorative circle top-right */
     .photo-frame::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 55%, rgba(6,60,36,0.35) 100%);
-      z-index: 1;
-      border-radius: 18px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.09);
+      top: -70px; right: -60px;
+      z-index: 0;
+    }
+    /* Small accent circle bottom-left */
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      bottom: -30px; left: -30px;
+      z-index: 0;
     }
     .photo-frame img {
+      position: relative; z-index: 1;
       width: 100%; height: 100%;
       object-fit: contain;
       object-position: center bottom;
       display: block;
+      filter: drop-shadow(0 -4px 16px rgba(0,0,0,0.15));
     }
     .photo-role-bar {
       position: absolute;
       bottom: 0; left: 0; right: 0;
       z-index: 2;
-      padding: 0.7rem 1rem;
+      padding: 0.75rem 1rem 0.8rem;
       text-align: center;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      color: rgba(255,255,255,0.9);
-      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 0.09em;
       text-transform: uppercase;
+      background: linear-gradient(0deg, rgba(6,36,24,0.65) 0%, transparent 100%);
     }
 
     /* ── Info column ── */
@@ -232,7 +256,7 @@
       }
       .prof-card.reverse .prof-photo { order: 0; }
       .prof-card.reverse .prof-info  { order: 0; }
-      .photo-frame { width: 220px; height: 260px; margin: 0 auto; }
+      .photo-wrap { width: 220px; margin: 0 auto; }
       .prof-role, .prof-skills { justify-content: center; }
       .prof-divider { margin: 0 auto; }
       .stats-inner { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -274,9 +298,11 @@
     <!-- Miguel Ángel -->
     <article class="prof-card reveal">
       <div class="prof-photo">
-        <div class="photo-frame">
-          <img src="miguel.PNG" alt="Miguel Ángel, director de Academia Esparta">
-          <div class="photo-role-bar">Dirección Académica</div>
+        <div class="photo-wrap">
+          <div class="photo-frame">
+            <img src="miguel.PNG" alt="Miguel Ángel, director de Academia Esparta">
+            <div class="photo-role-bar">Dirección Académica</div>
+          </div>
         </div>
       </div>
       <div class="prof-info">
@@ -301,13 +327,15 @@
     <!-- Julio Uceda -->
     <article class="prof-card reverse reveal">
       <div class="prof-photo">
-        <div class="photo-frame">
-          <img src="julio.PNG" alt="Julio Uceda, profesor de Academia Esparta">
-          <div class="photo-role-bar">ESO · Bachillerato · EBAU</div>
+        <div class="photo-wrap">
+          <div class="photo-frame">
+            <img src="julio.PNG" alt="Julio Uceda, profesor de Academia Esparta">
+            <div class="photo-role-bar">ESO · Bachillerato · EBAU</div>
+          </div>
         </div>
       </div>
       <div class="prof-info">
-        <span class="prof-badge"><i class="fa-solid fa-star"></i> Co-fundador</span>
+        <span class="prof-badge"><i class="fa-solid fa-chalkboard-teacher"></i> Profesor</span>
         <h2 class="prof-name">Julio Uceda</h2>
         <div class="prof-role">
           <span class="role-chip">📐 Matemáticas</span>
