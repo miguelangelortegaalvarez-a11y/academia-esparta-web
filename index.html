@@ -836,14 +836,69 @@
         to   { box-shadow: 0 20px 66px rgba(14,147,67,0.46); }
       }
       .portal-juegos {
-        background: linear-gradient(145deg, #1e1b4b 0%, #4f46e5 100%);
-        box-shadow: 0 14px 50px rgba(30,27,75,0.28);
-        animation: pulseIndigo 5s ease-in-out infinite alternate;
+        background: linear-gradient(145deg, #065f46 0%, #10b981 100%);
+        box-shadow: 0 14px 50px rgba(6,95,70,0.28);
+        animation: pulseEmerald 5s ease-in-out infinite alternate;
       }
-      @keyframes pulseIndigo {
-        from { box-shadow: 0 14px 50px rgba(30,27,75,0.28); }
-        to   { box-shadow: 0 20px 66px rgba(79,70,229,0.46); }
+      @keyframes pulseEmerald {
+        from { box-shadow: 0 14px 50px rgba(6,95,70,0.28); }
+        to   { box-shadow: 0 20px 66px rgba(16,185,129,0.46); }
       }
+
+      /* ── Math float animation ── */
+      .math-floats {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .mf {
+        position: absolute;
+        bottom: -2.5rem;
+        left: var(--x);
+        color: rgba(255,255,255,0.18);
+        font-size: 0.88rem;
+        font-weight: 700;
+        font-family: 'Poppins', monospace;
+        animation: mathRise var(--dur) var(--delay) ease-in infinite;
+        white-space: nowrap;
+      }
+      @keyframes mathRise {
+        0%   { transform: translateY(0) rotate(-5deg); opacity: 0; }
+        8%   { opacity: 1; }
+        85%  { opacity: 0.5; }
+        100% { transform: translateY(-420px) rotate(8deg); opacity: 0; }
+      }
+
+      /* ── Equation solver display ── */
+      .eq-box {
+        position: relative; z-index: 2;
+        background: rgba(255,255,255,0.12);
+        border: 1.5px solid rgba(255,255,255,0.25);
+        border-radius: 12px;
+        padding: 0.6rem 1.4rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: 0.04em;
+        min-width: 180px;
+        text-align: center;
+        margin: 0 auto 1.2rem;
+        font-family: 'Poppins', monospace;
+        min-height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .eq-question { color: rgba(255,255,255,0.9); }
+      .eq-ans {
+        color: #fff;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        text-shadow: 0 0 12px rgba(255,255,255,0.6);
+      }
+      .eq-ans.show { opacity: 1; }
 
       .rp-deco {
         position: absolute;
@@ -1646,8 +1701,25 @@
           <a href="juegos.html" class="portal-card portal-juegos">
             <div class="rp-deco rp-deco-1"></div>
             <div class="rp-deco rp-deco-2"></div>
+
+            <!-- Operaciones flotando de fondo -->
+            <div class="math-floats">
+              <span class="mf" style="--x:8%;  --delay:0s;   --dur:5s">3+5=8</span>
+              <span class="mf" style="--x:22%; --delay:1.4s; --dur:4.2s">12÷4=3</span>
+              <span class="mf" style="--x:38%; --delay:0.6s; --dur:5.5s">7×6=42</span>
+              <span class="mf" style="--x:54%; --delay:2.1s; --dur:4s">√25=5</span>
+              <span class="mf" style="--x:68%; --delay:0.3s; --dur:6s">2³=8</span>
+              <span class="mf" style="--x:80%; --delay:1.8s; --dur:4.8s">π≈3.14</span>
+              <span class="mf" style="--x:15%; --delay:3s;   --dur:5.2s">9-4=5</span>
+              <span class="mf" style="--x:48%; --delay:2.6s; --dur:3.8s">6²=36</span>
+              <span class="mf" style="--x:72%; --delay:0.9s; --dur:5.8s">15+7</span>
+            </div>
+
             <div class="rp-inner">
-              <span class="rp-emoji">🎮</span>
+              <!-- Ecuación animada -->
+              <div class="eq-box" id="eq-box">
+                <span class="eq-question" id="eq-q">8 × 7 = </span><span class="eq-ans" id="eq-a">?</span>
+              </div>
               <h2 class="rp-title">Juegos Interactivos</h2>
               <p class="rp-desc">Aprende jugando con actividades diseñadas por nuestros profesores para practicar sin aburrirte.</p>
               <div class="rp-cats">
@@ -1862,6 +1934,40 @@
         if (info && idSeccion === 'niv-final-eso')
           document.getElementById('txt-tema-final').innerText = 'Recursos de ' + info;
       }
+
+      // ── Equation solver animation ──
+      (function() {
+        var eqs = [
+          { q: '8 × 7 = ', a: '56' },
+          { q: '12 ÷ 4 = ', a: '3' },
+          { q: '√144 = ', a: '12' },
+          { q: '15 + 27 = ', a: '42' },
+          { q: '9² = ', a: '81' },
+          { q: '100 − 37 = ', a: '63' },
+          { q: '3 × 3 × 3 = ', a: '27' },
+          { q: '2⁸ = ', a: '256' },
+        ];
+        var eqQ = document.getElementById('eq-q');
+        var eqA = document.getElementById('eq-a');
+        if (!eqQ || !eqA) return;
+        var idx = 0;
+        function nextEq() {
+          // Reset
+          eqA.classList.remove('show');
+          eqA.textContent = '?';
+          var eq = eqs[idx % eqs.length];
+          idx++;
+          eqQ.textContent = eq.q;
+          // After 1.2s reveal answer
+          setTimeout(function() {
+            eqA.textContent = eq.a;
+            eqA.classList.add('show');
+            // After 2s go to next
+            setTimeout(nextEq, 2000);
+          }, 1200);
+        }
+        setTimeout(nextEq, 800);
+      })();
 
       // ── Testimonials carousel ──
       (function() {
