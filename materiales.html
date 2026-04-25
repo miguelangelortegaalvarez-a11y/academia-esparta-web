@@ -1,384 +1,632 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Materiales y Recursos – Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      :root {
-        --primary: #0e9343;
-        --primary-darker: #063c24;
-        --dark: #111827;
-        --gray: #4b5563;
-        --light: #f0fdf4;
-        --white: #ffffff;
-        --radius: 16px;
-        --radius-sm: 10px;
-        --shadow: 0 4px 20px rgba(0,0,0,0.08);
-        --shadow-hover: 0 12px 36px rgba(0,0,0,0.14);
-        --ease: all 0.28s cubic-bezier(0.4,0,0.2,1);
-      }
-      body { font-family: 'Poppins', sans-serif; color: var(--dark); background: #fff; }
-      a { text-decoration: none; }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materiales y Recursos | Academia Esparta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 
-      /* ── Header ── */
-      .header {
-        background: var(--white);
-        padding: 0.85rem 2rem;
-        position: fixed;
-        width: 100%;
-        top: 0; left: 0;
-        z-index: 1000;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-      }
-      .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); letter-spacing: -0.5px; }
-      .header-back {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: var(--gray);
-        font-size: 0.88rem;
-        font-weight: 600;
-        transition: color 0.2s;
-      }
-      .header-back:hover { color: var(--primary); }
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #0e9343; --primary-dark: #09834c; --primary-darker: #063c24;
+      --light: #f0fdf4; --dark: #111827; --gray: #4b5563; --white: #fff;
+      --radius: 14px; --ease: all 0.22s ease;
+    }
+    body { font-family: 'Poppins', sans-serif; color: var(--dark); background: var(--light); }
+    a { text-decoration: none; }
 
-      /* ── Hero ── */
-      .mat-hero {
-        background: linear-gradient(140deg, var(--primary-darker) 0%, var(--primary) 100%);
-        padding: 7rem 2rem 4.5rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .mat-hero::before {
-        content: '';
-        position: absolute;
-        width: 500px; height: 500px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.05);
-        top: -150px; right: -100px;
-      }
-      .mat-hero::after {
-        content: '';
-        position: absolute;
-        width: 280px; height: 280px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.04);
-        bottom: -80px; left: -60px;
-      }
-      .mat-hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
-      .mat-hero-emoji { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
-      .mat-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 0.8rem; }
-      .mat-hero p  { color: rgba(255,255,255,0.70); font-size: 1rem; line-height: 1.65; }
+    /* ── Header ── */
+    .site-header {
+      background: rgba(255,255,255,.93); backdrop-filter: blur(8px);
+      padding: .85rem 2rem; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,.07);
+    }
+    .site-logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); letter-spacing: -.5px; }
+    .site-back {
+      display: inline-flex; align-items: center; gap: .5rem;
+      color: var(--gray); font-size: .88rem; font-weight: 600; transition: color .2s;
+    }
+    .site-back:hover { color: var(--primary); }
 
-      /* ── Filter bar ── */
-      .filter-bar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.55rem;
-        justify-content: center;
-        padding: 2.5rem 2rem 0;
-        max-width: 900px;
-        margin: 0 auto;
-      }
-      .filter-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.42rem 1rem;
-        border-radius: 999px;
-        border: 1.5px solid rgba(14,147,67,0.2);
-        background: #fff;
-        color: var(--gray);
-        font-size: 0.83rem;
-        font-weight: 600;
-        font-family: 'Poppins', sans-serif;
-        cursor: pointer;
-        transition: var(--ease);
-      }
-      .filter-btn:hover, .filter-btn.active {
-        background: var(--primary);
-        color: #fff;
-        border-color: var(--primary);
-      }
+    /* ── Hero ── */
+    .page-hero {
+      background: linear-gradient(140deg, var(--primary-darker) 0%, var(--primary) 100%);
+      padding: 7.5rem 2rem 4.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; width: 420px; height: 420px; border-radius: 50%;
+      background: rgba(255,255,255,.05); top: -120px; right: -80px;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(255,255,255,.04); bottom: -50px; left: -40px;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 580px; margin: 0 auto; }
+    .hero-label {
+      display: inline-block; background: rgba(255,255,255,.15); color: rgba(255,255,255,.9);
+      font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      padding: .3rem 1rem; border-radius: 999px; margin-bottom: 1.2rem;
+      border: 1px solid rgba(255,255,255,.25);
+    }
+    .hero-h1 { font-size: clamp(1.7rem,4vw,2.6rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: .8rem; }
+    .hero-p  { color: rgba(255,255,255,.72); font-size: .98rem; line-height: 1.65; }
+    .hero-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-top: 1.5rem; }
+    .hero-tag {
+      background: rgba(255,255,255,.12); color: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.22);
+      font-size: .72rem; font-weight: 600; padding: .25rem .75rem; border-radius: 999px;
+    }
 
-      /* ── Materials grid ── */
-      .mat-section {
-        padding: 2rem 2rem 5rem;
-        max-width: 1060px;
-        margin: 0 auto;
-      }
-      .mat-cat-title {
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--primary);
-        margin: 2.5rem 0 1.2rem;
-      }
-      .mat-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.3rem;
-      }
-      .mat-card {
-        display: flex;
-        flex-direction: column;
-        background: var(--light);
-        border: 1.5px solid rgba(14,147,67,0.1);
-        border-radius: var(--radius);
-        padding: 1.8rem 1.6rem;
-        transition: var(--ease);
-        cursor: pointer;
-        text-decoration: none;
-        color: var(--dark);
-        gap: 0.7rem;
-      }
-      .mat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-hover);
-        border-color: var(--primary);
-        background: #fff;
-      }
-      .mat-card-emoji { font-size: 2.2rem; }
-      .mat-card h3 { font-size: 1rem; font-weight: 700; color: var(--dark); line-height: 1.3; }
-      .mat-card p  { font-size: 0.82rem; color: var(--gray); line-height: 1.6; flex: 1; }
-      .mat-card-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        background: rgba(14,147,67,0.1);
-        color: var(--primary);
-        font-size: 0.72rem;
-        font-weight: 700;
-        padding: 0.22rem 0.65rem;
-        border-radius: 999px;
-        width: fit-content;
-        margin-top: auto;
-      }
-      .mat-card-tag.orange { background: rgba(234,88,12,0.1); color: #ea580c; }
-      .mat-card-tag.blue   { background: rgba(37,99,235,0.1); color: #2563eb; }
-      .mat-card-tag.purple { background: rgba(124,58,237,0.1); color: #7c3aed; }
+    /* ── App wrapper ── */
+    .app-wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
 
-      /* ── ESO special card ── */
-      .mat-card-eso {
-        background: linear-gradient(135deg, var(--primary-darker), var(--primary));
-        color: #fff;
-        border-color: transparent;
-      }
-      .mat-card-eso:hover { background: linear-gradient(135deg, var(--primary), #16a34a); }
-      .mat-card-eso h3, .mat-card-eso p { color: rgba(255,255,255,0.95); }
-      .mat-card-eso p { color: rgba(255,255,255,0.7); }
-      .mat-card-eso .mat-card-tag { background: rgba(255,255,255,0.18); color: #fff; }
+    /* ── Loading ── */
+    .loading { text-align: center; padding: 4rem 2rem; color: #9ca3af; }
+    .loading-spinner {
+      width: 36px; height: 36px; border: 3px solid #e5e7eb;
+      border-top-color: var(--primary); border-radius: 50%;
+      animation: spin .8s linear infinite; margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-      /* ── CTA bottom ── */
-      .mat-cta {
-        text-align: center;
-        padding: 3rem 2rem 5rem;
-        border-top: 1px solid rgba(14,147,67,0.1);
-      }
-      .mat-cta p { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.2rem; }
-      .btn-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        background: var(--primary);
-        color: #fff;
-        font-weight: 700;
-        padding: 0.85rem 2rem;
-        border-radius: var(--radius-sm);
-        transition: var(--ease);
-        font-size: 0.95rem;
-      }
-      .btn-cta:hover { background: var(--primary-darker); transform: translateY(-2px); }
+    /* ── Nav topbar ── */
+    .nav-topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1.4rem; gap: .75rem; flex-wrap: wrap; min-height: 36px;
+    }
+    .breadcrumb { display: flex; align-items: center; gap: .35rem; font-size: .8rem; flex-wrap: wrap; }
+    .bc-link {
+      color: var(--primary-dark); font-weight: 600; cursor: pointer; border: none;
+      background: none; font-family: 'Poppins', sans-serif; font-size: .8rem; padding: 0;
+    }
+    .bc-link:hover { text-decoration: underline; }
+    .bc-sep  { color: #d1d5db; }
+    .bc-curr { color: var(--dark); font-weight: 700; font-size: .8rem; }
+    .nav-actions { display: flex; gap: .45rem; }
+    .btn-nav {
+      display: inline-flex; align-items: center; gap: .4rem; background: #fff;
+      border: 1.5px solid #e5e7eb; color: var(--gray); font-size: .8rem; font-weight: 600;
+      padding: .4rem .9rem; border-radius: 999px; cursor: pointer; transition: var(--ease);
+      font-family: 'Poppins', sans-serif;
+    }
+    .btn-nav:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-home { background: var(--light); border-color: rgba(14,147,67,.2); color: var(--primary-dark); }
+    .btn-home:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-      /* ── Responsive ── */
-      @media (max-width: 768px) {
-        .mat-grid { grid-template-columns: 1fr 1fr; }
-      }
-      @media (max-width: 480px) {
-        .mat-grid { grid-template-columns: 1fr; }
-        .mat-hero { padding: 6rem 1.5rem 3.5rem; }
-      }
+    /* ── Intro block ── */
+    .intro-block {
+      background: #fff; border-radius: var(--radius); padding: 1.4rem 1.6rem;
+      margin-bottom: 1.5rem; border: 1.5px solid rgba(14,147,67,.1);
+    }
+    .intro-title { font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: .25rem; }
+    .intro-sub   { font-size: .82rem; color: var(--gray); line-height: 1.55; }
 
-      /* Reveal */
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
-      .reveal.visible { opacity: 1; transform: none; }
-    </style>
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG">
-  </head>
-  <body>
+    /* ── SUBJECT SELECTOR ── */
+    .asig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .asig-card {
+      background: #fff; border-radius: var(--radius); border: 2px solid #e5e7eb;
+      cursor: pointer; transition: var(--ease); overflow: hidden; user-select: none;
+    }
+    .asig-card:hover {
+      transform: translateY(-5px); box-shadow: 0 16px 40px rgba(14,147,67,.15);
+      border-color: var(--primary);
+    }
+    .asig-top { height: 5px; background: linear-gradient(90deg, var(--primary-darker), var(--primary)); }
+    .asig-body { padding: 1.8rem 1.6rem 2rem; }
+    .asig-icon { font-size: 2.8rem; display: block; margin-bottom: .9rem; }
+    .asig-name { font-size: 1.05rem; font-weight: 800; color: var(--dark); margin-bottom: .4rem; line-height: 1.2; }
+    .asig-desc { font-size: .82rem; color: var(--gray); line-height: 1.55; margin-bottom: 1rem; }
+    .asig-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.3rem; }
+    .asig-tag  {
+      background: rgba(14,147,67,.09); color: var(--primary-dark);
+      font-size: .68rem; font-weight: 700; padding: .18rem .55rem; border-radius: 999px;
+    }
+    .asig-btn  {
+      display: inline-flex; align-items: center; gap: .4rem; background: var(--primary);
+      color: #fff; font-size: .8rem; font-weight: 700; padding: .55rem 1.2rem; border-radius: 999px;
+      transition: var(--ease); border: none; cursor: pointer; font-family: 'Poppins', sans-serif;
+    }
+    .asig-card:hover .asig-btn { background: var(--primary-darker); }
+    .asig-meta { font-size: .72rem; color: var(--gray); margin-top: .6rem; }
 
-    <!-- Header -->
-    <header class="header">
-      <a href="index.html" class="logo">Academia Esparta</a>
-      <a href="index.html" class="header-back"><i class="fa-solid fa-arrow-left"></i> Volver a inicio</a>
-    </header>
+    /* ── Curso grid ── */
+    .curso-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .9rem; }
+    .curso-card {
+      background: #fff; border-radius: var(--radius); padding: 1.4rem 1rem 1.15rem;
+      text-align: center; cursor: pointer; border: 2px solid #e5e7eb; transition: var(--ease);
+      position: relative; overflow: hidden; user-select: none;
+    }
+    .curso-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.1); }
+    .curso-num  { font-size: 2.4rem; font-weight: 800; line-height: 1; display: block; }
+    .curso-name { font-size: .76rem; color: var(--gray); font-weight: 500; margin: .3rem 0 .5rem; }
+    .curso-ciclo { font-size: .66rem; font-weight: 700; padding: .14rem .5rem; border-radius: 999px; display: inline-block; }
+    .curso-badge {
+      position: absolute; top: .45rem; right: .45rem; font-size: .58rem; font-weight: 700;
+      background: #fef2f2; color: #dc2626; padding: .13rem .38rem; border-radius: 999px;
+      border: 1px solid #fecaca;
+    }
 
-    <!-- Hero -->
-    <div class="mat-hero">
-      <div class="mat-hero-inner">
-        <span class="mat-hero-emoji">📚</span>
-        <h1>Materiales y Recursos Didácticos</h1>
-        <p>Todo el material organizado por nivel y materia. Gratuito y listo para imprimir o practicar online.</p>
+    /* ── Block grid ── */
+    .bloque-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: .85rem; }
+    .bloque-card {
+      background: #fff; border-radius: var(--radius); padding: 1.4rem 1.2rem;
+      cursor: pointer; border: 2px solid #e5e7eb; transition: var(--ease);
+      display: flex; align-items: center; gap: .9rem; user-select: none;
+    }
+    .bloque-card:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(0,0,0,.1); }
+    .bloque-emoji { font-size: 1.9rem; flex-shrink: 0; }
+    .bloque-info  { flex: 1; min-width: 0; }
+    .bloque-name  { font-size: .92rem; font-weight: 700; line-height: 1.25; }
+    .bloque-count { font-size: .73rem; color: var(--gray); margin-top: .18rem; }
+    .bloque-pill  {
+      font-size: .63rem; font-weight: 700; padding: .12rem .45rem;
+      border-radius: 999px; margin-top: .3rem; display: inline-block;
+    }
+    .bloque-arr   { color: #d1d5db; font-size: .85rem; flex-shrink: 0; transition: var(--ease); }
+    .bloque-card:hover .bloque-arr { transform: translateX(3px); }
+
+    /* ── Sub-block list ── */
+    .sb-header {
+      background: #fff; border-radius: var(--radius); padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem; display: flex; align-items: center; gap: .9rem;
+      border: 1.5px solid #e5e7eb; border-left-style: solid; border-left-width: 4px;
+    }
+    .sb-emoji { font-size: 1.8rem; }
+    .sb-title { font-size: 1rem; font-weight: 800; }
+    .sb-sub   { font-size: .76rem; color: var(--gray); margin-top: .12rem; }
+    .sb-list  { display: flex; flex-direction: column; gap: .55rem; }
+    .sb-item  {
+      background: #fff; border-radius: 10px; padding: .9rem 1.1rem;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; border: 1.5px solid #e5e7eb; transition: var(--ease); user-select: none;
+    }
+    .sb-item:hover { box-shadow: 0 4px 14px rgba(0,0,0,.08); transform: translateX(3px); }
+    .sb-item-left { display: flex; align-items: center; gap: .7rem; }
+    .sb-num  {
+      width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: .65rem; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .sb-name { font-size: .86rem; font-weight: 600; }
+    .sb-arr  { color: #d1d5db; font-size: .8rem; transition: var(--ease); }
+    .sb-item:hover .sb-arr { color: var(--primary); }
+
+    /* ── Resource view ── */
+    .rec-header {
+      background: #fff; border-radius: var(--radius); padding: 1.2rem 1.4rem;
+      margin-bottom: 1.2rem; border: 1.5px solid #e5e7eb;
+      border-left-style: solid; border-left-width: 4px;
+    }
+    .rec-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; margin-bottom: .3rem; }
+    .rec-name  { font-size: 1.05rem; font-weight: 800; color: var(--dark); }
+    .rec-coming {
+      text-align: center; padding: 3.5rem 2rem; background: #fff;
+      border-radius: var(--radius); border: 2px dashed #e5e7eb;
+    }
+    .rec-icon  { font-size: 3rem; display: block; margin-bottom: 1rem; }
+    .rec-title { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: .5rem; }
+    .rec-desc  {
+      font-size: .86rem; color: var(--gray); line-height: 1.65;
+      max-width: 340px; margin: 0 auto 1.5rem;
+    }
+    .btn-contact {
+      display: inline-flex; align-items: center; gap: .5rem; background: var(--primary);
+      color: #fff; font-weight: 700; font-size: .86rem; padding: .7rem 1.5rem; border-radius: 999px;
+      transition: var(--ease); border: none; cursor: pointer; font-family: 'Poppins', sans-serif;
+    }
+    .btn-contact:hover { background: var(--primary-darker); transform: translateY(-2px); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .asig-grid  { grid-template-columns: 1fr; }
+      .curso-grid { grid-template-columns: repeat(2,1fr); }
+      .bloque-grid { grid-template-columns: 1fr; }
+      .app-wrap { padding: 2rem 1rem 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="site-logo">Academia Esparta</a>
+    <a href="index.html" class="site-back">
+      <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+    </a>
+  </header>
+
+  <div class="page-hero">
+    <div class="hero-inner">
+      <span class="hero-label">📚 Materiales y Recursos</span>
+      <h1 class="hero-h1">Todo organizado por asignatura, curso y tema</h1>
+      <p class="hero-p">Selecciona la asignatura, elige el curso y explora los recursos de cada bloque temático. Alineado con el currículo LOMLOE de Andalucía.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">📚 Lengua Castellana</span>
+        <span class="hero-tag">🔢 Matemáticas</span>
+        <span class="hero-tag">1º – 6º Primaria</span>
+        <span class="hero-tag">LOMLOE · Andalucía</span>
       </div>
     </div>
+  </div>
 
-    <!-- Filter bar -->
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterCat('all', this)">🗂️ Todos</button>
-      <button class="filter-btn" onclick="filterCat('primaria', this)">🎒 Primaria</button>
-      <button class="filter-btn" onclick="filterCat('eso', this)">📐 ESO</button>
-      <button class="filter-btn" onclick="filterCat('lenguaje', this)">📖 Lenguaje</button>
-      <button class="filter-btn" onclick="filterCat('mates', this)">🔢 Matemáticas</button>
-      <button class="filter-btn" onclick="filterCat('juegos', this)">🎮 Juegos</button>
+  <div class="app-wrap">
+    <div id="recursos-app">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p style="font-size:.85rem">Cargando…</p>
+      </div>
     </div>
+  </div>
 
-    <!-- Materials -->
-    <div class="mat-section">
+  <script>
+    const CICLO = {
+      C1: { label: "Ciclo 1 · 1º-2º", color: "#1d4ed8", bg: "#eff6ff", border: "#bfdbfe" },
+      C2: { label: "Ciclo 2 · 3º-4º", color: "#059669", bg: "#ecfdf5", border: "#a7f3d0" },
+      C3: { label: "Ciclo 3 · 5º-6º", color: "#7c3aed", bg: "#faf5ff", border: "#ddd6fe" }
+    };
 
-      <!-- ★ FEATURED: Árbol navegable Lengua Castellana -->
-      <p class="mat-cat-title">⭐ Recurso destacado</p>
-      <a href="recursos-lengua.html" class="mat-card reveal" style="background:linear-gradient(135deg,#1e1b4b 0%,#4f46e5 100%);border-color:transparent;color:#fff;flex-direction:row;align-items:center;gap:1.4rem;padding:2rem 2rem;margin-bottom:0.5rem;">
-        <span style="font-size:3rem;flex-shrink:0">📚</span>
-        <div style="flex:1">
-          <div style="font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:.35rem">NUEVO · LOMLOE · Andalucía</div>
-          <div style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem">Lengua Castellana · 1º – 6º Primaria</div>
-          <p style="font-size:.83rem;color:rgba(255,255,255,.72);line-height:1.55;flex:unset;margin:0 0 .8rem">Árbol navegable de recursos por curso y bloque: Lectura, Gramática, Escritura y más, alineados con el currículo LOMLOE de Andalucía.</p>
-          <span style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);color:#fff;font-size:.75rem;font-weight:700;padding:.25rem .8rem;border-radius:999px;border:1px solid rgba(255,255,255,.3)">Explorar recursos →</span>
-        </div>
-      </a>
+    const ASIGNATURAS = {
 
-      <p class="mat-cat-title" data-cat="primaria lenguaje" style="margin-top:2.5rem">📖 Lectura y Escritura</p>
-      <div class="mat-grid">
-        <a href="./lectoescritura/" class="mat-card reveal" data-cat="primaria lenguaje">
-          <span class="mat-card-emoji">✏️</span>
-          <h3>Lectoescritura</h3>
-          <p>Grafomotricidad, vocales y primeras sílabas. Para Infantil y 1º de Primaria.</p>
-          <span class="mat-card-tag">🎒 Primaria</span>
-        </a>
-        <a href="./lectura-comprensiva.html" class="mat-card reveal" data-cat="primaria lenguaje">
-          <span class="mat-card-emoji">📖</span>
-          <h3>Comprensión Lectora</h3>
-          <p>Textos adaptados desde Infantil hasta 6º de Primaria con preguntas de repaso.</p>
-          <span class="mat-card-tag">🎒 Primaria</span>
-        </a>
-        <a href="./camino-letras/" class="mat-card reveal" data-cat="primaria lenguaje juegos">
-          <span class="mat-card-emoji">🔤</span>
-          <h3>Conciencia Fonológica</h3>
-          <p>Aprende las vocales y mejora la articulación con actividades visuales y divertidas.</p>
-          <span class="mat-card-tag purple">🎮 Interactivo</span>
-        </a>
-      </div>
-
-      <p class="mat-cat-title" data-cat="primaria mates">🔢 Matemáticas</p>
-      <div class="mat-grid">
-        <a href="./mates-iniciales/index.html" class="mat-card reveal" data-cat="primaria mates">
-          <span class="mat-card-emoji">🔢</span>
-          <h3>Matemáticas Iniciales</h3>
-          <p>Números del 1 al 10, conceptos espaciales y formas geométricas. Para los más peques.</p>
-          <span class="mat-card-tag">🎒 Primaria</span>
-        </a>
-        <a href="./operaciones/index.html" class="mat-card reveal" data-cat="primaria mates">
-          <span class="mat-card-emoji">🧮</span>
-          <h3>Operaciones</h3>
-          <p>Sumas, restas, multiplicaciones y divisiones. Todos los niveles, con y sin llevadas.</p>
-          <span class="mat-card-tag">🎒 Primaria</span>
-        </a>
-        <a href="entrenamiento-esparta.html" class="mat-card reveal" data-cat="primaria mates juegos">
-          <span class="mat-card-emoji">🏋️</span>
-          <h3>Gimnasio de Operaciones</h3>
-          <p>Sumas, restas y divisiones en modo entrenamiento. ¡Entrena como un espartano!</p>
-          <span class="mat-card-tag purple">🎮 Interactivo</span>
-        </a>
-      </div>
-
-      <p class="mat-cat-title" data-cat="eso">📐 ESO</p>
-      <div class="mat-grid">
-        <a href="./recursos/1-eso/matematicas/algebra/apuntes.html" class="mat-card mat-card-eso reveal" data-cat="eso mates">
-          <span class="mat-card-emoji">📗</span>
-          <h3>Apuntes ESO</h3>
-          <p>Zona de apuntes de matemáticas organizados por curso y tema.</p>
-          <span class="mat-card-tag">📐 ESO</span>
-        </a>
-        <a href="./recursos/1-eso/matematicas/algebra/imprimibles.html" class="mat-card reveal" data-cat="eso mates">
-          <span class="mat-card-emoji">🖨️</span>
-          <h3>Fichas Imprimibles ESO</h3>
-          <p>Fichas de ejercicios listas para imprimir, organizadas por curso y materia.</p>
-          <span class="mat-card-tag orange">🖨️ Imprimible</span>
-        </a>
-        <a href="./recursos/1-eso/matematicas/algebra/interactivo.html" class="mat-card reveal" data-cat="eso mates juegos">
-          <span class="mat-card-emoji">💻</span>
-          <h3>Interactivos ESO</h3>
-          <p>Ejercicios interactivos para practicar matemáticas de ESO con corrección automática.</p>
-          <span class="mat-card-tag purple">🎮 Interactivo</span>
-        </a>
-      </div>
-
-      <p class="mat-cat-title" data-cat="juegos">🎮 Juegos Interactivos</p>
-      <div class="mat-grid">
-        <a href="/camino-ingles/" class="mat-card reveal" data-cat="juegos">
-          <span class="mat-card-emoji">🇬🇧</span>
-          <h3>Inglés Interactivo</h3>
-          <p>Refuerza vocabulario y comprensión con recursos pensados para aprender jugando.</p>
-          <span class="mat-card-tag blue">🇬🇧 Inglés</span>
-        </a>
-        <a href="entrenamiento-esparta.html" class="mat-card reveal" data-cat="juegos mates">
-          <span class="mat-card-emoji">🧮</span>
-          <h3>Gimnasio de Cálculo</h3>
-          <p>Operaciones en modo cronometrado para mejorar la velocidad y precisión de cálculo.</p>
-          <span class="mat-card-tag purple">🎮 Interactivo</span>
-        </a>
-        <a href="./camino-letras/" class="mat-card reveal" data-cat="juegos lenguaje">
-          <span class="mat-card-emoji">🔤</span>
-          <h3>Fonología interactiva</h3>
-          <p>Actividades visuales para aprender las letras y mejorar la articulación del lenguaje.</p>
-          <span class="mat-card-tag purple">🎮 Interactivo</span>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- CTA -->
-    <div class="mat-cta">
-      <p>¿Necesitas material específico para tu hijo? Escríbenos y lo preparamos.</p>
-      <a href="index.html#contact" class="btn-cta"><i class="fa-solid fa-comment"></i> Contactar con la academia</a>
-    </div>
-
-    <script>
-      // Reveal on scroll
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.12 });
-      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-      // Filter
-      function filterCat(cat, btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.mat-card, .mat-cat-title').forEach(el => {
-          if (cat === 'all') {
-            el.style.display = '';
-          } else {
-            const cats = el.dataset.cat || '';
-            el.style.display = cats.includes(cat) ? '' : 'none';
+      lengua: {
+        nombre: "Lengua Castellana",
+        icono: "📚",
+        desc: "Lectura, comprensión, gramática, escritura y literatura. El eje comunicativo de Primaria.",
+        tags: ["Lectura", "Gramática", "Escritura", "Literatura", "Fonología"],
+        curriculum: {
+          "1": {
+            nombre: "1º Primaria", ciclo: "C1",
+            bloques: {
+              A:         { nombre: "Lenguas y hablantes",    color: "#1e40af", icono: "🌍",
+                subBloques: ["Diversidad lingüística", "Lengua materna"] },
+              B_oral:    { nombre: "Comunicación oral",      color: "#16a34a", icono: "🎤",
+                subBloques: ["Escucha activa", "Turnos de palabra", "Descripción oral simple", "Narración de vivencias"] },
+              LECTURA:   { nombre: "Lectura y comprensión",  color: "#dc2626", icono: "👓",
+                subBloques: ["Conciencia fonológica", "Decodificación", "Lectura silábica", "Lectura de palabra", "Lectura de frase", "Comprensión literal"] },
+              B_escrita: { nombre: "Escritura",              color: "#0891b2", icono: "✏️",
+                subBloques: ["Grafomotricidad", "Mayúsculas y minúsculas", "Ortografía natural", "Frases simples"] },
+              C:         { nombre: "Literatura",             color: "#ea580c", icono: "📖",
+                subBloques: ["Cuentos tradicionales", "Adivinanzas", "Retahílas", "Poemas breves"] },
+              D:         { nombre: "Gramática y ortografía", color: "#7c3aed", icono: "🔤",
+                subBloques: ["Sílaba", "Palabra", "Concordancia básica", "Vocabulario por campos semánticos"] }
+            }
+          },
+          "2": {
+            nombre: "2º Primaria", ciclo: "C1",
+            bloques: {
+              LECTURA: { nombre: "Lectura y comprensión",  color: "#dc2626", icono: "👓",
+                subBloques: ["Lectura fluida", "Inferencias simples", "Idea principal", "Secuencia temporal", "Comprensión de instrucciones", "Vocabulario en contexto"] },
+              D:       { nombre: "Gramática y ortografía", color: "#7c3aed", icono: "🔤",
+                subBloques: ["Nombre, Adjetivo, Verbo intuitivo", "Singular y Plural", "Masculino y Femenino", "Sinónimos", "Antónimos", "Signos de puntuación"] }
+            }
+          },
+          "3": {
+            nombre: "3º Primaria", ciclo: "C2",
+            bloques: {
+              LECTURA: { nombre: "Lectura y comprensión",  color: "#dc2626", icono: "👓",
+                subBloques: ["Tipos textuales", "Idea principal y secundarias", "Inferencias", "Vocabulario en contexto", "Velocidad lectora", "Lectura entonada"] },
+              D:       { nombre: "Gramática y ortografía", color: "#7c3aed", icono: "🔤",
+                subBloques: ["Sustantivo", "Adjetivo", "Verbo", "Determinantes", "Familia de palabras", "Polisemia", "Ortografía"] }
+            }
+          },
+          "4": {
+            nombre: "4º Primaria", ciclo: "C2",
+            bloques: {
+              LECTURA: { nombre: "Lectura y comprensión",  color: "#dc2626", icono: "👓",
+                subBloques: ["Textos expositivos", "Inferencias complejas", "Resumen escrito", "Esquemas y mapas conceptuales", "Lectura crítica inicial", "Velocidad lectora con comprensión"] },
+              D:       { nombre: "Gramática y ortografía", color: "#7c3aed", icono: "🔤",
+                subBloques: ["Sujeto y predicado", "Pronombres", "Adverbios", "Preposiciones", "Conjugación regular", "Prefijos y sufijos", "Acentuación", "Ortografía"] }
+            }
+          },
+          "5": {
+            nombre: "5º Primaria", ciclo: "C3",
+            bloques: {
+              LECTURA: { nombre: "Lectura y comprensión",  color: "#dc2626", icono: "👓",
+                subBloques: ["Textos argumentativos", "Textos periodísticos", "Inferencias avanzadas", "Hecho vs opinión", "Lectura crítica", "Búsqueda de información fiable", "Comprensión digital"] },
+              D:       { nombre: "Gramática y ortografía", color: "#7c3aed", icono: "🔤",
+                subBloques: ["Análisis morfológico", "Verbos irregulares", "Oración simple", "Campos semánticos", "Connotación y denotación", "Acentuación completa", "Tildes diacríticas", "Puntuación avanzada"] }
+            }
+          },
+          "6": {
+            nombre: "6º Primaria", ciclo: "C3",
+            bloques: {
+              LECTURA: { nombre: "Lectura y comprensión",  color: "#dc2626", icono: "👓",
+                subBloques: ["Todos los tipos textuales", "Lectura crítica plena", "Inferencias complejas", "Análisis de fuentes", "Alfabetización mediática", "Verificación de información", "Tránsito a ESO"] },
+              D:       { nombre: "Gramática y ortografía", color: "#7c3aed", icono: "🔤",
+                subBloques: ["Análisis morfosintáctico", "Oración simple completa", "Tipos de oración", "Voz activa y pasiva", "Léxico", "Cohesión textual", "Reglas ortográficas completas"] }
+            }
           }
-        });
-        // Hide empty grids
-        document.querySelectorAll('.mat-grid').forEach(grid => {
-          const visible = [...grid.children].some(c => c.style.display !== 'none');
-          grid.style.display = visible ? '' : 'none';
-        });
+        }
+      },
+
+      matematicas: {
+        nombre: "Matemáticas",
+        icono: "🔢",
+        desc: "Números, operaciones, resolución de problemas, geometría y estadística.",
+        tags: ["Cálculo", "Problemas", "Geometría", "Medida", "Estadística"],
+        curriculum: {
+          "1": {
+            nombre: "1º Primaria", ciclo: "C1",
+            bloques: {
+              A:         { nombre: "Números y operaciones",     color: "#ec4899", icono: "🔢",
+                subBloques: ["Números del 0 al 10", "Descomposición de números", "Suma sin llevada", "Resta sin llevada", "Números ordinales"] },
+              B:         { nombre: "Magnitudes y medidas",      color: "#f59e0b", icono: "📏",
+                subBloques: ["Longitud", "Tiempo", "Monedas", "Capacidad"] },
+              PROBLEMAS: { nombre: "Resolución de problemas",   color: "#0ea5e9", icono: "🎯",
+                subBloques: ["Problemas con suma", "Problemas con resta", "Problemas con lenguaje natural simple", "Estrategias de cálculo mental"] },
+              C:         { nombre: "Geometría",                 color: "#8b5cf6", icono: "🔺",
+                subBloques: ["Formas planas", "Formas 3D", "Posiciones en el espacio"] },
+              D:         { nombre: "Estadística y probabilidad",color: "#06b6d4", icono: "📊",
+                subBloques: ["Recuento de datos", "Tablas", "Gráficos de barras"] }
+            }
+          },
+          "2": {
+            nombre: "2º Primaria", ciclo: "C1",
+            bloques: {
+              PROBLEMAS: { nombre: "Resolución de problemas", color: "#0ea5e9", icono: "🎯",
+                subBloques: ["Problemas de suma con llevada", "Problemas de resta sin llevada", "Problemas con dos operaciones", "Estrategias de cálculo mental", "Representación gráfica de problemas"] },
+              A:         { nombre: "Números y operaciones",   color: "#ec4899", icono: "🔢",
+                subBloques: ["Números del 0 al 100", "Descomposición en decenas y unidades", "Suma con llevada", "Resta sin llevada", "Multiplicación como suma repetida", "Números pares e impares"] }
+            }
+          },
+          "3": {
+            nombre: "3º Primaria", ciclo: "C2",
+            bloques: {
+              PROBLEMAS: { nombre: "Resolución de problemas", color: "#0ea5e9", icono: "🎯",
+                subBloques: ["Problemas de suma y resta combinadas", "Problemas de multiplicación", "Problemas de división", "Estrategias de cálculo mental avanzado", "Estimación de resultados"] },
+              A:         { nombre: "Números y operaciones",   color: "#ec4899", icono: "🔢",
+                subBloques: ["Números del 0 al 1000", "Descomposición centenas, decenas, unidades", "Suma y resta hasta 999", "Multiplicación (tablas 2-10)", "División exacta", "Números romanos"] }
+            }
+          },
+          "4": {
+            nombre: "4º Primaria", ciclo: "C2",
+            bloques: {
+              PROBLEMAS: { nombre: "Resolución de problemas", color: "#0ea5e9", icono: "🎯",
+                subBloques: ["Problemas de varias operaciones", "Problemas con números decimales", "Problemas de medida", "Estrategias de estimación", "Problemas de razonamiento lógico"] },
+              A:         { nombre: "Números y operaciones",   color: "#ec4899", icono: "🔢",
+                subBloques: ["Números del 0 al 10000", "Números decimales", "Suma, resta, multiplicación", "División por números de 1 dígito", "Fracciones básicas", "Relación fracción-decimal"] }
+            }
+          },
+          "5": {
+            nombre: "5º Primaria", ciclo: "C3",
+            bloques: {
+              PROBLEMAS: { nombre: "Resolución de problemas", color: "#0ea5e9", icono: "🎯",
+                subBloques: ["Problemas de múltiples operaciones", "Problemas con fracciones", "Problemas de proporcionalidad", "Problemas de porcentajes", "Problemas de geometría aplicada"] },
+              A:         { nombre: "Números y operaciones",   color: "#ec4899", icono: "🔢",
+                subBloques: ["Números del 0 al 100000", "Decimales hasta milésimas", "Suma, resta, multiplicación, división", "Fracciones equivalentes y operaciones", "Porcentajes básicos", "Potencias de 10"] }
+            }
+          },
+          "6": {
+            nombre: "6º Primaria", ciclo: "C3",
+            bloques: {
+              PROBLEMAS: { nombre: "Resolución de problemas", color: "#0ea5e9", icono: "🎯",
+                subBloques: ["Problemas de todas las operaciones", "Proporcionalidad directa", "Porcentaje avanzado", "Combinatoria básica", "Lógica y razonamiento"] },
+              A:         { nombre: "Números y operaciones",   color: "#ec4899", icono: "🔢",
+                subBloques: ["Números hasta 1000000", "Decimales (operaciones completas)", "Fracciones (todas las operaciones)", "Porcentajes aplicados", "Razones y proporciones", "Notación científica"] }
+            }
+          }
+        }
       }
-    </script>
-  </body>
+    };
+
+    const { useState } = React;
+    const h = React.createElement;
+
+    // ── Breadcrumb ──────────────────────────────────────────────────────────
+    function Breadcrumb({ asig, curso, bloqueKey, subBloque, onHome, onAsig, onCurso, onBloque }) {
+      const asigData  = asig      ? ASIGNATURAS[asig] : null;
+      const cursoData = (asigData && curso) ? asigData.curriculum[curso] : null;
+      const bloqData  = (cursoData && bloqueKey) ? cursoData.bloques[bloqueKey] : null;
+
+      const items = [h('button', { key:'h', className:'bc-link', onClick: onHome }, 'Inicio')];
+
+      if (asig) {
+        items.push(h('span', { key:'s0', className:'bc-sep' }, ' › '));
+        if (curso) items.push(h('button', { key:'a', className:'bc-link', onClick: onAsig }, asigData.nombre));
+        else       items.push(h('span',   { key:'a', className:'bc-curr' }, asigData.nombre));
+      }
+      if (curso) {
+        items.push(h('span', { key:'s1', className:'bc-sep' }, ' › '));
+        if (bloqueKey) items.push(h('button', { key:'c', className:'bc-link', onClick: onCurso }, cursoData.nombre));
+        else           items.push(h('span',   { key:'c', className:'bc-curr' }, cursoData.nombre));
+      }
+      if (bloqueKey) {
+        items.push(h('span', { key:'s2', className:'bc-sep' }, ' › '));
+        if (subBloque) items.push(h('button', { key:'b', className:'bc-link', onClick: onBloque }, bloqData.nombre));
+        else           items.push(h('span',   { key:'b', className:'bc-curr' }, bloqData.nombre));
+      }
+      if (subBloque) {
+        items.push(h('span', { key:'s3', className:'bc-sep' }, ' › '));
+        items.push(h('span', { key:'sb', className:'bc-curr' }, subBloque));
+      }
+      return h('div', { className:'breadcrumb' }, ...items);
+    }
+
+    // ── View 0: Subject selector ─────────────────────────────────────────────
+    function AsignaturaView({ onSelect }) {
+      return h('div', null,
+        h('div', { className:'intro-block' },
+          h('div', { className:'intro-title' }, '¿Qué asignatura buscas?'),
+          h('div', { className:'intro-sub' }, 'Selecciona la asignatura para explorar los recursos organizados por curso y bloque temático.')
+        ),
+        h('div', { className:'asig-grid' },
+          ...Object.entries(ASIGNATURAS).map(([key, a]) =>
+            h('div', { key, className:'asig-card', onClick: () => onSelect(key) },
+              h('div', { className:'asig-top' }),
+              h('div', { className:'asig-body' },
+                h('span', { className:'asig-icon' }, a.icono),
+                h('div',  { className:'asig-name' }, a.nombre),
+                h('p',    { className:'asig-desc' }, a.desc),
+                h('div',  { className:'asig-tags' },
+                  ...a.tags.map((t, i) => h('span', { key:i, className:'asig-tag' }, t))
+                ),
+                h('button', { className:'asig-btn' }, 'Explorar recursos →'),
+                h('div', { className:'asig-meta' }, '6 cursos · 1º a 6º Primaria · LOMLOE Andalucía')
+              )
+            )
+          )
+        )
+      );
+    }
+
+    // ── View 1: Course selector ──────────────────────────────────────────────
+    function CursoView({ asig, onSelect }) {
+      const a = ASIGNATURAS[asig];
+      return h('div', null,
+        h('div', { className:'intro-block' },
+          h('div', { className:'intro-title' }, a.icono + ' ' + a.nombre + ' · Selecciona el curso'),
+          h('div', { className:'intro-sub' },
+            '1º Primaria incluye todos los bloques. En 2º–6º se trabajan los dos ejes principales del currículo LOMLOE.')
+        ),
+        h('div', { className:'curso-grid' },
+          ...Object.entries(a.curriculum).map(([key, c]) => {
+            const cc = CICLO[c.ciclo];
+            const isFirst = key === '1';
+            return h('div', {
+              key, className:'curso-card',
+              style: { borderColor: cc.border },
+              onClick: () => onSelect(key),
+              onMouseEnter: e => e.currentTarget.style.borderColor = cc.color,
+              onMouseLeave: e => e.currentTarget.style.borderColor = cc.border
+            },
+              isFirst && h('span', { className:'curso-badge' }, '✦ Todos los bloques'),
+              h('span', { className:'curso-num',   style:{ color: cc.color } }, key + 'º'),
+              h('div',  { className:'curso-name' }, c.nombre),
+              h('span', { className:'curso-ciclo', style:{ background: cc.bg, color: cc.color } }, cc.label)
+            );
+          })
+        )
+      );
+    }
+
+    // ── View 2: Block selector ───────────────────────────────────────────────
+    function BloqueView({ asig, curso, onSelect }) {
+      const c = ASIGNATURAS[asig].curriculum[curso];
+      const entries = Object.entries(c.bloques);
+      const isTwo = entries.length === 2;
+      return h('div', null,
+        h('div', { className:'intro-block' },
+          h('div', { className:'intro-title' }, c.nombre + ' · ' + CICLO[c.ciclo].label),
+          h('div', { className:'intro-sub' },
+            isTwo ? 'Dos ejes prioritarios para este ciclo. Selecciona el bloque.'
+                  : 'Todos los bloques del currículo. Selecciona el que quieres trabajar.')
+        ),
+        h('div', { className:'bloque-grid' },
+          ...entries.map(([key, b], idx) => {
+            const pill = isTwo ? (idx === 0 ? '★ Eje principal' : '★ Eje secundario') : null;
+            return h('div', {
+              key, className:'bloque-card',
+              style: { borderColor: isTwo ? b.color : '#e5e7eb' },
+              onClick: () => onSelect(key),
+              onMouseEnter: e => { e.currentTarget.style.borderColor = b.color; e.currentTarget.style.background = b.color + '10'; },
+              onMouseLeave: e => { e.currentTarget.style.borderColor = isTwo ? b.color : '#e5e7eb'; e.currentTarget.style.background = '#fff'; }
+            },
+              h('div', { className:'bloque-emoji' }, b.icono),
+              h('div', { className:'bloque-info' },
+                h('div', { className:'bloque-name',  style:{ color: b.color } }, b.nombre),
+                h('div', { className:'bloque-count' }, b.subBloques.length + ' temas'),
+                pill && h('span', { className:'bloque-pill', style:{ background: b.color + '18', color: b.color } }, pill)
+              ),
+              h('span', { className:'bloque-arr' }, '›')
+            );
+          })
+        )
+      );
+    }
+
+    // ── View 3: Sub-block list ───────────────────────────────────────────────
+    function SubBloqueView({ asig, curso, bloqueKey, onSelect }) {
+      const b = ASIGNATURAS[asig].curriculum[curso].bloques[bloqueKey];
+      return h('div', null,
+        h('div', { className:'sb-header', style:{ borderLeftColor: b.color } },
+          h('span', { className:'sb-emoji' }, b.icono),
+          h('div', null,
+            h('div', { className:'sb-title', style:{ color: b.color } }, b.nombre),
+            h('div', { className:'sb-sub' }, b.subBloques.length + ' temas · Selecciona para ver los recursos')
+          )
+        ),
+        h('div', { className:'sb-list' },
+          ...b.subBloques.map((sb, i) =>
+            h('div', {
+              key:i, className:'sb-item',
+              onClick: () => onSelect(sb),
+              onMouseEnter: e => e.currentTarget.style.borderColor = b.color,
+              onMouseLeave: e => e.currentTarget.style.borderColor = '#e5e7eb'
+            },
+              h('div', { className:'sb-item-left' },
+                h('span', { className:'sb-num', style:{ background: b.color } }, i + 1),
+                h('span', { className:'sb-name' }, sb)
+              ),
+              h('span', { className:'sb-arr' }, '›')
+            )
+          )
+        )
+      );
+    }
+
+    // ── View 4: Resource detail ──────────────────────────────────────────────
+    function RecursoView({ asig, curso, bloqueKey, subBloque }) {
+      const b = ASIGNATURAS[asig].curriculum[curso].bloques[bloqueKey];
+      return h('div', null,
+        h('div', { className:'rec-header', style:{ borderLeftColor: b.color } },
+          h('div', { className:'rec-label', style:{ color: b.color } }, b.icono + '  ' + b.nombre),
+          h('div', { className:'rec-name' }, subBloque)
+        ),
+        h('div', { className:'rec-coming' },
+          h('span', { className:'rec-icon' }, '📂'),
+          h('div',  { className:'rec-title' }, 'Recursos en preparación'),
+          h('p',    { className:'rec-desc' },
+            'Estamos preparando fichas y ejercicios para ',
+            h('strong', null, subBloque), '. ¡Muy pronto disponibles!'
+          ),
+          h('a', { href:'index.html#contact', className:'btn-contact' },
+            h('i', { className:'fa-solid fa-comment' }), ' Solicitar recursos'
+          )
+        )
+      );
+    }
+
+    // ── Main Navigator ───────────────────────────────────────────────────────
+    function Navigator() {
+      const [asig,      setAsig]      = useState(null);
+      const [curso,     setCurso]     = useState(null);
+      const [bloqueKey, setBloqueKey] = useState(null);
+      const [subBloque, setSubBloque] = useState(null);
+
+      const goHome   = () => { setAsig(null); setCurso(null); setBloqueKey(null); setSubBloque(null); };
+      const goAsig   = () => { setCurso(null); setBloqueKey(null); setSubBloque(null); };
+      const goCurso  = () => { setBloqueKey(null); setSubBloque(null); };
+      const goBloque = () => setSubBloque(null);
+      const goBack   = () => {
+        if (subBloque)  goBloque();
+        else if (bloqueKey) goCurso();
+        else if (curso)     goAsig();
+        else                goHome();
+      };
+
+      return h('div', null,
+        h('div', { className:'nav-topbar' },
+          h(Breadcrumb, { asig, curso, bloqueKey, subBloque,
+            onHome: goHome, onAsig: goAsig, onCurso: goCurso, onBloque: goBloque }),
+          asig && h('div', { className:'nav-actions' },
+            h('button', { className:'btn-nav', onClick: goBack }, '← Atrás'),
+            h('button', { className:'btn-nav btn-home', onClick: goHome }, '🏠')
+          )
+        ),
+        !asig                          && h(AsignaturaView, { onSelect: a => { setAsig(a); setCurso(null); setBloqueKey(null); setSubBloque(null); } }),
+        asig  && !curso                && h(CursoView,      { asig, onSelect: c => setCurso(c) }),
+        curso && !bloqueKey            && h(BloqueView,     { asig, curso, onSelect: k => setBloqueKey(k) }),
+        bloqueKey && !subBloque        && h(SubBloqueView,  { asig, curso, bloqueKey, onSelect: sb => setSubBloque(sb) }),
+        subBloque                      && h(RecursoView,    { asig, curso, bloqueKey, subBloque })
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('recursos-app')).render(h(Navigator));
+  </script>
+</body>
 </html>
