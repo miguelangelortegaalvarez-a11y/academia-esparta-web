@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Academia Esparta – Refuerzo y apoyo escolar en Torremolinos</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -234,11 +234,13 @@
         backdrop-filter: blur(4px);
       }
       .hero-inner h1 {
+        font-family: 'Nunito', sans-serif;
         font-size: clamp(2rem, 4.5vw, 3.3rem);
-        font-weight: 800;
+        font-weight: 900;
         color: #fff;
         line-height: 1.1;
         margin-bottom: 1.2rem;
+        letter-spacing: -0.01em;
       }
       .hero-inner p {
         font-size: 1.08rem;
@@ -246,7 +248,16 @@
         margin-bottom: 2rem;
         max-width: 560px;
         line-height: 1.65;
+        min-height: 1.8em;
       }
+      .hero-cursor {
+        display: inline-block;
+        color: rgba(255,255,255,0.7);
+        font-weight: 300;
+        animation: heroBlink 0.75s step-end infinite;
+        margin-left: 1px;
+      }
+      @keyframes heroBlink { 0%,100%{opacity:1} 50%{opacity:0} }
       .hero-buttons {
         display: flex;
         gap: 1rem;
@@ -1302,7 +1313,7 @@
       <div class="hero-inner">
         <div class="hero-badge">⚔️ Más de 15 años ayudando a alumnos en Torremolinos</div>
         <h1>Tu hijo puede mejorar sus notas y ganar seguridad</h1>
-        <p>Grupos reducidos, atención personalizada y acompañamiento real para Primaria, ESO, Bachillerato y EBAU.</p>
+        <p><span id="hero-sub"></span><span class="hero-cursor">|</span></p>
         <div class="hero-buttons">
           <a href="inscripcion.html" class="hero-btn-primary">Reserva tu plaza</a>
           <a href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases"
@@ -1938,17 +1949,34 @@
         }, speed);
       }
 
-      window.addEventListener('load', () => {
-        const h1 = document.querySelector('#hero h1');
-        const p  = document.querySelector('#hero p');
-        const h1Text = h1.textContent.trim();
-        const pText  = p.textContent.trim();
-        h1.textContent = '';
-        p.textContent  = '';
-        typeWriter(h1, h1Text, 45, () => {
-          typeWriter(p, pText, 22, null);
-        });
-      });
+      // ── Hero subtitle cycling typewriter ──
+      (function() {
+        var phrases = [
+          'Grupos reducidos y atención personalizada.',
+          'Para Primaria, ESO, Bachillerato y EBAU.',
+          'Acompañamiento real desde el primer día.',
+          'Donde cada alumno aprende a su ritmo.',
+          'Resultados que se notan desde el primer mes.',
+        ];
+        var el = document.getElementById('hero-sub');
+        if (!el) return;
+        var pi = 0, ci = 0, deleting = false;
+        function tick() {
+          var phrase = phrases[pi % phrases.length];
+          if (!deleting) {
+            ci++;
+            el.textContent = phrase.slice(0, ci);
+            if (ci === phrase.length) { deleting = true; setTimeout(tick, 2200); return; }
+            setTimeout(tick, 38);
+          } else {
+            ci--;
+            el.textContent = phrase.slice(0, ci);
+            if (ci === 0) { deleting = false; pi++; setTimeout(tick, 300); return; }
+            setTimeout(tick, 22);
+          }
+        }
+        setTimeout(tick, 600);
+      })();
 
       // ESO Navigator
       function irASeccionEso(idSeccion, info = '') {
