@@ -223,6 +223,24 @@
     }
     .btn-contact:hover { background: var(--primary-darker); transform: translateY(-2px); }
 
+    /* ── Fichas disponibles ── */
+    .fichas-disponibles { margin-top: .5rem; }
+    .fichas-dis-header { display:flex; align-items:center; justify-content:space-between; margin-bottom: 1rem; flex-wrap:wrap; gap:.5rem; }
+    .fichas-dis-titulo { font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#9ca3af; }
+    .fichas-dis-link { font-size:.75rem; font-weight:600; color:var(--primary-dark); text-decoration:none; }
+    .fichas-dis-link:hover { text-decoration:underline; }
+    .fichas-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:.7rem; }
+    .ficha-card-mini {
+      background:#fff; border:1.5px solid #e5e7eb; border-radius:12px;
+      padding:.9rem 1rem; text-decoration:none; color:inherit; display:block;
+      transition:all .18s;
+    }
+    .ficha-card-mini:hover { border-color:var(--primary); transform:translateY(-2px); box-shadow:0 6px 18px rgba(14,147,67,.1); }
+    .fcm-num { font-size:.62rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#9ca3af; margin-bottom:.3rem; }
+    .fcm-emoji { font-size:1.6rem; display:block; margin-bottom:.3rem; }
+    .fcm-titulo { font-size:.88rem; font-weight:700; color:#111; margin-bottom:.25rem; }
+    .fcm-nivel { font-size:.72rem; color:#6b7280; }
+
     /* ── Responsive ── */
     @media (max-width: 600px) {
       .asig-grid  { grid-template-columns: 1fr; }
@@ -569,25 +587,67 @@
       );
     }
 
+    // ── Mapa de recursos disponibles ────────────────────────────────────────
+    const RECURSOS = {
+      'lengua|1|LECTURA|Conciencia fonológica': {
+        ruta: 'recursos/primaria/1/lengua/conciencia-fonologica/',
+        fichas: [
+          { num:1, titulo:'Reconocer sonidos', emoji:'👂', nivel:'⭐ Básico' },
+          { num:2, titulo:'Las rimas',         emoji:'🎵', nivel:'⭐ Básico' },
+          { num:3, titulo:'Contar palabras',   emoji:'💬', nivel:'⭐⭐ Medio' },
+          { num:4, titulo:'Contar sílabas',    emoji:'👏', nivel:'⭐⭐ Medio' },
+          { num:5, titulo:'Sílaba inicial',    emoji:'🔍', nivel:'⭐⭐⭐ Medio-alto' },
+          { num:6, titulo:'Sílaba final',      emoji:'🔚', nivel:'⭐⭐⭐ Medio-alto' },
+          { num:7, titulo:'Unir sílabas',      emoji:'🧩', nivel:'⭐⭐⭐⭐ Alto' },
+          { num:8, titulo:'Los fonemas',       emoji:'🔬', nivel:'⭐⭐⭐⭐⭐ Avanzado' },
+        ]
+      }
+    };
+
     // ── View 4: Resource detail ──────────────────────────────────────────────
     function RecursoView({ asig, curso, bloqueKey, subBloque }) {
-      const b = ASIGNATURAS[asig].curriculum[curso].bloques[bloqueKey];
+      const b   = ASIGNATURAS[asig].curriculum[curso].bloques[bloqueKey];
+      const key = `${asig}|${curso}|${bloqueKey}|${subBloque}`;
+      const rec = RECURSOS[key];
+
       return h('div', null,
         h('div', { className:'rec-header', style:{ borderLeftColor: b.color } },
           h('div', { className:'rec-label', style:{ color: b.color } }, b.icono + '  ' + b.nombre),
           h('div', { className:'rec-name' }, subBloque)
         ),
-        h('div', { className:'rec-coming' },
-          h('span', { className:'rec-icon' }, '📂'),
-          h('div',  { className:'rec-title' }, 'Recursos en preparación'),
-          h('p',    { className:'rec-desc' },
-            'Estamos preparando fichas y ejercicios para ',
-            h('strong', null, subBloque), '. ¡Muy pronto disponibles!'
-          ),
-          h('a', { href:'index.html#contact', className:'btn-contact' },
-            h('i', { className:'fa-solid fa-comment' }), ' Solicitar recursos'
-          )
-        )
+        rec
+          ? h('div', { className:'fichas-disponibles' },
+              h('div', { className:'fichas-dis-header' },
+                h('span', { className:'fichas-dis-titulo' }, rec.fichas.length + ' fichas · de menos a más dificultad'),
+                h('a', { href: rec.ruta + 'index.html', className:'fichas-dis-link', target:'_blank' }, 'Ver índice completo →')
+              ),
+              h('div', { className:'fichas-grid' },
+                rec.fichas.map(f =>
+                  h('a', {
+                    key: f.num,
+                    href: rec.ruta + 'ficha-' + f.num + '.html',
+                    className: 'ficha-card-mini',
+                    target: '_blank'
+                  },
+                    h('div', { className:'fcm-num' }, 'Ficha ' + f.num + ' de ' + rec.fichas.length),
+                    h('span', { className:'fcm-emoji' }, f.emoji),
+                    h('div', { className:'fcm-titulo' }, f.titulo),
+                    h('div', { className:'fcm-nivel' }, f.nivel)
+                  )
+                )
+              )
+            )
+          : h('div', { className:'rec-coming' },
+              h('span', { className:'rec-icon' }, '📂'),
+              h('div',  { className:'rec-title' }, 'Recursos en preparación'),
+              h('p',    { className:'rec-desc' },
+                'Estamos preparando fichas y ejercicios para ',
+                h('strong', null, subBloque), '. ¡Muy pronto disponibles!'
+              ),
+              h('a', { href:'index.html#contact', className:'btn-contact' },
+                h('i', { className:'fa-solid fa-comment' }), ' Solicitar recursos'
+              )
+            )
       );
     }
 
