@@ -187,14 +187,6 @@
         align-items: center;
         justify-content: center;
       }
-      #splash-canvas {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        opacity: 1;
-        transition: opacity 1s ease;
-      }
-      #splash-canvas.fade { opacity: 0; }
       .splash-content {
         position: relative;
         z-index: 3;
@@ -217,15 +209,16 @@
         letter-spacing: 0.15em;
         text-transform: uppercase;
         line-height: 1;
-        opacity: 0;
-        transform: scale(0.94);
-        transition: opacity 0.7s ease, transform 0.7s ease;
+        clip-path: inset(0 100% 0 0);
+        animation: splashTitleReveal 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
         text-shadow:
           0 0 40px rgba(134,239,172,0.5),
           0 0 80px rgba(14,147,67,0.3);
         min-height: 1.2em;
       }
-      .splash-title.show { opacity: 1; transform: scale(1); }
+      @keyframes splashTitleReveal {
+        to { clip-path: inset(0 0% 0 0); }
+      }
       .splash-divider {
         display: flex;
         align-items: center;
@@ -1475,7 +1468,6 @@
 
     <!-- SPLASH SCREEN -->
     <div id="splash">
-      <canvas id="splash-canvas"></canvas>
       <div class="splash-content">
         <div class="splash-title">Academia Esparta</div>
         <div class="splash-divider">
@@ -2185,35 +2177,6 @@
         const splash       = document.getElementById('splash');
         const splashPhrase = document.getElementById('splashPhrase');
         const heroTitle    = document.getElementById('heroTitle');
-        const canvas       = document.getElementById('splash-canvas');
-        const ctx          = canvas.getContext('2d');
-
-        function resizeCanvas() {
-          canvas.width  = window.innerWidth;
-          canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
-        const fontSize = 14;
-        let drops = Array.from({length: Math.floor(canvas.width / fontSize)}, () => Math.random() * -60);
-        const palette = ['#0e9343','#0e9343','#0e9343','#86efac','#c6f6d5'];
-
-        function drawMatrix() {
-          ctx.fillStyle = 'rgba(2,26,11,0.06)';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.font = fontSize + 'px monospace';
-          drops.forEach((y, i) => {
-            const ch = chars[Math.floor(Math.random() * chars.length)];
-            ctx.fillStyle = palette[Math.floor(Math.random() * palette.length)];
-            ctx.fillText(ch, i * fontSize, y * fontSize);
-            if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
-          });
-        }
-
-        let matrixId = setInterval(drawMatrix, 33);
 
         function exitSplash() {
           splash.classList.add('out');
@@ -2250,39 +2213,32 @@
           type();
         }
 
-        // Phase 1: Matrix runs ~2.2s, then canvas fades and title appears
+        // Título revela de izq a dcha por CSS (0.4s delay + 1.0s duración = 1.4s)
+        // Divider aparece a 1.6s
         setTimeout(() => {
-          canvas.classList.add('fade');
-          const splashTitle   = splash.querySelector('.splash-title');
-          const splashDivider = splash.querySelector('.splash-divider');
-          splashTitle.classList.add('show');
+          splash.querySelector('.splash-divider').classList.add('show');
+        }, 1600);
 
-          setTimeout(() => {
-            splashDivider.classList.add('show');
-            clearInterval(matrixId);
-          }, 700);
-
-          // Phase 2: phrase typewriter after title settles
-          setTimeout(() => {
-            splashPhrase.style.opacity = '1';
-            const text = 'El esfuerzo de hoy es el resultado de mañana';
-            let i = 0;
-            const cursor = document.createElement('span');
-            cursor.className = 'splash-text-cursor';
-            splashPhrase.appendChild(cursor);
-            function tick() {
-              if (i < text.length) {
-                cursor.before(document.createTextNode(text[i++]));
-                setTimeout(tick, 48);
-              } else {
-                const tagline = splash.querySelector('.splash-tagline');
-                if (tagline) tagline.classList.add('show');
-                setTimeout(() => { cursor.remove(); setTimeout(exitSplash, 900); }, 1300);
-              }
+        // Frase typewriter arranca a 2.1s
+        setTimeout(() => {
+          splashPhrase.style.opacity = '1';
+          const text = 'El esfuerzo de hoy es el resultado de mañana';
+          let i = 0;
+          const cursor = document.createElement('span');
+          cursor.className = 'splash-text-cursor';
+          splashPhrase.appendChild(cursor);
+          function tick() {
+            if (i < text.length) {
+              cursor.before(document.createTextNode(text[i++]));
+              setTimeout(tick, 48);
+            } else {
+              const tagline = splash.querySelector('.splash-tagline');
+              if (tagline) tagline.classList.add('show');
+              setTimeout(() => { cursor.remove(); setTimeout(exitSplash, 900); }, 1300);
             }
-            tick();
-          }, 1400);
-        }, 2200);
+          }
+          tick();
+        }, 2100);
       })();
 
       // ESO Navigator
