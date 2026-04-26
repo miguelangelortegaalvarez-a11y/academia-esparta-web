@@ -3,139 +3,266 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ficha 2 · Las rimas · 1º Primaria</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Ficha 2 · Sonido inicial · 1º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --primary: #0e9343; --dark: #0a5233; --light: #f0fdf4; }
-    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #111; padding: 1.5rem; max-width: 780px; margin: 0 auto; }
-    .no-print { font-family: 'Poppins', sans-serif; }
-    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: .5rem; }
-    .back-btn { display: inline-flex; align-items: center; gap: .4rem; color: var(--dark); font-size: .8rem; font-weight: 600; text-decoration: none; border: 1.5px solid #e5e7eb; padding: .35rem .9rem; border-radius: 999px; transition: all .2s; }
-    .back-btn:hover { border-color: var(--primary); color: var(--primary); }
-    .print-btn { display: inline-flex; align-items: center; gap: .4rem; background: var(--primary); color: #fff; font-size: .8rem; font-weight: 600; border: none; padding: .35rem .9rem; border-radius: 999px; cursor: pointer; font-family: 'Poppins', sans-serif; }
-    .ficha-header { background: linear-gradient(135deg, var(--dark), var(--primary)); border-radius: 14px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .ficha-emoji-big { font-size: 2.8rem; }
-    .ficha-meta { flex: 1; }
-    .ficha-breadcrumb { font-family: 'Poppins', sans-serif; font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .2rem; }
-    .ficha-titulo { font-size: 1.5rem; font-weight: 700; color: #fff; }
-    .ficha-stars { font-size: 1rem; margin-top: .2rem; }
-    .ficha-num-badge { font-family: 'Poppins', sans-serif; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); color: #fff; font-size: .7rem; font-weight: 700; padding: .3rem .8rem; border-radius: 999px; }
-    .alumno-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: .8rem 1rem; }
-    .alumno-field { display: flex; align-items: center; gap: .4rem; flex: 1; min-width: 150px; }
-    .alumno-label { font-family: 'Poppins', sans-serif; font-size: .7rem; font-weight: 600; color: #9ca3af; white-space: nowrap; }
-    .alumno-line { flex: 1; border: none; border-bottom: 1.5px solid #d1d5db; font-family: 'Edu SA Beginner', cursive; font-size: .95rem; outline: none; padding: .1rem .2rem; }
-    .ejercicio { margin-bottom: 1.8rem; }
-    .ej-header { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; }
-    .ej-num { font-family: 'Poppins', sans-serif; background: var(--dark); color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; flex-shrink: 0; }
-    .ej-consigna { font-size: 1.05rem; font-weight: 600; color: #111; }
-    .ficha-footer { margin-top: 2rem; padding-top: 1rem; border-top: 2px dashed #e5e7eb; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; font-size: .68rem; color: #9ca3af; }
-    @media print { .no-print { display: none !important; } body { padding: .5cm; } .ficha-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .ej-num { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
-    @page { size: A4; margin: 1.2cm; }
 
-    /* Ejercicio 1: Une rimas */
-    .rima-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: .7rem; align-items: center; max-width: 540px; }
-    .rima-item { background: var(--light); border: 2px solid #bbf7d0; border-radius: 10px; padding: .6rem 1rem; text-align: center; font-size: 1.15rem; font-weight: 600; }
-    .rima-item.derecha { background: #fff7ed; border-color: #fed7aa; }
-    .rima-linea { border-bottom: 2px dashed #d1d5db; }
+    body {
+      font-family: 'Edu SA Beginner', cursive;
+      background: #fff;
+      color: #000;
+      padding: 2rem 1.5rem 1.2rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
 
-    /* Ejercicio 2: Rodea la que rima */
-    .rodea-grupos { display: flex; flex-direction: column; gap: .8rem; }
-    .rodea-grupo { display: flex; align-items: center; gap: 1rem; background: #fafafa; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: .7rem 1rem; flex-wrap: wrap; }
-    .rodea-base { font-size: 1.2rem; font-weight: 700; color: var(--dark); min-width: 80px; }
-    .rodea-sep { color: #9ca3af; font-size: .85rem; font-family: 'Poppins', sans-serif; }
-    .rodea-opciones { display: flex; gap: .6rem; flex-wrap: wrap; }
-    .rodea-btn { border: 2px solid #d1d5db; border-radius: 8px; padding: .3rem .8rem; font-family: 'Edu SA Beginner', cursive; font-size: 1rem; font-weight: 600; cursor: pointer; background: #fff; transition: all .15s; }
-    .rodea-btn:hover { border-color: var(--primary); background: var(--light); }
-    .rodea-btn.ok { border-color: var(--primary); background: var(--light); color: var(--dark); }
+    /* ── Barra web (no imprime) ── */
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1rem; gap: .5rem;
+    }
+    .back-btn {
+      color: #333; font-size: .8rem; text-decoration: none;
+      border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif;
+    }
+    .print-btn {
+      background: #222; color: #fff; font-size: .8rem;
+      border: none; padding: .3rem .8rem; border-radius: 999px;
+      cursor: pointer; font-family: sans-serif;
+    }
 
-    /* Ejercicio 3: Completa la rima */
-    .completa-lista { display: flex; flex-direction: column; gap: .8rem; }
-    .completa-item { background: #fafafa; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: .8rem 1rem; }
-    .completa-verso { font-size: 1.05rem; font-weight: 500; line-height: 1.6; }
-    .completa-hueco { display: inline-block; border-bottom: 2px solid var(--primary); min-width: 120px; margin: 0 .3rem; }
-    .completa-pistas { font-family: 'Poppins', sans-serif; font-size: .68rem; color: #9ca3af; margin-top: .4rem; }
+    /* ── ENCABEZADO ── */
+    .header { margin-bottom: 6px; text-align: center; }
+    .academia-nombre {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px; font-weight: 700; color: #000;
+      display: block; margin-bottom: 3px;
+    }
+    .ficha-ref {
+      font-family: sans-serif; font-size: 10px; color: #555;
+      display: block; margin-bottom: 8px;
+    }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 6px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 16px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 12px; }
+
+    /* ── Ejercicios ── */
+    .ejercicio { margin-bottom: 14px; }
+    .ej-titulo {
+      font-size: 18px; font-weight: 700; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ej-n {
+      font-family: sans-serif; font-size: 13px; font-weight: 700;
+      border: 1.5px solid #000; border-radius: 50%;
+      width: 24px; height: 24px; display: inline-flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    /* ── Ej 1: Sí/No ── */
+    .sino-lista { display: flex; flex-direction: column; gap: 4px; max-width: 520px; }
+    .sino-fila {
+      display: flex; align-items: center;
+      padding: 3px 2px; gap: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .sino-palabras { flex: 1; font-size: 18px; font-weight: 600; }
+    .sino-opciones { display: flex; gap: 14px; }
+    .opcion {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 16px; font-weight: 700; font-family: sans-serif;
+    }
+    .opcion .circulo {
+      width: 18px; height: 18px;
+      border: 1.5px solid #000; border-radius: 50%;
+      display: inline-block; flex-shrink: 0;
+    }
+
+    /* ── Ej 2: Agrupa por sonido ── */
+    .grupos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 24px;
+      max-width: 580px;
+    }
+    .grupo-fila {
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid #ddd; padding: 3px 0;
+    }
+    .grupo-label {
+      font-family: sans-serif; font-size: 14px; font-weight: 700;
+      min-width: 34px; flex-shrink: 0;
+    }
+    .grupo-palabras { display: flex; gap: 6px; flex-wrap: wrap; }
+    .grupo-palabra {
+      border: 1px solid #000; border-radius: 4px;
+      padding: 2px 8px; font-size: 16px; font-weight: 600;
+    }
+
+    /* ── Ej 3: Intruso ── */
+    .intruso-grupos { display: flex; flex-direction: column; gap: 5px; }
+    .intruso-fila {
+      display: flex; align-items: center; gap: 8px;
+      padding: 3px 2px; border-bottom: 1px solid #ddd;
+    }
+    .intruso-num {
+      font-family: sans-serif; font-size: 13px; font-weight: 700;
+      flex-shrink: 0; min-width: 20px;
+    }
+    .intruso-items { display: flex; gap: 8px; flex-wrap: wrap; }
+    .intruso-item {
+      border: 1px solid #000; border-radius: 4px;
+      padding: 4px 14px; font-size: 18px; font-weight: 600;
+      background: #fff;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 14px; padding-top: 6px;
+      border-top: 1px solid #ccc;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    /* ── PRINT ── */
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      .ejercicio { page-break-inside: avoid; }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 1.4cm 1.5cm; }
   </style>
 </head>
 <body>
 
-  <div class="topbar no-print">
+  <div class="topbar">
     <a class="back-btn" href="index.html">← Volver al índice</a>
-    <button class="print-btn" onclick="window.print()">🖨️ Imprimir ficha</button>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
   </div>
 
-  <div class="ficha-header">
-    <div class="ficha-emoji-big">🎵</div>
-    <div class="ficha-meta">
-      <div class="ficha-breadcrumb">Lengua · 1º Primaria · Conciencia Fonológica</div>
-      <div class="ficha-titulo">Las rimas</div>
-      <div class="ficha-stars">⭐ Nivel básico</div>
+  <div class="wrapper">
+
+  <!-- ENCABEZADO -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 1º Primaria · Conciencia fonológica · Ficha 2</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
     </div>
-    <div class="ficha-num-badge">Ficha 2 de 8</div>
   </div>
-
-  <div class="alumno-row">
-    <div class="alumno-field"><span class="alumno-label">NOMBRE:</span><input class="alumno-line" type="text" /></div>
-    <div class="alumno-field"><span class="alumno-label">FECHA:</span><input class="alumno-line" type="text" style="max-width:100px" /></div>
-    <div class="alumno-field"><span class="alumno-label">CLASE:</span><input class="alumno-line" type="text" style="max-width:80px" /></div>
-  </div>
+  <hr class="separador" />
 
   <!-- EJERCICIO 1 -->
   <div class="ejercicio">
-    <div class="ej-header">
-      <div class="ej-num">1</div>
-      <div class="ej-consigna">Une con una línea las palabras que riman.</div>
+    <div class="ej-titulo">
+      <span class="ej-n">1</span>
+      ¿Empiezan por el mismo sonido? Rodea SÍ o NO.
     </div>
-    <div class="rima-grid">
-      <div class="rima-item">🐱 gato</div><div class="rima-linea"></div><div class="rima-item derecha">🔔 campana</div>
-      <div class="rima-item">🌙 luna</div><div class="rima-linea"></div><div class="rima-item derecha">🦆 pato</div>
-      <div class="rima-item">🍎 manzana</div><div class="rima-linea"></div><div class="rima-item derecha">🌑 tuna</div>
-      <div class="rima-item">🌹 flor</div><div class="rima-linea"></div><div class="rima-item derecha">🐭 ratón</div>
-      <div class="rima-item">🔘 botón</div><div class="rima-linea"></div><div class="rima-item derecha">🎨 color</div>
+    <div class="sino-lista">
+      <div class="sino-fila">
+        <span class="sino-palabras">🍞 pan &nbsp;—&nbsp; 🦆 pato</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
+        </div>
+      </div>
+      <div class="sino-fila">
+        <span class="sino-palabras">🌞 sol &nbsp;—&nbsp; 🍜 sopa</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
+        </div>
+      </div>
+      <div class="sino-fila">
+        <span class="sino-palabras">🤲 mano &nbsp;—&nbsp; 🍎 manzana</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
+        </div>
+      </div>
+      <div class="sino-fila">
+        <span class="sino-palabras">🍽️ tenedor &nbsp;—&nbsp; ☕ taza</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
+        </div>
+      </div>
+      <div class="sino-fila">
+        <span class="sino-palabras">👃 nariz &nbsp;—&nbsp; ☁️ nube</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
+        </div>
+      </div>
+      <div class="sino-fila">
+        <span class="sino-palabras">🦷 diente &nbsp;—&nbsp; 👆 dedo</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- EJERCICIO 2 -->
   <div class="ejercicio">
-    <div class="ej-header">
-      <div class="ej-num">2</div>
-      <div class="ej-consigna">Rodea la palabra que rima con la primera.</div>
+    <div class="ej-titulo">
+      <span class="ej-n">2</span>
+      Rodea las dos palabras que empiezan con el mismo sonido.
     </div>
-    <div class="rodea-grupos">
-      <div class="rodea-grupo">
-        <span class="rodea-base">🌞 sol</span>
-        <span class="rodea-sep">→</span>
-        <div class="rodea-opciones">
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">col 🥬</button>
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">mesa 🪑</button>
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">pato 🦆</button>
+    <div class="grupos-grid">
+      <div class="grupo-fila">
+        <span class="grupo-label">/P/</span>
+        <div class="grupo-palabras">
+          <span class="grupo-palabra">pan</span>
+          <span class="grupo-palabra">pato</span>
+          <span class="grupo-palabra">sol</span>
         </div>
       </div>
-      <div class="rodea-grupo">
-        <span class="rodea-base">🐟 pez</span>
-        <span class="rodea-sep">→</span>
-        <div class="rodea-opciones">
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">luna 🌙</button>
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">vez ☝️</button>
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">casa 🏠</button>
+      <div class="grupo-fila">
+        <span class="grupo-label">/S/</span>
+        <div class="grupo-palabras">
+          <span class="grupo-palabra">sol</span>
+          <span class="grupo-palabra">sopa</span>
+          <span class="grupo-palabra">mano</span>
         </div>
       </div>
-      <div class="rodea-grupo">
-        <span class="rodea-base">🐭 ratón</span>
-        <span class="rodea-sep">→</span>
-        <div class="rodea-opciones">
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">camión 🚛</button>
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">flor 🌹</button>
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">gato 🐱</button>
+      <div class="grupo-fila">
+        <span class="grupo-label">/M/</span>
+        <div class="grupo-palabras">
+          <span class="grupo-palabra">mano</span>
+          <span class="grupo-palabra">mesa</span>
+          <span class="grupo-palabra">taza</span>
         </div>
       </div>
-      <div class="rodea-grupo">
-        <span class="rodea-base">🏠 casa</span>
-        <span class="rodea-sep">→</span>
-        <div class="rodea-opciones">
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">sol 🌞</button>
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">taza ☕</button>
-          <button class="rodea-btn" onclick="this.classList.toggle('ok')">pan 🍞</button>
+      <div class="grupo-fila">
+        <span class="grupo-label">/T/</span>
+        <div class="grupo-palabras">
+          <span class="grupo-palabra">taza</span>
+          <span class="grupo-palabra">tela</span>
+          <span class="grupo-palabra">nada</span>
+        </div>
+      </div>
+      <div class="grupo-fila">
+        <span class="grupo-label">/N/</span>
+        <div class="grupo-palabras">
+          <span class="grupo-palabra">nada</span>
+          <span class="grupo-palabra">nariz</span>
+          <span class="grupo-palabra">dedo</span>
+        </div>
+      </div>
+      <div class="grupo-fila">
+        <span class="grupo-label">/D/</span>
+        <div class="grupo-palabras">
+          <span class="grupo-palabra">dedo</span>
+          <span class="grupo-palabra">dado</span>
+          <span class="grupo-palabra">pan</span>
         </div>
       </div>
     </div>
@@ -143,34 +270,45 @@
 
   <!-- EJERCICIO 3 -->
   <div class="ejercicio">
-    <div class="ej-header">
-      <div class="ej-num">3</div>
-      <div class="ej-consigna">Completa la rima con la palabra del recuadro.</div>
+    <div class="ej-titulo">
+      <span class="ej-n">3</span>
+      Tacha la palabra que empieza con un sonido diferente.
     </div>
-    <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:.8rem; background:#f0fdf4; border:1.5px solid #bbf7d0; border-radius:8px; padding:.6rem 1rem;">
-      <span style="font-size:1rem; font-weight:600; margin-right:.3rem;">🗂️</span>
-      <span style="font-size:1rem; font-weight:700;">luna &nbsp;·&nbsp; ratón &nbsp;·&nbsp; flor &nbsp;·&nbsp; pan</span>
-    </div>
-    <div class="completa-lista">
-      <div class="completa-item">
-        <div class="completa-verso">
-          Tengo un <span class="completa-hueco"></span> con jamón,<br>
-          y un amigo que es un <span class="completa-hueco"></span>.
+    <div class="intruso-grupos">
+      <div class="intruso-fila">
+        <span class="intruso-num">a)</span>
+        <div class="intruso-items">
+          <div class="intruso-item">🍞 pan</div>
+          <div class="intruso-item">🦆 pato</div>
+          <div class="intruso-item">🌞 sol</div>
         </div>
       </div>
-      <div class="completa-item">
-        <div class="completa-verso">
-          Brilla la <span class="completa-hueco"></span> con su luz,<br>
-          y huele a rosas la <span class="completa-hueco"></span>.
+      <div class="intruso-fila">
+        <span class="intruso-num">b)</span>
+        <div class="intruso-items">
+          <div class="intruso-item">🌞 sol</div>
+          <div class="intruso-item">🍜 sopa</div>
+          <div class="intruso-item">🤲 mano</div>
+        </div>
+      </div>
+      <div class="intruso-fila">
+        <span class="intruso-num">c)</span>
+        <div class="intruso-items">
+          <div class="intruso-item">🤲 mano</div>
+          <div class="intruso-item">🍎 mesa</div>
+          <div class="intruso-item">☕ taza</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="ficha-footer">
-    <span>Academia Esparta · academiaesparta.es</span>
-    <span>Lengua · 1º Primaria · Ficha 2 — Las rimas</span>
+  <!-- FOOTER -->
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">¡Buen trabajo!</span>
   </div>
+
+  </div><!-- /wrapper -->
 
 </body>
 </html>
