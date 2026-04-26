@@ -7,71 +7,167 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #111; padding: 1.5rem; max-width: 780px; margin: 0 auto; }
+    body {
+      font-family: 'Edu SA Beginner', cursive;
+      background: #fff;
+      color: #111;
+      padding: 1rem 1.4rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
 
     /* ── Barra superior (no imprime) ── */
-    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: .5rem; }
-    .back-btn { display: inline-flex; align-items: center; gap: .4rem; color: #0a5233; font-size: .8rem; font-weight: 600; text-decoration: none; border: 1.5px solid #e5e7eb; padding: .35rem .9rem; border-radius: 999px; font-family: sans-serif; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: #0a5233; font-size: .8rem; font-weight: 600;
+      text-decoration: none; border: 1.5px solid #e5e7eb;
+      padding: .35rem .9rem; border-radius: 999px; font-family: sans-serif;
+    }
     .back-btn:hover { border-color: #0e9343; color: #0e9343; }
-    .print-btn { display: inline-flex; align-items: center; gap: .4rem; background: #0e9343; color: #fff; font-size: .8rem; font-weight: 600; border: none; padding: .35rem .9rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .print-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: #0e9343; color: #fff; font-size: .8rem; font-weight: 600;
+      border: none; padding: .35rem .9rem; border-radius: 999px;
+      cursor: pointer; font-family: sans-serif;
+    }
 
     /* ── ENCABEZADO ── */
-    .header { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 10px; }
-    .logo { font-size: 40px; flex-shrink: 0; }
+    .header { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+    .logo { font-size: 36px; flex-shrink: 0; line-height: 1; }
     .header-content { flex: 1; }
-    .header-content h1 { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 700; color: #0e9343; margin-bottom: 8px; }
-    .fields { display: flex; gap: 30px; }
+    .header-content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px; font-weight: 700; color: #0e9343; margin-bottom: 6px;
+    }
+    .fields { display: flex; gap: 24px; }
     .field { display: flex; flex-direction: column; flex: 1; }
-    .field label { font-size: 11px; color: #666; margin-bottom: 2px; font-family: 'Edu SA Beginner', cursive; }
-    .field input { border: none; border-bottom: 1px solid #333; padding: 5px 0; width: 100%; font-size: 13px; font-family: 'Edu SA Beginner', cursive; outline: none; background: transparent; }
-    .linea { border-bottom: 2px solid #0e9343; margin-bottom: 20px; }
+    .field label { font-size: 10px; color: #666; margin-bottom: 2px; font-family: 'Edu SA Beginner', cursive; }
+    .field input {
+      border: none; border-bottom: 1px solid #333;
+      padding: 3px 0; width: 100%; font-size: 12px;
+      font-family: 'Edu SA Beginner', cursive; outline: none; background: transparent;
+    }
+    .linea { border-bottom: 2px solid #0e9343; margin-bottom: 14px; }
 
     /* ── Contenido ── */
-    .contenido { min-height: 400px; margin-bottom: 25px; }
+    .contenido { margin-bottom: 12px; }
 
     /* ── Ejercicios ── */
-    .ejercicio { margin-bottom: 1.8rem; }
-    .ej-header { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; }
-    .ej-num { font-family: sans-serif; background: #0a5233; color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; flex-shrink: 0; }
-    .ej-consigna { font-size: 1.05rem; font-weight: 600; color: #111; }
+    .ejercicio { margin-bottom: 1.2rem; }
+    .ej-header { display: flex; align-items: center; gap: .5rem; margin-bottom: .7rem; }
+    .ej-num {
+      font-family: sans-serif; background: #0a5233; color: #fff;
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; font-weight: 700; flex-shrink: 0;
+    }
+    .ej-consigna { font-size: .95rem; font-weight: 600; color: #111; }
 
-    /* Ejercicio 1: Une */
-    .une-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: .8rem; align-items: center; max-width: 560px; }
-    .une-item { background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 10px; padding: .6rem .9rem; text-align: center; font-size: 1.1rem; font-weight: 600; }
-    .une-item.sonido { background: #fffbeb; border-color: #fde68a; font-size: .95rem; }
-    .une-linea { border-bottom: 2px dashed #d1d5db; width: 100%; }
+    /* ── Ejercicio 1: Une con flechas ── */
+    .une-wrap {
+      display: flex;
+      gap: 0;
+      max-width: 520px;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+    .une-col {
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+    .une-col.izq { align-items: flex-start; }
+    .une-col.der { align-items: flex-end; }
+    .une-col.centro {
+      flex: 1;
+      justify-content: space-around;
+      padding: 0 8px;
+    }
+    .une-item {
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      border-radius: 8px;
+      padding: .4rem .75rem;
+      font-size: .95rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .une-item.sonido {
+      background: #fffbeb;
+      border-color: #fde68a;
+      font-size: .85rem;
+    }
+    .une-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #9ca3af;
+      flex-shrink: 0;
+    }
 
-    /* Ejercicio 2: Sí / No */
-    .sino-grid { display: flex; flex-direction: column; gap: .7rem; max-width: 520px; }
-    .sino-row { display: flex; align-items: center; gap: .8rem; background: #fafafa; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: .6rem 1rem; }
-    .sino-palabras { flex: 1; font-size: 1.05rem; font-weight: 600; }
-    .sino-sep { color: #9ca3af; font-size: .9rem; }
-    .sino-opciones { display: flex; gap: .5rem; }
-    .sino-btn { border: 2px solid #d1d5db; border-radius: 8px; padding: .25rem .7rem; font-family: 'Edu SA Beginner', cursive; font-size: .9rem; font-weight: 600; cursor: pointer; background: #fff; transition: all .15s; color: #374151; }
-    .sino-btn:hover { border-color: #0e9343; color: #0e9343; }
+    /* ── Ejercicio 2: Rodea SÍ o NO ── */
+    .sino-grid { display: flex; flex-direction: column; gap: .5rem; max-width: 500px; }
+    .sino-row {
+      display: flex; align-items: center; gap: .8rem;
+      border: 1.5px solid #e5e7eb; border-radius: 8px;
+      padding: .45rem .85rem; background: #fafafa;
+    }
+    .sino-palabras { flex: 1; font-size: .95rem; font-weight: 600; }
+    .sino-sep { color: #9ca3af; font-size: .85rem; }
+    .sino-opciones { display: flex; gap: .6rem; align-items: center; }
+    .sino-circulo {
+      display: inline-flex; align-items: center; gap: .2rem;
+      font-family: 'Edu SA Beginner', cursive; font-size: .85rem; font-weight: 700;
+    }
+    .circulo {
+      width: 20px; height: 20px;
+      border: 2px solid #374151;
+      border-radius: 50%;
+      display: inline-block;
+    }
 
-    /* Ejercicio 3: Intruso */
-    .intruso-grupos { display: flex; flex-direction: column; gap: .8rem; }
-    .intruso-grupo { background: #fafafa; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: .7rem 1rem; }
-    .intruso-label { font-family: sans-serif; font-size: .65rem; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .5rem; }
-    .intruso-items { display: flex; gap: .8rem; flex-wrap: wrap; }
-    .intruso-item { border: 2px solid #d1d5db; border-radius: 10px; padding: .5rem 1rem; font-size: 1.1rem; font-weight: 600; text-align: center; cursor: pointer; transition: all .15s; background: #fff; user-select: none; }
-    .intruso-item:hover { border-color: #f87171; background: #fef2f2; }
-    .intruso-item.tachado { border-color: #f87171; background: #fef2f2; text-decoration: line-through; color: #f87171; }
+    /* ── Ejercicio 3: Tacha el intruso ── */
+    .intruso-grupos { display: flex; flex-direction: column; gap: .55rem; }
+    .intruso-grupo {
+      background: #fafafa; border: 1.5px solid #e5e7eb;
+      border-radius: 8px; padding: .5rem .85rem;
+    }
+    .intruso-label {
+      font-family: sans-serif; font-size: .6rem; font-weight: 600;
+      color: #9ca3af; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .4rem;
+    }
+    .intruso-items { display: flex; gap: .65rem; flex-wrap: wrap; }
+    .intruso-item {
+      border: 2px solid #d1d5db; border-radius: 8px;
+      padding: .35rem .8rem; font-size: .95rem; font-weight: 600;
+      text-align: center; background: #fff;
+    }
 
     /* ── FOOTER ── */
-    .footer { text-align: center; margin-top: 20px; padding-top: 10px; border-top: 1px solid #eee; }
-    .footer-brand { font-size: 11px; color: #999; margin-bottom: 4px; font-family: sans-serif; }
-    .footer-msg { font-family: 'Edu SA Beginner', cursive; font-weight: 700; color: #0e9343; font-size: 14px; }
+    .footer {
+      text-align: center; margin-top: 10px;
+      padding-top: 8px; border-top: 1px solid #eee;
+    }
+    .footer-brand { font-size: 10px; color: #999; margin-bottom: 3px; font-family: sans-serif; }
+    .footer-msg { font-family: 'Edu SA Beginner', cursive; font-weight: 700; color: #0e9343; font-size: 13px; }
 
     @media print {
       .topbar { display: none !important; }
-      body { padding: .5cm; }
+      body { padding: 0; }
       .ej-num { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .une-item { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .linea { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .intruso-grupo { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .sino-row { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
-    @page { size: A4; margin: 1.2cm; }
+    @page { size: A4 portrait; margin: 1.1cm 1.3cm; }
   </style>
 </head>
 <body>
@@ -109,12 +205,24 @@
         <div class="ej-num">1</div>
         <div class="ej-consigna">Une cada animal con el sonido que hace.</div>
       </div>
-      <div class="une-grid">
-        <div class="une-item">🐶 perro</div><div class="une-linea"></div><div class="une-item sonido">miau miau</div>
-        <div class="une-item">🐱 gato</div><div class="une-linea"></div><div class="une-item sonido">mu mu</div>
-        <div class="une-item">🐮 vaca</div><div class="une-linea"></div><div class="une-item sonido">croac croac</div>
-        <div class="une-item">🐸 rana</div><div class="une-linea"></div><div class="une-item sonido">guau guau</div>
-        <div class="une-item">🐑 oveja</div><div class="une-linea"></div><div class="une-item sonido">bee bee</div>
+      <div class="une-wrap">
+        <div class="une-col izq">
+          <div class="une-item">🐶 perro</div>
+          <div class="une-item">🐱 gato</div>
+          <div class="une-item">🐮 vaca</div>
+          <div class="une-item">🐸 rana</div>
+          <div class="une-item">🐑 oveja</div>
+        </div>
+        <div class="une-col centro">
+          <!-- espacio para que el alumno trace las líneas -->
+        </div>
+        <div class="une-col der">
+          <div class="une-item sonido">miau miau</div>
+          <div class="une-item sonido">mu mu</div>
+          <div class="une-item sonido">croac croac</div>
+          <div class="une-item sonido">guau guau</div>
+          <div class="une-item sonido">bee bee</div>
+        </div>
       </div>
     </div>
 
@@ -127,23 +235,38 @@
       <div class="sino-grid">
         <div class="sino-row">
           <span class="sino-palabras">🌞 sol &nbsp;<span class="sino-sep">—</span>&nbsp; 🍵 sopa</span>
-          <div class="sino-opciones"><button class="sino-btn">SÍ</button><button class="sino-btn">NO</button></div>
+          <div class="sino-opciones">
+            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
+            <span class="sino-circulo"><span class="circulo"></span> NO</span>
+          </div>
         </div>
         <div class="sino-row">
           <span class="sino-palabras">🏠 casa &nbsp;<span class="sino-sep">—</span>&nbsp; 🦆 pato</span>
-          <div class="sino-opciones"><button class="sino-btn">SÍ</button><button class="sino-btn">NO</button></div>
+          <div class="sino-opciones">
+            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
+            <span class="sino-circulo"><span class="circulo"></span> NO</span>
+          </div>
         </div>
         <div class="sino-row">
           <span class="sino-palabras">🤲 mano &nbsp;<span class="sino-sep">—</span>&nbsp; 🍎 manzana</span>
-          <div class="sino-opciones"><button class="sino-btn">SÍ</button><button class="sino-btn">NO</button></div>
+          <div class="sino-opciones">
+            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
+            <span class="sino-circulo"><span class="circulo"></span> NO</span>
+          </div>
         </div>
         <div class="sino-row">
           <span class="sino-palabras">🌙 luna &nbsp;<span class="sino-sep">—</span>&nbsp; 📚 libro</span>
-          <div class="sino-opciones"><button class="sino-btn">SÍ</button><button class="sino-btn">NO</button></div>
+          <div class="sino-opciones">
+            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
+            <span class="sino-circulo"><span class="circulo"></span> NO</span>
+          </div>
         </div>
         <div class="sino-row">
           <span class="sino-palabras">🍞 pan &nbsp;<span class="sino-sep">—</span>&nbsp; 🐟 pez</span>
-          <div class="sino-opciones"><button class="sino-btn">SÍ</button><button class="sino-btn">NO</button></div>
+          <div class="sino-opciones">
+            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
+            <span class="sino-circulo"><span class="circulo"></span> NO</span>
+          </div>
         </div>
       </div>
     </div>
@@ -158,25 +281,25 @@
         <div class="intruso-grupo">
           <div class="intruso-label">¿Cuál empieza diferente?</div>
           <div class="intruso-items">
-            <div class="intruso-item" onclick="this.classList.toggle('tachado')">🐱 gato</div>
-            <div class="intruso-item" onclick="this.classList.toggle('tachado')">🌷 rosa</div>
-            <div class="intruso-item" onclick="this.classList.toggle('tachado')">🤓 gafas</div>
+            <div class="intruso-item">🐱 gato</div>
+            <div class="intruso-item">🌷 rosa</div>
+            <div class="intruso-item">🤓 gafas</div>
           </div>
         </div>
         <div class="intruso-grupo">
           <div class="intruso-label">¿Cuál empieza diferente?</div>
           <div class="intruso-items">
-            <div class="intruso-item" onclick="this.classList.toggle('tachado')">🌞 sol</div>
-            <div class="intruso-item" onclick="this.classList.toggle('tachado')">🍵 sopa</div>
-            <div class="intruso-item" onclick="this.classList.toggle('tachado')">🐘 elefante</div>
+            <div class="intruso-item">🌞 sol</div>
+            <div class="intruso-item">🍵 sopa</div>
+            <div class="intruso-item">🐘 elefante</div>
           </div>
         </div>
         <div class="intruso-grupo">
           <div class="intruso-label">¿Cuál empieza diferente?</div>
           <div class="intruso-items">
-            <div class="intruso-item" onclick="this.classList.toggle('tachado')">🍞 pan</div>
-            <div class="intruso-item" onclick="this.classList.toggle('tachado')">🐟 pez</div>
-            <div class="intruso-item" onclick="this.classList.toggle('tachado')">🐒 mono</div>
+            <div class="intruso-item">🍞 pan</div>
+            <div class="intruso-item">🐟 pez</div>
+            <div class="intruso-item">🐒 mono</div>
           </div>
         </div>
       </div>
