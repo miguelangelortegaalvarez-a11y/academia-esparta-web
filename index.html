@@ -379,15 +379,15 @@
         50% { opacity: 0.4; transform: scale(1.5); }
       }
       .hero-inner h1 {
+        font-family: 'Nunito', sans-serif;
         font-size: clamp(2.6rem, 5.5vw, 4.2rem);
         font-weight: 800;
         color: white;
         line-height: 1.1;
-        letter-spacing: -0.02em;
+        letter-spacing: 0.01em;
         margin-bottom: 1.3rem;
-        animation: fadeUp 0.7s 0.15s ease both;
       }
-      .hero-inner h1 em { font-style: normal; color: #86efac; }
+      .hero-inner h1 em { font-style: normal; color: #fff; }
       .hero-inner > p {
         font-size: 1.12rem;
         color: rgba(255,255,255,0.78);
@@ -1518,7 +1518,7 @@
           Más de 15 años ayudando a alumnos en Torremolinos
         </div>
 
-        <h1 id="heroTitle" aria-label="Tu hijo puede mejorar sus notas y ganar seguridad"></h1>
+        <h1 id="heroTitle">Tu hijo puede mejorar sus notas y <em>ganar seguridad</em></h1>
 
         <p>Grupos reducidos, atención personalizada y acompañamiento real para Primaria, ESO, Bachillerato y EBAU.</p>
 
@@ -2176,46 +2176,15 @@
 
         const splash       = document.getElementById('splash');
         const splashPhrase = document.getElementById('splashPhrase');
-        const heroTitle    = document.getElementById('heroTitle');
 
         function exitSplash() {
           splash.classList.add('out');
-          // Página aparece al mismo tiempo que el splash desaparece
           document.querySelectorAll('body > *:not(#splash)').forEach(el => {
             el.style.transition = 'opacity 0.9s ease';
             el.style.opacity = '1';
           });
           document.body.classList.remove('splashing');
-          setTimeout(() => { splash.remove(); startHeroTypewriter(); }, 900);
-        }
-
-        function startHeroTypewriter() {
-          const part1 = 'Tu hijo puede mejorar sus notas y ';
-          const part2 = 'ganar seguridad';
-          let i = 0;
-          const cursor = document.createElement('span');
-          cursor.className = 'typewriter-cursor';
-          heroTitle.appendChild(cursor);
-          function type() {
-            if (i < part1.length) {
-              cursor.before(document.createTextNode(part1[i++]));
-              if (i === part1.length) {
-                const em = document.createElement('em');
-                heroTitle.insertBefore(em, cursor);
-                em.appendChild(cursor);
-                let j = 0;
-                function typeEm() {
-                  if (j < part2.length) {
-                    cursor.before(document.createTextNode(part2[j++]));
-                    setTimeout(typeEm, 42);
-                  } else { setTimeout(() => cursor.remove(), 2200); }
-                }
-                typeEm(); return;
-              }
-              setTimeout(type, 42);
-            }
-          }
-          type();
+          setTimeout(() => splash.remove(), 900);
         }
 
         // Título revela de izq a dcha por CSS (0.4s delay + 1.0s duración = 1.4s)
