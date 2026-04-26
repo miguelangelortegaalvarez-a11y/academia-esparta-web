@@ -276,13 +276,13 @@
         transition: opacity 0.6s ease;
       }
       .splash-tagline.show { opacity: 1; }
-      #splash.out { animation: splashOut 0.8s ease forwards; }
+      #splash.out { animation: splashOut 0.9s ease forwards; }
       @keyframes splashOut {
-        0%   { opacity: 1; transform: scale(1); }
-        50%  { opacity: 1; transform: scale(1.03); }
-        100% { opacity: 0; transform: scale(1.06); }
+        0%   { opacity: 1; }
+        100% { opacity: 0; }
       }
       body.splashing { overflow: hidden; }
+      body.splashing > *:not(#splash) { opacity: 0; }
       .typewriter-cursor {
         display: inline-block;
         width: 3px;
@@ -2180,8 +2180,13 @@
 
         function exitSplash() {
           splash.classList.add('out');
+          // Página aparece al mismo tiempo que el splash desaparece
+          document.querySelectorAll('body > *:not(#splash)').forEach(el => {
+            el.style.transition = 'opacity 0.9s ease';
+            el.style.opacity = '1';
+          });
           document.body.classList.remove('splashing');
-          setTimeout(() => { splash.remove(); startHeroTypewriter(); }, 800);
+          setTimeout(() => { splash.remove(); startHeroTypewriter(); }, 900);
         }
 
         function startHeroTypewriter() {
