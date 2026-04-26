@@ -7,312 +7,260 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: 'Edu SA Beginner', cursive;
       background: #fff;
-      color: #111;
-      padding: 1rem 1.4rem;
+      color: #000;
+      padding: 1.2rem 1.5rem;
       max-width: 780px;
       margin: 0 auto;
     }
 
-    /* ── Barra superior (no imprime) ── */
+    /* ── Barra web (no imprime) ── */
     .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-      gap: .5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1rem; gap: .5rem;
     }
     .back-btn {
-      display: inline-flex; align-items: center; gap: .4rem;
-      color: #0a5233; font-size: .8rem; font-weight: 600;
-      text-decoration: none; border: 1.5px solid #e5e7eb;
-      padding: .35rem .9rem; border-radius: 999px; font-family: sans-serif;
+      color: #333; font-size: .8rem; text-decoration: none;
+      border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif;
     }
-    .back-btn:hover { border-color: #0e9343; color: #0e9343; }
     .print-btn {
-      display: inline-flex; align-items: center; gap: .4rem;
-      background: #0e9343; color: #fff; font-size: .8rem; font-weight: 600;
-      border: none; padding: .35rem .9rem; border-radius: 999px;
+      background: #222; color: #fff; font-size: .8rem;
+      border: none; padding: .3rem .8rem; border-radius: 999px;
       cursor: pointer; font-family: sans-serif;
     }
 
     /* ── ENCABEZADO ── */
-    .header { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
-    .logo { font-size: 36px; flex-shrink: 0; line-height: 1; }
-    .header-content { flex: 1; }
-    .header-content h1 {
+    .header { margin-bottom: 6px; }
+    .header-top {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .academia-nombre {
       font-family: 'Montserrat', sans-serif;
-      font-size: 22px; font-weight: 700; color: #0e9343; margin-bottom: 6px;
+      font-size: 18px; font-weight: 700; color: #000;
     }
-    .fields { display: flex; gap: 24px; }
-    .field { display: flex; flex-direction: column; flex: 1; }
-    .field label { font-size: 10px; color: #666; margin-bottom: 2px; font-family: 'Edu SA Beginner', cursive; }
-    .field input {
-      border: none; border-bottom: 1px solid #333;
-      padding: 3px 0; width: 100%; font-size: 12px;
-      font-family: 'Edu SA Beginner', cursive; outline: none; background: transparent;
+    .ficha-ref {
+      font-family: sans-serif; font-size: 10px; color: #555;
     }
-    .linea { border-bottom: 2px solid #0e9343; margin-bottom: 14px; }
-
-    /* ── Contenido ── */
-    .contenido { margin-bottom: 12px; }
+    .datos-alumno {
+      display: flex; gap: 30px; margin-bottom: 6px;
+    }
+    .dato {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; flex: 1;
+    }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea {
+      flex: 1; border-bottom: 1px solid #000; height: 16px;
+    }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 12px; }
 
     /* ── Ejercicios ── */
-    .ejercicio { margin-bottom: 1.2rem; }
-    .ej-header { display: flex; align-items: center; gap: .5rem; margin-bottom: .7rem; }
-    .ej-num {
-      font-family: sans-serif; background: #0a5233; color: #fff;
-      width: 22px; height: 22px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .65rem; font-weight: 700; flex-shrink: 0;
+    .ejercicio { margin-bottom: 16px; }
+    .ej-titulo {
+      font-size: 13px; font-weight: 700; margin-bottom: 8px;
+      display: flex; align-items: baseline; gap: 6px;
     }
-    .ej-consigna { font-size: .95rem; font-weight: 600; color: #111; }
-
-    /* ── Ejercicio 1: Une con flechas ── */
-    .une-wrap {
-      display: flex;
-      gap: 0;
-      max-width: 520px;
-      justify-content: space-between;
-      align-items: stretch;
-    }
-    .une-col {
-      display: flex;
-      flex-direction: column;
-      gap: .45rem;
-    }
-    .une-col.izq { align-items: flex-start; }
-    .une-col.der { align-items: flex-end; }
-    .une-col.centro {
-      flex: 1;
-      justify-content: space-around;
-      padding: 0 8px;
-    }
-    .une-item {
-      background: #f0fdf4;
-      border: 1.5px solid #bbf7d0;
-      border-radius: 8px;
-      padding: .4rem .75rem;
-      font-size: .95rem;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .une-item.sonido {
-      background: #fffbeb;
-      border-color: #fde68a;
-      font-size: .85rem;
-    }
-    .une-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #9ca3af;
-      flex-shrink: 0;
+    .ej-n {
+      font-family: sans-serif; font-size: 11px; font-weight: 700;
+      border: 1.5px solid #000; border-radius: 50%;
+      width: 20px; height: 20px; display: inline-flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
     }
 
-    /* ── Ejercicio 2: Rodea SÍ o NO ── */
-    .sino-grid { display: flex; flex-direction: column; gap: .5rem; max-width: 500px; }
-    .sino-row {
-      display: flex; align-items: center; gap: .8rem;
-      border: 1.5px solid #e5e7eb; border-radius: 8px;
-      padding: .45rem .85rem; background: #fafafa;
+    /* ── Ej 1: Une ── */
+    .une-tabla {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 6px 0;
+      max-width: 480px;
     }
-    .sino-palabras { flex: 1; font-size: .95rem; font-weight: 600; }
-    .sino-sep { color: #9ca3af; font-size: .85rem; }
-    .sino-opciones { display: flex; gap: .6rem; align-items: center; }
-    .sino-circulo {
-      display: inline-flex; align-items: center; gap: .2rem;
-      font-family: 'Edu SA Beginner', cursive; font-size: .85rem; font-weight: 700;
+    .une-celda {
+      font-size: 13px; font-weight: 600; padding: 4px 10px;
+      border: 1px solid #000; border-radius: 4px;
+      white-space: nowrap; background: #fff;
     }
-    .circulo {
-      width: 20px; height: 20px;
-      border: 2px solid #374151;
-      border-radius: 50%;
-      display: inline-block;
+    .une-espacio {
+      border-bottom: 1px dashed #aaa;
+      margin: 0 6px;
+      align-self: center;
     }
 
-    /* ── Ejercicio 3: Tacha el intruso ── */
-    .intruso-grupos { display: flex; flex-direction: column; gap: .55rem; }
-    .intruso-grupo {
-      background: #fafafa; border: 1.5px solid #e5e7eb;
-      border-radius: 8px; padding: .5rem .85rem;
+    /* ── Ej 2: Sí/No ── */
+    .sino-lista { display: flex; flex-direction: column; gap: 5px; max-width: 480px; }
+    .sino-fila {
+      display: flex; align-items: center;
+      border: 1px solid #000; border-radius: 4px;
+      padding: 4px 10px; gap: 10px;
     }
-    .intruso-label {
-      font-family: sans-serif; font-size: .6rem; font-weight: 600;
-      color: #9ca3af; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .4rem;
+    .sino-palabras { flex: 1; font-size: 13px; font-weight: 600; }
+    .sino-opciones { display: flex; gap: 14px; }
+    .opcion {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 700; font-family: sans-serif;
     }
-    .intruso-items { display: flex; gap: .65rem; flex-wrap: wrap; }
+    .opcion .circulo {
+      width: 18px; height: 18px;
+      border: 1.5px solid #000; border-radius: 50%;
+      display: inline-block; flex-shrink: 0;
+    }
+
+    /* ── Ej 3: Intruso ── */
+    .intruso-grupos { display: flex; flex-direction: column; gap: 6px; }
+    .intruso-fila {
+      display: flex; align-items: center; gap: 8px;
+      border: 1px solid #000; border-radius: 4px; padding: 5px 10px;
+    }
+    .intruso-num {
+      font-family: sans-serif; font-size: 10px; font-weight: 700;
+      color: #555; flex-shrink: 0; min-width: 14px;
+    }
+    .intruso-items { display: flex; gap: 8px; flex-wrap: wrap; }
     .intruso-item {
-      border: 2px solid #d1d5db; border-radius: 8px;
-      padding: .35rem .8rem; font-size: .95rem; font-weight: 600;
-      text-align: center; background: #fff;
+      border: 1px solid #000; border-radius: 4px;
+      padding: 3px 12px; font-size: 13px; font-weight: 600;
+      background: #fff;
     }
 
     /* ── FOOTER ── */
     .footer {
-      text-align: center; margin-top: 10px;
-      padding-top: 8px; border-top: 1px solid #eee;
+      margin-top: 14px; padding-top: 6px;
+      border-top: 1px solid #ccc;
+      display: flex; justify-content: space-between; align-items: center;
     }
-    .footer-brand { font-size: 10px; color: #999; margin-bottom: 3px; font-family: sans-serif; }
-    .footer-msg { font-family: 'Edu SA Beginner', cursive; font-weight: 700; color: #0e9343; font-size: 13px; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
 
+    /* ── PRINT ── */
     @media print {
       .topbar { display: none !important; }
       body { padding: 0; max-width: none; margin: 0; }
       .ejercicio { page-break-inside: avoid; }
-      .ej-num { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .une-item { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .linea { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .intruso-grupo { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .sino-row { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .footer-msg { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
-    @page { size: A4 portrait; margin: 1.5cm 1.3cm; }
+    @page { size: A4 portrait; margin: 1.5cm 1.4cm; }
   </style>
 </head>
 <body>
 
   <div class="topbar">
     <a class="back-btn" href="index.html">← Volver al índice</a>
-    <button class="print-btn" onclick="window.print()">🖨️ Imprimir ficha</button>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
   </div>
 
   <!-- ENCABEZADO -->
   <div class="header">
-    <div class="logo">🏫</div>
-    <div class="header-content">
-      <h1>Academia Esparta</h1>
-      <div class="fields">
-        <div class="field">
-          <label>Nombre</label>
-          <input type="text" />
+    <div class="header-top">
+      <span class="academia-nombre">Academia Esparta</span>
+      <span class="ficha-ref">Lengua · 1º Primaria · Conciencia fonológica · Ficha 1</span>
+    </div>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <!-- EJERCICIO 1 -->
+  <div class="ejercicio">
+    <div class="ej-titulo">
+      <span class="ej-n">1</span>
+      Une cada animal con el sonido que hace.
+    </div>
+    <div class="une-tabla">
+      <div class="une-celda">🐶 perro</div><div class="une-espacio"></div><div class="une-celda">miau miau</div>
+      <div class="une-celda">🐱 gato</div><div class="une-espacio"></div><div class="une-celda">mu mu</div>
+      <div class="une-celda">🐮 vaca</div><div class="une-espacio"></div><div class="une-celda">croac croac</div>
+      <div class="une-celda">🐸 rana</div><div class="une-espacio"></div><div class="une-celda">guau guau</div>
+      <div class="une-celda">🐑 oveja</div><div class="une-espacio"></div><div class="une-celda">bee bee</div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 2 -->
+  <div class="ejercicio">
+    <div class="ej-titulo">
+      <span class="ej-n">2</span>
+      ¿Empiezan por el mismo sonido? Rodea SÍ o NO.
+    </div>
+    <div class="sino-lista">
+      <div class="sino-fila">
+        <span class="sino-palabras">🌞 sol &nbsp;—&nbsp; 🍵 sopa</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
         </div>
-        <div class="field">
-          <label>Fecha</label>
-          <input type="text" />
+      </div>
+      <div class="sino-fila">
+        <span class="sino-palabras">🏠 casa &nbsp;—&nbsp; 🦆 pato</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
+        </div>
+      </div>
+      <div class="sino-fila">
+        <span class="sino-palabras">🤲 mano &nbsp;—&nbsp; 🍎 manzana</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
+        </div>
+      </div>
+      <div class="sino-fila">
+        <span class="sino-palabras">🌙 luna &nbsp;—&nbsp; 📚 libro</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
+        </div>
+      </div>
+      <div class="sino-fila">
+        <span class="sino-palabras">🍞 pan &nbsp;—&nbsp; 🐟 pez</span>
+        <div class="sino-opciones">
+          <span class="opcion"><span class="circulo"></span> SÍ</span>
+          <span class="opcion"><span class="circulo"></span> NO</span>
         </div>
       </div>
     </div>
   </div>
-  <div class="linea"></div>
 
-  <!-- CONTENIDO -->
-  <div class="contenido">
-
-    <!-- EJERCICIO 1 -->
-    <div class="ejercicio">
-      <div class="ej-header">
-        <div class="ej-num">1</div>
-        <div class="ej-consigna">Une cada animal con el sonido que hace.</div>
+  <!-- EJERCICIO 3 -->
+  <div class="ejercicio">
+    <div class="ej-titulo">
+      <span class="ej-n">3</span>
+      Tacha la palabra que empieza con un sonido diferente.
+    </div>
+    <div class="intruso-grupos">
+      <div class="intruso-fila">
+        <span class="intruso-num">a)</span>
+        <div class="intruso-items">
+          <div class="intruso-item">🐱 gato</div>
+          <div class="intruso-item">🌷 rosa</div>
+          <div class="intruso-item">🤓 gafas</div>
+        </div>
       </div>
-      <div class="une-wrap">
-        <div class="une-col izq">
-          <div class="une-item">🐶 perro</div>
-          <div class="une-item">🐱 gato</div>
-          <div class="une-item">🐮 vaca</div>
-          <div class="une-item">🐸 rana</div>
-          <div class="une-item">🐑 oveja</div>
+      <div class="intruso-fila">
+        <span class="intruso-num">b)</span>
+        <div class="intruso-items">
+          <div class="intruso-item">🌞 sol</div>
+          <div class="intruso-item">🍵 sopa</div>
+          <div class="intruso-item">🐘 elefante</div>
         </div>
-        <div class="une-col centro">
-          <!-- espacio para que el alumno trace las líneas -->
-        </div>
-        <div class="une-col der">
-          <div class="une-item sonido">miau miau</div>
-          <div class="une-item sonido">mu mu</div>
-          <div class="une-item sonido">croac croac</div>
-          <div class="une-item sonido">guau guau</div>
-          <div class="une-item sonido">bee bee</div>
+      </div>
+      <div class="intruso-fila">
+        <span class="intruso-num">c)</span>
+        <div class="intruso-items">
+          <div class="intruso-item">🍞 pan</div>
+          <div class="intruso-item">🐟 pez</div>
+          <div class="intruso-item">🐒 mono</div>
         </div>
       </div>
     </div>
-
-    <!-- EJERCICIO 2 -->
-    <div class="ejercicio">
-      <div class="ej-header">
-        <div class="ej-num">2</div>
-        <div class="ej-consigna">¿Empiezan por el mismo sonido? Rodea <strong>SÍ</strong> o <strong>NO</strong>.</div>
-      </div>
-      <div class="sino-grid">
-        <div class="sino-row">
-          <span class="sino-palabras">🌞 sol &nbsp;<span class="sino-sep">—</span>&nbsp; 🍵 sopa</span>
-          <div class="sino-opciones">
-            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
-            <span class="sino-circulo"><span class="circulo"></span> NO</span>
-          </div>
-        </div>
-        <div class="sino-row">
-          <span class="sino-palabras">🏠 casa &nbsp;<span class="sino-sep">—</span>&nbsp; 🦆 pato</span>
-          <div class="sino-opciones">
-            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
-            <span class="sino-circulo"><span class="circulo"></span> NO</span>
-          </div>
-        </div>
-        <div class="sino-row">
-          <span class="sino-palabras">🤲 mano &nbsp;<span class="sino-sep">—</span>&nbsp; 🍎 manzana</span>
-          <div class="sino-opciones">
-            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
-            <span class="sino-circulo"><span class="circulo"></span> NO</span>
-          </div>
-        </div>
-        <div class="sino-row">
-          <span class="sino-palabras">🌙 luna &nbsp;<span class="sino-sep">—</span>&nbsp; 📚 libro</span>
-          <div class="sino-opciones">
-            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
-            <span class="sino-circulo"><span class="circulo"></span> NO</span>
-          </div>
-        </div>
-        <div class="sino-row">
-          <span class="sino-palabras">🍞 pan &nbsp;<span class="sino-sep">—</span>&nbsp; 🐟 pez</span>
-          <div class="sino-opciones">
-            <span class="sino-circulo"><span class="circulo"></span> SÍ</span>
-            <span class="sino-circulo"><span class="circulo"></span> NO</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- EJERCICIO 3 -->
-    <div class="ejercicio">
-      <div class="ej-header">
-        <div class="ej-num">3</div>
-        <div class="ej-consigna">Tacha el que suena diferente a los demás.</div>
-      </div>
-      <div class="intruso-grupos">
-        <div class="intruso-grupo">
-          <div class="intruso-label">¿Cuál empieza diferente?</div>
-          <div class="intruso-items">
-            <div class="intruso-item">🐱 gato</div>
-            <div class="intruso-item">🌷 rosa</div>
-            <div class="intruso-item">🤓 gafas</div>
-          </div>
-        </div>
-        <div class="intruso-grupo">
-          <div class="intruso-label">¿Cuál empieza diferente?</div>
-          <div class="intruso-items">
-            <div class="intruso-item">🌞 sol</div>
-            <div class="intruso-item">🍵 sopa</div>
-            <div class="intruso-item">🐘 elefante</div>
-          </div>
-        </div>
-        <div class="intruso-grupo">
-          <div class="intruso-label">¿Cuál empieza diferente?</div>
-          <div class="intruso-items">
-            <div class="intruso-item">🍞 pan</div>
-            <div class="intruso-item">🐟 pez</div>
-            <div class="intruso-item">🐒 mono</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-brand">🌿 Academia Esparta | Torremolinos</div>
-    <div class="footer-msg">✨ ¡Buen trabajo! ✨</div>
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">¡Buen trabajo!</span>
   </div>
 
 </body>
