@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ficha 6 · Sílaba final · 1º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --primary: #0e9343; --dark: #0a5233; --light: #f0fdf4; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #111; padding: 1.5rem; max-width: 780px; margin: 0 auto; }
+    .no-print { font-family: 'Poppins', sans-serif; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: .5rem; }
+    .back-btn { display: inline-flex; align-items: center; gap: .4rem; color: var(--dark); font-size: .8rem; font-weight: 600; text-decoration: none; border: 1.5px solid #e5e7eb; padding: .35rem .9rem; border-radius: 999px; }
+    .back-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .print-btn { display: inline-flex; align-items: center; gap: .4rem; background: var(--primary); color: #fff; font-size: .8rem; font-weight: 600; border: none; padding: .35rem .9rem; border-radius: 999px; cursor: pointer; font-family: 'Poppins', sans-serif; }
+    .ficha-header { background: linear-gradient(135deg, var(--dark), var(--primary)); border-radius: 14px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .ficha-emoji-big { font-size: 2.8rem; }
+    .ficha-meta { flex: 1; }
+    .ficha-breadcrumb { font-family: 'Poppins', sans-serif; font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .2rem; }
+    .ficha-titulo { font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .ficha-stars { font-size: 1rem; margin-top: .2rem; }
+    .ficha-num-badge { font-family: 'Poppins', sans-serif; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); color: #fff; font-size: .7rem; font-weight: 700; padding: .3rem .8rem; border-radius: 999px; }
+    .alumno-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: .8rem 1rem; }
+    .alumno-field { display: flex; align-items: center; gap: .4rem; flex: 1; min-width: 150px; }
+    .alumno-label { font-family: 'Poppins', sans-serif; font-size: .7rem; font-weight: 600; color: #9ca3af; white-space: nowrap; }
+    .alumno-line { flex: 1; border: none; border-bottom: 1.5px solid #d1d5db; font-family: 'Edu SA Beginner', cursive; font-size: .95rem; outline: none; padding: .1rem .2rem; }
+    .ejercicio { margin-bottom: 1.8rem; }
+    .ej-header { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; }
+    .ej-num { font-family: 'Poppins', sans-serif; background: var(--dark); color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; flex-shrink: 0; }
+    .ej-consigna { font-size: 1.05rem; font-weight: 600; color: #111; }
+    .ficha-footer { margin-top: 2rem; padding-top: 1rem; border-top: 2px dashed #e5e7eb; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; font-size: .68rem; color: #9ca3af; }
+    @media print { .no-print { display: none !important; } body { padding: .5cm; } .ficha-header, .ej-num, .sil-final-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+    @page { size: A4; margin: 1.2cm; }
+
+    /* Ej 1 */
+    .une-sil-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: .7rem; align-items: center; max-width: 540px; }
+    .une-sil-item { background: var(--light); border: 2px solid #bbf7d0; border-radius: 10px; padding: .6rem 1rem; text-align: center; font-size: 1.1rem; font-weight: 600; }
+    .sil-final-badge { background: #7c3aed; color: #fff; border-radius: 8px; padding: .4rem .7rem; font-size: 1.1rem; font-weight: 700; text-align: center; }
+    .une-linea { border-bottom: 2px dashed #d1d5db; }
+
+    /* Ej 2: rodea la que termina igual */
+    .termina-grupos { display: flex; flex-direction: column; gap: .8rem; }
+    .termina-row { display: flex; align-items: center; gap: 1rem; background: #fafafa; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: .7rem 1rem; flex-wrap: wrap; }
+    .termina-base { font-size: 1.1rem; font-weight: 700; color: var(--dark); min-width: 110px; }
+    .termina-sep { color: #9ca3af; font-family: 'Poppins', sans-serif; font-size: .8rem; }
+    .termina-opciones { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .termina-btn { border: 2px solid #d1d5db; border-radius: 8px; padding: .3rem .8rem; font-family: 'Edu SA Beginner', cursive; font-size: 1rem; font-weight: 600; cursor: pointer; background: #fff; transition: all .15s; }
+    .termina-btn:hover, .termina-btn.ok { border-color: #7c3aed; background: #f5f3ff; color: #5b21b6; }
+
+    /* Ej 3: escribe la sílaba final */
+    .escribe-final-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .7rem; }
+    .escribe-final-card { background: #fafafa; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: .7rem 1rem; }
+    .ef-palabra { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: .4rem; }
+    .ef-separada { font-size: .9rem; color: #6b7280; margin-bottom: .4rem; }
+    .ef-input-row { display: flex; align-items: center; gap: .3rem; }
+    .ef-label { font-size: .8rem; color: #9ca3af; font-family: 'Poppins', sans-serif; }
+    .ef-input { border: none; border-bottom: 2px solid #7c3aed; width: 70px; font-family: 'Edu SA Beginner', cursive; font-size: 1rem; font-weight: 600; outline: none; text-align: center; color: #5b21b6; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar no-print">
+    <a class="back-btn" href="index.html">← Volver al índice</a>
+    <button class="print-btn" onclick="window.print()">🖨️ Imprimir ficha</button>
+  </div>
+
+  <div class="ficha-header">
+    <div class="ficha-emoji-big">🔚</div>
+    <div class="ficha-meta">
+      <div class="ficha-breadcrumb">Lengua · 1º Primaria · Conciencia Fonológica</div>
+      <div class="ficha-titulo">Sílaba final</div>
+      <div class="ficha-stars">⭐⭐⭐ Nivel medio-alto</div>
+    </div>
+    <div class="ficha-num-badge">Ficha 6 de 8</div>
+  </div>
+
+  <div class="alumno-row">
+    <div class="alumno-field"><span class="alumno-label">NOMBRE:</span><input class="alumno-line" type="text" /></div>
+    <div class="alumno-field"><span class="alumno-label">FECHA:</span><input class="alumno-line" type="text" style="max-width:100px" /></div>
+    <div class="alumno-field"><span class="alumno-label">CLASE:</span><input class="alumno-line" type="text" style="max-width:80px" /></div>
+  </div>
+
+  <!-- EJERCICIO 1 -->
+  <div class="ejercicio">
+    <div class="ej-header">
+      <div class="ej-num">1</div>
+      <div class="ej-consigna">Une cada imagen con la sílaba por la que termina.</div>
+    </div>
+    <div class="une-sil-grid">
+      <div class="une-sil-item">🐱 gato</div><div class="une-linea"></div><div class="sil-final-badge">sa</div>
+      <div class="une-sil-item">🌙 luna</div><div class="une-linea"></div><div class="sil-final-badge">to</div>
+      <div class="une-sil-item">🏠 casa</div><div class="une-linea"></div><div class="sil-final-badge">na</div>
+      <div class="une-sil-item">🌹 rosa</div><div class="une-linea"></div><div class="sil-final-badge">sa</div>
+      <div class="une-sil-item">🎈 globo</div><div class="une-linea"></div><div class="sil-final-badge">bo</div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 2 -->
+  <div class="ejercicio">
+    <div class="ej-header">
+      <div class="ej-num">2</div>
+      <div class="ej-consigna">Rodea las palabras que terminan igual que la primera.</div>
+    </div>
+    <div class="termina-grupos">
+      <div class="termina-row">
+        <span class="termina-base">🐱 gato (-to)</span>
+        <span class="termina-sep">→</span>
+        <div class="termina-opciones">
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🍅 tomate</button>
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🧢 pato</button>
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🌊 mar</button>
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🌿 pato</button>
+        </div>
+      </div>
+      <div class="termina-row">
+        <span class="termina-base">🌙 luna (-na)</span>
+        <span class="termina-sep">→</span>
+        <div class="termina-opciones">
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🍌 banana</button>
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🌞 sol</button>
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">👩 persona</button>
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🐟 pez</button>
+        </div>
+      </div>
+      <div class="termina-row">
+        <span class="termina-base">🌹 rosa (-sa)</span>
+        <span class="termina-sep">→</span>
+        <div class="termina-opciones">
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🏠 casa</button>
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🌴 palma</button>
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">🐸 rana</button>
+          <button class="termina-btn" onclick="this.classList.toggle('ok')">👗 blusa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 3 -->
+  <div class="ejercicio">
+    <div class="ej-header">
+      <div class="ej-num">3</div>
+      <div class="ej-consigna">Escribe la sílaba final de cada palabra.</div>
+    </div>
+    <div class="escribe-final-grid">
+      <div class="escribe-final-card">
+        <div class="ef-palabra">🦋 mariposa</div>
+        <div class="ef-separada">ma · ri · po · ___</div>
+        <div class="ef-input-row"><span class="ef-label">Termina en:</span><input class="ef-input" type="text" placeholder="sa" /></div>
+      </div>
+      <div class="escribe-final-card">
+        <div class="ef-palabra">🚂 locomotora</div>
+        <div class="ef-separada">lo · co · mo · to · ___</div>
+        <div class="ef-input-row"><span class="ef-label">Termina en:</span><input class="ef-input" type="text" placeholder="ra" /></div>
+      </div>
+      <div class="escribe-final-card">
+        <div class="ef-palabra">🍎 manzana</div>
+        <div class="ef-separada">man · za · ___</div>
+        <div class="ef-input-row"><span class="ef-label">Termina en:</span><input class="ef-input" type="text" placeholder="na" /></div>
+      </div>
+      <div class="escribe-final-card">
+        <div class="ef-palabra">⚽ pelota</div>
+        <div class="ef-separada">pe · lo · ___</div>
+        <div class="ef-input-row"><span class="ef-label">Termina en:</span><input class="ef-input" type="text" placeholder="ta" /></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ficha-footer">
+    <span>Academia Esparta · academiaesparta.es</span>
+    <span>Lengua · 1º Primaria · Ficha 6 — Sílaba final</span>
+  </div>
+
+</body>
+</html>

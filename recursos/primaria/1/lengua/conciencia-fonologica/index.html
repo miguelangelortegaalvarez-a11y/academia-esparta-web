@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conciencia Fonológica · 1º Primaria · Academia Esparta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #0e9343;
+      --dark: #0a5233;
+      --light: #f0fdf4;
+    }
+    body { font-family: 'Poppins', sans-serif; background: #f3f4f6; color: #111; }
+
+    .header {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+      padding: 2rem 2.5rem;
+    }
+    .header-inner { max-width: 960px; margin: 0 auto; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: rgba(255,255,255,.7); font-size: .8rem; font-weight: 500;
+      text-decoration: none; margin-bottom: 1.2rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: #fff; }
+    .header-breadcrumb {
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: .5rem;
+    }
+    .header-title {
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: #fff; margin-bottom: .4rem;
+    }
+    .header-desc { color: rgba(255,255,255,.72); font-size: .9rem; }
+    .header-badges { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
+    .badge {
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+      color: rgba(255,255,255,.9); font-size: .7rem; font-weight: 600;
+      padding: .25rem .75rem; border-radius: 999px;
+    }
+
+    .main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+
+    .progress-bar {
+      background: #fff; border-radius: 12px; padding: 1.2rem 1.5rem;
+      margin-bottom: 2rem; border: 1px solid #e5e7eb;
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .progress-label { font-size: .82rem; color: #6b7280; font-weight: 500; }
+    .progress-track { flex: 1; min-width: 120px; height: 8px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #34d399); border-radius: 999px; width: 0%; transition: width .6s ease; }
+    .progress-pct { font-size: .82rem; font-weight: 700; color: var(--primary); }
+
+    .section-title {
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: #9ca3af; margin-bottom: 1rem;
+    }
+
+    .fichas-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
+    }
+
+    .ficha-card {
+      background: #fff; border: 1.5px solid #e5e7eb; border-radius: 14px;
+      padding: 1.3rem 1.4rem; text-decoration: none; color: inherit;
+      transition: all .2s; display: block; position: relative; overflow: hidden;
+    }
+    .ficha-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,147,67,.12); }
+    .ficha-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--dark), var(--primary));
+      opacity: 0; transition: opacity .2s;
+    }
+    .ficha-card:hover::before { opacity: 1; }
+
+    .ficha-num {
+      font-size: .65rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: #9ca3af; margin-bottom: .4rem;
+    }
+    .ficha-emoji { font-size: 2rem; margin-bottom: .5rem; display: block; }
+    .ficha-titulo {
+      font-family: 'Edu SA Beginner', cursive;
+      font-size: 1.15rem; font-weight: 700; color: #111; margin-bottom: .3rem;
+    }
+    .ficha-desc { font-size: .78rem; color: #6b7280; line-height: 1.5; margin-bottom: .8rem; }
+    .ficha-footer { display: flex; align-items: center; justify-content: space-between; }
+    .stars { font-size: .85rem; letter-spacing: .05em; }
+    .ficha-action {
+      font-size: .72rem; font-weight: 600; color: var(--primary);
+      display: flex; align-items: center; gap: .3rem;
+    }
+
+    .nivel-tag {
+      display: inline-block; font-size: .62rem; font-weight: 700;
+      padding: .15rem .5rem; border-radius: 999px; margin-bottom: .6rem;
+    }
+    .nivel-1 { background: #dcfce7; color: #166534; }
+    .nivel-2 { background: #fef9c3; color: #854d0e; }
+    .nivel-3 { background: #fee2e2; color: #991b1b; }
+    .nivel-4 { background: #ede9fe; color: #5b21b6; }
+    .nivel-5 { background: #fce7f3; color: #9d174d; }
+
+    @media (max-width: 640px) {
+      .fichas-grid { grid-template-columns: 1fr; }
+      .header { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-inner">
+      <a class="back-link" href="../../../..">← Volver a Recursos</a>
+      <div class="header-breadcrumb">Lengua · 1º Primaria · Conciencia Fonológica</div>
+      <div class="header-title">🔤 Conciencia Fonológica</div>
+      <div class="header-desc">8 fichas progresivas · De menos a más dificultad · Imprimibles</div>
+      <div class="header-badges">
+        <span class="badge">📚 Lengua Castellana</span>
+        <span class="badge">🎓 1º Primaria</span>
+        <span class="badge">🖨️ Imprimible</span>
+        <span class="badge">Fuente escolar</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <div class="progress-bar">
+      <span class="progress-label">Progresión de dificultad</span>
+      <div class="progress-track"><div class="progress-fill" id="pbar"></div></div>
+      <span class="progress-pct">⭐ Básico → ⭐⭐⭐⭐⭐ Avanzado</span>
+    </div>
+
+    <div class="section-title">Las 8 fichas · Haz clic para abrir e imprimir</div>
+
+    <div class="fichas-grid">
+
+      <a class="ficha-card" href="ficha-1.html">
+        <div class="ficha-num">Ficha 1 de 8</div>
+        <span class="ficha-emoji">👂</span>
+        <span class="nivel-tag nivel-1">Nivel básico</span>
+        <div class="ficha-titulo">Reconocer sonidos</div>
+        <div class="ficha-desc">Une animales con su sonido, identifica sonidos iguales y distintos.</div>
+        <div class="ficha-footer">
+          <span class="stars">⭐</span>
+          <span class="ficha-action">Abrir ficha →</span>
+        </div>
+      </a>
+
+      <a class="ficha-card" href="ficha-2.html">
+        <div class="ficha-num">Ficha 2 de 8</div>
+        <span class="ficha-emoji">🎵</span>
+        <span class="nivel-tag nivel-1">Nivel básico</span>
+        <div class="ficha-titulo">Las rimas</div>
+        <div class="ficha-desc">Une palabras que riman, rodea la que rima y completa la rima.</div>
+        <div class="ficha-footer">
+          <span class="stars">⭐</span>
+          <span class="ficha-action">Abrir ficha →</span>
+        </div>
+      </a>
+
+      <a class="ficha-card" href="ficha-3.html">
+        <div class="ficha-num">Ficha 3 de 8</div>
+        <span class="ficha-emoji">💬</span>
+        <span class="nivel-tag nivel-2">Nivel medio</span>
+        <div class="ficha-titulo">Contar palabras</div>
+        <div class="ficha-desc">Cuenta las palabras de cada frase y dibuja un cuadro por cada una.</div>
+        <div class="ficha-footer">
+          <span class="stars">⭐⭐</span>
+          <span class="ficha-action">Abrir ficha →</span>
+        </div>
+      </a>
+
+      <a class="ficha-card" href="ficha-4.html">
+        <div class="ficha-num">Ficha 4 de 8</div>
+        <span class="ficha-emoji">👏</span>
+        <span class="nivel-tag nivel-2">Nivel medio</span>
+        <div class="ficha-titulo">Contar sílabas</div>
+        <div class="ficha-desc">Da palmadas y cuenta las sílabas de cada palabra.</div>
+        <div class="ficha-footer">
+          <span class="stars">⭐⭐</span>
+          <span class="ficha-action">Abrir ficha →</span>
+        </div>
+      </a>
+
+      <a class="ficha-card" href="ficha-5.html">
+        <div class="ficha-num">Ficha 5 de 8</div>
+        <span class="ficha-emoji">🔍</span>
+        <span class="nivel-tag nivel-3">Nivel medio-alto</span>
+        <div class="ficha-titulo">Sílaba inicial</div>
+        <div class="ficha-desc">Identifica la sílaba con la que empieza cada palabra.</div>
+        <div class="ficha-footer">
+          <span class="stars">⭐⭐⭐</span>
+          <span class="ficha-action">Abrir ficha →</span>
+        </div>
+      </a>
+
+      <a class="ficha-card" href="ficha-6.html">
+        <div class="ficha-num">Ficha 6 de 8</div>
+        <span class="ficha-emoji">🔚</span>
+        <span class="nivel-tag nivel-3">Nivel medio-alto</span>
+        <div class="ficha-titulo">Sílaba final</div>
+        <div class="ficha-desc">Identifica la sílaba con la que termina cada palabra.</div>
+        <div class="ficha-footer">
+          <span class="stars">⭐⭐⭐</span>
+          <span class="ficha-action">Abrir ficha →</span>
+        </div>
+      </a>
+
+      <a class="ficha-card" href="ficha-7.html">
+        <div class="ficha-num">Ficha 7 de 8</div>
+        <span class="ficha-emoji">🧩</span>
+        <span class="nivel-tag nivel-4">Nivel alto</span>
+        <div class="ficha-titulo">Unir sílabas</div>
+        <div class="ficha-desc">Une sílabas para formar palabras completas.</div>
+        <div class="ficha-footer">
+          <span class="stars">⭐⭐⭐⭐</span>
+          <span class="ficha-action">Abrir ficha →</span>
+        </div>
+      </a>
+
+      <a class="ficha-card" href="ficha-8.html">
+        <div class="ficha-num">Ficha 8 de 8</div>
+        <span class="ficha-emoji">🔬</span>
+        <span class="nivel-tag nivel-5">Nivel avanzado</span>
+        <div class="ficha-titulo">Los fonemas</div>
+        <div class="ficha-desc">Identifica y trabaja los sonidos individuales de cada palabra.</div>
+        <div class="ficha-footer">
+          <span class="stars">⭐⭐⭐⭐⭐</span>
+          <span class="ficha-action">Abrir ficha →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('pbar').style.width = '100%';
+    }, 300);
+  </script>
+</body>
+</html>
