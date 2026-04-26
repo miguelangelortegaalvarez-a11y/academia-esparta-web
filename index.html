@@ -180,45 +180,21 @@
         position: fixed;
         inset: 0;
         z-index: 99999;
-        background: #020e06;
+        background: #021a0b;
         overflow: hidden;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
       }
-      .splash-orb {
+      #splash-canvas {
         position: absolute;
-        border-radius: 50%;
-        filter: blur(90px);
-        pointer-events: none;
+        inset: 0;
+        z-index: 1;
+        opacity: 1;
+        transition: opacity 1s ease;
       }
-      .splash-orb-1 {
-        width: 700px; height: 700px;
-        background: radial-gradient(circle, #0e9343 0%, transparent 65%);
-        opacity: 0.2;
-        top: -280px; left: -180px;
-        animation: orbFloat 11s ease-in-out infinite;
-      }
-      .splash-orb-2 {
-        width: 500px; height: 500px;
-        background: radial-gradient(circle, #063c24 0%, transparent 70%);
-        opacity: 0.35;
-        bottom: -180px; right: -80px;
-        animation: orbFloat 13s 2s ease-in-out infinite reverse;
-      }
-      .splash-orb-3 {
-        width: 320px; height: 320px;
-        background: radial-gradient(circle, #86efac 0%, transparent 70%);
-        opacity: 0.07;
-        top: 45%; left: 58%;
-        animation: orbFloat 9s 5s ease-in-out infinite;
-      }
-      @keyframes orbFloat {
-        0%, 100% { transform: translate(0, 0); }
-        33%       { transform: translate(28px, -32px); }
-        66%       { transform: translate(-22px, 18px); }
-      }
+      #splash-canvas.fade { opacity: 0; }
       .splash-content {
         position: relative;
         z-index: 3;
@@ -226,62 +202,53 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 2rem 3rem;
+        padding: 2.5rem 4rem;
+        background: rgba(2, 26, 11, 0.82);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border: 1px solid rgba(134,239,172,0.1);
+        border-radius: 4px;
       }
-      .splash-line-top {
-        width: 0;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #86efac, transparent);
-        margin-bottom: 3rem;
-        animation: splashLineGrow 0.9s 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
-      }
-      @keyframes splashLineGrow { to { width: 200px; } }
       .splash-title {
-        font-size: clamp(2.8rem, 9vw, 6.5rem);
+        font-size: clamp(2.8rem, 9vw, 6rem);
         font-weight: 800;
         color: #fff;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
         line-height: 1;
-        position: relative;
-        overflow: hidden;
-        clip-path: inset(0 100% 0 0);
-        animation: splashTitleReveal 1.1s 1.0s cubic-bezier(0.77,0,0.175,1) forwards;
-        text-shadow: 0 0 80px rgba(134,239,172,0.2), 0 2px 40px rgba(0,0,0,0.6);
+        opacity: 0;
+        transform: scale(0.94);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+        text-shadow:
+          0 0 40px rgba(134,239,172,0.5),
+          0 0 80px rgba(14,147,67,0.3);
+        min-height: 1.2em;
       }
-      @keyframes splashTitleReveal { to { clip-path: inset(0 0% 0 0); } }
-      .splash-title::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, transparent 0%, rgba(134,239,172,0.55) 50%, transparent 100%);
-        transform: translateX(-200%);
-        animation: splashSweep 0.65s 2.15s ease forwards;
-      }
-      @keyframes splashSweep { to { transform: translateX(250%); } }
+      .splash-title.show { opacity: 1; transform: scale(1); }
       .splash-divider {
         display: flex;
         align-items: center;
         gap: 0.8rem;
-        margin: 2rem 0 1.6rem;
+        margin: 1.8rem 0 1.4rem;
         opacity: 0;
-        animation: splashFadeUp 0.5s 2.5s ease forwards;
+        transition: opacity 0.5s ease;
       }
+      .splash-divider.show { opacity: 1; }
       .splash-divider-line {
-        width: 55px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(134,239,172,0.45));
+        width: 50px; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(134,239,172,0.5));
       }
       .splash-divider-line:last-child {
-        background: linear-gradient(90deg, rgba(134,239,172,0.45), transparent);
+        background: linear-gradient(90deg, rgba(134,239,172,0.5), transparent);
       }
       .splash-divider-dot {
         width: 5px; height: 5px;
         background: #86efac;
         border-radius: 50%;
-        box-shadow: 0 0 12px #86efac, 0 0 24px rgba(134,239,172,0.4);
+        box-shadow: 0 0 10px #86efac, 0 0 20px rgba(134,239,172,0.5);
       }
       .splash-phrase {
-        font-size: clamp(0.9rem, 2.4vw, 1.25rem);
+        font-size: clamp(0.9rem, 2.3vw, 1.2rem);
         color: #86efac;
         font-weight: 300;
         letter-spacing: 0.06em;
@@ -303,28 +270,23 @@
       }
       .splash-tagline {
         position: absolute;
-        bottom: 2.5rem;
+        bottom: 2rem;
         left: 50%;
         transform: translateX(-50%);
         font-size: 0.58rem;
-        color: rgba(255,255,255,0.18);
-        letter-spacing: 0.38em;
+        color: rgba(134,239,172,0.25);
+        letter-spacing: 0.35em;
         text-transform: uppercase;
         white-space: nowrap;
         opacity: 0;
-        animation: splashFadeUp 0.6s 3.2s ease forwards;
+        transition: opacity 0.6s ease;
       }
-      #splash.out {
-        animation: splashOut 0.75s cubic-bezier(0.4,0,1,1) forwards;
-      }
+      .splash-tagline.show { opacity: 1; }
+      #splash.out { animation: splashOut 0.8s ease forwards; }
       @keyframes splashOut {
         0%   { opacity: 1; transform: scale(1); }
-        55%  { opacity: 1; transform: scale(1.025); }
+        50%  { opacity: 1; transform: scale(1.03); }
         100% { opacity: 0; transform: scale(1.06); }
-      }
-      @keyframes splashFadeUp {
-        from { opacity: 0; transform: translateY(14px); }
-        to   { opacity: 1; transform: translateY(0); }
       }
       body.splashing { overflow: hidden; }
       .typewriter-cursor {
@@ -1512,11 +1474,8 @@
 
     <!-- SPLASH SCREEN -->
     <div id="splash">
-      <div class="splash-orb splash-orb-1"></div>
-      <div class="splash-orb splash-orb-2"></div>
-      <div class="splash-orb splash-orb-3"></div>
+      <canvas id="splash-canvas"></canvas>
       <div class="splash-content">
-        <div class="splash-line-top"></div>
         <div class="splash-title">Academia Esparta</div>
         <div class="splash-divider">
           <div class="splash-divider-line"></div>
@@ -2218,13 +2177,42 @@
         }, speed);
       }
 
-      // ── Splash + Hero typewriter ──
+      // ── Splash Matrix + Hero typewriter ──
       (function() {
         document.body.classList.add('splashing');
 
         const splash       = document.getElementById('splash');
         const splashPhrase = document.getElementById('splashPhrase');
         const heroTitle    = document.getElementById('heroTitle');
+        const canvas       = document.getElementById('splash-canvas');
+        const ctx          = canvas.getContext('2d');
+
+        function resizeCanvas() {
+          canvas.width  = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
+        const fontSize = 14;
+        let drops = Array.from({length: Math.floor(canvas.width / fontSize)}, () => Math.random() * -60);
+        const palette = ['#0e9343','#0e9343','#0e9343','#86efac','#c6f6d5'];
+
+        function drawMatrix() {
+          ctx.fillStyle = 'rgba(2,26,11,0.06)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.font = fontSize + 'px monospace';
+          drops.forEach((y, i) => {
+            const ch = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillStyle = palette[Math.floor(Math.random() * palette.length)];
+            ctx.fillText(ch, i * fontSize, y * fontSize);
+            if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+          });
+        }
+
+        let matrixId = setInterval(drawMatrix, 33);
 
         function exitSplash() {
           splash.classList.add('out');
@@ -2261,25 +2249,39 @@
           type();
         }
 
-        // El título se revela por CSS (clip-path, 1.0s delay + 1.1s duración = ~2.1s)
-        // La frase empieza cuando el divider ha aparecido (~2.6s)
+        // Phase 1: Matrix runs ~2.2s, then canvas fades and title appears
         setTimeout(() => {
-          splashPhrase.style.opacity = '1';
-          const text = 'El esfuerzo de hoy es el resultado de mañana';
-          let i = 0;
-          const cursor = document.createElement('span');
-          cursor.className = 'splash-text-cursor';
-          splashPhrase.appendChild(cursor);
-          function tick() {
-            if (i < text.length) {
-              cursor.before(document.createTextNode(text[i++]));
-              setTimeout(tick, 50);
-            } else {
-              setTimeout(() => { cursor.remove(); setTimeout(exitSplash, 900); }, 1300);
+          canvas.classList.add('fade');
+          const splashTitle   = splash.querySelector('.splash-title');
+          const splashDivider = splash.querySelector('.splash-divider');
+          splashTitle.classList.add('show');
+
+          setTimeout(() => {
+            splashDivider.classList.add('show');
+            clearInterval(matrixId);
+          }, 700);
+
+          // Phase 2: phrase typewriter after title settles
+          setTimeout(() => {
+            splashPhrase.style.opacity = '1';
+            const text = 'El esfuerzo de hoy es el resultado de mañana';
+            let i = 0;
+            const cursor = document.createElement('span');
+            cursor.className = 'splash-text-cursor';
+            splashPhrase.appendChild(cursor);
+            function tick() {
+              if (i < text.length) {
+                cursor.before(document.createTextNode(text[i++]));
+                setTimeout(tick, 48);
+              } else {
+                const tagline = splash.querySelector('.splash-tagline');
+                if (tagline) tagline.classList.add('show');
+                setTimeout(() => { cursor.remove(); setTimeout(exitSplash, 900); }, 1300);
+              }
             }
-          }
-          tick();
-        }, 2700);
+            tick();
+          }, 1400);
+        }, 2200);
       })();
 
       // ESO Navigator
