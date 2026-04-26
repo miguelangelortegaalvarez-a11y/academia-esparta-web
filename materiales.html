@@ -300,18 +300,8 @@
           "1": {
             nombre: "1º Primaria", ciclo: "C1",
             bloques: {
-              A:         { nombre: "Lenguas y hablantes",    color: "#1e40af", icono: "🌍",
-                subBloques: ["Diversidad lingüística", "Lengua materna"] },
-              B_oral:    { nombre: "Comunicación oral",      color: "#16a34a", icono: "🎤",
-                subBloques: ["Escucha activa", "Turnos de palabra", "Descripción oral simple", "Narración de vivencias"] },
-              LECTURA:   { nombre: "Lectura y comprensión",  color: "#dc2626", icono: "👓",
-                subBloques: ["Conciencia fonológica", "Aprendizaje de letras", "Lecturas de verdadero y falso", "Comprensión con opciones", "Lecturas finales", "Comprensión literal"] },
-              B_escrita: { nombre: "Escritura",              color: "#0891b2", icono: "✏️",
-                subBloques: ["Grafomotricidad", "Mayúsculas y minúsculas", "Ortografía natural", "Frases simples"] },
-              C:         { nombre: "Literatura",             color: "#ea580c", icono: "📖",
-                subBloques: ["Cuentos tradicionales", "Adivinanzas", "Retahílas", "Poemas breves"] },
-              D:         { nombre: "Gramática y ortografía", color: "#7c3aed", icono: "🔤",
-                subBloques: ["Sílaba", "Palabra", "Concordancia básica", "Vocabulario por campos semánticos"] }
+              LECTURA: { nombre: "Lectura y comprensión", color: "#dc2626", icono: "👓",
+                subBloques: ["Conciencia fonológica", "Aprendizaje de letras", "Lecturas de verdadero y falso", "Comprensión con opciones", "Lecturas finales"] }
             }
           },
           "2": {
@@ -453,7 +443,7 @@
         if (bloqueKey) items.push(h('button', { key:'c', className:'bc-link', onClick: onCurso }, cursoData.nombre));
         else           items.push(h('span',   { key:'c', className:'bc-curr' }, cursoData.nombre));
       }
-      if (bloqueKey) {
+      if (bloqueKey && cursoData && Object.keys(cursoData.bloques).length > 1) {
         items.push(h('span', { key:'s2', className:'bc-sep' }, ' › '));
         if (subBloque) items.push(h('button', { key:'b', className:'bc-link', onClick: onBloque }, bloqData.nombre));
         else           items.push(h('span',   { key:'b', className:'bc-curr' }, bloqData.nombre));
@@ -766,9 +756,10 @@
       const goAsig   = () => { setCurso(null); setBloqueKey(null); setSubBloque(null); };
       const goCurso  = () => { setBloqueKey(null); setSubBloque(null); };
       const goBloque = () => setSubBloque(null);
+      const isSingleBloque = () => curso && asig && Object.keys(ASIGNATURAS[asig].curriculum[curso].bloques).length === 1;
       const goBack   = () => {
-        if (subBloque)  goBloque();
-        else if (bloqueKey) goCurso();
+        if (subBloque)      goBloque();
+        else if (bloqueKey) isSingleBloque() ? goAsig() : goCurso();
         else if (curso)     goAsig();
         else                goHome();
       };
@@ -783,7 +774,11 @@
           )
         ),
         !asig                          && h(AsignaturaView, { onSelect: a => { setAsig(a); setCurso(null); setBloqueKey(null); setSubBloque(null); } }),
-        asig  && !curso                && h(CursoView,      { asig, onSelect: c => setCurso(c) }),
+        asig  && !curso                && h(CursoView,      { asig, onSelect: c => {
+          const bloques = Object.keys(ASIGNATURAS[asig].curriculum[c].bloques);
+          setCurso(c);
+          if (bloques.length === 1) setBloqueKey(bloques[0]);
+        }}),
         curso && !bloqueKey            && h(BloqueView,     { asig, curso, onSelect: k => setBloqueKey(k) }),
         bloqueKey && !subBloque        && h(SubBloqueView,  { asig, curso, bloqueKey, onSelect: sb => setSubBloque(sb) }),
         subBloque                      && h(RecursoView,    { asig, curso, bloqueKey, subBloque })
