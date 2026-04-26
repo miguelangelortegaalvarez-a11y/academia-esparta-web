@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ficha Letra RR · 1º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Edu SA Beginner', cursive;
+      background: #fff; color: #000;
+      padding: 2rem 1.5rem 1rem;
+      max-width: 780px; margin: 0 auto;
+    }
+
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+
+    /* ENCABEZADO */
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+
+    /* LETRA DESTACADA */
+    .letra-display { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 8px; }
+    .letra-grande { font-size: 50px; font-weight: 700; border: 2px solid #000; border-radius: 10px; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
+
+    /* EJERCICIOS */
+    .ejercicio { margin-bottom: 10px; }
+    .ej-titulo { font-size: 17px; font-weight: 700; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+    .ej-n { font-family: sans-serif; font-size: 13px; font-weight: 700; border: 1.5px solid #000; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* Ej 1: Rodea letras */
+    .letras-fila { display: flex; flex-wrap: wrap; gap: 5px; max-width: 620px; }
+    .letra-item { font-size: 19px; font-weight: 600; width: 34px; height: 34px; border: 1px solid #ccc; border-radius: 5px; display: flex; align-items: center; justify-content: center; background: #fff; }
+
+    /* Ej 2: Sílabas */
+    .silabas-fila { display: flex; gap: 14px; flex-wrap: wrap; }
+    .silaba-col { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 50px; }
+    .sil-muestra { font-size: 20px; font-weight: 700; border: 1.5px solid #000; border-radius: 6px; padding: 3px 10px; }
+    .sil-escribe { width: 50px; border-bottom: 1.5px solid #000; height: 22px; }
+
+    /* Ej 3: Palabras */
+    .palabras-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .palabra-card { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .palabra-etiqueta { font-size: 15px; font-weight: 700; border: 1.5px solid #000; border-radius: 6px; padding: 3px 6px; text-align: center; width: 100%; }
+    .palabra-escribe { border-bottom: 1.5px solid #000; height: 20px; width: 100%; }
+
+    /* Ej 4: Frases */
+    .frases-lista { display: flex; flex-direction: column; gap: 4px; }
+    .frase-item { display: flex; flex-direction: column; gap: 2px; }
+    .frase-cabeza { display: flex; align-items: center; gap: 8px; }
+    .frase-texto { font-size: 16px; font-weight: 600; }
+    .frase-caja { width: 24px; height: 24px; border: 1.5px solid #000; border-radius: 4px; flex-shrink: 0; font-family: sans-serif; font-size: 10px; display: flex; align-items: center; justify-content: center; color: #aaa; }
+    .frase-fila-escribir { display: flex; align-items: center; gap: 6px; }
+    .frase-flecha { font-size: 16px; flex-shrink: 0; }
+    .frase-linea { border-bottom: 1.5px solid #000; flex: 1; height: 20px; }
+
+    /* FOOTER */
+    .footer { margin-top: 6px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      .ejercicio { page-break-inside: avoid; }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 1.4cm 1.5cm; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-btn" href="../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="wrapper">
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 1º Primaria · Aprendizaje de letras · Letra RR</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="letra-display">
+    <div class="letra-grande" style="font-size:30px;">RR</div>
+    <div class="letra-grande" style="font-size:30px;">rr</div>
+  </div>
+
+  <div class="ejercicio">
+    <div class="ej-titulo"><span class="ej-n">1</span> 🔍 Rodea todas las letras RR y rr.</div>
+    <div class="letras-fila">
+      <div class="letra-item" style="font-size:13px;">RR</div><div class="letra-item">a</div><div class="letra-item" style="font-size:13px;">rr</div><div class="letra-item">m</div>
+      <div class="letra-item" style="font-size:13px;">RR</div><div class="letra-item">p</div><div class="letra-item" style="font-size:13px;">rr</div><div class="letra-item">s</div>
+      <div class="letra-item" style="font-size:13px;">RR</div><div class="letra-item">d</div><div class="letra-item" style="font-size:13px;">rr</div><div class="letra-item">A</div>
+      <div class="letra-item" style="font-size:13px;">RR</div><div class="letra-item">t</div><div class="letra-item" style="font-size:13px;">rr</div><div class="letra-item">b</div>
+      <div class="letra-item" style="font-size:13px;">RR</div><div class="letra-item">n</div><div class="letra-item" style="font-size:13px;">rr</div><div class="letra-item">e</div>
+    </div>
+  </div>
+
+  <div class="ejercicio">
+    <div class="ej-titulo"><span class="ej-n">2</span> ✏️ Lee estas sílabas y escribe debajo.</div>
+    <div class="silabas-fila">
+      <div class="silaba-col"><span class="sil-muestra">rra</span><div class="sil-escribe"></div></div><div class="silaba-col"><span class="sil-muestra">rre</span><div class="sil-escribe"></div></div><div class="silaba-col"><span class="sil-muestra">rri</span><div class="sil-escribe"></div></div><div class="silaba-col"><span class="sil-muestra">rro</span><div class="sil-escribe"></div></div><div class="silaba-col"><span class="sil-muestra">rru</span><div class="sil-escribe"></div></div>
+    </div>
+  </div>
+
+  <div class="ejercicio">
+    <div class="ej-titulo"><span class="ej-n">3</span> 📖 Lee estas palabras y escribe debajo.</div>
+    <div class="palabras-grid">
+      <div class="palabra-card"><div class="palabra-etiqueta">🐕 perro</div><div class="palabra-escribe"></div></div><div class="palabra-card"><div class="palabra-etiqueta">🚗 carro</div><div class="palabra-escribe"></div></div><div class="palabra-card"><div class="palabra-etiqueta">🌍 tierra</div><div class="palabra-escribe"></div></div><div class="palabra-card"><div class="palabra-etiqueta">🏺 jarra</div><div class="palabra-escribe"></div></div><div class="palabra-card"><div class="palabra-etiqueta">🐴 burro</div><div class="palabra-escribe"></div></div><div class="palabra-card"><div class="palabra-etiqueta">🗼 torre</div><div class="palabra-escribe"></div></div><div class="palabra-card"><div class="palabra-etiqueta">🎸 guitarra</div><div class="palabra-escribe"></div></div><div class="palabra-card"><div class="palabra-etiqueta">🏃 correr</div><div class="palabra-escribe"></div></div>
+    </div>
+  </div>
+
+  <div class="ejercicio">
+    <div class="ej-titulo"><span class="ej-n">4</span> 📝 Lee la frase, cuenta las palabras y escríbela.</div>
+    <div class="frases-lista">
+      <div class="frase-item">
+        <div class="frase-cabeza"><span class="frase-texto">🐕 El perro ladra</span><div class="frase-caja">nº</div></div>
+        <div class="frase-fila-escribir"><span class="frase-flecha">→</span><div class="frase-linea"></div></div>
+      </div>
+      <div class="frase-item">
+        <div class="frase-cabeza"><span class="frase-texto">🚗 Mi carro</span><div class="frase-caja">nº</div></div>
+        <div class="frase-fila-escribir"><span class="frase-flecha">→</span><div class="frase-linea"></div></div>
+      </div>
+      <div class="frase-item">
+        <div class="frase-cabeza"><span class="frase-texto">🌍 La tierra es redonda</span><div class="frase-caja">nº</div></div>
+        <div class="frase-fila-escribir"><span class="frase-flecha">→</span><div class="frase-linea"></div></div>
+      </div>
+      <div class="frase-item">
+        <div class="frase-cabeza"><span class="frase-texto">🏺 La jarra de agua</span><div class="frase-caja">nº</div></div>
+        <div class="frase-fila-escribir"><span class="frase-flecha">→</span><div class="frase-linea"></div></div>
+      </div>
+      <div class="frase-item">
+        <div class="frase-cabeza"><span class="frase-texto">🐴 El burro come</span><div class="frase-caja">nº</div></div>
+        <div class="frase-fila-escribir"><span class="frase-flecha">→</span><div class="frase-linea"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+
+  </div>
+</body>
+</html>
