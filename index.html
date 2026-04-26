@@ -193,99 +193,42 @@
         pointer-events: none;
         z-index: 2;
       }
-      .splash-logo-wrap {
+      .splash-content {
         position: relative;
         z-index: 3;
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
+        padding: 2rem;
         gap: 1.8rem;
-        opacity: 0;
-        transform: scale(0.15);
-        animation: wrapZoom 0.75s 0.1s cubic-bezier(0.16,1,0.3,1) forwards;
       }
-      @keyframes wrapZoom { to { opacity: 1; transform: scale(1); } }
-      .splash-logo-img {
-        width: clamp(260px, 42vw, 420px);
-        height: auto;
-        border-radius: 22px;
-        box-shadow:
-          0 0 0 1px rgba(134,239,172,0.15),
-          0 0 50px rgba(14,147,67,0.45),
-          0 0 100px rgba(14,147,67,0.2),
-          0 30px 60px rgba(0,0,0,0.5);
-        transform: rotate(-180deg);
-        filter: blur(8px);
-        animation:
-          spinIn  0.75s 0.1s cubic-bezier(0.16,1,0.3,1) forwards,
-          slowSpin 9s   1.0s linear infinite;
-      }
-      @keyframes spinIn {
-        0%   { transform: rotate(-180deg); filter: blur(8px); }
-        60%  { transform: rotate(8deg);   filter: blur(0); }
-        80%  { transform: rotate(-3deg); }
-        100% { transform: rotate(0deg);   filter: blur(0); }
-      }
-      @keyframes slowSpin {
-        from { transform: rotate(0deg); }
-        to   { transform: rotate(360deg); }
-      }
-      .splash-shockwave {
-        position: absolute;
-        top: 50%; left: 50%;
-        width: 200px; height: 200px;
-        border: 2px solid rgba(134,239,172,0.6);
-        border-radius: 50%;
-        transform: translate(-50%,-50%) scale(0);
-        opacity: 0;
-        z-index: 2;
-        animation: shockwave 0.6s 0.85s ease-out forwards;
-      }
-      @keyframes shockwave {
-        0%   { transform: translate(-50%,-50%) scale(0.2); opacity: 0.8; }
-        100% { transform: translate(-50%,-50%) scale(4);   opacity: 0; }
-      }
-      .splash-sub {
-        font-size: 0.76rem;
-        color: rgba(255,255,255,0.5);
-        letter-spacing: 0.28em;
+      .splash-title {
+        font-size: clamp(2.4rem, 7vw, 5rem);
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        font-weight: 400;
-        opacity: 0;
-        animation: splashFadeUp 0.5s 1.0s ease forwards;
+        min-height: 1.2em;
+        line-height: 1.1;
       }
-      .splash-bar-wrap {
-        width: 200px;
-        height: 2px;
-        background: rgba(255,255,255,0.1);
+      .splash-phrase {
+        font-size: clamp(1rem, 2.8vw, 1.5rem);
+        color: #86efac;
+        font-weight: 300;
+        letter-spacing: 0.04em;
+        font-style: italic;
+        min-height: 1.6em;
+      }
+      .splash-text-cursor {
+        display: inline-block;
+        width: 2px;
+        height: 0.85em;
+        background: #86efac;
+        margin-left: 3px;
+        vertical-align: middle;
         border-radius: 2px;
-        overflow: hidden;
-        opacity: 0;
-        animation: splashFadeUp 0.4s 1.1s ease forwards;
-      }
-      .splash-bar-fill {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(90deg, #86efac, #0e9343);
-        border-radius: 2px;
-        box-shadow: 0 0 10px rgba(134,239,172,0.7);
-        animation: splashBar 1.8s 1.1s ease forwards;
-      }
-      @keyframes splashFadeUp {
-        from { opacity: 0; transform: translateY(8px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-      @keyframes splashBar { 0% { width: 0%; } 55% { width: 70%; } 100% { width: 100%; } }
-      .splash-bottom {
-        position: absolute;
-        bottom: 12%;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        z-index: 3;
+        animation: cursorBlink 0.75s step-end infinite;
       }
       .splash-flash {
         position: absolute;
@@ -307,7 +250,6 @@
       }
       .splash-half.top { top: 0; }
       .splash-half.bot { bottom: 0; }
-      #splash.out .splash-logo-wrap { animation: none; opacity: 0; transition: opacity 0.25s; }
       #splash.out .splash-half.top  { transform: translateY(-100%); }
       #splash.out .splash-half.bot  { transform: translateY(100%); }
       body.splashing { overflow: hidden; }
@@ -1497,15 +1439,9 @@
     <!-- SPLASH SCREEN -->
     <div id="splash">
       <div class="splash-vignette"></div>
-      <div class="splash-shockwave"></div>
-      <div class="splash-logo-wrap">
-        <img src="Logo.PNG" alt="Academia Esparta" class="splash-logo-img">
-      </div>
-      <div class="splash-bottom">
-        <div class="splash-sub">Refuerzo escolar · Torremolinos</div>
-        <div class="splash-bar-wrap">
-          <div class="splash-bar-fill"></div>
-        </div>
+      <div class="splash-content">
+        <div class="splash-title" id="splashTitle"></div>
+        <div class="splash-phrase" id="splashPhrase"></div>
       </div>
       <div class="splash-half top"></div>
       <div class="splash-half bot"></div>
@@ -2206,58 +2142,81 @@
       (function() {
         document.body.classList.add('splashing');
 
-        const splash    = document.getElementById('splash');
-        const heroTitle = document.getElementById('heroTitle');
+        const splash       = document.getElementById('splash');
+        const splashTitle  = document.getElementById('splashTitle');
+        const splashPhrase = document.getElementById('splashPhrase');
+        const heroTitle    = document.getElementById('heroTitle');
 
-        const part1 = 'Tu hijo puede mejorar sus notas y ';
-        const part2 = 'ganar seguridad';
-        const speed = 42;
+        function typeText(el, text, speed, onDone) {
+          let i = 0;
+          const cursor = document.createElement('span');
+          cursor.className = 'splash-text-cursor';
+          el.appendChild(cursor);
+          function tick() {
+            if (i < text.length) {
+              cursor.before(document.createTextNode(text[i++]));
+              setTimeout(tick, speed);
+            } else {
+              onDone && onDone(cursor);
+            }
+          }
+          tick();
+        }
 
-        function typeWriter() {
+        function exitSplash() {
+          splash.classList.add('out');
+          document.body.classList.remove('splashing');
+          setTimeout(() => {
+            splash.remove();
+            startHeroTypewriter();
+          }, 750);
+        }
+
+        function startHeroTypewriter() {
+          const part1 = 'Tu hijo puede mejorar sus notas y ';
+          const part2 = 'ganar seguridad';
           let i = 0;
           const cursor = document.createElement('span');
           cursor.className = 'typewriter-cursor';
           heroTitle.appendChild(cursor);
-
           function type() {
             if (i < part1.length) {
-              cursor.before(document.createTextNode(part1[i]));
-              i++;
+              cursor.before(document.createTextNode(part1[i++]));
               if (i === part1.length) {
                 const em = document.createElement('em');
                 heroTitle.insertBefore(em, cursor);
                 em.appendChild(cursor);
-                typeInEm(em, cursor);
+                let j = 0;
+                function typeEm() {
+                  if (j < part2.length) {
+                    cursor.before(document.createTextNode(part2[j++]));
+                    setTimeout(typeEm, 42);
+                  } else {
+                    setTimeout(() => cursor.remove(), 2200);
+                  }
+                }
+                typeEm();
                 return;
               }
-              setTimeout(type, speed);
+              setTimeout(type, 42);
             }
           }
           type();
         }
 
-        function typeInEm(em, cursor) {
-          let j = 0;
-          function typeEm() {
-            if (j < part2.length) {
-              cursor.before(document.createTextNode(part2[j]));
-              j++;
-              setTimeout(typeEm, speed);
-            } else {
-              setTimeout(() => cursor.remove(), 2200);
-            }
-          }
-          typeEm();
-        }
-
-        setTimeout(() => {
-          splash.classList.add('out');
-          document.body.classList.remove('splashing');
+        // Paso 1: escribe "Academia Esparta"
+        typeText(splashTitle, 'Academia Esparta', 85, (c1) => {
           setTimeout(() => {
-            splash.remove();
-            typeWriter();
-          }, 750);
-        }, 2400);
+            c1.remove();
+            // Paso 2: escribe la frase
+            typeText(splashPhrase, 'El esfuerzo de hoy es el resultado de mañana', 48, (c2) => {
+              setTimeout(() => {
+                c2.remove();
+                setTimeout(exitSplash, 600);
+              }, 1200);
+            });
+          }, 400);
+        });
       })();
 
       // ESO Navigator
