@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reto de Dibujo de Funciones - Lina - Academia Esparta</title>
+    <title>Representación de Funciones - Lina - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         :root { 
             --esparta-blue: #0d47a1; 
@@ -24,7 +27,7 @@
         .page { 
             background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
             box-shadow: 0 0 25px rgba(0,0,0,0.1); box-sizing: border-box; position: relative; margin: 0 auto;
-            border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
+            border-top: 10px solid var(--esparta-blue); border-bottom: 10px solid var(--esparta-gold);
         }
 
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
@@ -35,22 +38,22 @@
         .section-header .line { flex-grow: 1; height: 3px; background: var(--esparta-gold); margin-left: 15px; }
 
         .ejercicio-box { border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin-bottom: 30px; background: #fafafa; }
-        .datos-lista { font-size: 14px; margin: 10px 0; line-height: 1.8; }
+        .datos-lista { font-size: 14px; margin: 10px 0; line-height: 2; }
         .datos-lista b { color: var(--esparta-blue); }
 
         .grid-dibujo { 
-            width: 100%; height: 300px; 
+            width: 100%; height: 320px; 
             background-image: 
-                linear-gradient(to right, #eee 1px, transparent 1px),
-                linear-gradient(to bottom, #eee 1px, transparent 1px);
+                linear-gradient(to right, #e0e0e0 1px, transparent 1px),
+                linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
             background-size: 20px 20px;
             border: 2px solid #333;
             position: relative;
             margin-top: 15px;
+            background-color: white;
         }
-        /* Ejes */
-        .grid-dibujo::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: #333; }
-        .grid-dibujo::after { content: ""; position: absolute; left: 50%; top: 0; width: 2px; height: 100%; background: #333; }
+        .grid-dibujo::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: #000; }
+        .grid-dibujo::after { content: ""; position: absolute; left: 50%; top: 0; width: 2px; height: 100%; background: #000; }
 
         .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
 
@@ -59,29 +62,29 @@
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Dibujo Lina</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha con Notación Formal</button>
 
     <div class="page">
         <header class="header">
             <div class="header-title">
                 <h1>ACADEMIA ESPARTA</h1>
-                <p>Análisis de Funciones: Del Dato al Dibujo</p>
+                <p>Geometría Analítica: Esbozo de Gráficas de Funciones</p>
             </div>
             <div style="background: var(--esparta-blue); color: white; padding: 5px 15px; font-weight: 900; border-radius: 4px;">LINA - 3º ESO</div>
         </header>
 
         <section>
             <div class="section-header">
-                <h2>Reto 1: Continuidad y Extremos</h2>
+                <h2>Reto 1: Extremos Absolutos y Punto Crítico</h2>
                 <div class="line"></div>
             </div>
             <div class="ejercicio-box">
-                <p>Dibuja una función que cumpla las siguientes condiciones:</p>
+                <p>Esboza la gráfica de la función \( f(x) \) dadas las siguientes condiciones formales:</p>
                 <div class="datos-lista">
-                    • <b>Dominio:</b> $[-6, 6]$ <br>
-                    • <b>Recorrido:</b> $[-3, 5]$ <br>
-                    • <b>Extremos:</b> Un máximo absoluto en $(2, 5)$ y un mínimo absoluto en $(-4, -3)$. <br>
-                    • <b>Discontinuidad:</b> Tiene una <b>discontinuidad evitable</b> (un "agujerito") en $x = 0$.
+                    • <b>Dominio:</b> \( \text{Dom}(f) = [-6, 6] \) <br>
+                    • <b>Recorrido:</b> \( \text{Im}(f) = [-3, 5] \) <br>
+                    • <b>Extremos Absolutos:</b> Máximo absoluto en \( (2, 5) \) y Mínimo absoluto en \( (-4, -3) \). <br>
+                    • <b>Continuidad:</b> \( f(x) \) presenta una <b>discontinuidad evitable</b> en el punto \( x = 0 \).
                 </div>
                 <div class="grid-dibujo"></div>
             </div>
@@ -89,15 +92,15 @@
 
         <section>
             <div class="section-header">
-                <h2>Reto 2: Saltos Finitos e Infinitos</h2>
+                <h2>Reto 2: Comportamiento Asintótico y Saltos</h2>
                 <div class="line"></div>
             </div>
             <div class="ejercicio-box">
                 <div class="datos-lista">
-                    • <b>Dominio:</b> $\mathbb{R} - \{-2, 3\}$ <br>
-                    • <b>Discontinuidad de Salto Infinito:</b> En $x = -2$ (por la izquierda la función sube a $+\infty$ y por la derecha baja a $-\infty$). <br>
-                    • <b>Discontinuidad de Salto Finito:</b> En $x = 3$. La función llega al valor $y=2$ y "salta" para empezar de nuevo en $y=4$. <br>
-                    • <b>Máximo Relativo:</b> En el punto $(1, 3)$.
+                    • <b>Dominio:</b> \( \text{Dom}(f) = \mathbb{R} \setminus \{-2, 3\} \) <br>
+                    • <b>Discontinuidad de Salto Infinito:</b> En \( x = -2 \), tal que \( \lim_{x \to -2^-} f(x) = +\infty \) y \( \lim_{x \to -2^+} f(x) = -\infty \). <br>
+                    • <b>Discontinuidad de Salto Finito:</b> En \( x = 3 \), donde \( \lim_{x \to 3^-} f(x) = 2 \) y \( \lim_{x \to 3^+} f(x) = 4 \). <br>
+                    • <b>Extremo Relativo:</b> Máximo relativo en \( (1, 3) \).
                 </div>
                 <div class="grid-dibujo"></div>
             </div>
@@ -105,24 +108,23 @@
 
         <section>
             <div class="section-header">
-                <h2>Reto 3: El Desafío Completo</h2>
+                <h2>Reto 3: Límites al Infinito</h2>
                 <div class="line"></div>
             </div>
             <div class="ejercicio-box">
                 <div class="datos-lista">
-                    • <b>Dominio:</b> $[-8, +\infty)$ <br>
-                    • <b>Recorrido:</b> $(-\infty, 4]$ <br>
-                    • <b>Discontinuidad Evitable:</b> En $x = -4$. <br>
-                    • <b>Discontinuidad Salto Infinito:</b> En $x = 0$ (la función se va a $-\infty$ por ambos lados). <br>
-                    • <b>Mínimo relativo:</b> En $(-6, -2)$. <br>
-                    • <b>Máximo absoluto:</b> En $(4, 4)$.
+                    • <b>Dominio:</b> \( \text{Dom}(f) = [-8, +\infty) \setminus \{0\} \) <br>
+                    • <b>Recorrido:</b> \( \text{Im}(f) = (-\infty, 4] \) <br>
+                    • <b>Discontinuidad Evitable:</b> En \( x = -4 \). <br>
+                    • <b>Discontinuidad de Salto Infinito:</b> En \( x = 0 \), tal que \( \lim_{x \to 0} f(x) = -\infty \). <br>
+                    • <b>Máximo Absoluto:</b> El valor máximo de la función es \( f(4) = 4 \).
                 </div>
                 <div class="grid-dibujo"></div>
             </div>
         </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · "Visualiza el problema para encontrar la solución" · Lina
+            © 2026 Academia Esparta · "Veritas in Mathematica" · Lina
         </footer>
     </div>
 
