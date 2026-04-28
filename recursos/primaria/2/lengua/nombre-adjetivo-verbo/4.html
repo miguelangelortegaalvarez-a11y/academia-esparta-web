@@ -21,24 +21,18 @@
     .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
     .seccion-titulo { font-size: 15px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .ej-n { font-family: sans-serif; font-size: 13px; font-weight: 700; border: 1.5px solid #000; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .recuerda-box { border: 2px solid #7c3aed; border-radius: 12px; padding: 8px 12px; margin-bottom: 10px; background: #faf5ff; }
-    .recuerda-titulo { font-family: sans-serif; font-size: 10px; font-weight: 700; color: #7c3aed; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
-    .recuerda-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
-    .recuerda-item { display: flex; flex-direction: column; gap: 2px; }
+    .recuerda-box { border: 2px solid #000; border-radius: 12px; padding: 8px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+    .recuerda-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .recuerda-item { display: flex; flex-direction: column; gap: 2px; border-left: 2px solid #000; padding-left: 7px; }
     .recuerda-tipo { font-size: 13px; font-weight: 700; }
-    .recuerda-def { font-size: 12px; font-weight: 600; color: #444; line-height: 1.3; }
-    .recuerda-ej { font-family: sans-serif; font-size: 10px; color: #666; font-style: italic; }
-    .tag-nombre { color: #0e9343; }
-    .tag-adj    { color: #b45309; }
-    .tag-verbo  { color: #1d4ed8; }
+    .recuerda-def { font-size: 12px; font-weight: 600; line-height: 1.3; }
+    .recuerda-ej { font-family: sans-serif; font-size: 10px; color: #444; font-style: italic; }
     .banco-palabras { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
     .palabra-chip { font-size: 14px; font-weight: 700; border: 1.5px solid #000; border-radius: 8px; padding: 2px 10px; }
     .tabla-clasificar { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
     .tabla-clasificar th { font-size: 13px; font-weight: 700; padding: 5px 8px; border: 1.5px solid #000; text-align: center; }
     .tabla-clasificar td { height: 28px; border: 1.5px solid #000; padding: 3px 8px; }
-    .th-nombre { background: #dcfce7; }
-    .th-adj    { background: #fef3c7; }
-    .th-verbo  { background: #dbeafe; }
     .frases-lista { display: flex; flex-direction: column; gap: 7px; margin-bottom: 10px; }
     .frase-item { font-size: 15px; font-weight: 600; line-height: 1.5; }
     .frase-num { font-family: sans-serif; font-size: 12px; font-weight: 700; margin-right: 4px; }
@@ -49,8 +43,8 @@
     .footer-msg { font-size: 12px; font-weight: 700; }
     @media print {
       .topbar { display: none !important; }
-      body { padding: 0 !important; max-width: none !important; margin: 0 !important; }
-      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
     @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
   </style>
@@ -74,24 +68,24 @@
     <div class="recuerda-titulo">📌 Recuerda</div>
     <div class="recuerda-grid">
       <div class="recuerda-item">
-        <span class="recuerda-tipo tag-nombre">🟢 Nombre</span>
-        <span class="recuerda-def">Dice cómo se llaman las personas, los animales y las cosas.</span>
+        <span class="recuerda-tipo">Nombre</span>
+        <span class="recuerda-def">Dice cómo se llaman las personas, animales y cosas.</span>
         <span class="recuerda-ej">ej: pelota, equipo, árbitro</span>
       </div>
       <div class="recuerda-item">
-        <span class="recuerda-tipo tag-adj">🟡 Adjetivo</span>
-        <span class="recuerda-def">Dice cómo son las personas, los animales y las cosas.</span>
+        <span class="recuerda-tipo">Adjetivo</span>
+        <span class="recuerda-def">Dice cómo son las personas, animales y cosas.</span>
         <span class="recuerda-ej">ej: veloz, fuerte, emocionante</span>
       </div>
       <div class="recuerda-item">
-        <span class="recuerda-tipo tag-verbo">🔵 Verbo</span>
-        <span class="recuerda-def">Dice qué hacen o qué les pasa a las personas o animales.</span>
+        <span class="recuerda-tipo">Verbo</span>
+        <span class="recuerda-def">Dice qué hacen o qué les pasa.</span>
         <span class="recuerda-ej">ej: marcar, entrenar, ganar</span>
       </div>
     </div>
   </div>
 
-  <div class="seccion-titulo"><span class="ej-n">1</span> 🗂️ Clasifica estas palabras en la tabla.</div>
+  <div class="seccion-titulo"><span class="ej-n">1</span> Clasifica estas palabras en la tabla.</div>
   <div class="banco-palabras">
     <span class="palabra-chip">pelota</span>
     <span class="palabra-chip">veloz</span>
@@ -106,9 +100,9 @@
   <table class="tabla-clasificar">
     <thead>
       <tr>
-        <th class="th-nombre">🟢 Nombre</th>
-        <th class="th-adj">🟡 Adjetivo</th>
-        <th class="th-verbo">🔵 Verbo</th>
+        <th>Nombre</th>
+        <th>Adjetivo</th>
+        <th>Verbo</th>
       </tr>
     </thead>
     <tbody>
@@ -118,21 +112,21 @@
     </tbody>
   </table>
 
-  <div class="seccion-titulo"><span class="ej-n">2</span> 🟢 Rodea el <strong>nombre</strong> de cada frase.</div>
+  <div class="seccion-titulo"><span class="ej-n">2</span> Rodea el <strong>nombre</strong> de cada frase.</div>
   <div class="frases-lista">
     <div class="frase-item"><span class="frase-num">1.</span> La pelota entró por la portería.</div>
     <div class="frase-item"><span class="frase-num">2.</span> El árbitro pitó un penalti al final del partido.</div>
     <div class="frase-item"><span class="frase-num">3.</span> El equipo celebró la victoria con mucha alegría.</div>
   </div>
 
-  <div class="seccion-titulo"><span class="ej-n">3</span> 🔵 Subraya el <strong>verbo</strong> de cada frase.</div>
+  <div class="seccion-titulo"><span class="ej-n">3</span> Subraya el <strong>verbo</strong> de cada frase.</div>
   <div class="frases-lista">
     <div class="frase-item"><span class="frase-num">1.</span> El equipo entrena todos los martes por la tarde.</div>
     <div class="frase-item"><span class="frase-num">2.</span> María marcó dos goles en el partido.</div>
     <div class="frase-item"><span class="frase-num">3.</span> Los jugadores ganan la copa al final de la temporada.</div>
   </div>
 
-  <div class="seccion-titulo"><span class="ej-n">4</span> ✍️ Escribe una frase sobre tu deporte favorito. Usa un <strong>nombre</strong>, un <strong>adjetivo</strong> y un <strong>verbo</strong>.</div>
+  <div class="seccion-titulo"><span class="ej-n">4</span> Escribe una frase sobre tu deporte favorito. Usa un <strong>nombre</strong>, un <strong>adjetivo</strong> y un <strong>verbo</strong>.</div>
   <div class="escribir-lineas">
     <div class="escribir-linea"></div>
     <div class="escribir-linea"></div>
