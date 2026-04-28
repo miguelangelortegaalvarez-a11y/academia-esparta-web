@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecuaciones de 1º Grado (Sin Pistas) - Noelia Lobón</title>
+    <title>Iniciación a Ecuaciones - Candela Jiménez - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -14,9 +14,10 @@
             --esparta-blue: #0d47a1; 
             --esparta-gold: #ffab00; 
             --white: #ffffff;
+            --light-bg: #f9f9f9;
         }
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; line-height: 1.6; }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
@@ -27,94 +28,91 @@
         .page { 
             background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
             box-shadow: 0 0 25px rgba(0,0,0,0.1); box-sizing: border-box; margin: 0 auto;
-            border-top: 10px solid var(--esparta-blue); border-bottom: 10px solid var(--esparta-gold);
+            border-top: 12px solid var(--esparta-blue); border-bottom: 12px solid var(--esparta-gold);
         }
 
-        .header { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 25px; text-align: center; }
+        .header { border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 25px; text-align: center; }
         .header h1 { font-weight: 900; font-size: 24px; margin: 0; color: var(--esparta-blue); }
 
-        .ejercicio-box { border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; background: #fafafa; position: relative; }
-        .numero { position: absolute; top: 10px; left: 10px; background: var(--esparta-blue); color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 12px; font-weight: bold; }
-        
-        .espacio-blanco { height: 80px; border: 1px dashed #ccc; margin-top: 15px; background: white; border-radius: 4px; }
+        .section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; color: var(--esparta-blue); border-left: 5px solid var(--esparta-gold); padding-left: 10px; margin: 25px 0 15px; }
 
-        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
+        .guia-box { background: var(--light-bg); border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .guia-box b { color: var(--esparta-blue); }
+        .operacion-flecha { color: var(--esparta-gold); font-weight: bold; }
+
+        .ejercicio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .ejercicio-card { border: 1px solid #eee; padding: 15px; border-radius: 8px; background: #fff; position: relative; }
+        .numero { position: absolute; top: -10px; left: -10px; background: var(--esparta-gold); color: var(--esparta-blue); width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12px; }
+        .ecuacion-text { font-family: 'Roboto Mono', monospace; font-size: 18px; display: block; margin: 10px 0; text-align: center; color: var(--esparta-blue); }
+        
+        .espacio-blanco { height: 60px; border: 1px dashed #ccc; margin-top: 10px; border-radius: 4px; }
+
+        .footer { text-align: center; margin-top: 40px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
 
         @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; } }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Sin Pistas</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha Candela Jiménez</button>
 
     <div class="page">
         <header class="header">
-            <h1>ACADEMIA ESPARTA: Desafío de Ecuaciones</h1>
-            <p>Entrenamiento Individual - <b>NOELIA LOBÓN</b></p>
+            <h1>ACADEMIA ESPARTA: Iniciación al Álgebra</h1>
+            <p>Alumna: <b>CANDELA JIMÉNEZ</b> · 2º ESO</p>
         </header>
 
-        <div class="ejercicio-box">
-            <div class="numero">1</div>
-            <p style="margin-left: 25px;">Si al triple de un número le sumas 15, obtienes el doble de ese número más 30. ¿De qué número hablamos?</p>
-            <div class="espacio-blanco"></div>
-        </div>
+        <section>
+            <div class="section-title">Lección 1: La Regla del Cambio</div>
+            <div class="guia-box">
+                <p>Para dejar a la <b>\(x\)</b> sola, los números se mueven al otro lado del igual haciendo la operación contraria:</p>
+                <ul>
+                    <li>Si está <b>Sumando (+)</b> <span class="operacion-flecha">&rarr;</span> Pasa <b>Restando (-)</b></li>
+                    <li>Si está <b>Restando (-)</b> <span class="operacion-flecha">&rarr;</span> Pasa <b>Sumando (+)</b></li>
+                    <li>Si está <b>Multiplicando</b> <span class="operacion-flecha">&rarr;</span> Pasa <b>Dividiendo (/)</b></li>
+                </ul>
+                <p><i>Ejemplo: \( 2x + 3 = 11 \implies 2x = 11 - 3 \implies 2x = 8 \implies x = 8/2 = 4 \)</i></p>
+            </div>
+        </section>
 
-        <div class="ejercicio-box">
-            <div class="numero">2</div>
-            <p style="margin-left: 25px;">Noelia Lobón reparte 120 € entre dos huchas. En la primera pone el triple de dinero que en la segunda. ¿Cuánto dinero hay en cada una?</p>
-            <div class="espacio-blanco"></div>
-        </div>
-
-        <div class="ejercicio-box">
-            <div class="numero">3</div>
-            <p style="margin-left: 25px;">Halla tres números enteros consecutivos cuya suma sea exactamente 72.</p>
-            <div class="espacio-blanco"></div>
-        </div>
-
-        <div class="ejercicio-box">
-            <div class="numero">4</div>
-            <p style="margin-left: 25px;">En un triángulo isósceles, el lado desigual mide 5 cm menos que los lados iguales. El perímetro es de 40 cm. Halla la medida de los tres lados.</p>
-            <div class="espacio-blanco"></div>
-        </div>
-
-        <div class="ejercicio-box">
-            <div class="numero">5</div>
-            <p style="margin-left: 25px;">Dentro de 10 años, Noelia tendrá el doble de la edad que tenía hace 5 años. ¿Cuál es su edad actual?</p>
-            <div class="espacio-blanco"></div>
-        </div>
-
-        <div class="ejercicio-box">
-            <div class="numero">6</div>
-            <p style="margin-left: 25px;">En una bolsa de 40 caramelos, el número de sabores de naranja es el doble que el de limón más 4. ¿Cuántos hay de cada sabor?</p>
-            <div class="espacio-blanco"></div>
-        </div>
-
-        <div class="ejercicio-box">
-            <div class="numero">7</div>
-            <p style="margin-left: 25px;">Noelia compra tres libros. El segundo cuesta el doble que el primero, y el tercero cuesta 5 € más que el segundo. En total paga 55 €.</p>
-            <div class="espacio-blanco"></div>
-        </div>
-
-        <div class="ejercicio-box">
-            <div class="numero">8</div>
-            <p style="margin-left: 25px;">La base de un rectángulo mide el doble que su altura. Si el perímetro es de 60 cm, ¿cuánto miden sus lados?</p>
-            <div class="espacio-blanco"></div>
-        </div>
-
-        <div class="ejercicio-box">
-            <div class="numero">9</div>
-            <p style="margin-left: 25px;">Si a las ovejas que tengo les añades la mitad de las que tengo y 2 más, tendría 50 ovejas. ¿Cuántas tengo en realidad?</p>
-            <div class="espacio-blanco"></div>
-        </div>
-
-        <div class="ejercicio-box">
-            <div class="numero">10</div>
-            <p style="margin-left: 25px;">La suma de dos números es 100 y su diferencia es 24. Encuentra ambos números.</p>
-            <div class="espacio-blanco"></div>
-        </div>
+        <section>
+            <div class="section-title">Entrenamiento Nivel 1</div>
+            <div class="ejercicio-grid">
+                <div class="ejercicio-card">
+                    <div class="numero">1</div>
+                    <span class="ecuacion-text">\( x + 8 = 20 \)</span>
+                    <div class="espacio-blanco"></div>
+                </div>
+                <div class="ejercicio-card">
+                    <div class="numero">2</div>
+                    <span class="ecuacion-text">\( x - 12 = 5 \)</span>
+                    <div class="espacio-blanco"></div>
+                </div>
+                <div class="ejercicio-card">
+                    <div class="numero">3</div>
+                    <span class="ecuacion-text">\( 4x = 24 \)</span>
+                    <div class="espacio-blanco"></div>
+                </div>
+                <div class="ejercicio-card">
+                    <div class="numero">4</div>
+                    <span class="ecuacion-text">\( \frac{x}{2} = 10 \)</span>
+                    <div class="espacio-blanco"></div>
+                </div>
+                <div class="ejercicio-card">
+                    <div class="numero">5</div>
+                    <span class="ecuacion-text">\( 2x + 3 = 11 \)</span>
+                    <div class="espacio-blanco"></div>
+                </div>
+                <div class="ejercicio-card">
+                    <div class="numero">6</div>
+                    <span class="ecuacion-text">\( 5x - 4 = 26 \)</span>
+                    <div class="espacio-blanco"></div>
+                </div>
+            </div>
+        </section>
 
         <footer class="footer">
-            © 2026 Academia Esparta · "Sin pistas, solo tu mente y la victoria" · Noelia Lobón
+            © 2026 Academia Esparta · "No hay fuerza sin base, no hay éxito sin práctica" · Candela Jiménez
         </footer>
     </div>
 
