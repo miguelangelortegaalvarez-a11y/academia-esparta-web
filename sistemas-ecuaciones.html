@@ -3,205 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Fun - Darío - Academia Esparta</title>
+    <title>Misión Selva: Darío al Rescate</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    
     <style>
         :root {
-            --jungle-green: #2d6a4f;
-            --ocean-blue: #0077b6;
-            --sand-yellow: #ffb703;
+            --jungle: #2d6a4f;
+            --sky: #ade8f4;
+            --accent: #ffb703;
             --white: #ffffff;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #f0fdf4;
+            background-color: var(--sky);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            overflow-x: hidden;
         }
 
-        .btn-imprimir {
-            display: block;
-            width: fit-content;
-            margin: 0 auto 20px;
-            background-color: var(--jungle-green);
-            color: white;
-            border: 3px solid var(--sand-yellow);
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 18px;
-            cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .page {
-            background-color: var(--white);
-            width: 210mm;
-            min-height: 297mm;
-            padding: 20mm;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            margin: 0 auto;
-            border-radius: 15px;
-            position: relative;
-            box-sizing: border-box;
-            border: 8px solid var(--ocean-blue);
-        }
-
-        header {
+        .game-container {
+            background: var(--white);
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 8px solid var(--jungle);
             text-align: center;
-            border-bottom: 4px dashed var(--sand-yellow);
-            margin-bottom: 30px;
-            padding-bottom: 10px;
         }
 
         h1 {
             font-family: 'Fredoka One', cursive;
-            color: var(--jungle-green);
-            font-size: 36px;
-            margin: 0;
+            color: var(--jungle);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px var(--accent);
         }
 
-        .student-info {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--ocean-blue);
-            margin-top: 10px;
-        }
+        p { font-weight: bold; color: #555; }
 
-        h2 {
-            font-family: 'Fredoka One', cursive;
-            color: var(--ocean-blue);
-            font-size: 22px;
-            background: #e0f2fe;
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-
-        /* Ejercicio Unir con Flechas */
-        .matching-container {
+        .match-area {
             display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-            padding: 20px;
+            justify-content: space-between;
+            margin-top: 30px;
+            position: relative;
         }
 
         .column {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 15px;
+            z-index: 2;
         }
 
-        .word {
-            border: 2px solid #ddd;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            background: #fff;
-            min-width: 120px;
-            text-align: center;
+        .item {
+            padding: 15px;
+            background: #f0f0f0;
+            border: 3px solid #ddd;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 900;
+            transition: all 0.3s;
+            user-select: none;
         }
 
-        .dot {
-            width: 12px;
-            height: 12px;
-            background-color: var(--jungle-green);
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 10px;
+        .item.selected {
+            background: var(--accent);
+            border-color: var(--jungle);
+            transform: scale(1.1);
         }
 
-        /* Ejercicio Dibujar/Escribir */
-        .drawing-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
+        .item.correct {
+            background: #95d5b2;
+            border-color: var(--jungle);
+            cursor: default;
+        }
+
+        .item-emoji { font-size: 2rem; display: block; }
+
+        #message {
             margin-top: 20px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            height: 30px;
+            color: var(--jungle);
         }
 
-        .draw-box {
-            border: 2px solid #ccc;
-            height: 120px;
-            border-radius: 10px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 10px;
-            font-weight: bold;
-            color: var(--jungle-green);
-            background-image: radial-gradient(#eee 1px, transparent 1px);
-            background-size: 20px 20px;
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent);
+            top: -10px;
+            z-index: 10;
+            animation: fall 3s linear forwards;
         }
 
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-weight: bold;
-            color: #aaa;
-        }
-
-        @media print {
-            .btn-imprimir { display: none; }
-            body { background: none; padding: 0; }
-            .page { box-shadow: none; margin: 0; border: none; }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha para Darío</button>
+    <div class="game-container">
+        <h1>¡AVENTURA TROPICAL!</h1>
+        <p>Darío, une la palabra con su dibujo:</p>
 
-    <div class="page">
-        <header>
-            <h1>🌴 TROPICAL FUN! 🌊</h1>
-            <div class="student-info">STUDENT: DARÍO</div>
-        </header>
-
-        <h2>1. Match with arrows! (¡Une con flechas!)</h2>
-        <div class="matching-container">
-            <div class="column">
-                <div class="word">GORILLA <span class="dot"></span></div>
-                <div class="word">ICE LOLLY <span class="dot"></span></div>
-                <div class="word">SANDALS <span class="dot"></span></div>
-                <div class="word">INSECT <span class="dot"></span></div>
-                <div class="word">WAVE <span class="dot"></span></div>
+        <div class="match-area">
+            <div class="column" id="words">
+                <div class="item" data-match="gorilla">GORILLA</div>
+                <div class="item" data-match="wave">WAVE</div>
+                <div class="item" data-match="lolly">ICE LOLLY</div>
+                <div class="item" data-match="sandals">SANDALS</div>
+                <div class="item" data-match="insect">INSECT</div>
             </div>
-            
-            <div class="column">
-                <div class="word"><span class="dot"></span> Polito de hielo</div>
-                <div class="word"><span class="dot"></span> Ola</div>
-                <div class="word"><span class="dot"></span> Gorila</div>
-                <div class="word"><span class="dot"></span> Insecto</div>
-                <div class="word"><span class="dot"></span> Sandalias</div>
+
+            <div class="column" id="emojis">
+                <div class="item" data-match="lolly"><span class="item-emoji"> ice 🍦</span></div>
+                <div class="item" data-match="gorilla"><span class="item-emoji">🦍 gorilla</span></div>
+                <div class="item" data-match="insect"><span class="item-emoji">🐞 insect</span></div>
+                <div class="item" data-match="wave"><span class="item-emoji">🌊 wave</span></div>
+                <div class="item" data-match="sandals"><span class="item-emoji">🩴 sandals</span></div>
             </div>
         </div>
 
-        <h2>2. Draw and Color! (¡Dibuja y Colorea!)</h2>
-        <div class="drawing-grid">
-            <div class="draw-box">A BIG LEAF</div>
-            <div class="draw-box">A BLUE CAP</div>
-            <div class="draw-box">THE BEACH</div>
-            <div class="draw-box">A SCARY GORILLA</div>
-            <div class="draw-box">A SMALL PLANT</div>
-            <div class="draw-box">SUN AND JUNGLE</div>
-        </div>
-
-        <h2>3. Mystery Word (Escribe la palabra correcta)</h2>
-        <p style="font-size: 18px; margin-left: 20px;">
-            I am in the jungle and I can see a big... <br>
-            <b>G _ _ _ _ _ A</b>
-        </p>
-
-        <div class="footer">
-            🌟 GREAT JOB, DARÍO! 🌟
-        </div>
+        <div id="message"></div>
     </div>
 
+    <script>
+        let selectedWord = null;
+        let correctCount = 0;
+
+        const items = document.querySelectorAll('.item');
+        const message = document.getElementById('message');
+
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                if (item.classList.contains('correct')) return;
+
+                // Si clicamos en una palabra
+                if (item.parentElement.id === 'words') {
+                    document.querySelectorAll('#words .item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    selectedWord = item;
+                } 
+                // Si clicamos en un dibujo
+                else if (selectedWord) {
+                    if (item.dataset.match === selectedWord.dataset.match) {
+                        item.classList.add('correct');
+                        selectedWord.classList.add('correct');
+                        selectedWord.classList.remove('selected');
+                        selectedWord = null;
+                        correctCount++;
+                        message.innerText = "¡BIEN HECHO! ⭐";
+                        
+                        if (correctCount === 5) {
+                            message.innerText = "¡ERES UN CAMPEÓN, DARÍO! 🏆";
+                            celebrate();
+                        }
+                    } else {
+                        message.innerText = "¡CASI! Inténtalo otra vez 🙊";
+                        selectedWord.classList.remove('selected');
+                        selectedWord = null;
+                    }
+                }
+            });
+        });
+
+        function celebrate() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = ['#ffb703', '#2d6a4f', '#0077b6'][Math.floor(Math.random() * 3)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(confetti);
+            }
+        }
+    </script>
 </body>
 </html>
