@@ -3,95 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecuaciones Nivel Pro - Sofía Millán - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>English Fun - Darío - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
     <style>
-        :root { 
-            --esparta-blue: #0d47a1; 
-            --esparta-gold: #ffab00; 
+        :root {
+            --jungle-green: #2d6a4f;
+            --ocean-blue: #0077b6;
+            --sand-yellow: #ffb703;
             --white: #ffffff;
-            --danger: #d32f2f;
         }
-        
-        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
-        
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0fdf4;
+            margin: 0;
+            padding: 20px;
+        }
+
         .btn-imprimir {
-            display: block; width: fit-content; margin: 0 auto 20px;
-            background-color: var(--esparta-blue); color: var(--white); border: 2px solid var(--esparta-gold); 
-            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase;
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px;
+            background-color: var(--jungle-green);
+            color: white;
+            border: 3px solid var(--sand-yellow);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .page { 
-            background-color: var(--white); width: 210mm; min-height: 297mm; padding: 15mm; 
-            box-shadow: 0 0 25px rgba(0,0,0,0.1); box-sizing: border-box; margin: 0 auto;
-            border-top: 10px solid var(--esparta-blue); border-bottom: 10px solid var(--esparta-gold);
+        .page {
+            background-color: var(--white);
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin: 0 auto;
+            border-radius: 15px;
+            position: relative;
+            box-sizing: border-box;
+            border: 8px solid var(--ocean-blue);
         }
 
-        .header { border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 25px; text-align: center; }
-        .header h1 { font-weight: 900; font-size: 24px; margin: 0; color: var(--esparta-blue); }
+        header {
+            text-align: center;
+            border-bottom: 4px dashed var(--sand-yellow);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
 
-        .warning-box { background: #fffde7; border: 1px solid var(--esparta-gold); border-radius: 8px; padding: 15px; margin-bottom: 20px; font-size: 14px; }
-        .warning-box b { color: var(--danger); text-transform: uppercase; }
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--jungle-green);
+            font-size: 36px;
+            margin: 0;
+        }
 
-        .ejercicio-box { border: 1px solid #eee; border-radius: 10px; padding: 20px; margin-bottom: 20px; background: #fafafa; }
-        .ecuacion { font-family: 'Roboto Mono', monospace; font-size: 19px; color: var(--esparta-blue); display: block; margin-bottom: 15px; text-align: center; }
-        
-        .pasos-guia { font-size: 12px; color: #666; font-style: italic; margin-top: 10px; display: flex; justify-content: space-between; }
-        .espacio-pro { height: 120px; border: 1px dashed #ccc; background: white; border-radius: 4px; margin-top: 10px; }
+        .student-info {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--ocean-blue);
+            margin-top: 10px;
+        }
 
-        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
+        h2 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--ocean-blue);
+            font-size: 22px;
+            background: #e0f2fe;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
 
-        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; } }
+        /* Ejercicio Unir con Flechas */
+        .matching-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 20px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .word {
+            border: 2px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            background: #fff;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--jungle-green);
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        /* Ejercicio Dibujar/Escribir */
+        .drawing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .draw-box {
+            border: 2px solid #ccc;
+            height: 120px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 10px;
+            font-weight: bold;
+            color: var(--jungle-green);
+            background-image: radial-gradient(#eee 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: bold;
+            color: #aaa;
+        }
+
+        @media print {
+            .btn-imprimir { display: none; }
+            body { background: none; padding: 0; }
+            .page { box-shadow: none; margin: 0; border: none; }
+        }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Nivel Pro Sofía Millán</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha para Darío</button>
 
     <div class="page">
-        <header class="header">
-            <h1>ACADEMIA ESPARTA: Desafío Nivel Experto</h1>
-            <p>Alumna: <b>SOFÍA MILLÁN</b> · Preparación para Examen</p>
+        <header>
+            <h1>🌴 TROPICAL FUN! 🌊</h1>
+            <div class="student-info">STUDENT: DARÍO</div>
         </header>
 
-        <div class="warning-box">
-            <b>🛡️ ¡CUIDADO, SOFÍA!</b> En este nivel el mayor enemigo son los signos. 
-            Recuerda: \( - (x - 5) \) se convierte en \( -x + 5 \). ¡Cambia los dos!
+        <h2>1. Match with arrows! (¡Une con flechas!)</h2>
+        <div class="matching-container">
+            <div class="column">
+                <div class="word">GORILLA <span class="dot"></span></div>
+                <div class="word">ICE LOLLY <span class="dot"></span></div>
+                <div class="word">SANDALS <span class="dot"></span></div>
+                <div class="word">INSECT <span class="dot"></span></div>
+                <div class="word">WAVE <span class="dot"></span></div>
+            </div>
+            
+            <div class="column">
+                <div class="word"><span class="dot"></span> Polito de hielo</div>
+                <div class="word"><span class="dot"></span> Ola</div>
+                <div class="word"><span class="dot"></span> Gorila</div>
+                <div class="word"><span class="dot"></span> Insecto</div>
+                <div class="word"><span class="dot"></span> Sandalias</div>
+            </div>
         </div>
 
-        <div class="ejercicio-box">
-            <span class="ecuacion">\( 2(x - 3) + 5 = 3(x + 1) \)</span>
-            <div class="espacio-pro"></div>
-            <div class="pasos-guia"><span>1. Quitar paréntesis</span> <span>2. Agrupar x</span> <span>3. Resolver</span></div>
+        <h2>2. Draw and Color! (¡Dibuja y Colorea!)</h2>
+        <div class="drawing-grid">
+            <div class="draw-box">A BIG LEAF</div>
+            <div class="draw-box">A BLUE CAP</div>
+            <div class="draw-box">THE BEACH</div>
+            <div class="draw-box">A SCARY GORILLA</div>
+            <div class="draw-box">A SMALL PLANT</div>
+            <div class="draw-box">SUN AND JUNGLE</div>
         </div>
 
-        <div class="ejercicio-box">
-            <span class="ecuacion">\( 5x - (x + 4) = 2(x + 6) \)</span>
-            <div class="espacio-pro"></div>
-        </div>
+        <h2>3. Mystery Word (Escribe la palabra correcta)</h2>
+        <p style="font-size: 18px; margin-left: 20px;">
+            I am in the jungle and I can see a big... <br>
+            <b>G _ _ _ _ _ A</b>
+        </p>
 
-        <div class="ejercicio-box">
-            <span class="ecuacion">\( 3(2x - 1) - 2(x + 2) = 1 \)</span>
-            <div class="espacio-pro"></div>
+        <div class="footer">
+            🌟 GREAT JOB, DARÍO! 🌟
         </div>
-
-        <div class="ejercicio-box">
-            <span class="ecuacion">\( 10 - 3(x - 2) = 2x + 1 \)</span>
-            <div class="espacio-pro"></div>
-        </div>
-
-        <div class="ejercicio-box">
-            <span class="ecuacion">\( 4(x - 1) = 6(x + 2) - 2x \)</span>
-            <div class="espacio-pro"></div>
-        </div>
-
-        <footer class="footer">
-            © 2026 Academia Esparta · "La precisión derrota a la duda" · Sofía Millán
-        </footer>
     </div>
 
 </body>
