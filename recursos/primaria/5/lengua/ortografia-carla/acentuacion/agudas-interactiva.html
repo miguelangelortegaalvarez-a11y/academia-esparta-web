@@ -206,7 +206,7 @@
   <div class="ej-card" id="ej2">
     <div class="ej-titulo">
       <span class="ej-num">2</span>
-      Escribe estas palabras con la tilde correcta.
+      Escribe estas palabras correctamente. <strong>Algunas llevan tilde y otras no.</strong>
       <span class="ej-score" id="score2"></span>
     </div>
     <div class="input-lista" id="input-lista"></div>
@@ -252,32 +252,32 @@
   ];
 
   const EJ2_ITEMS = [
-    { prompt: 'salon',    answer: 'salón'    },
-    { prompt: 'corazon',  answer: 'corazón'  },
-    { prompt: 'bebe',     answer: 'bebé'     },
-    { prompt: 'mama',     answer: 'mamá'     },
-    { prompt: 'balcon',   answer: 'balcón'   },
+    { prompt: 'salon',   answer: 'salón'  },
+    { prompt: 'hotel',   answer: 'hotel'  },
+    { prompt: 'corazon', answer: 'corazón'},
+    { prompt: 'reloj',   answer: 'reloj'  },
+    { prompt: 'bebe',    answer: 'bebé'   },
   ];
 
   // Posiciones respuesta correcta: [0,1,2,0,2,1,0,2] (0-indexado)
   const EJ3_ITEMS = [
     { show: 'reloj',  correct: 'reloj',  wrong: ['relój',  'rreloj']  },
     { show: 'hotel',  correct: 'hotel',  wrong: ['hotél',  'hotell']  },
-    { show: 'sofá',   correct: 'sofá',   wrong: ['sofa',   'sofas']   },
+    { show: 'sofa',   correct: 'sofá',   wrong: ['sofa',   'sofas']   },
     { show: 'color',  correct: 'color',  wrong: ['colór',  'coolour'] },
     { show: 'salud',  correct: 'salud',  wrong: ['saludd', 'salúd']   },
-    { show: 'bambú',  correct: 'bambú',  wrong: ['bambu',  'bambuu']  },
+    { show: 'bambu',  correct: 'bambú',  wrong: ['bambu',  'bambuu']  },
     { show: 'canal',  correct: 'canal',  wrong: ['canál',  'kenál']   },
     { show: 'nariz',  correct: 'nariz',  wrong: ['narís',  'naris']   },
   ];
   const MC_POSITIONS = [0,1,2,0,2,1,0,2];
 
   const EJ4_ITEMS = [
-    { word: 'feliz',  tilde: false },
-    { word: 'volcán', tilde: true  },
-    { word: 'ciudad', tilde: false },
-    { word: 'calor',  tilde: false },
-    { word: 'marrón', tilde: true  },
+    { word: 'feliz',  correct: 'feliz',  tilde: false },
+    { word: 'volcan', correct: 'volcán', tilde: true  },
+    { word: 'ciudad', correct: 'ciudad', tilde: false },
+    { word: 'calor',  correct: 'calor',  tilde: false },
+    { word: 'marron', correct: 'marrón', tilde: true  },
   ];
 
   /* ── Estado ── */
@@ -374,7 +374,7 @@
     if (!val) return;
     inp.dataset.done = '1';
     inp.readOnly = true;
-    const ok = norm(val) === norm(EJ2_ITEMS[i].answer);
+    const ok = val.trim().toLowerCase() === EJ2_ITEMS[i].answer.toLowerCase();
     inp.classList.add(ok ? 'ok' : 'fail');
     fb.textContent  = ok ? '✓' : '✗ ' + EJ2_ITEMS[i].answer;
     fb.className    = 'input-feedback ' + (ok ? 'ok' : 'fail');
@@ -449,7 +449,7 @@
             if (b.dataset.ans === (item.tilde ? 'si' : 'no')) b.classList.add('correct');
           });
           const fb = document.getElementById('fb4-' + i);
-          fb.textContent = isOk ? '✓' : ('✗ ' + (item.tilde ? 'SÍ' : 'NO'));
+          fb.textContent = isOk ? '✓' : ('✗ ' + (item.tilde ? 'SÍ → ' + item.correct : 'NO'));
           fb.className = 'sino-feedback ' + (isOk ? 'ok' : 'fail');
           if (isOk) scores[3]++;
           ej4Done++;
