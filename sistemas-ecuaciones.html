@@ -3,135 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misión Hiatos - Carla - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Boogaloo&display=swap" rel="stylesheet">
+    <title>Súper Ficha Hiatos - Carla - Academia Esparta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fuerte: #d32f2f; /* Rojo para las fuertes */
-            --debil: #1976d2;  /* Azul para las débiles */
-            --tilde: #ffab00;  /* Oro para la tilde mágica */
-            --bg: #ffffff;
+            --fuerte: #e63946;
+            --debil: #457b9d;
+            --accent: #f1faee;
+            --gold: #ffb703;
+            --dark: #1d3557;
         }
 
-        body { font-family: 'Montserrat', sans-serif; background-color: #f0f0f0; padding: 20px; color: #333; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; color: var(--dark); }
         
         .btn-imprimir {
             display: block; width: fit-content; margin: 0 auto 20px;
-            background-color: #0d47a1; color: white; border: 2px solid var(--tilde); 
-            padding: 12px 30px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase;
+            background-color: var(--dark); color: white; border: 2px solid var(--gold); 
+            padding: 15px 40px; border-radius: 50px; font-weight: 900; cursor: pointer; text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .page { 
-            background-color: var(--bg); width: 210mm; min-height: 297mm; padding: 15mm; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1); margin: 0 auto; border-radius: 10px;
-            border-top: 15px solid #0d47a1; position: relative;
+            background-color: white; width: 210mm; min-height: 297mm; padding: 20mm; 
+            box-shadow: 0 0 25px rgba(0,0,0,0.1); margin: 0 auto; border-radius: 5px;
+            border-left: 15px solid var(--fuerte); position: relative;
         }
 
-        header { text-align: center; border-bottom: 3px dashed #eee; padding-bottom: 10px; margin-bottom: 20px; }
-        h1 { font-family: 'Boogaloo', cursive; font-size: 45px; color: #0d47a1; margin: 0; }
-        .sub { font-weight: bold; color: #666; text-transform: uppercase; letter-spacing: 2px; }
+        header { text-align: center; border-bottom: 5px double var(--fuerte); padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { font-family: 'Fredoka One', cursive; font-size: 40px; color: var(--dark); margin: 0; }
+        .sub { font-weight: bold; color: var(--debil); text-transform: uppercase; letter-spacing: 3px; }
 
-        .vocal-box { display: flex; justify-content: center; gap: 20px; margin: 20px 0; }
-        .vocal { padding: 10px 25px; border-radius: 10px; font-size: 30px; font-weight: 900; color: white; }
-        .fuertes { background-color: var(--fuerte); box-shadow: 0 4px #b71c1c; }
-        .debiles { background-color: var(--debil); box-shadow: 0 4px #0d47a1; }
-
-        .regla-card { 
-            background: #f9f9f9; border-radius: 15px; padding: 20px; margin-bottom: 20px; 
-            border-left: 10px solid #ddd;
-        }
-        .regla-card.h1 { border-left-color: var(--fuerte); }
-        .regla-card.h2 { border-left-color: var(--tilde); }
-
-        h2 { font-family: 'Boogaloo', cursive; font-size: 28px; margin-top: 0; color: #333; }
-
-        .ejemplo-chip { 
-            display: inline-block; background: white; padding: 5px 15px; 
-            border-radius: 20px; border: 2px solid #eee; margin: 5px; font-weight: bold;
-        }
-        .separacion { color: var(--fuerte); font-size: 20px; }
-
-        .area-ejercicios { margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
-        .linea-ejercicio { margin-bottom: 15px; font-size: 18px; display: flex; align-items: center; }
-        .linea-ejercicio input { 
-            border: none; border-bottom: 2px solid #ccc; width: 200px; margin-left: 10px; 
-            font-family: 'Montserrat', sans-serif; font-size: 18px; text-align: center;
+        .section-title { 
+            background: var(--dark); color: white; padding: 10px 20px; 
+            border-radius: 0 50px 50px 0; margin-left: -20mm; width: fit-content;
+            font-family: 'Fredoka One', cursive; margin-top: 40px;
         }
 
-        .nota-espartana { 
-            background-color: #fff9c4; padding: 15px; border-radius: 10px; 
-            font-style: italic; font-size: 14px; margin-top: 20px;
+        .teoria-container { line-height: 1.8; font-size: 16px; text-align: justify; }
+        .vocal-circle {
+            display: inline-block; width: 40px; height: 40px; border-radius: 50%;
+            text-align: center; line-height: 40px; color: white; font-weight: 900; margin: 0 5px;
+        }
+        .v-fuerte { background: var(--fuerte); }
+        .v-debil { background: var(--debil); }
+
+        .ejemplos-grid { 
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 20px;
+        }
+        .ejemplo-item { 
+            background: var(--accent); padding: 10px; border-radius: 8px; 
+            border: 1px solid #ddd; text-align: center; font-weight: bold;
+        }
+        .hiato-split { color: var(--fuerte); font-size: 1.2em; }
+
+        .pregunta { font-weight: 900; color: var(--fuerte); margin-top: 25px; margin-bottom: 15px; font-size: 18px; }
+        .tabla-ejercicios { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .tabla-ejercicios th, .tabla-ejercicios td { border: 1px solid #eee; padding: 12px; text-align: left; }
+        .tabla-ejercicios th { background: var(--dark); color: white; }
+
+        .input-line { border-bottom: 2px dashed #ccc; width: 100%; height: 25px; margin: 5px 0; }
+
+        .sticker-nota {
+            background: #fff9c4; padding: 20px; border-radius: 15px; border: 2px dashed var(--gold);
+            margin: 30px 0; position: relative;
         }
 
-        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; margin: 0; } }
+        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: none; padding: 10mm; } }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Ficha de Carla</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR GUÍA MAESTRA (CARLA)</button>
 
     <div class="page">
         <header>
-            <h1>EL ROMPE-PAREJAS: LOS HIATOS</h1>
-            <p class="sub">Entrenamiento especial para: CARLA</p>
+            <h1>GUÍA MAESTRA: LOS HIATOS</h1>
+            <p class="sub">ACADEMIA ESPARTA · NIVEL: 4º-5º PRIMARIA</p>
+            <p><b>ALUMNA:</b> CARLA ___________________________</p>
         </header>
 
-        <section>
-            <h2 style="text-align: center;">1. Las Vocales en Combate</h2>
-            <div class="vocal-box">
-                <div>
-                    <div class="vocal fuertes">A, E, O</div>
-                    <p style="text-align:center; font-weight:bold; color:var(--fuerte)">FUERTES</p>
-                </div>
-                <div>
-                    <div class="vocal debiles">I, U</div>
-                    <p style="text-align:center; font-weight:bold; color:var(--debil)">DÉBILES</p>
-                </div>
+        <section class="teoria-container">
+            <div class="section-title">PARTE 1: La Teoría de los Gigantes</div>
+            <p>Un <b>HIATO</b> es la separación de dos vocales en sílabas diferentes. Para que Carla no se olvide nunca, vamos a clasificarlas por su "fuerza":</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="vocal-circle v-fuerte">A</span> <span class="vocal-circle v-fuerte">E</span> <span class="vocal-circle v-fuerte">O</span> <b>(VOCALES FUERTES)</b>
+                <br><br>
+                <span class="vocal-circle v-debil">I</span> <span class="vocal-circle v-debil">U</span> <b>(VOCALES DÉBILES)</b>
+            </div>
+
+            <h3>Regla 1: Fuerte + Fuerte = ¡SEPARACIÓN!</h3>
+            <p>Dos vocales fuertes tienen tanta energía que no pueden estar juntas. Se separan siempre y siguen las reglas normales de acentuación.</p>
+            <div class="ejemplos-grid">
+                <div class="ejemplo-item">Ca <span class="hiato-split">-</span> o <span class="hiato-split">-</span> ti <span class="hiato-split">-</span> co</div>
+                <div class="ejemplo-item">Le <span class="hiato-split">-</span> er</div>
+                <div class="ejemplo-item">Pe <span class="hiato-split">-</span> o <span class="hiato-split">-</span> nar</div>
+                <div class="ejemplo-item">Re <span class="hiato-split">-</span> cre <span class="hiato-split">-</span> o</div>
+                <div class="ejemplo-item">Te <span class="hiato-split">-</span> a <span class="hiato-split">-</span> tro</div>
+                <div class="ejemplo-item">Hé <span class="hiato-split">-</span> ro <span class="hiato-split">-</span> e</div>
+            </div>
+
+            <h3>Regla 2: Débil con Tilde + Fuerte = ¡RUPTURA!</h3>
+            <p>Si la vocal débil (i, u) lleva tilde, gana la fuerza de un gigante y rompe la pareja. <b>¡IMPORTANTE!</b> Siempre llevan tilde en la débil.</p>
+            <div class="ejemplos-grid">
+                <div class="ejemplo-item">Ma <span class="hiato-split">-</span> rí <span class="hiato-split">-</span> a</div>
+                <div class="ejemplo-item">Ba <span class="hiato-split">-</span> úl</div>
+                <div class="ejemplo-item">Frí <span class="hiato-split">-</span> o</div>
+                <div class="ejemplo-item">Pa <span class="hiato-split">-</span> í <span class="hiato-split">-</span> ses</div>
+                <div class="ejemplo-item">Grú <span class="hiato-split">-</span> a</div>
+                <div class="ejemplo-item">Dí <span class="hiato-split">-</span> a</div>
             </div>
         </section>
 
-        <div class="regla-card h1">
-            <h2>🔥 TIPO 1: El Choque de Gigantes</h2>
-            <p>Cuando dos vocales <b>FUERTES</b> se juntan, ¡se separan siempre! No caben en la misma sílaba.</p>
-            <div>
-                <span class="ejemplo-chip">CA <span class="separacion">-</span> OS</span>
-                <span class="ejemplo-chip">TE <span class="separacion">-</span> A <span class="separacion">-</span> TRO</span>
-                <span class="ejemplo-chip">RE <span class="separacion">-</span> CRE <span class="separacion">-</span> O</span>
-            </div>
+        <div class="sticker-nota">
+            <b>🛡️ EL TRUCO DE LA "H":</b> Carla, la letra "H" es muda, así que no cuenta. Si hay un hiato, la "H" se va con la segunda vocal. Ejemplo: <b>Bú - ho</b> o <b>Al - co - hol</b>.
         </div>
 
-        <div class="regla-card h2">
-            <h2>⚡ TIPO 2: El Poder de la Tilde</h2>
-            <p>Si una vocal <b>DÉBIL</b> (i, u) lleva <b style="color:var(--tilde)">TILDE</b>, se vuelve súper fuerte y rompe la pareja.</p>
-            <div>
-                <span class="ejemplo-chip">RÍ <span class="separacion">-</span> O</span>
-                <span class="ejemplo-chip">GRÚ <span class="separacion">-</span> A</span>
-                <span class="ejemplo-chip">MA <span class="separacion">-</span> RÍ <span class="separacion">-</span> A</span>
-                <span class="ejemplo-chip">BA <span class="separacion">-</span> ÚL</span>
-            </div>
-        </div>
+        <section class="ejercicios-lista">
+            <div class="section-title">PARTE 2: Entrenamiento Intensivo</div>
 
-        <section class="area-ejercicios">
-            <h2>⚔️ Misión para Carla: ¡Separa las sílabas!</h2>
-            <p>Escribe la palabra separada y rodea el hiato.</p>
-            
-            <div class="linea-ejercicio">1. Paseo: <input type="text"></div>
-            <div class="linea-ejercicio">2. Sonríe: <input type="text"></div>
-            <div class="linea-ejercicio">3. Poeta: <input type="text"></div>
-            <div class="linea-ejercicio">4. Frío: <input type="text"></div>
-            <div class="linea-ejercicio">5. Toalla: <input type="text"></div>
-            <div class="linea-ejercicio">6. Búho: <input type="text"></div>
-            <div class="linea-ejercicio">7. León: <input type="text"></div>
+            <div class="pregunta">1. Análisis de palabras. Separa y explica el motivo:</div>
+            <table class="tabla-ejercicios">
+                <tr><th>Palabra</th><th>Separación silábica</th><th>Motivo del Hiato</th></tr>
+                <tr><td>Poeta</td><td>Po - e - ta</td><td>Dos fuertes (o-e)</td></tr>
+                <tr><td>Sonríe</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
+                <tr><td>Cacao</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
+                <tr><td>Había</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
+                <tr><td>Mareo</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
+                <tr><td>Grúa</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
+                <tr><td>Océano</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
+                <tr><td>Río</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
+                <tr><td>Toalla</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
+                <tr><td>País</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
+            </table>
+
+            <div class="pregunta">2. El Detective de Tildes. Pon la tilde donde falte:</div>
+            <p style="background: #f0f0f0; padding: 15px; border-radius: 10px; line-height: 2;">
+                Sofia tiene mucha alegria porque su tio le regalo un baul lleno de juguetes. 
+                Vivia en una aldea cerca del rio y le gustaba mucho la poesia. 
+                Ayer vio un buho en el tejado y se quedo parada en la linea de la puerta.
+            </p>
+
+            <div class="pregunta">3. Clasificación Maestra. Clasifica estas palabras:</div>
+            <p><i>(Caos, Biología, Pelea, Reír, Paseo, Filosofía, Teatro, Grúa)</i></p>
+            <div style="display: flex; gap: 20px;">
+                <div style="flex:1; border: 2px solid var(--fuerte); border-radius: 10px; padding: 10px;">
+                    <b style="color: var(--fuerte);">TIPO: FUERTE + FUERTE</b>
+                    <div class="input-line"></div><div class="input-line"></div><div class="input-line"></div><div class="input-line"></div>
+                </div>
+                <div style="flex:1; border: 2px solid var(--debil); border-radius: 10px; padding: 10px;">
+                    <b style="color: var(--debil);">TIPO: DÉBIL (TILDE) + FUERTE</b>
+                    <div class="input-line"></div><div class="input-line"></div><div class="input-line"></div><div class="input-line"></div>
+                </div>
+            </div>
+
+            <div class="pregunta">4. Escritura Creativa. Escribe una frase con cada palabra:</div>
+            <p><b>A) HÉROE:</b> <div class="input-line"></div></p>
+            <p><b>B) PANADERÍA:</b> <div class="input-line"></div></p>
+            <p><b>C) LÍNEA:</b> <div class="input-line"></div></p>
         </section>
 
-        <div class="nota-espartana">
-            <b>🛡️ Consejo Espartano:</b> Carla, recuerda que la "H" es muda. No impide que las vocales se separen si hay un hiato. Ejemplo: <b>A - ho - ra</b>.
-        </div>
-
-        <footer style="text-align: center; margin-top: 40px; color: #aaa; font-weight: bold;">
-            ACADEMIA ESPARTA 2026 - ¡Tú puedes, Carla!
+        <footer style="text-align: center; color: #888; font-size: 12px; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px;">
+            Academia Esparta 2026 · Carla, ¡estás preparada para el éxito!
         </footer>
     </div>
-
 </body>
 </html>
