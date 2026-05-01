@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Síntesis silábica · Interactiva · 1º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Edu SA Beginner', cursive;
+      background: #fef9f0;
+      color: #1e293b;
+      min-height: 100vh;
+      padding-bottom: 4rem;
+    }
+
+    .topbar {
+      background: #fff; border-bottom: 1px solid #e2e8f0;
+      padding: .6rem 1.2rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      position: sticky; top: 0; z-index: 20;
+    }
+    .back-btn { color: #475569; font-size: .8rem; text-decoration: none; border: 1px solid #cbd5e1; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .topbar-right { display: flex; gap: .5rem; align-items: center; }
+    .paper-btn { color: #475569; font-size: .8rem; text-decoration: none; border: 1px solid #cbd5e1; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; background: #fff; }
+    .reset-top-btn { color: #64748b; font-size: .8rem; border: 1.5px solid #e2e8f0; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; background: #fff; cursor: pointer; }
+    .print-btn { background: #1e293b; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+
+    .ficha { max-width: 720px; margin: 1.5rem auto; padding: 0 1rem; }
+
+    .header-card { background: #fff; border-radius: 20px; padding: 1.4rem 1.6rem 1rem; box-shadow: 0 4px 20px rgba(0,0,0,.07); margin-bottom: 1rem; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #94a3b8; display: block; margin-bottom: 12px; }
+    .datos-alumno { display: flex; gap: 16px; }
+    .dato { display: flex; align-items: center; gap: 8px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; font-size: 15px; color: #475569; }
+    .dato-input { flex: 1; border: none; border-bottom: 2.5px solid #e2e8f0; font-family: 'Edu SA Beginner', cursive; font-size: 17px; padding: 3px 4px; background: transparent; outline: none; color: #1e293b; }
+    .dato-input:focus { border-bottom-color: #3b82f6; }
+    #inp-nombre { font-size: 19px; font-weight: 600; }
+
+    .ej-card { background: #fff; border-radius: 20px; padding: 1.4rem 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,.07); margin-bottom: 1rem; }
+    .ej-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .ej-titulo { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .ej-n { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; background: #1e293b; color: #fff; border-radius: 50%; width: 34px; height: 34px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; }
+    .ej-prog { font-family: 'Montserrat', sans-serif; font-size: .88rem; font-weight: 700; color: #94a3b8; white-space: nowrap; padding-top: 4px; }
+    .ej-prog.done-all { color: #16a34a; }
+    .hint { font-family: sans-serif; font-size: .72rem; color: #94a3b8; background: #f8fafc; border-radius: 8px; padding: 6px 10px; margin-bottom: 14px; display: block; }
+
+    /* ── TYPING ROWS ── */
+    .sint-lista { display: flex; flex-direction: column; gap: 6px; }
+    .sint-fila {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 6px; border-radius: 12px;
+      border-bottom: 1px dashed #f1f5f9;
+      transition: background .2s;
+    }
+    .sint-fila:last-child { border-bottom: none; }
+    .sint-fila.row-done { background: #f0fdf4; border-bottom-color: transparent; }
+    .sint-silabas {
+      font-size: 21px; font-weight: 700;
+      min-width: 180px; flex-shrink: 0;
+    }
+    .sint-igual { font-size: 22px; font-weight: 700; flex-shrink: 0; color: #94a3b8; }
+    .sint-input {
+      border: none; border-bottom: 2.5px solid #e2e8f0;
+      font-family: 'Edu SA Beginner', cursive; font-size: 21px; font-weight: 600;
+      width: 160px; padding: 3px 6px; background: transparent; outline: none; color: #1e293b;
+      border-radius: 0;
+      transition: border-color .15s, background .2s;
+    }
+    .sint-input:focus { border-bottom-color: #3b82f6; }
+    .sint-input.input-ok {
+      border-bottom: 2.5px solid #22c55e !important;
+      color: #16a34a; background: #f0fdf4;
+      border-radius: 8px 8px 0 0;
+    }
+    .sint-check {
+      font-size: 20px; width: 28px; text-align: center; flex-shrink: 0;
+      opacity: 0; transition: opacity .25s;
+    }
+    .sint-fila.row-done .sint-check { opacity: 1; }
+
+    /* ── EJ 3 COMPLETE: "pa + ___ = pato" ── */
+    .comp-lista { display: flex; flex-direction: column; gap: 6px; }
+    .comp-fila {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 6px; border-radius: 12px;
+      border-bottom: 1px dashed #f1f5f9;
+      transition: background .2s;
+    }
+    .comp-fila:last-child { border-bottom: none; }
+    .comp-fila.row-done { background: #f0fdf4; border-bottom-color: transparent; }
+    .comp-inicio { font-size: 21px; font-weight: 700; flex-shrink: 0; }
+    .comp-mas { font-size: 22px; font-weight: 700; flex-shrink: 0; color: #94a3b8; }
+    .comp-input {
+      border: none; border-bottom: 2.5px solid #e2e8f0;
+      font-family: 'Edu SA Beginner', cursive; font-size: 21px; font-weight: 600;
+      width: 90px; padding: 3px 6px; background: transparent; outline: none; color: #1e293b;
+      text-align: center;
+      transition: border-color .15s, background .2s;
+    }
+    .comp-input:focus { border-bottom-color: #3b82f6; }
+    .comp-input.input-ok {
+      border-bottom: 2.5px solid #22c55e !important;
+      color: #16a34a; background: #f0fdf4;
+      border-radius: 8px 8px 0 0;
+    }
+    .comp-igual { font-size: 22px; font-weight: 700; flex-shrink: 0; color: #94a3b8; }
+    .comp-result { font-size: 21px; font-weight: 700; color: #94a3b8; flex-shrink: 0; }
+    .comp-result.revealed { color: #16a34a; }
+    .comp-check { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; opacity: 0; transition: opacity .25s; }
+    .comp-fila.row-done .comp-check { opacity: 1; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes correct-pop { 0%{transform:scale(1)} 30%{transform:scale(1.28)} 55%{transform:scale(.94)} 75%{transform:scale(1.1)} 100%{transform:scale(1)} }
+    @keyframes wrong-shake {
+      0%,100% { transform:translateX(0); }
+      12%     { transform:translateX(-10px); background:#fee2e2; border-bottom-color:#dc2626!important; }
+      28%     { transform:translateX(10px);  background:#fee2e2; border-bottom-color:#dc2626!important; }
+      44%     { transform:translateX(-7px);  background:#fecaca; border-bottom-color:#f87171!important; }
+      60%     { transform:translateX(7px);   background:#fecaca; }
+      76%     { transform:translateX(-4px); }
+      88%     { transform:translateX(4px); }
+    }
+    @keyframes float-up { 0%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)} 25%{transform:translateX(-50%) translateY(-14px) scale(1.1)} 100%{opacity:0;transform:translateX(-50%) translateY(-60px) scale(.85)} }
+    @keyframes pop-in { 0%{transform:scale(0) rotate(-8deg);opacity:0} 65%{transform:scale(1.12) rotate(2deg)} 100%{transform:scale(1) rotate(0deg);opacity:1} }
+    @keyframes confetti-fall { 0%{transform:translateY(-40px) rotate(0deg) translateX(0);opacity:1} 80%{opacity:1} 100%{transform:translateY(105vh) rotate(540deg) translateX(var(--dx));opacity:0} }
+    @keyframes cel-bounce { 0%,100%{transform:scale(1)} 40%{transform:scale(1.08)} 70%{transform:scale(.97)} }
+    @keyframes fade-in { from{opacity:0} to{opacity:1} }
+
+    .anim-correct { animation: correct-pop .42s cubic-bezier(.34,1.56,.64,1) forwards; }
+    .anim-wrong   { animation: wrong-shake .52s ease forwards; }
+
+    .float-praise { position:fixed;z-index:60;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.5rem;color:#16a34a;pointer-events:none;white-space:nowrap;animation:float-up 1.05s ease forwards; }
+    .confetti-piece { position:fixed;top:-40px;pointer-events:none;z-index:900;animation:confetti-fall linear forwards; }
+
+    .celebration { position:fixed;inset:0;z-index:800;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;animation:fade-in .3s ease; }
+    .celebration.hidden { display:none; }
+    .cel-box { background:#fff;border-radius:28px;padding:3rem 2.4rem 2.4rem;text-align:center;max-width:420px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,.3);animation:pop-in .45s cubic-bezier(.34,1.56,.64,1); }
+    .cel-trophy { font-size:5rem;display:block;animation:cel-bounce 1.4s ease infinite;margin-bottom:.4rem; }
+    .cel-title { font-family:'Montserrat',sans-serif;font-size:1.7rem;font-weight:900;color:#1e293b;line-height:1.2;margin-bottom:.3rem; }
+    .cel-name  { font-family:'Montserrat',sans-serif;font-size:2.2rem;font-weight:900;color:#16a34a;margin-bottom:.6rem; }
+    .cel-stars { font-size:2.4rem;letter-spacing:6px;margin-bottom:.8rem; }
+    .cel-sub   { font-size:.95rem;color:#64748b;margin-bottom:1.6rem;line-height:1.5; }
+    .cel-btn { background:#22c55e;color:#fff;border:none;padding:.8rem 2.4rem;border-radius:999px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 4px 16px rgba(34,197,94,.35);transition:transform .15s,background .15s; }
+    .cel-btn:hover { background:#16a34a;transform:scale(1.05); }
+
+    .footer-card { background:#fff;border-radius:16px;padding:.9rem 1.5rem;margin-top:1rem;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center; }
+    .footer-marca { font-family:sans-serif;font-size:10px;color:#94a3b8; }
+    .footer-msg { font-size:13px;font-weight:700; }
+
+    .welcome { position:fixed;inset:0;z-index:850;background:rgba(15,23,42,.65);display:flex;align-items:center;justify-content:center; }
+    .welcome.hidden { display:none; }
+    .wel-box { background:#fff;border-radius:28px;padding:2.8rem 2.4rem 2.4rem;text-align:center;max-width:400px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,.35);animation:pop-in .45s cubic-bezier(.34,1.56,.64,1); }
+    .wel-emoji { font-size:4.5rem;display:block;margin-bottom:.6rem; }
+    .wel-academia { font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#94a3b8;margin-bottom:.5rem;display:block; }
+    .wel-title { font-family:'Montserrat',sans-serif;font-size:1.55rem;font-weight:900;color:#1e293b;margin-bottom:.4rem;line-height:1.2; }
+    .wel-sub   { font-size:.95rem;color:#64748b;margin-bottom:1.4rem; }
+    .wel-input { width:100%;font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:700;border:2.5px solid #e2e8f0;border-radius:14px;padding:.75rem 1rem;text-align:center;outline:none;color:#1e293b;margin-bottom:1rem;transition:border-color .15s,box-shadow .15s; }
+    .wel-input:focus { border-color:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15); }
+    .wel-input::placeholder { color:#cbd5e1;font-weight:500; }
+    .wel-btn { background:#3b82f6;color:#fff;border:none;padding:.85rem 2.6rem;border-radius:999px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 4px 18px rgba(59,130,246,.4);transition:transform .15s,background .15s,opacity .15s; }
+    .wel-btn:disabled { opacity:.35;cursor:default; }
+    .wel-btn:not(:disabled):hover { background:#2563eb;transform:scale(1.06); }
+
+    @media print {
+      body { background:#fff!important; }
+      .topbar,.hint { display:none!important; }
+      .ficha { max-width:none!important;padding:0!important; }
+      .ej-card,.header-card,.footer-card { box-shadow:none!important;border-radius:0!important; }
+      .celebration,.welcome { display:none!important; }
+      * { filter:grayscale(100%); }
+    }
+    @page { size:A4 portrait;margin:2cm 1.5cm 1.5cm; }
+  </style>
+</head>
+<body>
+
+<!-- WELCOME OVERLAY -->
+<div class="welcome" id="welcome">
+  <div class="wel-box">
+    <span class="wel-emoji">🧩</span>
+    <span class="wel-academia">Academia Esparta</span>
+    <div class="wel-title">¡Hola! ¿Cómo te llamas?</div>
+    <div class="wel-sub">Escribe tu nombre para empezar la ficha.</div>
+    <input class="wel-input" id="wel-input" type="text"
+           placeholder="Tu nombre aquí…" autocomplete="off" maxlength="40"
+           oninput="welUpdate()" onkeydown="if(event.key==='Enter')welStart()" />
+    <button class="wel-btn" id="wel-btn" onclick="welStart()" disabled>¡Vamos! 🚀</button>
+  </div>
+</div>
+
+<!-- CELEBRATION OVERLAY -->
+<div class="celebration hidden" id="celebration">
+  <div class="cel-box">
+    <span class="cel-trophy">🏆</span>
+    <div class="cel-title">¡Lo has hecho fenomenal!</div>
+    <div class="cel-name" id="cel-name"></div>
+    <div class="cel-stars">⭐⭐⭐</div>
+    <div class="cel-sub">Has respondido todas las preguntas correctamente. ¡Eres increíble!</div>
+    <button class="cel-btn" onclick="closeCelebration()">¡Genial! 🎉</button>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="back-btn" href="index.html">← Volver</a>
+  <div class="topbar-right">
+    <a class="paper-btn" href="sintesis-silabica.html">📄 Para papel</a>
+    <button class="reset-top-btn" onclick="resetAll()">↺ Reiniciar</button>
+    <button class="print-btn"     onclick="window.print()">🖨 Imprimir</button>
+  </div>
+</div>
+
+<div class="ficha">
+
+  <div class="header-card">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 1º Primaria · Conciencia fonológica · Ficha 5 · Síntesis silábica</span>
+    <div class="datos-alumno">
+      <div class="dato">
+        <label>Nombre:</label>
+        <input id="inp-nombre" class="dato-input" type="text" placeholder="Escribe tu nombre…" autocomplete="off" />
+      </div>
+      <div class="dato">
+        <label>Fecha:</label>
+        <input class="dato-input" type="text" placeholder="Hoy es…" autocomplete="off" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EJ 1 ═══ -->
+  <div class="ej-card">
+    <div class="ej-head">
+      <div class="ej-titulo">
+        <span class="ej-n">1</span>
+        Junta las sílabas y escribe la palabra.
+      </div>
+      <span class="ej-prog" id="prog1">0 / 6</span>
+    </div>
+    <span class="hint">⌨️ Junta las sílabas en tu cabeza y escribe la palabra. Pulsa Enter para comprobar.</span>
+
+    <div class="sint-lista">
+      <div class="sint-fila">
+        <span class="sint-silabas">ma · no</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e1-mano" data-ans="mano" data-ej="1"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+      <div class="sint-fila">
+        <span class="sint-silabas">ta · za</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e1-taza" data-ans="taza" data-ej="1"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+      <div class="sint-fila">
+        <span class="sint-silabas">na · da</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e1-nada" data-ans="nada" data-ej="1"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+      <div class="sint-fila">
+        <span class="sint-silabas">de · do</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e1-dedo" data-ans="dedo" data-ej="1"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+      <div class="sint-fila">
+        <span class="sint-silabas">ma · sa</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e1-masa" data-ans="masa" data-ej="1"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+      <div class="sint-fila">
+        <span class="sint-silabas">na · ta</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e1-nata" data-ans="nata" data-ej="1"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EJ 2 ═══ -->
+  <div class="ej-card">
+    <div class="ej-head">
+      <div class="ej-titulo">
+        <span class="ej-n">2</span>
+        Junta las sílabas y escribe la palabra.
+      </div>
+      <span class="ej-prog" id="prog2">0 / 4</span>
+    </div>
+    <span class="hint">⌨️ Palabras más largas. ¡Junta todas las sílabas y escríbela!</span>
+
+    <div class="sint-lista">
+      <div class="sint-fila">
+        <span class="sint-silabas">man · za · na</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e2-manzana" data-ans="manzana" data-ej="2"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+      <div class="sint-fila">
+        <span class="sint-silabas">mo · chi · la</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e2-mochila" data-ans="mochila" data-ej="2"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+      <div class="sint-fila">
+        <span class="sint-silabas">ma · ri · po · sa</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e2-mariposa" data-ans="mariposa" data-ej="2"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+      <div class="sint-fila">
+        <span class="sint-silabas">te · lé · fo · no</span>
+        <span class="sint-igual">=</span>
+        <input class="sint-input" id="e2-telefono" data-ans="telefono" data-ej="2"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               oninput="checkInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="sint-check">✅</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EJ 3 ═══ -->
+  <div class="ej-card">
+    <div class="ej-head">
+      <div class="ej-titulo">
+        <span class="ej-n">3</span>
+        Tienes la primera sílaba. Escribe la que falta.
+      </div>
+      <span class="ej-prog" id="prog3">0 / 4</span>
+    </div>
+    <span class="hint">⌨️ Escribe la sílaba que falta para completar la palabra.</span>
+
+    <div class="comp-lista">
+      <div class="comp-fila">
+        <span class="comp-inicio">🦆 pa +</span>
+        <input class="comp-input" id="e3-pato" data-ans="to" data-word="pato" data-ej="3"
+               autocomplete="off" autocorrect="off" spellcheck="false" placeholder="___"
+               oninput="checkCompInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="comp-igual">=</span>
+        <span class="comp-result" id="res-pato">pato</span>
+        <span class="comp-check">✅</span>
+      </div>
+      <div class="comp-fila">
+        <span class="comp-inicio">🍜 so +</span>
+        <input class="comp-input" id="e3-sopa" data-ans="pa" data-word="sopa" data-ej="3"
+               autocomplete="off" autocorrect="off" spellcheck="false" placeholder="___"
+               oninput="checkCompInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="comp-igual">=</span>
+        <span class="comp-result" id="res-sopa">sopa</span>
+        <span class="comp-check">✅</span>
+      </div>
+      <div class="comp-fila">
+        <span class="comp-inicio">🏠 ca +</span>
+        <input class="comp-input" id="e3-casa" data-ans="sa" data-word="casa" data-ej="3"
+               autocomplete="off" autocorrect="off" spellcheck="false" placeholder="___"
+               oninput="checkCompInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="comp-igual">=</span>
+        <span class="comp-result" id="res-casa">casa</span>
+        <span class="comp-check">✅</span>
+      </div>
+      <div class="comp-fila">
+        <span class="comp-inicio">🍽️ me +</span>
+        <input class="comp-input" id="e3-mesa" data-ans="sa" data-word="mesa" data-ej="3"
+               autocomplete="off" autocorrect="off" spellcheck="false" placeholder="___"
+               oninput="checkCompInput(this)" onkeydown="submitInput(event,this)" />
+        <span class="comp-igual">=</span>
+        <span class="comp-result" id="res-mesa">mesa</span>
+        <span class="comp-check">✅</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-card">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+
+</div><!-- /ficha -->
+
+<script>
+/* ═══════════════ AUDIO ═══════════════ */
+let _ctx = null;
+function getCtx() {
+  if (!_ctx) try { _ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+  return _ctx;
+}
+function _tone(freq, startOffset, dur, type, vol) {
+  const ctx = getCtx(); if (!ctx) return;
+  try {
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = type; osc.frequency.value = freq;
+    const t = ctx.currentTime + startOffset;
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(vol, t + 0.018);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    osc.start(t); osc.stop(t + dur + 0.05);
+  } catch(e) {}
+}
+function playCorrect() {
+  _tone(523, 0, 0.22, 'triangle', 0.22);
+  _tone(659, 0.11, 0.22, 'triangle', 0.22);
+  _tone(784, 0.22, 0.30, 'triangle', 0.22);
+}
+function playWrong() {
+  const ctx = getCtx(); if (!ctx) return;
+  try {
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(320, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(130, ctx.currentTime + 0.42);
+    gain.gain.setValueAtTime(0.18, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.46);
+    osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.5);
+  } catch(e) {}
+}
+function playCelebration() {
+  [[523,0,.13,'triangle',.20],[659,.13,.13,'triangle',.20],[784,.26,.13,'triangle',.20],
+   [1047,.40,.50,'triangle',.22],[784,.54,.09,'triangle',.14],[1047,.65,.75,'triangle',.22]]
+  .forEach(([f,s,d,t,v]) => _tone(f,s,d,t,v));
+}
+
+/* ═══════════════ WELCOME ═══════════════ */
+function welUpdate() {
+  document.getElementById('wel-btn').disabled = document.getElementById('wel-input').value.trim().length === 0;
+}
+function welStart() {
+  const name = document.getElementById('wel-input').value.trim();
+  if (!name) return;
+  document.getElementById('inp-nombre').value = name;
+  const el = document.getElementById('welcome');
+  el.style.transition = 'opacity .35s ease'; el.style.opacity = '0';
+  setTimeout(() => { el.classList.add('hidden'); el.style.opacity = ''; el.style.transition = ''; }, 350);
+}
+window.addEventListener('load', () => setTimeout(() => document.getElementById('wel-input').focus(), 100));
+
+/* ═══════════════ STATE ═══════════════ */
+const ej1Done = new Set();
+const ej2Done = new Set();
+const ej3Done = new Set();
+const TOTAL = 6 + 4 + 4; // 14
+
+/* ═══════════════ PRAISE ═══════════════ */
+const PRAISE = ['¡Bravo! 🌟','¡Perfecto! ⭐','¡Muy bien! 🎉','¡Genial! ✨','¡Correcto! 🏅','¡Así es! 💫'];
+let praiseIdx = 0;
+
+/* ═══════════════ NORMALIZE ═══════════════ */
+function norm(s) {
+  return s.toLowerCase().trim()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+/* ═══════════════ CHECK INPUT (EJ 1 y 2) ═══════════════ */
+function checkInput(input) {
+  if (input.readOnly) return;
+  const ej = input.dataset.ej;
+  const doneSet = ej === '1' ? ej1Done : ej2Done;
+  if (doneSet.has(input.id)) return;
+
+  if (norm(input.value) === norm(input.dataset.ans)) {
+    markInputDone(input, doneSet, ej === '1' ? 'prog1' : 'prog2', ej === '1' ? 6 : 4);
+  }
+}
+
+/* ═══════════════ CHECK COMP INPUT (EJ 3) ═══════════════ */
+function checkCompInput(input) {
+  if (input.readOnly) return;
+  if (ej3Done.has(input.id)) return;
+
+  if (norm(input.value) === norm(input.dataset.ans)) {
+    markCompInputDone(input);
+  }
+}
+
+function markCompInputDone(input) {
+  input.readOnly = true;
+  input.classList.add('input-ok');
+  const fila = input.closest('.comp-fila');
+  fila.classList.add('row-done');
+  const resEl = document.getElementById('res-' + input.dataset.word);
+  if (resEl) resEl.classList.add('revealed');
+  playCorrect(); showPraise(input);
+  ej3Done.add(input.id);
+  updateProg('prog3', ej3Done.size, 4);
+  checkCompletion();
+}
+
+function markInputDone(input, doneSet, progId, total) {
+  input.readOnly = true;
+  input.classList.add('input-ok');
+  const fila = input.closest('.sint-fila');
+  if (fila) fila.classList.add('row-done');
+  playCorrect(); showPraise(input);
+  doneSet.add(input.id);
+  updateProg(progId, doneSet.size, total);
+  checkCompletion();
+}
+
+/* ═══════════════ SUBMIT (Enter key) ═══════════════ */
+function submitInput(event, input) {
+  if (event.key !== 'Enter') return;
+  if (input.readOnly) return;
+  const ej = input.dataset.ej;
+  const doneSet = ej === '1' ? ej1Done : ej === '2' ? ej2Done : ej3Done;
+  if (doneSet.has(input.id)) return;
+
+  const ans = ej === '3' ? input.dataset.ans : input.dataset.ans;
+  if (norm(input.value) !== norm(ans)) {
+    playWrong();
+    input.classList.add('anim-wrong');
+    setTimeout(() => input.classList.remove('anim-wrong'), 560);
+  }
+}
+
+/* ═══════════════ PROGRESS ═══════════════ */
+function updateProg(id, done, total) {
+  const el = document.getElementById(id);
+  el.textContent = done + ' / ' + total;
+  if (done === total) el.classList.add('done-all');
+}
+
+/* ═══════════════ COMPLETION ═══════════════ */
+function checkCompletion() {
+  if (ej1Done.size + ej2Done.size + ej3Done.size === TOTAL) setTimeout(celebrate, 600);
+}
+function celebrate() {
+  const name = document.getElementById('inp-nombre').value.trim();
+  const celName = document.getElementById('cel-name');
+  celName.textContent = name || '';
+  celName.style.display = name ? 'block' : 'none';
+  document.getElementById('celebration').classList.remove('hidden');
+  playCelebration(); launchConfetti(220);
+}
+function closeCelebration() {
+  document.getElementById('celebration').classList.add('hidden');
+}
+
+/* ═══════════════ FLOATING PRAISE ═══════════════ */
+function showPraise(anchor) {
+  const rect = anchor.getBoundingClientRect();
+  const el = document.createElement('div');
+  el.className = 'float-praise';
+  el.textContent = PRAISE[praiseIdx++ % PRAISE.length];
+  el.style.left = (rect.left + rect.width / 2) + 'px';
+  el.style.top = rect.top + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+
+/* ═══════════════ CONFETTI ═══════════════ */
+function launchConfetti(n) {
+  const colors = ['#ec4899','#f97316','#22c55e','#3b82f6','#a855f7','#f59e0b','#ef4444','#06b6d4'];
+  const shapes = ['50%','4px','0'];
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    const size = 7 + Math.random() * 11;
+    const dx = (Math.random() - .5) * 120;
+    el.style.cssText = [
+      `left:${Math.random()*100}vw`,`width:${size}px`,
+      `height:${size*(.5+Math.random())}px`,
+      `background:${colors[Math.floor(Math.random()*colors.length)]}`,
+      `border-radius:${shapes[Math.floor(Math.random()*shapes.length)]}`,
+      `animation-delay:${Math.random()*1.8}s`,
+      `animation-duration:${2.5+Math.random()*2.5}s`,
+      `--dx:${dx}px`,
+    ].join(';');
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 5500);
+  }
+}
+
+/* ═══════════════ RESET ═══════════════ */
+function resetAll() {
+  ej1Done.clear(); ej2Done.clear(); ej3Done.clear();
+  praiseIdx = 0;
+
+  document.querySelectorAll('.sint-input, .comp-input').forEach(inp => {
+    inp.readOnly = false;
+    inp.value = '';
+    inp.classList.remove('input-ok','anim-wrong');
+  });
+  document.querySelectorAll('.sint-fila, .comp-fila').forEach(f => f.classList.remove('row-done'));
+  document.querySelectorAll('.comp-result').forEach(r => r.classList.remove('revealed'));
+
+  updateProg('prog1',0,6); updateProg('prog2',0,4); updateProg('prog3',0,4);
+  document.querySelectorAll('.ej-prog').forEach(p => p.classList.remove('done-all'));
+  document.getElementById('celebration').classList.add('hidden');
+}
+</script>
+
+</body>
+</html>
