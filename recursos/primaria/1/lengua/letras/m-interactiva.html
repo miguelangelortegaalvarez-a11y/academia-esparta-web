@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Letra M · Interactiva · 1º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Edu SA Beginner', cursive;
+      background: #fef9f0;
+      color: #1e293b;
+      min-height: 100vh;
+      padding-bottom: 4rem;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: #fff; border-bottom: 1px solid #e2e8f0;
+      padding: .6rem 1.2rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      position: sticky; top: 0; z-index: 20;
+    }
+    .back-btn { color: #475569; font-size: .8rem; text-decoration: none; border: 1px solid #cbd5e1; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .topbar-right { display: flex; gap: .5rem; align-items: center; }
+    .paper-btn { color: #475569; font-size: .8rem; text-decoration: none; border: 1px solid #cbd5e1; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; background: #fff; }
+    .reset-top-btn { color: #64748b; font-size: .8rem; border: 1.5px solid #e2e8f0; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; background: #fff; cursor: pointer; }
+    .print-btn { background: #1e293b; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+
+    .ficha { max-width: 720px; margin: 1.5rem auto; padding: 0 1rem; }
+
+    /* ── HEADER CARD ── */
+    .header-card {
+      background: #fff; border-radius: 20px;
+      padding: 1.4rem 1.6rem 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      margin-bottom: 1rem; text-align: center;
+    }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #94a3b8; display: block; margin-bottom: 10px; }
+    .letra-display { display: flex; justify-content: center; gap: 16px; margin-bottom: 14px; }
+    .letra-grande {
+      font-family: 'Montserrat', sans-serif; font-size: 54px; font-weight: 900;
+      width: 76px; height: 76px; border: 3px solid #1e293b; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: #f8fafc; line-height: 1;
+    }
+    .datos-alumno { display: flex; gap: 16px; }
+    .dato { display: flex; align-items: center; gap: 8px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; font-size: 15px; color: #475569; }
+    .dato-input { flex: 1; border: none; border-bottom: 2.5px solid #e2e8f0; font-family: 'Edu SA Beginner', cursive; font-size: 17px; padding: 3px 4px; background: transparent; outline: none; color: #1e293b; }
+    .dato-input:focus { border-bottom-color: #3b82f6; }
+    #inp-nombre { font-size: 19px; font-weight: 600; }
+
+    /* ── EXERCISE CARDS ── */
+    .ej-card { background: #fff; border-radius: 20px; padding: 1.4rem 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,.07); margin-bottom: 1rem; }
+    .ej-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .ej-titulo { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .ej-n { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; background: #1e293b; color: #fff; border-radius: 50%; width: 34px; height: 34px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; }
+    .ej-prog { font-family: 'Montserrat', sans-serif; font-size: .88rem; font-weight: 700; color: #94a3b8; white-space: nowrap; padding-top: 4px; }
+    .ej-prog.done-all { color: #16a34a; }
+    .hint { font-family: sans-serif; font-size: .72rem; color: #94a3b8; background: #f8fafc; border-radius: 8px; padding: 6px 10px; margin-bottom: 14px; display: block; }
+
+    /* ── EJ 1: LETRAS GRID ── */
+    .letras-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .lt-chip {
+      font-size: 26px; font-weight: 700;
+      width: 50px; height: 50px;
+      border: 2.5px solid #e2e8f0; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; user-select: none;
+      transition: all .18s; background: #fff; position: relative;
+    }
+    .lt-chip:hover:not(.lt-found):not(.anim-wrong) {
+      border-color: #94a3b8; transform: scale(1.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    }
+    .lt-chip.lt-found {
+      background: #22c55e !important; border-color: #16a34a !important;
+      color: #fff !important; cursor: default; pointer-events: none;
+    }
+    .lt-chip.lt-found::after {
+      content: '✓'; position: absolute; top: 1px; right: 5px;
+      font-size: 11px; font-weight: 900; opacity: .8;
+    }
+
+    /* ── EJ 2: SÍLABAS ── */
+    .silabas-fila { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .sil-col {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      min-width: 62px;
+    }
+    .sil-muestra {
+      font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 900;
+      border: 2.5px solid #1e293b; border-radius: 12px;
+      width: 62px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+      background: #f8fafc;
+    }
+    .sil-input {
+      border: none; border-bottom: 2.5px solid #e2e8f0;
+      font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700;
+      width: 62px; padding: 3px 4px; background: transparent; outline: none;
+      color: #1e293b; text-align: center;
+      transition: border-color .15s;
+    }
+    .sil-input:focus { border-bottom-color: #3b82f6; }
+    .sil-input.input-ok {
+      border-bottom: 2.5px solid #22c55e !important;
+      color: #16a34a; background: #f0fdf4; border-radius: 6px 6px 0 0;
+    }
+    .sil-col.col-done .sil-muestra {
+      border-color: #16a34a; background: #f0fdf4;
+    }
+
+    /* ── EJ 3: OPCIÓN MÚLTIPLE ── */
+    .mc-lista { display: flex; flex-direction: column; gap: 4px; }
+    .mc-fila {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 6px; border-radius: 12px;
+      transition: background .2s; border-bottom: 1px dashed #f1f5f9;
+      flex-wrap: wrap;
+    }
+    .mc-fila:last-child { border-bottom: none; }
+    .mc-fila.row-done { background: #f0fdf4; border-bottom-color: transparent; }
+    .mc-pregunta { font-size: 20px; font-weight: 600; flex: 0 0 auto; }
+    .mc-opciones { display: flex; gap: 6px; flex-wrap: wrap; }
+    .mc-btn {
+      font-family: 'Edu SA Beginner', cursive; font-size: 17px; font-weight: 700;
+      border: 2.5px solid #e2e8f0; border-radius: 999px;
+      padding: 6px 16px; cursor: pointer; background: #fff;
+      transition: all .15s; user-select: none;
+    }
+    .mc-btn:hover:not(:disabled) { transform: scale(1.08); border-color: #94a3b8; }
+    .mc-btn.done-ok { background: #22c55e; border-color: #16a34a; color: #fff; pointer-events: none; }
+    .mc-btn.done-other { opacity: .35; pointer-events: none; }
+
+    /* ── EJ 4: CUENTA PALABRAS ── */
+    .wcount-lista { display: flex; flex-direction: column; gap: 4px; }
+    .wcount-fila {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 6px; border-radius: 12px;
+      transition: background .2s; border-bottom: 1px dashed #f1f5f9;
+      flex-wrap: wrap;
+    }
+    .wcount-fila:last-child { border-bottom: none; }
+    .wcount-fila.row-done { background: #f0fdf4; border-bottom-color: transparent; }
+    .wcount-frase { font-size: 19px; font-weight: 600; flex: 1; min-width: 200px; }
+    .wcount-btns { display: flex; gap: 8px; }
+    .wc-btn {
+      font-family: 'Montserrat', sans-serif; font-size: 19px; font-weight: 800;
+      border: 2.5px solid #e2e8f0; border-radius: 999px;
+      width: 44px; height: 44px; cursor: pointer; background: #fff;
+      transition: all .15s; user-select: none;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .wc-btn:hover:not(:disabled) { transform: scale(1.12); border-color: #94a3b8; }
+    .wc-btn.done-ok { background: #22c55e; border-color: #16a34a; color: #fff; pointer-events: none; }
+    .wc-btn.done-other { opacity: .35; pointer-events: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes correct-pop { 0%{transform:scale(1)} 30%{transform:scale(1.28)} 55%{transform:scale(.94)} 75%{transform:scale(1.1)} 100%{transform:scale(1)} }
+    @keyframes wrong-shake {
+      0%,100% { transform:translateX(0) scale(1); background:inherit; border-color:inherit; }
+      12%     { transform:translateX(-11px) rotate(-4deg) scale(1.04); background:#fee2e2; border-color:#dc2626; }
+      28%     { transform:translateX(11px)  rotate(4deg);              background:#fee2e2; border-color:#dc2626; }
+      44%     { transform:translateX(-7px)  rotate(-2deg);             background:#fecaca; border-color:#f87171; }
+      60%     { transform:translateX(7px);  background:#fecaca; }
+      76%     { transform:translateX(-4px); }
+      88%     { transform:translateX(4px);  }
+    }
+    @keyframes float-up { 0%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)} 25%{transform:translateX(-50%) translateY(-14px) scale(1.1)} 100%{opacity:0;transform:translateX(-50%) translateY(-60px) scale(.85)} }
+    @keyframes pop-in { 0%{transform:scale(0) rotate(-8deg);opacity:0} 65%{transform:scale(1.12) rotate(2deg)} 100%{transform:scale(1) rotate(0deg);opacity:1} }
+    @keyframes confetti-fall { 0%{transform:translateY(-40px) rotate(0deg) translateX(0);opacity:1} 80%{opacity:1} 100%{transform:translateY(105vh) rotate(540deg) translateX(var(--dx));opacity:0} }
+    @keyframes cel-bounce { 0%,100%{transform:scale(1)} 40%{transform:scale(1.08)} 70%{transform:scale(.97)} }
+    @keyframes fade-in { from{opacity:0} to{opacity:1} }
+
+    .anim-correct { animation: correct-pop .42s cubic-bezier(.34,1.56,.64,1) forwards; }
+    .anim-wrong   { animation: wrong-shake .52s ease forwards; }
+
+    .float-praise { position:fixed;z-index:60;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.5rem;color:#16a34a;pointer-events:none;white-space:nowrap;animation:float-up 1.05s ease forwards; }
+    .confetti-piece { position:fixed;top:-40px;pointer-events:none;z-index:900;animation:confetti-fall linear forwards; }
+
+    .celebration { position:fixed;inset:0;z-index:800;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;animation:fade-in .3s ease; }
+    .celebration.hidden { display:none; }
+    .cel-box { background:#fff;border-radius:28px;padding:3rem 2.4rem 2.4rem;text-align:center;max-width:420px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,.3);animation:pop-in .45s cubic-bezier(.34,1.56,.64,1); }
+    .cel-trophy { font-size:5rem;display:block;animation:cel-bounce 1.4s ease infinite;margin-bottom:.4rem; }
+    .cel-title { font-family:'Montserrat',sans-serif;font-size:1.7rem;font-weight:900;color:#1e293b;line-height:1.2;margin-bottom:.3rem; }
+    .cel-name  { font-family:'Montserrat',sans-serif;font-size:2.2rem;font-weight:900;color:#16a34a;margin-bottom:.6rem; }
+    .cel-stars { font-size:2.4rem;letter-spacing:6px;margin-bottom:.8rem; }
+    .cel-sub   { font-size:.95rem;color:#64748b;margin-bottom:1.6rem;line-height:1.5; }
+    .cel-btn { background:#22c55e;color:#fff;border:none;padding:.8rem 2.4rem;border-radius:999px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 4px 16px rgba(34,197,94,.35);transition:transform .15s,background .15s; }
+    .cel-btn:hover { background:#16a34a;transform:scale(1.05); }
+
+    .footer-card { background:#fff;border-radius:16px;padding:.9rem 1.5rem;margin-top:1rem;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center; }
+    .footer-marca { font-family:sans-serif;font-size:10px;color:#94a3b8; }
+    .footer-msg { font-size:13px;font-weight:700; }
+
+    .welcome { position:fixed;inset:0;z-index:850;background:rgba(15,23,42,.65);display:flex;align-items:center;justify-content:center; }
+    .welcome.hidden { display:none; }
+    .wel-box { background:#fff;border-radius:28px;padding:2.8rem 2.4rem 2.4rem;text-align:center;max-width:400px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,.35);animation:pop-in .45s cubic-bezier(.34,1.56,.64,1); }
+    .wel-emoji { font-size:4.5rem;display:block;margin-bottom:.6rem; }
+    .wel-academia { font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#94a3b8;margin-bottom:.5rem;display:block; }
+    .wel-title { font-family:'Montserrat',sans-serif;font-size:1.55rem;font-weight:900;color:#1e293b;margin-bottom:.4rem;line-height:1.2; }
+    .wel-sub   { font-size:.95rem;color:#64748b;margin-bottom:1.4rem; }
+    .wel-input { width:100%;font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:700;border:2.5px solid #e2e8f0;border-radius:14px;padding:.75rem 1rem;text-align:center;outline:none;color:#1e293b;margin-bottom:1rem;transition:border-color .15s,box-shadow .15s; }
+    .wel-input:focus { border-color:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15); }
+    .wel-input::placeholder { color:#cbd5e1;font-weight:500; }
+    .wel-btn { background:#3b82f6;color:#fff;border:none;padding:.85rem 2.6rem;border-radius:999px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 4px 18px rgba(59,130,246,.4);transition:transform .15s,background .15s,opacity .15s; }
+    .wel-btn:disabled { opacity:.35;cursor:default; }
+    .wel-btn:not(:disabled):hover { background:#2563eb;transform:scale(1.06); }
+
+    @media print {
+      body { background:#fff!important; }
+      .topbar,.hint { display:none!important; }
+      .ficha { max-width:none!important;padding:0!important; }
+      .ej-card,.header-card,.footer-card { box-shadow:none!important;border-radius:0!important; }
+      .celebration,.welcome { display:none!important; }
+      * { filter:grayscale(100%); }
+    }
+    @page { size:A4 portrait;margin:2cm 1.5cm 1.5cm; }
+  </style>
+</head>
+<body>
+
+<!-- WELCOME OVERLAY -->
+<div class="welcome" id="welcome">
+  <div class="wel-box">
+    <span class="wel-emoji">🔤</span>
+    <span class="wel-academia">Academia Esparta</span>
+    <div class="wel-title">¡Hola! ¿Cómo te llamas?</div>
+    <div class="wel-sub">Escribe tu nombre para empezar la ficha.</div>
+    <input class="wel-input" id="wel-input" type="text"
+           placeholder="Tu nombre aquí…" autocomplete="off" maxlength="40"
+           oninput="welUpdate()" onkeydown="if(event.key==='Enter')welStart()" />
+    <button class="wel-btn" id="wel-btn" onclick="welStart()" disabled>¡Vamos! 🚀</button>
+  </div>
+</div>
+
+<!-- CELEBRATION OVERLAY -->
+<div class="celebration hidden" id="celebration">
+  <div class="cel-box">
+    <span class="cel-trophy">🏆</span>
+    <div class="cel-title">¡Lo has hecho fenomenal!</div>
+    <div class="cel-name" id="cel-name"></div>
+    <div class="cel-stars">⭐⭐⭐</div>
+    <div class="cel-sub">Has completado todos los ejercicios de la letra M. ¡Eres increíble!</div>
+    <button class="cel-btn" onclick="closeCelebration()">¡Genial! 🎉</button>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="back-btn" href="../../../materiales.html">← Volver</a>
+  <div class="topbar-right">
+    <a class="paper-btn" href="m.html">📄 Para papel</a>
+    <button class="reset-top-btn" onclick="resetAll()">↺ Reiniciar</button>
+    <button class="print-btn"     onclick="window.print()">🖨 Imprimir</button>
+  </div>
+</div>
+
+<div class="ficha">
+
+  <!-- HEADER -->
+  <div class="header-card">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 1º Primaria · Aprendizaje de letras · Letra M</span>
+    <div class="letra-display">
+      <div class="letra-grande">M</div>
+      <div class="letra-grande">m</div>
+    </div>
+    <div class="datos-alumno">
+      <div class="dato">
+        <label>Nombre:</label>
+        <input id="inp-nombre" class="dato-input" type="text" placeholder="Escribe tu nombre…" autocomplete="off" />
+      </div>
+      <div class="dato">
+        <label>Fecha:</label>
+        <input class="dato-input" type="text" placeholder="Hoy es…" autocomplete="off" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EJ 1 ═══ -->
+  <div class="ej-card">
+    <div class="ej-head">
+      <div class="ej-titulo">
+        <span class="ej-n">1</span>
+        🔍 Toca todas las letras M y m.
+      </div>
+      <span class="ej-prog" id="prog1">0 / 10</span>
+    </div>
+    <span class="hint">👆 Toca cada M o m que encuentres. ¡Cuidado con las otras letras!</span>
+
+    <div class="letras-grid">
+      <div class="lt-chip" id="lt-0"  data-ok="yes" onclick="clickLetra(this)">M</div>
+      <div class="lt-chip" id="lt-1"  data-ok="no"  onclick="clickLetra(this)">a</div>
+      <div class="lt-chip" id="lt-2"  data-ok="yes" onclick="clickLetra(this)">m</div>
+      <div class="lt-chip" id="lt-3"  data-ok="no"  onclick="clickLetra(this)">p</div>
+      <div class="lt-chip" id="lt-4"  data-ok="yes" onclick="clickLetra(this)">M</div>
+      <div class="lt-chip" id="lt-5"  data-ok="no"  onclick="clickLetra(this)">s</div>
+      <div class="lt-chip" id="lt-6"  data-ok="yes" onclick="clickLetra(this)">m</div>
+      <div class="lt-chip" id="lt-7"  data-ok="no"  onclick="clickLetra(this)">t</div>
+      <div class="lt-chip" id="lt-8"  data-ok="yes" onclick="clickLetra(this)">M</div>
+      <div class="lt-chip" id="lt-9"  data-ok="no"  onclick="clickLetra(this)">d</div>
+      <div class="lt-chip" id="lt-10" data-ok="yes" onclick="clickLetra(this)">m</div>
+      <div class="lt-chip" id="lt-11" data-ok="no"  onclick="clickLetra(this)">A</div>
+      <div class="lt-chip" id="lt-12" data-ok="yes" onclick="clickLetra(this)">M</div>
+      <div class="lt-chip" id="lt-13" data-ok="no"  onclick="clickLetra(this)">p</div>
+      <div class="lt-chip" id="lt-14" data-ok="yes" onclick="clickLetra(this)">m</div>
+      <div class="lt-chip" id="lt-15" data-ok="no"  onclick="clickLetra(this)">b</div>
+      <div class="lt-chip" id="lt-16" data-ok="yes" onclick="clickLetra(this)">M</div>
+      <div class="lt-chip" id="lt-17" data-ok="no"  onclick="clickLetra(this)">n</div>
+      <div class="lt-chip" id="lt-18" data-ok="yes" onclick="clickLetra(this)">m</div>
+      <div class="lt-chip" id="lt-19" data-ok="no"  onclick="clickLetra(this)">r</div>
+    </div>
+  </div>
+
+  <!-- ═══ EJ 2 ═══ -->
+  <div class="ej-card">
+    <div class="ej-head">
+      <div class="ej-titulo">
+        <span class="ej-n">2</span>
+        ✏️ Lee la sílaba y escríbela debajo.
+      </div>
+      <span class="ej-prog" id="prog2">0 / 5</span>
+    </div>
+    <span class="hint">⌨️ Mira la sílaba y escríbela en el campo de abajo. Pulsa Enter para comprobar.</span>
+
+    <div class="silabas-fila">
+      <div class="sil-col" id="col-ma">
+        <span class="sil-muestra">ma</span>
+        <input class="sil-input" id="sil-ma" data-ans="ma"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               maxlength="3"
+               oninput="checkSilInput(this)" onkeydown="submitSilInput(event,this)" />
+      </div>
+      <div class="sil-col" id="col-me">
+        <span class="sil-muestra">me</span>
+        <input class="sil-input" id="sil-me" data-ans="me"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               maxlength="3"
+               oninput="checkSilInput(this)" onkeydown="submitSilInput(event,this)" />
+      </div>
+      <div class="sil-col" id="col-mi">
+        <span class="sil-muestra">mi</span>
+        <input class="sil-input" id="sil-mi" data-ans="mi"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               maxlength="3"
+               oninput="checkSilInput(this)" onkeydown="submitSilInput(event,this)" />
+      </div>
+      <div class="sil-col" id="col-mo">
+        <span class="sil-muestra">mo</span>
+        <input class="sil-input" id="sil-mo" data-ans="mo"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               maxlength="3"
+               oninput="checkSilInput(this)" onkeydown="submitSilInput(event,this)" />
+      </div>
+      <div class="sil-col" id="col-mu">
+        <span class="sil-muestra">mu</span>
+        <input class="sil-input" id="sil-mu" data-ans="mu"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               maxlength="3"
+               oninput="checkSilInput(this)" onkeydown="submitSilInput(event,this)" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EJ 3 ═══ -->
+  <div class="ej-card">
+    <div class="ej-head">
+      <div class="ej-titulo">
+        <span class="ej-n">3</span>
+        📖 ¿Cuál es la palabra? Tócala.
+      </div>
+      <span class="ej-prog" id="prog3">0 / 8</span>
+    </div>
+    <span class="hint">👆 Mira el dibujo y toca la palabra correcta.</span>
+
+    <div class="mc-lista">
+      <div class="mc-fila" data-ok="mano">
+        <span class="mc-pregunta">🤲</span>
+        <div class="mc-opciones">
+          <button class="mc-btn" data-val="mano"    onclick="clickMC(this)">mano</button>
+          <button class="mc-btn" data-val="mesa"    onclick="clickMC(this)">mesa</button>
+          <button class="mc-btn" data-val="mochila" onclick="clickMC(this)">mochila</button>
+        </div>
+      </div>
+      <div class="mc-fila" data-ok="mesa">
+        <span class="mc-pregunta">🪑</span>
+        <div class="mc-opciones">
+          <button class="mc-btn" data-val="mamá"  onclick="clickMC(this)">mamá</button>
+          <button class="mc-btn" data-val="mesa"  onclick="clickMC(this)">mesa</button>
+          <button class="mc-btn" data-val="mano"  onclick="clickMC(this)">mano</button>
+        </div>
+      </div>
+      <div class="mc-fila" data-ok="manzana">
+        <span class="mc-pregunta">🍎</span>
+        <div class="mc-opciones">
+          <button class="mc-btn" data-val="mochila"  onclick="clickMC(this)">mochila</button>
+          <button class="mc-btn" data-val="mono"     onclick="clickMC(this)">mono</button>
+          <button class="mc-btn" data-val="manzana"  onclick="clickMC(this)">manzana</button>
+        </div>
+      </div>
+      <div class="mc-fila" data-ok="mariposa">
+        <span class="mc-pregunta">🦋</span>
+        <div class="mc-opciones">
+          <button class="mc-btn" data-val="mariposa" onclick="clickMC(this)">mariposa</button>
+          <button class="mc-btn" data-val="manzana"  onclick="clickMC(this)">manzana</button>
+          <button class="mc-btn" data-val="mar"      onclick="clickMC(this)">mar</button>
+        </div>
+      </div>
+      <div class="mc-fila" data-ok="mochila">
+        <span class="mc-pregunta">🎒</span>
+        <div class="mc-opciones">
+          <button class="mc-btn" data-val="mono"    onclick="clickMC(this)">mono</button>
+          <button class="mc-btn" data-val="mochila" onclick="clickMC(this)">mochila</button>
+          <button class="mc-btn" data-val="mamá"    onclick="clickMC(this)">mamá</button>
+        </div>
+      </div>
+      <div class="mc-fila" data-ok="mamá">
+        <span class="mc-pregunta">👩</span>
+        <div class="mc-opciones">
+          <button class="mc-btn" data-val="mar"   onclick="clickMC(this)">mar</button>
+          <button class="mc-btn" data-val="mano"  onclick="clickMC(this)">mano</button>
+          <button class="mc-btn" data-val="mamá"  onclick="clickMC(this)">mamá</button>
+        </div>
+      </div>
+      <div class="mc-fila" data-ok="mono">
+        <span class="mc-pregunta">🐒</span>
+        <div class="mc-opciones">
+          <button class="mc-btn" data-val="mono"    onclick="clickMC(this)">mono</button>
+          <button class="mc-btn" data-val="mochila" onclick="clickMC(this)">mochila</button>
+          <button class="mc-btn" data-val="mesa"    onclick="clickMC(this)">mesa</button>
+        </div>
+      </div>
+      <div class="mc-fila" data-ok="mar">
+        <span class="mc-pregunta">🌊</span>
+        <div class="mc-opciones">
+          <button class="mc-btn" data-val="mamá"  onclick="clickMC(this)">mamá</button>
+          <button class="mc-btn" data-val="mar"   onclick="clickMC(this)">mar</button>
+          <button class="mc-btn" data-val="mono"  onclick="clickMC(this)">mono</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EJ 4 ═══ -->
+  <div class="ej-card">
+    <div class="ej-head">
+      <div class="ej-titulo">
+        <span class="ej-n">4</span>
+        📝 ¿Cuántas palabras tiene la frase? Toca el número.
+      </div>
+      <span class="ej-prog" id="prog4">0 / 5</span>
+    </div>
+    <span class="hint">👆 Lee la frase y cuenta las palabras. Toca el número correcto.</span>
+
+    <div class="wcount-lista">
+      <div class="wcount-fila" data-ok="2">
+        <span class="wcount-frase">👩 Mi mamá</span>
+        <div class="wcount-btns">
+          <button class="wc-btn" data-val="1" onclick="clickWCount(this)">1</button>
+          <button class="wc-btn" data-val="2" onclick="clickWCount(this)">2</button>
+          <button class="wc-btn" data-val="3" onclick="clickWCount(this)">3</button>
+          <button class="wc-btn" data-val="4" onclick="clickWCount(this)">4</button>
+          <button class="wc-btn" data-val="5" onclick="clickWCount(this)">5</button>
+        </div>
+      </div>
+      <div class="wcount-fila" data-ok="4">
+        <span class="wcount-frase">🪑 La mesa es grande</span>
+        <div class="wcount-btns">
+          <button class="wc-btn" data-val="1" onclick="clickWCount(this)">1</button>
+          <button class="wc-btn" data-val="2" onclick="clickWCount(this)">2</button>
+          <button class="wc-btn" data-val="3" onclick="clickWCount(this)">3</button>
+          <button class="wc-btn" data-val="4" onclick="clickWCount(this)">4</button>
+          <button class="wc-btn" data-val="5" onclick="clickWCount(this)">5</button>
+        </div>
+      </div>
+      <div class="wcount-fila" data-ok="2">
+        <span class="wcount-frase">🤲 Mi mano</span>
+        <div class="wcount-btns">
+          <button class="wc-btn" data-val="1" onclick="clickWCount(this)">1</button>
+          <button class="wc-btn" data-val="2" onclick="clickWCount(this)">2</button>
+          <button class="wc-btn" data-val="3" onclick="clickWCount(this)">3</button>
+          <button class="wc-btn" data-val="4" onclick="clickWCount(this)">4</button>
+          <button class="wc-btn" data-val="5" onclick="clickWCount(this)">5</button>
+        </div>
+      </div>
+      <div class="wcount-fila" data-ok="4">
+        <span class="wcount-frase">🐒 El mono come manzana</span>
+        <div class="wcount-btns">
+          <button class="wc-btn" data-val="1" onclick="clickWCount(this)">1</button>
+          <button class="wc-btn" data-val="2" onclick="clickWCount(this)">2</button>
+          <button class="wc-btn" data-val="3" onclick="clickWCount(this)">3</button>
+          <button class="wc-btn" data-val="4" onclick="clickWCount(this)">4</button>
+          <button class="wc-btn" data-val="5" onclick="clickWCount(this)">5</button>
+        </div>
+      </div>
+      <div class="wcount-fila" data-ok="2">
+        <span class="wcount-frase">🎒 Mi mochila</span>
+        <div class="wcount-btns">
+          <button class="wc-btn" data-val="1" onclick="clickWCount(this)">1</button>
+          <button class="wc-btn" data-val="2" onclick="clickWCount(this)">2</button>
+          <button class="wc-btn" data-val="3" onclick="clickWCount(this)">3</button>
+          <button class="wc-btn" data-val="4" onclick="clickWCount(this)">4</button>
+          <button class="wc-btn" data-val="5" onclick="clickWCount(this)">5</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-card">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+
+</div><!-- /ficha -->
+
+<script>
+/* ═══════════════ AUDIO ═══════════════ */
+let _ctx = null;
+function getCtx() {
+  if (!_ctx) try { _ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+  return _ctx;
+}
+function _tone(freq, startOffset, dur, type, vol) {
+  const ctx = getCtx(); if (!ctx) return;
+  try {
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = type; osc.frequency.value = freq;
+    const t = ctx.currentTime + startOffset;
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(vol, t + 0.018);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    osc.start(t); osc.stop(t + dur + 0.05);
+  } catch(e) {}
+}
+function playCorrect() {
+  _tone(523, 0, 0.22, 'triangle', 0.22);
+  _tone(659, 0.11, 0.22, 'triangle', 0.22);
+  _tone(784, 0.22, 0.30, 'triangle', 0.22);
+}
+function playWrong() {
+  const ctx = getCtx(); if (!ctx) return;
+  try {
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(320, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(130, ctx.currentTime + 0.42);
+    gain.gain.setValueAtTime(0.18, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.46);
+    osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.5);
+  } catch(e) {}
+}
+function playCelebration() {
+  [[523,0,.13,'triangle',.20],[659,.13,.13,'triangle',.20],[784,.26,.13,'triangle',.20],
+   [1047,.40,.50,'triangle',.22],[784,.54,.09,'triangle',.14],[1047,.65,.75,'triangle',.22]]
+  .forEach(([f,s,d,t,v]) => _tone(f,s,d,t,v));
+}
+
+/* ═══════════════ WELCOME ═══════════════ */
+function welUpdate() {
+  document.getElementById('wel-btn').disabled = document.getElementById('wel-input').value.trim().length === 0;
+}
+function welStart() {
+  const name = document.getElementById('wel-input').value.trim();
+  if (!name) return;
+  document.getElementById('inp-nombre').value = name;
+  const el = document.getElementById('welcome');
+  el.style.transition = 'opacity .35s ease'; el.style.opacity = '0';
+  setTimeout(() => { el.classList.add('hidden'); el.style.opacity = ''; el.style.transition = ''; }, 350);
+}
+window.addEventListener('load', () => setTimeout(() => document.getElementById('wel-input').focus(), 100));
+
+/* ═══════════════ STATE ═══════════════ */
+let busy = false;
+const ej1Correct = new Set();       // lt-chip IDs correctamente tocados
+const ej2Done    = new Set();       // sil-input IDs
+const ej3Done    = new Set();       // mc-fila elements
+const ej4Done    = new Set();       // wcount-fila elements
+const TOTAL = 10 + 5 + 8 + 5;     // 28
+
+/* ═══════════════ PRAISE ═══════════════ */
+const PRAISE = ['¡Bravo! 🌟','¡Perfecto! ⭐','¡Muy bien! 🎉','¡Genial! ✨','¡Correcto! 🏅','¡Así es! 💫'];
+let praiseIdx = 0;
+
+/* ═══════════════ EJ 1 — TOCA LA LETRA ═══════════════ */
+function clickLetra(el) {
+  if (busy) return;
+  if (el.classList.contains('lt-found')) return;
+  const isOk = el.dataset.ok === 'yes';
+  if (isOk) {
+    el.classList.add('lt-found', 'anim-correct');
+    playCorrect(); showPraise(el);
+    ej1Correct.add(el.id);
+    updateProg('prog1', ej1Correct.size, 10);
+    checkCompletion();
+  } else {
+    busy = true; playWrong();
+    el.classList.add('anim-wrong');
+    setTimeout(() => { el.classList.remove('anim-wrong'); busy = false; }, 560);
+  }
+}
+
+/* ═══════════════ EJ 2 — SÍLABAS ═══════════════ */
+function norm(s) {
+  return s.toLowerCase().trim().normalize('NFD').replace(/[̀-ͯ]/g,'');
+}
+
+function checkSilInput(input) {
+  if (input.readOnly || ej2Done.has(input.id)) return;
+  if (norm(input.value) === norm(input.dataset.ans)) {
+    input.readOnly = true;
+    input.classList.add('input-ok');
+    const col = input.closest('.sil-col');
+    if (col) col.classList.add('col-done');
+    playCorrect(); showPraise(input);
+    ej2Done.add(input.id);
+    updateProg('prog2', ej2Done.size, 5);
+    checkCompletion();
+  }
+}
+
+function submitSilInput(event, input) {
+  if (event.key !== 'Enter') return;
+  if (input.readOnly) return;
+  if (norm(input.value) !== norm(input.dataset.ans)) {
+    playWrong();
+    input.classList.add('anim-wrong');
+    setTimeout(() => input.classList.remove('anim-wrong'), 560);
+  }
+}
+
+/* ═══════════════ EJ 3 — OPCIÓN MÚLTIPLE ═══════════════ */
+function clickMC(btn) {
+  if (busy) return;
+  const fila = btn.closest('.mc-fila');
+  if (ej3Done.has(fila)) return;
+  const isOk = btn.dataset.val === fila.dataset.ok;
+  const btns = fila.querySelectorAll('.mc-btn');
+  if (isOk) {
+    btn.classList.add('done-ok');
+    btns.forEach(b => { if (b !== btn) b.classList.add('done-other'); });
+    fila.classList.add('row-done');
+    playCorrect(); showPraise(btn);
+    ej3Done.add(fila);
+    updateProg('prog3', ej3Done.size, 8);
+    checkCompletion();
+  } else {
+    busy = true; playWrong();
+    btn.classList.add('anim-wrong');
+    setTimeout(() => { btn.classList.remove('anim-wrong'); busy = false; }, 560);
+  }
+}
+
+/* ═══════════════ EJ 4 — CUENTA PALABRAS ═══════════════ */
+function clickWCount(btn) {
+  if (busy) return;
+  const fila = btn.closest('.wcount-fila');
+  if (ej4Done.has(fila)) return;
+  const isOk = btn.dataset.val === fila.dataset.ok;
+  const btns = fila.querySelectorAll('.wc-btn');
+  if (isOk) {
+    btn.classList.add('done-ok');
+    btns.forEach(b => { if (b !== btn) b.classList.add('done-other'); });
+    fila.classList.add('row-done');
+    playCorrect(); showPraise(btn);
+    ej4Done.add(fila);
+    updateProg('prog4', ej4Done.size, 5);
+    checkCompletion();
+  } else {
+    busy = true; playWrong();
+    btn.classList.add('anim-wrong');
+    setTimeout(() => { btn.classList.remove('anim-wrong'); busy = false; }, 560);
+  }
+}
+
+/* ═══════════════ PROGRESS ═══════════════ */
+function updateProg(id, done, total) {
+  const el = document.getElementById(id);
+  el.textContent = done + ' / ' + total;
+  if (done === total) el.classList.add('done-all');
+}
+
+/* ═══════════════ COMPLETION ═══════════════ */
+function checkCompletion() {
+  if (ej1Correct.size + ej2Done.size + ej3Done.size + ej4Done.size === TOTAL) setTimeout(celebrate, 600);
+}
+function celebrate() {
+  const name = document.getElementById('inp-nombre').value.trim();
+  const celName = document.getElementById('cel-name');
+  celName.textContent = name || '';
+  celName.style.display = name ? 'block' : 'none';
+  document.getElementById('celebration').classList.remove('hidden');
+  playCelebration(); launchConfetti(220);
+}
+function closeCelebration() {
+  document.getElementById('celebration').classList.add('hidden');
+}
+
+/* ═══════════════ FLOATING PRAISE ═══════════════ */
+function showPraise(anchor) {
+  const rect = anchor.getBoundingClientRect();
+  const el = document.createElement('div');
+  el.className = 'float-praise';
+  el.textContent = PRAISE[praiseIdx++ % PRAISE.length];
+  el.style.left = (rect.left + rect.width / 2) + 'px';
+  el.style.top = rect.top + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+
+/* ═══════════════ CONFETTI ═══════════════ */
+function launchConfetti(n) {
+  const colors = ['#ec4899','#f97316','#22c55e','#3b82f6','#a855f7','#f59e0b','#ef4444','#06b6d4'];
+  const shapes = ['50%','4px','0'];
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    const size = 7 + Math.random() * 11;
+    const dx = (Math.random() - .5) * 120;
+    el.style.cssText = [
+      `left:${Math.random()*100}vw`,`width:${size}px`,
+      `height:${size*(.5+Math.random())}px`,
+      `background:${colors[Math.floor(Math.random()*colors.length)]}`,
+      `border-radius:${shapes[Math.floor(Math.random()*shapes.length)]}`,
+      `animation-delay:${Math.random()*1.8}s`,
+      `animation-duration:${2.5+Math.random()*2.5}s`,
+      `--dx:${dx}px`,
+    ].join(';');
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 5500);
+  }
+}
+
+/* ═══════════════ RESET ═══════════════ */
+function resetAll() {
+  ej1Correct.clear(); ej2Done.clear(); ej3Done.clear(); ej4Done.clear();
+  busy = false; praiseIdx = 0;
+
+  document.querySelectorAll('.lt-chip').forEach(c => c.classList.remove('lt-found','anim-correct','anim-wrong'));
+  document.querySelectorAll('.sil-input').forEach(i => { i.readOnly=false; i.value=''; i.classList.remove('input-ok','anim-wrong'); });
+  document.querySelectorAll('.sil-col').forEach(c => c.classList.remove('col-done'));
+  document.querySelectorAll('.mc-btn,.wc-btn').forEach(b => b.classList.remove('done-ok','done-other','anim-wrong'));
+  document.querySelectorAll('.mc-fila,.wcount-fila').forEach(f => f.classList.remove('row-done'));
+
+  updateProg('prog1',0,10); updateProg('prog2',0,5);
+  updateProg('prog3',0,8);  updateProg('prog4',0,5);
+  document.querySelectorAll('.ej-prog').forEach(p => p.classList.remove('done-all'));
+  document.getElementById('celebration').classList.add('hidden');
+}
+</script>
+
+</body>
+</html>
