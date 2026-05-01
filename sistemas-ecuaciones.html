@@ -3,168 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Súper Ficha Hiatos - Carla - Academia Esparta</title>
+    <title>Carla vs Los Hiatos - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
         :root {
             --fuerte: #e63946;
             --debil: #457b9d;
-            --accent: #f1faee;
             --gold: #ffb703;
             --dark: #1d3557;
+            --light: #f1faee;
         }
 
-        body { font-family: 'Montserrat', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; color: var(--dark); }
+        body { font-family: 'Montserrat', sans-serif; background: var(--dark); color: white; display: flex; justify-content: center; padding: 20px; }
         
-        .btn-imprimir {
-            display: block; width: fit-content; margin: 0 auto 20px;
-            background-color: var(--dark); color: white; border: 2px solid var(--gold); 
-            padding: 15px 40px; border-radius: 50px; font-weight: 900; cursor: pointer; text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
+        .game-card { background: white; color: var(--dark); width: 100%; max-width: 700px; border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); border: 5px solid var(--gold); }
 
-        .page { 
-            background-color: white; width: 210mm; min-height: 297mm; padding: 20mm; 
-            box-shadow: 0 0 25px rgba(0,0,0,0.1); margin: 0 auto; border-radius: 5px;
-            border-left: 15px solid var(--fuerte); position: relative;
-        }
+        h1 { font-family: 'Fredoka One', cursive; text-align: center; color: var(--fuerte); font-size: 2.5rem; margin-top: 0; }
+        
+        .screen { display: none; }
+        .active { display: block; }
 
-        header { text-align: center; border-bottom: 5px double var(--fuerte); padding-bottom: 20px; margin-bottom: 40px; }
-        h1 { font-family: 'Fredoka One', cursive; font-size: 40px; color: var(--dark); margin: 0; }
-        .sub { font-weight: bold; color: var(--debil); text-transform: uppercase; letter-spacing: 3px; }
+        .vocal-info { display: flex; justify-content: space-around; margin: 20px 0; }
+        .vocal { padding: 15px; border-radius: 50%; font-weight: 900; color: white; font-size: 1.5rem; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .v-f { background: var(--fuerte); border: 3px solid #b71c1c; }
+        .v-d { background: var(--debil); border: 3px solid #0d47a1; }
 
-        .section-title { 
-            background: var(--dark); color: white; padding: 10px 20px; 
-            border-radius: 0 50px 50px 0; margin-left: -20mm; width: fit-content;
-            font-family: 'Fredoka One', cursive; margin-top: 40px;
-        }
+        .btn { background: var(--gold); border: none; padding: 15px 30px; border-radius: 50px; font-family: 'Fredoka One', cursive; font-size: 1.2rem; cursor: pointer; color: var(--dark); transition: 0.3s; width: 100%; margin-top: 20px; }
+        .btn:hover { transform: scale(1.05); background: #ffa000; }
 
-        .teoria-container { line-height: 1.8; font-size: 16px; text-align: justify; }
-        .vocal-circle {
-            display: inline-block; width: 40px; height: 40px; border-radius: 50%;
-            text-align: center; line-height: 40px; color: white; font-weight: 900; margin: 0 5px;
-        }
-        .v-fuerte { background: var(--fuerte); }
-        .v-debil { background: var(--debil); }
+        .exercise-box { background: var(--light); padding: 20px; border-radius: 15px; border: 2px dashed var(--debil); margin-top: 20px; text-align: center; }
+        .word-to-split { font-size: 2rem; font-weight: 900; color: var(--dark); letter-spacing: 5px; margin-bottom: 20px; }
+        
+        input { font-size: 1.5rem; padding: 10px; border-radius: 10px; border: 3px solid var(--dark); text-align: center; width: 80%; text-transform: lowercase; }
 
-        .ejemplos-grid { 
-            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 20px;
-        }
-        .ejemplo-item { 
-            background: var(--accent); padding: 10px; border-radius: 8px; 
-            border: 1px solid #ddd; text-align: center; font-weight: bold;
-        }
-        .hiato-split { color: var(--fuerte); font-size: 1.2em; }
+        #feedback { margin-top: 15px; font-weight: 700; height: 25px; }
+        .correct { color: #2d6a4f; }
+        .wrong { color: var(--fuerte); }
 
-        .pregunta { font-weight: 900; color: var(--fuerte); margin-top: 25px; margin-bottom: 15px; font-size: 18px; }
-        .tabla-ejercicios { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-        .tabla-ejercicios th, .tabla-ejercicios td { border: 1px solid #eee; padding: 12px; text-align: left; }
-        .tabla-ejercicios th { background: var(--dark); color: white; }
-
-        .input-line { border-bottom: 2px dashed #ccc; width: 100%; height: 25px; margin: 5px 0; }
-
-        .sticker-nota {
-            background: #fff9c4; padding: 20px; border-radius: 15px; border: 2px dashed var(--gold);
-            margin: 30px 0; position: relative;
-        }
-
-        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: none; padding: 10mm; } }
+        .progress { background: #eee; height: 10px; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
+        #progress-bar { background: var(--gold); width: 0%; height: 100%; transition: 0.5s; }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ IMPRIMIR GUÍA MAESTRA (CARLA)</button>
-
-    <div class="page">
-        <header>
-            <h1>GUÍA MAESTRA: LOS HIATOS</h1>
-            <p class="sub">ACADEMIA ESPARTA · NIVEL: 4º-5º PRIMARIA</p>
-            <p><b>ALUMNA:</b> CARLA ___________________________</p>
-        </header>
-
-        <section class="teoria-container">
-            <div class="section-title">PARTE 1: La Teoría de los Gigantes</div>
-            <p>Un <b>HIATO</b> es la separación de dos vocales en sílabas diferentes. Para que Carla no se olvide nunca, vamos a clasificarlas por su "fuerza":</p>
-            <div style="text-align: center; margin: 20px 0;">
-                <span class="vocal-circle v-fuerte">A</span> <span class="vocal-circle v-fuerte">E</span> <span class="vocal-circle v-fuerte">O</span> <b>(VOCALES FUERTES)</b>
-                <br><br>
-                <span class="vocal-circle v-debil">I</span> <span class="vocal-circle v-debil">U</span> <b>(VOCALES DÉBILES)</b>
+    <div class="game-card">
+        <!-- PANTALLA 1: EXPLICACIÓN -->
+        <div id="screen-intro" class="screen active">
+            <h1>¡Hola, Carla!</h1>
+            <p>Bienvenida a la <b>Academia Esparta</b>. Hoy aprenderemos a romper palabras.</p>
+            <div class="vocal-info">
+                <div><div class="vocal v-f">A E O</div><p>FUERTES</p></div>
+                <div><div class="vocal v-d">I U</div><p>DÉBILES</p></div>
             </div>
-
-            <h3>Regla 1: Fuerte + Fuerte = ¡SEPARACIÓN!</h3>
-            <p>Dos vocales fuertes tienen tanta energía que no pueden estar juntas. Se separan siempre y siguen las reglas normales de acentuación.</p>
-            <div class="ejemplos-grid">
-                <div class="ejemplo-item">Ca <span class="hiato-split">-</span> o <span class="hiato-split">-</span> ti <span class="hiato-split">-</span> co</div>
-                <div class="ejemplo-item">Le <span class="hiato-split">-</span> er</div>
-                <div class="ejemplo-item">Pe <span class="hiato-split">-</span> o <span class="hiato-split">-</span> nar</div>
-                <div class="ejemplo-item">Re <span class="hiato-split">-</span> cre <span class="hiato-split">-</span> o</div>
-                <div class="ejemplo-item">Te <span class="hiato-split">-</span> a <span class="hiato-split">-</span> tro</div>
-                <div class="ejemplo-item">Hé <span class="hiato-split">-</span> ro <span class="hiato-split">-</span> e</div>
-            </div>
-
-            <h3>Regla 2: Débil con Tilde + Fuerte = ¡RUPTURA!</h3>
-            <p>Si la vocal débil (i, u) lleva tilde, gana la fuerza de un gigante y rompe la pareja. <b>¡IMPORTANTE!</b> Siempre llevan tilde en la débil.</p>
-            <div class="ejemplos-grid">
-                <div class="ejemplo-item">Ma <span class="hiato-split">-</span> rí <span class="hiato-split">-</span> a</div>
-                <div class="ejemplo-item">Ba <span class="hiato-split">-</span> úl</div>
-                <div class="ejemplo-item">Frí <span class="hiato-split">-</span> o</div>
-                <div class="ejemplo-item">Pa <span class="hiato-split">-</span> í <span class="hiato-split">-</span> ses</div>
-                <div class="ejemplo-item">Grú <span class="hiato-split">-</span> a</div>
-                <div class="ejemplo-item">Dí <span class="hiato-split">-</span> a</div>
-            </div>
-        </section>
-
-        <div class="sticker-nota">
-            <b>🛡️ EL TRUCO DE LA "H":</b> Carla, la letra "H" es muda, así que no cuenta. Si hay un hiato, la "H" se va con la segunda vocal. Ejemplo: <b>Bú - ho</b> o <b>Al - co - hol</b>.
+            <p><b>Recuerda:</b> Hay Hiato si...</p>
+            <ul>
+                <li>Hay 2 fuertes juntas (Ej: <b>ca-ó-ti-co</b>)</li>
+                <li>La débil lleva tilde (Ej: <b>rí-o</b>)</li>
+            </ul>
+            <button class="btn" onclick="nextScreen('screen-game')">¡EMPEZAR DESAFÍO!</button>
         </div>
 
-        <section class="ejercicios-lista">
-            <div class="section-title">PARTE 2: Entrenamiento Intensivo</div>
-
-            <div class="pregunta">1. Análisis de palabras. Separa y explica el motivo:</div>
-            <table class="tabla-ejercicios">
-                <tr><th>Palabra</th><th>Separación silábica</th><th>Motivo del Hiato</th></tr>
-                <tr><td>Poeta</td><td>Po - e - ta</td><td>Dos fuertes (o-e)</td></tr>
-                <tr><td>Sonríe</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
-                <tr><td>Cacao</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
-                <tr><td>Había</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
-                <tr><td>Mareo</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
-                <tr><td>Grúa</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
-                <tr><td>Océano</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
-                <tr><td>Río</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
-                <tr><td>Toalla</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
-                <tr><td>País</td><td><div class="input-line"></div></td><td><div class="input-line"></div></td></tr>
-            </table>
-
-            <div class="pregunta">2. El Detective de Tildes. Pon la tilde donde falte:</div>
-            <p style="background: #f0f0f0; padding: 15px; border-radius: 10px; line-height: 2;">
-                Sofia tiene mucha alegria porque su tio le regalo un baul lleno de juguetes. 
-                Vivia en una aldea cerca del rio y le gustaba mucho la poesia. 
-                Ayer vio un buho en el tejado y se quedo parada en la linea de la puerta.
-            </p>
-
-            <div class="pregunta">3. Clasificación Maestra. Clasifica estas palabras:</div>
-            <p><i>(Caos, Biología, Pelea, Reír, Paseo, Filosofía, Teatro, Grúa)</i></p>
-            <div style="display: flex; gap: 20px;">
-                <div style="flex:1; border: 2px solid var(--fuerte); border-radius: 10px; padding: 10px;">
-                    <b style="color: var(--fuerte);">TIPO: FUERTE + FUERTE</b>
-                    <div class="input-line"></div><div class="input-line"></div><div class="input-line"></div><div class="input-line"></div>
-                </div>
-                <div style="flex:1; border: 2px solid var(--debil); border-radius: 10px; padding: 10px;">
-                    <b style="color: var(--debil);">TIPO: DÉBIL (TILDE) + FUERTE</b>
-                    <div class="input-line"></div><div class="input-line"></div><div class="input-line"></div><div class="input-line"></div>
-                </div>
+        <!-- PANTALLA 2: JUEGO -->
+        <div id="screen-game" class="screen">
+            <div class="progress"><div id="progress-bar"></div></div>
+            <p style="text-align: center;">Misión: Separa las sílabas usando guiones (Ej: ma-re-o)</p>
+            
+            <div class="exercise-box">
+                <div id="word-display" class="word-to-split">CAÓTICO</div>
+                <input type="text" id="user-input" placeholder="tu-res-pue-sta" autocomplete="off">
+                <div id="feedback"></div>
+                <button class="btn" onclick="checkAnswer()">COMPROBAR</button>
             </div>
+        </div>
 
-            <div class="pregunta">4. Escritura Creativa. Escribe una frase con cada palabra:</div>
-            <p><b>A) HÉROE:</b> <div class="input-line"></div></p>
-            <p><b>B) PANADERÍA:</b> <div class="input-line"></div></p>
-            <p><b>C) LÍNEA:</b> <div class="input-line"></div></p>
-        </section>
-
-        <footer style="text-align: center; color: #888; font-size: 12px; margin-top: 40px; border-top: 1px solid #eee; padding-top: 10px;">
-            Academia Esparta 2026 · Carla, ¡estás preparada para el éxito!
-        </footer>
+        <!-- PANTALLA 3: VICTORIA -->
+        <div id="screen-win" class="screen">
+            <h1>🏆 ¡ERES UNA CRACK!</h1>
+            <p style="text-align: center; font-size: 1.2rem;">Carla, has dominado los hiatos como una verdadera espartana.</p>
+            <p style="text-align: center;">Ya no habrá tilde ni separación que se te resista.</p>
+            <button class="btn" onclick="location.reload()">VOLVER A JUGAR</button>
+        </div>
     </div>
+
+    <script>
+        const exercises = [
+            { word: "caótico", answer: "ca-ó-ti-co" },
+            { word: "frío", answer: "frí-o" },
+            { word: "poeta", answer: "po-e-ta" },
+            { word: "grúa", answer: "grú-a" },
+            { word: "teatro", answer: "te-a-tro" },
+            { word: "búho", answer: "bú-ho" },
+            { word: "mareo", answer: "ma-re-o" }
+        ];
+
+        let currentIdx = 0;
+
+        function nextScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(id === 'screen-game') loadWord();
+        }
+
+        function loadWord() {
+            document.getElementById('word-display').innerText = exercises[currentIdx].word.toUpperCase();
+            document.getElementById('user-input').value = "";
+            document.getElementById('feedback').innerText = "";
+            updateProgress();
+        }
+
+        function checkAnswer() {
+            const input = document.getElementById('user-input').value.trim().toLowerCase();
+            const feedback = document.getElementById('feedback');
+            
+            if (input === exercises[currentIdx].answer) {
+                feedback.innerHTML = "¡EXCELENTE! ✨";
+                feedback.className = "correct";
+                setTimeout(() => {
+                    currentIdx++;
+                    if (currentIdx < exercises.length) {
+                        loadWord();
+                    } else {
+                        nextScreen('screen-win');
+                    }
+                }, 1000);
+            } else {
+                feedback.innerHTML = "¡Casi! Revisa las sílabas 🧐";
+                feedback.className = "wrong";
+            }
+        }
+
+        function updateProgress() {
+            const percent = (currentIdx / exercises.length) * 100;
+            document.getElementById('progress-bar').style.width = percent + "%";
+        }
+    </script>
 </body>
 </html>
