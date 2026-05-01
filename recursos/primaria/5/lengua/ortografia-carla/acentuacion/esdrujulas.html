@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palabras esdrújulas · Ortografía Carla · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 10px; }
+    .seccion-titulo { font-size: 15px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .ej-n { font-family: sans-serif; font-size: 13px; font-weight: 700; border: 1.5px solid #000; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .recuerda-box { border: 2px solid #000; border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; }
+    .recuerda-titulo { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .recuerda-regla { font-size: 15px; font-weight: 600; line-height: 1.6; margin-bottom: 6px; }
+    .recuerda-regla strong { font-weight: 700; }
+    .recuerda-ejemplos { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+    .rec-ej-grupo { display: flex; flex-direction: column; gap: 2px; border-left: 2px solid #000; padding-left: 8px; }
+    .rec-ej-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .rec-ej-words { font-size: 13px; font-weight: 600; }
+    .silabas-lista { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .silaba-fila { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+    .silaba-fila .palabra-base { min-width: 110px; }
+    .silaba-fila .flecha { font-family: sans-serif; font-size: 13px; color: #555; }
+    .silaba-fila .silabas-div { min-width: 150px; border-bottom: 1.5px solid #000; }
+    .silaba-fila .tilde-check { min-width: 80px; border-bottom: 1.5px solid #000; }
+    .silabas-cabecera { display: flex; align-items: center; gap: 10px; font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+    .silabas-cabecera span:first-child { min-width: 110px; }
+    .silabas-cabecera .cab-silabas { min-width: 150px; }
+    .silabas-cabecera .cab-tilde { min-width: 80px; }
+    .tilde-lista { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .tilde-fila { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+    .tilde-fila .t-num { font-family: sans-serif; font-size: 12px; font-weight: 700; min-width: 18px; }
+    .tilde-fila .t-palabra { min-width: 160px; }
+    .tilde-fila .t-respuesta { flex: 1; border-bottom: 1.5px solid #000; }
+    .rodear-lista { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .rodear-chip { font-size: 14px; font-weight: 600; border: 1.5px solid #000; border-radius: 8px; padding: 3px 12px; }
+    .escribir-lineas { display: flex; flex-direction: column; gap: 7px; margin-bottom: 10px; }
+    .escribir-linea { border-bottom: 1.5px solid #000; height: 22px; width: 100%; }
+    .footer { margin-top: 10px; padding-top: 6px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Ortografía para Carla · Palabras esdrújulas</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Recuerda</div>
+    <div class="recuerda-regla">
+      Las palabras <strong>esdrújulas</strong> tienen la sílaba más fuerte en la <strong>antepenúltima</strong> sílaba.<br>
+      <strong>Siempre llevan tilde. Todas. Sin excepción.</strong>
+    </div>
+    <div class="recuerda-ejemplos">
+      <div class="rec-ej-grupo">
+        <span class="rec-ej-label">Ejemplos</span>
+        <span class="rec-ej-words">MÚ·si·ca &nbsp; PÁ·ja·ro &nbsp; MÉ·di·co &nbsp; SÍ·la·ba &nbsp; te·LÉ·fo·no</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="seccion-titulo"><span class="ej-n">1</span> Divide en sílabas y marca la sílaba fuerte (la más intensa).</div>
+  <div class="silabas-cabecera">
+    <span>Palabra</span>
+    <span class="cab-silabas">División en sílabas</span>
+    <span class="cab-tilde">Sílaba fuerte</span>
+  </div>
+  <div class="silabas-lista">
+    <div class="silaba-fila">
+      <span class="palabra-base">música</span>
+      <span class="flecha">→</span>
+      <span class="silabas-div"></span>
+      <span class="tilde-check"></span>
+    </div>
+    <div class="silaba-fila">
+      <span class="palabra-base">pájaro</span>
+      <span class="flecha">→</span>
+      <span class="silabas-div"></span>
+      <span class="tilde-check"></span>
+    </div>
+    <div class="silaba-fila">
+      <span class="palabra-base">médico</span>
+      <span class="flecha">→</span>
+      <span class="silabas-div"></span>
+      <span class="tilde-check"></span>
+    </div>
+    <div class="silaba-fila">
+      <span class="palabra-base">sílaba</span>
+      <span class="flecha">→</span>
+      <span class="silabas-div"></span>
+      <span class="tilde-check"></span>
+    </div>
+    <div class="silaba-fila">
+      <span class="palabra-base">teléfono</span>
+      <span class="flecha">→</span>
+      <span class="silabas-div"></span>
+      <span class="tilde-check"></span>
+    </div>
+    <div class="silaba-fila">
+      <span class="palabra-base">brújula</span>
+      <span class="flecha">→</span>
+      <span class="silabas-div"></span>
+      <span class="tilde-check"></span>
+    </div>
+  </div>
+
+  <div class="seccion-titulo"><span class="ej-n">2</span> Escribe estas palabras correctamente con su tilde.</div>
+  <div class="tilde-lista">
+    <div class="tilde-fila"><span class="t-num">1.</span><span class="t-palabra">camara</span><span class="t-respuesta"></span></div>
+    <div class="tilde-fila"><span class="t-num">2.</span><span class="t-palabra">matematicas</span><span class="t-respuesta"></span></div>
+    <div class="tilde-fila"><span class="t-num">3.</span><span class="t-palabra">numero</span><span class="t-respuesta"></span></div>
+    <div class="tilde-fila"><span class="t-num">4.</span><span class="t-palabra">rapido</span><span class="t-respuesta"></span></div>
+    <div class="tilde-fila"><span class="t-num">5.</span><span class="t-palabra">platano</span><span class="t-respuesta"></span></div>
+    <div class="tilde-fila"><span class="t-num">6.</span><span class="t-palabra">lampara</span><span class="t-respuesta"></span></div>
+  </div>
+
+  <div class="seccion-titulo"><span class="ej-n">3</span> Rodea solo las palabras esdrújulas.</div>
+  <div class="rodear-lista">
+    <span class="rodear-chip">fórmula</span>
+    <span class="rodear-chip">ciudad</span>
+    <span class="rodear-chip">clásico</span>
+    <span class="rodear-chip">árbol</span>
+    <span class="rodear-chip">fantástico</span>
+    <span class="rodear-chip">canción</span>
+    <span class="rodear-chip">cómodo</span>
+    <span class="rodear-chip">fácil</span>
+    <span class="rodear-chip">océano</span>
+    <span class="rodear-chip">trabajo</span>
+  </div>
+
+  <div class="seccion-titulo"><span class="ej-n">4</span> Escribe 5 palabras esdrújulas que no aparezcan en la ficha.</div>
+  <div class="escribir-lineas">
+    <div class="escribir-linea"></div>
+    <div class="escribir-linea"></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
