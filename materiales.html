@@ -352,7 +352,10 @@
               LECTURA: { nombre: "Lectura y comprensión",  color: "#dc2626", icono: "👓",
                 subBloques: ["Textos argumentativos", "Textos periodísticos", "Inferencias avanzadas", "Hecho vs opinión", "Lectura crítica", "Búsqueda de información fiable", "Comprensión digital"] },
               D:       { nombre: "Gramática y ortografía", color: "#7c3aed", icono: "🔤",
-                subBloques: ["Análisis morfológico", "Verbos irregulares", "Oración simple", "Campos semánticos", "Connotación y denotación", "Acentuación completa", "Tildes diacríticas", "Puntuación avanzada", "Reglas y ejercicios de ortografía para Carla"] }
+                subBloques: ["Análisis morfológico", "Verbos irregulares", "Oración simple", "Campos semánticos", "Connotación y denotación", "Acentuación completa", "Tildes diacríticas", "Puntuación avanzada"] },
+              CARLA:   { nombre: "Ortografía para Carla", color: "#e11d8f", icono: "✏️",
+                colores: { "Hiatos": "#dc2626" },
+                subBloques: ["Agudas, llanas y esdrújulas", "Diptongos y triptongos", "Hiatos", "Tilde diacrítica", "B y V", "G y J", "La H", "LL e Y", "C, Z y Q", "R y RR", "MP y MB", "Signos de puntuación", "Palabras compuestas y prefijos"] }
             }
           },
           "6": {
@@ -574,20 +577,21 @@
           )
         ),
         h('div', { className:'sb-list' },
-          ...b.subBloques.map((sb, i) =>
-            h('div', {
+          ...b.subBloques.map((sb, i) => {
+            const ic = (b.colores && b.colores[sb]) ? b.colores[sb] : b.color;
+            return h('div', {
               key:i, className:'sb-item',
               onClick: () => onSelect(sb),
-              onMouseEnter: e => e.currentTarget.style.borderColor = b.color,
+              onMouseEnter: e => e.currentTarget.style.borderColor = ic,
               onMouseLeave: e => e.currentTarget.style.borderColor = '#e5e7eb'
             },
               h('div', { className:'sb-item-left' },
-                h('span', { className:'sb-num', style:{ background: b.color } }, i + 1),
+                h('span', { className:'sb-num', style:{ background: ic } }, i + 1),
                 h('span', { className:'sb-name' }, sb)
               ),
               h('span', { className:'sb-arr' }, '›')
-            )
-          )
+            );
+          })
         )
       );
     }
