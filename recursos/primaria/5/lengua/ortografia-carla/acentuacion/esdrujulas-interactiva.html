@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palabras esdrújulas · Interactiva · Ortografía Carla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #faf5ff; color: #111; min-height: 100vh; }
+    #welcome { position: fixed; inset: 0; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 100; padding: 2rem; }
+    #welcome h1 { font-family: 'Montserrat', sans-serif; font-size: 2rem; color: #7c3aed; text-align: center; }
+    #welcome p { font-size: 1.1rem; color: #444; text-align: center; max-width: 400px; }
+    #welcome input { font-family: 'Open Sans', sans-serif; font-size: 1.1rem; padding: .6rem 1.2rem; border: 2px solid #7c3aed; border-radius: 999px; outline: none; text-align: center; width: 280px; }
+    #welcome button { background: #7c3aed; color: #fff; font-family: 'Open Sans', sans-serif; font-size: 1rem; font-weight: 700; border: none; border-radius: 999px; padding: .7rem 2rem; cursor: pointer; }
+    #welcome button:hover { background: #6d28d9; }
+    #app { display: none; max-width: 720px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    .ficha-header { text-align: center; margin-bottom: 1.2rem; }
+    .ficha-titulo { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 700; color: #7c3aed; }
+    .ficha-alumno { font-size: .95rem; color: #555; margin-top: 4px; }
+    .progress-bar { display: flex; gap: 8px; justify-content: center; margin-bottom: 1.5rem; }
+    .prog-dot { width: 14px; height: 14px; border-radius: 50%; background: #ede9fe; border: 2px solid #7c3aed; transition: background .3s; }
+    .prog-dot.done { background: #7c3aed; }
+    .prog-dot.active { background: #c4b5fd; }
+    .ej-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,.07); padding: 1.2rem 1.4rem; margin-bottom: 1.2rem; display: none; }
+    .ej-card.active { display: block; }
+    .ej-titulo { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .ej-num { background: #7c3aed; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 700; flex-shrink: 0; }
+    .ej-score { margin-left: auto; font-size: .85rem; color: #7c3aed; font-weight: 700; }
+    .chips-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 1rem; }
+    .chip { font-size: 1rem; font-weight: 700; padding: .45rem 1.1rem; border: 2px solid #7c3aed; border-radius: 999px; cursor: pointer; background: #fff; transition: all .15s; user-select: none; }
+    .chip:hover { background: #faf5ff; }
+    .chip.selected { background: #7c3aed; color: #fff; }
+    .chip.correct { background: #22c55e; color: #fff; border-color: #22c55e; }
+    .chip.wrong { background: #ef4444; color: #fff; border-color: #ef4444; }
+    .chip.missed { background: #fbbf24; color: #fff; border-color: #fbbf24; }
+    .btn-comprobar { display: block; margin: 0 auto; background: #7c3aed; color: #fff; font-family: 'Open Sans', sans-serif; font-size: 1rem; font-weight: 700; border: none; border-radius: 999px; padding: .6rem 2rem; cursor: pointer; }
+    .input-lista { display: flex; flex-direction: column; gap: 12px; }
+    .input-fila { display: flex; align-items: center; gap: 12px; }
+    .input-num { font-family: sans-serif; font-size: .85rem; font-weight: 700; min-width: 20px; color: #555; }
+    .input-prompt { font-size: 1rem; font-weight: 700; min-width: 120px; color: #333; }
+    .input-arrow { color: #999; }
+    .input-resp { font-family: 'Open Sans', sans-serif; font-size: 1rem; font-weight: 600; border: 2px solid #d1d5db; border-radius: 8px; padding: .35rem .8rem; width: 160px; outline: none; }
+    .input-resp:focus { border-color: #7c3aed; }
+    .input-resp.ok { border-color: #22c55e; background: #f0fdf4; }
+    .input-resp.fail { border-color: #ef4444; background: #fef2f2; }
+    .input-feedback { font-size: .85rem; font-weight: 700; }
+    .input-feedback.ok { color: #16a34a; }
+    .input-feedback.fail { color: #ef4444; }
+    .mc-lista { display: flex; flex-direction: column; gap: 10px; }
+    .mc-fila { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .mc-palabra { font-size: 1rem; font-weight: 700; min-width: 120px; color: #333; }
+    .mc-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .mc-btn { font-family: 'Open Sans', sans-serif; font-size: .9rem; font-weight: 700; border: 2px solid #7c3aed; border-radius: 8px; padding: .3rem .8rem; cursor: pointer; background: #fff; transition: all .15s; }
+    .mc-btn:hover { background: #faf5ff; }
+    .mc-btn.correct { background: #22c55e; color: #fff; border-color: #22c55e; }
+    .mc-btn.wrong { background: #ef4444; color: #fff; border-color: #ef4444; }
+    .sino-lista { display: flex; flex-direction: column; gap: 12px; }
+    .sino-fila { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .sino-palabra { font-size: 1.05rem; font-weight: 700; min-width: 110px; color: #333; }
+    .sino-opts { display: flex; gap: 8px; }
+    .sino-btn { font-family: 'Open Sans', sans-serif; font-size: .95rem; font-weight: 800; border: 2px solid #7c3aed; border-radius: 8px; padding: .35rem 1rem; cursor: pointer; background: #fff; transition: all .15s; min-width: 60px; }
+    .sino-btn:hover { background: #faf5ff; }
+    .sino-btn.correct { background: #22c55e; color: #fff; border-color: #22c55e; }
+    .sino-btn.wrong { background: #ef4444; color: #fff; border-color: #ef4444; }
+    .sino-feedback { font-size: .85rem; font-weight: 700; }
+    .sino-feedback.ok { color: #16a34a; }
+    .sino-feedback.fail { color: #ef4444; }
+    .btn-next { display: none; margin: 1rem auto 0; background: #7c3aed; color: #fff; font-family: 'Open Sans', sans-serif; font-size: 1rem; font-weight: 700; border: none; border-radius: 999px; padding: .6rem 2.2rem; cursor: pointer; }
+    .btn-next.visible { display: block; }
+    #celebration { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); align-items: center; justify-content: center; z-index: 200; }
+    #celebration.show { display: flex; }
+    .cel-card { background: #fff; border-radius: 24px; padding: 2.5rem 2rem; text-align: center; max-width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,.2); }
+    .cel-emoji { font-size: 3.5rem; }
+    .cel-titulo { font-family: 'Montserrat', sans-serif; font-size: 1.6rem; color: #7c3aed; margin: .5rem 0; }
+    .cel-nombre { font-size: 1.1rem; color: #555; margin-bottom: 1rem; }
+    .cel-score { font-size: 1.4rem; font-weight: 800; color: #7c3aed; margin-bottom: 1rem; }
+    .cel-btn { background: #7c3aed; color: #fff; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1rem; border: none; border-radius: 999px; padding: .7rem 2rem; cursor: pointer; }
+    #confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 201; }
+    .topbar { display: flex; align-items: center; margin-bottom: 1rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+  </style>
+</head>
+<body>
+<div id="welcome">
+  <h1>📝 Palabras esdrújulas</h1>
+  <p>¡Hola! Escribe tu nombre para empezar.</p>
+  <input id="nombre-input" type="text" placeholder="Tu nombre..." autocomplete="off" />
+  <button onclick="startApp()">¡Empezar! →</button>
+</div>
+<canvas id="confetti-canvas"></canvas>
+<div id="celebration">
+  <div class="cel-card">
+    <div class="cel-emoji">🏆</div>
+    <div class="cel-titulo">¡Ejercicio completado!</div>
+    <div class="cel-nombre" id="cel-nombre"></div>
+    <div class="cel-score" id="cel-score"></div>
+    <button class="cel-btn" onclick="location.href='../../../../../../materiales.html'">← Volver a materiales</button>
+  </div>
+</div>
+<div id="app">
+  <div class="topbar"><a class="back-btn" href="../../../../../../materiales.html">← Volver</a></div>
+  <div class="ficha-header">
+    <div class="ficha-titulo">Palabras esdrújulas</div>
+    <div class="ficha-alumno" id="ficha-alumno"></div>
+  </div>
+  <div class="progress-bar">
+    <div class="prog-dot active" id="dot-1"></div>
+    <div class="prog-dot" id="dot-2"></div>
+    <div class="prog-dot" id="dot-3"></div>
+    <div class="prog-dot" id="dot-4"></div>
+  </div>
+  <div class="ej-card active" id="ej1">
+    <div class="ej-titulo"><span class="ej-num">1</span> Toca todas las palabras <strong>esdrújulas</strong>.<span class="ej-score" id="score1"></span></div>
+    <div class="chips-grid" id="chips-grid"></div>
+    <button class="btn-comprobar" onclick="comprobarEj1()">Comprobar ✓</button>
+    <button class="btn-next" id="next1" onclick="goEj(2)">Siguiente ejercicio →</button>
+  </div>
+  <div class="ej-card" id="ej2">
+    <div class="ej-titulo"><span class="ej-num">2</span> Escribe estas palabras correctamente. <strong>Algunas llevan tilde y otras no.</strong><span class="ej-score" id="score2"></span></div>
+    <div class="input-lista" id="input-lista"></div>
+    <button class="btn-next" id="next2" onclick="goEj(3)">Siguiente ejercicio →</button>
+  </div>
+  <div class="ej-card" id="ej3">
+    <div class="ej-titulo"><span class="ej-num">3</span> Elige la escritura correcta de cada palabra.<span class="ej-score" id="score3"></span></div>
+    <div class="mc-lista" id="mc-lista"></div>
+    <button class="btn-next" id="next3" onclick="goEj(4)">Siguiente ejercicio →</button>
+  </div>
+  <div class="ej-card" id="ej4">
+    <div class="ej-titulo"><span class="ej-num">4</span> ¿Esta palabra lleva tilde? Pulsa SÍ o NO.<span class="ej-score" id="score4"></span></div>
+    <div class="sino-lista" id="sino-lista"></div>
+    <button class="btn-next" id="next4" onclick="finish()">Ver resultado 🎉</button>
+  </div>
+</div>
+<script>
+  const EJ1_CHIPS = [
+    { word: 'música',  ok: true  },
+    { word: 'pájaro',  ok: true  },
+    { word: 'médico',  ok: true  },
+    { word: 'sílaba',  ok: true  },
+    { word: 'rápido',  ok: true  },
+    { word: 'café',    ok: false },
+    { word: 'árbol',   ok: false },
+    { word: 'jardín',  ok: false },
+    { word: 'perro',   ok: false },
+    { word: 'salón',   ok: false },
+  ];
+  const EJ2_ITEMS = [
+    { prompt: 'camara',  answer: 'cámara'  },
+    { prompt: 'numero',  answer: 'número'  },
+    { prompt: 'coche',   answer: 'coche'   },
+    { prompt: 'platano', answer: 'plátano' },
+    { prompt: 'hotel',   answer: 'hotel'   },
+  ];
+  const EJ3_ITEMS = [
+    { show: 'formula',    correct: 'fórmula',    wrong: ['formula',    'formulá']    },
+    { show: 'clasico',    correct: 'clásico',    wrong: ['klásico',    'klassico']   },
+    { show: 'fantastico', correct: 'fantástico', wrong: ['fantastico', 'fantastíco'] },
+    { show: 'comodo',     correct: 'cómodo',     wrong: ['comodo',     'comodó']     },
+    { show: 'lampara',    correct: 'lámpara',    wrong: ['lamparaa',   'lamparà']    },
+    { show: 'brujula',    correct: 'brújula',    wrong: ['brujulá',    'brujúla']    },
+    { show: 'telefono',   correct: 'teléfono',   wrong: ['telefóno',   'teléfonno']  },
+    { show: 'matematicas',correct: 'matemáticas',wrong: ['matematícas','matematicás']},
+  ];
+  const MC_POSITIONS = [0,1,2,0,2,1,0,2];
+  const EJ4_ITEMS = [
+    { word: 'sabado',   correct: 'sábado',   tilde: true  },
+    { word: 'libro',    correct: 'libro',    tilde: false },
+    { word: 'capitulo', correct: 'capítulo', tilde: true  },
+    { word: 'ciudad',   correct: 'ciudad',   tilde: false },
+    { word: 'botanico', correct: 'botánico', tilde: true  },
+  ];
+  let nombre='',busy=false,scores=[0,0,0,0],ej2Done=0,ej3Done=0,ej4Done=0;
+  let maxScores=[EJ1_CHIPS.filter(c=>c.ok).length,EJ2_ITEMS.length,EJ3_ITEMS.length,EJ4_ITEMS.length];
+  function startApp(){nombre=document.getElementById('nombre-input').value.trim();if(!nombre){document.getElementById('nombre-input').focus();return;}document.getElementById('welcome').style.display='none';document.getElementById('app').style.display='block';document.getElementById('ficha-alumno').textContent='👤 '+nombre;buildEj1();buildEj2();buildEj3();buildEj4();}
+  function buildEj1(){const grid=document.getElementById('chips-grid');EJ1_CHIPS.forEach((c,i)=>{const el=document.createElement('div');el.className='chip';el.textContent=c.word;el.dataset.idx=i;el.addEventListener('click',()=>{if(el.classList.contains('correct')||el.classList.contains('wrong')||el.classList.contains('missed'))return;el.classList.toggle('selected');});grid.appendChild(el);});}
+  function comprobarEj1(){if(busy)return;busy=true;const chips=document.querySelectorAll('#chips-grid .chip');let correct=0;chips.forEach((el,i)=>{const selected=el.classList.contains('selected'),isOk=EJ1_CHIPS[i].ok;el.classList.remove('selected');if(isOk&&selected){el.classList.add('correct');correct++;}else if(!isOk&&selected){el.classList.add('wrong');}else if(isOk&&!selected){el.classList.add('missed');}});scores[0]=correct;document.getElementById('score1').textContent=correct+'/'+maxScores[0];document.getElementById('next1').classList.add('visible');setTimeout(()=>{busy=false;},400);}
+  function buildEj2(){const lista=document.getElementById('input-lista');EJ2_ITEMS.forEach((item,i)=>{const fila=document.createElement('div');fila.className='input-fila';fila.innerHTML=`<span class="input-num">${i+1}.</span><span class="input-prompt">${item.prompt}</span><span class="input-arrow">→</span><input class="input-resp" type="text" placeholder="escribe aquí…" autocomplete="off" data-idx="${i}" /><span class="input-feedback" id="fb2-${i}"></span>`;lista.appendChild(fila);const inp=fila.querySelector('input');inp.addEventListener('keydown',e=>{if(e.key==='Enter')checkEj2(i);});inp.addEventListener('blur',()=>checkEj2(i));});}
+  function checkEj2(i){const inp=document.querySelector(`#input-lista input[data-idx="${i}"]`);const fb=document.getElementById('fb2-'+i);if(inp.dataset.done)return;const val=inp.value.trim();if(!val)return;inp.dataset.done='1';inp.readOnly=true;const ok=val.trim().toLowerCase()===EJ2_ITEMS[i].answer.toLowerCase();inp.classList.add(ok?'ok':'fail');fb.textContent=ok?'✓':'✗ '+EJ2_ITEMS[i].answer;fb.className='input-feedback '+(ok?'ok':'fail');if(ok)scores[1]++;ej2Done++;document.getElementById('score2').textContent=scores[1]+'/'+maxScores[1];if(ej2Done===EJ2_ITEMS.length)document.getElementById('next2').classList.add('visible');}
+  function buildEj3(){const lista=document.getElementById('mc-lista');EJ3_ITEMS.forEach((item,i)=>{const pos=MC_POSITIONS[i];const opts=[...item.wrong];opts.splice(pos,0,item.correct);const fila=document.createElement('div');fila.className='mc-fila';fila.innerHTML=`<span class="mc-palabra">${item.show}</span><div class="mc-opts" id="mc-opts-${i}"></div>`;lista.appendChild(fila);const optsDiv=document.getElementById('mc-opts-'+i);opts.forEach((opt,j)=>{const btn=document.createElement('button');btn.className='mc-btn';btn.textContent=opt;btn.addEventListener('click',()=>{if(busy||btn.classList.contains('correct')||btn.classList.contains('wrong'))return;busy=true;const isCorrect=(j===pos);btn.classList.add(isCorrect?'correct':'wrong');if(!isCorrect)optsDiv.querySelectorAll('.mc-btn')[pos].classList.add('correct');optsDiv.querySelectorAll('.mc-btn').forEach(b=>b.disabled=true);if(isCorrect)scores[2]++;ej3Done++;document.getElementById('score3').textContent=scores[2]+'/'+maxScores[2];if(ej3Done===EJ3_ITEMS.length)document.getElementById('next3').classList.add('visible');setTimeout(()=>{busy=false;},300);});optsDiv.appendChild(btn);});});}
+  function buildEj4(){const lista=document.getElementById('sino-lista');EJ4_ITEMS.forEach((item,i)=>{const fila=document.createElement('div');fila.className='sino-fila';fila.innerHTML=`<span class="sino-palabra">${item.word}</span><div class="sino-opts"><button class="sino-btn" data-ans="si" data-idx="${i}">SÍ</button><button class="sino-btn" data-ans="no" data-idx="${i}">NO</button></div><span class="sino-feedback" id="fb4-${i}"></span>`;lista.appendChild(fila);fila.querySelectorAll('.sino-btn').forEach(btn=>{btn.addEventListener('click',()=>{if(busy||btn.disabled)return;busy=true;const chose=btn.dataset.ans==='si',isOk=chose===item.tilde;btn.classList.add(isOk?'correct':'wrong');fila.querySelectorAll('.sino-btn').forEach(b=>{b.disabled=true;if(b.dataset.ans===(item.tilde?'si':'no'))b.classList.add('correct');});const fb=document.getElementById('fb4-'+i);fb.textContent=isOk?'✓':('✗ '+(item.tilde?'SÍ → '+item.correct:'NO'));fb.className='sino-feedback '+(isOk?'ok':'fail');if(isOk)scores[3]++;ej4Done++;document.getElementById('score4').textContent=scores[3]+'/'+maxScores[3];if(ej4Done===EJ4_ITEMS.length)document.getElementById('next4').classList.add('visible');setTimeout(()=>{busy=false;},300);});});});}
+  function goEj(n){document.getElementById('ej'+(n-1)).classList.remove('active');document.getElementById('ej'+n).classList.add('active');document.getElementById('dot-'+(n-1)).classList.remove('active');document.getElementById('dot-'+(n-1)).classList.add('done');document.getElementById('dot-'+n).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+  function finish(){const total=scores.reduce((a,b)=>a+b,0),max=maxScores.reduce((a,b)=>a+b,0);document.getElementById('cel-nombre').textContent='¡Bien hecho, '+nombre+'!';document.getElementById('cel-score').textContent=total+' / '+max+' puntos';document.getElementById('dot-4').classList.remove('active');document.getElementById('dot-4').classList.add('done');launchConfetti();document.getElementById('celebration').classList.add('show');}
+  function launchConfetti(){const canvas=document.getElementById('confetti-canvas'),ctx=canvas.getContext('2d');canvas.width=window.innerWidth;canvas.height=window.innerHeight;const pieces=Array.from({length:120},()=>({x:Math.random()*canvas.width,y:Math.random()*-canvas.height,w:8+Math.random()*8,h:4+Math.random()*4,color:['#7c3aed','#a78bfa','#ddd6fe','#fbbf24','#f87171','#22c55e','#60a5fa'][Math.floor(Math.random()*7)],vy:2+Math.random()*4,vx:(Math.random()-.5)*2,angle:Math.random()*Math.PI*2,va:(Math.random()-.5)*.15}));let frame;function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);pieces.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.angle+=p.va;if(p.y>canvas.height){p.y=-20;p.x=Math.random()*canvas.width;}ctx.save();ctx.translate(p.x+p.w/2,p.y+p.h/2);ctx.rotate(p.angle);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});frame=requestAnimationFrame(draw);}draw();setTimeout(()=>{cancelAnimationFrame(frame);ctx.clearRect(0,0,canvas.width,canvas.height);},5000);}
+  document.getElementById('nombre-input').addEventListener('keydown',e=>{if(e.key==='Enter')startApp();});
+</script>
+</body>
+</html>
