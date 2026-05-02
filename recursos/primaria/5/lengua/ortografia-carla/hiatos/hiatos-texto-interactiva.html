@@ -155,11 +155,12 @@
   <div id="screen-lectura">
     <div class="lectura-card">
       <div class="lectura-badge">📖 Lee con atención</div>
-      <div class="lectura-titulo">El país de Lucía</div>
+      <div class="lectura-titulo">El cohete de Raúl</div>
       <div class="lectura-texto">
-        <p>Lucía vivía en un pequeño país rodeado de montañas. Cada día, al salir el sol, bajaba corriendo hasta el río que cruzaba su aldea. Le encantaba el frío del agua y oír el murmullo del viento. Incluso los lugares más feos le parecían hermosos.</p>
-        <p>Su abuelo le había regalado un baúl antiguo lleno de libros. Allí encontró poemas que hablaban del maíz dorado y de aldeas lejanas. El agua del río parecía caer entre las piedras con suavidad. También había un viejo mapa con los caminos del país vecino.</p>
-        <p>"¡Un día lo visitaré!", se decía Lucía. Y creía firmemente que lo lograría. Su familia siempre le repetía: "El que lee, crece." Y ella lo creía con todo su corazón.</p>
+        <p>Raúl vivía en un pequeño pueblo junto a un río de aguas tranquilas. Cada tarde, después de comer, iba al museo del barrio a observar las maquetas de cohetes espaciales. Le encantaba leer los carteles y nunca quería caer dormido en la silla. Siempre decía que algún día viajaría hasta las estrellas.</p>
+        <p>Su amiga Sofía, que hacía los deberes con él cada mañana, también soñaba con el espacio. "¿Crees que allí también hay nieve fría?", preguntaba a veces. "No lo sé, pero lo averiguaremos", le respondía Raúl con una sonrisa.</p>
+        <p>Una tarde, mientras leían juntos en el museo, encontraron un libro enorme con fotos de galaxias y planetas. Las imágenes eran tan feas y hermosas a la vez que se quedaron sin palabras. Había descripciones de planetas que parecían poemas, llenos de vocales y sonidos extraños.</p>
+        <p>Raúl se puso a copiar datos en su cuaderno. Sofía le veía trabajar en silencio y sentía que aquel día sería especial. Señaló el cielo que se veía ahí, al fondo, a través del cristal, y dijo: "Un día llegaremos hasta ahí."</p>
       </div>
       <div class="lectura-hint">💡 Mientras lees, intenta identificar las palabras con hiato. Después tendrás que encontrarlas.</div>
       <button class="btn-listo" onclick="startEjercicios()">¡Listo! Responder preguntas →</button>
@@ -221,54 +222,55 @@
   // correct: index of the correct option (0, 1 or 2) — varied positions
   const EJ1_ITEMS = [
     {
-      q: '¿Qué regaló el abuelo de Lucía?',
-      opts: ['Un baúl antiguo lleno de libros', 'Un mapa del país vecino', 'Una cesta con maíz y poemas'],
+      q: '¿Adónde iba Raúl cada tarde?',
+      opts: ['Al museo a ver maquetas de cohetes', 'Al río a jugar con sus amigos', 'A la biblioteca a estudiar'],
       correct: 0
     },
     {
-      q: '¿Qué le encantaba a Lucía cuando bajaba al río?',
-      opts: ['Nadar con sus amigos del pueblo', 'El frío del agua y oír el viento', 'Pescar peces entre las piedras'],
+      q: '¿Qué preguntaba Sofía sobre el espacio?',
+      opts: ['Si había agua en los planetas', 'Si allí también había nieve fría', 'Si los cohetes llegaban hasta allí'],
       correct: 1
     },
     {
-      q: '¿Qué frase repetía siempre la familia de Lucía?',
-      opts: ['Quien tiene un amigo, tiene un tesoro', 'Quien madruga, Dios le ayuda', 'El que lee, crece'],
+      q: '¿Qué encontraron Raúl y Sofía mientras leían en el museo?',
+      opts: ['Una maqueta muy grande', 'Un mapa del pueblo', 'Un libro con fotos de galaxias y planetas'],
       correct: 2
     },
   ];
 
   // ── EJ2: chips — select all hiatos from the text ─────────────────────────
+  // Chips shuffled so hiatos (ok:true) are NOT grouped at the start
   const EJ2_CHIPS = [
-    { word: 'Lucía',     ok: true  },
-    { word: 'país',      ok: true  },
-    { word: 'baúl',      ok: true  },
-    { word: 'frío',      ok: true  },
-    { word: 'creía',     ok: true  },
-    { word: 'montañas',  ok: false },
+    { word: 'pueblo',    ok: false },
+    { word: 'Raúl',      ok: true  },
+    { word: 'estrellas', ok: false },
+    { word: 'veía',      ok: true  },
+    { word: 'soñaba',    ok: false },
+    { word: 'hacía',     ok: true  },
+    { word: 'tranquilas',ok: false },
+    { word: 'sentía',    ok: true  },
     { word: 'silencio',  ok: false },
-    { word: 'corriendo', ok: false },
-    { word: 'hermosos',  ok: false },
-    { word: 'corazón',   ok: false },
+    { word: 'decía',     ok: true  },
   ];
 
   // ── EJ3: classify type 1 or type 2 ───────────────────────────────────────
   // tipo: 1 = fuerte+fuerte (no special tilde), 2 = débil tónica (always tilde)
   const EJ3_ITEMS = [
-    { word: 'aldea',    tipo: 1, hint: 'e + a' },
-    { word: 'poemas',   tipo: 1, hint: 'o + e' },
-    { word: 'río',      tipo: 2, hint: 'í tónica' },
-    { word: 'había',    tipo: 2, hint: 'í tónica' },
-    { word: 'lograría', tipo: 2, hint: 'í tónica' },
-    { word: 'lee',      tipo: 1, hint: 'e + e' },
+    { word: 'museo',  tipo: 1, hint: 'e + o' },
+    { word: 'leían',  tipo: 2, hint: 'í tónica' },
+    { word: 'feas',   tipo: 1, hint: 'e + a' },
+    { word: 'había',  tipo: 2, hint: 'í tónica' },
+    { word: 'poemas', tipo: 1, hint: 'o + e' },
+    { word: 'ahí',    tipo: 2, hint: 'í tónica' },
   ];
 
   // ── EJ4: SÍ / NO tilde — show without tilde ──────────────────────────────
   const EJ4_ITEMS = [
-    { word: 'dia',   correct: 'día',  tilde: true  },
-    { word: 'oir',   correct: 'oír',  tilde: true  },
-    { word: 'maiz',  correct: 'maíz', tilde: true  },
-    { word: 'caer',  correct: 'caer', tilde: false },
-    { word: 'feo',   correct: 'feo',  tilde: false },
+    { word: 'rio',  correct: 'río',  tilde: true  },
+    { word: 'leer', correct: 'leer', tilde: false },
+    { word: 'fria', correct: 'fría', tilde: true  },
+    { word: 'caer', correct: 'caer', tilde: false },
+    { word: 'dia',  correct: 'día',  tilde: true  },
   ];
 
   // ── State ─────────────────────────────────────────────────────────────────
