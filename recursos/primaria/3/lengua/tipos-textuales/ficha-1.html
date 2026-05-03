@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tipos textuales · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .seccion-titulo { font-size: 15px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .ej-n { font-family: sans-serif; font-size: 13px; font-weight: 700; border: 1.5px solid #000; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* Recuerda */
+    .recuerda-box { border: 2px solid #000; border-radius: 12px; padding: 7px 12px; margin-bottom: 8px; }
+    .recuerda-titulo { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+    .tipos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 16px; }
+    .tipo-item { font-size: 12.5px; line-height: 1.35; }
+    .tipo-nombre { font-weight: 800; }
+
+    /* EJ1 */
+    .fragmentos-lista { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+    .fragmento-bloque { display: flex; gap: 7px; align-items: flex-start; }
+    .frag-letra { font-family: sans-serif; font-size: 12px; font-weight: 800; padding-top: 3px; min-width: 14px; }
+    .frag-inner { flex: 1; }
+    .frag-texto { font-size: 13px; line-height: 1.4; border: 1px solid #bbb; border-radius: 6px; padding: 3px 7px; margin-bottom: 2px; }
+    .frag-respuesta { display: flex; align-items: center; gap: 5px; font-size: 12px; }
+    .frag-respuesta label { font-weight: 700; white-space: nowrap; }
+    .frag-linea { flex: 1; border-bottom: 1px solid #000; height: 14px; max-width: 200px; }
+
+    /* EJ2 - matching */
+    .unir-tabla { display: flex; gap: 0; margin-bottom: 8px; align-items: stretch; }
+    .unir-col-izq { display: flex; flex-direction: column; gap: 4px; }
+    .unir-col-der { display: flex; flex-direction: column; gap: 4px; margin-left: auto; }
+    .unir-espacio { flex: 1; }
+    .unir-item { font-size: 13px; font-weight: 700; border: 1.5px solid #000; border-radius: 8px; padding: 3px 10px; white-space: nowrap; }
+    .unir-item-der { font-size: 13px; font-weight: 600; border: 1.5px solid #000; border-radius: 8px; padding: 3px 10px; }
+
+    /* EJ3 - rodea */
+    .rodea-lista { display: flex; flex-direction: column; gap: 3px; margin-bottom: 8px; }
+    .rodea-item { font-size: 13px; line-height: 1.45; }
+    .rodea-item .num { font-family: sans-serif; font-size: 12px; font-weight: 700; margin-right: 4px; }
+    .opcion { border: 1.5px solid #000; border-radius: 999px; padding: 1px 9px; font-size: 13px; font-weight: 600; display: inline-block; margin: 0 2px; }
+
+    /* EJ4 - escribir */
+    .escribir-lista { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+    .escribir-fila { display: flex; align-items: center; gap: 8px; }
+    .escribir-label { font-size: 13px; font-weight: 700; white-space: nowrap; min-width: 100px; }
+    .escribir-linea { flex: 1; border-bottom: 1.5px solid #000; height: 18px; }
+
+    .footer { margin-top: 6px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 3º Primaria · Lectura y comprensión · Tipos textuales</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Recuerda</div>
+    <div class="tipos-grid">
+      <div class="tipo-item"><span class="tipo-nombre">Narrativo</span> — cuenta una historia con personajes y acción.</div>
+      <div class="tipo-item"><span class="tipo-nombre">Descriptivo</span> — explica cómo es una persona, animal o lugar.</div>
+      <div class="tipo-item"><span class="tipo-nombre">Instructivo</span> — indica cómo hacer algo paso a paso.</div>
+      <div class="tipo-item"><span class="tipo-nombre">Expositivo</span> — informa sobre un tema de forma clara.</div>
+      <div class="tipo-item" style="grid-column: 1 / -1;"><span class="tipo-nombre">Dialogado</span> — recoge una conversación entre personajes.</div>
+    </div>
+  </div>
+
+  <div class="seccion-titulo"><span class="ej-n">1</span> Lee cada fragmento y escribe qué tipo de texto es.</div>
+  <div class="fragmentos-lista">
+    <div class="fragmento-bloque">
+      <span class="frag-letra">A</span>
+      <div class="frag-inner">
+        <div class="frag-texto">Érase una vez una princesa que vivía en un castillo encantado. Un día, una bruja malvada la convirtió en paloma blanca.</div>
+        <div class="frag-respuesta"><label>Tipo:</label><div class="frag-linea"></div></div>
+      </div>
+    </div>
+    <div class="fragmento-bloque">
+      <span class="frag-letra">B</span>
+      <div class="frag-inner">
+        <div class="frag-texto">Para preparar una limonada: exprime dos limones, añade agua fría y azúcar al gusto. Remueve bien y sirve con hielo.</div>
+        <div class="frag-respuesta"><label>Tipo:</label><div class="frag-linea"></div></div>
+      </div>
+    </div>
+    <div class="fragmento-bloque">
+      <span class="frag-letra">C</span>
+      <div class="frag-inner">
+        <div class="frag-texto">El delfín es un mamífero marino de cuerpo alargado. Su piel es lisa y gris, y su aleta dorsal es muy característica.</div>
+        <div class="frag-respuesta"><label>Tipo:</label><div class="frag-linea"></div></div>
+      </div>
+    </div>
+    <div class="fragmento-bloque">
+      <span class="frag-letra">D</span>
+      <div class="frag-inner">
+        <div class="frag-texto">—¿Quieres venir al parque? —preguntó Sofía. —¡Claro! —respondió Marcos—. Te espero en la verja a las cinco.</div>
+        <div class="frag-respuesta"><label>Tipo:</label><div class="frag-linea"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seccion-titulo"><span class="ej-n">2</span> Une cada tipo de texto con su ejemplo. Traza una línea.</div>
+  <div class="unir-tabla">
+    <div class="unir-col-izq">
+      <div class="unir-item">Narrativo</div>
+      <div class="unir-item">Expositivo</div>
+      <div class="unir-item">Instructivo</div>
+      <div class="unir-item">Dialogado</div>
+      <div class="unir-item">Descriptivo</div>
+    </div>
+    <div class="unir-espacio"></div>
+    <div class="unir-col-der">
+      <div class="unir-item-der">Una enciclopedia del universo</div>
+      <div class="unir-item-der">Las normas de un juego de mesa</div>
+      <div class="unir-item-der">Una novela de aventuras</div>
+      <div class="unir-item-der">Una guía turística de Málaga</div>
+      <div class="unir-item-der">Una obra de teatro escolar</div>
+    </div>
+  </div>
+
+  <div class="seccion-titulo"><span class="ej-n">3</span> Rodea la opción correcta.</div>
+  <div class="rodea-lista">
+    <div class="rodea-item"><span class="num">1.</span> Una receta de bizcocho es un texto <span class="opcion">narrativo</span> <span class="opcion">instructivo</span> <span class="opcion">expositivo</span>.</div>
+    <div class="rodea-item"><span class="num">2.</span> Una noticia del periódico es un texto <span class="opcion">dialogado</span> <span class="opcion">expositivo</span> <span class="opcion">descriptivo</span>.</div>
+    <div class="rodea-item"><span class="num">3.</span> Un cuento de hadas es un texto <span class="opcion">instructivo</span> <span class="opcion">narrativo</span> <span class="opcion">dialogado</span>.</div>
+    <div class="rodea-item"><span class="num">4.</span> La ficha de un volcán en ciencias es un texto <span class="opcion">expositivo</span> <span class="opcion">narrativo</span> <span class="opcion">instructivo</span>.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
