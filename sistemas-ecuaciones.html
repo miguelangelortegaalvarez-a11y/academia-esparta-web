@@ -3,133 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafío Cinemática - Mari Carmen - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <title>Cinemática 3º ESO - Mari Carmen</title>
+    
+    <!-- Motor para fórmulas matemáticas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        :root {
-            --physics-blue: #1d3557;
-            --physics-red: #e63946;
-            --physics-gold: #ffb703;
-            --light: #f1faee;
+        /* Estilo minimalista en blanco y negro */
+        body { 
+            font-family: 'Courier New', Courier, monospace; 
+            background-color: #ffffff; 
+            margin: 0; 
+            padding: 20px; 
+            color: #000000;
         }
 
-        body { font-family: 'Montserrat', sans-serif; background: var(--physics-blue); color: white; display: flex; justify-content: center; padding: 20px; }
+        .no-print {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #000;
+            color: #fff;
+            border: 2px solid #000;
+            padding: 10px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .page { 
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 15mm;
+            border: 2px solid #000;
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px double #000;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+
+        h1 { margin: 0; font-size: 22pt; text-decoration: underline; }
         
-        .container { background: white; color: var(--physics-blue); width: 100%; max-width: 800px; border-radius: 20px; padding: 30px; border: 5px solid var(--physics-gold); }
+        .section {
+            margin-bottom: 25px;
+        }
 
-        h1 { font-family: 'Fredoka One', cursive; text-align: center; color: var(--physics-red); font-size: 2rem; margin-top: 0; border-bottom: 3px dashed var(--physics-gold); padding-bottom: 10px; }
-        
-        .section { margin-bottom: 30px; padding: 15px; border-radius: 15px; background: var(--light); }
-        h2 { font-size: 1.2rem; color: var(--physics-blue); border-left: 5px solid var(--physics-red); padding-left: 10px; }
+        .section-title {
+            font-weight: bold;
+            font-size: 14pt;
+            border: 1px solid #000;
+            display: inline-block;
+            padding: 5px 15px;
+            margin-bottom: 15px;
+        }
 
-        .exercise { margin-bottom: 20px; padding: 10px; border-bottom: 1px solid #ddd; }
-        .input-group { margin-top: 10px; }
-        
-        input { padding: 8px; border-radius: 5px; border: 2px solid var(--physics-blue); width: 120px; text-align: center; font-weight: bold; }
-        
-        .btn-check { background: var(--physics-red); color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .btn-check:hover { background: var(--physics-blue); }
+        .ejercicio {
+            margin-bottom: 20px;
+        }
 
-        .feedback { display: block; margin-top: 5px; font-weight: bold; font-size: 0.9rem; min-height: 20px; }
-        .correct { color: #2d6a4f; }
-        .wrong { color: #e63946; }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
 
-        .formula-box { background: #fff; border: 2px solid var(--physics-gold); padding: 10px; border-radius: 10px; text-align: center; font-style: italic; margin-bottom: 15px; }
+        .data-table th, .data-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
 
-        @media print { .btn-check { display: none; } }
+        .box-respuesta {
+            border: 1px solid #000;
+            height: 120px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .box-respuesta::after {
+            content: "SOLUCIÓN Y OPERACIONES:";
+            font-size: 8pt;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            color: #666;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 9pt;
+            border-top: 1px dashed #000;
+            padding-top: 10px;
+        }
+
+        @media print {
+            .no-print { display: none; }
+            body { padding: 0; }
+            .page { border: none; width: 100%; height: auto; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>PLAN DE TRABAJO: CINEMÁTICA</h1>
-    <p style="text-align: center;"><b>Alumna:</b> Mari Carmen | <b>Curso:</b> 3º ESO F y Q</p>
-
-    <div class="formula-box">
-        🚀 <b>Recordatorio:</b> \( v = \frac{x_f - x_0}{t} \)  |  \( 1 \text{ km/h} = \frac{1000 \text{ m}}{3600 \text{ s}} \approx 0,278 \text{ m/s} \)
+    <div class="no-print">
+        <button class="btn" onclick="window.print()">🖨️ Imprimir / Guardar como PDF</button>
     </div>
 
-    <!-- SECCIÓN 1: FACTORES DE CONVERSIÓN -->
-    <div class="section">
-        <h2>1. Conversión de Unidades al S.I.</h2>
-        <p>Convierte estas velocidades del plan de trabajo a m/s:</p>
-        
-        <div class="exercise">
-            <span>a) 200 m/min</span>
-            <div class="input-group">
-                <input type="number" id="ex1a" step="0.01"> m/s 
-                <button class="btn-check" onclick="check('ex1a', 3.33)">Verificar</button>
-                <span id="feedback-ex1a" class="feedback"></span>
+    <div class="page">
+        <header>
+            <h1>CONTROL DE FÍSICA Y QUÍMICA: CINEMÁTICA</h1>
+            <p>PLAN DE TRABAJO TEMA 6 | ALUMNA: <b>MARI CARMEN</b></p>
+        </header>
+
+        <!-- BLOQUE 1 -->
+        <div class="section">
+            <div class="section-title">I. CAMBIO DE UNIDADES (S.I.)</div>
+            <div class="ejercicio">
+                <p>1. Expresa las siguientes velocidades en metros por segundo (\(m/s\)) utilizando factores de conversión:</p>
+                <p>a) \( 200 \text{ m/min} \)</p>
+                <p>b) \( 130 \text{ km/h} \)</p>
+                <div class="box-respuesta"></div>
             </div>
         </div>
 
-        <div class="exercise">
-            <span>b) 130 km/h</span>
-            <div class="input-group">
-                <input type="number" id="ex1b" step="0.01"> m/s 
-                <button class="btn-check" onclick="check('ex1b', 36.11)">Verificar</button>
-                <span id="feedback-ex1b" class="feedback"></span>
+        <!-- BLOQUE 2 -->
+        <div class="section">
+            <div class="section-title">II. ANÁLISIS DE GRÁFICAS</div>
+            <div class="ejercicio">
+                <p>2. A partir de los datos de posición (\(x\)) y tiempo (\(t\)) del atleta:</p>
+                <table class="data-table">
+                    <tr><th>Tiempo (s)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>8</td><td>9</td><td>10</td></tr>
+                    <tr><th>Posición (m)</th><td>10</td><td>14</td><td>20</td><td>26</td><td>40</td><td>40</td><td>40</td></tr>
+                </table>
+                <p>a) ¿Cuál es la velocidad del atleta entre \(t = 0 \text{ s}\) y \(t = 3 \text{ s}\)?</p>
+                <p>b) Describe el movimiento en los últimos 2 segundos del entrenamiento:</p>
+                <div class="box-respuesta" style="height: 80px;"></div>
             </div>
         </div>
+
+        <!-- BLOQUE 3 -->
+        <div class="section">
+            <div class="section-title">III. PROBLEMAS DE MRU</div>
+            <div class="ejercicio">
+                <p>3. Un tren de alta velocidad recorre \( 650 \text{ km} \) en un tiempo de \( 3 \text{ h} \). Calcula su velocidad media en \( \text{km/h} \) y luego conviértela a \( \text{m/s} \).</p>
+                <div class="box-respuesta"></div>
+            </div>
+
+            <div class="ejercicio">
+                <p>4. Un coche parte de una posición inicial \( x_0 = 50 \text{ m} \) con una velocidad constante de \( 20 \text{ m/s} \). Calcula su posición final tras \( 8 \text{ s} \) de movimiento.</p>
+                <div class="box-respuesta"></div>
+            </div>
+        </div>
+
+        <footer>
+            Academia Esparta 2026 - Material de Repaso Exclusivo para Mari Carmen
+        </footer>
     </div>
-
-    <!-- SECCIÓN 2: CÁLCULOS MRU -->
-    <div class="section">
-        <h2>2. Problemas de Movimiento</h2>
-        
-        <div class="exercise">
-            <p><b>El Tren de Alta Velocidad:</b> Recorre 650 km en 3 horas.</p>
-            <span>a) Velocidad en km/h:</span>
-            <div class="input-group">
-                <input type="number" id="ex2a"> km/h 
-                <button class="btn-check" onclick="check('ex2a', 216.67)">Verificar</button>
-                <span id="feedback-ex2a" class="feedback"></span>
-            </div>
-        </div>
-
-        <div class="exercise">
-            <p><b>El Coche:</b> Sale de \( x_0 = 50 \text{ m} \) a una velocidad de \( 20 \text{ m/s} \). Pasados 8 segundos:</p>
-            <span>Distancia al origen (\( x_f \)):</span>
-            <div class="input-group">
-                <input type="number" id="ex2b"> metros 
-                <button class="btn-check" onclick="check('ex2b', 210)">Verificar</button>
-                <span id="feedback-ex2b" class="feedback"></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- SECCIÓN 3: GRÁFICAS -->
-    <div class="section">
-        <h2>3. Análisis de Gráficas (Tramo Atleta)</h2>
-        <p>Observa la tabla del atleta (puntos 8, 9 y 10s). ¿Qué velocidad lleva en ese tramo?</p>
-        <div class="exercise">
-            <div class="input-group">
-                <input type="number" id="ex3a"> m/s 
-                <button class="btn-check" onclick="check('ex3a', 0)">Verificar</button>
-                <span id="feedback-ex3a" class="feedback"></span>
-            </div>
-            <p><small>(Pista: Si la posición no cambia de 40m, ¿se mueve?)</small></p>
-        </div>
-    </div>
-
-    <button class="btn-check" style="width:100%; padding: 15px;" onclick="window.print()">🖨️ IMPRIMIR FICHA PARA REPASO MANUAL</button>
-</div>
-
-<script>
-    function check(id, correct) {
-        const val = parseFloat(document.getElementById(id).value);
-        const feedback = document.getElementById('feedback-' + id);
-        
-        // Tolerancia para decimales
-        if (Math.abs(val - correct) < 0.5) {
-            feedback.innerText = "¡Correcto! 🎯";
-            feedback.className = "feedback correct";
-        } else {
-            feedback.innerText = "Revisa el cálculo ❌ (Sol: " + correct + ")";
-            feedback.className = "feedback wrong";
-        }
-    }
-</script>
 
 </body>
 </html>
