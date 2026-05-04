@@ -3,139 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carla vs Los Hiatos - Academia Esparta</title>
+    <title>Desafío Cinemática - Mari Carmen - Academia Esparta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fuerte: #e63946;
-            --debil: #457b9d;
-            --gold: #ffb703;
-            --dark: #1d3557;
+            --physics-blue: #1d3557;
+            --physics-red: #e63946;
+            --physics-gold: #ffb703;
             --light: #f1faee;
         }
 
-        body { font-family: 'Montserrat', sans-serif; background: var(--dark); color: white; display: flex; justify-content: center; padding: 20px; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--physics-blue); color: white; display: flex; justify-content: center; padding: 20px; }
         
-        .game-card { background: white; color: var(--dark); width: 100%; max-width: 700px; border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); border: 5px solid var(--gold); }
+        .container { background: white; color: var(--physics-blue); width: 100%; max-width: 800px; border-radius: 20px; padding: 30px; border: 5px solid var(--physics-gold); }
 
-        h1 { font-family: 'Fredoka One', cursive; text-align: center; color: var(--fuerte); font-size: 2.5rem; margin-top: 0; }
+        h1 { font-family: 'Fredoka One', cursive; text-align: center; color: var(--physics-red); font-size: 2rem; margin-top: 0; border-bottom: 3px dashed var(--physics-gold); padding-bottom: 10px; }
         
-        .screen { display: none; }
-        .active { display: block; }
+        .section { margin-bottom: 30px; padding: 15px; border-radius: 15px; background: var(--light); }
+        h2 { font-size: 1.2rem; color: var(--physics-blue); border-left: 5px solid var(--physics-red); padding-left: 10px; }
 
-        .vocal-info { display: flex; justify-content: space-around; margin: 20px 0; }
-        .vocal { padding: 15px; border-radius: 50%; font-weight: 900; color: white; font-size: 1.5rem; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
-        .v-f { background: var(--fuerte); border: 3px solid #b71c1c; }
-        .v-d { background: var(--debil); border: 3px solid #0d47a1; }
-
-        .btn { background: var(--gold); border: none; padding: 15px 30px; border-radius: 50px; font-family: 'Fredoka One', cursive; font-size: 1.2rem; cursor: pointer; color: var(--dark); transition: 0.3s; width: 100%; margin-top: 20px; }
-        .btn:hover { transform: scale(1.05); background: #ffa000; }
-
-        .exercise-box { background: var(--light); padding: 20px; border-radius: 15px; border: 2px dashed var(--debil); margin-top: 20px; text-align: center; }
-        .word-to-split { font-size: 2rem; font-weight: 900; color: var(--dark); letter-spacing: 5px; margin-bottom: 20px; }
+        .exercise { margin-bottom: 20px; padding: 10px; border-bottom: 1px solid #ddd; }
+        .input-group { margin-top: 10px; }
         
-        input { font-size: 1.5rem; padding: 10px; border-radius: 10px; border: 3px solid var(--dark); text-align: center; width: 80%; text-transform: lowercase; }
+        input { padding: 8px; border-radius: 5px; border: 2px solid var(--physics-blue); width: 120px; text-align: center; font-weight: bold; }
+        
+        .btn-check { background: var(--physics-red); color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-check:hover { background: var(--physics-blue); }
 
-        #feedback { margin-top: 15px; font-weight: 700; height: 25px; }
+        .feedback { display: block; margin-top: 5px; font-weight: bold; font-size: 0.9rem; min-height: 20px; }
         .correct { color: #2d6a4f; }
-        .wrong { color: var(--fuerte); }
+        .wrong { color: #e63946; }
 
-        .progress { background: #eee; height: 10px; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
-        #progress-bar { background: var(--gold); width: 0%; height: 100%; transition: 0.5s; }
+        .formula-box { background: #fff; border: 2px solid var(--physics-gold); padding: 10px; border-radius: 10px; text-align: center; font-style: italic; margin-bottom: 15px; }
+
+        @media print { .btn-check { display: none; } }
     </style>
 </head>
 <body>
 
-    <div class="game-card">
-        <!-- PANTALLA 1: EXPLICACIÓN -->
-        <div id="screen-intro" class="screen active">
-            <h1>¡Hola, Carla!</h1>
-            <p>Bienvenida a la <b>Academia Esparta</b>. Hoy aprenderemos a romper palabras.</p>
-            <div class="vocal-info">
-                <div><div class="vocal v-f">A E O</div><p>FUERTES</p></div>
-                <div><div class="vocal v-d">I U</div><p>DÉBILES</p></div>
-            </div>
-            <p><b>Recuerda:</b> Hay Hiato si...</p>
-            <ul>
-                <li>Hay 2 fuertes juntas (Ej: <b>ca-ó-ti-co</b>)</li>
-                <li>La débil lleva tilde (Ej: <b>rí-o</b>)</li>
-            </ul>
-            <button class="btn" onclick="nextScreen('screen-game')">¡EMPEZAR DESAFÍO!</button>
-        </div>
+<div class="container">
+    <h1>PLAN DE TRABAJO: CINEMÁTICA</h1>
+    <p style="text-align: center;"><b>Alumna:</b> Mari Carmen | <b>Curso:</b> 3º ESO F y Q</p>
 
-        <!-- PANTALLA 2: JUEGO -->
-        <div id="screen-game" class="screen">
-            <div class="progress"><div id="progress-bar"></div></div>
-            <p style="text-align: center;">Misión: Separa las sílabas usando guiones (Ej: ma-re-o)</p>
-            
-            <div class="exercise-box">
-                <div id="word-display" class="word-to-split">CAÓTICO</div>
-                <input type="text" id="user-input" placeholder="tu-res-pue-sta" autocomplete="off">
-                <div id="feedback"></div>
-                <button class="btn" onclick="checkAnswer()">COMPROBAR</button>
+    <div class="formula-box">
+        🚀 <b>Recordatorio:</b> \( v = \frac{x_f - x_0}{t} \)  |  \( 1 \text{ km/h} = \frac{1000 \text{ m}}{3600 \text{ s}} \approx 0,278 \text{ m/s} \)
+    </div>
+
+    <!-- SECCIÓN 1: FACTORES DE CONVERSIÓN -->
+    <div class="section">
+        <h2>1. Conversión de Unidades al S.I.</h2>
+        <p>Convierte estas velocidades del plan de trabajo a m/s:</p>
+        
+        <div class="exercise">
+            <span>a) 200 m/min</span>
+            <div class="input-group">
+                <input type="number" id="ex1a" step="0.01"> m/s 
+                <button class="btn-check" onclick="check('ex1a', 3.33)">Verificar</button>
+                <span id="feedback-ex1a" class="feedback"></span>
             </div>
         </div>
 
-        <!-- PANTALLA 3: VICTORIA -->
-        <div id="screen-win" class="screen">
-            <h1>🏆 ¡ERES UNA CRACK!</h1>
-            <p style="text-align: center; font-size: 1.2rem;">Carla, has dominado los hiatos como una verdadera espartana.</p>
-            <p style="text-align: center;">Ya no habrá tilde ni separación que se te resista.</p>
-            <button class="btn" onclick="location.reload()">VOLVER A JUGAR</button>
+        <div class="exercise">
+            <span>b) 130 km/h</span>
+            <div class="input-group">
+                <input type="number" id="ex1b" step="0.01"> m/s 
+                <button class="btn-check" onclick="check('ex1b', 36.11)">Verificar</button>
+                <span id="feedback-ex1b" class="feedback"></span>
+            </div>
         </div>
     </div>
 
-    <script>
-        const exercises = [
-            { word: "caótico", answer: "ca-ó-ti-co" },
-            { word: "frío", answer: "frí-o" },
-            { word: "poeta", answer: "po-e-ta" },
-            { word: "grúa", answer: "grú-a" },
-            { word: "teatro", answer: "te-a-tro" },
-            { word: "búho", answer: "bú-ho" },
-            { word: "mareo", answer: "ma-re-o" }
-        ];
+    <!-- SECCIÓN 2: CÁLCULOS MRU -->
+    <div class="section">
+        <h2>2. Problemas de Movimiento</h2>
+        
+        <div class="exercise">
+            <p><b>El Tren de Alta Velocidad:</b> Recorre 650 km en 3 horas.</p>
+            <span>a) Velocidad en km/h:</span>
+            <div class="input-group">
+                <input type="number" id="ex2a"> km/h 
+                <button class="btn-check" onclick="check('ex2a', 216.67)">Verificar</button>
+                <span id="feedback-ex2a" class="feedback"></span>
+            </div>
+        </div>
 
-        let currentIdx = 0;
+        <div class="exercise">
+            <p><b>El Coche:</b> Sale de \( x_0 = 50 \text{ m} \) a una velocidad de \( 20 \text{ m/s} \). Pasados 8 segundos:</p>
+            <span>Distancia al origen (\( x_f \)):</span>
+            <div class="input-group">
+                <input type="number" id="ex2b"> metros 
+                <button class="btn-check" onclick="check('ex2b', 210)">Verificar</button>
+                <span id="feedback-ex2b" class="feedback"></span>
+            </div>
+        </div>
+    </div>
 
-        function nextScreen(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            if(id === 'screen-game') loadWord();
+    <!-- SECCIÓN 3: GRÁFICAS -->
+    <div class="section">
+        <h2>3. Análisis de Gráficas (Tramo Atleta)</h2>
+        <p>Observa la tabla del atleta (puntos 8, 9 y 10s). ¿Qué velocidad lleva en ese tramo?</p>
+        <div class="exercise">
+            <div class="input-group">
+                <input type="number" id="ex3a"> m/s 
+                <button class="btn-check" onclick="check('ex3a', 0)">Verificar</button>
+                <span id="feedback-ex3a" class="feedback"></span>
+            </div>
+            <p><small>(Pista: Si la posición no cambia de 40m, ¿se mueve?)</small></p>
+        </div>
+    </div>
+
+    <button class="btn-check" style="width:100%; padding: 15px;" onclick="window.print()">🖨️ IMPRIMIR FICHA PARA REPASO MANUAL</button>
+</div>
+
+<script>
+    function check(id, correct) {
+        const val = parseFloat(document.getElementById(id).value);
+        const feedback = document.getElementById('feedback-' + id);
+        
+        // Tolerancia para decimales
+        if (Math.abs(val - correct) < 0.5) {
+            feedback.innerText = "¡Correcto! 🎯";
+            feedback.className = "feedback correct";
+        } else {
+            feedback.innerText = "Revisa el cálculo ❌ (Sol: " + correct + ")";
+            feedback.className = "feedback wrong";
         }
+    }
+</script>
 
-        function loadWord() {
-            document.getElementById('word-display').innerText = exercises[currentIdx].word.toUpperCase();
-            document.getElementById('user-input').value = "";
-            document.getElementById('feedback').innerText = "";
-            updateProgress();
-        }
-
-        function checkAnswer() {
-            const input = document.getElementById('user-input').value.trim().toLowerCase();
-            const feedback = document.getElementById('feedback');
-            
-            if (input === exercises[currentIdx].answer) {
-                feedback.innerHTML = "¡EXCELENTE! ✨";
-                feedback.className = "correct";
-                setTimeout(() => {
-                    currentIdx++;
-                    if (currentIdx < exercises.length) {
-                        loadWord();
-                    } else {
-                        nextScreen('screen-win');
-                    }
-                }, 1000);
-            } else {
-                feedback.innerHTML = "¡Casi! Revisa las sílabas 🧐";
-                feedback.className = "wrong";
-            }
-        }
-
-        function updateProgress() {
-            const percent = (currentIdx / exercises.length) * 100;
-            document.getElementById('progress-bar').style.width = percent + "%";
-        }
-    </script>
 </body>
 </html>
