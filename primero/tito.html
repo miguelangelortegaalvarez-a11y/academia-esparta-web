@@ -3,106 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misión Cinemática - Mari Carmen - Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Cinemática 3º ESO - Mari Carmen</title>
     
-    <!-- Cargador de Matemáticas (MathJax) -->
+    <!-- Motor para fórmulas matemáticas -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { 
-            --esparta-blue: #1a237e; 
-            --esparta-gold: #c6a700; 
-            --bg: #f8f9fa;
+        /* Estilo minimalista en blanco y negro */
+        body { 
+            font-family: 'Courier New', Courier, monospace; 
+            background-color: #ffffff; 
+            margin: 0; 
+            padding: 20px; 
+            color: #000000;
         }
-        
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: #212121; line-height: 1.6; }
-        
-        .btn-imprimir {
-            display: block; width: fit-content; margin: 0 auto 20px;
-            background-color: var(--esparta-blue); color: white; border: 2px solid var(--esparta-gold); 
-            padding: 12px 30px; border-radius: 8px; font-weight: 900; cursor: pointer; text-transform: uppercase;
+
+        .no-print {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #000;
+            color: #fff;
+            border: 2px solid #000;
+            padding: 10px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: #fff;
+            color: #000;
         }
 
         .page { 
-            background-color: white; width: 210mm; min-height: 297mm; padding: 15mm; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1); margin: 0 auto; border-radius: 5px;
-            border-top: 12px solid var(--esparta-blue); box-sizing: border-box;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 15mm;
+            border: 2px solid #000;
+            box-sizing: border-box;
         }
 
-        header { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 25px; text-align: center; }
-        h1 { font-weight: 900; font-size: 26px; color: var(--esparta-blue); margin: 0; }
-        
-        .box-teoria { background: #e8eaf6; border-radius: 10px; padding: 15px; margin-bottom: 25px; border-left: 6px solid var(--esparta-blue); }
+        header {
+            text-align: center;
+            border-bottom: 3px double #000;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
 
-        .ejercicio { margin-bottom: 30px; padding: 15px; border: 1px solid #eee; border-radius: 10px; background: #fafafa; }
-        .num-ej { background: var(--esparta-blue); color: white; padding: 2px 10px; border-radius: 4px; font-weight: bold; margin-right: 10px; }
+        h1 { margin: 0; font-size: 22pt; text-decoration: underline; }
         
-        .espacio-respuesta { border: 1px dashed #bbb; background: #fff; height: 100px; border-radius: 5px; margin-top: 15px; }
-        
-        .table-data { width: 100%; border-collapse: collapse; margin: 15px 0; }
-        .table-data td, .table-data th { border: 1px solid #333; padding: 8px; text-align: center; }
-        
-        footer { text-align: center; margin-top: 40px; font-size: 11px; color: #757575; border-top: 1px solid #eee; padding-top: 15px; }
+        .section {
+            margin-bottom: 25px;
+        }
 
-        @media print { .btn-imprimir { display: none; } .page { box-shadow: none; border: 1px solid #eee; margin: 0; width: 100%; } }
+        .section-title {
+            font-weight: bold;
+            font-size: 14pt;
+            border: 1px solid #000;
+            display: inline-block;
+            padding: 5px 15px;
+            margin-bottom: 15px;
+        }
+
+        .ejercicio {
+            margin-bottom: 20px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .box-respuesta {
+            border: 1px solid #000;
+            height: 120px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .box-respuesta::after {
+            content: "SOLUCIÓN Y OPERACIONES:";
+            font-size: 8pt;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            color: #666;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 9pt;
+            border-top: 1px dashed #000;
+            padding-top: 10px;
+        }
+
+        @media print {
+            .no-print { display: none; }
+            body { padding: 0; }
+            .page { border: none; width: 100%; height: auto; }
+        }
     </style>
 </head>
 <body>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Plan de Trabajo Mari Carmen</button>
+    <div class="no-print">
+        <button class="btn" onclick="window.print()">🖨️ Imprimir / Guardar como PDF</button>
+    </div>
 
     <div class="page">
         <header>
-            <h1>PLAN DE TRABAJO TEMA 6: CINEMÁTICA</h1>
-            <p>Alumna: <b>MARI CARMEN</b> · 3º ESO Física y Química</p>
+            <h1>CONTROL DE FÍSICA Y QUÍMICA: CINEMÁTICA</h1>
+            <p>PLAN DE TRABAJO TEMA 6 | ALUMNA: <b>MARI CARMEN</b></p>
         </header>
 
-        <div class="box-teoria">
-            <b>🛡️ Manual de Supervivencia:</b>
-            <br>• Ecuación MRU: \( x_f = x_0 + v \cdot t \)
-            <br>• Velocidad: \( v = \frac{\Delta x}{\Delta t} \)
-            <br>• Factores de Conversión: \( 1 \text{ km} = 1000 \text{ m} \) y \( 1 \text{ h} = 3600 \text{ s} \)
+        <!-- BLOQUE 1 -->
+        <div class="section">
+            <div class="section-title">I. CAMBIO DE UNIDADES (S.I.)</div>
+            <div class="ejercicio">
+                <p>1. Expresa las siguientes velocidades en metros por segundo (\(m/s\)) utilizando factores de conversión:</p>
+                <p>a) \( 200 \text{ m/min} \)</p>
+                <p>b) \( 130 \text{ km/h} \)</p>
+                <div class="box-respuesta"></div>
+            </div>
         </div>
 
-        <!-- EJERCICIO 1 -->
-        <div class="ejercicio">
-            <p><span class="num-ej">2</span> <b>Factores de Conversión:</b> Expresa en unidades del S.I. (\(\text{m/s}\)) usando factores:</p>
-            <p>a) \( 200 \text{ m/min} \)</p>
-            <p>b) \( 130 \text{ km/h} \)</p>
-            <div class="espacio-respuesta"></div>
+        <!-- BLOQUE 2 -->
+        <div class="section">
+            <div class="section-title">II. ANÁLISIS DE GRÁFICAS</div>
+            <div class="ejercicio">
+                <p>2. A partir de los datos de posición (\(x\)) y tiempo (\(t\)) del atleta:</p>
+                <table class="data-table">
+                    <tr><th>Tiempo (s)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>8</td><td>9</td><td>10</td></tr>
+                    <tr><th>Posición (m)</th><td>10</td><td>14</td><td>20</td><td>26</td><td>40</td><td>40</td><td>40</td></tr>
+                </table>
+                <p>a) ¿Cuál es la velocidad del atleta entre \(t = 0 \text{ s}\) y \(t = 3 \text{ s}\)?</p>
+                <p>b) Describe el movimiento en los últimos 2 segundos del entrenamiento:</p>
+                <div class="box-respuesta" style="height: 80px;"></div>
+            </div>
         </div>
 
-        <!-- EJERCICIO 2 -->
-        <div class="ejercicio">
-            <p><span class="num-ej">5</span> <b>Análisis de Datos:</b> Observa la tabla de entrenamiento del atleta:</p>
-            <table class="table-data">
-                <tr><th>Tiempo \( (s) \)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
-                <tr><th>Posición \( (m) \)</th><td>10</td><td>14</td><td>20</td><td>26</td><td>42</td><td>40</td><td>40</td><td>40</td></tr>
-            </table>
-            <p>a) Calcula la velocidad entre \( t=0s \) y \( t=3s \).</p>
-            <p>b) ¿Qué ocurre con el atleta entre \( t=9s \) y \( t=10s \)? Justifica tu respuesta.</p>
-            <div class="espacio-respuesta"></div>
-        </div>
+        <!-- BLOQUE 3 -->
+        <div class="section">
+            <div class="section-title">III. PROBLEMAS DE MRU</div>
+            <div class="ejercicio">
+                <p>3. Un tren de alta velocidad recorre \( 650 \text{ km} \) en un tiempo de \( 3 \text{ h} \). Calcula su velocidad media en \( \text{km/h} \) y luego conviértela a \( \text{m/s} \).</p>
+                <div class="box-respuesta"></div>
+            </div>
 
-        <!-- EJERCICIO 3 -->
-        <div class="ejercicio">
-            <p><span class="num-ej">7</span> <b>Velocidad del AVE:</b> Un tren recorre \( 650 \text{ km} \) en \( 3 \text{ horas} \).</p>
-            <p>a) Calcula la velocidad media en \( \text{km/h} \).</p>
-            <p>b) Expresa dicho resultado en \( \text{m/s} \).</p>
-            <div class="espacio-respuesta"></div>
-        </div>
-
-        <!-- EJERCICIO 4 -->
-        <div class="ejercicio">
-            <p><span class="num-ej">8</span> <b>Posición Inicial:</b> Un coche situado inicialmente a \( 50 \text{ m} \) a la derecha del origen (\( x_0 = +50 \text{ m} \)) se desplaza a \( v = 20 \text{ m/s} \).</p>
-            <p>Calcula la posición final a los \( 8 \text{ segundos} \):</p>
-            <div class="espacio-respuesta"></div>
+            <div class="ejercicio">
+                <p>4. Un coche parte de una posición inicial \( x_0 = 50 \text{ m} \) con una velocidad constante de \( 20 \text{ m/s} \). Calcula su posición final tras \( 8 \text{ s} \) de movimiento.</p>
+                <div class="box-respuesta"></div>
+            </div>
         </div>
 
         <footer>
-            © 2026 Academia Esparta · "El movimiento se demuestra andando (y calculando)" · Mari Carmen
+            Academia Esparta 2026 - Material de Repaso Exclusivo para Mari Carmen
         </footer>
     </div>
 
