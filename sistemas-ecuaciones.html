@@ -3,45 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinemática 3º ESO - Mari Carmen (Entrenamiento)</title>
+    <title>Master Funciones 3º ESO - Mari Carmen</title>
     
+    <!-- Motor para fórmulas matemáticas -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
+        /* Estilo Blanco y Negro para impresión profesional */
         body { 
             font-family: 'Courier New', Courier, monospace; 
-            background-color: #ffffff; 
-            margin: 0; 
-            padding: 20px; 
-            color: #000000;
+            background-color: #fff; 
+            color: #000; 
+            line-height: 1.5;
+            padding: 20px;
         }
 
         .no-print {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
-        .btn {
+        .btn-print {
             background: #000;
             color: #fff;
             border: 2px solid #000;
-            padding: 10px 25px;
+            padding: 12px 30px;
             font-weight: bold;
             cursor: pointer;
-            text-transform: uppercase;
+            font-size: 14pt;
         }
 
-        .btn:hover {
-            background: #fff;
-            color: #000;
-        }
+        .btn-print:hover { background: #fff; color: #000; }
 
         .page { 
             width: 210mm;
-            min-height: 297mm;
             margin: 0 auto;
             padding: 15mm;
             border: 2px solid #000;
@@ -50,118 +47,191 @@
 
         header {
             text-align: center;
-            border-bottom: 3px double #000;
+            border-bottom: 4px double #000;
             margin-bottom: 30px;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
 
-        h1 { margin: 0; font-size: 20pt; text-decoration: underline; }
-        
-        .section { margin-bottom: 25px; }
+        h1 { margin: 0; font-size: 22pt; text-transform: uppercase; }
+        h2 { font-size: 16pt; border-bottom: 1px solid #000; margin-top: 30px; }
+        h3 { font-size: 13pt; margin-bottom: 5px; }
 
-        .section-title {
-            font-weight: bold;
-            font-size: 13pt;
+        .teoria-box {
             border: 1px solid #000;
-            display: inline-block;
-            padding: 5px 15px;
-            margin-bottom: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
         }
 
-        .data-table {
+        .ejemplo-resuelto {
+            margin: 15px 0;
+            padding-left: 20px;
+            border-left: 3px solid #000;
+        }
+
+        .ejercicio {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
         }
 
-        .data-table th, .data-table td {
+        table, th, td {
             border: 1px solid #000;
-            padding: 8px;
+        }
+
+        th, td {
+            padding: 10px;
             text-align: center;
         }
 
         .box-respuesta {
             border: 1px solid #000;
-            height: 110px;
+            height: 120px;
             margin-top: 10px;
             position: relative;
         }
 
         .box-respuesta::after {
-            content: "OPERACIONES Y RESULTADO:";
+            content: "ESPACIO PARA CÁLCULOS Y GRÁFICA:";
             font-size: 7pt;
             position: absolute;
             top: 5px;
             left: 5px;
-            color: #444;
+            color: #555;
+        }
+
+        .label-v-f {
+            display: inline-block;
+            border: 1px solid #000;
+            padding: 2px 5px;
+            font-size: 9pt;
+            font-weight: bold;
         }
 
         footer {
-            margin-top: 30px;
+            margin-top: 50px;
             text-align: center;
-            font-size: 9pt;
+            font-size: 10pt;
             border-top: 1px dashed #000;
-            padding-top: 10px;
+            padding-top: 20px;
         }
 
         @media print {
             .no-print { display: none; }
             body { padding: 0; }
-            .page { border: none; width: 100%; height: auto; }
+            .page { border: none; width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div class="no-print">
-        <button class="btn" onclick="window.print()">🖨️ IMPRIMIR / MANDAR PDF</button>
+        <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR / MANDAR PDF A MARI CARMEN</button>
     </div>
 
     <div class="page">
         <header>
-            <h1>FICHA DE REPASO: CINEMÁTICA (NUEVOS DATOS)</h1>
-            <p>PREPARACIÓN EXAMEN | ALUMNA: <b>MARI CARMEN</b></p>
+            <h1>ESTUDIO DE FUNCIONES POLINÓMICAS</h1>
+            <p>MATEMÁTICAS 3º ESO | ALUMNA: <b>MARI CARMEN</b></p>
         </header>
 
-        <div class="section">
-            <div class="section-title">I. FACTORES DE CONVERSIÓN AL S.I.</div>
-            <div class="ejercicio">
-                <p>1. Transforma las siguientes velocidades a metros por segundo (\(m/s\)) realizando los factores correspondientes:</p>
-                <p>a) \( 450 \text{ m/min} \)</p>
-                <p>b) \( 108 \text{ km/h} \)</p>
-                <div class="box-respuesta"></div>
+        <!-- PARTE 1: EXPLICACIÓN -->
+        <section class="section">
+            <div class="section-title"><h2>I. EXPLICACIÓN TEÓRICA</h2></div>
+            
+            <div class="teoria-box">
+                <h3>1. FUNCIÓN CONSTANTE</h3>
+                <p>Es una función donde el valor de \(y\) no depende de \(x\). Su gráfica es siempre una <b>línea horizontal</b>.</p>
+                <p><b>Expresión:</b> \(y = n\)</p>
+                <p><b>Pendiente:</b> \(m = 0\) (No tiene inclinación).</p>
             </div>
-        </div>
 
-        <div class="section">
-            <div class="section-title">II. GRÁFICAS POSICIÓN-TIEMPO</div>
+            <div class="teoria-box">
+                <h3>2. FUNCIÓN LINEAL (O PROPORCIONAL)</h3>
+                <p>Relaciona dos magnitudes directamente proporcionales. <b>Pasa siempre por el origen \((0,0)\)</b>.</p>
+                <p><b>Expresión:</b> \(y = mx\)</p>
+                <p><b>Pendiente (\(m\)):</b> Indica cuánto sube o baja la recta por cada unidad de \(x\).</p>
+            </div>
+
+            <div class="teoria-box">
+                <h3>3. FUNCIÓN AFÍN</h3>
+                <p>Es una línea recta que <b>NO pasa por el origen</b>. Corta al eje \(Y\) en un punto llamado ordenada en el origen.</p>
+                <p><b>Expresión:</b> \(y = mx + n\)</p>
+                <p>Donde \(m\) es la pendiente y \(n\) es la <b>ordenada en el origen</b> (punto de corte con el eje vertical).</p>
+            </div>
+        </section>
+
+        <!-- PARTE 2: EJEMPLOS -->
+        <section class="section">
+            <div class="section-title"><h2>II. EJEMPLOS RESUELTOS</h2></div>
+            
+            <div class="ejemplo-resuelto">
+                <p><b>Ejemplo 1 (Afín):</b> \(y = 3x - 2\)</p>
+                <ul>
+                    <li>Pendiente \(m = 3\) (La recta sube rápido).</li>
+                    <li>Ordenada en el origen \(n = -2\) (Corta al eje vertical en el punto \(-2\)).</li>
+                    <li>Si \(x=0\), entonces \(y=-2\).</li>
+                </ul>
+            </div>
+
+            <div class="ejemplo-resuelto">
+                <p><b>Ejemplo 2 (Lineal):</b> \(y = -2x\)</p>
+                <ul>
+                    <li>Pendiente \(m = -2\) (La recta baja).</li>
+                    <li>Corta en \((0,0)\). No tiene número suelto (\(n=0\)).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PARTE 3: EJERCICIOS -->
+        <section class="section">
+            <div class="section-title"><h2>III. EJERCICIOS DE ENTRENAMIENTO</h2></div>
+
             <div class="ejercicio">
-                <p>2. Un ciclista registra los siguientes datos de su posición (\(x\)) según el tiempo (\(t\)):</p>
-                <table class="data-table">
-                    <tr><th>Tiempo (s)</th><td>0</td><td>2</td><td>4</td><td>6</td><td>10</td><td>12</td><td>14</td></tr>
-                    <tr><th>Posición (m)</th><td>5</td><td>15</td><td>25</td><td>35</td><td>35</td><td>25</td><td>15</td></tr>
+                <p><b>1. Análisis de Funciones:</b> Identifica el tipo (Constante, Lineal o Afín) y extrae los datos de la fórmula:</p>
+                <table>
+                    <tr>
+                        <th>Función</th>
+                        <th>Tipo de Función</th>
+                        <th>Pendiente (\(m\))</th>
+                        <th>Ordenada (\(n\))</th>
+                    </tr>
+                    <tr><td>\(y = -5x\)</td><td></td><td></td><td></td></tr>
+                    <tr><td>\(y = 2x + 4\)</td><td></td><td></td><td></td></tr>
+                    <tr><td>\(y = 7\)</td><td></td><td></td><td></td></tr>
+                    <tr><td>\(y = \frac{3}{4}x - 1\)</td><td></td><td></td><td></td></tr>
+                    <tr><td>\(y = -x\)</td><td></td><td></td><td></td></tr>
                 </table>
-                <p>a) Calcula la velocidad en el tramo de \(t = 0 \text{ s}\) a \(t = 6 \text{ s}\).</p>
-                <p>b) ¿Qué ocurre entre el segundo \(6\) y el segundo \(10\)? ¿Y a partir del segundo \(10\)?</p>
-                <div class="box-respuesta" style="height: 100px;"></div>
             </div>
-        </div>
 
-        <div class="section">
-            <div class="section-title">III. PROBLEMAS DE MOVIMIENTO (MRU)</div>
             <div class="ejercicio">
-                <p>3. Un avión comercial vuela a una velocidad constante. Si recorre \( 1800 \text{ km} \) en un tiempo de \( 2,5 \text{ h} \), calcula su velocidad media en \( \text{km/h} \) y en \( \text{m/s} \).</p>
+                <p><b>2. Tabla de Valores:</b> Completa la tabla para la función afín \(y = -2x + 1\):</p>
+                <table>
+                    <tr><th>\(x\)</th><td>-3</td><td>-1</td><td>0</td><td>2</td><td>5</td></tr>
+                    <tr><th>\(y\)</th><td></td><td></td><td></td><td></td><td></td></tr>
+                </table>
+            </div>
+
+            <div class="ejercicio">
+                <p><b>3. Representación:</b> Halla la pendiente y la ordenada en el origen de una recta que pasa por los puntos \(A(0, 5)\) y \(B(1, 7)\). Escribe su ecuación.</p>
                 <div class="box-respuesta"></div>
             </div>
 
             <div class="ejercicio">
-                <p>4. Un corredor se encuentra inicialmente en la posición \( x_0 = -20 \text{ m} \) (a la izquierda del origen). Si corre con una velocidad de \( 6 \text{ m/s} \), ¿cuál será su posición final tras \( 15 \text{ s} \)?</p>
-                <div class="box-respuesta"></div>
+                <p><b>4. Aplicación Real:</b> Mari Carmen alquila una bicicleta. El coste es de \(5€\) de fianza inicial más \(2€\) por cada hora de uso.</p>
+                <p>a) Escribe la ecuación de la función coste (\(y\)) en función de las horas (\(x\)).</p>
+                <p>b) Calcula cuánto pagará si usa la bici durante \(4\) horas.</p>
+                <div class="box-respuesta" style="height: 150px;"></div>
             </div>
-        </div>
+        </section>
 
         <footer>
-            Academia Esparta 2026 - ¡A por el éxito en Cinemática, Mari Carmen!
+            Academia Esparta 2026 - ¡Concentración y éxito, Mari Carmen!
         </footer>
     </div>
 
