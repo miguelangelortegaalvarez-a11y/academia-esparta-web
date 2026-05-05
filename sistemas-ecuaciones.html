@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecuaciones Candela - Academia Esparta</title>
+    <title>Ecuaciones Nivel Pro - Candela - Academia Esparta</title>
     
-    <!-- Soporte para símbolos matemáticos -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -14,21 +13,23 @@
             font-family: 'Courier New', Courier, monospace; 
             background-color: #fff; 
             color: #000; 
-            line-height: 1.4;
-            padding: 10px;
+            line-height: 1.2;
+            padding: 0;
+            margin: 0;
         }
 
         .no-print {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            padding: 20px;
+            background: #f0f0f0;
         }
 
         .btn-print {
             background: #000;
             color: #fff;
             border: 2px solid #000;
-            padding: 10px 25px;
+            padding: 12px 30px;
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
@@ -36,128 +37,173 @@
 
         .page { 
             width: 210mm;
+            min-height: 297mm;
             margin: 0 auto;
             padding: 15mm;
-            border: 2px solid #000;
+            border-bottom: 2px dashed #000;
             box-sizing: border-box;
+            position: relative;
+            page-break-after: always;
         }
 
         header {
             text-align: center;
             border-bottom: 4px double #000;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding-bottom: 10px;
         }
 
         h1 { margin: 0; font-size: 18pt; text-decoration: underline; }
-        h2 { font-size: 14pt; border-bottom: 1px solid #000; margin-top: 25px; padding-bottom: 5px; }
+        h2 { font-size: 14pt; border: 1px solid #000; display: inline-block; padding: 5px 15px; margin-top: 10px; text-transform: uppercase; }
         
-        .box-teoria { border: 1px solid #000; padding: 12px; margin: 15px 0; background: #f9f9f9; }
+        .box-teoria { border: 1px solid #000; padding: 10px; margin: 10px 0; background: #f9f9f9; font-size: 10pt; }
         
         .ejercicio { 
-            margin-bottom: 25px; 
-            page-break-inside: avoid; 
-            display: flex;
-            flex-direction: column;
+            margin-bottom: 15px; 
+            page-break-inside: avoid;
         }
 
         .ecuacion {
-            font-size: 16pt;
+            font-size: 15pt;
             font-weight: bold;
-            margin: 10px 0;
+            margin: 5px 0;
         }
         
         .box-respuesta { 
             border: 1px solid #000; 
-            height: 150px; 
+            height: 120px; 
             width: 100%;
             margin-top: 5px; 
             position: relative;
         }
         
         .box-respuesta::before {
-            content: "PASOS Y SOLUCIÓN FINAL:";
+            content: "OPERACIONES:";
             font-size: 7pt;
             position: absolute;
-            top: 5px;
+            top: 3px;
             left: 5px;
-            color: #444;
+            color: #666;
         }
 
-        footer {
-            margin-top: 40px;
+        .footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 15mm;
+            right: 15mm;
             text-align: center;
             font-size: 9pt;
             border-top: 1px dashed #000;
-            padding-top: 10px;
+            padding-top: 5px;
         }
 
-        @media print { .no-print { display: none; } .page { border: none; width: 100%; } }
+        @media print { 
+            .no-print { display: none; } 
+            .page { border: none; margin: 0; } 
+            .page { border-bottom: none; }
+        }
     </style>
 </head>
 <body>
 
     <div class="no-print">
-        <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR / GUARDAR PDF PARA CANDELA</button>
+        <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR FICHA (2 PÁGINAS)</button>
     </div>
 
+    <!-- PÁGINA 1: SIN PARÉNTESIS -->
     <div class="page">
         <header>
-            <h1>ECUACIONES DE PRIMER GRADO</h1>
-            <p>MATEMÁTICAS | ALUMNA: <b>CANDELA</b></p>
+            <h1>ECUACIONES DE PRIMER GRADO - PARTE I</h1>
+            <p>ALUMNA: <b>CANDELA</b> | ACADEMIA ESPARTA</p>
         </header>
 
         <section>
-            <h2>I. EL MÉTODO ESPARTANO</h2>
+            <h2>Nivel 1: Transposición de Términos</h2>
             <div class="box-teoria">
-                <b>Paso 1:</b> Agrupa todos los términos con \(x\) en el lado izquierdo y los números en el lado derecho.
-                <br><b>Paso 2:</b> ¡Cuidado! Si un término cambia de lado, cambia su signo (de \(+\) a \(-\) o de \(-\) a \(+\)).
-                <br><b>Paso 3:</b> Reduce ambos lados y despeja la \(x\).
+                <b>Recordatorio:</b> Pasa las \(x\) a la izquierda y los números a la derecha. 
+                Si un término "salta" el igual, <b>cambia su signo</b>.
             </div>
-            <p><b>Ejemplo resuelto:</b> \(3x + 5 = x + 13\)</p>
-            <p>1. Movemos la \(x\): \(3x - x = 13 - 5\)</p>
-            <p>2. Operamos: \(2x = 8\)</p>
-            <p>3. Despejamos: \(x = \frac{8}{2} = 4\)</p>
+
+            <div class="ejercicio">
+                <div class="ecuacion">1) \(6x - 12 = 3x + 9\)</div>
+                <div class="box-respuesta"></div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ecuacion">2) \(4x + 7 = x + 25\)</div>
+                <div class="box-respuesta"></div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ecuacion">3) \(9x - 5 = 2x + 30\)</div>
+                <div class="box-respuesta"></div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ecuacion">4) \(5x + 14 = 8x - 1\)</div>
+                <div class="box-respuesta"></div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ecuacion">5) \(12x - 10 = 4x + 22\)</div>
+                <div class="box-respuesta"></div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ecuacion">6) \(2x - 18 = 5x - 3\)</div>
+                <div class="box-respuesta"></div>
+            </div>
         </section>
+
+        <div class="footer">Página 1 - Academia Esparta 2026</div>
+    </div>
+
+    <!-- PÁGINA 2: CON PARÉNTESIS -->
+    <div class="page">
+        <header>
+            <h1>ECUACIONES DE PRIMER GRADO - PARTE II</h1>
+            <p>ALUMNA: <b>CANDELA</b> | ACADEMIA ESPARTA</p>
+        </header>
 
         <section>
-            <h2>II. EJERCICIOS DE ENTRENAMIENTO</h2>
+            <h2>Nivel 2: Propiedad Distributiva</h2>
+            <div class="box-teoria">
+                <b>Nuevo Paso:</b> Primero elimina los paréntesis multiplicando el número de fuera por TODO lo de dentro.
+                <br><i>Ejemplo: \(2(x + 3) \rightarrow 2x + 6\)</i>. Luego, resuelve como las anteriores.
+            </div>
 
             <div class="ejercicio">
-                <div class="ecuacion">1) \(5x - 4 = 2x + 11\)</div>
+                <div class="ecuacion">7) \(3(x + 2) = x + 10\)</div>
                 <div class="box-respuesta"></div>
             </div>
 
             <div class="ejercicio">
-                <div class="ecuacion">2) \(7x + 2 = 4x + 20\)</div>
+                <div class="ecuacion">8) \(2(x - 4) = 5x - 17\)</div>
                 <div class="box-respuesta"></div>
             </div>
 
             <div class="ejercicio">
-                <div class="ecuacion">3) \(8x - 10 = 3x + 5\)</div>
+                <div class="ecuacion">9) \(4(2x + 1) = 3x + 24\)</div>
                 <div class="box-respuesta"></div>
             </div>
 
             <div class="ejercicio">
-                <div class="ecuacion">4) \(2x + 9 = 5x - 6\)</div>
+                <div class="ecuacion">10) \(5(x + 3) = 2(x + 12)\)</div>
                 <div class="box-respuesta"></div>
             </div>
 
             <div class="ejercicio">
-                <div class="ecuacion">5) \(10x - 7 = 4x + 23\)</div>
+                <div class="ecuacion">11) \(6(x - 1) = 4x + 8\)</div>
                 <div class="box-respuesta"></div>
             </div>
 
             <div class="ejercicio">
-                <div class="ecuacion">6) \(x - 8 = 3x - 14\)</div>
+                <div class="ecuacion">12) \(3(2x - 5) = x + 5\)</div>
                 <div class="box-respuesta"></div>
             </div>
-
         </section>
 
-        <footer>
-            Academia Esparta 2026 - ¡Candela, domina la \(x\) y ganarás la batalla!
-        </footer>
+        <div class="footer">Página 2 - Academia Esparta 2026</div>
     </div>
 
 </body>
