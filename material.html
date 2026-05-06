@@ -3,47 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funciones lineales · 3º ESO · Academia Esparta</title>
+    <title>Tabla de derivadas · 1º Bachillerato CCSS · Academia Esparta</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
+    </script>
 
     <style>
-        body { font-family:'Courier New',Courier,monospace; font-size:10.5pt; line-height:1.35; background:#fff; color:#000; padding:20px; }
-        .no-print { text-align:center; margin-bottom:16px; }
-        .btn { background:#000; color:#fff; border:none; padding:8px 20px; font-family:'Courier New',monospace; font-size:10pt; font-weight:bold; cursor:pointer; letter-spacing:1px; }
-        .btn:hover { background:#333; }
-
-        .page { width:210mm; border:2px solid #000; padding:11mm 12mm; box-sizing:border-box; margin:0 auto; background:#fff; }
-
-        .doc-header { border-bottom:5px double #000; margin-bottom:12px; padding-bottom:5px; }
-        h1 { font-size:15pt; text-decoration:underline; margin:0 0 3px 0; }
-        .subtitulo { font-size:9.5pt; letter-spacing:1px; margin:0; }
-        .alumna-linea { font-size:10pt; margin:5px 0 0 0; }
-
-        /* Bloque de ejercicio */
-        .ej { display:flex; gap:12px; margin-bottom:10px; padding-bottom:10px; border-bottom:1.5px dashed #666; }
-        .ej:last-of-type { border-bottom:none; margin-bottom:0; }
-
-        .ej-left { flex:1; }
-        .ej-num { font-size:12pt; font-weight:bold; margin-bottom:4px; }
-        .ecuacion-original { font-size:13pt; font-weight:bold; background:#000; color:#fff; padding:2px 10px; display:inline-block; margin-bottom:8px; }
-
-        .etiqueta { font-size:9.5pt; font-weight:bold; text-decoration:underline; margin:6px 0 3px 0; }
-        .lin { border-bottom:1px solid #000; display:block; height:16px; margin:3px 0; }
-
-        /* Tabla de valores */
-        table.tv { border-collapse:collapse; margin:4px 0; font-size:10.5pt; }
-        table.tv th { background:#000; color:#fff; border:1.5px solid #000; padding:4px 10px; text-align:center; font-size:9.5pt; }
-        table.tv td { border:1.5px solid #000; padding:5px 10px; text-align:center; min-width:32px; }
-        table.tv td.fila-x { background:#e8e8e8; font-weight:bold; }
-
-        .ej-right { flex:0 0 144px; }
-
-        footer { margin-top:14px; font-size:9pt; border-top:1px solid #000; padding-top:7px; text-align:center; }
-
-        @media print {
-            .no-print { display:none; }
-            .page { border:none; width:100%; }
+        :root {
+            --verde-esparta: #0a5233;
+            --verde-osc: #073a24;
+            --verde-claro: #e8f1ec;
+            --verde-acento: #1f7f54;
+            --dorado: #c9a14a;
+            --tinta: #1a1a1a;
+            --gris: #5b6b62;
         }
-        @page { size:A4 portrait; margin:1.8cm 2cm; }
+
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--tinta);
+            background: #eef2ef;
+            padding: 28px 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .no-print { text-align: center; margin-bottom: 22px; }
+        .btn {
+            background: var(--verde-esparta); color: #fff; border: none;
+            padding: 12px 26px; font-family: 'Inter', sans-serif; font-size: 11pt;
+            font-weight: 700; letter-spacing: 1.4px; cursor: pointer;
+            border-radius: 999px; box-shadow: 0 4px 14px rgba(10,82,51,0.25);
+            transition: transform .15s ease;
+        }
+        .btn:hover { transform: translateY(-1px); background: var(--verde-osc); }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 18px 60px rgba(0,0,0,0.12);
+            padding: 14mm 13mm 12mm 13mm;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* HEADER ESPECTACULAR */
+        .hero {
+            background: linear-gradient(135deg, var(--verde-esparta) 0%, var(--verde-osc) 100%);
+            color: #fff;
+            padding: 16px 22px 18px 22px;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+        .hero::before {
+            content: ""; position: absolute; right: -40px; top: -40px;
+            width: 180px; height: 180px; border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+        .hero::after {
+            content: ""; position: absolute; right: 40px; bottom: -60px;
+            width: 120px; height: 120px; border-radius: 50%;
+            background: rgba(201,161,74,0.12);
+        }
+
+        .hero-top {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 9pt; letter-spacing: 3px; font-weight: 600;
+            opacity: 0.85; margin-bottom: 6px; text-transform: uppercase;
+        }
+        .hero-top .marca { display: flex; align-items: center; gap: 8px; }
+        .hero-top .marca-icon { font-size: 14pt; }
+
+        h1.titulo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 38pt;
+            letter-spacing: -0.5px;
+            margin: 0 0 4px 0;
+            line-height: 1;
+        }
+        .titulo .acento { color: var(--dorado); font-style: italic; }
+
+        .subtitulo {
+            font-size: 10pt;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.92;
+            margin: 0;
+        }
+        .subtitulo b { color: var(--dorado); font-weight: 700; }
+
+        /* BLOQUE / SECCIÓN */
+        .bloque { margin-top: 14px; }
+        .bloque-cabecera {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+        }
+        .bloque-num {
+            width: 26px; height: 26px; border-radius: 50%;
+            background: var(--verde-esparta); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif; font-weight: 700;
+            font-size: 12pt;
+        }
+        .bloque-titulo {
+            font-family: 'Playfair Display', serif;
+            font-size: 14pt; font-weight: 700;
+            color: var(--verde-osc);
+            margin: 0;
+        }
+        .bloque-linea {
+            flex: 1; height: 1.5px;
+            background: linear-gradient(to right, var(--verde-acento), transparent);
+            margin-left: 6px;
+        }
+
+        /* GRID DE FÓRMULAS */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px 10px;
+        }
+        .grid.tres { grid-template-columns: 1fr 1fr 1fr; }
+
+        .formula {
+            background: linear-gradient(180deg, #fafdfb 0%, #fff 100%);
+            border: 1.2px solid #d6e3da;
+            border-left: 3.5px solid var(--verde-esparta);
+            border-radius: 4px;
+            padding: 7px 10px 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+        .formula .idx {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 14pt;
+            color: var(--verde-esparta);
+            min-width: 22px;
+            text-align: center;
+            opacity: 0.55;
+        }
+        .formula .cuerpo { flex: 1; }
+        .formula .nombre {
+            display: block;
+            font-size: 7.5pt;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--gris);
+            margin-bottom: 1px;
+        }
+        .formula .ec {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11.5pt;
+        }
+        .formula .ec .flecha {
+            color: var(--dorado);
+            font-weight: 800;
+            font-size: 12pt;
+        }
+        .formula mjx-container { font-size: 100% !important; }
+
+        /* Footer */
+        footer {
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1.5px solid var(--verde-esparta);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 8.5pt; color: var(--gris);
+        }
+        footer .marca-foot {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700; color: var(--verde-osc);
+            font-size: 10pt; letter-spacing: 0.5px;
+        }
+        footer .web { letter-spacing: 1px; }
+
+        /* IMPRESIÓN */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .no-print { display: none; }
+            .page {
+                width: 100%; min-height: auto;
+                box-shadow: none; border-radius: 0;
+                padding: 8mm 9mm 7mm 9mm;
+            }
+            .formula { break-inside: avoid; }
+            .bloque { break-inside: avoid; }
+        }
+        @page { size: A4 portrait; margin: 0.6cm; }
     </style>
 </head>
 <body>
@@ -54,232 +218,156 @@
 
 <div class="page">
 
-    <div class="doc-header">
-        <h1>Funciones lineales</h1>
-        <p class="subtitulo">DESPEJAR Y · TABLA DE VALORES · REPRESENTACIÓN &nbsp;|&nbsp; 3º ESO · ACADEMIA ESPARTA</p>
-        <p class="alumna-linea">Alumna: <b>Noelia Lobón</b> &nbsp;&nbsp;&nbsp; Fecha: ___________</p>
+    <div class="hero">
+        <div class="hero-top">
+            <span class="marca"><span class="marca-icon">🏛️</span> Academia Esparta · Torremolinos</span>
+            <span>1º Bachillerato · CCSS</span>
+        </div>
+        <h1 class="titulo">Tabla de <span class="acento">Derivadas</span></h1>
+        <p class="subtitulo">Reglas esenciales · <b>Matemáticas Aplicadas a las CCSS I</b> · Curso 25/26</p>
     </div>
 
-    <!-- ══════════ EJERCICIO 1 ══════════ -->
-    <div class="ej">
-        <div class="ej-left">
-            <div class="ej-num">1.</div>
-            <div class="ecuacion-original">x + y − 3 = 0</div>
-
-            <div class="etiqueta">Despeja y:</div>
-            <span class="lin"></span>
-            <span class="lin"></span>
-
-            <div class="etiqueta">Tabla de valores:</div>
-            <table class="tv">
-                <tr>
-                    <th>x</th>
-                    <td class="fila-x">−1</td>
-                    <td class="fila-x">0</td>
-                    <td class="fila-x">1</td>
-                    <td class="fila-x">2</td>
-                    <td class="fila-x">3</td>
-                </tr>
-                <tr>
-                    <th>y</th>
-                    <td></td><td></td><td></td><td></td><td></td>
-                </tr>
-            </table>
+    <!-- BLOQUE 1 -->
+    <section class="bloque">
+        <div class="bloque-cabecera">
+            <div class="bloque-num">I</div>
+            <h2 class="bloque-titulo">Derivadas elementales</h2>
+            <div class="bloque-linea"></div>
         </div>
-
-        <div class="ej-right">
-            <!-- Grid: x∈[-3,6] y∈[-4,7], unit=13px, origin=(57,99) -->
-            <svg width="142" height="163" xmlns="http://www.w3.org/2000/svg">
-              <!-- Vertical grid lines x=-3..6 -->
-              <line x1="18"  y1="8" x2="18"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="31"  y1="8" x2="31"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="44"  y1="8" x2="44"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="57"  y1="8" x2="57"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="70"  y1="8" x2="70"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="83"  y1="8" x2="83"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="96"  y1="8" x2="96"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="109" y1="8" x2="109" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="122" y1="8" x2="122" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="135" y1="8" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <!-- Horizontal grid lines y=7..-4 -->
-              <line x1="18" y1="8"   x2="135" y2="8"   stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="21"  x2="135" y2="21"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="34"  x2="135" y2="34"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="47"  x2="135" y2="47"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="60"  x2="135" y2="60"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="73"  x2="135" y2="73"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="86"  x2="135" y2="86"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="99"  x2="135" y2="99"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="112" x2="135" y2="112" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="125" x2="135" y2="125" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="138" x2="135" y2="138" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="151" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <!-- Axes -->
-              <line x1="13"  y1="99" x2="140" y2="99"  stroke="#000" stroke-width="1.5"/>
-              <line x1="57"  y1="4"  x2="57"  y2="156" stroke="#000" stroke-width="1.5"/>
-              <!-- Arrows -->
-              <polygon points="141,99 136,96 136,102" fill="#000"/>
-              <polygon points="57,3 54,8 60,8" fill="#000"/>
-              <!-- Axis labels -->
-              <text x="142" y="102" font-size="7" font-family="Courier New" fill="#000">x</text>
-              <text x="59"  y="3"   font-size="7" font-family="Courier New" fill="#000">y</text>
-              <!-- X labels every 2 units -->
-              <text x="31"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">-2</text>
-              <text x="83"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">2</text>
-              <text x="109" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">4</text>
-              <text x="135" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">6</text>
-              <!-- Y labels every 2 units -->
-              <text x="53" y="25"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">6</text>
-              <text x="53" y="51"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">4</text>
-              <text x="53" y="77"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">2</text>
-              <text x="50" y="116" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-2</text>
-              <text x="50" y="142" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-4</text>
-            </svg>
+        <div class="grid tres">
+            <div class="formula">
+                <span class="idx">01</span>
+                <div class="cuerpo">
+                    <span class="nombre">Constante</span>
+                    <div class="ec">\(y = k\) <span class="flecha">→</span> \(y' = 0\)</div>
+                </div>
+            </div>
+            <div class="formula">
+                <span class="idx">02</span>
+                <div class="cuerpo">
+                    <span class="nombre">Identidad</span>
+                    <div class="ec">\(y = x\) <span class="flecha">→</span> \(y' = 1\)</div>
+                </div>
+            </div>
+            <div class="formula">
+                <span class="idx">03</span>
+                <div class="cuerpo">
+                    <span class="nombre">Potencia</span>
+                    <div class="ec">\(y = x^{n}\) <span class="flecha">→</span> \(y' = n\,x^{n-1}\)</div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ══════════ EJERCICIO 2 ══════════ -->
-    <div class="ej">
-        <div class="ej-left">
-            <div class="ej-num">2.</div>
-            <div class="ecuacion-original">2x − y + 1 = 0</div>
-
-            <div class="etiqueta">Despeja y:</div>
-            <span class="lin"></span>
-            <span class="lin"></span>
-
-            <div class="etiqueta">Tabla de valores:</div>
-            <table class="tv">
-                <tr>
-                    <th>x</th>
-                    <td class="fila-x">−2</td>
-                    <td class="fila-x">−1</td>
-                    <td class="fila-x">0</td>
-                    <td class="fila-x">1</td>
-                    <td class="fila-x">2</td>
-                </tr>
-                <tr>
-                    <th>y</th>
-                    <td></td><td></td><td></td><td></td><td></td>
-                </tr>
-            </table>
+    <!-- BLOQUE 2 -->
+    <section class="bloque">
+        <div class="bloque-cabecera">
+            <div class="bloque-num">II</div>
+            <h2 class="bloque-titulo">Reglas de operación</h2>
+            <div class="bloque-linea"></div>
         </div>
-
-        <div class="ej-right">
-            <svg width="142" height="163" xmlns="http://www.w3.org/2000/svg">
-              <line x1="18"  y1="8" x2="18"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="31"  y1="8" x2="31"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="44"  y1="8" x2="44"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="57"  y1="8" x2="57"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="70"  y1="8" x2="70"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="83"  y1="8" x2="83"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="96"  y1="8" x2="96"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="109" y1="8" x2="109" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="122" y1="8" x2="122" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="135" y1="8" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="8"   x2="135" y2="8"   stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="21"  x2="135" y2="21"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="34"  x2="135" y2="34"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="47"  x2="135" y2="47"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="60"  x2="135" y2="60"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="73"  x2="135" y2="73"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="86"  x2="135" y2="86"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="99"  x2="135" y2="99"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="112" x2="135" y2="112" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="125" x2="135" y2="125" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="138" x2="135" y2="138" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="151" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="13"  y1="99" x2="140" y2="99"  stroke="#000" stroke-width="1.5"/>
-              <line x1="57"  y1="4"  x2="57"  y2="156" stroke="#000" stroke-width="1.5"/>
-              <polygon points="141,99 136,96 136,102" fill="#000"/>
-              <polygon points="57,3 54,8 60,8" fill="#000"/>
-              <text x="142" y="102" font-size="7" font-family="Courier New" fill="#000">x</text>
-              <text x="59"  y="3"   font-size="7" font-family="Courier New" fill="#000">y</text>
-              <text x="31"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">-2</text>
-              <text x="83"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">2</text>
-              <text x="109" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">4</text>
-              <text x="135" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">6</text>
-              <text x="53" y="25"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">6</text>
-              <text x="53" y="51"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">4</text>
-              <text x="53" y="77"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">2</text>
-              <text x="50" y="116" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-2</text>
-              <text x="50" y="142" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-4</text>
-            </svg>
+        <div class="grid">
+            <div class="formula">
+                <span class="idx">04</span>
+                <div class="cuerpo">
+                    <span class="nombre">Suma o resta</span>
+                    <div class="ec">\(y = f(x) \pm g(x)\) <span class="flecha">→</span> \(y' = f'(x) \pm g'(x)\)</div>
+                </div>
+            </div>
+            <div class="formula">
+                <span class="idx">05</span>
+                <div class="cuerpo">
+                    <span class="nombre">Constante por función</span>
+                    <div class="ec">\(y = k\cdot f(x)\) <span class="flecha">→</span> \(y' = k\cdot f'(x)\)</div>
+                </div>
+            </div>
+            <div class="formula">
+                <span class="idx">06</span>
+                <div class="cuerpo">
+                    <span class="nombre">Producto</span>
+                    <div class="ec">\(y = f\cdot g\) <span class="flecha">→</span> \(y' = f'\,g + f\,g'\)</div>
+                </div>
+            </div>
+            <div class="formula">
+                <span class="idx">07</span>
+                <div class="cuerpo">
+                    <span class="nombre">Cociente</span>
+                    <div class="ec">\(y = \dfrac{f}{g}\) <span class="flecha">→</span> \(y' = \dfrac{f'\,g - f\,g'}{g^{2}}\)</div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ══════════ EJERCICIO 3 ══════════ -->
-    <div class="ej">
-        <div class="ej-left">
-            <div class="ej-num">3.</div>
-            <div class="ecuacion-original">x + 2y − 8 = 0</div>
-
-            <div class="etiqueta">Despeja y:</div>
-            <span class="lin"></span>
-            <span class="lin"></span>
-
-            <div class="etiqueta">Tabla de valores:</div>
-            <table class="tv">
-                <tr>
-                    <th>x</th>
-                    <td class="fila-x">−2</td>
-                    <td class="fila-x">0</td>
-                    <td class="fila-x">2</td>
-                    <td class="fila-x">4</td>
-                    <td class="fila-x">6</td>
-                </tr>
-                <tr>
-                    <th>y</th>
-                    <td></td><td></td><td></td><td></td><td></td>
-                </tr>
-            </table>
+    <!-- BLOQUE 3 -->
+    <section class="bloque">
+        <div class="bloque-cabecera">
+            <div class="bloque-num">III</div>
+            <h2 class="bloque-titulo">Regla de la cadena</h2>
+            <div class="bloque-linea"></div>
         </div>
-
-        <div class="ej-right">
-            <svg width="142" height="163" xmlns="http://www.w3.org/2000/svg">
-              <line x1="18"  y1="8" x2="18"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="31"  y1="8" x2="31"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="44"  y1="8" x2="44"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="57"  y1="8" x2="57"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="70"  y1="8" x2="70"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="83"  y1="8" x2="83"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="96"  y1="8" x2="96"  y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="109" y1="8" x2="109" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="122" y1="8" x2="122" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="135" y1="8" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="8"   x2="135" y2="8"   stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="21"  x2="135" y2="21"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="34"  x2="135" y2="34"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="47"  x2="135" y2="47"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="60"  x2="135" y2="60"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="73"  x2="135" y2="73"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="86"  x2="135" y2="86"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="99"  x2="135" y2="99"  stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="112" x2="135" y2="112" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="125" x2="135" y2="125" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="138" x2="135" y2="138" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="18" y1="151" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
-              <line x1="13"  y1="99" x2="140" y2="99"  stroke="#000" stroke-width="1.5"/>
-              <line x1="57"  y1="4"  x2="57"  y2="156" stroke="#000" stroke-width="1.5"/>
-              <polygon points="141,99 136,96 136,102" fill="#000"/>
-              <polygon points="57,3 54,8 60,8" fill="#000"/>
-              <text x="142" y="102" font-size="7" font-family="Courier New" fill="#000">x</text>
-              <text x="59"  y="3"   font-size="7" font-family="Courier New" fill="#000">y</text>
-              <text x="31"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">-2</text>
-              <text x="83"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">2</text>
-              <text x="109" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">4</text>
-              <text x="135" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">6</text>
-              <text x="53" y="25"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">6</text>
-              <text x="53" y="51"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">4</text>
-              <text x="53" y="77"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">2</text>
-              <text x="50" y="116" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-2</text>
-              <text x="50" y="142" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-4</text>
-            </svg>
+        <div class="grid">
+            <div class="formula">
+                <span class="idx">08</span>
+                <div class="cuerpo">
+                    <span class="nombre">Potencia compuesta</span>
+                    <div class="ec">\(y = [f(x)]^{a}\) <span class="flecha">→</span> \(y' = a\,[f(x)]^{a-1}\cdot f'(x)\)</div>
+                </div>
+            </div>
+            <div class="formula">
+                <span class="idx">09</span>
+                <div class="cuerpo">
+                    <span class="nombre">Raíz cuadrada</span>
+                    <div class="ec">\(y = \sqrt{f(x)}\) <span class="flecha">→</span> \(y' = \dfrac{f'(x)}{2\sqrt{f(x)}}\)</div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <footer>Academia Esparta · Torremolinos &nbsp;|&nbsp; Funciones lineales 3º ESO</footer>
+    <!-- BLOQUE 4 -->
+    <section class="bloque">
+        <div class="bloque-cabecera">
+            <div class="bloque-num">IV</div>
+            <h2 class="bloque-titulo">Logaritmos y exponenciales</h2>
+            <div class="bloque-linea"></div>
+        </div>
+        <div class="grid">
+            <div class="formula">
+                <span class="idx">10</span>
+                <div class="cuerpo">
+                    <span class="nombre">Logaritmo neperiano</span>
+                    <div class="ec">\(y = \ln f(x)\) <span class="flecha">→</span> \(y' = \dfrac{f'(x)}{f(x)}\)</div>
+                </div>
+            </div>
+            <div class="formula">
+                <span class="idx">11</span>
+                <div class="cuerpo">
+                    <span class="nombre">Logaritmo en base a</span>
+                    <div class="ec">\(y = \log_{a} f(x)\) <span class="flecha">→</span> \(y' = \dfrac{f'(x)}{f(x)\,\ln a}\)</div>
+                </div>
+            </div>
+            <div class="formula">
+                <span class="idx">12</span>
+                <div class="cuerpo">
+                    <span class="nombre">Exponencial natural</span>
+                    <div class="ec">\(y = e^{f(x)}\) <span class="flecha">→</span> \(y' = e^{f(x)}\cdot f'(x)\)</div>
+                </div>
+            </div>
+            <div class="formula">
+                <span class="idx">13</span>
+                <div class="cuerpo">
+                    <span class="nombre">Exponencial base a</span>
+                    <div class="ec">\(y = a^{f(x)}\) <span class="flecha">→</span> \(y' = a^{f(x)}\cdot \ln a\cdot f'(x)\)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <span class="marca-foot">🏛️ Academia Esparta</span>
+        <span class="web">academiaesparta.es · Torremolinos</span>
+    </footer>
 
 </div>
+
 </body>
 </html>
