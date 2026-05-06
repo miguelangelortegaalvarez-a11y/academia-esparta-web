@@ -3,27 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de derivadas · 1º Bachillerato CCSS · Academia Esparta</title>
+    <title>Derivadas · Tabla y ejercicios resueltos · 1º Bachillerato CCSS · Academia Esparta</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
-      MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
+      MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] } };
     </script>
 
     <style>
         :root {
             --verde-esparta: #0a5233;
-            --verde-osc: #073a24;
-            --verde-claro: #e8f1ec;
+            --verde-osc: #052a1a;
             --verde-acento: #1f7f54;
-            --dorado: #c9a14a;
-            --tinta: #1a1a1a;
-            --gris: #5b6b62;
+            --verde-papel: #f3f8f5;
+            --verde-tinte: #e6efe9;
+            --dorado: #b88a3e;
+            --dorado-claro: #d9b87a;
+            --tinta: #131614;
+            --gris: #6a7770;
+            --gris-claro: #d8ddd9;
+            --hueso: #f8f9f8;
         }
 
         * { box-sizing: border-box; }
@@ -31,58 +35,60 @@
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: var(--tinta);
-            background: #eef2ef;
-            padding: 28px 16px;
+            background: #ecf0ed;
+            padding: 28px 16px 60px 16px;
             -webkit-font-smoothing: antialiased;
         }
 
+        /* ====== TOOLBAR ====== */
         .no-print { text-align: center; margin-bottom: 22px; }
         .btn {
-            background: var(--verde-esparta); color: #fff; border: none;
-            padding: 12px 26px; font-family: 'Inter', sans-serif; font-size: 11pt;
-            font-weight: 700; letter-spacing: 1.4px; cursor: pointer;
-            border-radius: 999px; box-shadow: 0 4px 14px rgba(10,82,51,0.25);
-            transition: transform .15s ease;
+            background: var(--verde-osc); color: #fff; border: none;
+            padding: 13px 30px; font-family: 'Inter', sans-serif; font-size: 11pt;
+            font-weight: 700; letter-spacing: 1.6px; cursor: pointer;
+            border-radius: 999px; box-shadow: 0 6px 18px rgba(5,42,26,0.25);
+            transition: transform .15s ease, box-shadow .15s ease;
         }
-        .btn:hover { transform: translateY(-1px); background: var(--verde-osc); }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(5,42,26,0.32); }
 
+        /* ====== PÁGINA A4 ====== */
         .page {
             width: 210mm;
             min-height: 297mm;
-            margin: 0 auto;
+            margin: 0 auto 22px auto;
             background: #fff;
             border-radius: 6px;
-            box-shadow: 0 18px 60px rgba(0,0,0,0.12);
+            box-shadow: 0 18px 60px rgba(0,0,0,0.10);
             padding: 14mm 13mm 12mm 13mm;
             position: relative;
             overflow: hidden;
         }
 
-        /* HEADER ESPECTACULAR */
+        /* ====== HERO PORTADA ====== */
         .hero {
             background: linear-gradient(135deg, var(--verde-esparta) 0%, var(--verde-osc) 100%);
             color: #fff;
-            padding: 16px 22px 18px 22px;
-            border-radius: 6px;
+            padding: 22px 26px 24px 26px;
+            border-radius: 8px;
             position: relative;
             overflow: hidden;
-            margin-bottom: 14px;
+            margin-bottom: 18px;
         }
         .hero::before {
-            content: ""; position: absolute; right: -40px; top: -40px;
-            width: 180px; height: 180px; border-radius: 50%;
-            background: rgba(255,255,255,0.06);
+            content: ""; position: absolute; right: -60px; top: -80px;
+            width: 240px; height: 240px; border-radius: 50%;
+            background: rgba(255,255,255,0.05);
         }
         .hero::after {
-            content: ""; position: absolute; right: 40px; bottom: -60px;
-            width: 120px; height: 120px; border-radius: 50%;
-            background: rgba(201,161,74,0.12);
+            content: ""; position: absolute; right: 80px; bottom: -90px;
+            width: 160px; height: 160px; border-radius: 50%;
+            background: rgba(184,138,62,0.14);
         }
-
         .hero-top {
             display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 9pt; letter-spacing: 3px; font-weight: 600;
-            opacity: 0.85; margin-bottom: 6px; text-transform: uppercase;
+            opacity: 0.85; margin-bottom: 8px; text-transform: uppercase;
         }
         .hero-top .marca { display: flex; align-items: center; gap: 8px; }
         .hero-top .marca-icon { font-size: 14pt; }
@@ -90,102 +96,222 @@
         h1.titulo {
             font-family: 'Playfair Display', serif;
             font-weight: 900;
-            font-size: 38pt;
-            letter-spacing: -0.5px;
-            margin: 0 0 4px 0;
-            line-height: 1;
+            font-size: 44pt;
+            letter-spacing: -1px;
+            margin: 0 0 6px 0;
+            line-height: 0.95;
         }
-        .titulo .acento { color: var(--dorado); font-style: italic; }
+        .titulo .acento { color: var(--dorado-claro); font-style: italic; }
 
         .subtitulo {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 10pt;
             font-weight: 500;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             opacity: 0.92;
             margin: 0;
         }
-        .subtitulo b { color: var(--dorado); font-weight: 700; }
+        .subtitulo b { color: var(--dorado-claro); font-weight: 700; }
 
-        /* BLOQUE / SECCIÓN */
+        /* ====== BLOQUE / SECCIÓN ====== */
         .bloque { margin-top: 14px; }
         .bloque-cabecera {
-            display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+            display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px;
+            border-bottom: 1.5px solid var(--gris-claro);
+            padding-bottom: 6px;
         }
         .bloque-num {
-            width: 26px; height: 26px; border-radius: 50%;
-            background: var(--verde-esparta); color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Playfair Display', serif; font-weight: 700;
-            font-size: 12pt;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700; font-size: 9pt;
+            letter-spacing: 2px;
+            color: var(--dorado);
+            background: var(--verde-papel);
+            padding: 4px 10px;
+            border-radius: 999px;
         }
         .bloque-titulo {
             font-family: 'Playfair Display', serif;
-            font-size: 14pt; font-weight: 700;
+            font-size: 17pt; font-weight: 700;
             color: var(--verde-osc);
             margin: 0;
-        }
-        .bloque-linea {
-            flex: 1; height: 1.5px;
-            background: linear-gradient(to right, var(--verde-acento), transparent);
-            margin-left: 6px;
+            letter-spacing: -0.3px;
         }
 
-        /* GRID DE FÓRMULAS */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 7px 10px;
+        /* ====== TABLA RESUMEN (PORTADA) ====== */
+        .resumen {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 8px 12px;
+            margin-top: 6px;
         }
-        .grid.tres { grid-template-columns: 1fr 1fr 1fr; }
+        .resumen.tres { grid-template-columns: 1fr 1fr 1fr; }
 
-        .formula {
-            background: linear-gradient(180deg, #fafdfb 0%, #fff 100%);
-            border: 1.2px solid #d6e3da;
-            border-left: 3.5px solid var(--verde-esparta);
-            border-radius: 4px;
-            padding: 7px 10px 8px 12px;
+        .res-card {
+            background: linear-gradient(180deg, var(--verde-papel) 0%, #fff 100%);
+            border: 1.2px solid var(--gris-claro);
+            border-radius: 8px;
+            padding: 8px 12px 10px 14px;
             display: flex;
             align-items: center;
             gap: 10px;
             position: relative;
         }
-        .formula .idx {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 14pt;
+        .res-card .idx {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700; font-size: 16pt;
             color: var(--verde-esparta);
-            min-width: 22px;
-            text-align: center;
-            opacity: 0.55;
+            min-width: 28px; text-align: center;
+            opacity: 0.45;
         }
-        .formula .cuerpo { flex: 1; }
-        .formula .nombre {
+        .res-card .nombre {
             display: block;
-            font-size: 7.5pt;
-            font-weight: 700;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: var(--gris);
-            margin-bottom: 1px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 7.5pt; font-weight: 600;
+            letter-spacing: 1.3px; text-transform: uppercase;
+            color: var(--gris); margin-bottom: 1px;
         }
-        .formula .ec {
-            display: flex; align-items: center; gap: 6px;
-            font-size: 11.5pt;
+        .res-card .ec {
+            display: flex; align-items: center; gap: 7px;
+            font-size: 11pt;
         }
-        .formula .ec .flecha {
-            color: var(--dorado);
-            font-weight: 800;
-            font-size: 12pt;
+        .res-card .ec .flecha {
+            color: var(--dorado); font-weight: 800; font-size: 12pt;
         }
-        .formula mjx-container { font-size: 100% !important; }
 
-        /* Footer */
+        /* ====== REGLA: ENCABEZADO Y FÓRMULA ====== */
+        .regla {
+            margin-top: 18px;
+            padding: 16px 18px 14px 18px;
+            border: 1.5px solid var(--gris-claro);
+            border-radius: 12px;
+            background: #fff;
+            position: relative;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .regla::before {
+            content: ""; position: absolute; left: 0; top: 18px; bottom: 18px;
+            width: 4px; background: var(--verde-esparta);
+            border-radius: 0 4px 4px 0;
+        }
+        .regla-cab {
+            display: flex; align-items: flex-start; gap: 14px;
+            margin-bottom: 10px;
+        }
+        .regla-numero {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700; font-size: 28pt;
+            color: var(--verde-esparta);
+            line-height: 1; letter-spacing: -1px;
+            min-width: 48px;
+        }
+        .regla-numero .barra { color: var(--dorado); }
+        .regla-numero .total { font-size: 13pt; opacity: 0.45; }
+
+        .regla-meta { flex: 1; }
+        .regla-tag {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 8pt; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: var(--dorado);
+            margin-bottom: 2px;
+        }
+        .regla-titulo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700; font-size: 16pt;
+            color: var(--verde-osc);
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, var(--verde-papel) 0%, #fff 100%);
+            border: 1.5px dashed var(--verde-acento);
+            border-radius: 8px;
+            padding: 10px 16px;
+            display: flex; justify-content: center; align-items: center;
+            gap: 14px;
+            font-size: 13pt;
+            margin: 4px 0 10px 0;
+        }
+        .formula-box .flecha {
+            color: var(--dorado); font-weight: 800; font-size: 16pt;
+        }
+
+        /* ====== EJEMPLOS RESUELTOS ====== */
+        .ejemplos-titulo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 8.5pt; font-weight: 600;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--gris);
+            margin: 6px 0 8px 0;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .ejemplos-titulo::before {
+            content: ""; width: 16px; height: 1.5px; background: var(--dorado);
+        }
+
+        .ejemplos {
+            display: grid; grid-template-columns: 1fr;
+            gap: 8px;
+        }
+        .ejemplos.dos { grid-template-columns: 1fr 1fr; gap: 10px; }
+        .ejemplos.tres { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
+        .ej {
+            background: var(--hueso);
+            border-radius: 8px;
+            padding: 9px 12px 10px 14px;
+            border-left: 3px solid var(--verde-acento);
+            position: relative;
+        }
+        .ej-cab {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 7.5pt; font-weight: 700;
+            letter-spacing: 1.6px; text-transform: uppercase;
+            color: var(--verde-esparta);
+            margin-bottom: 4px;
+        }
+        .ej-funcion {
+            font-size: 11pt; font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .ej-pasos {
+            font-size: 10pt;
+            color: var(--tinta);
+            padding-left: 12px;
+            border-left: 1.5px dotted var(--gris-claro);
+            margin: 4px 0 5px 4px;
+        }
+        .ej-pasos p { margin: 3px 0; }
+        .ej-pasos .nota {
+            font-size: 8.5pt; color: var(--gris);
+            font-style: italic;
+        }
+        .ej-resp {
+            background: var(--verde-osc); color: #fff;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            font-size: 11pt;
+            margin-top: 2px;
+        }
+        .ej-resp .lbl {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 7.5pt; font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--dorado-claro);
+            margin-right: 6px;
+        }
+
+        /* ====== FOOTER ====== */
         footer {
-            margin-top: 14px;
+            margin-top: 16px;
             padding-top: 10px;
             border-top: 1.5px solid var(--verde-esparta);
             display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 8.5pt; color: var(--gris);
         }
         footer .marca-foot {
@@ -193,21 +319,24 @@
             font-weight: 700; color: var(--verde-osc);
             font-size: 10pt; letter-spacing: 0.5px;
         }
-        footer .web { letter-spacing: 1px; }
+        footer .web { letter-spacing: 1.5px; }
+        footer .pag { letter-spacing: 2px; }
 
-        /* IMPRESIÓN */
+        /* ====== IMPRESIÓN ====== */
         @media print {
             body { background: #fff; padding: 0; }
             .no-print { display: none; }
             .page {
                 width: 100%; min-height: auto;
                 box-shadow: none; border-radius: 0;
-                padding: 8mm 9mm 7mm 9mm;
+                padding: 8mm 10mm 8mm 10mm;
+                margin: 0;
+                page-break-after: always;
             }
-            .formula { break-inside: avoid; }
-            .bloque { break-inside: avoid; }
+            .page:last-child { page-break-after: auto; }
+            .regla, .res-card, .ej { break-inside: avoid; page-break-inside: avoid; }
         }
-        @page { size: A4 portrait; margin: 0.6cm; }
+        @page { size: A4 portrait; margin: 0.5cm; }
     </style>
 </head>
 <body>
@@ -216,6 +345,9 @@
     <button class="btn" onclick="window.print()">🖨️ IMPRIMIR / GUARDAR PDF</button>
 </div>
 
+<!-- ============================================================ -->
+<!-- PÁGINA 1 — PORTADA + TABLA RESUMEN -->
+<!-- ============================================================ -->
 <div class="page">
 
     <div class="hero">
@@ -223,148 +355,602 @@
             <span class="marca"><span class="marca-icon">🏛️</span> Academia Esparta · Torremolinos</span>
             <span>1º Bachillerato · CCSS</span>
         </div>
-        <h1 class="titulo">Tabla de <span class="acento">Derivadas</span></h1>
-        <p class="subtitulo">Reglas esenciales · <b>Matemáticas Aplicadas a las CCSS I</b> · Curso 25/26</p>
+        <h1 class="titulo">Derivadas <span class="acento">resueltas</span></h1>
+        <p class="subtitulo">Tabla completa + ejercicios paso a paso · <b>Mat. Aplicadas a las CCSS I</b></p>
     </div>
 
-    <!-- BLOQUE 1 -->
+    <!-- BLOQUE I -->
     <section class="bloque">
         <div class="bloque-cabecera">
-            <div class="bloque-num">I</div>
+            <span class="bloque-num">BLOQUE I</span>
             <h2 class="bloque-titulo">Derivadas elementales</h2>
-            <div class="bloque-linea"></div>
         </div>
-        <div class="grid tres">
-            <div class="formula">
-                <span class="idx">01</span>
-                <div class="cuerpo">
-                    <span class="nombre">Constante</span>
-                    <div class="ec">\(y = k\) <span class="flecha">→</span> \(y' = 0\)</div>
-                </div>
-            </div>
-            <div class="formula">
-                <span class="idx">02</span>
-                <div class="cuerpo">
-                    <span class="nombre">Identidad</span>
-                    <div class="ec">\(y = x\) <span class="flecha">→</span> \(y' = 1\)</div>
-                </div>
-            </div>
-            <div class="formula">
-                <span class="idx">03</span>
-                <div class="cuerpo">
-                    <span class="nombre">Potencia</span>
-                    <div class="ec">\(y = x^{n}\) <span class="flecha">→</span> \(y' = n\,x^{n-1}\)</div>
-                </div>
-            </div>
+        <div class="resumen tres">
+            <div class="res-card"><span class="idx">01</span><div><span class="nombre">Constante</span><div class="ec">\(y = k\) <span class="flecha">→</span> \(y' = 0\)</div></div></div>
+            <div class="res-card"><span class="idx">02</span><div><span class="nombre">Identidad</span><div class="ec">\(y = x\) <span class="flecha">→</span> \(y' = 1\)</div></div></div>
+            <div class="res-card"><span class="idx">03</span><div><span class="nombre">Potencia</span><div class="ec">\(y = x^{n}\) <span class="flecha">→</span> \(y' = n\,x^{n-1}\)</div></div></div>
         </div>
     </section>
 
-    <!-- BLOQUE 2 -->
+    <!-- BLOQUE II -->
     <section class="bloque">
         <div class="bloque-cabecera">
-            <div class="bloque-num">II</div>
+            <span class="bloque-num">BLOQUE II</span>
             <h2 class="bloque-titulo">Reglas de operación</h2>
-            <div class="bloque-linea"></div>
         </div>
-        <div class="grid">
-            <div class="formula">
-                <span class="idx">04</span>
-                <div class="cuerpo">
-                    <span class="nombre">Suma o resta</span>
-                    <div class="ec">\(y = f(x) \pm g(x)\) <span class="flecha">→</span> \(y' = f'(x) \pm g'(x)\)</div>
-                </div>
-            </div>
-            <div class="formula">
-                <span class="idx">05</span>
-                <div class="cuerpo">
-                    <span class="nombre">Constante por función</span>
-                    <div class="ec">\(y = k\cdot f(x)\) <span class="flecha">→</span> \(y' = k\cdot f'(x)\)</div>
-                </div>
-            </div>
-            <div class="formula">
-                <span class="idx">06</span>
-                <div class="cuerpo">
-                    <span class="nombre">Producto</span>
-                    <div class="ec">\(y = f\cdot g\) <span class="flecha">→</span> \(y' = f'\,g + f\,g'\)</div>
-                </div>
-            </div>
-            <div class="formula">
-                <span class="idx">07</span>
-                <div class="cuerpo">
-                    <span class="nombre">Cociente</span>
-                    <div class="ec">\(y = \dfrac{f}{g}\) <span class="flecha">→</span> \(y' = \dfrac{f'\,g - f\,g'}{g^{2}}\)</div>
-                </div>
-            </div>
+        <div class="resumen">
+            <div class="res-card"><span class="idx">04</span><div><span class="nombre">Suma o resta</span><div class="ec">\(y = f \pm g\) <span class="flecha">→</span> \(y' = f' \pm g'\)</div></div></div>
+            <div class="res-card"><span class="idx">05</span><div><span class="nombre">Constante · función</span><div class="ec">\(y = k\,f\) <span class="flecha">→</span> \(y' = k\,f'\)</div></div></div>
+            <div class="res-card"><span class="idx">06</span><div><span class="nombre">Producto</span><div class="ec">\(y = f\cdot g\) <span class="flecha">→</span> \(y' = f'g + fg'\)</div></div></div>
+            <div class="res-card"><span class="idx">07</span><div><span class="nombre">Cociente</span><div class="ec">\(y = \dfrac{f}{g}\) <span class="flecha">→</span> \(y' = \dfrac{f'g - fg'}{g^{2}}\)</div></div></div>
         </div>
     </section>
 
-    <!-- BLOQUE 3 -->
+    <!-- BLOQUE III -->
     <section class="bloque">
         <div class="bloque-cabecera">
-            <div class="bloque-num">III</div>
+            <span class="bloque-num">BLOQUE III</span>
             <h2 class="bloque-titulo">Regla de la cadena</h2>
-            <div class="bloque-linea"></div>
         </div>
-        <div class="grid">
-            <div class="formula">
-                <span class="idx">08</span>
-                <div class="cuerpo">
-                    <span class="nombre">Potencia compuesta</span>
-                    <div class="ec">\(y = [f(x)]^{a}\) <span class="flecha">→</span> \(y' = a\,[f(x)]^{a-1}\cdot f'(x)\)</div>
-                </div>
-            </div>
-            <div class="formula">
-                <span class="idx">09</span>
-                <div class="cuerpo">
-                    <span class="nombre">Raíz cuadrada</span>
-                    <div class="ec">\(y = \sqrt{f(x)}\) <span class="flecha">→</span> \(y' = \dfrac{f'(x)}{2\sqrt{f(x)}}\)</div>
-                </div>
-            </div>
+        <div class="resumen">
+            <div class="res-card"><span class="idx">08</span><div><span class="nombre">Potencia compuesta</span><div class="ec">\(y = [f]^{a}\) <span class="flecha">→</span> \(y' = a\,[f]^{a-1}\,f'\)</div></div></div>
+            <div class="res-card"><span class="idx">09</span><div><span class="nombre">Raíz cuadrada</span><div class="ec">\(y = \sqrt{f}\) <span class="flecha">→</span> \(y' = \dfrac{f'}{2\sqrt{f}}\)</div></div></div>
         </div>
     </section>
 
-    <!-- BLOQUE 4 -->
+    <!-- BLOQUE IV -->
     <section class="bloque">
         <div class="bloque-cabecera">
-            <div class="bloque-num">IV</div>
+            <span class="bloque-num">BLOQUE IV</span>
             <h2 class="bloque-titulo">Logaritmos y exponenciales</h2>
-            <div class="bloque-linea"></div>
         </div>
-        <div class="grid">
-            <div class="formula">
-                <span class="idx">10</span>
-                <div class="cuerpo">
-                    <span class="nombre">Logaritmo neperiano</span>
-                    <div class="ec">\(y = \ln f(x)\) <span class="flecha">→</span> \(y' = \dfrac{f'(x)}{f(x)}\)</div>
-                </div>
-            </div>
-            <div class="formula">
-                <span class="idx">11</span>
-                <div class="cuerpo">
-                    <span class="nombre">Logaritmo en base a</span>
-                    <div class="ec">\(y = \log_{a} f(x)\) <span class="flecha">→</span> \(y' = \dfrac{f'(x)}{f(x)\,\ln a}\)</div>
-                </div>
-            </div>
-            <div class="formula">
-                <span class="idx">12</span>
-                <div class="cuerpo">
-                    <span class="nombre">Exponencial natural</span>
-                    <div class="ec">\(y = e^{f(x)}\) <span class="flecha">→</span> \(y' = e^{f(x)}\cdot f'(x)\)</div>
-                </div>
-            </div>
-            <div class="formula">
-                <span class="idx">13</span>
-                <div class="cuerpo">
-                    <span class="nombre">Exponencial base a</span>
-                    <div class="ec">\(y = a^{f(x)}\) <span class="flecha">→</span> \(y' = a^{f(x)}\cdot \ln a\cdot f'(x)\)</div>
-                </div>
-            </div>
+        <div class="resumen">
+            <div class="res-card"><span class="idx">10</span><div><span class="nombre">Logaritmo neperiano</span><div class="ec">\(y = \ln f\) <span class="flecha">→</span> \(y' = \dfrac{f'}{f}\)</div></div></div>
+            <div class="res-card"><span class="idx">11</span><div><span class="nombre">Logaritmo en base \(a\)</span><div class="ec">\(y = \log_{a} f\) <span class="flecha">→</span> \(y' = \dfrac{f'}{f\,\ln a}\)</div></div></div>
+            <div class="res-card"><span class="idx">12</span><div><span class="nombre">Exponencial \(e\)</span><div class="ec">\(y = e^{f}\) <span class="flecha">→</span> \(y' = e^{f}\,f'\)</div></div></div>
+            <div class="res-card"><span class="idx">13</span><div><span class="nombre">Exponencial \(a\)</span><div class="ec">\(y = a^{f}\) <span class="flecha">→</span> \(y' = a^{f}\,\ln a\,f'\)</div></div></div>
         </div>
     </section>
 
     <footer>
         <span class="marca-foot">🏛️ Academia Esparta</span>
         <span class="web">academiaesparta.es · Torremolinos</span>
+        <span class="pag">PORTADA</span>
+    </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PÁGINA 2 — BLOQUE I · DERIVADAS ELEMENTALES -->
+<!-- ============================================================ -->
+<div class="page">
+
+    <div class="bloque-cabecera">
+        <span class="bloque-num">BLOQUE I</span>
+        <h2 class="bloque-titulo">Derivadas elementales · ejercicios resueltos</h2>
+    </div>
+
+    <!-- REGLA 01 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">01<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Derivada de una constante</div>
+                <h3 class="regla-titulo">La derivada de cualquier número es cero</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = k\) <span class="flecha">⟹</span> \(y' = 0\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos tres">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = 7\)</div>
+                <div class="ej-pasos"><p class="nota">7 es un número fijo, no depende de \(x\).</p></div>
+                <div class="ej-resp"><span class="lbl">y' =</span> 0</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = -\pi\)</div>
+                <div class="ej-pasos"><p class="nota">\(-\pi\) sigue siendo una constante.</p></div>
+                <div class="ej-resp"><span class="lbl">y' =</span> 0</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 3</div>
+                <div class="ej-funcion">\(y = \sqrt{5}\)</div>
+                <div class="ej-pasos"><p class="nota">Aunque tenga raíz, es un número.</p></div>
+                <div class="ej-resp"><span class="lbl">y' =</span> 0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGLA 02 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">02<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Función identidad</div>
+                <h3 class="regla-titulo">La derivada de \(x\) vale siempre 1</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = x\) <span class="flecha">⟹</span> \(y' = 1\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(f(x) = x\)</div>
+                <div class="ej-pasos"><p class="nota">Caso directo de la regla.</p></div>
+                <div class="ej-resp"><span class="lbl">f'(x) =</span> 1</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = x + 4\)</div>
+                <div class="ej-pasos"><p>Derivada de \(x\) = 1; derivada de \(4\) = 0.</p></div>
+                <div class="ej-resp"><span class="lbl">y' =</span> 1</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGLA 03 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">03<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Regla de la potencia</div>
+                <h3 class="regla-titulo">Baja el exponente y resta uno</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = x^{n}\) <span class="flecha">⟹</span> \(y' = n\,x^{n-1}\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos tres">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = x^{3}\)</div>
+                <div class="ej-pasos"><p>Baja el 3 y deja \(x^{3-1} = x^{2}\).</p></div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(3x^{2}\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = x^{5}\)</div>
+                <div class="ej-pasos"><p>Baja el 5; el exponente queda \(x^{4}\).</p></div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(5x^{4}\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 3</div>
+                <div class="ej-funcion">\(y = x^{-2}\)</div>
+                <div class="ej-pasos"><p>Baja \(-2\); exponente \(-2-1=-3\).</p></div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(-2x^{-3}\)</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="marca-foot">🏛️ Academia Esparta</span>
+        <span class="web">Bloque I · Elementales</span>
+        <span class="pag">PÁG. 02</span>
+    </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PÁGINA 3 — BLOQUE II · OPERACIONES (Suma + k·f) -->
+<!-- ============================================================ -->
+<div class="page">
+
+    <div class="bloque-cabecera">
+        <span class="bloque-num">BLOQUE II</span>
+        <h2 class="bloque-titulo">Reglas de operación · ejercicios resueltos</h2>
+    </div>
+
+    <!-- REGLA 04 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">04<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Suma o resta</div>
+                <h3 class="regla-titulo">Se deriva término a término</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = f \pm g\) <span class="flecha">⟹</span> \(y' = f' \pm g'\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = 3x^{2} + 5x - 1\)</div>
+                <div class="ej-pasos">
+                    <p>Derivada de \(3x^{2}\) = \(6x\)</p>
+                    <p>Derivada de \(5x\) = \(5\)</p>
+                    <p>Derivada de \(-1\) = \(0\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(6x + 5\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = x^{4} - 2x^{2} + 7\)</div>
+                <div class="ej-pasos">
+                    <p>\(x^{4}\) → \(4x^{3}\)</p>
+                    <p>\(-2x^{2}\) → \(-4x\)</p>
+                    <p>\(+7\) → \(0\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(4x^{3} - 4x\)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGLA 05 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">05<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Constante por función</div>
+                <h3 class="regla-titulo">El número se queda multiplicando</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = k\,f(x)\) <span class="flecha">⟹</span> \(y' = k\,f'(x)\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = 7x^{4}\)</div>
+                <div class="ej-pasos">
+                    <p>Derivada de \(x^{4}\) = \(4x^{3}\).</p>
+                    <p>El 7 se mantiene: \(7\cdot 4x^{3}\).</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(28x^{3}\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = -5x^{2}\)</div>
+                <div class="ej-pasos">
+                    <p>Derivada de \(x^{2}\) = \(2x\).</p>
+                    <p>\(-5 \cdot 2x = -10x\).</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(-10x\)</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="marca-foot">🏛️ Academia Esparta</span>
+        <span class="web">Bloque II · Suma y constante</span>
+        <span class="pag">PÁG. 03</span>
+    </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PÁGINA 4 — BLOQUE II · PRODUCTO -->
+<!-- ============================================================ -->
+<div class="page">
+
+    <div class="bloque-cabecera">
+        <span class="bloque-num">BLOQUE II</span>
+        <h2 class="bloque-titulo">Producto y cociente · ejercicios resueltos</h2>
+    </div>
+
+    <!-- REGLA 06 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">06<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Regla del producto</div>
+                <h3 class="regla-titulo">Derivada del primero por el segundo + el primero por la derivada del segundo</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = f\cdot g\) <span class="flecha">⟹</span> \(y' = f'\,g + f\,g'\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = x^{2}\,(3x+1)\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x^{2}\) → \(f' = 2x\)</p>
+                    <p>\(g = 3x+1\) → \(g' = 3\)</p>
+                    <p>\(y' = 2x(3x+1) + x^{2}\cdot 3\)</p>
+                    <p>\(= 6x^{2} + 2x + 3x^{2}\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(9x^{2} + 2x\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = (x+1)(x^{2}-x)\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x+1\) → \(f' = 1\)</p>
+                    <p>\(g = x^{2}-x\) → \(g' = 2x-1\)</p>
+                    <p>\(y' = 1\cdot(x^{2}-x) + (x+1)(2x-1)\)</p>
+                    <p>\(= x^{2}-x + 2x^{2}+x-1\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(3x^{2} - 1\)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGLA 07 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">07<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Regla del cociente</div>
+                <h3 class="regla-titulo">Cuidado con el orden y con elevar al cuadrado el denominador</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = \dfrac{f}{g}\) <span class="flecha">⟹</span> \(y' = \dfrac{f'g - fg'}{g^{2}}\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = \dfrac{2x+1}{x-3}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = 2x+1\) → \(f' = 2\)</p>
+                    <p>\(g = x-3\) → \(g' = 1\)</p>
+                    <p>Numerador: \(2(x-3) - (2x+1)\cdot 1\)</p>
+                    <p>\(= 2x-6-2x-1 = -7\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(\dfrac{-7}{(x-3)^{2}}\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = \dfrac{x^{2}}{x+1}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x^{2}\) → \(f' = 2x\)</p>
+                    <p>\(g = x+1\) → \(g' = 1\)</p>
+                    <p>Numerador: \(2x(x+1) - x^{2}\)</p>
+                    <p>\(= 2x^{2}+2x-x^{2} = x^{2}+2x\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(\dfrac{x^{2}+2x}{(x+1)^{2}}\)</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="marca-foot">🏛️ Academia Esparta</span>
+        <span class="web">Bloque II · Producto y cociente</span>
+        <span class="pag">PÁG. 04</span>
+    </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PÁGINA 5 — BLOQUE III · CADENA -->
+<!-- ============================================================ -->
+<div class="page">
+
+    <div class="bloque-cabecera">
+        <span class="bloque-num">BLOQUE III</span>
+        <h2 class="bloque-titulo">Regla de la cadena · ejercicios resueltos</h2>
+    </div>
+
+    <!-- REGLA 08 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">08<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Potencia compuesta</div>
+                <h3 class="regla-titulo">Deriva la potencia y multiplica por la derivada de dentro</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = [f(x)]^{a}\) <span class="flecha">⟹</span> \(y' = a\,[f(x)]^{a-1}\,f'(x)\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = (3x+2)^{5}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = 3x+2\) → \(f' = 3\)</p>
+                    <p>Aplica la regla: \(5(3x+2)^{4}\cdot 3\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(15\,(3x+2)^{4}\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = (x^{2}-1)^{4}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x^{2}-1\) → \(f' = 2x\)</p>
+                    <p>\(4(x^{2}-1)^{3}\cdot 2x\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(8x\,(x^{2}-1)^{3}\)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGLA 09 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">09<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Raíz cuadrada</div>
+                <h3 class="regla-titulo">Numerador: derivada de dentro · Denominador: 2 por la raíz</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = \sqrt{f(x)}\) <span class="flecha">⟹</span> \(y' = \dfrac{f'(x)}{2\sqrt{f(x)}}\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = \sqrt{x^{2}+1}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x^{2}+1\) → \(f' = 2x\)</p>
+                    <p>Aplica: \(\dfrac{2x}{2\sqrt{x^{2}+1}}\)</p>
+                    <p>Simplifica el 2.</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(\dfrac{x}{\sqrt{x^{2}+1}}\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = \sqrt{3x-2}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = 3x-2\) → \(f' = 3\)</p>
+                    <p>\(\dfrac{3}{2\sqrt{3x-2}}\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(\dfrac{3}{2\sqrt{3x-2}}\)</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="marca-foot">🏛️ Academia Esparta</span>
+        <span class="web">Bloque III · Cadena</span>
+        <span class="pag">PÁG. 05</span>
+    </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PÁGINA 6 — BLOQUE IV · LOGARITMOS -->
+<!-- ============================================================ -->
+<div class="page">
+
+    <div class="bloque-cabecera">
+        <span class="bloque-num">BLOQUE IV</span>
+        <h2 class="bloque-titulo">Logaritmos · ejercicios resueltos</h2>
+    </div>
+
+    <!-- REGLA 10 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">10<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Logaritmo neperiano</div>
+                <h3 class="regla-titulo">Derivada de dentro partido por lo de dentro</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = \ln f(x)\) <span class="flecha">⟹</span> \(y' = \dfrac{f'(x)}{f(x)}\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = \ln(x^{2}+1)\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x^{2}+1\) → \(f' = 2x\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(\dfrac{2x}{x^{2}+1}\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = \ln(3x)\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = 3x\) → \(f' = 3\)</p>
+                    <p>\(\dfrac{3}{3x}\). Simplifica.</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(\dfrac{1}{x}\)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGLA 11 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">11<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Logaritmo en base \(a\)</div>
+                <h3 class="regla-titulo">Como el neperiano, pero multiplicando \(\ln a\) abajo</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = \log_{a} f(x)\) <span class="flecha">⟹</span> \(y' = \dfrac{f'(x)}{f(x)\,\ln a}\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = \log_{2} x\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x\) → \(f' = 1\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(\dfrac{1}{x\,\ln 2}\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = \log_{3}(2x+1)\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = 2x+1\) → \(f' = 2\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(\dfrac{2}{(2x+1)\,\ln 3}\)</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="marca-foot">🏛️ Academia Esparta</span>
+        <span class="web">Bloque IV · Logaritmos</span>
+        <span class="pag">PÁG. 06</span>
+    </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PÁGINA 7 — BLOQUE IV · EXPONENCIALES -->
+<!-- ============================================================ -->
+<div class="page">
+
+    <div class="bloque-cabecera">
+        <span class="bloque-num">BLOQUE IV</span>
+        <h2 class="bloque-titulo">Exponenciales · ejercicios resueltos</h2>
+    </div>
+
+    <!-- REGLA 12 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">12<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Exponencial natural</div>
+                <h3 class="regla-titulo">El \(e^{f}\) se queda igual; multiplicas por la derivada del exponente</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = e^{f(x)}\) <span class="flecha">⟹</span> \(y' = e^{f(x)}\cdot f'(x)\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = e^{2x}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = 2x\) → \(f' = 2\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(2\,e^{2x}\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = e^{x^{2}+1}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x^{2}+1\) → \(f' = 2x\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(2x\,e^{x^{2}+1}\)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGLA 13 -->
+    <div class="regla">
+        <div class="regla-cab">
+            <div class="regla-numero">13<span class="barra">/</span><span class="total">13</span></div>
+            <div class="regla-meta">
+                <div class="regla-tag">Exponencial en base \(a\)</div>
+                <h3 class="regla-titulo">Como la natural, pero apareciendo \(\ln a\) multiplicando</h3>
+            </div>
+        </div>
+        <div class="formula-box">\(y = a^{f(x)}\) <span class="flecha">⟹</span> \(y' = a^{f(x)}\cdot \ln a \cdot f'(x)\)</div>
+        <div class="ejemplos-titulo">Ejemplos resueltos</div>
+        <div class="ejemplos dos">
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 1</div>
+                <div class="ej-funcion">\(y = 2^{x}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x\) → \(f' = 1\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(2^{x}\,\ln 2\)</div>
+            </div>
+            <div class="ej">
+                <div class="ej-cab">Ejemplo 2</div>
+                <div class="ej-funcion">\(y = 3^{x^{2}}\)</div>
+                <div class="ej-pasos">
+                    <p>\(f = x^{2}\) → \(f' = 2x\)</p>
+                </div>
+                <div class="ej-resp"><span class="lbl">y' =</span> \(2x\,\ln 3\,\cdot 3^{x^{2}}\)</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="marca-foot">🏛️ Academia Esparta</span>
+        <span class="web">Bloque IV · Exponenciales · Fin del dossier</span>
+        <span class="pag">PÁG. 07</span>
     </footer>
 
 </div>
