@@ -3,108 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lectura comprensiva: El delfín - 2º Primaria - Academia Esparta</title>
+    <title>Lectura comprensiva: Las focas - 4º Primaria - Academia Esparta</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Edu SA Beginner', cursive;
+            font-family: 'Open Sans', sans-serif;
             background: #fff;
             color: #000;
-            font-size: 12pt;
-            line-height: 1.5;
-            padding: 20px;
+            padding: 2rem 1.5rem 1rem;
+            max-width: 780px;
+            margin: 0 auto;
         }
-        .no-print { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+
+        .no-print {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
         .btn {
-            background: #0a5233;
+            background: #222;
             color: #fff;
-            border: 2px solid #0a5233;
-            padding: 10px 22px;
-            font-family: 'Montserrat', sans-serif;
+            border: none;
+            padding: 8px 24px;
+            font-family: 'Open Sans', sans-serif;
             font-weight: 700;
             cursor: pointer;
-            text-transform: uppercase;
             font-size: 10pt;
-            border-radius: 6px;
+            border-radius: 999px;
         }
-        .btn:hover { background: #fff; color: #0a5233; }
+        .btn:hover { background: #444; }
 
-        .page {
-            width: 210mm;
-            margin: 0 auto;
-            padding: 12mm;
-            box-sizing: border-box;
-            background: #fff;
-        }
-
-        header {
+        .header {
             text-align: center;
-            border-bottom: 3px solid #0a5233;
-            margin-bottom: 16px;
-            padding-bottom: 10px;
+            margin-bottom: 6px;
         }
-        .logo-cabecera {
+        .academia-nombre {
             font-family: 'Montserrat', sans-serif;
+            font-size: 24pt;
             font-weight: 700;
-            font-size: 20pt;
-            color: #0a5233;
-            margin: 0;
+            color: #000;
+            display: block;
+            margin-bottom: 3px;
         }
-        .curso {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 11pt;
-            color: #0a5233;
-            margin: 4px 0 0 0;
-            letter-spacing: 1px;
+        .ficha-ref {
+            font-size: 10pt;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
         }
         .datos-alumno {
             display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
+            gap: 30px;
+            margin-bottom: 6px;
+            text-align: left;
+        }
+        .dato {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-size: 11pt;
+            flex: 1;
+        }
+        .dato label { white-space: nowrap; font-weight: 700; }
+        .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+
+        hr.separador {
+            border: none;
+            border-top: 1.5px solid #000;
+            margin-bottom: 12px;
+        }
+
+        .lectura-titulo {
+            font-size: 15pt;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .lectura-box {
+            border: 1.5px solid #000;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 14px;
+        }
+        .lectura-texto {
+            font-size: 13pt;
+            line-height: 1.75;
         }
 
         h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 13pt;
-            color: #0a5233;
-            margin-top: 16px;
-            margin-bottom: 6px;
+            font-size: 11pt;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            margin: 14px 0 8px 0;
         }
-
-        .lectura {
-            border: 2px solid #0a5233;
-            border-radius: 8px;
-            padding: 14px 18px;
-            margin: 10px 0 14px 0;
-            background: #f4f9f6;
-            font-size: 13pt;
-            line-height: 1.6;
-        }
-        .lectura-titulo {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: #0a5233;
-            text-align: center;
-            font-size: 15pt;
-            margin: 0 0 10px 0;
-            letter-spacing: 1px;
-        }
-        .lectura p { margin: 6px 0; }
 
         ol.preguntas, ol.vof, ol.huecos {
-            padding-left: 24px;
-            margin: 6px 0 0 0;
+            padding-left: 22px;
         }
-        ol.preguntas li { margin-bottom: 12px; }
-        ol.vof li { margin-bottom: 8px; }
-        ol.huecos li { margin-bottom: 10px; }
+        ol.preguntas li { margin-bottom: 10px; font-size: 12pt; font-weight: 600; line-height: 1.4; }
+        ol.vof li { margin-bottom: 8px; font-size: 12pt; font-weight: 600; }
+        ol.huecos li { margin-bottom: 10px; font-size: 12pt; font-weight: 600; line-height: 1.5; }
+
+        .banco {
+            font-size: 10pt;
+            color: #444;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
 
         .linea-respuesta {
             border-bottom: 1.5px solid #000;
@@ -115,37 +124,35 @@
         .casilla-vf {
             display: inline-block;
             border: 1.5px solid #000;
-            width: 28px;
-            height: 20px;
+            width: 26px;
+            height: 19px;
             margin-left: 10px;
             vertical-align: middle;
         }
         .hueco-rellenar {
             display: inline-block;
             border-bottom: 1.5px solid #000;
-            min-width: 80px;
+            min-width: 90px;
             height: 18px;
             vertical-align: bottom;
         }
 
         footer {
-            margin-top: 18px;
-            text-align: center;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 10pt;
-            color: #0a5233;
-            border-top: 2px solid #0a5233;
+            margin-top: 16px;
             padding-top: 8px;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        footer p { margin: 4px 0; }
-        .estrella { font-size: 14pt; }
+        .footer-marca { font-size: 10pt; color: #666; }
+        .footer-msg { font-size: 12pt; font-weight: 700; }
 
         @media print {
             .no-print { display: none; }
-            body { padding: 0; filter: grayscale(100%); }
-            .page { padding: 10mm; }
+            body { padding: 0; filter: grayscale(100%); max-width: none; }
         }
+        @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
     </style>
 </head>
 <body>
@@ -154,60 +161,65 @@
         <button class="btn" onclick="window.print()">🖨️ IMPRIMIR / GUARDAR PDF</button>
     </div>
 
-    <div class="page">
-        <header>
-            <p class="logo-cabecera">🏫 Academia Esparta</p>
-            <p class="curso">2º PRIMARIA · LENGUA · LECTURA COMPRENSIVA</p>
-            <div class="datos-alumno">
-                <span>Nombre: ______________________</span>
-                <span>Fecha: __________</span>
-            </div>
-        </header>
-
-        <div class="lectura">
-            <p class="lectura-titulo">EL DELFÍN</p>
-            <p>El delfín es un mamífero marino que vive en los mares y océanos de todo el mundo. Tiene el cuerpo alargado y la piel suave de color gris. Su cola es muy potente y le ayuda a nadar muy rápido.</p>
-            <p>Los delfines respiran por un agujero que tienen en la cabeza llamado espiráculo. Comen pescado y calamares. Son animales muy inteligentes y juguetones.</p>
-            <p>Viven en grupos llamados manadas y se comunican entre ellos con silbidos y chasquidos. Una mamá delfín solo tiene una cría cada dos o tres años, y la cuida durante mucho tiempo.</p>
+    <div class="header">
+        <span class="academia-nombre">Academia Esparta</span>
+        <span class="ficha-ref">Lengua · 4º Primaria · Lectura comprensiva</span>
+        <div class="datos-alumno">
+            <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+            <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
         </div>
-
-        <h2>1. Responde a estas preguntas</h2>
-        <ol class="preguntas">
-            <li>¿Cómo es el cuerpo del delfín? <span class="linea-respuesta"></span></li>
-            <li>¿De qué color es su piel? <span class="linea-respuesta"></span></li>
-            <li>¿Qué le ayuda a nadar muy rápido? <span class="linea-respuesta"></span></li>
-            <li>¿Cómo se llama el agujero por el que respira? <span class="linea-respuesta"></span></li>
-            <li>¿Qué comen los delfines? <span class="linea-respuesta"></span></li>
-            <li>¿Cómo se llama el grupo en el que viven los delfines? <span class="linea-respuesta"></span></li>
-            <li>¿Cómo se comunican entre ellos? <span class="linea-respuesta"></span></li>
-            <li>¿Cuántas crías tiene una mamá delfín cada dos o tres años? <span class="linea-respuesta"></span></li>
-        </ol>
-
-        <h2>2. Verdadero o Falso (escribe V o F en la casilla)</h2>
-        <ol class="vof">
-            <li>El delfín es un pez. <span class="casilla-vf"></span></li>
-            <li>La piel del delfín es de color gris. <span class="casilla-vf"></span></li>
-            <li>Los delfines respiran por la boca. <span class="casilla-vf"></span></li>
-            <li>Los delfines comen lechuga y zanahorias. <span class="casilla-vf"></span></li>
-            <li>Los delfines son animales solitarios. <span class="casilla-vf"></span></li>
-            <li>Se comunican con silbidos y chasquidos. <span class="casilla-vf"></span></li>
-        </ol>
-
-        <h2>3. Rellena los huecos con la palabra correcta</h2>
-        <ol class="huecos">
-            <li>El delfín es un <span class="hueco-rellenar"></span> marino.</li>
-            <li>Su cola es muy <span class="hueco-rellenar"></span>.</li>
-            <li>Respira por un agujero llamado <span class="hueco-rellenar"></span>.</li>
-            <li>Vive en grupos llamados <span class="hueco-rellenar"></span>.</li>
-            <li>Es un animal muy inteligente y <span class="hueco-rellenar"></span>.</li>
-            <li>La mamá tiene una cría cada dos o <span class="hueco-rellenar"></span> años.</li>
-        </ol>
-
-        <footer>
-            <p>Academia Esparta · Torremolinos</p>
-            <p><span class="estrella">⭐</span> ¡Buen trabajo! <span class="estrella">⭐</span></p>
-        </footer>
     </div>
+    <hr class="separador">
+
+    <div class="lectura-titulo">Las focas</div>
+    <div class="lectura-box">
+        <div class="lectura-texto">
+            La foca es un mamífero marino adaptado a vivir en aguas frías. Su cuerpo fusiforme —parecido a un torpedo— y sus aletas le permiten nadar con gran agilidad, alcanzando velocidades de hasta 25 km/h bajo el agua. Sin embargo, sobre tierra firme se desplaza con torpeza, arrastrándose sobre el suelo.
+            <br><br>
+            Las focas respiran aire, por lo que deben salir a la superficie con frecuencia. Bajo su piel poseen una gruesa capa de grasa llamada <em>blubber</em> que las protege del frío extremo del Ártico y la Antártida.
+            <br><br>
+            Se alimentan de peces, calamares y crustáceos, y pueden sumergirse hasta 300 metros de profundidad. Sus bigotes, llamados vibrisas, son tan sensibles que detectan los movimientos del agua producidos por sus presas, lo que les permite cazar incluso en la oscuridad.
+            <br><br>
+            Las focas forman grandes colonias en las costas rocosas. Las hembras tienen una sola cría al año, a la que amamantan con una leche muy rica en grasa durante varias semanas.
+        </div>
+    </div>
+
+    <h2>1. Responde a estas preguntas</h2>
+    <ol class="preguntas">
+        <li>¿Qué forma tiene el cuerpo de la foca y a qué objeto se compara en el texto?<span class="linea-respuesta"></span></li>
+        <li>¿A qué velocidad puede nadar la foca?<span class="linea-respuesta"></span></li>
+        <li>¿Por qué necesita la foca salir a la superficie con frecuencia?<span class="linea-respuesta"></span></li>
+        <li>¿Cómo se llama la capa de grasa que tiene bajo la piel y para qué sirve?<span class="linea-respuesta"></span></li>
+        <li>¿De qué se alimentan las focas?<span class="linea-respuesta"></span></li>
+        <li>¿A qué profundidad puede bucear la foca?<span class="linea-respuesta"></span></li>
+        <li>¿Para qué le sirven las vibrisas?<span class="linea-respuesta"></span></li>
+        <li>¿Cuántas crías tiene una hembra al año?<span class="linea-respuesta"></span></li>
+    </ol>
+
+    <h2>2. Verdadero o Falso (escribe V o F en la casilla)</h2>
+    <ol class="vof">
+        <li>La foca es un pez. <span class="casilla-vf"></span></li>
+        <li>Las focas pueden nadar a 25 km/h. <span class="casilla-vf"></span></li>
+        <li>Las focas viven en climas cálidos y tropicales. <span class="casilla-vf"></span></li>
+        <li>El blubber protege a las focas del frío extremo. <span class="casilla-vf"></span></li>
+        <li>Las vibrisas ayudan a detectar presas incluso en la oscuridad. <span class="casilla-vf"></span></li>
+        <li>Una hembra foca tiene tres crías al año. <span class="casilla-vf"></span></li>
+    </ol>
+
+    <h2>3. Rellena los huecos con la palabra correcta</h2>
+    <p class="banco">Banco de palabras: <strong>aletas · colonia · Antártida · leche · torpedo · rocosas</strong></p>
+    <ol class="huecos">
+        <li>El cuerpo de la foca tiene forma fusiforme, como un <span class="hueco-rellenar"></span>.</li>
+        <li>Las focas usan sus <span class="hueco-rellenar"></span> para nadar con agilidad.</li>
+        <li>Algunas focas viven en las heladas aguas de la <span class="hueco-rellenar"></span>.</li>
+        <li>Las focas forman grandes <span class="hueco-rellenar"></span> en costas <span class="hueco-rellenar"></span>.</li>
+        <li>Las hembras amamantan a sus crías con una <span class="hueco-rellenar"></span> muy rica en grasa.</li>
+    </ol>
+
+    <footer>
+        <span class="footer-marca">Academia Esparta · Torremolinos</span>
+        <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+    </footer>
 
 </body>
 </html>
