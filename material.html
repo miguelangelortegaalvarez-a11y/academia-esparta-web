@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento Derivadas 1 - Academia Esparta</title>
-    
+    <title>Ecuaciones de Primer Grado - 1º ESO - Academia Esparta</title>
+
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -26,6 +26,9 @@
         .paso { margin: 6px 0 6px 16px; padding-left: 10px; border-left: 2px solid #000; }
         .resultado-final { background: #000; color: #fff; padding: 4px 10px; display: inline-block; margin-top: 8px; font-weight: bold; }
 
+        .ejercicios-lista { list-style-type: decimal; margin: 8px 0 8px 0; padding-left: 28px; }
+        .ejercicios-lista li { margin: 8px 0; }
+
         footer { margin-top: 24px; text-align: center; font-size: 9pt; border-top: 1px solid #000; padding-top: 8px; }
 
         @media print { .no-print { display: none; } .page { border: none; width: 100%; } }
@@ -39,70 +42,87 @@
 
     <div class="page">
         <header>
-            <h1>BLOQUE 1: FUNCIONES POLINÓMICAS</h1>
-            <p>1º BACHILLERATO CCSS | ACADEMIA ESPARTA</p>
+            <h1>ECUACIONES DE PRIMER GRADO</h1>
+            <p>1º ESO | ACADEMIA ESPARTA</p>
         </header>
 
         <section>
-            <h2>1. La Regla de la Potencia</h2>
+            <h2>1. Despeje básico</h2>
+            <p>Una <b>ecuación</b> es una igualdad con una incógnita (una letra, normalmente la <b>x</b>). <b>Resolver</b> la ecuación significa encontrar el valor de la <b>x</b> que hace que la igualdad sea verdadera.</p>
             <div class="box-formula">
-                <span class="formula-text">\( f(x) = x^n \longrightarrow f'(x) = n \cdot x^{n-1} \)</span>
+                <span class="formula-text">\( x + a = b \quad \longrightarrow \quad x = b - a \)</span>
             </div>
-            <p><b>Explicación:</b> El exponente (\(n\)) "salta" hacia adelante multiplicando a la base, y al exponente original se le resta una unidad.</p>
+            <p><b>Idea:</b> lo que está sumando en un lado pasa al otro lado restando, y al revés. Así dejamos la <b>x</b> sola.</p>
+
+            <div class="ejercicio-guia">
+                <h3>Ejemplo resuelto: \( x + 8 = 15 \)</h3>
+                <div class="paso"><b>Paso 1:</b> el 8 está sumando; lo pasamos al otro lado restando: \( x = 15 - 8 \).</div>
+                <div class="paso"><b>Paso 2:</b> hacemos la resta: \( x = 7 \).</div>
+                <div class="resultado-final">x = 7</div>
+            </div>
+
+            <p><b>Resuelve tú:</b></p>
+            <ol class="ejercicios-lista">
+                <li>\( x + 7 = 12 \)</li>
+                <li>\( x - 4 = 9 \)</li>
+                <li>\( x + 15 = 23 \)</li>
+                <li>\( x - 6 = 8 \)</li>
+            </ol>
         </section>
 
         <section>
-            <h2>2. Ejemplos Desarrollados</h2>
+            <h2>2. Incógnita en los dos lados</h2>
+            <p>Cuando la <b>x</b> aparece a izquierda y derecha del igual, hay que <b>juntar todas las x en un lado</b> y <b>todos los números en el otro</b>.</p>
+            <div class="box-formula">
+                <span class="formula-text">\( ax + b = cx + d \quad \longrightarrow \quad ax - cx = d - b \)</span>
+            </div>
+            <p><b>Idea:</b> las <b>x</b> a la izquierda, los números a la derecha. Cada cosa que cruza el igual cambia de signo.</p>
 
-            <!-- NIVEL FÁCIL -->
             <div class="ejercicio-guia">
-                <h3>Nivel Inicial: Potencia simple</h3>
-                <p><b>Derivar:</b> \( f(x) = x^4 \)</p>
-                <div class="paso">
-                    <b>Paso 1:</b> El exponente es 4. Lo pasamos adelante multiplicando: \( 4 \cdot x^{...} \)
-                </div>
-                <div class="paso">
-                    <b>Paso 2:</b> Restamos 1 al exponente original: \( 4 - 1 = 3 \).
-                </div>
-                <div class="resultado-final">Resultado: \( f'(x) = 4x^3 \)</div>
+                <h3>Ejemplo resuelto: \( 2x + 3 = x + 7 \)</h3>
+                <div class="paso"><b>Paso 1:</b> pasamos la <b>x</b> de la derecha al otro lado restando, y el 3 al otro lado restando también: \( 2x - x = 7 - 3 \).</div>
+                <div class="paso"><b>Paso 2:</b> simplificamos: \( x = 4 \).</div>
+                <div class="resultado-final">x = 4</div>
             </div>
 
-            <!-- NIVEL MEDIO -->
+            <p><b>Resuelve tú:</b></p>
+            <ol class="ejercicios-lista">
+                <li>\( x + 5 = 2x + 1 \)</li>
+                <li>\( 3x + 4 = x + 10 \)</li>
+                <li>\( 2x - 3 = x + 5 \)</li>
+                <li>\( 4x + 2 = 2x + 10 \)</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>3. Con paréntesis</h2>
+            <p>Cuando hay un paréntesis con un número delante, primero hay que <b>quitar el paréntesis</b> usando la <b>propiedad distributiva</b>: el número de fuera multiplica a <i>cada</i> término de dentro.</p>
+            <div class="box-formula">
+                <span class="formula-text">\( a \cdot (x + b) = a \cdot x + a \cdot b \)</span>
+            </div>
+            <p><b>Idea:</b> primero aplicamos la distributiva para deshacernos del paréntesis. Una vez hecho eso, ya es una ecuación como las de antes.</p>
+
             <div class="ejercicio-guia">
-                <h3>Nivel Medio: Con coeficiente numérico</h3>
-                <p><b>Derivar:</b> \( f(x) = 3x^5 \)</p>
-                <div class="paso">
-                    <b>Paso 1:</b> El 5 baja, pero se encuentra con un 3. Se multiplican: \( 5 \cdot 3 = 15 \).
-                </div>
-                <div class="paso">
-                    <b>Paso 2:</b> Restamos 1 al exponente original: \( 5 - 1 = 4 \).
-                </div>
-                <div class="resultado-final">Resultado: \( f'(x) = 15x^4 \)</div>
+                <h3>Ejemplo resuelto: \( 3(x + 2) = 9 \)</h3>
+                <div class="paso"><b>Paso 1:</b> aplicamos la distributiva: \( 3 \cdot x + 3 \cdot 2 = 9 \;\rightarrow\; 3x + 6 = 9 \).</div>
+                <div class="paso"><b>Paso 2:</b> pasamos el 6 al otro lado restando: \( 3x = 9 - 6 = 3 \).</div>
+                <div class="paso"><b>Paso 3:</b> el 3 está multiplicando a la <b>x</b>; lo pasamos al otro lado dividiendo: \( x = 3 / 3 = 1 \).</div>
+                <div class="resultado-final">x = 1</div>
             </div>
 
-            <!-- NIVEL PRO -->
-            <div class="ejercicio-guia">
-                <h3>Nivel Pro: Polinomio completo</h3>
-                <p><b>Derivar:</b> \( f(x) = 2x^3 - 5x^2 + 7x - 9 \)</p>
-                <div class="paso">
-                    <b>Paso 1:</b> Derivamos \( 2x^3 \). El 3 baja: \( 3 \cdot 2 = 6 \). Queda \( 6x^2 \).
-                </div>
-                <div class="paso">
-                    <b>Paso 2:</b> Derivamos \( -5x^2 \). El 2 baja: \( 2 \cdot (-5) = -10 \). Queda \( -10x^1 \) (el 1 no se pone).
-                </div>
-                <div class="paso">
-                    <b>Paso 3:</b> Derivamos \( 7x \). Como la \( x \) está elevada a 1, queda solo el número: \( 7 \).
-                </div>
-                <div class="paso">
-                    <b>Paso 4:</b> Derivamos el número suelto \( -9 \). La derivada de cualquier número solo es siempre 0.
-                </div>
-                <div class="resultado-final">Resultado: \( f'(x) = 6x^2 - 10x + 7 \)</div>
-            </div>
+            <p><b>Resuelve tú:</b></p>
+            <ol class="ejercicios-lista">
+                <li>\( 2(x + 3) = 10 \)</li>
+                <li>\( 3(x - 1) = 12 \)</li>
+                <li>\( 2(x + 1) = x + 5 \)</li>
+                <li>\( 4(x - 2) = 8 \)</li>
+            </ol>
         </section>
 
         <footer>
-            Academia Esparta 2026 - ¡Dominando la base de la derivada!
+            Academia Esparta · Torremolinos
         </footer>
     </div>
+
 </body>
 </html>
