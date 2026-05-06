@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expresiones algebraicas y valor numérico · 1º ESO · Academia Esparta</title>
+    <title>Examen: Ecuaciones 2º grado · 2º ESO · Academia Esparta</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
         body { font-family:'Courier New',Courier,monospace; font-size:10.5pt; line-height:1.35; background:#fff; color:#000; padding:20px; }
@@ -13,35 +16,31 @@
 
         .page { width:210mm; border:2px solid #000; padding:11mm 12mm; box-sizing:border-box; margin:0 auto; background:#fff; }
 
-        .doc-header { border-bottom:5px double #000; margin-bottom:11px; padding-bottom:5px; }
-        h1 { font-size:15pt; text-decoration:underline; margin:0 0 3px 0; }
-        .subtitulo { font-size:9.5pt; letter-spacing:1px; margin:0; }
-        .alumno-fecha { font-size:9.5pt; margin:5px 0 0 0; color:#444; }
+        /* Header estilo examen */
+        .doc-header { border-bottom:5px double #000; margin-bottom:12px; padding-bottom:6px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+        .header-izq h1 { font-size:14pt; text-decoration:underline; margin:0 0 3px 0; text-transform:uppercase; letter-spacing:1px; }
+        .header-izq .subtitulo { font-size:9.5pt; letter-spacing:1px; margin:0 0 5px 0; }
+        .header-izq .datos { font-size:10pt; }
+        .nota-box { border:2px solid #000; padding:6px 10px; text-align:center; min-width:70px; }
+        .nota-box .nota-label { font-size:9pt; display:block; }
+        .nota-box .nota-val { font-size:18pt; font-weight:bold; display:block; height:28px; }
 
-        h2 { font-size:11pt; background:#000; color:#fff; padding:3px 10px; margin:10px 0 6px 0; text-transform:uppercase; display:block; }
+        /* Secciones */
+        .seccion-header { background:#000; color:#fff; padding:3px 10px; margin:10px 0 7px 0; font-size:10.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:0.5px; }
 
-        /* Tabla monomios */
-        table.mono { border-collapse:collapse; width:100%; margin:4px 0 8px 0; font-size:10pt; }
-        table.mono th { background:#000; color:#fff; border:1.5px solid #000; padding:4px 8px; text-align:center; font-size:9.5pt; }
-        table.mono td { border:1.5px solid #000; padding:6px 8px; text-align:center; }
-        table.mono td.exp { text-align:left; background:#f0f0f0; font-weight:bold; }
+        /* Grid 2 columnas */
+        .ej-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 20px; }
+        .ej { padding:4px 0 0 0; }
+        .ej .num { font-weight:bold; font-size:10.5pt; }
+        .ej .ecuacion { font-size:11pt; margin:2px 0 3px 0; }
+        .espacio-inc { height:52px; border-bottom:1px solid #ccc; margin-bottom:4px; }
+        .espacio-comp { height:72px; border-bottom:1px solid #ccc; margin-bottom:4px; }
 
-        /* Ejercicios en 2 columnas */
-        .ej-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px 16px; margin:2px 0 4px 0; }
-        .ej { font-size:10pt; padding:3px 0; }
-        .lin { border-bottom:1px solid #000; display:block; height:15px; margin:3px 0 2px 0; }
-
-        /* Problemas */
-        .prob { margin:5px 0; font-size:10pt; }
-        .prob-lin { border-bottom:1px solid #000; display:block; height:15px; margin:3px 0; }
-        .prob-lin2 { border-bottom:1px solid #000; display:block; height:15px; margin:2px 0; }
-
-        footer { margin-top:14px; font-size:9pt; border-top:1px solid #000; padding-top:7px; text-align:center; }
+        footer { margin-top:12px; font-size:9pt; border-top:1px solid #000; padding-top:7px; display:flex; justify-content:space-between; }
 
         @media print {
             .no-print { display:none; }
             .page { border:none; width:100%; }
-            h2 { page-break-after:avoid; }
         }
         @page { size:A4 portrait; margin:1.8cm 2cm; }
     </style>
@@ -55,145 +54,121 @@
 <div class="page">
 
     <div class="doc-header">
-        <h1>Expresiones algebraicas y valor numérico</h1>
-        <p class="subtitulo">1º ESO &nbsp;|&nbsp; ACADEMIA ESPARTA</p>
-        <p class="alumno-fecha">Nombre: _________________________________ &nbsp;&nbsp; Fecha: ____________</p>
+        <div class="header-izq">
+            <h1>Ecuaciones de segundo grado</h1>
+            <p class="subtitulo">2º ESO &nbsp;|&nbsp; ACADEMIA ESPARTA</p>
+            <div class="datos">
+                Alumno: _________________________________ <br>
+                Fecha: _____________ &nbsp; Clase: _________
+            </div>
+        </div>
+        <div class="nota-box">
+            <span class="nota-label">NOTA</span>
+            <span class="nota-val">&nbsp;</span>
+            <span class="nota-label">/ 10</span>
+        </div>
     </div>
 
-    <!-- ══ A ══ -->
-    <h2>A · Coeficiente y grado de cada monomio</h2>
-    <table class="mono">
-        <tr>
-            <th>Monomio</th><th>Coeficiente</th><th>Parte literal</th><th>Grado</th>
-        </tr>
-        <tr><td class="exp">6x²</td><td></td><td></td><td></td></tr>
-        <tr><td class="exp">−4ab</td><td></td><td></td><td></td></tr>
-        <tr><td class="exp">3x²y³</td><td></td><td></td><td></td></tr>
-        <tr><td class="exp">−x</td><td></td><td></td><td></td></tr>
-        <tr><td class="exp">9</td><td></td><td></td><td></td></tr>
-        <tr><td class="exp">−2x³y</td><td></td><td></td><td></td></tr>
-    </table>
+    <!-- ══════ SECCIÓN 1: INCOMPLETAS ══════ -->
+    <div class="seccion-header">1. Ecuaciones incompletas &nbsp;<span style="font-size:9pt;font-weight:normal;">(0,5 puntos cada una · total 3 puntos)</span></div>
 
-    <!-- ══ B ══ -->
-    <h2>B · Calcula el valor numérico (una variable)</h2>
     <div class="ej-grid">
 
         <div class="ej">
-            <b>1.</b> P(x) = 2x + 5 &nbsp;&nbsp; si x = 3
-            <span class="lin"></span>
-        </div>
-        <div class="ej">
-            <b>2.</b> P(x) = x² + 1 &nbsp;&nbsp; si x = 4
-            <span class="lin"></span>
+            <span class="num">1.</span>
+            <div class="ecuacion">\( 3x^2 = 0 \)</div>
+            <div class="espacio-inc"></div>
         </div>
 
         <div class="ej">
-            <b>3.</b> P(x) = 3x − 2 &nbsp;&nbsp; si x = 0
-            <span class="lin"></span>
-        </div>
-        <div class="ej">
-            <b>4.</b> P(x) = −x + 7 &nbsp;&nbsp; si x = 5
-            <span class="lin"></span>
+            <span class="num">2.</span>
+            <div class="ecuacion">\( x^2 - 16 = 0 \)</div>
+            <div class="espacio-inc"></div>
         </div>
 
         <div class="ej">
-            <b>5.</b> P(x) = 4x² − x &nbsp;&nbsp; si x = 2
-            <span class="lin"></span>
-        </div>
-        <div class="ej">
-            <b>6.</b> P(x) = x² − 3x + 2 &nbsp;&nbsp; si x = 3
-            <span class="lin"></span>
+            <span class="num">3.</span>
+            <div class="ecuacion">\( 2x^2 + 18 = 0 \)</div>
+            <div class="espacio-inc"></div>
         </div>
 
         <div class="ej">
-            <b>7.</b> P(x) = 5x − 10 &nbsp;&nbsp; si x = −2
-            <span class="lin"></span>
-        </div>
-        <div class="ej">
-            <b>8.</b> P(x) = x² + 2x − 8 &nbsp;&nbsp; si x = −1
-            <span class="lin"></span>
+            <span class="num">4.</span>
+            <div class="ecuacion">\( 5x^2 - 45 = 0 \)</div>
+            <div class="espacio-inc"></div>
         </div>
 
         <div class="ej">
-            <b>9.</b> P(x) = 2x² + 3x &nbsp;&nbsp; si x = −3
-            <span class="lin"></span>
-        </div>
-        <div class="ej">
-            <b>10.</b> P(x) = −x² + 4 &nbsp;&nbsp; si x = 2
-            <span class="lin"></span>
+            <span class="num">5.</span>
+            <div class="ecuacion">\( x^2 + 4x = 0 \)</div>
+            <div class="espacio-inc"></div>
         </div>
 
         <div class="ej">
-            <b>11.</b> P(x) = x³ − 2x &nbsp;&nbsp; si x = 2
-            <span class="lin"></span>
-        </div>
-        <div class="ej">
-            <b>12.</b> P(x) = 3x² − 5x + 1 &nbsp;&nbsp; si x = −1
-            <span class="lin"></span>
+            <span class="num">6.</span>
+            <div class="ecuacion">\( 3x^2 - 9x = 0 \)</div>
+            <div class="espacio-inc"></div>
         </div>
 
     </div>
 
-    <!-- ══ C ══ -->
-    <h2>C · Calcula el valor numérico (dos variables)</h2>
+    <!-- ══════ SECCIÓN 2: COMPLETAS ══════ -->
+    <div class="seccion-header">2. Ecuaciones completas &nbsp;<span style="font-size:9pt;font-weight:normal;">(1 punto cada una · total 7 puntos)</span></div>
+
     <div class="ej-grid">
 
         <div class="ej">
-            <b>13.</b> E(x,y) = 3x + y &nbsp;&nbsp; si x=2, y=1
-            <span class="lin"></span>
-        </div>
-        <div class="ej">
-            <b>14.</b> E(a,b) = a² − 2b &nbsp;&nbsp; si a=3, b=4
-            <span class="lin"></span>
+            <span class="num">7.</span>
+            <div class="ecuacion">\( x^2 - 5x + 6 = 0 \)</div>
+            <div class="espacio-comp"></div>
         </div>
 
         <div class="ej">
-            <b>15.</b> E(x,y) = 2x − y + 5 &nbsp;&nbsp; si x=0, y=−3
-            <span class="lin"></span>
-        </div>
-        <div class="ej">
-            <b>16.</b> E(p,q) = p·q + 2p &nbsp;&nbsp; si p=3, q=4
-            <span class="lin"></span>
+            <span class="num">8.</span>
+            <div class="ecuacion">\( x^2 + 4x - 5 = 0 \)</div>
+            <div class="espacio-comp"></div>
         </div>
 
         <div class="ej">
-            <b>17.</b> E(x,y) = x² + y² &nbsp;&nbsp; si x=1, y=−2
-            <span class="lin"></span>
+            <span class="num">9.</span>
+            <div class="ecuacion">\( x^2 + x + 1 = 0 \)</div>
+            <div class="espacio-comp"></div>
         </div>
+
         <div class="ej">
-            <b>18.</b> E(a,b) = 3a − b² + 2 &nbsp;&nbsp; si a=2, b=−1
-            <span class="lin"></span>
+            <span class="num">10.</span>
+            <div class="ecuacion">\( 2x^2 - 7x + 3 = 0 \)</div>
+            <div class="espacio-comp"></div>
+        </div>
+
+        <div class="ej">
+            <span class="num">11.</span>
+            <div class="ecuacion">\( x^2 - 2x - 15 = 0 \)</div>
+            <div class="espacio-comp"></div>
+        </div>
+
+        <div class="ej">
+            <span class="num">12.</span>
+            <div class="ecuacion">\( 3x^2 + 5x - 2 = 0 \)</div>
+            <div class="espacio-comp"></div>
+        </div>
+
+        <div class="ej">
+            <span class="num">13.</span>
+            <div class="ecuacion">\( x^2 + 6x + 9 = 0 \)</div>
+            <div class="espacio-comp"></div>
+        </div>
+
+        <div class="ej" style="visibility:hidden;">
+            <!-- celda vacía para equilibrar el grid -->
         </div>
 
     </div>
 
-    <!-- ══ D ══ -->
-    <h2>D · Problemas</h2>
-
-    <div class="prob">
-        <b>19.</b> La expresión <b>2n + 1</b> representa cualquier número impar.
-        Calcula su valor si n = 6 y si n = 10.
-        <span class="prob-lin"></span>
-    </div>
-
-    <div class="prob">
-        <b>20.</b> Un taxi cobra <b>C = 1,5·km + 3</b> euros. ¿Cuánto pagas si recorres 4 km? ¿Y si recorres 10 km?
-        <span class="prob-lin"></span>
-    </div>
-
-    <div class="prob">
-        <b>21.</b> El área de un rectángulo es <b>A = b · h</b>. Calcula el área si b = 5 cm
-        y h = 2x cm, cuando x = 3.
-        <span class="prob-lin"></span>
-    </div>
-
-    <div class="prob">
-        <b>22.</b> La expresión <b>n² − n</b> da el número de diagonales de un polígono de n lados.
-        ¿Cuántas diagonales tienen un hexágono (n=6) y un octógono (n=8)?
-        <span class="prob-lin"></span>
-    </div>
-
-    <footer>Academia Esparta · Torremolinos &nbsp;|&nbsp; Álgebra 1º ESO</footer>
+    <footer>
+        <span>Academia Esparta · Torremolinos</span>
+        <span>Ecuaciones de 2º grado · 2º ESO</span>
+    </footer>
 
 </div>
 </body>
