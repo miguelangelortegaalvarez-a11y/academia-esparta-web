@@ -3,156 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lectura comprensiva: Las focas - 4º Primaria - Academia Esparta</title>
+    <title>Estadística — Introducción · 4º ESO · Academia Esparta</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11pt;
+            line-height: 1.4;
             background: #fff;
             color: #000;
-            padding: 2rem 1.5rem 1rem;
-            max-width: 780px;
-            margin: 0 auto;
+            padding: 20px;
         }
-
         .no-print {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 18px;
         }
         .btn {
-            background: #222;
+            background: #000;
             color: #fff;
             border: none;
-            padding: 8px 24px;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 700;
+            padding: 9px 22px;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+            font-weight: bold;
             cursor: pointer;
+            letter-spacing: 1px;
+        }
+        .btn:hover { background: #333; }
+
+        .page {
+            width: 210mm;
+            border: 2px solid #000;
+            padding: 12mm;
+            box-sizing: border-box;
+            margin: 0 auto;
+            background: #fff;
+        }
+
+        .doc-header {
+            border-bottom: 5px double #000;
+            margin-bottom: 18px;
+            padding-bottom: 6px;
+        }
+        h1 {
+            font-size: 16pt;
+            text-decoration: underline;
+            margin: 0 0 4px 0;
+        }
+        .subtitulo {
             font-size: 10pt;
-            border-radius: 999px;
+            letter-spacing: 1px;
+            margin: 0;
         }
-        .btn:hover { background: #444; }
-
-        .header {
-            text-align: center;
-            margin-bottom: 6px;
-        }
-        .academia-nombre {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24pt;
-            font-weight: 700;
-            color: #000;
-            display: block;
-            margin-bottom: 3px;
-        }
-        .ficha-ref {
+        .para-alumna {
             font-size: 10pt;
-            color: #555;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .datos-alumno {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 6px;
-            text-align: left;
-        }
-        .dato {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11pt;
-            flex: 1;
-        }
-        .dato label { white-space: nowrap; font-weight: 700; }
-        .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
-
-        hr.separador {
-            border: none;
-            border-top: 1.5px solid #000;
-            margin-bottom: 12px;
-        }
-
-        .lectura-titulo {
-            font-size: 15pt;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-        .lectura-box {
-            border: 1.5px solid #000;
-            border-radius: 8px;
-            padding: 12px 15px;
-            margin-bottom: 14px;
-        }
-        .lectura-texto {
-            font-size: 13pt;
-            line-height: 1.75;
+            margin: 6px 0 0 0;
+            color: #444;
         }
 
         h2 {
-            font-size: 11pt;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            margin: 14px 0 8px 0;
-        }
-
-        ol.preguntas, ol.vof, ol.huecos {
-            padding-left: 22px;
-        }
-        ol.preguntas li { margin-bottom: 10px; font-size: 12pt; font-weight: 600; line-height: 1.4; }
-        ol.vof li { margin-bottom: 8px; font-size: 12pt; font-weight: 600; }
-        ol.huecos li { margin-bottom: 10px; font-size: 12pt; font-weight: 600; line-height: 1.5; }
-
-        .banco {
-            font-size: 10pt;
-            color: #444;
+            font-size: 12pt;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            margin-top: 14px;
             margin-bottom: 8px;
-            font-style: italic;
+            text-transform: uppercase;
+            display: inline-block;
         }
 
-        .linea-respuesta {
-            border-bottom: 1.5px solid #000;
-            display: block;
-            margin-top: 4px;
-            height: 18px;
+        .box-concepto {
+            border: 2px solid #000;
+            padding: 10px 14px;
+            margin: 10px 0;
+            background: #f9f9f9;
         }
-        .casilla-vf {
-            display: inline-block;
+        .concepto-titulo {
+            font-size: 11pt;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 6px;
+        }
+        .concepto-item {
+            margin: 3px 0 3px 12px;
+        }
+        .formula-inline {
+            font-style: normal;
+        }
+
+        .enunciado {
+            margin: 10px 0 6px 0;
+            font-weight: bold;
+        }
+        .datos-box {
             border: 1.5px solid #000;
-            width: 26px;
-            height: 19px;
-            margin-left: 10px;
-            vertical-align: middle;
+            padding: 8px 12px;
+            margin: 8px 0;
+            background: #f9f9f9;
+            letter-spacing: 1px;
         }
-        .hueco-rellenar {
-            display: inline-block;
-            border-bottom: 1.5px solid #000;
-            min-width: 90px;
+
+        table.frecuencias {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+            font-size: 10.5pt;
+        }
+        table.frecuencias th {
+            background: #000;
+            color: #fff;
+            border: 1.5px solid #000;
+            padding: 5px 8px;
+            text-align: center;
+        }
+        table.frecuencias td {
+            border: 1.5px solid #000;
+            padding: 6px 8px;
+            text-align: center;
+            min-width: 40px;
+        }
+        table.frecuencias td.dato { background: #e8e8e8; font-weight: bold; }
+        table.frecuencias td.vacia { background: #fff; }
+        table.frecuencias tr.total td { background: #e8e8e8; font-weight: bold; }
+
+        .apartado {
+            margin: 14px 0 6px 0;
+            font-weight: bold;
+        }
+        .linea-calculo {
+            border-bottom: 1px solid #000;
+            display: block;
+            margin: 6px 0;
             height: 18px;
-            vertical-align: bottom;
+        }
+        .espacio-trabajo {
+            border: 1px dashed #999;
+            height: 50px;
+            margin: 6px 0;
+            background: #fafafa;
+        }
+        .resultado-final {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 4px 10px;
+            margin-top: 6px;
+            font-size: 10.5pt;
         }
 
         footer {
-            margin-top: 16px;
+            margin-top: 24px;
+            font-size: 9pt;
+            border-top: 1px solid #000;
             padding-top: 8px;
-            border-top: 1px solid #ccc;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
         }
-        .footer-marca { font-size: 10pt; color: #666; }
-        .footer-msg { font-size: 12pt; font-weight: 700; }
 
         @media print {
             .no-print { display: none; }
-            body { padding: 0; filter: grayscale(100%); max-width: none; }
+            .page { border: none; width: 100%; }
         }
-        @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
     </style>
 </head>
 <body>
@@ -161,65 +174,112 @@
         <button class="btn" onclick="window.print()">🖨️ IMPRIMIR / GUARDAR PDF</button>
     </div>
 
-    <div class="header">
-        <span class="academia-nombre">Academia Esparta</span>
-        <span class="ficha-ref">Lengua · 4º Primaria · Lectura comprensiva</span>
-        <div class="datos-alumno">
-            <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
-            <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    <div class="page">
+
+        <div class="doc-header">
+            <h1>Estadística — Introducción</h1>
+            <p class="subtitulo">INICIO DEL TEMA · 4º ESO &nbsp;|&nbsp; ACADEMIA ESPARTA</p>
+            <p class="para-alumna">Alumna: Leire &nbsp;&nbsp;&nbsp; Fecha: ___________</p>
         </div>
-    </div>
-    <hr class="separador">
 
-    <div class="lectura-titulo">Las focas</div>
-    <div class="lectura-box">
-        <div class="lectura-texto">
-            La foca es un mamífero marino adaptado a vivir en aguas frías. Su cuerpo fusiforme —parecido a un torpedo— y sus aletas le permiten nadar con gran agilidad, alcanzando velocidades de hasta 25 km/h bajo el agua. Sin embargo, sobre tierra firme se desplaza con torpeza, arrastrándose sobre el suelo.
-            <br><br>
-            Las focas respiran aire, por lo que deben salir a la superficie con frecuencia. Bajo su piel poseen una gruesa capa de grasa llamada <em>blubber</em> que las protege del frío extremo del Ártico y la Antártida.
-            <br><br>
-            Se alimentan de peces, calamares y crustáceos, y pueden sumergirse hasta 300 metros de profundidad. Sus bigotes, llamados vibrisas, son tan sensibles que detectan los movimientos del agua producidos por sus presas, lo que les permite cazar incluso en la oscuridad.
-            <br><br>
-            Las focas forman grandes colonias en las costas rocosas. Las hembras tienen una sola cría al año, a la que amamantan con una leche muy rica en grasa durante varias semanas.
+        <h2>Conceptos clave</h2>
+
+        <div class="box-concepto">
+            <div class="concepto-titulo">Tabla de frecuencias</div>
+            <div class="concepto-item"><b>xi</b> → valor de la variable</div>
+            <div class="concepto-item"><b>fi</b> → frecuencia absoluta: nº de veces que aparece xi</div>
+            <div class="concepto-item"><b>hi</b> → frecuencia relativa: \( h_i = \dfrac{f_i}{n} \)</div>
+            <div class="concepto-item"><b>hi %</b> → frecuencia relativa en porcentaje: \( h_i \times 100 \)</div>
+            <div class="concepto-item"><b>Fi</b> → frecuencia absoluta acumulada: suma de fi hasta xi</div>
         </div>
+
+        <div class="box-concepto">
+            <div class="concepto-titulo">Medidas de centralización</div>
+            <div class="concepto-item"><b>Media</b>: \( \bar{x} = \dfrac{\displaystyle\sum x_i \cdot f_i}{n} \)</div>
+            <div class="concepto-item"><b>Mediana</b>: valor que deja el 50 % de los datos por debajo. Se localiza con Fi.</div>
+            <div class="concepto-item"><b>Moda</b>: valor con mayor frecuencia absoluta (fi más alta).</div>
+        </div>
+
+        <h2>Ejercicio</h2>
+
+        <p class="enunciado">Las notas de los 15 alumnos de 4ºA en el primer examen de Estadística fueron:</p>
+
+        <div class="datos-box">
+            4 &nbsp; 5 &nbsp; 6 &nbsp; 7 &nbsp; 5 &nbsp; 6 &nbsp; 4 &nbsp; 6 &nbsp; 5 &nbsp; 8 &nbsp; 6 &nbsp; 5 &nbsp; 7 &nbsp; 6 &nbsp; 7
+        </div>
+
+        <p class="apartado">a) Completa la tabla de frecuencias &nbsp;<span style="font-weight:normal;font-size:10pt;">(n = 15)</span></p>
+
+        <table class="frecuencias">
+            <tr>
+                <th>xi</th>
+                <th>fi</th>
+                <th>\( h_i = f_i / n \)</th>
+                <th>hi (%)</th>
+                <th>Fi</th>
+            </tr>
+            <tr>
+                <td class="dato">4</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="dato">5</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="dato">6</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="dato">7</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="dato">8</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+                <td class="vacia">&nbsp;</td>
+            </tr>
+            <tr class="total">
+                <td>TOTAL</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>100 %</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+
+        <p class="apartado">b) Calcula la media aritmética</p>
+        <div class="espacio-trabajo"></div>
+        <span class="resultado-final">\( \bar{x} = \)</span>
+
+        <p class="apartado">c) Calcula la mediana</p>
+        <p style="font-size:10pt; margin: 0 0 4px 0;">Recuerda: n = 15 (impar) → la mediana es el valor en la posición <b>8</b> de los datos ordenados.</p>
+        <div class="espacio-trabajo"></div>
+        <span class="resultado-final">Me = </span>
+
+        <p class="apartado">d) ¿Cuál es la moda? ¿Qué significa en este contexto?</p>
+        <span class="linea-calculo"></span>
+        <span class="linea-calculo"></span>
+
+        <footer>
+            Academia Esparta · Torremolinos &nbsp;|&nbsp; Estadística 4º ESO
+        </footer>
+
     </div>
-
-    <h2>1. Responde a estas preguntas</h2>
-    <ol class="preguntas">
-        <li>¿Qué forma tiene el cuerpo de la foca y a qué objeto se compara en el texto?<span class="linea-respuesta"></span></li>
-        <li>¿A qué velocidad puede nadar la foca?<span class="linea-respuesta"></span></li>
-        <li>¿Por qué necesita la foca salir a la superficie con frecuencia?<span class="linea-respuesta"></span></li>
-        <li>¿Cómo se llama la capa de grasa que tiene bajo la piel y para qué sirve?<span class="linea-respuesta"></span></li>
-        <li>¿De qué se alimentan las focas?<span class="linea-respuesta"></span></li>
-        <li>¿A qué profundidad puede bucear la foca?<span class="linea-respuesta"></span></li>
-        <li>¿Para qué le sirven las vibrisas?<span class="linea-respuesta"></span></li>
-        <li>¿Cuántas crías tiene una hembra al año?<span class="linea-respuesta"></span></li>
-    </ol>
-
-    <h2>2. Verdadero o Falso (escribe V o F en la casilla)</h2>
-    <ol class="vof">
-        <li>La foca es un pez. <span class="casilla-vf"></span></li>
-        <li>Las focas pueden nadar a 25 km/h. <span class="casilla-vf"></span></li>
-        <li>Las focas viven en climas cálidos y tropicales. <span class="casilla-vf"></span></li>
-        <li>El blubber protege a las focas del frío extremo. <span class="casilla-vf"></span></li>
-        <li>Las vibrisas ayudan a detectar presas incluso en la oscuridad. <span class="casilla-vf"></span></li>
-        <li>Una hembra foca tiene tres crías al año. <span class="casilla-vf"></span></li>
-    </ol>
-
-    <h2>3. Rellena los huecos con la palabra correcta</h2>
-    <p class="banco">Banco de palabras: <strong>aletas · colonia · Antártida · leche · torpedo · rocosas</strong></p>
-    <ol class="huecos">
-        <li>El cuerpo de la foca tiene forma fusiforme, como un <span class="hueco-rellenar"></span>.</li>
-        <li>Las focas usan sus <span class="hueco-rellenar"></span> para nadar con agilidad.</li>
-        <li>Algunas focas viven en las heladas aguas de la <span class="hueco-rellenar"></span>.</li>
-        <li>Las focas forman grandes <span class="hueco-rellenar"></span> en costas <span class="hueco-rellenar"></span>.</li>
-        <li>Las hembras amamantan a sus crías con una <span class="hueco-rellenar"></span> muy rica en grasa.</li>
-    </ol>
-
-    <footer>
-        <span class="footer-marca">Academia Esparta · Torremolinos</span>
-        <span class="footer-msg">⭐ ¡Buen trabajo!</span>
-    </footer>
 
 </body>
 </html>
