@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funciones cuadráticas · 4º ESO · Academia Esparta</title>
-
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Funciones lineales · 3º ESO · Academia Esparta</title>
 
     <style>
         body { font-family:'Courier New',Courier,monospace; font-size:10.5pt; line-height:1.35; background:#fff; color:#000; padding:20px; }
@@ -19,39 +16,34 @@
         .doc-header { border-bottom:5px double #000; margin-bottom:12px; padding-bottom:5px; }
         h1 { font-size:15pt; text-decoration:underline; margin:0 0 3px 0; }
         .subtitulo { font-size:9.5pt; letter-spacing:1px; margin:0; }
-        .para-alumna { font-size:9.5pt; margin:5px 0 0 0; color:#444; }
+        .alumna-linea { font-size:10pt; margin:5px 0 0 0; }
 
-        .box-formulas {
-            border:2px solid #000; padding:7px 12px; margin:0 0 10px 0;
-            background:#f9f9f9; font-size:9.5pt;
-            display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;
-        }
-        .f-item { flex:1; min-width:160px; }
+        /* Bloque de ejercicio */
+        .ej { display:flex; gap:12px; margin-bottom:10px; padding-bottom:10px; border-bottom:1.5px dashed #666; }
+        .ej:last-of-type { border-bottom:none; margin-bottom:0; }
 
-        h2 { font-size:11pt; background:#000; color:#fff; padding:3px 10px; margin:10px 0 6px 0; text-transform:uppercase; display:inline-block; }
+        .ej-left { flex:1; }
+        .ej-num { font-size:12pt; font-weight:bold; margin-bottom:4px; }
+        .ecuacion-original { font-size:13pt; font-weight:bold; background:#000; color:#fff; padding:2px 10px; display:inline-block; margin-bottom:8px; }
 
-        .ejercicio { display:flex; gap:10px; margin-bottom:8px; padding-bottom:8px; border-bottom:1.5px dashed #666; }
-        .ejercicio:last-of-type { border-bottom:none; margin-bottom:0; }
+        .etiqueta { font-size:9.5pt; font-weight:bold; text-decoration:underline; margin:6px 0 3px 0; }
+        .lin { border-bottom:1px solid #000; display:block; height:16px; margin:3px 0; }
 
-        .calculo { flex:1; font-size:10pt; }
-        .funcion-titulo { font-size:11.5pt; font-weight:bold; margin:0 0 6px 0; }
+        /* Tabla de valores */
+        table.tv { border-collapse:collapse; margin:4px 0; font-size:10.5pt; }
+        table.tv th { background:#000; color:#fff; border:1.5px solid #000; padding:4px 10px; text-align:center; font-size:9.5pt; }
+        table.tv td { border:1.5px solid #000; padding:5px 10px; text-align:center; min-width:32px; }
+        table.tv td.fila-x { background:#e8e8e8; font-weight:bold; }
 
-        .campo { display:flex; gap:6px; align-items:center; margin:2px 0; font-size:9.5pt; }
-        .campo .etiq { white-space:nowrap; }
-        .lin { border-bottom:1px solid #000; display:inline-block; min-width:38px; height:14px; vertical-align:bottom; }
+        .ej-right { flex:0 0 144px; }
 
-        .bloque { margin:5px 0 3px 0; }
-        .bloque-titulo { font-weight:bold; font-size:9.5pt; text-decoration:underline; }
-        .res-box { border:1.5px solid #000; padding:2px 8px; display:inline-block; font-size:9.5pt; margin-top:3px; }
-
-        .grafico { flex:0 0 156px; padding-top:2px; }
-
-        footer { margin-top:16px; font-size:9pt; border-top:1px solid #000; padding-top:7px; text-align:center; }
+        footer { margin-top:14px; font-size:9pt; border-top:1px solid #000; padding-top:7px; text-align:center; }
 
         @media print {
             .no-print { display:none; }
             .page { border:none; width:100%; }
         }
+        @page { size:A4 portrait; margin:1.8cm 2cm; }
     </style>
 </head>
 <body>
@@ -63,284 +55,230 @@
 <div class="page">
 
     <div class="doc-header">
-        <h1>Funciones cuadráticas</h1>
-        <p class="subtitulo">VÉRTICE · CORTES · REPRESENTACIÓN &nbsp;|&nbsp; 4º ESO · ACADEMIA ESPARTA</p>
-        <p class="para-alumna">Alumna: Leire &nbsp;&nbsp;&nbsp; Fecha: ___________</p>
+        <h1>Funciones lineales</h1>
+        <p class="subtitulo">DESPEJAR Y · TABLA DE VALORES · REPRESENTACIÓN &nbsp;|&nbsp; 3º ESO · ACADEMIA ESPARTA</p>
+        <p class="alumna-linea">Alumna: <b>Noelia Lobón</b> &nbsp;&nbsp;&nbsp; Fecha: ___________</p>
     </div>
 
-    <div class="box-formulas">
-        <div class="f-item">
-            <b>Vértice:</b> &nbsp;
-            \( x_V = \dfrac{-b}{2a} \) &nbsp; → &nbsp; \( y_V = f(x_V) \)
-        </div>
-        <div class="f-item">
-            <b>Cortes eje X:</b> &nbsp;
-            \( x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} \)
-        </div>
-        <div class="f-item">
-            <b>Corte eje Y:</b> &nbsp; \( f(0) = c \)
-        </div>
-    </div>
+    <!-- ══════════ EJERCICIO 1 ══════════ -->
+    <div class="ej">
+        <div class="ej-left">
+            <div class="ej-num">1.</div>
+            <div class="ecuacion-original">x + y − 3 = 0</div>
 
-    <!-- ═══════════════════ EJERCICIO 1 ═══════════════════ -->
-    <h2>Ejercicio 1</h2>
-    <div class="ejercicio">
-        <div class="calculo">
-            <p class="funcion-titulo">\( f(x) = x^2 - 4x + 3 \)</p>
+            <div class="etiqueta">Despeja y:</div>
+            <span class="lin"></span>
+            <span class="lin"></span>
 
-            <div class="campo">
-                <span class="etiq">a =</span><span class="lin"></span>
-                <span class="etiq">&nbsp; b =</span><span class="lin"></span>
-                <span class="etiq">&nbsp; c =</span><span class="lin"></span>
-            </div>
-
-            <div class="bloque">
-                <div class="bloque-titulo">Vértice</div>
-                <div class="campo">
-                    <span class="etiq">\( x_V = \dfrac{-(\ )}{2 \cdot (\ )} = \)</span>
-                    <span class="lin"></span>
-                </div>
-                <div class="campo">
-                    <span class="etiq">\( y_V = (\ )^2 - 4(\ ) + 3 = \)</span>
-                    <span class="lin"></span>
-                </div>
-                <div class="res-box">V( <span class="lin"></span> , <span class="lin"></span> )</div>
-            </div>
-
-            <div class="bloque">
-                <div class="bloque-titulo">Cortes eje X &nbsp; → &nbsp; \(x^2 - 4x + 3 = 0\)</div>
-                <div class="campo">
-                    <span class="etiq">\(\Delta = (-4)^2 - 4 \cdot 1 \cdot 3 =\)</span>
-                    <span class="lin"></span>
-                </div>
-                <div class="campo">
-                    <span class="etiq">\(x_1 =\)</span><span class="lin"></span>
-                    <span class="etiq">&nbsp; \(x_2 =\)</span><span class="lin"></span>
-                </div>
-            </div>
-
-            <div class="bloque">
-                <div class="bloque-titulo">Corte eje Y</div>
-                <div class="campo"><span class="etiq">f(0) =</span><span class="lin"></span></div>
-            </div>
+            <div class="etiqueta">Tabla de valores:</div>
+            <table class="tv">
+                <tr>
+                    <th>x</th>
+                    <td class="fila-x">−1</td>
+                    <td class="fila-x">0</td>
+                    <td class="fila-x">1</td>
+                    <td class="fila-x">2</td>
+                    <td class="fila-x">3</td>
+                </tr>
+                <tr>
+                    <th>y</th>
+                    <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+            </table>
         </div>
 
-        <div class="grafico">
-            <svg width="156" height="152" xmlns="http://www.w3.org/2000/svg">
-              <line x1="18" y1="8" x2="18" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="31" y1="8" x2="31" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="44" y1="8" x2="44" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="57" y1="8" x2="57" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="70" y1="8" x2="70" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="83" y1="8" x2="83" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="96" y1="8" x2="96" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="109" y1="8" x2="109" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="122" y1="8" x2="122" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="135" y1="8" x2="135" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="148" y1="8" x2="148" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="8"   x2="148" y2="8"   stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="21"  x2="148" y2="21"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="34"  x2="148" y2="34"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="47"  x2="148" y2="47"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="60"  x2="148" y2="60"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="73"  x2="148" y2="73"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="86"  x2="148" y2="86"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="99"  x2="148" y2="99"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="112" x2="148" y2="112" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="125" x2="148" y2="125" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="138" x2="148" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="13" y1="73" x2="152" y2="73" stroke="#000" stroke-width="1.5"/>
-              <line x1="57" y1="4"  x2="57"  y2="143" stroke="#000" stroke-width="1.5"/>
-              <polygon points="153,73 148,70 148,76" fill="#000"/>
-              <polygon points="57,3 54,9 60,9" fill="#000"/>
-              <text x="154" y="76" font-size="8" font-family="Courier New" fill="#000">x</text>
-              <text x="59"  y="3"  font-size="8" font-family="Courier New" fill="#000">y</text>
-              <text x="27"  y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">-2</text>
-              <text x="83"  y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">2</text>
-              <text x="109" y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">4</text>
-              <text x="135" y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">6</text>
-              <text x="51" y="25"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">4</text>
-              <text x="51" y="51"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">2</text>
-              <text x="48" y="90"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-1</text>
-              <text x="48" y="103" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-2</text>
-              <text x="48" y="129" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-4</text>
+        <div class="ej-right">
+            <!-- Grid: x∈[-3,6] y∈[-4,7], unit=13px, origin=(57,99) -->
+            <svg width="142" height="163" xmlns="http://www.w3.org/2000/svg">
+              <!-- Vertical grid lines x=-3..6 -->
+              <line x1="18"  y1="8" x2="18"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="31"  y1="8" x2="31"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="44"  y1="8" x2="44"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="57"  y1="8" x2="57"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="70"  y1="8" x2="70"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="83"  y1="8" x2="83"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="96"  y1="8" x2="96"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="109" y1="8" x2="109" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="122" y1="8" x2="122" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="135" y1="8" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <!-- Horizontal grid lines y=7..-4 -->
+              <line x1="18" y1="8"   x2="135" y2="8"   stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="21"  x2="135" y2="21"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="34"  x2="135" y2="34"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="47"  x2="135" y2="47"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="60"  x2="135" y2="60"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="73"  x2="135" y2="73"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="86"  x2="135" y2="86"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="99"  x2="135" y2="99"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="112" x2="135" y2="112" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="125" x2="135" y2="125" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="138" x2="135" y2="138" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="151" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <!-- Axes -->
+              <line x1="13"  y1="99" x2="140" y2="99"  stroke="#000" stroke-width="1.5"/>
+              <line x1="57"  y1="4"  x2="57"  y2="156" stroke="#000" stroke-width="1.5"/>
+              <!-- Arrows -->
+              <polygon points="141,99 136,96 136,102" fill="#000"/>
+              <polygon points="57,3 54,8 60,8" fill="#000"/>
+              <!-- Axis labels -->
+              <text x="142" y="102" font-size="7" font-family="Courier New" fill="#000">x</text>
+              <text x="59"  y="3"   font-size="7" font-family="Courier New" fill="#000">y</text>
+              <!-- X labels every 2 units -->
+              <text x="31"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">-2</text>
+              <text x="83"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">2</text>
+              <text x="109" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">4</text>
+              <text x="135" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">6</text>
+              <!-- Y labels every 2 units -->
+              <text x="53" y="25"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">6</text>
+              <text x="53" y="51"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">4</text>
+              <text x="53" y="77"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">2</text>
+              <text x="50" y="116" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-2</text>
+              <text x="50" y="142" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-4</text>
             </svg>
         </div>
     </div>
 
-    <!-- ═══════════════════ EJERCICIO 2 ═══════════════════ -->
-    <h2>Ejercicio 2</h2>
-    <div class="ejercicio">
-        <div class="calculo">
-            <p class="funcion-titulo">\( f(x) = -x^2 + 2x + 3 \)</p>
+    <!-- ══════════ EJERCICIO 2 ══════════ -->
+    <div class="ej">
+        <div class="ej-left">
+            <div class="ej-num">2.</div>
+            <div class="ecuacion-original">2x − y + 1 = 0</div>
 
-            <div class="campo">
-                <span class="etiq">a =</span><span class="lin"></span>
-                <span class="etiq">&nbsp; b =</span><span class="lin"></span>
-                <span class="etiq">&nbsp; c =</span><span class="lin"></span>
-            </div>
+            <div class="etiqueta">Despeja y:</div>
+            <span class="lin"></span>
+            <span class="lin"></span>
 
-            <div class="bloque">
-                <div class="bloque-titulo">Vértice</div>
-                <div class="campo">
-                    <span class="etiq">\( x_V = \dfrac{-(\ )}{2 \cdot (\ )} = \)</span>
-                    <span class="lin"></span>
-                </div>
-                <div class="campo">
-                    <span class="etiq">\( y_V = -(\ )^2 + 2(\ ) + 3 = \)</span>
-                    <span class="lin"></span>
-                </div>
-                <div class="res-box">V( <span class="lin"></span> , <span class="lin"></span> )</div>
-            </div>
-
-            <div class="bloque">
-                <div class="bloque-titulo">Cortes eje X &nbsp; → &nbsp; \(-x^2 + 2x + 3 = 0\)</div>
-                <div class="campo">
-                    <span class="etiq">\(\Delta = 2^2 - 4 \cdot (-1) \cdot 3 =\)</span>
-                    <span class="lin"></span>
-                </div>
-                <div class="campo">
-                    <span class="etiq">\(x_1 =\)</span><span class="lin"></span>
-                    <span class="etiq">&nbsp; \(x_2 =\)</span><span class="lin"></span>
-                </div>
-            </div>
-
-            <div class="bloque">
-                <div class="bloque-titulo">Corte eje Y</div>
-                <div class="campo"><span class="etiq">f(0) =</span><span class="lin"></span></div>
-            </div>
+            <div class="etiqueta">Tabla de valores:</div>
+            <table class="tv">
+                <tr>
+                    <th>x</th>
+                    <td class="fila-x">−2</td>
+                    <td class="fila-x">−1</td>
+                    <td class="fila-x">0</td>
+                    <td class="fila-x">1</td>
+                    <td class="fila-x">2</td>
+                </tr>
+                <tr>
+                    <th>y</th>
+                    <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+            </table>
         </div>
 
-        <div class="grafico">
-            <svg width="156" height="152" xmlns="http://www.w3.org/2000/svg">
-              <line x1="18" y1="8" x2="18" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="31" y1="8" x2="31" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="44" y1="8" x2="44" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="57" y1="8" x2="57" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="70" y1="8" x2="70" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="83" y1="8" x2="83" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="96" y1="8" x2="96" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="109" y1="8" x2="109" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="122" y1="8" x2="122" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="135" y1="8" x2="135" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="148" y1="8" x2="148" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="8"   x2="148" y2="8"   stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="21"  x2="148" y2="21"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="34"  x2="148" y2="34"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="47"  x2="148" y2="47"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="60"  x2="148" y2="60"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="73"  x2="148" y2="73"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="86"  x2="148" y2="86"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="99"  x2="148" y2="99"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="112" x2="148" y2="112" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="125" x2="148" y2="125" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="138" x2="148" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="13" y1="73" x2="152" y2="73" stroke="#000" stroke-width="1.5"/>
-              <line x1="57" y1="4"  x2="57"  y2="143" stroke="#000" stroke-width="1.5"/>
-              <polygon points="153,73 148,70 148,76" fill="#000"/>
-              <polygon points="57,3 54,9 60,9" fill="#000"/>
-              <text x="154" y="76" font-size="8" font-family="Courier New" fill="#000">x</text>
-              <text x="59"  y="3"  font-size="8" font-family="Courier New" fill="#000">y</text>
-              <text x="27"  y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">-2</text>
-              <text x="83"  y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">2</text>
-              <text x="109" y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">4</text>
-              <text x="135" y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">6</text>
-              <text x="51" y="25"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">4</text>
-              <text x="51" y="51"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">2</text>
-              <text x="48" y="90"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-1</text>
-              <text x="48" y="103" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-2</text>
-              <text x="48" y="129" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-4</text>
+        <div class="ej-right">
+            <svg width="142" height="163" xmlns="http://www.w3.org/2000/svg">
+              <line x1="18"  y1="8" x2="18"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="31"  y1="8" x2="31"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="44"  y1="8" x2="44"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="57"  y1="8" x2="57"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="70"  y1="8" x2="70"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="83"  y1="8" x2="83"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="96"  y1="8" x2="96"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="109" y1="8" x2="109" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="122" y1="8" x2="122" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="135" y1="8" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="8"   x2="135" y2="8"   stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="21"  x2="135" y2="21"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="34"  x2="135" y2="34"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="47"  x2="135" y2="47"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="60"  x2="135" y2="60"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="73"  x2="135" y2="73"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="86"  x2="135" y2="86"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="99"  x2="135" y2="99"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="112" x2="135" y2="112" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="125" x2="135" y2="125" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="138" x2="135" y2="138" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="151" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="13"  y1="99" x2="140" y2="99"  stroke="#000" stroke-width="1.5"/>
+              <line x1="57"  y1="4"  x2="57"  y2="156" stroke="#000" stroke-width="1.5"/>
+              <polygon points="141,99 136,96 136,102" fill="#000"/>
+              <polygon points="57,3 54,8 60,8" fill="#000"/>
+              <text x="142" y="102" font-size="7" font-family="Courier New" fill="#000">x</text>
+              <text x="59"  y="3"   font-size="7" font-family="Courier New" fill="#000">y</text>
+              <text x="31"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">-2</text>
+              <text x="83"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">2</text>
+              <text x="109" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">4</text>
+              <text x="135" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">6</text>
+              <text x="53" y="25"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">6</text>
+              <text x="53" y="51"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">4</text>
+              <text x="53" y="77"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">2</text>
+              <text x="50" y="116" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-2</text>
+              <text x="50" y="142" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-4</text>
             </svg>
         </div>
     </div>
 
-    <!-- ═══════════════════ EJERCICIO 3 ═══════════════════ -->
-    <h2>Ejercicio 3</h2>
-    <div class="ejercicio">
-        <div class="calculo">
-            <p class="funcion-titulo">\( f(x) = x^2 - 6x + 5 \)</p>
+    <!-- ══════════ EJERCICIO 3 ══════════ -->
+    <div class="ej">
+        <div class="ej-left">
+            <div class="ej-num">3.</div>
+            <div class="ecuacion-original">x + 2y − 8 = 0</div>
 
-            <div class="campo">
-                <span class="etiq">a =</span><span class="lin"></span>
-                <span class="etiq">&nbsp; b =</span><span class="lin"></span>
-                <span class="etiq">&nbsp; c =</span><span class="lin"></span>
-            </div>
+            <div class="etiqueta">Despeja y:</div>
+            <span class="lin"></span>
+            <span class="lin"></span>
 
-            <div class="bloque">
-                <div class="bloque-titulo">Vértice</div>
-                <div class="campo">
-                    <span class="etiq">\( x_V = \dfrac{-(\ )}{2 \cdot (\ )} = \)</span>
-                    <span class="lin"></span>
-                </div>
-                <div class="campo">
-                    <span class="etiq">\( y_V = (\ )^2 - 6(\ ) + 5 = \)</span>
-                    <span class="lin"></span>
-                </div>
-                <div class="res-box">V( <span class="lin"></span> , <span class="lin"></span> )</div>
-            </div>
-
-            <div class="bloque">
-                <div class="bloque-titulo">Cortes eje X &nbsp; → &nbsp; \(x^2 - 6x + 5 = 0\)</div>
-                <div class="campo">
-                    <span class="etiq">\(\Delta = (-6)^2 - 4 \cdot 1 \cdot 5 =\)</span>
-                    <span class="lin"></span>
-                </div>
-                <div class="campo">
-                    <span class="etiq">\(x_1 =\)</span><span class="lin"></span>
-                    <span class="etiq">&nbsp; \(x_2 =\)</span><span class="lin"></span>
-                </div>
-            </div>
-
-            <div class="bloque">
-                <div class="bloque-titulo">Corte eje Y</div>
-                <div class="campo"><span class="etiq">f(0) =</span><span class="lin"></span></div>
-            </div>
+            <div class="etiqueta">Tabla de valores:</div>
+            <table class="tv">
+                <tr>
+                    <th>x</th>
+                    <td class="fila-x">−2</td>
+                    <td class="fila-x">0</td>
+                    <td class="fila-x">2</td>
+                    <td class="fila-x">4</td>
+                    <td class="fila-x">6</td>
+                </tr>
+                <tr>
+                    <th>y</th>
+                    <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+            </table>
         </div>
 
-        <div class="grafico">
-            <svg width="156" height="152" xmlns="http://www.w3.org/2000/svg">
-              <line x1="18" y1="8" x2="18" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="31" y1="8" x2="31" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="44" y1="8" x2="44" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="57" y1="8" x2="57" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="70" y1="8" x2="70" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="83" y1="8" x2="83" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="96" y1="8" x2="96" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="109" y1="8" x2="109" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="122" y1="8" x2="122" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="135" y1="8" x2="135" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="148" y1="8" x2="148" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="8"   x2="148" y2="8"   stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="21"  x2="148" y2="21"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="34"  x2="148" y2="34"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="47"  x2="148" y2="47"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="60"  x2="148" y2="60"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="73"  x2="148" y2="73"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="86"  x2="148" y2="86"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="99"  x2="148" y2="99"  stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="112" x2="148" y2="112" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="125" x2="148" y2="125" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="18" y1="138" x2="148" y2="138" stroke="#ccc" stroke-width="0.7"/>
-              <line x1="13" y1="73" x2="152" y2="73" stroke="#000" stroke-width="1.5"/>
-              <line x1="57" y1="4"  x2="57"  y2="143" stroke="#000" stroke-width="1.5"/>
-              <polygon points="153,73 148,70 148,76" fill="#000"/>
-              <polygon points="57,3 54,9 60,9" fill="#000"/>
-              <text x="154" y="76" font-size="8" font-family="Courier New" fill="#000">x</text>
-              <text x="59"  y="3"  font-size="8" font-family="Courier New" fill="#000">y</text>
-              <text x="27"  y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">-2</text>
-              <text x="83"  y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">2</text>
-              <text x="109" y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">4</text>
-              <text x="135" y="82" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">6</text>
-              <text x="51" y="25"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">4</text>
-              <text x="51" y="51"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">2</text>
-              <text x="48" y="90"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-1</text>
-              <text x="48" y="103" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-2</text>
-              <text x="48" y="129" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-4</text>
+        <div class="ej-right">
+            <svg width="142" height="163" xmlns="http://www.w3.org/2000/svg">
+              <line x1="18"  y1="8" x2="18"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="31"  y1="8" x2="31"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="44"  y1="8" x2="44"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="57"  y1="8" x2="57"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="70"  y1="8" x2="70"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="83"  y1="8" x2="83"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="96"  y1="8" x2="96"  y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="109" y1="8" x2="109" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="122" y1="8" x2="122" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="135" y1="8" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="8"   x2="135" y2="8"   stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="21"  x2="135" y2="21"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="34"  x2="135" y2="34"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="47"  x2="135" y2="47"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="60"  x2="135" y2="60"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="73"  x2="135" y2="73"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="86"  x2="135" y2="86"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="99"  x2="135" y2="99"  stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="112" x2="135" y2="112" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="125" x2="135" y2="125" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="138" x2="135" y2="138" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="18" y1="151" x2="135" y2="151" stroke="#ccc" stroke-width="0.6"/>
+              <line x1="13"  y1="99" x2="140" y2="99"  stroke="#000" stroke-width="1.5"/>
+              <line x1="57"  y1="4"  x2="57"  y2="156" stroke="#000" stroke-width="1.5"/>
+              <polygon points="141,99 136,96 136,102" fill="#000"/>
+              <polygon points="57,3 54,8 60,8" fill="#000"/>
+              <text x="142" y="102" font-size="7" font-family="Courier New" fill="#000">x</text>
+              <text x="59"  y="3"   font-size="7" font-family="Courier New" fill="#000">y</text>
+              <text x="31"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">-2</text>
+              <text x="83"  y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">2</text>
+              <text x="109" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">4</text>
+              <text x="135" y="108" font-size="7" font-family="Courier New" text-anchor="middle" fill="#000">6</text>
+              <text x="53" y="25"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">6</text>
+              <text x="53" y="51"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">4</text>
+              <text x="53" y="77"  font-size="7" font-family="Courier New" text-anchor="end" fill="#000">2</text>
+              <text x="50" y="116" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-2</text>
+              <text x="50" y="142" font-size="7" font-family="Courier New" text-anchor="end" fill="#000">-4</text>
             </svg>
         </div>
     </div>
 
-    <footer>Academia Esparta · Torremolinos &nbsp;|&nbsp; Funciones cuadráticas 4º ESO</footer>
+    <footer>Academia Esparta · Torremolinos &nbsp;|&nbsp; Funciones lineales 3º ESO</footer>
 
 </div>
 </body>
