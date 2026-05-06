@@ -3,73 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Derivadas 1º Bachillerato CCSS - Academia Esparta</title>
+    <title>Master Derivadas CCSS - Academia Esparta</title>
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        body { 
-            font-family: 'Courier New', Courier, monospace; 
-            background-color: #fff; 
-            color: #000; 
-            line-height: 1.4;
-            padding: 20px;
-        }
-
-        .no-print {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            background: #000;
-            color: #fff;
-            border: 2px solid #000;
-            padding: 12px 25px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            text-decoration: none;
-            font-size: 10pt;
-            display: inline-block;
-        }
-
+        body { font-family: 'Courier New', Courier, monospace; background: #fff; color: #000; line-height: 1.6; padding: 20px; }
+        .no-print { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .btn { background: #000; color: #fff; border: 2px solid #000; padding: 12px 25px; font-weight: bold; cursor: pointer; text-transform: uppercase; text-decoration: none; font-size: 10pt; }
         .btn:hover { background: #fff; color: #000; }
         .btn-ws { background: #25D366; border-color: #25D366; }
-
-        .page { 
-            width: 210mm;
-            margin: 0 auto;
-            padding: 15mm;
-            border: 2px solid #000;
-            box-sizing: border-box;
-        }
-
-        header {
-            text-align: center;
-            border-bottom: 4px double #000;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-        }
-
-        h1 { margin: 0; font-size: 18pt; text-decoration: underline; }
-        h2 { font-size: 14pt; border: 1px solid #000; display: inline-block; padding: 5px 15px; margin-top: 25px; text-transform: uppercase; }
         
-        .box-regla { border: 1px solid #000; padding: 15px; margin: 15px 0; background: #f9f9f9; }
-        .ejemplo-desarrollado { margin: 10px 0 25px 20px; border-left: 3px solid #000; padding-left: 15px; }
+        .page { width: 210mm; margin: 0 auto; padding: 15mm; border: 2px solid #000; box-sizing: border-box; }
+        header { text-align: center; border-bottom: 5px double #000; margin-bottom: 30px; padding-bottom: 10px; }
+        h1 { margin: 0; font-size: 20pt; text-decoration: underline; }
+        h2 { font-size: 15pt; background: #000; color: #fff; display: inline-block; padding: 5px 15px; margin-top: 30px; text-transform: uppercase; }
         
-        .formula { font-size: 14pt; font-weight: bold; display: block; margin-bottom: 10px; }
-
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 9pt;
-            border-top: 1px dashed #000;
-            padding-top: 15px;
-        }
+        .box-regla { border: 1px solid #000; padding: 20px; margin: 20px 0; background: #fdfdfd; }
+        .step { margin: 15px 0 15px 25px; padding-left: 15px; border-left: 2px dashed #000; }
+        .pro-tip { background: #eee; padding: 10px; border: 1px solid #000; font-size: 9pt; margin-top: 10px; }
+        
+        .formula-principal { font-size: 16pt; font-weight: bold; display: block; margin-bottom: 15px; text-align: center; }
+        footer { margin-top: 50px; text-align: center; font-size: 9pt; border-top: 1px dashed #000; padding-top: 20px; }
 
         @media print { .no-print { display: none; } .page { border: none; width: 100%; } }
     </style>
@@ -77,94 +33,81 @@
 <body>
 
     <div class="no-print">
-        <button class="btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
-        <a id="wsLink" class="btn btn-ws" href="#" onclick="shareWhatsApp()">📲 Compartir por WhatsApp</a>
+        <button class="btn" onclick="window.print()">🖨️ GENERAR PDF COMPLETO</button>
+        <button class="btn btn-ws" onclick="shareWhatsApp()">📲 MANDAR POR WHATSAPP</button>
     </div>
 
     <div class="page">
         <header>
-            <h1>TABLA DE DERIVADAS: REGLAS Y OPERACIONES</h1>
-            <p>MATEMÁTICAS APLICADAS A LAS CCSS I | 1º BACHILLERATO</p>
+            <h1>GUÍA TÉCNICA DE DERIVACIÓN Y SIMPLIFICACIÓN</h1>
+            <p>1º BACHILLERATO CIENCIAS SOCIALES | ACADEMIA ESPARTA</p>
         </header>
 
+        <!-- REGLA DE LA POTENCIA COMPLEJA -->
         <section>
-            <h2>1. Derivadas Elementales</h2>
-            
+            <h2>1. Función Potencial (con Regla de la Cadena)</h2>
             <div class="box-regla">
-                <span class="formula">Derivada de una Constante: \(f(x) = k \rightarrow f'(x) = 0\)</span>
-                <div class="ejemplo-desarrollado">
-                    <b>Ejemplo:</b> \(f(x) = 7\)
-                    <br><b>Paso a paso:</b> Como 7 es un número sin "x", su variación es nula.
-                    <br><b>Resultado:</b> \(f'(x) = 0\)
-                </div>
-            </div>
-
-            <div class="box-regla">
-                <span class="formula">Derivada de la Función Identidad: \(f(x) = x \rightarrow f'(x) = 1\)</span>
-                <div class="ejemplo-desarrollado">
-                    <b>Ejemplo:</b> \(f(x) = x\)
-                    <br><b>Resultado:</b> \(f'(x) = 1\)
-                </div>
-            </div>
-
-            <div class="box-regla">
-                <span class="formula">Derivada de una Potencia: \(f(x) = x^n \rightarrow f'(x) = n \cdot x^{n-1}\)</span>
-                <div class="ejemplo-desarrollado">
-                    <b>Ejemplo:</b> \(f(x) = x^5\)
-                    <br><b>Paso 1:</b> Bajamos el exponente (5) delante multiplicando.
-                    <br><b>Paso 2:</b> Restamos 1 al exponente: \(5 - 1 = 4\).
-                    <br><b>Resultado:</b> \(f'(x) = 5x^4\)
+                <span class="formula-principal">\( f(x) = [g(x)]^n \longrightarrow f'(x) = n \cdot [g(x)]^{n-1} \cdot g'(x) \)</span>
+                
+                <div class="step">
+                    <b>Problema:</b> Derivar \( f(x) = (3x^2 - 5)^4 \)
+                    <br><b>Paso 1:</b> Bajamos el exponente "4" delante.
+                    <br><b>Paso 2:</b> Mantenemos el paréntesis igual pero restamos uno al grado: \( (3x^2 - 5)^3 \).
+                    <br><b>Paso 3 (Clave):</b> Multiplicamos por la derivada de lo de dentro: \( (6x) \).
+                    <br><b>Paso 4:</b> Multiplicamos los términos externos: \( 4 \cdot 6x = 24x \).
+                    <br><b>Resultado final:</b> \( f'(x) = 24x(3x^2 - 5)^3 \)
                 </div>
             </div>
         </section>
 
+        <!-- EL COCIENTE Y LA FACTORIZACIÓN -->
         <section>
-            <h2>2. Reglas de Operación</h2>
-
+            <h2>2. Función Cociente y Factorización</h2>
             <div class="box-regla">
-                <span class="formula">Suma y Resta: \((u \pm v)' = u' \pm v'\)</span>
-                <div class="ejemplo-desarrollado">
-                    <b>Ejemplo:</b> \(f(x) = x^3 + x^2 - 5\)
-                    <br><b>Paso 1:</b> Derivamos \(x^3 \rightarrow 3x^2\)
-                    <br><b>Paso 2:</b> Derivamos \(x^2 \rightarrow 2x\)
-                    <br><b>Paso 3:</b> Derivamos \(-5 \rightarrow 0\)
-                    <br><b>Resultado:</b> \(f'(x) = 3x^2 + 2x\)
+                <span class="formula-principal">\( \left( \frac{u}{v} \right)' = \frac{u' \cdot v - u \cdot v'}{v^2} \)</span>
+                
+                <div class="step">
+                    <b>Problema:</b> Derivar y simplificar \( f(x) = \frac{x^2 + 1}{x^2 - 1} \)
+                    <br><b>Paso 1:</b> Derivada del numerador (\(u'\)) = \( 2x \).
+                    <br><b>Paso 2:</b> Derivada del denominador (\(v'\)) = \( 2x \).
+                    <br><b>Paso 3:</b> Aplicamos fórmula: \( \frac{2x(x^2 - 1) - (x^2 + 1)2x}{(x^2 - 1)^2} \).
+                    <br><b>Paso 4 (Factorización):</b> Sacamos <b>factor común \( 2x \)</b> en el numerador:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;\( \frac{2x \cdot [(x^2 - 1) - (x^2 + 1)]}{(x^2 - 1)^2} \)
+                    <br><b>Paso 5:</b> Operamos dentro del corchete: \( x^2 - 1 - x^2 - 1 = -2 \).
+                    <br><b>Paso 6:</b> Multiplicamos al final: \( 2x \cdot (-2) = -4x \).
+                    <br><b>Resultado final:</b> \( f'(x) = \frac{-4x}{(x^2 - 1)^2} \)
+                </div>
+                <div class="pro-tip">
+                    🎯 <b>CONSEJO PRO:</b> En los cocientes de CCSS, casi siempre podrás sacar factor común a la \( x \) o a un paréntesis entero en el numerador. ¡Hazlo antes de operar a lo loco!
                 </div>
             </div>
+        </section>
 
+        <!-- DERIVADAS CON RAÍCES -->
+        <section>
+            <h2>3. Derivadas con Raíces (Paso a Potencia)</h2>
             <div class="box-regla">
-                <span class="formula">Producto: \((u \cdot v)' = u' \cdot v + u \cdot v'\)</span>
-                <div class="ejemplo-desarrollado">
-                    <b>Ejemplo:</b> \(f(x) = (x^2) \cdot (x + 1)\)
-                    <br><b>Paso 1:</b> Identificamos \(u = x^2\) y \(v = x + 1\).
-                    <br><b>Paso 2:</b> Calculamos \(u' = 2x\) y \(v' = 1\).
-                    <br><b>Paso 3:</b> Aplicamos fórmula: \((2x) \cdot (x + 1) + (x^2) \cdot (1)\).
-                    <br><b>Paso 4:</b> Operamos: \(2x^2 + 2x + x^2\).
-                    <br><b>Resultado:</b> \(f'(x) = 3x^2 + 2x\)
-                </div>
-            </div>
-
-            <div class="box-regla">
-                <span class="formula">Cociente: \( \left( \frac{u}{v} \right)' = \frac{u' \cdot v - u \cdot v'}{v^2} \)</span>
-                <div class="ejemplo-desarrollado">
-                    <b>Ejemplo:</b> \(f(x) = \frac{x^2}{x + 3}\)
-                    <br><b>Paso 1:</b> \(u = x^2, u' = 2x\) | \(v = x + 3, v' = 1\).
-                    <br><b>Paso 2:</b> Aplicamos: \( \frac{2x(x+3) - x^2(1)}{(x+3)^2} \).
-                    <br><b>Paso 3:</b> Operamos numerador: \( 2x^2 + 6x - x^2 \).
-                    <br><b>Resultado:</b> \(f'(x) = \frac{x^2 + 6x}{(x+3)^2} \)
+                <div class="step">
+                    <b>Problema:</b> Derivar \( f(x) = \sqrt[3]{x^2} \)
+                    <br><b>Paso 1:</b> Transformamos la raíz en exponente fraccionario: \( f(x) = x^{2/3} \).
+                    <br><b>Paso 2:</b> Aplicamos regla de la potencia: Bajamos \( 2/3 \).
+                    <br><b>Paso 3:</b> Restamos 1 al exponente: \( \frac{2}{3} - 1 = -\frac{1}{3} \).
+                    <br><b>Paso 4:</b> Pasamos el exponente negativo abajo para que sea positivo: \( \frac{2}{3x^{1/3}} \).
+                    <br><b>Resultado final:</b> \( f'(x) = \frac{2}{3\sqrt[3]{x}} \)
                 </div>
             </div>
         </section>
 
         <footer>
-            Academia Esparta 2026 - Preparación Exclusiva para Bachillerato CCSS
+            Academia Esparta 2026 - Simplificar es la clave del éxito en Selectividad.
         </footer>
     </div>
 
     <script>
         function shareWhatsApp() {
-            const text = encodeURIComponent("¡Hola! Te comparto la Guía Maestra de Derivadas de la Academia Esparta para 1º de Bachillerato CCSS.");
-            window.open(`https://wa.me/?text=${text}`, '_blank');
+            const url = window.location.href;
+            const text = "🚀 Hola! Aquí tienes la Guía Maestra de Derivadas simplificadas paso a paso de la Academia Esparta. Ideal para el examen de CCSS:";
+            window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`, '_blank');
         }
     </script>
 </body>
