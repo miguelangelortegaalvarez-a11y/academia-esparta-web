@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Academia Esparta – Refuerzo y apoyo escolar en Torremolinos</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=Nunito:wght@700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -1457,6 +1457,1211 @@
       .fa-brands { font-family: "Font Awesome 6 Brands" !important; font-weight: 400 !important; }
       .fa-solid   { font-family: "Font Awesome 6 Free" !important;   font-weight: 900 !important; }
       .fa-regular { font-family: "Font Awesome 6 Free" !important;   font-weight: 400 !important; }
+
+      /* =============================================
+         HERO PREMIUM — sistema visual del form (13/05/2026)
+         Fondo emerald-900 + aurora drifting + serif Fraunces
+         ============================================= */
+      #hero.hero-premium {
+        position: relative;
+        min-height: 78vh;
+        background: #064e3b;
+        color: #ecfdf5;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5rem 1.5rem 4.5rem;
+      }
+
+      .hp-bg-img {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(6,78,59,0.93) 0%, rgba(6,78,59,0.97) 100%),
+          url('hero.PNG') center center / cover no-repeat;
+        z-index: 0;
+      }
+      /* Overlay legacy ya no se usa (todo va en .hp-bg-img) pero por si acaso */
+      .hp-bg-overlay { display: none; }
+
+      .hp-aurora {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.55;
+        mix-blend-mode: screen;
+        will-change: transform;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .hp-a1 {
+        width: 75vmax; height: 75vmax;
+        top: -32vmax; left: -26vmax;
+        background: radial-gradient(circle, #10b981 0%, transparent 60%);
+        animation: hp-drift1 24s ease-in-out infinite alternate;
+      }
+      .hp-a2 {
+        width: 65vmax; height: 65vmax;
+        bottom: -30vmax; right: -22vmax;
+        background: radial-gradient(circle, #059669 0%, transparent 62%);
+        animation: hp-drift2 30s ease-in-out infinite alternate;
+      }
+      .hp-a3 {
+        width: 38vmax; height: 38vmax;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        background: radial-gradient(circle, rgba(74,222,128,.18) 0%, transparent 62%);
+        animation: hp-drift3 20s ease-in-out infinite alternate;
+        opacity: 0.5;
+      }
+      @keyframes hp-drift1 {
+        from { transform: translate(0,0) scale(1); }
+        to   { transform: translate(12vmax,8vmax) scale(1.15); }
+      }
+      @keyframes hp-drift2 {
+        from { transform: translate(0,0) scale(1); }
+        to   { transform: translate(-10vmax,-6vmax) scale(1.18); }
+      }
+      @keyframes hp-drift3 {
+        from { transform: translate(-50%,-50%) scale(1); }
+        to   { transform: translate(-42%,-56%) scale(1.22); }
+      }
+
+      .hp-vignette {
+        position: absolute; inset: 0;
+        pointer-events: none;
+        background: radial-gradient(ellipse 95% 80% at 50% 40%, transparent 35%, rgba(0,0,0,.55) 100%);
+        z-index: 3;
+      }
+
+      .hp-inner {
+        position: relative;
+        z-index: 10;
+        max-width: 980px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .hp-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.55rem 1.25rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255,255,255,0.15);
+        background: rgba(255,255,255,0.04);
+        backdrop-filter: blur(8px);
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(236,253,245,0.85);
+        font-weight: 500;
+        margin-bottom: 2.5rem;
+      }
+      .hp-pulse {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: #4ade80;
+        box-shadow: 0 0 12px rgba(74,222,128,0.7);
+        animation: hp-pulse 2.4s ease-out infinite;
+      }
+      @keyframes hp-pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(74,222,128,.6), 0 0 12px rgba(74,222,128,.7); }
+        70%  { box-shadow: 0 0 0 12px rgba(74,222,128,0), 0 0 12px rgba(74,222,128,.7); }
+        100% { box-shadow: 0 0 0 0 rgba(74,222,128,0), 0 0 12px rgba(74,222,128,.7); }
+      }
+
+      .hp-title {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif;
+        font-weight: 400;
+        font-size: clamp(2.4rem, 6vw, 4.5rem);
+        line-height: 1.05;
+        letter-spacing: -0.025em;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+      }
+      .hp-title em {
+        font-style: italic;
+        font-weight: 400;
+        color: #4ade80;
+      }
+
+      .hp-lead {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: clamp(1rem, 1.5vw, 1.2rem);
+        line-height: 1.6;
+        color: rgba(236,253,245,0.7);
+        max-width: 640px;
+        margin: 0 auto 3rem;
+      }
+
+      .hp-cta-row {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem;
+      }
+
+      .hp-cta-primary {
+        position: relative;
+        isolation: isolate;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 1.05rem 2.5rem;
+        border-radius: 9999px;
+        background: #ffffff;
+        color: #064e3b;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+        box-shadow: 0 20px 60px -15px rgba(4,120,87,0.6);
+        transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+      }
+      .hp-cta-primary::before {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        border-radius: 9999px;
+        background: conic-gradient(from 0deg, #4ade80, rgba(74,222,128,.15), #4ade80, rgba(74,222,128,.4), #4ade80);
+        z-index: -1;
+        opacity: 0.55;
+        filter: blur(16px);
+        animation: hp-glow 5s ease-in-out infinite, hp-spin 14s linear infinite;
+      }
+      @keyframes hp-glow {
+        0%, 100% { opacity: 0.5; transform: scale(1); }
+        50%      { opacity: 0.85; transform: scale(1.06); }
+      }
+      @keyframes hp-spin {
+        to { transform: rotate(360deg); }
+      }
+      .hp-cta-primary:hover { transform: translateY(-2px); }
+
+      .hp-cta-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 1rem 2rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255,255,255,0.25);
+        background: rgba(255,255,255,0.04);
+        backdrop-filter: blur(8px);
+        color: rgba(236,253,245,0.95) !important;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.25s ease;
+      }
+      .hp-cta-ghost:hover {
+        background: rgba(255,255,255,0.08);
+        border-color: rgba(255,255,255,0.4);
+        transform: translateY(-2px);
+      }
+
+      .hp-scroll-cue {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+        color: rgba(236,253,245,0.45);
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .hp-scroll-arrow {
+        width: 1px;
+        height: 32px;
+        background: linear-gradient(to bottom, rgba(236,253,245,0.6), transparent);
+        animation: hp-scroll-pulse 2s ease-in-out infinite;
+      }
+      @keyframes hp-scroll-pulse {
+        0%, 100% { opacity: 0.3; }
+        50%      { opacity: 1; }
+      }
+
+      /* FIX scroll-reveal: forzar visibles los elementos en secciones premium */
+      .about-premium .reveal,
+      .testimonios-premium .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      /* ABOUT PREMIUM — fondo + tipografía. Layout original del timeline INTACTO. */
+      .about-premium {
+        position: relative;
+        background: #053a2c !important;
+        color: #ecfdf5;
+        padding: 4rem 1.5rem 4rem;
+        overflow: hidden;
+      }
+      /* Eliminar la imagen decorativa antigua del about (quienes-somos.PNG)
+         porque ahora tenemos auroras drifting que dan el ambiente */
+      .about-premium::before {
+        background: none !important;
+        display: none !important;
+      }
+      .about-premium .ap-aurora {
+        position: absolute !important;
+        border-radius: 50%;
+        filter: blur(110px);
+        opacity: 0.18;
+        mix-blend-mode: screen;
+        pointer-events: none;
+        z-index: 0 !important;
+      }
+      .about-premium .ap-a1 {
+        width: 35vmax; height: 35vmax;
+        top: -10vmax; left: -10vmax;
+        background: radial-gradient(circle, #10b981 0%, transparent 60%);
+      }
+      .about-premium .ap-a2 {
+        width: 32vmax; height: 32vmax;
+        bottom: -12vmax; right: -10vmax;
+        background: radial-gradient(circle, #059669 0%, transparent 62%);
+      }
+      .about-premium .ap-header,
+      .about-premium .snake-tl,
+      .about-premium .ap-cta {
+        position: relative;
+        z-index: 2;
+      }
+      .about-premium .ap-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.45rem 1.1rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(74,222,128,0.25);
+        background: rgba(74,222,128,0.06);
+        backdrop-filter: blur(8px);
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        font-weight: 500;
+        color: rgba(167,243,208,0.9);
+        margin-bottom: 1.75rem;
+      }
+      .about-premium .ap-header { text-align: center; max-width: 980px; margin: 0 auto 3.5rem; }
+      .about-premium .ap-header h2 {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        font-size: clamp(2rem, 4.5vw, 3.4rem) !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.02em !important;
+        color: #ffffff !important;
+        margin-bottom: 1.25rem !important;
+      }
+      .about-premium .ap-header p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        font-size: clamp(1rem, 1.4vw, 1.15rem) !important;
+        color: rgba(236,253,245,0.65) !important;
+        line-height: 1.6 !important;
+        max-width: 640px;
+        margin: 0 auto !important;
+      }
+      /* Refinar la tipografía de los items del timeline sin tocar layout */
+      .about-premium .sitem h3 {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        font-size: 1.05rem !important;
+        line-height: 1.3 !important;
+        letter-spacing: -0.01em !important;
+      }
+      .about-premium .sitem p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+      }
+      .about-premium .sitem-year {
+        color: #4ade80 !important;
+        font-weight: 500 !important;
+        letter-spacing: 0.22em !important;
+      }
+      /* CTA bottom */
+      .about-premium .ap-cta {
+        text-align: center;
+        margin-top: 3.5rem;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .about-premium .ap-cta p {
+        font-family: 'Fraunces', serif !important;
+        font-style: italic !important;
+        font-size: clamp(1.2rem, 2vw, 1.5rem) !important;
+        color: rgba(236,253,245,0.85) !important;
+        margin-bottom: 1.5rem !important;
+      }
+      @media (max-width: 768px) {
+        .about-premium { padding: 4rem 1rem 5rem; }
+      }
+
+      /* TESTIMONIOS PREMIUM */
+      .testimonios-premium {
+        background: #064e3b !important;
+        color: #ecfdf5;
+        position: relative;
+        overflow: hidden;
+        padding: 4rem 1.5rem 4.5rem !important;
+      }
+      .testimonios-premium::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(74,222,128,0.08), transparent 70%);
+        pointer-events: none;
+      }
+      .testimonios-premium .container {
+        position: relative;
+        z-index: 2;
+      }
+      .testimonios-premium .rating-hero {
+        text-align: center;
+        margin-bottom: 3.5rem;
+      }
+      .testimonios-premium .rating-google-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: rgba(167,243,208,0.7) !important;
+        background: rgba(74,222,128,0.06);
+        border: 1px solid rgba(74,222,128,0.2);
+        padding: 0.5rem 1.1rem;
+        border-radius: 9999px;
+        margin-bottom: 1.5rem;
+      }
+      .testimonios-premium .rating-big {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 300 !important;
+        font-size: clamp(4rem, 8vw, 6rem) !important;
+        line-height: 1 !important;
+        color: #ffffff !important;
+        letter-spacing: -0.03em !important;
+        margin: 0.5rem 0 !important;
+        text-shadow: 0 0 40px rgba(74,222,128,0.25);
+      }
+      .testimonios-premium .rating-stars-big {
+        font-size: 1.6rem;
+        color: #fbbf24;
+        letter-spacing: 0.15em;
+        text-shadow: 0 0 18px rgba(251,191,36,0.4);
+      }
+      .testimonios-premium .rating-count-label {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        font-size: 0.95rem !important;
+        color: rgba(236,253,245,0.55) !important;
+        margin-top: 1rem !important;
+      }
+
+      .testimonios-premium .t-card {
+        background: rgba(6,78,59,0.55) !important;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(74,222,128,0.18) !important;
+        border-radius: 18px !important;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.2) !important;
+        padding: 2rem 1.75rem !important;
+        transition: all 0.35s ease;
+      }
+      .testimonios-premium .t-card:hover {
+        border-color: rgba(74,222,128,0.4) !important;
+        transform: translateY(-3px);
+      }
+      .testimonios-premium .t-card-stars {
+        color: #fbbf24 !important;
+        font-size: 1.05rem !important;
+        letter-spacing: 0.1em !important;
+        text-shadow: 0 0 14px rgba(251,191,36,0.4);
+        margin-bottom: 1rem !important;
+      }
+      .testimonios-premium .t-card-text {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        font-style: italic !important;
+        font-size: 1.02rem !important;
+        line-height: 1.55 !important;
+        color: rgba(236,253,245,0.92) !important;
+        margin-bottom: 1.5rem !important;
+      }
+      .testimonios-premium .t-card-author {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .testimonios-premium .author-avatar {
+        width: 38px; height: 38px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #10b981, #4ade80) !important;
+        color: #064e3b !important;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        box-shadow: 0 0 14px rgba(74,222,128,0.3);
+      }
+      .testimonios-premium .author-name {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 0.92rem !important;
+        color: #ffffff !important;
+        display: block !important;
+      }
+      .testimonios-premium .author-meta {
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 0.72rem !important;
+        color: rgba(167,243,208,0.55) !important;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .testimonios-premium .tc-controls {
+        margin-top: 2rem !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+      .testimonios-premium .tc-btn {
+        background: rgba(255,255,255,0.04) !important;
+        border: 1px solid rgba(255,255,255,0.15) !important;
+        color: rgba(236,253,245,0.85) !important;
+        width: 42px; height: 42px;
+        border-radius: 50% !important;
+        font-size: 1.05rem !important;
+        transition: all 0.25s ease;
+        cursor: pointer;
+      }
+      .testimonios-premium .tc-btn:hover {
+        background: rgba(74,222,128,0.12) !important;
+        border-color: rgba(74,222,128,0.4) !important;
+        color: #ffffff !important;
+      }
+      .testimonios-premium .tc-dots span {
+        background: rgba(255,255,255,0.25) !important;
+      }
+      .testimonios-premium .tc-dots span.active {
+        background: #4ade80 !important;
+        box-shadow: 0 0 10px rgba(74,222,128,0.5);
+      }
+      @media (max-width: 768px) {
+        .testimonios-premium { padding: 4rem 1rem 5rem !important; }
+      }
+
+      /* LEVELS / REFUERZO PREMIUM */
+      .levels-premium {
+        background: #053a2c !important;
+        color: #ecfdf5;
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 1.5rem 5.5rem !important;
+      }
+      .levels-premium .reveal { opacity: 1 !important; transform: none !important; }
+      .levels-premium::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(74,222,128,0.06), transparent 70%);
+        pointer-events: none;
+      }
+      .levels-premium .container { position: relative; z-index: 2; }
+      .levels-premium .lp-header {
+        text-align: center !important;
+        max-width: 720px;
+        margin: 0 auto 3.5rem !important;
+      }
+      .levels-premium .lp-header .ap-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.45rem 1.1rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(74,222,128,0.25);
+        background: rgba(74,222,128,0.06);
+        backdrop-filter: blur(8px);
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        font-weight: 500;
+        color: rgba(167,243,208,0.9);
+        margin-bottom: 1.5rem;
+      }
+      .levels-premium .lp-header h2 {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        font-size: clamp(2rem, 4.2vw, 3rem) !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.02em !important;
+        color: #ffffff !important;
+        margin-bottom: 1rem !important;
+      }
+      .levels-premium .lp-header p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        font-size: clamp(0.98rem, 1.4vw, 1.1rem) !important;
+        color: rgba(236,253,245,0.65) !important;
+        line-height: 1.6 !important;
+        max-width: 600px;
+        margin: 0 auto !important;
+      }
+      /* Cards mantienen su flip 3D, solo ajustamos estilo de la cara */
+      .levels-premium .level-card-front {
+        background: rgba(6,78,59,0.5) !important;
+        border: 1px solid rgba(74,222,128,0.18) !important;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.2) !important;
+      }
+      .levels-premium .level-card-front h3 {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        color: #ffffff !important;
+        font-size: 1.6rem !important;
+        letter-spacing: -0.01em !important;
+      }
+      .levels-premium .level-card-front p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        color: rgba(236,253,245,0.7) !important;
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+      }
+      .levels-premium .level-card-back {
+        background: linear-gradient(135deg, #064e3b, #053a2c) !important;
+        border: 1px solid rgba(74,222,128,0.3) !important;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.25) !important;
+      }
+      .levels-premium .level-card-back h3 {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        color: #ffffff !important;
+      }
+      .levels-premium .level-back-list li {
+        font-family: 'Poppins', sans-serif !important;
+        color: rgba(236,253,245,0.85) !important;
+      }
+      .levels-premium .lp-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #ffffff !important;
+        color: #064e3b !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 600 !important;
+        padding: 0.85rem 1.6rem !important;
+        border-radius: 9999px !important;
+        text-decoration: none;
+        box-shadow: 0 10px 26px -8px rgba(74,222,128,0.4);
+        transition: transform .25s ease, box-shadow .25s ease;
+      }
+      .levels-premium .lp-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 32px -8px rgba(74,222,128,0.55);
+      }
+      @media (max-width: 768px) {
+        .levels-premium { padding: 4rem 1rem 4.5rem !important; }
+      }
+
+      /* LOGOPEDIA + PSICOLOGÍA PREMIUM (svc-section) */
+      .svc-premium {
+        position: relative;
+        color: #ecfdf5;
+        padding: 5rem 1.5rem 5rem !important;
+        overflow: hidden;
+      }
+      .svc-premium-a { background: #064e3b !important; }
+      .svc-premium-b { background: #053a2c !important; }
+      .svc-premium .reveal { opacity: 1 !important; transform: none !important; }
+      .svc-premium .svc-row {
+        position: relative;
+        z-index: 2;
+        max-width: 1100px;
+        margin: 0 auto;
+        gap: 3rem !important;
+      }
+      .svc-premium .svc-card {
+        background: rgba(6,78,59,0.55) !important;
+        border: 1px solid rgba(74,222,128,0.2) !important;
+        backdrop-filter: blur(12px);
+        border-radius: 22px !important;
+        padding: 2.5rem 2rem !important;
+        text-align: center !important;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.25) !important;
+      }
+      .svc-premium .svc-card-emoji {
+        font-size: 3.5rem !important;
+        margin-bottom: 1rem !important;
+        filter: drop-shadow(0 0 20px rgba(74,222,128,0.35));
+      }
+      .svc-premium .svc-card h2 {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        font-size: 2rem !important;
+        color: #ffffff !important;
+        letter-spacing: -0.02em !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .svc-premium .svc-card p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        color: rgba(236,253,245,0.65) !important;
+        font-size: 0.98rem !important;
+      }
+      .svc-premium .svc-details {
+        max-width: 600px;
+      }
+      .svc-premium .svc-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.4rem 1rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(74,222,128,0.25);
+        background: rgba(74,222,128,0.06);
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 0.62rem !important;
+        letter-spacing: 0.22em !important;
+        text-transform: uppercase;
+        font-weight: 500 !important;
+        color: rgba(167,243,208,0.9) !important;
+        margin-bottom: 1.25rem !important;
+      }
+      .svc-premium .svc-details h3 {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        font-size: clamp(1.6rem, 3vw, 2.2rem) !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.02em !important;
+        color: #ffffff !important;
+        margin-bottom: 1rem !important;
+      }
+      .svc-premium .svc-details > p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        font-size: 1rem !important;
+        line-height: 1.65 !important;
+        color: rgba(236,253,245,0.75) !important;
+        margin-bottom: 1.5rem !important;
+      }
+      .svc-premium .svc-details > p strong {
+        color: #ffffff !important;
+        font-weight: 500 !important;
+      }
+      .svc-premium .service-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem !important;
+        margin-bottom: 1.75rem !important;
+      }
+      .svc-premium .service-chip {
+        background: rgba(74,222,128,0.08) !important;
+        border: 1px solid rgba(74,222,128,0.22) !important;
+        color: rgba(236,253,245,0.95) !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 0.78rem !important;
+        font-weight: 400 !important;
+        padding: 0.45rem 0.95rem !important;
+        border-radius: 9999px !important;
+        transition: all 0.25s ease;
+      }
+      .svc-premium .service-chip:hover {
+        background: rgba(74,222,128,0.16) !important;
+        border-color: rgba(74,222,128,0.45) !important;
+        transform: translateY(-1px);
+      }
+      .svc-premium .btn-primary {
+        display: inline-flex !important;
+        align-items: center;
+        gap: 0.55rem;
+        background: #ffffff !important;
+        color: #064e3b !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 600 !important;
+        padding: 0.9rem 1.7rem !important;
+        border-radius: 9999px !important;
+        text-decoration: none;
+        box-shadow: 0 10px 26px -8px rgba(74,222,128,0.4);
+        transition: transform .25s ease, box-shadow .25s ease;
+        border: none !important;
+      }
+      .svc-premium .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 32px -8px rgba(74,222,128,0.55);
+      }
+      @media (max-width: 768px) {
+        .svc-premium { padding: 4rem 1rem !important; }
+        .svc-premium .svc-row { gap: 2rem !important; }
+      }
+
+      /* RECURSOS PREMIUM */
+      .recursos-premium {
+        background: #064e3b !important;
+        color: #ecfdf5;
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 1.5rem 5.5rem !important;
+      }
+      .recursos-premium .reveal { opacity: 1 !important; transform: none !important; }
+      .recursos-premium::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(74,222,128,0.06), transparent 70%);
+        pointer-events: none;
+      }
+      .recursos-premium .container { position: relative; z-index: 2; }
+      .recursos-premium .rp-header {
+        text-align: center !important;
+        max-width: 720px;
+        margin: 0 auto 3.5rem !important;
+      }
+      .recursos-premium .rp-header .ap-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.45rem 1.1rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(74,222,128,0.25);
+        background: rgba(74,222,128,0.06);
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        font-weight: 500;
+        color: rgba(167,243,208,0.9);
+        margin-bottom: 1.5rem;
+      }
+      .recursos-premium .rp-header h2 {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        font-size: clamp(2rem, 4.2vw, 3rem) !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.02em !important;
+        color: #ffffff !important;
+        margin-bottom: 1rem !important;
+      }
+      .recursos-premium .rp-header p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        font-size: clamp(0.98rem, 1.4vw, 1.1rem) !important;
+        color: rgba(236,253,245,0.65) !important;
+      }
+      /* Adaptar las 2 portal cards al dark mode */
+      .recursos-premium .portal-card {
+        border: 1px solid rgba(74,222,128,0.2) !important;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.3) !important;
+      }
+      .recursos-premium .portal-recursos {
+        background: linear-gradient(135deg, rgba(6,78,59,0.65), rgba(5,58,44,0.78)) !important;
+        position: relative;
+      }
+      .recursos-premium .portal-recursos::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #4ade80, transparent);
+        opacity: 0.55;
+      }
+      .recursos-premium .portal-juegos {
+        background: linear-gradient(135deg, rgba(6,78,59,0.7), rgba(5,58,44,0.82)) !important;
+        position: relative;
+      }
+      .recursos-premium .portal-juegos::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #86efac, transparent);
+        opacity: 0.7;
+      }
+      .recursos-premium .rp-title {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        color: #ffffff !important;
+        letter-spacing: -0.01em !important;
+      }
+      .recursos-premium .rp-desc {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        color: rgba(236,253,245,0.75) !important;
+      }
+      .recursos-premium .rp-cat {
+        background: rgba(255,255,255,0.08) !important;
+        border: 1px solid rgba(255,255,255,0.15) !important;
+        color: rgba(236,253,245,0.95) !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 400 !important;
+        backdrop-filter: blur(6px);
+      }
+      .recursos-premium .rp-btn {
+        background: #ffffff !important;
+        color: #064e3b !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 600 !important;
+        box-shadow: 0 10px 26px -8px rgba(74,222,128,0.4) !important;
+      }
+      .recursos-premium .mf {
+        color: rgba(255,255,255,0.18) !important;
+      }
+      @media (max-width: 768px) {
+        .recursos-premium { padding: 4rem 1rem 4.5rem !important; }
+      }
+
+      /* CONTACT PREMIUM */
+      .contact-premium {
+        background: #053a2c !important;
+        color: #ecfdf5;
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 1.5rem 5rem !important;
+      }
+      .contact-premium .reveal { opacity: 1 !important; transform: none !important; }
+      .contact-premium::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(74,222,128,0.05), transparent 70%);
+        pointer-events: none;
+      }
+      .contact-premium .container { position: relative; z-index: 2; }
+      .contact-premium .cp-header {
+        text-align: center !important;
+        max-width: 720px;
+        margin: 0 auto 3rem !important;
+      }
+      .contact-premium .cp-header .ap-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.45rem 1.1rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(74,222,128,0.25);
+        background: rgba(74,222,128,0.06);
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        font-weight: 500;
+        color: rgba(167,243,208,0.9);
+        margin-bottom: 1.5rem;
+      }
+      .contact-premium .cp-header h2 {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        font-size: clamp(2rem, 4.2vw, 3rem) !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.02em !important;
+        color: #ffffff !important;
+        margin-bottom: 1rem !important;
+      }
+      .contact-premium .cp-header p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        font-size: clamp(0.98rem, 1.4vw, 1.1rem) !important;
+        color: rgba(236,253,245,0.65) !important;
+      }
+      .contact-premium .contact-info {
+        background: rgba(6,78,59,0.55) !important;
+        border: 1px solid rgba(74,222,128,0.18) !important;
+        backdrop-filter: blur(10px);
+        border-radius: 18px !important;
+        padding: 2rem !important;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.2) !important;
+      }
+      .contact-premium .contact-list li {
+        color: rgba(236,253,245,0.92) !important;
+        font-family: 'Poppins', sans-serif !important;
+      }
+      .contact-premium .contact-list a {
+        color: #4ade80 !important;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+      .contact-premium .contact-list a:hover { color: #ffffff !important; }
+      .contact-premium .contact-list i {
+        color: #4ade80 !important;
+      }
+      .contact-premium .contact-hours {
+        background: rgba(74,222,128,0.06) !important;
+        border: 1px solid rgba(74,222,128,0.2) !important;
+        border-radius: 14px !important;
+        padding: 1.25rem 1.5rem !important;
+        margin-top: 1.5rem !important;
+      }
+      .contact-premium .contact-hours h4 {
+        font-family: 'Fraunces', serif !important;
+        color: #ffffff !important;
+        font-weight: 400 !important;
+        font-size: 0.95rem !important;
+        margin-bottom: 0.35rem !important;
+      }
+      .contact-premium .contact-hours p {
+        color: rgba(236,253,245,0.72) !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 0.92rem !important;
+        margin-bottom: 0 !important;
+      }
+      .contact-premium .contact-map {
+        border-radius: 18px !important;
+        overflow: hidden;
+        border: 1px solid rgba(74,222,128,0.2);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+      }
+      .contact-premium .contact-map iframe { filter: hue-rotate(15deg) saturate(0.7); }
+      @media (max-width: 768px) {
+        .contact-premium { padding: 4rem 1rem !important; }
+      }
+
+      /* FOOTER PREMIUM */
+      .footer-premium {
+        background: #032519 !important;
+        color: rgba(236,253,245,0.7);
+        padding: 4rem 1.5rem 2rem !important;
+        border-top: 1px solid rgba(74,222,128,0.12);
+      }
+      .footer-premium .footer-grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        gap: 3rem !important;
+      }
+      .footer-premium .footer-logo {
+        font-family: 'Fraunces', serif !important;
+        font-weight: 500 !important;
+        color: #ffffff !important;
+        font-size: 1.5rem !important;
+        letter-spacing: -0.01em !important;
+        margin-bottom: 0.85rem !important;
+      }
+      .footer-premium .footer-desc {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        color: rgba(236,253,245,0.6) !important;
+        font-size: 0.92rem !important;
+        line-height: 1.65 !important;
+      }
+      .footer-premium h4 {
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 0.7rem !important;
+        letter-spacing: 0.22em !important;
+        text-transform: uppercase !important;
+        font-weight: 600 !important;
+        color: rgba(167,243,208,0.85) !important;
+        margin-bottom: 1rem !important;
+      }
+      .footer-premium .footer-links li,
+      .footer-premium .footer-links a {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 300 !important;
+        font-size: 0.92rem !important;
+        color: rgba(236,253,245,0.65) !important;
+        line-height: 1.9 !important;
+        transition: color 0.2s ease;
+      }
+      .footer-premium .footer-links a:hover { color: #4ade80 !important; }
+      .footer-premium .footer-social a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(236,253,245,0.7) !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 0.92rem !important;
+        padding: 0.45rem 0.9rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(74,222,128,0.18);
+        background: rgba(74,222,128,0.04);
+        transition: all 0.25s ease;
+      }
+      .footer-premium .footer-social a:hover {
+        color: #ffffff !important;
+        border-color: rgba(74,222,128,0.4);
+        background: rgba(74,222,128,0.12);
+      }
+      .footer-premium .footer-copy {
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 0.78rem !important;
+        color: rgba(236,253,245,0.4) !important;
+        text-align: center;
+        margin-top: 3rem !important;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255,255,255,0.06);
+      }
+      @media (max-width: 768px) {
+        .footer-premium { padding: 3rem 1rem 1.5rem !important; }
+      }
+
+      /* SPLASH PREMIUM — coherencia con el resto */
+      #splash {
+        background: #064e3b !important;
+      }
+      #splash::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,222,128,0.10), transparent 70%),
+          radial-gradient(ellipse 60% 40% at 30% 80%, rgba(16,185,129,0.08), transparent 70%);
+        pointer-events: none;
+      }
+      .splash-content {
+        background: transparent !important;
+        border: none !important;
+        padding: 2rem !important;
+        position: relative;
+        z-index: 2;
+      }
+      .splash-title {
+        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+        font-weight: 400 !important;
+        font-size: clamp(2.6rem, 8vw, 5.5rem) !important;
+        letter-spacing: -0.02em !important;
+        text-transform: none !important;
+        color: #ffffff !important;
+        line-height: 1.05 !important;
+        text-shadow:
+          0 0 40px rgba(74,222,128,0.25),
+          0 0 80px rgba(16,185,129,0.15) !important;
+      }
+      .splash-divider {
+        margin: 1.5rem 0 1.25rem !important;
+      }
+      .splash-divider-line {
+        width: 60px !important;
+        background: linear-gradient(90deg, transparent, rgba(74,222,128,0.5)) !important;
+      }
+      .splash-divider-line:last-child {
+        background: linear-gradient(90deg, rgba(74,222,128,0.5), transparent) !important;
+      }
+      .splash-divider-dot {
+        background: #4ade80 !important;
+        box-shadow: 0 0 12px #4ade80, 0 0 24px rgba(74,222,128,0.5) !important;
+      }
+      .splash-phrase {
+        font-family: 'Fraunces', serif !important;
+        font-style: italic !important;
+        font-weight: 400 !important;
+        font-size: clamp(1rem, 2.4vw, 1.4rem) !important;
+        color: rgba(167,243,208,0.92) !important;
+        letter-spacing: -0.005em !important;
+      }
+      .splash-text-cursor {
+        background: #4ade80 !important;
+        box-shadow: 0 0 8px #4ade80 !important;
+      }
+      .splash-tagline {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 500 !important;
+        font-size: 0.7rem !important;
+        letter-spacing: 0.28em !important;
+        color: rgba(167,243,208,0.55) !important;
+      }
+
+      /* Stats bar premium */
+      .hp-stats {
+        background: #053a2c;
+        border-top: 1px solid rgba(74,222,128,0.12);
+        border-bottom: 1px solid rgba(74,222,128,0.12);
+        position: relative;
+        overflow: hidden;
+      }
+      .hp-stats::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(74,222,128,0.06), transparent 70%);
+        pointer-events: none;
+      }
+      .hp-stats-inner {
+        position: relative;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .hp-stat {
+        flex: 1;
+        min-width: 140px;
+        text-align: center;
+      }
+      .hp-stat-number {
+        display: block;
+        font-family: 'Fraunces', 'Cormorant Garamond', serif;
+        font-weight: 400;
+        font-size: clamp(2.2rem, 4vw, 3.4rem);
+        line-height: 1;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.6rem;
+        text-shadow: 0 0 28px rgba(74,222,128,0.18);
+      }
+      .hp-stat-label {
+        display: block;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(167,243,208,0.65);
+      }
+      .hp-stat-sep {
+        width: 1px;
+        height: 50px;
+        background: linear-gradient(to bottom, transparent, rgba(74,222,128,0.25), transparent);
+        flex-shrink: 0;
+      }
+      @media (max-width: 768px) {
+        .hp-stats-inner {
+          padding: 2rem 1rem;
+          gap: 1.25rem;
+        }
+        .hp-stat-sep { display: none; }
+        .hp-stat { min-width: 45%; }
+      }
+
+      /* Header sobre fondo oscuro */
+      header.over-hero {
+        background: rgba(6,78,59,0.4) !important;
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        box-shadow: none;
+      }
+      header.over-hero .logo { color: #ffffff !important; }
+      header.over-hero .nav a:not(.nav-cta) { color: rgba(236,253,245,0.85) !important; }
+      header.over-hero .nav a:not(.nav-cta):hover { color: #4ade80 !important; }
+      header.over-hero .nav-cta {
+        background: #ffffff !important;
+        color: #064e3b !important;
+      }
+      header.over-hero .hamburger span { background: #ffffff !important; }
+
+      @media (max-width: 768px) {
+        #hero.hero-premium { min-height: 88vh; padding: 5rem 1rem 6rem; }
+        .hp-title { font-size: clamp(2rem, 9vw, 3rem); }
+        .hp-cta-primary, .hp-cta-ghost {
+          width: 100%;
+          justify-content: center;
+        }
+        .hp-badge { font-size: 0.6rem; padding: 0.45rem 1rem; }
+      }
     </style>
 
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG">
@@ -1479,7 +2684,7 @@
     </div>
 
     <!-- ==================== HEADER ==================== -->
-    <header class="header">
+    <header class="header over-hero">
       <div class="logo">Academia Esparta</div>
 
       <nav class="nav" id="nav">
@@ -1501,79 +2706,90 @@
       </button>
     </header>
 
-    <!-- ==================== HERO ==================== -->
-    <section id="hero">
-      <div class="hero-bg" id="heroBg"></div>
-      <div class="hero-grid"></div>
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
+    <!-- ==================== HERO PREMIUM ==================== -->
+    <section id="hero" class="hero-premium">
+      <div class="hp-bg-img" aria-hidden="true"></div>
+      <div class="hp-bg-overlay" aria-hidden="true"></div>
+      <div class="hp-aurora hp-a1" aria-hidden="true"></div>
+      <div class="hp-aurora hp-a2" aria-hidden="true"></div>
+      <div class="hp-aurora hp-a3" aria-hidden="true"></div>
+      <div class="hp-vignette" aria-hidden="true"></div>
 
-      <div class="hero-inner">
-        <div class="hero-badge">
-          <span class="pulse-dot"></span>
-          Más de 15 años ayudando a alumnos en Torremolinos
+      <div class="hp-inner">
+        <div class="hp-badge">
+          <span class="hp-pulse" aria-hidden="true"></span>
+          Desde 2011 · Refuerzo escolar · Torremolinos
         </div>
 
-        <h1 id="heroTitle">Tu hijo puede mejorar sus notas y <em>ganar seguridad</em></h1>
+        <h1 class="hp-title">
+          Tu hijo puede mejorar sus notas<br>
+          y <em>ganar seguridad</em>.
+        </h1>
 
-        <p>Grupos reducidos, atención personalizada y acompañamiento real para Primaria, ESO, Bachillerato y EBAU.</p>
+        <p class="hp-lead">
+          Grupos reducidos, atención personalizada y acompañamiento real para Primaria, ESO, Bachillerato y EBAU.
+        </p>
 
-        <div class="hero-buttons">
-          <a href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases" class="btn-white" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
-          <a href="https://shadow.academiaesparta.es/inscripcion" class="btn-ghost">Reserva tu plaza</a>
-        </div>
-
-        <div class="hero-chips">
-          <span>Primaria</span>
-          <span>ESO</span>
-          <span>Bachillerato</span>
-          <span>EBAU</span>
-          <span>Grupos reducidos</span>
-          <span>Logopedia</span>
-          <span>Psicología</span>
+        <div class="hp-cta-row">
+          <a href="https://shadow.academiaesparta.es/inscripcion" class="hp-cta-primary">
+            Reserva tu plaza
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/34659407023?text=Hola,%20quiero%20información%20sobre%20las%20clases" class="hp-cta-ghost" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+            Escríbenos por WhatsApp
+          </a>
         </div>
       </div>
 
-      <div class="scroll-cue">
+      <div class="hp-scroll-cue" aria-hidden="true">
         <span>Descubre más</span>
-        <div class="scroll-cue-arrow"></div>
-      </div>
-
-      <div class="wave">
-        <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,35 C240,70 480,0 720,35 C960,70 1200,0 1440,35 L1440,70 L0,70 Z" fill="#fff"/>
-        </svg>
+        <div class="hp-scroll-arrow"></div>
       </div>
     </section>
 
-    <!-- ==================== STATS BAR ==================== -->
-    <div class="stats-bar">
-      <div class="stat-item">
-        <span class="stat-number" data-target="15" data-suffix="+">15+</span>
-        <span class="stat-label">Años de experiencia</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="58" data-suffix="">58</span>
-        <span class="stat-label">Reseñas en Google</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="4" data-suffix="">4</span>
-        <span class="stat-label">Etapas educativas</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="100" data-suffix="%">100%</span>
-        <span class="stat-label">Atención personalizada</span>
+    <!-- ==================== STATS BAR PREMIUM ==================== -->
+    <div class="hp-stats">
+      <div class="hp-stats-inner">
+        <div class="hp-stat">
+          <span class="hp-stat-number" data-target="15" data-suffix="+">15+</span>
+          <span class="hp-stat-label">Años de experiencia</span>
+        </div>
+        <div class="hp-stat-sep" aria-hidden="true"></div>
+        <div class="hp-stat">
+          <span class="hp-stat-number" data-target="59" data-suffix="">59</span>
+          <span class="hp-stat-label">Reseñas en Google</span>
+        </div>
+        <div class="hp-stat-sep" aria-hidden="true"></div>
+        <div class="hp-stat">
+          <span class="hp-stat-number" data-target="4" data-suffix="">4</span>
+          <span class="hp-stat-label">Etapas educativas</span>
+        </div>
+        <div class="hp-stat-sep" aria-hidden="true"></div>
+        <div class="hp-stat">
+          <span class="hp-stat-number" data-target="100" data-suffix="%">100%</span>
+          <span class="hp-stat-label">Atención personalizada</span>
+        </div>
       </div>
     </div>
 
-    <!-- ==================== ABOUT ==================== -->
-    <section id="about">
+    <!-- ==================== ABOUT PREMIUM ==================== -->
+    <section id="about" class="about-premium">
+      <div class="ap-aurora ap-a1" aria-hidden="true"></div>
+      <div class="ap-aurora ap-a2" aria-hidden="true"></div>
 
-      <div class="story-header reveal">
-        <h2>De un sueño de dos amigos a la academia de referencia en Torremolinos</h2>
-        <p>Esta es la historia de dos amigos de toda la vida que apostaron por lo que creían, sin red de seguridad y sin saber lo que les venía encima.</p>
+      <div class="story-header reveal ap-header">
+        <div class="ap-eyebrow">
+          <span class="hp-pulse" aria-hidden="true"></span>
+          NUESTRA HISTORIA
+        </div>
+        <h2>De un sueño de dos amigos<br>a la academia de referencia<br>en Torremolinos.</h2>
+        <p>La historia de dos amigos de toda la vida que apostaron por lo que creían, sin red de seguridad y sin saber lo que les venía encima.</p>
       </div>
 
       <!-- Snake timeline -->
@@ -1634,15 +2850,21 @@
 
       </div>
 
-      <div class="story-cta reveal">
+      <div class="story-cta reveal ap-cta">
         <p>¿La historia de tu hijo podría empezar aquí?</p>
-        <a href="https://shadow.academiaesparta.es/inscripcion">Conoce nuestro proyecto →</a>
+        <a href="https://shadow.academiaesparta.es/inscripcion" class="hp-cta-primary">
+          Conoce nuestro proyecto
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
       </div>
 
     </section>
 
     <!-- ==================== TESTIMONIOS ==================== -->
-    <section id="testimonios" class="section testimonials-section">
+    <section id="testimonios" class="section testimonials-section testimonios-premium">
       <div class="container">
 
         <!-- Rating hero -->
@@ -1653,7 +2875,7 @@
           </div>
           <div class="rating-big">4,9</div>
           <span class="rating-stars-big">★★★★★</span>
-          <p class="rating-count-label">Basado en 58 reseñas verificadas</p>
+          <p class="rating-count-label">Basado en 59 reseñas verificadas</p>
         </div>
 
         <!-- Carrusel automático -->
@@ -1763,12 +2985,16 @@
       </div>
     </section>
 
-    <!-- ==================== LEVELS ==================== -->
-    <section id="levels" class="section section-white">
+    <!-- ==================== LEVELS PREMIUM ==================== -->
+    <section id="levels" class="section levels-premium">
       <div class="container">
-        <div class="section-header">
-          <h2>Método Esparta por etapas educativas</h2>
-          <div class="divider"></div>
+        <div class="section-header lp-header">
+          <div class="ap-eyebrow">
+            <span class="hp-pulse" aria-hidden="true"></span>
+            ETAPAS EDUCATIVAS
+          </div>
+          <h2>Método Esparta por etapas.</h2>
+          <p>Cada curso requiere su enfoque. Diseñamos el acompañamiento según la edad y el reto académico.</p>
         </div>
         <div class="card-grid">
 
@@ -1791,7 +3017,7 @@
                     <li>Inglés adaptado al nivel</li>
                     <li>Seguimiento continuo con las familias</li>
                   </ul>
-                  <a href="https://shadow.academiaesparta.es/inscripcion" class="btn-back">Reserva una plaza →</a>
+                  <a href="https://shadow.academiaesparta.es/inscripcion" class="btn-back lp-btn">Reserva una plaza →</a>
                 </div>
               </div>
             </div>
@@ -1816,7 +3042,7 @@
                     <li>Técnicas de estudio y organización</li>
                     <li>Preparación de exámenes con método</li>
                   </ul>
-                  <a href="https://shadow.academiaesparta.es/inscripcion" class="btn-back">Reserva una plaza →</a>
+                  <a href="https://shadow.academiaesparta.es/inscripcion" class="btn-back lp-btn">Reserva una plaza →</a>
                 </div>
               </div>
             </div>
@@ -1841,7 +3067,7 @@
                     <li>Simulacros con exámenes reales EBAU</li>
                     <li>Orientación y estrategia universitaria</li>
                   </ul>
-                  <a href="https://shadow.academiaesparta.es/inscripcion" class="btn-back">Reserva una plaza →</a>
+                  <a href="https://shadow.academiaesparta.es/inscripcion" class="btn-back lp-btn">Reserva una plaza →</a>
                 </div>
               </div>
             </div>
@@ -1853,7 +3079,7 @@
 
     <!-- ==================== LOGOPEDIA ==================== -->
     <!-- ==================== LOGOPEDIA ==================== -->
-    <section id="speech" class="svc-section">
+    <section id="speech" class="svc-section svc-premium svc-premium-a">
       <div class="svc-row">
         <div class="svc-card">
           <div class="svc-card-emoji">🗣️</div>
@@ -1880,7 +3106,7 @@
     </section>
 
     <!-- ==================== PSICOLOGÍA ==================== -->
-    <section id="psychology" class="svc-section">
+    <section id="psychology" class="svc-section svc-premium svc-premium-b">
       <div class="svc-row svc-row-reverse">
         <div class="svc-details reveal">
           <span class="svc-label">Especialidad</span>
@@ -1908,12 +3134,15 @@
 
     <!-- ==================== RECURSOS ==================== -->
     <!-- ==================== RECURSOS + JUEGOS (portales duo) ==================== -->
-    <section id="recursos" class="section section-white">
+    <section id="recursos" class="section recursos-premium">
       <div class="container">
-        <div class="section-header reveal">
-          <h2>Aprende, practica y juega</h2>
+        <div class="section-header reveal rp-header">
+          <div class="ap-eyebrow">
+            <span class="hp-pulse" aria-hidden="true"></span>
+            BIBLIOTECA ABIERTA
+          </div>
+          <h2>Aprende, practica y juega.</h2>
           <p>Todo el contenido organizado en su propio espacio. Elige lo que necesitas.</p>
-          <div class="divider"></div>
         </div>
 
         <div class="portales-duo reveal">
@@ -1993,11 +3222,15 @@
     </section>
 
     <!-- ==================== CONTACTO ==================== -->
-    <section id="contact" class="section section-light">
+    <section id="contact" class="section contact-premium">
       <div class="container">
-        <div class="section-header">
-          <h2>Contacto</h2>
-          <div class="divider"></div>
+        <div class="section-header cp-header">
+          <div class="ap-eyebrow">
+            <span class="hp-pulse" aria-hidden="true"></span>
+            VEN A VERNOS
+          </div>
+          <h2>Visítanos en Torremolinos.</h2>
+          <p>Estamos aquí para resolver dudas, mostrarte el centro y planificar el camino de tu hijo.</p>
         </div>
         <div class="contact-grid">
           <div class="contact-info">
@@ -2047,7 +3280,7 @@
     </section>
 
     <!-- ==================== FOOTER ==================== -->
-    <footer class="footer">
+    <footer class="footer footer-premium">
       <div class="footer-grid">
         <div>
           <div class="footer-logo">Academia Esparta</div>
@@ -2130,7 +3363,7 @@
       });
 
       // Contador animado en stats
-      const statNums = document.querySelectorAll('.stat-number[data-target]');
+      const statNums = document.querySelectorAll('.stat-number[data-target], .hp-stat-number[data-target]');
       const statObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
