@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página no encontrada (404) | Academia Esparta</title>
+  <meta name="robots" content="noindex, follow" />
+  <meta name="description" content="La página que buscas no existe. Vuelve al inicio de Academia Esparta o explora nuestros servicios y materiales." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #064e3b;
+      color: rgba(236,253,245,0.85);
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Header */
+    .header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.85rem 2rem;
+      background: rgba(6,78,59,0.4);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.4rem; color: #fff; letter-spacing: -0.5px; }
+    .nav-mini { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-mini a { color: rgba(236,253,245,0.85); font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-mini a:hover { color: #4ade80; }
+    .nav-cta {
+      background: #fff; color: #064e3b !important;
+      padding: 0.48rem 1.1rem; border-radius: 8px;
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: #4ade80; color: #fff !important; }
+
+    /* Main */
+    .wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 1.5rem 5rem;
+      position: relative;
+      isolation: isolate;
+    }
+    .wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(74,222,128,0.12), transparent 60%),
+                  radial-gradient(ellipse at bottom left, rgba(74,222,128,0.08), transparent 60%);
+      z-index: -2;
+    }
+    .aurora { position: absolute; border-radius: 50%; filter: blur(100px); mix-blend-mode: screen; pointer-events: none; z-index: -1; }
+    .aurora-1 { width: 420px; height: 420px; background: rgba(74,222,128,0.15); top: -100px; right: -80px; animation: drift 28s ease-in-out infinite alternate; }
+    .aurora-2 { width: 360px; height: 360px; background: rgba(34,197,94,0.10); bottom: -80px; left: -60px; animation: drift 32s ease-in-out infinite alternate-reverse; }
+    @keyframes drift { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(40px, 30px) scale(1.08); } }
+
+    .inner { max-width: 760px; text-align: center; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.45rem 1.1rem;
+      border: 1px solid rgba(248,113,113,0.35);
+      background: rgba(248,113,113,0.08);
+      border-radius: 9999px;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(252,165,165,0.95);
+      margin-bottom: 1.4rem;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #f87171;
+      box-shadow: 0 0 0 0 rgba(248,113,113,0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(248,113,113,0.6); } 50% { box-shadow: 0 0 0 10px rgba(248,113,113,0); } }
+
+    .code-404 {
+      font-family: 'Fraunces', 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(6rem, 18vw, 11rem);
+      color: rgba(74,222,128,0.25);
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: 'Fraunces', 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 1.2rem;
+    }
+    h1 em { font-style: italic; color: rgba(167,243,208,0.9); }
+
+    .lead {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(236,253,245,0.7);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto 2.8rem;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .option {
+      background: rgba(6,78,59,0.55);
+      border: 1px solid rgba(74,222,128,0.2);
+      border-radius: 18px;
+      padding: 1.4rem 1.2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .option:hover {
+      transform: translateY(-3px);
+      border-color: rgba(74,222,128,0.4);
+      background: rgba(6,78,59,0.7);
+    }
+    .option-icon {
+      width: 36px; height: 36px;
+      background: rgba(74,222,128,0.12);
+      border: 1px solid rgba(74,222,128,0.3);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: #4ade80;
+      margin-bottom: 0.3rem;
+    }
+    .option-title {
+      font-family: 'Fraunces', 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.15rem;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .option-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(236,253,245,0.65);
+      line-height: 1.55;
+    }
+
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      background: #ffffff; color: #064e3b;
+      padding: 0.9rem 1.7rem;
+      border-radius: 9999px;
+      font-weight: 600; font-size: 0.95rem;
+      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 10px 26px -8px rgba(74,222,128,0.4);
+    }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 32px -8px rgba(74,222,128,0.55); }
+
+    /* Footer mini */
+    .footer-mini {
+      padding: 1.5rem 1.5rem;
+      background: #032519;
+      border-top: 1px solid rgba(74,222,128,0.12);
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(236,253,245,0.4);
+    }
+
+    @media (max-width: 600px) {
+      .nav-mini a:not(.nav-cta) { display: none; }
+      .wrap { padding: 7rem 1rem 3rem; }
+      .options { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="/" class="logo">Academia Esparta</a>
+    <nav class="nav-mini">
+      <a href="/">Inicio</a>
+      <a href="https://shadow.academiaesparta.es/inscripcion" class="nav-cta">Inscripción</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="inner">
+      <div class="eyebrow">
+        <span class="pulse-dot"></span>
+        Error 404 · Página no encontrada
+      </div>
+      <div class="code-404">404</div>
+      <h1>Aquí no hay <em>nada que estudiar.</em></h1>
+      <p class="lead">La página que buscas no existe o se ha movido. No pasa nada — abajo tienes cuatro caminos para encontrar lo que necesitas.</p>
+
+      <div class="options">
+        <a href="/" class="option">
+          <div class="option-icon"><i class="fa-solid fa-house"></i></div>
+          <div class="option-title">Volver al inicio</div>
+          <div class="option-desc">La home con todo nuestro contenido principal.</div>
+        </a>
+        <a href="/materiales.html" class="option">
+          <div class="option-icon"><i class="fa-solid fa-book"></i></div>
+          <div class="option-title">Materiales y fichas</div>
+          <div class="option-desc">Biblioteca de fichas imprimibles de Lengua y Matemáticas.</div>
+        </a>
+        <a href="/quienes-somos.html" class="option">
+          <div class="option-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="option-title">Quiénes somos</div>
+          <div class="option-desc">El equipo de Academia Esparta y nuestra historia.</div>
+        </a>
+        <a href="https://wa.me/34659407023" class="option">
+          <div class="option-icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="option-title">Contactar por WhatsApp</div>
+          <div class="option-desc">Si no encuentras lo que buscas, escríbenos directamente.</div>
+        </a>
+      </div>
+
+      <a class="cta-primary" href="/">
+        <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer-mini">
+    © 2025 Academia Esparta · Torremolinos, Málaga
+  </footer>
+
+</body>
+</html>
