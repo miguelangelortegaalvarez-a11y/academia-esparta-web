@@ -1,0 +1,62 @@
+name: Regenerar sitemap.xml
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - '.github/workflows/sitemap.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generar sitemap.xml
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          {
+            echo '<?xml version="1.0" encoding="UTF-8"?>'
+            echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+
+            for url in "" "quienes-somos.html" "logopedia.html" "psicologia.html" "materiales.html"; do
+              PRIO="0.8"
+              [ -z "$url" ] && PRIO="1.0"
+              echo "  <url>"
+              echo "    <loc>https://academiaesparta.es/${url}</loc>"
+              echo "    <lastmod>${TODAY}</lastmod>"
+              echo "    <changefreq>monthly</changefreq>"
+              echo "    <priority>${PRIO}</priority>"
+              echo "  </url>"
+            done
+
+            find recursos -name "*.html" 2>/dev/null | grep -v "ortografia-carla" | sort | while read f; do
+              echo "  <url>"
+              echo "    <loc>https://academiaesparta.es/${f}</loc>"
+              echo "    <lastmod>${TODAY}</lastmod>"
+              echo "    <changefreq>yearly</changefreq>"
+              echo "    <priority>0.5</priority>"
+              echo "  </url>"
+            done
+
+            echo '</urlset>'
+          } > sitemap.xml
+
+      - name: Commit y push si hay cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain sitemap.xml)" ]]; then
+            git add sitemap.xml
+            git commit -m "Regenerar sitemap.xml [skip ci]"
+            git push
+          else
+            echo "Sitemap sin cambios."
+          fi
