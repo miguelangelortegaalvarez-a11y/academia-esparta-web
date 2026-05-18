@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Los medios de transporte · Esquemas y mapas conceptuales · 4º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 14px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13.5px; line-height: 1.65; text-align: justify; }
+    .lectura-texto p { margin-bottom: 8px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 14px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+
+    /* ── ESQUEMA jerárquico ────────────────────────────────────────── */
+    .esquema { display: flex; flex-direction: column; align-items: center; margin: 10px 0 6px; }
+    .esquema-titulo {
+      border: 2px solid #000; border-radius: 8px;
+      padding: 10px 22px; font-weight: 800; font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+      background: #f5f5f5;
+    }
+    .esquema-conector-v { width: 2px; height: 18px; background: #000; }
+    .esquema-conector-h { width: 75%; height: 2px; background: #000; }
+    .esquema-ramas { display: flex; gap: 12px; justify-content: space-between; width: 100%; margin-top: -2px; }
+    .esquema-rama { flex: 1; display: flex; flex-direction: column; align-items: stretch; }
+    .esquema-rama-arriba { width: 2px; height: 18px; background: #000; align-self: center; }
+    .esquema-rama-cabecera {
+      border: 1.5px solid #000; border-radius: 6px;
+      padding: 7px 10px; font-weight: 700; font-size: 12px;
+      text-align: center; background: #fafafa;
+      margin-bottom: 8px;
+    }
+    .esquema-rama-items { display: flex; flex-direction: column; gap: 7px; padding: 0 4px; }
+    .esquema-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    .esquema-item-bullet { font-weight: 800; }
+    .esquema-item-linea { flex: 1; border-bottom: 1.5px solid #000; height: 18px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box, .esquema-titulo, .esquema-rama-cabecera { background: #fff !important; }
+      .recuerda-box { border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: LECTURA ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 4º Primaria · Esquemas y mapas conceptuales</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🗺️ Esquema / mapa conceptual</div>
+
+  <div class="lectura-label">Lee con atención. Después tendrás que organizar la información en un esquema.</div>
+  <div class="lectura-box">
+    <div class="lectura-titulo">Los medios de transporte</div>
+    <div class="lectura-texto">
+      <p>Los medios de transporte son los vehículos que usamos las personas y las mercancías para desplazarnos de un lugar a otro. A lo largo de la historia se han inventado muchos tipos diferentes, y hoy podemos clasificarlos en tres grandes grupos según por dónde se mueven: los terrestres, los aéreos y los marítimos.</p>
+      <p>Los medios de transporte terrestres son los que se desplazan por la tierra. Pueden ir por carretera, como el coche, el autobús o la motocicleta, o por raíles, como el tren o el metro. La bicicleta también es un transporte terrestre, muy popular porque no contamina y nos ayuda a estar en forma.</p>
+      <p>Los medios de transporte aéreos se mueven por el cielo. Los más conocidos son el avión y el helicóptero. El avión nos permite viajar muy lejos en pocas horas, incluso entre continentes. El helicóptero, en cambio, no necesita pistas para despegar y se usa mucho en emergencias y rescates.</p>
+      <p>Los medios de transporte marítimos son los que viajan por el mar, los ríos o los lagos. Los barcos grandes, llamados cruceros, llevan a cientos de personas de vacaciones. Los cargueros transportan mercancías. Y las pequeñas embarcaciones, como las lanchas o las barcas, se usan para pescar o pasear.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 1</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: ESQUEMA ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Esquema · Los medios de transporte</span>
+    <span class="page-2-ref">Lengua · 4º Primaria · Esquemas y mapas conceptuales</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda cómo se hace un esquema:</div>
+    Arriba va el <strong>tema general</strong>. Debajo, las <strong>categorías o ideas principales</strong>. Y dentro de cada categoría, los <strong>ejemplos o detalles</strong>. Sé breve: una o dos palabras por hueco.
+  </div>
+
+  <div class="preguntas-label">Completa el esquema con la información del texto:</div>
+
+  <div class="esquema">
+    <div class="esquema-titulo">LOS MEDIOS DE TRANSPORTE</div>
+    <div class="esquema-conector-v"></div>
+    <div class="esquema-conector-h"></div>
+    <div class="esquema-ramas">
+      <div class="esquema-rama">
+        <div class="esquema-rama-arriba"></div>
+        <div class="esquema-rama-cabecera">________________</div>
+        <div class="esquema-rama-items">
+          <div class="esquema-item"><span class="esquema-item-bullet">•</span><div class="esquema-item-linea"></div></div>
+          <div class="esquema-item"><span class="esquema-item-bullet">•</span><div class="esquema-item-linea"></div></div>
+          <div class="esquema-item"><span class="esquema-item-bullet">•</span><div class="esquema-item-linea"></div></div>
+        </div>
+      </div>
+      <div class="esquema-rama">
+        <div class="esquema-rama-arriba"></div>
+        <div class="esquema-rama-cabecera">________________</div>
+        <div class="esquema-rama-items">
+          <div class="esquema-item"><span class="esquema-item-bullet">•</span><div class="esquema-item-linea"></div></div>
+          <div class="esquema-item"><span class="esquema-item-bullet">•</span><div class="esquema-item-linea"></div></div>
+          <div class="esquema-item"><span class="esquema-item-bullet">•</span><div class="esquema-item-linea"></div></div>
+        </div>
+      </div>
+      <div class="esquema-rama">
+        <div class="esquema-rama-arriba"></div>
+        <div class="esquema-rama-cabecera">________________</div>
+        <div class="esquema-rama-items">
+          <div class="esquema-item"><span class="esquema-item-bullet">•</span><div class="esquema-item-linea"></div></div>
+          <div class="esquema-item"><span class="esquema-item-bullet">•</span><div class="esquema-item-linea"></div></div>
+          <div class="esquema-item"><span class="esquema-item-bullet">•</span><div class="esquema-item-linea"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
