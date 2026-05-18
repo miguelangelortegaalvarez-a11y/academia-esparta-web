@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El museo del Prado · Velocidad lectora con comprensión · 4º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 14px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13.5px; line-height: 1.65; text-align: justify; }
+    .lectura-texto p { margin-bottom: 8px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .tiempo-box { display: flex; gap: 16px; padding: 10px 14px; background: #f5f5f5; border: 1.5px solid #000; border-radius: 8px; margin-bottom: 10px; font-size: 12px; align-items: center; flex-wrap: wrap; }
+    .tiempo-titulo { font-weight: 800; font-family: 'Montserrat', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+    .tiempo-item { display: flex; gap: 6px; align-items: center; }
+    .tiempo-item label { font-weight: 700; white-space: nowrap; }
+    .tiempo-hueco { border-bottom: 1.5px solid #000; height: 16px; width: 70px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .tiempo-box, .recuerda-box { background: #fff !important; border: 1px solid #000 !important; }
+      .recuerda-box { border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 4º Primaria · Velocidad lectora con comprensión</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">⏱️ Velocidad lectora</div>
+
+  <div class="tiempo-box">
+    <span class="tiempo-titulo">⏱ Cronómetro:</span>
+    <div class="tiempo-item"><label>Hora de inicio:</label><div class="tiempo-hueco"></div></div>
+    <div class="tiempo-item"><label>Hora de fin:</label><div class="tiempo-hueco"></div></div>
+    <div class="tiempo-item"><label>Tiempo total:</label><div class="tiempo-hueco"></div></div>
+  </div>
+
+  <div class="lectura-label">Lee el texto lo más rápido que puedas, pero <strong>entendiéndolo bien</strong>. No vuelvas atrás.</div>
+  <div class="lectura-box">
+    <div class="lectura-titulo">El museo del Prado</div>
+    <div class="lectura-texto">
+      <p>El museo del Prado es uno de los museos de arte más importantes del mundo. Está situado en Madrid, la capital de España, y se inauguró en mil ochocientos diecinueve. Conserva una de las colecciones de pintura más valiosas de toda Europa y recibe cada año a millones de visitantes.</p>
+      <p>En sus salas se exponen obras de grandes maestros españoles como Goya, Velázquez, El Greco y Murillo. También hay cuadros de pintores extranjeros muy famosos, como Rubens, Tiziano o Brueghel el Viejo. Algunos de los cuadros más conocidos del museo son Las meninas, El tres de mayo o El jardín de las delicias.</p>
+      <p>El edificio que aloja el museo es muy bonito y forma parte del paisaje cultural de Madrid. Se diseñó originalmente para ser un museo de ciencias naturales, pero al final se utilizó para guardar la enorme colección de cuadros que pertenecía a los reyes de España.</p>
+      <p>Visitar el museo del Prado es una experiencia única. Hay obras tan grandes que ocupan paredes enteras y otras tan pequeñas que casi no se ven. Recorrer sus salas es como hacer un viaje por la historia del arte.</p>
+      <span class="palabras-count">— Texto de 200 palabras —</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 8</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · El museo del Prado</span>
+    <span class="page-2-ref">Lengua · 4º Primaria · Velocidad lectora con comprensión</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📏 Calcula tu velocidad:</div>
+    Palabras del texto: <strong>200</strong>. Divide 200 entre tu tiempo en minutos. Por ejemplo, si tardaste 2 minutos: 200 ÷ 2 = 100 palabras por minuto. En 4º Primaria, lo normal es leer entre 100 y 130 palabras por minuto.
+  </div>
+
+  <div class="tiempo-box">
+    <span class="tiempo-titulo">📊 Mis resultados:</span>
+    <div class="tiempo-item"><label>Tiempo (min):</label><div class="tiempo-hueco"></div></div>
+    <div class="tiempo-item"><label>Palabras / minuto:</label><div class="tiempo-hueco"></div></div>
+  </div>
+
+  <div class="preguntas-label">Sin volver al texto, responde:</div>
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> ¿En qué ciudad está el museo del Prado?</div>
+      <div class="linea-resp"></div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> ¿Cuándo se inauguró el museo?</div>
+      <div class="linea-resp"></div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Cita tres pintores españoles cuyas obras se exponen allí.</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> ¿Para qué se diseñó originalmente el edificio?</div>
+      <div class="linea-resp"></div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">5.</span> Cita uno de los cuadros más conocidos del museo.</div>
+      <div class="linea-resp"></div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">6.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Es uno de los museos más importantes del mundo.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Solo expone obras de pintores españoles.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Está en Barcelona.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">La colección perteneció a los reyes de España.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
