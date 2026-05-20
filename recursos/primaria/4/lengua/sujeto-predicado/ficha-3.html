@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El sujeto omitido · Gramática · 4º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 12px; }
+
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 11px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+
+    .metodo-box { border: 2px solid #000; border-radius: 10px; padding: 10px 13px; margin-bottom: 11px; }
+    .metodo-titulo { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
+    .metodo-texto { font-size: 12.5px; line-height: 1.5; }
+    .metodo-texto strong { font-weight: 800; }
+
+    .terminaciones { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; margin-top: 6px; }
+    .term-item { font-size: 12px; line-height: 1.4; }
+    .term-item strong { font-weight: 800; }
+
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; }
+    .ej-prueba { font-size: 12.5px; line-height: 1.5; margin-bottom: 4px; }
+    .ej-resultado { font-size: 12.5px; font-weight: 600; }
+
+    .verbo-marca { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; font-weight: 700; }
+    .sujeto-marca { font-weight: 800; font-style: normal; border-bottom: 2px solid #000; padding-bottom: 1px; }
+    .predicado-marca { font-weight: 700; font-style: italic; }
+
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; background: transparent; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+
+    .ej-block { margin-bottom: 14px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 8px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-titulo { font-size: 12.5px; font-weight: 700; margin-bottom: 2px; }
+    .col-prompt { font-size: 12.5px; font-style: italic; }
+
+    @media screen {
+      .page-break { margin: 24px 0; border-top: 2px dashed #bbb; }
+    }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 4º Primaria · Sujeto y predicado</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Gramática · Ficha 3</div>
+
+  <div class="teoria-titulo">El sujeto omitido (o tácito)</div>
+
+  <div class="def-box">
+    <div class="def-titulo">¿Qué es el sujeto omitido?</div>
+    <div class="def-texto">A veces el sujeto <strong>no aparece escrito</strong> en la oración, pero podemos saber quién realiza la acción gracias a la <strong>terminación del verbo</strong>. Ese sujeto que no se escribe se llama <strong>sujeto omitido</strong> o <strong>tácito</strong>.</div>
+  </div>
+
+  <div class="metodo-box">
+    <div class="metodo-titulo">¿Cómo sabemos quién es el sujeto omitido?</div>
+    <div class="metodo-texto">Mira la terminación del verbo. Cada terminación indica una persona:</div>
+    <div class="terminaciones">
+      <div class="term-item"><strong>-o</strong> → yo &nbsp;(como, estudio, llego)</div>
+      <div class="term-item"><strong>-mos</strong> → nosotros/as &nbsp;(comemos, llegamos)</div>
+      <div class="term-item"><strong>-s</strong> → tú &nbsp;(comes, estudias, llegas)</div>
+      <div class="term-item"><strong>-áis / -éis</strong> → vosotros/as &nbsp;(coméis, llegáis)</div>
+      <div class="term-item"><strong>-a / -e</strong> → él, ella &nbsp;(come, llega)</div>
+      <div class="term-item"><strong>-an / -en</strong> → ellos, ellas &nbsp;(comen, llegan)</div>
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion"><span class="verbo-marca">Llegamos</span> tarde al colegio.</div>
+    <div class="ej-prueba">El verbo <span class="verbo-marca">llegamos</span> termina en <strong>-mos</strong> → sujeto omitido: <span class="sujeto-marca">(nosotros)</span>.</div>
+    <div class="ej-prueba">Prueba: si cambio <span class="verbo-marca">llegamos</span> → <span class="verbo-marca">llegan</span>, el sujeto pasaría a ser ellos. Confirma que el sujeto de <em>llegamos</em> es <strong>nosotros</strong>.</div>
+    <div class="ej-resultado">→ Sujeto omitido: <span class="sujeto-marca">(nosotros)</span> · Predicado: <span class="predicado-marca">llegamos tarde al colegio</span>.</div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">¿<span class="verbo-marca">Estudiáis</span> mucho en casa?</div>
+    <div class="ej-prueba">El verbo <span class="verbo-marca">estudiáis</span> termina en <strong>-áis</strong> → sujeto omitido: <span class="sujeto-marca">(vosotros)</span>.</div>
+    <div class="ej-resultado">→ Sujeto omitido: <span class="sujeto-marca">(vosotros)</span> · Predicado: <span class="predicado-marca">¿estudiáis mucho en casa?</span></div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">El sujeto omitido o tácito <strong>no está escrito</strong>, pero el verbo nos dice quién es. Podemos escribirlo entre paréntesis para mostrarlo: <em>Comemos en el jardín.</em> → <em>(Nosotros) comemos en el jardín.</em></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Sujeto y predicado · Ficha 3</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: EJERCICIOS ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Sujeto omitido</span>
+    <span class="page-2-ref">Lengua · 4º Primaria · Ficha 3</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Di si el sujeto está <strong>escrito</strong> (E) u <strong>omitido</strong> (O). Si está omitido, escríbelo entre paréntesis:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> El gato duerme en el sofá. → E / O &nbsp;&nbsp; Sujeto: <span style="display:inline-block; width:46%; border-bottom:1.5px solid #000;"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> Comemos en el jardín. → E / O &nbsp;&nbsp; Sujeto: <span style="display:inline-block; width:50%; border-bottom:1.5px solid #000;"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> Aitana y yo estudiamos juntos. → E / O &nbsp;&nbsp; Sujeto: <span style="display:inline-block; width:40%; border-bottom:1.5px solid #000;"></span></div>
+      <div class="oracion-item"><span class="letra">d)</span> ¡Cantáis muy bien! → E / O &nbsp;&nbsp; Sujeto: <span style="display:inline-block; width:50%; border-bottom:1.5px solid #000;"></span></div>
+      <div class="oracion-item"><span class="letra">e)</span> Los alumnos llegaron tarde. → E / O &nbsp;&nbsp; Sujeto: <span style="display:inline-block; width:40%; border-bottom:1.5px solid #000;"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Subraya el verbo y escribe el sujeto omitido:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Dormimos ocho horas cada noche. → Sujeto omitido: <span style="display:inline-block; width:42%; border-bottom:1.5px solid #000;"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> ¿Venís a la fiesta del colegio? → Sujeto omitido: <span style="display:inline-block; width:42%; border-bottom:1.5px solid #000;"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> Dibuja muy bien. → Sujeto omitido: <span style="display:inline-block; width:52%; border-bottom:1.5px solid #000;"></span></div>
+      <div class="oracion-item"><span class="letra">d)</span> Corro todos los días por el parque. → Sujeto omitido: <span style="display:inline-block; width:40%; border-bottom:1.5px solid #000;"></span></div>
+    </div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> Reescribe añadiendo el sujeto omitido entre paréntesis:</div>
+      <div class="col-prompt">a) Llegamos tarde.</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">b) ¿Coméis verdura?</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">c) Estudia por las tardes.</div>
+      <div class="linea-resp"></div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Inventa dos oraciones con <strong>sujeto omitido</strong>:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
