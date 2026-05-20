@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Distribuciones de probabilidad · Soluciones explicadas · 1.º Bach CCSS</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 12mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; margin: 0; color:#1a1a1a; background:#fff; font-size: 11.5px; line-height: 1.5; }
+  .sheet { max-width: 180mm; margin: 0 auto; }
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid #0d47a1; padding-bottom: 6px; margin-bottom: 12px;
+  }
+  header .left { font-weight: 800; color: #0d47a1; font-size: 14px; letter-spacing: .3px; }
+  header .right { font-size: 10px; color: #555; text-align: right; }
+  h1 {
+    background: linear-gradient(90deg, #0d47a1, #1976d2);
+    color: #fff; margin: 0 0 14px 0; padding: 8px 14px; border-radius: 5px;
+    font-size: 16px; text-align: center; letter-spacing: .5px;
+  }
+  h1 small { font-family: 'Lora', serif; color: #ffd54f; font-weight: 600; font-style: italic; font-size: 12px; }
+  .bloque {
+    background:#e3eaf6; border-left:6px solid #0d47a1; color:#0d47a1;
+    padding: 8px 12px; font-weight:800; font-size: 13px; margin: 18px 0 10px 0;
+    border-radius: 4px;
+  }
+  .ej {
+    border: 1px solid #cfd6e2; border-radius: 6px; padding: 10px 14px; background: #fff;
+    margin-bottom: 12px; page-break-inside: avoid;
+    box-shadow: 0 1px 2px rgba(13,71,161,0.04);
+  }
+  .ej-head {
+    display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;
+    border-bottom: 1px dashed #e0e6ee; padding-bottom: 4px;
+  }
+  .num { background:#0d47a1; color:#fff; font-weight:800; padding: 2px 9px; border-radius: 12px; font-size: 11px; }
+  .num.examen { background:#bf6c00; }
+  .titulo { font-weight: 700; color:#0d47a1; font-size: 12px; }
+  .enunciado {
+    background:#f4f6fa; border-left:3px solid #90a4c8; padding: 6px 10px;
+    font-style: italic; color:#333; margin: 6px 0; border-radius: 3px;
+  }
+  .seccion { margin: 8px 0; }
+  .seccion h3 {
+    margin: 6px 0 4px 0; font-size: 11.5px; color:#bf6c00;
+    text-transform: uppercase; letter-spacing: .5px; font-weight: 800;
+  }
+  .seccion p { margin: 3px 0; }
+  .paso { margin: 4px 0 4px 6px; padding-left: 8px; border-left: 2px solid #ffb300; }
+  .paso b { color:#bf6c00; }
+  .res {
+    background:#e8f5e9; border-left: 4px solid #2e7d32; padding: 6px 10px;
+    margin-top: 6px; font-weight: 600; border-radius: 3px;
+  }
+  .res b { color:#1b5e20; }
+  .idea {
+    background:#fff8e1; border-left: 4px solid #ff8f00; padding: 5px 10px;
+    margin-top: 6px; font-size: 11px; border-radius: 3px;
+  }
+  .idea b { color:#bf6c00; }
+  .katex { font-size: 1.05em !important; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header>
+  <div class="left">ACADEMIA ESPARTA · Matemáticas CCSS I</div>
+  <div class="right">1.º Bachillerato · Unidad · Distribuciones de probabilidad<br>Soluciones explicadas a fondo (1–20 + E1–E5)</div>
+</header>
+
+<h1>Distribuciones de probabilidad <small>— soluciones explicadas paso a paso</small></h1>
+
+
+<!-- ===================== BLOQUE A ===================== -->
+<div class="bloque">Bloque A · Probabilidad y variable discreta</div>
+
+<!-- 1 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">1</span><span class="titulo">Lanzamos dos monedas: 2 caras / 1 cara y 1 cruz</span></div>
+  <div class="enunciado">Lanzamos dos monedas al aire. Calcula la probabilidad de obtener dos caras y la de obtener una cara y una cruz.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Es un <b>experimento compuesto</b> con dos etapas (1.ª y 2.ª moneda). Las dos tiradas son <b>independientes</b>: el resultado de una no afecta a la otra. En cada moneda, $P(\text{cara})=P(\text{cruz})=\tfrac{1}{2}$.</p>
+    <p>Regla a recordar: dentro de una misma rama del árbol se <b>multiplica</b>; entre ramas distintas se <b>suma</b>.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso"><b>Dos caras</b> (una rama: $C$ y luego $C$): $$P(CC)=\tfrac{1}{2}\cdot\tfrac{1}{2}=\tfrac{1}{4}=0{,}25$$</div>
+    <div class="paso"><b>Una cara y una cruz</b> (dos ramas: $C\!+\!$ ó $+\!C$):
+      $$P=\underbrace{\tfrac{1}{2}\cdot\tfrac{1}{2}}_{C+}+\underbrace{\tfrac{1}{2}\cdot\tfrac{1}{2}}_{+C}=\tfrac{1}{2}=0{,}50$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P(2C)=\tfrac{1}{4}\quad\bullet\quad P(1C\text{ y }1+)=\tfrac{1}{2}$</div>
+  <div class="idea"><b>Idea clave:</b> «una cara y una cruz» se puede dar de dos formas distintas, por eso vale el doble que «dos caras» (o «dos cruces»).</div>
+</div>
+
+<!-- 2 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">2</span><span class="titulo">Tres ases de una baraja de 40 sin reemplazo</span></div>
+  <div class="enunciado">Extraemos tres naipes de una baraja de 40 cartas <b>sin reemplazamiento</b>. Calcula la probabilidad de obtener tres ases.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Compuesto de 3 etapas y <b>dependiente</b>: cada vez que sacas un as, en la siguiente extracción hay <b>una carta menos en total</b> y <b>un as menos</b>. Hay que actualizar numerador y denominador en cada paso.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso"><b>1.ª carta:</b> de 40 cartas hay 4 ases $\to P_1=\tfrac{4}{40}$</div>
+    <div class="paso"><b>2.ª carta</b> (ya falta 1 as y 1 carta): $P_2=\tfrac{3}{39}$</div>
+    <div class="paso"><b>3.ª carta:</b> $P_3=\tfrac{2}{38}$</div>
+    <div class="paso">Como están <b>encadenadas en la misma rama</b>, se multiplican:
+      $$P=\tfrac{4}{40}\cdot\tfrac{3}{39}\cdot\tfrac{2}{38}=\tfrac{24}{59\,280}=\tfrac{1}{2470}\approx 0{,}0004$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P(\text{3 ases}) = \dfrac{1}{2470} \approx 0{,}04\%$</div>
+  <div class="idea"><b>Idea clave:</b> «sin reemplazo» = <b>dependientes</b>. Si fuera con devolución, sería $(4/40)^3 = 1/1000$.</div>
+</div>
+
+<!-- 3 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">3</span><span class="titulo">Espacio muestral del nº de ases (2 cartas con reemplazo)</span></div>
+  <div class="enunciado">Extraemos <b>con reemplazamiento</b> dos cartas de una baraja de 40 y anotamos el número de ases. Escribe los posibles valores de la variable.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>La pregunta no pide probabilidades, sino los <b>valores posibles</b> de la variable aleatoria $X=$ «nº de ases obtenidos en 2 extracciones».</p>
+    <p>Como tenemos 2 cartas, el nº de ases sólo puede ser $0$, $1$ ó $2$.</p>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $X\in\{0,\ 1,\ 2\}$</div>
+  <div class="idea"><b>Idea clave:</b> el espacio muestral de la <b>variable</b> es distinto del espacio muestral del <b>experimento</b>. Aquí el experimento tiene muchísimos resultados (las 1600 parejas de cartas posibles), pero la variable sólo toma 3 valores.</div>
+</div>
+
+<!-- 4 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">4</span><span class="titulo">Dado irregular · probabilidad del 6</span></div>
+  <div class="enunciado">En un dado irregular, $P(1)=P(2)=P(3)=0{,}1$ y $P(4)=P(5)=0{,}2$. Calcula $P(6)$.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>En cualquier distribución de probabilidad, la suma de todas las probabilidades vale <b>1</b>. Por tanto, $P(6)$ es lo que falta para llegar a 1.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">Sumamos lo que ya tenemos: $3\cdot 0{,}1 + 2\cdot 0{,}2 = 0{,}3 + 0{,}4 = 0{,}7$</div>
+    <div class="paso">$P(6)=1-0{,}7=0{,}3$</div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P(6)=0{,}3$</div>
+  <div class="idea"><b>Idea clave:</b> $\sum p_i = 1$ es la propiedad más útil para encontrar una probabilidad desconocida.</div>
+</div>
+
+<!-- 5 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">5</span><span class="titulo">Dos monedas · media y desviación típica del nº de caras</span></div>
+  <div class="enunciado">Lanzamos dos monedas. Calcula la media $\mu$ y la desviación típica $\sigma$ del número de caras obtenidas.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Sea $X=$ «nº de caras». Toma valores $0,1,2$. Primero hago la <b>tabla de probabilidades</b>; después aplico las fórmulas:</p>
+    <p>$\mu=\sum p_i x_i \qquad \sigma=\sqrt{\sum p_i x_i^{\,2} - \mu^{2}}$</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso"><b>Probabilidades</b> (igual que el ejercicio 1):
+      $$P(0)=\tfrac{1}{4},\quad P(1)=\tfrac{1}{2},\quad P(2)=\tfrac{1}{4}$$
+      (Comprobación: suman 1 ✓.)
+    </div>
+    <div class="paso"><b>Media:</b>
+      $$\mu = 0\cdot\tfrac{1}{4} + 1\cdot\tfrac{1}{2} + 2\cdot\tfrac{1}{4} = 0 + 0{,}5 + 0{,}5 = 1$$
+    </div>
+    <div class="paso"><b>Suma de cuadrados ponderada:</b>
+      $$\sum p_i x_i^{\,2} = 0^{2}\!\cdot\!\tfrac{1}{4} + 1^{2}\!\cdot\!\tfrac{1}{2} + 2^{2}\!\cdot\!\tfrac{1}{4} = 0 + 0{,}5 + 1 = 1{,}5$$
+    </div>
+    <div class="paso"><b>Desviación típica:</b>
+      $$\sigma = \sqrt{1{,}5 - 1^{2}} = \sqrt{0{,}5}\approx 0{,}71$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $\mu = 1$ cara $\quad\bullet\quad \sigma \approx 0{,}71$</div>
+  <div class="idea"><b>Idea clave:</b> $\mu$ es el «valor esperado». En 2 monedas, esperamos 1 cara de media — lógico, porque cada moneda da 0{,}5 caras en promedio.</div>
+</div>
+
+
+<!-- ===================== BLOQUE B ===================== -->
+<div class="bloque">Bloque B · Función de densidad (variable continua)</div>
+
+<!-- 6 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">6</span><span class="titulo">¿Es $f(x)=\tfrac{x}{2}-1$ en $[2,4]$ una densidad?</span></div>
+  <div class="enunciado">Comprueba que $f(x)=\dfrac{x}{2}-1$ en $2\leq x\leq 4$ es una función de densidad.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Para ser función de densidad hay que comprobar <b>dos condiciones</b>:</p>
+    <p>① $f(x)\geq 0$ en todo el intervalo.<br>② El área total bajo la curva vale 1.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso"><b>Condición 1 — no negativa:</b>
+      $f(2)=\tfrac{2}{2}-1=0\geq 0$ ✓
+      $\quad$ $f(4)=\tfrac{4}{2}-1=1\geq 0$ ✓
+      <br>Como $f$ es lineal y va de $0$ a $1$, es positiva en todo $[2,4]$.
+    </div>
+    <div class="paso"><b>Condición 2 — área = 1.</b> La gráfica de $f$ entre $x=2$ y $x=4$ es un <b>triángulo</b> con base $b=4-2=2$ y altura $h=f(4)=1$:
+      $$\text{Área}=\tfrac{b\cdot h}{2}=\tfrac{2\cdot 1}{2}=1 \ \checkmark$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> sí, $f$ cumple las dos condiciones, así que <b>es una función de densidad</b>.</div>
+  <div class="idea"><b>Idea clave:</b> en CCSS no integramos: las áreas se calculan como figuras geométricas (triángulos, trapecios, rectángulos).</div>
+</div>
+
+<!-- 7 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">7</span><span class="titulo">$P[X<3]$ con la $f$ del ej. 6</span></div>
+  <div class="enunciado">Con la función de densidad del ejercicio 6, halla $P[X<3]$.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>En variables continuas, la probabilidad es el <b>área bajo la curva</b> en el intervalo pedido. Aquí: área desde $x=2$ hasta $x=3$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">Calculo los valores en los extremos: $f(2)=0$, $f(3)=\tfrac{3}{2}-1=0{,}5$.</div>
+    <div class="paso">La región es otro triángulo, de base $b=3-2=1$ y altura $h=0{,}5$:
+      $$P[X<3]=\tfrac{1\cdot 0{,}5}{2}=0{,}25$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X<3]=0{,}25$</div>
+  <div class="idea"><b>Idea clave:</b> si una densidad parte de $0$, los recintos hasta un punto son triángulos. Más allá, suelen ser trapecios.</div>
+</div>
+
+<!-- 8 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">8</span><span class="titulo">$P[X=3]$ con la $f$ del ej. 6</span></div>
+  <div class="enunciado">En la misma función del ejercicio 6, ¿cuál es el valor de $P[X=3]$? Razónalo.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>En variables <b>continuas</b>, la probabilidad puntual <b>siempre vale 0</b>. Es una idea geométrica fundamental.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Razonamiento</h3>
+    <div class="paso">$P[X=3]$ sería el «área» de un segmento vertical en $x=3$. Un segmento tiene anchura cero, así que su área vale $0$.</div>
+    <div class="paso">Consecuencia útil: en una variable continua da igual escribir $<$ o $\leq$ — el resultado es el mismo:
+      $$P[X<3]=P[X\leq 3]=0{,}25$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X=3]=0$</div>
+  <div class="idea"><b>Idea clave:</b> esto NO pasa en variables discretas, donde sí puede tener sentido $P[X=k]>0$ (por ejemplo $P[\text{cara}]=0{,}5$ en una moneda).</div>
+</div>
+
+<!-- 9 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">9</span><span class="titulo">Hallar $k$ para que $f(x)=0{,}4+kx$ sea densidad en $[0,4]$</span></div>
+  <div class="enunciado">Halla el valor de $k$ para que $f(x)=0{,}4+k\,x$, definida en $[0,4]$ y $0$ en el resto, sea una función de densidad.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Imponemos la condición clave: el <b>área total = 1</b>. La gráfica entre $x=0$ y $x=4$ es un <b>trapecio</b> con bases $f(0)$ y $f(4)$, y altura horizontal $4$.</p>
+    <p>Recordatorio: $\text{Área trapecio} = \dfrac{B+b}{2}\cdot h$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">$f(0)=0{,}4 \quad\bullet\quad f(4)=0{,}4+4k$</div>
+    <div class="paso">Planteamos la ecuación:
+      $$\frac{0{,}4 + (0{,}4+4k)}{2}\cdot 4 = 1$$
+      $$\frac{0{,}8+4k}{2}\cdot 4 = 1\ \Longrightarrow\ 2(0{,}8+4k)=1$$
+      $$1{,}6+8k=1\ \Longrightarrow\ 8k=-0{,}6$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $k=-0{,}075$. La densidad queda $f(x)=0{,}4-0{,}075x$.</div>
+  <div class="idea"><b>Idea clave:</b> hay que comprobar que la $f$ resultante sigue siendo $\geq 0$. Aquí $f(4)=0{,}4-0{,}3=0{,}1>0$ ✓.</div>
+</div>
+
+<!-- 10 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">10</span><span class="titulo">$P[X\leq 1]$ con $f(x)=0{,}4-0{,}075x$</span></div>
+  <div class="enunciado">Con la función de densidad obtenida en el ejercicio 9, halla $P[X\leq 1]$.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Área del trapecio entre $x=0$ y $x=1$, con bases $f(0)$ y $f(1)$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">$f(0)=0{,}4 \quad\bullet\quad f(1)=0{,}4-0{,}075=0{,}325$</div>
+    <div class="paso">
+      $$P[X\leq 1] = \frac{0{,}4+0{,}325}{2}\cdot 1 = \frac{0{,}725}{2}=0{,}3625$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X\leq 1]=0{,}3625\approx 36{,}3\%$</div>
+  <div class="idea"><b>Idea clave:</b> cuando la densidad <b>baja</b> (pendiente negativa), las primeras unidades acumulan más probabilidad que las últimas.</div>
+</div>
+
+
+<!-- ===================== BLOQUE C ===================== -->
+<div class="bloque">Bloque C · Distribución Binomial</div>
+
+<!-- 11 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">11</span><span class="titulo">$B(12;\,0{,}25)$ · $P[X=0]$</span></div>
+  <div class="enunciado">En una distribución binomial $B(12;\,0{,}25)$, calcula $P[X=0]$.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Fórmula binomial: $P[X=k]=\binom{n}{k}\cdot p^{k}\cdot q^{\,n-k}$ con $q=1-p$.</p>
+    <p>Aquí $n=12$, $p=0{,}25$, $q=0{,}75$, $k=0$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">$\binom{12}{0}=1$ y $0{,}25^{0}=1$, así que sólo queda:
+      $$P[X=0]=0{,}75^{12}$$
+    </div>
+    <div class="paso">Calculadora: $0{,}75^{12}\approx 0{,}0317$.</div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X=0]\approx 0{,}032\ (3{,}2\%)$</div>
+  <div class="idea"><b>Idea clave:</b> $P[X=0]$ es siempre $q^{n}$: 12 ensayos seguidos sin ningún éxito.</div>
+</div>
+
+<!-- 12 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">12</span><span class="titulo">$\mu$ y $\sigma$ de $B(12;\,0{,}25)$</span></div>
+  <div class="enunciado">Calcula los parámetros $\mu$ y $\sigma$ de la binomial del ejercicio 11.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>En una binomial, los parámetros son directos:</p>
+    <p>$\mu = n\cdot p \qquad \sigma = \sqrt{n\,p\,q}$</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">$\mu = 12\cdot 0{,}25 = 3$ éxitos esperados</div>
+    <div class="paso">$\sigma = \sqrt{12\cdot 0{,}25\cdot 0{,}75} = \sqrt{2{,}25}=1{,}5$</div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $\mu = 3 \quad\bullet\quad \sigma = 1{,}5$</div>
+  <div class="idea"><b>Idea clave:</b> en cualquier binomial, de media se esperan $np$ éxitos. Es la fórmula más útil para «predecir el resultado promedio».</div>
+</div>
+
+<!-- 13 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">13</span><span class="titulo">7 monedas: exactamente 3 caras</span></div>
+  <div class="enunciado">Lanzamos 7 monedas. Calcula la probabilidad de obtener exactamente 3 caras.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Cada moneda es un ensayo Bernoulli independiente con $p=0{,}5$. Modelo: $X\sim B(7;\,0{,}5)$. Queremos $P[X=3]$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">$\binom{7}{3}=\dfrac{7!}{3!\,4!}=35$</div>
+    <div class="paso">
+      $$P[X=3]=35\cdot 0{,}5^{3}\cdot 0{,}5^{4}=35\cdot 0{,}5^{7}=35\cdot \tfrac{1}{128}\approx 0{,}273$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X=3]\approx 0{,}273\ (27{,}3\%)$</div>
+  <div class="idea"><b>Idea clave:</b> cuando $p=0{,}5$, la binomial es <b>simétrica</b>: $P[X=3]=P[X=4]$ en $B(7;0{,}5)$.</div>
+</div>
+
+<!-- 14 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">14</span><span class="titulo">Test 10 preguntas, 4 correctas al azar</span></div>
+  <div class="enunciado">Test de 10 preguntas, cada una con 4 respuestas (sólo una correcta). Si se contesta al azar, ¿probabilidad de acertar exactamente 4?</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Acertar al azar tiene $p=\tfrac{1}{4}$. Modelo: $X\sim B(10;\,\tfrac{1}{4})$. Queremos $P[X=4]$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">$\binom{10}{4}=210$</div>
+    <div class="paso">
+      $$P[X=4]=210\cdot \left(\tfrac{1}{4}\right)^{4}\cdot \left(\tfrac{3}{4}\right)^{6}=210\cdot \tfrac{1}{256}\cdot \tfrac{729}{4096}\approx 0{,}146$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X=4]\approx 0{,}146\ (14{,}6\%)$</div>
+  <div class="idea"><b>Idea clave:</b> la media de aciertos al azar es $np=10\cdot 0{,}25=2{,}5$. Sacar 4 está por encima de lo esperado, por eso la probabilidad es bajita.</div>
+</div>
+
+<!-- 15 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">15</span><span class="titulo">6 hijos: tantos chicos como chicas</span></div>
+  <div class="enunciado">En una familia con 6 hijos, ¿cuál es la probabilidad de que haya tantos chicos como chicas?</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>«Tantos chicos como chicas» = exactamente 3 chicos (y 3 chicas) entre 6 hijos. Con $p(\text{chico})=0{,}5$: $X\sim B(6;\,0{,}5)$, queremos $P[X=3]$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">$\binom{6}{3}=20$</div>
+    <div class="paso">
+      $$P[X=3]=20\cdot 0{,}5^{3}\cdot 0{,}5^{3}=20\cdot 0{,}5^{6}=\tfrac{20}{64}=\tfrac{5}{16}\approx 0{,}3125$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X=3]=\tfrac{5}{16}\approx 0{,}313\ (31{,}3\%)$</div>
+  <div class="idea"><b>Idea clave:</b> contraintuitivo: aunque chico/chica son equiprobables, el resultado «mitad y mitad» sólo ocurre ⅓ de las veces. Lo «raro» sería que siempre saliera 3 y 3.</div>
+</div>
+
+
+<!-- ===================== BLOQUE D ===================== -->
+<div class="bloque">Bloque D · Distribución Normal y tipificación</div>
+
+<!-- 16 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">16</span><span class="titulo">$N(0,1)$: $P[z\leq 1{,}83]$ y $P[z\geq 0{,}27]$</span></div>
+  <div class="enunciado">Calcula $P[z\leq 1{,}83]$ y $P[z\geq 0{,}27]$ usando la tabla de la $N(0,1)$.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>La tabla de la normal estándar da directamente $P[z\leq a]$ para $a\geq 0$. Para «$\geq$» usamos el complementario: $P[z\geq a]=1-P[z\leq a]$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso"><b>$P[z\leq 1{,}83]$:</b> busco fila $1{,}8$ y columna $0{,}03$ en la tabla $\to 0{,}9664$.</div>
+    <div class="paso"><b>$P[z\geq 0{,}27]$:</b> busco $P[z\leq 0{,}27]=0{,}6064$ y resto:
+      $$P[z\geq 0{,}27]=1-0{,}6064=0{,}3936$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[z\leq 1{,}83]=0{,}9664 \quad\bullet\quad P[z\geq 0{,}27]=0{,}3936$</div>
+  <div class="idea"><b>Idea clave:</b> el área total de la campana vale $1$, así que «por encima» + «por debajo» $= 1$.</div>
+</div>
+
+<!-- 17 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">17</span><span class="titulo">$P[-0{,}83<z<0{,}83]$</span></div>
+  <div class="enunciado">En una $N(0,1)$, calcula $P[-0{,}83 < z < 0{,}83]$.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>La tabla sólo trae valores positivos. Para los negativos usamos la <b>simetría</b> de la campana: $P[z\leq -a]=1-P[z\leq a]$.</p>
+    <p>Para un intervalo: $P[a<z<b]=P[z\leq b]-P[z\leq a]$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">De la tabla: $P[z\leq 0{,}83]=0{,}7967$.</div>
+    <div class="paso">Por simetría: $P[z\leq -0{,}83]=1-0{,}7967=0{,}2033$.</div>
+    <div class="paso">Resto:
+      $$P[-0{,}83<z<0{,}83]=0{,}7967-0{,}2033=0{,}5934$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P\approx 0{,}5934\ (59{,}3\%)$</div>
+  <div class="idea"><b>Idea clave:</b> un intervalo $(-a,\,a)$ centrado en $0$ se puede calcular más rápido como $2\cdot P[z\leq a]-1$.</div>
+</div>
+
+<!-- 18 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">18</span><span class="titulo">Tipificar 38 y 14 con $\mu=28$, $\sigma=10$</span></div>
+  <div class="enunciado">En un examen, la nota media fue 28 y la desviación típica 10. Tipifica la nota de quien sacó 38 y la de quien sacó 14.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Tipificar = convertir el valor real $x$ en su equivalente $z$ en la $N(0,1)$:
+    $$z=\dfrac{x-\mu}{\sigma}$$</p>
+    <p>$z>0$ → por encima de la media. $z<0$ → por debajo.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">Alumno con 38: $\ z_{38}=\dfrac{38-28}{10}=1$</div>
+    <div class="paso">Alumno con 14: $\ z_{14}=\dfrac{14-28}{10}=-1{,}4$</div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $z_{38}=1$ (una desviación típica por encima de la media); $z_{14}=-1{,}4$ (1,4 desviaciones por debajo).</div>
+  <div class="idea"><b>Idea clave:</b> la $z$ indica «a cuántas $\sigma$ estás de la media». Permite comparar resultados de exámenes con escalas distintas.</div>
+</div>
+
+<!-- 19 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">19</span><span class="titulo">Despejar $\sigma$ si $x=17$, $\mu=15$, $z=1$</span></div>
+  <div class="enunciado">En una distribución normal de media 15, el dato $x=17$ se tipifica como $z=1$. ¿Cuál es la desviación típica?</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>La misma fórmula de tipificación, pero ahora despejo $\sigma$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">
+      $$z=\dfrac{x-\mu}{\sigma}\ \Longrightarrow\ 1=\dfrac{17-15}{\sigma}=\dfrac{2}{\sigma}$$
+    </div>
+    <div class="paso">Por tanto $\sigma=2$.</div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $\sigma = 2$</div>
+  <div class="idea"><b>Idea clave:</b> cuando $z=1$, el dato $x$ está exactamente a $1\sigma$ de la media, así que $\sigma = x-\mu$.</div>
+</div>
+
+<!-- 20 -->
+<div class="ej">
+  <div class="ej-head"><span class="num">20</span><span class="titulo">$N(43,10)$: $P[X\leq 30]$</span></div>
+  <div class="enunciado">En una $N(43,10)$, calcula $P[X\leq 30]$.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Esquema típico de problema con normal: <b>tipificar</b> → <b>buscar en la tabla</b> → si la $z$ sale negativa, usar simetría.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso"><b>Tipifico:</b>
+      $$z=\dfrac{30-43}{10}=-1{,}3$$
+    </div>
+    <div class="paso"><b>Aplico simetría</b> (la tabla no trae negativos):
+      $$P[X\leq 30]=P[z\leq -1{,}3]=1-P[z\leq 1{,}3]$$
+    </div>
+    <div class="paso">$P[z\leq 1{,}3]=0{,}9032$ (de la tabla), por tanto:
+      $$P[X\leq 30]=1-0{,}9032=0{,}0968$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X\leq 30]\approx 0{,}0968\ (9{,}7\%)$</div>
+  <div class="idea"><b>Idea clave:</b> $30$ está bastante por debajo de la media ($43$), por eso la probabilidad de sacar menos de $30$ es pequeña.</div>
+</div>
+
+
+<!-- ===================== PROBLEMAS TIPO EXAMEN ===================== -->
+<div class="bloque" style="background:#fff8e1; border-left-color:#bf6c00; color:#bf6c00;">★ Problemas tipo examen · resueltos a fondo</div>
+
+<!-- E1 -->
+<div class="ej">
+  <div class="ej-head"><span class="num examen">E1</span><span class="titulo">Aproximación Binomial → Normal con corrección de Yates</span></div>
+  <div class="enunciado">Se lanza 2000 veces un dado de 12 caras. ¿Probabilidad de obtener <b>al menos 180</b> veces la cara «uno»?</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>El nº de unos en 2000 tiradas es $X\sim B(2000;\,\tfrac{1}{12})$. Como $n$ es enorme, calcular la binomial exacta es inviable. <b>Aproximo por una normal</b> y aplico el ajuste de Yates al pasar de discreta a continua.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso"><b>Compruebo condiciones</b> $np>5$ y $nq>5$:
+      $\ np = 2000\cdot \tfrac{1}{12}\approx 166{,}67$ (✓) $\quad nq=2000\cdot \tfrac{11}{12}\approx 1833{,}3$ (✓).
+    </div>
+    <div class="paso"><b>Calculo $\sigma$</b> de la binomial:
+      $$\sigma=\sqrt{npq}=\sqrt{2000\cdot \tfrac{1}{12}\cdot \tfrac{11}{12}}=\sqrt{152{,}78}\approx 12{,}36$$
+    </div>
+    <div class="paso"><b>Aproximo:</b> $X\approx N(166{,}67;\ 12{,}36)$.</div>
+    <div class="paso"><b>Corrección de Yates.</b> Como $X$ era discreta, $P[X\geq 180]$ se aproxima por $P[X_N\geq 179{,}5]$.</div>
+    <div class="paso"><b>Tipifico:</b>
+      $$z=\dfrac{179{,}5-166{,}67}{12{,}36}\approx 1{,}04$$
+    </div>
+    <div class="paso"><b>Tabla:</b> $P[z\leq 1{,}04]=0{,}8508$, así que
+      $$P[X_N\geq 179{,}5]=1-0{,}8508=0{,}1492$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X\geq 180]\approx 0{,}149\ (14{,}9\%)$</div>
+  <div class="idea"><b>Idea clave:</b> el «$-0{,}5$» de Yates va siempre <b>a favor</b> de incluir el valor entero: para «al menos 180» bajo a 179,5; para «como mucho 180» subo a 180,5.</div>
+</div>
+
+<!-- E2 -->
+<div class="ej">
+  <div class="ej-head"><span class="num examen">E2</span><span class="titulo">Nota de corte en oposición · $N(6{,}5;\,2)$</span></div>
+  <div class="enunciado">A una oposición se presentan 2500 personas para 300 plazas. Calificaciones $\sim N(6{,}5\,;\,2)$. Nota mínima para entrar.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Buscamos la nota $k$ tal que sólo los 300 mejores la superan, es decir
+    $$P[X\geq k] = \dfrac{300}{2500}=0{,}12$$
+    Equivalente: $P[X<k] = 0{,}88$. Voy del área a la $z$, y de la $z$ destipifico a $x$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso"><b>Busco el $z$ tal que $P[z\leq z]=0{,}88$.</b> En la tabla, $0{,}8790$ corresponde a $z=1{,}17$ y $0{,}8810$ a $z=1{,}18$. Como $0{,}88$ cae justo en medio, interpolo: $z\approx 1{,}175$.</div>
+    <div class="paso"><b>Destipifico</b> con $x=\mu+z\sigma$:
+      $$k = 6{,}5 + 1{,}175\cdot 2 = 6{,}5 + 2{,}35 = 8{,}85$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> nota de corte $\approx 8{,}85$ puntos.</div>
+  <div class="idea"><b>Idea clave:</b> «pasar de la $z$ a la $x$» es la operación inversa de la tipificación: $x=\mu+z\sigma$.</div>
+</div>
+
+<!-- E3 -->
+<div class="ej">
+  <div class="ej-head"><span class="num examen">E3</span><span class="titulo">Cálculo inverso de tipificación · sistema de ecuaciones</span></div>
+  <div class="enunciado">Brianda: nota real 84, $z=1{,}75$. Christian: nota real 78, $z=1$. Halla $\mu$ y $\sigma$ del examen.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Aplico $z=\dfrac{x-\mu}{\sigma}$ a cada alumno y monto un sistema $2\times 2$ con incógnitas $\mu$ y $\sigma$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">Ecuación (1) — Brianda: $\ 84-\mu = 1{,}75\,\sigma$.</div>
+    <div class="paso">Ecuación (2) — Christian: $\ 78-\mu = 1\cdot \sigma = \sigma$.</div>
+    <div class="paso"><b>Resto (1) − (2)</b> para eliminar $\mu$:
+      $$84-78 = 1{,}75\sigma - \sigma \ \Longrightarrow\ 6 = 0{,}75\,\sigma$$
+      $$\boxed{\sigma = 8}$$
+    </div>
+    <div class="paso">Sustituyo en (2): $\ \mu = 78-\sigma = 78-8 = 70$.</div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $\mu = 70 \quad\bullet\quad \sigma = 8$</div>
+  <div class="idea"><b>Idea clave:</b> cuando tienes dos datos $(x_i, z_i)$ de la misma normal, restando las ecuaciones cancelas $\mu$ y despejas $\sigma$.</div>
+</div>
+
+<!-- E4 -->
+<div class="ej">
+  <div class="ej-head"><span class="num examen">E4</span><span class="titulo">Binomial acumulada · $B(5;\,0{,}2)$</span></div>
+  <div class="enunciado">5 televisores; probabilidad de defecto 0,2. Probabilidad de que haya <b>al menos 2 defectuosos</b>.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>«Al menos 2» = $P[X\geq 2]$. Es más cómodo usar el <b>complementario</b>:
+    $$P[X\geq 2] = 1 - P[X=0] - P[X=1]$$
+    con $X\sim B(5;\,0{,}2)$, $q=0{,}8$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso">$P[X=0]=\binom{5}{0}\cdot 0{,}2^{0}\cdot 0{,}8^{5}=0{,}8^{5}=0{,}32768$</div>
+    <div class="paso">$P[X=1]=\binom{5}{1}\cdot 0{,}2\cdot 0{,}8^{4}=5\cdot 0{,}2\cdot 0{,}4096=0{,}4096$</div>
+    <div class="paso">$P[X\geq 2]=1-0{,}32768-0{,}4096=0{,}26272$</div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P[X\geq 2]\approx 0{,}263\ (26{,}3\%)$</div>
+  <div class="idea"><b>Idea clave:</b> para «al menos» con valores pequeños, el complementario ahorra muchísimo trabajo. Sumar $P[X=2]+P[X=3]+P[X=4]+P[X=5]$ sería más largo.</div>
+</div>
+
+<!-- E5 -->
+<div class="ej">
+  <div class="ej-head"><span class="num examen">E5</span><span class="titulo">Dado especial · alguna blanca Y alguna negra</span></div>
+  <div class="enunciado">Dado: 3 caras rojas, 2 blancas, 1 negra. Lanzamos 3 dados. Probabilidad de obtener <b>alguna blanca y alguna negra</b>.</div>
+
+  <div class="seccion">
+    <h3>¿Cómo lo enfoco?</h3>
+    <p>Probabilidades por dado: $P(R)=\tfrac{3}{6}=\tfrac{1}{2}$, $P(B)=\tfrac{2}{6}=\tfrac{1}{3}$, $P(N)=\tfrac{1}{6}$.</p>
+    <p>Llamo $A=$«al menos una blanca» y $C=$«al menos una negra». Quiero $P(A\cap C)$.</p>
+    <p>Vía complementario: $P(A\cap C)=1-P(A^c\cup C^c)$ y por inclusión-exclusión $P(A^c\cup C^c)=P(A^c)+P(C^c)-P(A^c\cap C^c)$.</p>
+  </div>
+
+  <div class="seccion">
+    <h3>Resolución</h3>
+    <div class="paso"><b>Ninguna blanca</b> (cada dado: 4 caras no blancas):
+      $$P(A^c)=\left(\tfrac{4}{6}\right)^{\!3}=\tfrac{64}{216}$$
+    </div>
+    <div class="paso"><b>Ninguna negra</b> (5 caras no negras):
+      $$P(C^c)=\left(\tfrac{5}{6}\right)^{\!3}=\tfrac{125}{216}$$
+    </div>
+    <div class="paso"><b>Ni blanca ni negra</b> = «todas rojas»:
+      $$P(A^c\cap C^c)=\left(\tfrac{3}{6}\right)^{\!3}=\tfrac{27}{216}$$
+    </div>
+    <div class="paso"><b>Junto todo:</b>
+      $$P(A\cap C)=1-\left(\tfrac{64}{216}+\tfrac{125}{216}-\tfrac{27}{216}\right)=1-\tfrac{162}{216}=\tfrac{54}{216}=\tfrac{1}{4}$$
+    </div>
+  </div>
+
+  <div class="res"><b>Resultado:</b> $P(\text{alguna B y alguna N})=\dfrac{1}{4}=0{,}25$</div>
+  <div class="idea"><b>Idea clave:</b> «alguna A y alguna B» se ataca casi siempre por complementario + inclusión-exclusión. Si lo hicieras directamente caso a caso (1B+1N+1R, 2B+1N, 1B+2N) tendría que dar lo mismo — buen modo de comprobar.</div>
+</div>
+
+</div>
+</body>
+</html>
