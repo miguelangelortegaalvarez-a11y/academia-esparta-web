@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adverbios de tiempo · Gramática · 4º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 12px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 11px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .adv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-bottom: 0; }
+    .adv-chip { border: 1.2px solid #000; border-radius: 6px; padding: 4px 7px; font-size: 12px; font-weight: 700; text-align: center; }
+    .metodo-box { border: 2px solid #000; border-radius: 10px; padding: 9px 13px; margin-bottom: 10px; }
+    .metodo-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .metodo-texto { font-size: 12.5px; line-height: 1.5; }
+    .metodo-texto strong { font-weight: 800; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; }
+    .ej-prueba { font-size: 12.5px; line-height: 1.5; margin-bottom: 4px; }
+    .ej-resultado { font-size: 12.5px; font-weight: 600; }
+    .adv-marca { font-weight: 800; border-bottom: 2px solid #000; padding-bottom: 1px; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; background: transparent; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 14px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 8px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; font-style: italic; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 4º Primaria · Adverbios</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Gramática · Ficha 2</div>
+  <div class="teoria-titulo">Adverbios de tiempo</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Adverbios de tiempo — indican cuándo ocurre la acción</div>
+    <div class="def-texto" style="margin-bottom:7px;">Responden a la pregunta <strong>¿cuándo?</strong> hecha después del verbo.</div>
+    <div class="adv-grid">
+      <div class="adv-chip">hoy</div><div class="adv-chip">ayer</div><div class="adv-chip">mañana</div><div class="adv-chip">ahora</div>
+      <div class="adv-chip">antes</div><div class="adv-chip">después</div><div class="adv-chip">pronto</div><div class="adv-chip">tarde</div>
+      <div class="adv-chip">siempre</div><div class="adv-chip">nunca</div><div class="adv-chip">ya</div><div class="adv-chip">todavía</div>
+    </div>
+  </div>
+
+  <div class="metodo-box">
+    <div class="metodo-titulo">¿Cómo identificamos un adverbio de tiempo?</div>
+    <div class="metodo-texto">Tras encontrar el verbo, pregunta <strong>¿cuándo?</strong> La palabra que responde es el adverbio de tiempo.</div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion"><span class="adv-marca">Ayer</span> fui al cine con mi familia.</div>
+    <div class="ej-prueba">¿Cuándo fui al cine? → <span class="adv-marca">ayer</span> → adverbio de tiempo.</div>
+    <div class="ej-resultado">→ <span class="adv-marca">ayer</span> modifica al verbo <em>fui</em>.</div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">El tren llegará <span class="adv-marca">pronto</span>. <span class="adv-marca">Siempre</span> es puntual.</div>
+    <div class="ej-prueba">¿Cuándo llegará? → <span class="adv-marca">pronto</span>. &nbsp; ¿Cuándo es puntual? → <span class="adv-marca">siempre</span>.</div>
+    <div class="ej-resultado">→ Ambos modifican a sus respectivos verbos.</div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto"><strong>Siempre / nunca</strong> expresan frecuencia (siempre = en todo momento; nunca = en ningún momento). <strong>Ya</strong> indica que algo ha ocurrido o está ocurriendo. <strong>Todavía</strong> indica que algo continúa o aún no ha pasado.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Adverbios · Ficha 2</span>
+  </div>
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Adverbios de tiempo</span>
+    <span class="page-2-ref">Lengua · 4º Primaria · Ficha 2</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Subraya el <strong>adverbio de tiempo</strong> en cada oración:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Ayer fui al cine con mi familia.</div>
+      <div class="oracion-item"><span class="letra">b)</span> El autobús llega pronto; esperadlo aquí.</div>
+      <div class="oracion-item"><span class="letra">c)</span> Siempre desayuno antes de salir de casa.</div>
+      <div class="oracion-item"><span class="letra">d)</span> ¿Todavía no has terminado los deberes?</div>
+      <div class="oracion-item"><span class="letra">e)</span> Hoy hace mucho frío en la calle.</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Completa con el adverbio de tiempo correcto (hoy / ayer / mañana / siempre / nunca / ya / todavía):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> ___ es lunes, así que ___ fue domingo.</div>
+      <div class="oracion-item"><span class="letra">b)</span> No llego ___ tarde al colegio; soy muy puntual.</div>
+      <div class="oracion-item"><span class="letra">c)</span> ___ tenemos excursión al museo; lo anunciaron esta mañana.</div>
+      <div class="oracion-item"><span class="letra">d)</span> ¿___ has terminado el dibujo o sigue en proceso?</div>
+    </div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> Ordena estas palabras para formar oraciones con adverbio de tiempo:</div>
+      <div class="col-prompt">a) siempre / agua / bebo / antes / de comer</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">b) llegó / tarde / ayer / el profe</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">c) ya / acabado / he / los deberes</div>
+      <div class="linea-resp"></div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Inventa dos oraciones usando adverbios de tiempo diferentes:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
