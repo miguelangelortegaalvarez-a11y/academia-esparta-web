@@ -214,9 +214,18 @@
   }
   .anim-stage.in .pop{opacity:1;transform:scale(1)}
 
-  /* círculo rodando (se activa cuando entra) — más lento */
-  .rolling{transform:translateX(0) rotate(0)}
-  .anim-stage.in .rolling{animation:rollOnce 6s ease-in-out 3s forwards}
+  /* círculo rodando (se activa cuando entra) — más lento.
+     Importante: transform-box:fill-box + transform-origin:center hacen que
+     la rotación pivote sobre el centro del propio círculo (no sobre (0,0)
+     del SVG), para que ruede pegado a la línea en vez de salir disparado.
+     Linear (no ease-in-out) para que el giro y la traslación vayan acompasados:
+     una vuelta entera = 2·π·r = 220 px de desplazamiento. */
+  .rolling{
+    transform:translateX(0) rotate(0);
+    transform-box:fill-box;
+    transform-origin:center;
+  }
+  .anim-stage.in .rolling{animation:rollOnce 6s linear 3s forwards}
   @keyframes rollOnce{
     0%{transform:translateX(0) rotate(0)}
     100%{transform:translateX(220px) rotate(360deg)}
