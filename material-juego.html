@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Geometría en movimiento · Miguel · Academia Esparta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --sky:#e0f2fe;
+    --sky-2:#bae6fd;
+    --teal:#5eead4;
+    --teal-2:#14b8a6;
+    --grass:#34d399;
+    --grass-2:#10b981;
+    --sun:#fcd34d;
+    --sun-2:#f59e0b;
+    --coral:#fb7185;
+    --coral-2:#f43f5e;
+    --grape:#a78bfa;
+    --grape-2:#8b5cf6;
+    --pink:#f9a8d4;
+    --ink:#0f172a;
+    --ink-soft:#334155;
+    --paper:#fffaf3;
+    --card:#ffffff;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Fredoka',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+
+  /* fondo con burbujas flotando */
+  .bubbles{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .bubble{
+    position:absolute;border-radius:50%;
+    opacity:.5;animation:float 14s ease-in-out infinite;
+  }
+  .bubble:nth-child(1){left:8%;top:18%;width:90px;height:90px;background:var(--teal);animation-delay:0s}
+  .bubble:nth-child(2){left:80%;top:12%;width:60px;height:60px;background:var(--sun);animation-delay:-2s}
+  .bubble:nth-child(3){left:15%;top:65%;width:120px;height:120px;background:var(--coral);animation-delay:-5s;opacity:.35}
+  .bubble:nth-child(4){left:70%;top:55%;width:70px;height:70px;background:var(--grape);animation-delay:-8s}
+  .bubble:nth-child(5){left:45%;top:80%;width:100px;height:100px;background:var(--grass);animation-delay:-3s;opacity:.4}
+  .bubble:nth-child(6){left:60%;top:30%;width:50px;height:50px;background:var(--pink);animation-delay:-6s}
+  @keyframes float{
+    0%,100%{transform:translateY(0) translateX(0) rotate(0)}
+    33%{transform:translateY(-30px) translateX(15px) rotate(8deg)}
+    66%{transform:translateY(20px) translateX(-12px) rotate(-6deg)}
+  }
+
+  /* ---------- NAV ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(255,250,243,.88);
+    border-bottom:2px dashed rgba(15,23,42,.1);
+  }
+  .topbar-inner{
+    max-width:1180px;margin:0 auto;
+    display:flex;align-items:center;gap:1rem;
+    padding:.85rem 1.25rem;
+  }
+  .brand{
+    font-family:'Fredoka',sans-serif;font-weight:700;
+    letter-spacing:.15em;font-size:.85rem;
+    color:var(--teal-2);
+  }
+  .brand span{color:var(--coral-2)}
+  .top-pills{margin-left:auto;display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
+  .top-pills a{
+    color:var(--ink-soft);font-size:.82rem;font-weight:500;
+    padding:.35rem .7rem;border-radius:999px;
+    border:2px solid transparent;transition:all .2s;
+  }
+  .top-pills a:hover{
+    background:var(--teal);color:var(--ink);border-color:var(--teal-2);
+    transform:translateY(-2px);
+  }
+  @media (max-width:760px){.top-pills{display:none}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width:1180px;margin:0 auto;
+    padding:5rem 1.5rem 3rem;
+    text-align:center;position:relative;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-size:.85rem;font-weight:600;
+    color:var(--teal-2);
+    padding:.5rem 1rem;border:2px dashed var(--teal-2);
+    border-radius:999px;background:#fff;
+    margin-bottom:1.8rem;
+  }
+  .eyebrow .star{
+    display:inline-block;animation:spin 4s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  h1.hero-title{
+    font-family:'Fredoka',sans-serif;
+    font-weight:700;
+    font-size:clamp(2.6rem,7vw,5rem);
+    line-height:1.05;
+    color:var(--ink);
+    margin-bottom:1rem;
+  }
+  h1.hero-title .accent{color:var(--coral-2);position:relative;display:inline-block}
+  h1.hero-title .accent::after{
+    content:"";position:absolute;left:-4%;right:-4%;bottom:.05em;height:.32em;
+    background:var(--sun);z-index:-1;border-radius:3px;
+    transform:rotate(-1.5deg);
+  }
+  h1.hero-title .bounce{
+    display:inline-block;animation:bounce 2.2s ease-in-out infinite;
+    color:var(--teal-2);
+  }
+  @keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+  }
+  .hero-sub{
+    max-width:620px;margin:0 auto 2rem;
+    color:var(--ink-soft);font-size:1.1rem;font-weight:400;
+  }
+  .hero-shapes{
+    display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-top:1.5rem;
+  }
+  .shape-chip{
+    width:60px;height:60px;display:flex;align-items:center;justify-content:center;
+    background:var(--card);border-radius:18px;
+    box-shadow:0 6px 0 rgba(15,23,42,.08);
+    animation:wiggle 3s ease-in-out infinite;
+  }
+  .shape-chip:nth-child(2){animation-delay:.3s}
+  .shape-chip:nth-child(3){animation-delay:.6s}
+  .shape-chip:nth-child(4){animation-delay:.9s}
+  .shape-chip:nth-child(5){animation-delay:1.2s}
+  @keyframes wiggle{
+    0%,100%{transform:rotate(-3deg)}
+    50%{transform:rotate(3deg)}
+  }
+
+  .signed{
+    margin-top:2.8rem;
+    display:inline-flex;align-items:center;gap:1rem;
+    padding:1rem 1.4rem;border-radius:22px;
+    background:#fff;
+    box-shadow:0 8px 0 var(--teal),0 12px 24px rgba(20,184,166,.18);
+    border:2px solid var(--ink);
+  }
+  .signed .avatar{
+    width:50px;height:50px;border-radius:50%;
+    background:linear-gradient(135deg,var(--coral),var(--coral-2));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Caveat',cursive;color:#fff;font-weight:700;font-size:1.7rem;
+    border:3px solid var(--ink);
+  }
+  .signed-text{text-align:left;font-size:.9rem;color:var(--ink-soft);line-height:1.35}
+  .signed-text strong{color:var(--ink);font-weight:600;display:block;font-size:1rem}
+
+  /* ---------- TOC ---------- */
+  .toc{max-width:1180px;margin:0 auto;padding:2rem 1.5rem 4rem}
+  .toc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+  .toc-card{
+    display:flex;align-items:center;gap:.85rem;
+    padding:1rem 1.15rem;border-radius:18px;
+    background:var(--card);
+    border:2px solid var(--ink);
+    color:var(--ink);font-weight:500;font-size:.95rem;
+    transition:all .2s;
+    box-shadow:0 6px 0 rgba(15,23,42,.85);
+  }
+  .toc-card:hover{transform:translate(-2px,-4px);box-shadow:0 10px 0 rgba(15,23,42,.85)}
+  .toc-card:nth-child(5n+1) .toc-num{background:var(--coral)}
+  .toc-card:nth-child(5n+2) .toc-num{background:var(--sun)}
+  .toc-card:nth-child(5n+3) .toc-num{background:var(--teal)}
+  .toc-card:nth-child(5n+4) .toc-num{background:var(--grape)}
+  .toc-card:nth-child(5n+5) .toc-num{background:var(--grass)}
+  .toc-num{
+    width:36px;height:36px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink);font-weight:700;font-size:.95rem;
+    border:2px solid var(--ink);flex-shrink:0;
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  /* ---------- TOPIC ---------- */
+  section.topic{
+    max-width:1180px;margin:0 auto;
+    padding:4rem 1.5rem;
+  }
+  .topic-head{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.8rem;flex-wrap:wrap}
+  .topic-tag{
+    flex-shrink:0;font-family:'JetBrains Mono',monospace;
+    font-size:.75rem;font-weight:700;color:var(--ink);
+    padding:.45rem .8rem;border-radius:10px;
+    border:2px solid var(--ink);
+    background:var(--sun);
+    letter-spacing:.06em;
+  }
+  h2.topic-title{
+    font-family:'Fredoka',sans-serif;font-weight:600;
+    font-size:clamp(1.7rem,3.4vw,2.5rem);
+    line-height:1.1;color:var(--ink);
+  }
+  h2.topic-title .underline{
+    position:relative;display:inline-block;
+  }
+  h2.topic-title .underline::after{
+    content:"";position:absolute;left:0;right:0;bottom:-4px;height:5px;
+    background:var(--teal);border-radius:5px;
+  }
+  .topic-lede{color:var(--ink-soft);margin-top:.6rem;font-size:1.02rem;max-width:62ch}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;align-items:stretch}
+  @media (max-width:880px){.grid-2{grid-template-columns:1fr}}
+
+  .card{
+    background:var(--card);
+    border:2px solid var(--ink);
+    border-radius:22px;
+    padding:1.5rem 1.6rem;
+    box-shadow:0 8px 0 rgba(15,23,42,.85);
+  }
+  .card.teal{background:#ecfeff}
+  .card.sun{background:#fffbeb}
+  .card.coral{background:#fff1f2}
+  .card.grape{background:#f5f3ff}
+  .card.grass{background:#ecfdf5}
+
+  .formula{
+    margin:.4rem 0 1rem;padding:1.1rem 1.2rem;
+    background:var(--ink);color:#fff;
+    border-radius:14px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:1.4rem;font-weight:700;
+    text-align:center;letter-spacing:.02em;
+  }
+  .formula small{
+    display:block;margin-top:.4rem;font-weight:500;
+    color:rgba(255,255,255,.7);font-size:.7rem;letter-spacing:.1em;
+    text-transform:uppercase;font-family:'Fredoka',sans-serif;
+  }
+  .formula .var{color:var(--sun)}
+  .formula .op{color:#94a3b8;font-weight:500}
+
+  .ex{
+    margin-top:1rem;padding:1rem 1.15rem;
+    background:#fff;
+    border:2px dashed var(--ink);
+    border-radius:14px;
+    font-size:.95rem;color:var(--ink-soft);
+  }
+  .ex b{color:var(--ink)}
+  .ex .calc{display:block;margin-top:.45rem;font-family:'JetBrains Mono',monospace;color:var(--ink);font-size:.95rem}
+  .ex .res{
+    display:inline-block;margin-top:.5rem;
+    padding:.3rem .75rem;border-radius:10px;
+    background:var(--grass-2);color:#fff;
+    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;
+    border:2px solid var(--ink);
+  }
+
+  .anim-stage{
+    background:var(--card);
+    border:2px solid var(--ink);border-radius:22px;
+    padding:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    min-height:280px;
+    box-shadow:0 8px 0 rgba(15,23,42,.85);
+  }
+  .anim-stage svg{max-width:100%;height:auto;display:block}
+  .anim-label{
+    font-size:.82rem;color:var(--ink-soft);text-align:center;
+    margin-top:.7rem;font-weight:500;font-style:italic;
+  }
+  .play-hint{
+    display:inline-flex;align-items:center;gap:.4rem;
+    padding:.3rem .7rem;border-radius:999px;
+    background:var(--sun);color:var(--ink);
+    font-size:.75rem;font-weight:600;
+    border:2px solid var(--ink);
+    margin-bottom:.6rem;
+  }
+
+  /* ---------- ANIMACIONES PARA SVG ---------- */
+  .a-rotate{animation:rot 18s linear infinite;transform-origin:center}
+  @keyframes rot{to{transform:rotate(360deg)}}
+
+  .a-pulse{animation:pulseScale 2.4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+  @keyframes pulseScale{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.08)}
+  }
+
+  /* triángulo que da la vuelta y forma romboide */
+  .a-flip{animation:flipTri 4.5s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+  @keyframes flipTri{
+    0%,30%{transform:translateX(0) rotate(0deg)}
+    55%,75%{transform:translateX(80px) rotate(180deg)}
+    100%{transform:translateX(0) rotate(0deg)}
+  }
+
+  /* círculo rodando π·d veces */
+  .a-roll{animation:roll 5s ease-in-out infinite;transform-origin:center}
+  @keyframes roll{
+    0%{transform:translateX(0) rotate(0)}
+    100%{transform:translateX(220px) rotate(360deg)}
+  }
+  .a-trace{
+    stroke-dasharray:240;
+    stroke-dashoffset:240;
+    animation:trace 5s ease-in-out infinite;
+  }
+  @keyframes trace{
+    0%{stroke-dashoffset:240}
+    100%{stroke-dashoffset:0}
+  }
+
+  /* polígono que cambia de lados (5,6,8,10,∞) */
+  .a-morph{animation:morph 8s ease-in-out infinite;transform-origin:center}
+  @keyframes morph{
+    0%,15%{transform:scale(.85)}
+    50%{transform:scale(1.05) rotate(36deg)}
+    85%,100%{transform:scale(.85)}
+  }
+
+  /* ---------- CALCULADORA INTERACTIVA ---------- */
+  .calc-box{
+    background:#fff;border:2px solid var(--ink);border-radius:22px;
+    padding:1.4rem;box-shadow:0 8px 0 rgba(15,23,42,.85);
+    display:flex;flex-direction:column;align-items:center;gap:1rem;
+  }
+  .calc-box h4{font-weight:600;color:var(--ink);font-size:1.05rem;text-align:center}
+  .calc-box input[type=range]{
+    width:100%;max-width:280px;
+    -webkit-appearance:none;appearance:none;
+    height:8px;background:var(--teal);border-radius:999px;
+    border:2px solid var(--ink);outline:none;
+  }
+  .calc-box input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;
+    width:24px;height:24px;border-radius:50%;
+    background:var(--coral-2);border:3px solid var(--ink);
+    cursor:pointer;box-shadow:0 3px 0 rgba(15,23,42,.5);
+  }
+  .calc-box input[type=range]::-moz-range-thumb{
+    width:24px;height:24px;border-radius:50%;
+    background:var(--coral-2);border:3px solid var(--ink);cursor:pointer;
+  }
+  .calc-output{
+    display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%;
+  }
+  .calc-output div{
+    padding:.65rem .8rem;border-radius:12px;border:2px solid var(--ink);
+    background:#fffbeb;font-size:.92rem;text-align:center;font-weight:500;
+  }
+  .calc-output div b{display:block;font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--ink)}
+  .calc-output div.acc{background:var(--grass);color:#fff}
+  .calc-output div.acc b{color:#fff}
+
+  /* ---------- CHEAT ---------- */
+  .cheat{max-width:1180px;margin:2rem auto 0;padding:4rem 1.5rem}
+  .cheat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:2rem}
+  .cheat-card{
+    background:var(--card);border:2px solid var(--ink);border-radius:18px;
+    padding:1.1rem 1.2rem;box-shadow:0 6px 0 rgba(15,23,42,.85);
+    transition:transform .2s;
+  }
+  .cheat-card:hover{transform:translateY(-4px) rotate(-1deg)}
+  .cheat-card:nth-child(odd):hover{transform:translateY(-4px) rotate(1deg)}
+  .cheat-card h4{
+    font-size:.8rem;font-weight:600;color:var(--coral-2);
+    margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em;
+  }
+  .cheat-card .f{
+    font-family:'JetBrains Mono',monospace;font-weight:700;
+    font-size:1.1rem;color:var(--ink);margin-bottom:.3rem;
+  }
+  .cheat-card .note{font-size:.8rem;color:var(--ink-soft)}
+
+  /* ---------- CLOSING ---------- */
+  .closing{max-width:880px;margin:3rem auto 0;padding:4rem 1.5rem 5rem;text-align:center}
+  .closing h3{
+    font-family:'Caveat',cursive;font-weight:700;
+    font-size:clamp(2rem,4vw,3rem);
+    color:var(--ink);line-height:1.15;margin-bottom:1.4rem;
+  }
+  .closing h3 .hl{color:var(--coral-2)}
+  .closing p{color:var(--ink-soft);max-width:560px;margin:0 auto 1.8rem;font-size:1rem}
+
+  footer{
+    text-align:center;padding:2rem 1.5rem 3rem;
+    color:var(--ink-soft);font-size:.8rem;
+  }
+  footer .hearts{display:inline-block;animation:beat 1.4s ease-in-out infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+</style>
+</head>
+<body>
+
+<div class="bubbles">
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+</div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">ACADEMIA <span>ESPARTA</span></div>
+    <nav class="top-pills">
+      <a href="#perimetro">Perímetro</a>
+      <a href="#rectangulo">Rectángulo</a>
+      <a href="#rombo">Rombo</a>
+      <a href="#romboide">Romboide</a>
+      <a href="#triangulo">Triángulo</a>
+      <a href="#poligono">Polígono</a>
+      <a href="#pi">π</a>
+      <a href="#circulo">Círculo · Juega</a>
+      <a href="#compuestas">Figuras</a>
+      <a href="#chuleta">Chuleta</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow"><span class="star">✨</span> Tema 10 · Mates · 6º Primaria <span class="star">✨</span></div>
+  <h1 class="hero-title">Geometría <span class="bounce">en</span> <span class="accent">movimiento</span>.</h1>
+  <p class="hero-sub">Mira las fórmulas <b>en acción</b> 👀 — figuras que se transforman, círculos que ruedan y una calculadora con la que jugar. Hecho para que se te quede sin esfuerzo, Miguel.</p>
+
+  <div class="hero-shapes">
+    <div class="shape-chip"><svg width="34" height="34" viewBox="0 0 40 40"><rect x="6" y="6" width="28" height="28" fill="#5eead4" stroke="#0f172a" stroke-width="2.5"/></svg></div>
+    <div class="shape-chip"><svg width="34" height="34" viewBox="0 0 40 40"><polygon points="20,5 35,35 5,35" fill="#fcd34d" stroke="#0f172a" stroke-width="2.5"/></svg></div>
+    <div class="shape-chip"><svg width="34" height="34" viewBox="0 0 40 40"><polygon points="20,5 35,20 20,35 5,20" fill="#fb7185" stroke="#0f172a" stroke-width="2.5"/></svg></div>
+    <div class="shape-chip"><svg width="34" height="34" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="#a78bfa" stroke="#0f172a" stroke-width="2.5"/></svg></div>
+    <div class="shape-chip"><svg width="34" height="34" viewBox="0 0 40 40"><polygon points="20,4 36,15 30,34 10,34 4,15" fill="#34d399" stroke="#0f172a" stroke-width="2.5"/></svg></div>
+  </div>
+
+  <div class="signed">
+    <div class="avatar">L</div>
+    <div class="signed-text">
+      <strong>Preparado por Lucía</strong>
+      Tu profe de Mates · Academia Esparta
+    </div>
+  </div>
+</section>
+
+<section class="toc">
+  <div class="toc-grid">
+    <a class="toc-card" href="#perimetro"><div class="toc-num">01</div>Perímetro</a>
+    <a class="toc-card" href="#rectangulo"><div class="toc-num">02</div>Rectángulo y cuadrado</a>
+    <a class="toc-card" href="#rombo"><div class="toc-num">03</div>Rombo</a>
+    <a class="toc-card" href="#romboide"><div class="toc-num">04</div>Romboide (animado)</a>
+    <a class="toc-card" href="#triangulo"><div class="toc-num">05</div>Triángulo (animado)</a>
+    <a class="toc-card" href="#poligono"><div class="toc-num">06</div>Polígono regular</a>
+    <a class="toc-card" href="#pi"><div class="toc-num">07</div>π · Círculo que rueda</a>
+    <a class="toc-card" href="#circulo"><div class="toc-num">08</div>Círculo · Calculadora 🎮</a>
+    <a class="toc-card" href="#compuestas"><div class="toc-num">09</div>Figuras compuestas</a>
+    <a class="toc-card" href="#chuleta"><div class="toc-num">10</div>Chuleta final</a>
+  </div>
+</section>
+
+<!-- 01 PERÍMETRO -->
+<section class="topic" id="perimetro">
+  <div class="topic-head">
+    <div class="topic-tag">01 · PERÍMETRO</div>
+    <div>
+      <h2 class="topic-title">El <span class="underline">contorno</span> de la figura.</h2>
+      <p class="topic-lede">Imagina que pones una hormiga a darle la vuelta al borde — lo que recorre es el perímetro. Solo tienes que sumar los lados.</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card teal">
+        <div class="formula">P <span class="op">=</span> <span class="var">l₁</span> + <span class="var">l₂</span> + <span class="var">l₃</span> + … + <span class="var">lₙ</span>
+          <small>Suma de los lados</small>
+        </div>
+        <div class="ex">
+          <b>Ejemplo</b> · Pieza de madera con lados 90, 100, 150, 60, 50 cm.
+          <span class="calc">P = 90 + 100 + 150 + 60 + 50</span>
+          <span class="res">P = 450 cm</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="anim-stage">
+        <span class="play-hint">▶ La hormiga 🐜 da una vuelta</span>
+        <svg viewBox="0 0 280 200" width="100%">
+          <polygon points="40,160 40,80 140,30 240,80 240,160"
+                   fill="#a7f3d0" stroke="#0f172a" stroke-width="3"/>
+          <text x="20" y="125" font-size="11" font-weight="600">80</text>
+          <text x="78" y="55" font-size="11" font-weight="600">115</text>
+          <text x="180" y="48" font-size="11" font-weight="600">115</text>
+          <text x="248" y="125" font-size="11" font-weight="600">80</text>
+          <text x="120" y="180" font-size="11" font-weight="600">200</text>
+          <!-- hormiga animada recorriendo el borde -->
+          <text font-size="22">🐜
+            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto"
+              path="M 40,160 L 40,80 L 140,30 L 240,80 L 240,160 Z" />
+          </text>
+        </svg>
+        <div class="anim-label">La hormiga camina los 590 cm del borde</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 RECTÁNGULO -->
+<section class="topic" id="rectangulo">
+  <div class="topic-head">
+    <div class="topic-tag">02 · RECTÁNGULO · CUADRADO</div>
+    <div>
+      <h2 class="topic-title">¿Cuántos <span class="underline">cuadraditos</span> caben dentro?</h2>
+      <p class="topic-lede">El área es la superficie que ocupa la figura. Mira cómo los cuadraditos van rellenándola, fila a fila.</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card sun">
+        <div class="formula">A <span class="op">=</span> <span class="var">b</span> · <span class="var">h</span>
+          <small>Rectángulo · base por altura</small>
+        </div>
+        <div class="formula">A <span class="op">=</span> <span class="var">l</span>²
+          <small>Cuadrado · lado al cuadrado</small>
+        </div>
+        <div class="ex">
+          <b>Rectángulo</b> de base 7 cm y altura 3 cm.
+          <span class="calc">A = 7 · 3</span>
+          <span class="res">A = 21 cm²</span>
+        </div>
+        <div class="ex">
+          <b>Cuadrado</b> de lado 4 cm.
+          <span class="calc">A = 4² = 4 · 4</span>
+          <span class="res">A = 16 cm²</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="anim-stage">
+        <span class="play-hint">▶ Cuadraditos rellenando</span>
+        <svg viewBox="0 0 280 180" width="100%">
+          <!-- rectángulo 5×3 -->
+          <g transform="translate(40,40)">
+            <rect x="0" y="0" width="200" height="120" fill="#fffbeb" stroke="#0f172a" stroke-width="3"/>
+            <!-- 15 cuadrados que aparecen uno tras otro -->
+            <g fill="#fcd34d" stroke="#0f172a" stroke-width="1.5">
+              <rect x="0" y="0" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="0s" dur=".3s" fill="freeze"/></rect>
+              <rect x="40" y="0" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin=".2s" dur=".3s" fill="freeze"/></rect>
+              <rect x="80" y="0" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin=".4s" dur=".3s" fill="freeze"/></rect>
+              <rect x="120" y="0" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin=".6s" dur=".3s" fill="freeze"/></rect>
+              <rect x="160" y="0" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin=".8s" dur=".3s" fill="freeze"/></rect>
+              <rect x="0" y="40" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="1s" dur=".3s" fill="freeze"/></rect>
+              <rect x="40" y="40" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="1.2s" dur=".3s" fill="freeze"/></rect>
+              <rect x="80" y="40" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="1.4s" dur=".3s" fill="freeze"/></rect>
+              <rect x="120" y="40" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="1.6s" dur=".3s" fill="freeze"/></rect>
+              <rect x="160" y="40" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="1.8s" dur=".3s" fill="freeze"/></rect>
+              <rect x="0" y="80" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="2s" dur=".3s" fill="freeze"/></rect>
+              <rect x="40" y="80" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="2.2s" dur=".3s" fill="freeze"/></rect>
+              <rect x="80" y="80" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="2.4s" dur=".3s" fill="freeze"/></rect>
+              <rect x="120" y="80" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="2.6s" dur=".3s" fill="freeze"/></rect>
+              <rect x="160" y="80" width="40" height="40"><animate attributeName="opacity" from="0" to="1" begin="2.8s" dur=".3s" fill="freeze"/></rect>
+            </g>
+            <text x="80" y="78" font-size="22" font-weight="700" fill="#0f172a" font-family="JetBrains Mono">5×3</text>
+          </g>
+        </svg>
+        <div class="anim-label">5 columnas × 3 filas = 15 cuadraditos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ROMBO -->
+<section class="topic" id="rombo">
+  <div class="topic-head">
+    <div class="topic-tag">03 · ROMBO</div>
+    <div>
+      <h2 class="topic-title">El rombo es <span class="underline">medio rectángulo</span>.</h2>
+      <p class="topic-lede">Si dibujas las dos diagonales y las encierras en un rectángulo, el rombo ocupa justo la mitad.</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card coral">
+        <div class="formula">A <span class="op">=</span> (<span class="var">D</span> · <span class="var">d</span>) <span class="op">/</span> 2
+          <small>D = diagonal mayor · d = diagonal menor</small>
+        </div>
+        <div class="ex">
+          <b>Cometa</b> con diagonales 60 cm y 40 cm.
+          <span class="calc">A = (60 · 40) / 2 = 2.400 / 2</span>
+          <span class="res">A = 1.200 cm²</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="anim-stage">
+        <span class="play-hint">▶ Rectángulo que se transforma</span>
+        <svg viewBox="0 0 280 220" width="100%">
+          <rect x="30" y="40" width="220" height="140" fill="none" stroke="#0f172a" stroke-width="2" stroke-dasharray="6 4">
+            <animate attributeName="opacity" values="0;1;1;0;0" dur="4s" repeatCount="indefinite"/>
+          </rect>
+          <polygon points="140,40 250,110 140,180 30,110" fill="#fda4af" stroke="#0f172a" stroke-width="3"/>
+          <line x1="30" y1="110" x2="250" y2="110" stroke="#0f172a" stroke-width="2" stroke-dasharray="4 4"/>
+          <line x1="140" y1="40" x2="140" y2="180" stroke="#0f172a" stroke-width="2" stroke-dasharray="4 4"/>
+          <text x="195" y="105" font-size="14" font-weight="700">D</text>
+          <text x="150" y="62" font-size="14" font-weight="700">d</text>
+        </svg>
+        <div class="anim-label">El rectángulo aparece y desaparece — el rombo es su mitad</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 ROMBOIDE -->
+<section class="topic" id="romboide">
+  <div class="topic-head">
+    <div class="topic-tag">04 · ROMBOIDE</div>
+    <div>
+      <h2 class="topic-title">Un rectángulo <span class="underline">torcido</span>.</h2>
+      <p class="topic-lede">Mira cómo cortando un triángulo de un lado y pegándolo en el otro… ¡el romboide se transforma en rectángulo!</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card grape">
+        <div class="formula">A <span class="op">=</span> <span class="var">b</span> · <span class="var">h</span>
+          <small>OJO · h es la altura perpendicular</small>
+        </div>
+        <div class="ex">
+          <b>Romboide</b> de base 18 cm y altura 2 dm.
+          <span class="calc">2 dm = 20 cm</span>
+          <span class="calc">A = 18 · 20</span>
+          <span class="res">A = 360 cm²</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="anim-stage">
+        <span class="play-hint">▶ Romboide → Rectángulo</span>
+        <svg viewBox="0 0 280 200" width="100%">
+          <!-- cuerpo central que queda siempre -->
+          <polygon points="80,60 220,60 220,150 80,150" fill="#ddd6fe" stroke="#0f172a" stroke-width="3"/>
+          <!-- triángulo izquierdo: empieza como cuña del romboide, se mueve a la derecha -->
+          <polygon points="60,150 80,60 80,150" fill="#a78bfa" stroke="#0f172a" stroke-width="3">
+            <animateTransform attributeName="transform" type="translate"
+              values="0,0; 0,0; 160,0; 160,0; 0,0" dur="5s" repeatCount="indefinite"/>
+          </polygon>
+          <!-- triángulo derecho del romboide -->
+          <polygon points="220,60 240,60 220,150" fill="#a78bfa" stroke="#0f172a" stroke-width="3">
+            <animate attributeName="opacity" values="1;1;0;0;1" dur="5s" repeatCount="indefinite"/>
+          </polygon>
+          <line x1="80" y1="60" x2="80" y2="150" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4 3"/>
+          <text x="60" y="105" font-size="13" font-weight="700" fill="#f59e0b">h</text>
+          <text x="140" y="172" font-size="13" font-weight="700">b</text>
+        </svg>
+        <div class="anim-label">Cortas un triángulo y lo pegas al otro lado → A = b · h</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 TRIÁNGULO -->
+<section class="topic" id="triangulo">
+  <div class="topic-head">
+    <div class="topic-tag">05 · TRIÁNGULO</div>
+    <div>
+      <h2 class="topic-title">Dos triángulos = <span class="underline">un romboide</span>.</h2>
+      <p class="topic-lede">Por eso el área del triángulo se divide entre 2: dos triángulos iguales forman un paralelogramo. Mira:</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card grass">
+        <div class="formula">A <span class="op">=</span> (<span class="var">b</span> · <span class="var">h</span>) <span class="op">/</span> 2
+          <small>Vale para CUALQUIER triángulo</small>
+        </div>
+        <div class="ex">
+          <b>Señal de tráfico</b> con base 70 cm y altura 60,6 cm.
+          <span class="calc">A = (70 · 60,6) / 2 = 4.242 / 2</span>
+          <span class="res">A = 2.121 cm²</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="anim-stage">
+        <span class="play-hint">▶ Dos triángulos se juntan</span>
+        <svg viewBox="0 0 280 220" width="100%">
+          <!-- triángulo fijo -->
+          <polygon points="50,170 180,170 50,50" fill="#86efac" stroke="#0f172a" stroke-width="3"/>
+          <!-- triángulo que rota y encaja arriba -->
+          <polygon points="50,170 180,170 50,50" fill="#34d399" stroke="#0f172a" stroke-width="3" opacity=".95">
+            <animateTransform attributeName="transform" type="translate"
+              values="0,0; 0,0; 130,-120; 130,-120; 0,0" dur="5s" repeatCount="indefinite"/>
+            <animateTransform attributeName="transform" type="rotate" additive="sum"
+              values="0; 0; 180; 180; 0" dur="5s" repeatCount="indefinite"/>
+          </polygon>
+          <line x1="50" y1="50" x2="50" y2="170" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4 3"/>
+          <text x="32" y="115" font-size="13" font-weight="700" fill="#f59e0b">h</text>
+          <text x="105" y="190" font-size="13" font-weight="700">b</text>
+        </svg>
+        <div class="anim-label">2 triángulos = 1 romboide → triángulo = romboide/2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 POLÍGONO REGULAR -->
+<section class="topic" id="poligono">
+  <div class="topic-head">
+    <div class="topic-tag">06 · POLÍGONO REGULAR · APOTEMA</div>
+    <div>
+      <h2 class="topic-title">El polígono se rompe en <span class="underline">triangulitos</span>.</h2>
+      <p class="topic-lede">Un pentágono regular = 5 triángulos iguales. Un hexágono = 6. La altura de esos triángulos se llama <b>apotema</b>.</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card teal">
+        <div class="formula">A <span class="op">=</span> (<span class="var">P</span> · <span class="var">ap</span>) <span class="op">/</span> 2
+          <small>P = perímetro · ap = apotema</small>
+        </div>
+        <div class="ex">
+          <b>Pentágono</b> regular de lado 8 cm y apotema 5,5 cm.
+          <span class="calc">P = 5 · 8 = 40 cm</span>
+          <span class="calc">A = (40 · 5,5) / 2 = 220 / 2</span>
+          <span class="res">A = 110 cm²</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="anim-stage">
+        <span class="play-hint">▶ Triangulitos que aparecen</span>
+        <svg viewBox="0 0 280 240" width="100%">
+          <g transform="translate(140,130)">
+            <!-- 5 triángulos rellenos, cada uno aparece tras el otro -->
+            <g stroke="#0f172a" stroke-width="2">
+              <polygon points="0,0 0,-90 86,-28" fill="#5eead4">
+                <animate attributeName="opacity" from="0" to="1" begin="0s" dur=".4s" fill="freeze"/>
+              </polygon>
+              <polygon points="0,0 86,-28 53,72" fill="#fcd34d">
+                <animate attributeName="opacity" from="0" to="1" begin=".4s" dur=".4s" fill="freeze"/>
+              </polygon>
+              <polygon points="0,0 53,72 -53,72" fill="#fb7185">
+                <animate attributeName="opacity" from="0" to="1" begin=".8s" dur=".4s" fill="freeze"/>
+              </polygon>
+              <polygon points="0,0 -53,72 -86,-28" fill="#a78bfa">
+                <animate attributeName="opacity" from="0" to="1" begin="1.2s" dur=".4s" fill="freeze"/>
+              </polygon>
+              <polygon points="0,0 -86,-28 0,-90" fill="#34d399">
+                <animate attributeName="opacity" from="0" to="1" begin="1.6s" dur=".4s" fill="freeze"/>
+              </polygon>
+            </g>
+            <!-- apotema -->
+            <line x1="0" y1="0" x2="0" y2="72" stroke="#0f172a" stroke-width="3"/>
+            <text x="6" y="40" font-size="13" font-weight="700">ap</text>
+            <circle cx="0" cy="0" r="4" fill="#0f172a"/>
+          </g>
+        </svg>
+        <div class="anim-label">Pentágono = 5 triángulos iguales (cada color)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 PI - CÍRCULO QUE RUEDA -->
+<section class="topic" id="pi">
+  <div class="topic-head">
+    <div class="topic-tag">07 · π · CIRCUNFERENCIA</div>
+    <div>
+      <h2 class="topic-title">π es lo que mide el <span class="underline">círculo desenrollado</span>.</h2>
+      <p class="topic-lede">Si un círculo rueda <b>una vuelta entera</b>, lo que recorre es su circunferencia. Y siempre mide π veces el diámetro (≈ 3,14 veces).</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card sun">
+        <div class="formula">L <span class="op">=</span> π · <span class="var">d</span> <span class="op">=</span> 2 · π · <span class="var">r</span>
+          <small>L = longitud · d = diámetro · r = radio</small>
+        </div>
+        <div class="ex">
+          <b>Circunferencia</b> de diámetro 10 cm.
+          <span class="calc">L = π · 10 = 3,14 · 10</span>
+          <span class="res">L = 31,4 cm</span>
+        </div>
+        <div class="ex">
+          <b>Circunferencia terrestre</b> ≈ 40.000 km.
+          <span class="calc">r = L / (2π) = 40.000 / 6,28</span>
+          <span class="res">r ≈ 6.369 km</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="anim-stage">
+        <span class="play-hint">▶ El círculo rueda y deja huella</span>
+        <svg viewBox="0 0 320 200" width="100%">
+          <!-- línea base donde rueda -->
+          <line x1="20" y1="150" x2="300" y2="150" stroke="#0f172a" stroke-width="2"/>
+          <!-- huella que se va dibujando = circunferencia -->
+          <line x1="50" y1="150" x2="50" y2="150" stroke="#f59e0b" stroke-width="6" stroke-linecap="round" class="a-trace"/>
+          <line x1="50" y1="158" x2="280" y2="158" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" class="a-trace"/>
+          <!-- círculo rodando -->
+          <g class="a-roll">
+            <circle cx="50" cy="115" r="35" fill="#fde68a" stroke="#0f172a" stroke-width="3"/>
+            <line x1="50" y1="115" x2="50" y2="80" stroke="#0f172a" stroke-width="2"/>
+            <circle cx="50" cy="115" r="3" fill="#0f172a"/>
+          </g>
+          <text x="120" y="180" font-size="13" font-weight="700" fill="#f59e0b">L = π · d ≈ 3,14 · d</text>
+        </svg>
+        <div class="anim-label">Una vuelta del círculo = π veces su diámetro</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 CÍRCULO - CALCULADORA INTERACTIVA -->
+<section class="topic" id="circulo">
+  <div class="topic-head">
+    <div class="topic-tag">08 · CÍRCULO · CALCULADORA</div>
+    <div>
+      <h2 class="topic-title">Mueve el radio y <span class="underline">mira qué pasa</span> 🎮</h2>
+      <p class="topic-lede">Aquí puedes jugar: arrastra el deslizador, cambia el radio y mira cómo cambian la longitud y el área en vivo.</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card coral">
+        <div class="formula">A <span class="op">=</span> π · <span class="var">r</span>²
+          <small>Área del círculo</small>
+        </div>
+        <div class="ex">
+          <b>Alfombra circular</b> de radio 30 cm.
+          <span class="calc">A = π · 30² = 3,14 · 900</span>
+          <span class="res">A = 2.826 cm²</span>
+        </div>
+        <div class="ex" style="background:#fff7ed;border-color:#f59e0b">
+          ⚠️ <b>Truco</b>: si te dan el <b>diámetro</b>, primero divídelo entre 2 para tener el radio. Después aplica la fórmula.
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="calc-box">
+        <h4>🎮 Calculadora del círculo</h4>
+        <svg id="calc-svg" viewBox="0 0 260 200" width="100%" style="max-width:300px">
+          <circle id="calc-circle" cx="130" cy="100" r="60" fill="#fb7185" stroke="#0f172a" stroke-width="3"/>
+          <line id="calc-radius" x1="130" y1="100" x2="190" y2="100" stroke="#0f172a" stroke-width="2.5"/>
+          <circle cx="130" cy="100" r="4" fill="#0f172a"/>
+          <text x="150" y="92" font-size="13" font-weight="700">r</text>
+        </svg>
+        <input id="r-input" type="range" min="1" max="100" value="30" />
+        <div class="calc-output">
+          <div>Radio<br/><b id="out-r">30 cm</b></div>
+          <div>Diámetro<br/><b id="out-d">60 cm</b></div>
+          <div>Longitud<br/><b id="out-l">188,40 cm</b></div>
+          <div class="acc">Área<br/><b id="out-a">2.826 cm²</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 FIGURAS COMPUESTAS -->
+<section class="topic" id="compuestas">
+  <div class="topic-head">
+    <div class="topic-tag">09 · FIGURAS PLANAS</div>
+    <div>
+      <h2 class="topic-title">Trocea, <span class="underline">suma y resta</span>.</h2>
+      <p class="topic-lede">Si la figura es rara, divídela en piezas que conozcas (rectángulos, triángulos, círculos…). Suma las áreas y resta los huecos.</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card grape">
+        <div class="formula">A<sub style="font-size:.7em">total</sub> <span class="op">=</span> A₁ + A₂ + A₃ <span class="op">−</span> A<sub style="font-size:.7em">hueco</sub>
+          <small>Suma piezas, resta huecos</small>
+        </div>
+        <div class="ex">
+          <b>Casita</b> = tejado triangular + cuerpo rectangular − ventana cuadrada.
+          <span class="calc">A = (4,5 · 1,2)/2 + (4,5 · 1,4) − (1 · 1)</span>
+          <span class="calc">A = 2,7 + 6,3 − 1</span>
+          <span class="res">A = 8 cm²</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="anim-stage">
+        <span class="play-hint">▶ La casita se monta</span>
+        <svg viewBox="0 0 280 220" width="100%">
+          <!-- rectángulo (cuerpo) -->
+          <rect x="60" y="100" width="160" height="100" fill="#86efac" stroke="#0f172a" stroke-width="3">
+            <animate attributeName="opacity" from="0" to="1" begin="0s" dur=".5s" fill="freeze"/>
+          </rect>
+          <!-- triángulo (tejado) -->
+          <polygon points="60,100 220,100 140,30" fill="#fcd34d" stroke="#0f172a" stroke-width="3">
+            <animate attributeName="opacity" from="0" to="1" begin=".8s" dur=".5s" fill="freeze"/>
+          </polygon>
+          <!-- ventana (hueco) -->
+          <rect x="120" y="135" width="40" height="40" fill="#fffaf3" stroke="#0f172a" stroke-width="3" stroke-dasharray="5 4">
+            <animate attributeName="opacity" from="0" to="1" begin="1.6s" dur=".5s" fill="freeze"/>
+          </rect>
+          <text x="100" y="80" font-size="13" font-weight="700">tejado</text>
+          <text x="80" y="125" font-size="13" font-weight="700">cuerpo</text>
+          <text x="124" y="160" font-size="11" font-weight="700">hueco</text>
+        </svg>
+        <div class="anim-label">Aparecen las piezas → al final restas la ventana</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHULETA -->
+<section class="cheat" id="chuleta">
+  <div class="topic-head">
+    <div class="topic-tag">⚡ CHULETA</div>
+    <div>
+      <h2 class="topic-title">Todas las fórmulas <span class="underline">en una pantalla</span>.</h2>
+      <p class="topic-lede">Repasa esto 2 minutos antes del examen. Pasa el ratón por encima de cada tarjeta para verla bailar 💃</p>
+    </div>
+  </div>
+  <div class="cheat-grid">
+    <div class="cheat-card"><h4>Perímetro</h4><div class="f">P = l₁ + l₂ + … + lₙ</div><div class="note">Suma de los lados</div></div>
+    <div class="cheat-card"><h4>Cuadrado</h4><div class="f">A = l²</div><div class="note">P = 4 · l</div></div>
+    <div class="cheat-card"><h4>Rectángulo</h4><div class="f">A = b · h</div><div class="note">P = 2·b + 2·h</div></div>
+    <div class="cheat-card"><h4>Rombo</h4><div class="f">A = (D · d) / 2</div><div class="note">D y d son las diagonales</div></div>
+    <div class="cheat-card"><h4>Romboide</h4><div class="f">A = b · h</div><div class="note">h perpendicular</div></div>
+    <div class="cheat-card"><h4>Triángulo</h4><div class="f">A = (b · h) / 2</div><div class="note">Cualquier triángulo</div></div>
+    <div class="cheat-card"><h4>Polígono regular</h4><div class="f">A = (P · ap) / 2</div><div class="note">ap = apotema</div></div>
+    <div class="cheat-card"><h4>Circunferencia</h4><div class="f">L = π·d = 2·π·r</div><div class="note">π ≈ 3,14</div></div>
+    <div class="cheat-card"><h4>Círculo (área)</h4><div class="f">A = π · r²</div><div class="note">r al cuadrado</div></div>
+    <div class="cheat-card"><h4>Compuesta</h4><div class="f">A = ΣA − A<sub>hueco</sub></div><div class="note">Trocea, suma, resta</div></div>
+  </div>
+</section>
+
+<section class="closing">
+  <h3>"Las mates no se aprenden mirándolas —<br/>se aprenden <span class="hl">jugando con ellas</span>."</h3>
+  <p>Vuelve a esta página cuando quieras: mueve el deslizador del círculo, mira rodar la rueda, ve apareciendo los triangulitos. Si lo ves, se te queda 💚</p>
+  <div class="signed">
+    <div class="avatar">L</div>
+    <div class="signed-text">
+      <strong>¡A por todas, Miguel!</strong>
+      Lucía · Academia Esparta · Torremolinos
+    </div>
+  </div>
+</section>
+
+<footer>
+  Hecho con <span class="hearts">💚</span> en Academia Esparta · Tema 10 · 6º Primaria
+</footer>
+
+<script>
+  (function(){
+    const PI = 3.14;
+    const r = document.getElementById('r-input');
+    const outR = document.getElementById('out-r');
+    const outD = document.getElementById('out-d');
+    const outL = document.getElementById('out-l');
+    const outA = document.getElementById('out-a');
+    const circle = document.getElementById('calc-circle');
+    const radius = document.getElementById('calc-radius');
+
+    function fmt(n){
+      return n.toLocaleString('es-ES',{minimumFractionDigits:0,maximumFractionDigits:2});
+    }
+    function update(){
+      const val = +r.value;
+      outR.textContent = val + ' cm';
+      outD.textContent = (val*2) + ' cm';
+      outL.textContent = fmt(PI*val*2) + ' cm';
+      outA.textContent = fmt(PI*val*val) + ' cm²';
+      // escalar visual: max radio = 80px en SVG
+      const visR = Math.min(80, Math.max(10, val * 0.8));
+      circle.setAttribute('r', visR);
+      radius.setAttribute('x2', 130 + visR);
+    }
+    r.addEventListener('input', update);
+    update();
+  })();
+</script>
+</body>
+</html>
