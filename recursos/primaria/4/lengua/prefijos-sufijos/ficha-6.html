@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Análisis morfológico · Nivel reto · 4º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 11px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .adv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-top: 6px; }
+    .adv-chip { border: 1.2px solid #000; border-radius: 6px; padding: 4px 7px; font-size: 12px; font-weight: 700; text-align: center; }
+    .repaso-tabla { width: 100%; border-collapse: collapse; font-size: 12px; margin: 8px 0; }
+    .repaso-tabla th { border: 1.5px solid #000; padding: 5px 8px; font-weight: 800; background: transparent; text-align: left; }
+    .repaso-tabla td { border: 1.5px solid #000; padding: 5px 8px; vertical-align: top; line-height: 1.4; }
+    .metodo-box { border: 2px solid #000; border-radius: 10px; padding: 9px 13px; margin-bottom: 10px; }
+    .metodo-titulo { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
+    .metodo-texto { font-size: 12.5px; line-height: 1.5; }
+    .metodo-texto strong { font-weight: 800; }
+    .formacion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 6px; font-size: 12px; }
+    .form-item { border: 1px solid #ccc; border-radius: 5px; padding: 4px 8px; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; }
+    .ej-prueba { font-size: 12.5px; line-height: 1.5; margin-bottom: 4px; }
+    .ej-resultado { font-size: 12.5px; font-weight: 600; }
+    .adv-marca { font-weight: 800; border-bottom: 2px solid #000; padding-bottom: 1px; }
+    .modifica-marca { font-style: italic; text-decoration: underline; text-decoration-style: dotted; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; background: transparent; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 8px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .analisis-mini { display: grid; grid-template-columns: 1fr 1fr 1fr 1.4fr; gap: 5px; align-items: center; font-size: 11.5px; margin-top: 4px; border: 1px solid #ccc; border-radius: 5px; padding: 4px 6px; }
+    .analisis-mini label { font-weight: 700; font-size: 10.5px; white-space: nowrap; }
+    .analisis-linea { border-bottom: 1.5px solid #000; height: 15px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; font-style: italic; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 4º Primaria · Prefijos y sufijos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">⭐ Gramática · Ficha 6 · Nivel reto</div>
+  <div class="teoria-titulo">Análisis morfológico · Nivel reto</div>
+
+  <div class="def-box">
+    <div class="def-titulo">¿Qué es el análisis morfológico?</div>
+    <div class="def-texto">Analizar morfológicamente una palabra significa descomponerla en sus partes: <strong>prefijo</strong> (si lo tiene) + <strong>raíz</strong> + <strong>sufijo</strong> (si lo tiene).</div>
+  </div>
+
+  <table class="repaso-tabla">
+    <tr>
+      <th>Parte</th>
+      <th>Posición</th>
+      <th>Qué aporta</th>
+      <th>Ejemplos</th>
+    </tr>
+    <tr>
+      <td><strong>Prefijo</strong></td>
+      <td>Delante</td>
+      <td>Cambia el significado</td>
+      <td>des-, in-, re-, sub-</td>
+    </tr>
+    <tr>
+      <td><strong>Raíz</strong></td>
+      <td>En el centro</td>
+      <td>Significado base</td>
+      <td>mar, pan, hac-</td>
+    </tr>
+    <tr>
+      <td><strong>Sufijo</strong></td>
+      <td>Detrás</td>
+      <td>Cambia categoría o matiz</td>
+      <td>-ero, -ista, -ción, -able</td>
+    </tr>
+  </table>
+
+  <div class="metodo-box">
+    <div class="metodo-titulo">Pasos para el análisis morfológico</div>
+    <div class="metodo-texto">
+      <strong>1.</strong> Localiza la <strong>raíz</strong> (parte con el significado base).<br/>
+      <strong>2.</strong> ¿Hay algo delante? → <strong>prefijo</strong>.<br/>
+      <strong>3.</strong> ¿Hay algo detrás? → <strong>sufijo</strong>.<br/>
+      <strong>4.</strong> Indica qué aporta cada parte.
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion"><span class="adv-marca">des</span> | <span class="modifica-marca">hac</span> | er</div>
+    <div class="ej-prueba">Prefijo <span class="adv-marca">des-</span> (negación / inversión) + raíz <span class="modifica-marca">hac-</span> (hacer) + terminación <em>-er</em>.</div>
+    <div class="ej-resultado">→ deshacer = hacer lo contrario, quitar lo que se había hecho.</div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion"><span class="adv-marca">sub</span> | <span class="modifica-marca">mar</span> | <span class="adv-marca">ino</span></div>
+    <div class="ej-prueba">Prefijo <span class="adv-marca">sub-</span> (bajo) + raíz <span class="modifica-marca">mar</span> (mar) + sufijo <span class="adv-marca">-ino</span> (adjetivo relativo).</div>
+    <div class="ej-resultado">→ submarino = relativo a lo que está bajo el mar.</div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 No todas las palabras tienen prefijo y sufijo</div>
+    <div class="recuerda-texto">
+      Algunas tienen <strong>solo raíz</strong>: <em>pan, mar, sol</em>.<br/>
+      Algunas tienen <strong>raíz + sufijo</strong>: <em>panadero, marinero</em>.<br/>
+      Algunas tienen <strong>prefijo + raíz</strong>: <em>deshacer, releer</em>.<br/>
+      Algunas tienen <strong>prefijo + raíz + sufijo</strong>: <em>sub+mar+ino, in+util+idad</em>.
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Prefijos y sufijos · Ficha 6</span>
+  </div>
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Análisis morfológico</span>
+    <span class="page-2-ref">Lengua · 4º Primaria · Ficha 6</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Análisis morfológico completo (prefijo / raíz / sufijo / significado):</div>
+    <div class="oraciones-lista" style="gap: 9px;">
+      <div class="oracion-item">
+        <span class="letra">a)</span> <strong>deshacer</strong>
+        <div class="analisis-mini">
+          <label>Prefijo:</label><div class="analisis-linea"></div>
+          <label>Raíz:</label><div class="analisis-linea"></div>
+          <label>Sufijo:</label><div class="analisis-linea"></div>
+          <label>Significado:</label><div class="analisis-linea"></div>
+        </div>
+      </div>
+      <div class="oracion-item">
+        <span class="letra">b)</span> <strong>submarino</strong>
+        <div class="analisis-mini">
+          <label>Prefijo:</label><div class="analisis-linea"></div>
+          <label>Raíz:</label><div class="analisis-linea"></div>
+          <label>Sufijo:</label><div class="analisis-linea"></div>
+          <label>Significado:</label><div class="analisis-linea"></div>
+        </div>
+      </div>
+      <div class="oracion-item">
+        <span class="letra">c)</span> <strong>panadero</strong>
+        <div class="analisis-mini">
+          <label>Prefijo:</label><div class="analisis-linea"></div>
+          <label>Raíz:</label><div class="analisis-linea"></div>
+          <label>Sufijo:</label><div class="analisis-linea"></div>
+          <label>Significado:</label><div class="analisis-linea"></div>
+        </div>
+      </div>
+      <div class="oracion-item">
+        <span class="letra">d)</span> <strong>prehistórico</strong>
+        <div class="analisis-mini">
+          <label>Prefijo:</label><div class="analisis-linea"></div>
+          <label>Raíz:</label><div class="analisis-linea"></div>
+          <label>Sufijo:</label><div class="analisis-linea"></div>
+          <label>Significado:</label><div class="analisis-linea"></div>
+        </div>
+      </div>
+      <div class="oracion-item">
+        <span class="letra">e)</span> <strong>reescribir</strong>
+        <div class="analisis-mini">
+          <label>Prefijo:</label><div class="analisis-linea"></div>
+          <label>Raíz:</label><div class="analisis-linea"></div>
+          <label>Sufijo:</label><div class="analisis-linea"></div>
+          <label>Significado:</label><div class="analisis-linea"></div>
+        </div>
+      </div>
+      <div class="oracion-item">
+        <span class="letra">f)</span> <strong>invisibilidad</strong>
+        <div class="analisis-mini">
+          <label>Prefijo:</label><div class="analisis-linea"></div>
+          <label>Raíz:</label><div class="analisis-linea"></div>
+          <label>Sufijo:</label><div class="analisis-linea"></div>
+          <label>Significado:</label><div class="analisis-linea"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Forma 3 palabras distintas a partir de cada raíz usando prefijos y sufijos:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> raíz ORDEN: <span style="display:inline-block; width:72%; border-bottom:1.5px solid #000;"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> raíz POSIBLE: <span style="display:inline-block; width:70%; border-bottom:1.5px solid #000;"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> raíz MAR: <span style="display:inline-block; width:74%; border-bottom:1.5px solid #000;"></span></div>
+    </div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> ¿Verdadero (V) o falso (F)?</div>
+      <div class="col-prompt">a) «imposible» tiene prefijo in-. <span style="display:inline-block;width:22px;height:17px;border:1.5px solid #000;vertical-align:middle;margin-left:4px;"></span></div>
+      <div class="col-prompt">b) «submarino» tiene el prefijo sub-. <span style="display:inline-block;width:22px;height:17px;border:1.5px solid #000;vertical-align:middle;margin-left:4px;"></span></div>
+      <div class="col-prompt">c) «panadero» tiene el sufijo -ista. <span style="display:inline-block;width:22px;height:17px;border:1.5px solid #000;vertical-align:middle;margin-left:4px;"></span></div>
+      <div class="col-prompt">d) «releer» significa leer por primera vez. <span style="display:inline-block;width:22px;height:17px;border:1.5px solid #000;vertical-align:middle;margin-left:4px;"></span></div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Inventa dos palabras nuevas usando prefijos y sufijos que hayas estudiado. Explica su significado.</div>
+      <div class="col-prompt">Palabra 1:</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">Significado:</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">Palabra 2:</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">Significado:</div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Excelente trabajo!</span>
+  </div>
+</body>
+</html>

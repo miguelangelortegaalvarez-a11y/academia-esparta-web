@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ortografía · Repaso nivel reto · 4º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 11px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .metodo-box { border: 2px solid #000; border-radius: 10px; padding: 9px 13px; margin-bottom: 10px; }
+    .metodo-titulo { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
+    .metodo-texto { font-size: 12.5px; line-height: 1.5; }
+    .metodo-texto strong { font-weight: 800; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; }
+    .ej-prueba { font-size: 12.5px; line-height: 1.5; margin-bottom: 4px; }
+    .ej-resultado { font-size: 12.5px; font-weight: 600; }
+    .adv-marca { font-weight: 800; border-bottom: 2px solid #000; padding-bottom: 1px; }
+    .modifica-marca { font-style: italic; text-decoration: underline; text-decoration-style: dotted; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; background: transparent; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 8px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .analisis-mini { display: grid; grid-template-columns: 1fr 0.5fr 1.2fr; gap: 4px; align-items: baseline; font-size: 11.5px; margin-top: 2px; }
+    .analisis-mini label { font-weight: 700; font-size: 11px; white-space: nowrap; }
+    .analisis-linea { border-bottom: 1.5px solid #000; height: 15px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; font-style: italic; }
+    .adv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin: 7px 0; }
+    .adv-chip { border: 1.5px solid #000; border-radius: 6px; padding: 4px 7px; font-size: 12px; font-weight: 600; text-align: center; }
+    /* Tabla de repaso */
+    .repaso-tabla { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 10px; }
+    .repaso-tabla th { background: transparent; border: 1.5px solid #000; padding: 5px 7px; font-weight: 800; font-size: 11.5px; text-align: left; }
+    .repaso-tabla td { border: 1.5px solid #000; padding: 5px 7px; line-height: 1.4; vertical-align: top; }
+    .repaso-tabla tr:first-child th { border-top: 1.5px solid #000; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 4º Primaria · Ortografía</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">⭐ Gramática · Ficha 6 · Nivel reto</div>
+  <div class="teoria-titulo">Repaso de ortografía · Nivel reto</div>
+
+  <div class="def-box">
+    <div class="def-texto">Repaso general de todas las reglas ortográficas estudiadas.</div>
+  </div>
+
+  <table class="repaso-tabla">
+    <thead>
+      <tr>
+        <th>Letras</th>
+        <th>Regla principal</th>
+        <th>Ejemplo correcto</th>
+        <th>Error frecuente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>B / V</strong></td>
+        <td>-mb-, bl/br, verbos -bir, imperfecto -ar</td>
+        <td>también, blanco, escribir, cantaba</td>
+        <td>❌ escrivir<br/>❌ escri<strong>b</strong>io (sin tilde)</td>
+      </tr>
+      <tr>
+        <td><strong>H</strong></td>
+        <td>Palabras con h muda (hay que memorizar)</td>
+        <td>hoy, hacer, hora, hijo</td>
+        <td>❌ oy<br/>❌ acer</td>
+      </tr>
+      <tr>
+        <td><strong>G / J</strong></td>
+        <td>gue/gui (u muda), -aje/-eje con j</td>
+        <td>guerra, guitarra, viaje</td>
+        <td>❌ jerra<br/>❌ viage</td>
+      </tr>
+      <tr>
+        <td><strong>C / Z / Q</strong></td>
+        <td>c+a/o/u=/k/, qu+e/i=/k/, z+a/o/u=/s/</td>
+        <td>casa, queso, zapato</td>
+        <td>❌ zena<br/>❌ qeso</td>
+      </tr>
+      <tr>
+        <td><strong>LL / Y</strong></td>
+        <td>-illo/-illa con ll; final /i/ con y</td>
+        <td>silla, rey, ayer</td>
+        <td>❌ siya<br/>❌ rei</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="metodo-box">
+    <div class="metodo-titulo">Estrategia ante la duda</div>
+    <div class="metodo-texto">
+      <strong>1.</strong> Piensa en la regla que aplica.<br/>
+      <strong>2.</strong> Si no recuerdas la regla, recuerda ejemplos similares seguros.<br/>
+      <strong>3.</strong> Consulta el diccionario.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Las 5 reglas de oro</div>
+    <div class="recuerda-texto">
+      <strong>1.</strong> Después de m → b: <em>también, combinar</em>.<br/>
+      <strong>2.</strong> La h es muda pero obligatoria: <em>hoy, hacer, hora</em>.<br/>
+      <strong>3.</strong> -aje/-eje → j: <em>viaje, garaje, hereje</em>.<br/>
+      <strong>4.</strong> Plural de -z → -ces: <em>paz → paces, vez → veces</em>.<br/>
+      <strong>5.</strong> -illo/-illa → ll: <em>silla, cepillo, amarillo</em>.
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Ortografía · Ficha 6</span>
+  </div>
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Repaso nivel reto</span>
+    <span class="page-2-ref">Lengua · 4º Primaria · Ficha 6</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Dictado preparatorio — escribe estas palabras correctamente:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> tam___ién &nbsp;&nbsp;&nbsp; <span class="letra">b)</span> escri___ir &nbsp;&nbsp;&nbsp; <span class="letra">c)</span> ___oy &nbsp;&nbsp;&nbsp; <span class="letra">d)</span> via___e &nbsp;&nbsp;&nbsp; <span class="letra">e)</span> ___ueso</div>
+      <div class="oracion-item"><span class="letra">f)</span> pa___ &nbsp;&nbsp;&nbsp; <span class="letra">g)</span> si___a &nbsp;&nbsp;&nbsp; <span class="letra">h)</span> a___er &nbsp;&nbsp;&nbsp; <span class="letra">i)</span> nue___o &nbsp;&nbsp;&nbsp; <span class="letra">j)</span> ___ermano</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Corrige todos los errores del texto (hay al menos 6). Reescríbelo correctamente:</div>
+    <div class="oracion-item" style="font-style:italic; margin-bottom:6px; font-size:12.5px;">«Ayer, mi ermano y yo fuimos de biaje a Malaga. Hicimos las maletas con mucha rapidéz y llegamos a la iora prevista. Havia mucha gente en la caye.»</div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> Clasifica: indica qué regla ortográfica aplica en cada caso:</div>
+      <div class="col-prompt">a) escribir → regla:</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">b) hoy → regla:</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">c) viaje → regla:</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">d) queso → regla:</div>
+      <div class="linea-resp"></div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Escribe 3 palabras de cada grupo que no aparezcan en la ficha:</div>
+      <div class="col-prompt">B:</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">H:</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">J:</div>
+      <div class="linea-resp"></div>
+      <div class="col-prompt">LL:</div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Excelente trabajo!</span>
+  </div>
+</body>
+</html>
