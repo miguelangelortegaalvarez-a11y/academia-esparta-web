@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escribe tu noticia · Textos periodísticos · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+
+    .tema-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 6px 0 12px; }
+    .tema-opcion { display: flex; gap: 8px; align-items: flex-start; border: 1.5px solid #000; border-radius: 8px; padding: 8px 10px; font-size: 12.5px; line-height: 1.4; }
+    .tema-casilla { width: 16px; height: 16px; border: 1.5px solid #000; flex-shrink: 0; margin-top: 1px; }
+    .tema-texto strong { display: block; margin-bottom: 1px; }
+
+    .esquema-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .esquema-fila { margin-bottom: 8px; }
+    .esquema-etiqueta { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; display: block; }
+    .esquema-hint { font-size: 10.5px; font-style: italic; color: #555; margin-bottom: 4px; }
+
+    .redaccion-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .redaccion-titulo { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .titular-box { border: 1.5px solid #000; height: 32px; margin-bottom: 8px; padding: 4px; }
+    .entradilla-box { border: 1.5px dashed #000; height: 50px; margin-bottom: 8px; padding: 4px; }
+    .redaccion-pauta { background-image: repeating-linear-gradient(transparent, transparent 22px, #000 22px, #000 23px); min-height: 240px; }
+
+    .checklist-box { background: #f5f5f5; border: 1.5px solid #000; border-radius: 8px; padding: 8px 12px; font-size: 12px; line-height: 1.55; }
+    .checklist-titulo { font-weight: 800; margin-bottom: 4px; font-size: 12px; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: .5px; }
+    .checklist-item { display: flex; gap: 8px; align-items: center; margin-bottom: 3px; }
+    .check-casilla { width: 14px; height: 14px; border: 1.5px solid #000; flex-shrink: 0; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box, .checklist-box { background: #fff !important; border: 1px solid #000 !important; }
+      .recuerda-box { border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Textos periodísticos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📝 Escribe tu propia noticia</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Ya sabes hacerlo:</div>
+    En las fichas anteriores has aprendido a identificar las <strong>5W</strong>, el <strong>titular</strong>, la <strong>entradilla</strong>, la <strong>pirámide invertida</strong> y a distinguir <strong>hechos de opiniones</strong>. Ahora vas a escribir <strong>tu propia noticia</strong>. Sigue el plan: primero el esquema, después la redacción y por último la revisión.
+  </div>
+
+  <div class="preguntas-label">Paso 1 · Elige tu tema (marca uno)</div>
+  <div class="tema-grid">
+    <div class="tema-opcion"><span class="tema-casilla"></span><div class="tema-texto"><strong>1) Algo curioso que ha pasado en tu colegio</strong></div></div>
+    <div class="tema-opcion"><span class="tema-casilla"></span><div class="tema-texto"><strong>2) Un evento del barrio (mercadillo, fiesta, obra…)</strong></div></div>
+    <div class="tema-opcion"><span class="tema-casilla"></span><div class="tema-texto"><strong>3) Un partido o competición deportiva que hayas visto</strong></div></div>
+    <div class="tema-opcion"><span class="tema-casilla"></span><div class="tema-texto"><strong>4) Tema propio: ______________________</strong></div></div>
+  </div>
+
+  <div class="preguntas-label">Paso 2 · Tu esquema (las 5W antes de redactar)</div>
+  <div class="esquema-box">
+    <div class="esquema-fila">
+      <span class="esquema-etiqueta">📌 ¿Qué ha pasado?</span>
+      <div class="linea-resp"></div>
+    </div>
+    <div class="esquema-fila">
+      <span class="esquema-etiqueta">🧑 ¿Quién es el protagonista?</span>
+      <div class="linea-resp"></div>
+    </div>
+    <div class="esquema-fila">
+      <span class="esquema-etiqueta">📅 ¿Cuándo?</span>
+      <div class="linea-resp"></div>
+    </div>
+    <div class="esquema-fila">
+      <span class="esquema-etiqueta">📍 ¿Dónde?</span>
+      <div class="linea-resp"></div>
+    </div>
+    <div class="esquema-fila">
+      <span class="esquema-etiqueta">❓ ¿Por qué o cómo ha ocurrido?</span>
+      <div class="linea-resp"></div>
+    </div>
+    <div class="esquema-fila">
+      <span class="esquema-etiqueta">💬 Persona a la que voy a "entrevistar" (declaración)</span>
+      <div class="esquema-hint">Una frase entrecomillada de alguien que aparece en la noticia.</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Producción · Ficha 10</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Paso 3 · Redacción final</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Textos periodísticos</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="lectura-label">Escribe ahora tu noticia. Empieza por el titular (corto), después la entradilla (1-2 líneas que resuman lo más importante) y por último el cuerpo, siguiendo la pirámide invertida.</div>
+
+  <div class="redaccion-box">
+    <div class="redaccion-titulo">📰 Titular</div>
+    <div class="titular-box"></div>
+
+    <div class="redaccion-titulo">✏️ Entradilla</div>
+    <div class="entradilla-box"></div>
+
+    <div class="redaccion-titulo">📝 Cuerpo de la noticia</div>
+    <div class="redaccion-pauta"></div>
+  </div>
+
+  <div class="checklist-box">
+    <div class="checklist-titulo">✅ Antes de entregar, revisa:</div>
+    <div class="checklist-item"><span class="check-casilla"></span>¿Mi titular es corto y resume lo esencial (menos de 12 palabras)?</div>
+    <div class="checklist-item"><span class="check-casilla"></span>¿La entradilla amplía la información del titular?</div>
+    <div class="checklist-item"><span class="check-casilla"></span>¿Respondo a las 5W en los primeros párrafos?</div>
+    <div class="checklist-item"><span class="check-casilla"></span>¿He puesto al menos una declaración entre comillas?</div>
+    <div class="checklist-item"><span class="check-casilla"></span>¿Cuento hechos en lugar de mis opiniones personales?</div>
+    <div class="checklist-item"><span class="check-casilla"></span>¿He revisado faltas de ortografía y tildes?</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Eres periodista!</span>
+  </div>
+</body>
+</html>
