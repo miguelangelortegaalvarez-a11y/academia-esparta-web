@@ -1,459 +1,194 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Juegos Interactivos – Academia Esparta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      :root {
-        --primary: #0e9343;
-        --primary-darker: #063c24;
-        --game: #4f46e5;
-        --game-dark: #1e1b4b;
-        --dark: #111827;
-        --gray: #4b5563;
-        --light: #f5f3ff;
-        --white: #ffffff;
-        --radius: 16px;
-        --radius-sm: 10px;
-        --shadow-hover: 0 12px 36px rgba(0,0,0,0.14);
-        --ease: all 0.28s cubic-bezier(0.4,0,0.2,1);
-      }
-      body { font-family: 'Poppins', sans-serif; color: var(--dark); background: #fff; }
-      a { text-decoration: none; }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juegos Interactivos – Academia Esparta</title>
+  <meta name="description" content="Juegos educativos interactivos de Academia Esparta. Próximamente." />
+  <link rel="canonical" href="https://academiaesparta.es/juegos.html" />
+  <meta name="robots" content="noindex,follow" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #064e3b;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-      /* ── Header ── */
-      .header {
-        background: #fff;
-        padding: 0.85rem 2rem;
-        position: fixed;
-        width: 100%; top: 0; left: 0;
-        z-index: 1000;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-      }
-      .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); letter-spacing: -0.5px; }
-      .header-back {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        color: var(--gray); font-size: 0.88rem; font-weight: 600;
-        transition: color 0.2s;
-      }
-      .header-back:hover { color: var(--game); }
+    /* ── Header ── */
+    .site-header {
+      background: rgba(6,78,59,.85);
+      backdrop-filter: blur(12px);
+      padding: .85rem 2rem;
+      position: fixed;
+      width: 100%; top: 0; left: 0; z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(74,222,128,.12);
+    }
+    .site-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -.02em;
+    }
+    .site-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      color: rgba(236,253,245,.65);
+      font-size: .85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .site-back:hover { color: #4ade80; }
 
-      /* ── Hero ── */
-      .hero {
-        background: linear-gradient(140deg, var(--game-dark) 0%, var(--game) 100%);
-        padding: 7rem 2rem 4.5rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .hero::before {
-        content: '';
-        position: absolute;
-        width: 500px; height: 500px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.05);
-        top: -150px; right: -100px;
-      }
-      .hero::after {
-        content: '';
-        position: absolute;
-        width: 280px; height: 280px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.04);
-        bottom: -80px; left: -60px;
-      }
-      .hero-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-      .hero-emoji { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
-      .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 0.8rem; }
-      .hero p  { color: rgba(255,255,255,0.70); font-size: 1rem; line-height: 1.65; }
+    /* ── Main ── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-      /* ── Game cards ── */
-      .games-section {
-        padding: 3rem 2rem 5rem;
-        max-width: 960px;
-        margin: 0 auto;
-      }
-      .games-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-      }
-      .game-card {
-        display: flex;
-        flex-direction: column;
-        border-radius: var(--radius);
-        overflow: hidden;
-        text-decoration: none;
-        color: var(--dark);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-        border: 1.5px solid rgba(79,70,229,0.1);
-        transition: var(--ease);
-        background: #fff;
-      }
-      .game-card:hover {
-        transform: translateY(-6px);
-        box-shadow: var(--shadow-hover);
-        border-color: var(--game);
-      }
-      .game-card-header {
-        padding: 2.2rem 1.8rem 1.6rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        text-align: center;
-      }
-      .game-emoji-circle {
-        width: 80px; height: 80px;
-        border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 2.4rem;
-        transition: transform 0.3s ease;
-      }
-      .game-card:hover .game-emoji-circle { transform: scale(1.12) rotate(-5deg); }
-      .gc-blue   .game-emoji-circle { background: #eff6ff; }
-      .gc-green  .game-emoji-circle { background: #f0fdf4; }
-      .gc-purple .game-emoji-circle { background: #faf5ff; }
-      .gc-orange .game-emoji-circle { background: #fff7ed; }
-      .gc-red    .game-emoji-circle { background: #fef2f2; }
+    /* Aurora decorativa */
+    .aurora {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+    .a1 { width: 500px; height: 500px; background: rgba(74,222,128,.12); top: -100px; left: -100px; animation: drift 28s ease-in-out infinite alternate; }
+    .a2 { width: 400px; height: 400px; background: rgba(16,185,129,.09); bottom: 0; right: -80px; animation: drift 22s ease-in-out infinite alternate-reverse; }
+    @keyframes drift { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(40px,30px) scale(1.08)} }
 
-      .game-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--dark); line-height: 1.25; }
-      .game-card-body {
-        padding: 0 1.8rem 1.8rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        flex: 1;
-      }
-      .game-card p { font-size: 0.83rem; color: var(--gray); line-height: 1.6; flex: 1; }
-      .game-tag {
-        display: inline-flex; align-items: center; gap: 0.3rem;
-        font-size: 0.72rem; font-weight: 700;
-        padding: 0.22rem 0.65rem;
-        border-radius: 999px;
-        width: fit-content;
-      }
-      .tag-blue   { background: #eff6ff; color: #2563eb; }
-      .tag-green  { background: #f0fdf4; color: #16a34a; }
-      .tag-purple { background: #faf5ff; color: #7c3aed; }
-      .tag-orange { background: #fff7ed; color: #ea580c; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      border: 1px solid rgba(74,222,128,.22);
+      background: rgba(74,222,128,.07);
+      border-radius: 9999px;
+      padding: .35rem 1rem;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      color: rgba(167,243,208,.85);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .pulse {
+      width: 7px; height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
 
-      .game-btn {
-        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-        padding: 0.7rem 1.3rem;
-        border-radius: var(--radius-sm);
-        font-size: 0.85rem; font-weight: 700;
-        transition: var(--ease);
-        border: 2px solid var(--game);
-        color: var(--game);
-        background: transparent;
-      }
-      .game-btn:hover { background: var(--game); color: #fff; }
-      .game-btn.filled { background: var(--game); color: #fff; }
-      .game-btn.filled:hover { background: var(--game-dark); border-color: var(--game-dark); }
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+    h1 em {
+      font-style: italic;
+      color: #4ade80;
+    }
 
-      /* ── Pronto ── */
-      .coming-soon {
-        opacity: 0.55;
-        pointer-events: none;
-        filter: grayscale(0.4);
-      }
-      .tag-soon { background: #f3f4f6; color: #9ca3af; }
+    p {
+      font-size: clamp(.95rem, 2vw, 1.1rem);
+      color: rgba(236,253,245,.65);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
 
-      /* ── CTA ── */
-      .games-cta {
-        text-align: center;
-        padding: 3rem 2rem 5rem;
-        border-top: 1px solid rgba(79,70,229,0.1);
-      }
-      .games-cta p { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.2rem; }
-      .btn-cta {
-        display: inline-flex; align-items: center; gap: 0.6rem;
-        background: var(--primary); color: #fff;
-        font-weight: 700; padding: 0.85rem 2rem;
-        border-radius: var(--radius-sm);
-        transition: var(--ease); font-size: 0.95rem;
-      }
-      .btn-cta:hover { background: var(--primary-darker); transform: translateY(-2px); }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: #fff;
+      color: #064e3b;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: .95rem;
+      padding: .9rem 2.2rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+      z-index: 1;
+    }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(74,222,128,.25); }
 
-      /* ── Reveal ── */
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
-      .reveal.visible { opacity: 1; transform: none; }
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: .8rem;
+      color: rgba(236,253,245,.35);
+      border-top: 1px solid rgba(74,222,128,.08);
+    }
+  </style>
+</head>
+<body>
 
-      /* ── Responsive ── */
-      @media (max-width: 768px) { .games-grid { grid-template-columns: 1fr 1fr; } }
-      @media (max-width: 480px) { .games-grid { grid-template-columns: 1fr; } }
+  <header class="site-header">
+    <a href="/" class="site-logo">Academia Esparta</a>
+    <a href="/" class="site-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Volver al inicio
+    </a>
+  </header>
 
-      /* ════════════════════════════════════════════
-         PREMIUM OVERRIDE — coherente con la web
-         ════════════════════════════════════════════ */
-      body {
-        background: #064e3b !important;
-        color: #ecfdf5 !important;
-        font-family: 'Poppins', sans-serif !important;
-      }
-      .reveal { opacity: 1 !important; transform: none !important; }
+  <main>
+    <div class="aurora a1"></div>
+    <div class="aurora a2"></div>
 
-      /* Header */
-      .header {
-        background: rgba(6,78,59,0.4) !important;
-        backdrop-filter: blur(12px) !important;
-        border-bottom: 1px solid rgba(255,255,255,0.08) !important;
-        box-shadow: none !important;
-      }
-      .logo {
-        font-family: 'Fraunces', serif !important;
-        font-weight: 500 !important;
-        color: #ffffff !important;
-      }
-      .header-back {
-        color: rgba(236,253,245,0.8) !important;
-        transition: color 0.2s ease;
-      }
-      .header-back:hover { color: #4ade80 !important; }
-
-      /* Hero */
-      .hero {
-        background:
-          radial-gradient(ellipse 60% 50% at 30% 40%, rgba(16,185,129,0.18), transparent 65%),
-          radial-gradient(ellipse 50% 40% at 75% 70%, rgba(74,222,128,0.12), transparent 65%),
-          #064e3b !important;
-        padding: 8rem 2rem 4.5rem !important;
-        text-align: center;
-        position: relative;
-      }
-      .hero-emoji {
-        display: inline-block;
-        font-size: 3.5rem !important;
-        margin-bottom: 1rem;
-        filter: drop-shadow(0 0 24px rgba(74,222,128,0.4));
-      }
-      .hero h1 {
-        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
-        font-weight: 400 !important;
-        font-size: clamp(2.2rem, 4.5vw, 3.6rem) !important;
-        line-height: 1.08 !important;
-        letter-spacing: -0.025em !important;
-        color: #ffffff !important;
-        margin-bottom: 1.25rem !important;
-      }
-      .hero p {
-        font-family: 'Poppins', sans-serif !important;
-        font-weight: 300 !important;
-        color: rgba(236,253,245,0.7) !important;
-        font-size: clamp(1rem, 1.5vw, 1.15rem) !important;
-        max-width: 640px;
-        margin: 0 auto !important;
-        line-height: 1.6 !important;
-      }
-
-      /* Games section */
-      .games-section {
-        background: #053a2c !important;
-        padding: 4rem 1.5rem 5rem !important;
-      }
-      .games-grid .game-card,
-      .game-card {
-        display: flex !important;
-        flex-direction: column !important;
-        background: rgba(6,78,59,0.55) !important;
-        border: 1px solid rgba(74,222,128,0.18) !important;
-        backdrop-filter: blur(10px);
-        color: #ecfdf5 !important;
-        box-shadow: 0 12px 32px rgba(0,0,0,0.25) !important;
-        transition: all 0.3s ease !important;
-        text-decoration: none !important;
-        overflow: hidden;
-      }
-      .game-card:hover {
-        border-color: rgba(74,222,128,0.45) !important;
-        background: rgba(6,78,59,0.7) !important;
-        transform: translateY(-3px);
-      }
-      .game-card-header {
-        background: transparent !important;
-        border-bottom: none !important;
-      }
-      .game-emoji-circle {
-        background: rgba(74,222,128,0.12) !important;
-        border: 1px solid rgba(74,222,128,0.3) !important;
-        filter: drop-shadow(0 0 16px rgba(74,222,128,0.35));
-      }
-      .game-card h3 {
-        font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
-        font-weight: 400 !important;
-        color: #ffffff !important;
-        letter-spacing: -0.01em !important;
-      }
-      .game-card-body p {
-        font-family: 'Poppins', sans-serif !important;
-        font-weight: 300 !important;
-        color: rgba(236,253,245,0.7) !important;
-        line-height: 1.55 !important;
-      }
-      .game-tag {
-        background: rgba(74,222,128,0.08) !important;
-        border: 1px solid rgba(74,222,128,0.22) !important;
-        color: rgba(236,253,245,0.95) !important;
-        font-family: 'Poppins', sans-serif !important;
-      }
-      .game-btn {
-        background: #ffffff !important;
-        color: #064e3b !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-weight: 600 !important;
-        border-radius: 9999px !important;
-        box-shadow: 0 8px 22px -6px rgba(74,222,128,0.4) !important;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-        border: none !important;
-      }
-      .game-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 28px -6px rgba(74,222,128,0.55) !important;
-      }
-      /* CTA footer premium */
-      .games-cta {
-        background: #053a2c !important;
-        border-top: 1px solid rgba(74,222,128,0.12) !important;
-      }
-      .games-cta p {
-        font-family: 'Fraunces', serif !important;
-        font-style: italic !important;
-        font-size: clamp(1.1rem, 1.8vw, 1.4rem) !important;
-        color: rgba(236,253,245,0.85) !important;
-      }
-      .btn-cta {
-        background: #ffffff !important;
-        color: #064e3b !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-weight: 600 !important;
-        padding: 1rem 2.2rem !important;
-        border-radius: 9999px !important;
-        box-shadow: 0 12px 32px -10px rgba(74,222,128,0.5) !important;
-      }
-      .btn-cta:hover {
-        background: #ecfdf5 !important;
-        transform: translateY(-2px);
-        box-shadow: 0 16px 38px -10px rgba(74,222,128,0.65) !important;
-      }
-      .btn-cta i { color: #4ade80 !important; }
-    </style>
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG">
-  </head>
-  <body>
-
-    <header class="header">
-      <a href="index.html" class="logo">Academia Esparta</a>
-      <a href="index.html" class="header-back"><i class="fa-solid fa-arrow-left"></i> Volver a inicio</a>
-    </header>
-
-    <!-- Hero -->
-    <div class="hero">
-      <div class="hero-inner">
-        <span class="hero-emoji">🎮</span>
-        <h1>Juegos Interactivos</h1>
-        <p>Aprende jugando con actividades diseñadas por nuestros profesores. Matemáticas, inglés, fonología y más.</p>
-      </div>
+    <div class="eyebrow">
+      <span class="pulse"></span>
+      EN PREPARACIÓN
     </div>
 
-    <!-- Games -->
-    <div class="games-section">
-      <div class="games-grid">
+    <h1>Juegos<br><em>muy pronto</em></h1>
 
-        <a href="entrenamiento-esparta.html" class="game-card gc-blue reveal">
-          <div class="game-card-header">
-            <div class="game-emoji-circle">🏋️</div>
-            <h3>Gimnasio de Cálculo</h3>
-          </div>
-          <div class="game-card-body">
-            <p>Sumas, restas, multiplicaciones y divisiones en modo entrenamiento. ¡Cronometrado y con niveles!</p>
-            <span class="game-tag tag-blue">🔢 Matemáticas</span>
-            <span class="game-btn filled">Empezar a entrenar →</span>
-          </div>
-        </a>
+    <p>
+      Estamos preparando una colección de juegos educativos interactivos
+      para practicar lectura, matemáticas e inglés de forma diferente.
+    </p>
 
-        <a href="/camino-ingles/" class="game-card gc-green reveal">
-          <div class="game-card-header">
-            <div class="game-emoji-circle">🇬🇧</div>
-            <h3>Inglés Interactivo</h3>
-          </div>
-          <div class="game-card-body">
-            <p>Refuerza vocabulario y comprensión lectora con recursos diseñados para aprender inglés jugando.</p>
-            <span class="game-tag tag-green">🇬🇧 Inglés</span>
-            <span class="game-btn filled">Entrar al camino →</span>
-          </div>
-        </a>
+    <a href="/materiales.html" class="cta">
+      Ver fichas imprimibles
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </main>
 
-        <a href="./camino-letras/" class="game-card gc-purple reveal">
-          <div class="game-card-header">
-            <div class="game-emoji-circle">🔤</div>
-            <h3>Conciencia Fonológica</h3>
-          </div>
-          <div class="game-card-body">
-            <p>Aprende las vocales, mejora la articulación y desarrolla la conciencia fonológica con actividades visuales.</p>
-            <span class="game-tag tag-purple">🔤 Lenguaje</span>
-            <span class="game-btn filled">Jugar ahora →</span>
-          </div>
-        </a>
+  <footer>© 2026 Academia Esparta · Torremolinos</footer>
 
-        <a href="./camino-matematico/" class="game-card gc-orange reveal">
-          <div class="game-card-header">
-            <div class="game-emoji-circle">🧮</div>
-            <h3>Camino Matemático</h3>
-          </div>
-          <div class="game-card-body">
-            <p>Recorre el camino de las mates resolviendo retos por niveles. Para Primaria y ESO.</p>
-            <span class="game-tag tag-orange">🔢 Matemáticas</span>
-            <span class="game-btn filled">Entrar →</span>
-          </div>
-        </a>
-
-        <a href="./cuento-pirata-mario/" class="game-card gc-blue reveal">
-          <div class="game-card-header">
-            <div class="game-emoji-circle">🏴‍☠️</div>
-            <h3>Cuento Pirata Mario</h3>
-          </div>
-          <div class="game-card-body">
-            <p>Una aventura interactiva de lectoescritura y comprensión lectora para los más peques.</p>
-            <span class="game-tag tag-purple">📖 Lectura</span>
-            <span class="game-btn filled">Comenzar aventura →</span>
-          </div>
-        </a>
-
-        <div class="game-card gc-red coming-soon reveal">
-          <div class="game-card-header">
-            <div class="game-emoji-circle">🚀</div>
-            <h3>Próximamente…</h3>
-          </div>
-          <div class="game-card-body">
-            <p>Nuevos juegos en preparación. ¡Síguenos para enterarte cuando lleguen!</p>
-            <span class="game-tag tag-soon">🔜 Próximamente</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="games-cta">
-      <p>¿Quieres que creemos un juego específico para tu hijo? Escríbenos.</p>
-      <a href="index.html#contact" class="btn-cta"><i class="fa-solid fa-comment"></i> Contactar con la academia</a>
-    </div>
-
-    <script>
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.12 });
-      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-    </script>
-  </body>
+</body>
 </html>
