@@ -47,7 +47,7 @@ academia-esparta-web/
 │                                 # Resto de 1º ESO sin cubrir
 │
 │  ── Imágenes ──
-├── Logo.PNG / favicon.PNG / og-image.jpg
+├── Logo.PNG / favicon.PNG / apple-touch-icon.png / og-image.jpg
 ├── hero.jpg / quienes-somos.jpg / primaria.jpg / secundaria.jpg / bachiller.jpg
 └── julio.jpg / miguel.jpg        # Fotos equipo (todas en uso)
 │
@@ -199,7 +199,6 @@ Antes de cualquier `git commit`:
 |---|---|---|
 | `~/Desktop/dashboard-shadow-academia-esparta/` | Dashboard interno — Supabase + React | shadow.academiaesparta.es |
 | `~/Desktop/consulta-asistida-ia/mavego-app/` | App clínica Mavego (proyecto externo) | mavego-dev.academiaesparta.es |
-| `~/Desktop/Activos/academia-esparta-web-BACKUP-2026-05-13/` | Backup local pre-refundición premium | — |
 | `~/Desktop/Activos/supabase-shadow-setup/` | SQL fundacional del dashboard | — |
 | `~/Desktop/Activos/n8n-organization/` | Workflows n8n del ecosistema | — |
 
@@ -207,7 +206,7 @@ Antes de cualquier `git commit`:
 
 ## Cuando vuelvas a este proyecto
 
-1. Abre esta carpeta (`~/Desktop/Activos/academia-esparta-web/`).
+1. Abre esta carpeta (`~/Desktop/academia-esparta-web/`).
 2. Lee este `CLAUDE.md` — tienes la estructura completa, el estado y el roadmap.
 3. Lee `DISENO.md` si vas a tocar páginas web (sistema premium, trampas CSS).
 4. El siguiente paso siempre está en **Roadmap › Prioridad alta**.
