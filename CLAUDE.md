@@ -40,7 +40,8 @@ academia-esparta-web/
 │   │   ├── 2/lengua/     # 12 bloques × ~10 fichas — COMPLETO ✅
 │   │   ├── 3/lengua/     # 12 bloques × 6 fichas — COMPLETO ✅
 │   │   ├── 4/lengua/     # 14 bloques completos (6-10 fichas c/u) — COMPLETO ✅
-│   │   ├── 5/lengua/     # Carpeta creada — SIN FICHAS (próximo paso) ⬅
+│   │   ├── 5/lengua/     # Área Lectura COMPLETA: 7 bloques × 10 fichas ✅
+│   │   │                 # Siguiente: bloque D "Gramática y ortografía" (8 sub-bloques) ⬅
 │   │   └── 6/            # Sin carpeta aún
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
@@ -138,11 +139,14 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - **2º Primaria Lengua** — 12 bloques, ~111 fichas ✅
 - **3º Primaria Lengua** — 12 bloques, ~73 fichas ✅
 - **4º Primaria Lengua** — 14 bloques, ~102 fichas ✅
+- **5º Primaria Lengua (Lectura)** — 7 bloques × 10 fichas = 70 fichas ✅ (cerrada 2026-05-22)
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~449 fichas indexadas en sitemap
+- **Total:** ~519 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
-- 1 artículo publicado: `como-elegir-academia-torremolinos.html`
+- 2 artículos publicados:
+  - `como-elegir-academia-torremolinos.html`
+  - `como-ayudar-comprension-lectora-primaria.html`
 
 ### Páginas de servicio
 - Logopedia · Psicología · Quiénes somos — en sistema premium, con JSON-LD
@@ -153,7 +157,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — siguiente paso
 
-1. **Fichas 5º Primaria Lengua** — carpeta existe, está vacía. Empezar por los bloques básicos: velocidad lectora, comprensión, gramática (sustantivo, adjetivo, verbo, conjugación). Ruta: `recursos/primaria/5/lengua/BLOQUE/`.
+1. **5º Primaria Lengua · Bloque D "Gramática y ortografía"** — 8 sub-bloques sin empezar. Los nombres exactos se ven en `materiales.html` al entrar en 5º Primaria · Lengua · Bloque D. Ruta: `recursos/primaria/5/lengua/BLOQUE/`. (El área de Lectura de 5º ya está cerrada.)
 
 2. **Fichas 6º Primaria Lengua** — crear carpeta y empezar cuando 5º esté sólido.
 
