@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lectura crítica de redes sociales · Lectura crítica · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
+    .post-box { border: 1.5px solid #000; border-radius: 12px; padding: 10px 13px; margin-bottom: 11px; }
+    .post-cab { display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid #000; margin-bottom: 7px; }
+    .post-perfil { display: flex; gap: 8px; align-items: center; }
+    .post-avatar { width: 32px; height: 32px; border: 1.5px solid #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; }
+    .post-nombre { font-weight: 800; font-size: 13px; }
+    .post-user { font-size: 10.5px; color: #555; }
+    .post-red { font-family: sans-serif; font-size: 10px; font-weight: 800; padding: 2px 8px; border: 1px solid #000; border-radius: 999px; }
+    .post-texto { font-size: 13.5px; line-height: 1.6; }
+    .post-stats { display: flex; gap: 14px; padding-top: 6px; margin-top: 7px; border-top: 1px solid #000; font-size: 11px; color: #333; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .opciones-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; font-size: 13px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: center; }
+    .opcion-check { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; }
+    .pistas-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; font-size: 13px; }
+    .pista-fila { display: flex; gap: 8px; align-items: flex-start; }
+    .pista-num { font-weight: 800; font-family: sans-serif; min-width: 18px; }
+    .pista-frase { flex: 1; line-height: 1.4; }
+    .pista-resp { display: block; border-bottom: 1px solid #000; height: 18px; margin-top: 4px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Lectura crítica</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📱 ¿Recomendación sincera o publicidad?</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Lo que ves en redes no siempre es lo que parece</div>
+    En Instagram, TikTok o YouTube, muchas personas hacen <strong>recomendaciones pagadas</strong> sin avisar. Eso se llama <em>publicidad encubierta</em> y, por ley, debería avisarse con etiquetas como <strong>«#publi»</strong>, <strong>«#ad»</strong> o <strong>«colaboración con…»</strong>. Lee siempre el texto y los <em>hashtags</em>; piensa quién paga ese vídeo y qué intereses puede tener.
+  </div>
+
+  <div class="lectura-label">Lee esta publicación de Instagram de un «influencer» llamado @MartaRunsFast. Fíjate en los detalles pequeños.</div>
+  <div class="post-box">
+    <div class="post-cab">
+      <div class="post-perfil">
+        <div class="post-avatar">M</div>
+        <div>
+          <div class="post-nombre">Marta Runs Fast</div>
+          <div class="post-user">@martarunsfast · hace 2 h</div>
+        </div>
+      </div>
+      <span class="post-red">📷 Instagram</span>
+    </div>
+    <div class="post-texto">
+      <p>¡HOLA, runners! 🏃‍♀️ Hoy os hablo de las zapatillas que han <strong>cambiado mi vida</strong>: las nuevas <strong>SpeedPro X9</strong>. Las llevo puestas en cada entrenamiento y son una pasada: ligeras, cómodas, perfectas.</p>
+      <p>Os juro que <strong>nunca</strong> había corrido tan rápido. Las he probado en montaña, en asfalto y hasta en la playa. Una <strong>maravilla</strong>. Si queréis las vuestras, en su web tenéis un <strong>15 % de descuento</strong> con mi código <strong>MARTA15</strong>.</p>
+      <p>Compradlas YA antes de que se agoten. ¡Os encantarán!</p>
+      <p style="font-size: 11px; color: #555; margin-top: 6px;">#running #fitness #colaboracion #speedpro #ad</p>
+    </div>
+    <div class="post-stats">
+      <span>❤ 12.3K</span><span>💬 245</span><span>🔁 1.1K</span>
+    </div>
+    <span class="palabras-count">— Texto de 105 palabras —</span>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 9</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · La publi escondida en redes</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Lectura crítica</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Encuentra las pistas que demuestran que esto <strong>no es solo una recomendación amistosa</strong>: hay marca, código de descuento, hashtags de colaboración y muchas exageraciones.
+  </div>
+
+  <div class="preguntas-label">1. Identifica las pistas de que esta publicación es publicidad pagada:</div>
+  <div class="pistas-list">
+    <div class="pista-fila">
+      <span class="pista-num">1.</span>
+      <div class="pista-frase">
+        Pista en el <strong>nombre de la marca y el modelo</strong>:
+        <span class="pista-resp"></span>
+      </div>
+    </div>
+    <div class="pista-fila">
+      <span class="pista-num">2.</span>
+      <div class="pista-frase">
+        Pista en el <strong>código de descuento</strong>:
+        <span class="pista-resp"></span>
+      </div>
+    </div>
+    <div class="pista-fila">
+      <span class="pista-num">3.</span>
+      <div class="pista-frase">
+        Pista en los <strong>hashtags</strong> (#colaboracion, #ad, #speedpro):
+        <span class="pista-resp"></span>
+      </div>
+    </div>
+    <div class="pista-fila">
+      <span class="pista-num">4.</span>
+      <div class="pista-frase">
+        Pista en las <strong>exageraciones</strong> («cambiado mi vida», «maravilla», «nunca»):
+        <span class="pista-resp"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="preguntas-lista" style="margin-top: 14px;">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> ¿Cuál es el <strong>objetivo principal</strong> de esta publicación de Marta?</div>
+      <div class="opciones-list">
+        <div class="opcion-fila"><span class="opcion-check"></span><span>a) Contar a sus seguidores cómo ha sido su día.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>b) Que sus seguidores compren las zapatillas SpeedPro X9.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>c) Avisar de un peligro relacionado con el deporte.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>d) Pedir consejo a sus seguidores sobre qué zapatillas usar.</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Tener muchos «me gusta» significa que la información es siempre verdad.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Los hashtags como #ad o #colaboracion indican que la publicación es publicidad pagada.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Si un influencer da un código de descuento, normalmente está cobrando por promocionar.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Lo mejor antes de comprar algo así es buscar opiniones independientes en otro sitio.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Reescribe el primer párrafo de Marta de forma <strong>sincera</strong>, avisando claramente de que está colaborando con la marca:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

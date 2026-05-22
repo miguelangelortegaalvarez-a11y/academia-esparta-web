@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exageraciones publicitarias · Lectura crítica · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13.5px; line-height: 1.65; text-align: justify; }
+    .lectura-texto p { margin-bottom: 8px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .lectura-firma { display: block; text-align: right; font-size: 12.5px; font-style: italic; margin-top: 8px; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .opciones-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; font-size: 13px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: center; }
+    .opcion-check { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; }
+    .exa-grid { display: grid; grid-template-columns: 26px 1fr 70px 70px; gap: 5px 8px; margin-top: 6px; font-size: 12.5px; align-items: center; }
+    .exa-cabecera { font-weight: 800; font-size: 11px; padding-bottom: 3px; border-bottom: 1.5px solid #000; text-align: center; }
+    .exa-num { font-weight: 800; text-align: center; }
+    .exa-frase { border-bottom: 1px solid #000; padding: 4px 4px 4px 0; min-height: 28px; line-height: 1.35; font-style: italic; }
+    .exa-check { border: 1.5px solid #000; height: 22px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Lectura crítica</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🚀 Exageraciones publicitarias</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Cuando un anuncio se pasa de la raya</div>
+    Una <strong>exageración</strong> (o <em>hipérbole</em>) es cuando algo se cuenta mucho más grande, mucho más bonito o mucho más fuerte de lo que es en realidad. La publicidad las usa todo el rato: <em>«el mejor del mundo», «increíble», «único», «cambiará tu vida»</em>. Aprender a detectarlas te ayuda a no creerte todo lo que te quieren vender.
+  </div>
+
+  <div class="lectura-label">Lee con atención. Fíjate en las palabras que parecen «demasiado» fuertes para ser ciertas.</div>
+  <div class="lectura-box">
+    <div class="lectura-titulo">¡AquaExtreme, el verano más brutal de tu vida!</div>
+    <div class="lectura-texto">
+      <p>¿Cansado del calor? ¡Olvídate! Llega <strong>AquaExtreme</strong>, el parque acuático más alucinante del universo. ¡Más de cien toboganes vertiginosos! ¡La piscina de olas más gigantesca jamás construida! Una experiencia inolvidable que cambiará tu vida para siempre.</p>
+      <p>Diversión explosiva, adrenalina imbatible, recuerdos eternos. Nuestro tobogán «Volcán» es tan increíble que se te cortará la respiración. La hamburguesa más rica del planeta solo cuesta 12 euros. Cada minuto en AquaExtreme es una aventura de película.</p>
+      <p>No esperes más. Si no vienes este verano, te arrepentirás toda la vida. Es la oportunidad única de los últimos cien años. Reserva ya en aquaextreme.es y vive la mejor experiencia jamás contada. ¡Ven a AquaExtreme o quédate en casa aburrido para siempre!</p>
+      <span class="lectura-firma">— Anuncio publicado en una revista de verano</span>
+      <span class="palabras-count">— Texto de 168 palabras —</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 2</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · ¡AquaExtreme, el verano más brutal!</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Lectura crítica</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Marca las frases donde el anuncio se está pasando: cuando algo es «el mejor del mundo», «único», «inolvidable» o «cambiará tu vida», casi siempre es una <strong>exageración</strong> publicitaria.
+  </div>
+
+  <div class="preguntas-label">1. Marca con una X si cada frase es una exageración (Exa) o una afirmación normal (Norm):</div>
+  <div class="exa-grid">
+    <div class="exa-cabecera">#</div>
+    <div class="exa-cabecera">Frase del anuncio</div>
+    <div class="exa-cabecera">Exa</div>
+    <div class="exa-cabecera">Norm</div>
+
+    <div class="exa-num">1</div>
+    <div class="exa-frase">«El parque acuático más alucinante del universo.»</div>
+    <div class="exa-check"></div>
+    <div class="exa-check"></div>
+
+    <div class="exa-num">2</div>
+    <div class="exa-frase">«La hamburguesa cuesta 12 euros.»</div>
+    <div class="exa-check"></div>
+    <div class="exa-check"></div>
+
+    <div class="exa-num">3</div>
+    <div class="exa-frase">«Si no vienes este verano, te arrepentirás toda la vida.»</div>
+    <div class="exa-check"></div>
+    <div class="exa-check"></div>
+
+    <div class="exa-num">4</div>
+    <div class="exa-frase">«Tiene más de cien toboganes.»</div>
+    <div class="exa-check"></div>
+    <div class="exa-check"></div>
+
+    <div class="exa-num">5</div>
+    <div class="exa-frase">«La oportunidad única de los últimos cien años.»</div>
+    <div class="exa-check"></div>
+    <div class="exa-check"></div>
+
+    <div class="exa-num">6</div>
+    <div class="exa-frase">«Reserva en aquaextreme.es.»</div>
+    <div class="exa-check"></div>
+    <div class="exa-check"></div>
+  </div>
+
+  <div class="preguntas-lista" style="margin-top: 14px;">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> ¿Por qué el anuncio usa tantas exageraciones?</div>
+      <div class="opciones-list">
+        <div class="opcion-fila"><span class="opcion-check"></span><span>a) Porque el redactor no sabe escribir bien.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>b) Para impresionar al lector y que quiera ir al parque.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>c) Porque las exageraciones son obligatorias en los anuncios.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>d) Para que la gente se enfade y no vaya.</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Decir «el mejor del mundo» suele ser una exageración.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Si un anuncio exagera mucho, lo más sensato es comprobar la información.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">«La piscina de olas más gigantesca jamás construida» suena a dato comprobado.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Una exageración es lo mismo que una mentira: las dos cosas son idénticas.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Reescribe esta frase del anuncio sin exageraciones, contando solo lo que se podría comprobar:</div>
+      <div style="font-size:12.5px; margin-top:4px;"><em>«Diversión explosiva, adrenalina imbatible, recuerdos eternos.»</em></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
