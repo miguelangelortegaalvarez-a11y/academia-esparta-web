@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anotar y citar fuentes · Búsqueda de información fiable · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13.5px; line-height: 1.65; text-align: justify; }
+    .lectura-texto p { margin-bottom: 8px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .lectura-firma { display: block; text-align: right; font-size: 12.5px; font-style: italic; margin-top: 8px; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .opciones-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; font-size: 13px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: center; }
+    .opcion-check { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; }
+    .cita-grid { display: grid; grid-template-columns: 26px 1.4fr 1fr 1fr; gap: 5px 8px; margin-top: 6px; font-size: 12px; align-items: stretch; }
+    .cita-cabecera { font-weight: 800; font-size: 11px; padding-bottom: 3px; border-bottom: 1.5px solid #000; text-align: center; }
+    .cita-num { font-weight: 800; text-align: center; padding-top: 4px; }
+    .cita-celda { border-bottom: 1px solid #000; padding: 4px 4px 4px 0; min-height: 50px; line-height: 1.35; }
+    .cita-resp { border-bottom: 1px solid #000; padding: 4px; min-height: 50px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Búsqueda de información fiable</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📝 Anotar y citar de dónde sale la información</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Citar es decir «esto no me lo he inventado»</div>
+    Cuando usas información ajena en tu trabajo, tienes que <strong>citar la fuente</strong>: decir de dónde la has sacado. Eso es <em>honesto</em> con quien lo escribió y, además, <em>refuerza</em> tu trabajo. Para cada cita conviene anotar: <strong>1)</strong> autor, <strong>2)</strong> título del texto, <strong>3)</strong> dónde se publicó (web, libro, periódico), <strong>4)</strong> año o fecha. Copiar sin citar se llama <em>plagio</em>.
+  </div>
+
+  <div class="lectura-label">Lee este texto sobre cómo anotar bien las fuentes mientras investigas.</div>
+  <div class="lectura-box">
+    <div class="lectura-titulo">El cuaderno de las fuentes</div>
+    <div class="lectura-texto">
+      <p>Cuando Adrián empezó su trabajo sobre los volcanes, fue copiando frases de aquí y de allá. Al final, su trabajo era genial… hasta que la profe le preguntó: «¿De dónde has sacado esto?». Adrián no se acordaba. Tampoco encontraba la web. La frase quedó como suya, pero no lo era. Eso es <strong>plagio</strong>.</p>
+      <p>Su prima Carmen le enseñó un truco: <strong>el cuaderno de las fuentes</strong>. En una libreta, cada vez que toma una idea o un dato apunta cuatro cosas: <em>autor, título, lugar de publicación y año</em>. Por ejemplo: «<em>Brusi, María — Cómo nace un volcán — National Geographic España — 2023</em>». Si copia una frase exacta, la pone «entre comillas». Si la reescribe con sus propias palabras (<em>parafrasear</em>), también anota de dónde venía.</p>
+      <p>Al final del trabajo, todas esas anotaciones forman la <strong>bibliografía</strong>: la lista de fuentes utilizadas. Citar no es trampa, es lo contrario: dice al lector que tu trabajo se apoya en fuentes de verdad y que puede comprobarlas si quiere.</p>
+      <span class="lectura-firma">— Texto adaptado para Lengua 5º</span>
+      <span class="palabras-count">— Texto de 207 palabras —</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 9</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Anotar y citar fuentes</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Búsqueda de información fiable</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Practicar el <strong>cuaderno de fuentes</strong>: anotar autor, título, lugar y año de tres informaciones distintas.
+  </div>
+
+  <div class="preguntas-label">1. Para cada dato, escribe los CUATRO elementos de la cita: autor, título, dónde se publica y año.</div>
+  <div class="cita-grid">
+    <div class="cita-cabecera">#</div>
+    <div class="cita-cabecera">Información encontrada</div>
+    <div class="cita-cabecera">Autor / Título</div>
+    <div class="cita-cabecera">Dónde / Año</div>
+
+    <div class="cita-num">1</div>
+    <div class="cita-celda">Texto sobre tortugas marinas firmado por Laura Gómez, publicado en la web «Animales en peligro» en 2024.</div>
+    <div class="cita-resp"></div>
+    <div class="cita-resp"></div>
+
+    <div class="cita-num">2</div>
+    <div class="cita-celda">Capítulo «Los volcanes» del libro <em>Tierra viva</em>, de Pedro Ruiz, editorial Anaya, año 2022.</div>
+    <div class="cita-resp"></div>
+    <div class="cita-resp"></div>
+
+    <div class="cita-num">3</div>
+    <div class="cita-celda">Noticia del Diario SUR sobre las dunas de Artola firmada por Marta Casas en marzo de 2026.</div>
+    <div class="cita-resp"></div>
+    <div class="cita-resp"></div>
+  </div>
+
+  <div class="preguntas-lista" style="margin-top: 14px;">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> ¿Qué es PLAGIO?</div>
+      <div class="opciones-list">
+        <div class="opcion-fila"><span class="opcion-check"></span><span>a) Copiar lo que ha escrito otra persona y presentarlo como mío, sin citar.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>b) Usar Wikipedia para empezar un trabajo.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>c) Apuntar el autor, título y año de las fuentes.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>d) Combinar tres fuentes distintas en mi trabajo.</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Citar fuentes hace que mi trabajo parezca más serio y comprobable.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Si copio una frase EXACTA, debo ponerla entre comillas y citar de dónde es.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Parafrasear (reescribir con mis palabras) significa que ya no hay que citar.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">La bibliografía es la lista de fuentes usadas al final de un trabajo.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

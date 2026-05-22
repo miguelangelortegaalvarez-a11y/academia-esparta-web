@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contenido vs anuncio en una pantalla · Comprensión digital · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .opciones-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; font-size: 13px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: center; }
+    .opcion-check { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .pantalla-mockup { border: 2px solid #000; border-radius: 8px; margin-top: 8px; font-size: 11.5px; overflow: hidden; }
+    .pantalla-barra { background: #333; color: #fff !important; padding: 6px 10px; font-weight: 800; font-size: 11.5px; display: flex; justify-content: space-between; }
+    .pantalla-cuerpo { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+    .item-resultado { border: 1.5px solid #000; border-radius: 5px; padding: 6px 8px; line-height: 1.4; font-size: 11.5px; position: relative; }
+    .item-anuncio { background: #fff8d6; border-style: dashed; }
+    .item-etiqueta { font-size: 9.5px; font-weight: 800; padding: 1px 5px; border: 1px solid #000; border-radius: 3px; margin-right: 6px; }
+    .item-titulo { font-weight: 800; font-size: 12px; margin-top: 3px; margin-bottom: 2px; text-decoration: underline; color: #0033cc; }
+    .item-url { font-size: 10px; color: #555; font-style: italic; }
+    .item-num { position: absolute; right: 6px; top: 4px; font-family: sans-serif; font-weight: 800; font-size: 12px; border: 1.5px solid #000; border-radius: 50%; width: 20px; height: 20px; text-align: center; line-height: 17px; background: #fff; }
+    .clasifica-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; font-size: 12.5px; }
+    .clasifica-col { border: 1.5px solid #000; border-radius: 6px; padding: 6px 8px; min-height: 80px; }
+    .clasifica-titulo { font-weight: 800; font-size: 12px; margin-bottom: 4px; text-align: center; padding-bottom: 3px; border-bottom: 1px solid #000; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .pantalla-barra { background: #333 !important; color: #fff !important; }
+      .item-anuncio { background: #fff !important; }
+      .item-titulo { color: #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Comprensión digital</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📢 Contenido vs anuncio en una pantalla</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 No todo lo que aparece en pantalla es respuesta a tu búsqueda</div>
+    En los buscadores y webs, los <strong>primeros resultados</strong> muchas veces son <strong>anuncios</strong>: alguien ha pagado para aparecer arriba. Suelen llevar una etiqueta pequeña que pone <em>«Anuncio»</em>, <em>«Patrocinado»</em> o <em>«Ad»</em>. NO son las mejores respuestas a tu pregunta: son las que más interesan a quien paga. Aprende a saltarlos y a ir a los resultados orgánicos (sin etiqueta).
+  </div>
+
+  <div class="lectura-label">Imagina que has buscado «libros de aventuras para 10 años». Observa los resultados que aparecen.</div>
+
+  <div class="pantalla-mockup">
+    <div class="pantalla-barra">
+      <span>🔍 libros de aventuras para 10 años</span>
+      <span>Resultados</span>
+    </div>
+    <div class="pantalla-cuerpo">
+      <div class="item-resultado item-anuncio">
+        <span class="item-num">1</span>
+        <span class="item-etiqueta">Anuncio</span>
+        <span style="font-style:italic;">megalibros-baratos.click</span>
+        <div class="item-titulo">¡SUPER OFERTA! 10 libros gratis si te suscribes hoy</div>
+        <div>Sube ya, oferta limitada hasta esta noche. Sin compromiso.</div>
+      </div>
+      <div class="item-resultado item-anuncio">
+        <span class="item-num">2</span>
+        <span class="item-etiqueta">Patrocinado</span>
+        <div class="item-url">amazon.es</div>
+        <div class="item-titulo">Pack de aventura 10 libros - Comprar online</div>
+        <div>Envío en 24 horas. Valoraciones de clientes.</div>
+      </div>
+      <div class="item-resultado">
+        <span class="item-num">3</span>
+        <div class="item-url">bibliotecasdemalaga.es</div>
+        <div class="item-titulo">Biblioteca Municipal: Lecturas recomendadas 9-11 años</div>
+        <div>Lista oficial de libros de aventura recomendados por bibliotecarias para chicos y chicas de 9 a 11 años.</div>
+      </div>
+      <div class="item-resultado">
+        <span class="item-num">4</span>
+        <div class="item-url">leerentodaspartes.org</div>
+        <div class="item-titulo">15 libros de aventuras para niños y niñas de 10 años</div>
+        <div>Selección hecha por una librería independiente. Con resumen y edad recomendada de cada uno.</div>
+      </div>
+      <div class="item-resultado item-anuncio">
+        <span class="item-num">5</span>
+        <span class="item-etiqueta">Ad</span>
+        <div class="item-url">cursoslectura-mejorpremio.win</div>
+        <div class="item-titulo">CURSO ONLINE: enseña a tu hijo a leer en 7 días</div>
+        <div>Método único, miles de familias contentas. ¡Solo hoy!</div>
+      </div>
+    </div>
+  </div>
+  <span class="palabras-count" style="display:block; margin-top:4px;">— Resultados ficticios para esta actividad —</span>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 4</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Contenido vs anuncio</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Comprensión digital</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Distinguir entre <strong>anuncio</strong> (alguien ha pagado para aparecer) y <strong>resultado orgánico</strong> (aparece porque encaja con la búsqueda).
+  </div>
+
+  <div class="preguntas-label">1. Clasifica los 5 resultados en la columna correcta (escribe los números):</div>
+  <div class="clasifica-grid">
+    <div class="clasifica-col">
+      <div class="clasifica-titulo">📢 ANUNCIOS</div>
+    </div>
+    <div class="clasifica-col">
+      <div class="clasifica-titulo">📚 Resultados orgánicos</div>
+    </div>
+  </div>
+
+  <div class="preguntas-lista" style="margin-top: 14px;">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> ¿Qué resultados te darían MEJOR respuesta a tu búsqueda real (libros de aventuras para 10 años)?</div>
+      <div class="opciones-list">
+        <div class="opcion-fila"><span class="opcion-check"></span><span>a) El 1 y el 5, porque van primero.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>b) El 3 y el 4, porque son selecciones de biblioteca y librería.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>c) El 2, porque hay que comprar en Amazon obligatoriamente.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>d) Ninguno: hay que pinchar al azar.</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">«Anuncio», «Patrocinado» o «Ad» son etiquetas que avisan de publicidad.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">El primer resultado siempre es el más fiable.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">El resultado 5 («curso online en 7 días») suena exagerado y conviene desconfiar.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Un resultado orgánico aparece porque encaja con la búsqueda, no porque hayan pagado.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

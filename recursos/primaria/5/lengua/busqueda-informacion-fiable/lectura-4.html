@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mirar la URL antes de creer · Búsqueda de información fiable · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13.5px; line-height: 1.65; text-align: justify; }
+    .lectura-texto p { margin-bottom: 8px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .lectura-firma { display: block; text-align: right; font-size: 12.5px; font-style: italic; margin-top: 8px; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .opciones-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; font-size: 13px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: center; }
+    .opcion-check { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; }
+    .url-grid { display: grid; grid-template-columns: 26px 1fr 90px 1fr; gap: 5px 8px; margin-top: 6px; font-size: 12.5px; align-items: stretch; }
+    .url-cabecera { font-weight: 800; font-size: 11px; padding-bottom: 3px; border-bottom: 1.5px solid #000; text-align: center; }
+    .url-num { font-weight: 800; text-align: center; padding-top: 4px; }
+    .url-celda { border-bottom: 1px solid #000; padding: 4px 4px 4px 0; min-height: 30px; line-height: 1.35; font-family: monospace; font-size: 12px; }
+    .url-resp { border-bottom: 1px solid #000; padding: 4px; min-height: 30px; text-align: center; }
+    .url-motivo { border-bottom: 1px solid #000; padding: 4px; min-height: 30px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Búsqueda de información fiable</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🌐 La URL importa: .es, .gob, .edu, .com</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 La dirección de una web da muchas pistas</div>
+    La <strong>URL</strong> es la dirección que aparece arriba del navegador (ejemplo: <em>www.museodelprado.es</em>). El final, llamado <strong>dominio</strong>, te ayuda a saber quién está detrás: <strong>.gob.es</strong> = administración pública; <strong>.edu</strong> = centro educativo o universidad; <strong>.org</strong> = asociaciones (no garantiza nada, pero suele ser sin ánimo de lucro); <strong>.com</strong> = empresa o cualquiera; <strong>.click</strong>, <strong>.xyz</strong>, <strong>.win</strong>… suelen ser raros, ten cuidado.
+  </div>
+
+  <div class="lectura-label">Lee este texto sobre cómo «leer» una dirección web antes de pinchar.</div>
+  <div class="lectura-box">
+    <div class="lectura-titulo">Lee la URL antes de pinchar</div>
+    <div class="lectura-texto">
+      <p>La URL es como el sobre de una carta: antes de abrirla, te dice mucho de quién te escribe. Cuando buscas información en internet, mirar la dirección antes de pinchar te ahorra disgustos. Fíjate primero en el <strong>dominio</strong>, que es la parte final: <em>.es</em>, <em>.com</em>, <em>.gob.es</em>, <em>.edu</em>, <em>.org</em>…</p>
+      <p>Algunos dominios son señal de seriedad. Las webs del gobierno terminan en <strong>.gob.es</strong>: por ejemplo, <em>educacion.gob.es</em> es del Ministerio de Educación. Los colegios y universidades suelen acabar en <strong>.edu</strong>. Las asociaciones y entidades culturales muchas veces usan <strong>.org</strong>. Las empresas y prácticamente cualquier persona pueden tener un <strong>.com</strong> o <strong>.es</strong>: no es malo, pero hay que mirar quién hay detrás.</p>
+      <p>Lo que sí debe encenderte una luz roja son los dominios raros (<em>.click</em>, <em>.win</em>, <em>.top</em>), las URLs llenas de números (<em>premio2024-gratis.xyz</em>) o las que copian a otras (<em>amaz0n-ofertas.com</em>). Y recuerda: el dominio es solo una pista, no una garantía. Hay que mirar también quién firma y de qué fecha es.</p>
+      <span class="lectura-firma">— Texto adaptado para Lengua 5º</span>
+      <span class="palabras-count">— Texto de 197 palabras —</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 4</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Lee la URL antes de pinchar</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Búsqueda de información fiable</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Mirar la <strong>URL</strong> y decidir si la web parece <strong>fiable</strong> o <strong>sospechosa</strong> ANTES de pinchar en ella.
+  </div>
+
+  <div class="preguntas-label">1. Para cada URL, marca FIABLE o SOSPECHOSA y explica brevemente por qué:</div>
+  <div class="url-grid">
+    <div class="url-cabecera">#</div>
+    <div class="url-cabecera">URL</div>
+    <div class="url-cabecera">F / S</div>
+    <div class="url-cabecera">Motivo</div>
+
+    <div class="url-num">1</div>
+    <div class="url-celda">www.educacion.gob.es</div>
+    <div class="url-resp"></div>
+    <div class="url-motivo"></div>
+
+    <div class="url-num">2</div>
+    <div class="url-celda">premio-gratis-2024.click</div>
+    <div class="url-resp"></div>
+    <div class="url-motivo"></div>
+
+    <div class="url-num">3</div>
+    <div class="url-celda">www.museodelprado.es</div>
+    <div class="url-resp"></div>
+    <div class="url-motivo"></div>
+
+    <div class="url-num">4</div>
+    <div class="url-celda">amaz0n-superofertas.win</div>
+    <div class="url-resp"></div>
+    <div class="url-motivo"></div>
+
+    <div class="url-num">5</div>
+    <div class="url-celda">unicef.org</div>
+    <div class="url-resp"></div>
+    <div class="url-motivo"></div>
+  </div>
+
+  <div class="preguntas-lista" style="margin-top: 14px;">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Los dominios .gob.es son webs de la administración pública.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Una URL .com siempre es de fiar.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Una URL llena de números y guiones raros es señal para sospechar.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Sustituir letras por números («amaz0n») suele ser truco para imitar marcas.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Buscas información sobre tu instituto del año que viene. ¿En cuál confiarías más?</div>
+      <div class="opciones-list">
+        <div class="opcion-fila"><span class="opcion-check"></span><span>a) institutoejemplo.edu.es</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>b) instituto-gratis-2024.click</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>c) institut0-ejemplo.win</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>d) regalostodos.xyz</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

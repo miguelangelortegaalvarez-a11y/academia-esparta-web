@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buscar dentro de un texto largo · Comprensión digital · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13px; line-height: 1.6; text-align: justify; }
+    .lectura-texto p { margin-bottom: 7px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .lectura-h2 { font-weight: 800; font-size: 13.5px; margin-top: 6px; margin-bottom: 3px; }
+    .lectura-firma { display: block; text-align: right; font-size: 12.5px; font-style: italic; margin-top: 8px; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .opciones-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; font-size: 13px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: center; }
+    .opcion-check { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; }
+    .buscar-grid { display: grid; grid-template-columns: 26px 1.4fr 90px 1fr; gap: 5px 8px; margin-top: 6px; font-size: 12.5px; align-items: stretch; }
+    .buscar-cabecera { font-weight: 800; font-size: 11px; padding-bottom: 3px; border-bottom: 1.5px solid #000; text-align: center; }
+    .buscar-num { font-weight: 800; text-align: center; padding-top: 4px; }
+    .buscar-celda { border-bottom: 1px solid #000; padding: 4px 4px 4px 0; min-height: 30px; line-height: 1.35; }
+    .buscar-resp { border-bottom: 1px solid #000; padding: 4px; min-height: 30px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Comprensión digital</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔎 Buscar dentro de un texto largo: Ctrl+F y ojeo rápido</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 No siempre hay que leerlo todo</div>
+    Cuando un texto es largo y solo necesitas <strong>un dato</strong>, lo más práctico es <strong>ojearlo</strong> con la mirada (subtítulos, palabras en negrita, cifras) o usar el <strong>buscador del navegador</strong>: pulsando <em>Ctrl+F</em> (o ⌘+F en Mac) puedes escribir una palabra y el navegador la encuentra. Eso se llama <strong>lectura selectiva</strong>: no es vagueza, es eficacia.
+  </div>
+
+  <div class="lectura-label">Lee este texto largo sobre el sistema solar. ¡Pero no tienes que leerlo entero! Después tendrás que encontrar datos concretos en él.</div>
+
+  <div class="lectura-box">
+    <div class="lectura-titulo">El sistema solar: ocho planetas alrededor del Sol</div>
+    <div class="lectura-texto">
+      <p>El sistema solar es el conjunto formado por el <strong>Sol</strong> y todos los cuerpos que giran a su alrededor: planetas, lunas, asteroides y cometas. El Sol es una estrella, una bola gigantesca de gases muy calientes que produce su propia luz. Sin él, la vida en la Tierra no sería posible.</p>
+
+      <div class="lectura-h2">Los planetas rocosos</div>
+      <p><strong>Mercurio</strong> es el planeta más cercano al Sol. Es pequeño y muy caliente de día. <strong>Venus</strong> es el segundo: tiene una atmósfera densa que lo hace muy caluroso, alcanzando temperaturas de unos 460 °C. <strong>La Tierra</strong> es el tercero, único planeta con agua líquida y vida conocida. <strong>Marte</strong>, el cuarto, es llamado «el planeta rojo» por el óxido de hierro de su superficie. Tiene dos lunas pequeñas: Fobos y Deimos.</p>
+
+      <div class="lectura-h2">Los planetas gaseosos</div>
+      <p><strong>Júpiter</strong> es el más grande del sistema solar: cabrían más de 1 300 Tierras dentro. Tiene una mancha roja gigante que es un huracán que dura siglos. <strong>Saturno</strong> es famoso por sus anillos de hielo y roca. <strong>Urano</strong> está inclinado de lado, como si girara «tumbado». <strong>Neptuno</strong> es el más lejano y el más ventoso, con vientos de más de 2 000 km/h.</p>
+
+      <div class="lectura-h2">¿Y Plutón?</div>
+      <p>Hasta 2006, Plutón se consideraba el noveno planeta. Pero los astrónomos decidieron que era demasiado pequeño y se reclasificó como <em>planeta enano</em>. Hoy se considera que el sistema solar tiene <strong>ocho planetas</strong>.</p>
+
+      <span class="lectura-firma">— Texto adaptado para Lengua 5º</span>
+      <span class="palabras-count">— Texto de 270 palabras —</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 9</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Búsqueda selectiva · El sistema solar</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Comprensión digital</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Encontrar datos concretos <strong>sin leer todo el texto otra vez</strong>: ojea los subtítulos, las negritas y las cifras. Si fuera digital, usarías Ctrl+F.
+  </div>
+
+  <div class="preguntas-label">1. Para cada pregunta, escribe qué PALABRA buscarías con Ctrl+F y cuál es la respuesta:</div>
+  <div class="buscar-grid">
+    <div class="buscar-cabecera">#</div>
+    <div class="buscar-cabecera">Pregunta</div>
+    <div class="buscar-cabecera">Palabra Ctrl+F</div>
+    <div class="buscar-cabecera">Respuesta</div>
+
+    <div class="buscar-num">1</div>
+    <div class="buscar-celda">¿Qué temperatura alcanza Venus?</div>
+    <div class="buscar-resp"></div>
+    <div class="buscar-resp"></div>
+
+    <div class="buscar-num">2</div>
+    <div class="buscar-celda">¿Cuántas Tierras caben en Júpiter?</div>
+    <div class="buscar-resp"></div>
+    <div class="buscar-resp"></div>
+
+    <div class="buscar-num">3</div>
+    <div class="buscar-celda">¿Cómo se llaman las dos lunas de Marte?</div>
+    <div class="buscar-resp"></div>
+    <div class="buscar-resp"></div>
+
+    <div class="buscar-num">4</div>
+    <div class="buscar-celda">¿Desde qué año Plutón ya no es planeta?</div>
+    <div class="buscar-resp"></div>
+    <div class="buscar-resp"></div>
+
+    <div class="buscar-num">5</div>
+    <div class="buscar-celda">¿Cuántos km/h alcanzan los vientos de Neptuno?</div>
+    <div class="buscar-resp"></div>
+    <div class="buscar-resp"></div>
+  </div>
+
+  <div class="preguntas-lista" style="margin-top: 14px;">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Ctrl+F (o ⌘+F) abre el buscador dentro de la página.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">La lectura selectiva consiste en saltarse párrafos que no me hacen falta.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Cuando solo necesito un dato concreto, debo leer todo el texto entero igualmente.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Los subtítulos y las negritas ayudan a encontrar partes del texto rápidamente.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

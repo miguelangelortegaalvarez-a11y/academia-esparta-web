@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comentarios de internet · Comprensión digital · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .opciones-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; font-size: 13px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: center; }
+    .opcion-check { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .video-mockup { border: 2px solid #000; border-radius: 8px; padding: 10px 12px; margin-top: 8px; font-size: 12.5px; }
+    .video-titulo { font-weight: 800; font-size: 13.5px; margin-bottom: 4px; }
+    .video-canal { font-size: 11px; color: #555; font-style: italic; margin-bottom: 8px; }
+    .comentarios-titulo { font-weight: 800; font-size: 12px; margin-top: 8px; margin-bottom: 6px; padding-bottom: 3px; border-bottom: 1.5px solid #000; }
+    .comentario { display: flex; gap: 8px; margin-bottom: 8px; }
+    .comentario-num { font-weight: 800; font-size: 13px; min-width: 22px; text-align: center; border: 1.5px solid #000; border-radius: 4px; height: 22px; line-height: 18px; }
+    .comentario-cuerpo { flex: 1; line-height: 1.45; }
+    .comentario-usuario { font-weight: 800; font-size: 11.5px; }
+    .comentario-fecha { font-size: 10px; color: #555; font-style: italic; margin-left: 5px; }
+    .clasifica-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 6px; font-size: 12.5px; }
+    .clasifica-col { border: 1.5px solid #000; border-radius: 6px; padding: 6px 8px; min-height: 90px; }
+    .clasifica-titulo { font-weight: 800; font-size: 11.5px; margin-bottom: 4px; text-align: center; padding-bottom: 3px; border-bottom: 1px solid #000; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Comprensión digital</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">💬 Comentarios de internet: qué dicen y qué valen</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Un comentario es una OPINIÓN de una persona, no la verdad</div>
+    Los comentarios bajo un vídeo, un artículo o una foto son <strong>opiniones</strong> de personas anónimas. Algunos son útiles (aportan dato, corrigen un error, comparten experiencia). Otros son <em>insultos</em>, <em>bromas</em>, <em>spam</em> o intentos de <em>quedar bien</em>. No te creas algo solo porque está en los comentarios. Y si quieres dejar uno, hazlo con respeto: detrás de cada pantalla hay una persona.
+  </div>
+
+  <div class="lectura-label">Lee este vídeo y los comentarios que le han dejado.</div>
+
+  <div class="video-mockup">
+    <div class="video-titulo">🎬 «Cómo planta tu propio limonero en casa» — vídeo educativo</div>
+    <div class="video-canal">Canal: Jardín en familia · Publicado hace 3 días · 28 000 visualizaciones</div>
+
+    <div class="comentarios-titulo">💬 Comentarios (4)</div>
+
+    <div class="comentario">
+      <div class="comentario-num">1</div>
+      <div class="comentario-cuerpo">
+        <span class="comentario-usuario">@LauraPlantas</span><span class="comentario-fecha">hace 2 días</span><br>
+        Muy útil, gracias. Yo planté el mío hace dos años con este método y ya da limones pequeños. La clave es la luz directa varias horas al día.
+      </div>
+    </div>
+
+    <div class="comentario">
+      <div class="comentario-num">2</div>
+      <div class="comentario-cuerpo">
+        <span class="comentario-usuario">@usuarioxyz4421</span><span class="comentario-fecha">hace 1 día</span><br>
+        VAYA TONTERÍA DE VÍDEO. El que ha hecho esto no tiene ni idea. Aprende antes de subir vídeos. 👎👎👎
+      </div>
+    </div>
+
+    <div class="comentario">
+      <div class="comentario-num">3</div>
+      <div class="comentario-cuerpo">
+        <span class="comentario-usuario">@MartaBio</span><span class="comentario-fecha">hace 22 h</span><br>
+        Pequeño matiz: para que germine la semilla mejor remojarla en agua templada 8 horas antes. Lo digo como bióloga, no por discutir. ¡Gracias por el vídeo!
+      </div>
+    </div>
+
+    <div class="comentario">
+      <div class="comentario-num">4</div>
+      <div class="comentario-cuerpo">
+        <span class="comentario-usuario">@PROMO_GRATIS_2024</span><span class="comentario-fecha">hace 1 h</span><br>
+        🎁🎁 Visita mi canal y consigue MIL EUROS GRATIS HOY MISMO. Solo hoy, no te lo pierdas: regalos-aquí.click 🎁🎁
+      </div>
+    </div>
+  </div>
+  <span class="palabras-count" style="display:block; margin-top:4px;">— Vídeo y comentarios ficticios para esta actividad —</span>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 8</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Leer comentarios</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Comprensión digital</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Clasificar los comentarios en <strong>útil</strong>, <strong>insulto</strong> o <strong>spam</strong>, y entender cuáles aportan algo.
+  </div>
+
+  <div class="preguntas-label">1. Coloca el NÚMERO de cada comentario en la columna correcta:</div>
+  <div class="clasifica-grid">
+    <div class="clasifica-col">
+      <div class="clasifica-titulo">✅ Útil</div>
+    </div>
+    <div class="clasifica-col">
+      <div class="clasifica-titulo">😠 Insulto / Falta de respeto</div>
+    </div>
+    <div class="clasifica-col">
+      <div class="clasifica-titulo">📢 Spam / Anuncio</div>
+    </div>
+  </div>
+
+  <div class="preguntas-lista" style="margin-top: 14px;">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> ¿Qué comentarios podrían MEJORAR realmente tu siembra de limonero?</div>
+      <div class="opciones-list">
+        <div class="opcion-fila"><span class="opcion-check"></span><span>a) El 1 (cuenta experiencia personal real) y el 3 (matiz técnico de una bióloga).</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>b) El 2, porque insulta más alto.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>c) El 4, porque te regalan «mil euros».</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>d) Ninguno: los comentarios son siempre inútiles.</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Un comentario es la verdad porque está escrito en internet.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Un comentario puede ser útil cuando aporta datos o experiencia.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Los insultos en mayúscula son una buena manera de discutir.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Detrás de cada pantalla hay una persona y conviene tratarla con respeto.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Escribe un comentario ÚTIL que tú dejarías bajo este vídeo (que aporte algo, sin faltar al respeto):</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

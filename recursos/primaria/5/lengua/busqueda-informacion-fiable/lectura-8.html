@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cruzar dos fuentes · Búsqueda de información fiable · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13.5px; line-height: 1.65; text-align: justify; }
+    .lectura-texto p { margin-bottom: 8px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .lectura-firma { display: block; text-align: right; font-size: 12.5px; font-style: italic; margin-top: 8px; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .opciones-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; font-size: 13px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: center; }
+    .opcion-check { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; }
+    .fuente-box { border: 1.5px solid #000; border-radius: 6px; padding: 8px 10px; margin-top: 6px; font-size: 12.5px; line-height: 1.5; }
+    .fuente-titulo { font-weight: 800; font-size: 12px; margin-bottom: 4px; }
+    .fuente-meta { font-size: 11px; color: #555; font-style: italic; margin-bottom: 4px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Búsqueda de información fiable</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔀 Cruzar dos fuentes para confirmar un dato</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Una fuente está bien; dos, mejor</div>
+    Que un dato lo diga <strong>una</strong> persona no significa que sea verdad. Que lo digan <strong>dos fuentes distintas</strong> y serias (un periódico fiable + una web oficial; un libro + una entrevista) lo hace mucho más creíble. Si las dos coinciden, ese dato gana fuerza. Si <em>se contradicen</em>, busca una <strong>tercera fuente</strong> que actúe como árbitro o pregúntate cuál es la más fiable.
+  </div>
+
+  <div class="lectura-label">Lee con atención las dos fuentes siguientes sobre la población de un pueblo inventado.</div>
+
+  <div class="fuente-box">
+    <div class="fuente-titulo">📰 Fuente A — Periódico «El Sur»</div>
+    <div class="fuente-meta">Publicado en mayo de 2026 · Firmado por Lucía Reyes, redactora local</div>
+    <div>
+      «Según los datos del Ayuntamiento, el pueblo de Villalba del Río cerró el año 2025 con <strong>4 187 habitantes</strong>, lo que supone un ligero crecimiento respecto a 2024. Es la población más alta registrada en la última década, gracias sobre todo a la llegada de familias jóvenes.»
+    </div>
+  </div>
+
+  <div class="fuente-box">
+    <div class="fuente-titulo">🌐 Fuente B — Web del Ayuntamiento de Villalba del Río</div>
+    <div class="fuente-meta">Sección «Cifras del municipio» · Actualizado a 1 de enero de 2026</div>
+    <div>
+      «Población empadronada a 31 de diciembre de 2025: <strong>4 187 personas</strong>. La población se ha incrementado un 1,2 % respecto a 2024.»
+    </div>
+  </div>
+
+  <div class="fuente-box">
+    <div class="fuente-titulo">📱 Fuente C — Mensaje viral por WhatsApp</div>
+    <div class="fuente-meta">Recibido en marzo de 2026 · Sin firma ni fecha original</div>
+    <div>
+      «¡Atención! En Villalba del Río ya somos <strong>12 000 vecinos</strong>. Es oficial. Reenvíalo a todos tus contactos antes de que lo borren.»
+    </div>
+    <span class="palabras-count" style="margin-top:6px;">— Tres fuentes para comparar —</span>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 8</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Cruzar dos fuentes</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Búsqueda de información fiable</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Comparar las tres fuentes y decidir qué dato <strong>te crees</strong>, justificándolo con los criterios del bloque.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Comparando las tres fuentes, ¿qué cifra de habitantes te crees y por qué?</div>
+      <div class="opciones-list">
+        <div class="opcion-fila"><span class="opcion-check"></span><span>a) 4 187, porque la dicen DOS fuentes serias (periódico + web del Ayuntamiento).</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>b) 12 000, porque lo dice un WhatsApp y «se reenvía mucho».</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>c) Una cifra inventada por mí.</span></div>
+        <div class="opcion-fila"><span class="opcion-check"></span><span>d) No se puede saber sin viajar al pueblo.</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> ¿Por qué la fuente C (WhatsApp) NO encaja con las otras dos?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Cuando dos fuentes serias coinciden, el dato gana fuerza.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Que un mensaje «se reenvíe mucho» lo convierte en verdadero.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Si dos fuentes se contradicen, conviene buscar una tercera.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">La fuente B (web del Ayuntamiento) es oficial y firmada con fecha.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Si tuvieras que añadir una <strong>tercera fuente</strong> que confirmara el dato de 4 187 habitantes, ¿cuál buscarías? Da una idea:</div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

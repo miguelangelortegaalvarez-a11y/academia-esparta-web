@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reto final: investiga un tema con 3 fuentes · Búsqueda de información fiable · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13.5px; line-height: 1.65; text-align: justify; }
+    .lectura-texto p { margin-bottom: 8px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .lectura-firma { display: block; text-align: right; font-size: 12.5px; font-style: italic; margin-top: 8px; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 12px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .opciones-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; font-size: 13px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: center; }
+    .opcion-check { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; }
+    .checklist { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; font-size: 12.5px; }
+    .check-fila { display: flex; gap: 10px; align-items: center; }
+    .check-box { border: 1.5px solid #000; width: 16px; height: 16px; display: inline-block; flex-shrink: 0; }
+    .reto-fuente { border: 1.5px solid #000; border-radius: 6px; padding: 8px 10px; margin-top: 8px; font-size: 12px; }
+    .reto-fuente-titulo { font-weight: 800; font-size: 12px; margin-bottom: 4px; padding-bottom: 3px; border-bottom: 1px solid #000; }
+    .reto-fuente-campo { display: flex; gap: 6px; margin-bottom: 4px; align-items: center; }
+    .reto-fuente-label { font-weight: 700; font-size: 11px; min-width: 80px; }
+    .reto-fuente-linea { flex: 1; border-bottom: 1px solid #000; height: 16px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Búsqueda de información fiable</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🏆 Reto final: investiga un tema con 3 fuentes</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Repaso rápido del bloque</div>
+    Aplica TODO lo que has aprendido: <strong>palabras clave</strong> ajustadas, <strong>tipos de fuente</strong> distintos, <strong>URL</strong> y dominio, <strong>autor con autoridad</strong>, <strong>fecha</strong> actualizada, <strong>cruzar dos fuentes</strong> y <strong>citar</strong> de dónde viene cada cosa.
+  </div>
+
+  <div class="lectura-label">Lee la propuesta del reto. Vas a investigar un tema usando tres fuentes y a anotarlas de forma correcta.</div>
+  <div class="lectura-box">
+    <div class="lectura-titulo">Misión investigadora: las dunas de Artola (Marbella)</div>
+    <div class="lectura-texto">
+      <p>Tu profe de Conocimiento del Medio te pide un trabajo de una página sobre las <strong>dunas de Artola</strong>, un espacio natural protegido de la costa de Marbella. No quiere que copies de internet: quiere que uses <strong>tres fuentes distintas</strong> y bien anotadas.</p>
+      <p>Antes de empezar, piensa: ¿qué tipo de información necesitas? ¿En qué fuentes la buscarías? ¿Cómo sabrás si son fiables? Y, sobre todo: ¿cómo vas a apuntar las tres para que tu profe pueda comprobarlas si quiere?</p>
+      <p>Para el reto, INVENTA tres fuentes <em>realistas</em>: una web oficial, un libro o periódico, y una persona o documental. Para cada una rellena los campos. Si dos fuentes <em>se contradicen</em> (por ejemplo, dan tamaños distintos del espacio), decide cuál te crees y por qué.</p>
+      <span class="lectura-firma">— Reto final · Búsqueda de información fiable</span>
+      <span class="palabras-count">— Texto de 152 palabras —</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 10</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Reto · 3 fuentes sobre las dunas de Artola</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Búsqueda de información fiable</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu misión:</div>
+    Diseñar tu investigación: <strong>palabras clave</strong>, <strong>tres fuentes</strong> realistas y bien anotadas, y un pequeño párrafo final justificando tus decisiones.
+  </div>
+
+  <div class="preguntas-label">1. Marca con una X los pasos que vas a aplicar en este reto:</div>
+  <div class="checklist">
+    <div class="check-fila"><span class="check-box"></span><span>Elegir palabras clave cortas y concretas.</span></div>
+    <div class="check-fila"><span class="check-box"></span><span>Mirar la URL antes de pinchar.</span></div>
+    <div class="check-fila"><span class="check-box"></span><span>Comprobar que el autor tenga autoridad sobre el tema.</span></div>
+    <div class="check-fila"><span class="check-box"></span><span>Mirar la fecha y descartar fuentes muy antiguas si el tema lo pide.</span></div>
+    <div class="check-fila"><span class="check-box"></span><span>Combinar tres tipos de fuente distintos.</span></div>
+    <div class="check-fila"><span class="check-box"></span><span>Anotar autor, título, dónde y año.</span></div>
+  </div>
+
+  <div class="preguntas-label" style="margin-top: 12px;">2. Escribe tus palabras clave para buscar este tema:</div>
+  <div class="linea-resp"></div>
+
+  <div class="preguntas-label" style="margin-top: 12px;">3. Inventa tres fuentes realistas. Rellena la ficha de cada una:</div>
+
+  <div class="reto-fuente">
+    <div class="reto-fuente-titulo">🌐 Fuente 1 (web oficial / institucional)</div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Autor:</span><span class="reto-fuente-linea"></span></div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Título:</span><span class="reto-fuente-linea"></span></div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Dónde:</span><span class="reto-fuente-linea"></span></div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Año:</span><span class="reto-fuente-linea"></span></div>
+  </div>
+
+  <div class="reto-fuente">
+    <div class="reto-fuente-titulo">📖 Fuente 2 (libro o periódico)</div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Autor:</span><span class="reto-fuente-linea"></span></div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Título:</span><span class="reto-fuente-linea"></span></div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Dónde:</span><span class="reto-fuente-linea"></span></div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Año:</span><span class="reto-fuente-linea"></span></div>
+  </div>
+
+  <div class="reto-fuente">
+    <div class="reto-fuente-titulo">🗣️ Fuente 3 (persona, vídeo o documental)</div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Autor:</span><span class="reto-fuente-linea"></span></div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Título:</span><span class="reto-fuente-linea"></span></div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Dónde:</span><span class="reto-fuente-linea"></span></div>
+    <div class="reto-fuente-campo"><span class="reto-fuente-label">Año:</span><span class="reto-fuente-linea"></span></div>
+  </div>
+
+  <div class="preguntas-label" style="margin-top: 12px;">4. Explica en dos o tres líneas <strong>por qué confías</strong> en estas tres fuentes:</div>
+  <div class="linea-resp"></div>
+  <div class="linea-resp"></div>
+  <div class="linea-resp"></div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">🏆 ¡Investigador certificado!</span>
+  </div>
+</body>
+</html>
