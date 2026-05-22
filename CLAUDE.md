@@ -187,9 +187,11 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 Antes de cualquier `git commit`:
 
 1. Ejecutar `git status` y mostrar qué archivos van a entrar.
-2. Escanear en busca de: datos personales de alumnos, teléfonos, emails privados, URLs con credenciales.
-3. Nunca commitear material privado de alumnos con nombres reales sin `noindex,nofollow`.
-4. Solo hacer el commit tras confirmación explícita del usuario.
+2. **Solo commitear lo que se haya trabajado en la sesión actual.** Nunca `git add -A` ni `git add .` — siempre `git add <rutas-específicas>`. Si aparece un archivo "modified" que no se ha tocado en la conversación (CI, hooks, autoformat, IDE…), **parar y preguntar a Miguel** — no entra en el commit.
+3. Escanear en busca de: datos personales de alumnos, teléfonos, emails privados, URLs con credenciales.
+4. Nunca commitear material privado de alumnos con nombres reales sin `noindex,nofollow`.
+5. Solo hacer el commit tras confirmación explícita del usuario.
+6. Tras el commit, ejecutar `git show --stat HEAD` para verificar que el contenido es exactamente el esperado (sobre todo si hubo `pull --rebase` previo).
 
 ---
 
