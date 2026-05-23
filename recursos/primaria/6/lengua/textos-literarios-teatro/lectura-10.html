@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reto final: escribe tu propia escena · Textos literarios: teatro · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .escena { font-size: 12.5px; line-height: 1.55; }
+    .escena .acotacion { font-style: italic; color: #333; display: block; margin: 3px 0; }
+    .escena .replica { margin-bottom: 3px; }
+    .escena .personaje { font-weight: 800; text-transform: uppercase; letter-spacing: .3px; }
+    .checklist { font-size: 12px; margin-top: 4px; }
+    .checklist .item { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
+    .check-box { border: 1.5px solid #000; width: 14px; height: 14px; flex-shrink: 0; }
+    .escritura-titulo { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; margin: 8px 0 4px; }
+    .escritura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
+    .escritura-mini-titulo { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: REPASO + MODELO ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos literarios: teatro</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🏆 Reto final: escribe tu propia escena teatral</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Antes de escribir, recuerda:</div>
+    Una escena teatral debe tener:
+    <ul>
+      <li><strong>Reparto:</strong> al menos 2 personajes con nombre.</li>
+      <li><strong>Acotación inicial:</strong> indica lugar, momento del día y ambiente.</li>
+      <li><strong>Diálogo:</strong> los personajes hablan. El nombre va en <strong>MAYÚSCULAS</strong> seguido de dos puntos.</li>
+      <li><strong>Acotaciones:</strong> entre paréntesis y en cursiva. Indican gestos, tono o entradas y salidas.</li>
+      <li><strong>Conflicto:</strong> los personajes quieren cosas distintas o uno tiene un problema.</li>
+      <li><strong>Final:</strong> el conflicto se resuelve, se aparca o queda abierto.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">Modelo: «El último cromo»</div>
+    <div class="escena">
+      <div class="acotacion">(Patio del colegio. Recreo. NACHO sostiene un sobre de cromos sin abrir. PAULA se acerca.)</div>
+      <div class="replica"><span class="personaje">Paula:</span> ¿Lo vas a abrir ahora?</div>
+      <div class="replica"><span class="personaje">Nacho:</span> Es el último que necesito. Si me sale, completo la colección.</div>
+      <div class="replica"><span class="personaje">Paula:</span> <em>(Cruzando los dedos.)</em> Venga, ábrelo.</div>
+      <div class="acotacion">(NACHO abre el sobre con cuidado. Saca un cromo y lo mira.)</div>
+      <div class="replica"><span class="personaje">Nacho:</span> <em>(Sin emoción.)</em> Repetido.</div>
+      <div class="replica"><span class="personaje">Paula:</span> Te lo cambio por dos de los míos.</div>
+      <div class="replica"><span class="personaje">Nacho:</span> <em>(Sonriendo.)</em> Trato hecho.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 10</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: TU ESCENA ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Tu escena teatral</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos literarios: teatro</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Lo que debe tener tu escena (marca al terminar):</div>
+    <div class="checklist">
+      <div class="item"><span class="check-box"></span><span>2 o 3 personajes con nombre</span></div>
+      <div class="item"><span class="check-box"></span><span>Acotación inicial (lugar, momento, ambiente)</span></div>
+      <div class="item"><span class="check-box"></span><span>Al menos 6 réplicas de diálogo</span></div>
+      <div class="item"><span class="check-box"></span><span>2 acotaciones intermedias (gestos o entradas)</span></div>
+      <div class="item"><span class="check-box"></span><span>Un conflicto claro entre los personajes</span></div>
+      <div class="item"><span class="check-box"></span><span>Un final (resolución o frase de cierre)</span></div>
+    </div>
+  </div>
+
+  <div class="escritura-box">
+    <div class="escritura-mini-titulo">Título y reparto</div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+  </div>
+
+  <div class="escritura-box">
+    <div class="escritura-mini-titulo">Escena</div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+    <div class="linea-resp"></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">🏆 ¡Bloque completado!</span>
+  </div>
+</body>
+</html>

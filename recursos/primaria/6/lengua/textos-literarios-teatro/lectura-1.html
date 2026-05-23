@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personajes, acotaciones y diálogo · Textos literarios: teatro · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .reparto { font-size: 12px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed #999; }
+    .reparto-titulo { font-weight: 800; font-size: 11px; letter-spacing: .5px; margin-bottom: 3px; }
+    .reparto ul { margin: 0 0 0 18px; padding: 0; }
+    .escena { font-size: 12.5px; line-height: 1.6; }
+    .escena .acotacion { font-style: italic; color: #333; display: block; margin: 4px 0; }
+    .escena .replica { margin-bottom: 4px; }
+    .escena .personaje { font-weight: 800; text-transform: uppercase; letter-spacing: .3px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 60%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 30px; text-align: center; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA + ESCENA ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos literarios: teatro</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🎭 Personajes, acotaciones y diálogo</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Cómo es un texto teatral?</div>
+    El <strong>teatro</strong> es un texto literario escrito para ser <strong>representado</strong> sobre un escenario. No lo cuenta un narrador: la historia avanza gracias a lo que dicen y hacen los personajes. Tiene tres elementos básicos:
+    <ul>
+      <li><strong>Personajes:</strong> quienes intervienen. Su nombre aparece <strong>en mayúsculas</strong>, seguido de dos puntos.</li>
+      <li><strong>Diálogo:</strong> lo que dicen los personajes. Es la mayor parte del texto.</li>
+      <li><strong>Acotaciones:</strong> indicaciones del autor (entre paréntesis y en <em>cursiva</em>) que explican gestos, tono, lugar o decorado.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">La merienda perdida</div>
+
+    <div class="reparto">
+      <div class="reparto-titulo">REPARTO</div>
+      <ul>
+        <li><strong>LUCAS</strong>, niño de 11 años.</li>
+        <li><strong>SARA</strong>, su hermana mayor.</li>
+        <li><strong>ABUELA</strong>, sentada con un libro.</li>
+      </ul>
+    </div>
+
+    <div class="escena">
+      <div class="acotacion">(Cocina de una casa. Tarde de invierno. LUCAS entra mirando hacia todos lados.)</div>
+
+      <div class="replica"><span class="personaje">Lucas:</span> <em>(Preocupado.)</em> Abuela, ¿has visto mi merienda? La dejé aquí esta mañana.</div>
+
+      <div class="replica"><span class="personaje">Abuela:</span> <em>(Sin levantar la vista del libro.)</em> En esta casa nadie toca lo que no es suyo, hijo. Pregúntale a tu hermana.</div>
+
+      <div class="acotacion">(Entra SARA con un bocadillo a medio comer.)</div>
+
+      <div class="replica"><span class="personaje">Sara:</span> <em>(Sonriendo.)</em> ¿Te refieres a este?</div>
+
+      <div class="replica"><span class="personaje">Lucas:</span> <em>(Enfadado.)</em> ¡Sara! ¡Llevo toda la tarde buscándola!</div>
+
+      <div class="replica"><span class="personaje">Sara:</span> Tranquilo, hermanito. Era una broma. Hay otra en la nevera.</div>
+
+      <div class="acotacion">(LUCAS suspira aliviado y se acerca a la nevera.)</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 1</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Personajes, acotaciones y diálogo</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos literarios: teatro</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a reconocer los tres elementos básicos del teatro (personajes, diálogo y acotaciones) en la escena «La merienda perdida».
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Completa el conteo:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">¿Cuántos personajes intervienen en la escena?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuántas acotaciones hay en total?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuántas veces habla Lucas?</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">El nombre de los personajes va en mayúsculas y seguido de dos puntos.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Las acotaciones las dicen los personajes en voz alta.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">En un texto teatral hay un narrador que cuenta lo que pasa.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Las acotaciones suelen escribirse entre paréntesis y en cursiva.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Copia <strong>dos acotaciones</strong> distintas que aparezcan en la escena:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Explica con tus palabras <strong>qué información</strong> da una acotación que no podría darnos un diálogo:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
