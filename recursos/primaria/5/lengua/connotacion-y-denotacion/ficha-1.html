@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El significado denotativo · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Connotación y denotación</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📖 Vocabulario · Ficha 1</div>
+  <div class="teoria-titulo">El significado denotativo (literal)</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Definición</div>
+    <div class="def-texto">El <strong>significado denotativo</strong> es el significado <strong>objetivo y literal</strong> de una palabra: el que aparece en el <strong>diccionario</strong>. Es igual para todas las personas y <strong>no depende</strong> de los sentimientos ni de la situación.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:30%">Palabra</th><th>Significado denotativo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>perro</strong></td><td>Mamífero doméstico de la familia de los cánidos.</td></tr>
+      <tr><td><strong>casa</strong></td><td>Edificio construido para vivir en él.</td></tr>
+      <tr><td><strong>noche</strong></td><td>Tiempo en el que no hay luz del Sol.</td></tr>
+      <tr><td><strong>rojo</strong></td><td>Color parecido al de la sangre o al de los tomates maduros.</td></tr>
+      <tr><td><strong>león</strong></td><td>Mamífero felino de gran tamaño que vive en África.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="def-box">
+    <div class="def-titulo">¿Cómo lo reconozco?</div>
+    <div class="def-texto">
+      1) Si puedes <strong>buscarlo en el diccionario</strong> y la definición encaja, es denotativo.<br />
+      2) No añade <strong>emociones</strong> ni opiniones: solo describe la realidad.<br />
+      3) Es el <strong>mismo significado para todo el mundo</strong>, en cualquier país que hable español.
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">"En el jardín hay un perro grande."</div>
+    <div class="ej-analisis">
+      <span class="pal">Análisis:</span> la palabra <em>perro</em> se usa con su significado <strong>denotativo</strong>. Habla de un animal concreto, no de una persona ni de un sentimiento. Si abres el diccionario en la palabra <em>perro</em>, ahí está la definición exacta que se aplica aquí. ✅
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">La <strong>denotación</strong> es el significado <strong>frío y objetivo</strong>: el del diccionario. Cuando hablamos de denotación, las palabras se usan tal cual, sin segundas intenciones ni matices personales. En la <strong>ficha 2</strong> veremos lo contrario: cuando una palabra añade matices o emociones (la <em>connotación</em>).</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Connotación y denotación · Ficha 1</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · El significado denotativo</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 1</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Une con flechas</strong> cada palabra con su significado denotativo (el del diccionario):</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Palabra</th><th>Significado denotativo</th></tr></thead>
+      <tbody>
+        <tr><td>a) lápiz</td><td>Astro alrededor del cual gira la Tierra.</td></tr>
+        <tr><td>b) Sol</td><td>Mueble con asiento y respaldo para una persona.</td></tr>
+        <tr><td>c) silla</td><td>Instrumento alargado para escribir o dibujar.</td></tr>
+        <tr><td>d) gato</td><td>Vehículo de dos ruedas que se mueve pedaleando.</td></tr>
+        <tr><td>e) bicicleta</td><td>Mamífero felino doméstico de pequeño tamaño.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe el <strong>significado denotativo</strong> (el del diccionario) de cada palabra. Hazlo con tus palabras:</div>
+    <div class="par-ej">
+      <div class="col-ej">
+        <div class="col-prompt">a) mesa → <span class="inline-resp" style="min-width:180px;"></span></div>
+        <div class="col-prompt">b) agua → <span class="inline-resp" style="min-width:180px;"></span></div>
+        <div class="col-prompt">c) libro → <span class="inline-resp" style="min-width:180px;"></span></div>
+      </div>
+      <div class="col-ej">
+        <div class="col-prompt">d) pájaro → <span class="inline-resp" style="min-width:180px;"></span></div>
+        <div class="col-prompt">e) reloj → <span class="inline-resp" style="min-width:180px;"></span></div>
+        <div class="col-prompt">f) árbol → <span class="inline-resp" style="min-width:180px;"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Lee las oraciones. En todas, la palabra subrayada se usa con su <strong>significado denotativo</strong>. <strong>Explica</strong> con una palabra a qué se refiere:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Hoy hace mucho <u>calor</u> en la calle. → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> El <u>perro</u> de mi vecino ladra mucho. → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> Apaga la <u>luz</u> antes de salir de la habitación. → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">d)</span> Compramos pan en la <u>panadería</u> de la esquina. → <span class="inline-resp"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Marca con una <strong>X</strong> las oraciones en las que la palabra subrayada se usa con su significado denotativo (literal, el del diccionario):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> <span class="inline-resp" style="min-width:30px;"></span> En el zoo vimos un <u>león</u> dormido.</div>
+      <div class="oracion-item"><span class="letra">b)</span> <span class="inline-resp" style="min-width:30px;"></span> Mi hermano es un <u>león</u>: nunca tiene miedo.</div>
+      <div class="oracion-item"><span class="letra">c)</span> <span class="inline-resp" style="min-width:30px;"></span> Por la <u>noche</u> hay menos coches en la calle.</div>
+      <div class="oracion-item"><span class="letra">d)</span> <span class="inline-resp" style="min-width:30px;"></span> Después del examen me quedé en blanco, fue una <u>noche</u> en mi cabeza.</div>
+      <div class="oracion-item"><span class="letra">e)</span> <span class="inline-resp" style="min-width:30px;"></span> El <u>fuego</u> de la chimenea calienta el salón.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
