@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reto final: escribe tu propio poema · Textos literarios: poesía · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ol { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .ejemplo-box { border: 1.5px solid #000; border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; }
+    .ejemplo-titulo { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .ejemplo-poema { font-style: italic; font-size: 12.5px; line-height: 1.6; text-align: center; }
+    .ejemplo-nota { font-size: 11px; color: #444; margin-top: 6px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 8px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .linea-larga { border-bottom: 1.5px solid #000; height: 22px; width: 100%; margin-bottom: 4px; }
+    .rima-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 4px; }
+    .rima-cell { border: 1.5px solid #000; padding: 4px 6px; text-align: center; min-height: 30px; }
+    .rima-cell .et { font-size: 11px; font-weight: 800; }
+    .verso-box { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+    .verso-box .label-v { font-size: 11px; font-weight: 700; min-width: 70px; }
+    .verso-box .linea { flex: 1; border-bottom: 1.5px solid #000; height: 22px; }
+    .verso-box .silabas { border: 1.5px solid #000; width: 42px; height: 22px; text-align: center; font-size: 11px; }
+    .poema-final-box { border: 2px solid #000; border-radius: 8px; padding: 12px; margin-top: 6px; }
+    .poema-final-box .linea { border-bottom: 1px solid #000; height: 24px; margin-bottom: 6px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos literarios: poesía</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🏆 Reto: escribe tu propio poema</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 8 pasos para escribir un poema</div>
+    <ol>
+      <li><strong>Elige un tema:</strong> ¿de qué quieres hablar? (la lluvia, mi mascota, la libertad, mi colegio, el verano…).</li>
+      <li><strong>Elige el yo poético:</strong> ¿quién habla? ¿tú mismo? ¿un animal? ¿una nube?</li>
+      <li><strong>Decide la forma:</strong> vamos a escribir una CUARTETA (4 versos de arte menor, hasta 8 sílabas, rima ABAB).</li>
+      <li><strong>Busca palabras que rimen:</strong> haz una lluvia de palabras con los finales que vas a usar.</li>
+      <li><strong>Escribe un BORRADOR</strong> sin preocuparte por la perfección.</li>
+      <li><strong>Mide los versos:</strong> cuenta sílabas, ajusta usando sinalefas.</li>
+      <li><strong>Añade al menos un recurso literario:</strong> comparación, metáfora o personificación.</li>
+      <li><strong>Pasa a limpio</strong> el poema final.</li>
+    </ol>
+  </div>
+
+  <div class="ejemplo-box">
+    <div class="ejemplo-titulo">📖 Ejemplo trabajado</div>
+    <div class="ejemplo-poema">
+      Llega el sol del mes de mayo, (8 — A)<br />
+      trae el viento la alegría, (8 — B)<br />
+      canta el mar como un caballo (8 — A)<br />
+      y se baña el mediodía. (8 — B)
+    </div>
+    <div class="ejemplo-nota">Recurso: <em>«canta el mar como un caballo»</em> → personificación + comparación.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 10</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Tu poema · plantilla guiada</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos literarios: poesía</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Mi tema es:</div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Mi yo poético es:</div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Mi rima será (rodea):  <strong>asonante</strong>  /  <strong>consonante</strong></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Mis 4 palabras que riman (esquema A-B-A-B):</div>
+      <div class="rima-grid">
+        <div class="rima-cell"><div class="et">A</div></div>
+        <div class="rima-cell"><div class="et">B</div></div>
+        <div class="rima-cell"><div class="et">A</div></div>
+        <div class="rima-cell"><div class="et">B</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">5.</span> BORRADOR — escribe tus 4 versos y mide las sílabas:</div>
+      <div class="verso-box"><span class="label-v">Verso 1 (A):</span><span class="linea"></span><span class="silabas"></span></div>
+      <div class="verso-box"><span class="label-v">Verso 2 (B):</span><span class="linea"></span><span class="silabas"></span></div>
+      <div class="verso-box"><span class="label-v">Verso 3 (A):</span><span class="linea"></span><span class="silabas"></span></div>
+      <div class="verso-box"><span class="label-v">Verso 4 (B):</span><span class="linea"></span><span class="silabas"></span></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">6.</span> Recurso literario que has usado y dónde aparece:</div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">7.</span> POEMA FINAL — pásalo a limpio con tu mejor letra:</div>
+      <div class="poema-final-box">
+        <div style="text-align:center; font-weight:700; margin-bottom:8px;">Título: ____________________________</div>
+        <div class="linea"></div>
+        <div class="linea"></div>
+        <div class="linea"></div>
+        <div class="linea"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">🏆 ¡Eres un poeta!</span>
+  </div>
+</body>
+</html>
