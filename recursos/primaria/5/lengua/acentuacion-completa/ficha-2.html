@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sílabas tónicas y átonas · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Acentuación completa</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🎯 Ortografía · Ficha 2</div>
+  <div class="teoria-titulo">Sílabas tónicas y átonas (separar y subrayar)</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Definición</div>
+    <div class="def-texto">En cualquier palabra de más de una sílaba hay <strong>una sola sílaba tónica</strong> (la que suena más fuerte) y las demás son <strong>átonas</strong> (suenan más flojas). Para acentuar bien, primero hay que <strong>separar</strong> la palabra en sílabas y <strong>localizar</strong> la tónica.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:30%">Palabra</th><th style="width:35%">Sílabas separadas</th><th>Tónica subrayada</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>camino</td><td>ca-mi-no</td><td>ca-<u>mi</u>-no</td></tr>
+      <tr><td>árbol</td><td>ár-bol</td><td><u>ár</u>-bol</td></tr>
+      <tr><td>ratón</td><td>ra-tón</td><td>ra-<u>tón</u></td></tr>
+      <tr><td>brújula</td><td>brú-ju-la</td><td><u>brú</u>-ju-la</td></tr>
+      <tr><td>pájaro</td><td>pá-ja-ro</td><td><u>pá</u>-ja-ro</td></tr>
+      <tr><td>relámpago</td><td>re-lám-pa-go</td><td>re-<u>lám</u>-pa-go</td></tr>
+    </tbody>
+  </table>
+
+  <div class="def-box">
+    <div class="def-titulo">Pasos para separar y marcar la tónica</div>
+    <div class="def-texto">
+      1) <strong>Separa</strong> la palabra en sílabas, con guiones: <em>ca-mi-no</em>.<br />
+      2) <strong>Lee en voz alta</strong> la palabra alargando cada sílaba.<br />
+      3) <strong>Subraya</strong> la sílaba que suena con más fuerza: <em>ca-<u>mi</u>-no</em>.<br />
+      4) Recuerda: las palabras de <strong>una sola sílaba</strong> (sol, mar, pan) no se clasifican por tónica/átona porque solo tienen una.
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">"Mi abuela tiene un teléfono nuevo."</div>
+    <div class="ej-analisis">
+      <span class="pal">Análisis:</span> separamos <em>te-lé-fo-no</em>. Al pronunciar despacio, la sílaba <strong>lé</strong> es la que suena más fuerte → te-<u>lé</u>-fo-no. Las sílabas <em>te, fo, no</em> son <strong>átonas</strong>. La tónica es <strong>lé</strong>, y además lleva tilde. ✅
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">La sílaba tónica <strong>no siempre</strong> lleva tilde, pero siempre existe. La tilde es una <em>marca escrita</em> que se pone solo en ciertos casos (lo veremos en las fichas 3, 4 y 5). Pero la <strong>fuerza</strong> al pronunciar (la tonicidad) está siempre, lleve tilde o no.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Acentuación completa · Ficha 2</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Sílabas tónicas y átonas</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 2</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Separa</strong> en sílabas y <strong>subraya</strong> la sílaba tónica:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Palabra</th><th>Sílabas (con tónica subrayada)</th><th>Palabra</th><th>Sílabas (con tónica subrayada)</th></tr></thead>
+      <tbody>
+        <tr><td>a) carpeta</td><td></td><td>e) mochila</td><td></td></tr>
+        <tr><td>b) cuaderno</td><td></td><td>f) cámara</td><td></td></tr>
+        <tr><td>c) reloj</td><td></td><td>g) Mediterráneo</td><td></td></tr>
+        <tr><td>d) hospital</td><td></td><td>h) pirámide</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Clasifica</strong> en la tabla las sílabas de la palabra <em>computadora</em> (com-pu-ta-do-ra):</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Sílabas átonas</th><th>Sílaba tónica</th></tr></thead>
+      <tbody>
+        <tr><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Lee y marca con una <strong>X</strong> la fila en que la sílaba subrayada es la <strong>tónica</strong> (la que suena más fuerte):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> <span class="inline-resp" style="min-width:30px;"></span> ca-<u>mi</u>-sa</div>
+      <div class="oracion-item"><span class="letra">b)</span> <span class="inline-resp" style="min-width:30px;"></span> ca-mi-<u>sa</u></div>
+      <div class="oracion-item"><span class="letra">c)</span> <span class="inline-resp" style="min-width:30px;"></span> <u>pa</u>-pel</div>
+      <div class="oracion-item"><span class="letra">d)</span> <span class="inline-resp" style="min-width:30px;"></span> pa-<u>pel</u></div>
+      <div class="oracion-item"><span class="letra">e)</span> <span class="inline-resp" style="min-width:30px;"></span> <u>plá</u>-ta-no</div>
+      <div class="oracion-item"><span class="letra">f)</span> <span class="inline-resp" style="min-width:30px;"></span> plá-<u>ta</u>-no</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Lee la frase, <strong>separa</strong> en sílabas las palabras subrayadas y <strong>subraya</strong> su tónica:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> El <u>caracol</u> camina por el jardín → <span class="inline-resp" style="min-width:280px;"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> Mi <u>hermano</u> juega al fútbol → <span class="inline-resp" style="min-width:280px;"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> La <u>profesora</u> explica la lección → <span class="inline-resp" style="min-width:280px;"></span></div>
+      <div class="oracion-item"><span class="letra">d)</span> Compré un <u>helicóptero</u> de juguete → <span class="inline-resp" style="min-width:280px;"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

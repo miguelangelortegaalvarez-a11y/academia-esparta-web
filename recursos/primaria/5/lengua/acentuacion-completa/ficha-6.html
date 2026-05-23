@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Repaso · clasificar y acentuar · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Acentuación completa</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🧩 Ortografía · Ficha 6</div>
+  <div class="teoria-titulo">Repaso · clasificar y acentuar</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Las tres reglas en una tabla</div>
+    <div class="def-texto">Para decidir si una palabra lleva tilde hay que hacer <strong>dos cosas</strong>: 1) <strong>localizar</strong> la sílaba tónica y 2) <strong>aplicar</strong> la regla que toque. Aquí tienes el resumen completo.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:20%">Tipo</th><th style="width:30%">Sílaba tónica</th><th>Lleva tilde…</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Aguda</strong></td><td>Última sílaba</td><td>Cuando acaba en <strong>vocal, -n o -s</strong>.</td></tr>
+      <tr><td><strong>Llana</strong></td><td>Penúltima sílaba</td><td>Cuando <strong>NO</strong> acaba en vocal, -n ni -s (es decir, en cualquier otra consonante).</td></tr>
+      <tr><td><strong>Esdrújula</strong></td><td>Antepenúltima sílaba</td><td><strong>SIEMPRE</strong>.</td></tr>
+      <tr><td><strong>Sobresdrújula</strong></td><td>Antes de la antepenúltima</td><td><strong>SIEMPRE</strong>.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="def-box">
+    <div class="def-titulo">Método paso a paso</div>
+    <div class="def-texto">
+      1) <strong>Separa</strong> la palabra en sílabas: <em>ca-mi-no, ár-bol, plá-ta-no</em>.<br />
+      2) <strong>Localiza</strong> la sílaba tónica (la que suena más fuerte).<br />
+      3) <strong>Clasifica</strong>: aguda, llana, esdrújula o sobresdrújula.<br />
+      4) <strong>Aplica</strong> la regla → ¿lleva tilde o no?
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">"El lápiz cayó en el sofá."</div>
+    <div class="ej-analisis">
+      <span class="pal">Análisis de "lápiz":</span> <em>lá-piz</em>. Tónica en la penúltima → <strong>llana</strong>. Acaba en -z (no en vocal, -n ni -s) → <strong>lleva tilde</strong>: lápiz. ✅<br />
+      <span class="pal">Análisis de "cayó":</span> <em>ca-yó</em>. Tónica en la última → <strong>aguda</strong>. Acaba en vocal → <strong>lleva tilde</strong>: cayó. ✅<br />
+      <span class="pal">Análisis de "sofá":</span> <em>so-fá</em>. Aguda, acaba en vocal → <strong>lleva tilde</strong>: sofá. ✅
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">Las reglas de agudas y llanas son <strong>opuestas</strong>: si en agudas la tilde aparece en "vocal/n/s", en llanas aparece justo en lo contrario. Las esdrújulas y sobresdrújulas son las <strong>más fáciles</strong>: tilde siempre.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Acentuación completa · Ficha 6</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Clasificar y acentuar</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 6</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Separa</strong> en sílabas, <strong>clasifica</strong> y di si lleva tilde o no:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Palabra</th><th>Sílabas</th><th>Tipo</th><th>¿Tilde?</th></tr></thead>
+      <tbody>
+        <tr><td>a) cocodrilo</td><td></td><td></td><td></td></tr>
+        <tr><td>b) pared</td><td></td><td></td><td></td></tr>
+        <tr><td>c) lampara</td><td></td><td></td><td></td></tr>
+        <tr><td>d) canción</td><td></td><td></td><td></td></tr>
+        <tr><td>e) miercoles</td><td></td><td></td><td></td></tr>
+        <tr><td>f) cesped</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Pon la <strong>tilde</strong> donde haga falta en este texto (hay 6 palabras a las que les falta):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item">"El sabado por la tarde, mi mama preparo una tortilla. Luego escuchamos musica clasica y leimos un libro de poesia en el salon."</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Clasifica</strong> estas palabras en la tabla según su tipo (agudas, llanas, esdrújulas o sobresdrújulas):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item">brújula · camión · árbol · cantar · músico · feliz · cuéntamelo · examen · plátano · cama · sofá · ágilmente</div>
+    </div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Agudas</th><th>Llanas</th><th>Esdrújulas</th><th>Sobresdrújulas</th></tr></thead>
+      <tbody>
+        <tr><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Escribe <strong>una oración</strong> con cada palabra que se indica. Recuerda poner las tildes que toquen:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> jardín → <span class="inline-resp" style="min-width:430px;"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> árbol → <span class="inline-resp" style="min-width:430px;"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> teléfono → <span class="inline-resp" style="min-width:430px;"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
