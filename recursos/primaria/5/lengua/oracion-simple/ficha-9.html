@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Análisis sintáctico básico · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .clases-tabla td.clase { font-weight: 800; width: 22%; }
+    .clases-tabla td.ej { font-style: italic; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Oración simple</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Gramática · Ficha 9</div>
+  <div class="teoria-titulo">Análisis sintáctico básico</div>
+
+  <div class="def-box">
+    <div class="def-titulo">5 pasos para analizar una oración simple</div>
+    <div class="def-texto">
+      <strong>1.</strong> Busca el <strong>verbo conjugado</strong> (núcleo del predicado).<br />
+      <strong>2.</strong> Busca el <strong>sujeto</strong> (¿quién + verbo? / ¿qué + verbo?). Si no aparece → sujeto omitido.<br />
+      <strong>3.</strong> Lo demás es el <strong>predicado</strong>. Decide si es PV (verbo normal) o PN (ser/estar/parecer + atributo).<br />
+      <strong>4.</strong> Dentro del predicado, busca los <strong>complementos</strong>: CD (¿qué/a quién? → lo, la, los, las), CI (¿a quién/para quién? → le, les), CC (dónde, cuándo, cómo, cuánto…).<br />
+      <strong>5.</strong> Comprueba la <strong>concordancia</strong> sujeto–verbo.
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">Mi hermana regaló un libro a su amiga ayer.</div>
+    <div class="ej-analisis">
+      <span class="pal">1) Verbo:</span> regaló. <br />
+      <span class="pal">2) Sujeto:</span> <em>Mi hermana</em> (¿quién regaló?). <br />
+      <span class="pal">3) Predicado verbal:</span> <em>regaló un libro a su amiga ayer</em>. <br />
+      <span class="pal">4) Complementos:</span> <em>un libro</em> = CD (¿qué regaló? → "lo regaló"); <em>a su amiga</em> = CI (¿a quién? → "le regaló"); <em>ayer</em> = CC de tiempo (¿cuándo?). <br />
+      <span class="pal">5) Concordancia:</span> sujeto singular 3ª pers. ↔ verbo singular 3ª pers. ✅
+    </div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:25%">Función</th><th>Pregunta / Truco</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="clase">Sujeto</td><td class="ej">¿quién? / ¿qué? + verbo. Concuerda con el verbo.</td></tr>
+      <tr><td class="clase">CD</td><td class="ej">¿qué? / ¿a quién? → lo, la, los, las.</td></tr>
+      <tr><td class="clase">CI</td><td class="ej">¿a quién? / ¿para quién? → le, les.</td></tr>
+      <tr><td class="clase">CC</td><td class="ej">¿dónde, cuándo, cómo, cuánto, con quién, para qué…?</td></tr>
+      <tr><td class="clase">Atributo</td><td class="ej">Solo con ser, estar, parecer → "lo" lo sustituye.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">Sigue siempre el mismo orden: <strong>verbo → sujeto → predicado → complementos</strong>. Si encuentras el verbo, ya tienes la mitad del análisis hecho.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Oración simple · Ficha 9</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Análisis sintáctico básico</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 9</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Indica <strong>sujeto (S)</strong> y <strong>predicado (P)</strong> y di si el predicado es PV o PN:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Oración</th><th>Sujeto</th><th>Predicado</th><th>PV/PN</th></tr></thead>
+      <tbody>
+        <tr><td>Mi tío conduce un camión.</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>El pastel está muy rico.</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>Aquellos perros ladran mucho.</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>Las flores son bonitas.</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Analiza las oraciones. Marca <strong>S, V, CD, CI, CC</strong>:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Oración</th><th>S</th><th>V</th><th>CD</th><th>CI</th><th>CC</th></tr></thead>
+      <tbody>
+        <tr><td>Lucía escribió una carta a su amiga.</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>Comimos pizza en casa.</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>Mi padre regaló un balón a mi hermano.</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Analiza esta oración paso a paso (siguiendo los 5 pasos):</div>
+    <div style="font-size:13px; font-style:italic; text-align:center; margin: 6px 0;">"Esta mañana mis primos compraron un regalo a la abuela."</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><strong>1) Verbo:</strong> <span class="inline-resp"></span></div>
+      <div class="oracion-item"><strong>2) Sujeto:</strong> <span class="inline-resp"></span></div>
+      <div class="oracion-item"><strong>3) Predicado (PV/PN):</strong> <span class="inline-resp"></span></div>
+      <div class="oracion-item"><strong>4) CD:</strong> <span class="inline-resp" style="min-width:90px"></span> · <strong>CI:</strong> <span class="inline-resp" style="min-width:90px"></span> · <strong>CC:</strong> <span class="inline-resp" style="min-width:90px"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

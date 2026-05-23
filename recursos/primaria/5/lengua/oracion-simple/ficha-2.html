@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El sujeto: identificación y concordancia · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .clases-tabla td.clase { font-weight: 800; width: 22%; }
+    .clases-tabla td.ej { font-style: italic; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Oración simple</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Gramática · Ficha 2</div>
+  <div class="teoria-titulo">El sujeto: identificación y concordancia</div>
+
+  <div class="def-box">
+    <div class="def-titulo">¿Qué es el sujeto?</div>
+    <div class="def-texto">El <strong>sujeto</strong> es la palabra (o grupo de palabras) de la oración que indica <strong>quién</strong> o <strong>qué</strong> realiza la acción del verbo, o de quién se dice algo. Para encontrarlo, pregunta al verbo: <strong>¿quién + verbo?</strong> o <strong>¿qué + verbo?</strong></div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:40%">Oración</th><th style="width:25%">Pregunta al verbo</th><th>Sujeto</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="ej">Los niños cantan en clase.</td><td>¿Quién canta?</td><td><strong>Los niños</strong></td></tr>
+      <tr><td class="ej">El sol calienta la tierra.</td><td>¿Qué calienta?</td><td><strong>El sol</strong></td></tr>
+      <tr><td class="ej">María lee un cuento.</td><td>¿Quién lee?</td><td><strong>María</strong></td></tr>
+      <tr><td class="ej">Aquellos coches contaminan mucho.</td><td>¿Qué contamina?</td><td><strong>Aquellos coches</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="def-box">
+    <div class="def-titulo">Concordancia sujeto–verbo</div>
+    <div class="def-texto">El sujeto y el verbo siempre <strong>concuerdan</strong> en <strong>número</strong> (singular/plural) y <strong>persona</strong> (1ª, 2ª, 3ª). Si cambias uno, debes cambiar el otro:<br />
+      · <em>El niño <strong>juega</strong></em> (singular) → <em>Los niños <strong>juegan</strong></em> (plural).<br />
+      · <em>Yo <strong>como</strong></em> (1ª pers.) → <em>Tú <strong>comes</strong></em> (2ª pers.) → <em>Ella <strong>come</strong></em> (3ª pers.).
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">Mis amigos vienen al cine esta tarde.</div>
+    <div class="ej-analisis">
+      ¿Quién viene? → <span class="pal">Mis amigos</span> (sujeto, plural, 3ª persona). El verbo <em>vienen</em> está en plural y 3ª persona → <strong>concuerda ✅</strong>. Si dijéramos <em>"Mis amigos viene"</em>, sería incorrecto.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">El sujeto <strong>nunca</strong> empieza por una preposición (<em>a, de, en, con, por…</em>). Por ejemplo, en <em>"A mi hermano le gusta el chocolate"</em>, el sujeto NO es "a mi hermano", es <strong>"el chocolate"</strong> (¿qué le gusta? → el chocolate).</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Oración simple · Ficha 2</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · El sujeto y la concordancia</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 2</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Subraya el sujeto</strong> de cada oración (usa la pregunta ¿quién? o ¿qué? + verbo):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> La maestra explica el problema con paciencia.</div>
+      <div class="oracion-item"><span class="letra">b)</span> Los pájaros vuelan hacia el sur en otoño.</div>
+      <div class="oracion-item"><span class="letra">c)</span> Mi hermano mayor estudia bachillerato.</div>
+      <div class="oracion-item"><span class="letra">d)</span> Aquellas nubes oscuras anuncian tormenta.</div>
+      <div class="oracion-item"><span class="letra">e)</span> El tren de Málaga llega a las ocho.</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Marca si hay <strong>concordancia correcta</strong> entre sujeto y verbo (Sí / No):</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Oración</th><th>¿Concuerda?</th></tr></thead>
+      <tbody>
+        <tr><td>Mis primas viene esta tarde.</td><td class="vacio"></td></tr>
+        <tr><td>El gato duerme en el sofá.</td><td class="vacio"></td></tr>
+        <tr><td>Los alumnos estudian para el examen.</td><td class="vacio"></td></tr>
+        <tr><td>Tú comes muy despacio.</td><td class="vacio"></td></tr>
+        <tr><td>Nosotros juega al fútbol los sábados.</td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> Pasa el <strong>sujeto a plural</strong> y cambia el verbo:</div>
+      <div class="col-prompt">a) El niño corre. → <span class="inline-resp"></span></div>
+      <div class="col-prompt">b) Mi tío cocina. → <span class="inline-resp"></span></div>
+      <div class="col-prompt">c) La nube se aleja. → <span class="inline-resp"></span></div>
+      <div class="col-prompt">d) Tu hermana sonríe. → <span class="inline-resp"></span></div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Inventa un <strong>sujeto</strong> coherente con el verbo:</div>
+      <div class="col-prompt">a) <span class="inline-resp"></span> ladran toda la noche.</div>
+      <div class="col-prompt">b) <span class="inline-resp"></span> brilla en el cielo.</div>
+      <div class="col-prompt">c) <span class="inline-resp"></span> cantan en el coro.</div>
+      <div class="col-prompt">d) <span class="inline-resp"></span> repara el coche.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
