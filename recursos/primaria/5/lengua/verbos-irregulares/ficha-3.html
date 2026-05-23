@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cambios o → ue · Verbos irregulares · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .clases-tabla td.clase { font-weight: 800; width: 22%; }
+    .clases-tabla td.ej { font-style: italic; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Verbos irregulares</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Gramática · Ficha 3</div>
+  <div class="teoria-titulo">Cambios vocálicos: o → ue</div>
+
+  <div class="def-box">
+    <div class="def-titulo">La regla</div>
+    <div class="def-texto">Otros verbos cambian la <strong>o</strong> de la raíz por <strong>ue</strong> en presente, igual que con e → ie: cambian en <strong>yo, tú, él/ella, ellos</strong> y <strong>NO</strong> cambian en <strong>nosotros y vosotros</strong>.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:22%">Persona</th><th>poder</th><th>dormir</th><th>contar</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="clase">yo</td><td class="ej"><strong>puedo</strong></td><td class="ej"><strong>duermo</strong></td><td class="ej"><strong>cuento</strong></td></tr>
+      <tr><td class="clase">tú</td><td class="ej"><strong>puedes</strong></td><td class="ej"><strong>duermes</strong></td><td class="ej"><strong>cuentas</strong></td></tr>
+      <tr><td class="clase">él/ella</td><td class="ej"><strong>puede</strong></td><td class="ej"><strong>duerme</strong></td><td class="ej"><strong>cuenta</strong></td></tr>
+      <tr><td class="clase">nosotros</td><td class="ej">podemos</td><td class="ej">dormimos</td><td class="ej">contamos</td></tr>
+      <tr><td class="clase">vosotros</td><td class="ej">podéis</td><td class="ej">dormís</td><td class="ej">contáis</td></tr>
+      <tr><td class="clase">ellos</td><td class="ej"><strong>pueden</strong></td><td class="ej"><strong>duermen</strong></td><td class="ej"><strong>cuentan</strong></td></tr>
+    </tbody>
+  </table>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:35%">Verbos frecuentes con cambio o → ue</th><th>1ª persona singular (yo)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="ej">contar, encontrar, recordar, mostrar, costar, almorzar</td><td class="ej">cuento, encuentro, recuerdo, muestro, cuesto, almuerzo</td></tr>
+      <tr><td class="ej">poder, volver, mover, soler, doler, llover</td><td class="ej">puedo, vuelvo, muevo, suelo, duelo, llueve</td></tr>
+      <tr><td class="ej">dormir, morir</td><td class="ej">duermo, muero</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">No puedo dormir porque mi vecino vuelve muy tarde a casa.</div>
+    <div class="ej-analisis">
+      <span class="pal">poder</span> → p<u>ue</u>do · <span class="pal">dormir</span> → d<u>ue</u>rmo · <span class="pal">volver</span> → v<u>ue</u>lve. Los tres cambian la <strong>o</strong> por <strong>ue</strong>.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">El verbo <em>jugar</em> hace lo mismo, pero con la <strong>u</strong>: u → ue (yo j<u>ue</u>go, tú j<u>ue</u>gas, nosotros jugamos…).</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Cambios o → ue · Ficha 3</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Cambios o → ue</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 3</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Completa la conjugación en presente:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Persona</th><th>encontrar</th><th>volver</th><th>recordar</th></tr></thead>
+      <tbody>
+        <tr><td>yo</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>tú</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>él/ella</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>nosotros</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>ellos</td><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe la forma correcta (presente):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Mi gato (dormir) <span class="inline-resp"></span> todo el día.</div>
+      <div class="oracion-item"><span class="letra">b)</span> Nosotros (volver) <span class="inline-resp"></span> a casa a las seis.</div>
+      <div class="oracion-item"><span class="letra">c)</span> Tú (contar) <span class="inline-resp"></span> chistes muy buenos.</div>
+      <div class="oracion-item"><span class="letra">d)</span> Yo (jugar) <span class="inline-resp"></span> al baloncesto los sábados.</div>
+    </div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> Infinitivo:</div>
+      <div class="col-prompt">a) cuestas → <span class="inline-resp"></span></div>
+      <div class="col-prompt">b) muestro → <span class="inline-resp"></span></div>
+      <div class="col-prompt">c) almuerzan → <span class="inline-resp"></span></div>
+      <div class="col-prompt">d) suele → <span class="inline-resp"></span></div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> ¿Correcto (✓) o incorrecto (✗)?</div>
+      <div class="col-prompt">a) yo dormo → <span class="inline-resp" style="min-width:50px"></span></div>
+      <div class="col-prompt">b) ellos vuelven → <span class="inline-resp" style="min-width:50px"></span></div>
+      <div class="col-prompt">c) nosotros puedemos → <span class="inline-resp" style="min-width:50px"></span></div>
+      <div class="col-prompt">d) tú cuentas → <span class="inline-resp" style="min-width:50px"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

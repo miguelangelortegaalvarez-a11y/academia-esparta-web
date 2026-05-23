@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pretérito perfecto simple irregular · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .clases-tabla td.clase { font-weight: 800; width: 22%; }
+    .clases-tabla td.ej { font-style: italic; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Verbos irregulares</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Gramática · Ficha 8</div>
+  <div class="teoria-titulo">Pretérito perfecto simple irregular</div>
+
+  <div class="def-box">
+    <div class="def-titulo">¿Qué es?</div>
+    <div class="def-texto">El <strong>pretérito perfecto simple</strong> (también llamado <em>indefinido</em>) cuenta acciones del pasado ya terminadas: <em>canté, comí, viví</em>. Muchos verbos lo forman de manera <strong>irregular</strong>: cambia la raíz y las terminaciones no llevan tilde.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:22%">Persona</th><th>tener</th><th>hacer</th><th>decir</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="clase">yo</td><td class="ej"><strong>tuve</strong></td><td class="ej"><strong>hice</strong></td><td class="ej"><strong>dije</strong></td></tr>
+      <tr><td class="clase">tú</td><td class="ej">tuviste</td><td class="ej">hiciste</td><td class="ej">dijiste</td></tr>
+      <tr><td class="clase">él/ella</td><td class="ej">tuvo</td><td class="ej">hizo</td><td class="ej">dijo</td></tr>
+      <tr><td class="clase">nosotros</td><td class="ej">tuvimos</td><td class="ej">hicimos</td><td class="ej">dijimos</td></tr>
+      <tr><td class="clase">vosotros</td><td class="ej">tuvisteis</td><td class="ej">hicisteis</td><td class="ej">dijisteis</td></tr>
+      <tr><td class="clase">ellos</td><td class="ej">tuvieron</td><td class="ej">hicieron</td><td class="ej">dijeron</td></tr>
+    </tbody>
+  </table>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:35%">Otros verbos muy frecuentes (yo)</th><th>Forma</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="ej">venir, poner, poder, saber, querer</td><td class="ej">vine, puse, pude, supe, quise</td></tr>
+      <tr><td class="ej">andar, estar, haber</td><td class="ej">anduve, estuve, hube</td></tr>
+      <tr><td class="ej">ir / ser (comparten)</td><td class="ej">fui (yo fui al cine · yo fui maestro)</td></tr>
+      <tr><td class="ej">dar, ver</td><td class="ej">di, vi</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">Ayer tuve un examen y mi hermano hizo una foto del pizarrón.</div>
+    <div class="ej-analisis">
+      <span class="pal">tuve</span> = pasado simple de <em>tener</em>. ¡Fíjate! No es "yo tení", es <strong>tuve</strong>. · <span class="pal">hizo</span> = pasado simple de <em>hacer</em>, 3ª persona singular.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">El pasado irregular <strong>no lleva tilde</strong> en la 1ª y 3ª persona del singular: yo tuve (no <em>tuvé</em>), él hizo (no <em>hizó</em>). El acento cae en la raíz, no en la terminación.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Pasado irregular · Ficha 8</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Pasado irregular</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 8</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe el pasado simple (1ª persona singular, "yo"):</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Infinitivo</th><th>yo (pasado)</th><th>Infinitivo</th><th>yo (pasado)</th></tr></thead>
+      <tbody>
+        <tr><td>tener</td><td class="vacio"></td><td>venir</td><td class="vacio"></td></tr>
+        <tr><td>hacer</td><td class="vacio"></td><td>saber</td><td class="vacio"></td></tr>
+        <tr><td>decir</td><td class="vacio"></td><td>poder</td><td class="vacio"></td></tr>
+        <tr><td>estar</td><td class="vacio"></td><td>querer</td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Completa con el verbo en pasado simple:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Mi madre (hacer) <span class="inline-resp"></span> la cena ayer.</div>
+      <div class="oracion-item"><span class="letra">b)</span> Yo (tener) <span class="inline-resp"></span> mucha suerte en el examen.</div>
+      <div class="oracion-item"><span class="letra">c)</span> Mis primos (venir) <span class="inline-resp"></span> el sábado pasado.</div>
+      <div class="oracion-item"><span class="letra">d)</span> Tú me (decir) <span class="inline-resp"></span> la verdad.</div>
+    </div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> ¿Lleva tilde o no? Tacha la forma incorrecta:</div>
+      <div class="col-prompt">a) yo <strong>tuve / tuvé</strong></div>
+      <div class="col-prompt">b) él <strong>hizo / hizó</strong></div>
+      <div class="col-prompt">c) yo <strong>fui / fuí</strong></div>
+      <div class="col-prompt">d) ella <strong>dijo / dijó</strong></div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Infinitivo:</div>
+      <div class="col-prompt">a) puse → <span class="inline-resp"></span></div>
+      <div class="col-prompt">b) supiste → <span class="inline-resp"></span></div>
+      <div class="col-prompt">c) anduvieron → <span class="inline-resp"></span></div>
+      <div class="col-prompt">d) quisimos → <span class="inline-resp"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SER, ESTAR, HABER · Verbos irregulares · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .clases-tabla td.clase { font-weight: 800; width: 22%; }
+    .clases-tabla td.ej { font-style: italic; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Verbos irregulares</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Gramática · Ficha 6</div>
+  <div class="teoria-titulo">Verbos muy irregulares: SER, ESTAR, HABER</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Los tres más importantes</div>
+    <div class="def-texto">Son los verbos <strong>más usados</strong> del español y los <strong>más irregulares</strong>: <em>ser</em> y <em>estar</em> expresan estado o identidad; <em>haber</em> se usa como auxiliar (he comido, ha venido…) o impersonal (hay).</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:22%">Persona</th><th>SER (presente)</th><th>ESTAR (presente)</th><th>HABER (presente)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="clase">yo</td><td class="ej"><strong>soy</strong></td><td class="ej"><strong>estoy</strong></td><td class="ej"><strong>he</strong></td></tr>
+      <tr><td class="clase">tú</td><td class="ej"><strong>eres</strong></td><td class="ej"><strong>estás</strong></td><td class="ej"><strong>has</strong></td></tr>
+      <tr><td class="clase">él/ella</td><td class="ej"><strong>es</strong></td><td class="ej"><strong>está</strong></td><td class="ej"><strong>ha</strong> (hay)</td></tr>
+      <tr><td class="clase">nosotros</td><td class="ej"><strong>somos</strong></td><td class="ej">estamos</td><td class="ej"><strong>hemos</strong></td></tr>
+      <tr><td class="clase">vosotros</td><td class="ej"><strong>sois</strong></td><td class="ej">estáis</td><td class="ej">habéis</td></tr>
+      <tr><td class="clase">ellos</td><td class="ej"><strong>son</strong></td><td class="ej">están</td><td class="ej"><strong>han</strong></td></tr>
+    </tbody>
+  </table>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:22%">Verbo</th><th>¿Para qué se usa?</th><th style="width:32%">Ejemplos</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="clase">SER</td><td>Identidad, profesión, origen, cualidad permanente.</td><td class="ej">Soy alto · Es maestro · Somos de Málaga</td></tr>
+      <tr><td class="clase">ESTAR</td><td>Estado temporal, lugar, sensación, salud.</td><td class="ej">Estoy cansado · Está en casa · Estamos enfermos</td></tr>
+      <tr><td class="clase">HABER</td><td>Auxiliar (he + participio) o impersonal (hay).</td><td class="ej">He comido · Han llegado · Hay tres libros</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">Marta es maestra, está en su clase y ha preparado el examen.</div>
+    <div class="ej-analisis">
+      <span class="pal">es</span> = SER (profesión, permanente) · <span class="pal">está</span> = ESTAR (lugar) · <span class="pal">ha preparado</span> = HABER + participio (auxiliar).
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">Truco SER / ESTAR: si es algo que <strong>te define</strong> o permanente → SER. Si es <strong>temporal</strong>, un lugar o un estado → ESTAR.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 SER, ESTAR, HABER · Ficha 6</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · SER, ESTAR, HABER</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 6</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Completa con SER o ESTAR (presente):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Yo <span class="inline-resp"></span> de Torremolinos.</div>
+      <div class="oracion-item"><span class="letra">b)</span> Marta <span class="inline-resp"></span> muy contenta hoy.</div>
+      <div class="oracion-item"><span class="letra">c)</span> Mis primos <span class="inline-resp"></span> simpáticos.</div>
+      <div class="oracion-item"><span class="letra">d)</span> La biblioteca <span class="inline-resp"></span> cerca del colegio.</div>
+      <div class="oracion-item"><span class="letra">e)</span> Vosotros <span class="inline-resp"></span> buenos amigos.</div>
+      <div class="oracion-item"><span class="letra">f)</span> Tú <span class="inline-resp"></span> cansado, descansa.</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Completa con HABER + participio (presente perfecto):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Yo <span class="inline-resp"></span> (comer) ya.</div>
+      <div class="oracion-item"><span class="letra">b)</span> Mis amigos <span class="inline-resp"></span> (llegar) al cine.</div>
+      <div class="oracion-item"><span class="letra">c)</span> Nosotros <span class="inline-resp"></span> (terminar) los deberes.</div>
+      <div class="oracion-item"><span class="letra">d)</span> ¿Tú <span class="inline-resp"></span> (ver) la película nueva?</div>
+    </div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> Escribe la forma de SER:</div>
+      <div class="col-prompt">a) yo → <span class="inline-resp"></span></div>
+      <div class="col-prompt">b) ellos → <span class="inline-resp"></span></div>
+      <div class="col-prompt">c) vosotros → <span class="inline-resp"></span></div>
+      <div class="col-prompt">d) nosotros → <span class="inline-resp"></span></div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Escribe la forma de ESTAR:</div>
+      <div class="col-prompt">a) yo → <span class="inline-resp"></span></div>
+      <div class="col-prompt">b) tú → <span class="inline-resp"></span></div>
+      <div class="col-prompt">c) ella → <span class="inline-resp"></span></div>
+      <div class="col-prompt">d) ellos → <span class="inline-resp"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
