@@ -40,10 +40,10 @@ academia-esparta-web/
 │   │   ├── 2/lengua/     # 12 bloques × ~10 fichas — COMPLETO ✅
 │   │   ├── 3/lengua/     # 12 bloques × 6 fichas — COMPLETO ✅
 │   │   ├── 4/lengua/     # 14 bloques completos (6-10 fichas c/u) — COMPLETO ✅
-│   │   ├── 5/lengua/     # Área Lectura COMPLETA: 7 bloques × 10 fichas ✅
-│   │   │                 # Bloque D Gramática 7/8 ✅: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas
-│   │   │                 # Siguiente: 5º D puntuacion-avanzada (último sub-bloque) ⬅
-│   │   └── 6/            # Sin carpeta aún
+│   │   ├── 5/lengua/     # COMPLETO ✅ (cerrado 2026-05-23)
+│   │   │                 # Área Lectura: 7 bloques × 10 fichas
+│   │   │                 # Bloque D Gramática 8/8: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
+│   │   └── 6/            # Sin carpeta aún — siguiente prioridad ⬅
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
 │                                 # Resto de 1º ESO sin cubrir
@@ -140,10 +140,11 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - **2º Primaria Lengua** — 12 bloques, ~111 fichas ✅
 - **3º Primaria Lengua** — 12 bloques, ~73 fichas ✅
 - **4º Primaria Lengua** — 14 bloques, ~102 fichas ✅
-- **5º Primaria Lengua (Lectura)** — 7 bloques × 10 fichas = 70 fichas ✅ (cerrada 2026-05-22)
-- **5º Primaria Lengua (Gramática · bloque D)** — 7/8 sub-bloques × 10 fichas = 70 fichas (2026-05-23). Sub-bloques cubiertos: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas. Pendiente: puntuacion-avanzada.
+- **5º Primaria Lengua — COMPLETO ✅** (cerrado 2026-05-23):
+  - Área Lectura — 7 bloques × 10 fichas = 70 fichas (cerrada 2026-05-22)
+  - Bloque D Gramática — 8 sub-bloques × 10 fichas = 80 fichas: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~589 fichas indexadas en sitemap
+- **Total:** ~599 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
 - 2 artículos publicados:
@@ -159,9 +160,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — siguiente paso
 
-1. **5º Primaria Lengua · Bloque D "Gramática y ortografía"** — 7/8 sub-bloques cubiertos (analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas). **Siguiente sugerido:** `puntuacion-avanzada` (uso avanzado de coma, punto y coma, dos puntos, comillas, guion, paréntesis; signos en preguntas/exclamaciones complejas). Único pendiente: puntuacion-avanzada. **Patrón establecido:** 10 fichas por sub-bloque (no 6 como cursos anteriores), dificultad progresiva ⭐→⭐⭐⭐⭐, registrar en `materiales.html` como clave `'lengua|5|D|Nombre del sub-bloque'` antes del primer bloque LECTURA de 5º. Ruta: `recursos/primaria/5/lengua/BLOQUE/`.
-
-2. **Fichas 6º Primaria Lengua** — crear carpeta y empezar cuando 5º esté sólido.
+1. **Fichas 6º Primaria Lengua** — crear `recursos/primaria/6/lengua/` y arrancar. Sin estructura definida aún. Primer paso: decidir qué bloques cubrir (similar a 5º o más exigente, dado que 6º es la antesala de la ESO). **Patrón heredado de 5º:** 10 fichas por sub-bloque con dificultad progresiva ⭐→⭐⭐⭐⭐, registrar cada uno en `materiales.html` con clave `'lengua|6|D|Nombre'` o `'lengua|6|LECTURA|Nombre'`. Ruta: `recursos/primaria/6/lengua/BLOQUE/`.
 
 ### Prioridad media — después de Primaria completa
 
