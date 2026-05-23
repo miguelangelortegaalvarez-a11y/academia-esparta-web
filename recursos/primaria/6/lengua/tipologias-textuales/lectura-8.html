@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dos miradas sobre los videojuegos · Tipologías textuales · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .doble-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+    .mini-titulo { font-size: 12px; font-weight: 800; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
+    .mini-letra { font-family: sans-serif; font-size: 14px; font-weight: 800; }
+    .mini-tipo-resp { border: 1.5px solid #000; min-width: 100px; height: 19px; padding: 0 6px; font-size: 11px; }
+    .mini-texto { border: 1.5px solid #000; border-radius: 8px; padding: 8px 11px; }
+    .mini-titulo-texto { font-size: 12.5px; font-weight: 800; margin-bottom: 4px; }
+    .mini-cuerpo { font-size: 11.5px; line-height: 1.5; text-align: justify; }
+    .mini-cuerpo p { margin-bottom: 5px; }
+    .mini-cuerpo p:last-child { margin-bottom: 0; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 9px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .comp-tabla { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
+    .comp-tabla th, .comp-tabla td { border: 1.5px solid #000; padding: 5px 7px; vertical-align: top; }
+    .comp-tabla th { background: #eee; font-weight: 800; text-align: center; }
+    .comp-tabla td.etiqueta { font-weight: 800; width: 38%; background: #f5f5f5; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .comp-tabla th, .comp-tabla td.etiqueta { background: #eee !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: DOS TEXTOS PARA COMPARAR ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Tipologías textuales</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔍 Expositivo vs argumentativo</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Mismo tema, distinta intención</div>
+    Sobre un mismo tema se puede escribir de formas muy distintas. Si el autor solo quiere <strong>informar</strong>, el texto será <em>expositivo</em>. Si el autor quiere <strong>defender una opinión</strong>, el texto será <em>argumentativo</em>. Aquí tienes dos textos sobre los <strong>videojuegos</strong>: uno de cada tipo. ¿Sabrás distinguirlos?
+  </div>
+
+  <div class="doble-grid">
+    <div class="mini-texto">
+      <div class="mini-titulo"><span class="mini-letra">A.</span><span class="mini-tipo-resp">Tipo: ____________</span></div>
+      <div class="mini-titulo-texto">¿Qué es un videojuego?</div>
+      <div class="mini-cuerpo">
+        <p>Un videojuego es un programa informático diseñado para entretener. El jugador interactúa con una pantalla mediante un mando, un teclado o un mando táctil, y avanza superando retos.</p>
+        <p>Existen muchos géneros: de aventura, de plataformas, de estrategia, deportivos o educativos. Algunos se juegan en solitario; otros, en grupo a través de internet.</p>
+        <p>En España, según datos de 2023, casi siete de cada diez personas entre 6 y 14 años juega a videojuegos al menos una vez por semana.</p>
+      </div>
+    </div>
+    <div class="mini-texto">
+      <div class="mini-titulo"><span class="mini-letra">B.</span><span class="mini-tipo-resp">Tipo: ____________</span></div>
+      <div class="mini-titulo-texto">Los videojuegos también enseñan</div>
+      <div class="mini-cuerpo">
+        <p>Algunos adultos siguen pensando que los videojuegos son una pérdida de tiempo. Sin embargo, yo creo que <strong>bien usados, los videojuegos también enseñan</strong>.</p>
+        <p>En primer lugar, mejoran la rapidez para tomar decisiones: en una partida hay que pensar en segundos. Además, los juegos de estrategia obligan a planificar a largo plazo, igual que en un examen.</p>
+        <p>Por supuesto, abusar de ellos es malo. Pero no más que abusar de la televisión o del móvil. La clave no es prohibirlos: es enseñar a usarlos con cabeza.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 8</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Dos miradas sobre los videojuegos</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Tipologías textuales</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Identifica qué tipo de texto es cada uno y, sobre todo, justifica tu respuesta comparando cómo se escribe sobre el mismo tema.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Completa la siguiente tabla comparativa:</div>
+      <table class="comp-tabla">
+        <thead>
+          <tr><th></th><th>Texto A</th><th>Texto B</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="etiqueta">Tipo de texto</td><td></td><td></td></tr>
+          <tr><td class="etiqueta">¿Hay opinión personal del autor?</td><td></td><td></td></tr>
+          <tr><td class="etiqueta">Una palabra o expresión que lo demuestra</td><td></td><td></td></tr>
+          <tr><td class="etiqueta">¿Dónde lo encontrarías? (libro, periódico, blog…)</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">El texto A da datos comprobables y no opinión del autor.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">El texto B defiende una tesis sobre los videojuegos.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Sobre el mismo tema solo se puede escribir un tipo de texto.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Frases como "yo creo que" son típicas de un texto argumentativo.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Convierte la siguiente <strong>frase expositiva</strong> en una <strong>frase argumentativa</strong>:</div>
+      <div class="linea-resp"></div>
+      <div style="font-size: 12px; font-style: italic; margin: 2px 0 6px;">Original: "En España, casi siete de cada diez niños juega a videojuegos al menos una vez por semana."</div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Escribe el <strong>titular</strong> que pondrías a cada texto si aparecieran en un periódico.</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

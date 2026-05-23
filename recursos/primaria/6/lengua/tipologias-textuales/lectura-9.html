@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reciclar en casa: un texto con tres caras · Tipologías textuales · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-titulo { font-size: 14px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13px; line-height: 1.6; text-align: justify; }
+    .lectura-texto p { margin-bottom: 6px; display: flex; gap: 8px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .lectura-texto p .num-parrafo { font-family: sans-serif; font-weight: 800; min-width: 22px; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .clas-tabla { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
+    .clas-tabla th, .clas-tabla td { border: 1.5px solid #000; padding: 5px 7px; text-align: center; vertical-align: middle; }
+    .clas-tabla th { background: #eee; font-weight: 800; }
+    .clas-tabla td.parrafo { font-weight: 800; width: 60px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .clas-tabla th { background: #eee !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEXTO MIXTO ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Tipologías textuales</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🧩 Texto mixto</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Los textos reales se mezclan</div>
+    En la vida real, un mismo texto puede combinar <strong>varias tipologías</strong>. Por ejemplo, un cartel sobre reciclaje puede empezar <em>explicando</em> qué es (expositivo), seguir <em>defendiendo</em> por qué hay que hacerlo (argumentativo) y terminar <em>indicando</em> cómo separar la basura en casa (instructivo). Saber detectar cada parte es lo que distingue a un buen lector.
+  </div>
+
+  <div class="lectura-box">
+    <div class="lectura-titulo">Reciclar en casa</div>
+    <div class="lectura-texto">
+      <p><span class="num-parrafo">¶1</span><span>Reciclar es el proceso por el que los materiales usados (papel, vidrio, plástico, metales…) se separan, se recogen y se transforman en materias primas con las que se fabrican productos nuevos. Es uno de los pasos clave para reducir la cantidad de residuos que acaba en vertederos.</span></p>
+      <p><span class="num-parrafo">¶2</span><span>Hoy, en España, cada persona genera cada año más de 450 kilos de basura. Solo una pequeña parte de esos residuos se recicla; el resto se entierra o se quema. Sin embargo, casi todo lo que tiramos podría tener una segunda vida si lo separáramos bien en casa.</span></p>
+      <p><span class="num-parrafo">¶3</span><span>Por eso pienso que reciclar no es algo que deba hacer "el de al lado": es responsabilidad de cada uno. Cuesta tan poco esfuerzo separar un envase del cartón que no hacerlo, sabiendo lo que sabemos, es una decisión consciente de mirar para otro lado.</span></p>
+      <p><span class="num-parrafo">¶4</span><span>Reciclar en casa es muy sencillo si sigues estos pasos: 1. Coloca tres cubos o bolsas, uno por tipo de residuo. 2. Echa el papel y el cartón en el cubo azul (sin grapas grandes). 3. Echa los envases de plástico y latas en el amarillo. 4. Echa el vidrio en el verde. 5. Cuando se llene un cubo, baja su contenido al contenedor del mismo color.</span></p>
+      <p><span class="num-parrafo">¶5</span><span>Si todas las familias de un mismo bloque siguieran estos pasos, el edificio entero produciría hasta un 40 % menos de basura sin reciclar. Es un cambio pequeño que multiplica su efecto cuando todos lo asumen.</span></p>
+      <span class="palabras-count">— Texto de 281 palabras —</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 9</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Reciclar en casa</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Tipologías textuales</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Marca a qué tipología pertenece cada párrafo del texto. Recuerda: un mismo texto puede tener partes expositivas, argumentativas e instructivas.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Clasifica cada párrafo escribiendo una <strong>X</strong> en la columna que corresponda:</div>
+      <table class="clas-tabla">
+        <thead>
+          <tr><th>Párrafo</th><th>Expositivo</th><th>Argumentativo</th><th>Instructivo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="parrafo">¶1</td><td></td><td></td><td></td></tr>
+          <tr><td class="parrafo">¶2</td><td></td><td></td><td></td></tr>
+          <tr><td class="parrafo">¶3</td><td></td><td></td><td></td></tr>
+          <tr><td class="parrafo">¶4</td><td></td><td></td><td></td></tr>
+          <tr><td class="parrafo">¶5</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Justifica por qué el párrafo ¶3 es argumentativo. ¿Qué pista del texto te lo confirma?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">El texto es solo informativo: no contiene opinión del autor.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Un texto real puede combinar partes expositivas, argumentativas e instructivas.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">El párrafo ¶4 utiliza estructura numerada propia de un instructivo.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">El dato "450 kilos por persona y año" es una opinión del autor.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Reescribe el párrafo ¶3 quitándole toda la opinión y dejándolo <strong>solo expositivo</strong>.</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

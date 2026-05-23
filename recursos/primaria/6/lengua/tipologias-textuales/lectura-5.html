@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Móviles en el patio del colegio · Tipologías textuales · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .lectura-label { font-family: sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; color: #444; }
+    .lectura-titulo { font-size: 14px; font-weight: 800; margin-bottom: 5px; }
+    .lectura-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; margin-bottom: 11px; }
+    .lectura-texto { font-size: 13px; line-height: 1.6; text-align: justify; }
+    .lectura-texto p { margin-bottom: 7px; }
+    .lectura-texto p:last-child { margin-bottom: 0; }
+    .palabras-count { display: block; text-align: right; font-size: 10px; color: #555; font-style: italic; margin-top: 6px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .clasif-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 4px; }
+    .clasif-col { border: 1.5px solid #000; border-radius: 6px; padding: 6px 8px; min-height: 90px; }
+    .clasif-titulo { font-weight: 800; font-size: 12px; margin-bottom: 4px; text-align: center; border-bottom: 1px solid #000; padding-bottom: 3px; }
+    .clasif-lineas { display: flex; flex-direction: column; gap: 4px; }
+    .clasif-linea { border-bottom: 1px solid #000; height: 14px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: ARGUMENTATIVO + CONTRAARGUMENTOS ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Tipologías textuales</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">⚖️ Argumentativo: contraargumentos</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Argumento, contraargumento y refutación</div>
+    Un buen texto argumentativo no solo defiende una tesis: también <strong>responde a las opiniones contrarias</strong>. Un <em>contraargumento</em> es una razón que va en contra de la tesis. Cuando el autor lo nombra para demostrar que no es tan fuerte como parece, está haciendo una <em>refutación</em>. Suelen usarse conectores como "es cierto que…, pero…", "aunque…", "se podría decir que…".
+  </div>
+
+  <div class="lectura-label">Lee el texto. Verás que el autor también recoge la opinión contraria.</div>
+  <div class="lectura-box">
+    <div class="lectura-titulo">Los móviles deberían estar prohibidos en el patio</div>
+    <div class="lectura-texto">
+      <p>Cada vez es más habitual ver a alumnos con el móvil en la mano durante el recreo. Yo creo que <strong>los móviles deberían estar prohibidos en el patio del colegio</strong>, porque el recreo es uno de los pocos momentos del día en que de verdad podemos jugar y hablar cara a cara.</p>
+      <p>En primer lugar, el recreo sirve para descansar de las pantallas, no para mirar otra distinta. Llevamos toda la mañana delante de la pizarra digital o de la tablet, y el cuerpo y los ojos necesitan moverse y mirar a lo lejos.</p>
+      <p>Además, cuando hay móviles, los grupos se rompen: unos miran vídeos, otros graban, otros se sienten excluidos. Sin móvil, hablamos más, jugamos más y nos peleamos menos.</p>
+      <p>Es cierto que <em>algunos compañeros dicen que el móvil sirve para avisar a sus padres si pasa algo</em>. Sin embargo, el colegio ya tiene teléfono y conserje: cualquier emergencia se puede resolver sin necesidad de que cada alumno lleve el suyo encima.</p>
+      <p>Por todo ello, prohibir los móviles en el patio no es una norma para fastidiar: es una manera de proteger lo poco que ya nos queda de juego real.</p>
+      <span class="palabras-count">— Texto de 246 palabras —</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 5</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Móviles en el patio</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Tipologías textuales</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Separa los argumentos a favor de la tesis, los contraargumentos (lo que dirían quienes opinan lo contrario) y la refutación con la que el autor responde a esos contraargumentos.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Coloca cada idea del texto en la columna que corresponda:</div>
+      <div class="clasif-grid">
+        <div class="clasif-col">
+          <div class="clasif-titulo">Argumentos a favor</div>
+          <div class="clasif-lineas">
+            <div class="clasif-linea"></div>
+            <div class="clasif-linea"></div>
+            <div class="clasif-linea"></div>
+            <div class="clasif-linea"></div>
+          </div>
+        </div>
+        <div class="clasif-col">
+          <div class="clasif-titulo">Contraargumento</div>
+          <div class="clasif-lineas">
+            <div class="clasif-linea"></div>
+            <div class="clasif-linea"></div>
+            <div class="clasif-linea"></div>
+            <div class="clasif-linea"></div>
+          </div>
+        </div>
+        <div class="clasif-col">
+          <div class="clasif-titulo">Refutación</div>
+          <div class="clasif-lineas">
+            <div class="clasif-linea"></div>
+            <div class="clasif-linea"></div>
+            <div class="clasif-linea"></div>
+            <div class="clasif-linea"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">El autor solo da razones a favor de su tesis, no recoge la opinión contraria.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">"Es cierto que…, sin embargo…" es una manera de introducir una refutación.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Un texto argumentativo es más fuerte cuando responde a los contraargumentos.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">La refutación es la opinión contraria, sin más.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Imagina que tú defiendes la tesis contraria: <em>"Los móviles deberían permitirse en el patio"</em>. Escribe un argumento a favor de esa tesis.</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Ahora <strong>refuta</strong> tu propio argumento: ¿qué podría decir alguien para quitarle fuerza?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
