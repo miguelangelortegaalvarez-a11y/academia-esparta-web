@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guion y raya · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Puntuación avanzada</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✒️ Ortografía · Ficha 7</div>
+  <div class="teoria-titulo">Guion (-) y raya (—)</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Definición</div>
+    <div class="def-texto">El <strong>guion (-)</strong> es <u>corto</u> y une palabras o sílabas. La <strong>raya (—)</strong> es <u>larga</u> y se usa en diálogos o como inciso largo (parecido a un paréntesis). Son distintos: no confundas uno con otro.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:14%">Signo</th><th style="width:36%">Para qué sirve</th><th>Ejemplo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>- guion</strong></td><td>une palabras compuestas o relaciona dos términos.</td><td><em>teórico-práctico, hispano-marroquí, partido Madrid-Barça.</em></td></tr>
+      <tr><td><strong>- guion</strong></td><td>parte una palabra al final del renglón (entre sílabas).</td><td><em>casti- / llo</em></td></tr>
+      <tr><td><strong>- guion</strong></td><td>une intervalos: páginas, fechas, capítulos.</td><td><em>páginas 12-15</em> · <em>1990-2000</em></td></tr>
+      <tr><td><strong>— raya</strong></td><td>marca cada intervención de un diálogo.</td><td><em>—Hola, ¿cómo estás?</em></td></tr>
+      <tr><td><strong>— raya</strong></td><td>introduce inciso largo, como paréntesis.</td><td><em>Mi tío —el de Cádiz— vendrá hoy.</em></td></tr>
+      <tr><td><strong>— raya</strong></td><td>marca lo que dice el narrador dentro del diálogo.</td><td><em>—Ven aquí —dijo serio.</em></td></tr>
+    </tbody>
+  </table>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">—¿Vienes? —preguntó Marta— Te estamos esperando.</div>
+    <div class="ej-analisis">
+      <span class="pal">Análisis:</span> es un <strong>diálogo</strong>. La <strong>primera raya</strong> abre la frase del personaje. La <strong>segunda raya</strong> introduce la voz del narrador (<em>"preguntó Marta"</em>). La <strong>tercera raya</strong> devuelve la palabra al personaje. Las rayas en diálogos van <strong>pegadas</strong> a la palabra que sigue, sin espacio. ✅
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">El <strong>guion (-)</strong> es corto y une cosas. La <strong>raya (—)</strong> es larga y se usa en diálogos o incisos. Para escribir la raya en el ordenador: <em>Alt + 0151</em> en Windows, o <em>Opción + Mayús + guion</em> en Mac. Si no tienes raya, en clase puedes usar un guion como sustituto.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Puntuación avanzada · Ficha 7</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Guion y raya</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 7</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Marca con una X si en cada caso se usa <strong>guion (-)</strong> o <strong>raya (—)</strong>:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Oración</th><th>Guion</th><th>Raya</th></tr></thead>
+      <tbody>
+        <tr><td>El partido Madrid___Barça fue espectacular.</td><td></td><td></td></tr>
+        <tr><td>___Vámonos ya ___dijo papá.</td><td></td><td></td></tr>
+        <tr><td>Vivió entre 1980___2010.</td><td></td><td></td></tr>
+        <tr><td>Mi prima ___la mayor___ vive en Sevilla.</td><td></td><td></td></tr>
+        <tr><td>Compré un curso teórico___práctico.</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Reescribe</strong> el diálogo usando rayas (—) al principio de cada intervención:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Hola, dijo Marta. Estoy buscando a Lucas.</div>
+      <div class="oracion-item">→ <span class="inline-resp" style="min-width:550px;"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> ¿Por dónde se fue? preguntó. Hace media hora que lo busco.</div>
+      <div class="oracion-item">→ <span class="inline-resp" style="min-width:550px;"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Sustituye los paréntesis por <strong>rayas (—)</strong>:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Mi tío (el que vive en Cádiz) viene hoy. → <span class="inline-resp" style="min-width:430px;"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> Aquel día (lo recuerdo bien) llovía mucho. → <span class="inline-resp" style="min-width:430px;"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> El profesor (un hombre muy paciente) sonrió. → <span class="inline-resp" style="min-width:430px;"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Inventa un <strong>diálogo</strong> breve de 3 intervenciones entre dos personajes, usando rayas:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item">— <span class="inline-resp" style="min-width:530px;"></span></div>
+      <div class="oracion-item">— <span class="inline-resp" style="min-width:530px;"></span></div>
+      <div class="oracion-item">— <span class="inline-resp" style="min-width:530px;"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐⭐⭐ ¡Casi expert@!</span>
+  </div>
+</body>
+</html>

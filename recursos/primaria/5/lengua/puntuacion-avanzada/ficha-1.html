@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panorama de la puntuación · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Puntuación avanzada</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✒️ Ortografía · Ficha 1</div>
+  <div class="teoria-titulo">Panorama de la puntuación</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Definición</div>
+    <div class="def-texto">Los <strong>signos de puntuación</strong> son marcas que organizan lo que escribimos: indican <strong>pausas</strong>, <strong>entonación</strong> y <strong>relaciones</strong> entre las ideas. Sin ellos, un texto sería difícil de leer y podría entenderse mal. En este bloque vas a aprender a usarlos como en 6º: con precisión.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:20%">Signo</th><th style="width:36%">Para qué sirve</th><th>Ejemplo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>. punto</strong></td><td>cierra una oración.</td><td><em>Llegó tarde. Pidió perdón.</em></td></tr>
+      <tr><td><strong>, coma</strong></td><td>marca pausa breve, separa elementos.</td><td><em>Compré pan, leche y fruta.</em></td></tr>
+      <tr><td><strong>; punto y coma</strong></td><td>pausa mayor que la coma, menor que el punto.</td><td><em>Llegó tarde; aun así, entró.</em></td></tr>
+      <tr><td><strong>: dos puntos</strong></td><td>anuncian algo (enumeración, cita, explicación).</td><td><em>Trae lo básico: agua y comida.</em></td></tr>
+      <tr><td><strong>" " comillas</strong></td><td>citas literales, palabras destacadas.</td><td><em>Dijo: "Vuelvo enseguida".</em></td></tr>
+      <tr><td><strong>( ) paréntesis</strong></td><td>añaden un dato extra o aclaración.</td><td><em>Mi tío (de Sevilla) vino ayer.</em></td></tr>
+      <tr><td><strong>— raya</strong></td><td>introduce diálogo o incisos largos.</td><td><em>—Ven aquí —dijo serio.</em></td></tr>
+      <tr><td><strong>¿? ¡!</strong></td><td>marcan pregunta y exclamación.</td><td><em>¿Vienes? ¡Qué bien!</em></td></tr>
+    </tbody>
+  </table>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">"Cuando llegó, dijo: «¡Por fin!»; estaba agotado (había caminado horas)."</div>
+    <div class="ej-analisis">
+      <span class="pal">Análisis:</span> esta frase usa <strong>cinco signos</strong> a la vez. La <strong>coma</strong> separa la oración inicial. Los <strong>dos puntos</strong> anuncian lo que dijo. Las <strong>comillas</strong> marcan la cita exacta. Los <strong>signos de exclamación</strong> dan emoción. El <strong>punto y coma</strong> une dos ideas relacionadas. Los <strong>paréntesis</strong> añaden un dato extra. ✅ Cada signo aporta algo distinto.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">La puntuación no es decoración: <strong>cambia el significado</strong>. No es lo mismo <em>"Vamos a comer, niños"</em> (los llamas) que <em>"Vamos a comer niños"</em> (caníbal). En las siguientes 9 fichas verás cada signo en detalle.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Puntuación avanzada · Ficha 1</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Panorama de la puntuación</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 1</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Identifica</strong> el signo que aparece subrayado y escribe su nombre:</div>
+    <div class="par-ej">
+      <div class="col-ej">
+        <div class="col-prompt">a) Compré pan<u>,</u> leche y fruta. → ___________</div>
+        <div class="col-prompt">b) <u>¿</u>Vienes mañana? → ___________</div>
+        <div class="col-prompt">c) Dijo<u>:</u> "Estoy listo". → ___________</div>
+        <div class="col-prompt">d) Mi primo <u>(</u>de Cádiz<u>)</u> llegó. → ___________</div>
+      </div>
+      <div class="col-ej">
+        <div class="col-prompt">e) Llegó tarde<u>;</u> aun así, ganó. → ___________</div>
+        <div class="col-prompt">f) <u>—</u>Ven aquí —dijo. → ___________</div>
+        <div class="col-prompt">g) Eso es <u>"</u>de locos<u>"</u>. → ___________</div>
+        <div class="col-prompt">h) Fin de la historia<u>.</u> → ___________</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Une cada <strong>signo</strong> con su <strong>uso principal</strong>:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Signo</th><th>Uso (escribe la letra)</th></tr></thead>
+      <tbody>
+        <tr><td>1) <strong>coma (,)</strong></td><td>____  a) cierran una pregunta</td></tr>
+        <tr><td>2) <strong>dos puntos (:)</strong></td><td>____  b) marcan una pausa breve o separan elementos</td></tr>
+        <tr><td>3) <strong>punto y coma (;)</strong></td><td>____  c) marcan una cita literal</td></tr>
+        <tr><td>4) <strong>comillas (" ")</strong></td><td>____  d) anuncian algo: enumeración, cita o explicación</td></tr>
+        <tr><td>5) <strong>paréntesis ( )</strong></td><td>____  e) pausa mayor que la coma</td></tr>
+        <tr><td>6) <strong>signos ¿?</strong></td><td>____  f) añaden una aclaración o dato extra</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Lee y <strong>marca con una X</strong> si la frase está bien puntuada o le falta un signo:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Mañana traeré agua pan y queso. → ☐ está bien ☐ falta(n) signo(s)</div>
+      <div class="oracion-item"><span class="letra">b)</span> ¿Has terminado los deberes? → ☐ está bien ☐ falta(n) signo(s)</div>
+      <div class="oracion-item"><span class="letra">c)</span> Compré tres cosas leche, pan y fruta. → ☐ está bien ☐ falta(n) signo(s)</div>
+      <div class="oracion-item"><span class="letra">d)</span> Mi hermano (el mayor) vive en Málaga. → ☐ está bien ☐ falta(n) signo(s)</div>
+      <div class="oracion-item"><span class="letra">e)</span> Qué bien que hayas venido → ☐ está bien ☐ falta(n) signo(s)</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Escribe una <strong>oración</strong> que use cada signo. Subráyalo:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> con una <strong>coma</strong>: <span class="inline-resp" style="min-width:430px;"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> con <strong>dos puntos</strong>: <span class="inline-resp" style="min-width:430px;"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> con <strong>comillas</strong>: <span class="inline-resp" style="min-width:430px;"></span></div>
+      <div class="oracion-item"><span class="letra">d)</span> con <strong>paréntesis</strong>: <span class="inline-resp" style="min-width:430px;"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen comienzo!</span>
+  </div>
+</body>
+</html>
