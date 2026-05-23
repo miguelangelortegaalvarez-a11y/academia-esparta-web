@@ -44,8 +44,10 @@ academia-esparta-web/
 │   │   │                 # Área Lectura: 7 bloques × 10 fichas
 │   │   │                 # Bloque D Gramática 8/8: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
 │   │   └── 6/lengua/     # EN MARCHA ⬅ (arrancado 2026-05-23)
-│   │                     # Área Lectura 1/7: tipologias-textuales (10 fichas)
-│   │                     # Siguiente: textos literarios narrativa
+│   │                     # Área Lectura 2/7:
+│   │                     #   - tipologias-textuales (10 fichas)
+│   │                     #   - textos-literarios-narrativa (10 fichas)
+│   │                     # Siguiente: textos literarios poesía
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
 │                                 # Resto de 1º ESO sin cubrir
@@ -146,17 +148,20 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
   - Área Lectura — 7 bloques × 10 fichas = 70 fichas (cerrada 2026-05-22)
   - Bloque D Gramática — 8 sub-bloques × 10 fichas = 80 fichas: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
 - **6º Primaria Lengua — EN MARCHA ⬅** (arrancado 2026-05-23):
-  - Área Lectura 1/7: `tipologias-textuales` (10 fichas) ✅
+  - Área Lectura 2/7:
+    - `tipologias-textuales` (10 fichas) ✅
+    - `textos-literarios-narrativa` (10 fichas) ✅
   - Estructura prevista: 7 sub-bloques Lectura + 8 Gramática = 150 fichas
   - Sub-bloques Lectura: Tipologías textuales · Textos literarios narrativa · Textos literarios poesía · Textos literarios teatro · Textos discontinuos · Intención del autor y subtexto · Resumen y esquema avanzado
   - Sub-bloques Gramática D: Análisis sintáctico SN+SV · Oración compuesta coordinadas · Oración compuesta subordinadas · Verbo avanzado (perífrasis, pasiva) · Léxico (cultismos, prefijos griegos/latinos) · Polisemia/homonimia/paronimia · Ortografía avanzada · Puntuación nivel ESO
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~609 fichas indexadas en sitemap
+- **Total:** ~619 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
-- 2 artículos publicados:
+- 3 artículos publicados:
   - `como-elegir-academia-torremolinos.html`
   - `como-ayudar-comprension-lectora-primaria.html`
+  - `tecnicas-de-estudio-primaria.html` (publicado 2026-05-23)
 
 ### Páginas de servicio
 - Logopedia · Psicología · Quiénes somos — en sistema premium, con JSON-LD
@@ -167,13 +172,13 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — siguiente paso
 
-1. **Fichas 6º Primaria Lengua — EN MARCHA** — estructura definida y arrancada el 2026-05-23. Patrón heredado de 5º: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|LECTURA|Nombre'` o `'lengua|6|D|Nombre'`. Hecho: Tipologías textuales (1/7 Lectura). **Siguiente sub-bloque: Textos literarios narrativa.**
+1. **Fichas 6º Primaria Lengua — EN MARCHA** — estructura definida y arrancada el 2026-05-23. Patrón heredado de 5º: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|LECTURA|Nombre'` o `'lengua|6|D|Nombre'`. Hecho (2/7 Lectura): Tipologías textuales · Textos literarios narrativa. **Siguiente sub-bloque: Textos literarios poesía.**
 
 ### Prioridad media — después de Primaria completa
 
 3. **ESO completa** — 1º ESO tiene solo álgebra. Cubrir resto de matemáticas 1º ESO, luego 2º, 3º, 4º. La estructura `recursos/1-eso/`, `recursos/2-eso/`... ya sigue el mismo patrón.
 
-4. **Blog — más artículos SEO** — "cómo estudiar para selectividad", "técnicas de estudio para primaria", etc. Hub `blog.html` está listo.
+4. **Blog — más artículos SEO** — "cómo preparar la EBAU en Andalucía", "qué hacer si tu hijo no aprueba matemáticas", "el paso de Primaria a la ESO", etc. Hub `blog.html` está listo. Ya hay 3 artículos publicados.
 
 5. **Migrar `materiales.html` al sistema premium** — sigue con la paleta legacy verde claro. No es urgente pero rompe coherencia visual.
 
