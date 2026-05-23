@@ -41,7 +41,8 @@ academia-esparta-web/
 │   │   ├── 3/lengua/     # 12 bloques × 6 fichas — COMPLETO ✅
 │   │   ├── 4/lengua/     # 14 bloques completos (6-10 fichas c/u) — COMPLETO ✅
 │   │   ├── 5/lengua/     # Área Lectura COMPLETA: 7 bloques × 10 fichas ✅
-│   │   │                 # Siguiente: bloque D "Gramática y ortografía" (8 sub-bloques) ⬅
+│   │   │                 # Bloque D Gramática 2/8 ✅: analisis-morfologico, verbos-irregulares
+│   │   │                 # Siguiente: 5º D oracion-simple (6 sub-bloques restantes) ⬅
 │   │   └── 6/            # Sin carpeta aún
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
@@ -140,8 +141,9 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - **3º Primaria Lengua** — 12 bloques, ~73 fichas ✅
 - **4º Primaria Lengua** — 14 bloques, ~102 fichas ✅
 - **5º Primaria Lengua (Lectura)** — 7 bloques × 10 fichas = 70 fichas ✅ (cerrada 2026-05-22)
+- **5º Primaria Lengua (Gramática · bloque D)** — 2/8 sub-bloques × 10 fichas = 20 fichas (2026-05-23). Sub-bloques cubiertos: analisis-morfologico, verbos-irregulares. Pendientes: oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada.
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~519 fichas indexadas en sitemap
+- **Total:** ~539 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
 - 2 artículos publicados:
@@ -157,7 +159,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — siguiente paso
 
-1. **5º Primaria Lengua · Bloque D "Gramática y ortografía"** — 8 sub-bloques sin empezar. Los nombres exactos se ven en `materiales.html` al entrar en 5º Primaria · Lengua · Bloque D. Ruta: `recursos/primaria/5/lengua/BLOQUE/`. (El área de Lectura de 5º ya está cerrada.)
+1. **5º Primaria Lengua · Bloque D "Gramática y ortografía"** — 2/8 sub-bloques cubiertos (analisis-morfologico, verbos-irregulares). **Siguiente sugerido:** `oracion-simple` (sujeto, predicado, complementos básicos). Pendientes 6: oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada. **Patrón establecido:** 10 fichas por sub-bloque (no 6 como cursos anteriores), dificultad progresiva ⭐→⭐⭐⭐⭐, registrar en `materiales.html` como clave `'lengua|5|D|Nombre del sub-bloque'` antes del primer bloque LECTURA de 5º. Ruta: `recursos/primaria/5/lengua/BLOQUE/`.
 
 2. **Fichas 6º Primaria Lengua** — crear carpeta y empezar cuando 5º esté sólido.
 
