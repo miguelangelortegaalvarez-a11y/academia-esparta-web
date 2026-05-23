@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Repaso · los 8 monosílabos · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Tildes diacríticas</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🧩 Ortografía · Ficha 6</div>
+  <div class="teoria-titulo">Repaso · los 8 monosílabos con tilde diacrítica</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Tabla resumen (memorízala)</div>
+    <div class="def-texto">Cada palabra de esta tabla tiene una <strong>versión con tilde</strong> y otra <strong>sin tilde</strong>. La tilde no cambia la pronunciación, solo el <strong>significado</strong> o la <strong>función</strong>.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:18%">Pareja</th><th>Con tilde</th><th>Sin tilde</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>tú / tu</strong></td><td>pronombre: <em>Tú vienes.</em></td><td>posesivo: <em>tu casa</em>.</td></tr>
+      <tr><td><strong>él / el</strong></td><td>pronombre: <em>Él lo hizo.</em></td><td>artículo: <em>el día</em>.</td></tr>
+      <tr><td><strong>mí / mi</strong></td><td>pronombre: <em>para mí</em>.</td><td>posesivo / nota: <em>mi libro</em>.</td></tr>
+      <tr><td><strong>sí / si</strong></td><td>afirmación / pron.: <em>Sí.</em> · <em>en sí</em></td><td>condición / nota: <em>si llueve</em>.</td></tr>
+      <tr><td><strong>sé / se</strong></td><td>verbo saber/ser: <em>Yo sé.</em></td><td>pronombre: <em>se lava</em>.</td></tr>
+      <tr><td><strong>dé / de</strong></td><td>verbo dar: <em>que me dé</em>.</td><td>preposición: <em>de Marta</em>.</td></tr>
+      <tr><td><strong>té / te</strong></td><td>bebida: <em>un té</em>.</td><td>pronombre: <em>te llamo</em>.</td></tr>
+      <tr><td><strong>más / mas</strong></td><td>cantidad: <em>quiero más</em>.</td><td>= "pero": <em>vine, mas tarde</em>.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">"Sí, sé que él quiere más té, mas no le queda azúcar."</div>
+    <div class="ej-analisis">
+      <span class="pal">Análisis:</span> <strong>Sí</strong> (afirmación), <strong>sé</strong> (verbo saber), <strong>él</strong> (pronombre), <strong>más</strong> (cantidad), <strong>té</strong> (bebida), <strong>mas</strong> (= "pero", sin tilde). Cinco palabras con tilde diacrítica y una sin ella, todas en la misma frase. ✅
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">Cuando dudes, <strong>cambia mentalmente la palabra</strong>: ¿es la persona? ¿es algo mío? ¿es un verbo? Si encaja, lleva tilde. Si va delante de un nombre o significa una cosa distinta, va sin tilde.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Tildes diacríticas · Ficha 6</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Repaso de los 8 monosílabos</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 6</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Pon o quita la tilde según corresponda. Escribe la palabra <u>correcta</u>:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Oración</th><th>Palabra correcta</th></tr></thead>
+      <tbody>
+        <tr><td>a) Tu eres mi mejor amigo.</td><td></td></tr>
+        <tr><td>b) Esta carta es para mi.</td><td></td></tr>
+        <tr><td>c) Yo se la respuesta.</td><td></td></tr>
+        <tr><td>d) Quiero un te con leche.</td><td></td></tr>
+        <tr><td>e) Necesito mas tiempo.</td><td></td></tr>
+        <tr><td>f) Si quieres, vamos al cine.</td><td></td></tr>
+        <tr><td>g) Espero que me de el balón.</td><td></td></tr>
+        <tr><td>h) El partido empieza tarde.</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> En esta frase faltan <strong>cuatro tildes diacríticas</strong>. Subráyalas y reescribe la frase abajo:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item">«Si tu te pones el abrigo, mama te dara un te calentito».</div>
+      <div class="oracion-item">→ <span class="inline-resp" style="min-width:560px;"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Indica si la palabra subrayada lleva tilde diacrítica (<strong>SÍ</strong>) o no (<strong>NO</strong>):</div>
+    <div class="par-ej">
+      <div class="col-ej">
+        <div class="col-prompt">a) <u>El</u> coche es rojo. → ____</div>
+        <div class="col-prompt">b) <u>Te</u> escribo mañana. → ____</div>
+        <div class="col-prompt">c) <u>Mas</u> no lo conseguí. → ____</div>
+        <div class="col-prompt">d) <u>De</u> Sevilla a Cádiz. → ____</div>
+        <div class="col-prompt">e) Tomo <u>te</u> cada tarde. → ____</div>
+      </div>
+      <div class="col-ej">
+        <div class="col-prompt">f) <u>Si</u> me llamas, voy. → ____</div>
+        <div class="col-prompt">g) Yo <u>se</u> jugar al ajedrez. → ____</div>
+        <div class="col-prompt">h) <u>Tu</u> hermano es alto. → ____</div>
+        <div class="col-prompt">i) <u>El</u> vino contigo. → ____</div>
+        <div class="col-prompt">j) Quiero <u>mas</u> agua. → ____</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Escribe una sola frase que contenga <strong>al menos tres monosílabos con tilde diacrítica</strong>. Subráyalos:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="inline-resp" style="min-width:580px; height:18px;"></span></div>
+      <div class="oracion-item"><span class="inline-resp" style="min-width:580px; height:18px;"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Has dominado los monosílabos!</span>
+  </div>
+</body>
+</html>
