@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Narrador en 1ª y 3ª persona · Textos literarios: narrativa · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .doble-box { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+    .mini-texto { border: 1.5px solid #000; border-radius: 8px; padding: 8px 12px; }
+    .mini-titulo { font-size: 12px; font-weight: 800; margin-bottom: 4px; text-align: center; border-bottom: 1px solid #000; padding-bottom: 3px; }
+    .mini-cuerpo { font-size: 11.5px; line-height: 1.5; text-align: justify; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .trans-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .trans-tabla th, .trans-tabla td { border: 1.5px solid #000; padding: 5px 7px; }
+    .trans-tabla th { background: #f5f5f5; font-weight: 800; text-align: center; font-size: 11px; }
+    .trans-tabla td.col-orig { width: 50%; }
+    .trans-tabla td.col-trans { height: 38px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box, .trans-tabla th { background: #fff !important; border: 1px solid #000 !important; }
+      .recuerda-box { border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1 ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos literarios: narrativa</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🎙 Narrador: 1ª y 3ª persona</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Quién cuenta la historia?</div>
+    El narrador es la <em>voz</em> que cuenta lo que sucede. Puede hablar en:
+    <ul>
+      <li><strong>1ª persona:</strong> usa <em>yo, me, mi</em> y verbos como <em>fui, vi, sentí</em>. El narrador es uno de los personajes y cuenta su propia historia.</li>
+      <li><strong>3ª persona:</strong> usa <em>él, ella, le, su</em> y verbos como <em>fue, vio, sintió</em>. El narrador está fuera y cuenta lo que les pasa a los demás.</li>
+    </ul>
+  </div>
+
+  <div class="preguntas-label" style="font-size: 12px; margin-bottom: 6px;">Lee los dos textos. Cuentan exactamente el mismo episodio, pero con narradores distintos:</div>
+
+  <div class="doble-box">
+    <div class="mini-texto">
+      <div class="mini-titulo">Versión A</div>
+      <div class="mini-cuerpo">Aquella tarde salí del colegio sin paraguas. Empezó a llover muy fuerte y eché a correr. Cuando llegué al portal, estaba empapado y me reí solo, porque me había olvidado del paraguas justo el día en que más falta me hacía. Subí las escaleras de dos en dos y entré en casa dando un portazo.</div>
+    </div>
+    <div class="mini-texto">
+      <div class="mini-titulo">Versión B</div>
+      <div class="mini-cuerpo">Aquella tarde Carlos salió del colegio sin paraguas. Empezó a llover muy fuerte y él echó a correr. Cuando llegó al portal, estaba empapado y se rió solo, porque se había olvidado del paraguas justo el día en que más falta le hacía. Subió las escaleras de dos en dos y entró en casa dando un portazo.</div>
+    </div>
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Indica en qué persona está cada versión y escribe <strong>tres palabras del texto</strong> que te lo demuestren:</div>
+      <table class="trans-tabla">
+        <tr><th style="width: 18%;">Versión</th><th style="width: 22%;">Persona</th><th>Tres palabras o expresiones del texto</th></tr>
+        <tr><td style="text-align: center; font-weight: 800;">A</td><td style="height: 28px;"></td><td></td></tr>
+        <tr><td style="text-align: center; font-weight: 800;">B</td><td style="height: 28px;"></td><td></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 4</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2 ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Cambio de persona</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos literarios: narrativa</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a reconocer la persona del narrador y a <em>transformar</em> frases pasando de 1ª a 3ª persona y al revés. Fíjate bien en los pronombres y en los verbos.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">En la versión A, el narrador es el propio protagonista.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">«Salí» y «llegué» son formas verbales en 3ª persona.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">En 3ª persona, el narrador está fuera de la historia.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Para pasar de 1ª a 3ª persona basta con cambiar los verbos y los pronombres.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Transforma cada frase a la otra persona:</div>
+      <table class="trans-tabla">
+        <tr><th>Frase original</th><th>Pasa a la otra persona</th></tr>
+        <tr><td class="col-orig">Me asomé a la ventana y vi pasar a Lucía corriendo.</td><td class="col-trans"></td></tr>
+        <tr><td class="col-orig">Carla cogió la mochila, salió de casa y cerró la puerta.</td><td class="col-trans"></td></tr>
+        <tr><td class="col-orig">No me lo podía creer: ¡habíamos ganado el concurso!</td><td class="col-trans"></td></tr>
+        <tr><td class="col-orig">Pablo no contestó. Se quedó mirando el suelo en silencio.</td><td class="col-trans"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Escribe <strong>tres líneas</strong> sobre algo que te pasara ayer, usando narrador en <strong>1ª persona</strong>:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

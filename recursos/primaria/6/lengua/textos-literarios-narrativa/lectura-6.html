@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subgéneros narrativos · Textos literarios: narrativa · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .mini-texto { border: 1.5px solid #000; border-radius: 8px; padding: 7px 11px; margin-bottom: 7px; }
+    .mini-titulo { font-size: 11.5px; font-weight: 800; margin-bottom: 3px; display: flex; justify-content: space-between; align-items: center; }
+    .mini-letra { font-family: sans-serif; font-size: 13px; font-weight: 800; }
+    .mini-tipo-resp { border: 1.5px solid #000; min-width: 120px; height: 18px; padding: 0 6px; font-size: 11px; }
+    .mini-cuerpo { font-size: 11.5px; line-height: 1.5; text-align: justify; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .rel-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .rel-tabla th, .rel-tabla td { border: 1.5px solid #000; padding: 5px 7px; }
+    .rel-tabla th { background: #f5f5f5; font-weight: 800; text-align: center; font-size: 11px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box, .rel-tabla th { background: #fff !important; border: 1px solid #000 !important; }
+      .recuerda-box { border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1 ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos literarios: narrativa</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📚 Subgéneros narrativos</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 No todas las narraciones son iguales</div>
+    Dentro de la literatura narrativa hay distintos <em>subgéneros</em>. Los más importantes son:
+    <ul>
+      <li><strong>Cuento:</strong> narración breve, casi siempre inventada, con pocos personajes y un solo conflicto.</li>
+      <li><strong>Leyenda:</strong> historia que mezcla hechos reales (un lugar, un personaje histórico) con elementos fantásticos. Se transmite de generación en generación.</li>
+      <li><strong>Mito:</strong> relato muy antiguo que explica el origen del mundo o de algún fenómeno usando dioses o seres extraordinarios.</li>
+      <li><strong>Fábula:</strong> historia corta, casi siempre con animales como personajes, que termina con una <em>moraleja</em> o enseñanza.</li>
+    </ul>
+  </div>
+
+  <div class="preguntas-label" style="font-size: 12px; margin-bottom: 6px;">Lee los cuatro mini-textos y escribe al lado de qué subgénero es cada uno:</div>
+
+  <div class="mini-texto">
+    <div class="mini-titulo"><span><span class="mini-letra">A.</span></span><span class="mini-tipo-resp">Subgénero: ____________</span></div>
+    <div class="mini-cuerpo">Cuentan los antiguos habitantes de Málaga que, hace muchos siglos, una princesa mora se enamoró de un pastor cristiano. Su padre, el rey, no aprobaba aquel amor y los encerró en torres distintas del castillo de Gibralfaro. Aún hoy, en las noches de luna llena, dicen que se oyen sus voces llamándose desde lo alto de las murallas.</div>
+  </div>
+
+  <div class="mini-texto">
+    <div class="mini-titulo"><span><span class="mini-letra">B.</span></span><span class="mini-tipo-resp">Subgénero: ____________</span></div>
+    <div class="mini-cuerpo">Un cuervo encontró un trozo de queso y subió con él a la rama de un árbol. Una zorra, al verlo, empezó a alabar lo bonita que era su voz y le pidió que cantara. El cuervo, vanidoso, abrió el pico para presumir y se le cayó el queso, que la zorra atrapó al vuelo. <em>Moraleja: ten cuidado con los que te alaban; pueden buscar algo a cambio.</em></div>
+  </div>
+
+  <div class="mini-texto">
+    <div class="mini-titulo"><span><span class="mini-letra">C.</span></span><span class="mini-tipo-resp">Subgénero: ____________</span></div>
+    <div class="mini-cuerpo">Al principio, los antiguos griegos creían que la diosa Deméter, encargada de las cosechas, era feliz junto a su hija Perséfone. Cuando el dios del inframundo se la llevó, Deméter, triste, hizo que la tierra dejara de dar frutos. Desde entonces, cuando madre e hija pasan medio año separadas, llega el invierno; y cuando se reencuentran, vuelve la primavera.</div>
+  </div>
+
+  <div class="mini-texto">
+    <div class="mini-titulo"><span><span class="mini-letra">D.</span></span><span class="mini-tipo-resp">Subgénero: ____________</span></div>
+    <div class="mini-cuerpo">Una mañana, una niña llamada Aitana encontró una piedra plana y brillante en el patio del recreo. La guardó en el bolsillo. Por la tarde, descubrió que cada vez que tocaba la piedra podía oír los pensamientos de su mejor amiga. Al día siguiente, decidió devolverla a su sitio: no quería conocer secretos que no le pertenecían.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 6</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2 ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Subgéneros narrativos</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos literarios: narrativa</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a justificar tu clasificación con pistas del texto y a fijar bien las diferencias entre los cuatro subgéneros.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Escribe en la tabla una pista (palabra, frase o elemento) que te haya hecho identificar cada subgénero:</div>
+      <table class="rel-tabla">
+        <tr><th style="width: 18%;">Texto</th><th>Pista del texto que confirma el subgénero</th></tr>
+        <tr><td style="text-align: center; font-weight: 800;">A</td><td style="height: 30px;"></td></tr>
+        <tr><td style="text-align: center; font-weight: 800;">B</td><td style="height: 30px;"></td></tr>
+        <tr><td style="text-align: center; font-weight: 800;">C</td><td style="height: 30px;"></td></tr>
+        <tr><td style="text-align: center; font-weight: 800;">D</td><td style="height: 30px;"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Una fábula casi siempre acaba con una enseñanza o moraleja.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Las leyendas son completamente reales y verificables.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Los mitos suelen incluir dioses o seres extraordinarios.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Un cuento puede tener cualquier tema, pero suele ser corto y con pocos personajes.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Escribe la <strong>moraleja</strong> que pondrías a esta mini-fábula: «Un león se rió de un ratón pequeñito y le dejó marchar. Días después, el león quedó atrapado en una red y el ratón vino a roer las cuerdas para liberarlo»:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
