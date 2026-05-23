@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reto final: campos semánticos · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+    .reto-titulo { background: #000; color: #fff !important; text-align: center; font-weight: 800; font-size: 14px; padding: 6px; border-radius: 6px; margin-bottom: 10px; letter-spacing: .5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .reto-titulo { background: #000 !important; color: #fff !important; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Campos semánticos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🏆 Reto final · Ficha 10</div>
+  <div class="teoria-titulo">Repaso integrado · Vocabulario</div>
+
+  <div class="reto-titulo">REPASO RÁPIDO DE TODO LO APRENDIDO</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Tus herramientas</div>
+    <div class="def-texto">
+      ➜ <strong>Sinónimos</strong>: misma o parecida idea (bonito = hermoso).<br />
+      ➜ <strong>Antónimos</strong>: idea contraria (grande / pequeño · posible / imposible).<br />
+      ➜ <strong>Familia léxica</strong>: misma raíz (libro, librería, librero…). Incluye palabras patrimoniales y cultas (leche / lácteo).<br />
+      ➜ <strong>Campo semántico</strong>: mismo tema (rosa, clavel, tulipán = flores).<br />
+      ➜ <strong>Hiperónimo</strong>: palabra general que incluye a otras. <strong>Hipónimo</strong>: cada palabra específica.<br />
+      ➜ <strong>Contexto y matiz</strong>: una palabra puede tener varios sinónimos; eliges según el sentido y el registro.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📋 Instrucciones</div>
+    <div class="recuerda-texto">Esta ficha es <strong>reto final</strong>. Mezcla todo lo que has visto en las 9 fichas anteriores. Hazla sin mirar atrás; si te bloqueas, vuelve a la ficha correspondiente. Pon todas las respuestas con calma y revísalas al final.</div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Para cada palabra, escribe <strong>un sinónimo</strong> y <strong>un antónimo</strong>:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Palabra</th><th>Sinónimo</th><th>Antónimo</th></tr></thead>
+      <tbody>
+        <tr><td>a) alegre</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>b) rápido</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>c) entrar</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>d) limpio</td><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Campos semánticos · Reto final</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Reto final · Más ejercicios mezclados</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 10</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Indica si cada par de palabras es <strong>familia léxica (FL)</strong> o <strong>campo semántico (CS)</strong>:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Par de palabras</th><th>FL / CS</th></tr></thead>
+      <tbody>
+        <tr><td>a) flor — florero</td><td class="vacio"></td></tr>
+        <tr><td>b) león — tigre</td><td class="vacio"></td></tr>
+        <tr><td>c) pan — panadería</td><td class="vacio"></td></tr>
+        <tr><td>d) silla — mesa</td><td class="vacio"></td></tr>
+        <tr><td>e) leche — lácteo</td><td class="vacio"></td></tr>
+        <tr><td>f) coche — bicicleta</td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Escribe el <strong>hiperónimo</strong> y dos <strong>hipónimos</strong> más para cada grupo:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Hipónimos dados</th><th>Hiperónimo</th><th>Otros 2 hipónimos</th></tr></thead>
+      <tbody>
+        <tr><td>a) trompeta, piano, batería</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>b) rosa, clavel, margarita</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>c) coche, moto, tren</td><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Forma el <strong>antónimo</strong> añadiendo prefijo:</div>
+    <div class="par-ej">
+      <div class="col-ej">
+        <div class="col-prompt">a) legal → <span class="inline-resp"></span></div>
+        <div class="col-prompt">b) ordenar → <span class="inline-resp"></span></div>
+        <div class="col-prompt">c) posible → <span class="inline-resp"></span></div>
+      </div>
+      <div class="col-ej">
+        <div class="col-prompt">d) cargar → <span class="inline-resp"></span></div>
+        <div class="col-prompt">e) lógico → <span class="inline-resp"></span></div>
+        <div class="col-prompt">f) responsable → <span class="inline-resp"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> <strong>Reto literario:</strong> reescribe este texto en tu cuaderno cambiando las palabras repetidas por sinónimos y eligiendo matices más expresivos:</div>
+    <div style="background:#fafafa;border:1.2px solid #aaa;border-radius:8px;padding:9px 12px;font-size:12.5px;line-height:1.55;">
+      "El perro corrió por el parque. El perro estaba contento. El perro vio a otro perro y los dos perros corrieron juntos. Después, el perro volvió a casa y bebió agua. El perro estaba muy cansado."
+    </div>
+    <div style="font-size:11.5px;color:#555;margin-top:4px;">Pista: usa <em>can / chucho / mascota</em>; <em>feliz / eufórico</em>; <em>jadeante / agotado</em>; <em>regresó / volvió</em>; <em>vivienda / hogar</em>; etc.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">🏆 ¡Has completado el sub-bloque!</span>
+  </div>
+</body>
+</html>

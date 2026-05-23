@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sinónimos en contexto · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+    .texto-base { background: #fafafa; border: 1.2px solid #aaa; border-radius: 8px; padding: 9px 12px; font-size: 12.5px; line-height: 1.55; margin-bottom: 10px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Campos semánticos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Vocabulario · Ficha 6</div>
+  <div class="teoria-titulo">Sinónimos en contexto</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Idea clave</div>
+    <div class="def-texto">Dos palabras pueden ser <strong>sinónimas en una frase y no serlo en otra</strong>. El significado depende del <strong>contexto</strong>. Por eso, para elegir un buen sinónimo no basta con consultar el diccionario: hay que leer toda la oración.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:35%">Palabra polisémica</th><th>Sinónimo según el contexto</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>banco</strong> (entidad financiera)</td><td>caja, entidad bancaria</td></tr>
+      <tr><td><strong>banco</strong> (asiento del parque)</td><td>asiento, escaño</td></tr>
+      <tr><td><strong>cabeza</strong> (parte del cuerpo)</td><td>cráneo</td></tr>
+      <tr><td><strong>cabeza</strong> (líder de un grupo)</td><td>jefe, líder, capitán</td></tr>
+      <tr><td><strong>hoja</strong> (de un árbol)</td><td>fronda</td></tr>
+      <tr><td><strong>hoja</strong> (de papel)</td><td>folio, página</td></tr>
+    </tbody>
+  </table>
+
+  <div class="def-box">
+    <div class="def-titulo">Cómo elegir el sinónimo correcto</div>
+    <div class="def-texto">
+      1) <strong>Lee toda la oración</strong>: el sentido depende de las palabras de alrededor.<br />
+      2) <strong>Sustituye mentalmente</strong> la palabra por el sinónimo y comprueba si tiene sentido.<br />
+      3) <strong>Descarta</strong> los sinónimos que cambian el significado o suenan raros.
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">Me voy al <strong>banco</strong> a sacar dinero. / Me senté en el <strong>banco</strong> del parque.</div>
+    <div class="ej-analisis">
+      <span class="pal">Misma palabra, dos sentidos.</span> En la primera frase, <em>banco = caja / entidad bancaria</em>. En la segunda, <em>banco = asiento</em>. Sin leer el contexto sería imposible elegir bien. ✅
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">Las palabras que tienen <strong>varios significados</strong> se llaman <em>polisémicas</em>. Casi todas las palabras frecuentes lo son. Por eso, al buscar un sinónimo en el diccionario verás varias opciones: elige la que encaje en tu frase.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Campos semánticos · Ficha 6</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Sinónimos en contexto</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 6</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Elige el sinónimo correcto <strong>según el contexto</strong> de cada frase (rodéalo):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> La <u>hoja</u> del árbol cayó al suelo. → <em>folio · fronda · página</em></div>
+      <div class="oracion-item"><span class="letra">b)</span> Mi padre trabaja en un <u>banco</u> del centro. → <em>asiento · entidad bancaria · escaño</em></div>
+      <div class="oracion-item"><span class="letra">c)</span> El <u>cabeza</u> del equipo dio la orden. → <em>cráneo · líder · cabello</em></div>
+      <div class="oracion-item"><span class="letra">d)</span> Me apunté la dirección en una <u>hoja</u>. → <em>fronda · folio · rama</em></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Sustituye la palabra <u>subrayada</u> por <strong>el sinónimo más adecuado</strong> al contexto:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> La carretera era muy <u>larga</u> y monótona. → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> El profesor explicó la lección con voz <u>clara</u>. → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> Mi abuela hizo un guiso <u>rico</u>. → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">d)</span> Este puente es muy <u>antiguo</u>. → <span class="inline-resp"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Reescribe el siguiente párrafo <strong>cambiando las palabras repetidas</strong> por sinónimos:</div>
+    <div class="texto-base">
+      Ayer fui al parque con mi amigo Pablo. El parque estaba muy bonito y los árboles del parque tenían hojas verdes. Mi amigo Pablo cogió una hoja y la guardó en su mochila. Después mi amigo Pablo me dijo que el parque era su lugar favorito.
+    </div>
+    <table class="tabla-ejer">
+      <tbody>
+        <tr><td class="vacio" style="height: 25px;"></td></tr>
+        <tr><td class="vacio" style="height: 25px;"></td></tr>
+        <tr><td class="vacio" style="height: 25px;"></td></tr>
+        <tr><td class="vacio" style="height: 25px;"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
