@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El verbo II · Análisis morfológico · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .clases-tabla td.clase { font-weight: 800; width: 22%; }
+    .clases-tabla td.ej { font-style: italic; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Análisis morfológico</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Gramática · Ficha 6</div>
+  <div class="teoria-titulo">El verbo II: persona, número, tiempo y modo</div>
+
+  <div class="def-box">
+    <div class="def-titulo">¿Qué nos dice la desinencia?</div>
+    <div class="def-texto">La desinencia del verbo indica <strong>quién</strong> realiza la acción (persona y número), <strong>cuándo</strong> (tiempo) y <strong>cómo</strong> la presentamos (modo).</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:22%">Persona</th><th>Singular</th><th>Plural</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="clase">1ª (yo / nosotros)</td><td class="ej">yo canto</td><td class="ej">nosotros cantamos</td></tr>
+      <tr><td class="clase">2ª (tú / vosotros)</td><td class="ej">tú cantas</td><td class="ej">vosotros cantáis</td></tr>
+      <tr><td class="clase">3ª (él, ella / ellos)</td><td class="ej">él canta</td><td class="ej">ellos cantan</td></tr>
+    </tbody>
+  </table>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:22%">Tiempo</th><th>¿Cuándo ocurre?</th><th style="width:32%">Ejemplos</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="clase">Pasado</td><td>Acción ya terminada.</td><td class="ej">canté, cantaba, había cantado</td></tr>
+      <tr><td class="clase">Presente</td><td>Acción que ocurre ahora.</td><td class="ej">canto, cantas, canta</td></tr>
+      <tr><td class="clase">Futuro</td><td>Acción que va a ocurrir.</td><td class="ej">cantaré, cantarás, cantará</td></tr>
+    </tbody>
+  </table>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:22%">Modo</th><th>¿Cómo se presenta?</th><th style="width:32%">Ejemplos</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="clase">Indicativo</td><td>Hecho <strong>real o seguro</strong>.</td><td class="ej">canto, comí, vivirá</td></tr>
+      <tr><td class="clase">Subjuntivo</td><td><strong>Deseo, duda</strong> o posibilidad.</td><td class="ej">cante, comiera, viva</td></tr>
+      <tr><td class="clase">Imperativo</td><td><strong>Orden</strong> o petición.</td><td class="ej">¡canta! ¡come! ¡vive!</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">Mis amigos cantaron en el concierto.</div>
+    <div class="ej-analisis">
+      <span class="pal">cantaron</span> → verbo <em>cantar</em>, <strong>1ª conjugación</strong>, <strong>3ª persona</strong>, <strong>plural</strong>, <strong>tiempo pasado</strong> (pret. perfecto simple), <strong>modo indicativo</strong>.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda · Orden para analizar un verbo</div>
+    <div class="recuerda-texto"><strong>1)</strong> Infinitivo y conjugación &nbsp;·&nbsp; <strong>2)</strong> Persona &nbsp;·&nbsp; <strong>3)</strong> Número &nbsp;·&nbsp; <strong>4)</strong> Tiempo &nbsp;·&nbsp; <strong>5)</strong> Modo.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 El verbo II · Ficha 6</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · El verbo II</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 6</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Indica persona y número de cada forma verbal:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Verbo</th><th>Persona</th><th>Número</th><th>Verbo</th><th>Persona</th><th>Número</th></tr></thead>
+      <tbody>
+        <tr><td>cantamos</td><td class="vacio"></td><td class="vacio"></td><td>vivís</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>comes</td><td class="vacio"></td><td class="vacio"></td><td>juegan</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>partiré</td><td class="vacio"></td><td class="vacio"></td><td>bebían</td><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Indica el tiempo (pasado / presente / futuro):</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Mañana viajaremos a Granada. → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> Ayer comí con mis abuelos. → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> Ahora estudio matemáticas. → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">d)</span> El año pasado vivía en Málaga. → <span class="inline-resp"></span></div>
+    </div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> Indica el modo (indicativo, subjuntivo o imperativo):</div>
+      <div class="col-prompt">a) ¡Come la sopa! → <span class="inline-resp"></span></div>
+      <div class="col-prompt">b) Ojalá llueva pronto. → <span class="inline-resp"></span></div>
+      <div class="col-prompt">c) Marcos juega al fútbol. → <span class="inline-resp"></span></div>
+      <div class="col-prompt">d) Quizá venga mañana. → <span class="inline-resp"></span></div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Análisis completo del verbo:</div>
+      <div class="col-prompt">a) <strong>comeremos</strong>: <span class="inline-resp"></span></div>
+      <div class="col-prompt">b) <strong>saltaba</strong>: <span class="inline-resp"></span></div>
+      <div class="col-prompt">c) <strong>vives</strong>: <span class="inline-resp"></span></div>
+      <div class="col-prompt">d) <strong>cantaron</strong>: <span class="inline-resp"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

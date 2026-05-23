@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Determinantes · Análisis morfológico · 5º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.45; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .clases-tabla td.clase { font-weight: 800; width: 24%; }
+    .clases-tabla td.ej { font-style: italic; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 8px; }
+    .ej-oracion { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    .recuerda-texto { font-size: 12.5px; line-height: 1.45; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 110px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 6px; text-align: left; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 22px; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+    }
+    @page { size: A4 portrait; margin: 2.2cm 2.2cm 1.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 5º Primaria · Análisis morfológico</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Gramática · Ficha 3</div>
+  <div class="teoria-titulo">Los determinantes</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Determinante</div>
+    <div class="def-texto">Palabra que <strong>acompaña al sustantivo</strong> para presentarlo o concretarlo. <strong>Siempre concuerda</strong> con él en género y número: <em>el libro / los libros / la mesa / las mesas</em>.</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead>
+      <tr><th style="width:22%">Clase</th><th>¿Qué hace?</th><th style="width:34%">Ejemplos</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="clase">Artículos</td><td>Presentan al sustantivo. <strong>Determinados</strong> (algo conocido) o <strong>indeterminados</strong> (algo nuevo).</td><td class="ej">el, la, los, las · un, una, unos, unas</td></tr>
+      <tr><td class="clase">Demostrativos</td><td>Indican <strong>cercanía o lejanía</strong>.</td><td class="ej">este, ese, aquel (y sus formas)</td></tr>
+      <tr><td class="clase">Posesivos</td><td>Indican a quién <strong>pertenece</strong> algo.</td><td class="ej">mi, tu, su, nuestro, vuestro, sus</td></tr>
+      <tr><td class="clase">Numerales</td><td><strong>Cardinales</strong> (cantidad) u <strong>ordinales</strong> (orden).</td><td class="ej">dos coches · tercer puesto</td></tr>
+      <tr><td class="clase">Indefinidos</td><td>Indican cantidad <strong>imprecisa</strong>.</td><td class="ej">algún, mucho, poco, varios, todo</td></tr>
+      <tr><td class="clase">Interrog./Exclam.</td><td>En preguntas o exclamaciones. Llevan <strong>tilde</strong>.</td><td class="ej">¿qué hora? · ¡cuánto frío!</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">Mis dos hermanas viven en aquella casa.</div>
+    <div class="ej-analisis">
+      <span class="pal">Mis</span> → determinante posesivo, femenino, plural. &nbsp;·&nbsp;
+      <span class="pal">dos</span> → determinante numeral cardinal. &nbsp;·&nbsp;
+      <span class="pal">aquella</span> → determinante demostrativo, femenino, singular.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-texto">El determinante <strong>siempre va delante de un sustantivo</strong> y concuerda con él. Si no acompaña a un sustantivo, no es un determinante (puede ser pronombre).</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Los determinantes · Ficha 3</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Los determinantes</span>
+    <span class="page-2-ref">Lengua · 5º Primaria · Ficha 3</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Subraya los determinantes e indica de qué clase son:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th style="width:55%">Oración</th><th>Determinante</th><th>Clase</th></tr></thead>
+      <tbody>
+        <tr><td>Mi perro duerme en aquella alfombra.</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>Hemos comprado tres libros nuevos.</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>Algunos niños juegan en el patio.</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>¿Qué hora es?</td><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Completa con un determinante adecuado e indica su clase entre paréntesis:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> <span class="inline-resp"></span> bicicleta es roja y nueva. ( <span class="inline-resp" style="min-width:80px"></span> )</div>
+      <div class="oracion-item"><span class="letra">b)</span> Tengo <span class="inline-resp"></span> hermanos pequeños. ( <span class="inline-resp" style="min-width:80px"></span> )</div>
+      <div class="oracion-item"><span class="letra">c)</span> ¡<span class="inline-resp"></span> calor hace hoy! ( <span class="inline-resp" style="min-width:80px"></span> )</div>
+      <div class="oracion-item"><span class="letra">d)</span> <span class="inline-resp"></span> días iremos al cine. ( <span class="inline-resp" style="min-width:80px"></span> )</div>
+    </div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">3.</span> Concordancia. Escribe el determinante posesivo:</div>
+      <div class="col-prompt">a) (yo) <span class="inline-resp"></span> mochila</div>
+      <div class="col-prompt">b) (tú) <span class="inline-resp"></span> cuadernos</div>
+      <div class="col-prompt">c) (él) <span class="inline-resp"></span> casa</div>
+      <div class="col-prompt">d) (nosotros) <span class="inline-resp"></span> equipo</div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Cambia el demostrativo de cercanía:</div>
+      <div class="col-prompt">a) cerca → este libro · lejos → <span class="inline-resp"></span> libro</div>
+      <div class="col-prompt">b) cerca → <span class="inline-resp"></span> mesa · lejos → aquella mesa</div>
+      <div class="col-prompt">c) cerca → estos coches · lejos → <span class="inline-resp"></span> coches</div>
+      <div class="col-prompt">d) cerca → esta calle · lejos → <span class="inline-resp"></span> calle</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
