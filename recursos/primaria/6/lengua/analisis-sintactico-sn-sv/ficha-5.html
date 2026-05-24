@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El sintagma verbal (SV): el verbo manda · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.5; }
+    .clases-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11.5px; }
+    .clases-tabla th, .clases-tabla td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .clases-tabla th { font-weight: 800; background: #f3f3f3; }
+    .clases-tabla td.sigla { font-weight: 800; width: 12%; text-align: center; }
+    .clases-tabla td.tipo { font-weight: 700; width: 28%; }
+    .clases-tabla td.ej { font-style: italic; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 10px; }
+    .ej-oracion { font-size: 14px; font-weight: 700; margin-bottom: 6px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12.5px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 120px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 7px; text-align: left; vertical-align: middle; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 24px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Análisis sintáctico SN+SV</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">⚙️ El sintagma verbal (SV)</div>
+  <div class="teoria-titulo">El verbo manda</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Definición</div>
+    <div class="def-texto">El <strong>sintagma verbal (SV)</strong> es el grupo de palabras cuyo <strong>núcleo</strong> es un <strong>verbo conjugado</strong>. Funciona como <strong>predicado</strong>: dice qué hace, cómo es o cómo está el sujeto.</div>
+  </div>
+
+  <div class="def-box">
+    <div class="def-titulo">Estructura del SV</div>
+    <div class="def-texto">El núcleo (el verbo) puede ir solo o acompañado de <strong>complementos</strong>. Los complementos son sintagmas que completan el sentido del verbo. En 6º, conocemos estos cuatro:</div>
+  </div>
+
+  <table class="clases-tabla">
+    <thead><tr><th>Sigla</th><th>Tipo</th><th>Ejemplo (en negrita el complemento)</th></tr></thead>
+    <tbody>
+      <tr><td class="sigla">CD</td><td class="tipo">Complemento Directo</td><td class="ej">Marta come <strong>una manzana</strong>.</td></tr>
+      <tr><td class="sigla">CI</td><td class="tipo">Complemento Indirecto</td><td class="ej">Marta da una manzana <strong>a su hermano</strong>.</td></tr>
+      <tr><td class="sigla">CC</td><td class="tipo">Complemento Circunstancial</td><td class="ej">Marta come <strong>en el patio</strong>.</td></tr>
+      <tr><td class="sigla">Atr</td><td class="tipo">Atributo (con ser/estar/parecer)</td><td class="ej">Marta está <strong>cansada</strong>.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">Mi hermano leyó un libro en la biblioteca.</div>
+    <div class="ej-analisis">
+      <span class="pal">SV (predicado):</span> <em>leyó un libro en la biblioteca</em>. <span class="pal">Núcleo:</span> <em>leyó</em>. <span class="pal">Complementos:</span> <em>un libro</em> (CD), <em>en la biblioteca</em> (CC).
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Cómo encontrar el SV</div>
+    1) <strong>Localiza el verbo conjugado.</strong> 2) Todo lo que no sea el sujeto forma parte del SV. 3) Comprueba: el SV es <strong>"todo lo que decimos del sujeto"</strong>.
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Análisis sintáctico · Ficha 5</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · El sintagma verbal</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Ficha 5</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Rodea el verbo</strong> conjugado (núcleo del SV) de cada oración:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Mi padre prepara la cena los viernes.</div>
+      <div class="oracion-item"><span class="letra">b)</span> Los pájaros vuelan sobre el tejado.</div>
+      <div class="oracion-item"><span class="letra">c)</span> Aquella señora vendía periódicos en la esquina.</div>
+      <div class="oracion-item"><span class="letra">d)</span> La pelota rodó muy lejos.</div>
+      <div class="oracion-item"><span class="letra">e)</span> Mi amiga Sara está enferma hoy.</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Subraya el SV completo</strong> (predicado) de cada oración:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> El profesor / explica el tema con paciencia.</div>
+      <div class="oracion-item"><span class="letra">b)</span> Mis hermanos / juegan al fútbol en el parque.</div>
+      <div class="oracion-item"><span class="letra">c)</span> La luna / brilla mucho esta noche.</div>
+      <div class="oracion-item"><span class="letra">d)</span> Aquel hombre / parece muy simpático.</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Indica el <strong>tipo de complemento</strong> (CD, CI, CC, Atr) del fragmento en cursiva:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Oración</th><th style="width:18%;">Tipo</th></tr></thead>
+      <tbody>
+        <tr><td>Compré <em>un libro</em>.</td><td class="vacio"></td></tr>
+        <tr><td>El perro duerme <em>en el sofá</em>.</td><td class="vacio"></td></tr>
+        <tr><td>Ana es <em>muy alta</em>.</td><td class="vacio"></td></tr>
+        <tr><td>Regalé un balón <em>a mi primo</em>.</td><td class="vacio"></td></tr>
+        <tr><td>Estudiamos <em>por la tarde</em>.</td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Forma un <strong>SV completo</strong> a partir del verbo dado:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> comprar → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> escribir → <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> estar → <span class="inline-resp"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
