@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uso de G y J · Ortografía avanzada · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.5; }
+    .dos-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 4px 0 10px; }
+    .col-card { border: 1.5px solid #000; border-radius: 8px; padding: 8px 11px; font-size: 12px; line-height: 1.45; }
+    .col-titulo { font-weight: 800; font-size: 13px; margin-bottom: 4px; text-align: center; }
+    .col-card .ej { font-style: italic; display: block; margin-top: 4px; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 10px; }
+    .ej-oracion { font-size: 14px; font-weight: 700; margin-bottom: 6px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .esquema-arbol { font-family: 'Courier New', monospace; font-size: 12.5px; background: #f5f5f5; border: 1px solid #ccc; border-radius: 6px; padding: 8px 12px; margin: 6px 0; white-space: pre; line-height: 1.5; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12.5px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 120px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 7px; text-align: left; vertical-align: middle; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 24px; }
+    .tabla-ejer td.col-mini { width: 22%; text-align: center; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .esquema-arbol { background: #fff !important; border: 1px solid #000 !important; }
+      .tabla-ejer th { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Ortografía avanzada</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✍️ Uso de G y J</div>
+  <div class="teoria-titulo">Cuando G suena como J, hay que elegir bien</div>
+
+  <div class="def-box">
+    <div class="def-titulo">El problema</div>
+    <div class="def-texto">La <strong>G</strong> ante <strong>a, o, u</strong> suena fuerte (<em>gato</em>). Ante <strong>e, i</strong> suena igual que la <strong>J</strong> (<em>gente / jefe</em>). Cuando coincide ese sonido, hay que aplicar <strong>reglas</strong> y conocer las familias léxicas. La J ante cualquier vocal suena siempre igual (<em>jamón, jefe, jirafa, juez</em>).</div>
+  </div>
+
+  <div class="dos-cols">
+    <div class="col-card">
+      <div class="col-titulo">🇬 Se escribe con G</div>
+      · Palabras con <strong>gen-, gene-, gest-</strong>: gente, generoso, gestión, género. (Excepto: <em>jengibre, ajeno</em>.)<br>
+      · Con <strong>geo-</strong> (tierra): geografía, geología.<br>
+      · Verbos en <strong>-ger, -gir</strong>: coger, recoger, dirigir, fingir. (Excepto: <em>tejer, crujir</em>.)<br>
+      · Terminaciones <strong>-logía, -gogía</strong>: psicología, pedagogía.
+    </div>
+    <div class="col-card">
+      <div class="col-titulo">🇯 Se escribe con J</div>
+      · Terminaciones <strong>-aje, -eje</strong>: viaje, equipaje, hereje.<br>
+      · Terminación <strong>-jería</strong>: cerrajería, mensajería.<br>
+      · Verbos en <strong>-jar, -jear</strong>: trabajar, hojear.<br>
+      · Pretéritos de <strong>traer, decir, conducir</strong> y derivados: traje, dije, conduje, produjo.
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">El equipaje del viaje geográfico llegó tarde, dijo el conductor.</div>
+    <div class="ej-analisis">
+      · <span class="pal">equipaje, viaje</span> → terminación <em>-aje</em> → <strong>J</strong>.<br>
+      · <span class="pal">geográfico</span> → empieza por <em>geo-</em> → <strong>G</strong>.<br>
+      · <span class="pal">dijo</span> → pretérito de <em>decir</em> → <strong>J</strong>.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Truco rápido</div>
+    Si la palabra acaba en <strong>-aje</strong> o <strong>-eje</strong> → <strong>siempre J</strong> (sin excepciones útiles en Primaria). Si la palabra empieza por <strong>gen-, gest-, geo-</strong> → <strong>siempre G</strong>.
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Ortografía avanzada · Ficha 2</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: EJERCICIOS ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Uso de G y J</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Ficha 2</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Completa con <strong>G</strong> o <strong>J</strong>:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Palabra</th><th>Completa</th><th>Palabra</th><th>Completa</th></tr></thead>
+      <tbody>
+        <tr><td>ele__ir</td><td class="vacio"></td><td>traba__ar</td><td class="vacio"></td></tr>
+        <tr><td>prote__er</td><td class="vacio"></td><td>conser__e</td><td class="vacio"></td></tr>
+        <tr><td>tradu__o</td><td class="vacio"></td><td>__ente</td><td class="vacio"></td></tr>
+        <tr><td>pa__e (criado)</td><td class="vacio"></td><td>__eología</td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Marca con una <strong>X</strong> la forma correcta:</div>
+    <div class="par-ej">
+      <div class="col-ej">
+        <div class="col-prompt">☐ garage ☐ garaje</div>
+        <div class="col-prompt">☐ jirafa ☐ girafa</div>
+        <div class="col-prompt">☐ recojer ☐ recoger</div>
+      </div>
+      <div class="col-ej">
+        <div class="col-prompt">☐ ingeniero ☐ injeniero</div>
+        <div class="col-prompt">☐ mensajería ☐ mensagería</div>
+        <div class="col-prompt">☐ dijieron ☐ dijeron</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Conjuga el <strong>pretérito perfecto simple</strong> de <em>conducir</em>:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">yo</span> <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">tú</span> <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">él</span> <span class="inline-resp"></span></div>
+      <div class="oracion-item"><span class="letra">ellos</span> <span class="inline-resp"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Escribe <strong>tres palabras</strong> que acaben en <em>-aje</em> y <strong>tres</strong> que empiecen por <em>geo-</em>:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">-aje:</span> <span class="inline-resp" style="min-width:420px"></span></div>
+      <div class="oracion-item"><span class="letra">geo-:</span> <span class="inline-resp" style="min-width:420px"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

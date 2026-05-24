@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reto final · Ortografía avanzada · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.5; }
+    .dos-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 4px 0 10px; }
+    .col-card { border: 1.5px solid #000; border-radius: 8px; padding: 8px 11px; font-size: 12px; line-height: 1.45; }
+    .col-titulo { font-weight: 800; font-size: 13px; margin-bottom: 4px; text-align: center; }
+    .col-card .ej { font-style: italic; display: block; margin-top: 4px; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 10px; }
+    .ej-oracion { font-size: 14px; font-weight: 700; margin-bottom: 6px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .esquema-arbol { font-family: 'Courier New', monospace; font-size: 12.5px; background: #f5f5f5; border: 1px solid #ccc; border-radius: 6px; padding: 8px 12px; margin: 6px 0; white-space: pre; line-height: 1.5; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12.5px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 120px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 7px; text-align: left; vertical-align: middle; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 24px; }
+    .tabla-ejer td.col-mini { width: 22%; text-align: center; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+    .texto-reto { border: 1.5px solid #000; border-radius: 8px; padding: 10px 13px; font-size: 12.5px; line-height: 1.65; margin-bottom: 10px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .esquema-arbol { background: #fff !important; border: 1px solid #000 !important; }
+      .tabla-ejer th { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: REPASO + RETO 1 ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Ortografía avanzada</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🏆 Reto final</div>
+  <div class="teoria-titulo">Todas las reglas en juego a la vez</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Recordatorio rápido</div>
+    <div class="def-texto">En esta ficha se mezclan todas las reglas del bloque: <strong>B/V, G/J, H, LL/Y, X/S, doble C, mayúsculas, juntas/separadas e hiatos</strong>. Lee con atención antes de responder y usa los trucos aprendidos.</div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> En este texto faltan tildes, mayúsculas y hay errores ortográficos. <strong>Reescríbelo correctamente</strong>:</div>
+    <div class="texto-reto">el lunes pasado mi hermano hugo y yo viajamos a malaga. estuvimos en la universidad de malaga porque mi tio trabaja alli. cuando llegamos, nos encontramos con un espectaculo expontaneo: un grupo de jovenes cantaba en el patio. fue una accion espontanea, pero tambien muy emocionante. al volver a casa, dije que el viaje habia sido extraordinario.</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="inline-resp" style="min-width:560px"></span></div>
+      <div class="oracion-item"><span class="inline-resp" style="min-width:560px"></span></div>
+      <div class="oracion-item"><span class="inline-resp" style="min-width:560px"></span></div>
+      <div class="oracion-item"><span class="inline-resp" style="min-width:560px"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Ortografía avanzada · Ficha 10</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: RETOS 2-4 ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Reto final</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Ficha 10</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Completa la letra que falta y di <strong>qué regla aplicas</strong>:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Palabra</th><th>Forma correcta</th><th>Regla</th></tr></thead>
+      <tbody>
+        <tr><td>ad__ertir</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>__umedad</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>recoo__er (verbo coger)</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>constru__eron</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>colec__ión</td><td class="vacio"></td><td class="vacio"></td></tr>
+        <tr><td>e__pléndido</td><td class="vacio"></td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Elige la forma correcta:</div>
+    <div class="par-ej">
+      <div class="col-ej">
+        <div class="col-prompt">☐ porque ☐ por que ☐ por qué</div>
+        <div class="col-prompt"><em>No vengo ____ llueve.</em></div>
+        <div class="col-prompt">☐ sino ☐ si no</div>
+        <div class="col-prompt"><em>No es Juan, ____ Pedro.</em></div>
+      </div>
+      <div class="col-ej">
+        <div class="col-prompt">☐ también ☐ tan bien</div>
+        <div class="col-prompt"><em>Yo ____ quiero ir.</em></div>
+        <div class="col-prompt">☐ cayó ☐ calló</div>
+        <div class="col-prompt"><em>Se ____ de la bici.</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Mini-redacción</strong>: escribe 5 líneas sobre un viaje. Tienes que usar, <strong>al menos</strong>:</div>
+    <div class="oraciones-lista" style="margin-bottom:6px;">
+      <div class="oracion-item">· 1 palabra del verbo <em>estar</em> en pretérito (con V).</div>
+      <div class="oracion-item">· 1 palabra terminada en <em>-aje</em> (con J).</div>
+      <div class="oracion-item">· 1 palabra con <em>extra-</em> o <em>ex-</em>.</div>
+      <div class="oracion-item">· 1 sustantivo terminado en <em>-cción</em>.</div>
+    </div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="inline-resp" style="min-width:560px"></span></div>
+      <div class="oracion-item"><span class="inline-resp" style="min-width:560px"></span></div>
+      <div class="oracion-item"><span class="inline-resp" style="min-width:560px"></span></div>
+      <div class="oracion-item"><span class="inline-resp" style="min-width:560px"></span></div>
+      <div class="oracion-item"><span class="inline-resp" style="min-width:560px"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">🏆 ¡Bloque superado!</span>
+  </div>
+</body>
+</html>
