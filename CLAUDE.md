@@ -173,10 +173,11 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - **Total:** ~689 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
-- 3 artículos publicados:
+- 4 artículos publicados:
   - `como-elegir-academia-torremolinos.html`
   - `como-ayudar-comprension-lectora-primaria.html`
   - `tecnicas-de-estudio-primaria.html` (publicado 2026-05-23)
+  - `como-trabajar-ortografia-primaria.html` (publicado 2026-05-24, con 7 enlaces a fichas)
 
 ### Páginas de servicio
 - Logopedia · Psicología · Quiénes somos — en sistema premium, con JSON-LD
