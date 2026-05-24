@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cartas al director · Intención del autor · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .carta-box { border: 1.5px solid #000; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; background: #fff; }
+    .carta-cabecera { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-align: center; margin-bottom: 4px; color: #555; }
+    .carta-titular { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; text-align: center; margin-bottom: 8px; border-bottom: 1.5px solid #000; padding-bottom: 5px; }
+    .carta-cuerpo { font-size: 12.5px; line-height: 1.55; text-align: justify; }
+    .carta-cuerpo p { margin-bottom: 6px; }
+    .carta-firma { font-size: 11.5px; text-align: right; margin-top: 6px; font-style: italic; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 30%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 28px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✉️ Cartas al director</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Qué es una carta al director?</div>
+    Es un texto <strong>de opinión</strong> que un lector envía a un periódico o revista para dar su punto de vista sobre un tema. Su intención principal es <strong>convencer</strong> al resto de lectores. Suele tener:
+    <ul>
+      <li><strong>Tesis</strong>: la idea principal que defiende el autor (a favor o en contra de algo).</li>
+      <li><strong>Argumentos</strong>: razones que apoyan esa tesis (datos, ejemplos, experiencias).</li>
+      <li><strong>Tono personal</strong>: el autor se implica, usa la primera persona, expresa sentimientos.</li>
+      <li><strong>Firma</strong>: nombre y, a veces, ciudad o cargo de quien escribe.</li>
+    </ul>
+  </div>
+
+  <div class="carta-box">
+    <div class="carta-cabecera">SECCIÓN · CARTAS AL DIRECTOR · DIARIO DE TORREMOLINOS</div>
+    <div class="carta-titular">«Los semáforos del colegio funcionan mal»</div>
+    <div class="carta-cuerpo">
+      <p>Señor director:</p>
+      <p>Soy padre de dos niños del colegio Las Palmeras y escribo porque ya no sé a quién acudir. Los dos semáforos que hay junto a la entrada del centro <strong>llevan tres meses averiados</strong>: el rojo dura apenas cinco segundos y, además, la mitad de los días directamente no funcionan.</p>
+      <p>La semana pasada, un coche tuvo que frenar bruscamente para no atropellar a una niña de primero. <strong>No es la primera vez</strong>: en marzo ya pasó algo parecido. Los padres hemos avisado al Ayuntamiento por teléfono, por correo y en persona. La respuesta siempre es la misma: «Lo estamos estudiando».</p>
+      <p>Creo que un colegio con 600 alumnos merece <strong>algo más que silencio</strong>. Pido públicamente que el Ayuntamiento repare los semáforos antes de que tengamos que lamentar un accidente. Después será tarde.</p>
+    </div>
+    <div class="carta-firma">— Javier Domínguez, padre de alumnos. Torremolinos.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 8</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Cartas al director</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a desmontar la carta: identificar su <strong>tesis</strong>, los <strong>argumentos</strong> y la <strong>intención</strong> que tiene su autor al publicarla.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Resume en una frase la <strong>tesis</strong> que defiende Javier Domínguez:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Anota <strong>dos argumentos</strong> que usa para apoyar esa tesis:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">Argumento 1</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">Argumento 2</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> ¿Cuál es la <strong>intención</strong> principal del autor al enviar esta carta? Marca la opción correcta:</div>
+      <div style="margin-left:12px; font-size:13px; line-height:1.7;">
+        ☐ Contar una anécdota sin más.<br>
+        ☐ Presionar al Ayuntamiento y movilizar a otros padres para que reparen los semáforos.<br>
+        ☐ Vender un producto relacionado con la seguridad vial.
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Subraya en el texto una frase con <strong>tono emocional</strong> y otra con un <strong>dato concreto</strong>. Cópialas:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">Frase emocional</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">Dato concreto</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">5.</span> Imagina que estás de acuerdo con Javier. Escribe en 2-3 líneas tu propia carta al director apoyando su petición:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

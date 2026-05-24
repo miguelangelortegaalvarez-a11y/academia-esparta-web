@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El tono del autor · Intención del autor · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .tonos-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; margin-top: 6px; font-size: 11px; }
+    .tono-card { border: 1.5px solid #000; border-radius: 6px; padding: 5px 7px; }
+    .tono-nombre { font-weight: 800; font-size: 11.5px; }
+    .doble-texto { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 12px; }
+    .texto-etiqueta { display: inline-block; font-family: sans-serif; font-weight: 800; font-size: 10px; background: #000; color: #fff; padding: 2px 7px; border-radius: 999px; margin-bottom: 5px; }
+    .texto-cuerpo { font-size: 12px; line-height: 1.55; text-align: justify; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 35%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 28px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .texto-etiqueta { background: #000 !important; color: #fff !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🎨 El tono del autor</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Qué es el tono?</div>
+    El <strong>tono</strong> es la <strong>actitud</strong> con la que el autor habla del tema: cómo se siente y cómo quiere que tú te sientas. Dos textos sobre lo mismo pueden tener tonos opuestos según las palabras y los signos que se elijan.
+    <div class="tonos-grid">
+      <div class="tono-card"><span class="tono-nombre">😊 Alegre</span><br>positivo, con energía.</div>
+      <div class="tono-card"><span class="tono-nombre">😔 Triste</span><br>melancólico, nostálgico.</div>
+      <div class="tono-card"><span class="tono-nombre">😡 Crítico</span><br>de queja o protesta.</div>
+      <div class="tono-card"><span class="tono-nombre">🤔 Neutro</span><br>objetivo, sin emoción.</div>
+      <div class="tono-card"><span class="tono-nombre">😍 Admirativo</span><br>elogia, valora muy bien.</div>
+      <div class="tono-card"><span class="tono-nombre">😂 Humorístico</span><br>busca la sonrisa.</div>
+    </div>
+  </div>
+
+  <div class="doble-texto">
+    <div class="texto-box">
+      <span class="texto-etiqueta">TEXTO 1</span>
+      <div class="texto-cuerpo">
+        Han abierto un nuevo skate park en el barrio. Por fin un sitio para los chavales, con rampas modernas y una zona verde alrededor. Llevábamos años pidiéndolo y, aunque ha tardado, el resultado es magnífico. Los sábados está lleno de niños y niñas riéndose. ¡Una alegría para Torremolinos!
+      </div>
+    </div>
+    <div class="texto-box">
+      <span class="texto-etiqueta">TEXTO 2</span>
+      <div class="texto-cuerpo">
+        Han abierto un nuevo skate park en el barrio. Otra ocurrencia más del Ayuntamiento, que se gasta el dinero en cemento mientras la biblioteca sigue con goteras. El ruido es constante y los vecinos no podemos descansar los sábados. Como siempre, deciden sin preguntar a quienes vivimos aquí.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 4</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · El tono del autor</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Los dos textos hablan del mismo hecho, pero el <strong>tono</strong> es totalmente distinto. Vas a identificarlo y a fijarte en las palabras que lo provocan.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> ¿Qué tono predomina en cada texto? Elige entre alegre, crítico, neutro o admirativo:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">Texto 1</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">Texto 2</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Localiza en cada texto dos palabras o expresiones que marcan ese tono y cópialas aquí:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">Pistas del texto 1</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">Pistas del texto 2</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> ¿Cuál es la <strong>intención</strong> de cada autor (informar, convencer, criticar, celebrar)?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Reescribe el texto 2 en <strong>tono neutro</strong>: cuenta el mismo hecho, pero sin opinión ni queja. Solo información:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">5.</span> ¿Qué texto te parece más fácil de creer? ¿Por qué crees que pasa eso?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

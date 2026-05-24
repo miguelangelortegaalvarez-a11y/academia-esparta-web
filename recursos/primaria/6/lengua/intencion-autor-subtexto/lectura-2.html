@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La intención en titulares y carteles · Intención del autor · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .titulares-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+    .titular-card { border: 1.5px solid #000; border-radius: 8px; padding: 10px 12px; }
+    .titular-num { font-family: sans-serif; font-weight: 800; font-size: 11px; color: #555; margin-bottom: 4px; }
+    .titular-texto { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; line-height: 1.35; }
+    .titular-fuente { font-size: 10px; color: #555; margin-top: 5px; font-style: italic; }
+    .carteles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cartel-card { border: 2.5px solid #000; border-radius: 10px; padding: 14px 12px; text-align: center; min-height: 110px; display: flex; flex-direction: column; justify-content: center; }
+    .cartel-num { font-family: sans-serif; font-weight: 800; font-size: 11px; color: #555; margin-bottom: 6px; }
+    .cartel-titulo { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.2; margin-bottom: 4px; }
+    .cartel-sub { font-size: 11.5px; line-height: 1.35; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 55%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 28px; text-align: center; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA + TITULARES Y CARTELES ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📰 Titulares y carteles</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Cómo se nota la intención en pocas palabras</div>
+    Los <strong>titulares</strong> de prensa y los <strong>carteles</strong> publicitarios tienen que captar tu atención en segundos. Por eso eligen muy bien cada palabra. Fíjate en estas pistas:
+    <ul>
+      <li><strong>Verbos en imperativo</strong> («Ven», «Apaga», «Únete»): casi siempre quieren <strong>convencer</strong>.</li>
+      <li><strong>Cifras, lugares y fechas concretas</strong> («El paro baja un 2,1 % en abril»): suelen <strong>informar</strong>.</li>
+      <li><strong>Adjetivos exagerados o emocionales</strong> («increíble», «único», «mágico»): buscan <strong>convencer</strong> o emocionar.</li>
+      <li><strong>Preguntas directas al lector</strong> («¿Y tú a qué esperas?»): te quieren <strong>implicar</strong>.</li>
+      <li><strong>Juegos de palabras y rimas</strong>: suelen <strong>entretener</strong> o quedarse en la memoria (publicidad).</li>
+    </ul>
+  </div>
+
+  <div class="titulares-grid">
+    <div class="titular-card">
+      <div class="titular-num">TITULAR 1</div>
+      <div class="titular-texto">«El Ayuntamiento de Torremolinos invertirá 1,2 millones de euros en reformar el paseo marítimo.»</div>
+      <div class="titular-fuente">Diario local · sección «Ciudad»</div>
+    </div>
+    <div class="titular-card">
+      <div class="titular-num">TITULAR 2</div>
+      <div class="titular-texto">«¡Despídete del aburrimiento! Llega a Málaga la feria más loca del verano.»</div>
+      <div class="titular-fuente">Revista de ocio</div>
+    </div>
+    <div class="titular-card">
+      <div class="titular-num">TITULAR 3</div>
+      <div class="titular-texto">«Recicla el plástico de tu casa. Cada botella cuenta.»</div>
+      <div class="titular-fuente">Folleto del Ayuntamiento</div>
+    </div>
+    <div class="titular-card">
+      <div class="titular-num">TITULAR 4</div>
+      <div class="titular-texto">«Un perro perdido recorre 300 km para volver con su dueño en Asturias.»</div>
+      <div class="titular-fuente">Sección «Curiosidades»</div>
+    </div>
+  </div>
+
+  <div class="carteles-grid">
+    <div class="cartel-card">
+      <div class="cartel-num">CARTEL A</div>
+      <div class="cartel-titulo">¡APAGA LA LUZ!</div>
+      <div class="cartel-sub">Cada bombilla encendida sin nadie cuesta dinero… y planeta. <strong>Tú decides.</strong></div>
+    </div>
+    <div class="cartel-card">
+      <div class="cartel-num">CARTEL B</div>
+      <div class="cartel-titulo">FESTIVAL DE LIBROS</div>
+      <div class="cartel-sub">Plaza de la Constitución · Sábado 14 de junio · de 10 a 20 h · Entrada libre.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 2</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Titulares y carteles</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a clasificar cada titular y cada cartel según la <strong>intención</strong> de quien lo escribió y a localizar las <strong>pistas</strong> que te lo confirman.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Escribe la intención principal de cada titular (informar / entretener / convencer):</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">Titular 1 — paseo marítimo</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">Titular 2 — feria del verano</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">Titular 3 — reciclaje</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">Titular 4 — perro perdido</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Subraya en el titular 2 dos palabras o signos que delatan que quiere <strong>convencerte</strong> de algo:</div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Cartel A y cartel B tienen intenciones distintas. Explica cuál es la de cada uno y en qué te basas:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">Cartel A — «¡Apaga la luz!»</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">Cartel B — «Festival de libros»</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> El cartel A termina con «Tú decides.» ¿Por qué crees que el autor elige esa frase y no «Apágala ya»?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">5.</span> Reescribe el titular 1 con intención de <strong>convencer</strong> a la gente de que el cambio es una gran noticia. Usa al menos un adjetivo emocional:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

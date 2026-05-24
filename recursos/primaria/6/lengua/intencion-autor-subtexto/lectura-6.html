@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subtexto en diálogos · Intención del autor · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .ejemplo-box { background: #fff; border: 1.5px dashed #000; border-radius: 6px; padding: 6px 10px; margin-top: 6px; font-size: 12px; line-height: 1.5; }
+    .dialogo-box { border: 1.5px solid #000; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; }
+    .dialogo-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .dialogo-escena { font-size: 11.5px; font-style: italic; color: #444; margin-bottom: 8px; text-align: center; }
+    .dialogo-linea { font-size: 12.5px; line-height: 1.55; margin-bottom: 4px; }
+    .dialogo-pers { font-weight: 800; }
+    .acotacion { font-style: italic; color: #555; font-size: 12px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .traduce-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 11.5px; }
+    .traduce-tabla th, .traduce-tabla td { border: 1.5px solid #000; padding: 5px 8px; vertical-align: middle; }
+    .traduce-tabla thead th { background: #000; color: #fff; font-weight: 800; font-size: 11px; }
+    .traduce-tabla td.frase { width: 50%; font-style: italic; }
+    .traduce-tabla td.resp { height: 28px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .traduce-tabla thead th { background: #000 !important; color: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">💬 Subtexto en diálogos</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Lo que se dice y lo que se calla</div>
+    El <strong>subtexto</strong> es <strong>lo que un personaje quiere decir sin decirlo directamente</strong>. Se nota en:
+    <ul>
+      <li><strong>Indirectas y dobles sentidos</strong> («Pues nada, otra vez sin avisar…»).</li>
+      <li><strong>Silencios</strong>, suspiros o respuestas muy cortas («Bueno.»).</li>
+      <li><strong>Acotaciones</strong> del narrador que describen gestos, miradas o tono de voz.</li>
+      <li><strong>Cambios de tema</strong> bruscos para evitar algo.</li>
+    </ul>
+    <div class="ejemplo-box">
+      <strong>Ejemplo:</strong> <em>«—¿Te lo has pasado bien? —preguntó ella sin mirarle.»</em> El subtexto dice que está enfadada o dolida, aunque la pregunta parezca normal.
+    </div>
+  </div>
+
+  <div class="dialogo-box">
+    <div class="dialogo-titulo">El examen</div>
+    <div class="dialogo-escena">Lucía vuelve a casa con el examen de Matemáticas corregido. Su padre está en la cocina.</div>
+
+    <div class="dialogo-linea"><span class="dialogo-pers">PADRE:</span> ¿Qué tal el examen, cariño?</div>
+    <div class="dialogo-linea"><span class="dialogo-pers">LUCÍA:</span> <span class="acotacion">(dejando la mochila en el suelo de golpe)</span> Bien.</div>
+    <div class="dialogo-linea"><span class="dialogo-pers">PADRE:</span> ¿Bien… bien? ¿O bien de los tuyos?</div>
+    <div class="dialogo-linea"><span class="dialogo-pers">LUCÍA:</span> Bien. ¿Hay zumo?</div>
+    <div class="dialogo-linea"><span class="dialogo-pers">PADRE:</span> En la nevera. <span class="acotacion">(pausa)</span> ¿Y la nota?</div>
+    <div class="dialogo-linea"><span class="dialogo-pers">LUCÍA:</span> Ya lo veremos mañana en clase con todos. Para qué adelantar.</div>
+    <div class="dialogo-linea"><span class="dialogo-pers">PADRE:</span> Lucía…</div>
+    <div class="dialogo-linea"><span class="dialogo-pers">LUCÍA:</span> <span class="acotacion">(sin levantar la vista del vaso)</span> Un cuatro y medio. Pero la profe ha dicho que el último ejercicio estaba casi bien.</div>
+    <div class="dialogo-linea"><span class="dialogo-pers">PADRE:</span> <span class="acotacion">(suspira y se sienta a su lado)</span> Ven aquí. Cuéntame qué ha pasado.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 6</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Subtexto en diálogos</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a leer entre líneas: qué está sintiendo Lucía y qué intuye el padre, aunque ninguno de los dos lo diga abiertamente.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Cuando Lucía dice «Bien.» y deja la mochila de golpe, ¿qué nos está diciendo el autor sin que ella lo diga con palabras?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Traduce las frases siguientes a su significado real (subtexto):</div>
+      <table class="traduce-tabla">
+        <thead>
+          <tr><th class="frase">Lo que dice Lucía</th><th>Lo que realmente quiere decir</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="frase">«¿Hay zumo?»</td><td class="resp"></td></tr>
+          <tr><td class="frase">«Ya lo veremos mañana en clase con todos. Para qué adelantar.»</td><td class="resp"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> El padre dice solo «Lucía…» con puntos suspensivos. ¿Qué intención tiene esa frase?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Al final, el padre <em>suspira y se sienta a su lado</em>. ¿Qué pretende el autor que entendamos con esa acotación? Marca la opción correcta:</div>
+      <div style="margin-left:12px; font-size:13px; line-height:1.7;">
+        ☐ Que el padre se va a enfadar mucho.<br>
+        ☐ Que el padre entiende a su hija y va a escucharla sin gritar.<br>
+        ☐ Que el padre está demasiado cansado para hablar del tema.
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">5.</span> Si reescribiéramos la escena <strong>sin subtexto</strong> (todo dicho a las claras), ¿qué se perdería como lector?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

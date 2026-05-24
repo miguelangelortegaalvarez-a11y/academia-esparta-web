@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reto final: análisis completo · Intención del autor · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .texto-autor { font-size: 10px; color: #555; text-align: center; font-style: italic; margin-bottom: 6px; }
+    .texto-cuerpo { font-size: 12.5px; line-height: 1.55; text-align: justify; }
+    .texto-cuerpo p { margin-bottom: 6px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .analisis-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 11.5px; }
+    .analisis-tabla th, .analisis-tabla td { border: 1.5px solid #000; padding: 5px 8px; vertical-align: middle; }
+    .analisis-tabla thead th { background: #000; color: #fff; font-weight: 800; font-size: 11px; }
+    .analisis-tabla td.col-aspecto { width: 35%; font-weight: 700; background: #f5f5f5; }
+    .analisis-tabla td.col-resp { height: 30px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .reto-banner { background: #000; color: #fff; padding: 6px 12px; border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; text-align: center; margin-bottom: 8px; letter-spacing: 1px; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .analisis-tabla thead th { background: #000 !important; color: #fff !important; }
+      .analisis-tabla td.col-aspecto { background: #fff !important; }
+      .reto-banner { background: #000 !important; color: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="reto-banner">🏆 RETO FINAL · ANÁLISIS COMPLETO</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Antes de empezar: tu chuleta del bloque</div>
+    Ya tienes todas las herramientas. Recuerda mirar siempre:
+    <ul>
+      <li><strong>Intención</strong> (informar / entretener / convencer / criticar).</li>
+      <li><strong>Tono</strong> (alegre, crítico, nostálgico, neutro, irónico…).</li>
+      <li><strong>Subtexto</strong>: lo que se sugiere sin decirlo (gestos, silencios, dobles sentidos).</li>
+      <li><strong>Marcas del lenguaje</strong>: adjetivos valorativos, verbos en primera persona, exclamaciones, signos de interrogación, palabras exageradas.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">Última hora del verano</div>
+    <div class="texto-autor">Relato breve · adaptación libre</div>
+    <div class="texto-cuerpo">
+      <p>Mateo cerró la mochila con un golpe seco. Mañana empezaba el curso. Su madre, desde la cocina, lo llamó con esa voz que ponía cuando todo iba bien y nada iba bien al mismo tiempo:</p>
+      <p>—¡Mateo! ¿Has revisado los libros? ¿Tienes el chándal preparado? Anda, ven a cenar, que mañana hay que madrugar.</p>
+      <p>Él se sentó a la mesa sin levantar la vista. <em>Qué cena tan estupenda</em>, pensó mientras pinchaba un trozo de tortilla que se le caía del tenedor. Lo había decidido durante el verano: este año no iba a contarle a su madre lo que pasaba en clase. Para qué. Otra reunión más con la tutora, otra promesa de la profe, y al final lo mismo de siempre.</p>
+      <p>—¿Estás bien? —preguntó ella, sentándose a su lado.</p>
+      <p>—Sí. <span style="color:#444;">(Tres segundos de silencio.)</span> Solo cansado.</p>
+      <p>Su madre apoyó la mano sobre la suya, despacio, como quien posa algo frágil.</p>
+      <p>—Sabes que puedes contarme lo que sea, ¿verdad?</p>
+      <p>Mateo asintió. Pero no dijo nada. Fuera, el cielo de agosto se había puesto de un azul muy oscuro, casi de septiembre.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 10 · RETO</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Análisis · Última hora del verano</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Intención del autor y subtexto</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a hacer un <strong>análisis completo</strong> del relato: intención, tono y, sobre todo, el subtexto que se esconde detrás de lo que Mateo y su madre se dicen (y callan).
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Completa el análisis general del texto:</div>
+      <table class="analisis-tabla">
+        <thead>
+          <tr><th class="col-aspecto">Aspecto</th><th>Respuesta</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="col-aspecto">Tipo de texto</td><td class="col-resp"></td></tr>
+          <tr><td class="col-aspecto">Intención del autor</td><td class="col-resp"></td></tr>
+          <tr><td class="col-aspecto">Tono predominante</td><td class="col-resp"></td></tr>
+          <tr><td class="col-aspecto">Tema (en una frase)</td><td class="col-resp"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> En la frase <em>«Qué cena tan estupenda»</em>, ¿qué figura del bloque aparece? Tradúcela a su sentido real:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Cuando Mateo dice «Sí. Solo cansado», ¿qué está callando? Escribe el <strong>subtexto</strong> que el autor te pide intuir:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> La madre apoya la mano «despacio, como quien posa algo frágil». ¿Qué intenta transmitir el autor con esa imagen? Marca la opción correcta:</div>
+      <div style="margin-left:12px; font-size:13px; line-height:1.7;">
+        ☐ Que la madre está nerviosa y se le va a caer algo.<br>
+        ☐ Que la madre intuye que su hijo está mal y elige no presionar.<br>
+        ☐ Que la madre quiere coger algo de la mesa pero no llega.
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">5.</span> La última frase dice: «Fuera, el cielo de agosto se había puesto de un azul muy oscuro, casi de septiembre.» ¿Por qué crees que el autor cierra así el relato? Relaciónalo con lo que siente Mateo:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">6.</span> Si tuvieras que recomendar este relato a un compañero, ¿qué le dirías que <strong>aprenderá</strong> leyéndolo sobre la <em>intención del autor</em> y el <em>subtexto</em>?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">🏆 ¡Has cerrado el bloque!</span>
+  </div>
+</body>
+</html>

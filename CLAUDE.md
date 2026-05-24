@@ -44,13 +44,14 @@ academia-esparta-web/
 │   │   │                 # Área Lectura: 7 bloques × 10 fichas
 │   │   │                 # Bloque D Gramática 8/8: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
 │   │   └── 6/lengua/     # EN MARCHA ⬅ (arrancado 2026-05-23)
-│   │                     # Área Lectura 5/7:
+│   │                     # Área Lectura 6/7:
 │   │                     #   - tipologias-textuales (10 fichas)
 │   │                     #   - textos-literarios-narrativa (10 fichas)
 │   │                     #   - textos-literarios-poesia (10 fichas)
 │   │                     #   - textos-literarios-teatro (10 fichas)
 │   │                     #   - textos-discontinuos (10 fichas)
-│   │                     # Siguiente: intención del autor y subtexto
+│   │                     #   - intencion-autor-subtexto (10 fichas, márgenes 3cm)
+│   │                     # Siguiente: resumen y esquema avanzado (cierra Lectura)
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
 │                                 # Resto de 1º ESO sin cubrir
@@ -131,7 +132,7 @@ Refundición del 13/05/2026. Documentación completa en `DISENO.md`.
 
 Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
-- Papel A4, márgenes laterales 2.5cm / superior 2cm / inferior 1.5cm (ajustado 2026-05-23 para evitar contenido pegado al borde derecho en print). Solo B&N para imprimir. **Fichas anteriores a 6º siguen con `margin: 2.2cm 2.2cm 1.5cm` — pendiente migrar.**
+- Papel A4. Márgenes nuevos (2026-05-24): laterales **3cm** / superior 2cm / inferior 1.5cm — `@page { margin: 2cm 3cm 1.5cm 3cm }`. La EPSON ET-2820 de Miguel cortaba con 2.5cm. Solo B&N para imprimir. **Fichas anteriores siguen con márgenes menores (2.5cm las primeras 50 de 6º, 2.2cm hasta 5º) — pendiente migrar.**
 - Fuente 1º–2º: **Edu SA Beginner**. Fuente 3º+: **Poppins**.
 - Las fichas NO usan el sistema visual premium de la web.
 - Ruta: `recursos/primaria/CURSO/lengua/BLOQUE/nombre-bloque-Xprimaria-serie-Y.html`
@@ -151,17 +152,18 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
   - Área Lectura — 7 bloques × 10 fichas = 70 fichas (cerrada 2026-05-22)
   - Bloque D Gramática — 8 sub-bloques × 10 fichas = 80 fichas: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
 - **6º Primaria Lengua — EN MARCHA ⬅** (arrancado 2026-05-23):
-  - Área Lectura 5/7:
+  - Área Lectura 6/7:
     - `tipologias-textuales` (10 fichas) ✅
     - `textos-literarios-narrativa` (10 fichas) ✅
     - `textos-literarios-poesia` (10 fichas) ✅
     - `textos-literarios-teatro` (10 fichas) ✅ (cerrado 2026-05-24)
     - `textos-discontinuos` (10 fichas) ✅ (cerrado 2026-05-24)
+    - `intencion-autor-subtexto` (10 fichas) ✅ (cerrado 2026-05-24, márgenes 3cm)
   - Estructura prevista: 7 sub-bloques Lectura + 8 Gramática = 150 fichas
   - Sub-bloques Lectura: Tipologías textuales · Textos literarios narrativa · Textos literarios poesía · Textos literarios teatro · Textos discontinuos · Intención del autor y subtexto · Resumen y esquema avanzado
   - Sub-bloques Gramática D: Análisis sintáctico SN+SV · Oración compuesta coordinadas · Oración compuesta subordinadas · Verbo avanzado (perífrasis, pasiva) · Léxico (cultismos, prefijos griegos/latinos) · Polisemia/homonimia/paronimia · Ortografía avanzada · Puntuación nivel ESO
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~649 fichas indexadas en sitemap
+- **Total:** ~659 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
 - 3 artículos publicados:
@@ -178,7 +180,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — siguiente paso
 
-1. **Fichas 6º Primaria Lengua — EN MARCHA** — estructura definida y arrancada el 2026-05-23. Patrón heredado de 5º: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|LECTURA|Nombre'` o `'lengua|6|D|Nombre'`. Hecho (5/7 Lectura): Tipologías textuales · Textos literarios narrativa · Textos literarios poesía · Textos literarios teatro · Textos discontinuos. **Siguiente sub-bloque: Intención del autor y subtexto.**
+1. **Fichas 6º Primaria Lengua — EN MARCHA** — estructura definida y arrancada el 2026-05-23. Patrón heredado de 5º: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|LECTURA|Nombre'` o `'lengua|6|D|Nombre'`. **Márgenes @page 3cm laterales** (no 2.5cm — la EPSON ET-2820 corta). Hecho (6/7 Lectura): Tipologías textuales · Textos literarios narrativa · Textos literarios poesía · Textos literarios teatro · Textos discontinuos · Intención del autor y subtexto. **Siguiente sub-bloque: Resumen y esquema avanzado (cierra el área Lectura).**
 
 ### Prioridad media — después de Primaria completa
 
