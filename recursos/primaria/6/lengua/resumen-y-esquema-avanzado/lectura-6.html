@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Esquema numérico · Resumen y esquema avanzado · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .ejemplo-num { font-size: 12px; line-height: 1.5; margin-top: 6px; background: #fff; border: 1.5px dashed #000; border-radius: 6px; padding: 8px 12px; }
+    .n-titulo { font-weight: 800; }
+    .n-2 { padding-left: 24px; }
+    .n-3 { padding-left: 48px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .texto-cuerpo { font-size: 12.5px; line-height: 1.55; text-align: justify; }
+    .texto-cuerpo p { margin-bottom: 6px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 12px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .esquema-marco { border: 1.5px solid #000; border-radius: 6px; padding: 10px 14px; font-size: 12px; line-height: 1.55; }
+    .esq-num-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .esq-prefijo { font-weight: 800; min-width: 36px; }
+    .esq-prefijo-2 { font-weight: 700; min-width: 36px; margin-left: 24px; }
+    .esq-linea { flex: 1; border-bottom: 1.5px solid #000; height: 18px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box, .ejemplo-num { background: #fff !important; }
+      .recuerda-box { border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Resumen y esquema avanzado</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 Esquema numérico</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 El esquema numérico paso a paso</div>
+    Usa <strong>números</strong> para marcar la jerarquía. Cada nivel añade un punto: <strong>1, 1.1, 1.1.1…</strong> Es el preferido en libros de texto e informes.
+    <div class="ejemplo-num">
+      <div class="n-titulo">1. El cuerpo humano</div>
+      <div class="n-2">1.1. Cabeza</div>
+      <div class="n-3">1.1.1. Cráneo</div>
+      <div class="n-3">1.1.2. Cara</div>
+      <div class="n-2">1.2. Tronco</div>
+      <div class="n-2">1.3. Extremidades</div>
+      <div class="n-3">1.3.1. Superiores</div>
+      <div class="n-3">1.3.2. Inferiores</div>
+    </div>
+    <ul style="margin-top:6px;">
+      <li>El nivel 1 (1, 2, 3…) lleva el <strong>tema</strong> o las <strong>partes grandes</strong>.</li>
+      <li>El nivel 2 (1.1, 1.2…) lleva las <strong>subpartes</strong>.</li>
+      <li>Cada nivel se <strong>sangra hacia la derecha</strong> respecto al anterior.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">La antigua civilización egipcia</div>
+    <div class="texto-cuerpo">
+      <p>El antiguo Egipto se organizaba alrededor del río Nilo. Su sociedad tenía tres pilares: la <strong>política</strong>, la <strong>religión</strong> y la <strong>economía</strong>.</p>
+      <p>En lo <strong>político</strong>, el faraón era el máximo gobernante: a la vez rey y dios. Le seguían los visires, que dirigían el gobierno, y los nomarcas, que administraban las provincias.</p>
+      <p>En lo <strong>religioso</strong>, los egipcios eran politeístas: adoraban a muchos dioses, como Ra (el sol), Osiris (los muertos) y Anubis (los embalsamamientos). Creían firmemente en la vida después de la muerte, por eso construían pirámides y momificaban a sus difuntos.</p>
+      <p>En lo <strong>económico</strong>, vivían sobre todo de la agricultura, gracias a las crecidas del Nilo. También destacaron en el comercio con tierras lejanas y en la artesanía, especialmente en orfebrería y cerámica.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 6</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Esquema numérico</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Resumen y esquema avanzado</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a <strong>completar un esquema numérico</strong> del texto sobre Egipto y a <strong>comparar</strong> este tipo de esquema con el de llaves.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Completa el esquema numérico del texto:</div>
+      <div class="esquema-marco">
+        <div class="esq-num-row"><span class="esq-prefijo">1.</span><span style="font-weight:800;">El antiguo Egipto</span></div>
+        <div class="esq-num-row"><span class="esq-prefijo-2">1.1.</span><span style="font-weight:700;">Política</span></div>
+        <div class="esq-num-row"><span style="min-width:64px;"></span><span style="min-width:36px;">1.1.1.</span><span class="esq-linea"></span></div>
+        <div class="esq-num-row"><span style="min-width:64px;"></span><span style="min-width:36px;">1.1.2.</span><span class="esq-linea"></span></div>
+        <div class="esq-num-row"><span style="min-width:64px;"></span><span style="min-width:36px;">1.1.3.</span><span class="esq-linea"></span></div>
+        <div class="esq-num-row"><span class="esq-prefijo-2">1.2.</span><span style="font-weight:700;">Religión</span></div>
+        <div class="esq-num-row"><span style="min-width:64px;"></span><span style="min-width:36px;">1.2.1.</span><span class="esq-linea"></span></div>
+        <div class="esq-num-row"><span style="min-width:64px;"></span><span style="min-width:36px;">1.2.2.</span><span class="esq-linea"></span></div>
+        <div class="esq-num-row"><span class="esq-prefijo-2">1.3.</span><span class="esq-linea"></span></div>
+        <div class="esq-num-row"><span style="min-width:64px;"></span><span style="min-width:36px;">1.3.1.</span><span class="esq-linea"></span></div>
+        <div class="esq-num-row"><span style="min-width:64px;"></span><span style="min-width:36px;">1.3.2.</span><span class="esq-linea"></span></div>
+        <div class="esq-num-row"><span style="min-width:64px;"></span><span style="min-width:36px;">1.3.3.</span><span class="esq-linea"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Compara el esquema de <strong>llaves</strong> y el <strong>numérico</strong>: di una ventaja de cada uno.</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resumir un texto corto · Resumen y esquema avanzado · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul, .recuerda-box ol { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .pasos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
+    .paso-card { border: 1.5px solid #000; border-radius: 6px; padding: 6px 10px; font-size: 11.5px; line-height: 1.4; }
+    .paso-num { font-weight: 800; font-size: 12.5px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .texto-cuerpo { font-size: 12.5px; line-height: 1.55; text-align: justify; }
+    .texto-cuerpo p { margin-bottom: 6px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .opciones-lista { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .opcion-fila { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; }
+    .opcion-marca { border: 1.5px solid #000; width: 18px; height: 18px; display: inline-block; flex-shrink: 0; margin-top: 1px; }
+    .opcion-texto { flex: 1; }
+    .resumen-box { border: 1.5px dashed #000; border-radius: 6px; padding: 8px 10px; margin-top: 4px; font-size: 12.5px; line-height: 1.55; background: #fafafa; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box, .resumen-box { background: #fff !important; }
+      .recuerda-box { border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Resumen y esquema avanzado</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✏️ Resumir un texto corto</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Cuatro pasos para resumir bien</div>
+    Un buen resumen <strong>cabe en 3 o 4 líneas</strong>, dice lo importante y deja fuera ejemplos y repeticiones. Sigue siempre estos pasos:
+    <div class="pasos-grid">
+      <div class="paso-card"><span class="paso-num">1.</span> Lee el texto entero <strong>dos veces</strong>. La primera para entenderlo, la segunda con el lápiz en la mano.</div>
+      <div class="paso-card"><span class="paso-num">2.</span> Subraya las <strong>ideas principales</strong>. Una por párrafo suele ser suficiente.</div>
+      <div class="paso-card"><span class="paso-num">3.</span> Quita <strong>ejemplos, repeticiones y detalles</strong> que no cambian el sentido.</div>
+      <div class="paso-card"><span class="paso-num">4.</span> Redáctalo <strong>con tus palabras</strong>, en frases cortas y bien conectadas.</div>
+    </div>
+    <ul style="margin-top:6px;">
+      <li>⚠️ Un resumen <strong>no es copiar y pegar</strong> frases del texto. Tampoco es contar tu opinión.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">El reciclaje del vidrio</div>
+    <div class="texto-cuerpo">
+      <p>El vidrio es uno de los pocos materiales que se puede reciclar <strong>infinitas veces sin perder calidad</strong>. Una botella vieja puede convertirse, en pocas semanas, en otra botella nueva exactamente igual.</p>
+      <p>El proceso es sencillo. Las botellas se llevan al contenedor verde, se transportan a una planta, se limpian, se trituran y se funden a más de 1.500 grados. Con el cristal líquido se moldean nuevos envases.</p>
+      <p>Reciclar vidrio ahorra energía y materias primas. Por cada tres botellas recicladas se ahorra la energía que gasta una nevera durante un día entero. Por eso, depositar el vidrio en su contenedor —y no en la basura común— es uno de los gestos más útiles que podemos hacer en casa.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 3</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Resumir un texto corto</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Resumen y esquema avanzado</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a aprender a <strong>elegir un buen resumen</strong>, detectar errores típicos y <strong>redactar tu propio resumen</strong> del texto del vidrio.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Tres alumnos han escrito un resumen del texto. Marca el <strong>mejor</strong>:</div>
+      <div class="opciones-lista">
+        <div class="opcion-fila"><span class="opcion-marca"></span><span class="opcion-texto"><strong>A.</strong> Las botellas viejas se llevan al contenedor verde y se trituran a 1.500 grados.</span></div>
+        <div class="opcion-fila"><span class="opcion-marca"></span><span class="opcion-texto"><strong>B.</strong> El vidrio se puede reciclar infinitas veces. Tras llevarlo al contenedor verde, se limpia, se funde y se hacen nuevos envases. Reciclar vidrio ahorra mucha energía.</span></div>
+        <div class="opcion-fila"><span class="opcion-marca"></span><span class="opcion-texto"><strong>C.</strong> A mí me parece muy importante reciclar el vidrio porque es muy bueno para el planeta y todo el mundo debería hacerlo.</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Explica <strong>qué falla</strong> en los otros dos resúmenes:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Marca las frases del texto que <strong>NO entrarían</strong> en un buen resumen (son detalles o ejemplos):</div>
+      <div class="opciones-lista">
+        <div class="opcion-fila"><span class="opcion-marca"></span><span class="opcion-texto">Una botella vieja puede convertirse en otra botella nueva.</span></div>
+        <div class="opcion-fila"><span class="opcion-marca"></span><span class="opcion-texto">Se funden a más de 1.500 grados.</span></div>
+        <div class="opcion-fila"><span class="opcion-marca"></span><span class="opcion-texto">Por cada tres botellas recicladas se ahorra la energía de una nevera durante un día.</span></div>
+        <div class="opcion-fila"><span class="opcion-marca"></span><span class="opcion-texto">Reciclar vidrio ahorra energía y materias primas.</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Escribe <strong>tu propio resumen</strong> del texto del vidrio en 3 o 4 líneas, con tus palabras:</div>
+      <div class="resumen-box">
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

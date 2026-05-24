@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reto final · Resumen y esquema avanzado · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 11.5px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ol { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .texto-cuerpo { font-size: 11.5px; line-height: 1.5; text-align: justify; }
+    .texto-cuerpo p { margin-bottom: 5px; }
+    .parrafo-num { font-weight: 800; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 12px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .marco-trabajo { border: 1.5px solid #000; border-radius: 6px; padding: 8px 12px; }
+    .marco-titulo { font-weight: 800; font-size: 12.5px; margin-bottom: 4px; }
+    .resumen-box { border: 1.5px dashed #000; border-radius: 6px; padding: 8px 10px; margin-top: 4px; font-size: 12.5px; line-height: 1.55; background: #fafafa; }
+    .autoeval { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 11.5px; }
+    .autoeval td, .autoeval th { border: 1.5px solid #000; padding: 5px 8px; vertical-align: middle; }
+    .autoeval th { background: #f5f5f5; font-weight: 800; text-align: center; }
+    .autoeval td.col-checks { width: 36%; text-align: center; }
+    .check-box { display: inline-block; width: 14px; height: 14px; border: 1.5px solid #000; vertical-align: middle; margin: 0 4px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box, .resumen-box { background: #fff !important; }
+      .recuerda-box { border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .autoeval th { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Resumen y esquema avanzado</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🏆 Reto final: del texto al resumen y al esquema</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 Antes de empezar, repasa el plan</div>
+    <ol>
+      <li>Lee el texto entero <strong>dos veces</strong>.</li>
+      <li>Subraya la <strong>idea principal</strong> de cada párrafo.</li>
+      <li>Haz un <strong>esquema</strong> (numérico o de llaves).</li>
+      <li>Escribe el <strong>resumen final</strong> con tus palabras, usando el esquema como guion.</li>
+      <li>Autoevalúate con la rúbrica al final.</li>
+    </ol>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">El cambio climático</div>
+    <div class="texto-cuerpo">
+      <p><span class="parrafo-num">[1]</span> El cambio climático es la <strong>transformación del clima</strong> del planeta debida, sobre todo, a la actividad humana. La Tierra siempre ha sufrido cambios, pero los actuales son mucho más rápidos.</p>
+      <p><span class="parrafo-num">[2]</span> La principal <strong>causa</strong> es la emisión de gases de efecto invernadero, como el CO₂. Estos gases se acumulan en la atmósfera cuando quemamos petróleo, carbón o gas para fabricar electricidad, mover coches o calentar edificios.</p>
+      <p><span class="parrafo-num">[3]</span> Sus <strong>efectos</strong> ya se notan: subida de las temperaturas, deshielo en los polos, aumento del nivel del mar y fenómenos extremos como olas de calor, sequías o lluvias torrenciales.</p>
+      <p><span class="parrafo-num">[4]</span> La <strong>solución</strong> exige decisiones grandes y pequeñas. A nivel mundial, los países firman acuerdos para reducir emisiones y apostar por energías limpias. A nivel personal, ahorrar energía, comer menos carne, reciclar y moverse en transporte público también suma.</p>
+      <p><span class="parrafo-num">[5]</span> El cambio climático es un reto enorme, pero <strong>todavía hay margen</strong>. Cuanto antes actuemos, menos costoso será el daño.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 10</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="page-2-header">
+    <span class="page-2-titulo">Reto final · Resumen y esquema</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Resumen y esquema avanzado</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Esquema del texto (numérico o de llaves, a tu elección):</div>
+      <div class="marco-trabajo">
+        <div class="marco-titulo">Esquema · El cambio climático</div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Resumen del texto (5-6 líneas, con tus palabras):</div>
+      <div class="resumen-box">
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+        <div class="linea-resp"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> <strong>Autoevaluación.</strong> Marca con una X lo que has logrado:</div>
+      <table class="autoeval">
+        <tr><th>Criterio</th><th>Sí / No / A medias</th></tr>
+        <tr><td>He identificado la idea principal de cada párrafo.</td><td class="col-checks"><span class="check-box"></span>Sí <span class="check-box"></span>No <span class="check-box"></span>A medias</td></tr>
+        <tr><td>El esquema tiene niveles bien ordenados.</td><td class="col-checks"><span class="check-box"></span>Sí <span class="check-box"></span>No <span class="check-box"></span>A medias</td></tr>
+        <tr><td>El resumen está escrito con mis palabras.</td><td class="col-checks"><span class="check-box"></span>Sí <span class="check-box"></span>No <span class="check-box"></span>A medias</td></tr>
+        <tr><td>He usado al menos dos conectores en el resumen.</td><td class="col-checks"><span class="check-box"></span>Sí <span class="check-box"></span>No <span class="check-box"></span>A medias</td></tr>
+        <tr><td>El resumen cabe en 5-6 líneas (no me he excedido).</td><td class="col-checks"><span class="check-box"></span>Sí <span class="check-box"></span>No <span class="check-box"></span>A medias</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">🏆 ¡Reto superado!</span>
+  </div>
+</body>
+</html>
