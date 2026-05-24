@@ -182,11 +182,11 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - **Total:** ~749 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
-- 4 artículos publicados:
-  - `como-elegir-academia-torremolinos.html`
-  - `como-ayudar-comprension-lectora-primaria.html`
-  - `tecnicas-de-estudio-primaria.html` (publicado 2026-05-23)
-  - `como-trabajar-ortografia-primaria.html` (publicado 2026-05-24, con 7 enlaces a fichas)
+- 4 artículos publicados, todos con enlaces internos a fichas (2026-05-24):
+  - `como-elegir-academia-torremolinos.html` (sin enlaces — artículo comercial puro)
+  - `como-ayudar-comprension-lectora-primaria.html` (11 enlaces a fichas)
+  - `tecnicas-de-estudio-primaria.html` (5 enlaces a fichas)
+  - `como-trabajar-ortografia-primaria.html` (9 enlaces a fichas)
 
 ### Páginas de servicio
 - Logopedia · Psicología · Quiénes somos — en sistema premium, con JSON-LD
@@ -197,23 +197,21 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — orden acordado con Miguel (2026-05-24)
 
-1. **Enlazar fichas desde el blog** — los 4 artículos publicados no apuntan a fichas concretas (salvo «ortografía», que ya enlaza 7). Añadir enlaces internos contextuales desde los otros 3 artículos hacia fichas relevantes. Palanca SEO de alto retorno sin contenido nuevo.
+1. **Matemáticas Primaria** — empezar a cubrir el área de Mates. Miguel adelantó que **la organización será diferente** a Lengua. **NO arrancar hasta acordar la estructura con él** (probablemente bloques tipo operaciones, números, geometría, medida, problemas). Es lo primero que toca la próxima sesión.
 
-2. **Matemáticas Primaria** — empezar a cubrir el área de Mates. Miguel adelantó que **la organización será diferente** a Lengua. NO arrancar hasta acordar la estructura con él (probablemente bloques tipo operaciones, números, geometría, medida, problemas).
+2. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 1.
 
 ### Prioridad media — más adelante
 
-3. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 2.
+3. **ESO completa** — 1º ESO tiene solo álgebra. Cubrir resto de matemáticas 1º ESO, luego 2º, 3º, 4º. La estructura `recursos/1-eso/`, `recursos/2-eso/`... ya sigue el mismo patrón.
 
-4. **ESO completa** — 1º ESO tiene solo álgebra. Cubrir resto de matemáticas 1º ESO, luego 2º, 3º, 4º. La estructura `recursos/1-eso/`, `recursos/2-eso/`... ya sigue el mismo patrón.
-
-5. **Migrar `materiales.html` al sistema premium** — sigue con la paleta legacy verde claro. No es urgente pero rompe coherencia visual.
+4. **Migrar `materiales.html` al sistema premium** — sigue con la paleta legacy verde claro. No es urgente pero rompe coherencia visual.
 
 ### Prioridad baja — cuando recursos y materiales estén completos
 
-6. **Juegos interactivos** — todo está en `_pendiente/`. Retomar cuando Primaria + ESO estén cubiertos. Cablear `operaciones/`, `mates-iniciales/`, `lectoescritura/` al menos en `juegos.html`.
+5. **Juegos interactivos** — todo está en `_pendiente/`. Retomar cuando Primaria + ESO estén cubiertos. Cablear `operaciones/`, `mates-iniciales/`, `lectoescritura/` al menos en `juegos.html`.
 
-7. **Bachillerato** — crear `recursos/1-bachillerato/` y `recursos/2-bachillerato/` con fichas de las asignaturas principales.
+6. **Bachillerato** — crear `recursos/1-bachillerato/` y `recursos/2-bachillerato/` con fichas de las asignaturas principales.
 
 ### Lo que NO haría aún
 
