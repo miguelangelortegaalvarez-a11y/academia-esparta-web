@@ -182,6 +182,12 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 **Orden de cobertura:** curso a curso, 1º → 6º. Cerrar 1º Mates completo antes de pasar a 2º.
 
+**Formato fichas Mates (validado 2026-05-25 con `ficha-1.html` de `numeros-hasta-99`):**
+- **Solo ejercicios, sin página de teoría.** Las fichas de Mates van directas a la práctica (la teoría la explica el profe en clase). Diferencia clave respecto a Lengua, que sí lleva página 1 de teoría.
+- **1 folio A4 obligatorio.** Validar con Chrome headless PDF antes de cerrar cada ficha (`reference-chrome-pdf-preview`).
+- **4-5 ejercicios** equilibrados que rellenan el folio sin apretarse ni dejar huecos.
+- Plantilla base CSS: ver `recursos/primaria/1/matematicas/numeros/numeros-hasta-99/ficha-1.html`.
+
 ### Sub-bloques 1º Primaria (120 fichas)
 
 | Bloque | Sub-bloques | Fichas |
@@ -245,7 +251,10 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 ### Prioridad alta — orden acordado con Miguel (2026-05-24)
 
-1. **1º Primaria Matemáticas** — estructura acordada con Miguel el 2026-05-24 (detalle completo en sección "Estructura matemáticas Primaria"). 6 bloques (5 LOMLOE + problemas), sub-bloques anidados, **6 fichas/serie**, curso a curso 1º→6º. **Total 1º Mates: 120 fichas**. Arrancar por bloque `numeros` → sub-bloque `numeros-hasta-99` → serie 1.
+1. **1º Primaria Matemáticas** — estructura acordada con Miguel el 2026-05-24 (detalle completo en sección "Estructura matemáticas Primaria"). 6 bloques (5 LOMLOE + problemas), sub-bloques anidados, **6 fichas/serie**, curso a curso 1º→6º. **Total 1º Mates: 120 fichas**.
+   - **En marcha:** `numeros/numeros-hasta-99/` — ficha-1 (números 1-10) y ficha-2 (números 10-20) ✅
+   - **Siguiente sesión:** ficha-3 (números 20-50), ficha-4 (50-99), ficha-5 (series numéricas), ficha-6 (contar de 2 en 2 / 5 en 5 / 10 en 10)
+   - **Después:** seguir con sub-bloque `decenas-unidades` (siguiente sub-bloque del bloque `numeros`)
 
 2. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 1.
 
