@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Principal y subordinada: cuál depende de cuál · Oración compuesta: subordinadas · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.5; }
+    .dos-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 4px 0 10px; }
+    .col-card { border: 1.5px solid #000; border-radius: 8px; padding: 8px 11px; font-size: 12px; line-height: 1.45; }
+    .col-titulo { font-weight: 800; font-size: 13px; margin-bottom: 4px; text-align: center; }
+    .col-card .ej { font-style: italic; display: block; margin-top: 4px; }
+    .ejemplo { border: 1.2px dashed #555; border-radius: 8px; padding: 8px 11px; margin-bottom: 10px; }
+    .ej-oracion { font-size: 14px; font-weight: 700; margin-bottom: 6px; font-style: italic; text-align: center; }
+    .ej-analisis { font-size: 12px; line-height: 1.5; }
+    .ej-analisis .pal { font-weight: 800; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12.5px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .oraciones-lista { display: flex; flex-direction: column; gap: 7px; padding-left: 4px; }
+    .oracion-item { font-size: 12.5px; line-height: 1.4; }
+    .oracion-item .letra { font-weight: 700; margin-right: 4px; }
+    .inline-resp { display: inline-block; border-bottom: 1.5px solid #000; min-width: 120px; height: 14px; vertical-align: bottom; }
+    .tabla-ejer { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+    .tabla-ejer th, .tabla-ejer td { border: 1.2px solid #000; padding: 5px 7px; text-align: left; vertical-align: middle; }
+    .tabla-ejer th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; }
+    .tabla-ejer td.vacio { height: 24px; }
+    .tabla-ejer td.col-mini { width: 22%; text-align: center; }
+    .par-ej { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .col-ej { display: flex; flex-direction: column; gap: 6px; }
+    .col-prompt { font-size: 12.5px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .tabla-ejer th { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Oración compuesta: subordinadas</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🧭 Principal y subordinada: cuál depende de cuál</div>
+  <div class="teoria-titulo">Localizar las dos proposiciones</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Cómo se distinguen</div>
+    <div class="def-texto">La <strong>proposición principal</strong> es la que <strong>puede ir sola</strong> (con sentido completo) y de la que <strong>cuelga</strong> la otra. La <strong>proposición subordinada</strong> es la que <strong>no funciona sola</strong>: necesita a la principal para tener sentido. La subordinada suele ir <strong>introducida por un nexo</strong> (que, porque, cuando, si, aunque…).</div>
+  </div>
+
+  <div class="dos-cols">
+    <div class="col-card">
+      <div class="col-titulo">🏛️ Proposición PRINCIPAL</div>
+      Es la que <strong>manda</strong>. Tiene <strong>sentido sola</strong>. Lleva el verbo principal.
+      <span class="ej">Ej.: <strong>Pienso</strong> que tienes razón.</span>
+    </div>
+    <div class="col-card">
+      <div class="col-titulo">🔗 Proposición SUBORDINADA</div>
+      <strong>Depende</strong> de la principal. Sola no significa nada. Suele empezar por un <strong>nexo</strong>.
+      <span class="ej">Ej.: Pienso <strong>que tienes razón</strong>.</span>
+    </div>
+  </div>
+
+  <div class="ejemplo">
+    <div class="ej-oracion">Cuando termine los deberes, iré al parque.</div>
+    <div class="ej-analisis">
+      <strong>Paso 1:</strong> hay <span class="pal">dos verbos conjugados</span> (<em>termine</em>, <em>iré</em>) → es compuesta.<br>
+      <strong>Paso 2:</strong> ¿qué proposición tiene sentido sola? <em>«Iré al parque»</em> sí; <em>«Cuando termine los deberes»</em> no.<br>
+      <strong>Paso 3:</strong> entonces, <em>«Iré al parque»</em> es la <strong>principal</strong> y <em>«Cuando termine los deberes»</em> es la <strong>subordinada</strong>. El nexo es <em>cuando</em>.<br>
+      <strong>¡Atención!</strong> La subordinada puede ir <strong>antes</strong> o <strong>después</strong> de la principal. Su sitio no importa: lo que cuenta es si tiene sentido sola.
+    </div>
+  </div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Truco: la prueba de «tachar»</div>
+    <strong>Tacha la proposición que empiece por un nexo subordinante</strong> (que, cuando, porque, si, aunque…). Lo que queda es la <strong>principal</strong>: si tiene sentido sola, lo has hecho bien.
+    <br>· <em>«Cuando termine los deberes</em>, iré al parque.» → tacho la subordinada → «Iré al parque.» ✅
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Subordinadas · Ficha 2</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: EJERCICIOS ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Ejercicios · Identificar principal y subordinada</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Ficha 2</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Lee cada oración compuesta y <strong>escribe la PRINCIPAL</strong> en la columna de la derecha:</div>
+    <table class="tabla-ejer">
+      <thead><tr><th>Oración compuesta</th><th>Proposición principal</th></tr></thead>
+      <tbody>
+        <tr><td>Iremos a la playa cuando salga el sol.</td><td class="vacio"></td></tr>
+        <tr><td>Si llueve mañana, no jugaremos al fútbol.</td><td class="vacio"></td></tr>
+        <tr><td>El profesor explica que mañana hay examen.</td><td class="vacio"></td></tr>
+        <tr><td>Aunque estoy cansado, terminaré los deberes.</td><td class="vacio"></td></tr>
+        <tr><td>Comimos paella porque era domingo.</td><td class="vacio"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Ahora, <strong>escribe la SUBORDINADA</strong> de cada una de las oraciones de arriba:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> <span class="inline-resp" style="min-width:380px"></span></div>
+      <div class="oracion-item"><span class="letra">b)</span> <span class="inline-resp" style="min-width:380px"></span></div>
+      <div class="oracion-item"><span class="letra">c)</span> <span class="inline-resp" style="min-width:380px"></span></div>
+      <div class="oracion-item"><span class="letra">d)</span> <span class="inline-resp" style="min-width:380px"></span></div>
+      <div class="oracion-item"><span class="letra">e)</span> <span class="inline-resp" style="min-width:380px"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Separa con una barra /</strong> la principal y la subordinada en cada oración:</div>
+    <div class="oraciones-lista">
+      <div class="oracion-item"><span class="letra">a)</span> Mi hermana cree que el examen ha sido difícil.</div>
+      <div class="oracion-item"><span class="letra">b)</span> Si terminas pronto, podrás jugar.</div>
+      <div class="oracion-item"><span class="letra">c)</span> Compré el libro porque me lo recomendaron.</div>
+      <div class="oracion-item"><span class="letra">d)</span> Cuando suena el timbre, salimos al patio.</div>
+    </div>
+  </div>
+
+  <div class="par-ej">
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">4.</span> Marca con una <strong>X</strong> qué proposición de cada par es la <strong>principal</strong>:</div>
+      <div class="col-prompt">☐ que viene mañana &nbsp; ☐ Me dijo…</div>
+      <div class="col-prompt">☐ Hoy estoy contento &nbsp; ☐ porque he aprobado</div>
+      <div class="col-prompt">☐ si llegas tarde &nbsp; ☐ Te llamaré</div>
+    </div>
+    <div class="col-ej">
+      <div class="ej-enunciado"><span class="num">5.</span> Completa con una <strong>principal</strong> que tenga sentido:</div>
+      <div class="col-prompt">a) <span class="inline-resp"></span> cuando llegue a casa.</div>
+      <div class="col-prompt">b) <span class="inline-resp"></span> porque me duele la cabeza.</div>
+      <div class="col-prompt">c) <span class="inline-resp"></span> si quieres venir.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Sigue así!</span>
+  </div>
+</body>
+</html>
