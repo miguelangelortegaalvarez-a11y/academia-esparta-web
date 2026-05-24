@@ -43,7 +43,7 @@ academia-esparta-web/
 │   │   ├── 5/lengua/     # COMPLETO ✅ (cerrado 2026-05-23)
 │   │   │                 # Área Lectura: 7 bloques × 10 fichas
 │   │   │                 # Bloque D Gramática 8/8: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
-│   │   └── 6/lengua/     # EN MARCHA ⬅ (Lectura CERRADA 7/7, Gramática D 1/8)
+│   │   └── 6/lengua/     # EN MARCHA ⬅ (Lectura CERRADA 7/7, Gramática D 2/8)
 │   │                     # Área Lectura 7/7 ✅:
 │   │                     #   - tipologias-textuales (10 fichas)
 │   │                     #   - textos-literarios-narrativa (10 fichas)
@@ -52,9 +52,10 @@ academia-esparta-web/
 │   │                     #   - textos-discontinuos (10 fichas)
 │   │                     #   - intencion-autor-subtexto (10 fichas, márgenes 3cm)
 │   │                     #   - resumen-y-esquema-avanzado (10 fichas, márgenes 3cm)
-│   │                     # Área Gramática D 1/8:
+│   │                     # Área Gramática D 2/8:
 │   │                     #   - analisis-sintactico-sn-sv (10 fichas, márgenes 3cm) ✅
-│   │                     # Siguiente: Gramática D — Oración compuesta: coordinadas
+│   │                     #   - oracion-compuesta-coordinadas (10 fichas, márgenes 3cm) ✅
+│   │                     # Siguiente: Gramática D — Oración compuesta: subordinadas
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
 │                                 # Resto de 1º ESO sin cubrir
@@ -163,12 +164,13 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
     - `textos-discontinuos` (10 fichas) ✅
     - `intencion-autor-subtexto` (10 fichas) ✅ (márgenes 3cm)
     - `resumen-y-esquema-avanzado` (10 fichas) ✅ (márgenes 3cm)
-  - Bloque D Gramática 1/8:
+  - Bloque D Gramática 2/8:
     - `analisis-sintactico-sn-sv` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
+    - `oracion-compuesta-coordinadas` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
   - Estructura prevista: 7 sub-bloques Lectura + 8 Gramática = 150 fichas
-  - Sub-bloques Gramática D pendientes (7): Oración compuesta coordinadas · Oración compuesta subordinadas · Verbo avanzado (perífrasis, pasiva) · Léxico (cultismos, prefijos griegos/latinos) · Polisemia/homonimia/paronimia · Ortografía avanzada · Puntuación nivel ESO
+  - Sub-bloques Gramática D pendientes (6): Oración compuesta subordinadas · Verbo avanzado (perífrasis, pasiva) · Léxico (cultismos, prefijos griegos/latinos) · Polisemia/homonimia/paronimia · Ortografía avanzada · Puntuación nivel ESO
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~679 fichas indexadas en sitemap
+- **Total:** ~689 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
 - 3 artículos publicados:
@@ -185,7 +187,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — siguiente paso
 
-1. **Fichas 6º Primaria Lengua — EN MARCHA** — Área Lectura CERRADA 7/7 ✅ (2026-05-24). Bloque D Gramática 1/8 (analisis-sintactico-sn-sv cerrado 2026-05-24). Patrón: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|LECTURA|Nombre'` o `'lengua|6|D|Nombre'`. **Márgenes @page 3cm laterales** (la EPSON ET-2820 corta a 2.5cm). **Siguiente sub-bloque: Oración compuesta: coordinadas.**
+1. **Fichas 6º Primaria Lengua — EN MARCHA** — Área Lectura CERRADA 7/7 ✅ (2026-05-24). Bloque D Gramática 2/8 (analisis-sintactico-sn-sv ✅ y oracion-compuesta-coordinadas ✅ cerrados 2026-05-24). Patrón: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|LECTURA|Nombre'` o `'lengua|6|D|Nombre'`. **Márgenes @page 3cm laterales** (la EPSON ET-2820 corta a 2.5cm). **Siguiente sub-bloque: Oración compuesta: subordinadas.**
 
 ### Prioridad media — después de Primaria completa
 
