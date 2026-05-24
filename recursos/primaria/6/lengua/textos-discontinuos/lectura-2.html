@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leer una etiqueta alimentaria · Textos discontinuos · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .etiqueta-marca { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; text-align: center; letter-spacing: 1px; margin-bottom: 2px; }
+    .etiqueta-producto { font-size: 12px; text-align: center; margin-bottom: 8px; font-style: italic; }
+    .etiqueta-seccion { font-family: sans-serif; font-weight: 800; font-size: 11px; letter-spacing: .8px; margin: 8px 0 4px; padding-bottom: 2px; border-bottom: 1.5px solid #000; }
+    .nutri-tabla { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .nutri-tabla th, .nutri-tabla td { border: 1px solid #000; padding: 4px 6px; text-align: left; }
+    .nutri-tabla thead th { background: #000; color: #fff; font-weight: 800; text-align: center; font-size: 10.5px; }
+    .nutri-tabla td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+    .ingredientes { font-size: 11.5px; line-height: 1.45; }
+    .ingredientes strong { background: #ddd; padding: 0 3px; }
+    .alergenos { font-size: 11px; margin-top: 6px; padding: 5px 8px; border: 1.5px dashed #000; }
+    .info-extra { display: flex; gap: 14px; margin-top: 8px; font-size: 11px; }
+    .info-extra div { flex: 1; }
+    .info-extra strong { display: block; font-weight: 800; font-size: 10px; letter-spacing: .5px; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 60%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 30px; text-align: center; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+      .nutri-tabla thead th { background: #000 !important; color: #fff !important; }
+      .ingredientes strong { background: #ddd !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA + ETIQUETA ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🥣 Leer una etiqueta alimentaria</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Cómo se lee una etiqueta de un alimento?</div>
+    Una <strong>etiqueta</strong> es un texto discontinuo que mezcla <strong>tabla nutricional</strong>, <strong>lista de ingredientes</strong> y <strong>avisos legales</strong>. Para entenderla, fíjate en:
+    <ul>
+      <li>Los <strong>valores nutricionales</strong> suelen darse por <strong>100&nbsp;g</strong> y por <strong>porción</strong>: la cantidad cambia según cuánto comas.</li>
+      <li>En la lista de <strong>ingredientes</strong>, el primero es el que más cantidad tiene; los últimos, los que menos.</li>
+      <li>Los <strong>alérgenos</strong> aparecen siempre <strong>destacados</strong> (negrita o mayúsculas) y son obligatorios por ley.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="etiqueta-marca">GALLETITAS DORADAS</div>
+    <div class="etiqueta-producto">Galletas de avena con chocolate · Paquete de 300 g (12 galletas)</div>
+
+    <div class="etiqueta-seccion">INFORMACIÓN NUTRICIONAL</div>
+    <table class="nutri-tabla">
+      <thead>
+        <tr>
+          <th style="text-align:left;">Valores medios</th>
+          <th>por 100 g</th>
+          <th>por porción (25 g · 1 galleta)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Valor energético (kcal)</td><td class="num">468</td><td class="num">117</td></tr>
+        <tr><td>Grasas</td><td class="num">20 g</td><td class="num">5,0 g</td></tr>
+        <tr><td>&nbsp;&nbsp;de las cuales saturadas</td><td class="num">9 g</td><td class="num">2,2 g</td></tr>
+        <tr><td>Hidratos de carbono</td><td class="num">62 g</td><td class="num">15,5 g</td></tr>
+        <tr><td>&nbsp;&nbsp;de los cuales azúcares</td><td class="num">28 g</td><td class="num">7,0 g</td></tr>
+        <tr><td>Proteínas</td><td class="num">7 g</td><td class="num">1,8 g</td></tr>
+        <tr><td>Sal</td><td class="num">0,8 g</td><td class="num">0,2 g</td></tr>
+      </tbody>
+    </table>
+
+    <div class="etiqueta-seccion">INGREDIENTES</div>
+    <div class="ingredientes">
+      Harina de <strong>TRIGO</strong> (42 %), azúcar, copos de <strong>AVENA</strong> (12 %), chocolate negro 8 % (pasta de cacao, azúcar, manteca de cacao, emulgente: <strong>LECITINA DE SOJA</strong>), aceite de girasol, jarabe de glucosa, <strong>HUEVO</strong> en polvo, gasificantes (E-500, E-503), sal, aroma natural de vainilla.
+    </div>
+
+    <div class="alergenos">
+      <strong>ALÉRGENOS:</strong> contiene gluten (trigo, avena), soja y huevo. Puede contener trazas de frutos de cáscara y leche.
+    </div>
+
+    <div class="info-extra">
+      <div><strong>CONSUMIR PREFERENTEMENTE ANTES DE:</strong> 12/2026</div>
+      <div><strong>CONSERVACIÓN:</strong> en lugar fresco y seco</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 2</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Leer una etiqueta alimentaria</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a sacar información concreta de una etiqueta y a comparar valores entre <strong>100&nbsp;g</strong> y <strong>1 porción</strong>.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Busca y anota:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">¿Cuántas galletas trae el paquete?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuántas kcal aporta UNA galleta?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuántos gramos de azúcar hay en 100 g?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuál es el ingrediente que más cantidad tiene?</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">El producto contiene huevo.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">La avena aparece más arriba en la lista que el azúcar.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Una galleta aporta más kcal que 100 g de producto.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">El producto no es apto para personas celíacas (sin gluten).</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Si te comes <strong>3 galletas</strong>, ¿cuántas kcal habrás tomado? Anota la operación:</div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Explica por qué los alérgenos se escriben en <strong>negrita o mayúsculas</strong> dentro de la lista de ingredientes:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

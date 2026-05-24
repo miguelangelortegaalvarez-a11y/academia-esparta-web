@@ -44,12 +44,13 @@ academia-esparta-web/
 │   │   │                 # Área Lectura: 7 bloques × 10 fichas
 │   │   │                 # Bloque D Gramática 8/8: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
 │   │   └── 6/lengua/     # EN MARCHA ⬅ (arrancado 2026-05-23)
-│   │                     # Área Lectura 4/7:
+│   │                     # Área Lectura 5/7:
 │   │                     #   - tipologias-textuales (10 fichas)
 │   │                     #   - textos-literarios-narrativa (10 fichas)
 │   │                     #   - textos-literarios-poesia (10 fichas)
 │   │                     #   - textos-literarios-teatro (10 fichas)
-│   │                     # Siguiente: textos discontinuos
+│   │                     #   - textos-discontinuos (10 fichas)
+│   │                     # Siguiente: intención del autor y subtexto
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
 │                                 # Resto de 1º ESO sin cubrir
@@ -150,16 +151,17 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
   - Área Lectura — 7 bloques × 10 fichas = 70 fichas (cerrada 2026-05-22)
   - Bloque D Gramática — 8 sub-bloques × 10 fichas = 80 fichas: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
 - **6º Primaria Lengua — EN MARCHA ⬅** (arrancado 2026-05-23):
-  - Área Lectura 4/7:
+  - Área Lectura 5/7:
     - `tipologias-textuales` (10 fichas) ✅
     - `textos-literarios-narrativa` (10 fichas) ✅
     - `textos-literarios-poesia` (10 fichas) ✅
     - `textos-literarios-teatro` (10 fichas) ✅ (cerrado 2026-05-24)
+    - `textos-discontinuos` (10 fichas) ✅ (cerrado 2026-05-24)
   - Estructura prevista: 7 sub-bloques Lectura + 8 Gramática = 150 fichas
   - Sub-bloques Lectura: Tipologías textuales · Textos literarios narrativa · Textos literarios poesía · Textos literarios teatro · Textos discontinuos · Intención del autor y subtexto · Resumen y esquema avanzado
   - Sub-bloques Gramática D: Análisis sintáctico SN+SV · Oración compuesta coordinadas · Oración compuesta subordinadas · Verbo avanzado (perífrasis, pasiva) · Léxico (cultismos, prefijos griegos/latinos) · Polisemia/homonimia/paronimia · Ortografía avanzada · Puntuación nivel ESO
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~639 fichas indexadas en sitemap
+- **Total:** ~649 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
 - 3 artículos publicados:
@@ -176,7 +178,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — siguiente paso
 
-1. **Fichas 6º Primaria Lengua — EN MARCHA** — estructura definida y arrancada el 2026-05-23. Patrón heredado de 5º: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|LECTURA|Nombre'` o `'lengua|6|D|Nombre'`. Hecho (4/7 Lectura): Tipologías textuales · Textos literarios narrativa · Textos literarios poesía · Textos literarios teatro. **Siguiente sub-bloque: Textos discontinuos.**
+1. **Fichas 6º Primaria Lengua — EN MARCHA** — estructura definida y arrancada el 2026-05-23. Patrón heredado de 5º: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|LECTURA|Nombre'` o `'lengua|6|D|Nombre'`. Hecho (5/7 Lectura): Tipologías textuales · Textos literarios narrativa · Textos literarios poesía · Textos literarios teatro · Textos discontinuos. **Siguiente sub-bloque: Intención del autor y subtexto.**
 
 ### Prioridad media — después de Primaria completa
 

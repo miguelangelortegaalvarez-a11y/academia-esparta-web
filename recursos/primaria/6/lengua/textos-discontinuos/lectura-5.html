@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leer el plano de un zoo · Textos discontinuos · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 8px; }
+
+    .plano-wrap { display: grid; grid-template-columns: 1fr 130px; gap: 10px; align-items: start; }
+    .plano { display: grid; grid-template-columns: repeat(5, 1fr); grid-auto-rows: 52px; gap: 3px; padding: 4px; border: 1.5px solid #000; position: relative; }
+    .plano .cell { display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: sans-serif; font-weight: 800; font-size: 13px; border: 1.5px solid #000; }
+    .plano .cell.path { background: #f0f0f0; font-weight: 600; font-size: 10px; color: #555; border-style: dashed; border-width: 1px; }
+    .plano .cell.entrada { background: #000; color: #fff; }
+    .plano .cell.salida { background: #000; color: #fff; }
+    .plano .cell span.zona-cod { font-size: 18px; line-height: 1; }
+    .plano .cell span.zona-nom { font-size: 8.5px; font-weight: 700; line-height: 1.1; text-align: center; padding: 1px 2px; }
+    .plano .rosa { position: absolute; top: 6px; right: 6px; width: 38px; height: 38px; border: 1.5px solid #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #fff; font-family: sans-serif; font-weight: 800; font-size: 10px; flex-direction: column; }
+    .plano .rosa span { line-height: 1; }
+    .plano .rosa .n { font-size: 12px; }
+
+    .leyenda { font-size: 10px; border: 1.5px solid #000; padding: 6px; }
+    .leyenda h4 { font-family: 'Montserrat', sans-serif; font-size: 11px; text-align: center; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid #000; letter-spacing: .5px; }
+    .leyenda ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; }
+    .leyenda li { display: flex; align-items: center; gap: 5px; line-height: 1.1; }
+    .leyenda li .sigla { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 1.5px solid #000; font-family: sans-serif; font-weight: 800; font-size: 11px; flex-shrink: 0; }
+
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 60%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 30px; text-align: center; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+      .plano .cell.path { background: #f0f0f0 !important; }
+      .plano .cell.entrada, .plano .cell.salida { background: #000 !important; color: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA + PLANO ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🗺 Leer el plano de un zoo</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Cómo se lee un plano?</div>
+    Un <strong>plano</strong> es un dibujo a vista de pájaro de un lugar (un parque, un centro comercial, un museo…). No se entiende solo: hay que mirarlo junto con su <strong>leyenda</strong>, que explica qué significa cada <strong>símbolo</strong> o <strong>letra</strong>.
+    <ul>
+      <li>La <strong>rosa de los vientos</strong> indica el norte: te ayuda a orientarte.</li>
+      <li>Cada zona aparece con un <strong>código</strong> (letra o icono) que se descifra en la leyenda.</li>
+      <li>Los caminos suelen marcarse con líneas discontinuas o un color distinto.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">Plano del Zoo Costa del Sol</div>
+
+    <div class="plano-wrap">
+      <div class="plano">
+        <div class="rosa"><span class="n">N</span><span>↑</span></div>
+
+        <!-- Fila 1 -->
+        <div class="cell"><span class="zona-cod">🦁</span><span class="zona-nom">SABANA</span></div>
+        <div class="cell"><span class="zona-cod">🦁</span><span class="zona-nom">SABANA</span></div>
+        <div class="cell path">camino</div>
+        <div class="cell"><span class="zona-cod">🐠</span><span class="zona-nom">ACUARIO</span></div>
+        <div class="cell"><span class="zona-cod">🐠</span><span class="zona-nom">ACUARIO</span></div>
+
+        <!-- Fila 2 -->
+        <div class="cell"><span class="zona-cod">🦁</span><span class="zona-nom">SABANA</span></div>
+        <div class="cell path">camino</div>
+        <div class="cell path">camino</div>
+        <div class="cell"><span class="zona-cod">🦜</span><span class="zona-nom">AVIARIO</span></div>
+        <div class="cell"><span class="zona-cod">☕</span><span class="zona-nom">CAFETERÍA</span></div>
+
+        <!-- Fila 3 -->
+        <div class="cell"><span class="zona-cod">🐍</span><span class="zona-nom">REPTILES</span></div>
+        <div class="cell path">camino</div>
+        <div class="cell"><span class="zona-cod">🐒</span><span class="zona-nom">SELVA</span></div>
+        <div class="cell"><span class="zona-cod">🐒</span><span class="zona-nom">SELVA</span></div>
+        <div class="cell"><span class="zona-cod">🚻</span><span class="zona-nom">ASEOS</span></div>
+
+        <!-- Fila 4 -->
+        <div class="cell entrada"><span class="zona-cod">🚪</span><span class="zona-nom">ENTRADA</span></div>
+        <div class="cell path">camino</div>
+        <div class="cell path">camino</div>
+        <div class="cell path">camino</div>
+        <div class="cell salida"><span class="zona-cod">🚪</span><span class="zona-nom">SALIDA</span></div>
+      </div>
+
+      <div class="leyenda">
+        <h4>LEYENDA</h4>
+        <ul>
+          <li><span class="sigla">🦁</span>Sabana africana</li>
+          <li><span class="sigla">🐒</span>Selva tropical</li>
+          <li><span class="sigla">🐠</span>Acuario</li>
+          <li><span class="sigla">🦜</span>Aviario</li>
+          <li><span class="sigla">🐍</span>Reptilario</li>
+          <li><span class="sigla">☕</span>Cafetería</li>
+          <li><span class="sigla">🚻</span>Aseos</li>
+          <li><span class="sigla">🚪</span>Entrada / Salida</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 5</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Leer el plano de un zoo</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a usar el plano y su <strong>leyenda</strong> para orientarte, calcular distancias y describir trayectos.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Localiza en el plano y completa:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">¿Cuántas zonas distintas hay en el zoo (sin contar caminos)?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Qué zona está al norte de la entrada?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Qué zona ocupa más espacio del plano?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Qué hay entre el aviario y los aseos?</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">La cafetería está cerca del aviario.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Los reptiles están al sur del zoo, junto a la entrada.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Para ir del acuario a la salida hay que cruzar la sabana.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">La entrada y la salida están en el mismo punto.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Describe el <strong>recorrido más corto</strong> para ir desde la <strong>entrada</strong> hasta el <strong>acuario</strong>, mencionando las zonas por las que pasas:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> ¿Por qué crees que es importante que la leyenda aparezca <strong>junto al plano</strong> y no en otra página? Razona la respuesta:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

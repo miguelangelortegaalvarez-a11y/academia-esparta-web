@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leer un gráfico de barras · Textos discontinuos · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 2px; }
+    .texto-subtitulo { font-size: 11px; text-align: center; margin-bottom: 10px; color: #333; font-style: italic; }
+
+    .grafico { display: flex; align-items: flex-end; gap: 0; height: 220px; padding: 0 0 0 40px; position: relative; border-left: 1.5px solid #000; border-bottom: 1.5px solid #000; margin: 14px 8px 0; }
+    .grafico .y-marca { position: absolute; left: -28px; font-size: 10px; font-family: sans-serif; transform: translateY(50%); }
+    .grafico .y-linea { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed #bbb; }
+    .grafico .barra { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; margin: 0 4px; height: 100%; position: relative; }
+    .grafico .barra .col { width: 70%; max-width: 50px; background: #000; border: 1.5px solid #000; position: relative; }
+    .grafico .barra .col .valor { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font-family: sans-serif; font-size: 11px; font-weight: 800; }
+    .grafico .barra .etiq { position: absolute; bottom: -22px; font-size: 10.5px; font-weight: 700; text-align: center; width: 100%; }
+    .grafico-eje-y { position: absolute; left: -34px; top: -10px; font-size: 9px; font-family: sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; }
+    .grafico-eje-x { text-align: center; font-size: 9px; font-family: sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; margin-top: 28px; }
+
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 60%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 30px; text-align: center; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+      .grafico .barra .col { background: #000 !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA + GRÁFICO ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📊 Leer un gráfico de barras</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Cómo se lee un gráfico de barras?</div>
+    Un <strong>gráfico de barras</strong> sirve para <strong>comparar cantidades</strong> de un vistazo. Cada barra representa un grupo (un equipo, un mes, una asignatura…). Cuanto más alta es la barra, más cantidad hay.
+    <ul>
+      <li>El <strong>eje horizontal (X)</strong> indica las categorías que se comparan.</li>
+      <li>El <strong>eje vertical (Y)</strong> indica la cantidad (número de alumnos, € recaudados, etc.).</li>
+      <li>El <strong>título</strong> dice <em>qué</em> se mide; la fuente, <em>de dónde</em> salen los datos.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">Deporte favorito del alumnado de 6º A</div>
+    <div class="texto-subtitulo">Encuesta realizada a 25 alumnos · Mayo 2026</div>
+
+    <div class="grafico">
+      <div class="grafico-eje-y">Nº alumnos</div>
+      <span class="y-marca" style="bottom: 0%">0</span>
+      <span class="y-marca" style="bottom: 20%">2</span>
+      <span class="y-marca" style="bottom: 40%">4</span>
+      <span class="y-marca" style="bottom: 60%">6</span>
+      <span class="y-marca" style="bottom: 80%">8</span>
+      <span class="y-marca" style="bottom: 100%">10</span>
+      <span class="y-linea" style="bottom: 20%"></span>
+      <span class="y-linea" style="bottom: 40%"></span>
+      <span class="y-linea" style="bottom: 60%"></span>
+      <span class="y-linea" style="bottom: 80%"></span>
+      <span class="y-linea" style="bottom: 100%"></span>
+
+      <div class="barra"><div class="col" style="height: 90%"><span class="valor">9</span></div><span class="etiq">Fútbol</span></div>
+      <div class="barra"><div class="col" style="height: 60%"><span class="valor">6</span></div><span class="etiq">Baloncesto</span></div>
+      <div class="barra"><div class="col" style="height: 40%"><span class="valor">4</span></div><span class="etiq">Natación</span></div>
+      <div class="barra"><div class="col" style="height: 30%"><span class="valor">3</span></div><span class="etiq">Voleibol</span></div>
+      <div class="barra"><div class="col" style="height: 20%"><span class="valor">2</span></div><span class="etiq">Tenis</span></div>
+      <div class="barra"><div class="col" style="height: 10%"><span class="valor">1</span></div><span class="etiq">Otros</span></div>
+    </div>
+    <div class="grafico-eje-x">Deporte</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 4</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Leer un gráfico de barras</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a interpretar un gráfico de barras: leer cantidades, comparar grupos y sacar conclusiones globales.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Localiza los datos en el gráfico:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">¿Qué deporte es el favorito?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuántos alumnos eligen voleibol?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Qué deporte es el menos votado?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuál es la diferencia entre fútbol y baloncesto?</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">El fútbol tiene el triple de votos que el voleibol.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Entre natación y voleibol suman más votos que el baloncesto.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">El número total de alumnos encuestados es 25.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">El gráfico mide los votos en porcentaje (%).</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Suma los votos del gráfico y comprueba que coincide con el total de alumnos. Anota la operación:</div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Escribe una <strong>frase resumen</strong> que un periódico podría poner como titular sobre los resultados:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

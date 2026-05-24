@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gráfico circular y texto · Textos discontinuos · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 2px; }
+    .texto-fuente { font-size: 10px; text-align: center; font-style: italic; color: #444; margin-bottom: 8px; }
+
+    .pie-wrap { display: grid; grid-template-columns: 170px 1fr; gap: 14px; align-items: center; }
+    .pie-svg { width: 100%; height: auto; }
+    .pie-leyenda { font-size: 11px; }
+    .pie-leyenda ul { list-style: none; padding: 0; margin: 0; }
+    .pie-leyenda li { display: flex; align-items: center; gap: 8px; padding: 3px 0; border-bottom: 1px dashed #ccc; }
+    .pie-leyenda li:last-child { border-bottom: none; }
+    .pie-leyenda li .swatch { width: 18px; height: 18px; border: 1.5px solid #000; flex-shrink: 0; }
+    .pie-leyenda li .cat { flex: 1; font-weight: 700; }
+    .pie-leyenda li .pct { font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .articulo { margin-top: 10px; padding-top: 8px; border-top: 1.5px dashed #000; font-size: 11.5px; line-height: 1.5; text-align: justify; }
+    .articulo p { margin-bottom: 6px; }
+    .articulo strong { font-weight: 800; }
+
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 60%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 30px; text-align: center; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA + GRÁFICO + ARTÍCULO ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🥧 Gráfico circular + texto explicativo</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Cómo funcionan juntos un gráfico y un texto?</div>
+    En muchos artículos, el <strong>gráfico circular</strong> y el <strong>texto</strong> son <em>complementarios</em>: ninguno se entiende del todo sin el otro. El gráfico da las <strong>cifras y la proporción</strong>; el texto las <strong>interpreta</strong> y aporta <strong>contexto</strong>.
+    <ul>
+      <li>El círculo completo representa <strong>el 100 %</strong> del grupo estudiado.</li>
+      <li>Cada porción muestra una parte del total: cuanto más grande, más importante es.</li>
+      <li>Lee primero el gráfico, después el texto y por último <strong>cruza los datos</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">¿En qué emplean su tiempo libre los alumnos de 6º?</div>
+    <div class="texto-fuente">Estudio realizado a 200 alumnos de 6º de Primaria de Málaga · Curso 2025/26</div>
+
+    <div class="pie-wrap">
+      <svg class="pie-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+        <!-- Pantallas 38% — negro -->
+        <path d="M 75,75 L 75,15 A 60,60 0 0,1 116.1,118.7 Z" fill="#000" stroke="#fff" stroke-width="1"/>
+        <!-- Deporte 22% — gris oscuro -->
+        <path d="M 75,75 L 116.1,118.7 A 60,60 0 0,1 39.7,123.5 Z" fill="#666" stroke="#fff" stroke-width="1"/>
+        <!-- Amigos 18% — gris medio -->
+        <path d="M 75,75 L 39.7,123.5 A 60,60 0 0,1 16.1,63.8 Z" fill="#aaa" stroke="#fff" stroke-width="1"/>
+        <!-- Tareas 9% — gris claro -->
+        <path d="M 75,75 L 16.1,63.8 A 60,60 0 0,1 31.3,33.9 Z" fill="#d0d0d0" stroke="#fff" stroke-width="1"/>
+        <!-- Leer 8% — gris muy claro -->
+        <path d="M 75,75 L 31.3,33.9 A 60,60 0 0,1 56.5,17.9 Z" fill="#ececec" stroke="#fff" stroke-width="1"/>
+        <!-- Otros 5% — blanco con borde -->
+        <path d="M 75,75 L 56.5,17.9 A 60,60 0 0,1 75,15 Z" fill="#fff" stroke="#000" stroke-width="1"/>
+        <!-- Borde exterior -->
+        <circle cx="75" cy="75" r="60" fill="none" stroke="#000" stroke-width="1.5"/>
+      </svg>
+
+      <div class="pie-leyenda">
+        <ul>
+          <li><span class="swatch" style="background:#000;"></span><span class="cat">Pantallas (TV, móvil, videojuegos)</span><span class="pct">38 %</span></li>
+          <li><span class="swatch" style="background:#666;"></span><span class="cat">Deporte</span><span class="pct">22 %</span></li>
+          <li><span class="swatch" style="background:#aaa;"></span><span class="cat">Estar con amigos</span><span class="pct">18 %</span></li>
+          <li><span class="swatch" style="background:#d0d0d0;"></span><span class="cat">Tareas y ayudar en casa</span><span class="pct">9 %</span></li>
+          <li><span class="swatch" style="background:#ececec;"></span><span class="cat">Leer</span><span class="pct">8 %</span></li>
+          <li><span class="swatch" style="background:#fff;"></span><span class="cat">Otros</span><span class="pct">5 %</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="articulo">
+      <p>El estudio, realizado a <strong>200 alumnos</strong> de 6º de Primaria de la provincia de Málaga, muestra que las <strong>pantallas</strong> son ya la actividad principal del tiempo libre: casi <strong>cuatro de cada diez</strong> minutos libres se dedican al móvil, a la televisión o a los videojuegos.</p>
+      <p>El <strong>deporte</strong> mantiene un peso importante (22 %), aunque va por detrás de las pantallas. Estar con amigos «en persona» ocupa un 18 %, mientras que la lectura, con apenas un 8 %, queda en el penúltimo lugar.</p>
+      <p>Los autores del estudio recuerdan que «leer 20 minutos al día mejora el vocabulario y la concentración» y proponen que las familias <em>negocien</em> con sus hijos un pequeño tiempo diario sin pantallas.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 9</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Gráfico circular + texto</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a <strong>cruzar dos fuentes</strong> (gráfico y artículo) y comprobar si dicen lo mismo o si una completa a la otra.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Localiza los datos:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">¿Qué actividad ocupa más tiempo libre?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuál es el porcentaje dedicado a leer?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuántos alumnos participaron en el estudio?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Qué dos actividades juntas suman 40&nbsp;%?</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Las pantallas y el deporte juntas suman más del 50 % del tiempo libre.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">El tiempo dedicado a leer es mayor que el dedicado a tareas y ayudar en casa.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">El artículo recomienda 20 minutos diarios de lectura.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">El gráfico circular completo representa el 100 % de los alumnos.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> El texto dice que <strong>«casi cuatro de cada diez minutos libres»</strong> se dedican a pantallas. ¿Coincide esta afirmación con el porcentaje del gráfico? Justifica tu respuesta:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> El estudio ofrece dos formatos (gráfico y artículo) para los mismos datos. Explica qué aporta <strong>cada uno</strong> que el otro no puede ofrecer:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

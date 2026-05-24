@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leer instrucciones de montaje · Textos discontinuos · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 8px; }
+
+    .montaje-seccion { font-family: sans-serif; font-weight: 800; font-size: 11px; letter-spacing: .8px; margin: 10px 0 4px; padding-bottom: 2px; border-bottom: 1.5px solid #000; }
+
+    .piezas-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 4px; }
+    .pieza { border: 1.5px solid #000; padding: 4px; text-align: center; font-size: 10px; }
+    .pieza svg { width: 100%; height: 36px; }
+    .pieza .letra { font-family: sans-serif; font-weight: 800; font-size: 12px; display: block; margin-bottom: 2px; }
+    .pieza .cant { font-family: sans-serif; font-weight: 800; font-size: 10px; margin-top: 2px; }
+
+    .herramientas { display: flex; gap: 8px; margin-top: 4px; align-items: center; }
+    .herramientas .h-item { display: flex; align-items: center; gap: 4px; font-size: 11px; border: 1.5px solid #000; padding: 3px 6px; }
+    .herramientas svg { width: 22px; height: 22px; }
+
+    .avisos { display: flex; gap: 6px; margin-top: 4px; font-size: 10.5px; }
+    .aviso { flex: 1; padding: 4px 6px; border: 1.5px dashed #000; display: flex; align-items: center; gap: 5px; }
+    .aviso .marca { font-family: sans-serif; font-weight: 800; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #000; border-radius: 50%; flex-shrink: 0; }
+
+    .pasos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-top: 4px; }
+    .paso { border: 1.5px solid #000; padding: 6px; display: flex; gap: 6px; font-size: 11px; line-height: 1.3; }
+    .paso .num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: #000; color: #fff; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; flex-shrink: 0; }
+    .paso .desc { flex: 1; }
+    .paso .desc strong { display: block; font-size: 11px; margin-bottom: 1px; }
+
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 60%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 30px; text-align: center; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+      .paso .num { background: #000 !important; color: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA + INSTRUCCIONES ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔧 Leer instrucciones de montaje</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Cómo se leen unas instrucciones de montaje?</div>
+    Las instrucciones de montaje (estilo IKEA) son textos discontinuos que combinan <strong>lista de piezas</strong>, <strong>herramientas</strong>, <strong>dibujos paso a paso</strong> y <strong>avisos</strong>. Para entenderlas:
+    <ul>
+      <li>Empieza siempre comprobando que <strong>tienes todas las piezas</strong> con sus cantidades.</li>
+      <li>Sigue los pasos <strong>en el orden numerado</strong>: saltar uno suele estropear el montaje.</li>
+      <li>Los <strong>iconos de aviso</strong> (no hacer, dos personas, herramienta…) son importantes incluso si no llevan texto.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">TABURETE BÄNK · Guía de montaje (8 minutos)</div>
+
+    <div class="montaje-seccion">PIEZAS</div>
+    <div class="piezas-grid">
+      <div class="pieza">
+        <span class="letra">A</span>
+        <svg viewBox="0 0 60 36"><rect x="8" y="10" width="44" height="16" fill="none" stroke="black" stroke-width="1.5"/></svg>
+        <span>Asiento</span><span class="cant">× 1</span>
+      </div>
+      <div class="pieza">
+        <span class="letra">B</span>
+        <svg viewBox="0 0 60 36"><rect x="26" y="2" width="8" height="32" fill="none" stroke="black" stroke-width="1.5"/></svg>
+        <span>Pata</span><span class="cant">× 4</span>
+      </div>
+      <div class="pieza">
+        <span class="letra">C</span>
+        <svg viewBox="0 0 60 36"><rect x="4" y="14" width="52" height="8" fill="none" stroke="black" stroke-width="1.5"/></svg>
+        <span>Listón</span><span class="cant">× 4</span>
+      </div>
+      <div class="pieza">
+        <span class="letra">D</span>
+        <svg viewBox="0 0 60 36"><line x1="14" y1="18" x2="46" y2="18" stroke="black" stroke-width="2"/><polygon points="14,12 14,24 8,18" fill="black"/></svg>
+        <span>Tornillo</span><span class="cant">× 16</span>
+      </div>
+      <div class="pieza">
+        <span class="letra">E</span>
+        <svg viewBox="0 0 60 36"><polygon points="30,8 38,14 38,22 30,28 22,22 22,14" fill="none" stroke="black" stroke-width="1.5"/><circle cx="30" cy="18" r="3" fill="black"/></svg>
+        <span>Tuerca</span><span class="cant">× 16</span>
+      </div>
+    </div>
+
+    <div class="montaje-seccion">HERRAMIENTAS</div>
+    <div class="herramientas">
+      <div class="h-item">
+        <svg viewBox="0 0 24 24"><rect x="10" y="3" width="4" height="14" fill="black"/><polygon points="6,17 18,17 12,22" fill="black"/></svg>
+        Llave Allen (incluida)
+      </div>
+      <div class="h-item">
+        <svg viewBox="0 0 24 24"><rect x="10" y="2" width="4" height="14" fill="none" stroke="black" stroke-width="1.5"/><line x1="12" y1="16" x2="12" y2="22" stroke="black" stroke-width="2"/></svg>
+        Destornillador (opcional)
+      </div>
+    </div>
+
+    <div class="montaje-seccion">AVISOS</div>
+    <div class="avisos">
+      <div class="aviso"><span class="marca">2×</span>Algunos pasos son más fáciles entre dos personas.</div>
+      <div class="aviso"><span class="marca">✗</span>No apretar los tornillos al máximo hasta el paso 5.</div>
+    </div>
+
+    <div class="montaje-seccion">PASOS DE MONTAJE</div>
+    <div class="pasos-grid">
+      <div class="paso"><span class="num">1</span><span class="desc"><strong>Comprueba las piezas</strong>Saca todas las piezas de la caja y cuéntalas con la lista. Si falta alguna, no continúes.</span></div>
+      <div class="paso"><span class="num">2</span><span class="desc"><strong>Une 2 patas (B) con 1 listón (C)</strong>Coloca el listón entre dos patas. Usa 4 tornillos (D) y 4 tuercas (E). Repite la operación con las otras dos patas.</span></div>
+      <div class="paso"><span class="num">3</span><span class="desc"><strong>Une los dos lados</strong>Junta los dos pares de patas usando los otros 2 listones (C). Quedará el armazón en forma de marco.</span></div>
+      <div class="paso"><span class="num">4</span><span class="desc"><strong>Coloca el asiento (A)</strong>Encaja el asiento sobre el armazón haciendo coincidir los agujeros. Pon los 8 tornillos restantes sin apretarlos todavía.</span></div>
+      <div class="paso"><span class="num">5</span><span class="desc"><strong>Aprieta todo</strong>Cuando el taburete esté montado, aprieta TODOS los tornillos con la llave Allen. ¡Listo para sentarse!</span></div>
+      <div class="paso"><span class="num">6</span><span class="desc"><strong>Revisión final</strong>Comprueba que el taburete no cojea. Si hace falta, afloja un tornillo, recoloca la pieza y vuelve a apretar.</span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 8</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Instrucciones de montaje</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a manejar a la vez <strong>lista de piezas, herramientas, avisos y pasos</strong>, y a razonar por qué el orden importa.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Localiza los datos en la guía:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">¿Cuántas piezas distintas hay en total (sin contar tornillería)?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuántos tornillos (D) trae la caja?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿En qué paso se coloca el asiento?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Qué herramienta viene incluida en la caja?</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">El destornillador es obligatorio para montar el taburete.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">Los tornillos hay que apretarlos al máximo desde el paso 2.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">La cantidad de tornillos coincide con la de tuercas.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">El paso 1 sirve para comprobar que no falta ninguna pieza.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Explica con tus palabras por qué el aviso «<em>no apretar los tornillos al máximo hasta el paso 5</em>» es <strong>importante</strong>:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> Imagina que abres la caja y sólo encuentras <strong>3 patas (B)</strong>. ¿Qué deberías hacer según las instrucciones y por qué?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

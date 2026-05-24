@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leer un mapa de senderismo · Textos discontinuos · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+    .texto-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 8px; }
+
+    .mapa-wrap { display: grid; grid-template-columns: 1fr 160px; gap: 10px; align-items: start; }
+    .mapa-svg { width: 100%; height: auto; border: 1.5px solid #000; background: #fafafa; display: block; }
+    .leyenda { font-size: 10px; border: 1.5px solid #000; padding: 6px; }
+    .leyenda h4 { font-family: 'Montserrat', sans-serif; font-size: 11px; text-align: center; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid #000; letter-spacing: .5px; }
+    .leyenda ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+    .leyenda li { display: flex; align-items: center; gap: 6px; line-height: 1.2; }
+    .leyenda li .icono { width: 26px; height: 14px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .info-rutas { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 8px; }
+    .info-rutas th, .info-rutas td { border: 1.5px solid #000; padding: 4px 6px; text-align: center; }
+    .info-rutas thead th { background: #000; color: #fff; font-weight: 800; font-size: 10.5px; }
+    .info-rutas td.nombre { text-align: left; font-weight: 700; }
+
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 60%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 30px; text-align: center; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+      .info-rutas thead th { background: #000 !important; color: #fff !important; }
+      .mapa-svg { background: #fafafa !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA + MAPA ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🥾 Leer un mapa con leyenda</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Qué información da un mapa?</div>
+    Un <strong>mapa</strong> representa un terreno desde arriba. Por sí solo no se entiende: hay que mirar al mismo tiempo la <strong>leyenda</strong> (los símbolos) y la <strong>tabla de datos</strong> (cifras y características).
+    <ul>
+      <li>El <strong>tipo de línea</strong> distingue cada ruta (continua, discontinua, punteada…).</li>
+      <li>Los <strong>iconos</strong> señalan puntos de interés: refugio, fuente, mirador, cumbre…</li>
+      <li>La <strong>escala</strong> permite calcular distancias reales.</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="texto-titulo">Sendas señalizadas · Sierra de Mijas</div>
+
+    <div class="mapa-wrap">
+      <svg class="mapa-svg" viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Marco norte -->
+        <g font-family="sans-serif" font-size="9" font-weight="800">
+          <circle cx="370" cy="25" r="14" fill="white" stroke="black" stroke-width="1.5"/>
+          <text x="370" y="22" text-anchor="middle">N</text>
+          <text x="370" y="34" text-anchor="middle">↑</text>
+        </g>
+
+        <!-- Curvas de nivel (sombreado) -->
+        <ellipse cx="240" cy="130" rx="80" ry="50" fill="none" stroke="#888" stroke-width="0.5" stroke-dasharray="1,2"/>
+        <ellipse cx="240" cy="130" rx="50" ry="30" fill="none" stroke="#888" stroke-width="0.5" stroke-dasharray="1,2"/>
+        <ellipse cx="240" cy="130" rx="25" ry="15" fill="none" stroke="#888" stroke-width="0.5" stroke-dasharray="1,2"/>
+
+        <!-- Río -->
+        <path d="M 0,220 Q 80,210 130,225 Q 200,240 280,235 Q 350,232 400,240" fill="none" stroke="#000" stroke-width="1.2" stroke-dasharray="6,2,1,2"/>
+        <text x="60" y="218" font-family="sans-serif" font-size="8" font-style="italic">río Pereilas</text>
+
+        <!-- Ruta 1: continua (verde, fácil) -->
+        <path d="M 50,250 L 100,230 L 150,210 L 190,190 L 230,170" fill="none" stroke="#000" stroke-width="2.4"/>
+        <!-- Ruta 2: discontinua (azul, media) -->
+        <path d="M 50,250 L 90,240 L 130,200 L 170,160 L 220,135" fill="none" stroke="#000" stroke-width="2.4" stroke-dasharray="8,4"/>
+        <!-- Ruta 3: punteada (roja, alta) -->
+        <path d="M 50,250 L 70,220 L 110,170 L 150,130 L 200,110 L 240,100" fill="none" stroke="#000" stroke-width="2.4" stroke-dasharray="2,3"/>
+
+        <!-- Puntos de interés -->
+        <!-- Parking (inicio) -->
+        <rect x="42" y="244" width="16" height="12" fill="white" stroke="black" stroke-width="1.5"/>
+        <text x="50" y="254" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="800">P</text>
+        <text x="50" y="270" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="700">Parking</text>
+
+        <!-- Fuente -->
+        <circle cx="130" cy="200" r="6" fill="white" stroke="black" stroke-width="1.5"/>
+        <text x="130" y="203" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="800">F</text>
+        <text x="130" y="218" text-anchor="middle" font-family="sans-serif" font-size="8">Fuente Vieja</text>
+
+        <!-- Mirador (Ruta 1 final) -->
+        <polygon points="230,164 224,176 236,176" fill="white" stroke="black" stroke-width="1.5"/>
+        <text x="230" y="174" text-anchor="middle" font-family="sans-serif" font-size="7" font-weight="800">M</text>
+        <text x="248" y="172" font-family="sans-serif" font-size="8">Mirador</text>
+
+        <!-- Refugio (Ruta 2 final) -->
+        <polygon points="220,128 213,138 227,138" fill="white" stroke="black" stroke-width="1.5"/>
+        <rect x="215" y="138" width="10" height="6" fill="white" stroke="black" stroke-width="1.5"/>
+        <text x="240" y="140" font-family="sans-serif" font-size="8">Refugio</text>
+
+        <!-- Cumbre (Ruta 3 final) -->
+        <polygon points="240,90 232,108 248,108" fill="black"/>
+        <text x="260" y="104" font-family="sans-serif" font-size="8" font-weight="800">Cumbre 1.150 m</text>
+
+        <!-- Escala -->
+        <g transform="translate(280,260)">
+          <line x1="0" y1="0" x2="80" y2="0" stroke="black" stroke-width="2"/>
+          <line x1="0" y1="-3" x2="0" y2="3" stroke="black" stroke-width="2"/>
+          <line x1="40" y1="-3" x2="40" y2="3" stroke="black" stroke-width="1.5"/>
+          <line x1="80" y1="-3" x2="80" y2="3" stroke="black" stroke-width="2"/>
+          <text x="40" y="15" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="700">0           1 km</text>
+        </g>
+      </svg>
+
+      <div class="leyenda">
+        <h4>LEYENDA</h4>
+        <ul>
+          <li><span class="icono"><svg width="26" height="6"><line x1="0" y1="3" x2="26" y2="3" stroke="black" stroke-width="2.4"/></svg></span>Ruta 1 (verde)</li>
+          <li><span class="icono"><svg width="26" height="6"><line x1="0" y1="3" x2="26" y2="3" stroke="black" stroke-width="2.4" stroke-dasharray="8,4"/></svg></span>Ruta 2 (azul)</li>
+          <li><span class="icono"><svg width="26" height="6"><line x1="0" y1="3" x2="26" y2="3" stroke="black" stroke-width="2.4" stroke-dasharray="2,3"/></svg></span>Ruta 3 (roja)</li>
+          <li><span class="icono"><svg width="26" height="14"><path d="M 0,9 Q 8,7 13,11 Q 19,13 26,11" fill="none" stroke="black" stroke-width="1.2" stroke-dasharray="3,1,1,1"/></svg></span>Río</li>
+          <li><span class="icono">P</span>Parking inicio</li>
+          <li><span class="icono">F</span>Fuente</li>
+          <li><span class="icono">M</span>Mirador</li>
+          <li><span class="icono">▲</span>Cumbre</li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="info-rutas">
+      <thead>
+        <tr><th>Ruta</th><th>Distancia</th><th>Tiempo</th><th>Dificultad</th><th>Llega a</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="nombre">Ruta 1 — verde</td><td>3,5 km</td><td>1 h 15 min</td><td>Baja</td><td>Mirador</td></tr>
+        <tr><td class="nombre">Ruta 2 — azul</td><td>5,2 km</td><td>2 h 00 min</td><td>Media</td><td>Refugio</td></tr>
+        <tr><td class="nombre">Ruta 3 — roja</td><td>7,8 km</td><td>3 h 30 min</td><td>Alta</td><td>Cumbre</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 6</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Leer un mapa con leyenda</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a combinar la información del <strong>mapa</strong>, la <strong>leyenda</strong> y la <strong>tabla</strong> para tomar decisiones razonadas.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Localiza la información cruzando mapa, leyenda y tabla:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">¿Cuántas rutas señalizadas hay?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Cuál es la única ruta que pasa por la Fuente Vieja?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Qué ruta llega a la cumbre y cuánto se tarda?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿A cuántos metros de altura está la cumbre?</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">Las tres rutas empiezan en el parking.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">La ruta más corta es la que llega al refugio.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">El río atraviesa el mapa de oeste a este.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">Para llegar al mirador hay que recorrer más de 5 km.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Una familia con niños pequeños quiere hacer una ruta de no más de 2 horas. ¿Qué ruta les recomendarías y por qué?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> ¿Por qué en este mapa se usan <strong>tipos de línea diferentes</strong> (continua, discontinua, punteada) en lugar de solo colores?</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leer un cartel de un evento · Textos discontinuos · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12px; }
+    .recuerda-box ul { margin: 4px 0 0 18px; padding: 0; }
+    .recuerda-box li { margin-bottom: 2px; }
+    .texto-box { border: 1.5px solid #000; border-radius: 8px; padding: 0; margin-bottom: 10px; overflow: hidden; }
+    .cartel { padding: 16px 18px; text-align: center; background: #fff; }
+    .cartel-organiza { font-family: sans-serif; font-size: 10px; letter-spacing: 2px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
+    .cartel-titulo { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; letter-spacing: 2px; margin: 4px 0; }
+    .cartel-subtitulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; }
+    .cartel-fecha { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; background: #000; color: #fff; padding: 6px 16px; display: inline-block; margin: 4px 0; }
+    .cartel-datos { display: flex; justify-content: space-around; margin: 10px 0 6px; font-size: 12.5px; text-align: left; gap: 10px; }
+    .cartel-datos div { flex: 1; }
+    .cartel-datos strong { display: block; font-family: sans-serif; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 800; margin-bottom: 2px; }
+    .cartel-cartel { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; margin: 8px 0 4px; padding: 6px; border-top: 1.5px dashed #000; border-bottom: 1.5px dashed #000; }
+    .cartel-grupos { font-size: 13px; line-height: 1.5; }
+    .cartel-grupos .principal { font-weight: 800; font-size: 16px; display: block; margin-bottom: 2px; }
+    .cartel-precio { display: flex; justify-content: center; gap: 18px; margin-top: 10px; font-size: 12px; }
+    .cartel-precio span { padding: 4px 10px; border: 1.5px solid #000; font-weight: 700; }
+    .cartel-pie { font-size: 10.5px; margin-top: 8px; padding-top: 6px; border-top: 1px solid #000; line-height: 1.4; }
+    .preguntas-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .preguntas-lista { display: flex; flex-direction: column; gap: 10px; }
+    .pregunta-enunciado { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .pregunta-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .linea-resp { border-bottom: 1.5px solid #000; height: 19px; width: 100%; margin-bottom: 4px; }
+    .vf-list { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .vf-fila { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+    .vf-letra { font-family: sans-serif; font-weight: 800; }
+    .vf-frase { flex: 1; }
+    .vf-resp { border: 1.5px solid #000; width: 30px; height: 22px; display: inline-block; text-align: center; }
+    .conteo-tabla { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .conteo-tabla td { border: 1.5px solid #000; padding: 6px 8px; vertical-align: middle; }
+    .conteo-tabla td.col-elem { width: 60%; font-weight: 700; background: #f5f5f5; }
+    .conteo-tabla td.col-resp { height: 30px; text-align: center; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .conteo-tabla td.col-elem { background: #fff !important; }
+      .cartel-fecha { background: #000 !important; color: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 2.5cm 1.5cm 2.5cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA + CARTEL ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📣 Leer un cartel de un evento</div>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">📌 ¿Para qué sirve un cartel?</div>
+    Un <strong>cartel</strong> anuncia un evento (concierto, fiesta, función, mercadillo…) y tiene que dar mucha información en muy poco espacio. Para leerlo bien, busca siempre <strong>cinco datos</strong>:
+    <ul>
+      <li><strong>QUÉ:</strong> qué se celebra (festival, concierto, obra de teatro…).</li>
+      <li><strong>CUÁNDO:</strong> fecha y hora.</li>
+      <li><strong>DÓNDE:</strong> lugar exacto.</li>
+      <li><strong>CUÁNTO:</strong> precio o si es gratis.</li>
+      <li><strong>QUIÉN ORGANIZA</strong> y las <strong>condiciones</strong> (edad, entradas limitadas, etc.).</li>
+    </ul>
+  </div>
+
+  <div class="texto-box">
+    <div class="cartel">
+      <div class="cartel-organiza">Ayuntamiento de Torremolinos presenta</div>
+      <div class="cartel-titulo">FERIA DEL MAR</div>
+      <div class="cartel-subtitulo">XII edición · Música, gastronomía y tradición</div>
+
+      <div class="cartel-fecha">12 · 13 · 14 JULIO</div>
+
+      <div class="cartel-datos">
+        <div><strong>Lugar</strong>Recinto Ferial Playa del Bajondillo</div>
+        <div><strong>Horario</strong>Viernes y sábado: 19:00 – 02:00<br>Domingo: 12:00 – 23:00</div>
+      </div>
+
+      <div class="cartel-cartel">CARTEL MUSICAL</div>
+      <div class="cartel-grupos">
+        <span class="principal">LOS MAREAS</span>
+        Trío Andaluz · Coro Costa del Sol · DJ Marejada
+      </div>
+
+      <div class="cartel-precio">
+        <span>ENTRADA GRATUITA</span>
+        <span>BONO 3 DÍAS: 5 €</span>
+      </div>
+
+      <div class="cartel-pie">
+        Menores de 14 años deben venir acompañados de un adulto. Aforo limitado a 2.000 personas por jornada.<br>
+        Más información: <strong>www.torremolinos.es/feriadelmar</strong> · Tlf. 952 37 95 00
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Lectura · Ficha 3</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: COMPRENSIÓN ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Comprensión · Leer un cartel de un evento</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Textos discontinuos</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">🎯 Tu objetivo:</div>
+    Vas a localizar en un cartel los <strong>cinco datos clave</strong> (qué, cuándo, dónde, cuánto, condiciones) e interpretar la información implícita.
+  </div>
+
+  <div class="preguntas-lista">
+    <div>
+      <div class="pregunta-enunciado"><span class="num">1.</span> Localiza los datos en el cartel:</div>
+      <table class="conteo-tabla">
+        <tr><td class="col-elem">¿Qué se celebra?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Qué días dura el evento?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Dónde se celebra exactamente?</td><td class="col-resp"></td></tr>
+        <tr><td class="col-elem">¿Qué grupo es la atracción principal?</td><td class="col-resp"></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">2.</span> Marca verdadero (V) o falso (F):</div>
+      <div class="vf-list">
+        <div class="vf-fila"><span class="vf-letra">a)</span><span class="vf-frase">La entrada al recinto cuesta 5 €.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">b)</span><span class="vf-frase">El domingo el horario es distinto al del viernes y sábado.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">c)</span><span class="vf-frase">Un niño de 12 años puede ir solo, sin adulto.</span><span class="vf-resp"></span></div>
+        <div class="vf-fila"><span class="vf-letra">d)</span><span class="vf-frase">La feria está organizada por un ayuntamiento.</span><span class="vf-resp"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">3.</span> Explica con tus palabras qué significa «<em>aforo limitado a 2.000 personas por jornada</em>»:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+
+    <div>
+      <div class="pregunta-enunciado"><span class="num">4.</span> ¿Por qué crees que el título del cartel («FERIA DEL MAR») se escribe con letras tan grandes en comparación con el resto? Razona la respuesta:</div>
+      <div class="linea-resp"></div>
+      <div class="linea-resp"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Buen trabajo!</span>
+  </div>
+</body>
+</html>
