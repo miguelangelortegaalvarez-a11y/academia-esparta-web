@@ -43,7 +43,7 @@ academia-esparta-web/
 │   │   ├── 5/lengua/     # COMPLETO ✅ (cerrado 2026-05-23)
 │   │   │                 # Área Lectura: 7 bloques × 10 fichas
 │   │   │                 # Bloque D Gramática 8/8: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
-│   │   └── 6/lengua/     # EN MARCHA ⬅ (Lectura CERRADA 7/7, Gramática D 5/8)
+│   │   └── 6/lengua/     # EN MARCHA ⬅ (Lectura CERRADA 7/7, Gramática D 6/8)
 │   │                     # Área Lectura 7/7 ✅:
 │   │                     #   - tipologias-textuales (10 fichas)
 │   │                     #   - textos-literarios-narrativa (10 fichas)
@@ -52,13 +52,14 @@ academia-esparta-web/
 │   │                     #   - textos-discontinuos (10 fichas)
 │   │                     #   - intencion-autor-subtexto (10 fichas, márgenes 3cm)
 │   │                     #   - resumen-y-esquema-avanzado (10 fichas, márgenes 3cm)
-│   │                     # Área Gramática D 5/8:
+│   │                     # Área Gramática D 6/8:
 │   │                     #   - analisis-sintactico-sn-sv (10 fichas, márgenes 3cm) ✅
 │   │                     #   - oracion-compuesta-coordinadas (10 fichas, márgenes 3cm) ✅
 │   │                     #   - oracion-compuesta-subordinadas (10 fichas, márgenes 3cm) ✅
 │   │                     #   - verbo-avanzado (10 fichas, márgenes 3cm) ✅
 │   │                     #   - lexico-cultismos-prefijos (10 fichas, márgenes 3cm) ✅
-│   │                     # Siguiente: Gramática D — Polisemia, homonimia y paronimia
+│   │                     #   - polisemia-homonimia-paronimia (10 fichas, márgenes 3cm) ✅
+│   │                     # Siguiente: Gramática D — Ortografía avanzada
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
 │                                 # Resto de 1º ESO sin cubrir
@@ -167,16 +168,17 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
     - `textos-discontinuos` (10 fichas) ✅
     - `intencion-autor-subtexto` (10 fichas) ✅ (márgenes 3cm)
     - `resumen-y-esquema-avanzado` (10 fichas) ✅ (márgenes 3cm)
-  - Bloque D Gramática 5/8:
+  - Bloque D Gramática 6/8:
     - `analisis-sintactico-sn-sv` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
     - `oracion-compuesta-coordinadas` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
     - `oracion-compuesta-subordinadas` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
     - `verbo-avanzado` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
     - `lexico-cultismos-prefijos` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
+    - `polisemia-homonimia-paronimia` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
   - Estructura prevista: 7 sub-bloques Lectura + 8 Gramática = 150 fichas
-  - Sub-bloques Gramática D pendientes (3): Polisemia/homonimia/paronimia · Ortografía avanzada · Puntuación nivel ESO
+  - Sub-bloques Gramática D pendientes (2): Ortografía avanzada · Puntuación nivel ESO
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~719 fichas indexadas en sitemap
+- **Total:** ~729 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
 - 4 artículos publicados:
@@ -194,7 +196,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — orden acordado con Miguel (2026-05-24)
 
-1. **Acabar 6º Primaria Lengua** — Área Lectura CERRADA 7/7 ✅. Bloque D Gramática 5/8 ✅. **Quedan 3 sub-bloques de Gramática D** (~30 fichas a 10/sub-bloque): Polisemia/homonimia/paronimia · Ortografía avanzada · Puntuación nivel ESO. Patrón: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|D|Nombre'`. **Márgenes @page 3cm laterales**. **Siguiente sub-bloque: Polisemia, homonimia y paronimia.**
+1. **Acabar 6º Primaria Lengua** — Área Lectura CERRADA 7/7 ✅. Bloque D Gramática 6/8 ✅. **Quedan 2 sub-bloques de Gramática D** (~20 fichas a 10/sub-bloque): Ortografía avanzada · Puntuación nivel ESO. Patrón: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|D|Nombre'`. **Márgenes @page 3cm laterales**. **Siguiente sub-bloque: Ortografía avanzada.**
 
 2. **Enlazar fichas desde el blog** — los 3 artículos publicados no apuntan a fichas concretas. Añadir enlaces internos contextuales desde cada artículo hacia fichas relevantes. Palanca SEO de alto retorno sin contenido nuevo.
 
