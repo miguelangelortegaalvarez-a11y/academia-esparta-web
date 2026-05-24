@@ -61,6 +61,9 @@ academia-esparta-web/
 │   │                     #   - polisemia-homonimia-paronimia (10 fichas, márgenes 3cm)
 │   │                     #   - ortografia-avanzada (10 fichas, márgenes 3cm)
 │   │                     #   - puntuacion-nivel-eso (10 fichas, márgenes 3cm)
+│   │   ├── [1-6]/matematicas/  # Estructura acordada 2026-05-24 — ver sección "Estructura matemáticas Primaria"
+│   │   │                       # 6 bloques: numeros, operaciones, medida, geometria, estadistica, problemas
+│   │   │                       # Sub-bloques anidados · 6 fichas/serie · empieza por 1º (120 fichas previstas)
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
 │                                 # Resto de 1º ESO sin cubrir
@@ -144,9 +147,54 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - Papel A4. Márgenes nuevos (2026-05-24): laterales **3cm** / superior 2cm / inferior 1.5cm — `@page { margin: 2cm 3cm 1.5cm 3cm }`. La EPSON ET-2820 de Miguel cortaba con 2.5cm. Solo B&N para imprimir. **Fichas anteriores siguen con márgenes menores (2.5cm las primeras 50 fichas de 6º — tipologías, narrativa, poesía, teatro, discontinuos; 2.2cm hasta 5º) — pendiente migrar.**
 - Fuente 1º–2º: **Edu SA Beginner**. Fuente 3º+: **Poppins**.
 - Las fichas NO usan el sistema visual premium de la web.
-- Ruta: `recursos/primaria/CURSO/lengua/BLOQUE/nombre-bloque-Xprimaria-serie-Y.html`
-- Cada serie = 6 fichas (gramática/lengua) o 10 fichas (comprensión/velocidad).
+- Ruta Lengua: `recursos/primaria/CURSO/lengua/BLOQUE/nombre-bloque-Xprimaria-serie-Y.html`
+- Ruta Mates: `recursos/primaria/CURSO/matematicas/BLOQUE/SUB-BLOQUE/nombre-sub-bloque-Xprimaria-serie-Y.html`
+- Cada serie = 6 fichas (gramática/lengua/mates) o 10 fichas (comprensión/velocidad).
 - El sitemap las recoge automáticamente — no hay que tocar nada más.
+
+---
+
+## Estructura matemáticas Primaria
+
+Acordado con Miguel el **2026-05-24** antes de arrancar 1º Primaria Mates.
+
+**6 bloques raíz** (5 LOMLOE + problemas como bloque propio), todos al mismo nivel:
+
+```
+recursos/primaria/CURSO/matematicas/
+├── numeros/        # numeración, decenas, ordinales, comparar, fracciones (3º+), decimales (4º+), %
+├── operaciones/    # sumas, restas, multiplicación, división, cálculo mental, potencias (5º+)
+├── medida/         # longitud, masa, capacidad, tiempo, dinero, superficie (3º+), volumen (5º+)
+├── geometria/      # figuras planas, cuerpos, ángulos, simetría, perímetro, área (3º+), coordenadas (4º+)
+├── estadistica/    # tablas, gráficos (barras, líneas, sectores), media (5º+), probabilidad (5º+)
+└── problemas/      # bloque propio con sub-bloques por tipo (suma, resta, multi, división, mixtos, fracciones, geometría…)
+```
+
+**Sub-bloques anidados** dentro de cada bloque (mismo patrón que Bloque D Gramática de 5º/6º Lengua):
+```
+recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
+├── sumas-llevadas-3primaria-serie-1.html
+├── sumas-llevadas-3primaria-serie-2.html
+└── ... (hasta serie-6)
+```
+
+**Tamaño de serie:** **6 fichas siempre** (uniforme, sin excepciones). Mismo criterio que Bloque D Gramática de Lengua.
+
+**Orden de cobertura:** curso a curso, 1º → 6º. Cerrar 1º Mates completo antes de pasar a 2º.
+
+### Sub-bloques 1º Primaria (120 fichas)
+
+| Bloque | Sub-bloques | Fichas |
+|---|---|---|
+| `numeros` | numeros-hasta-99 · decenas-unidades · numeros-ordinales · comparar-y-ordenar | 4 × 6 = 24 |
+| `operaciones` | sumas-sin-llevadas · restas-sin-llevadas · calculo-mental | 3 × 6 = 18 |
+| `medida` | longitud-peso-capacidad · monedas-billetes · el-reloj-en-punto · dias-semana · meses-año | 5 × 6 = 30 |
+| `geometria` | figuras-planas · cuerpos-geometricos · lineas-y-situacion-espacial | 3 × 6 = 18 |
+| `estadistica` | tablas-simples · pictogramas | 2 × 6 = 12 |
+| `problemas` | problemas-suma-sencillos · problemas-resta-sencillos · problemas-mixtos-basicos | 3 × 6 = 18 |
+| | **Total 1º Mates** | **120 fichas** |
+
+> En 2º+ la cantidad de sub-bloques crece porque entra multiplicación, división informal, fracciones, problemas de dos operaciones, etc. 1º es el curso con menos sub-bloques de toda Primaria.
 
 ---
 
@@ -197,7 +245,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — orden acordado con Miguel (2026-05-24)
 
-1. **Matemáticas Primaria** — empezar a cubrir el área de Mates. Miguel adelantó que **la organización será diferente** a Lengua. **NO arrancar hasta acordar la estructura con él** (probablemente bloques tipo operaciones, números, geometría, medida, problemas). Es lo primero que toca la próxima sesión.
+1. **1º Primaria Matemáticas** — estructura acordada con Miguel el 2026-05-24 (detalle completo en sección "Estructura matemáticas Primaria"). 6 bloques (5 LOMLOE + problemas), sub-bloques anidados, **6 fichas/serie**, curso a curso 1º→6º. **Total 1º Mates: 120 fichas**. Arrancar por bloque `numeros` → sub-bloque `numeros-hasta-99` → serie 1.
 
 2. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 1.
 
@@ -259,4 +307,4 @@ Antes de cualquier `git commit`:
 7. Los interactivos están en `_pendiente/` — no tocar hasta que Primaria + ESO estén completos.
 8. La memoria de Claude (`~/.claude/projects/...`) se carga automáticamente al abrir esta carpeta.
 
-**Frase trigger:** _"Seguimos con las fichas"_ o _"Vamos con [bloque] de [Nº Primaria]"_ → ir directo al roadmap, sin preguntar.
+**Frase trigger:** _"Seguimos con las fichas"_, _"Vamos con [bloque] de [Nº Primaria]"_, _"Seguimos con mates"_ o _"Vamos con [bloque] de mates de [Nº Primaria]"_ → ir directo al roadmap, sin preguntar.
