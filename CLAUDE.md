@@ -185,23 +185,27 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ## Roadmap
 
-### Prioridad alta — siguiente paso
+### Prioridad alta — orden acordado con Miguel (2026-05-24)
 
-1. **Fichas 6º Primaria Lengua — EN MARCHA** — Área Lectura CERRADA 7/7 ✅ (2026-05-24). Bloque D Gramática 2/8 (analisis-sintactico-sn-sv ✅ y oracion-compuesta-coordinadas ✅ cerrados 2026-05-24). Patrón: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|LECTURA|Nombre'` o `'lengua|6|D|Nombre'`. **Márgenes @page 3cm laterales** (la EPSON ET-2820 corta a 2.5cm). **Siguiente sub-bloque: Oración compuesta: subordinadas.**
+1. **Acabar 6º Primaria Lengua** — Área Lectura CERRADA 7/7 ✅. Bloque D Gramática 2/8 ✅. **Quedan 6 sub-bloques de Gramática D** (~60 fichas a 10/sub-bloque): Oración compuesta subordinadas · Verbo avanzado (perífrasis, pasiva) · Léxico (cultismos, prefijos griegos/latinos) · Polisemia/homonimia/paronimia · Ortografía avanzada · Puntuación nivel ESO. Patrón: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|D|Nombre'`. **Márgenes @page 3cm laterales**. **Siguiente sub-bloque: Oración compuesta: subordinadas.**
 
-### Prioridad media — después de Primaria completa
+2. **Enlazar fichas desde el blog** — los 3 artículos publicados no apuntan a fichas concretas. Añadir enlaces internos contextuales desde cada artículo hacia fichas relevantes. Palanca SEO de alto retorno sin contenido nuevo.
 
-3. **ESO completa** — 1º ESO tiene solo álgebra. Cubrir resto de matemáticas 1º ESO, luego 2º, 3º, 4º. La estructura `recursos/1-eso/`, `recursos/2-eso/`... ya sigue el mismo patrón.
+3. **Matemáticas Primaria** — empezar a cubrir el área de Mates. Miguel adelantó que **la organización será diferente** a Lengua. NO arrancar hasta acordar la estructura con él (probablemente bloques tipo operaciones, números, geometría, medida, problemas).
 
-4. **Blog — más artículos SEO** — "cómo preparar la EBAU en Andalucía", "qué hacer si tu hijo no aprueba matemáticas", "el paso de Primaria a la ESO", etc. Hub `blog.html` está listo. Ya hay 3 artículos publicados.
+### Prioridad media — más adelante
 
-5. **Migrar `materiales.html` al sistema premium** — sigue con la paleta legacy verde claro. No es urgente pero rompe coherencia visual.
+4. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 2.
+
+5. **ESO completa** — 1º ESO tiene solo álgebra. Cubrir resto de matemáticas 1º ESO, luego 2º, 3º, 4º. La estructura `recursos/1-eso/`, `recursos/2-eso/`... ya sigue el mismo patrón.
+
+6. **Migrar `materiales.html` al sistema premium** — sigue con la paleta legacy verde claro. No es urgente pero rompe coherencia visual.
 
 ### Prioridad baja — cuando recursos y materiales estén completos
 
-6. **Juegos interactivos** — todo está en `_pendiente/`. Retomar cuando Primaria + ESO estén cubiertos. Cablear `operaciones/`, `mates-iniciales/`, `lectoescritura/` al menos en `juegos.html`.
+7. **Juegos interactivos** — todo está en `_pendiente/`. Retomar cuando Primaria + ESO estén cubiertos. Cablear `operaciones/`, `mates-iniciales/`, `lectoescritura/` al menos en `juegos.html`.
 
-7. **Bachillerato** — crear `recursos/1-bachillerato/` y `recursos/2-bachillerato/` con fichas de las asignaturas principales.
+8. **Bachillerato** — crear `recursos/1-bachillerato/` y `recursos/2-bachillerato/` con fichas de las asignaturas principales.
 
 ### Lo que NO haría aún
 
