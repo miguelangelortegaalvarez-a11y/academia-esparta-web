@@ -43,7 +43,7 @@ academia-esparta-web/
 │   │   ├── 5/lengua/     # COMPLETO ✅ (cerrado 2026-05-23)
 │   │   │                 # Área Lectura: 7 bloques × 10 fichas
 │   │   │                 # Bloque D Gramática 8/8: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
-│   │   └── 6/lengua/     # EN MARCHA ⬅ (Lectura CERRADA 7/7, Gramática D 7/8)
+│   │   └── 6/lengua/     # COMPLETO ✅ (cerrado 2026-05-24) — 150 fichas
 │   │                     # Área Lectura 7/7 ✅:
 │   │                     #   - tipologias-textuales (10 fichas)
 │   │                     #   - textos-literarios-narrativa (10 fichas)
@@ -52,15 +52,15 @@ academia-esparta-web/
 │   │                     #   - textos-discontinuos (10 fichas)
 │   │                     #   - intencion-autor-subtexto (10 fichas, márgenes 3cm)
 │   │                     #   - resumen-y-esquema-avanzado (10 fichas, márgenes 3cm)
-│   │                     # Área Gramática D 7/8:
-│   │                     #   - analisis-sintactico-sn-sv (10 fichas, márgenes 3cm) ✅
-│   │                     #   - oracion-compuesta-coordinadas (10 fichas, márgenes 3cm) ✅
-│   │                     #   - oracion-compuesta-subordinadas (10 fichas, márgenes 3cm) ✅
-│   │                     #   - verbo-avanzado (10 fichas, márgenes 3cm) ✅
-│   │                     #   - lexico-cultismos-prefijos (10 fichas, márgenes 3cm) ✅
-│   │                     #   - polisemia-homonimia-paronimia (10 fichas, márgenes 3cm) ✅
-│   │                     #   - ortografia-avanzada (10 fichas, márgenes 3cm) ✅
-│   │                     # Siguiente: Gramática D — Puntuación nivel ESO (último sub-bloque)
+│   │                     # Área Gramática D 8/8 ✅:
+│   │                     #   - analisis-sintactico-sn-sv (10 fichas, márgenes 3cm)
+│   │                     #   - oracion-compuesta-coordinadas (10 fichas, márgenes 3cm)
+│   │                     #   - oracion-compuesta-subordinadas (10 fichas, márgenes 3cm)
+│   │                     #   - verbo-avanzado (10 fichas, márgenes 3cm)
+│   │                     #   - lexico-cultismos-prefijos (10 fichas, márgenes 3cm)
+│   │                     #   - polisemia-homonimia-paronimia (10 fichas, márgenes 3cm)
+│   │                     #   - ortografia-avanzada (10 fichas, márgenes 3cm)
+│   │                     #   - puntuacion-nivel-eso (10 fichas, márgenes 3cm)
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
 │                                 # Resto de 1º ESO sin cubrir
@@ -160,27 +160,26 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - **5º Primaria Lengua — COMPLETO ✅** (cerrado 2026-05-23):
   - Área Lectura — 7 bloques × 10 fichas = 70 fichas (cerrada 2026-05-22)
   - Bloque D Gramática — 8 sub-bloques × 10 fichas = 80 fichas: analisis-morfologico, verbos-irregulares, oracion-simple, campos-semanticos, connotacion-y-denotacion, acentuacion-completa, tildes-diacriticas, puntuacion-avanzada
-- **6º Primaria Lengua — EN MARCHA ⬅** (arrancado 2026-05-23):
-  - Área Lectura 7/7 ✅ CERRADA (2026-05-24):
-    - `tipologias-textuales` (10 fichas) ✅
-    - `textos-literarios-narrativa` (10 fichas) ✅
-    - `textos-literarios-poesia` (10 fichas) ✅
-    - `textos-literarios-teatro` (10 fichas) ✅
-    - `textos-discontinuos` (10 fichas) ✅
-    - `intencion-autor-subtexto` (10 fichas) ✅ (márgenes 3cm)
-    - `resumen-y-esquema-avanzado` (10 fichas) ✅ (márgenes 3cm)
-  - Bloque D Gramática 7/8:
-    - `analisis-sintactico-sn-sv` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
-    - `oracion-compuesta-coordinadas` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
-    - `oracion-compuesta-subordinadas` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
-    - `verbo-avanzado` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
-    - `lexico-cultismos-prefijos` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
-    - `polisemia-homonimia-paronimia` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
-    - `ortografia-avanzada` (10 fichas) ✅ (márgenes 3cm, cerrado 2026-05-24)
-  - Estructura prevista: 7 sub-bloques Lectura + 8 Gramática = 150 fichas
-  - Sub-bloque Gramática D pendiente (1): Puntuación nivel ESO
+- **6º Primaria Lengua — COMPLETO ✅** (cerrado 2026-05-24, 150 fichas):
+  - Área Lectura 7/7 ✅ (cerrada 2026-05-24):
+    - `tipologias-textuales` (10 fichas)
+    - `textos-literarios-narrativa` (10 fichas)
+    - `textos-literarios-poesia` (10 fichas)
+    - `textos-literarios-teatro` (10 fichas)
+    - `textos-discontinuos` (10 fichas)
+    - `intencion-autor-subtexto` (10 fichas, márgenes 3cm)
+    - `resumen-y-esquema-avanzado` (10 fichas, márgenes 3cm)
+  - Bloque D Gramática 8/8 ✅ (cerrado 2026-05-24, todo con márgenes 3cm):
+    - `analisis-sintactico-sn-sv` (10 fichas)
+    - `oracion-compuesta-coordinadas` (10 fichas)
+    - `oracion-compuesta-subordinadas` (10 fichas)
+    - `verbo-avanzado` (10 fichas)
+    - `lexico-cultismos-prefijos` (10 fichas)
+    - `polisemia-homonimia-paronimia` (10 fichas)
+    - `ortografia-avanzada` (10 fichas)
+    - `puntuacion-nivel-eso` (10 fichas)
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~739 fichas indexadas en sitemap
+- **Total:** ~749 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
 - 4 artículos publicados:
@@ -198,25 +197,23 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ### Prioridad alta — orden acordado con Miguel (2026-05-24)
 
-1. **Acabar 6º Primaria Lengua** — Área Lectura CERRADA 7/7 ✅. Bloque D Gramática 7/8 ✅. **Queda 1 sub-bloque de Gramática D** (~10 fichas): Puntuación nivel ESO. Patrón: 10 fichas por sub-bloque, dificultad progresiva ⭐→⭐⭐⭐⭐, registro en `materiales.html` con clave `'lengua|6|D|Nombre'`. **Márgenes @page 3cm laterales**. **Siguiente sub-bloque: Puntuación nivel ESO (último para cerrar 6º).**
+1. **Enlazar fichas desde el blog** — los 4 artículos publicados no apuntan a fichas concretas (salvo «ortografía», que ya enlaza 7). Añadir enlaces internos contextuales desde los otros 3 artículos hacia fichas relevantes. Palanca SEO de alto retorno sin contenido nuevo.
 
-2. **Enlazar fichas desde el blog** — los 3 artículos publicados no apuntan a fichas concretas. Añadir enlaces internos contextuales desde cada artículo hacia fichas relevantes. Palanca SEO de alto retorno sin contenido nuevo.
-
-3. **Matemáticas Primaria** — empezar a cubrir el área de Mates. Miguel adelantó que **la organización será diferente** a Lengua. NO arrancar hasta acordar la estructura con él (probablemente bloques tipo operaciones, números, geometría, medida, problemas).
+2. **Matemáticas Primaria** — empezar a cubrir el área de Mates. Miguel adelantó que **la organización será diferente** a Lengua. NO arrancar hasta acordar la estructura con él (probablemente bloques tipo operaciones, números, geometría, medida, problemas).
 
 ### Prioridad media — más adelante
 
-4. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 2.
+3. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 2.
 
-5. **ESO completa** — 1º ESO tiene solo álgebra. Cubrir resto de matemáticas 1º ESO, luego 2º, 3º, 4º. La estructura `recursos/1-eso/`, `recursos/2-eso/`... ya sigue el mismo patrón.
+4. **ESO completa** — 1º ESO tiene solo álgebra. Cubrir resto de matemáticas 1º ESO, luego 2º, 3º, 4º. La estructura `recursos/1-eso/`, `recursos/2-eso/`... ya sigue el mismo patrón.
 
-6. **Migrar `materiales.html` al sistema premium** — sigue con la paleta legacy verde claro. No es urgente pero rompe coherencia visual.
+5. **Migrar `materiales.html` al sistema premium** — sigue con la paleta legacy verde claro. No es urgente pero rompe coherencia visual.
 
 ### Prioridad baja — cuando recursos y materiales estén completos
 
-7. **Juegos interactivos** — todo está en `_pendiente/`. Retomar cuando Primaria + ESO estén cubiertos. Cablear `operaciones/`, `mates-iniciales/`, `lectoescritura/` al menos en `juegos.html`.
+6. **Juegos interactivos** — todo está en `_pendiente/`. Retomar cuando Primaria + ESO estén cubiertos. Cablear `operaciones/`, `mates-iniciales/`, `lectoescritura/` al menos en `juegos.html`.
 
-8. **Bachillerato** — crear `recursos/1-bachillerato/` y `recursos/2-bachillerato/` con fichas de las asignaturas principales.
+7. **Bachillerato** — crear `recursos/1-bachillerato/` y `recursos/2-bachillerato/` con fichas de las asignaturas principales.
 
 ### Lo que NO haría aún
 

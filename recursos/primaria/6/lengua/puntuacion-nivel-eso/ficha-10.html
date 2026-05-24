@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reto final: puntuación completa en textos largos · Puntuación nivel ESO · 6º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+    .ficha-ref { font-family: sans-serif; font-size: 10px; color: #555; display: block; margin-bottom: 6px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 5px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 14px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 9px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+    .teoria-titulo { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+    .def-box { border: 1.5px solid #000; border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; }
+    .def-titulo { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+    .def-texto { font-size: 12.5px; line-height: 1.5; }
+    .tabla-resumen { width: 100%; border-collapse: collapse; font-size: 11.5px; margin-bottom: 10px; }
+    .tabla-resumen th, .tabla-resumen td { border: 1.2px solid #000; padding: 4px 7px; text-align: left; vertical-align: top; }
+    .tabla-resumen th { font-weight: 800; background: #f3f3f3; font-size: 11.5px; text-align: center; }
+    .tabla-resumen td.signo { text-align: center; font-weight: 800; font-size: 14px; width: 12%; }
+    .recuerda-box { background: #f5f5f5; border-left: 3px solid #000; padding: 8px 12px; margin: 4px 0 10px; font-size: 12px; line-height: 1.5; }
+    .recuerda-titulo { font-weight: 800; margin-bottom: 3px; font-size: 12.5px; }
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 10px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    .page-break { page-break-after: always; break-after: page; }
+    .page-2-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .page-2-titulo { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .page-2-ref { font-family: sans-serif; font-size: 10px; color: #555; }
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .texto-largo { border: 1.2px solid #000; border-radius: 6px; padding: 10px 12px; font-size: 12.5px; line-height: 1.7; margin-bottom: 8px; }
+    .texto-resp { border: 1.2px solid #000; border-radius: 6px; min-height: 110px; padding: 6px 8px; }
+
+    @media screen { .page-break { margin: 24px 0; border-top: 2px dashed #bbb; } }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { border: none !important; margin: 0 !important; }
+      .recuerda-box { background: #fff !important; border: 1px solid #000 !important; border-left: 3px solid #000 !important; }
+      .tabla-resumen th { background: #fff !important; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- ───────── PÁGINA 1: TEORÍA / RESUMEN ───────── -->
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Lengua · 6º Primaria · Puntuación nivel ESO</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🏆 Reto final: toda la puntuación en acción</div>
+  <div class="teoria-titulo">Lo que has aprendido, en una sola tabla</div>
+
+  <div class="def-box">
+    <div class="def-titulo">Antes de empezar, repasa el cuadro</div>
+    <div class="def-texto">En este reto vas a puntuar <strong>textos largos sin signos</strong> y a corregir <strong>textos con errores</strong>. Vas a aplicar todo lo trabajado en las nueve fichas anteriores. Antes de lanzarte, revisa este resumen.</div>
+  </div>
+
+  <table class="tabla-resumen">
+    <thead><tr><th>Signo</th><th>¿Qué hace?</th><th>Cuándo usarlo</th></tr></thead>
+    <tbody>
+      <tr><td class="signo">,</td><td>Pausa breve</td><td>Enumeraciones, vocativos, incisos, conectores, subordinadas antepuestas.</td></tr>
+      <tr><td class="signo">;</td><td>Pausa media</td><td>Enumeraciones complejas con comas; oraciones relacionadas; antes de conectores largos.</td></tr>
+      <tr><td class="signo">.</td><td>Cierra oración</td><td>Punto y seguido, y aparte, final. Tras abreviaturas.</td></tr>
+      <tr><td class="signo">:</td><td>Anuncia algo</td><td>Antes de enumeración, cita textual, explicación o tras fórmulas de saludo.</td></tr>
+      <tr><td class="signo">…</td><td>Suspende</td><td>Suspense, lista incompleta, cita recortada [...].</td></tr>
+      <tr><td class="signo">¿?</td><td>Pregunta</td><td>Siempre en pareja, en su posición exacta.</td></tr>
+      <tr><td class="signo">¡!</td><td>Exclama</td><td>Siempre en pareja. No punto detrás.</td></tr>
+      <tr><td class="signo">«»</td><td>Cita / destaca</td><td>Citas textuales, títulos menores, ironía, extranjerismos.</td></tr>
+      <tr><td class="signo">()</td><td>Inciso</td><td>Información complementaria, fechas, aclaraciones.</td></tr>
+      <tr><td class="signo">—</td><td>Inciso fuerte / diálogo</td><td>Incisos con énfasis y turnos de diálogo en narrativa.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="recuerda-box">
+    <div class="recuerda-titulo">💡 Estrategia para el reto</div>
+    Lee cada frase <strong>en voz baja</strong>. Donde harías una pausa breve → coma. Donde harías una pausa más larga sin cambiar de tema → punto y coma. Donde cierras una idea entera → punto. Donde alguien habla → comillas o raya.
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">📄 Puntuación nivel ESO · Ficha 10</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ───────── PÁGINA 2: RETO ───────── -->
+  <div class="page-2-header">
+    <span class="page-2-titulo">Reto final · Puntúa y corrige</span>
+    <span class="page-2-ref">Lengua · 6º Primaria · Ficha 10</span>
+  </div>
+  <hr class="separador" />
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Puntúa este texto añadiendo <strong>comas, puntos, dos puntos y punto y coma</strong> donde haga falta. Respeta también las mayúsculas:</div>
+    <div class="texto-largo">
+      el sábado pasado fuimos de excursión al parque natural llegamos pronto unos a pie otros en autobús el monitor que era muy simpático nos dio las instrucciones nada de gritar nada de tirar basura caminad en fila al final del día estábamos cansados pero felices habíamos visto pájaros ardillas mariposas y una serpiente
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Este texto tiene <strong>seis errores de puntuación</strong>. Búscalos, márcalos y reescríbelo correctamente debajo:</div>
+    <div class="texto-largo">
+      —Marta vienes al cine?. —Si, claro!. —Dijo Pedro a que hora quedamos?, —A las cinco. Mi madre me dijo: no llegues tarde….
+    </div>
+    <div class="ej-enunciado" style="margin-top:6px;">Versión corregida:</div>
+    <div class="texto-resp"></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Escribe <strong>un texto propio</strong> (5-7 líneas) sobre tu mejor recuerdo del curso. Tienes que usar, al menos: una enumeración con comas, una pregunta, una exclamación, una cita textual con dos puntos y comillas, y un inciso con paréntesis o rayas.</div>
+    <div class="texto-resp" style="min-height:150px;"></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">🏆 ¡Has terminado 6º Primaria Lengua!</span>
+  </div>
+</body>
+</html>
