@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El reloj en punto · 1º Primaria · Ficha 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    .ej-block { margin-bottom: 8px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 5px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    .reloj-mini { width: 64px; height: 64px; display: inline-block; vertical-align: middle; }
+    .digital-mini { font-family: 'Courier New', monospace; font-weight: 800; font-size: 18px; border: 2px solid #000; border-radius: 6px; padding: 3px 10px; display: inline-block; background: #fff; }
+
+    /* Ejercicio 1: dibujar para actividades cotidianas */
+    .actividad-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 4px; justify-items: center; }
+    .actividad-caja { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+    .actividad-nombre { font-size: 13px; font-weight: 700; }
+    .actividad-hora { font-family: 'Courier New', monospace; font-weight: 800; font-size: 14px; border: 1.5px solid #000; border-radius: 4px; padding: 1px 8px; }
+
+    /* Ejercicio 2: ordenar */
+    .ordenar-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 4px; justify-items: center; }
+    .ordenar-caja { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .ordenar-hueco { width: 32px; height: 32px; border: 1.5px solid #000; border-radius: 5px; }
+
+    /* Ejercicio 3: escribir hora en palabras */
+    .palabras-fila { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+    .palabras-fila .digital-pill { font-family: 'Courier New', monospace; font-weight: 800; font-size: 20px; border: 2px solid #000; border-radius: 6px; padding: 3px 12px; background: #f0f0f0; }
+    .palabras-fila .arrow { font-size: 18px; font-weight: 800; font-family: sans-serif; }
+    .palabras-fila .palabra-linea { flex: 1; border-bottom: 1.5px solid #000; min-width: 280px; height: 26px; }
+
+    /* Ejercicio 4: completar frase */
+    .completar-fila { font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .completar-fila .hueco-num { display: inline-block; min-width: 40px; border-bottom: 1.5px solid #000; height: 20px; margin: 0 3px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 1º Primaria · El reloj en punto · Ficha 3</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🕐 El reloj en punto</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Dibuja</strong> la aguja corta para cada actividad:</div>
+    <div class="actividad-fila">
+      <div class="actividad-caja">
+        <svg class="reloj-mini" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#000">
+            <text x="50" y="17">12</text><text x="68" y="22">1</text><text x="82" y="36">2</text><text x="87" y="54">3</text><text x="82" y="72">4</text><text x="68" y="86">5</text>
+            <text x="50" y="91">6</text><text x="32" y="86">7</text><text x="18" y="72">8</text><text x="13" y="54">9</text><text x="18" y="36">10</text><text x="32" y="22">11</text>
+          </g>
+          <circle cx="50" cy="50" r="2.5" fill="#000"/>
+          <line x1="50" y1="50" x2="50" y2="20" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <div class="actividad-nombre">Desayuno</div>
+        <div class="actividad-hora">8:00</div>
+      </div>
+      <div class="actividad-caja">
+        <svg class="reloj-mini" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#000">
+            <text x="50" y="17">12</text><text x="68" y="22">1</text><text x="82" y="36">2</text><text x="87" y="54">3</text><text x="82" y="72">4</text><text x="68" y="86">5</text>
+            <text x="50" y="91">6</text><text x="32" y="86">7</text><text x="18" y="72">8</text><text x="13" y="54">9</text><text x="18" y="36">10</text><text x="32" y="22">11</text>
+          </g>
+          <circle cx="50" cy="50" r="2.5" fill="#000"/>
+          <line x1="50" y1="50" x2="50" y2="20" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <div class="actividad-nombre">Recreo</div>
+        <div class="actividad-hora">11:00</div>
+      </div>
+      <div class="actividad-caja">
+        <svg class="reloj-mini" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#000">
+            <text x="50" y="17">12</text><text x="68" y="22">1</text><text x="82" y="36">2</text><text x="87" y="54">3</text><text x="82" y="72">4</text><text x="68" y="86">5</text>
+            <text x="50" y="91">6</text><text x="32" y="86">7</text><text x="18" y="72">8</text><text x="13" y="54">9</text><text x="18" y="36">10</text><text x="32" y="22">11</text>
+          </g>
+          <circle cx="50" cy="50" r="2.5" fill="#000"/>
+          <line x1="50" y1="50" x2="50" y2="20" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <div class="actividad-nombre">Comida</div>
+        <div class="actividad-hora">14:00</div>
+      </div>
+      <div class="actividad-caja">
+        <svg class="reloj-mini" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#000">
+            <text x="50" y="17">12</text><text x="68" y="22">1</text><text x="82" y="36">2</text><text x="87" y="54">3</text><text x="82" y="72">4</text><text x="68" y="86">5</text>
+            <text x="50" y="91">6</text><text x="32" y="86">7</text><text x="18" y="72">8</text><text x="13" y="54">9</text><text x="18" y="36">10</text><text x="32" y="22">11</text>
+          </g>
+          <circle cx="50" cy="50" r="2.5" fill="#000"/>
+          <line x1="50" y1="50" x2="50" y2="20" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <div class="actividad-nombre">Cena</div>
+        <div class="actividad-hora">21:00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe debajo el orden de los relojes del más <strong>temprano (1)</strong> al más <strong>tarde (4)</strong>:</div>
+    <div class="ordenar-fila">
+      <div class="ordenar-caja">
+        <svg class="reloj-mini" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#000">
+            <text x="50" y="17">12</text><text x="68" y="22">1</text><text x="82" y="36">2</text><text x="87" y="54">3</text><text x="82" y="72">4</text><text x="68" y="86">5</text>
+            <text x="50" y="91">6</text><text x="32" y="86">7</text><text x="18" y="72">8</text><text x="13" y="54">9</text><text x="18" y="36">10</text><text x="32" y="22">11</text>
+          </g>
+          <circle cx="50" cy="50" r="2.5" fill="#000"/>
+          <line x1="50" y1="50" x2="50" y2="20" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="50" x2="68" y2="64" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <div class="ordenar-hueco"></div>
+      </div>
+      <div class="ordenar-caja">
+        <svg class="reloj-mini" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#000">
+            <text x="50" y="17">12</text><text x="68" y="22">1</text><text x="82" y="36">2</text><text x="87" y="54">3</text><text x="82" y="72">4</text><text x="68" y="86">5</text>
+            <text x="50" y="91">6</text><text x="32" y="86">7</text><text x="18" y="72">8</text><text x="13" y="54">9</text><text x="18" y="36">10</text><text x="32" y="22">11</text>
+          </g>
+          <circle cx="50" cy="50" r="2.5" fill="#000"/>
+          <line x1="50" y1="50" x2="50" y2="20" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="50" x2="32" y2="36" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <div class="ordenar-hueco"></div>
+      </div>
+      <div class="ordenar-caja">
+        <svg class="reloj-mini" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#000">
+            <text x="50" y="17">12</text><text x="68" y="22">1</text><text x="82" y="36">2</text><text x="87" y="54">3</text><text x="82" y="72">4</text><text x="68" y="86">5</text>
+            <text x="50" y="91">6</text><text x="32" y="86">7</text><text x="18" y="72">8</text><text x="13" y="54">9</text><text x="18" y="36">10</text><text x="32" y="22">11</text>
+          </g>
+          <circle cx="50" cy="50" r="2.5" fill="#000"/>
+          <line x1="50" y1="50" x2="50" y2="20" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="50" x2="68" y2="36" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <div class="ordenar-hueco"></div>
+      </div>
+      <div class="ordenar-caja">
+        <svg class="reloj-mini" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#000">
+            <text x="50" y="17">12</text><text x="68" y="22">1</text><text x="82" y="36">2</text><text x="87" y="54">3</text><text x="82" y="72">4</text><text x="68" y="86">5</text>
+            <text x="50" y="91">6</text><text x="32" y="86">7</text><text x="18" y="72">8</text><text x="13" y="54">9</text><text x="18" y="36">10</text><text x="32" y="22">11</text>
+          </g>
+          <circle cx="50" cy="50" r="2.5" fill="#000"/>
+          <line x1="50" y1="50" x2="50" y2="20" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="50" x2="50" y2="28" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <div class="ordenar-hueco"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Escribe la hora en <strong>palabras</strong> (ejemplo: 3:00 → las tres en punto):</div>
+
+    <div class="palabras-fila">
+      <span class="digital-pill">5:00</span>
+      <span class="arrow">→</span>
+      <span class="palabra-linea"></span>
+    </div>
+    <div class="palabras-fila">
+      <span class="digital-pill">9:00</span>
+      <span class="arrow">→</span>
+      <span class="palabra-linea"></span>
+    </div>
+    <div class="palabras-fila">
+      <span class="digital-pill">12:00</span>
+      <span class="arrow">→</span>
+      <span class="palabra-linea"></span>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Completa:</div>
+    <div class="completar-fila">La aguja <strong>corta</strong> marca la <span class="hueco-num" style="min-width:100px"></span> y la aguja <strong>larga</strong> marca los <span class="hueco-num" style="min-width:100px"></span>.</div>
+    <div class="completar-fila">Cuando la aguja larga apunta al <span class="hueco-num"></span>, decimos que es la hora "en punto".</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
