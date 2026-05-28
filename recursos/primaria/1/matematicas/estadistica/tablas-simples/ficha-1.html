@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tablas simples · 1º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.5rem 1.5rem 0.7rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 12px; margin-bottom: 7px; }
+    .recuerda-titulo { font-size: 12.5px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-idea { font-size: 12px; margin-bottom: 5px; line-height: 1.3; }
+    .recuerda-ejemplo { display: flex; justify-content: center; }
+    .tabla-ej { border-collapse: collapse; font-size: 13px; }
+    .tabla-ej th, .tabla-ej td { border: 1.5px solid #000; padding: 3px 14px; text-align: center; font-weight: 700; }
+    .tabla-ej th { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .tabla-ej svg { width: 22px; height: 22px; vertical-align: middle; }
+
+    .ej-block { margin-bottom: 8px; }
+    .ej-enunciado { font-size: 12.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ejercicio 1: mosaico + tabla */
+    .e1-wrap { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; }
+    .mosaico { border: 2px solid #000; border-radius: 10px; padding: 8px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; justify-items: center; align-items: center; }
+    .mosaico svg { width: 32px; height: 32px; }
+    .tabla-rellenar { border-collapse: collapse; font-size: 13px; }
+    .tabla-rellenar th, .tabla-rellenar td { border: 1.5px solid #000; padding: 5px 12px; text-align: center; font-weight: 700; }
+    .tabla-rellenar th { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .tabla-rellenar svg { width: 22px; height: 22px; vertical-align: middle; }
+    .tabla-rellenar .hueco { min-width: 36px; height: 20px; }
+
+    /* Ejercicio 2: leer tabla + preguntas */
+    .e2-wrap { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; }
+    .preg-lista { display: flex; flex-direction: column; gap: 4px; }
+    .preg-fila { font-size: 12px; line-height: 1.35; }
+    .preg-hueco { display: inline-block; min-width: 36px; border-bottom: 1.5px solid #000; height: 18px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-grande { display: inline-block; min-width: 80px; border-bottom: 1.5px solid #000; height: 18px; vertical-align: middle; margin-left: 4px; }
+
+    /* Ejercicio 3: rodear */
+    .rodear-fila { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .rodear-caja { border: 1.5px dashed #000; border-radius: 8px; padding: 6px; display: flex; align-items: center; justify-content: center; min-height: 56px; }
+    .rodear-caja svg { width: 44px; height: 44px; }
+
+    /* Ejercicio 4: dibujar según tabla */
+    .e4-wrap { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: stretch; }
+    .dibujar-zona { border: 2px solid #000; border-radius: 10px; padding: 8px; display: grid; grid-template-rows: repeat(3, 1fr); gap: 5px; }
+    .dibujar-fila { display: grid; grid-template-columns: 30px 1fr; gap: 8px; align-items: center; border-bottom: 1px dashed #999; padding-bottom: 4px; }
+    .dibujar-fila:last-child { border-bottom: none; padding-bottom: 0; }
+    .dibujar-fila svg { width: 26px; height: 26px; }
+    .dibujar-fila .zona-libre { height: 28px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 1º Primaria · Tablas simples</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📊 Tablas simples</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-idea">Una <strong>tabla</strong> sirve para <strong>contar y ordenar</strong> cosas. Cada fila dice <strong>cuántos hay</strong> de cada tipo.</div>
+    <div class="recuerda-ejemplo">
+      <table class="tabla-ej">
+        <tr><th>Figura</th><th>Cantidad</th></tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3.5" stroke-linejoin="round"/></svg></td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#000" stroke-width="3.5"/></svg></td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3.5"/></svg></td>
+          <td>4</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Cuenta</strong> las figuras del mosaico y <strong>rellena</strong> la tabla:</div>
+    <div class="e1-wrap">
+      <div class="mosaico">
+        <svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#000" stroke-width="3"/></svg>
+        <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3"/></svg>
+        <svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#000" stroke-width="3"/></svg>
+        <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3"/></svg>
+        <svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3"/></svg>
+        <svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3"/></svg>
+      </div>
+      <table class="tabla-rellenar">
+        <tr><th>Figura</th><th>Cantidad</th></tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3.5" stroke-linejoin="round"/></svg></td>
+          <td class="hueco"></td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#000" stroke-width="3.5"/></svg></td>
+          <td class="hueco"></td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3.5"/></svg></td>
+          <td class="hueco"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Mira esta <strong>tabla</strong> y <strong>responde</strong>:</div>
+    <div class="e2-wrap">
+      <table class="tabla-rellenar">
+        <tr><th>Figura</th><th>Cantidad</th></tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3.5" stroke-linejoin="round"/></svg></td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#000" stroke-width="3.5"/></svg></td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3.5"/></svg></td>
+          <td>7</td>
+        </tr>
+      </table>
+      <div class="preg-lista">
+        <div class="preg-fila">a) ¿Cuántos <strong>triángulos</strong> hay? <span class="preg-hueco"></span></div>
+        <div class="preg-fila">b) ¿Cuántos <strong>círculos</strong> hay? <span class="preg-hueco"></span></div>
+        <div class="preg-fila">c) ¿De qué figura hay <strong>MÁS</strong>? <span class="preg-hueco-grande"></span></div>
+        <div class="preg-fila">d) ¿De qué figura hay <strong>MENOS</strong>? <span class="preg-hueco-grande"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Rodea</strong> la figura del ejercicio 2 de la que hay <strong>MÁS</strong>:</div>
+    <div class="rodear-fila">
+      <div class="rodear-caja"><svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      <div class="rodear-caja"><svg viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#000" stroke-width="2.5"/></svg></div>
+      <div class="rodear-caja"><svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="2.5"/></svg></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Dibuja</strong> en cada fila tantas figuras como dice la tabla:</div>
+    <div class="e4-wrap">
+      <table class="tabla-rellenar">
+        <tr><th>Figura</th><th>Cantidad</th></tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3.5" stroke-linejoin="round"/></svg></td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#000" stroke-width="3.5"/></svg></td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3.5"/></svg></td>
+          <td>2</td>
+        </tr>
+      </table>
+      <div class="dibujar-zona">
+        <div class="dibujar-fila">
+          <svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+          <div class="zona-libre"></div>
+        </div>
+        <div class="dibujar-fila">
+          <svg viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#000" stroke-width="3"/></svg>
+          <div class="zona-libre"></div>
+        </div>
+        <div class="dibujar-fila">
+          <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3"/></svg>
+          <div class="zona-libre"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
