@@ -187,19 +187,23 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 - **1 folio A4 obligatorio.** Validar con Chrome headless PDF antes de cerrar cada ficha (`reference-chrome-pdf-preview`).
 - **Rellenar la página entera, sin huecos vacíos** (norma del 2026-05-28). Si queda corta: añadir ejercicios coherentes con el sub-bloque o agrandar cajas/padding/font-size. Validar siempre con PDF antes de cerrar.
 - **4-7 ejercicios** equilibrados que cubren el folio sin apretarse ni dejar huecos.
+- **Bloque "Recuerda" inicial opcional** (estilo banner con borde negro): permitido como excepción al "solo ejercicios" cuando el concepto del sub-bloque lo requiere para asociar (ej. equivalencias D↔U). Validado en `decenas-unidades/ficha-1.html`.
+- **Número de fichas por sub-bloque ajustable** (norma del 2026-05-28): el ideal son 6, pero si el concepto en 1º no da para 6 fichas distintas, hacer 2-3 con misma estructura y números distintos (estilo Rubio/Santillana). NO inventar conceptos de 2º para rellenar. Ejemplo: `decenas-unidades` cerrado en 2 fichas.
 - Plantilla base CSS: ver `recursos/primaria/1/matematicas/numeros/numeros-hasta-99/ficha-1.html`.
 
 ### Sub-bloques 1º Primaria (120 fichas)
 
-| Bloque | Sub-bloques | Fichas |
+| Bloque | Sub-bloques (fichas estimadas) | Fichas |
 |---|---|---|
-| `numeros` | numeros-hasta-99 · decenas-unidades · numeros-ordinales · comparar-y-ordenar | 4 × 6 = 24 |
-| `operaciones` | sumas-sin-llevadas · restas-sin-llevadas · calculo-mental | 3 × 6 = 18 |
-| `medida` | longitud-peso-capacidad · monedas-billetes · el-reloj-en-punto · dias-semana · meses-año | 5 × 6 = 30 |
-| `geometria` | figuras-planas · cuerpos-geometricos · lineas-y-situacion-espacial | 3 × 6 = 18 |
-| `estadistica` | tablas-simples · pictogramas | 2 × 6 = 12 |
-| `problemas` | problemas-suma-sencillos · problemas-resta-sencillos · problemas-mixtos-basicos | 3 × 6 = 18 |
-| | **Total 1º Mates** | **120 fichas** |
+| `numeros` | numeros-hasta-99 (6 ✅) · decenas-unidades (2 ✅) · numeros-ordinales (~2-4) · comparar-y-ordenar (~4-6) | ~14-18 |
+| `operaciones` | sumas-sin-llevadas · restas-sin-llevadas · calculo-mental | ~12-18 |
+| `medida` | longitud-peso-capacidad · monedas-billetes · el-reloj-en-punto · dias-semana · meses-año | ~20-30 |
+| `geometria` | figuras-planas · cuerpos-geometricos · lineas-y-situacion-espacial | ~10-18 |
+| `estadistica` | tablas-simples · pictogramas | ~6-12 |
+| `problemas` | problemas-suma-sencillos · problemas-resta-sencillos · problemas-mixtos-basicos | ~12-18 |
+| | **Total 1º Mates (rango realista)** | **~75-110 fichas** |
+
+> Total revisado a la baja el 2026-05-28 tras la norma "ajustar fichas al material real disponible". Antes se estimaba 120, pero en 1º muchos conceptos no dan para 6 fichas distintas. La cifra final saldrá según vayamos cerrando cada sub-bloque.
 
 > En 2º+ la cantidad de sub-bloques crece porque entra multiplicación, división informal, fracciones, problemas de dos operaciones, etc. 1º es el curso con menos sub-bloques de toda Primaria.
 
@@ -253,8 +257,8 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 ### Prioridad alta — orden acordado con Miguel (2026-05-24)
 
 1. **1º Primaria Matemáticas** — estructura acordada con Miguel el 2026-05-24 (detalle completo en sección "Estructura matemáticas Primaria"). 6 bloques (5 LOMLOE + problemas), sub-bloques anidados, **6 fichas/serie**, curso a curso 1º→6º. **Total 1º Mates: 120 fichas**.
-   - **Sub-bloque cerrado ✅:** `numeros/numeros-hasta-99/` — 6/6 fichas (1-10, 10-20, 20-50, 50-99, series anterior/posterior, contar de 2/5/10 en 10).
-   - **Siguiente sub-bloque:** `numeros/decenas-unidades/` — crear carpeta y arrancar ficha-1. Después: `numeros-ordinales` → `comparar-y-ordenar` para cerrar el bloque `numeros` completo (24 fichas).
+   - **Sub-bloques cerrados ✅:** `numeros-hasta-99` (6 fichas) + `decenas-unidades` (2 fichas — ajustado a la baja porque en 1º no da para 6 conceptualmente distintas).
+   - **Siguiente sub-bloque:** `numeros/numeros-ordinales/` — arrancar ficha-1. Después: `comparar-y-ordenar` para cerrar el bloque `numeros`.
    - **Índice web:** `materiales.html` ya alineado para 1º Mates con la estructura de 6 bloques (commit `ec68965`, 2026-05-28). 2º–6º Mates en `materiales.html` siguen con la estructura antigua de 5 bloques — actualizar al arrancar cada curso.
 
 2. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 1.
