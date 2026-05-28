@@ -61,9 +61,9 @@ academia-esparta-web/
 │   │                     #   - polisemia-homonimia-paronimia (10 fichas, márgenes 3cm)
 │   │                     #   - ortografia-avanzada (10 fichas, márgenes 3cm)
 │   │                     #   - puntuacion-nivel-eso (10 fichas, márgenes 3cm)
-│   │   ├── [1-6]/matematicas/  # Estructura acordada 2026-05-24 — ver sección "Estructura matemáticas Primaria"
-│   │   │                       # 6 bloques: numeros, operaciones, medida, geometria, estadistica, problemas
-│   │   │                       # Sub-bloques anidados · 6 fichas/serie · empieza por 1º (120 fichas previstas)
+│   │   ├── 1/matematicas/      # 1º Mates COMPLETO ✅ (cerrado 2026-05-28, 71 fichas)
+│   │   │                       # 6 bloques: numeros (12) + operaciones (20) + medida (15) + geometria (9) + estadistica (6) + problemas (9)
+│   │   ├── [2-6]/matematicas/  # Pendiente · Estructura acordada 2026-05-24 — ver sección "Estructura matemáticas Primaria"
 │   └── 1-eso/
 │       └── matematicas/algebra/  # 4 páginas (apuntes, imprimibles, interactivo, index)
 │                                 # Resto de 1º ESO sin cubrir
@@ -191,21 +191,23 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 - **Número de fichas por sub-bloque ajustable** (norma del 2026-05-28): el ideal son 6, pero si el concepto en 1º no da para 6 fichas distintas, hacer 2-3 con misma estructura y números distintos (estilo Rubio/Santillana). NO inventar conceptos de 2º para rellenar. Ejemplo: `decenas-unidades` cerrado en 2 fichas.
 - Plantilla base CSS: ver `recursos/primaria/1/matematicas/numeros/numeros-hasta-99/ficha-1.html`.
 
-### Sub-bloques 1º Primaria (120 fichas)
+### Sub-bloques 1º Primaria — COMPLETO ✅ (71 fichas)
 
-| Bloque | Sub-bloques (fichas estimadas) | Fichas |
+| Bloque | Sub-bloques | Fichas |
 |---|---|---|
 | `numeros` ✅ | numeros-hasta-99 (6 ✅) · decenas-unidades (2 ✅) · numeros-ordinales (2 ✅) · comparar-y-ordenar (2 ✅) | **12** |
 | `operaciones` ✅ | sumas-sin-llevadas (8 ✅) · restas-sin-llevadas (8 ✅) · sumas-y-restas-mezcladas (4 ✅) | **20** |
-| `medida` ✅ | longitud-peso-capacidad (3 ✅) · monedas-billetes (3 ✅) · el-reloj-en-punto (3 ✅) · dias-semana (3 ✅) · meses-del-ano (3 ✅) | **17** |
+| `medida` ✅ | longitud-peso-capacidad (3 ✅) · monedas-billetes (3 ✅) · el-reloj-en-punto (3 ✅) · dias-semana (3 ✅) · meses-del-ano (3 ✅) | **15** |
 | `geometria` ✅ | figuras-planas (3 ✅) · cuerpos-geometricos (3 ✅) · lineas-y-situacion-espacial (3 ✅) | **9** |
-| `estadistica` 🟡 | tablas-simples (3 ✅) · pictogramas | ~6 |
-| `problemas` | problemas-suma-sencillos · problemas-resta-sencillos · problemas-mixtos-basicos | ~12-18 |
-| | **Total 1º Mates (rango realista)** | **~75-110 fichas** |
+| `estadistica` ✅ | tablas-simples (3 ✅) · pictogramas (3 ✅) | **6** |
+| `problemas` ✅ | problemas-suma-sencillos (3 ✅) · problemas-resta-sencillos (3 ✅) · problemas-mixtos-basicos (3 ✅) | **9** |
+| | **TOTAL 1º Mates COMPLETO ✅** | **71** |
 
-> Total revisado a la baja el 2026-05-28 tras la norma "ajustar fichas al material real disponible". Antes se estimaba 120, pero en 1º muchos conceptos no dan para 6 fichas distintas. La cifra final saldrá según vayamos cerrando cada sub-bloque.
+> 1º Mates cerrado el **2026-05-28** con **71 fichas**. Cifra final aplicando la norma "ajustar fichas al material real disponible" (en 1º muchos conceptos no dan para 6 fichas distintas).
+>
+> **Norma crítica para problemas de 1º:** todas las sumas SIN llevadas (cada dígito sumado ≤9) y todas las restas SIN prestar (minuendo ≥ sustraendo en cada columna). Validar dígito a dígito antes de cerrar. Miguel detectó 25 operaciones con llevadas/prestar en la 1ª pasada y hubo que rehacer.
 
-> En 2º+ la cantidad de sub-bloques crece porque entra multiplicación, división informal, fracciones, problemas de dos operaciones, etc. 1º es el curso con menos sub-bloques de toda Primaria.
+> En 2º+ la cantidad de sub-bloques crece porque entra multiplicación, división informal, fracciones, problemas de dos operaciones, sumas/restas con llevada, etc. 1º es el curso con menos sub-bloques de toda Primaria.
 
 ---
 
@@ -237,8 +239,15 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
     - `polisemia-homonimia-paronimia` (10 fichas)
     - `ortografia-avanzada` (10 fichas)
     - `puntuacion-nivel-eso` (10 fichas)
+- **1º Primaria Matemáticas — COMPLETO ✅** (cerrado 2026-05-28, 71 fichas):
+  - `numeros` (12): numeros-hasta-99 (6) + decenas-unidades (2) + numeros-ordinales (2) + comparar-y-ordenar (2)
+  - `operaciones` (20): sumas-sin-llevadas (8) + restas-sin-llevadas (8) + sumas-y-restas-mezcladas (4)
+  - `medida` (15): longitud-peso-capacidad (3) + monedas-billetes (3) + el-reloj-en-punto (3) + dias-semana (3) + meses-del-ano (3)
+  - `geometria` (9): figuras-planas (3) + cuerpos-geometricos (3) + lineas-y-situacion-espacial (3)
+  - `estadistica` (6): tablas-simples (3) + pictogramas (3)
+  - `problemas` (9): problemas-suma-sencillos (3) + problemas-resta-sencillos (3) + problemas-mixtos-basicos (3)
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~749 fichas indexadas en sitemap
+- **Total:** ~820 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
 - 4 artículos publicados, todos con enlaces internos a fichas (2026-05-24):
@@ -256,7 +265,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 ### Prioridad alta — orden acordado con Miguel (2026-05-24)
 
-1. **1º Primaria Matemáticas** — estructura acordada con Miguel el 2026-05-24 (detalle completo en sección "Estructura matemáticas Primaria"). 6 bloques (5 LOMLOE + problemas), sub-bloques anidados, **6 fichas/serie**, curso a curso 1º→6º. **Total 1º Mates: 120 fichas**.
+1. **1º Primaria Matemáticas COMPLETO ✅** (cerrado 2026-05-28, **71 fichas**) — estructura acordada con Miguel el 2026-05-24 (detalle completo en sección "Estructura matemáticas Primaria"). 6 bloques (5 LOMLOE + problemas), sub-bloques anidados. Cifra final aplicando la norma "ajustar fichas al material real" (en 1º muchos conceptos no dan para 6 fichas distintas).
    - **Bloque `numeros` COMPLETO ✅** (12 fichas, cerrado 2026-05-28): `numeros-hasta-99` (6) + `decenas-unidades` (2) + `numeros-ordinales` (2) + `comparar-y-ordenar` (2). Patrón en sub-bloques de 2 fichas: ficha-1 con "Recuerda" + ejemplos, ficha-2 solo ejercicios + variación.
    - **Bloque `operaciones` EN MARCHA — `sumas-sin-llevadas` COMPLETO ✅** (8 fichas, cerrado 2026-05-28): ficha-1 con Recuerda (3 ejemplos: una cifra vertical, dos cifras vertical, una cifra horizontal) + sumas básicas + serie 1-10. ficha-2 unir suma↔resultado + serie 11-20. ficha-3 sumas con dibujos (●★▲■) + serie 20-30. ficha-4 descomponer + serie 10-100 de 10 en 10. ficha-5 el doble + serie 40-50. ficha-6 tres sumandos + serie 50-60. ficha-7 y ficha-8 página entera con 20 sumas DU+DU en rejilla 5×4 (fuente 22px, gap 38px) — estilo cuadernillo Rubio.
    - **`restas-sin-llevadas` COMPLETO ✅** (8 fichas, cerrado 2026-05-28): clonadas del patrón de `sumas-sin-llevadas` («cógelo como imagen y lo imitas con restas todo de un tirón»). ficha-1 introducción + Recuerda (7−3, 47−23 D U, 8−5 horizontal). ficha-2 unir resta↔resultado. ficha-3 con dibujos (segundo grupo = se quitan). ficha-4 **completar restas** `7−☐=5` (en lugar de «descomponer al revés»: más natural para 1º). ficha-5 **la mitad** (en lugar de el doble): 2→1, 4→2, 6→3, 8→4, 20→10, 40→20. ficha-6 **restas encadenadas en horizontal** `9−2−1=☐` (no en columna: confunde a 1º). ficha-7 y ficha-8 página entera 20 restas DU−DU (con minuendo≥sustraendo dígito a dígito en cada columna).
@@ -273,10 +282,17 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
      - **`figuras-planas`** (3): 4 figuras canónicas (triángulo/cuadrado/rectángulo/círculo) con SVG simple. ficha-1 Recuerda + 4 ejercicios. ficha-2 contar mosaico, asociar figura↔objeto, series, intruso. ficha-3 casita SVG + dibujar + V/F + nombrar. **Norma:** uniones figura↔texto sin caja contenedora; píldoras solo en el texto. Dejar ~100-150px de aire bajo el footer (Safari mete sus márgenes y se va a 2 páginas).
      - **`cuerpos-geometricos`** (3, con SVG 3D): 4 cuerpos (cubo/esfera/cilindro/cono). Plantillas SVG isométricas B&N: cubo (3 polígonos), esfera (círculo+elipse meridiana), cilindro (elipse+líneas+arcos), cono (líneas+arcos con base dashed). ficha-1 Recuerda + unir nombre + unir nº caras planas (6/0/2/1) + rodear. ficha-2 contar mosaico, asociar cuerpo↔objeto cotidiano (dado/lata/gorro/pelota), rodear los que ruedan (esfera/cilindro/cono), asociar cuerpo↔figura plana (cubo↔cuadrado / cilindro↔rectángulo / cono↔triángulo / esfera↔círculo). ficha-3 muñeco compuesto + nombrar + V/F + dibujar libre.
      - **`lineas-y-situacion-espacial`** (3): líneas (recta/curva/abierta/cerrada) + posición (dentro/fuera, encima/debajo, izq/medio/dcha). ficha-1 Recuerda + 4 ejercicios sobre líneas. ficha-2 mini-escenas con caja/pelota, pecera/pez, mesa/casa/árbol + escena grande con V/F. ficha-3 nombrar líneas + escena habitación (cama+gato+zapato+mesilla+lámpara+alfombra+pelota) con completar 6 frases + dibujar 4 + V/F mixto.
-   - **Bloque `estadistica` EN MARCHA 🟡 — `tablas-simples` COMPLETO ✅** (3 fichas, cerrado 2026-05-28, registradas en `materiales.html`). ficha-1 figuras (triángulo/cuadrado/círculo) con Recuerda + contar mosaico→tabla + leer tabla→preguntas (MÁS/MENOS) + rodear + dibujar según tabla. ficha-2 frutas (manzana/plátano/uva/pera, SVG B&N reusables) con TOTAL + ordenar de MENOS a MÁS (3 puestos). ficha-3 objetos del aula (lápiz/goma/libro/sacapuntas, SVG nuevos) con V/F sobre tabla + ordenar de MÁS a MENOS (4 puestos). Tablas con `<table class="tabla-rellenar">` HTML real (border-collapse, th gris).
+   - **Bloque `estadistica` COMPLETO ✅** (6 fichas, cerrado 2026-05-28). Dos sub-bloques:
+     - **`tablas-simples`** (3): ficha-1 figuras + Recuerda + contar→tabla. ficha-2 frutas + TOTAL + ordenar MENOS→MÁS. ficha-3 estuche + V/F + ordenar MÁS→MENOS (4 puestos). Tablas HTML reales (`border-collapse`, `th` gris).
+     - **`pictogramas`** (3): ficha-1 frutas + Recuerda + leyenda "cada 🍎=1" + leer/responder/dibujar. ficha-2 mascotas (perro/gato/pez SVG nuevos) + TOTAL + ordenar MENOS→MÁS (3 puestos). ficha-3 transportes (coche/bici/avión/barco SVG nuevos, **4 categorías** vs 3) + V/F + ordenar MÁS→MENOS (4 puestos).
+   - **Bloque `problemas` COMPLETO ✅** (9 fichas, cerrado 2026-05-28). Tres sub-bloques × 3 fichas. Patrón: **ficha-1** Recuerda + 5 problemas con dibujo · **ficha-2** 5 problemas (3 con dibujo + 2 sin) · **ficha-3** 6 problemas solo texto. Componente `.problema` reusable con caja border + grid `40px 1fr` cuando lleva icono. Caja "OPERACIÓN" (dashed) + caja "SOLUCIÓN" con línea para frase. **Mixtos añade caja `.signo-elegir`** (label SIGNO + "+ o −") antes de OPERACIÓN.
+     - **`problemas-suma-sencillos`** (3): caramelos, niños, coches, pegatinas, galletas (f1) · lápices, pelotas, libros, flores, peces (f2) · cromos, plátanos, bus, monedas, ovejas, cuentos (f3 — 6 problemas).
+     - **`problemas-resta-sencillos`** (3): Recuerda con palabras pista (quita/da/vuelan/comen/gasta) + manzanas/pájaros/caramelos/globos/monedas (f1) · peces/galletas/cromos/coches/niños (f2) · pegatinas/hojas/clase/céntimos/gallinas/donuts (f3).
+     - **`problemas-mixtos-basicos`** (3): Recuerda con **tabla 2 cols de palabras pista** (`+ regalan/llegan/compran/más/en total/ponen` · `− quedan/se van/comen/dan/pierden/vuelan/gastan`) + alternancia suma/resta + casilla SIGNO obligatoria en los 3 fichas.
+   - **NORMA CRÍTICA validada 2026-05-28 (problemas 1º):** todas las sumas SIN llevadas y todas las restas SIN prestar. Miguel detectó 25 operaciones con llevadas/prestar en la 1ª pasada — hubo que rehacerlas. Validar dígito a dígito antes de cerrar cada ficha.
    - **Índice web:** `materiales.html` ya alineado para 1º Mates con la estructura de 6 bloques (commit `ec68965`, 2026-05-28). 2º–6º Mates en `materiales.html` siguen con la estructura antigua de 5 bloques — actualizar al arrancar cada curso.
-   - **Hero compacto en `materiales.html`** (2026-05-28): el hero ocupaba toda la pantalla y los padres tenían que hacer scroll para ver las tarjetas Lengua/Mates. Reducido (`padding 7.5rem→2rem`, h1 más pequeño, quitados `<p>` descriptivo y 4 `<span class="hero-tag">`, app-wrap padding-top 2.5rem→1.5rem). Las tarjetas aparecen ahora en el viewport inicial sin scroll. Decisión "Hero compacto" (mantiene label + h1 corto) frente a "Hero mínimo" o "Sin hero".
-   - **Siguiente:** arrancar **`pictogramas`** (gráfico de barras con iconos: cada 🍎 = 1).
+   - **Hero compacto en `materiales.html`** (2026-05-28): el hero ocupaba toda la pantalla y los padres tenían que hacer scroll para ver las tarjetas Lengua/Mates. Reducido (`padding 7.5rem→2rem`, h1 más pequeño, quitados `<p>` descriptivo y 4 `<span class="hero-tag">`, app-wrap padding-top 2.5rem→1.5rem). Las tarjetas aparecen ahora en el viewport inicial sin scroll.
+   - **1º MATES COMPLETO ✅** (2026-05-28, 71 fichas totales: 12+20+15+9+6+9). **Siguiente:** arrancar **2º Primaria Matemáticas**. Estructura mismos 6 bloques pero los sub-bloques crecen (multiplicación, división informal, fracciones básicas, problemas con dos operaciones, sumas/restas CON llevada/prestar, números hasta 1000). Actualizar primero el árbol de 2º en `materiales.html` (sigue con la estructura antigua de 5 bloques).
 
 2. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 1.
 
