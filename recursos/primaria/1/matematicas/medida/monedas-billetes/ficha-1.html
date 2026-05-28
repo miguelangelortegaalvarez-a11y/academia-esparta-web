@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monedas y billetes · 1º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* Bloque "Recuerda" */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 11px; margin-bottom: 6px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-idea { font-size: 12.5px; margin-bottom: 3px; line-height: 1.3; }
+    .recuerda-idea strong { font-weight: 700; }
+
+    .ej-block { margin-bottom: 6px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* SVG monedas y billetes */
+    .moneda-svg { width: 46px; height: 46px; display: inline-block; vertical-align: middle; }
+    .billete-svg { width: 74px; height: 42px; display: inline-block; vertical-align: middle; }
+    .mini-moneda-svg { width: 30px; height: 30px; display: inline-block; vertical-align: middle; }
+
+    /* Ejercicio 1: unir moneda con valor */
+    .unir-fila { display: grid; grid-template-columns: 80px 1fr 1fr 70px; align-items: center; gap: 8px; margin-bottom: 3px; }
+    .unir-izq { display: flex; justify-content: flex-start; }
+    .unir-der { display: flex; justify-content: flex-end; font-size: 15px; font-weight: 700; font-family: sans-serif; }
+    .unir-puntos { height: 10px; }
+
+    /* Ejercicio 2: escribir valor */
+    .escribir-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 4px; }
+    .escribir-caja { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .escribir-hueco { width: 54px; border-bottom: 1.5px solid #000; height: 18px; }
+
+    /* Ejercicio 3: clasificar moneda/billete */
+    .clasif-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 4px; justify-items: center; align-items: center; }
+
+    /* Ejercicio 4: contar monedas iguales */
+    .contar-linea { font-size: 13px; margin-bottom: 3px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .contar-linea .total { display: inline-block; min-width: 44px; border-bottom: 1.5px solid #000; height: 18px; margin: 0 4px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 1º Primaria · Monedas y billetes</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">💶 Monedas y billetes</div>
+
+  <!-- DEFINICIONES SVG REUTILIZABLES -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Moneda EURO (con anillo bicolor + 12 estrellas) -->
+      <symbol id="moneda-euro" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/>
+        <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+          <text x="50" y="9">★</text>
+          <text x="69" y="13">★</text>
+          <text x="83" y="26">★</text>
+          <text x="89" y="44">★</text>
+          <text x="89" y="60">★</text>
+          <text x="83" y="78">★</text>
+          <text x="69" y="91">★</text>
+          <text x="50" y="95">★</text>
+          <text x="31" y="91">★</text>
+          <text x="17" y="78">★</text>
+          <text x="11" y="60">★</text>
+          <text x="11" y="44">★</text>
+        </g>
+        <text class="val" x="50" y="58" text-anchor="middle" font-size="22" font-weight="800" font-family="sans-serif" fill="#000">1€</text>
+        <text x="50" y="73" text-anchor="middle" font-size="6" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">EURO</text>
+      </symbol>
+
+      <!-- Moneda CÉNTIMO (sin anillo, solo círculo) -->
+      <symbol id="moneda-cent" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <g fill="#000" font-family="sans-serif" font-size="6" text-anchor="middle">
+          <text x="50" y="13">★</text>
+          <text x="74" y="20">★</text>
+          <text x="86" y="40">★</text>
+          <text x="86" y="62">★</text>
+          <text x="74" y="83">★</text>
+          <text x="50" y="91">★</text>
+          <text x="26" y="83">★</text>
+          <text x="14" y="62">★</text>
+          <text x="14" y="40">★</text>
+          <text x="26" y="20">★</text>
+        </g>
+        <text class="val" x="50" y="58" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">50</text>
+        <text x="50" y="74" text-anchor="middle" font-size="7" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">CENT</text>
+      </symbol>
+
+      <!-- Billete -->
+      <symbol id="billete" viewBox="0 0 160 90">
+        <rect x="3" y="3" width="154" height="84" rx="6" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <rect x="9" y="9" width="142" height="72" rx="3" fill="none" stroke="#000" stroke-width="1"/>
+        <text class="val" x="14" y="24" font-size="13" font-weight="800" font-family="sans-serif" fill="#000">5</text>
+        <text class="val" x="146" y="24" font-size="13" font-weight="800" font-family="sans-serif" text-anchor="end" fill="#000">5</text>
+        <text x="80" y="38" text-anchor="middle" font-size="9" font-weight="700" font-family="sans-serif" letter-spacing="3" fill="#000">EURO</text>
+        <text class="val" x="80" y="66" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">5</text>
+        <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+          <text x="32" y="80">★</text>
+          <text x="44" y="83">★</text>
+          <text x="60" y="83">★</text>
+          <text x="80" y="84">★</text>
+          <text x="100" y="83">★</text>
+          <text x="116" y="83">★</text>
+          <text x="128" y="80">★</text>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-idea"><strong>Monedas:</strong> son redondas. Hay de <strong>céntimos</strong> (1c, 2c, 5c, 10c, 20c, 50c) y de <strong>euros</strong> (1€, 2€).</div>
+    <div class="recuerda-idea"><strong>Billetes:</strong> son rectangulares y de papel. Los más usados: <strong>5€, 10€ y 20€</strong>.</div>
+    <div class="recuerda-idea"><strong>100 céntimos = 1 euro.</strong> El símbolo del euro es <strong>€</strong> y el de céntimo es <strong>c</strong>.</div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Une cada <strong>moneda</strong> o <strong>billete</strong> con su <strong>valor</strong>:</div>
+
+    <div class="unir-fila">
+      <div class="unir-izq">
+        <svg class="moneda-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/>
+          <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+            <text x="50" y="9">★</text><text x="69" y="13">★</text><text x="83" y="26">★</text><text x="89" y="44">★</text><text x="89" y="60">★</text><text x="83" y="78">★</text>
+            <text x="69" y="91">★</text><text x="50" y="95">★</text><text x="31" y="91">★</text><text x="17" y="78">★</text><text x="11" y="60">★</text><text x="11" y="44">★</text>
+          </g>
+          <text x="50" y="58" text-anchor="middle" font-size="22" font-weight="800" font-family="sans-serif" fill="#000">1€</text>
+          <text x="50" y="73" text-anchor="middle" font-size="6" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">EURO</text>
+        </svg>
+      </div>
+      <div class="unir-puntos"></div>
+      <div class="unir-puntos"></div>
+      <div class="unir-der">5 €</div>
+    </div>
+
+    <div class="unir-fila">
+      <div class="unir-izq">
+        <svg class="billete-svg" viewBox="0 0 160 90">
+          <rect x="3" y="3" width="154" height="84" rx="6" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <rect x="9" y="9" width="142" height="72" rx="3" fill="none" stroke="#000" stroke-width="1"/>
+          <text x="14" y="24" font-size="13" font-weight="800" font-family="sans-serif" fill="#000">5</text>
+          <text x="146" y="24" font-size="13" font-weight="800" font-family="sans-serif" text-anchor="end" fill="#000">5</text>
+          <text x="80" y="38" text-anchor="middle" font-size="9" font-weight="700" font-family="sans-serif" letter-spacing="3" fill="#000">EURO</text>
+          <text x="80" y="66" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">5</text>
+          <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+            <text x="32" y="80">★</text><text x="44" y="83">★</text><text x="60" y="83">★</text><text x="80" y="84">★</text><text x="100" y="83">★</text><text x="116" y="83">★</text><text x="128" y="80">★</text>
+          </g>
+        </svg>
+      </div>
+      <div class="unir-puntos"></div>
+      <div class="unir-puntos"></div>
+      <div class="unir-der">2 €</div>
+    </div>
+
+    <div class="unir-fila">
+      <div class="unir-izq">
+        <svg class="moneda-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/>
+          <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+            <text x="50" y="9">★</text><text x="69" y="13">★</text><text x="83" y="26">★</text><text x="89" y="44">★</text><text x="89" y="60">★</text><text x="83" y="78">★</text>
+            <text x="69" y="91">★</text><text x="50" y="95">★</text><text x="31" y="91">★</text><text x="17" y="78">★</text><text x="11" y="60">★</text><text x="11" y="44">★</text>
+          </g>
+          <text x="50" y="58" text-anchor="middle" font-size="22" font-weight="800" font-family="sans-serif" fill="#000">2€</text>
+          <text x="50" y="73" text-anchor="middle" font-size="6" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">EURO</text>
+        </svg>
+      </div>
+      <div class="unir-puntos"></div>
+      <div class="unir-puntos"></div>
+      <div class="unir-der">10 €</div>
+    </div>
+
+    <div class="unir-fila">
+      <div class="unir-izq">
+        <svg class="billete-svg" viewBox="0 0 160 90">
+          <rect x="3" y="3" width="154" height="84" rx="6" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <rect x="9" y="9" width="142" height="72" rx="3" fill="none" stroke="#000" stroke-width="1"/>
+          <text x="14" y="24" font-size="13" font-weight="800" font-family="sans-serif" fill="#000">10</text>
+          <text x="146" y="24" font-size="13" font-weight="800" font-family="sans-serif" text-anchor="end" fill="#000">10</text>
+          <text x="80" y="38" text-anchor="middle" font-size="9" font-weight="700" font-family="sans-serif" letter-spacing="3" fill="#000">EURO</text>
+          <text x="80" y="66" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">10</text>
+          <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+            <text x="32" y="80">★</text><text x="44" y="83">★</text><text x="60" y="83">★</text><text x="80" y="84">★</text><text x="100" y="83">★</text><text x="116" y="83">★</text><text x="128" y="80">★</text>
+          </g>
+        </svg>
+      </div>
+      <div class="unir-puntos"></div>
+      <div class="unir-puntos"></div>
+      <div class="unir-der">1 €</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe debajo el <strong>valor</strong> de cada moneda o billete:</div>
+    <div class="escribir-fila">
+      <div class="escribir-caja">
+        <svg class="moneda-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g fill="#000" font-family="sans-serif" font-size="6" text-anchor="middle">
+            <text x="50" y="13">★</text><text x="74" y="20">★</text><text x="86" y="40">★</text><text x="86" y="62">★</text><text x="74" y="83">★</text>
+            <text x="50" y="91">★</text><text x="26" y="83">★</text><text x="14" y="62">★</text><text x="14" y="40">★</text><text x="26" y="20">★</text>
+          </g>
+          <text x="50" y="58" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">50</text>
+          <text x="50" y="74" text-anchor="middle" font-size="7" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">CENT</text>
+        </svg>
+        <div class="escribir-hueco"></div>
+      </div>
+      <div class="escribir-caja">
+        <svg class="moneda-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/>
+          <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+            <text x="50" y="9">★</text><text x="69" y="13">★</text><text x="83" y="26">★</text><text x="89" y="44">★</text><text x="89" y="60">★</text><text x="83" y="78">★</text>
+            <text x="69" y="91">★</text><text x="50" y="95">★</text><text x="31" y="91">★</text><text x="17" y="78">★</text><text x="11" y="60">★</text><text x="11" y="44">★</text>
+          </g>
+          <text x="50" y="58" text-anchor="middle" font-size="22" font-weight="800" font-family="sans-serif" fill="#000">2€</text>
+          <text x="50" y="73" text-anchor="middle" font-size="6" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">EURO</text>
+        </svg>
+        <div class="escribir-hueco"></div>
+      </div>
+      <div class="escribir-caja">
+        <svg class="billete-svg" viewBox="0 0 160 90">
+          <rect x="3" y="3" width="154" height="84" rx="6" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <rect x="9" y="9" width="142" height="72" rx="3" fill="none" stroke="#000" stroke-width="1"/>
+          <text x="14" y="24" font-size="13" font-weight="800" font-family="sans-serif" fill="#000">20</text>
+          <text x="146" y="24" font-size="13" font-weight="800" font-family="sans-serif" text-anchor="end" fill="#000">20</text>
+          <text x="80" y="38" text-anchor="middle" font-size="9" font-weight="700" font-family="sans-serif" letter-spacing="3" fill="#000">EURO</text>
+          <text x="80" y="66" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">20</text>
+          <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+            <text x="32" y="80">★</text><text x="44" y="83">★</text><text x="60" y="83">★</text><text x="80" y="84">★</text><text x="100" y="83">★</text><text x="116" y="83">★</text><text x="128" y="80">★</text>
+          </g>
+        </svg>
+        <div class="escribir-hueco"></div>
+      </div>
+      <div class="escribir-caja">
+        <svg class="moneda-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+          <g fill="#000" font-family="sans-serif" font-size="6" text-anchor="middle">
+            <text x="50" y="13">★</text><text x="74" y="20">★</text><text x="86" y="40">★</text><text x="86" y="62">★</text><text x="74" y="83">★</text>
+            <text x="50" y="91">★</text><text x="26" y="83">★</text><text x="14" y="62">★</text><text x="14" y="40">★</text><text x="26" y="20">★</text>
+          </g>
+          <text x="50" y="58" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">10</text>
+          <text x="50" y="74" text-anchor="middle" font-size="7" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">CENT</text>
+        </svg>
+        <div class="escribir-hueco"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Rodea las <strong>MONEDAS</strong> y tacha los <strong>BILLETES</strong>:</div>
+    <div class="clasif-fila">
+      <svg class="moneda-svg" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/>
+        <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+          <text x="50" y="9">★</text><text x="69" y="13">★</text><text x="83" y="26">★</text><text x="89" y="44">★</text><text x="89" y="60">★</text><text x="83" y="78">★</text>
+          <text x="69" y="91">★</text><text x="50" y="95">★</text><text x="31" y="91">★</text><text x="17" y="78">★</text><text x="11" y="60">★</text><text x="11" y="44">★</text>
+        </g>
+        <text x="50" y="58" text-anchor="middle" font-size="22" font-weight="800" font-family="sans-serif" fill="#000">1€</text>
+        <text x="50" y="73" text-anchor="middle" font-size="6" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">EURO</text>
+      </svg>
+      <svg class="billete-svg" viewBox="0 0 160 90">
+        <rect x="3" y="3" width="154" height="84" rx="6" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <rect x="9" y="9" width="142" height="72" rx="3" fill="none" stroke="#000" stroke-width="1"/>
+        <text x="14" y="24" font-size="13" font-weight="800" font-family="sans-serif" fill="#000">5</text>
+        <text x="146" y="24" font-size="13" font-weight="800" font-family="sans-serif" text-anchor="end" fill="#000">5</text>
+        <text x="80" y="38" text-anchor="middle" font-size="9" font-weight="700" font-family="sans-serif" letter-spacing="3" fill="#000">EURO</text>
+        <text x="80" y="66" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">5</text>
+        <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+          <text x="32" y="80">★</text><text x="44" y="83">★</text><text x="60" y="83">★</text><text x="80" y="84">★</text><text x="100" y="83">★</text><text x="116" y="83">★</text><text x="128" y="80">★</text>
+        </g>
+      </svg>
+      <svg class="moneda-svg" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <g fill="#000" font-family="sans-serif" font-size="6" text-anchor="middle">
+          <text x="50" y="13">★</text><text x="74" y="20">★</text><text x="86" y="40">★</text><text x="86" y="62">★</text><text x="74" y="83">★</text>
+          <text x="50" y="91">★</text><text x="26" y="83">★</text><text x="14" y="62">★</text><text x="14" y="40">★</text><text x="26" y="20">★</text>
+        </g>
+        <text x="50" y="58" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">20</text>
+        <text x="50" y="74" text-anchor="middle" font-size="7" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">CENT</text>
+      </svg>
+      <svg class="billete-svg" viewBox="0 0 160 90">
+        <rect x="3" y="3" width="154" height="84" rx="6" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <rect x="9" y="9" width="142" height="72" rx="3" fill="none" stroke="#000" stroke-width="1"/>
+        <text x="14" y="24" font-size="13" font-weight="800" font-family="sans-serif" fill="#000">10</text>
+        <text x="146" y="24" font-size="13" font-weight="800" font-family="sans-serif" text-anchor="end" fill="#000">10</text>
+        <text x="80" y="38" text-anchor="middle" font-size="9" font-weight="700" font-family="sans-serif" letter-spacing="3" fill="#000">EURO</text>
+        <text x="80" y="66" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">10</text>
+        <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+          <text x="32" y="80">★</text><text x="44" y="83">★</text><text x="60" y="83">★</text><text x="80" y="84">★</text><text x="100" y="83">★</text><text x="116" y="83">★</text><text x="128" y="80">★</text>
+        </g>
+      </svg>
+    </div>
+    <div class="clasif-fila">
+      <svg class="billete-svg" viewBox="0 0 160 90">
+        <rect x="3" y="3" width="154" height="84" rx="6" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <rect x="9" y="9" width="142" height="72" rx="3" fill="none" stroke="#000" stroke-width="1"/>
+        <text x="14" y="24" font-size="13" font-weight="800" font-family="sans-serif" fill="#000">20</text>
+        <text x="146" y="24" font-size="13" font-weight="800" font-family="sans-serif" text-anchor="end" fill="#000">20</text>
+        <text x="80" y="38" text-anchor="middle" font-size="9" font-weight="700" font-family="sans-serif" letter-spacing="3" fill="#000">EURO</text>
+        <text x="80" y="66" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">20</text>
+        <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+          <text x="32" y="80">★</text><text x="44" y="83">★</text><text x="60" y="83">★</text><text x="80" y="84">★</text><text x="100" y="83">★</text><text x="116" y="83">★</text><text x="128" y="80">★</text>
+        </g>
+      </svg>
+      <svg class="moneda-svg" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/>
+        <g fill="#000" font-family="sans-serif" font-size="7" text-anchor="middle">
+          <text x="50" y="9">★</text><text x="69" y="13">★</text><text x="83" y="26">★</text><text x="89" y="44">★</text><text x="89" y="60">★</text><text x="83" y="78">★</text>
+          <text x="69" y="91">★</text><text x="50" y="95">★</text><text x="31" y="91">★</text><text x="17" y="78">★</text><text x="11" y="60">★</text><text x="11" y="44">★</text>
+        </g>
+        <text x="50" y="58" text-anchor="middle" font-size="22" font-weight="800" font-family="sans-serif" fill="#000">2€</text>
+        <text x="50" y="73" text-anchor="middle" font-size="6" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">EURO</text>
+      </svg>
+      <svg class="moneda-svg" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <g fill="#000" font-family="sans-serif" font-size="6" text-anchor="middle">
+          <text x="50" y="13">★</text><text x="74" y="20">★</text><text x="86" y="40">★</text><text x="86" y="62">★</text><text x="74" y="83">★</text>
+          <text x="50" y="91">★</text><text x="26" y="83">★</text><text x="14" y="62">★</text><text x="14" y="40">★</text><text x="26" y="20">★</text>
+        </g>
+        <text x="50" y="58" text-anchor="middle" font-size="26" font-weight="800" font-family="sans-serif" fill="#000">5</text>
+        <text x="50" y="74" text-anchor="middle" font-size="7" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">CENT</text>
+      </svg>
+      <svg class="moneda-svg" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/>
+        <g fill="#000" font-family="sans-serif" font-size="6" text-anchor="middle">
+          <text x="50" y="13">★</text><text x="74" y="20">★</text><text x="86" y="40">★</text><text x="86" y="62">★</text><text x="74" y="83">★</text>
+          <text x="50" y="91">★</text><text x="26" y="83">★</text><text x="14" y="62">★</text><text x="14" y="40">★</text><text x="26" y="20">★</text>
+        </g>
+        <text x="50" y="58" text-anchor="middle" font-size="28" font-weight="800" font-family="sans-serif" fill="#000">1</text>
+        <text x="50" y="74" text-anchor="middle" font-size="7" font-weight="700" font-family="sans-serif" letter-spacing="1" fill="#000">CENT</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Cuenta y escribe <strong>cuánto dinero</strong> hay en total:</div>
+    <div class="contar-linea">
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">1€</text></svg>
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">1€</text></svg>
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">1€</text></svg>
+      <span>= en total tengo</span><span class="total"></span><span>€</span>
+    </div>
+    <div class="contar-linea">
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">2€</text></svg>
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">2€</text></svg>
+      <span>= en total tengo</span><span class="total"></span><span>€</span>
+    </div>
+    <div class="contar-linea">
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">1€</text></svg>
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">1€</text></svg>
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">1€</text></svg>
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">1€</text></svg>
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">1€</text></svg>
+      <span>= en total tengo</span><span class="total"></span><span>€</span>
+    </div>
+    <div class="contar-linea">
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">2€</text></svg>
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">2€</text></svg>
+      <svg class="mini-moneda-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#fff" stroke="#000" stroke-width="2.5"/><circle cx="50" cy="50" r="34" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="50" y="60" text-anchor="middle" font-size="32" font-weight="800" font-family="sans-serif" fill="#000">2€</text></svg>
+      <span>= en total tengo</span><span class="total"></span><span>€</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
