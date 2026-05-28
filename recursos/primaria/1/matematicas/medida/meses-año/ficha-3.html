@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Los meses del año · 1º Primaria · Ficha 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    .ej-block { margin-bottom: 10px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 5px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ejercicio 1: tachar el intruso */
+    .intruso-bloque { display: flex; flex-direction: column; gap: 6px; }
+    .intruso-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .intruso-caja { border: 1.5px solid #000; border-radius: 8px; padding: 7px 4px; text-align: center; font-size: 12.5px; font-weight: 700; }
+
+    /* Ejercicio 2: tabla mes anterior / este mes / siguiente */
+    .meses-tabla { width: 100%; border-collapse: collapse; }
+    .meses-tabla th, .meses-tabla td { border: 1.5px solid #000; padding: 5px 6px; text-align: center; font-size: 12.5px; height: 30px; }
+    .meses-tabla th { font-weight: 700; background: #f4f4f4; font-size: 12px; }
+    .meses-tabla td.lleno { font-weight: 700; background: #fafafa; }
+
+    /* Ejercicio 3: ordenar los 12 meses */
+    .banco-meses { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin-bottom: 5px; }
+    .banco-mes { border: 1.5px dashed #000; border-radius: 6px; padding: 4px 2px; text-align: center; font-size: 11.5px; font-weight: 700; background: #f4f4f4; }
+    .ordenar-huecos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
+    .ord-hueco-caja { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .ord-num { font-family: sans-serif; font-size: 10.5px; font-weight: 700; }
+    .ord-hueco { width: 100%; border: 1.5px solid #000; border-radius: 6px; height: 28px; }
+
+    /* Ejercicio 4: problemas */
+    .prob-lista { display: flex; flex-direction: column; gap: 6px; }
+    .prob { font-size: 13px; line-height: 1.45; }
+    .hueco-cuadrado { display: inline-block; width: 38px; height: 26px; border: 1.5px solid #000; border-radius: 5px; vertical-align: middle; margin: 0 4px; }
+    .hueco-linea { display: inline-block; min-width: 100px; border-bottom: 1.5px solid #000; height: 18px; vertical-align: bottom; margin: 0 3px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 1º Primaria · Los meses del año · Ficha 3</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🗓️ Los meses del año</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Tacha</strong> en cada fila la palabra que <strong>NO</strong> es un mes:</div>
+    <div class="intruso-bloque">
+      <div class="intruso-fila">
+        <div class="intruso-caja">enero</div>
+        <div class="intruso-caja">febrero</div>
+        <div class="intruso-caja">lunes</div>
+        <div class="intruso-caja">abril</div>
+      </div>
+      <div class="intruso-fila">
+        <div class="intruso-caja">julio</div>
+        <div class="intruso-caja">agosto</div>
+        <div class="intruso-caja">otoño</div>
+        <div class="intruso-caja">octubre</div>
+      </div>
+      <div class="intruso-fila">
+        <div class="intruso-caja">marzo</div>
+        <div class="intruso-caja">mayo</div>
+        <div class="intruso-caja">tarde</div>
+        <div class="intruso-caja">junio</div>
+      </div>
+      <div class="intruso-fila">
+        <div class="intruso-caja">septiembre</div>
+        <div class="intruso-caja">año</div>
+        <div class="intruso-caja">noviembre</div>
+        <div class="intruso-caja">diciembre</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Completa la tabla con el mes <strong>anterior</strong> y el mes <strong>siguiente</strong>:</div>
+    <table class="meses-tabla">
+      <thead>
+        <tr>
+          <th>Mes anterior</th>
+          <th>Este mes</th>
+          <th>Mes siguiente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td class="lleno">marzo</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="lleno">junio</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="lleno">octubre</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Aquí tienes los <strong>12 meses</strong> mezclados. Escríbelos en su sitio (del 1º al 12º):</div>
+    <div class="banco-meses">
+      <div class="banco-mes">julio</div>
+      <div class="banco-mes">marzo</div>
+      <div class="banco-mes">noviembre</div>
+      <div class="banco-mes">enero</div>
+      <div class="banco-mes">septiembre</div>
+      <div class="banco-mes">mayo</div>
+      <div class="banco-mes">diciembre</div>
+      <div class="banco-mes">febrero</div>
+      <div class="banco-mes">agosto</div>
+      <div class="banco-mes">abril</div>
+      <div class="banco-mes">octubre</div>
+      <div class="banco-mes">junio</div>
+    </div>
+    <div class="ordenar-huecos">
+      <div class="ord-hueco-caja"><span class="ord-num">1º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">2º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">3º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">4º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">5º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">6º</span><div class="ord-hueco"></div></div>
+    </div>
+    <div class="ordenar-huecos" style="margin-top:5px;">
+      <div class="ord-hueco-caja"><span class="ord-num">7º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">8º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">9º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">10º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">11º</span><div class="ord-hueco"></div></div>
+      <div class="ord-hueco-caja"><span class="ord-num">12º</span><div class="ord-hueco"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Contesta a estas <strong>preguntas</strong>:</div>
+    <div class="prob-lista">
+      <div class="prob">a) ¿En qué mes empiezan las clases del cole? <span class="hueco-linea"></span></div>
+      <div class="prob">b) ¿En qué mes son los Reyes Magos? <span class="hueco-linea"></span></div>
+      <div class="prob">c) ¿Cuántos meses hay desde <strong>enero</strong> hasta <strong>marzo</strong>? <span class="hueco-cuadrado"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

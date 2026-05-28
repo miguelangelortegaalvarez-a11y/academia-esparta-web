@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Los días de la semana · 1º Primaria · Ficha 2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    .ej-block { margin-bottom: 11px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 6px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ejercicio 1: unir día↔ordinal */
+    .unir-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; align-items: start; }
+    .unir-col { display: flex; flex-direction: column; gap: 8px; }
+    .unir-item { border: 1.5px solid #000; border-radius: 8px; padding: 6px 10px; text-align: center; font-size: 13.5px; font-weight: 700; }
+
+    /* Ejercicio 2: mini calendario */
+    .cal-wrap { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; }
+    .cal-tabla { width: 100%; border-collapse: collapse; }
+    .cal-tabla th, .cal-tabla td { border: 1.5px solid #000; padding: 4px 2px; text-align: center; font-size: 12px; font-weight: 600; height: 26px; }
+    .cal-tabla th { background: #f4f4f4; font-weight: 700; font-size: 10.5px; }
+    .cal-preguntas { display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; }
+    .cal-preg { display: flex; align-items: center; gap: 6px; }
+    .cal-hueco { display: inline-block; width: 42px; height: 26px; border: 1.5px solid #000; border-radius: 5px; }
+
+    /* Ejercicio 3: continuar la serie */
+    .serie-bloque { display: flex; flex-direction: column; gap: 6px; }
+    .serie-fila { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    .serie-caja { border: 1.5px solid #000; border-radius: 6px; min-height: 36px; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 700; text-align: center; padding: 3px; }
+    .serie-caja.lleno { background: #f4f4f4; }
+
+    /* Ejercicio 4: problemas dentro de N días */
+    .prob-lista { display: flex; flex-direction: column; gap: 8px; }
+    .prob { font-size: 13px; line-height: 1.5; }
+    .hueco-linea { display: inline-block; min-width: 105px; border-bottom: 1.5px solid #000; height: 18px; vertical-align: bottom; margin: 0 3px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 1º Primaria · Los días de la semana · Ficha 2</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📅 Los días de la semana</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Une</strong> cada día con la <strong>posición</strong> que ocupa en la semana:</div>
+    <div class="unir-grid">
+      <div class="unir-col">
+        <div class="unir-item">jueves</div>
+        <div class="unir-item">lunes</div>
+        <div class="unir-item">domingo</div>
+        <div class="unir-item">miércoles</div>
+      </div>
+      <div class="unir-col">
+        <div class="unir-item">3º día</div>
+        <div class="unir-item">7º día</div>
+        <div class="unir-item">1º día</div>
+        <div class="unir-item">4º día</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Mira este <strong>calendario</strong> y contesta:</div>
+    <div class="cal-wrap">
+      <table class="cal-tabla">
+        <thead>
+          <tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th><th>D</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+          <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+          <tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
+          <tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
+        </tbody>
+      </table>
+      <div class="cal-preguntas">
+        <div class="cal-preg">¿Cuántos lunes hay? <span class="cal-hueco"></span></div>
+        <div class="cal-preg">¿Cuántos sábados hay? <span class="cal-hueco"></span></div>
+        <div class="cal-preg">¿Qué día es el 10? <span class="cal-hueco" style="width:80px;"></span></div>
+        <div class="cal-preg">¿Qué día es el 25? <span class="cal-hueco" style="width:80px;"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Continúa</strong> la serie de días (siguen el orden de la semana):</div>
+    <div class="serie-bloque">
+      <div class="serie-fila">
+        <div class="serie-caja lleno">lunes</div>
+        <div class="serie-caja lleno">martes</div>
+        <div class="serie-caja"></div>
+        <div class="serie-caja"></div>
+        <div class="serie-caja"></div>
+      </div>
+      <div class="serie-fila">
+        <div class="serie-caja lleno">jueves</div>
+        <div class="serie-caja lleno">viernes</div>
+        <div class="serie-caja"></div>
+        <div class="serie-caja"></div>
+        <div class="serie-caja"></div>
+      </div>
+      <div class="serie-fila">
+        <div class="serie-caja lleno">sábado</div>
+        <div class="serie-caja lleno">domingo</div>
+        <div class="serie-caja"></div>
+        <div class="serie-caja"></div>
+        <div class="serie-caja"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Si <strong>hoy</strong> es el día indicado, escribe qué día será o fue:</div>
+    <div class="prob-lista">
+      <div class="prob">a) Hoy es <strong>lunes</strong>. <strong>Mañana</strong> será <span class="hueco-linea"></span>.</div>
+      <div class="prob">b) Hoy es <strong>jueves</strong>. <strong>Ayer</strong> fue <span class="hueco-linea"></span>.</div>
+      <div class="prob">c) Hoy es <strong>miércoles</strong>. <strong>Dentro de 2 días</strong> será <span class="hueco-linea"></span>.</div>
+      <div class="prob">d) Hoy es <strong>sábado</strong>. <strong>Hace 2 días</strong> fue <span class="hueco-linea"></span>.</div>
+      <div class="prob">e) Hoy es <strong>domingo</strong>. <strong>Mañana</strong> empieza el cole, será <span class="hueco-linea"></span>.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
