@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Líneas y situación espacial · 1º Primaria · Ficha 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.5rem 1.5rem 0.7rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    .ej-block { margin-bottom: 9px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 5px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ejercicio 1: nombrar líneas */
+    .nombrar-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .nombrar-caja { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .nombrar-svg { width: 100%; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+    .nombrar-svg svg { width: 90px; height: 40px; }
+    .nombrar-linea { width: 100%; border-bottom: 1.5px solid #000; height: 22px; }
+
+    /* Ejercicio 2: completar frases sobre escena */
+    .escena2-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+    .escena2-svg { border: 2px solid #000; border-radius: 10px; padding: 6px; }
+    .escena2-svg svg { width: 100%; height: 150px; display: block; }
+    .completar-lista { display: flex; flex-direction: column; gap: 6px; padding-top: 2px; }
+    .completar-frase { font-size: 12px; line-height: 1.35; }
+    .completar-hueco { display: inline-block; min-width: 50px; border-bottom: 1.5px solid #000; height: 17px; vertical-align: middle; }
+
+    /* Ejercicio 3: dibujar según consigna */
+    .dibujar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .dibujar-caja { display: flex; flex-direction: column; gap: 4px; }
+    .dibujar-instr { font-size: 12px; font-weight: 700; line-height: 1.3; }
+    .dibujar-hueco { width: 100%; height: 70px; border: 1.5px solid #000; border-radius: 8px; position: relative; }
+    .dibujar-hueco.con-caja { display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px; }
+    .dibujar-hueco.con-caja .caja-base { width: 36px; height: 26px; border: 1.5px solid #000; }
+    .dibujar-hueco.con-mesa { display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px; }
+    .dibujar-hueco.con-mesa svg { width: 70%; height: 32px; }
+
+    /* Ejercicio 4: V/F mixto */
+    .vf-lista { display: flex; flex-direction: column; gap: 6px; }
+    .vf-fila { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; font-size: 12.5px; }
+    .vf-frase { line-height: 1.3; }
+    .vf-opcion { display: flex; align-items: center; gap: 3px; font-weight: 700; }
+    .vf-circ { width: 20px; height: 20px; border: 1.5px solid #000; border-radius: 50%; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 1º Primaria · Líneas y situación espacial · Ficha 3</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📏 Repaso: líneas y posición</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe el <strong>nombre</strong> debajo de cada línea (recta, curva, abierta o cerrada):</div>
+    <div class="nombrar-fila">
+      <div class="nombrar-caja">
+        <div class="nombrar-svg"><svg viewBox="0 0 100 40"><line x1="6" y1="20" x2="94" y2="20" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <div class="nombrar-linea"></div>
+      </div>
+      <div class="nombrar-caja">
+        <div class="nombrar-svg"><svg viewBox="0 0 100 40"><path d="M 6 30 Q 50 4 94 30" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <div class="nombrar-linea"></div>
+      </div>
+      <div class="nombrar-caja">
+        <div class="nombrar-svg"><svg viewBox="0 0 100 40"><ellipse cx="50" cy="20" rx="36" ry="14" fill="none" stroke="#000" stroke-width="2.5"/></svg></div>
+        <div class="nombrar-linea"></div>
+      </div>
+      <div class="nombrar-caja">
+        <div class="nombrar-svg"><svg viewBox="0 0 100 40"><path d="M 6 8 Q 30 36 50 18 T 94 28" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <div class="nombrar-linea"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Mira el dibujo y <strong>completa</strong> con: dentro, fuera, encima, debajo, izquierda, derecha.</div>
+    <div class="escena2-wrap">
+      <div class="escena2-svg">
+        <svg viewBox="0 0 240 150" preserveAspectRatio="xMidYMid meet">
+          <!-- suelo -->
+          <line x1="10" y1="140" x2="230" y2="140" stroke="#000" stroke-width="2"/>
+          <!-- cama izquierda (rectángulo bajo) -->
+          <rect x="20" y="98" width="70" height="32" fill="none" stroke="#000" stroke-width="2.5"/>
+          <line x1="20" y1="110" x2="35" y2="110" stroke="#000" stroke-width="2"/>
+          <!-- gato encima de la cama (forma ovalada con orejas y cola) -->
+          <ellipse cx="55" cy="92" rx="14" ry="6" fill="none" stroke="#000" stroke-width="2"/>
+          <polygon points="46,86 48,80 52,86" fill="none" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
+          <polygon points="58,86 62,80 64,86" fill="none" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
+          <line x1="69" y1="92" x2="76" y2="88" stroke="#000" stroke-width="1.5"/>
+          <!-- mesilla en medio -->
+          <rect x="110" y="100" width="35" height="36" fill="none" stroke="#000" stroke-width="2.5"/>
+          <!-- lámpara encima de la mesilla -->
+          <polygon points="120,80 135,80 132,100 123,100" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+          <!-- alfombra a la derecha -->
+          <rect x="165" y="125" width="60" height="13" fill="none" stroke="#000" stroke-width="2"/>
+          <!-- pelota encima de la alfombra -->
+          <circle cx="195" cy="118" r="7" fill="none" stroke="#000" stroke-width="2"/>
+          <!-- zapato debajo de la cama -->
+          <ellipse cx="50" cy="135" rx="10" ry="3.5" fill="none" stroke="#000" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="completar-lista">
+        <div class="completar-frase">a) El gato está <span class="completar-hueco"></span> de la cama.</div>
+        <div class="completar-frase">b) El zapato está <span class="completar-hueco"></span> de la cama.</div>
+        <div class="completar-frase">c) La lámpara está <span class="completar-hueco"></span> de la mesilla.</div>
+        <div class="completar-frase">d) La pelota está <span class="completar-hueco"></span> de la alfombra.</div>
+        <div class="completar-frase">e) La cama está a la <span class="completar-hueco"></span>.</div>
+        <div class="completar-frase">f) La alfombra está a la <span class="completar-hueco"></span>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Dibuja</strong> lo que se pide:</div>
+    <div class="dibujar-grid">
+      <div class="dibujar-caja">
+        <span class="dibujar-instr">a) Una pelota <strong>encima</strong> de la mesa.</span>
+        <div class="dibujar-hueco con-mesa">
+          <svg viewBox="0 0 100 32"><line x1="14" y1="6" x2="86" y2="6" stroke="#000" stroke-width="2.5"/><line x1="22" y1="6" x2="22" y2="28" stroke="#000" stroke-width="2.5"/><line x1="78" y1="6" x2="78" y2="28" stroke="#000" stroke-width="2.5"/></svg>
+        </div>
+      </div>
+      <div class="dibujar-caja">
+        <span class="dibujar-instr">b) Una pelota <strong>dentro</strong> de la caja.</span>
+        <div class="dibujar-hueco con-caja">
+          <div class="caja-base"></div>
+        </div>
+      </div>
+      <div class="dibujar-caja">
+        <span class="dibujar-instr">c) Una línea <strong>recta</strong>.</span>
+        <div class="dibujar-hueco"></div>
+      </div>
+      <div class="dibujar-caja">
+        <span class="dibujar-instr">d) Una línea <strong>cerrada</strong>.</span>
+        <div class="dibujar-hueco"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Rodea <strong>V</strong> si la frase es <strong>verdadera</strong> o <strong>F</strong> si es <strong>falsa</strong>:</div>
+    <div class="vf-lista">
+      <div class="vf-fila">
+        <div class="vf-frase">a) Una línea <strong>recta</strong> va siempre derecha.</div>
+        <div class="vf-opcion"><div class="vf-circ"></div>V</div>
+        <div class="vf-opcion"><div class="vf-circ"></div>F</div>
+      </div>
+      <div class="vf-fila">
+        <div class="vf-frase">b) En una línea <strong>cerrada</strong> los extremos no se tocan.</div>
+        <div class="vf-opcion"><div class="vf-circ"></div>V</div>
+        <div class="vf-opcion"><div class="vf-circ"></div>F</div>
+      </div>
+      <div class="vf-fila">
+        <div class="vf-frase">c) Si la pelota está <strong>encima</strong> de la mesa, está por arriba.</div>
+        <div class="vf-opcion"><div class="vf-circ"></div>V</div>
+        <div class="vf-opcion"><div class="vf-circ"></div>F</div>
+      </div>
+      <div class="vf-fila">
+        <div class="vf-frase">d) Una línea <strong>curva</strong> va doblada.</div>
+        <div class="vf-opcion"><div class="vf-circ"></div>V</div>
+        <div class="vf-opcion"><div class="vf-circ"></div>F</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
