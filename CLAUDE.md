@@ -196,7 +196,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 | Bloque | Sub-bloques (fichas estimadas) | Fichas |
 |---|---|---|
 | `numeros` ✅ | numeros-hasta-99 (6 ✅) · decenas-unidades (2 ✅) · numeros-ordinales (2 ✅) · comparar-y-ordenar (2 ✅) | **12** |
-| `operaciones` | sumas-sin-llevadas (6 ✅) · restas-sin-llevadas · calculo-mental | 6/~12-18 |
+| `operaciones` | sumas-sin-llevadas (8 ✅) · restas-sin-llevadas · calculo-mental | 8/~14-20 |
 | `medida` | longitud-peso-capacidad · monedas-billetes · el-reloj-en-punto · dias-semana · meses-año | ~20-30 |
 | `geometria` | figuras-planas · cuerpos-geometricos · lineas-y-situacion-espacial | ~10-18 |
 | `estadistica` | tablas-simples · pictogramas | ~6-12 |
@@ -258,7 +258,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 1. **1º Primaria Matemáticas** — estructura acordada con Miguel el 2026-05-24 (detalle completo en sección "Estructura matemáticas Primaria"). 6 bloques (5 LOMLOE + problemas), sub-bloques anidados, **6 fichas/serie**, curso a curso 1º→6º. **Total 1º Mates: 120 fichas**.
    - **Bloque `numeros` COMPLETO ✅** (12 fichas, cerrado 2026-05-28): `numeros-hasta-99` (6) + `decenas-unidades` (2) + `numeros-ordinales` (2) + `comparar-y-ordenar` (2). Patrón en sub-bloques de 2 fichas: ficha-1 con "Recuerda" + ejemplos, ficha-2 solo ejercicios + variación.
-   - **Bloque `operaciones` EN MARCHA — `sumas-sin-llevadas` COMPLETO ✅** (6 fichas, cerrado 2026-05-28): ficha-1 con Recuerda (3 ejemplos: una cifra vertical, dos cifras vertical, una cifra horizontal) + sumas básicas + serie 1-10. ficha-2 unir suma↔resultado + serie 11-20. ficha-3 sumas con dibujos (●★▲■) + serie 20-30. ficha-4 descomponer + serie 10-100 de 10 en 10. ficha-5 el doble + serie 40-50. ficha-6 tres sumandos + serie 50-60.
+   - **Bloque `operaciones` EN MARCHA — `sumas-sin-llevadas` COMPLETO ✅** (8 fichas, cerrado 2026-05-28): ficha-1 con Recuerda (3 ejemplos: una cifra vertical, dos cifras vertical, una cifra horizontal) + sumas básicas + serie 1-10. ficha-2 unir suma↔resultado + serie 11-20. ficha-3 sumas con dibujos (●★▲■) + serie 20-30. ficha-4 descomponer + serie 10-100 de 10 en 10. ficha-5 el doble + serie 40-50. ficha-6 tres sumandos + serie 50-60. ficha-7 y ficha-8 página entera con 20 sumas DU+DU en rejilla 5×4 (fuente 22px, gap 38px) — estilo cuadernillo Rubio.
    - **Siguiente sub-bloque:** `operaciones/restas-sin-llevadas/`.
    - **Índice web:** `materiales.html` ya alineado para 1º Mates con la estructura de 6 bloques (commit `ec68965`, 2026-05-28). 2º–6º Mates en `materiales.html` siguen con la estructura antigua de 5 bloques — actualizar al arrancar cada curso.
 
