@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sumas y restas mezcladas — introducción · 1º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* Bloque "Recuerda" — 3 ejemplos */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 12px 18px 14px; margin-bottom: 12px; }
+    .recuerda-titulo { font-size: 14px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-idea { font-size: 13.5px; margin-bottom: 12px; line-height: 1.4; }
+    .recuerda-idea strong { font-weight: 700; }
+    .recuerda-ejemplos { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: flex-start; justify-items: center; padding: 6px 4px 4px; }
+    .ej-mini { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .ej-mini .etiqueta { font-size: 10.5px; color: #444; font-family: sans-serif; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; text-align: center; }
+    .ej-col-mini { font-family: sans-serif; font-size: 19px; font-weight: 700; text-align: right; line-height: 1.35; }
+    .ej-col-mini .lin { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+    .ej-col-mini .barra { border-top: 2px solid #000; padding-top: 3px; }
+    .ej-horiz-mini { font-family: sans-serif; font-size: 18px; font-weight: 700; padding-top: 4px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+
+    .ej-block { margin-bottom: 12px; }
+    .ej-enunciado { font-size: 14px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Operaciones en columna */
+    .columnas-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px 8px; justify-items: center; margin-top: 4px; }
+    .columnas-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 12px; justify-items: center; margin-top: 4px; }
+    .op-col { font-family: sans-serif; font-size: 18px; font-weight: 700; text-align: right; line-height: 1.25; min-width: 65px; }
+    .op-col .lin { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+    .op-col .sg { font-weight: 800; font-size: 16px; }
+    .op-col .barra { border-top: 2px solid #000; margin-top: 2px; padding-top: 4px; min-height: 28px; }
+
+    /* Operaciones horizontales */
+    .horiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; margin-top: 4px; }
+    .horiz-fila { display: flex; align-items: center; gap: 8px; font-family: sans-serif; font-size: 17px; font-weight: 700; justify-content: center; }
+    .horiz-fila .caja { border: 1.5px solid #000; border-radius: 6px; width: 55px; height: 30px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 1º Primaria · Sumas y restas mezcladas</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">➕ ➖ Sumas y restas mezcladas</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-idea">Antes de operar, <strong>fíjate bien en el signo</strong>. El signo <strong>+</strong> significa <strong>juntar</strong> (añadir). El signo <strong>−</strong> significa <strong>quitar</strong>. Aunque las cuentas estén mezcladas, cada una se resuelve por separado.</div>
+    <div class="recuerda-ejemplos">
+      <div class="ej-mini">
+        <div class="etiqueta">Suma (vertical)</div>
+        <div class="ej-col-mini">
+          <div>3</div>
+          <div class="lin"><span style="font-weight:800">+</span><span>4</span></div>
+          <div class="barra">7</div>
+        </div>
+      </div>
+      <div class="ej-mini">
+        <div class="etiqueta">Resta (vertical)</div>
+        <div class="ej-col-mini">
+          <div>7</div>
+          <div class="lin"><span style="font-weight:800">−</span><span>3</span></div>
+          <div class="barra">4</div>
+        </div>
+      </div>
+      <div class="ej-mini">
+        <div class="etiqueta">Mezcladas (horizontal)</div>
+        <div class="ej-horiz-mini">
+          <div>5 + 2 = 7</div>
+          <div>8 − 3 = 5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Resuelve estas operaciones en columna (fíjate en el signo):</div>
+    <div class="columnas-grid">
+      <div class="op-col"><div>6</div><div class="lin"><span class="sg">+</span><span>3</span></div><div class="barra">&nbsp;</div></div>
+      <div class="op-col"><div>8</div><div class="lin"><span class="sg">−</span><span>5</span></div><div class="barra">&nbsp;</div></div>
+      <div class="op-col"><div>4</div><div class="lin"><span class="sg">+</span><span>2</span></div><div class="barra">&nbsp;</div></div>
+      <div class="op-col"><div>9</div><div class="lin"><span class="sg">−</span><span>4</span></div><div class="barra">&nbsp;</div></div>
+      <div class="op-col"><div>5</div><div class="lin"><span class="sg">+</span><span>3</span></div><div class="barra">&nbsp;</div></div>
+      <div class="op-col"><div>7</div><div class="lin"><span class="sg">−</span><span>2</span></div><div class="barra">&nbsp;</div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Resuelve estas operaciones horizontales (fíjate en el signo):</div>
+    <div class="horiz-grid">
+      <div class="horiz-fila"><span>3</span><span>+</span><span>5</span><span>=</span><div class="caja"></div></div>
+      <div class="horiz-fila"><span>9</span><span>−</span><span>4</span><span>=</span><div class="caja"></div></div>
+      <div class="horiz-fila"><span>6</span><span>+</span><span>2</span><span>=</span><div class="caja"></div></div>
+      <div class="horiz-fila"><span>8</span><span>−</span><span>3</span><span>=</span><div class="caja"></div></div>
+      <div class="horiz-fila"><span>4</span><span>+</span><span>4</span><span>=</span><div class="caja"></div></div>
+      <div class="horiz-fila"><span>7</span><span>−</span><span>5</span><span>=</span><div class="caja"></div></div>
+      <div class="horiz-fila"><span>2</span><span>+</span><span>6</span><span>=</span><div class="caja"></div></div>
+      <div class="horiz-fila"><span>9</span><span>−</span><span>6</span><span>=</span><div class="caja"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Resuelve estas operaciones en columna de dos cifras:</div>
+    <div class="columnas-grid-4">
+      <div class="op-col"><div>2 5</div><div class="lin"><span class="sg">+</span><span>1 3</span></div><div class="barra">&nbsp;</div></div>
+      <div class="op-col"><div>4 7</div><div class="lin"><span class="sg">−</span><span>2 4</span></div><div class="barra">&nbsp;</div></div>
+      <div class="op-col"><div>3 2</div><div class="lin"><span class="sg">+</span><span>4 5</span></div><div class="barra">&nbsp;</div></div>
+      <div class="op-col"><div>6 8</div><div class="lin"><span class="sg">−</span><span>3 5</span></div><div class="barra">&nbsp;</div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
