@@ -195,7 +195,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 | Bloque | Sub-bloques (fichas estimadas) | Fichas |
 |---|---|---|
-| `numeros` | numeros-hasta-99 (6 ✅) · decenas-unidades (2 ✅) · numeros-ordinales (2 ✅) · comparar-y-ordenar (~4-6) | ~14-16 |
+| `numeros` ✅ | numeros-hasta-99 (6 ✅) · decenas-unidades (2 ✅) · numeros-ordinales (2 ✅) · comparar-y-ordenar (2 ✅) | **12** |
 | `operaciones` | sumas-sin-llevadas · restas-sin-llevadas · calculo-mental | ~12-18 |
 | `medida` | longitud-peso-capacidad · monedas-billetes · el-reloj-en-punto · dias-semana · meses-año | ~20-30 |
 | `geometria` | figuras-planas · cuerpos-geometricos · lineas-y-situacion-espacial | ~10-18 |
@@ -257,8 +257,8 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 ### Prioridad alta — orden acordado con Miguel (2026-05-24)
 
 1. **1º Primaria Matemáticas** — estructura acordada con Miguel el 2026-05-24 (detalle completo en sección "Estructura matemáticas Primaria"). 6 bloques (5 LOMLOE + problemas), sub-bloques anidados, **6 fichas/serie**, curso a curso 1º→6º. **Total 1º Mates: 120 fichas**.
-   - **Sub-bloques cerrados ✅:** `numeros-hasta-99` (6 fichas) + `decenas-unidades` (2 fichas) + `numeros-ordinales` (2 fichas con patrón "ficha-1 con Recuerda + ejemplos, ficha-2 solo ejercicios"). Total bloque `numeros`: 10/14-18 fichas.
-   - **Siguiente sub-bloque:** `numeros/comparar-y-ordenar/` (último del bloque `numeros`). Después, salto al bloque `operaciones`.
+   - **Bloque `numeros` COMPLETO ✅** (12 fichas, cerrado 2026-05-28): `numeros-hasta-99` (6) + `decenas-unidades` (2) + `numeros-ordinales` (2) + `comparar-y-ordenar` (2). Patrón en sub-bloques de 2 fichas: ficha-1 con "Recuerda" + ejemplos, ficha-2 solo ejercicios + variación.
+   - **Siguiente bloque:** `operaciones/` — empezar por `sumas-sin-llevadas/`.
    - **Índice web:** `materiales.html` ya alineado para 1º Mates con la estructura de 6 bloques (commit `ec68965`, 2026-05-28). 2º–6º Mates en `materiales.html` siguen con la estructura antigua de 5 bloques — actualizar al arrancar cada curso.
 
 2. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 1.

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparar y ordenar — práctica · 1º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    .ej-block { margin-bottom: 11px; }
+    .ej-enunciado { font-size: 14px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Comparar dos números — cajas tipo "píldora" individuales */
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; margin-top: 4px; }
+    .comp-fila { display: grid; grid-template-columns: 60px 60px 60px; gap: 8px; align-items: center; justify-content: center; }
+    .comp-num { border: 2px solid #000; border-radius: 6px; height: 34px; display: flex; align-items: center; justify-content: center; font-family: sans-serif; font-size: 18px; font-weight: 800; background: #f0f0f0; }
+    .comp-caja { border: 1.5px solid #000; border-radius: 6px; height: 34px; }
+
+    /* Rodear — cajas individuales */
+    .rodear-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px 18px; margin-top: 4px; }
+    .rodear-fila { display: grid; grid-template-columns: 60px 60px; gap: 10px; justify-content: center; }
+    .rodear-num { border: 2px solid #000; border-radius: 6px; height: 34px; display: flex; align-items: center; justify-content: center; font-family: sans-serif; font-size: 18px; font-weight: 800; }
+
+    /* Ordenar */
+    .ordenar-fila { padding: 4px 12px; border: 1.2px solid #000; border-radius: 6px; margin-bottom: 4px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; }
+    .ordenar-numeros { font-family: sans-serif; font-size: 16px; font-weight: 700; }
+    .ordenar-cajas { display: flex; gap: 6px; flex: 1; justify-content: flex-end; }
+    .ordenar-caja { border: 1.5px solid #000; border-radius: 6px; width: 50px; height: 28px; }
+
+    /* Serie con número que falta */
+    .serie-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; margin-top: 4px; }
+    .serie-fila { display: grid; grid-template-columns: 50px 50px 50px 50px 50px; gap: 4px; align-items: center; justify-content: center; }
+    .serie-num { border: 2px solid #000; border-radius: 6px; height: 32px; display: flex; align-items: center; justify-content: center; font-family: sans-serif; font-size: 17px; font-weight: 800; background: #f0f0f0; }
+    .serie-caja { border: 1.5px solid #000; border-radius: 6px; height: 32px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 1º Primaria · Comparar y ordenar</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 Comparar y ordenar — más práctica</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe el signo correcto entre cada pareja: &gt; , &lt; o =</div>
+    <div class="comp-grid">
+      <div class="comp-fila"><div class="comp-num">3</div><div class="comp-caja"></div><div class="comp-num">8</div></div>
+      <div class="comp-fila"><div class="comp-num">11</div><div class="comp-caja"></div><div class="comp-num">5</div></div>
+      <div class="comp-fila"><div class="comp-num">19</div><div class="comp-caja"></div><div class="comp-num">19</div></div>
+      <div class="comp-fila"><div class="comp-num">24</div><div class="comp-caja"></div><div class="comp-num">42</div></div>
+      <div class="comp-fila"><div class="comp-num">35</div><div class="comp-caja"></div><div class="comp-num">53</div></div>
+      <div class="comp-fila"><div class="comp-num">70</div><div class="comp-caja"></div><div class="comp-num">70</div></div>
+      <div class="comp-fila"><div class="comp-num">68</div><div class="comp-caja"></div><div class="comp-num">86</div></div>
+      <div class="comp-fila"><div class="comp-num">91</div><div class="comp-caja"></div><div class="comp-num">19</div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Rodea con un círculo el número MAYOR de cada pareja:</div>
+    <div class="rodear-grid">
+      <div class="rodear-fila"><div class="rodear-num">9</div><div class="rodear-num">6</div></div>
+      <div class="rodear-fila"><div class="rodear-num">12</div><div class="rodear-num">21</div></div>
+      <div class="rodear-fila"><div class="rodear-num">34</div><div class="rodear-num">43</div></div>
+      <div class="rodear-fila"><div class="rodear-num">59</div><div class="rodear-num">95</div></div>
+      <div class="rodear-fila"><div class="rodear-num">80</div><div class="rodear-num">78</div></div>
+      <div class="rodear-fila"><div class="rodear-num">63</div><div class="rodear-num">36</div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Rodea con un círculo el número MENOR de cada pareja:</div>
+    <div class="rodear-grid">
+      <div class="rodear-fila"><div class="rodear-num">4</div><div class="rodear-num">7</div></div>
+      <div class="rodear-fila"><div class="rodear-num">28</div><div class="rodear-num">82</div></div>
+      <div class="rodear-fila"><div class="rodear-num">45</div><div class="rodear-num">54</div></div>
+      <div class="rodear-fila"><div class="rodear-num">17</div><div class="rodear-num">71</div></div>
+      <div class="rodear-fila"><div class="rodear-num">60</div><div class="rodear-num">16</div></div>
+      <div class="rodear-fila"><div class="rodear-num">99</div><div class="rodear-num">89</div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Ordena de MAYOR a MENOR:</div>
+    <div class="ordenar-fila">
+      <div class="ordenar-numeros">2 · 7 · 5 · 9</div>
+      <div class="ordenar-cajas">
+        <div class="ordenar-caja"></div><div class="ordenar-caja"></div><div class="ordenar-caja"></div><div class="ordenar-caja"></div>
+      </div>
+    </div>
+    <div class="ordenar-fila">
+      <div class="ordenar-numeros">18 · 6 · 20 · 13</div>
+      <div class="ordenar-cajas">
+        <div class="ordenar-caja"></div><div class="ordenar-caja"></div><div class="ordenar-caja"></div><div class="ordenar-caja"></div>
+      </div>
+    </div>
+    <div class="ordenar-fila">
+      <div class="ordenar-numeros">50 · 35 · 60 · 28</div>
+      <div class="ordenar-cajas">
+        <div class="ordenar-caja"></div><div class="ordenar-caja"></div><div class="ordenar-caja"></div><div class="ordenar-caja"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> Escribe el número que FALTA en cada serie:</div>
+    <div class="serie-grid">
+      <div class="serie-fila"><div class="serie-num">1</div><div class="serie-num">2</div><div class="serie-caja"></div><div class="serie-num">4</div><div class="serie-num">5</div></div>
+      <div class="serie-fila"><div class="serie-num">7</div><div class="serie-num">8</div><div class="serie-num">9</div><div class="serie-caja"></div><div class="serie-num">11</div></div>
+      <div class="serie-fila"><div class="serie-num">15</div><div class="serie-num">16</div><div class="serie-caja"></div><div class="serie-num">18</div><div class="serie-num">19</div></div>
+      <div class="serie-fila"><div class="serie-num">28</div><div class="serie-caja"></div><div class="serie-num">30</div><div class="serie-num">31</div><div class="serie-num">32</div></div>
+      <div class="serie-fila"><div class="serie-num">49</div><div class="serie-num">50</div><div class="serie-num">51</div><div class="serie-caja"></div><div class="serie-num">53</div></div>
+      <div class="serie-fila"><div class="serie-num">76</div><div class="serie-num">77</div><div class="serie-num">78</div><div class="serie-num">79</div><div class="serie-caja"></div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
