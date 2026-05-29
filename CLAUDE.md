@@ -235,7 +235,12 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 **Decisión pendiente** al llegar a `tablas-de-multiplicar`: ¿solo 2/5/10 o también 3/4? Preguntar a Miguel entonces.
 
-**Arrancar por:** ~~`numeros`~~ ✅ hecho → **SIGUIENTE: bloque `operaciones`** → `sumas-con-llevada` → `ficha-1`.
+**Bloque `operaciones` de 2º — EN MARCHA:**
+- **`sumas-con-llevada` (4 fichas, en producción commit 2d1d1ec, 2026-05-29):** formato decidido por Miguel = **16 sumas verticales DU+DU por ficha, 4 por fila (rejilla 4×4), SIN explicaciones/Recuerda, con un círculo vacío sobre las decenas** para que el alumno anote la llevada. ficha-1 a ficha-4, números distintos. **Norma:** todas con llevada en unidades (U₁+U₂>9) y resultado ≤99 (una sola llevada U→D, sin acarreo a centenas). Generadas y verificadas dígito a dígito con script Python. CSS propio en `sumas-con-llevada/ficha-1.html` (clases `.sumas-grid`, `.op`, `.circ-fila`, `.circulo`, `.barra`).
+- **`restas-con-llevada` (4 fichas, 2026-05-29):** clonado del formato de sumas pero **SIN el círculo arriba** (decisión de Miguel: las restas igual que las sumas pero sin círculo). 16 restas verticales DU−DU por ficha, rejilla 4×4, números distintos. **Norma:** todas CON prestar (unidad del minuendo < unidad del sustraendo) y decena del minuendo > la del sustraendo → resultado positivo de 1-2 cifras. Verificadas dígito a dígito con script Python. El `<div class="circ-fila">` eliminado del cuerpo (la regla CSS `.circulo`/`.circ-fila` queda sin usar, inofensiva).
+- **⚠️ BUG corregido 2026-05-29:** el commit de sumas (2d1d1ec) subió las 4 fichas pero NO registró nada en `materiales.html` → la web no mostraba "Sumas con llevada" (sin entrada en `RECURSOS`, no aparece nada). Añadidas las entradas `matematicas|2|OPERACIONES|Sumas con llevada` y `…|Restas con llevada` (4 fichas cada una). **LECCIÓN: cada vez que se cierra un sub-bloque hay que registrar su entrada en `RECURSOS` de `materiales.html`, no solo subir las fichas.**
+
+**Arrancar por:** ~~`numeros`~~ ✅ → ~~`sumas-con-llevada`~~ ✅ (4 fichas) → ~~`restas-con-llevada`~~ ✅ (4 fichas) → **SIGUIENTE: `sumas-y-restas-mezcladas`** (operaciones DU±DU mezcladas con llevada/prestar; misma rejilla 4×4 de 16 operaciones, sin círculo).
 
 ---
 
