@@ -211,11 +211,18 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 ### Sub-bloques 2º Primaria — ACORDADO 2026-05-29 (EN MARCHA)
 
-Árbol acordado con Miguel el 2026-05-29. Mismos 6 bloques que 1º. Serie = 6 fichas de referencia (ajustable a la baja). **Ya alineado en `materiales.html`** (reemplazó la estructura antigua de 2 bloques). Sin fichas en disco todavía → "en preparación".
+Árbol acordado con Miguel el 2026-05-29. Mismos 6 bloques que 1º. Serie = 6 fichas de referencia. **DIRECTRIZ 2º (Miguel):** hacer MÁS fichas que en 1º (las de 2º se usan más) y RELLENAR la página entera con apartados generosos. Ya alineado en `materiales.html`.
+
+**Bloque `numeros` de 2º COMPLETO ✅ (21 fichas, cerrado 2026-05-29, en producción commit 57dce96):**
+- `numeros-hasta-1000` (6): CDU · leer/escribir · formar+descomponer · descomponer · material base 10 · repaso
+- `centenas-decenas-unidades` (3): equivalencias 1C=10D=100U, sumar/restar 10-100, valor posicional
+- `comparar-y-ordenar` (3): signo >,<,= · ordenar · mayor/menor hasta 1000
+- `pares-e-impares` (3) · `series-numericas` (3, de 2/5/10/50/100 asc-desc) · `numeros-ordinales` (3, 1º-20º)
+- **⚠️ NUNCA usar `class="dato"` en celdas `<td>`** (la plantilla la usa en el header con `display:flex` → apila las celdas y rompe la tabla; usar clase propia).
 
 | Bloque | Sub-bloques |
 |---|---|
-| `numeros` | numeros-hasta-1000 · centenas-decenas-unidades · comparar-y-ordenar · pares-e-impares · series-numericas · numeros-ordinales |
+| `numeros` ✅ | numeros-hasta-1000 · centenas-decenas-unidades · comparar-y-ordenar · pares-e-impares · series-numericas · numeros-ordinales |
 | `operaciones` | sumas-con-llevada · restas-con-llevada · sumas-y-restas-mezcladas · multiplicacion-concepto · tablas-de-multiplicar · doble-y-mitad |
 | `medida` | longitud-metro-centimetro · peso-y-capacidad · el-reloj-horas-y-media · monedas-y-billetes · calendario |
 | `geometria` | figuras-planas · cuerpos-geometricos · lineas-rectas-curvas-poligonales · simetria |
@@ -228,7 +235,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 **Decisión pendiente** al llegar a `tablas-de-multiplicar`: ¿solo 2/5/10 o también 3/4? Preguntar a Miguel entonces.
 
-**Arrancar por:** `numeros` → `numeros-hasta-1000` → `ficha-1`.
+**Arrancar por:** ~~`numeros`~~ ✅ hecho → **SIGUIENTE: bloque `operaciones`** → `sumas-con-llevada` → `ficha-1`.
 
 ---
 
