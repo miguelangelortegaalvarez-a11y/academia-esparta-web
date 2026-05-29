@@ -209,6 +209,27 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 > En 2º+ la cantidad de sub-bloques crece porque entra multiplicación, división informal, fracciones, problemas de dos operaciones, sumas/restas con llevada, etc. 1º es el curso con menos sub-bloques de toda Primaria.
 
+### Sub-bloques 2º Primaria — ACORDADO 2026-05-29 (EN MARCHA)
+
+Árbol acordado con Miguel el 2026-05-29. Mismos 6 bloques que 1º. Serie = 6 fichas de referencia (ajustable a la baja). **Ya alineado en `materiales.html`** (reemplazó la estructura antigua de 2 bloques). Sin fichas en disco todavía → "en preparación".
+
+| Bloque | Sub-bloques |
+|---|---|
+| `numeros` | numeros-hasta-1000 · centenas-decenas-unidades · comparar-y-ordenar · pares-e-impares · series-numericas · numeros-ordinales |
+| `operaciones` | sumas-con-llevada · restas-con-llevada · sumas-y-restas-mezcladas · multiplicacion-concepto · tablas-de-multiplicar · doble-y-mitad |
+| `medida` | longitud-metro-centimetro · peso-y-capacidad · el-reloj-horas-y-media · monedas-y-billetes · calendario |
+| `geometria` | figuras-planas · cuerpos-geometricos · lineas-rectas-curvas-poligonales · simetria |
+| `estadistica` | tablas-de-datos · graficos-de-barras · pictogramas |
+| `problemas` | problemas-suma-con-llevada · problemas-resta-con-prestar · problemas-multiplicacion · problemas-dos-operaciones · problemas-mixtos |
+
+**Estimación:** ~29 sub-bloques × 4-6 fichas ≈ 120-150 fichas.
+
+**Diferencia clave vs 1º:** en 2º SÍ entran sumas/restas CON llevada y CON prestar. Se reutiliza el CSS `.problema` y los componentes de operaciones; solo cambian los números.
+
+**Decisión pendiente** al llegar a `tablas-de-multiplicar`: ¿solo 2/5/10 o también 3/4? Preguntar a Miguel entonces.
+
+**Arrancar por:** `numeros` → `numeros-hasta-1000` → `ficha-1`.
+
 ---
 
 ## Contenido publicado

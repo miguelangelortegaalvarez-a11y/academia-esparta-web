@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Números hasta 1000 (práctica) · Centenas, decenas y unidades · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 14px; font-weight: 700; margin-bottom: 7px; line-height: 1.35; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ej 1: palabras -> cifra */
+    .pal-fila { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; margin-bottom: 9px; }
+    .pal-fila .palabra { flex: 1; }
+    .pal-fila .caja-cifra { width: 100px; height: 36px; border: 1.5px solid #000; border-radius: 6px; flex-shrink: 0; }
+
+    /* Ej 2: cifra -> palabras */
+    .leer-fila { display: flex; align-items: center; gap: 12px; margin-bottom: 11px; }
+    .leer-fila .num-grande { font-size: 24px; font-weight: 700; min-width: 60px; }
+    .leer-fila .linea-escribir { flex: 1; border-bottom: 1.5px solid #000; height: 22px; }
+
+    /* Ej 3: valor posicional */
+    .valor-fila { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; margin-bottom: 9px; flex-wrap: wrap; }
+    .valor-fila .num-marcado { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+    .valor-fila .num-marcado .destacado { text-decoration: underline; text-underline-offset: 3px; }
+    .valor-fila .caja-vale { width: 90px; height: 34px; border: 1.5px solid #000; border-radius: 6px; }
+
+    /* Ej 4: anterior y posterior */
+    .ap-tabla { border-collapse: collapse; }
+    .ap-tabla th, .ap-tabla td { border: 1.5px solid #000; text-align: center; }
+    .ap-tabla th { font-family: sans-serif; font-size: 11.5px; background: #f3f3f3; padding: 3px 8px; }
+    .ap-tabla td { height: 36px; width: 110px; font-size: 20px; font-weight: 700; }
+    .ap-tabla td.dado { background: #f3f3f3; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Números hasta 1000</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 Leer y escribir números</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe con cifras cada número:</div>
+    <div class="pal-fila"><span class="palabra">trescientos cuarenta y dos</span><div class="caja-cifra"></div></div>
+    <div class="pal-fila"><span class="palabra">seiscientos diez</span><div class="caja-cifra"></div></div>
+    <div class="pal-fila"><span class="palabra">ochocientos cinco</span><div class="caja-cifra"></div></div>
+    <div class="pal-fila"><span class="palabra">novecientos noventa y nueve</span><div class="caja-cifra"></div></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe cómo se lee cada número:</div>
+    <div class="leer-fila"><span class="num-grande">215</span><div class="linea-escribir"></div></div>
+    <div class="leer-fila"><span class="num-grande">480</span><div class="linea-escribir"></div></div>
+    <div class="leer-fila"><span class="num-grande">706</span><div class="linea-escribir"></div></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> ¿Cuánto vale la cifra <u>subrayada</u>?</div>
+    <div class="valor-fila"><span class="num-marcado"><span class="destacado">5</span>38</span><span>El 5 vale</span><div class="caja-vale"></div></div>
+    <div class="valor-fila"><span class="num-marcado">2<span class="destacado">7</span>4</span><span>El 7 vale</span><div class="caja-vale"></div></div>
+    <div class="valor-fila"><span class="num-marcado">86<span class="destacado">3</span></span><span>El 3 vale</span><div class="caja-vale"></div></div>
+    <div class="valor-fila"><span class="num-marcado"><span class="destacado">4</span>09</span><span>El 4 vale</span><div class="caja-vale"></div></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Escribe el número anterior y el posterior:</div>
+    <table class="ap-tabla">
+      <tr><th>Anterior</th><th>Número</th><th>Posterior</th></tr>
+      <tr><td></td><td class="dado">350</td><td></td></tr>
+      <tr><td></td><td class="dado">699</td><td></td></tr>
+      <tr><td></td><td class="dado">500</td><td></td></tr>
+      <tr><td></td><td class="dado">120</td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
