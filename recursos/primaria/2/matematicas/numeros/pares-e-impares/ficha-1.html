@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Números pares e impares · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 9px 14px; margin-bottom: 13px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 700; font-family: sans-serif; margin-bottom: 6px; }
+    .recuerda-cuerpo { font-size: 16px; line-height: 1.7; }
+    .recuerda-cuerpo b { font-size: 18px; }
+
+    .ej-block { margin-bottom: 9px; }
+    .ej-block:last-of-type { margin-bottom: 0; }
+    .ej-enunciado { font-size: 15px; font-weight: 700; margin-bottom: 9px; line-height: 1.3; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    .mosaico { display: flex; gap: 14px; flex-wrap: wrap; }
+    .mosaico .mn { font-size: 21px; font-weight: 700; border: 1.5px solid #000; border-radius: 8px; padding: 7px 16px; }
+
+    /* Tabla par/impar */
+    .pi-tabla { border-collapse: collapse; width: 100%; }
+    .pi-tabla th, .pi-tabla td { border: 1.5px solid #000; }
+    .pi-tabla th { font-family: sans-serif; font-size: 13px; background: #f3f3f3; padding: 5px 0; width: 50%; }
+    .pi-tabla td { height: 64px; vertical-align: top; }
+
+    /* Serie */
+    .serie-cajas { display: flex; gap: 8px; flex-wrap: wrap; font-size: 19px; font-weight: 700; }
+    .serie-cajas .caja-num { width: 54px; height: 40px; border: 1.5px solid #000; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .serie-cajas .caja-num.vacia { background: #fff; }
+    .serie-label { font-size: 13px; font-weight: 600; font-family: sans-serif; margin-bottom: 5px; }
+
+    /* Clasificar PAR/IMPAR (ejercicio 5) */
+    .clasif { display: flex; gap: 14px; flex-wrap: wrap; }
+    .clasif .item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .clasif .item .cnum { font-size: 21px; font-weight: 700; border: 1.5px solid #000; border-radius: 8px; padding: 7px 16px; }
+    .clasif .item .cresp { width: 100%; height: 30px; border: 1.5px solid #000; border-radius: 6px; }
+
+    .footer { margin-top: 14px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Pares e impares</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 Números pares e impares</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <div class="recuerda-cuerpo">
+      Un número es <b>PAR</b> si termina en <b>0, 2, 4, 6 u 8</b>.<br>
+      Un número es <b>IMPAR</b> si termina en <b>1, 3, 5, 7 o 9</b>.
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Rodea los números <b>PARES</b>:</div>
+    <div class="mosaico"><span class="mn">7</span><span class="mn">12</span><span class="mn">25</span><span class="mn">38</span><span class="mn">40</span><span class="mn">53</span><span class="mn">64</span><span class="mn">81</span><span class="mn">96</span></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Rodea los números <b>IMPARES</b>:</div>
+    <div class="mosaico"><span class="mn">10</span><span class="mn">17</span><span class="mn">23</span><span class="mn">34</span><span class="mn">49</span><span class="mn">52</span><span class="mn">65</span><span class="mn">70</span><span class="mn">88</span></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Clasifica estos números en la tabla: <b>14, 27, 50, 33, 68, 91, 46, 75</b></div>
+    <table class="pi-tabla">
+      <tr><th>PARES</th><th>IMPARES</th></tr>
+      <tr><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Completa las series:</div>
+    <div class="serie-label">Números pares (de 2 en 2):</div>
+    <div class="serie-cajas">
+      <div class="caja-num">0</div><div class="caja-num">2</div><div class="caja-num vacia"></div><div class="caja-num">6</div><div class="caja-num vacia"></div><div class="caja-num">10</div><div class="caja-num vacia"></div><div class="caja-num">14</div>
+    </div>
+    <div class="serie-label" style="margin-top:7px;">Números impares (de 2 en 2):</div>
+    <div class="serie-cajas">
+      <div class="caja-num">1</div><div class="caja-num">3</div><div class="caja-num vacia"></div><div class="caja-num">7</div><div class="caja-num vacia"></div><div class="caja-num">11</div><div class="caja-num vacia"></div><div class="caja-num">15</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> Escribe debajo de cada número si es <b>PAR</b> o <b>IMPAR</b>:</div>
+    <div class="clasif">
+      <div class="item"><span class="cnum">8</span><div class="cresp"></div></div>
+      <div class="item"><span class="cnum">15</span><div class="cresp"></div></div>
+      <div class="item"><span class="cnum">26</span><div class="cresp"></div></div>
+      <div class="item"><span class="cnum">39</span><div class="cresp"></div></div>
+      <div class="item"><span class="cnum">42</span><div class="cresp"></div></div>
+      <div class="item"><span class="cnum">57</span><div class="cresp"></div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

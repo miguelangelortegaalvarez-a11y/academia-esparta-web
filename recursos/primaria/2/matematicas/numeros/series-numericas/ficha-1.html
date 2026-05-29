@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Series numéricas · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 9px 14px; margin-bottom: 12px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 700; font-family: sans-serif; margin-bottom: 5px; }
+    .recuerda-cuerpo { font-size: 15px; line-height: 1.55; }
+    .recuerda-cuerpo b { font-size: 17px; }
+
+    .ej-block { margin-bottom: 12px; }
+    .ej-enunciado { font-size: 15px; font-weight: 700; margin-bottom: 7px; line-height: 1.3; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    .serie-cajas { display: flex; gap: 8px; flex-wrap: wrap; font-size: 18px; font-weight: 700; align-items: center; }
+    .serie-cajas .caja-num { width: 58px; height: 42px; border: 1.5px solid #000; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .serie-cajas .caja-num.vacia { background: #fff; }
+    .serie-cajas .salto { font-size: 13px; font-family: sans-serif; }
+    .serie-label { font-size: 13px; font-weight: 600; font-family: sans-serif; margin-bottom: 4px; }
+    .serie-block { margin-bottom: 9px; }
+
+    /* ¿cuánto aumenta? */
+    .salto-fila { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 18px; font-weight: 700; margin-bottom: 9px; }
+    .salto-fila .caja-num { width: 56px; height: 40px; border: 1.5px solid #000; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: #f3f3f3; }
+    .salto-fila .resp { margin-left: 8px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .salto-fila .resp .caja-salto { width: 60px; height: 40px; border: 1.5px solid #000; border-radius: 6px; }
+
+    .footer { margin-top: 8px; padding-top: 6px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Series numéricas</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔁 Series numéricas</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <div class="recuerda-cuerpo">
+      En una serie sumamos siempre la <b>misma cantidad</b> para pasar de un número al siguiente.<br>
+      Ejemplo (de 2 en 2): 2 → 4 → 6 → 8 → 10…
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Completa las series:</div>
+    <div class="serie-block">
+      <div class="serie-label">De 2 en 2:</div>
+      <div class="serie-cajas"><div class="caja-num">10</div><div class="caja-num">12</div><div class="caja-num vacia"></div><div class="caja-num">16</div><div class="caja-num vacia"></div><div class="caja-num">20</div><div class="caja-num vacia"></div></div>
+    </div>
+    <div class="serie-block">
+      <div class="serie-label">De 5 en 5:</div>
+      <div class="serie-cajas"><div class="caja-num">5</div><div class="caja-num">10</div><div class="caja-num vacia"></div><div class="caja-num">20</div><div class="caja-num vacia"></div><div class="caja-num">30</div><div class="caja-num vacia"></div></div>
+    </div>
+    <div class="serie-block">
+      <div class="serie-label">De 10 en 10:</div>
+      <div class="serie-cajas"><div class="caja-num">30</div><div class="caja-num">40</div><div class="caja-num vacia"></div><div class="caja-num">60</div><div class="caja-num vacia"></div><div class="caja-num">80</div><div class="caja-num vacia"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> ¿Cuánto aumenta cada serie? Escribe el salto:</div>
+    <div class="salto-fila"><div class="caja-num">3</div><div class="caja-num">6</div><div class="caja-num">9</div><div class="caja-num">12</div><span class="resp">aumenta de <div class="caja-salto"></div> en cada paso</span></div>
+    <div class="salto-fila"><div class="caja-num">20</div><div class="caja-num">25</div><div class="caja-num">30</div><div class="caja-num">35</div><span class="resp">aumenta de <div class="caja-salto"></div> en cada paso</span></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Continúa la serie escribiendo los <b>3 números</b> siguientes:</div>
+    <div class="serie-block">
+      <div class="serie-label">De 10 en 10:</div>
+      <div class="serie-cajas"><div class="caja-num">100</div><div class="caja-num">110</div><div class="caja-num">120</div><div class="caja-num vacia"></div><div class="caja-num vacia"></div><div class="caja-num vacia"></div></div>
+    </div>
+    <div class="serie-block">
+      <div class="serie-label">De 100 en 100:</div>
+      <div class="serie-cajas"><div class="caja-num">200</div><div class="caja-num">300</div><div class="caja-num">400</div><div class="caja-num vacia"></div><div class="caja-num vacia"></div><div class="caja-num vacia"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Completa estas series que <b>bajan</b> (van restando):</div>
+    <div class="serie-block">
+      <div class="serie-label">De 2 en 2 hacia atrás:</div>
+      <div class="serie-cajas"><div class="caja-num">20</div><div class="caja-num">18</div><div class="caja-num vacia"></div><div class="caja-num">14</div><div class="caja-num vacia"></div><div class="caja-num">10</div><div class="caja-num vacia"></div></div>
+    </div>
+    <div class="serie-block">
+      <div class="serie-label">De 10 en 10 hacia atrás:</div>
+      <div class="serie-cajas"><div class="caja-num">90</div><div class="caja-num">80</div><div class="caja-num vacia"></div><div class="caja-num">60</div><div class="caja-num vacia"></div><div class="caja-num">40</div><div class="caja-num vacia"></div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

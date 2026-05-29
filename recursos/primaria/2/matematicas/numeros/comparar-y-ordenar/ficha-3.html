@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparar y ordenar (repaso) · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    .ej-block { margin-bottom: 11px; }
+    .ej-enunciado { font-size: 14px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ej 1: signo */
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 36px; }
+    .comp-fila { display: flex; align-items: center; gap: 10px; justify-content: center; }
+    .comp-fila .cn { font-size: 20px; font-weight: 700; border: 1.5px solid #000; border-radius: 6px; padding: 4px 12px; min-width: 70px; text-align: center; }
+    .comp-fila .caja-sg { width: 44px; height: 38px; border: 1.5px solid #000; border-radius: 6px; }
+
+    /* Ej 2-3: ordenar */
+    .ordenar-bloque { margin-bottom: 10px; }
+    .banco { display: flex; gap: 9px; margin-bottom: 8px; flex-wrap: wrap; }
+    .banco .bn { font-size: 18px; font-weight: 700; border: 1.5px dashed #000; border-radius: 8px; padding: 5px 13px; background: #f3f3f3; }
+    .huecos { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+    .huecos .hueco-caja { width: 72px; height: 36px; border: 1.5px solid #000; border-radius: 8px; }
+    .huecos .flecha { font-size: 17px; font-family: sans-serif; }
+
+    /* Ej 5: rodear */
+    .grupo-fila { display: flex; gap: 16px; margin-bottom: 9px; }
+    .grupo-fila .gn { font-size: 20px; font-weight: 700; border: 1.5px solid #000; border-radius: 8px; padding: 5px 16px; }
+
+    /* Ej 4: V/F */
+    .vf-fila { display: flex; align-items: center; gap: 12px; font-size: 14.5px; font-weight: 600; margin-bottom: 8px; }
+    .vf-fila .frase { flex: 1; line-height: 1.3; }
+    .vf-opts { display: flex; gap: 10px; flex-shrink: 0; }
+    .vf-opts .vf { width: 30px; height: 30px; border: 1.5px solid #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Comparar y ordenar</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 Repaso: comparar y ordenar</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe el signo &gt;, &lt; o = en cada recuadro:</div>
+    <div class="comp-grid">
+      <div class="comp-fila"><span class="cn">263</span><div class="caja-sg"></div><span class="cn">236</span></div>
+      <div class="comp-fila"><span class="cn">580</span><div class="caja-sg"></div><span class="cn">580</span></div>
+      <div class="comp-fila"><span class="cn">419</span><div class="caja-sg"></div><span class="cn">491</span></div>
+      <div class="comp-fila"><span class="cn">905</span><div class="caja-sg"></div><span class="cn">950</span></div>
+      <div class="comp-fila"><span class="cn">700</span><div class="caja-sg"></div><span class="cn">699</span></div>
+      <div class="comp-fila"><span class="cn">348</span><div class="caja-sg"></div><span class="cn">348</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Ordena de <b>menor a mayor</b>. Usa los números del banco:</div>
+    <div class="ordenar-bloque">
+      <div class="banco"><span class="bn">615</span><span class="bn">156</span><span class="bn">561</span><span class="bn">165</span><span class="bn">516</span></div>
+      <div class="huecos"><div class="hueco-caja"></div><span class="flecha">&lt;</span><div class="hueco-caja"></div><span class="flecha">&lt;</span><div class="hueco-caja"></div><span class="flecha">&lt;</span><div class="hueco-caja"></div><span class="flecha">&lt;</span><div class="hueco-caja"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Ordena de <b>mayor a menor</b>. Usa los números del banco:</div>
+    <div class="ordenar-bloque">
+      <div class="banco"><span class="bn">240</span><span class="bn">420</span><span class="bn">204</span><span class="bn">402</span><span class="bn">224</span></div>
+      <div class="huecos"><div class="hueco-caja"></div><span class="flecha">&gt;</span><div class="hueco-caja"></div><span class="flecha">&gt;</span><div class="hueco-caja"></div><span class="flecha">&gt;</span><div class="hueco-caja"></div><span class="flecha">&gt;</span><div class="hueco-caja"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Rodea <b>V</b> si es verdadero o <b>F</b> si es falso:</div>
+    <div class="vf-fila"><span class="frase">453 es mayor que 435.</span><div class="vf-opts"><div class="vf">V</div><div class="vf">F</div></div></div>
+    <div class="vf-fila"><span class="frase">700 es menor que 699.</span><div class="vf-opts"><div class="vf">V</div><div class="vf">F</div></div></div>
+    <div class="vf-fila"><span class="frase">El número 380 está entre 300 y 400.</span><div class="vf-opts"><div class="vf">V</div><div class="vf">F</div></div></div>
+    <div class="vf-fila"><span class="frase">520 = 502.</span><div class="vf-opts"><div class="vf">V</div><div class="vf">F</div></div></div>
+    <div class="vf-fila"><span class="frase">El mayor número de 3 cifras es 999.</span><div class="vf-opts"><div class="vf">V</div><div class="vf">F</div></div></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> Rodea el número <b>mayor</b> de cada grupo:</div>
+    <div class="grupo-fila"><span class="gn">347</span><span class="gn">374</span><span class="gn">437</span></div>
+    <div class="grupo-fila"><span class="gn">820</span><span class="gn">802</span><span class="gn">880</span></div>
+    <div class="grupo-fila"><span class="gn">519</span><span class="gn">591</span><span class="gn">509</span></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Repaso superado!</span>
+  </div>
+</body>
+</html>

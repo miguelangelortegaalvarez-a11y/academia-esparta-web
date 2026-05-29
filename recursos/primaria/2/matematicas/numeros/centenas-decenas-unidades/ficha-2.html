@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valor posicional y equivalencias (práctica) · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    .ej-block { margin-bottom: 9px; }
+    .ej-enunciado { font-size: 14px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ej 1: equivalencias en 2 columnas */
+    .equiv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 30px; }
+    .equiv-fila { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; }
+    .equiv-fila .pieza { white-space: nowrap; }
+    .equiv-fila .caja-eq { width: 52px; height: 32px; border: 1.5px solid #000; border-radius: 6px; flex-shrink: 0; }
+
+    /* Ej 2: tabla operaciones */
+    .op-tabla { border-collapse: collapse; }
+    .op-tabla th, .op-tabla td { border: 1.5px solid #000; text-align: center; }
+    .op-tabla th { font-family: sans-serif; font-size: 12px; background: #f3f3f3; padding: 3px 0; width: 95px; }
+    .op-tabla td { height: 34px; font-size: 19px; font-weight: 700; }
+    .op-tabla td.op-dado { background: #f3f3f3; }
+
+    /* Ej 3: rodear donde vale más */
+    .masvale-fila { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 600; margin-bottom: 7px; flex-wrap: wrap; }
+    .masvale-fila .pista { min-width: 150px; }
+    .masvale-fila .op { border: 1.5px solid #000; border-radius: 8px; padding: 5px 16px; font-size: 20px; font-weight: 700; }
+
+    /* Ej 4: posición de la cifra */
+    .pos-fila { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; margin-bottom: 7px; flex-wrap: wrap; }
+    .pos-fila .num-marcado { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+    .pos-fila .num-marcado .destacado { text-decoration: underline; text-underline-offset: 3px; }
+    .pos-fila .caja-pos { width: 130px; height: 34px; border: 1.5px solid #000; border-radius: 6px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Centenas, decenas y unidades</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 Equivalencias y valor de las cifras</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Completa las equivalencias:</div>
+    <div class="equiv-grid">
+      <div class="equiv-fila"><span class="pieza">300 unidades =</span><div class="caja-eq"></div><span class="pieza">centenas</span></div>
+      <div class="equiv-fila"><span class="pieza">40 unidades =</span><div class="caja-eq"></div><span class="pieza">decenas</span></div>
+      <div class="equiv-fila"><span class="pieza">200 unidades =</span><div class="caja-eq"></div><span class="pieza">decenas</span></div>
+      <div class="equiv-fila"><span class="pieza">600 unidades =</span><div class="caja-eq"></div><span class="pieza">centenas</span></div>
+      <div class="equiv-fila"><span class="pieza">70 unidades =</span><div class="caja-eq"></div><span class="pieza">decenas</span></div>
+      <div class="equiv-fila"><span class="pieza">500 unidades =</span><div class="caja-eq"></div><span class="pieza">centenas</span></div>
+      <div class="equiv-fila"><span class="pieza">90 unidades =</span><div class="caja-eq"></div><span class="pieza">decenas</span></div>
+      <div class="equiv-fila"><span class="pieza">800 unidades =</span><div class="caja-eq"></div><span class="pieza">centenas</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Completa la tabla sumando o restando:</div>
+    <table class="op-tabla">
+      <tr><th>Número</th><th>+ 100</th><th>− 100</th><th>− 1</th></tr>
+      <tr><td class="op-dado">348</td><td></td><td></td><td></td></tr>
+      <tr><td class="op-dado">516</td><td></td><td></td><td></td></tr>
+      <tr><td class="op-dado">270</td><td></td><td></td><td></td></tr>
+      <tr><td class="op-dado">609</td><td></td><td></td><td></td></tr>
+      <tr><td class="op-dado">453</td><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Rodea el número donde la cifra indicada <b>vale más</b>:</div>
+    <div class="masvale-fila"><span class="pista">El <b>5</b> vale más en…</span><span class="op">500</span><span class="op">250</span></div>
+    <div class="masvale-fila"><span class="pista">El <b>8</b> vale más en…</span><span class="op">800</span><span class="op">180</span></div>
+    <div class="masvale-fila"><span class="pista">El <b>3</b> vale más en…</span><span class="op">730</span><span class="op">300</span></div>
+    <div class="masvale-fila"><span class="pista">El <b>6</b> vale más en…</span><span class="op">460</span><span class="op">640</span></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> ¿En qué posición está la cifra <u>subrayada</u>? Escribe «centenas», «decenas» o «unidades»:</div>
+    <div class="pos-fila"><span class="num-marcado"><span class="destacado">3</span>50</span><span>está en las</span><div class="caja-pos"></div></div>
+    <div class="pos-fila"><span class="num-marcado">4<span class="destacado">3</span>7</span><span>está en las</span><div class="caja-pos"></div></div>
+    <div class="pos-fila"><span class="num-marcado">81<span class="destacado">3</span></span><span>está en las</span><div class="caja-pos"></div></div>
+    <div class="pos-fila"><span class="num-marcado">9<span class="destacado">0</span>6</span><span>está en las</span><div class="caja-pos"></div></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
