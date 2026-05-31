@@ -1616,13 +1616,36 @@
         padding: 5rem 1.5rem 4.5rem;
       }
 
+      /* Capa foto (recibe Ken Burns + parallax) con overscan vertical */
+      .hp-bg-photo {
+        position: absolute;
+        inset: -15% 0;
+        z-index: 0;
+        overflow: hidden;
+        will-change: transform;
+      }
+      .hp-bg-photo-zoom {
+        position: absolute;
+        inset: 0;
+        background: url('hero.jpg') center center / cover no-repeat;
+        animation: hp-kenburns 24s ease-in-out infinite alternate;
+        will-change: transform;
+      }
+      @keyframes hp-kenburns {
+        from { transform: scale(1.05) translate(0, 0); }
+        to   { transform: scale(1.22) translate(-2.5%, -2%); }
+      }
+      /* Capa degradado (encima de la foto, fija — mantiene legibilidad constante) */
       .hp-bg-img {
         position: absolute;
         inset: 0;
         background:
-          linear-gradient(180deg, rgba(6,78,59,0.93) 0%, rgba(6,78,59,0.97) 100%),
-          url('hero.jpg') center center / cover no-repeat;
-        z-index: 0;
+          linear-gradient(180deg,
+            rgba(6,78,59,0.66) 0%,
+            rgba(6,78,59,0.42) 32%,
+            rgba(5,58,44,0.72) 72%,
+            rgba(3,37,25,0.94) 100%);
+        z-index: 1;
       }
       /* Overlay legacy ya no se usa (todo va en .hp-bg-img) pero por si acaso */
       .hp-bg-overlay { display: none; }
@@ -1677,12 +1700,86 @@
         z-index: 3;
       }
 
+      /* Grano fílmico sobre la foto — textura sutil, da empaque editorial */
+      .hp-grain {
+        position: absolute; inset: 0;
+        pointer-events: none;
+        z-index: 4;
+        opacity: 0.07;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 180px 180px;
+      }
+
+      /* Chip de reseñas en el hero — prueba social bajo los CTA */
+      .hp-reviews {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.5rem 1rem 0.5rem 0.85rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(8px);
+        font-family: 'Poppins', sans-serif;
+      }
+      .hp-reviews-stars {
+        display: inline-flex;
+        gap: 1px;
+        color: #fbbf24;
+      }
+      .hp-reviews-text {
+        font-size: 0.82rem;
+        color: rgba(236,253,245,0.9);
+        font-weight: 500;
+      }
+      .hp-reviews-text strong { font-weight: 700; color: #fff; }
+      .hp-reviews-text span { color: rgba(236,253,245,0.6); font-weight: 400; }
+      .hp-reviews-text {
+        transition: opacity 0.4s ease;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 78vw;
+      }
+      .hp-reviews-text.is-swapping { opacity: 0; }
+
       .hp-inner {
         position: relative;
         z-index: 10;
         max-width: 980px;
         margin: 0 auto;
         text-align: center;
+      }
+
+      /* Entrada escalonada del hero (sustituye al splash) */
+      @keyframes hp-enter {
+        from { opacity: 0; transform: translateY(26px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .hp-badge,
+      .hp-title,
+      .hp-lead,
+      .hp-cta-row,
+      .hp-reviews {
+        opacity: 0;
+        animation: hp-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .hp-badge   { animation-delay: 0.15s; }
+      .hp-title   { animation-delay: 0.35s; }
+      .hp-lead    { animation-delay: 0.60s; }
+      .hp-cta-row { animation-delay: 0.85s; }
+      .hp-reviews { animation-delay: 1.05s; }
+      @keyframes hp-fade {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hp-badge, .hp-title, .hp-lead, .hp-cta-row, .hp-reviews, .hp-scroll-cue {
+          opacity: 1;
+          animation: none;
+        }
+        .hp-bg-photo-zoom { animation: none; }
       }
 
       .hp-badge {
@@ -1728,6 +1825,14 @@
         font-style: italic;
         font-weight: 400;
         color: #4ade80;
+      }
+      .hp-rotate {
+        display: inline-block;
+        transition: opacity 0.35s ease, transform 0.35s ease;
+      }
+      .hp-rotate.is-swapping {
+        opacity: 0;
+        transform: translateY(8px);
       }
 
       .hp-lead {
@@ -1811,6 +1916,8 @@
         bottom: 2rem;
         left: 50%;
         transform: translateX(-50%);
+        opacity: 0;
+        animation: hp-fade 0.9s ease 1.3s forwards;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -2934,20 +3041,6 @@
 </head>
   <body>
 
-    <!-- SPLASH SCREEN -->
-    <div id="splash">
-      <div class="splash-content">
-        <div class="splash-title">Academia Esparta</div>
-        <div class="splash-divider">
-          <div class="splash-divider-line"></div>
-          <div class="splash-divider-dot"></div>
-          <div class="splash-divider-line"></div>
-        </div>
-        <div class="splash-phrase" id="splashPhrase"></div>
-      </div>
-      <div class="splash-tagline">Desde 2011 &middot; Academia de Refuerzo &middot; Torremolinos, M&aacute;laga</div>
-    </div>
-
     <!-- ==================== HEADER ==================== -->
     <header class="header over-hero">
       <div class="logo">Academia Esparta</div>
@@ -2973,11 +3066,13 @@
 
     <!-- ==================== HERO PREMIUM ==================== -->
     <section id="hero" class="hero-premium">
+      <div class="hp-bg-photo" aria-hidden="true"><div class="hp-bg-photo-zoom"></div></div>
       <div class="hp-bg-img" aria-hidden="true"></div>
       <div class="hp-bg-overlay" aria-hidden="true"></div>
       <div class="hp-aurora hp-a1" aria-hidden="true"></div>
       <div class="hp-aurora hp-a2" aria-hidden="true"></div>
       <div class="hp-aurora hp-a3" aria-hidden="true"></div>
+      <div class="hp-grain" aria-hidden="true"></div>
       <div class="hp-vignette" aria-hidden="true"></div>
 
       <div class="hp-inner">
@@ -2987,8 +3082,8 @@
         </div>
 
         <h1 class="hp-title">
-          Tu hijo puede mejorar sus notas<br>
-          y <em>ganar seguridad</em>.
+          Tu hijo puede<br>
+          <em class="hp-rotate" id="hpRotate">mejorar sus notas</em>.
         </h1>
 
         <p class="hp-lead">
@@ -3009,6 +3104,19 @@
             </svg>
             Escríbenos por WhatsApp
           </a>
+        </div>
+
+        <div class="hp-reviews">
+          <span class="hp-reviews-stars" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </span>
+          <span class="hp-reviews-text">
+            <strong>4,9</strong> <span>·</span> 63 reseñas en Google
+          </span>
         </div>
       </div>
 
@@ -3729,51 +3837,6 @@
         }, speed);
       }
 
-      // ── Splash Matrix + Hero typewriter ──
-      (function() {
-        document.body.classList.add('splashing');
-
-        const splash       = document.getElementById('splash');
-        const splashPhrase = document.getElementById('splashPhrase');
-
-        function exitSplash() {
-          splash.classList.add('out');
-          document.querySelectorAll('body > *:not(#splash)').forEach(el => {
-            el.style.transition = 'opacity 0.9s ease';
-            el.style.opacity = '1';
-          });
-          document.body.classList.remove('splashing');
-          setTimeout(() => splash.remove(), 900);
-        }
-
-        // Título revela de izq a dcha por CSS (0.4s delay + 1.0s duración = 1.4s)
-        // Divider aparece a 1.6s
-        setTimeout(() => {
-          splash.querySelector('.splash-divider').classList.add('show');
-        }, 1600);
-
-        // Frase typewriter arranca a 2.1s
-        setTimeout(() => {
-          splashPhrase.style.opacity = '1';
-          const text = 'El esfuerzo de hoy es el resultado de mañana';
-          let i = 0;
-          const cursor = document.createElement('span');
-          cursor.className = 'splash-text-cursor';
-          splashPhrase.appendChild(cursor);
-          function tick() {
-            if (i < text.length) {
-              cursor.before(document.createTextNode(text[i++]));
-              setTimeout(tick, 48);
-            } else {
-              const tagline = splash.querySelector('.splash-tagline');
-              if (tagline) tagline.classList.add('show');
-              setTimeout(() => { cursor.remove(); setTimeout(exitSplash, 900); }, 1300);
-            }
-          }
-          tick();
-        }, 2100);
-      })();
-
       // ESO Navigator
       function irASeccionEso(idSeccion, info = '') {
         document.querySelectorAll('.resource-section-eso').forEach(s => s.classList.remove('active'));
@@ -3943,6 +4006,73 @@
             updateDots();
           }, 200);
         });
+      })();
+    </script>
+
+    <!-- ==================== HERO DINÁMICO ==================== -->
+    <script>
+      (function () {
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // 1) Titular rotativo
+        var rotate = document.getElementById('hpRotate');
+        if (rotate && !reduce) {
+          var palabras = [
+            'mejorar sus notas',
+            'ganar seguridad',
+            'subir su nota media',
+            'aprobar la EBAU',
+            'recuperar el curso'
+          ];
+          var i = 0;
+          setInterval(function () {
+            i = (i + 1) % palabras.length;
+            rotate.classList.add('is-swapping');
+            setTimeout(function () {
+              rotate.textContent = palabras[i];
+              rotate.classList.remove('is-swapping');
+            }, 350);
+          }, 2800);
+        }
+
+        // 2) Chip de reseñas rotativa (testimonios reales de Google)
+        var rev = document.getElementById('hpReviewsText');
+        if (rev && !reduce) {
+          var reseñas = [
+            '<strong>4,9</strong> <span>·</span> 63 reseñas en Google',
+            '“Mis niñas tienen notas de 10” <span>· Luz Marina</span>',
+            '“Han mejorado muchísimo” <span>· Rocío V.</span>',
+            '“Explican con calma y amabilidad” <span>· Lucía M.</span>',
+            '“La mejor academia para apoyo” <span>· Marta C.</span>'
+          ];
+          var r = 0;
+          setInterval(function () {
+            r = (r + 1) % reseñas.length;
+            rev.classList.add('is-swapping');
+            setTimeout(function () {
+              rev.innerHTML = reseñas[r];
+              rev.classList.remove('is-swapping');
+            }, 400);
+          }, 4000);
+        }
+
+        // 3) Parallax suave de la foto del hero
+        var photo = document.querySelector('.hp-bg-photo');
+        var hero = document.getElementById('hero');
+        if (photo && hero && !reduce) {
+          var ticking = false;
+          window.addEventListener('scroll', function () {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(function () {
+              var y = window.scrollY || window.pageYOffset;
+              if (y < hero.offsetHeight) {
+                photo.style.transform = 'translateY(' + (y * 0.12) + 'px)';
+              }
+              ticking = false;
+            });
+          }, { passive: true });
+        }
       })();
     </script>
   </body>
