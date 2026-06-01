@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La multiplicación · El orden no cambia el resultado · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 9px 13px; margin-bottom: 13px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 700; font-family: sans-serif; margin-bottom: 7px; }
+    .rec-cuerpo { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .rec-texto { font-size: 14px; line-height: 1.5; }
+    .rec-texto b { font-size: 17px; }
+    .rec-op { font-size: 19px; font-weight: 700; font-family: sans-serif; white-space: nowrap; }
+    .rec-op .x { font-size: 21px; }
+
+    .grupos { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+    .grupo { border: 1.6px dashed #000; border-radius: 12px; padding: 9px 11px; display: grid; gap: 7px; justify-content: center; }
+    .grupo .row { display: flex; gap: 7px; }
+    .punto { width: 15px; height: 15px; border-radius: 50%; background: #000; }
+    .grupos .mas-g { font-size: 22px; font-weight: 800; font-family: sans-serif; }
+    .grupo-vacio { border: 1.6px dashed #000; border-radius: 12px; width: 124px; height: 58px; }
+
+    .rejilla { display: inline-grid; gap: 9px; border: 1.6px solid #000; border-radius: 10px; padding: 11px 13px; }
+    .rejilla .punto { width: 14px; height: 14px; }
+    .rejillas-fila { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; margin-bottom: 6px; }
+
+    .ej-block { margin-bottom: 14px; }
+    .ej-enunciado { font-size: 14px; font-weight: 700; margin-bottom: 8px; line-height: 1.35; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    .resp-fila { display: flex; align-items: center; gap: 7px; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 9px; flex-wrap: wrap; }
+    .caja { width: 42px; height: 36px; border: 1.6px solid #000; border-radius: 6px; display: inline-block; }
+    .caja.res { width: 54px; }
+    .resp-fila .sep { font-size: 18px; }
+    .resp-fila .lead { min-width: 122px; font-size: 17px; }
+    .resp-fila.ejemplo { background: #ededed; border-radius: 7px; padding: 4px 11px; display: inline-flex; }
+    .resp-fila.ejemplo .et { font-size: 11.5px; font-family: sans-serif; font-weight: 700; margin-right: 4px; }
+    .pista { font-family: sans-serif; font-size: 11.5px; font-weight: 600; color: #555; margin: -3px 0 8px; }
+    .dos-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · La multiplicación</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✖️ El orden no cambia el resultado</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <div class="rec-cuerpo">
+      <div class="rejilla" style="grid-template-columns: repeat(5, 14px);"><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div></div>
+      <div class="rec-texto">
+        La misma rejilla se puede leer de dos formas:<br>
+        <span class="rec-op">2 <span class="x">×</span> 5 = 10</span> &nbsp;y&nbsp; <span class="rec-op">5 <span class="x">×</span> 2 = 10</span><br>
+        <b>El orden no cambia el resultado.</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe la misma rejilla como dos multiplicaciones:</div>
+    <div class="rejillas-fila"><div class="rejilla" style="grid-template-columns: repeat(4, 14px);"><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div></div>
+      <div>
+        <div class="resp-fila"><div class="caja"></div><span class="sep">×</span><div class="caja"></div><span class="sep">=</span><div class="caja res"></div></div>
+        <div class="resp-fila" style="margin:0"><div class="caja"></div><span class="sep">×</span><div class="caja"></div><span class="sep">=</span><div class="caja res"></div></div>
+      </div>
+      <div class="rejilla" style="grid-template-columns: repeat(6, 14px);"><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div><div class="punto"></div></div>
+      <div>
+        <div class="resp-fila"><div class="caja"></div><span class="sep">×</span><div class="caja"></div><span class="sep">=</span><div class="caja res"></div></div>
+        <div class="resp-fila" style="margin:0"><div class="caja"></div><span class="sep">×</span><div class="caja"></div><span class="sep">=</span><div class="caja res"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Completa para que las dos multiplicaciones den lo mismo:</div>
+    <div class="dos-col">
+      <div class="resp-fila"><span class="lead" style="min-width:0">3 × 6 = 6 ×</span><div class="caja"></div></div>
+      <div class="resp-fila"><span class="lead" style="min-width:0">4 × 2 =</span><div class="caja"></div><span class="sep">× 4</span></div>
+      <div class="resp-fila"><span class="lead" style="min-width:0">5 × 7 = 7 ×</span><div class="caja"></div></div>
+      <div class="resp-fila"><span class="lead" style="min-width:0">8 ×</span><div class="caja"></div><span class="sep">= 9 × 8</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Calcula las dos y comprueba que dan el mismo resultado:</div>
+    <div class="dos-col">
+      <div class="resp-fila"><span class="lead" style="min-width:0">2 × 8 =</span><div class="caja res"></div><span style="margin:0 10px">y</span><span class="lead" style="min-width:0">8 × 2 =</span><div class="caja res"></div></div>
+      <div class="resp-fila"><span class="lead" style="min-width:0">3 × 5 =</span><div class="caja res"></div><span style="margin:0 10px">y</span><span class="lead" style="min-width:0">5 × 3 =</span><div class="caja res"></div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">✏️ ¡A por todas!</span>
+  </div>
+</body>
+</html>
