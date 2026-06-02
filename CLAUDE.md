@@ -118,6 +118,24 @@ academia-esparta-web/
 
 ---
 
+## Estado técnico / auditoría web (2026-06-02)
+
+Auditoría profunda + optimizaciones (3 commits: `ee102d0`, `0bdfdfe`, `326c1d0`). Detalle en memoria `project-web-auditoria-optimizacion`.
+
+**Hecho:**
+- **Reseñas Google 63 → 64** en 5 sitios (index.html: chip hero, contador `data-target`, label rating, chip rotativo JS; + `como-elegir-academia-torremolinos.html`).
+- **153 botones "← Volver" rotos (404) arreglados** — eran error de plantilla (mal número de `../`): Lengua necesita 5 niveles `../../../../../materiales.html`, Mates 6 niveles `../../../../../../materiales.html`. Verificar SIEMPRE al crear plantilla nueva.
+- **Índice `conciencia-fonologica`** reescrito: 8 cards inventadas → 5 fichas reales.
+- **Rendimiento:** imágenes recomprimidas con `sips` (~1,5 MB ahorrados: hero 914→359 KB, Logo 371→98 KB, etc.) + `preload`/`fetchpriority` del hero + `preconnect` a fuentes. El hero es **background-image CSS** (por eso disparaba el LCP).
+- **`aggregateRating` 4,9 · 64** en JSON-LD (estrellas Google). Caveat: Google puede no mostrar estrellas de reseñas autodeclaradas sin widget.
+- Meta description en `inscripcion.html`.
+
+**Foto técnica:** HTTPS ✅, SEO 100/100, 0 enlaces/recursos rotos, todas las imágenes con `alt`, Umami **sin cookies** (no necesita banner RGPD), web pública **sin `<form>`** (inscripción → `shadow.academiaesparta.es`, contacto por WhatsApp).
+
+**Pendiente (rendimiento):** aligerar fuentes (3 familias) + Font Awesome (con cuidado, no romper diseño); WebP (falta cwebp/imagemagick en la máquina); cabeceras de seguridad 0/4 (GitHub Pages no las permite → opcional Cloudflare delante, no urgente).
+
+---
+
 ## Sistema visual premium
 
 Refundición del 13/05/2026. Documentación completa en `DISENO.md`.
