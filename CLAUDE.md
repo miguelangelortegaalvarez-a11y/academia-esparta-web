@@ -305,11 +305,12 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 - **Total:** ~820 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
-- 4 artículos publicados, todos con enlaces internos a fichas (2026-05-24):
+- 5 artículos publicados, casi todos con enlaces internos a fichas:
   - `como-elegir-academia-torremolinos.html` (sin enlaces — artículo comercial puro)
   - `como-ayudar-comprension-lectora-primaria.html` (11 enlaces a fichas)
   - `tecnicas-de-estudio-primaria.html` (5 enlaces a fichas)
   - `como-trabajar-ortografia-primaria.html` (9 enlaces a fichas)
+  - `como-ayudar-matematicas-primaria.html` (2026-06-04, commit 9ca66b7, 18 enlaces a fichas de mates 1º-2º — primer artículo de mates; 3 pilares número/cálculo/problemas; enlaza a psicología por discalculia)
 
 ### Páginas de servicio
 - Logopedia · Psicología · Quiénes somos — en sistema premium, con JSON-LD
