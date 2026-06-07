@@ -2787,13 +2787,124 @@
         font-size: 0.92rem !important;
         margin-bottom: 0 !important;
       }
+      /* Contenedor 3D: el mapa flota como un panel que se inclina */
+      .contact-premium .contact-grid { perspective: 1200px; }
       .contact-premium .contact-map {
+        position: relative;
         border-radius: 18px !important;
         overflow: hidden;
-        border: 1px solid rgba(74,222,128,0.2);
-        box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+        border: 1px solid rgba(74,222,128,0.22);
+        box-shadow: 0 18px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(74,222,128,0.06) inset;
+        transform-style: preserve-3d;
+        transition: transform 0.5s cubic-bezier(.2,.7,.2,1), box-shadow 0.5s ease;
+        will-change: transform;
       }
-      .contact-premium .contact-map iframe { filter: hue-rotate(15deg) saturate(0.7); }
+      .contact-premium .contact-map.tilting {
+        transition: transform 0.08s linear, box-shadow 0.3s ease;
+        box-shadow: 0 30px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(74,222,128,0.18) inset;
+      }
+      /* Vista satélite: realzar contraste/color, sin invertir la foto aérea */
+      .contact-premium .contact-map iframe {
+        filter: contrast(1.06) saturate(1.14) brightness(0.97);
+      }
+      /* Capa transparente que captura el ratón para el tilt (el iframe se traga los eventos) */
+      .map-tilt-capture {
+        position: absolute; inset: 0;
+        z-index: 2;
+        cursor: crosshair;
+      }
+      /* Brillo que sigue al ratón — sensación de cristal 3D */
+      .map-glare {
+        position: absolute; inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        opacity: 0;
+        background: radial-gradient(220px 220px at var(--mx,50%) var(--my,50%),
+                    rgba(255,255,255,0.18), rgba(255,255,255,0) 60%);
+        transition: opacity 0.4s ease;
+        mix-blend-mode: screen;
+      }
+      .contact-premium .contact-map.tilting .map-glare { opacity: 1; }
+      /* Velo esmeralda para fundir el mapa con la paleta y dar legibilidad a la tarjeta */
+      .contact-premium .contact-map::before {
+        content: "";
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(120% 90% at 30% 110%, rgba(6,78,59,0.45) 0%, rgba(6,78,59,0) 55%),
+          linear-gradient(180deg, rgba(3,37,25,0) 50%, rgba(3,37,25,0.82) 100%);
+        pointer-events: none;
+        z-index: 3;
+      }
+      /* Tarjeta flotante de cristal */
+      .map-card {
+        position: absolute;
+        left: 18px; bottom: 18px; right: 18px;
+        z-index: 4;
+        transform: translateZ(40px);
+        display: flex; align-items: center; gap: 14px;
+        padding: 14px 16px;
+        background: rgba(3,37,25,0.62);
+        backdrop-filter: blur(14px) saturate(1.2);
+        -webkit-backdrop-filter: blur(14px) saturate(1.2);
+        border: 1px solid rgba(74,222,128,0.28);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      }
+      .map-card-pin {
+        flex-shrink: 0;
+        width: 42px; height: 42px;
+        display: grid; place-items: center;
+        border-radius: 50%;
+        background: rgba(74,222,128,0.12);
+        position: relative;
+      }
+      .map-card-pin::after {
+        content: "";
+        position: absolute; inset: 0;
+        border-radius: 50%;
+        border: 2px solid rgba(74,222,128,0.5);
+        animation: hp-pulse 2.4s ease-out infinite;
+      }
+      .map-card-pin i { color: #4ade80; font-size: 1.15rem; }
+      .map-card-text { flex: 1; min-width: 0; }
+      .map-card-text strong {
+        display: block;
+        font-family: 'Fraunces', 'Cormorant Garamond', serif;
+        font-weight: 400;
+        color: #ffffff;
+        font-size: 1.02rem;
+        line-height: 1.2;
+      }
+      .map-card-text span {
+        display: block;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.78rem;
+        color: rgba(236,253,245,0.7);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .map-card-btn {
+        flex-shrink: 0;
+        display: inline-flex; align-items: center; gap: 7px;
+        padding: 9px 16px;
+        background: #4ade80;
+        color: #032519 !important;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 0.82rem;
+        text-decoration: none;
+        border-radius: 999px;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      }
+      .map-card-btn:hover {
+        transform: translateY(-2px);
+        background: #6ee7a0;
+        box-shadow: 0 8px 20px rgba(74,222,128,0.35);
+      }
+      @media (max-width: 540px) {
+        .map-card { flex-wrap: wrap; gap: 10px; padding: 12px 14px; }
+        .map-card-text span { white-space: normal; }
+        .map-card-btn { width: 100%; justify-content: center; }
+      }
       @media (max-width: 768px) {
         .contact-premium { padding: 4rem 1rem !important; }
       }
@@ -3709,11 +3820,27 @@
               <p>Lunes a viernes: 16:00–22:00</p>
             </div>
           </div>
-          <div class="contact-map">
+          <div class="contact-map" id="contactMap">
             <iframe
-              src="https://maps.google.com/maps?q=Calle+Rafael+Quintana+Rosado+8,+29620+Torremolinos,+Malaga,+Spain&z=16&output=embed"
+              src="https://maps.google.com/maps?q=Calle+Rafael+Quintana+Rosado+8,+29620+Torremolinos,+Malaga,+Spain&z=18&t=h&output=embed"
               allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
+            <div class="map-glare" aria-hidden="true"></div>
+            <div class="map-tilt-capture" aria-hidden="true"></div>
+            <div class="map-card">
+              <div class="map-card-pin" aria-hidden="true">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="map-card-text">
+                <strong>Academia Esparta</strong>
+                <span>C/ Rafael Quintana Rosado 8, Torremolinos</span>
+              </div>
+              <a class="map-card-btn"
+                 href="https://www.google.com/maps/dir/?api=1&destination=Calle+Rafael+Quintana+Rosado+8,+29620+Torremolinos,+Malaga"
+                 target="_blank" rel="noopener">
+                <i class="fa-solid fa-diamond-turn-right"></i> Cómo llegar
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -4084,6 +4211,47 @@
             });
           }, { passive: true });
         }
+      })();
+    </script>
+
+    <!-- Mapa: efecto 3D tilt (panel que se inclina siguiendo el ratón) -->
+    <script>
+      (function () {
+        var map = document.getElementById('contactMap');
+        if (!map) return;
+        var capture = map.querySelector('.map-tilt-capture');
+        var glare = map.querySelector('.map-glare');
+        if (!capture) return;
+        // Respetar reduce-motion y saltar el efecto en táctil
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
+
+        var MAX = 9; // grados máximos de inclinación
+        var raf = null, ev = null;
+
+        function render() {
+          raf = null;
+          var r = map.getBoundingClientRect();
+          var px = (ev.clientX - r.left) / r.width;   // 0..1
+          var py = (ev.clientY - r.top) / r.height;    // 0..1
+          var ry = (px - 0.5) * 2 * MAX;               // rotateY
+          var rx = (0.5 - py) * 2 * MAX;               // rotateX
+          map.style.transform = 'rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) scale(1.02)';
+          if (glare) {
+            glare.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+            glare.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+          }
+        }
+
+        capture.addEventListener('mouseenter', function () { map.classList.add('tilting'); });
+        capture.addEventListener('mousemove', function (e) {
+          ev = e;
+          if (!raf) raf = requestAnimationFrame(render);
+        });
+        capture.addEventListener('mouseleave', function () {
+          map.classList.remove('tilting');
+          map.style.transform = '';
+        });
       })();
     </script>
   </body>
