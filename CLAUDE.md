@@ -266,7 +266,11 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 **BLOQUE `operaciones` DE 2º COMPLETO ✅** (33 fichas: sumas-con-llevada 4 + restas-con-llevada 4 + mezcladas 4 + multiplicacion-concepto 6 + tablas-de-multiplicar 10 + doble-y-mitad 5).
 
-**Arrancar por:** ~~`numeros`~~ ✅ (21) → ~~`operaciones`~~ ✅ (33) → **SIGUIENTE bloque de 2º: `medida`** (longitud-metro-centimetro · peso-y-capacidad · el-reloj-horas-y-media · monedas-y-billetes · calendario).
+**Bloque `medida` de 2º — EN MARCHA:**
+- **`longitud-metro-centimetro` (3 fichas, COMPLETO ✅, commit b4cb5e2, 2026-06-10):** metro/centímetro, 1 m = 100 cm. f1 elegir unidad (m/cm) + medir con **regla SVG** + medida lógica + conversión · f2 medir con regla + comparar >,<,= + ordenar menor→mayor + 2 problemas · f3 repaso (medir + equivalencias m↔cm + dibujar líneas con la regla + 2 problemas). **Regla SVG reusable:** viewBox 0 0 543 96, 33 px = 1 cm, objeto = `<rect>` gris desde x=24 (=0 cm); el largo del rect en px /33 da los cm. Verificar que cada objeto cae en marca exacta.
+- **`peso-y-capacidad` (2 de ~4 fichas, EN MARCHA, commit c0a7e4e, 2026-06-10):** f1 **el peso** (kilo/gramo, 1 kg = 1000 g) con **balanza SVG nueva** (platillos; el plato que baja pesa más) — elegir unidad + balanza + peso lógico + conversión · f2 **la capacidad** (el litro, 1 l = 2 medios litros) con **vaso SVG nuevo** (nivel de agua, polygon trapezoidal) — más/menos de 1 l + ordenar vasos por nivel + medio litro + 2 problemas. **FALTAN:** f3 comparar y ordenar pesos y capacidades juntos · f4 repaso + problemas mixtos. Componentes SVG (balanza, vaso con nivel) aprobados por Miguel.
+
+**Arrancar por:** ~~`numeros`~~ ✅ (21) → ~~`operaciones`~~ ✅ (33) → **`medida` EN MARCHA:** longitud-metro-centimetro ✅ (3) · peso-y-capacidad 🔄 (2/4, faltan f3 comparar-ordenar + f4 repaso) · _pendientes_ el-reloj-horas-y-media · monedas-y-billetes · calendario.
 
 ---
 
