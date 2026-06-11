@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El calendario · Medida · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.0rem 1.5rem 0.6rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 12px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-idea { font-size: 12.5px; margin-bottom: 2px; line-height: 1.28; }
+    .recuerda-idea strong { font-weight: 700; }
+    .ej-block { margin-bottom: 9px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    /* calendario */
+    .cal { border-collapse: collapse; margin: 0 auto; }
+    .cal caption { font-size: 15px; font-weight: 700; margin-bottom: 4px; letter-spacing: 1px; text-transform: uppercase; }
+    .cal th, .cal td { border: 1.3px solid #000; width: 38px; height: 30px; text-align: center; font-size: 13px; font-family: sans-serif; font-weight: 600; }
+    .cal th { background: #eee; font-size: 12px; }
+    .cal td.vacio { background: #fafafa; border-color: #ccc; }
+    .cal td.mk { background: #ddd; }
+    .cal-wrap { display: flex; gap: 16px; align-items: flex-start; }
+    .cal-preg { flex: 1; }
+    .preg { font-size: 13px; font-weight: 700; margin-bottom: 7px; line-height: 1.3; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .preg .resp { min-width: 80px; border-bottom: 1.5px solid #000; height: 18px; display: inline-block; }
+    .respbox { width: 46px; height: 24px; border: 1.6px solid #000; border-radius: 5px; display: inline-block; vertical-align: middle; }
+    /* secuencias dia/mes */
+    .sec-grid { display: grid; grid-auto-flow: column; gap: 6px; justify-content: start; margin-bottom: 7px; }
+    .sec-caja { min-width: 60px; height: 26px; border: 1.5px solid #000; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 700; padding: 0 4px; }
+    .sec-caja.lleno { background: #eee; }
+    .sec-caja.hueco { background: #fff; }
+    /* listas de preguntas sueltas */
+    .qlist { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+    .qrow { display: flex; align-items: center; gap: 6px; border: 1.5px solid #000; border-radius: 8px; padding: 5px 9px; font-size: 12.5px; font-weight: 700; flex-wrap: wrap; }
+    .qrow .respbox { width: 70px; height: 22px; border: 1.5px solid #000; border-radius: 5px; }
+    /* problemas */
+    .problema { border: 1.6px solid #000; border-radius: 9px; padding: 7px 11px; margin-bottom: 8px; font-size: 13.5px; line-height: 1.35; }
+    .op-line { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-family: sans-serif; font-weight: 700; font-size: 13px; flex-wrap: wrap; }
+    .op-line .sol { flex: 1; min-width: 100px; border-bottom: 1.4px solid #000; height: 16px; }
+    .caja { width: 44px; height: 26px; border: 1.6px solid #000; border-radius: 6px; display: inline-block; vertical-align: middle; }
+    .footer { margin-top: 10px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · El calendario</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+  <div class="tipo-badge">📅 El calendario</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-idea">La <strong>semana</strong> tiene <strong>7 días</strong>: lunes, martes, miércoles, jueves, viernes, sábado y domingo.</div>
+    <div class="recuerda-idea">El <strong>año</strong> tiene <strong>12 meses</strong>. Cada mes tiene <strong>28, 30 o 31 días</strong>. Hay <strong>4 estaciones</strong>.</div>
+    <div class="recuerda-idea">En el <strong>calendario</strong>, cada columna es un día de la semana y cada número es una fecha.</div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Completa los <strong>días</strong> y los <strong>meses</strong> que faltan:</div>
+<div class="sec-grid"><div class="sec-caja lleno">lunes</div><div class="sec-caja lleno">martes</div><div class="sec-caja hueco"></div><div class="sec-caja lleno">jueves</div><div class="sec-caja hueco"></div><div class="sec-caja lleno">sábado</div><div class="sec-caja lleno">domingo</div></div>
+<div class="sec-grid" style="grid-template-columns:repeat(6,1fr);grid-auto-flow:row"><div class="sec-caja lleno">enero</div><div class="sec-caja hueco"></div><div class="sec-caja lleno">marzo</div><div class="sec-caja hueco"></div><div class="sec-caja lleno">mayo</div><div class="sec-caja lleno">junio</div><div class="sec-caja hueco"></div><div class="sec-caja lleno">agosto</div><div class="sec-caja lleno">septiembre</div><div class="sec-caja hueco"></div><div class="sec-caja lleno">noviembre</div><div class="sec-caja hueco"></div></div>  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Mira el calendario de <strong>mayo</strong> y responde:</div>
+<div class="cal-wrap"><table class="cal"><caption>Mayo</caption><thead><tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th><th>D</th></tr></thead><tbody><tr><td class="vacio"></td><td class="vacio"></td><td class="vacio"></td><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr><tr><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td></tr><tr><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td></tr><tr><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td class="vacio"></td></tr></tbody></table><div class="cal-preg">
+  <div class="preg">a) El día <b>1</b> de mayo es <span class="resp"></span></div>
+  <div class="preg">b) El día <b>15</b> de mayo es <span class="resp"></span></div>
+  <div class="preg">c) ¿Cuántos <b>domingos</b> tiene mayo? <span class="respbox"></span></div>
+  <div class="preg">d) ¿Qué número es el <b>segundo lunes</b>? <span class="respbox"></span></div>
+  <div class="preg">e) ¿Cuántos <b>días</b> tiene mayo en total? <span class="respbox"></span></div>
+</div></div>  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Escribe en qué <strong>estación</strong> cae cada mes <span style="font-family:sans-serif;font-weight:600;font-size:11px">(primavera · verano · otoño · invierno)</span>:</div>
+<div class="qlist"><div class="qrow"><b>Julio</b> está en <span class="respbox" style="width:96px"></span></div><div class="qrow"><b>Enero</b> está en <span class="respbox" style="width:96px"></span></div><div class="qrow"><b>Abril</b> está en <span class="respbox" style="width:96px"></span></div><div class="qrow"><b>Octubre</b> está en <span class="respbox" style="width:96px"></span></div></div>  </div>
+
+  <div class="ej-block" style="margin-bottom:0">
+    <div class="ej-enunciado"><span class="num">4.</span> Completa el <strong>mes anterior</strong> y el <strong>mes siguiente</strong>:</div>
+<table class="cal" style="width:100%;table-layout:fixed"><thead><tr><th>Mes anterior</th><th>ESTE MES</th><th>Mes siguiente</th></tr></thead><tbody><tr><td style="height:30px"></td><td style="background:#eee;font-weight:700">Marzo</td><td></td></tr><tr><td style="height:30px"></td><td style="background:#eee;font-weight:700">Junio</td><td></td></tr><tr><td style="height:30px"></td><td style="background:#eee;font-weight:700">Septiembre</td><td></td></tr><tr><td style="height:30px"></td><td style="background:#eee;font-weight:700">Noviembre</td><td></td></tr></tbody></table>  </div>
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
