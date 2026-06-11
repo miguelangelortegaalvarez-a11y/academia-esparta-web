@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monedas y billetes · Medida · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.0rem 1.5rem 0.6rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 12px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-idea { font-size: 12.5px; margin-bottom: 2px; line-height: 1.28; }
+    .recuerda-idea strong { font-weight: 700; }
+    .ej-block { margin-bottom: 9px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+    .moneda-svg { width: 46px; height: 46px; display: inline-block; vertical-align: middle; }
+    .billete-svg { width: 74px; height: 42px; display: inline-block; vertical-align: middle; }
+    .mini-moneda-svg { width: 32px; height: 32px; display: inline-block; vertical-align: middle; }
+    .mini-billete-svg { width: 50px; height: 28px; display: inline-block; vertical-align: middle; }
+    /* escribir valor debajo */
+    .escribir-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; justify-items: center; }
+    .escribir-caja { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .escribir-hueco { width: 62px; border: 1.5px solid #000; border-radius: 4px; height: 24px; }
+    /* contar dinero en linea */
+    .contar-linea { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; border: 1.5px solid #000; border-radius: 9px; padding: 5px 9px; margin-bottom: 6px; }
+    .contar-linea .total { display: inline-block; min-width: 52px; border: 1.6px solid #000; border-radius: 5px; height: 26px; margin-left: 4px; }
+    .contar-linea .eq { font-size: 13px; font-weight: 700; margin-left: auto; }
+    /* comparar grupos */
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .comp-celda { display: flex; align-items: center; justify-content: center; gap: 4px; flex-wrap: wrap; border: 1.6px solid #000; border-radius: 10px; padding: 7px; }
+    /* problemas */
+    .problema { border: 1.6px solid #000; border-radius: 9px; padding: 7px 11px; margin-bottom: 8px; font-size: 13.5px; line-height: 1.35; }
+    .op-line { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-family: sans-serif; font-weight: 700; font-size: 13px; flex-wrap: wrap; }
+    .op-line .sol { flex: 1; min-width: 100px; border-bottom: 1.4px solid #000; height: 16px; }
+    .caja { width: 44px; height: 26px; border: 1.6px solid #000; border-radius: 6px; display: inline-block; vertical-align: middle; }
+    /* ¿me llega? SÍ/NO */
+    .pill { border: 1.5px solid #000; border-radius: 999px; padding: 2px 12px; font-size: 12px; font-weight: 700; font-family: sans-serif; white-space: nowrap; }
+    .llega-fila { display: flex; align-items: center; gap: 10px; border: 1.5px solid #000; border-radius: 9px; padding: 6px 11px; margin-bottom: 6px; flex-wrap: wrap; }
+    .llega-obj { font-size: 13px; font-weight: 700; }
+    .llega-tengo { font-size: 13px; font-weight: 700; }
+    .llega-ops { display: flex; gap: 7px; margin-left: auto; }
+    /* ¿cuánto falta / cambio? */
+    .falta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 22px; }
+    .falta-fila { display: flex; align-items: center; gap: 5px; border: 1.5px solid #000; border-radius: 8px; padding: 6px 10px; font-size: 12.5px; font-weight: 700; flex-wrap: wrap; }
+    /* dibujar/marcar */
+    .dibujar-fila { display: flex; align-items: center; gap: 10px; border: 1.5px solid #000; border-radius: 9px; padding: 6px 10px; margin-bottom: 6px; }
+    .dibujar-txt { font-size: 13.5px; font-weight: 700; }
+    .dibujar-zona { flex: 1; height: 46px; border: 1.4px dashed #000; border-radius: 6px; margin-left: 6px; }
+    .footer { margin-top: 10px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Monedas y billetes</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+  <div class="tipo-badge">💶 Voy de compras</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-idea">Para comprar algo, mi dinero tiene que ser <strong>igual o mayor</strong> que el precio.</div>
+    <div class="recuerda-idea">Si tengo <strong>menos</strong> que el precio, me <strong>falta</strong> dinero. Lo que falta = precio − mi dinero.</div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> ¿Te llega el dinero para comprarlo? Rodea <strong>SÍ</strong> o <strong>NO</strong>:</div>
+<div class="llega-fila"><span class="llega-obj">Una pelota cuesta <b>6 €</b>.</span><span class="llega-tengo">Tengo <b>8 €</b>.</span><span class="llega-ops"><span class="pill">SÍ</span><span class="pill">NO</span></span></div><div class="llega-fila"><span class="llega-obj">Un libro cuesta <b>12 €</b>.</span><span class="llega-tengo">Tengo <b>10 €</b>.</span><span class="llega-ops"><span class="pill">SÍ</span><span class="pill">NO</span></span></div><div class="llega-fila"><span class="llega-obj">Un coche cuesta <b>15 €</b>.</span><span class="llega-tengo">Tengo <b>15 €</b>.</span><span class="llega-ops"><span class="pill">SÍ</span><span class="pill">NO</span></span></div><div class="llega-fila"><span class="llega-obj">Una mochila cuesta <b>20 €</b>.</span><span class="llega-tengo">Tengo <b>17 €</b>.</span><span class="llega-ops"><span class="pill">SÍ</span><span class="pill">NO</span></span></div>  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe <strong>cuánto dinero te falta</strong>:</div>
+<div class="falta-grid"><div class="falta-fila">Cuesta <b>10 €</b>, tengo <b>7 €</b> → me faltan <span class="caja" style="width:48px;height:24px"></span> €</div><div class="falta-fila">Cuesta <b>20 €</b>, tengo <b>15 €</b> → me faltan <span class="caja" style="width:48px;height:24px"></span> €</div><div class="falta-fila">Cuesta <b>8 €</b>, tengo <b>5 €</b> → me faltan <span class="caja" style="width:48px;height:24px"></span> €</div><div class="falta-fila">Cuesta <b>25 €</b>, tengo <b>20 €</b> → me faltan <span class="caja" style="width:48px;height:24px"></span> €</div></div>  </div>
+
+  <div class="ej-block" style="margin-bottom:0">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Dibuja</strong> las monedas y billetes para pagar la cantidad <strong>justa</strong>:</div>
+<div class="dibujar-fila"><span class="dibujar-txt">Pago justo <b>9 €</b>. Dibujo:</span><div class="dibujar-zona"></div></div><div class="dibujar-fila"><span class="dibujar-txt">Pago justo <b>16 €</b>. Dibujo:</span><div class="dibujar-zona"></div></div><div class="dibujar-fila"><span class="dibujar-txt">Pago justo <b>23 €</b>. Dibujo:</span><div class="dibujar-zona"></div></div>  </div>
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
