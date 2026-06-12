@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Líneas rectas, curvas y poligonales · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 3px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 5px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ejercicio 1: escena de los caminos */
+    .escena-caja { border: 1.5px solid #000; border-radius: 10px; padding: 4px 8px; }
+    .escena-caja svg { width: 100%; max-width: 420px; height: auto; display: block; margin: 0 auto; }
+    .caminos-resp { display: flex; gap: 16px; margin-top: 4px; }
+    .camino-item { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; flex: 1; }
+    .camino-item .linea-resp { flex: 1; border-bottom: 1.5px solid #000; height: 16px; }
+
+    /* Ejercicio 2: rodear opción */
+    .rodea-fila { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; flex-wrap: wrap; }
+    .opcion-circ { display: inline-flex; width: 25px; height: 25px; border: 1.8px solid #000; border-radius: 50%; align-items: center; justify-content: center; font-family: sans-serif; font-weight: 700; font-size: 13px; }
+    .linea-inline { display: inline-block; width: 130px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: bottom; }
+
+    /* Ejercicio 3: unir poligonal cerrada ↔ figura */
+    .objetos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 40px; align-items: center; }
+    .objetos-col { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+    .objeto-caja { display: flex; align-items: center; justify-content: center; min-height: 38px; }
+    .objeto-caja svg { width: 40px; height: 40px; }
+    .objetos-nom { border: 1.5px solid #000; border-radius: 8px; padding: 5px 8px; text-align: center; font-size: 13.5px; font-weight: 700; width: 100%; }
+
+    /* Ejercicio 4: unir puntos numerados */
+    .puntos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .puntos-caja { border: 1.5px solid #000; border-radius: 10px; padding: 6px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .puntos-caja svg { width: 150px; height: 110px; }
+    .puntos-resp { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; width: 100%; }
+    .puntos-resp .linea-resp { flex: 1; border-bottom: 1.5px solid #000; height: 16px; }
+
+    /* Ejercicio 5: V o F */
+    .vf-fila { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+    .vf-frase { flex: 1; }
+    .vf-ops { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-circ { width: 22px; height: 22px; border: 1.8px solid #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: sans-serif; font-weight: 700; font-size: 12px; }
+
+    .footer { margin-top: 5px; padding-top: 3px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Líneas</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📏 Líneas en el mundo real</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Los <strong>tres caminos al cole</strong>: escribe qué tipo de línea es cada camino.</div>
+    <div class="escena-caja">
+      <svg viewBox="0 0 480 200">
+        <!-- casa -->
+        <polygon points="8,76 48,36 88,76" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+        <rect x="16" y="76" width="64" height="86" fill="none" stroke="#000" stroke-width="2.5"/>
+        <rect x="24" y="88" width="14" height="14" fill="none" stroke="#000" stroke-width="1.8"/>
+        <rect x="42" y="128" width="18" height="34" fill="none" stroke="#000" stroke-width="1.8"/>
+        <!-- cole -->
+        <rect x="392" y="50" width="80" height="112" fill="none" stroke="#000" stroke-width="2.5"/>
+        <rect x="402" y="60" width="60" height="18" fill="none" stroke="#000" stroke-width="1.8"/>
+        <text x="432" y="74" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12">COLE</text>
+        <rect x="400" y="90" width="14" height="14" fill="none" stroke="#000" stroke-width="1.8"/>
+        <rect x="450" y="90" width="14" height="14" fill="none" stroke="#000" stroke-width="1.8"/>
+        <rect x="421" y="126" width="22" height="36" fill="none" stroke="#000" stroke-width="1.8"/>
+        <!-- camino A: recta -->
+        <line x1="96" y1="66" x2="388" y2="66" stroke="#000" stroke-width="2.5"/>
+        <!-- camino B: curva ondulada -->
+        <path d="M96,106 Q132.5,84 169,106 T242,106 T315,106 T388,106" fill="none" stroke="#000" stroke-width="2.5"/>
+        <!-- camino C: poligonal en zigzag -->
+        <polyline points="96,162 132,140 168,162 204,140 240,162 276,140 312,162 348,140 388,162" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- letras sobre cada camino -->
+        <circle cx="150" cy="66" r="10" fill="#fff" stroke="#000" stroke-width="1.8"/>
+        <text x="150" y="70.5" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12">A</text>
+        <circle cx="242" cy="106" r="10" fill="#fff" stroke="#000" stroke-width="1.8"/>
+        <text x="242" y="110.5" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12">B</text>
+        <circle cx="312" cy="162" r="10" fill="#fff" stroke="#000" stroke-width="1.8"/>
+        <text x="312" y="166.5" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="12">C</text>
+      </svg>
+    </div>
+    <div class="caminos-resp">
+      <div class="camino-item">Camino A: <div class="linea-resp"></div></div>
+      <div class="camino-item">Camino B: <div class="linea-resp"></div></div>
+      <div class="camino-item">Camino C: <div class="linea-resp"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> ¿Qué camino es <strong>más corto</strong>? Piensa y <strong>rodea</strong>:</div>
+    <div class="rodea-fila">El camino más corto entre la casa y el cole es el: <span class="opcion-circ">A</span> <span class="opcion-circ">B</span> <span class="opcion-circ">C</span></div>
+    <div class="rodea-fila" style="margin-bottom:0;">porque la línea <span class="linea-inline"></span> es el camino más corto.</div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Cada línea <strong>poligonal cerrada</strong> esconde una figura: <strong>une</strong> cada una con su nombre.</div>
+    <div class="objetos-grid">
+      <div class="objetos-col">
+        <div class="objeto-caja"><svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+        <div class="objeto-caja"><svg viewBox="0 0 60 60"><polygon points="10,10 50,10 50,50 10,50" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+        <div class="objeto-caja"><svg viewBox="0 0 60 60"><polygon points="30,6 52.8,22.6 44.1,49.4 15.9,49.4 7.2,22.6" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+        <div class="objeto-caja"><svg viewBox="0 0 60 60"><polygon points="30,6 50.8,18 50.8,42 30,54 9.2,42 9.2,18" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="objetos-col">
+        <div class="objetos-nom">pentágono</div>
+        <div class="objetos-nom">triángulo</div>
+        <div class="objetos-nom">hexágono</div>
+        <div class="objetos-nom">cuadrado</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Termina el dibujo</strong>: une los puntos en orden con la regla, vuelve al 1 para cerrar la poligonal y descubre la figura.</div>
+    <div class="puntos-grid">
+      <div class="puntos-caja">
+        <svg viewBox="0 0 150 140">
+          <circle cx="75" cy="12" r="4" fill="#000"/><text x="85" y="16" font-family="sans-serif" font-size="11" font-weight="bold">1</text>
+          <circle cx="132" cy="70" r="4" fill="#000"/><text x="138" y="62" font-family="sans-serif" font-size="11" font-weight="bold">2</text>
+          <circle cx="75" cy="128" r="4" fill="#000"/><text x="85" y="138" font-family="sans-serif" font-size="11" font-weight="bold">3</text>
+          <circle cx="18" cy="70" r="4" fill="#000"/><text x="4" y="62" font-family="sans-serif" font-size="11" font-weight="bold">4</text>
+        </svg>
+        <div class="puntos-resp">Es un: <div class="linea-resp"></div></div>
+      </div>
+      <div class="puntos-caja">
+        <svg viewBox="0 0 150 140">
+          <circle cx="35" cy="128" r="4" fill="#000"/><text x="20" y="132" font-family="sans-serif" font-size="11" font-weight="bold">1</text>
+          <circle cx="35" cy="66" r="4" fill="#000"/><text x="20" y="62" font-family="sans-serif" font-size="11" font-weight="bold">2</text>
+          <circle cx="75" cy="18" r="4" fill="#000"/><text x="75" y="10" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold">3</text>
+          <circle cx="115" cy="66" r="4" fill="#000"/><text x="123" y="62" font-family="sans-serif" font-size="11" font-weight="bold">4</text>
+          <circle cx="115" cy="128" r="4" fill="#000"/><text x="123" y="132" font-family="sans-serif" font-size="11" font-weight="bold">5</text>
+        </svg>
+        <div class="puntos-resp">Es una: <div class="linea-resp"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> Rodea <strong>V</strong> si es verdadero o <strong>F</strong> si es falso:</div>
+    <div class="vf-fila"><span class="vf-frase">El camino recto es el más corto entre dos puntos.</span><span class="vf-ops"><span class="vf-circ">V</span><span class="vf-circ">F</span></span></div>
+    <div class="vf-fila"><span class="vf-frase">Una poligonal cerrada de 3 trozos forma un triángulo.</span><span class="vf-ops"><span class="vf-circ">V</span><span class="vf-circ">F</span></span></div>
+    <div class="vf-fila"><span class="vf-frase">Los caminos curvos están hechos de trozos rectos.</span><span class="vf-ops"><span class="vf-circ">V</span><span class="vf-circ">F</span></span></div>
+    <div class="vf-fila" style="margin-bottom:0;"><span class="vf-frase">Una línea poligonal puede ser abierta o cerrada.</span><span class="vf-ops"><span class="vf-circ">V</span><span class="vf-circ">F</span></span></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

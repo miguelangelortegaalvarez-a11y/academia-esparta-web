@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Líneas rectas, curvas y poligonales · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 3px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 5px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+
+    .ej-block { margin-bottom: 11px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ejercicio 1: tabla clasificar línea */
+    .tabla-lineas { width: 100%; border-collapse: collapse; }
+    .tabla-lineas th { border: 1.5px solid #000; background: #eee; font-size: 12px; padding: 4px 6px; }
+    .tabla-lineas td { border: 1.5px solid #000; text-align: center; padding: 3px 6px; }
+    .celda-linea { width: 34%; }
+    .celda-marca { width: 22%; height: 48px; }
+    .linea-svg { width: 96px; height: 42px; display: block; margin: 0 auto; }
+
+    /* Ejercicio 2: contar trozos rectos */
+    .contar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .contar-caja { border: 1.5px solid #000; border-radius: 8px; padding: 5px 4px 6px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .contar-svg { width: 100%; height: 64px; }
+    .hueco-num { display: inline-block; border: 1.5px solid #000; border-radius: 5px; width: 38px; height: 26px; }
+
+    /* Ejercicio 3: rodear cerradas / tachar abiertas */
+    .mosaico-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .mosaico-caja { border: 1.5px dashed #000; border-radius: 8px; padding: 6px 4px; display: flex; align-items: center; justify-content: center; }
+    .mosaico-svg { width: 100%; height: 62px; }
+
+    /* Ejercicio 4: dibujar con la regla */
+    .dibujar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .dibujar-caja { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .dibujar-titulo { font-size: 12.5px; font-weight: 700; text-align: center; line-height: 1.25; }
+    .dibujar-zona { border: 1.5px solid #000; border-radius: 8px; width: 100%; height: 110px; }
+
+    .footer { margin-top: 5px; padding-top: 3px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Líneas</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📏 Líneas: práctica</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Completa la tabla:</strong> marca con una <strong>X</strong> qué tipo de línea es cada una:</div>
+    <table class="tabla-lineas">
+      <tr>
+        <th class="celda-linea">Línea</th>
+        <th>Recta</th>
+        <th>Curva</th>
+        <th>Poligonal</th>
+      </tr>
+      <tr>
+        <td class="celda-linea"><svg class="linea-svg" viewBox="0 0 100 50"><line x1="10" y1="42" x2="90" y2="8" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+      </tr>
+      <tr>
+        <td class="celda-linea"><svg class="linea-svg" viewBox="0 0 100 50"><path d="M6,25 Q 26,2 46,25 T 86,25" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+      </tr>
+      <tr>
+        <td class="celda-linea"><svg class="linea-svg" viewBox="0 0 100 50"><polyline points="6,42 30,8 54,42 78,8 94,30" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+      </tr>
+      <tr>
+        <td class="celda-linea"><svg class="linea-svg" viewBox="0 0 100 50"><path d="M68,6 C 28,6 28,25 50,25 C 72,25 72,44 32,44" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+      </tr>
+      <tr>
+        <td class="celda-linea"><svg class="linea-svg" viewBox="0 0 100 50"><polygon points="50,5 84,19 73,45 27,45 16,19" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+        <td class="celda-marca"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Cuenta los trozos rectos</strong> de cada línea poligonal y escribe el número (los puntos te ayudan):</div>
+    <div class="contar-grid">
+      <div class="contar-caja">
+        <svg class="contar-svg" viewBox="0 0 120 70">
+          <polyline points="12,58 45,14 75,52 110,20" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="58" r="2.5" fill="#000"/><circle cx="45" cy="14" r="2.5" fill="#000"/><circle cx="75" cy="52" r="2.5" fill="#000"/><circle cx="110" cy="20" r="2.5" fill="#000"/>
+        </svg>
+        <span class="hueco-num"></span>
+      </div>
+      <div class="contar-caja">
+        <svg class="contar-svg" viewBox="0 0 120 70">
+          <polyline points="6,52 26,14 48,48 70,12 92,48 114,18" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="6" cy="52" r="2.5" fill="#000"/><circle cx="26" cy="14" r="2.5" fill="#000"/><circle cx="48" cy="48" r="2.5" fill="#000"/><circle cx="70" cy="12" r="2.5" fill="#000"/><circle cx="92" cy="48" r="2.5" fill="#000"/><circle cx="114" cy="18" r="2.5" fill="#000"/>
+        </svg>
+        <span class="hueco-num"></span>
+      </div>
+      <div class="contar-caja">
+        <svg class="contar-svg" viewBox="0 0 120 70">
+          <polygon points="22,60 62,10 106,54" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="22" cy="60" r="2.5" fill="#000"/><circle cx="62" cy="10" r="2.5" fill="#000"/><circle cx="106" cy="54" r="2.5" fill="#000"/>
+        </svg>
+        <span class="hueco-num"></span>
+      </div>
+      <div class="contar-caja">
+        <svg class="contar-svg" viewBox="0 0 120 70">
+          <polygon points="18,50 42,10 104,18 92,62" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="18" cy="50" r="2.5" fill="#000"/><circle cx="42" cy="10" r="2.5" fill="#000"/><circle cx="104" cy="18" r="2.5" fill="#000"/><circle cx="92" cy="62" r="2.5" fill="#000"/>
+        </svg>
+        <span class="hueco-num"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Rodea</strong> las líneas <strong>CERRADAS</strong> y <strong>tacha</strong> las <strong>ABIERTAS</strong>:</div>
+    <div class="mosaico-grid">
+      <div class="mosaico-caja">
+        <svg class="mosaico-svg" viewBox="0 0 100 60">
+          <path d="M50,8 C 80,8 92,24 85,42 C 78,55 30,57 18,45 C 6,33 20,8 50,8 Z" fill="none" stroke="#000" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <div class="mosaico-caja">
+        <svg class="mosaico-svg" viewBox="0 0 100 60">
+          <polyline points="8,48 30,12 52,48 74,12 92,40" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="mosaico-caja">
+        <svg class="mosaico-svg" viewBox="0 0 100 60">
+          <polygon points="50,6 88,24 74,54 26,54 12,24" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="mosaico-caja">
+        <svg class="mosaico-svg" viewBox="0 0 100 60">
+          <path d="M72,10 C 24,12 24,48 72,52" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="mosaico-caja">
+        <svg class="mosaico-svg" viewBox="0 0 100 60">
+          <polygon points="16,16 84,9 90,50 22,53" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="mosaico-caja">
+        <svg class="mosaico-svg" viewBox="0 0 100 60">
+          <path d="M50,30 a4,4 0 0,1 8,0 a8,8 0 0,1 -16,0 a12,12 0 0,1 24,0 a16,16 0 0,1 -32,0" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Dibuja con la regla</strong> en cada caja:</div>
+    <div class="dibujar-grid">
+      <div class="dibujar-caja">
+        <div class="dibujar-titulo">una línea recta</div>
+        <div class="dibujar-zona"></div>
+      </div>
+      <div class="dibujar-caja">
+        <div class="dibujar-titulo">una línea poligonal ABIERTA de 4 trozos</div>
+        <div class="dibujar-zona"></div>
+      </div>
+      <div class="dibujar-caja">
+        <div class="dibujar-titulo">una línea poligonal CERRADA de 3 lados</div>
+        <div class="dibujar-zona"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

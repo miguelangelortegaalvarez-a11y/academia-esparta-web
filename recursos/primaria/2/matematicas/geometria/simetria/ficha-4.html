@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simetría · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 3px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 5px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+
+    .ej-block { margin-bottom: 10px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ejercicio 1: ¿es simétrica? SÍ / NO */
+    .sino-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .sino-caja { border: 1.5px solid #000; border-radius: 8px; padding: 7px 8px 5px; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .sino-caja svg { width: 62px; height: 62px; }
+    .sino-ops { font-family: sans-serif; font-weight: 700; font-size: 13px; }
+
+    /* Ejercicio 2: trazar el eje */
+    .ejes-grid { display: grid; grid-template-columns: repeat(4, 1fr); justify-items: center; align-items: center; }
+    .ejes-grid svg { width: 70px; height: 70px; }
+
+    /* Ejercicio 3: dibujar la otra mitad */
+    .mitades { display: flex; justify-content: center; gap: 46px; padding-top: 2px; }
+    .mitades svg { width: 136px; height: 136px; }
+
+    /* Ejercicio 5: inventa tu figura */
+    .inventa { display: flex; justify-content: center; padding-top: 2px; }
+    .inventa svg { width: 251px; height: 128px; }
+
+    /* Ejercicio 4: verdadero o falso */
+    .vf-lista { display: flex; flex-direction: column; gap: 8px; }
+    .vf-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; border-bottom: 1px dotted #999; padding-bottom: 4px; }
+    .vf-opciones { font-family: sans-serif; font-weight: 700; font-size: 12.5px; white-space: nowrap; }
+
+    .footer { margin-top: 5px; padding-top: 3px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Simetría</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🦋 Simetría: repaso</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Rodea SÍ o NO</strong>: ¿es simétrica?</div>
+    <div class="sino-grid">
+      <div class="sino-caja">
+        <svg viewBox="0 0 60 60"><polygon points="30,4 36,24 56,30 36,36 30,56 24,36 4,30 24,24" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <span class="sino-ops">SÍ&nbsp;&nbsp;·&nbsp;&nbsp;NO</span>
+      </div>
+      <div class="sino-caja">
+        <svg viewBox="0 0 60 60"><path d="M38,7 A23,23 0 1 0 38,53 A26,26 0 0 1 38,7 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <span class="sino-ops">SÍ&nbsp;&nbsp;·&nbsp;&nbsp;NO</span>
+      </div>
+      <div class="sino-caja">
+        <svg viewBox="0 0 60 60"><polygon points="30,6 52,24 8,24" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/><rect x="12" y="24" width="36" height="28" fill="none" stroke="#000" stroke-width="2.2"/><rect x="25" y="38" width="10" height="14" fill="none" stroke="#000" stroke-width="2.2"/></svg>
+        <span class="sino-ops">SÍ&nbsp;&nbsp;·&nbsp;&nbsp;NO</span>
+      </div>
+      <div class="sino-caja">
+        <svg viewBox="0 0 60 60"><rect x="40" y="9" width="7" height="10" fill="none" stroke="#000" stroke-width="2.2"/><polygon points="30,6 52,24 8,24" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/><rect x="12" y="24" width="36" height="28" fill="none" stroke="#000" stroke-width="2.2"/><rect x="15" y="38" width="10" height="14" fill="none" stroke="#000" stroke-width="2.2"/></svg>
+        <span class="sino-ops">SÍ&nbsp;&nbsp;·&nbsp;&nbsp;NO</span>
+      </div>
+      <div class="sino-caja">
+        <svg viewBox="0 0 60 60"><circle cx="16" cy="32" r="10" fill="none" stroke="#000" stroke-width="2.2"/><circle cx="44" cy="32" r="10" fill="none" stroke="#000" stroke-width="2.2"/><path d="M26,30 Q30,25 34,30" fill="none" stroke="#000" stroke-width="2.2"/><line x1="6" y1="32" x2="2" y2="25" stroke="#000" stroke-width="2.2"/><line x1="54" y1="32" x2="58" y2="25" stroke="#000" stroke-width="2.2"/></svg>
+        <span class="sino-ops">SÍ&nbsp;&nbsp;·&nbsp;&nbsp;NO</span>
+      </div>
+      <div class="sino-caja">
+        <svg viewBox="0 0 60 60"><ellipse cx="33" cy="30" rx="16" ry="10" fill="none" stroke="#000" stroke-width="2.2"/><polygon points="18,30 7,21 7,39" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/><circle cx="41" cy="27" r="1.8" fill="#000"/></svg>
+        <span class="sino-ops">SÍ&nbsp;&nbsp;·&nbsp;&nbsp;NO</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Traza el eje de simetría</strong> de cada figura (usa la regla):</div>
+    <div class="ejes-grid">
+      <svg viewBox="0 0 60 60"><polygon points="30,6 50.8,18 50.8,42 30,54 9.2,42 9.2,18" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 60 60"><polygon points="30,6 48,30 30,54 12,30" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 60 60"><polygon points="30,6 50,28 38,28 38,52 22,52 22,28 10,28" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 60 60"><polygon points="30,8 35.6,24.3 52.8,24.6 39,34.9 44.1,51.4 30,41.5 15.9,51.4 21,34.9 7.2,24.6 24.4,24.3" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Dibuja la otra mitad</strong> siguiendo la cuadrícula:</div>
+    <div class="mitades">
+      <svg viewBox="-2 -2 116 116">
+        <path d="M0,0 V112 M16,0 V112 M32,0 V112 M48,0 V112 M64,0 V112 M80,0 V112 M96,0 V112 M112,0 V112 M0,0 H112 M0,16 H112 M0,32 H112 M0,48 H112 M0,64 H112 M0,80 H112 M0,96 H112 M0,112 H112" fill="none" stroke="#bbb" stroke-width="0.8"/>
+        <line x1="48" y1="-2" x2="48" y2="114" stroke="#000" stroke-width="2" stroke-dasharray="5,3"/>
+        <path d="M48,16 H32 V32 H16 V48 H0 V64 H16 V80 H32 V96 H48" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="square"/>
+      </svg>
+      <svg viewBox="-2 -2 116 116">
+        <path d="M0,0 V112 M16,0 V112 M32,0 V112 M48,0 V112 M64,0 V112 M80,0 V112 M96,0 V112 M112,0 V112 M0,0 H112 M0,16 H112 M0,32 H112 M0,48 H112 M0,64 H112 M0,80 H112 M0,96 H112 M0,112 H112" fill="none" stroke="#bbb" stroke-width="0.8"/>
+        <line x1="48" y1="-2" x2="48" y2="114" stroke="#000" stroke-width="2" stroke-dasharray="5,3"/>
+        <path d="M48,0 H16 V48 H32 V96 H16 V112 H48" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="square"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Rodea</strong> V si es verdadero o F si es falso:</div>
+    <div class="vf-lista">
+      <div class="vf-item"><span>Una figura puede doblarse por su eje y las dos mitades coinciden.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+      <div class="vf-item"><span>La letra O es simétrica.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+      <div class="vf-item"><span>Un pez mirando a un lado es simétrico.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+      <div class="vf-item"><span>El eje de simetría siempre es una línea curva.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> <strong>Inventa y dibuja TU figura simétrica</strong>: dibuja una mitad y luego su espejo. ¡Tú eliges la figura!</div>
+    <div class="inventa">
+      <svg viewBox="-2 -2 196 100">
+        <path d="M0,0 V96 M16,0 V96 M32,0 V96 M48,0 V96 M64,0 V96 M80,0 V96 M96,0 V96 M112,0 V96 M128,0 V96 M144,0 V96 M160,0 V96 M176,0 V96 M192,0 V96 M0,0 H192 M0,16 H192 M0,32 H192 M0,48 H192 M0,64 H192 M0,80 H192 M0,96 H192" fill="none" stroke="#bbb" stroke-width="0.8"/>
+        <line x1="96" y1="-2" x2="96" y2="98" stroke="#000" stroke-width="2" stroke-dasharray="5,3"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

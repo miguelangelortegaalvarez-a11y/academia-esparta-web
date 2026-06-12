@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Líneas rectas, curvas y poligonales · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 3px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 5px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 12px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 13px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-idea { font-size: 12.5px; margin-bottom: 4px; line-height: 1.35; }
+    .recuerda-figuras { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 5px; }
+    .rf-caja { border: 1.5px solid #000; border-radius: 8px; padding: 4px 4px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1px; }
+    .rf-nombre { font-size: 12px; font-weight: 700; }
+    .rf-info { font-family: sans-serif; font-size: 9.5px; color: #555; }
+
+    .linea-svg { width: 108px; height: 58px; }
+
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ejercicio 1: unir línea↔nombre */
+    .unir-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; align-items: center; }
+    .unir-col { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+    .unir-fig { display: flex; align-items: center; justify-content: center; min-height: 52px; }
+    .unir-fig svg { width: 110px; height: 52px; }
+    .unir-nom { border: 1.5px solid #000; border-radius: 8px; padding: 8px 8px; text-align: center; font-size: 13.5px; font-weight: 700; width: 100%; }
+
+    /* Ejercicio 2: rodear poligonales */
+    .rodear-mosaico { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
+    .rodear-fig { border: 1.5px dashed #000; border-radius: 8px; padding: 4px; display: flex; align-items: center; justify-content: center; min-height: 68px; }
+    .rodear-fig svg { width: 88px; height: 56px; }
+
+    /* Ejercicio 3: abierta o cerrada */
+    .escribir-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .escribir-caja { border: 1.5px solid #000; border-radius: 8px; padding: 8px 6px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .escribir-caja svg { width: 96px; height: 62px; }
+    .escribir-hueco { width: 90%; border-bottom: 1.5px solid #000; height: 30px; }
+
+    /* Ejercicio 4: verdadero o falso */
+    .vf-lista { display: flex; flex-direction: column; gap: 12px; }
+    .vf-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 14px; border-bottom: 1px dotted #999; padding-bottom: 6px; }
+    .vf-opciones { font-family: sans-serif; font-weight: 700; font-size: 12.5px; white-space: nowrap; }
+
+    .footer { margin-top: 8px; padding-top: 3px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Líneas</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📏 Líneas: rectas, curvas y poligonales</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-idea">Las líneas pueden ser <strong>rectas</strong> (no se tuercen), <strong>curvas</strong> (se doblan poco a poco) o <strong>poligonales</strong> (hechas de trozos rectos unidos).</div>
+    <div class="recuerda-figuras">
+      <div class="rf-caja">
+        <svg class="linea-svg" viewBox="0 0 90 50"><line x1="8" y1="42" x2="82" y2="10" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <span class="rf-nombre">recta</span>
+        <span class="rf-info">no se tuerce</span>
+      </div>
+      <div class="rf-caja">
+        <svg class="linea-svg" viewBox="0 0 90 50"><path d="M6 32 Q 25 6 45 32 T 84 32" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <span class="rf-nombre">curva</span>
+        <span class="rf-info">se dobla poco a poco</span>
+      </div>
+      <div class="rf-caja">
+        <svg class="linea-svg" viewBox="0 0 90 50"><polyline points="6,40 26,12 44,36 64,10 84,34" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="rf-nombre">poligonal abierta</span>
+        <span class="rf-info">trozos rectos unidos</span>
+      </div>
+      <div class="rf-caja">
+        <svg class="linea-svg" viewBox="0 0 90 50"><polygon points="45,5 74,17 65,44 24,45 14,16" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <span class="rf-nombre">poligonal cerrada</span>
+        <span class="rf-info">termina donde empezó</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Une</strong> cada línea con su <strong>nombre</strong>:</div>
+    <div class="unir-grid">
+      <div class="unir-col">
+        <div class="unir-fig"><svg viewBox="0 0 90 50"><path d="M8 8 C 50 2 18 42 50 36 C 74 32 64 46 82 44" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <div class="unir-fig"><svg viewBox="0 0 90 50"><polyline points="8,14 28,40 48,10 68,38 84,16" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="unir-fig"><svg viewBox="0 0 90 50"><line x1="8" y1="8" x2="82" y2="44" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <div class="unir-fig"><svg viewBox="0 0 90 50"><polygon points="16,12 76,7 68,44 24,40" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="unir-col">
+        <div class="unir-nom">recta</div>
+        <div class="unir-nom">poligonal cerrada</div>
+        <div class="unir-nom">curva</div>
+        <div class="unir-nom">poligonal abierta</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Rodea</strong> todas las líneas <strong>POLIGONALES</strong> (las de trozos rectos):</div>
+    <div class="rodear-mosaico">
+      <div class="rodear-fig"><svg viewBox="0 0 64 50"><polyline points="5,38 18,10 31,34 44,8 59,32" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="rodear-fig"><svg viewBox="0 0 64 50"><path d="M5 28 Q 17 6 30 28 T 59 28" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+      <div class="rodear-fig"><svg viewBox="0 0 64 50"><polygon points="32,5 56,18 47,44 14,40 9,16" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      <div class="rodear-fig"><svg viewBox="0 0 64 50"><line x1="7" y1="40" x2="57" y2="10" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+      <div class="rodear-fig"><svg viewBox="0 0 64 50"><polyline points="6,12 24,38 42,12 58,38" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="rodear-fig"><svg viewBox="0 0 64 50"><path d="M7 40 C 24 4 48 10 38 26 C 31 37 17 30 25 19 C 34 8 52 20 57 38" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Escribe</strong> ABIERTA o CERRADA debajo de cada línea:</div>
+    <div class="escribir-fila">
+      <div class="escribir-caja">
+        <svg viewBox="0 0 70 52"><polygon points="18,8 58,13 50,44 10,38" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <div class="escribir-hueco"></div>
+      </div>
+      <div class="escribir-caja">
+        <svg viewBox="0 0 70 52"><path d="M52 9 C 14 11 14 42 52 44" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="escribir-hueco"></div>
+      </div>
+      <div class="escribir-caja">
+        <svg viewBox="0 0 70 52"><polyline points="8,42 24,10 40,36 60,14" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="escribir-hueco"></div>
+      </div>
+      <div class="escribir-caja">
+        <svg viewBox="0 0 70 52"><path d="M35 8 C 55 6 63 20 56 36 C 48 49 18 47 11 32 C 5 17 17 9 35 8 Z" fill="none" stroke="#000" stroke-width="2.5"/></svg>
+        <div class="escribir-hueco"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Rodea</strong> V si es verdadero o F si es falso:</div>
+    <div class="vf-lista">
+      <div class="vf-item"><span>Una línea poligonal está hecha de trozos rectos.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+      <div class="vf-item"><span>Las líneas curvas se doblan poco a poco.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+      <div class="vf-item"><span>Una línea recta se tuerce.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+      <div class="vf-item"><span>Una línea poligonal cerrada termina donde empezó.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
