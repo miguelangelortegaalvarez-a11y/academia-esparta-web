@@ -284,7 +284,12 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 **BLOQUE `geometria` DE 2º COMPLETO ✅** (16 fichas: figuras-planas 4 + cuerpos-geometricos 4 + lineas 4 + simetria 4).
 
-**Arrancar por:** ~~`numeros`~~ ✅ (21) → ~~`operaciones`~~ ✅ (33) → ~~`medida`~~ ✅ (19) → ~~`geometria`~~ ✅ (16) → **siguiente bloque de 2º: `estadistica`** (tablas-de-datos · graficos-de-barras · pictogramas) → `problemas`.
+**Bloque `estadistica` de 2º — EN MARCHA (2026-06-12/13):** generado con el patrón de agentes en paralelo (1 agente por ficha; los agentes NO tienen Bash → la validación PDF/llenado la hace la sesión madre en lote con `/tmp/validar_ficha.py`, Chrome headless + PyObjC Quartz + PIL, rango 88-95%).
+- **`tablas-de-datos` (4 fichas, COMPLETO ✅, commit 8772b68, 2026-06-12):** avances de 2º = **recuento con palotes** + **tabla de doble entrada** + preguntas con suma/llevada y resta/prestar. **Componente SVG palotes nuevo reusable** (`.palote5` grupo de 5 con el quinto cruzado, `.palote1` suelto, `.recuento`). f1 recuento con palotes (Recuerda 1/3/5/7 + mosaico 18 mascotas 7/6/5 + leer palotes 12/8/4/10 + preguntas + V/F) · f2 leer/completar tablas con números grandes (cuentos 24/17/31/9: 24+17, 31−9; granja 15/12/8/20 + ordenar + V/F) · f3 **tabla de doble entrada** (Recuerda con celda cruzada resaltada + recreo niños/niñas + columna TOTAL + bocadillos 2ºA/2ºB con operaciones) · f4 repaso página entera (palotes frutas 6/4/3/3 + doble entrada granjas con TOTAL + ordenar + V/F).
+- **`graficos-de-barras` (4 fichas, COMPLETO ✅, 2026-06-13):** avance estrella de estadística en 2º. **Componente SVG nuevo reusable: gráfico de barras vertical** — viewBox `0 0 320 196`, rejilla `#bbb` cada 20px (1 unidad), eje 0-8, barra = `rect` con `y=170−20·v`/`height=20·v` fill `#d6d6d6`, etiquetas y=186; **variante vacía** con columnas guía punteadas (`stroke-dasharray 4,3`) para que el alumno dibuje. Escala SIEMPRE 1 cuadrado = 1 (la escala de 2 en 2 es de 3º). f1 leer (Recuerda + mini-gráfico helados + mascotas 7/5/3/6) · f2 dibujar barras desde tabla (frutas 6/4/7/3 + deportes 8/5/2) · f3 leer/comparar/calcular (libros por día 4/6/2/5/8 + operaciones + ordenar 5 puestos) · f4 repaso (leer helados 5/7/8/4 + dibujar flores 6/8/5 + V/F).
+- ⚠️ Lección validación: pasar SIEMPRE ruta absoluta a `validar_ficha.py` — con ruta relativa y CWD cambiado, Chrome genera un PDF de error (ERR_FILE_NOT_FOUND) que mide ~37% y confunde.
+
+**Arrancar por:** ~~`numeros`~~ ✅ (21) → ~~`operaciones`~~ ✅ (33) → ~~`medida`~~ ✅ (19) → ~~`geometria`~~ ✅ (16) → **`estadistica` EN MARCHA: tablas-de-datos ✅ (4) · graficos-de-barras ✅ (4) · siguiente: `pictogramas` (cierra el bloque)** → `problemas` (último bloque de 2º).
 
 ---
 

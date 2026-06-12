@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gráficos de barras · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.5rem 1.5rem 0.7rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* ══ MANDOS DE AJUSTE DE LLENADO ══
+       1) max-width de .grafico (sube a 340-380px si la página queda corta; baja a 280px si se pasa)
+       2) margin-bottom de .ej-block (subir/bajar 2-4px)
+       3) gap de .preg-lista y .vf-lista */
+    .grafico { width: 100%; max-width: 310px; height: auto; display: block; margin: 0 auto; }
+
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 5px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Ejercicio 1: gráfico + tabla al lado */
+    .e1-wrap { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; }
+    .tabla-rellenar { border-collapse: collapse; font-size: 13px; }
+    .tabla-rellenar th, .tabla-rellenar td { border: 1.5px solid #000; padding: 4px 12px; text-align: center; font-weight: 700; }
+    .tabla-rellenar th { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .tabla-rellenar .num-hueco { min-width: 64px; height: 30px; }
+    .tabla-rellenar .num-dado { font-family: sans-serif; font-size: 15px; font-weight: 800; }
+    .centrar { display: flex; justify-content: center; }
+
+    /* Ejercicio 2: preguntas con operación */
+    .preg-lista { display: flex; flex-direction: column; gap: 11px; }
+    .preg-fila { font-size: 13.5px; line-height: 1.35; }
+    .preg-hueco-op { display: inline-block; min-width: 180px; border-bottom: 1.5px solid #000; height: 16px; vertical-align: middle; margin-left: 4px; }
+
+    /* Ejercicio 4: V/F con píldoras */
+    .vf-lista { display: flex; flex-direction: column; gap: 9px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 23px; height: 23px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .footer { margin-top: 10px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Gráficos de barras</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📊 Gráficos de barras</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> El quiosco apunta los helados que vende. <strong>Lee el gráfico</strong> y <strong>completa la tabla</strong>:</div>
+    <div class="e1-wrap">
+      <!-- Gráfico CON barras: Vainilla 5 · Fresa 7 · Chocolate 8 · Limón 4 -->
+      <svg class="grafico" viewBox="0 0 320 196">
+        <!-- Rejilla -->
+        <line x1="40" y1="150" x2="310" y2="150" stroke="#bbb" stroke-width="1"/>
+        <line x1="40" y1="130" x2="310" y2="130" stroke="#bbb" stroke-width="1"/>
+        <line x1="40" y1="110" x2="310" y2="110" stroke="#bbb" stroke-width="1"/>
+        <line x1="40" y1="90" x2="310" y2="90" stroke="#bbb" stroke-width="1"/>
+        <line x1="40" y1="70" x2="310" y2="70" stroke="#bbb" stroke-width="1"/>
+        <line x1="40" y1="50" x2="310" y2="50" stroke="#bbb" stroke-width="1"/>
+        <line x1="40" y1="30" x2="310" y2="30" stroke="#bbb" stroke-width="1"/>
+        <line x1="40" y1="10" x2="310" y2="10" stroke="#bbb" stroke-width="1"/>
+        <!-- Barras -->
+        <rect x="60" y="70" width="36" height="100" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/>
+        <rect x="124" y="30" width="36" height="140" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/>
+        <rect x="188" y="10" width="36" height="160" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/>
+        <rect x="252" y="90" width="36" height="80" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/>
+        <!-- Ejes -->
+        <line x1="40" y1="10" x2="40" y2="170" stroke="#000" stroke-width="2"/>
+        <line x1="40" y1="170" x2="310" y2="170" stroke="#000" stroke-width="2"/>
+        <!-- Números del eje -->
+        <text x="32" y="174" text-anchor="end" font-family="sans-serif" font-size="11">0</text>
+        <text x="32" y="154" text-anchor="end" font-family="sans-serif" font-size="11">1</text>
+        <text x="32" y="134" text-anchor="end" font-family="sans-serif" font-size="11">2</text>
+        <text x="32" y="114" text-anchor="end" font-family="sans-serif" font-size="11">3</text>
+        <text x="32" y="94" text-anchor="end" font-family="sans-serif" font-size="11">4</text>
+        <text x="32" y="74" text-anchor="end" font-family="sans-serif" font-size="11">5</text>
+        <text x="32" y="54" text-anchor="end" font-family="sans-serif" font-size="11">6</text>
+        <text x="32" y="34" text-anchor="end" font-family="sans-serif" font-size="11">7</text>
+        <text x="32" y="14" text-anchor="end" font-family="sans-serif" font-size="11">8</text>
+        <!-- Etiquetas -->
+        <text x="78" y="186" text-anchor="middle" font-family="sans-serif" font-size="11">Vainilla</text>
+        <text x="142" y="186" text-anchor="middle" font-family="sans-serif" font-size="11">Fresa</text>
+        <text x="206" y="186" text-anchor="middle" font-family="sans-serif" font-size="11">Chocolate</text>
+        <text x="270" y="186" text-anchor="middle" font-family="sans-serif" font-size="11">Limón</text>
+      </svg>
+      <table class="tabla-rellenar">
+        <tr><th>Helado</th><th>Cantidad</th></tr>
+        <tr><td>Vainilla</td><td class="num-hueco"></td></tr>
+        <tr><td>Fresa</td><td class="num-hueco"></td></tr>
+        <tr><td>Chocolate</td><td class="num-hueco"></td></tr>
+        <tr><td>Limón</td><td class="num-hueco"></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Mira el gráfico de los helados. <strong>Escribe la operación y el resultado</strong>:</div>
+    <div class="preg-lista">
+      <div class="preg-fila">a) ¿Cuántos helados de chocolate <strong>más que</strong> de limón se vendieron? <span class="preg-hueco-op"></span></div>
+      <div class="preg-fila">b) ¿Cuántos helados de vainilla y fresa se vendieron <strong>juntos</strong>? <span class="preg-hueco-op"></span></div>
+      <div class="preg-fila">c) ¿Cuántos helados se vendieron <strong>EN TOTAL</strong>? <span class="preg-hueco-op"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> En el jardín hemos contado las flores. <strong>Dibuja el gráfico</strong> con los datos de la tabla:</div>
+    <div class="centrar" style="margin-bottom: 6px;">
+      <table class="tabla-rellenar">
+        <tr><th>Flor</th><th>Cantidad</th></tr>
+        <tr><td>Rosas</td><td class="num-dado">6</td></tr>
+        <tr><td>Margaritas</td><td class="num-dado">8</td></tr>
+        <tr><td>Tulipanes</td><td class="num-dado">5</td></tr>
+      </table>
+    </div>
+    <!-- Gráfico VACÍO de 3 columnas: Rosas · Margaritas · Tulipanes -->
+    <svg class="grafico" viewBox="0 0 320 196">
+      <!-- Rejilla -->
+      <line x1="40" y1="150" x2="310" y2="150" stroke="#bbb" stroke-width="1"/>
+      <line x1="40" y1="130" x2="310" y2="130" stroke="#bbb" stroke-width="1"/>
+      <line x1="40" y1="110" x2="310" y2="110" stroke="#bbb" stroke-width="1"/>
+      <line x1="40" y1="90" x2="310" y2="90" stroke="#bbb" stroke-width="1"/>
+      <line x1="40" y1="70" x2="310" y2="70" stroke="#bbb" stroke-width="1"/>
+      <line x1="40" y1="50" x2="310" y2="50" stroke="#bbb" stroke-width="1"/>
+      <line x1="40" y1="30" x2="310" y2="30" stroke="#bbb" stroke-width="1"/>
+      <line x1="40" y1="10" x2="310" y2="10" stroke="#bbb" stroke-width="1"/>
+      <!-- Columnas guía punteadas -->
+      <rect x="76" y="10" width="36" height="160" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="142" y="10" width="36" height="160" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="208" y="10" width="36" height="160" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+      <!-- Ejes -->
+      <line x1="40" y1="10" x2="40" y2="170" stroke="#000" stroke-width="2"/>
+      <line x1="40" y1="170" x2="310" y2="170" stroke="#000" stroke-width="2"/>
+      <!-- Números del eje -->
+      <text x="32" y="174" text-anchor="end" font-family="sans-serif" font-size="11">0</text>
+      <text x="32" y="154" text-anchor="end" font-family="sans-serif" font-size="11">1</text>
+      <text x="32" y="134" text-anchor="end" font-family="sans-serif" font-size="11">2</text>
+      <text x="32" y="114" text-anchor="end" font-family="sans-serif" font-size="11">3</text>
+      <text x="32" y="94" text-anchor="end" font-family="sans-serif" font-size="11">4</text>
+      <text x="32" y="74" text-anchor="end" font-family="sans-serif" font-size="11">5</text>
+      <text x="32" y="54" text-anchor="end" font-family="sans-serif" font-size="11">6</text>
+      <text x="32" y="34" text-anchor="end" font-family="sans-serif" font-size="11">7</text>
+      <text x="32" y="14" text-anchor="end" font-family="sans-serif" font-size="11">8</text>
+      <!-- Etiquetas -->
+      <text x="94" y="186" text-anchor="middle" font-family="sans-serif" font-size="11">Rosas</text>
+      <text x="160" y="186" text-anchor="middle" font-family="sans-serif" font-size="11">Margaritas</text>
+      <text x="226" y="186" text-anchor="middle" font-family="sans-serif" font-size="11">Tulipanes</text>
+    </svg>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Rodea</strong> V (verdadero) o F (falso). Mira el gráfico de los helados:</div>
+    <div class="vf-lista">
+      <div class="vf-fila">
+        <span>1. El helado más vendido es el de chocolate.</span>
+        <span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span>
+      </div>
+      <div class="vf-fila">
+        <span>2. Se vendieron 5 helados de fresa.</span>
+        <span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span>
+      </div>
+      <div class="vf-fila">
+        <span>3. El de limón es el menos vendido.</span>
+        <span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span>
+      </div>
+      <div class="vf-fila">
+        <span>4. Vainilla y limón suman 10 helados.</span>
+        <span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
