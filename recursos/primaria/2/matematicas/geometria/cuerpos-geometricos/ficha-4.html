@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuerpos geométricos · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 3px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 5px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 5px; }
+
+    .ej-block { margin-bottom: 11px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    .figura-mini { width: 38px; height: 38px; }
+
+    .banco { border: 1.5px dashed #000; border-radius: 8px; padding: 5px 10px; text-align: center; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+
+    /* Ejercicio 1: escribir el nombre */
+    .nombrar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .nombrar-caja { border: 1.5px solid #000; border-radius: 8px; padding: 6px 8px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .nombrar-linea { border-bottom: 1.5px solid #000; height: 22px; width: 100%; }
+
+    /* Ejercicio 2: unir cuerpo ↔ figura plana */
+    .unir-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 40px; align-items: center; }
+    .unir-col { display: flex; flex-direction: column; gap: 5px; align-items: center; }
+    .unir-fig { display: flex; align-items: center; justify-content: center; min-height: 40px; }
+    .unir-fig svg { width: 40px; height: 40px; }
+    .unir-caja { border: 1.5px solid #000; border-radius: 8px; padding: 3px 8px; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 40px; }
+    .unir-caja svg { width: 30px; height: 30px; }
+    .unir-caja span { font-size: 12.5px; font-weight: 700; }
+
+    /* Ejercicio 3: rodear */
+    .rodear-mosaico { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
+    .rodear-fig { border: 1.5px dashed #000; border-radius: 8px; padding: 3px; display: flex; align-items: center; justify-content: center; min-height: 48px; }
+
+    /* Ejercicio 4: verdadero o falso */
+    .vf-lista { display: flex; flex-direction: column; gap: 7px; }
+    .vf-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; border-bottom: 1px dotted #999; padding-bottom: 4px; }
+    .vf-opciones { font-family: sans-serif; font-weight: 700; font-size: 12.5px; white-space: nowrap; }
+
+    /* Ejercicio 5: dibujar objetos */
+    .dibujar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .dibujar-caja { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .dibujar-titulo { font-size: 12px; font-weight: 700; text-align: center; }
+    .dibujar-zona { border: 1.5px solid #000; border-radius: 8px; width: 100%; height: 116px; }
+
+    .footer { margin-top: 4px; padding-top: 2px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Cuerpos geométricos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🧊 Cuerpos geométricos: repaso</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Escribe el nombre</strong> de cada cuerpo (te ayudamos con el banco):</div>
+    <div class="banco">esfera · prisma · cono · cubo · pirámide · cilindro</div>
+    <div class="nombrar-grid">
+      <div class="nombrar-caja">
+        <svg class="figura-mini" viewBox="0 0 60 60">
+          <line x1="30" y1="10" x2="12" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="30" y1="10" x2="48" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 12 46 A 18 5 0 0 0 48 46" fill="none" stroke="#000" stroke-width="2.5"/>
+          <path d="M 12 46 A 18 5 0 0 1 48 46" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="3,2"/>
+        </svg>
+        <div class="nombrar-linea"></div>
+      </div>
+      <div class="nombrar-caja">
+        <svg class="figura-mini" viewBox="0 0 60 60">
+          <rect x="10" y="22" width="30" height="30" fill="none" stroke="#000" stroke-width="2.5"/>
+          <polygon points="10,22 22,10 52,10 40,22" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+          <polygon points="40,22 52,10 52,40 40,52" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="nombrar-linea"></div>
+      </div>
+      <div class="nombrar-caja">
+        <svg class="figura-mini" viewBox="0 0 60 60">
+          <circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="2.5"/>
+          <ellipse cx="30" cy="30" rx="22" ry="7" fill="none" stroke="#000" stroke-width="1.5"/>
+        </svg>
+        <div class="nombrar-linea"></div>
+      </div>
+      <div class="nombrar-caja">
+        <svg class="figura-mini" viewBox="0 0 60 60">
+          <line x1="30" y1="8" x2="10" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="30" y1="8" x2="50" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="30" y1="8" x2="30" y2="54" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <polyline points="10,46 30,54 50,46" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+          <polyline points="10,46 30,40 50,46" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="3,2"/>
+        </svg>
+        <div class="nombrar-linea"></div>
+      </div>
+      <div class="nombrar-caja">
+        <svg class="figura-mini" viewBox="0 0 60 60">
+          <ellipse cx="30" cy="12" rx="16" ry="5" fill="none" stroke="#000" stroke-width="2.5"/>
+          <line x1="14" y1="12" x2="14" y2="48" stroke="#000" stroke-width="2.5"/>
+          <line x1="46" y1="12" x2="46" y2="48" stroke="#000" stroke-width="2.5"/>
+          <path d="M 14 48 A 16 5 0 0 0 46 48" fill="none" stroke="#000" stroke-width="2.5"/>
+          <path d="M 14 48 A 16 5 0 0 1 46 48" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="3,2"/>
+        </svg>
+        <div class="nombrar-linea"></div>
+      </div>
+      <div class="nombrar-caja">
+        <svg class="figura-mini" viewBox="0 0 60 60">
+          <rect x="6" y="26" width="32" height="22" fill="none" stroke="#000" stroke-width="2.5"/>
+          <polygon points="6,26 16,16 48,16 38,26" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+          <polygon points="38,26 48,16 48,38 38,48" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="nombrar-linea"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Une</strong> cada cuerpo con la <strong>figura plana</strong> de sus caras:</div>
+    <div class="unir-grid">
+      <div class="unir-col">
+        <div class="unir-fig">
+          <svg viewBox="0 0 60 60">
+            <line x1="30" y1="8" x2="10" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="30" y1="8" x2="50" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="30" y1="8" x2="30" y2="54" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="10,46 30,54 50,46" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+            <polyline points="10,46 30,40 50,46" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="3,2"/>
+          </svg>
+        </div>
+        <div class="unir-fig">
+          <svg viewBox="0 0 60 60">
+            <ellipse cx="30" cy="12" rx="16" ry="5" fill="none" stroke="#000" stroke-width="2.5"/>
+            <line x1="14" y1="12" x2="14" y2="48" stroke="#000" stroke-width="2.5"/>
+            <line x1="46" y1="12" x2="46" y2="48" stroke="#000" stroke-width="2.5"/>
+            <path d="M 14 48 A 16 5 0 0 0 46 48" fill="none" stroke="#000" stroke-width="2.5"/>
+            <path d="M 14 48 A 16 5 0 0 1 46 48" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="3,2"/>
+          </svg>
+        </div>
+        <div class="unir-fig">
+          <svg viewBox="0 0 60 60">
+            <rect x="10" y="22" width="30" height="30" fill="none" stroke="#000" stroke-width="2.5"/>
+            <polygon points="10,22 22,10 52,10 40,22" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+            <polygon points="40,22 52,10 52,40 40,52" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="unir-fig">
+          <svg viewBox="0 0 60 60">
+            <rect x="6" y="26" width="32" height="22" fill="none" stroke="#000" stroke-width="2.5"/>
+            <polygon points="6,26 16,16 48,16 38,26" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+            <polygon points="38,26 48,16 48,38 38,48" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="unir-col">
+        <div class="unir-caja">
+          <svg viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#000" stroke-width="3"/></svg>
+          <span>cuadrado</span>
+        </div>
+        <div class="unir-caja">
+          <svg viewBox="0 0 60 60"><polygon points="30,8 52,52 8,52" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+          <span>triángulo</span>
+        </div>
+        <div class="unir-caja">
+          <svg viewBox="0 0 60 60"><rect x="6" y="16" width="48" height="28" fill="none" stroke="#000" stroke-width="3"/></svg>
+          <span>rectángulo</span>
+        </div>
+        <div class="unir-caja">
+          <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3"/></svg>
+          <span>círculo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Rodea</strong> los cuerpos que <strong>NO ruedan</strong> (todo caras planas):</div>
+    <div class="rodear-mosaico">
+      <div class="rodear-fig"><svg class="figura-mini" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="2.5"/><ellipse cx="30" cy="30" rx="22" ry="7" fill="none" stroke="#000" stroke-width="1.5"/></svg></div>
+      <div class="rodear-fig"><svg class="figura-mini" viewBox="0 0 60 60"><rect x="10" y="22" width="30" height="30" fill="none" stroke="#000" stroke-width="2.5"/><polygon points="10,22 22,10 52,10 40,22" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><polygon points="40,22 52,10 52,40 40,52" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      <div class="rodear-fig"><svg class="figura-mini" viewBox="0 0 60 60"><ellipse cx="30" cy="12" rx="16" ry="5" fill="none" stroke="#000" stroke-width="2.5"/><line x1="14" y1="12" x2="14" y2="48" stroke="#000" stroke-width="2.5"/><line x1="46" y1="12" x2="46" y2="48" stroke="#000" stroke-width="2.5"/><path d="M 14 48 A 16 5 0 0 0 46 48" fill="none" stroke="#000" stroke-width="2.5"/></svg></div>
+      <div class="rodear-fig"><svg class="figura-mini" viewBox="0 0 60 60"><line x1="30" y1="8" x2="10" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="8" x2="50" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="8" x2="30" y2="54" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><polyline points="10,46 30,54 50,46" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      <div class="rodear-fig"><svg class="figura-mini" viewBox="0 0 60 60"><line x1="30" y1="10" x2="12" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="10" x2="48" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><path d="M 12 46 A 18 5 0 0 0 48 46" fill="none" stroke="#000" stroke-width="2.5"/></svg></div>
+      <div class="rodear-fig"><svg class="figura-mini" viewBox="0 0 60 60"><rect x="6" y="26" width="32" height="22" fill="none" stroke="#000" stroke-width="2.5"/><polygon points="6,26 16,16 48,16 38,26" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><polygon points="38,26 48,16 48,38 38,48" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Rodea</strong> V si es verdadero o F si es falso:</div>
+    <div class="vf-lista">
+      <div class="vf-item"><span>Las caras del cubo son cuadrados.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+      <div class="vf-item"><span>El cono rueda porque tiene una parte curva.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+      <div class="vf-item"><span>La pirámide de Egipto tiene forma de cubo.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+      <div class="vf-item"><span>El prisma tiene todas sus caras planas.</span><span class="vf-opciones">V&nbsp;&nbsp;·&nbsp;&nbsp;F</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> <strong>Dibuja</strong> un objeto de la vida real con la forma de cada cuerpo:</div>
+    <div class="dibujar-grid">
+      <div class="dibujar-caja">
+        <div class="dibujar-titulo">esfera</div>
+        <div class="dibujar-zona"></div>
+      </div>
+      <div class="dibujar-caja">
+        <div class="dibujar-titulo">cilindro</div>
+        <div class="dibujar-zona"></div>
+      </div>
+      <div class="dibujar-caja">
+        <div class="dibujar-titulo">cubo</div>
+        <div class="dibujar-zona"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

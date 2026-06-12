@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuerpos geométricos · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 3px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 5px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 5px; }
+
+    .ej-block { margin-bottom: 11px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    .figura-mini { width: 38px; height: 38px; }
+
+    /* Ejercicio 1: objeto real ↔ cuerpo */
+    .objetos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 40px; align-items: center; }
+    .objetos-col { display: flex; flex-direction: column; gap: 7px; align-items: center; }
+    .objeto-caja { display: flex; align-items: center; gap: 8px; min-height: 40px; }
+    .objeto-caja svg { width: 40px; height: 40px; }
+    .objeto-nombre { font-family: sans-serif; font-size: 10px; color: #555; }
+    .objetos-nom { border: 1.5px solid #000; border-radius: 8px; padding: 5px 8px; text-align: center; font-size: 13px; font-weight: 700; width: 100%; }
+
+    /* Ejercicio 2: escena — contar cuerpos */
+    .escena-grid { display: grid; grid-template-columns: 270px 1fr; gap: 16px; align-items: center; }
+    .escena-caja { border: 1.5px solid #000; border-radius: 10px; padding: 5px; display: flex; justify-content: center; }
+    .conteo-lista { display: flex; flex-direction: column; gap: 5px; }
+    .conteo-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; }
+    .conteo-hueco { width: 34px; height: 22px; border: 1.5px solid #000; border-radius: 5px; flex-shrink: 0; }
+    .conteo-fig { width: 24px; height: 24px; flex-shrink: 0; }
+
+    /* Ejercicio 3: el intruso */
+    .intruso-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 5px; }
+    .intruso-fig { border: 1.5px dashed #000; border-radius: 8px; padding: 3px; display: flex; align-items: center; justify-content: center; min-height: 50px; }
+
+    /* Ejercicio 4: adivinanzas */
+    .frases { display: flex; flex-direction: column; gap: 12px; }
+    .frase { font-size: 13.5px; line-height: 1.5; }
+    .hueco-frase { display: inline-block; border-bottom: 1.5px solid #000; min-width: 100px; height: 16px; vertical-align: bottom; }
+
+    .footer { margin-top: 3px; padding-top: 2px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Cuerpos geométricos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🧊 Cuerpos geométricos en el mundo real</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Une</strong> cada objeto con el cuerpo geométrico que tiene su <strong>forma</strong>:</div>
+    <div class="objetos-grid">
+      <div class="objetos-col">
+        <div class="objeto-caja">
+          <svg viewBox="0 0 60 60">
+            <ellipse cx="30" cy="12" rx="16" ry="5" fill="none" stroke="#000" stroke-width="2.5"/>
+            <line x1="14" y1="12" x2="14" y2="48" stroke="#000" stroke-width="2.5"/>
+            <line x1="46" y1="12" x2="46" y2="48" stroke="#000" stroke-width="2.5"/>
+            <path d="M 14 48 A 16 5 0 0 0 46 48" fill="none" stroke="#000" stroke-width="2.5"/>
+            <line x1="14" y1="24" x2="46" y2="24" stroke="#000" stroke-width="1.2"/>
+            <line x1="14" y1="38" x2="46" y2="38" stroke="#000" stroke-width="1.2"/>
+          </svg>
+          <span class="objeto-nombre">lata</span>
+        </div>
+        <div class="objeto-caja">
+          <svg viewBox="0 0 60 60">
+            <line x1="30" y1="8" x2="8" y2="50" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="30" y1="8" x2="52" y2="50" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="30" y1="8" x2="30" y2="56" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="8,50 30,56 52,50" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="15" y1="36" x2="45" y2="36" stroke="#000" stroke-width="1.2"/>
+            <line x1="11" y1="44" x2="49" y2="44" stroke="#000" stroke-width="1.2"/>
+          </svg>
+          <span class="objeto-nombre">pirámide de Egipto</span>
+        </div>
+        <div class="objeto-caja">
+          <svg viewBox="0 0 60 60">
+            <rect x="10" y="22" width="30" height="30" fill="none" stroke="#000" stroke-width="2.5"/>
+            <polygon points="10,22 22,10 52,10 40,22" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+            <polygon points="40,22 52,10 52,40 40,52" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="25" cy="37" r="2.5" fill="#000"/>
+            <circle cx="18" cy="30" r="2.5" fill="#000"/>
+            <circle cx="32" cy="44" r="2.5" fill="#000"/>
+            <circle cx="34" cy="14" r="2" fill="#000"/>
+            <circle cx="46" cy="28" r="2" fill="#000"/>
+          </svg>
+          <span class="objeto-nombre">dado</span>
+        </div>
+        <div class="objeto-caja">
+          <svg viewBox="0 0 60 60">
+            <circle cx="30" cy="16" r="11" fill="none" stroke="#000" stroke-width="2.5"/>
+            <ellipse cx="30" cy="28" rx="12" ry="4" fill="none" stroke="#000" stroke-width="2"/>
+            <line x1="18" y1="28" x2="30" y2="56" stroke="#000" stroke-width="2.5"/>
+            <line x1="42" y1="28" x2="30" y2="56" stroke="#000" stroke-width="2.5"/>
+            <line x1="22" y1="38" x2="36" y2="32" stroke="#000" stroke-width="1"/>
+            <line x1="25" y1="46" x2="35" y2="42" stroke="#000" stroke-width="1"/>
+          </svg>
+          <span class="objeto-nombre">cucurucho de helado</span>
+        </div>
+        <div class="objeto-caja">
+          <svg viewBox="0 0 60 60">
+            <rect x="6" y="26" width="32" height="22" fill="none" stroke="#000" stroke-width="2.5"/>
+            <polygon points="6,26 16,16 48,16 38,26" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+            <polygon points="38,26 48,16 48,38 38,48" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="6" y1="33" x2="38" y2="33" stroke="#000" stroke-width="1.2"/>
+            <line x1="38" y1="33" x2="48" y2="23" stroke="#000" stroke-width="1.2"/>
+          </svg>
+          <span class="objeto-nombre">caja de zapatos</span>
+        </div>
+        <div class="objeto-caja">
+          <svg viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="2.5"/>
+            <path d="M 12 18 Q 30 30 12 42" fill="none" stroke="#000" stroke-width="1.5"/>
+            <path d="M 48 18 Q 30 30 48 42" fill="none" stroke="#000" stroke-width="1.5"/>
+          </svg>
+          <span class="objeto-nombre">pelota</span>
+        </div>
+      </div>
+      <div class="objetos-col">
+        <div class="objetos-nom">cubo</div>
+        <div class="objetos-nom">cilindro</div>
+        <div class="objetos-nom">prisma</div>
+        <div class="objetos-nom">pirámide</div>
+        <div class="objetos-nom">esfera</div>
+        <div class="objetos-nom">cono</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Observa los <strong>juguetes</strong> y cuenta cuántos cuerpos hay de cada tipo:</div>
+    <div class="escena-grid">
+      <div class="escena-caja">
+        <svg width="262" height="212" viewBox="0 0 260 210">
+          <!-- regalo prisma -->
+          <rect x="8" y="162" width="52" height="30" fill="none" stroke="#000" stroke-width="2"/>
+          <polygon points="8,162 18,152 70,152 60,162" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+          <polygon points="60,162 70,152 70,182 60,192" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+          <line x1="34" y1="162" x2="34" y2="192" stroke="#000" stroke-width="1.2"/>
+          <line x1="44" y1="152" x2="34" y2="162" stroke="#000" stroke-width="1.2"/>
+          <!-- pirámide juguete -->
+          <line x1="88" y1="150" x2="68" y2="192" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+          <line x1="88" y1="150" x2="108" y2="192" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+          <line x1="88" y1="150" x2="88" y2="198" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+          <polyline points="68,192 88,198 108,192" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+          <!-- muñeco: cubo peana -->
+          <rect x="120" y="152" width="48" height="40" fill="none" stroke="#000" stroke-width="2"/>
+          <polygon points="120,152 132,140 180,140 168,152" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+          <polygon points="168,152 180,140 180,180 168,192" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+          <!-- muñeco: cilindro cuerpo -->
+          <ellipse cx="144" cy="100" rx="18" ry="5" fill="none" stroke="#000" stroke-width="2"/>
+          <line x1="126" y1="100" x2="126" y2="146" stroke="#000" stroke-width="2"/>
+          <line x1="162" y1="100" x2="162" y2="146" stroke="#000" stroke-width="2"/>
+          <path d="M 126 146 A 18 5 0 0 0 162 146" fill="none" stroke="#000" stroke-width="2"/>
+          <!-- muñeco: esfera cabeza -->
+          <circle cx="144" cy="78" r="19" fill="none" stroke="#000" stroke-width="2"/>
+          <!-- muñeco: cono gorro -->
+          <line x1="144" y1="28" x2="128" y2="60" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+          <line x1="144" y1="28" x2="160" y2="60" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 128 60 A 16 4.5 0 0 0 160 60" fill="none" stroke="#000" stroke-width="2"/>
+          <!-- cono de tráfico -->
+          <line x1="204" y1="140" x2="188" y2="192" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+          <line x1="204" y1="140" x2="220" y2="192" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 188 192 A 16 5 0 0 0 220 192" fill="none" stroke="#000" stroke-width="2"/>
+          <line x1="194" y1="172" x2="214" y2="172" stroke="#000" stroke-width="1.2"/>
+          <!-- pelota esfera -->
+          <circle cx="240" cy="178" r="15" fill="none" stroke="#000" stroke-width="2"/>
+          <ellipse cx="240" cy="178" rx="15" ry="5" fill="none" stroke="#000" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div class="conteo-lista">
+        <div class="conteo-item">
+          <svg class="conteo-fig" viewBox="0 0 60 60"><rect x="10" y="22" width="30" height="30" fill="none" stroke="#000" stroke-width="3"/><polygon points="10,22 22,10 52,10 40,22" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/><polygon points="40,22 52,10 52,40 40,52" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+          cubos: <span class="conteo-hueco"></span>
+        </div>
+        <div class="conteo-item">
+          <svg class="conteo-fig" viewBox="0 0 60 60"><rect x="6" y="26" width="32" height="22" fill="none" stroke="#000" stroke-width="3"/><polygon points="6,26 16,16 48,16 38,26" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/><polygon points="38,26 48,16 48,38 38,48" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+          prismas: <span class="conteo-hueco"></span>
+        </div>
+        <div class="conteo-item">
+          <svg class="conteo-fig" viewBox="0 0 60 60"><line x1="30" y1="8" x2="10" y2="46" stroke="#000" stroke-width="3" stroke-linecap="round"/><line x1="30" y1="8" x2="50" y2="46" stroke="#000" stroke-width="3" stroke-linecap="round"/><line x1="30" y1="8" x2="30" y2="54" stroke="#000" stroke-width="3" stroke-linecap="round"/><polyline points="10,46 30,54 50,46" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+          pirámides: <span class="conteo-hueco"></span>
+        </div>
+        <div class="conteo-item">
+          <svg class="conteo-fig" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="3"/><ellipse cx="30" cy="30" rx="22" ry="7" fill="none" stroke="#000" stroke-width="1.5"/></svg>
+          esferas: <span class="conteo-hueco"></span>
+        </div>
+        <div class="conteo-item">
+          <svg class="conteo-fig" viewBox="0 0 60 60"><ellipse cx="30" cy="12" rx="16" ry="5" fill="none" stroke="#000" stroke-width="3"/><line x1="14" y1="12" x2="14" y2="48" stroke="#000" stroke-width="3"/><line x1="46" y1="12" x2="46" y2="48" stroke="#000" stroke-width="3"/><path d="M 14 48 A 16 5 0 0 0 46 48" fill="none" stroke="#000" stroke-width="3"/></svg>
+          cilindros: <span class="conteo-hueco"></span>
+        </div>
+        <div class="conteo-item">
+          <svg class="conteo-fig" viewBox="0 0 60 60"><line x1="30" y1="10" x2="12" y2="46" stroke="#000" stroke-width="3" stroke-linecap="round"/><line x1="30" y1="10" x2="48" y2="46" stroke="#000" stroke-width="3" stroke-linecap="round"/><path d="M 12 46 A 18 5 0 0 0 48 46" fill="none" stroke="#000" stroke-width="3"/></svg>
+          conos: <span class="conteo-hueco"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Rodea el intruso</strong> de cada fila:</div>
+    <div class="intruso-fila">
+      <div class="intruso-fig"><svg class="figura-mini" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="2.5"/><ellipse cx="30" cy="30" rx="22" ry="7" fill="none" stroke="#000" stroke-width="1.5"/></svg></div>
+      <div class="intruso-fig"><svg class="figura-mini" viewBox="0 0 60 60"><ellipse cx="30" cy="12" rx="16" ry="5" fill="none" stroke="#000" stroke-width="2.5"/><line x1="14" y1="12" x2="14" y2="48" stroke="#000" stroke-width="2.5"/><line x1="46" y1="12" x2="46" y2="48" stroke="#000" stroke-width="2.5"/><path d="M 14 48 A 16 5 0 0 0 46 48" fill="none" stroke="#000" stroke-width="2.5"/></svg></div>
+      <div class="intruso-fig"><svg class="figura-mini" viewBox="0 0 60 60"><rect x="10" y="22" width="30" height="30" fill="none" stroke="#000" stroke-width="2.5"/><polygon points="10,22 22,10 52,10 40,22" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><polygon points="40,22 52,10 52,40 40,52" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      <div class="intruso-fig"><svg class="figura-mini" viewBox="0 0 60 60"><line x1="30" y1="10" x2="12" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="10" x2="48" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><path d="M 12 46 A 18 5 0 0 0 48 46" fill="none" stroke="#000" stroke-width="2.5"/></svg></div>
+    </div>
+    <div class="intruso-fila" style="margin-bottom:0;">
+      <div class="intruso-fig"><svg class="figura-mini" viewBox="0 0 60 60"><line x1="30" y1="8" x2="10" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="8" x2="50" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="8" x2="30" y2="54" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><polyline points="10,46 30,54 50,46" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      <div class="intruso-fig"><svg class="figura-mini" viewBox="0 0 60 60"><line x1="30" y1="8" x2="10" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="8" x2="50" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="8" x2="30" y2="54" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><polyline points="10,46 30,54 50,46" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      <div class="intruso-fig"><svg class="figura-mini" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#000" stroke-width="2.5"/><ellipse cx="30" cy="30" rx="22" ry="7" fill="none" stroke="#000" stroke-width="1.5"/></svg></div>
+      <div class="intruso-fig"><svg class="figura-mini" viewBox="0 0 60 60"><line x1="30" y1="8" x2="10" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="8" x2="50" y2="46" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="8" x2="30" y2="54" stroke="#000" stroke-width="2.5" stroke-linecap="round"/><polyline points="10,46 30,54 50,46" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Adivina</strong> qué cuerpo geométrico es:</div>
+    <div class="frases">
+      <div class="frase">a) Tengo 6 caras iguales. Soy el <span class="hueco-frase"></span>.</div>
+      <div class="frase">b) Soy redonda del todo y ruedo en todas las direcciones. Soy la <span class="hueco-frase"></span>.</div>
+      <div class="frase">c) Tengo una sola cara plana y termino en punta. Soy el <span class="hueco-frase"></span>.</div>
+      <div class="frase">d) Mis caras de los lados son triángulos. Soy la <span class="hueco-frase"></span>.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
