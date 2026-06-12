@@ -275,7 +275,10 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 **Bloque `medida` de 2º COMPLETO ✅** (19 fichas): longitud-metro-centimetro (3) · peso-y-capacidad (4) · el-reloj-horas-y-media (4) · monedas-y-billetes (4) · calendario (4).
 
-**Arrancar por:** ~~`numeros`~~ ✅ (21) → ~~`operaciones`~~ ✅ (33) → ~~`medida`~~ ✅ (19) → **siguiente bloque de 2º: `geometria`** (figuras-planas · cuerpos-geometricos · lineas-rectas-curvas-poligonales · simetria).
+**Bloque `geometria` de 2º — EN MARCHA:**
+- **`figuras-planas` (4 fichas, COMPLETO ✅, 2026-06-12):** avance clave de 2º = **polígonos, lados y vértices, pentágono y hexágono** (nuevos respecto a 1º). f1 Recuerda (6 tarjetas con vértices marcados con puntos; círculo = "NO es un polígono") + unir + contar lados/vértices + rodear pentágonos (mezclados con hexágonos ROTADOS para forzar contar lados) + V/F · f2 tabla nombre/lados/vértices + clasificar por nº de lados (banco) + dibujar polígonos de 3/4/5 lados + completar frases · f3 mundo real: unir objeto↔figura (señal, ventana, puerta, reloj, tuerca=hexágono — SVG nuevos) + **robot SVG compuesto** para contar figuras (2 triángulos, 1 cuadrado, 5 rectángulos, 5 círculos, 1 pentágono, 1 hexágono — verificado) + intruso (figuras rotadas) + continuar series dibujando · f4 repaso (nombrar con banco + unir nº lados + rodear solo polígonos + V/F + dibujar pentágono/hexágono con regla). **SVG pentágono/hexágono regulares reusables** (vértices sobre circunferencia r=24 centrada en viewBox 60×60; rotar con `transform="rotate(α 30 30)"`). Validadas 1 folio A4 (llenado 91-94%) con Chrome PDF + render PyObjC Quartz por página.
+
+**Arrancar por:** ~~`numeros`~~ ✅ (21) → ~~`operaciones`~~ ✅ (33) → ~~`medida`~~ ✅ (19) → **`geometria` EN MARCHA**: ~~figuras-planas~~ ✅ (4) → **siguiente: `cuerpos-geometricos`** → lineas-rectas-curvas-poligonales → simetria.
 
 ---
 
