@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tablas de datos · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.5rem 1.5rem 0.7rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    .ej-block { margin-bottom: 13px; }
+    .ej-enunciado { font-size: 12.5px; font-weight: 700; margin-bottom: 6px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    .tabla-datos { border-collapse: collapse; font-size: 13.5px; }
+    .tabla-datos th, .tabla-datos td { border: 1.5px solid #000; padding: 5px 18px; text-align: center; font-weight: 700; }
+    .tabla-datos th { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .tabla-datos .hueco-celda { min-width: 70px; height: 24px; }
+
+    /* Ej 1: tabla + preguntas */
+    .e1-wrap { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; }
+    .preg-lista { display: flex; flex-direction: column; gap: 9px; }
+    .preg-fila { font-size: 12.5px; line-height: 1.4; }
+    .preg-hueco { display: inline-block; min-width: 50px; border-bottom: 1.5px solid #000; height: 18px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-grande { display: inline-block; min-width: 95px; border-bottom: 1.5px solid #000; height: 18px; vertical-align: middle; margin-left: 4px; }
+
+    /* Ej 2: texto + tabla a completar */
+    .e2-wrap { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; }
+    .texto-caja { border: 2px solid #000; border-radius: 10px; padding: 10px 14px; font-size: 13.5px; line-height: 1.6; }
+
+    /* Ej 3: operación + resultado */
+    .op-lista { display: flex; flex-direction: column; gap: 9px; }
+    .op-fila { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; font-size: 12.5px; line-height: 1.35; }
+    .op-caja { border: 1.5px dashed #000; border-radius: 8px; width: 110px; height: 30px; display: flex; align-items: center; justify-content: flex-start; padding-left: 8px; font-family: sans-serif; font-size: 9px; color: #777; }
+    .res-caja { border: 1.5px solid #000; border-radius: 8px; width: 64px; height: 30px; display: flex; align-items: center; justify-content: flex-start; padding-left: 8px; font-family: sans-serif; font-size: 9px; color: #777; }
+
+    /* Ej 4: ordenar */
+    .orden-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .orden-item { text-align: center; }
+    .orden-num { font-size: 12px; font-weight: 700; margin-bottom: 4px; font-family: sans-serif; }
+    .orden-caja { border: 2px solid #000; border-radius: 10px; height: 44px; }
+    .orden-flecha { font-size: 12px; font-family: sans-serif; color: #555; }
+
+    /* Ej 5: V o F */
+    .vf-lista { display: flex; flex-direction: column; gap: 9px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 12.5px; line-height: 1.35; }
+    .vf-pildoras { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border: 1.5px solid #000; border-radius: 50%; font-weight: 700; font-size: 13px; }
+
+    .footer { margin-top: 10px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Tablas de datos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📊 Tablas de datos</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Esta tabla muestra los <strong>cuentos</strong> que ha leído cada niño este trimestre. <strong>Léela y responde</strong>:</div>
+    <div class="e1-wrap">
+      <table class="tabla-datos">
+        <tr><th>Niño/a</th><th>Cuentos leídos</th></tr>
+        <tr><td>Marta</td><td>24</td></tr>
+        <tr><td>Hugo</td><td>17</td></tr>
+        <tr><td>Vera</td><td>31</td></tr>
+        <tr><td>Leo</td><td>9</td></tr>
+      </table>
+      <div class="preg-lista">
+        <div class="preg-fila">a) ¿Cuántos cuentos ha leído <strong>Vera</strong>? <span class="preg-hueco"></span></div>
+        <div class="preg-fila">b) ¿Quién ha leído <strong>MÁS</strong> cuentos? <span class="preg-hueco-grande"></span></div>
+        <div class="preg-fila">c) ¿Quién ha leído <strong>MENOS</strong>? <span class="preg-hueco-grande"></span></div>
+        <div class="preg-fila">d) ¿Cuántos cuentos han leído <strong>Marta y Hugo</strong> entre los dos? <span class="preg-hueco-grande"></span></div>
+        <div class="preg-fila">e) ¿Cuántos cuentos <strong>más</strong> ha leído Vera que Leo? <span class="preg-hueco-grande"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Lee y completa</strong> la tabla con los datos del texto:</div>
+    <div class="e2-wrap">
+      <div class="texto-caja">«En la granja de mi abuelo hay <strong>15 gallinas</strong>, <strong>12 ovejas</strong>, <strong>8 vacas</strong> y <strong>20 conejos</strong>.»</div>
+      <table class="tabla-datos">
+        <tr><th>Animal</th><th>Cantidad</th></tr>
+        <tr><td>Gallinas</td><td class="hueco-celda"></td></tr>
+        <tr><td>Ovejas</td><td class="hueco-celda"></td></tr>
+        <tr><td>Vacas</td><td class="hueco-celda"></td></tr>
+        <tr><td>Conejos</td><td class="hueco-celda"></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Usa la tabla del ejercicio 2. <strong>Escribe la operación y el resultado</strong>:</div>
+    <div class="op-lista">
+      <div class="op-fila">
+        <span>a) ¿Cuántas <strong>gallinas y vacas</strong> hay en total?</span>
+        <div class="op-caja">OPERACIÓN</div>
+        <div class="res-caja">RESULTADO</div>
+      </div>
+      <div class="op-fila">
+        <span>b) ¿Cuántos <strong>conejos más que ovejas</strong> hay?</span>
+        <div class="op-caja">OPERACIÓN</div>
+        <div class="res-caja">RESULTADO</div>
+      </div>
+      <div class="op-fila">
+        <span>c) ¿Cuántos animales hay entre <strong>ovejas y conejos</strong>?</span>
+        <div class="op-caja">OPERACIÓN</div>
+        <div class="res-caja">RESULTADO</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Ordena</strong> los animales de la granja del que hay <strong>MÁS</strong> al que hay <strong>MENOS</strong>:</div>
+    <div class="orden-fila">
+      <div class="orden-item">
+        <div class="orden-num">1º (más) <span class="orden-flecha">→</span></div>
+        <div class="orden-caja"></div>
+      </div>
+      <div class="orden-item">
+        <div class="orden-num">2º <span class="orden-flecha">→</span></div>
+        <div class="orden-caja"></div>
+      </div>
+      <div class="orden-item">
+        <div class="orden-num">3º <span class="orden-flecha">→</span></div>
+        <div class="orden-caja"></div>
+      </div>
+      <div class="orden-item">
+        <div class="orden-num">4º (menos)</div>
+        <div class="orden-caja"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> <strong>Rodea V o F</strong>:</div>
+    <div class="vf-lista">
+      <div class="vf-fila">
+        <span>1. Hay más ovejas que vacas.</span>
+        <div class="vf-pildoras"><span class="vf">V</span><span class="vf">F</span></div>
+      </div>
+      <div class="vf-fila">
+        <span>2. En la granja hay 18 conejos.</span>
+        <div class="vf-pildoras"><span class="vf">V</span><span class="vf">F</span></div>
+      </div>
+      <div class="vf-fila">
+        <span>3. Las gallinas son el grupo más numeroso.</span>
+        <div class="vf-pildoras"><span class="vf">V</span><span class="vf">F</span></div>
+      </div>
+      <div class="vf-fila">
+        <span>4. Entre gallinas y ovejas suman 27 animales.</span>
+        <div class="vf-pildoras"><span class="vf">V</span><span class="vf">F</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

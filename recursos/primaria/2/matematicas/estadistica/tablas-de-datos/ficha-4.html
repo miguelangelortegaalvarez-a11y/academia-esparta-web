@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tablas de datos · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.5rem 1.5rem 0.7rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    .ej-block { margin-bottom: 10px; }
+    .ej-enunciado { font-size: 12.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    /* Palotes de recuento */
+    .recuento { display: flex; gap: 6px; align-items: center; justify-content: center; }
+    .palote5 { width: 30px; height: 26px; }
+    .palote1 { width: 9px; height: 26px; }
+    .palote5 line, .palote1 line { stroke: #000; stroke-width: 2.5; stroke-linecap: round; }
+    .pista-palotes { font-size: 11.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .pista-palotes .recuento { justify-content: flex-start; }
+
+    /* Ejercicio 1: mosaico + tabla de recuento */
+    .e1-wrap { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; }
+    .mosaico { border: 2px solid #000; border-radius: 10px; padding: 10px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; justify-items: center; align-items: center; }
+    .mosaico svg { width: 36px; height: 36px; }
+    .tabla-rellenar { border-collapse: collapse; font-size: 13px; width: 100%; }
+    .tabla-rellenar th, .tabla-rellenar td { border: 1.5px solid #000; padding: 5px 10px; text-align: center; font-weight: 700; }
+    .tabla-rellenar th { background: #f3f3f3; font-size: 11px; font-family: sans-serif; }
+    .tabla-rellenar svg { width: 26px; height: 26px; vertical-align: middle; }
+    .tabla-rellenar .celda-recuento { min-width: 130px; height: 34px; }
+    .tabla-rellenar .celda-num { min-width: 52px; height: 34px; }
+
+    /* Ejercicio 2: preguntas */
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 12.5px; line-height: 1.4; }
+    .preg-hueco { display: inline-block; min-width: 44px; border-bottom: 1.5px solid #000; height: 19px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-grande { display: inline-block; min-width: 95px; border-bottom: 1.5px solid #000; height: 19px; vertical-align: middle; margin-left: 4px; }
+    .preg-lista-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; }
+
+    /* Ejercicio 3: tabla de doble entrada */
+    .tabla-doble { border-collapse: collapse; font-size: 13px; margin: 0 auto 7px; }
+    .tabla-doble th, .tabla-doble td { border: 1.5px solid #000; padding: 6px 16px; text-align: center; font-weight: 700; }
+    .tabla-doble th { background: #f3f3f3; font-size: 11px; font-family: sans-serif; }
+    .tabla-doble .fila-nombre { font-size: 12.5px; background: #fafafa; }
+    .tabla-doble .celda-total { min-width: 62px; height: 30px; }
+
+    /* Ejercicio 4: ordenar */
+    .ordenar-puestos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: center; }
+    .ordenar-puesto { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .ordenar-num { font-family: sans-serif; font-size: 11.5px; font-weight: 700; color: #555; }
+    .ordenar-hueco { width: 100%; height: 40px; border: 1.5px solid #000; border-radius: 8px; }
+
+    /* Ejercicio 5: V/F */
+    .vf-lista { display: flex; flex-direction: column; gap: 6px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; border: 1.5px solid #000; border-radius: 999px; padding: 4px 8px 4px 14px; font-size: 12.5px; }
+    .vf-opciones { display: flex; gap: 8px; }
+    .vf-circ { width: 26px; height: 26px; border: 1.5px solid #000; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12.5px; font-family: sans-serif; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Tablas de datos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📊 Tablas de datos</div>
+
+  <!-- EJERCICIO 1: mosaico + recuento con palotes -->
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Cuenta</strong> las frutas, haz el <strong>recuento con palotes</strong> y escribe el <strong>número</strong>:</div>
+    <div class="pista-palotes">
+      Ejemplo:
+      <span class="recuento">
+        <svg class="palote5" viewBox="0 0 36 30"><line x1="5" y1="4" x2="5" y2="26"/><line x1="13" y1="4" x2="13" y2="26"/><line x1="21" y1="4" x2="21" y2="26"/><line x1="29" y1="4" x2="29" y2="26"/><line x1="1" y1="23" x2="33" y2="7"/></svg>
+        <svg class="palote1" viewBox="0 0 10 30"><line x1="5" y1="4" x2="5" y2="26"/></svg>
+        <svg class="palote1" viewBox="0 0 10 30"><line x1="5" y1="4" x2="5" y2="26"/></svg>
+      </span>
+      = 7
+    </div>
+    <div class="e1-wrap">
+      <div class="mosaico">
+        <!-- Fila 1: manzana, plátano, pera, uva -->
+        <svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2"/><path d="M 32 12 Q 40 8 42 14" fill="none" stroke="#000" stroke-width="1.5"/></svg>
+        <svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="14" x2="30" y2="8" stroke="#000" stroke-width="1.5"/></svg>
+        <svg viewBox="0 0 60 60"><circle cx="20" cy="26" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="30" cy="22" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="40" cy="26" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="25" cy="35" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="35" cy="35" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="30" cy="44" r="5" fill="none" stroke="#000" stroke-width="2"/><line x1="30" y1="17" x2="32" y2="8" stroke="#000" stroke-width="1.5"/></svg>
+        <!-- Fila 2: manzana, uva, plátano, manzana -->
+        <svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2"/><path d="M 32 12 Q 40 8 42 14" fill="none" stroke="#000" stroke-width="1.5"/></svg>
+        <svg viewBox="0 0 60 60"><circle cx="20" cy="26" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="30" cy="22" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="40" cy="26" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="25" cy="35" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="35" cy="35" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="30" cy="44" r="5" fill="none" stroke="#000" stroke-width="2"/><line x1="30" y1="17" x2="32" y2="8" stroke="#000" stroke-width="1.5"/></svg>
+        <svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2"/><path d="M 32 12 Q 40 8 42 14" fill="none" stroke="#000" stroke-width="1.5"/></svg>
+        <!-- Fila 3: pera, manzana, plátano, uva -->
+        <svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="14" x2="30" y2="8" stroke="#000" stroke-width="1.5"/></svg>
+        <svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2"/><path d="M 32 12 Q 40 8 42 14" fill="none" stroke="#000" stroke-width="1.5"/></svg>
+        <svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 60 60"><circle cx="20" cy="26" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="30" cy="22" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="40" cy="26" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="25" cy="35" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="35" cy="35" r="5" fill="none" stroke="#000" stroke-width="2"/><circle cx="30" cy="44" r="5" fill="none" stroke="#000" stroke-width="2"/><line x1="30" y1="17" x2="32" y2="8" stroke="#000" stroke-width="1.5"/></svg>
+        <!-- Fila 4: manzana, pera, plátano, manzana -->
+        <svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2"/><path d="M 32 12 Q 40 8 42 14" fill="none" stroke="#000" stroke-width="1.5"/></svg>
+        <svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="14" x2="30" y2="8" stroke="#000" stroke-width="1.5"/></svg>
+        <svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2"/><path d="M 32 12 Q 40 8 42 14" fill="none" stroke="#000" stroke-width="1.5"/></svg>
+      </div>
+      <table class="tabla-rellenar">
+        <tr><th>Fruta</th><th>Recuento</th><th>Número</th></tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="3"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.5"/></svg></td>
+          <td class="celda-recuento"></td>
+          <td class="celda-num"></td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg></td>
+          <td class="celda-recuento"></td>
+          <td class="celda-num"></td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="3"/></svg></td>
+          <td class="celda-recuento"></td>
+          <td class="celda-num"></td>
+        </tr>
+        <tr>
+          <td><svg viewBox="0 0 60 60"><circle cx="20" cy="26" r="5" fill="none" stroke="#000" stroke-width="2.5"/><circle cx="30" cy="22" r="5" fill="none" stroke="#000" stroke-width="2.5"/><circle cx="40" cy="26" r="5" fill="none" stroke="#000" stroke-width="2.5"/><circle cx="25" cy="35" r="5" fill="none" stroke="#000" stroke-width="2.5"/><circle cx="35" cy="35" r="5" fill="none" stroke="#000" stroke-width="2.5"/><circle cx="30" cy="44" r="5" fill="none" stroke="#000" stroke-width="2.5"/></svg></td>
+          <td class="celda-recuento"></td>
+          <td class="celda-num"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 2: preguntas sobre la tabla -->
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Responde</strong> usando la tabla del ejercicio 1:</div>
+    <div class="preg-lista preg-lista-2col">
+      <div class="preg-fila">a) ¿De qué fruta hay <strong>MÁS</strong>? <span class="preg-hueco-grande"></span></div>
+      <div class="preg-fila">b) ¿Cuántas manzanas y plátanos hay <strong>juntos</strong>? <span class="preg-hueco"></span></div>
+      <div class="preg-fila">c) ¿Cuántas manzanas <strong>más que</strong> peras hay? <span class="preg-hueco"></span></div>
+      <div class="preg-fila">d) ¿Cuántas frutas hay <strong>EN TOTAL</strong>? <span class="preg-hueco"></span></div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 3: tabla de doble entrada -->
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Ana y Luis tienen una <strong>granja</strong> cada uno. <strong>Completa</strong> la columna TOTAL y <strong>responde</strong>:</div>
+    <table class="tabla-doble">
+      <tr><th></th><th>GALLINAS</th><th>OVEJAS</th><th>VACAS</th><th>TOTAL</th></tr>
+      <tr>
+        <td class="fila-nombre">Granja de Ana</td>
+        <td>12</td>
+        <td>7</td>
+        <td>5</td>
+        <td class="celda-total"></td>
+      </tr>
+      <tr>
+        <td class="fila-nombre">Granja de Luis</td>
+        <td>9</td>
+        <td>11</td>
+        <td>6</td>
+        <td class="celda-total"></td>
+      </tr>
+    </table>
+    <div class="preg-lista">
+      <div class="preg-fila">a) ¿Quién tiene <strong>más ovejas</strong>? <span class="preg-hueco-grande"></span></div>
+      <div class="preg-fila">b) ¿Cuántas gallinas hay <strong>entre las dos granjas</strong>? Operación: <span class="preg-hueco-grande"></span> &nbsp;Son <span class="preg-hueco"></span> gallinas.</div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 4: ordenar -->
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Ordena</strong> los animales de la granja de <strong>Luis</strong> del que hay <strong>MENOS</strong> al que hay <strong>MÁS</strong>:</div>
+    <div class="ordenar-puestos">
+      <div class="ordenar-puesto">
+        <span class="ordenar-num">1.º (menos)</span>
+        <div class="ordenar-hueco"></div>
+      </div>
+      <div class="ordenar-puesto">
+        <span class="ordenar-num">2.º</span>
+        <div class="ordenar-hueco"></div>
+      </div>
+      <div class="ordenar-puesto">
+        <span class="ordenar-num">3.º (más)</span>
+        <div class="ordenar-hueco"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 5: verdadero o falso -->
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> <strong>Rodea</strong> V si es verdadero o F si es falso (mira la tabla del ejercicio 3):</div>
+    <div class="vf-lista">
+      <div class="vf-fila">
+        <span>Ana tiene más gallinas que Luis.</span>
+        <span class="vf-opciones"><span class="vf-circ">V</span><span class="vf-circ">F</span></span>
+      </div>
+      <div class="vf-fila">
+        <span>Luis tiene 24 animales en total.</span>
+        <span class="vf-opciones"><span class="vf-circ">V</span><span class="vf-circ">F</span></span>
+      </div>
+      <div class="vf-fila">
+        <span>Entre las dos granjas hay 18 ovejas.</span>
+        <span class="vf-opciones"><span class="vf-circ">V</span><span class="vf-circ">F</span></span>
+      </div>
+      <div class="vf-fila">
+        <span>Ana tiene 6 vacas.</span>
+        <span class="vf-opciones"><span class="vf-circ">V</span><span class="vf-circ">F</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
