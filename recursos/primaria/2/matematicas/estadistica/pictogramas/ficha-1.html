@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pictogramas · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.5rem 1.5rem 0.7rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 11px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 12.5px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-idea { font-size: 12px; margin-bottom: 5px; line-height: 1.3; }
+    .recuerda-ejemplo { display: flex; justify-content: center; }
+    .picto-leyenda { font-family: sans-serif; font-size: 10.5px; color: #444; margin-top: 3px; text-align: center; }
+
+    .picto { border-collapse: collapse; font-size: 13px; }
+    .picto th, .picto td { border: 1.5px solid #000; padding: 8px 6px; text-align: center; font-weight: 700; }
+    .picto th { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .picto .cat { width: 52px; }
+    .picto .cat svg { width: 38px; height: 38px; vertical-align: middle; }
+    .picto .iconos { text-align: left; padding-left: 8px; }
+    .picto .iconos svg { width: 31px; height: 31px; vertical-align: middle; margin-right: 4px; }
+
+    .ej-block { margin-bottom: 15px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; line-height: 1.25; }
+    .ej-enunciado .num { font-family: sans-serif; font-weight: 800; margin-right: 4px; }
+
+    .e1-wrap { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; }
+    .tabla-rellenar { border-collapse: collapse; font-size: 13px; }
+    .tabla-rellenar th, .tabla-rellenar td { border: 1.5px solid #000; padding: 5px 12px; text-align: center; font-weight: 700; }
+    .tabla-rellenar th { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .tabla-rellenar svg { width: 24px; height: 24px; vertical-align: middle; }
+    .tabla-rellenar th, .tabla-rellenar td { padding: 8px 12px; }
+    .tabla-rellenar .hueco { min-width: 55px; height: 42px; }
+
+    .preg-lista { display: flex; flex-direction: column; gap: 13px; }
+    .preg-fila { font-size: 13.5px; line-height: 1.35; }
+    .preg-hueco { display: inline-block; min-width: 55px; border-bottom: 1.5px solid #000; height: 18px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-grande { display: inline-block; min-width: 120px; border-bottom: 1.5px solid #000; height: 18px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-op { display: inline-block; min-width: 160px; border-bottom: 1.5px solid #000; height: 18px; vertical-align: middle; margin-left: 4px; }
+
+    .e3-wrap { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: stretch; }
+    .picto-vacio { border-collapse: collapse; font-size: 13px; width: 100%; }
+    .picto-vacio th, .picto-vacio td { border: 1.5px solid #000; padding: 4px 6px; text-align: center; font-weight: 700; }
+    .picto-vacio th { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .picto-vacio .cat { width: 50px; }
+    .picto-vacio .cat svg { width: 30px; height: 30px; vertical-align: middle; }
+    .picto-vacio .zona-libre { height: 64px; min-width: 200px; }
+
+    .vf-lista { display: flex; flex-direction: column; gap: 13px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13.5px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .ordenar-puestos { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; margin-top: 4px; }
+    .ordenar-puesto { border: 2px solid #000; border-radius: 10px; padding: 10px 6px; text-align: center; }
+    .ordenar-num { display: block; font-size: 12px; font-weight: 700; margin-bottom: 6px; font-family: sans-serif; }
+    .ordenar-hueco { height: 72px; border-bottom: 1.5px dashed #000; }
+
+    .footer { margin-top: 10px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: none !important; margin: 0 !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 2cm 3cm 1.5cm 3cm; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Pictogramas</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📊 Pictogramas</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 Recuerda</div>
+    <div class="recuerda-idea">Un <strong>pictograma</strong> dibuja los datos. Cada <strong>dibujito vale 1</strong>. Para saber cuántos hay solo tienes que <strong>contar los dibujitos</strong> de cada fila.</div>
+    <div class="recuerda-ejemplo">
+      <table class="picto"><tr><th>Fruta</th><th>Pictograma</th><th>Total</th></tr>
+      <tr><td class="cat"><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="3"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.5"/></svg></td><td class="iconos"><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg></td><td>3</td></tr></table>
+    </div>
+    <div class="picto-leyenda">Cada <svg viewBox="0 0 60 60" style="width:14px;height:14px;vertical-align:middle"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="3"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.5"/></svg> = 1 manzana → aquí hay <strong>3</strong> manzanas.</div>
+  </div>
+<div class="ej-block"><div class="ej-enunciado"><span class="num">1.</span> Este pictograma muestra la <strong>fruta favorita</strong> de la clase. <strong>Cuenta</strong> los dibujitos y <strong>completa</strong> la tabla:</div><div class="e1-wrap"><table class="picto" style="width:100%;"><tr><th>Fruta</th><th>Pictograma</th></tr><tr><td class="cat"><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="3"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.5"/></svg></td><td class="iconos"><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.0"/></svg></td></tr><tr><td class="cat"><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg></td><td class="iconos"><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg></td></tr><tr><td class="cat"><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="3"/></svg></td><td class="iconos"><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="2.5"/></svg><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="2.5"/></svg><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="2.5"/></svg><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="2.5"/></svg><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="2.5"/></svg><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="2.5"/></svg></td></tr></table><table class="tabla-rellenar"><tr><th>Fruta</th><th>Cantidad</th></tr><tr><td><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="3"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.5"/></svg></td><td class="hueco"></td></tr><tr><td><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg></td><td class="hueco"></td></tr><tr><td><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="3"/></svg></td><td class="hueco"></td></tr></table></div></div>
+<div class="ej-block"><div class="ej-enunciado"><span class="num">2.</span> Mira el pictograma y <strong>responde</strong>:</div><div class="preg-lista"><div class="preg-fila">a) ¿Cuántas <strong>manzanas</strong> hay? <span class="preg-hueco"></span></div><div class="preg-fila">b) ¿De qué fruta hay <strong>MÁS</strong>? <span class="preg-hueco-grande"></span></div><div class="preg-fila">c) ¿Cuántas manzanas <strong>MÁS que</strong> plátanos hay? Operación: <span class="preg-hueco-op"></span></div><div class="preg-fila">d) ¿Cuántas frutas hay <strong>EN TOTAL</strong>? Operación: <span class="preg-hueco-op"></span></div></div></div>
+<div class="ej-block"><div class="ej-enunciado"><span class="num">3.</span> <strong>Dibuja</strong> el pictograma según la tabla. Haz un dibujito por cada unidad:</div><div class="e3-wrap"><table class="tabla-rellenar"><tr><th>Fruta</th><th>Cantidad</th></tr><tr><td><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="3"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.5"/></svg></td><td>7</td></tr><tr><td><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg></td><td>9</td></tr><tr><td><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="3"/></svg></td><td>4</td></tr></table><table class="picto-vacio"><tr><th>Fruta</th><th>Pictograma</th></tr><tr><td class="cat"><svg viewBox="0 0 60 60"><path d="M 30 18 Q 16 18 16 34 Q 16 50 30 52 Q 44 50 44 34 Q 44 18 30 18 Z" fill="none" stroke="#000" stroke-width="3"/><line x1="30" y1="18" x2="32" y2="10" stroke="#000" stroke-width="2.5"/></svg></td><td class="zona-libre"></td></tr><tr><td class="cat"><svg viewBox="0 0 60 60"><path d="M 12 16 Q 10 38 18 50 Q 32 56 48 48 Q 50 46 50 42 Q 38 42 28 32 Q 18 22 18 14 Q 14 14 12 16 Z" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg></td><td class="zona-libre"></td></tr><tr><td class="cat"><svg viewBox="0 0 60 60"><path d="M 30 14 Q 24 14 22 26 Q 14 34 16 44 Q 18 54 30 54 Q 42 54 44 44 Q 46 34 38 26 Q 36 14 30 14 Z" fill="none" stroke="#000" stroke-width="3"/></svg></td><td class="zona-libre"></td></tr></table></div></div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
