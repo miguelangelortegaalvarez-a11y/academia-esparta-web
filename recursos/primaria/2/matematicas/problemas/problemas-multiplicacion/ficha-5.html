@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problemas de multiplicación · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.5rem 1.5rem 0.7rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 11px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 12.5px; font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-pasos { font-size: 11.5px; line-height: 1.3; margin-bottom: 4px; }
+    .recuerda-pasos ol { padding-left: 22px; }
+    .recuerda-ejemplo { background: #f6f6f6; border: 1.5px solid #999; border-radius: 8px; padding: 4px 8px; font-size: 11.5px; line-height: 1.35; }
+    .recuerda-ejemplo .ej-label { font-family: sans-serif; font-size: 10px; font-weight: 700; color: #444; letter-spacing: .5px; }
+    .recuerda-ejemplo .llev { color: #000; font-weight: 700; }
+
+    /* Problemas con dibujo a la izquierda */
+    .problemas { display: grid; grid-template-columns: 1fr; gap: 9px; }
+    .problema { border: 1.5px solid #000; border-radius: 10px; padding: 7px 14px; display: grid; grid-template-columns: 56px 1fr; gap: 8px; align-items: start; }
+    .problema-icono { display: flex; align-items: center; justify-content: center; }
+    .problema-icono svg { width: 50px; height: 50px; }
+    .problema-cuerpo { display: flex; flex-direction: column; gap: 3px; }
+    .problema-cabecera { display: flex; align-items: baseline; gap: 5px; }
+    .problema-num { font-family: sans-serif; font-size: 15px; font-weight: 800; }
+    .problema-enunciado { font-size: 14px; line-height: 1.3; font-weight: 600; }
+    .problema-resolver { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; align-items: stretch; margin-top: 4px; }
+    .zona { border: 1.5px dashed #555; border-radius: 6px; padding: 4px 8px; min-height: 58px; }
+    .zona-label { font-family: sans-serif; font-size: 10px; font-weight: 700; color: #444; letter-spacing: .4px; display: block; margin-bottom: 1px; }
+    .zona-solucion { display: flex; flex-direction: column; }
+    .solucion-linea { flex: 1; border-bottom: 1.5px solid #000; margin-top: 6px; min-height: 32px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Problemas de multiplicación</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">✖️ Problemas de multiplicación</div>
+
+  <div class="problemas">
+
+    <!-- 1. Manzanas / bolsas · 7x4 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><circle cx="30" cy="34" r="16" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="30" y2="10" stroke="#000" stroke-width="2.5"/><path d="M 30 13 Q 40 6 44 14 Q 36 18 30 15" fill="none" stroke="#000" stroke-width="2"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">1.</span>
+          <span class="problema-enunciado">En el huerto preparan <strong>7</strong> bolsas y meten <strong>4</strong> manzanas en cada bolsa. ¿Cuántas manzanas hay en total?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Rotuladores / cajas · 6x6 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><rect x="24" y="14" width="12" height="30" rx="2" fill="none" stroke="#000" stroke-width="2.5"/><path d="M 24 14 L 30 6 L 36 14 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><line x1="24" y1="38" x2="36" y2="38" stroke="#000" stroke-width="2"/><circle cx="30" cy="48" r="1.6" fill="#000"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">2.</span>
+          <span class="problema-enunciado">En la papelería hay <strong>6</strong> cajas y cada caja tiene <strong>6</strong> rotuladores. ¿Cuántos rotuladores hay?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Yogures / packs · 8x3 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><path d="M 19 22 L 41 22 L 39 50 L 21 50 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><rect x="17" y="16" width="26" height="6" rx="2" fill="none" stroke="#000" stroke-width="2.5"/><line x1="24" y1="32" x2="36" y2="32" stroke="#000" stroke-width="1.8"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">3.</span>
+          <span class="problema-enunciado">En la nevera hay <strong>8</strong> packs y en cada pack vienen <strong>3</strong> yogures. ¿Cuántos yogures hay en total?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Lápices / estuches · 5x7 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><rect x="23" y="11" width="14" height="6" fill="none" stroke="#000" stroke-width="2.5"/><rect x="23" y="17" width="14" height="23" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="17" x2="30" y2="40" stroke="#000" stroke-width="1.4"/><path d="M 23 40 L 30 50 L 37 40 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">4.</span>
+          <span class="problema-enunciado">En clase hay <strong>5</strong> estuches y cada estuche guarda <strong>7</strong> lápices. ¿Cuántos lápices hay en total?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Jugadores / equipos · 4x8 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><circle cx="30" cy="16" r="7" fill="none" stroke="#000" stroke-width="2.5"/><path d="M 18 50 Q 18 32 30 32 Q 42 32 42 50" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><line x1="18" y1="44" x2="42" y2="44" stroke="#000" stroke-width="2"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">5.</span>
+          <span class="problema-enunciado">En el torneo hay <strong>4</strong> equipos y cada equipo tiene <strong>8</strong> jugadores. ¿Cuántos jugadores hay en total?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Ya casi lo tienes!</span>
+  </div>
+</body>
+</html>

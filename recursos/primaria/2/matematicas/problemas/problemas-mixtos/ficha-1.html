@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problemas mixtos · 2º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Edu SA Beginner', cursive; background: #fff; color: #000; padding: 1.5rem 1.5rem 0.7rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-family: 'Edu SA Beginner', cursive; font-size: 22px; font-weight: 700; color: #000; display: block; margin-bottom: 1px; }
+    .ficha-ref { font-family: sans-serif; font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 11px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 12.5px; font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-pasos { font-size: 11.5px; line-height: 1.3; margin-bottom: 4px; }
+    .recuerda-pasos ol { padding-left: 22px; }
+    .recuerda-ejemplo { background: #f6f6f6; border: 1.5px solid #999; border-radius: 8px; padding: 4px 8px; font-size: 11.5px; line-height: 1.35; }
+    .recuerda-ejemplo .ej-label { font-family: sans-serif; font-size: 10px; font-weight: 700; color: #444; letter-spacing: .5px; }
+    .recuerda-ejemplo .llev { color: #000; font-weight: 700; }
+
+    /* Problemas con dibujo a la izquierda */
+    .problemas { display: grid; grid-template-columns: 1fr; gap: 9px; }
+    .problema { border: 1.5px solid #000; border-radius: 10px; padding: 6px 14px; display: grid; grid-template-columns: 56px 1fr; gap: 8px; align-items: start; }
+    .problema-icono { display: flex; align-items: center; justify-content: center; }
+    .problema-icono svg { width: 50px; height: 50px; }
+    .problema-cuerpo { display: flex; flex-direction: column; gap: 3px; }
+    .problema-cabecera { display: flex; align-items: baseline; gap: 5px; }
+    .problema-num { font-family: sans-serif; font-size: 15px; font-weight: 800; }
+    .problema-enunciado { font-size: 14px; line-height: 1.3; font-weight: 600; }
+    .problema-resolver { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; align-items: stretch; margin-top: 4px; }
+    .zona { border: 1.5px dashed #555; border-radius: 6px; padding: 4px 8px; min-height: 54px; }
+    .zona-label { font-family: sans-serif; font-size: 10px; font-weight: 700; color: #444; letter-spacing: .4px; display: block; margin-bottom: 1px; }
+    .zona-solucion { display: flex; flex-direction: column; }
+    .solucion-linea { flex: 1; border-bottom: 1.5px solid #000; margin-top: 6px; min-height: 30px; }
+
+    .footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-family: sans-serif; font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 2º Primaria · Problemas mixtos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 Problemas mixtos</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 Lee bien y decide qué operación usar</div>
+    <div class="recuerda-pasos">
+      <ol>
+        <li><strong>SUMA (+):</strong> cuando dice <em>en total, llegan, más</em>.</li>
+        <li><strong>RESTA (−):</strong> cuando dice <em>quedan, se van, menos, cuántos más</em>.</li>
+        <li><strong>MULTIPLICA (×):</strong> cuando hay <em>grupos iguales, en cada uno, veces</em>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="problemas">
+
+    <!-- 1. Cromos · S 27+18 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><rect x="10" y="16" width="28" height="34" rx="3" fill="none" stroke="#000" stroke-width="2.5"/><rect x="20" y="10" width="28" height="34" rx="3" fill="#fff" stroke="#000" stroke-width="2.5"/><line x1="25" y1="18" x2="43" y2="18" stroke="#000" stroke-width="1.6"/><line x1="25" y1="24" x2="43" y2="24" stroke="#000" stroke-width="1.6"/><line x1="25" y1="30" x2="38" y2="30" stroke="#000" stroke-width="1.6"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">1.</span>
+          <span class="problema-enunciado">Pablo tiene <strong>27</strong> cromos y su abuela le da <strong>18</strong> más. ¿Cuántos cromos tiene Pablo en total?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Caramelos · R 52-24 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><ellipse cx="30" cy="30" rx="14" ry="9" fill="none" stroke="#000" stroke-width="2.5"/><path d="M 16 30 L 8 24 L 10 30 L 8 36 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><path d="M 44 30 L 52 24 L 50 30 L 52 36 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><line x1="24" y1="26" x2="28" y2="34" stroke="#000" stroke-width="1.2"/><line x1="32" y1="26" x2="36" y2="34" stroke="#000" stroke-width="1.2"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">2.</span>
+          <span class="problema-enunciado">Sara tiene <strong>52</strong> caramelos y se come <strong>24</strong>. ¿Cuántos caramelos le quedan?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Manzanas / bolsas · M 4x5 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><circle cx="30" cy="34" r="16" fill="none" stroke="#000" stroke-width="2.5"/><line x1="30" y1="18" x2="30" y2="10" stroke="#000" stroke-width="2.5"/><path d="M 30 13 Q 40 6 44 14 Q 36 18 30 15" fill="none" stroke="#000" stroke-width="2"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">3.</span>
+          <span class="problema-enunciado">En la frutería hay <strong>4</strong> bolsas y en cada bolsa hay <strong>5</strong> manzanas. ¿Cuántas manzanas hay?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Niños / clase · S 36+29 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><circle cx="22" cy="20" r="7" fill="none" stroke="#000" stroke-width="2.5"/><path d="M 11 48 Q 11 33 22 33 Q 33 33 33 48 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><circle cx="41" cy="24" r="6" fill="none" stroke="#000" stroke-width="2.5"/><path d="M 32 48 Q 32 36 41 36 Q 50 36 50 48 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">4.</span>
+          <span class="problema-enunciado">En el parque hay <strong>36</strong> niños jugando y llegan <strong>29</strong> más. ¿Cuántos niños hay ahora en el parque?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Dinero / euros · R 63-27 -->
+    <div class="problema">
+      <div class="problema-icono">
+        <svg viewBox="0 0 60 60"><circle cx="23" cy="26" r="13" fill="none" stroke="#000" stroke-width="2.5"/><path d="M 27 21 Q 18 20 18 26 Q 18 32 27 31" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round"/><line x1="16" y1="24" x2="25" y2="24" stroke="#000" stroke-width="1.8"/><line x1="16" y1="28" x2="25" y2="28" stroke="#000" stroke-width="1.8"/><circle cx="38" cy="37" r="13" fill="#fff" stroke="#000" stroke-width="2.5"/><path d="M 42 32 Q 33 31 33 37 Q 33 43 42 42" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round"/><line x1="31" y1="35" x2="40" y2="35" stroke="#000" stroke-width="1.8"/><line x1="31" y1="39" x2="40" y2="39" stroke="#000" stroke-width="1.8"/></svg>
+      </div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">5.</span>
+          <span class="problema-enunciado">Daniel tiene <strong>63</strong> euros y se gasta <strong>27</strong> en un juego. ¿Cuántos euros le quedan?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Tú puedes!</span>
+  </div>
+</body>
+</html>
