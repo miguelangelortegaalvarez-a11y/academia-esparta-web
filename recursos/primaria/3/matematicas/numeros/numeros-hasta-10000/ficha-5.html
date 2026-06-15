@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El millar y sus equivalencias · Números hasta 10.000 · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 7px 13px; margin-bottom: 9px; text-align: center; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 5px; }
+    .recuerda-grande { font-size: 20px; font-weight: 800; letter-spacing: .5px; margin-bottom: 3px; }
+    .recuerda-sub { font-size: 12px; color: #333; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 10px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.3; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Filas de igualdades con caja */
+    .equiv-grid { display: flex; flex-wrap: wrap; gap: 8px 34px; }
+    .equiv-fila { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; }
+    .equiv-fila .igual { font-size: 18px; }
+    .equiv-fila .caja { width: 66px; height: 32px; border: 1.5px solid #000; border-radius: 6px; }
+    .equiv-fila .unidad { font-size: 14px; font-weight: 600; }
+
+    /* Filas estilo "número = caja palabra" más anchas */
+    .conta-grid { display: flex; flex-direction: column; gap: 7px; }
+    .conta-fila { display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 700; }
+    .conta-fila .num-grande { min-width: 74px; }
+    .conta-fila .igual { font-size: 18px; }
+    .conta-fila .caja { width: 76px; height: 32px; border: 1.5px solid #000; border-radius: 6px; }
+    .conta-fila .unidad { font-size: 14px; font-weight: 600; }
+
+    /* Unir columnas */
+    .unir-wrap { display: flex; justify-content: space-around; gap: 30px; }
+    .unir-col { display: flex; flex-direction: column; gap: 8px; }
+    .unir-item { border: 1.5px solid #000; border-radius: 6px; padding: 6px 16px; font-size: 16px; font-weight: 700; text-align: center; min-width: 120px; }
+
+    /* Cadena de igualdades */
+    .cadena-grid { display: flex; flex-direction: column; gap: 8px; }
+    .cadena-fila { display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 700; flex-wrap: wrap; }
+    .cadena-fila .num-grande { min-width: 74px; }
+    .cadena-fila .igual { font-size: 18px; }
+    .cadena-fila .caja { width: 76px; height: 32px; border: 1.5px solid #000; border-radius: 6px; }
+    .cadena-fila .unidad { font-size: 14px; font-weight: 600; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Números hasta 10.000</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 El millar y sus equivalencias</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <div class="recuerda-grande">1 UM = 10 C = 100 D = 1.000 U</div>
+    <div class="recuerda-sub">una unidad de millar = diez centenas = cien decenas = mil unidades</div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Completa las equivalencias:</div>
+    <div class="equiv-grid">
+      <div class="equiv-fila"><span>1 UM</span><span class="igual">=</span><div class="caja"></div><span class="unidad">C</span></div>
+      <div class="equiv-fila"><span>1 UM</span><span class="igual">=</span><div class="caja"></div><span class="unidad">D</span></div>
+      <div class="equiv-fila"><span>1 UM</span><span class="igual">=</span><div class="caja"></div><span class="unidad">U</span></div>
+      <div class="equiv-fila"><span>1 C</span><span class="igual">=</span><div class="caja"></div><span class="unidad">D</span></div>
+      <div class="equiv-fila"><span>1 C</span><span class="igual">=</span><div class="caja"></div><span class="unidad">U</span></div>
+      <div class="equiv-fila"><span>1 D</span><span class="igual">=</span><div class="caja"></div><span class="unidad">U</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> ¿Cuántas centenas hay en cada número?</div>
+    <div class="conta-grid">
+      <div class="conta-fila"><span class="num-grande">3.000</span><span class="igual">=</span><div class="caja"></div><span class="unidad">centenas</span></div>
+      <div class="conta-fila"><span class="num-grande">5.000</span><span class="igual">=</span><div class="caja"></div><span class="unidad">centenas</span></div>
+      <div class="conta-fila"><span class="num-grande">2.400</span><span class="igual">=</span><div class="caja"></div><span class="unidad">centenas</span></div>
+      <div class="conta-fila"><span class="num-grande">1.000</span><span class="igual">=</span><div class="caja"></div><span class="unidad">centenas</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> ¿Cuántas decenas hay en cada número?</div>
+    <div class="conta-grid">
+      <div class="conta-fila"><span class="num-grande">100</span><span class="igual">=</span><div class="caja"></div><span class="unidad">decenas</span></div>
+      <div class="conta-fila"><span class="num-grande">1.000</span><span class="igual">=</span><div class="caja"></div><span class="unidad">decenas</span></div>
+      <div class="conta-fila"><span class="num-grande">350</span><span class="igual">=</span><div class="caja"></div><span class="unidad">decenas</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Une cada cosa con su equivalente:</div>
+    <div class="unir-wrap">
+      <div class="unir-col">
+        <div class="unir-item">1.000 U</div>
+        <div class="unir-item">10 C</div>
+        <div class="unir-item">100 D</div>
+        <div class="unir-item">10 D</div>
+      </div>
+      <div class="unir-col">
+        <div class="unir-item">1 C</div>
+        <div class="unir-item">1 UM</div>
+        <div class="unir-item">1 UM</div>
+        <div class="unir-item">1 UM</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> Completa:</div>
+    <div class="cadena-grid">
+      <div class="cadena-fila"><span class="num-grande">4.000</span><span class="igual">=</span><span>4 UM</span><span class="igual">=</span><div class="caja"></div><span class="unidad">C</span></div>
+      <div class="cadena-fila"><span class="num-grande">6.000</span><span class="igual">=</span><span>6 UM</span><span class="igual">=</span><div class="caja"></div><span class="unidad">D</span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

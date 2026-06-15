@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leer y escribir números hasta 10.000 · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 7px 13px; margin-bottom: 9px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 6px; }
+    .recuerda-ejemplos { display: flex; flex-wrap: wrap; gap: 9px 30px; align-items: flex-start; }
+    .rec-ej { font-size: 13px; line-height: 1.5; }
+    .rec-ej b { font-size: 18px; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 8px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Ej 1 — escribir con letra (línea larga a la derecha) */
+    .letra-fila { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .letra-fila .num-grande { min-width: 78px; font-size: 19px; font-weight: 700; }
+    .letra-fila .linea-escr { flex: 1; border-bottom: 1.5px solid #000; height: 15px; }
+
+    /* Ej 2 — escribir con cifras (texto izq, caja dcha) */
+    .cifras-fila { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .cifras-fila .texto { flex: 1; font-size: 14px; font-weight: 600; }
+    .cifras-fila .caja-num { width: 130px; height: 36px; border: 1.5px solid #000; border-radius: 6px; }
+
+    /* Ej 3 — unir número con lectura (dos columnas, sin guías) */
+    .unir-wrap { display: flex; justify-content: space-between; gap: 40px; padding: 0 18px; }
+    .unir-col { display: flex; flex-direction: column; gap: 11px; }
+    .unir-col.izq { align-items: flex-start; }
+    .unir-col.dcha { align-items: flex-end; }
+    .unir-item { border: 1.5px solid #000; border-radius: 6px; padding: 6px 14px; font-size: 16px; font-weight: 700; }
+    .unir-col.dcha .unir-item { font-weight: 600; font-size: 14px; }
+
+    /* Ej 4 — descripción UM C D U + caja */
+    .desc-fila { display: flex; align-items: center; gap: 12px; margin-bottom: 9px; }
+    .desc-fila .texto { flex: 1; font-size: 14px; font-weight: 600; }
+    .desc-fila .caja-num { width: 110px; height: 36px; border: 1.5px solid #000; border-radius: 6px; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Números hasta 10.000</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 Leer y escribir números</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <div class="recuerda-ejemplos">
+      <div class="rec-ej"><b>4.000</b> = cuatro mil</div>
+      <div class="rec-ej"><b>3.250</b> = tres mil doscientos cincuenta</div>
+      <div class="rec-ej"><b>6.007</b> = seis mil siete</div>
+      <div class="rec-ej"><b>5.080</b> = cinco mil ochenta</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe con letra cada número:</div>
+    <div class="letra-fila"><span class="num-grande">2.345</span><div class="linea-escr"></div></div>
+    <div class="letra-fila"><span class="num-grande">4.070</span><div class="linea-escr"></div></div>
+    <div class="letra-fila"><span class="num-grande">6.500</span><div class="linea-escr"></div></div>
+    <div class="letra-fila"><span class="num-grande">8.009</span><div class="linea-escr"></div></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe con cifras:</div>
+    <div class="cifras-fila"><span class="texto">tres mil doscientos diez</span><div class="caja-num"></div></div>
+    <div class="cifras-fila"><span class="texto">cinco mil ochocientos</span><div class="caja-num"></div></div>
+    <div class="cifras-fila"><span class="texto">siete mil cuatro</span><div class="caja-num"></div></div>
+    <div class="cifras-fila"><span class="texto">nueve mil novecientos noventa</span><div class="caja-num"></div></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Une cada número con su lectura:</div>
+    <div class="unir-wrap">
+      <div class="unir-col izq">
+        <div class="unir-item">1.500</div>
+        <div class="unir-item">1.050</div>
+        <div class="unir-item">1.005</div>
+        <div class="unir-item">1.550</div>
+      </div>
+      <div class="unir-col dcha">
+        <div class="unir-item">mil cinco</div>
+        <div class="unir-item">mil quinientos cincuenta</div>
+        <div class="unir-item">mil cincuenta</div>
+        <div class="unir-item">mil quinientos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> ¿Qué número es? Escríbelo:</div>
+    <div class="desc-fila"><span class="texto">Tiene 6 UM, 3 C, 0 D y 2 U</span><div class="caja-num"></div></div>
+    <div class="desc-fila"><span class="texto">Tiene 4 UM, 0 C, 8 D y 5 U</span><div class="caja-num"></div></div>
+    <div class="desc-fila"><span class="texto">Tiene 9 UM, 1 C, 1 D y 0 U</span><div class="caja-num"></div></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

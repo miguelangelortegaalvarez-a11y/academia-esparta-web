@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Repaso: mayor, menor y series · Números hasta 10.000 · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 7px 13px; margin-bottom: 9px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 6px; }
+    .recuerda-ejemplos { display: flex; flex-wrap: wrap; gap: 9px 30px; align-items: flex-start; }
+    .rec-ej { font-size: 13px; line-height: 1.5; }
+    .rec-ej b { font-size: 18px; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 14px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 7px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla UM C D U */
+    .cdu-tabla { border-collapse: collapse; margin-bottom: 4px; }
+    .cdu-tabla th, .cdu-tabla td { border: 1.5px solid #000; text-align: center; }
+    .cdu-tabla th { font-size: 12px; font-weight: 700; background: #f3f3f3; padding: 4px 0; width: 58px; }
+    .cdu-tabla .num-cab { width: 92px; background: #fff; font-size: 19px; font-weight: 700; }
+    .cdu-tabla td { height: 31px; font-size: 19px; font-weight: 700; }
+
+    /* Construir número desde UM C D U */
+    .construir-fila { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; margin-bottom: 6px; flex-wrap: wrap; }
+    .construir-fila .pieza { border: 1.5px solid #000; border-radius: 6px; padding: 4px 9px; }
+    .construir-fila .igual { font-size: 19px; }
+    .construir-fila .caja-res { width: 100px; height: 38px; border: 1.5px solid #000; border-radius: 6px; }
+
+    /* Descomponer en suma */
+    .suma-fila { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; margin-bottom: 6px; flex-wrap: wrap; }
+    .suma-fila .num-grande { min-width: 80px; }
+    .suma-fila .caja-sum { width: 84px; height: 36px; border: 1.5px solid #000; border-radius: 6px; }
+    .suma-fila .mas { font-weight: 700; }
+
+    /* Serie de 1000 en 1000 */
+    .serie-cajas { display: flex; gap: 6px; flex-wrap: wrap; font-size: 15px; font-weight: 700; }
+    .serie-cajas .caja-num { width: 62px; height: 40px; border: 1.5px solid #000; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .serie-cajas .caja-num.vacia { background: #fff; }
+
+    /* Repaso — parejas mayor/menor */
+    .parejas { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-bottom: 2px; }
+    .pareja { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 700; }
+    .pareja .vs { font-size: 14px; font-weight: 600; color: #555; }
+
+    /* Repaso — ordenar */
+    .ordenar-fila { margin-bottom: 15px; }
+    .ordenar-dados { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .ordenar-dados .sep { color: #555; margin: 0 4px; }
+    .ordenar-cajas { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; }
+    .ordenar-cajas .caja-ord { width: 92px; height: 40px; border: 1.5px solid #000; border-radius: 6px; }
+    .ordenar-cajas .flecha { font-size: 16px; color: #555; }
+
+    /* Repaso — anterior / posterior */
+    .ant-post { display: flex; flex-direction: column; gap: 14px; }
+    .ant-post-fila { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; }
+    .ant-post-fila .caja-ap { width: 100px; height: 42px; border: 1.5px solid #000; border-radius: 6px; }
+    .ant-post-fila .num-centro { font-size: 22px; font-weight: 800; min-width: 90px; text-align: center; }
+    .ant-post-fila .etq { font-size: 11px; font-weight: 600; color: #555; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Números hasta 10.000</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🏆 Repaso: mayor, menor y series</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Rodea el número MAYOR de cada pareja:</div>
+    <div class="parejas">
+      <div class="pareja"><span>3.450</span><span class="vs">·</span><span>3.405</span></div>
+      <div class="pareja"><span>6.000</span><span class="vs">·</span><span>5.999</span></div>
+      <div class="pareja"><span>8.210</span><span class="vs">·</span><span>8.120</span></div>
+      <div class="pareja"><span>7.007</span><span class="vs">·</span><span>7.070</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Rodea el número MENOR de cada pareja:</div>
+    <div class="parejas">
+      <div class="pareja"><span>2.300</span><span class="vs">·</span><span>2.030</span></div>
+      <div class="pareja"><span>9.900</span><span class="vs">·</span><span>9.090</span></div>
+      <div class="pareja"><span>4.111</span><span class="vs">·</span><span>4.101</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Ordena de MENOR a MAYOR:</div>
+    <div class="ordenar-fila">
+      <div class="ordenar-dados">3.200 <span class="sep">·</span> 2.300 <span class="sep">·</span> 3.020 <span class="sep">·</span> 2.030</div>
+      <div class="ordenar-cajas">
+        <div class="caja-ord"></div><span class="flecha">→</span>
+        <div class="caja-ord"></div><span class="flecha">→</span>
+        <div class="caja-ord"></div><span class="flecha">→</span>
+        <div class="caja-ord"></div>
+      </div>
+    </div>
+    <div class="ordenar-fila">
+      <div class="ordenar-dados">5.500 <span class="sep">·</span> 5.050 <span class="sep">·</span> 5.005 <span class="sep">·</span> 5.555</div>
+      <div class="ordenar-cajas">
+        <div class="caja-ord"></div><span class="flecha">→</span>
+        <div class="caja-ord"></div><span class="flecha">→</span>
+        <div class="caja-ord"></div><span class="flecha">→</span>
+        <div class="caja-ord"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Completa las series:</div>
+    <div style="margin-bottom: 8px;">
+      <div style="font-size: 12px; font-weight: 600; color: #555; margin-bottom: 4px;">De 1.000 en 1.000:</div>
+      <div class="serie-cajas">
+        <div class="caja-num">4.000</div>
+        <div class="caja-num">5.000</div>
+        <div class="caja-num vacia"></div>
+        <div class="caja-num">7.000</div>
+        <div class="caja-num vacia"></div>
+        <div class="caja-num vacia"></div>
+      </div>
+    </div>
+    <div style="margin-bottom: 8px;">
+      <div style="font-size: 12px; font-weight: 600; color: #555; margin-bottom: 4px;">De 100 en 100:</div>
+      <div class="serie-cajas">
+        <div class="caja-num">2.300</div>
+        <div class="caja-num">2.400</div>
+        <div class="caja-num vacia"></div>
+        <div class="caja-num vacia"></div>
+        <div class="caja-num">2.700</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size: 12px; font-weight: 600; color: #555; margin-bottom: 4px;">De 10 en 10:</div>
+      <div class="serie-cajas">
+        <div class="caja-num">3.950</div>
+        <div class="caja-num">3.960</div>
+        <div class="caja-num vacia"></div>
+        <div class="caja-num vacia"></div>
+        <div class="caja-num">3.990</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> Escribe el número ANTERIOR y el POSTERIOR:</div>
+    <div class="ant-post">
+      <div class="ant-post-fila">
+        <span class="etq">anterior</span><div class="caja-ap"></div>
+        <span class="num-centro">5.000</span>
+        <div class="caja-ap"></div><span class="etq">posterior</span>
+      </div>
+      <div class="ant-post-fila">
+        <span class="etq">anterior</span><div class="caja-ap"></div>
+        <span class="num-centro">3.299</span>
+        <div class="caja-ap"></div><span class="etq">posterior</span>
+      </div>
+      <div class="ant-post-fila">
+        <span class="etq">anterior</span><div class="caja-ap"></div>
+        <span class="num-centro">7.000</span>
+        <div class="caja-ap"></div><span class="etq">posterior</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">🏆 ¡Repaso superado!</span>
+  </div>
+</body>
+</html>
