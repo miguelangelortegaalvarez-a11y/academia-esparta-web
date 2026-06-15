@@ -308,7 +308,27 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 - **MÉTODO (2026-06-14):** las 17 fichas que faltaban (mult 2-6 + dos-op 1-6 + mixtos 1-6) se generaron con un **WORKFLOW de 17 agentes en paralelo, 1 ficha por agente** (Miguel: "¿te ves capaz de lanzar 17 agentes...?"). Números fijados y verificados por mí en el script; cada agente clona la plantilla corregida, redacta enunciados, elige iconos y ajusta el llenado. Validación EN LOTE (las 17 a 1 página + arreglo de impresión presente + muestra visual). Las 3 keys registradas en RECURSOS de `materiales.html`. Commit 59f53fc.
 - ⚠️ **ARREGLO IMPRESIÓN SAFARI (2026-06-14):** Miguel reportó que al imprimir "desbordaba por la derecha y no se veía la línea del rectángulo". El CSS era idéntico en las 13 fichas y en Chrome salían perfectas → bug de Safari, que NO respeta `@page{margin}` (pone el body a ancho de A4 y recorta el borde derecho al meter su propio margen). **FIX: `@page{ size:A4 portrait; margin:0 }` + en `@media print` `body{ max-width:15cm !important; margin:2cm auto 1.5cm !important }`** (margen vía body; mismo aspecto en Chrome, verificado por Miguel en Safari). Aplicado primero a las 30 fichas de problemas de 2º (commit d466664 las 12 de suma+resta; las 18 nuevas ya nacieron con el fix) y luego, tras barrido, a **las 172 restantes de Mates Primaria** (commit e69e24f) → **las 202 fichas de Mates Primaria ya migradas**. ⚠️ **DEUDA: solo queda Lengua (~620 fichas) con `@page margin:3cm` → mismo recorte potencial en Safari. NO migrado (trabajo grande, distintas plantillas/anchos).**
 
-**Arrancar por:** ~~`numeros`~~ ✅ (21) → ~~`operaciones`~~ ✅ (33) → ~~`medida`~~ ✅ (19) → ~~`geometria`~~ ✅ (16) → ~~`estadistica`~~ ✅ (12) → ~~`problemas`~~ ✅ (30: suma 6 + resta 6 + multiplicacion 6 + dos-operaciones 6 + mixtos 6). **2º MATES COMPLETO ✅ (131 fichas, 2026-06-14). SIGUIENTE: 3º Mates.**
+**Arrancar por:** ~~`numeros`~~ ✅ (21) → ~~`operaciones`~~ ✅ (33) → ~~`medida`~~ ✅ (19) → ~~`geometria`~~ ✅ (16) → ~~`estadistica`~~ ✅ (12) → ~~`problemas`~~ ✅ (30: suma 6 + resta 6 + multiplicacion 6 + dos-operaciones 6 + mixtos 6). **2º MATES COMPLETO ✅ (131 fichas, 2026-06-14).**
+
+### Sub-bloques 3º Primaria — ACORDADO 2026-06-15 (EN MARCHA)
+
+Árbol acordado con Miguel el 2026-06-15. Mismos 6 bloques. Serie = 6 fichas. **⚠️ 3º usa fuente Poppins** (no Edu SA Beginner, que es solo 1º-2º). Plantilla base: `recursos/primaria/3/matematicas/numeros/numeros-hasta-10000/ficha-1.html` (clonada de la de 2º, fuente cambiada a Poppins, arreglo impresión Safari incluido). back-btn = 6 niveles `../../../../../../materiales.html`.
+
+**Decisiones de NIVEL (Miguel):** decimales → **aplazados a 4º** (en 3º NO) · fracciones → **concepto + sumar/restar mismo denominador** · división → **una cifra, exacta Y con resto** (división por dos cifras es 4º).
+
+| Bloque | Sub-bloques |
+|---|---|
+| `numeros` | numeros-hasta-10000 ✅ · valor-posicional-y-descomposicion · comparar-y-ordenar · numeros-romanos · las-fracciones · sumar-y-restar-fracciones |
+| `operaciones` | sumas-y-restas-llevando · multiplicacion-por-una-cifra · multiplicacion-por-dos-cifras · propiedades-y-calculo-mental · la-division-concepto-y-reparto · division-por-una-cifra |
+| `medida` | longitud-km-m-cm-mm · masa-kilo-gramo · capacidad-litro-mililitro · el-reloj-y-los-minutos · el-dinero-euros-y-centimos · superficie |
+| `geometria` | rectas-paralelas-secantes-perpendiculares · los-angulos · poligonos-y-triangulos · circunferencia-y-circulo · el-perimetro |
+| `estadistica` | tablas-de-datos · graficos-de-barras · pictogramas · graficos-lineales · probabilidad |
+| `problemas` | problemas-suma-y-resta · problemas-multiplicacion · problemas-division · problemas-dos-operaciones · problemas-mixtos |
+
+**Bloque `numeros` de 3º — EN MARCHA:**
+- **`numeros-hasta-10000` COMPLETO ✅ (6 fichas, cerrado 2026-06-15, commits 6b84320/88ebe68/5f050fc):** f1 UM·C·D·U (descomponer en tabla, formar, descomponer en suma, serie de 1.000 en 1.000) · f2 leer y escribir números (cifra↔letra, unir lecturas, ¿qué número es?) · f3 formar y descomponer · f4 descomponer con ceros + ¿qué número soy? (adivinanzas + inventa tú) · f5 el millar y equivalencias (1 UM=10 C=100 D=1.000 U) · f6 repaso (mayor/menor, ordenar, series, anterior/posterior). f1 a mano (ancla); f2-f6 con **5 agentes en paralelo (1/ficha), números fijados por mí** (agentes solo redactan+montan clonando f1). 1 folio A4 c/u (92-95%). Registradas en RECURSOS de materiales.html. ⚠️ Reparto: `numeros-hasta-10000` cubre leer/escribir/formar/descomponer/equivalencias/series; el **valor posicional puro** y **comparar/ordenar formal** van en sus sub-bloques propios para no duplicar.
+
+**SIGUIENTE en 3º:** `valor-posicional-y-descomposicion` (sub-bloque 2 de numeros).
 
 ---
 
@@ -347,8 +367,12 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
   - `geometria` (9): figuras-planas (3) + cuerpos-geometricos (3) + lineas-y-situacion-espacial (3)
   - `estadistica` (6): tablas-simples (3) + pictogramas (3)
   - `problemas` (9): problemas-suma-sencillos (3) + problemas-resta-sencillos (3) + problemas-mixtos-basicos (3)
+- **2º Primaria Matemáticas — COMPLETO ✅** (cerrado 2026-06-14, 131 fichas):
+  - `numeros` (21) + `operaciones` (33) + `medida` (19) + `geometria` (16) + `estadistica` (12) + `problemas` (30) — detalle en sección "Estructura matemáticas Primaria"
+- **3º Primaria Matemáticas — EN MARCHA** (arrancado 2026-06-15, fuente Poppins):
+  - `numeros`: `numeros-hasta-10000` (6) ✅ — resto de sub-bloques pendientes
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
-- **Total:** ~820 fichas indexadas en sitemap
+- **Total:** ~957 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
 - **Índice rediseñado el 2026-06-15** (commits a31b003 + 362804d): fuera las portadas de emoji → diseño editorial con **fotos reales** (Pexels, uso comercial, self-hosted en `blog-img/` para no depender del CDN ni añadir cookies), **artículo destacado a doble ancho** con imagen de fondo y **color por categoría** (var `--cat` + `--img` por tarjeta). El **destacado es `como-elegir-academia-torremolinos`** (color **jade `#4fc3a1`** — el coral daba sensación de alerta), no Mates. Portadas `aspect-ratio:16/9` (las fotos verticales se recortan en el hero ancho → para el destacado mejor horizontal). Degradado verde sutil sobre cada foto. La de Lectura: niño de espaldas, NO identificable (norma de Miguel: fotos de niños sin cara identificable). El artículo `elegir-academia` se reescribió en clave de metodología propia y tono NO competitivo (ver memoria `project-posicionamiento-academia`).
@@ -396,7 +420,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
    - **NORMA CRÍTICA validada 2026-05-28 (problemas 1º):** todas las sumas SIN llevadas y todas las restas SIN prestar. Miguel detectó 25 operaciones con llevadas/prestar en la 1ª pasada — hubo que rehacerlas. Validar dígito a dígito antes de cerrar cada ficha.
    - **Índice web:** `materiales.html` ya alineado para 1º Mates con la estructura de 6 bloques (commit `ec68965`, 2026-05-28). 2º–6º Mates en `materiales.html` siguen con la estructura antigua de 5 bloques — actualizar al arrancar cada curso.
    - **Hero compacto en `materiales.html`** (2026-05-28): el hero ocupaba toda la pantalla y los padres tenían que hacer scroll para ver las tarjetas Lengua/Mates. Reducido (`padding 7.5rem→2rem`, h1 más pequeño, quitados `<p>` descriptivo y 4 `<span class="hero-tag">`, app-wrap padding-top 2.5rem→1.5rem). Las tarjetas aparecen ahora en el viewport inicial sin scroll.
-   - **1º MATES COMPLETO ✅** (2026-05-28, 71 fichas totales: 12+20+15+9+6+9). **Siguiente:** arrancar **2º Primaria Matemáticas**. Estructura mismos 6 bloques pero los sub-bloques crecen (multiplicación, división informal, fracciones básicas, problemas con dos operaciones, sumas/restas CON llevada/prestar, números hasta 1000). Actualizar primero el árbol de 2º en `materiales.html` (sigue con la estructura antigua de 5 bloques).
+   - **1º MATES COMPLETO ✅** (2026-05-28, 71 fichas). **2º MATES COMPLETO ✅** (2026-06-14, 131 fichas). **3º MATES EN MARCHA** (arrancado 2026-06-15): árbol acordado + `numeros-hasta-10000` ✅ (6 fichas). **Siguiente:** continuar el bloque `numeros` de 3º por `valor-posicional-y-descomposicion` (ver sección "Sub-bloques 3º Primaria"). 3º usa **Poppins**.
 
 2. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 1.
 
