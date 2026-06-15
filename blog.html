@@ -24,7 +24,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-p1HgFeAX1FD9CpVLoFBlGFeAJJMqviHOk/VmTXn3ChnW+ZhFQuGcx68S2N6C8THRLugVZ0JfR0e7xuVghg7Hww=="
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG">
 
@@ -65,32 +65,45 @@
     .hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(236,253,245,0.7); line-height: 1.7; max-width: 640px; margin: 0 auto; }
 
     .articles { padding: 3rem 1.5rem 5rem; background: #053a2c; }
-    .articles-inner { max-width: 920px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.6rem; }
+    .articles-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
     .post-card {
-      background: rgba(6,78,59,0.55);
-      border: 1px solid rgba(74,222,128,0.2);
+      --cat: #4ade80;
+      position: relative;
+      background: rgba(3,37,25,0.62);
+      border: 1px solid rgba(255,255,255,0.07);
       border-radius: 22px;
       backdrop-filter: blur(12px);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.28);
       overflow: hidden;
       display: flex; flex-direction: column;
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
-    .post-card:hover { transform: translateY(-4px); border-color: rgba(74,222,128,0.4); box-shadow: 0 18px 44px rgba(0,0,0,0.3); }
-    .post-cover {
-      height: 180px;
-      background: linear-gradient(135deg, rgba(74,222,128,0.18), rgba(6,78,59,0.6));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .post-cover::after {
+    .post-card::before {
       content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.25) 100%);
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cat), transparent);
+      z-index: 2;
     }
-    .post-body { padding: 1.6rem 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
+    .post-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--cat) 55%, transparent); box-shadow: 0 18px 44px rgba(0,0,0,0.34); }
+    .post-cover {
+      height: 172px;
+      background-image: linear-gradient(180deg, rgba(6,78,59,0.14) 0%, rgba(3,37,25,0) 28%, rgba(3,37,25,0.92) 100%), var(--img);
+      background-size: cover; background-position: center;
+      transition: transform 0.5s ease;
+    }
+    .post-card:hover .post-cover { transform: scale(1.05); }
+    .post-body { position: relative; z-index: 1; padding: 1.9rem 1.6rem 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
+    .post-cat {
+      align-self: flex-start;
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.34rem 0.9rem;
+      border-radius: 9999px;
+      background: color-mix(in srgb, var(--cat) 13%, transparent);
+      border: 1px solid color-mix(in srgb, var(--cat) 42%, transparent);
+      color: var(--cat);
+      font-size: 0.64rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+    }
     .post-meta { display: flex; gap: 1rem; align-items: center; font-size: 0.72rem; color: rgba(167,243,208,0.85); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
     .post-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
     .post-title {
@@ -110,13 +123,25 @@
     }
     .post-link {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      color: #4ade80;
+      color: var(--cat);
       font-size: 0.88rem;
       font-weight: 500;
       margin-top: 0.4rem;
       transition: gap 0.2s ease;
     }
     .post-card:hover .post-link { gap: 0.7rem; }
+
+    /* Artículo destacado */
+    .post-featured {
+      grid-column: 1 / -1;
+      min-height: 360px;
+      justify-content: flex-end;
+      background-image: linear-gradient(95deg, rgba(2,30,21,0.97) 0%, rgba(2,30,21,0.9) 36%, rgba(2,30,21,0.55) 64%, rgba(2,30,21,0.28) 100%), var(--img);
+      background-size: cover; background-position: center right;
+    }
+    .post-featured .post-body { max-width: 62%; padding: 2.6rem 2.4rem; justify-content: center; gap: 0.9rem; }
+    .post-featured .post-title { font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.15; }
+    .post-featured .post-excerpt { font-size: 1.02rem; max-width: 48ch; flex: none; }
 
     .empty-soon {
       background: rgba(6,78,59,0.4);
@@ -157,6 +182,9 @@
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .hero { padding: 8rem 1.2rem 3rem; }
       .articles { padding: 2.5rem 1.2rem 4rem; }
+      .articles-inner { grid-template-columns: 1fr; }
+      .post-featured { min-height: 300px; background-image: linear-gradient(180deg, rgba(2,30,21,0.5) 0%, rgba(2,30,21,0.96) 100%), var(--img); }
+      .post-featured .post-body { max-width: 100%; padding: 1.9rem 1.6rem 1.6rem; }
     }
   </style>
   <!-- Umami Analytics -->
@@ -196,73 +224,91 @@
   <section class="articles">
     <div class="articles-inner">
 
-      <a href="como-ayudar-matematicas-primaria.html" class="post-card">
-        <div class="post-cover">🔢</div>
+      <a href="como-ayudar-matematicas-primaria.html" class="post-card post-featured" style="--cat:#60a5fa; --img:url('blog-img/mates.jpg')">
         <div class="post-body">
+          <span class="post-cat"><i class="fa-solid fa-star"></i> Destacado · Matemáticas</span>
+          <h2 class="post-title">Cómo ayudar a tu hijo con las matemáticas en Primaria</h2>
+          <p class="post-excerpt">Tu hijo "se hunde" en mates de golpe. Casi nunca es falta de capacidad: es un escalón que no subió. Los tres pilares (número, cálculo y problemas) y qué hacer en casa, sin agobios.</p>
           <div class="post-meta">
             <span><i class="fa-regular fa-calendar"></i> Junio 2026</span>
             <span><i class="fa-regular fa-clock"></i> 8 min</span>
           </div>
-          <h2 class="post-title">Cómo ayudar a tu hijo con las matemáticas en Primaria</h2>
-          <p class="post-excerpt">Tu hijo "se hunde" en mates de golpe. Casi nunca es falta de capacidad: es un escalón que no subió. Los tres pilares (número, cálculo y problemas) y qué hacer en casa, sin agobios.</p>
           <span class="post-link">Leer guía <i class="fa-solid fa-arrow-right"></i></span>
         </div>
       </a>
 
-      <a href="como-trabajar-ortografia-primaria.html" class="post-card">
-        <div class="post-cover">✍️</div>
+      <a href="como-trabajar-ortografia-primaria.html" class="post-card" style="--cat:#fbbf24; --img:url('blog-img/ortografia.jpg')">
+        <div class="post-cover"></div>
         <div class="post-body">
-          <div class="post-meta">
-            <span><i class="fa-regular fa-calendar"></i> Mayo 2026</span>
-            <span><i class="fa-regular fa-clock"></i> 7 min</span>
-          </div>
+          <span class="post-cat">Ortografía</span>
           <h2 class="post-title">Cómo trabajar la ortografía en Primaria sin que sea un drama</h2>
           <p class="post-excerpt">Tu hijo comete las mismas faltas en 6º que en 3º. Por qué "copiar 20 veces" no funciona y 4 estrategias que sí mejoran la ortografía en casa, sin dramas.</p>
-          <span class="post-link">Leer guía <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a href="tecnicas-de-estudio-primaria.html" class="post-card">
-        <div class="post-cover">🧠</div>
-        <div class="post-body">
           <div class="post-meta">
             <span><i class="fa-regular fa-calendar"></i> Mayo 2026</span>
             <span><i class="fa-regular fa-clock"></i> 7 min</span>
           </div>
-          <h2 class="post-title">Técnicas de estudio que sí funcionan en Primaria</h2>
-          <p class="post-excerpt">Tu hijo estudia pero no le cunde. Qué técnicas sí funcionan, cuáles son pérdida de tiempo, y cómo preparar exámenes sin agonía. Guía honesta para padres.</p>
           <span class="post-link">Leer guía <i class="fa-solid fa-arrow-right"></i></span>
         </div>
       </a>
 
-      <a href="como-ayudar-comprension-lectora-primaria.html" class="post-card">
-        <div class="post-cover">📖</div>
+      <a href="tecnicas-de-estudio-primaria.html" class="post-card" style="--cat:#4ade80; --img:url('blog-img/estudio.jpg')">
+        <div class="post-cover"></div>
         <div class="post-body">
+          <span class="post-cat">Técnicas de estudio</span>
+          <h2 class="post-title">Técnicas de estudio que sí funcionan en Primaria</h2>
+          <p class="post-excerpt">Tu hijo estudia pero no le cunde. Qué técnicas sí funcionan, cuáles son pérdida de tiempo, y cómo preparar exámenes sin agonía. Guía honesta para padres.</p>
+          <div class="post-meta">
+            <span><i class="fa-regular fa-calendar"></i> Mayo 2026</span>
+            <span><i class="fa-regular fa-clock"></i> 7 min</span>
+          </div>
+          <span class="post-link">Leer guía <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="como-ayudar-comprension-lectora-primaria.html" class="post-card" style="--cat:#a78bfa; --img:url('blog-img/lectura.jpg')">
+        <div class="post-cover"></div>
+        <div class="post-body">
+          <span class="post-cat">Comprensión lectora</span>
+          <h2 class="post-title">Cómo ayudar a tu hijo con la comprensión lectora en Primaria</h2>
+          <p class="post-excerpt">Tu hijo lee fluido pero no entiende lo que lee. Guía práctica para padres: cómo detectar el problema y 6 estrategias que funcionan en casa, sin necesidad de ser experto.</p>
           <div class="post-meta">
             <span><i class="fa-regular fa-calendar"></i> Mayo 2026</span>
             <span><i class="fa-regular fa-clock"></i> 6 min</span>
           </div>
-          <h2 class="post-title">Cómo ayudar a tu hijo con la comprensión lectora en Primaria</h2>
-          <p class="post-excerpt">Tu hijo lee fluido pero no entiende lo que lee. Guía práctica para padres: cómo detectar el problema y 6 estrategias que funcionan en casa, sin necesidad de ser experto.</p>
           <span class="post-link">Leer guía <i class="fa-solid fa-arrow-right"></i></span>
         </div>
       </a>
 
-      <a href="como-elegir-academia-torremolinos.html" class="post-card">
-        <div class="post-cover">📋</div>
+      <a href="como-elegir-academia-torremolinos.html" class="post-card" style="--cat:#fb7185; --img:url('blog-img/academia.jpg')">
+        <div class="post-cover"></div>
         <div class="post-body">
+          <span class="post-cat">Elegir academia</span>
+          <h2 class="post-title">Cómo elegir academia de refuerzo en Torremolinos: 7 claves</h2>
+          <p class="post-excerpt">Guía para padres y madres que están buscando academia. 7 criterios objetivos para distinguir una academia que funciona de una que no, con banderas rojas concretas y preguntas que hacer antes de inscribir.</p>
           <div class="post-meta">
             <span><i class="fa-regular fa-calendar"></i> Mayo 2026</span>
             <span><i class="fa-regular fa-clock"></i> 8 min</span>
           </div>
-          <h2 class="post-title">Cómo elegir academia de refuerzo en Torremolinos: 7 claves</h2>
-          <p class="post-excerpt">Guía para padres y madres que están buscando academia. 7 criterios objetivos para distinguir una academia que funciona de una que no, con banderas rojas concretas y preguntas que hacer antes de inscribir.</p>
+          <span class="post-link">Leer guía <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="como-preparar-la-ebau-andalucia.html" class="post-card" style="--cat:#22d3ee; --img:url('blog-img/ebau.jpg')">
+        <div class="post-cover"></div>
+        <div class="post-body">
+          <span class="post-cat">EBAU</span>
+          <h2 class="post-title">Cómo preparar la EBAU en Andalucía</h2>
+          <p class="post-excerpt">La Selectividad no es una lotería: es un examen previsible y preparable. Cómo se calcula la nota, las dos fases, las ponderaciones y un plan realista para llegar a junio con ventaja.</p>
+          <div class="post-meta">
+            <span><i class="fa-regular fa-calendar"></i> Junio 2026</span>
+            <span><i class="fa-regular fa-clock"></i> 9 min</span>
+          </div>
           <span class="post-link">Leer guía <i class="fa-solid fa-arrow-right"></i></span>
         </div>
       </a>
 
       <div class="empty-soon">
-        <p>Iremos publicando nuevas guías cada mes. <strong style="color:#4ade80; font-weight:500;">Próximamente</strong>: cómo preparar la EBAU en Andalucía, el paso de Primaria a la ESO, técnicas para memorizar las tablas de multiplicar…</p>
+        <p>Iremos publicando nuevas guías cada mes. <strong style="color:#4ade80; font-weight:500;">Próximamente</strong>: el paso de Primaria a la ESO, técnicas para memorizar las tablas de multiplicar, qué hacer si tu hijo no aprueba matemáticas…</p>
       </div>
 
     </div>
