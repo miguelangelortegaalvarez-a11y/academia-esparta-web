@@ -351,9 +351,9 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 - **Total:** ~820 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
-- **Índice rediseñado el 2026-06-15** (commit a31b003): fuera las portadas de emoji → diseño editorial con **fotos reales** (Pexels, uso comercial, self-hosted en `blog-img/` para no depender del CDN ni añadir cookies), **artículo destacado a doble ancho** con imagen de fondo (degradado verde lateral) y **color por categoría** (var `--cat` por tarjeta: mates azul, ortografía ámbar, estudio verde, lectura violeta, academia coral, EBAU cian). Degradado verde sutil sobre cada foto para cohesión premium. La de Lectura: niño de espaldas, NO identificable (norma de Miguel: fotos de niños sin cara identificable).
+- **Índice rediseñado el 2026-06-15** (commits a31b003 + 362804d): fuera las portadas de emoji → diseño editorial con **fotos reales** (Pexels, uso comercial, self-hosted en `blog-img/` para no depender del CDN ni añadir cookies), **artículo destacado a doble ancho** con imagen de fondo y **color por categoría** (var `--cat` + `--img` por tarjeta). El **destacado es `como-elegir-academia-torremolinos`** (color **jade `#4fc3a1`** — el coral daba sensación de alerta), no Mates. Portadas `aspect-ratio:16/9` (las fotos verticales se recortan en el hero ancho → para el destacado mejor horizontal). Degradado verde sutil sobre cada foto. La de Lectura: niño de espaldas, NO identificable (norma de Miguel: fotos de niños sin cara identificable). El artículo `elegir-academia` se reescribió en clave de metodología propia y tono NO competitivo (ver memoria `project-posicionamiento-academia`).
 - 6 artículos publicados, casi todos con enlaces internos a fichas:
-  - `como-elegir-academia-torremolinos.html` (sin enlaces — artículo comercial puro)
+  - `como-elegir-academia-torremolinos.html` (DESTACADO del blog; reescrito 2026-06-15: 7 claves en tono positivo "buena señal" + sección "Cómo trabajamos en Esparta"; enlaza a psicología, materiales y otros artículos)
   - `como-ayudar-comprension-lectora-primaria.html` (11 enlaces a fichas)
   - `tecnicas-de-estudio-primaria.html` (5 enlaces a fichas)
   - `como-trabajar-ortografia-primaria.html` (9 enlaces a fichas)
