@@ -318,7 +318,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 | Bloque | Sub-bloques |
 |---|---|
-| `numeros` | numeros-hasta-10000 ✅ · valor-posicional-y-descomposicion · comparar-y-ordenar · numeros-romanos · las-fracciones · sumar-y-restar-fracciones |
+| `numeros` | numeros-hasta-10000 ✅ · valor-posicional-y-descomposicion ✅ · comparar-y-ordenar · numeros-romanos · las-fracciones · sumar-y-restar-fracciones |
 | `operaciones` | sumas-y-restas-llevando · multiplicacion-por-una-cifra · multiplicacion-por-dos-cifras · propiedades-y-calculo-mental · la-division-concepto-y-reparto · division-por-una-cifra |
 | `medida` | longitud-km-m-cm-mm · masa-kilo-gramo · capacidad-litro-mililitro · el-reloj-y-los-minutos · el-dinero-euros-y-centimos · superficie |
 | `geometria` | rectas-paralelas-secantes-perpendiculares · los-angulos · poligonos-y-triangulos · circunferencia-y-circulo · el-perimetro |
@@ -328,7 +328,9 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 **Bloque `numeros` de 3º — EN MARCHA:**
 - **`numeros-hasta-10000` COMPLETO ✅ (6 fichas, cerrado 2026-06-15, commits 6b84320/88ebe68/5f050fc):** f1 UM·C·D·U (descomponer en tabla, formar, descomponer en suma, serie de 1.000 en 1.000) · f2 leer y escribir números (cifra↔letra, unir lecturas, ¿qué número es?) · f3 formar y descomponer · f4 descomponer con ceros + ¿qué número soy? (adivinanzas + inventa tú) · f5 el millar y equivalencias (1 UM=10 C=100 D=1.000 U) · f6 repaso (mayor/menor, ordenar, series, anterior/posterior). f1 a mano (ancla); f2-f6 con **5 agentes en paralelo (1/ficha), números fijados por mí** (agentes solo redactan+montan clonando f1). 1 folio A4 c/u (92-95%). Registradas en RECURSOS de materiales.html. ⚠️ Reparto: `numeros-hasta-10000` cubre leer/escribir/formar/descomponer/equivalencias/series; el **valor posicional puro** y **comparar/ordenar formal** van en sus sub-bloques propios para no duplicar.
 
-**SIGUIENTE en 3º:** `valor-posicional-y-descomposicion` (sub-bloque 2 de numeros).
+- **`valor-posicional-y-descomposicion` COMPLETO ✅ (6 fichas, cerrado 2026-06-15, commit 54f9e79):** sub-bloque del **valor posicional puro** (cuánto vale cada cifra según su posición, sin duplicar el "5 C" de numeros-hasta-10000). f1 el valor de cada cifra (cifra marcada con recuadro `.cm` + tabla valor por posición + descomp. en suma + misma cifra distinto valor) · f2 práctica sin Recuerda (cifra marcada + cifra que ocupa cada posición + rodear cifra pedida + V/F) · f3 descomponer y componer (número→suma y suma→número + unir + completar sumando) · f4 **descomposición multiplicativa** (3×1.000 + 5×100 + 8×10 + 2×1; concepto nuevo de 3º, con Recuerda) · f5 el cero (valor 0, no se escribe en la suma) + adivinanzas "¿qué número soy?" + inventa tú · f6 repaso. f1 a mano (ancla); f2-f6 con **5 agentes en paralelo (1/ficha), números fijados y verificados por mí** (agentes solo redactan+montan clonando f1). 1 folio A4 c/u (82-91%; hubo que comprimir f3/f4/f5 que salieron a 98%/2-páginas — bajar alturas de caja+gaps). Registradas en RECURSOS de materiales.html. Clase nueva reusable `.cm` (cifra marcada con recuadro gris).
+
+**SIGUIENTE en 3º:** `comparar-y-ordenar` (sub-bloque 3 de numeros; luego numeros-romanos, las-fracciones, sumar-y-restar-fracciones).
 
 ---
 
@@ -370,7 +372,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 - **2º Primaria Matemáticas — COMPLETO ✅** (cerrado 2026-06-14, 131 fichas):
   - `numeros` (21) + `operaciones` (33) + `medida` (19) + `geometria` (16) + `estadistica` (12) + `problemas` (30) — detalle en sección "Estructura matemáticas Primaria"
 - **3º Primaria Matemáticas — EN MARCHA** (arrancado 2026-06-15, fuente Poppins):
-  - `numeros`: `numeros-hasta-10000` (6) ✅ — resto de sub-bloques pendientes
+  - `numeros`: `numeros-hasta-10000` (6) ✅ + `valor-posicional-y-descomposicion` (6) ✅ — siguiente: `comparar-y-ordenar`
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
 - **Total:** ~957 fichas indexadas en sitemap
 
@@ -420,7 +422,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
    - **NORMA CRÍTICA validada 2026-05-28 (problemas 1º):** todas las sumas SIN llevadas y todas las restas SIN prestar. Miguel detectó 25 operaciones con llevadas/prestar en la 1ª pasada — hubo que rehacerlas. Validar dígito a dígito antes de cerrar cada ficha.
    - **Índice web:** `materiales.html` ya alineado para 1º Mates con la estructura de 6 bloques (commit `ec68965`, 2026-05-28). 2º–6º Mates en `materiales.html` siguen con la estructura antigua de 5 bloques — actualizar al arrancar cada curso.
    - **Hero compacto en `materiales.html`** (2026-05-28): el hero ocupaba toda la pantalla y los padres tenían que hacer scroll para ver las tarjetas Lengua/Mates. Reducido (`padding 7.5rem→2rem`, h1 más pequeño, quitados `<p>` descriptivo y 4 `<span class="hero-tag">`, app-wrap padding-top 2.5rem→1.5rem). Las tarjetas aparecen ahora en el viewport inicial sin scroll.
-   - **1º MATES COMPLETO ✅** (2026-05-28, 71 fichas). **2º MATES COMPLETO ✅** (2026-06-14, 131 fichas). **3º MATES EN MARCHA** (arrancado 2026-06-15): árbol acordado + `numeros-hasta-10000` ✅ (6 fichas). **Siguiente:** continuar el bloque `numeros` de 3º por `valor-posicional-y-descomposicion` (ver sección "Sub-bloques 3º Primaria"). 3º usa **Poppins**.
+   - **1º MATES COMPLETO ✅** (2026-05-28, 71 fichas). **2º MATES COMPLETO ✅** (2026-06-14, 131 fichas). **3º MATES EN MARCHA** (arrancado 2026-06-15): árbol acordado + `numeros-hasta-10000` ✅ (6) + `valor-posicional-y-descomposicion` ✅ (6). **Siguiente:** continuar el bloque `numeros` de 3º por `comparar-y-ordenar` (ver sección "Sub-bloques 3º Primaria"). 3º usa **Poppins**.
 
 2. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 1.
 
