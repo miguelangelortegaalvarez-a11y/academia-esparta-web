@@ -318,7 +318,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 | Bloque | Sub-bloques |
 |---|---|
-| `numeros` | numeros-hasta-10000 ✅ · valor-posicional-y-descomposicion ✅ · comparar-y-ordenar · numeros-romanos · las-fracciones · sumar-y-restar-fracciones |
+| `numeros` | numeros-hasta-10000 ✅ · valor-posicional-y-descomposicion ✅ · comparar-y-ordenar ✅ · numeros-romanos · las-fracciones · sumar-y-restar-fracciones |
 | `operaciones` | sumas-y-restas-llevando · multiplicacion-por-una-cifra · multiplicacion-por-dos-cifras · propiedades-y-calculo-mental · la-division-concepto-y-reparto · division-por-una-cifra |
 | `medida` | longitud-km-m-cm-mm · masa-kilo-gramo · capacidad-litro-mililitro · el-reloj-y-los-minutos · el-dinero-euros-y-centimos · superficie |
 | `geometria` | rectas-paralelas-secantes-perpendiculares · los-angulos · poligonos-y-triangulos · circunferencia-y-circulo · el-perimetro |
@@ -330,7 +330,9 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 - **`valor-posicional-y-descomposicion` COMPLETO ✅ (6 fichas, cerrado 2026-06-15, commit 54f9e79):** sub-bloque del **valor posicional puro** (cuánto vale cada cifra según su posición, sin duplicar el "5 C" de numeros-hasta-10000). f1 el valor de cada cifra (cifra marcada con recuadro `.cm` + tabla valor por posición + descomp. en suma + misma cifra distinto valor) · f2 práctica sin Recuerda (cifra marcada + cifra que ocupa cada posición + rodear cifra pedida + V/F) · f3 descomponer y componer (número→suma y suma→número + unir + completar sumando) · f4 **descomposición multiplicativa** (3×1.000 + 5×100 + 8×10 + 2×1; concepto nuevo de 3º, con Recuerda) · f5 el cero (valor 0, no se escribe en la suma) + adivinanzas "¿qué número soy?" + inventa tú · f6 repaso. f1 a mano (ancla); f2-f6 con **5 agentes en paralelo (1/ficha), números fijados y verificados por mí** (agentes solo redactan+montan clonando f1). 1 folio A4 c/u (82-91%; hubo que comprimir f3/f4/f5 que salieron a 98%/2-páginas — bajar alturas de caja+gaps). Registradas en RECURSOS de materiales.html. Clase nueva reusable `.cm` (cifra marcada con recuadro gris).
 
-**SIGUIENTE en 3º:** `comparar-y-ordenar` (sub-bloque 3 de numeros; luego numeros-romanos, las-fracciones, sumar-y-restar-fracciones).
+- **`comparar-y-ordenar` COMPLETO ✅ (6 fichas, cerrado 2026-06-15, commit 5d52ee4):** sub-bloque 3 de numeros. f1 el signo >,<,= (Recuerda "el signo abierto mira al mayor / el pico al menor" + comparar de izda a dcha + parejas + rodear mayor/menor + V/F) · f2 práctica sin Recuerda (signo + **completar la cifra que falta** para que sean iguales / para que la desigualdad sea verdadera + rodear mayor de cada trío) · f3 **ordenar** menor→mayor y mayor→menor (bancos desordenados + secuencia de cajas con < o > + numerar puesto 1-4) · f4 **anterior/posterior** (tabla) + **intercalar** un nº entre dos + completar series de 1 en 1 (cruzando millares) · f5 **la recta numérica** (completar de 100 en 100 y de 10 en 10) + **formar el mayor/menor nº con unas cifras** + ¿entre qué millares? · f6 repaso. f1 a mano (ancla) + f5 a mano (lleva la recta, componente nuevo); f2/f3/f4/f6 con **4 agentes en paralelo (1/ficha), números fijados y verificados por mí**. 1 folio A4 c/u (85-89%). Registradas en RECURSOS de materiales.html. Clases nuevas reusables: `.recta-num`/`.rn-puntos`/`.rn-pt` (recta numérica con ticks), `.cifras-banco`/`.dig`/`.caja-num` (formar nº con cifras), `.orden-banco`/`.orden-secuencia` (ordenar), `.ap-tabla` (anterior/posterior), `.cifra-box` (hueco de una cifra dentro de un número).
+
+**SIGUIENTE en 3º:** `numeros-romanos` (sub-bloque 4 de numeros; luego las-fracciones, sumar-y-restar-fracciones).
 
 ---
 
@@ -372,7 +374,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 - **2º Primaria Matemáticas — COMPLETO ✅** (cerrado 2026-06-14, 131 fichas):
   - `numeros` (21) + `operaciones` (33) + `medida` (19) + `geometria` (16) + `estadistica` (12) + `problemas` (30) — detalle en sección "Estructura matemáticas Primaria"
 - **3º Primaria Matemáticas — EN MARCHA** (arrancado 2026-06-15, fuente Poppins):
-  - `numeros`: `numeros-hasta-10000` (6) ✅ + `valor-posicional-y-descomposicion` (6) ✅ — siguiente: `comparar-y-ordenar`
+  - `numeros`: `numeros-hasta-10000` (6) ✅ + `valor-posicional-y-descomposicion` (6) ✅ + `comparar-y-ordenar` (6) ✅ — siguiente: `numeros-romanos`
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
 - **Total:** ~957 fichas indexadas en sitemap
 
