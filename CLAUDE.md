@@ -25,11 +25,13 @@ academia-esparta-web/
 ├── logopedia.html                          # Servicio Logopedia (Rocío)
 ├── psicologia.html                         # Servicio Psicología
 ├── materiales.html                         # Hub público de fichas imprimibles (índice React inline)
-├── blog.html                               # Hub blog SEO — "Guías para padres"
+├── blog.html                               # Hub blog SEO "Guías para padres" — diseño editorial con fotos (rediseño 2026-06-15)
+├── blog-img/                               # Fotos de portada del blog (Pexels, self-hosted): mates, ortografia, estudio, lectura, academia, ebau
 ├── inscripcion.html                        # Redirige → shadow.academiaesparta.es/inscripcion
 ├── juegos.html                             # "Próximamente" — interactivos aparcados
 ├── 404.html                                # Página de error (sistema premium)
 ├── como-elegir-academia-torremolinos.html  # Artículo SEO nº1
+├── como-preparar-la-ebau-andalucia.html    # Artículo SEO EBAU/Bachillerato (2026-06-15)
 ├── google690465498c577da0.html             # Verificación Google Search Console (no tocar)
 │
 │  ── Recursos (fichas imprimibles SEO) ──
@@ -121,6 +123,8 @@ academia-esparta-web/
 ## Estado técnico / auditoría web (2026-06-02)
 
 Auditoría profunda + optimizaciones (3 commits: `ee102d0`, `0bdfdfe`, `326c1d0`). Detalle en memoria `project-web-auditoria-optimizacion`.
+
+> **⚠️ FIX CRÍTICO 2026-06-15 (commit a31b003):** el hash SRI de Font Awesome estaba MAL en las 13 páginas (`sha512-p1HgFeAX…`). Con SRI estricto, eso **bloqueaba TODOS los iconos de Font Awesome en toda la web, en todos los navegadores y en producción** (footer redes, mapa, teléfono, flechas "Leer guía"…) — pasó desapercibido porque casi todos los iconos llevan texto al lado. Corregido al hash bueno de FA 6.4.0: `sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==` (mantiene SRI). **Lección:** si no se ven iconos FA, comprobar el hash SRI contra el fichero que sirve cdnjs (`openssl dgst -sha512 -binary all.min.css | openssl base64 -A`). Los SVG/CSS escritos a mano (botón WhatsApp, pulse-dot) NO dependen de FA y siempre se vieron.
 
 **Hecho:**
 - **Reseñas Google 63 → 64** en 5 sitios (index.html: chip hero, contador `data-target`, label rating, chip rotativo JS; + `como-elegir-academia-torremolinos.html`).
@@ -347,12 +351,14 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 - **Total:** ~820 fichas indexadas en sitemap
 
 ### Blog (`/blog.html`)
-- 5 artículos publicados, casi todos con enlaces internos a fichas:
+- **Índice rediseñado el 2026-06-15** (commit a31b003): fuera las portadas de emoji → diseño editorial con **fotos reales** (Pexels, uso comercial, self-hosted en `blog-img/` para no depender del CDN ni añadir cookies), **artículo destacado a doble ancho** con imagen de fondo (degradado verde lateral) y **color por categoría** (var `--cat` por tarjeta: mates azul, ortografía ámbar, estudio verde, lectura violeta, academia coral, EBAU cian). Degradado verde sutil sobre cada foto para cohesión premium. La de Lectura: niño de espaldas, NO identificable (norma de Miguel: fotos de niños sin cara identificable).
+- 6 artículos publicados, casi todos con enlaces internos a fichas:
   - `como-elegir-academia-torremolinos.html` (sin enlaces — artículo comercial puro)
   - `como-ayudar-comprension-lectora-primaria.html` (11 enlaces a fichas)
   - `tecnicas-de-estudio-primaria.html` (5 enlaces a fichas)
   - `como-trabajar-ortografia-primaria.html` (9 enlaces a fichas)
   - `como-ayudar-matematicas-primaria.html` (2026-06-04, commit 9ca66b7, 18 enlaces a fichas de mates 1º-2º — primer artículo de mates; 3 pilares número/cálculo/problemas; enlaza a psicología por discalculia)
+  - `como-preparar-la-ebau-andalucia.html` (2026-06-15 — guía estratégica de Bachillerato: nota 60/40, dos fases Acceso/Admisión, ponderaciones, plan de preparación; enlaza a psicología por gestión de nervios; CTA a inscripción. Sin enlaces a fichas: no hay material de ese nivel. Datos estables; el detalle de asignaturas/fechas se consulta cada año en el Distrito Único Andaluz)
 
 ### Páginas de servicio
 - Logopedia · Psicología · Quiénes somos — en sistema premium, con JSON-LD
