@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valor posicional y descomposición · Repaso · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 7px 13px; margin-bottom: 9px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 6px; }
+    .recuerda-ejemplos { display: flex; flex-wrap: wrap; gap: 8px 26px; align-items: flex-start; }
+    .rec-ej { font-size: 13px; line-height: 1.55; }
+    .rec-ej b { font-size: 17px; }
+
+    /* Cifra marcada */
+    .cm { display: inline-block; border: 1.6px solid #000; border-radius: 5px; padding: 0 5px; font-weight: 800; background: #efefef; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 12px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Valor de la cifra marcada (lista) */
+    .vp-lista { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+    .vp-item { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; width: calc(50% - 9px); }
+    .vp-item .flecha { font-size: 15px; }
+    .vp-item .et { font-size: 13px; font-weight: 600; white-space: nowrap; }
+    .vp-item .caja-resp { flex: 1; min-width: 70px; height: 34px; border: 1.5px solid #000; border-radius: 6px; }
+    .vp-item.full { width: 100%; font-size: 14px; }
+    .vp-item.full .et { font-weight: 700; white-space: normal; }
+    .vp-item.full .caja-resp { flex: none; width: 130px; }
+
+    /* Tabla valor posicional */
+    .vp-tabla { border-collapse: collapse; margin-bottom: 4px; width: 100%; }
+    .vp-tabla th, .vp-tabla td { border: 1.5px solid #000; text-align: center; }
+    .vp-tabla th { font-size: 11px; font-weight: 700; background: #f3f3f3; padding: 5px 3px; line-height: 1.2; }
+    .vp-tabla .num-cab { background: #fff; font-size: 19px; font-weight: 700; width: 90px; }
+    .vp-tabla td { height: 34px; font-size: 16px; font-weight: 700; }
+
+    /* Descomponer en suma / producto */
+    .desc-grupo { margin-bottom: 10px; }
+    .suma-fila { display: flex; align-items: center; gap: 6px; font-size: 17px; font-weight: 700; margin-bottom: 6px; flex-wrap: nowrap; }
+    .suma-fila .num-grande { min-width: 70px; font-size: 18px; }
+    .suma-fila .et-tipo { font-size: 12px; font-weight: 600; min-width: 60px; }
+    .suma-fila .caja-sum { width: 74px; height: 33px; border: 1.5px solid #000; border-radius: 6px; flex: none; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Valor posicional y descomposición</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔢 Repaso</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Mira la cifra marcada y escribe cuánto vale:</div>
+    <div class="vp-lista">
+      <div class="vp-item"><span>6.<span class="cm">4</span>83</span><span class="flecha">→</span><span class="et">vale</span><div class="caja-resp"></div></div>
+      <div class="vp-item"><span>2.5<span class="cm">7</span>0</span><span class="flecha">→</span><span class="et">vale</span><div class="caja-resp"></div></div>
+      <div class="vp-item"><span><span class="cm">9</span>.146</span><span class="flecha">→</span><span class="et">vale</span><div class="caja-resp"></div></div>
+      <div class="vp-item"><span>3.80<span class="cm">5</span></span><span class="flecha">→</span><span class="et">vale</span><div class="caja-resp"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe el valor de cada cifra según su posición:</div>
+    <table class="vp-tabla">
+      <tr><th class="num-cab">Número</th><th>Valor de<br>las UM</th><th>Valor de<br>las C</th><th>Valor de<br>las D</th><th>Valor de<br>las U</th></tr>
+      <tr><td class="num-cab">7.358</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="num-cab">4.620</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="num-cab">9.107</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="num-cab">5.043</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Descompón cada número en suma y en producto:</div>
+    <div class="desc-grupo">
+      <div class="suma-fila"><span class="num-grande">8.516</span><span class="et-tipo">suma:</span><span>=</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div></div>
+      <div class="suma-fila"><span class="num-grande"></span><span class="et-tipo">producto:</span><span>=</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div></div>
+    </div>
+    <div class="desc-grupo">
+      <div class="suma-fila"><span class="num-grande">3.204</span><span class="et-tipo">suma:</span><span>=</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div></div>
+      <div class="suma-fila"><span class="num-grande"></span><span class="et-tipo">producto:</span><span>=</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div><span>+</span><div class="caja-sum"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Mezcla final. Resuelve cada apartado:</div>
+    <div class="vp-lista">
+      <div class="vp-item full"><span class="et">a) ¿Qué número soy? Tengo 6 UM, 0 C, 5 D y 2 U.</span><div class="caja-resp"></div></div>
+      <div class="vp-item full"><span class="et">b) Escribe el número:&nbsp; 4.000 + 800 + 30 + 9 =</span><div class="caja-resp"></div></div>
+      <div class="vp-item full"><span class="et">c) Escribe el número:&nbsp; 7×1.000 + 1×100 + 0×10 + 6×1 =</span><div class="caja-resp"></div></div>
+      <div class="vp-item full"><span class="et">d) En 5.380, ¿cuánto vale el 3?</span><div class="caja-resp"></div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
