@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Números romanos · Repaso · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 7px 13px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 5px; }
+    .rec-ej { font-size: 12.5px; line-height: 1.5; }
+    .rec-ej b { font-weight: 800; }
+
+    /* Tabla de símbolos */
+    .simbolos { display: flex; gap: 6px; margin: 6px 0 3px; }
+    .sim-cel { flex: 1; border: 1.5px solid #000; border-radius: 8px; text-align: center; padding: 4px 2px 3px; }
+    .sim-cel .letra { font-size: 22px; font-weight: 800; line-height: 1; }
+    .sim-cel .val { font-size: 11.5px; font-weight: 600; color: #333; margin-top: 2px; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 14px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 9px; line-height: 1.3; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Unir símbolo ↔ valor (dos columnas) */
+    .unir { display: flex; justify-content: space-around; gap: 30px; }
+    .unir-col { display: flex; flex-direction: column; gap: 7px; }
+    .unir-col span { font-size: 16px; font-weight: 700; border: 1.5px solid #000; border-radius: 8px; padding: 4px 0; width: 120px; text-align: center; }
+    .unir-col.valores span { font-weight: 600; }
+
+    /* Escribe el valor / escribe en romano (rejilla de cajas) */
+    .conv-lista { display: flex; flex-wrap: wrap; gap: 14px 16px; }
+    .conv-item { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 18px; font-weight: 700; width: calc(33.33% - 11px); }
+    .conv-item .flecha { font-size: 15px; color: #555; }
+    .conv-item .caja { width: 62px; height: 38px; border: 1.5px solid #000; border-radius: 6px; flex-shrink: 0; }
+
+    /* Verdadero / Falso */
+    .vf-lista { display: flex; flex-direction: column; gap: 6px; }
+    .vf-item { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; }
+    .vf-item .frase { flex: 1; }
+    .vf-item .frase b { font-weight: 800; }
+    .vf-item .opc { display: flex; gap: 8px; }
+    .vf-item .opc span { border: 1.5px solid #000; border-radius: 6px; width: 30px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+
+    /* Ordenar (banco + cajas) */
+    .banco { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:10px; }
+    .banco span { font-size:16px; font-weight:700; border:1.5px solid #000; border-radius:8px; padding:4px 14px; }
+    .orden-cajas { display:flex; align-items:center; justify-content:center; gap:8px; font-size:14px; font-weight:700; }
+    .orden-cajas .caja-o { width:60px; height:34px; border:1.5px solid #000; border-radius:6px; }
+    .orden-cajas .ml { font-size:12px; color:#555; }
+
+    /* Aplicación (textos largos, dos columnas) */
+    .conv-lista.dos .conv-item { width: calc(50% - 8px); }
+
+    .footer { margin-top: 9px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Números romanos</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🏅 Repaso de los números romanos</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe con cifras el valor de cada número romano:</div>
+    <div class="conv-lista">
+      <div class="conv-item"><span>VII</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>XIV</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>XL</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>XCIX</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>CD</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>DCCC</span><span class="flecha">→</span><div class="caja"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe en números romanos:</div>
+    <div class="conv-lista">
+      <div class="conv-item"><span>6</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>19</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>44</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>90</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>600</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>1.000</span><span class="flecha">→</span><div class="caja"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Ordena de <b>menor a mayor</b>:</div>
+    <div class="banco">
+      <span>XII</span><span>IV</span><span>XXX</span><span>XIX</span><span>XL</span>
+    </div>
+    <div class="orden-cajas">
+      <span class="ml">menor</span>
+      <div class="caja-o"></div>
+      <div class="caja-o"></div>
+      <div class="caja-o"></div>
+      <div class="caja-o"></div>
+      <div class="caja-o"></div>
+      <span class="ml">mayor</span>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Resuelve:</div>
+    <div class="conv-lista dos">
+      <div class="conv-item"><span>Siglo XXI</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>Felipe VI</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>Capítulo IX</span><span class="flecha">→</span><div class="caja"></div></div>
+      <div class="conv-item"><span>Año MM</span><span class="flecha">→</span><div class="caja"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5.</span> ¿Verdadero o falso? Rodea <b>V</b> o <b>F</b>:</div>
+    <div class="vf-lista">
+      <div class="vf-item"><span class="frase"><b>MM</b> vale 2.000.</span><div class="opc"><span>V</span><span>F</span></div></div>
+      <div class="vf-item"><span class="frase"><b>XLIV</b> vale 44.</span><div class="opc"><span>V</span><span>F</span></div></div>
+      <div class="vf-item"><span class="frase">El siglo <b>XXI</b> es el siglo 21.</span><div class="opc"><span>V</span><span>F</span></div></div>
+      <div class="vf-item"><span class="frase"><b>CM</b> vale 600.</span><div class="opc"><span>V</span><span>F</span></div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
