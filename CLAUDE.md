@@ -75,6 +75,11 @@ academia-esparta-web/
 ├── hero.jpg / quienes-somos.jpg / primaria.jpg / secundaria.jpg / bachiller.jpg
 └── julio.jpg / miguel.jpg        # Fotos equipo (todas en uso)
 │
+│  ── Juegos de contenido propio (PILOTO en local, SIN SUBIR — ver memoria project-juegos-interactivos) ──
+├── juegos/
+│   └── camino-matematico/    # Piloto reconstruido 2026-06-17: motor por cursos + imágenes optimizadas (32MB→1.6MB) + dinamismo
+│                             # NO trackeado, NO enlazado en juegos.html. Original en _pendiente/ intacto.
+│
 │  ── Interactivos aparcados (no tocar hasta acabar recursos) ──
 └── _pendiente/
     ├── camino-ingles/
@@ -318,7 +323,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 | Bloque | Sub-bloques |
 |---|---|
-| `numeros` | numeros-hasta-10000 ✅ · valor-posicional-y-descomposicion ✅ · comparar-y-ordenar ✅ · numeros-romanos ✅ · las-fracciones ✅ · sumar-y-restar-fracciones |
+| `numeros` ✅ | numeros-hasta-10000 ✅ · valor-posicional-y-descomposicion ✅ · comparar-y-ordenar ✅ · numeros-romanos ✅ · las-fracciones ✅ · sumar-y-restar-fracciones ✅ |
 | `operaciones` | sumas-y-restas-llevando · multiplicacion-por-una-cifra · multiplicacion-por-dos-cifras · propiedades-y-calculo-mental · la-division-concepto-y-reparto · division-por-una-cifra |
 | `medida` | longitud-km-m-cm-mm · masa-kilo-gramo · capacidad-litro-mililitro · el-reloj-y-los-minutos · el-dinero-euros-y-centimos · superficie |
 | `geometria` | rectas-paralelas-secantes-perpendiculares · los-angulos · poligonos-y-triangulos · circunferencia-y-circulo · el-perimetro |
@@ -440,7 +445,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 ### Prioridad baja — cuando recursos y materiales estén completos
 
-5. **Juegos interactivos** — todo está en `_pendiente/`. Retomar cuando Primaria + ESO estén cubiertos. Cablear `operaciones/`, `mates-iniciales/`, `lectoescritura/` al menos en `juegos.html`.
+5. **Juegos interactivos** — EN MARCHA (Miguel lo adelantó al roadmap el 2026-06-17). Decisión: **portal de juegos de contenido propio** en `juegos.html` (hoy "Próximamente"), **solo Camino Matemático + Camino Inglés** (resto de `_pendiente/` descartado para esto). **Piloto del Camino Matemático HECHO en `juegos/camino-matematico/`** — motor genérico + contenido por cursos (`CURRICULUM`, añadir reto = 1 línea), home 2 pasos, imágenes optimizadas 32MB→1.6MB, dinamismo (guerrero avanza + animaciones + sonido Web Audio sin peso + racha + estrellas), aritmética validada. **EN LOCAL, SIN SUBIR** (sin commit, sin enlazar). Detalle completo y siguientes pasos (clonar al Inglés, montar el portal) en memoria `project-juegos-interactivos`.
 
 6. **Bachillerato** — crear `recursos/1-bachillerato/` y `recursos/2-bachillerato/` con fichas de las asignaturas principales.
 
