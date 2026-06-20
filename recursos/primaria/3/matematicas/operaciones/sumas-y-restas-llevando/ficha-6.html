@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sumas y restas llevando · Repaso · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 8px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 7px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Rejilla de operaciones verticales (sumas y restas mezcladas) */
+    .sumas-grid { display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 30px; justify-items: center; margin-top: 10px; }
+    .op { font-weight: 700; }
+    .op .fila { display: grid; grid-template-columns: 22px 24px 24px 24px; align-items: center; font-size: 22px; }
+    .op .fila span { text-align: center; }
+    .op .signo { font-weight: 800; font-size: 20px; }
+    .op .barra { grid-column: 2 / 5; border-top: 2.5px solid #000; height: 26px; }
+    /* Operaciones de 4 cifras */
+    .op4 .fila { grid-template-columns: 22px 24px 24px 24px 24px; }
+    .op4 .barra { grid-column: 2 / 6; }
+
+    /* Problemas */
+    .problemas { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .problema { border: 1.5px solid #000; border-radius: 10px; padding: 8px 12px; }
+    .problema-cabecera { display: flex; align-items: baseline; gap: 5px; }
+    .problema-num { font-family: sans-serif; font-size: 15px; font-weight: 800; }
+    .problema-enunciado { font-size: 13.5px; line-height: 1.3; font-weight: 600; }
+    .problema-resolver { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; align-items: stretch; margin-top: 5px; }
+    .zona { border: 1.5px dashed #555; border-radius: 6px; padding: 4px 8px; min-height: 66px; }
+    .zona-label { font-family: sans-serif; font-size: 10px; font-weight: 700; color: #444; letter-spacing: .4px; display: block; margin-bottom: 1px; }
+    .zona-solucion { display: flex; flex-direction: column; }
+    .solucion-linea { flex: 1; border-bottom: 1.5px solid #000; margin-top: 8px; min-height: 30px; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Sumas y restas llevando</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔁 Repaso · sumas y restas</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Resuelve estas operaciones. ¡Fíjate bien en el signo!</div>
+    <div class="sumas-grid">
+      <div class="op"><div class="fila"><span></span><span>4</span><span>5</span><span>8</span></div><div class="fila"><span class="signo">+</span><span>3</span><span>6</span><span>7</span></div><div class="fila"><span></span><div class="barra"></div></div></div>
+      <div class="op"><div class="fila"><span></span><span>6</span><span>2</span><span>4</span></div><div class="fila"><span class="signo">−</span><span>1</span><span>7</span><span>5</span></div><div class="fila"><span></span><div class="barra"></div></div></div>
+      <div class="op op4"><div class="fila"><span></span><span>2</span><span>3</span><span>4</span><span>6</span></div><div class="fila"><span class="signo">+</span><span>1</span><span>5</span><span>7</span><span>8</span></div><div class="fila"><span></span><div class="barra"></div></div></div>
+
+      <div class="op op4"><div class="fila"><span></span><span>5</span><span>2</span><span>1</span><span>3</span></div><div class="fila"><span class="signo">−</span><span>2</span><span>4</span><span>7</span><span>6</span></div><div class="fila"><span></span><div class="barra"></div></div></div>
+      <div class="op"><div class="fila"><span></span><span>3</span><span>7</span><span>6</span></div><div class="fila"><span class="signo">+</span><span>2</span><span>8</span><span>5</span></div><div class="fila"><span></span><div class="barra"></div></div></div>
+      <div class="op"><div class="fila"><span></span><span>7</span><span>0</span><span>3</span></div><div class="fila"><span class="signo">−</span><span>2</span><span>4</span><span>8</span></div><div class="fila"><span></span><div class="barra"></div></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Resuelve los problemas.</div>
+    <div class="problemas">
+      <div class="problema">
+        <div class="problema-cabecera"><span class="problema-num">1.</span><span class="problema-enunciado">Un colegio compró 1.348 lápices en septiembre y 1.276 en enero. ¿Cuántos lápices compró en total?</span></div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+      <div class="problema">
+        <div class="problema-cabecera"><span class="problema-num">2.</span><span class="problema-enunciado">Una biblioteca tiene 2.500 libros. Si presta 1.365, ¿cuántos libros le quedan?</span></div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+      <div class="problema">
+        <div class="problema-cabecera"><span class="problema-num">3.</span><span class="problema-enunciado">En un partido había 845 personas y en otro 678. ¿Cuántas personas más había en el primero?</span></div>
+        <div class="problema-resolver">
+          <div class="zona"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
