@@ -324,7 +324,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 | Bloque | Sub-bloques |
 |---|---|
 | `numeros` ✅ | numeros-hasta-10000 ✅ · valor-posicional-y-descomposicion ✅ · comparar-y-ordenar ✅ · numeros-romanos ✅ · las-fracciones ✅ · sumar-y-restar-fracciones ✅ |
-| `operaciones` | sumas-y-restas-llevando · multiplicacion-por-una-cifra · multiplicacion-por-dos-cifras · propiedades-y-calculo-mental · la-division-concepto-y-reparto · division-por-una-cifra |
+| `operaciones` 🔶 | sumas-y-restas-llevando ✅ · multiplicacion-por-una-cifra · multiplicacion-por-dos-cifras · propiedades-y-calculo-mental · la-division-concepto-y-reparto · division-por-una-cifra |
 | `medida` | longitud-km-m-cm-mm · masa-kilo-gramo · capacidad-litro-mililitro · el-reloj-y-los-minutos · el-dinero-euros-y-centimos · superficie |
 | `geometria` | rectas-paralelas-secantes-perpendiculares · los-angulos · poligonos-y-triangulos · circunferencia-y-circulo · el-perimetro |
 | `estadistica` | tablas-de-datos · graficos-de-barras · pictogramas · graficos-lineales · probabilidad |
@@ -345,7 +345,10 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 **BLOQUE `numeros` DE 3º COMPLETO ✅** (36 fichas: numeros-hasta-10000 6 + valor-posicional-y-descomposicion 6 + comparar-y-ordenar 6 + numeros-romanos 6 + las-fracciones 6 + sumar-y-restar-fracciones 6).
 
-**SIGUIENTE en 3º:** bloque `operaciones`, empezando por `sumas-y-restas-llevando` (árbol acordado arriba: sumas-y-restas-llevando · multiplicacion-por-una-cifra · multiplicacion-por-dos-cifras · propiedades-y-calculo-mental · la-division-concepto-y-reparto · division-por-una-cifra). División acordada: **una cifra, exacta Y con resto** (por dos cifras es 4º).
+**Bloque `operaciones` de 3º — EN MARCHA:**
+- **`sumas-y-restas-llevando` COMPLETO ✅ (6 fichas, cerrado 2026-06-20, commit 9dcdd59) — abre el bloque `operaciones` de 3º.** Repaso/consolidación de sumas y restas llevando con números hasta 4 cifras (≤9999). f1 sumas 3 cifras (8 verticales colocadas + 6 cuadrículas "coloca y resuelve" — **2 ejercicios, sin tercero**, decisión de Miguel: nada de "rodear las bien resueltas") · f2 sumas 4 cifras + **tres sumandos** (Ej2 verticales de 3 sumandos) · f3 restas 3 cifras (prestar) · f4 restas 4 cifras + **la prueba de la resta** (Ej2 resta→prueba sumando, diferencia+sustraendo=minuendo) · f5 sumas y restas **mezcladas** (¡fíjate en el signo!) · f6 repaso (mezcla 3/4 cifras) + 3 problemas reales (componente `.problema`). f1 a mano (ancla); f2-f6 con **5 agentes en paralelo (1/ficha), números fijados y verificados por mí dígito a dígito** (todas las sumas con llevada, todas las restas con préstamo y positivas). Validador `--virtual-time-budget=4000`: 1 folio A4 c/u, **llenado 78-82%** (f1 79.2, f2 81.9, f3 78.3, f4 82.0, f5 79.2, f6 79.2). **Componentes nuevos reusables:** `.op`/`.sumas-grid`/`.fila`/`.barra` (operación vertical en rejilla — para 4 cifras: `grid-template-columns: 22px 24px 24px 24px 24px` + barra `grid-column: 2/6`, clase `.op4`), `.coloca-grid`/`.coloca-item`/`.rejilla`/`.cel`/`.res`/`.sig` (cuadrícula vacía para colocar y operar), `.rec-op`/`.lleva` (operación de muestra resuelta en el Recuerda con las llevadas arriba). Registradas en RECURSOS de materiales.html.
+
+**SIGUIENTE en 3º:** dentro de `operaciones`, sigue `multiplicacion-por-una-cifra` (árbol: ~~sumas-y-restas-llevando~~ ✅ · multiplicacion-por-una-cifra · multiplicacion-por-dos-cifras · propiedades-y-calculo-mental · la-division-concepto-y-reparto · division-por-una-cifra). División acordada: **una cifra, exacta Y con resto** (por dos cifras es 4º).
 
 ---
 
@@ -387,7 +390,8 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 - **2º Primaria Matemáticas — COMPLETO ✅** (cerrado 2026-06-14, 131 fichas):
   - `numeros` (21) + `operaciones` (33) + `medida` (19) + `geometria` (16) + `estadistica` (12) + `problemas` (30) — detalle en sección "Estructura matemáticas Primaria"
 - **3º Primaria Matemáticas — EN MARCHA** (arrancado 2026-06-15, fuente Poppins):
-  - **Bloque `numeros` COMPLETO ✅ (36 fichas)**: `numeros-hasta-10000` (6) ✅ + `valor-posicional-y-descomposicion` (6) ✅ + `comparar-y-ordenar` (6) ✅ + `numeros-romanos` (6) ✅ + `las-fracciones` (6) ✅ + `sumar-y-restar-fracciones` (6) ✅ — **siguiente: bloque `operaciones`** (empezar por `sumas-y-restas-llevando`)
+  - **Bloque `numeros` COMPLETO ✅ (36 fichas)**: `numeros-hasta-10000` (6) ✅ + `valor-posicional-y-descomposicion` (6) ✅ + `comparar-y-ordenar` (6) ✅ + `numeros-romanos` (6) ✅ + `las-fracciones` (6) ✅ + `sumar-y-restar-fracciones` (6) ✅
+  - **Bloque `operaciones` EN MARCHA**: `sumas-y-restas-llevando` (6) ✅ (cerrado 2026-06-20, commit 9dcdd59) — **siguiente: `multiplicacion-por-una-cifra`**
 - **1º ESO Matemáticas** — solo álgebra (4 páginas)
 - **Total:** ~969 fichas indexadas en sitemap
 
@@ -437,7 +441,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
    - **NORMA CRÍTICA validada 2026-05-28 (problemas 1º):** todas las sumas SIN llevadas y todas las restas SIN prestar. Miguel detectó 25 operaciones con llevadas/prestar en la 1ª pasada — hubo que rehacerlas. Validar dígito a dígito antes de cerrar cada ficha.
    - **Índice web:** `materiales.html` ya alineado para 1º Mates con la estructura de 6 bloques (commit `ec68965`, 2026-05-28). 2º–6º Mates en `materiales.html` siguen con la estructura antigua de 5 bloques — actualizar al arrancar cada curso.
    - **Hero compacto en `materiales.html`** (2026-05-28): el hero ocupaba toda la pantalla y los padres tenían que hacer scroll para ver las tarjetas Lengua/Mates. Reducido (`padding 7.5rem→2rem`, h1 más pequeño, quitados `<p>` descriptivo y 4 `<span class="hero-tag">`, app-wrap padding-top 2.5rem→1.5rem). Las tarjetas aparecen ahora en el viewport inicial sin scroll.
-   - **1º MATES COMPLETO ✅** (2026-05-28, 71 fichas). **2º MATES COMPLETO ✅** (2026-06-14, 131 fichas). **3º MATES EN MARCHA** (arrancado 2026-06-15): árbol acordado + **bloque `numeros` COMPLETO ✅ (36 fichas)**: `numeros-hasta-10000` ✅ (6) + `valor-posicional-y-descomposicion` ✅ (6) + `comparar-y-ordenar` ✅ (6) + `numeros-romanos` ✅ (6) + `las-fracciones` ✅ (6) + `sumar-y-restar-fracciones` ✅ (6, cierra `numeros`). **Siguiente:** bloque `operaciones` (empezar por `sumas-y-restas-llevando`; ver sección "Sub-bloques 3º Primaria"). 3º usa **Poppins**.
+   - **1º MATES COMPLETO ✅** (2026-05-28, 71 fichas). **2º MATES COMPLETO ✅** (2026-06-14, 131 fichas). **3º MATES EN MARCHA** (arrancado 2026-06-15): árbol acordado + **bloque `numeros` COMPLETO ✅ (36 fichas)**: `numeros-hasta-10000` ✅ (6) + `valor-posicional-y-descomposicion` ✅ (6) + `comparar-y-ordenar` ✅ (6) + `numeros-romanos` ✅ (6) + `las-fracciones` ✅ (6) + `sumar-y-restar-fracciones` ✅ (6, cierra `numeros`). Bloque `operaciones` EN MARCHA: `sumas-y-restas-llevando` ✅ (6, commit 9dcdd59). **Siguiente:** `multiplicacion-por-una-cifra` (ver sección "Sub-bloques 3º Primaria"). 3º usa **Poppins**.
 
 2. **Más artículos de blog SEO** — "Cómo preparar la EBAU en Andalucía", "Qué hacer si tu hijo no aprueba matemáticas", "El paso de Primaria a la ESO". Ideas ya listadas. Después de prioridad 1.
 
