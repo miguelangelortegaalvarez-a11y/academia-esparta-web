@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La división con resto · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 7px 13px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 4px; }
+    .recuerda p { font-size: 12.5px; line-height: 1.5; }
+    .recuerda b { font-weight: 800; }
+    .recuerda-fila { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-top: 6px; }
+    .rec-ejemplo { display: flex; align-items: center; gap: 12px; }
+    .rec-ejemplo .div-h { font-size: 20px; font-weight: 800; white-space: nowrap; }
+
+    .reparto { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .caja-r { border: 1.7px solid #000; border-radius: 9px; min-width: 50px; min-height: 50px; padding: 6px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 5px; }
+    .caja-r.dibuja { min-width: 64px; min-height: 56px; border-style: dashed; }
+    .pt { width: 12px; height: 12px; border-radius: 50%; background: #000; display: block; }
+
+    /* Sobrantes (resto) */
+    .sobran { display: flex; align-items: center; gap: 7px; }
+    .sobran .lbl { font-size: 11px; font-weight: 800; color: #333; }
+
+    .ej-block { margin-bottom: 9px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 7px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    .hueco { display: inline-block; width: 30px; height: 30px; border: 1.7px solid #000; border-radius: 6px; vertical-align: middle; margin: 0 3px; }
+
+    .rep-fila { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 11px; }
+    .rep-fila .etiq { font-size: 12px; font-weight: 700; min-width: 105px; }
+    .rep-fila .div-op { font-size: 17px; font-weight: 800; white-space: nowrap; }
+
+    .divs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px; margin-top: 8px; }
+    .div1 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+    .div1 .n { font-size: 12px; font-weight: 800; color: #555; margin-right: 2px; }
+
+    /* Rodea las exactas */
+    .exactas { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 8px; justify-content: center; }
+    .exactas .chip { border: 1.6px solid #000; border-radius: 999px; padding: 5px 17px; font-size: 17px; font-weight: 700; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · La división: concepto y reparto</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">➗ La división con resto</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <p>A veces el reparto <b>no es exacto</b> y <b>sobra</b> algo: eso es el <b>RESTO</b>. Reparto <b>7</b> caramelos entre <b>2</b>: tocan <b>3</b> a cada uno y <b>sobra 1</b>. → <b>7 ÷ 2 = 3</b> y resto <b>1</b>.</p>
+    <div class="recuerda-fila">
+      <div class="rec-ejemplo">
+        <div class="reparto">
+          <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+          <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        </div>
+        <div class="sobran"><span class="lbl">sobra →</span><span class="pt"></span></div>
+        <div class="div-h">7 ÷ 2 = 3 (resto 1)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Observa el reparto y escribe el <b>cociente</b> y el <b>resto</b>.</div>
+
+    <div class="rep-fila">
+      <div class="reparto">
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+      </div>
+      <div class="sobran"><span class="lbl">sobran →</span><span class="pt"></span><span class="pt"></span></div>
+      <div class="div-op">11 ÷ 3 = <span class="hueco"></span> y resto <span class="hueco"></span></div>
+    </div>
+
+    <div class="rep-fila">
+      <div class="reparto">
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+      </div>
+      <div class="sobran"><span class="lbl">sobran →</span><span class="pt"></span><span class="pt"></span></div>
+      <div class="div-op">14 ÷ 4 = <span class="hueco"></span> y resto <span class="hueco"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <b>Reparte tú</b>: dibuja los puntos, y escribe cuántos tocan y cuántos <b>sobran</b>.</div>
+
+    <div class="rep-fila">
+      <div class="etiq">9 entre 2:</div>
+      <div class="reparto">
+        <div class="caja-r dibuja"></div>
+        <div class="caja-r dibuja"></div>
+      </div>
+      <div class="div-op">9 ÷ 2 = <span class="hueco"></span> y resto <span class="hueco"></span></div>
+    </div>
+
+    <div class="rep-fila">
+      <div class="etiq">13 entre 3:</div>
+      <div class="reparto">
+        <div class="caja-r dibuja"></div>
+        <div class="caja-r dibuja"></div>
+        <div class="caja-r dibuja"></div>
+      </div>
+      <div class="div-op">13 ÷ 3 = <span class="hueco"></span> y resto <span class="hueco"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Completa el <b>cociente</b> y el <b>resto</b>. Piensa en la tabla más cercana.</div>
+    <div class="divs">
+      <div class="div1"><span class="n">a)</span> 17 ÷ 5 = <span class="hueco"></span> y resto <span class="hueco"></span></div>
+      <div class="div1"><span class="n">b)</span> 19 ÷ 4 = <span class="hueco"></span> y resto <span class="hueco"></span></div>
+      <div class="div1"><span class="n">c)</span> 22 ÷ 3 = <span class="hueco"></span> y resto <span class="hueco"></span></div>
+      <div class="div1"><span class="n">d)</span> 15 ÷ 2 = <span class="hueco"></span> y resto <span class="hueco"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <b>Rodea</b> solo las divisiones <b>exactas</b> (las que no tienen resto).</div>
+    <div class="exactas">
+      <div class="chip">12 ÷ 3</div>
+      <div class="chip">13 ÷ 4</div>
+      <div class="chip">20 ÷ 5</div>
+      <div class="chip">11 ÷ 2</div>
+      <div class="chip">18 ÷ 6</div>
+      <div class="chip">9 ÷ 4</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

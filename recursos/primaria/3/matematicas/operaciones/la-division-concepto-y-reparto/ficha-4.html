@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Términos de la división y la prueba · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 7px 13px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 4px; }
+    .recuerda p { font-size: 12.5px; line-height: 1.5; }
+    .recuerda b { font-weight: 800; }
+    .recuerda-fila { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; margin-top: 8px; }
+    /* Términos etiquetados */
+    .terminos { font-size: 12px; font-weight: 700; text-align: center; line-height: 1.3; }
+    .terminos .grande { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+    .terminos .et { font-size: 10px; font-weight: 600; color: #444; }
+    .rec-prueba { font-size: 15px; font-weight: 700; }
+    .rec-prueba b { font-weight: 800; }
+
+    .ej-block { margin-bottom: 9px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 7px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    .hueco { display: inline-block; width: 30px; height: 30px; border: 1.7px solid #000; border-radius: 6px; vertical-align: middle; margin: 0 3px; }
+
+    /* Identificar términos */
+    .term-lista { display: flex; flex-direction: column; gap: 13px; margin-top: 8px; }
+    .term-item { font-size: 15px; font-weight: 700; }
+    .term-item .div-g { font-size: 20px; font-weight: 800; }
+    .term-item .sub { display: flex; gap: 26px; margin-top: 6px; flex-wrap: wrap; font-size: 13px; font-weight: 600; }
+    .term-item .sub span { display: flex; align-items: center; gap: 4px; }
+
+    /* Prueba de la división */
+    .prueba-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 13px 24px; margin-top: 8px; }
+    .prueba-item { font-size: 18px; font-weight: 700; }
+    .prueba-item .n { font-size: 12px; font-weight: 800; color: #555; margin-right: 2px; }
+    .prueba-item .pr { font-size: 14px; font-weight: 600; color: #333; margin-top: 5px; }
+
+    .divs { display: grid; grid-template-columns: 1fr 1fr; gap: 11px 26px; margin-top: 8px; }
+    .div1 { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+    .div1 .n { font-size: 12px; font-weight: 800; color: #555; margin-right: 2px; }
+
+    .vf-lista { display: flex; flex-direction: column; gap: 9px; margin-top: 8px; }
+    .vf { display: flex; align-items: center; gap: 12px; }
+    .vf .op { font-size: 13.5px; font-weight: 600; }
+    .vf .opt { margin-left: auto; display: flex; gap: 12px; }
+    .vf .opt .o { border: 1.6px solid #000; border-radius: 6px; padding: 2px 13px; font-size: 13px; font-weight: 700; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · La división: concepto y reparto</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">➗ Los términos y la prueba</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <p>Cada número de la división tiene su <b>nombre</b>. Para comprobar si está bien, hacemos la <b>prueba</b>: <b>cociente × divisor = dividendo</b>.</p>
+    <div class="recuerda-fila">
+      <div class="terminos">
+        <span class="grande">20 ÷ 5 = 4</span><br>
+        <span class="et">dividendo&nbsp;·&nbsp;divisor&nbsp;·&nbsp;cociente</span>
+      </div>
+      <div class="rec-prueba">Prueba: <b>4 × 5 = 20</b> ✓</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe el valor de cada <b>término</b>.</div>
+    <div class="term-lista">
+      <div class="term-item">
+        <span class="div-g">18 ÷ 6 = 3</span>
+        <div class="sub"><span>dividendo = <span class="hueco"></span></span><span>divisor = <span class="hueco"></span></span><span>cociente = <span class="hueco"></span></span></div>
+      </div>
+      <div class="term-item">
+        <span class="div-g">24 ÷ 4 = 6</span>
+        <div class="sub"><span>dividendo = <span class="hueco"></span></span><span>divisor = <span class="hueco"></span></span><span>cociente = <span class="hueco"></span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Calcula y <b>comprueba</b> con la prueba.</div>
+    <div class="prueba-lista">
+      <div class="prueba-item"><span class="n">a)</span> 12 ÷ 3 = <span class="hueco"></span><div class="pr">prueba: <span class="hueco"></span> × 3 = 12</div></div>
+      <div class="prueba-item"><span class="n">b)</span> 20 ÷ 4 = <span class="hueco"></span><div class="pr">prueba: <span class="hueco"></span> × 4 = 20</div></div>
+      <div class="prueba-item"><span class="n">c)</span> 30 ÷ 6 = <span class="hueco"></span><div class="pr">prueba: <span class="hueco"></span> × 6 = 30</div></div>
+      <div class="prueba-item"><span class="n">d)</span> 28 ÷ 7 = <span class="hueco"></span><div class="pr">prueba: <span class="hueco"></span> × 7 = 28</div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Completa estas divisiones.</div>
+    <div class="divs">
+      <div class="div1"><span class="n">a)</span> 16 ÷ 2 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">b)</span> 25 ÷ 5 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">c)</span> 36 ÷ 6 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">d)</span> 24 ÷ 3 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">e)</span> 18 ÷ 3 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">f)</span> 45 ÷ 5 = <span class="hueco"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> ¿Verdadero o falso?</div>
+    <div class="vf-lista">
+      <div class="vf"><span class="op">El <b>cociente</b> es el resultado de la división.</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+      <div class="vf"><span class="op">En <b>24 ÷ 6 = 4</b>, el divisor es 4.</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+      <div class="vf"><span class="op">La prueba de <b>15 ÷ 3 = 5</b> es <b>5 × 3 = 15</b>.</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dividir es repartir · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 7px 13px; margin-bottom: 10px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 4px; }
+    .recuerda p { font-size: 12.5px; line-height: 1.5; }
+    .recuerda b { font-weight: 800; }
+    .recuerda-fila { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; margin-top: 6px; }
+    /* Ejemplo visual del Recuerda */
+    .rec-ejemplo { display: flex; align-items: center; gap: 12px; }
+    .rec-ejemplo .div-h { font-size: 22px; font-weight: 800; white-space: nowrap; }
+    /* Términos etiquetados */
+    .terminos { font-size: 13px; font-weight: 700; text-align: center; line-height: 1.25; }
+    .terminos .grande { font-size: 21px; font-weight: 800; letter-spacing: 1px; }
+    .terminos .et { font-size: 10px; font-weight: 600; color: #444; }
+
+    /* Reparto visual: cajas con puntos */
+    .reparto { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .caja-r { border: 1.7px solid #000; border-radius: 9px; min-width: 50px; min-height: 50px; padding: 6px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 5px; }
+    .caja-r.dibuja { min-width: 64px; min-height: 56px; border-style: dashed; }
+    .pt { width: 12px; height: 12px; border-radius: 50%; background: #000; display: block; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 9px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 7px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Caja-hueco para escribir un número */
+    .hueco { display: inline-block; width: 30px; height: 30px; border: 1.7px solid #000; border-radius: 6px; vertical-align: middle; margin: 0 3px; }
+
+    /* Fila de reparto con su división al lado */
+    .rep-fila { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 11px; }
+    .rep-fila .etiq { font-size: 12px; font-weight: 700; min-width: 130px; }
+    .rep-fila .div-op { font-size: 21px; font-weight: 800; white-space: nowrap; }
+
+    /* Lista de divisiones para completar */
+    .divs { display: grid; grid-template-columns: 1fr 1fr; gap: 11px 26px; margin-top: 8px; }
+    .div1 { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+    .div1 .n { font-size: 12px; font-weight: 800; color: #555; margin-right: 2px; }
+
+    /* Verdadero / Falso */
+    .vf-lista { display: flex; flex-direction: column; gap: 9px; margin-top: 8px; }
+    .vf { display: flex; align-items: center; gap: 12px; }
+    .vf .op { font-size: 13.5px; font-weight: 600; }
+    .vf .opt { margin-left: auto; display: flex; gap: 12px; }
+    .vf .opt .o { border: 1.6px solid #000; border-radius: 6px; padding: 2px 13px; font-size: 13px; font-weight: 700; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · La división: concepto y reparto</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">➗ Dividir es repartir</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <p><b>Dividir</b> es <b>repartir</b> en partes <b>iguales</b>. El signo es <b>÷</b>. Repartimos <b>6 caramelos</b> entre <b>2 platos</b>: tocan <b>3</b> a cada uno.</p>
+    <div class="recuerda-fila">
+      <div class="rec-ejemplo">
+        <div class="reparto">
+          <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+          <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        </div>
+        <div class="div-h">6 ÷ 2 = 3</div>
+      </div>
+      <div class="terminos">
+        <span class="grande">6 ÷ 2 = 3</span><br>
+        <span class="et">dividendo&nbsp;·&nbsp;divisor&nbsp;·&nbsp;cociente</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Observa cómo se ha repartido y <b>completa</b> la división.</div>
+
+    <div class="rep-fila">
+      <div class="reparto">
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+      </div>
+      <div class="div-op">8 ÷ 2 = <span class="hueco"></span></div>
+    </div>
+
+    <div class="rep-fila">
+      <div class="reparto">
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span><span class="pt"></span></div>
+      </div>
+      <div class="div-op">9 ÷ 3 = <span class="hueco"></span></div>
+    </div>
+
+    <div class="rep-fila">
+      <div class="reparto">
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span></div>
+        <div class="caja-r"><span class="pt"></span><span class="pt"></span></div>
+      </div>
+      <div class="div-op">10 ÷ 5 = <span class="hueco"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Reparte tú: <b>dibuja los puntos</b> repartiéndolos por igual y escribe cuántos tocan a cada uno.</div>
+
+    <div class="rep-fila">
+      <div class="etiq">12 entre 3 cajas:</div>
+      <div class="reparto">
+        <div class="caja-r dibuja"></div>
+        <div class="caja-r dibuja"></div>
+        <div class="caja-r dibuja"></div>
+      </div>
+      <div class="div-op">12 ÷ 3 = <span class="hueco"></span></div>
+    </div>
+
+    <div class="rep-fila">
+      <div class="etiq">8 entre 4 cajas:</div>
+      <div class="reparto">
+        <div class="caja-r dibuja"></div>
+        <div class="caja-r dibuja"></div>
+        <div class="caja-r dibuja"></div>
+        <div class="caja-r dibuja"></div>
+      </div>
+      <div class="div-op">8 ÷ 4 = <span class="hueco"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Completa estas divisiones. Piensa: <i>¿cuántos tocan a cada uno?</i></div>
+    <div class="divs">
+      <div class="div1"><span class="n">a)</span> 10 ÷ 2 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">b)</span> 15 ÷ 3 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">c)</span> 12 ÷ 4 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">d)</span> 20 ÷ 5 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">e)</span> 14 ÷ 2 = <span class="hueco"></span></div>
+      <div class="div1"><span class="n">f)</span> 18 ÷ 3 = <span class="hueco"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> ¿Verdadero o falso?</div>
+    <div class="vf-lista">
+      <div class="vf"><span class="op">Dividir es repartir en partes iguales.</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+      <div class="vf"><span class="op">En <b>15 ÷ 3 = 5</b>, el número 15 es el <b>dividendo</b>.</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+      <div class="vf"><span class="op">Si reparto 10 entre 2, a cada uno le tocan 6.</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
