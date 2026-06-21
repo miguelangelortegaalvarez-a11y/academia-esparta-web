@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La división por una cifra (5) · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 8px 13px; margin-bottom: 11px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 4px; }
+    .recuerda p { font-size: 12.5px; line-height: 1.5; }
+    .recuerda b { font-weight: 800; }
+    .recuerda-fila { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; margin-top: 7px; }
+    .pasos { font-size: 12px; line-height: 1.5; }
+    .pasos .p { display: flex; gap: 7px; margin-bottom: 2px; }
+    .pasos .nb { display: inline-flex; align-items: center; justify-content: center; min-width: 17px; height: 17px; border-radius: 50%; background: #000; color: #fff; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+
+    /* ===== CASITA RESUELTA ===== */
+    .rec-casita { display: inline-flex; align-items: flex-start; }
+    .rec-casita .izq { border-right: 2.5px solid #000; padding-right: 9px; }
+    .rec-casita .der { padding-left: 9px; }
+    .cres { display: inline-grid; }
+    .cres.c2 { grid-template-columns: 15px 26px 26px; }
+    .cres.c3 { grid-template-columns: 14px 24px 24px 24px; }
+    .cres > div { font-size: 20px; font-weight: 700; text-align: center; line-height: 1; height: 25px; display: flex; align-items: center; justify-content: center; }
+    .cres .sg { font-size: 17px; }
+    .cres .ln { border-bottom: 2px solid #000; }
+    .cres .gris { color: #888; }
+    .cres .cog { background: #e7e7e7; border-radius: 4px; }
+    .rec-casita .divisor { font-size: 20px; font-weight: 700; text-align: center; height: 25px; display: flex; align-items: center; justify-content: center; }
+    .rec-casita .cociente { border-top: 2.5px solid #000; font-size: 20px; font-weight: 700; text-align: center; padding-top: 3px; margin-top: 1px; }
+
+    /* ===== CASITA VACÍA ===== */
+    .casitas-fila { display: flex; gap: 18px; flex-wrap: wrap; justify-content: space-around; margin-top: 9px; }
+    .casita { display: inline-flex; align-items: flex-start; }
+    .casita .izq { border-right: 2.5px solid #000; padding-right: 11px; }
+    .casita .dvd { font-size: 23px; font-weight: 700; text-align: right; letter-spacing: 7px; padding-right: 2px; height: 30px; }
+    .casita .zona { min-height: 86px; }
+    .casita .der { padding-left: 11px; }
+    .casita .dvs { font-size: 23px; font-weight: 700; text-align: center; height: 30px; }
+    .casita .coc { border-top: 2.5px solid #000; min-width: 58px; min-height: 34px; margin-top: 3px; }
+
+    .ej-block { margin-bottom: 10px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    .hueco { display: inline-block; width: 30px; height: 30px; border: 1.7px solid #000; border-radius: 6px; vertical-align: middle; margin: 0 3px; }
+    .divs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; margin-top: 8px; }
+    .div1 { font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+    .div1 .n { font-size: 12px; font-weight: 800; color: #555; margin-right: 2px; }
+    .div1 .rt { font-size: 13px; font-weight: 700; margin: 0 2px; }
+
+    .footer { margin-top: 12px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · La división por una cifra (5)</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">➗ Cuando hay que coger dos cifras</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA · COGER LAS DOS PRIMERAS CIFRAS</div>
+    <p>Si la <b>primera cifra es menor que el divisor</b>, no se puede dividir todavía: <b>cojo las dos primeras cifras juntas</b>. En <b>128 ÷ 4</b>, como <b>1 &lt; 4</b>, empiezo por <b>12</b>. Sale <b>32</b>.</p>
+    <div class="recuerda-fila">
+      <div class="pasos">
+        <div class="p"><span class="nb">1</span><span><b>1 &lt; 4</b> → cojo <b>12</b>. <b>12 ÷ 4 = 3.</b></span></div>
+        <div class="p"><span class="nb">2</span><span>Bajo el 8: <b>8 ÷ 4 = 2.</b></span></div>
+        <div class="p"><span class="nb">3</span><span>El cociente tiene <b>2 cifras</b>: empieza bajo la 2ª cifra.</span></div>
+      </div>
+      <div class="rec-casita">
+        <div class="izq">
+          <div class="cres c3">
+            <div></div><div class="cog">1</div><div class="cog">2</div><div>8</div>
+            <div class="sg">−</div><div class="ln">1</div><div class="ln">2</div><div></div>
+            <div></div><div></div><div>0</div><div class="gris">8</div>
+            <div class="sg">−</div><div></div><div></div><div class="ln">8</div>
+            <div></div><div></div><div></div><div>0</div>
+          </div>
+        </div>
+        <div class="der">
+          <div class="divisor">4</div>
+          <div class="cociente">32</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> La primera cifra es <b>menor que el divisor</b>: coge las <b>dos primeras</b>. Resuelve (salen exactas).</div>
+    <div class="casitas-fila">
+      <div class="casita">
+        <div class="izq"><div class="dvd">248</div><div class="zona"></div></div>
+        <div class="der"><div class="dvs">4</div><div class="coc"></div></div>
+      </div>
+      <div class="casita">
+        <div class="izq"><div class="dvd">156</div><div class="zona"></div></div>
+        <div class="der"><div class="dvs">3</div><div class="coc"></div></div>
+      </div>
+      <div class="casita">
+        <div class="izq"><div class="dvd">175</div><div class="zona"></div></div>
+        <div class="der"><div class="dvs">5</div><div class="coc"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Ahora con <b>resto</b>. Sigue cogiendo las dos primeras cifras.</div>
+    <div class="casitas-fila">
+      <div class="casita">
+        <div class="izq"><div class="dvd">137</div><div class="zona"></div></div>
+        <div class="der"><div class="dvs">4</div><div class="coc"></div></div>
+      </div>
+      <div class="casita">
+        <div class="izq"><div class="dvd">269</div><div class="zona"></div></div>
+        <div class="der"><div class="dvs">5</div><div class="coc"></div></div>
+      </div>
+      <div class="casita">
+        <div class="izq"><div class="dvd">188</div><div class="zona"></div></div>
+        <div class="der"><div class="dvs">6</div><div class="coc"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Calcula y escribe el <b>cociente</b> y el <b>resto</b>.</div>
+    <div class="divs">
+      <div class="div1"><span class="n">a)</span> 154 ÷ 4 = <span class="hueco"></span> <span class="rt">y resto</span> <span class="hueco"></span></div>
+      <div class="div1"><span class="n">b)</span> 259 ÷ 6 = <span class="hueco"></span> <span class="rt">y resto</span> <span class="hueco"></span></div>
+      <div class="div1"><span class="n">c)</span> 137 ÷ 5 = <span class="hueco"></span> <span class="rt">y resto</span> <span class="hueco"></span></div>
+      <div class="div1"><span class="n">d)</span> 248 ÷ 5 = <span class="hueco"></span> <span class="rt">y resto</span> <span class="hueco"></span></div>
+      <div class="div1"><span class="n">e)</span> 166 ÷ 4 = <span class="hueco"></span> <span class="rt">y resto</span> <span class="hueco"></span></div>
+      <div class="div1"><span class="n">f)</span> 197 ÷ 6 = <span class="hueco"></span> <span class="rt">y resto</span> <span class="hueco"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Mira siempre la primera cifra!</span>
+  </div>
+</body>
+</html>
