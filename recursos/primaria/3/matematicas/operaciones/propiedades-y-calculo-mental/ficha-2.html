@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propiedad asociativa · 3º Primaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 12px; margin-bottom: 9px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .recuerda-txt { flex: 1; min-width: 260px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 5px; }
+    .recuerda-txt p { font-size: 12px; line-height: 1.45; }
+    .recuerda-txt b { font-weight: 800; }
+    /* Ejemplo resuelto dentro del Recuerda */
+    .rec-ej { font-weight: 700; }
+    .rec-ej .rl { font-size: 18px; font-weight: 700; margin: 5px 0; white-space: nowrap; }
+    .rec-ej .rl b { font-weight: 800; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 9px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Caja-hueco para escribir un número */
+    .hueco { display: inline-block; width: 26px; height: 26px; border: 1.6px solid #000; border-radius: 5px; vertical-align: middle; margin: 0 3px; }
+    .hueco.ancha { width: 48px; }
+
+    /* Igualdades / listas de cálculo en rejilla */
+    .igs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 26px; margin-top: 8px; }
+    .igs.una { grid-template-columns: 1fr; }
+    .ig { font-size: 19px; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+    .ig .n { font-size: 12px; font-weight: 800; color: #555; margin-right: 2px; }
+
+    /* Calcula de las dos formas */
+    .dosf { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 22px; margin-top: 8px; }
+    .dosf .par { border: 1.5px solid #bbb; border-radius: 9px; padding: 7px 11px; }
+    .dosf .par .l { font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 5px; margin: 3px 0; }
+
+    /* Unir dos columnas (el alumno traza la flecha) */
+    .une { display: flex; justify-content: space-between; max-width: 470px; margin: 7px auto 2px; }
+    .une .col { display: flex; flex-direction: column; gap: 11px; }
+    .chip { border: 1.6px solid #000; border-radius: 999px; padding: 5px 16px; font-size: 17px; font-weight: 700; text-align: center; }
+
+    /* Verdadero / Falso */
+    .vf-lista { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+    .vf { display: flex; align-items: center; gap: 12px; }
+    .vf .op { font-size: 18px; font-weight: 800; }
+    .vf .opt { margin-left: auto; display: flex; gap: 12px; }
+    .vf .opt .o { border: 1.6px solid #000; border-radius: 6px; padding: 2px 13px; font-size: 13px; font-weight: 700; }
+
+    .footer { margin-top: 9px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Propiedades y cálculo mental</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">➕ Propiedad asociativa de la suma</div>
+
+  <div class="recuerda">
+    <div class="recuerda-txt">
+      <div class="recuerda-titulo">RECUERDA</div>
+      <p>Al sumar tres números puedes <b>agruparlos</b> como quieras: el resultado <b>no cambia</b>. Truco: agrupa primero los dos que <b>suman 10</b> y será más fácil.</p>
+    </div>
+    <div class="rec-ej">
+      <div class="rl">(8 + 2) + 5 = 10 + 5 = <b>15</b></div>
+      <div class="rl">3 + (7 + 6) = 3 + 13 = <b>16</b></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Suma agrupando primero los dos números que hacen 10. Rodea esa pareja:</div>
+    <div class="igs">
+      <div class="ig"><span class="n">a)</span> 7 + 3 + 6 = <span class="hueco ancha"></span></div>
+      <div class="ig"><span class="n">b)</span> 4 + 6 + 5 = <span class="hueco ancha"></span></div>
+      <div class="ig"><span class="n">c)</span> 9 + 1 + 8 = <span class="hueco ancha"></span></div>
+      <div class="ig"><span class="n">d)</span> 2 + 8 + 7 = <span class="hueco ancha"></span></div>
+      <div class="ig"><span class="n">e)</span> 5 + 5 + 4 = <span class="hueco ancha"></span></div>
+      <div class="ig"><span class="n">f)</span> 6 + 4 + 9 = <span class="hueco ancha"></span></div>
+      <div class="ig"><span class="n">g)</span> 3 + 7 + 2 = <span class="hueco ancha"></span></div>
+      <div class="ig"><span class="n">h)</span> 8 + 2 + 6 = <span class="hueco ancha"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Calcula de las <b>dos formas</b>. ¡Da igual cómo agrupes!</div>
+    <div class="dosf">
+      <div class="par"><div class="l">(4 + 6) + 3 = <span class="hueco ancha"></span></div><div class="l">4 + (6 + 3) = <span class="hueco ancha"></span></div></div>
+      <div class="par"><div class="l">(2 + 8) + 5 = <span class="hueco ancha"></span></div><div class="l">2 + (8 + 5) = <span class="hueco ancha"></span></div></div>
+      <div class="par"><div class="l">(5 + 5) + 7 = <span class="hueco ancha"></span></div><div class="l">5 + (5 + 7) = <span class="hueco ancha"></span></div></div>
+      <div class="par"><div class="l">(9 + 1) + 4 = <span class="hueco ancha"></span></div><div class="l">9 + (1 + 4) = <span class="hueco ancha"></span></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Escribe el número que falta para que se cumpla la propiedad asociativa:</div>
+    <div class="igs una">
+      <div class="ig"><span class="n">a)</span> (3 + 4) + 6 = 3 + (4 + <span class="hueco"></span>)</div>
+      <div class="ig"><span class="n">b)</span> (8 + 2) + 5 = 8 + (2 + <span class="hueco"></span>)</div>
+      <div class="ig"><span class="n">c)</span> (1 + 9) + 7 = <span class="hueco"></span> + (9 + 7)</div>
+      <div class="ig"><span class="n">d)</span> (6 + 4) + 2 = 6 + (<span class="hueco"></span> + 2)</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> ¿Verdadero o falso?</div>
+    <div class="vf-lista">
+      <div class="vf"><span class="op">(4 + 6) + 2 = 4 + (6 + 2)</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+      <div class="vf"><span class="op">Para sumar 5 + 5 + 9 conviene juntar primero 5 + 5</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+      <div class="vf"><span class="op">(3 + 7) + 8 da un resultado distinto a 3 + (7 + 8)</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+      <div class="vf"><span class="op">(2 + 1) + 6 = 2 + (1 + 6)</span><span class="opt"><span class="o">V</span><span class="o">F</span></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
