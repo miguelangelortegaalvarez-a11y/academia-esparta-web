@@ -141,7 +141,9 @@ Auditoría profunda + optimizaciones (3 commits: `ee102d0`, `0bdfdfe`, `326c1d0`
 
 **Foto técnica:** HTTPS ✅, SEO 100/100, 0 enlaces/recursos rotos, todas las imágenes con `alt`, Umami **sin cookies** (no necesita banner RGPD), web pública **sin `<form>`** (inscripción → `shadow.academiaesparta.es`, contacto por WhatsApp).
 
-**Pendiente (rendimiento):** aligerar fuentes (3 familias) + Font Awesome (con cuidado, no romper diseño); WebP (falta cwebp/imagemagick en la máquina); cabeceras de seguridad 0/4 (GitHub Pages no las permite → opcional Cloudflare delante, no urgente).
+**Fuentes — optimización invisible HECHA (2026-06-22, commits b1aaad1 + 6bce16e):** auditoría profunda (2 workflows con verificación adversarial + medición woff2 real). Hallazgo: **8 familias** en el sitio (Fraunces, Poppins, Nunito, Montserrat, Open Sans, Edu SA Beginner, Bebas Neue, Roboto Mono). Matiz clave: el navegador solo descarga el woff2 de un peso/familia que algún elemento PINTA → lo cargado-no-usado no se baja (recortarlo es cosmético). Aplicado, **0 cambio visual** (validado píxel a píxel): (1) Fraunces sin el eje `SOFT` inútil (0 usos en las 1039 páginas) → woff2 **221→124 KB, -97 KB/página** en las 15 premium; (2) Nunito muerta fuera de index; (3) `preconnect` a `fonts.gstatic` en **1037 páginas** (premium + fichas, -100-300 ms). Las fichas ya estaban tipográficamente ajustadas. **DECISIÓN Miguel: NO cambiar las letras** (descartado unificar/sustituir fuentes). NO tocadas por esa norma: `.rating-big` (Poppins 900 sintetizado), Roboto Mono en 2 fichas 6º, Bebas Neue en 3 de 1º ESO.
+
+**Pendiente (rendimiento):** Font Awesome (carga la librería completa por ~15 iconos — subset/SVG inline, con cuidado de no romper diseño); WebP (falta cwebp/imagemagick en la máquina); cabeceras de seguridad 0/4 (GitHub Pages no las permite → opcional Cloudflare delante, no urgente).
 
 ---
 
