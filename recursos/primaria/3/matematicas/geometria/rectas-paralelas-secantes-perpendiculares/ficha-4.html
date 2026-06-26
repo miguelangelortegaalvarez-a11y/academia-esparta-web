@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rectas perpendiculares · Geometría · 3º Primaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 13px; margin-bottom: 9px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 5px; }
+    .recuerda-idea { font-size: 13px; line-height: 1.3; margin-bottom: 1px; }
+    .recuerda-idea b { font-weight: 700; }
+
+    /* Tarjetas concepto dentro del Recuerda */
+    .rec-cards { display: flex; gap: 10px; justify-content: space-between; }
+    .rec-card { flex: 1; text-align: center; border: 1.5px solid #000; border-radius: 8px; padding: 5px 6px; }
+    .rec-card .nom { font-size: 13px; font-weight: 800; display: block; margin-bottom: 2px; }
+    .rec-card .desc { font-size: 10.5px; line-height: 1.2; color: #222; }
+    .rec-card svg { display: block; margin: 2px auto; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 9px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.32; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* SVG rectas individuales */
+    .rsvg { width: 150px; height: 42px; }
+    .par-svg { width: 116px; height: 94px; }
+
+    /* Unir dibujo ↔ nombre */
+    .une { display: flex; justify-content: space-around; gap: 30px; }
+    .une-col { display: flex; flex-direction: column; gap: 12px; }
+    .une-it { display: flex; align-items: center; gap: 8px; }
+    .une-it .et { font-size: 13.5px; font-weight: 700; }
+    .une-it .dot { width: 9px; height: 9px; border-radius: 50%; background: #000; flex-shrink: 0; }
+    .une-col.txt .chip { border: 1.6px solid #000; border-radius: 999px; padding: 5px 16px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+    /* Nombrar debajo del dibujo */
+    .nombrar { display: flex; gap: 16px; justify-content: space-around; flex-wrap: wrap; }
+    .nom-it { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .nom-it .ln { width: 130px; border-bottom: 1.4px solid #000; height: 22px; }
+
+    /* Verdadero / Falso */
+    .vf-lista { display: flex; flex-direction: column; gap: 6px; }
+    .vf-item { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+    .vf-item .txt { flex: 1; }
+    .vf-pill { border: 1.5px solid #000; border-radius: 6px; width: 26px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+    .vf-pill.v { margin-right: 4px; }
+
+    /* Dibujar con la regla */
+    .dibujar { display: flex; gap: 14px; flex-wrap: wrap; }
+    .dib-item { flex: 1 1 30%; }
+    .dib-item .lbl { font-size: 12px; font-weight: 700; margin-bottom: 4px; text-align: center; }
+    .dib-caja { border: 1.5px solid #000; border-radius: 8px; height: 96px; position: relative; }
+    .pt-d { position: absolute; width: 8px; height: 8px; background: #000; border-radius: 50%; transform: translate(-50%, -50%); }
+    .pt-d .pl { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 800; }
+
+    /* Clasificar pares (paralelas / secantes / perpendiculares) */
+    .clasif { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .clasif-it { display: flex; flex-direction: column; align-items: center; gap: 5px; border: 1.4px solid #000; border-radius: 8px; padding: 5px; }
+    .clasif-it .et { font-size: 12px; font-weight: 800; align-self: flex-start; }
+    .clasif-it .ln { width: 116px; border-bottom: 1.4px solid #000; height: 20px; }
+
+    /* Pares en fila (sin caja) */
+    .par-fila { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+    .par-it { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .par-it .et { font-size: 13px; font-weight: 800; }
+    .par-it .resp { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; }
+    .caja { width: 40px; height: 28px; border: 1.6px solid #000; border-radius: 6px; display: inline-block; vertical-align: middle; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+
+    /* --- extra f2-f6 --- */
+    .geo-svg { display:block; }
+    .geo-fila { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; align-items:flex-start; }
+    .geo-it { display:flex; flex-direction:column; align-items:center; gap:5px; }
+    .geo-it .lbl { font-size:12px; font-weight:700; }
+    .sino { display:flex; gap:7px; margin-top:3px; }
+    .sino .op { border:1.5px solid #000; border-radius:6px; padding:1px 11px; font-size:12px; font-weight:800; }
+    .clasif-it .ln { width:110px; border-bottom:1.4px solid #000; height:20px; }
+    .resumen { display:flex; gap:9px; }
+    .resumen .col { flex:1; text-align:center; border:1.5px solid #000; border-radius:8px; padding:3px 4px; }
+    .resumen .col .t { font-size:12px; font-weight:800; display:block; }
+    .resumen .col .d { font-size:10px; line-height:1.15; color:#222; }
+    .resumen .col svg { display:block; margin:1px auto; }
+    .obj-fila { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; align-items:flex-start; }
+    .obj-it { display:flex; flex-direction:column; align-items:center; gap:5px; }
+    .obj-it .sino { justify-content:center; }
+    .objsvg { width:96px; height:74px; }
+
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <!-- Definiciones SVG globales: flecha -->
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <marker id="fl" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#000"/>
+    </marker>
+  </defs></svg>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Rectas perpendiculares</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📐 Rectas perpendiculares</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 RECUERDA</div>
+    <div class="recuerda-idea">Las rectas <b>PERPENDICULARES</b> son secantes especiales: se cortan formando un <b>ángulo recto</b> (como la <b>esquina de un folio</b>). Se marca con un <b>cuadradito</b>.</div>
+    <div style="text-align:center;margin-top:3px"><svg class="par-svg" viewBox="0 0 120 96"><line x1="8.0" y1="48.0" x2="112.0" y2="48.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><line x1="60.0" y1="8.0" x2="60.0" y2="88.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><path d="M71.0,48.0 L71.0,59.0 L60.0,59.0" fill="none" stroke="#000" stroke-width="1.5"/></svg><svg class="par-svg" viewBox="0 0 120 96"><line x1="8.0" y1="18.0" x2="112.0" y2="78.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><line x1="83.1" y1="8.0" x2="36.9" y2="88.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><path d="M69.5,53.5 L64.0,63.0 L54.5,57.5" fill="none" stroke="#000" stroke-width="1.5"/></svg></div>
+  </div>
+<div class="ej-block"><div class="ej-enunciado"><span class="num">1</span>¿Son <b>perpendiculares</b>? Usa la esquina de un folio y rodea <b>SÍ</b> o <b>NO</b>.</div><div class="par-fila"><div class="par-it"><span class="et">a</span><svg class="par-svg" viewBox="0 0 120 96"><line x1="8.0" y1="48.0" x2="112.0" y2="48.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><line x1="60.0" y1="8.0" x2="60.0" y2="88.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/></svg><div class="sino"><span class="op">SÍ</span><span class="op">NO</span></div></div><div class="par-it"><span class="et">b</span><svg class="par-svg" viewBox="0 0 120 96"><line x1="8.0" y1="18.0" x2="112.0" y2="78.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><line x1="54.4" y1="8.0" x2="65.6" y2="88.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/></svg><div class="sino"><span class="op">SÍ</span><span class="op">NO</span></div></div><div class="par-it"><span class="et">c</span><svg class="par-svg" viewBox="0 0 120 96"><line x1="20.0" y1="8.0" x2="100.0" y2="88.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><line x1="100.0" y1="8.0" x2="20.0" y2="88.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/></svg><div class="sino"><span class="op">SÍ</span><span class="op">NO</span></div></div><div class="par-it"><span class="et">d</span><svg class="par-svg" viewBox="0 0 120 96"><line x1="8.0" y1="61.9" x2="112.0" y2="34.1" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><line x1="8.0" y1="8.8" x2="112.0" y2="87.2" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/></svg><div class="sino"><span class="op">SÍ</span><span class="op">NO</span></div></div></div></div><div class="ej-block"><div class="ej-enunciado"><span class="num">2</span>Estas rectas <b>sí</b> son perpendiculares. Dibuja el <b>cuadradito</b> del ángulo recto en cada cruce.</div><div class="par-fila"><div class="par-it"><span class="et">a</span><svg class="par-svg" viewBox="0 0 120 96"><line x1="8.0" y1="48.0" x2="112.0" y2="48.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><line x1="60.0" y1="8.0" x2="60.0" y2="88.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/></svg></div><div class="par-it"><span class="et">b</span><svg class="par-svg" viewBox="0 0 120 96"><line x1="8.0" y1="29.1" x2="112.0" y2="66.9" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><line x1="74.6" y1="8.0" x2="45.4" y2="88.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/></svg></div><div class="par-it"><span class="et">c</span><svg class="par-svg" viewBox="0 0 120 96"><line x1="36.9" y1="8.0" x2="83.1" y2="88.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/><line x1="112.0" y1="18.0" x2="8.0" y2="78.0" stroke="#000" stroke-width="2.2" marker-start="url(#fl)" marker-end="url(#fl)"/></svg></div></div></div><div class="ej-block"><div class="ej-enunciado"><span class="num">3</span>Dibuja con la regla una recta <b>perpendicular</b> a la que está trazada (que forme ángulo recto).</div><div class="geo-fila"><div class="geo-it"><span class="lbl">a</span><svg class="geo-svg" viewBox="0 0 134 112" style="width:134px;height:112px"><circle cx="12" cy="12" r="2" fill="#777"/><circle cx="34" cy="12" r="2" fill="#777"/><circle cx="56" cy="12" r="2" fill="#777"/><circle cx="78" cy="12" r="2" fill="#777"/><circle cx="100" cy="12" r="2" fill="#777"/><circle cx="122" cy="12" r="2" fill="#777"/><circle cx="12" cy="34" r="2" fill="#777"/><circle cx="34" cy="34" r="2" fill="#777"/><circle cx="56" cy="34" r="2" fill="#777"/><circle cx="78" cy="34" r="2" fill="#777"/><circle cx="100" cy="34" r="2" fill="#777"/><circle cx="122" cy="34" r="2" fill="#777"/><circle cx="12" cy="56" r="2" fill="#777"/><circle cx="34" cy="56" r="2" fill="#777"/><circle cx="56" cy="56" r="2" fill="#777"/><circle cx="78" cy="56" r="2" fill="#777"/><circle cx="100" cy="56" r="2" fill="#777"/><circle cx="122" cy="56" r="2" fill="#777"/><circle cx="12" cy="78" r="2" fill="#777"/><circle cx="34" cy="78" r="2" fill="#777"/><circle cx="56" cy="78" r="2" fill="#777"/><circle cx="78" cy="78" r="2" fill="#777"/><circle cx="100" cy="78" r="2" fill="#777"/><circle cx="122" cy="78" r="2" fill="#777"/><circle cx="12" cy="100" r="2" fill="#777"/><circle cx="34" cy="100" r="2" fill="#777"/><circle cx="56" cy="100" r="2" fill="#777"/><circle cx="78" cy="100" r="2" fill="#777"/><circle cx="100" cy="100" r="2" fill="#777"/><circle cx="122" cy="100" r="2" fill="#777"/><line x1="12" y1="56" x2="122" y2="56" stroke="#000" stroke-width="2.6" marker-start="url(#fl)" marker-end="url(#fl)"/></svg></div><div class="geo-it"><span class="lbl">b</span><svg class="geo-svg" viewBox="0 0 134 112" style="width:134px;height:112px"><circle cx="12" cy="12" r="2" fill="#777"/><circle cx="34" cy="12" r="2" fill="#777"/><circle cx="56" cy="12" r="2" fill="#777"/><circle cx="78" cy="12" r="2" fill="#777"/><circle cx="100" cy="12" r="2" fill="#777"/><circle cx="122" cy="12" r="2" fill="#777"/><circle cx="12" cy="34" r="2" fill="#777"/><circle cx="34" cy="34" r="2" fill="#777"/><circle cx="56" cy="34" r="2" fill="#777"/><circle cx="78" cy="34" r="2" fill="#777"/><circle cx="100" cy="34" r="2" fill="#777"/><circle cx="122" cy="34" r="2" fill="#777"/><circle cx="12" cy="56" r="2" fill="#777"/><circle cx="34" cy="56" r="2" fill="#777"/><circle cx="56" cy="56" r="2" fill="#777"/><circle cx="78" cy="56" r="2" fill="#777"/><circle cx="100" cy="56" r="2" fill="#777"/><circle cx="122" cy="56" r="2" fill="#777"/><circle cx="12" cy="78" r="2" fill="#777"/><circle cx="34" cy="78" r="2" fill="#777"/><circle cx="56" cy="78" r="2" fill="#777"/><circle cx="78" cy="78" r="2" fill="#777"/><circle cx="100" cy="78" r="2" fill="#777"/><circle cx="122" cy="78" r="2" fill="#777"/><circle cx="12" cy="100" r="2" fill="#777"/><circle cx="34" cy="100" r="2" fill="#777"/><circle cx="56" cy="100" r="2" fill="#777"/><circle cx="78" cy="100" r="2" fill="#777"/><circle cx="100" cy="100" r="2" fill="#777"/><circle cx="122" cy="100" r="2" fill="#777"/><line x1="56" y1="12" x2="56" y2="100" stroke="#000" stroke-width="2.6" marker-start="url(#fl)" marker-end="url(#fl)"/></svg></div><div class="geo-it"><span class="lbl">c</span><svg class="geo-svg" viewBox="0 0 134 112" style="width:134px;height:112px"><circle cx="12" cy="12" r="2" fill="#777"/><circle cx="34" cy="12" r="2" fill="#777"/><circle cx="56" cy="12" r="2" fill="#777"/><circle cx="78" cy="12" r="2" fill="#777"/><circle cx="100" cy="12" r="2" fill="#777"/><circle cx="122" cy="12" r="2" fill="#777"/><circle cx="12" cy="34" r="2" fill="#777"/><circle cx="34" cy="34" r="2" fill="#777"/><circle cx="56" cy="34" r="2" fill="#777"/><circle cx="78" cy="34" r="2" fill="#777"/><circle cx="100" cy="34" r="2" fill="#777"/><circle cx="122" cy="34" r="2" fill="#777"/><circle cx="12" cy="56" r="2" fill="#777"/><circle cx="34" cy="56" r="2" fill="#777"/><circle cx="56" cy="56" r="2" fill="#777"/><circle cx="78" cy="56" r="2" fill="#777"/><circle cx="100" cy="56" r="2" fill="#777"/><circle cx="122" cy="56" r="2" fill="#777"/><circle cx="12" cy="78" r="2" fill="#777"/><circle cx="34" cy="78" r="2" fill="#777"/><circle cx="56" cy="78" r="2" fill="#777"/><circle cx="78" cy="78" r="2" fill="#777"/><circle cx="100" cy="78" r="2" fill="#777"/><circle cx="122" cy="78" r="2" fill="#777"/><circle cx="12" cy="100" r="2" fill="#777"/><circle cx="34" cy="100" r="2" fill="#777"/><circle cx="56" cy="100" r="2" fill="#777"/><circle cx="78" cy="100" r="2" fill="#777"/><circle cx="100" cy="100" r="2" fill="#777"/><circle cx="122" cy="100" r="2" fill="#777"/><line x1="34" y1="100" x2="100" y2="34" stroke="#000" stroke-width="2.6" marker-start="url(#fl)" marker-end="url(#fl)"/></svg></div></div></div><div class="ej-block"><div class="ej-enunciado"><span class="num">4</span>Rodea los objetos donde veas rectas <b>perpendiculares</b> (ángulo recto).</div><div class="obj-fila"><div class="obj-it"><span class="lbl">a</span><svg class="objsvg" viewBox="0 0 96 74"><rect x="14" y="8" width="68" height="58" fill="none" stroke="#000" stroke-width="2.6"/><line x1="48" y1="8" x2="48" y2="66" stroke="#000" stroke-width="2.4"/><line x1="14" y1="37" x2="82" y2="37" stroke="#000" stroke-width="2.4"/></svg></div><div class="obj-it"><span class="lbl">b</span><svg class="objsvg" viewBox="0 0 96 74"><line x1="12" y1="12" x2="84" y2="62" stroke="#000" stroke-width="2.8"/><line x1="12" y1="62" x2="84" y2="12" stroke="#000" stroke-width="2.8"/></svg></div><div class="obj-it"><span class="lbl">c</span><svg class="objsvg" viewBox="0 0 96 74"><line x1="48" y1="6" x2="48" y2="68" stroke="#000" stroke-width="2.8"/><line x1="12" y1="37" x2="84" y2="37" stroke="#000" stroke-width="2.8"/></svg></div><div class="obj-it"><span class="lbl">d</span><svg class="objsvg" viewBox="0 0 96 74"><line x1="20" y1="6" x2="20" y2="68" stroke="#000" stroke-width="2.6"/><line x1="62" y1="6" x2="62" y2="68" stroke="#000" stroke-width="2.6"/><line x1="14" y1="12" x2="68" y2="12" stroke="#000" stroke-width="2.2"/><line x1="14" y1="24" x2="68" y2="24" stroke="#000" stroke-width="2.2"/><line x1="14" y1="36" x2="68" y2="36" stroke="#000" stroke-width="2.2"/><line x1="14" y1="48" x2="68" y2="48" stroke="#000" stroke-width="2.2"/><line x1="14" y1="60" x2="68" y2="60" stroke="#000" stroke-width="2.2"/></svg></div></div></div>
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
