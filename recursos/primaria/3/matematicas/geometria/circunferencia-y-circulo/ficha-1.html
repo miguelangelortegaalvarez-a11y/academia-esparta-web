@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Circunferencia y círculo · Geometría · 3º Primaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 12px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 4px; }
+    .recuerda-idea { font-size: 12.5px; line-height: 1.3; margin-bottom: 1px; }
+    .recuerda-idea b { font-weight: 700; }
+    .rec-cards { display: flex; gap: 10px; justify-content: space-between; }
+    .rec-card { flex: 1; text-align: center; border: 1.5px solid #000; border-radius: 8px; padding: 4px 5px; }
+    .rec-card .nom { font-size: 12px; font-weight: 800; display: block; margin-bottom: 1px; }
+    .rec-card .desc { font-size: 9.5px; line-height: 1.18; color: #222; }
+    .rec-card svg { display: block; margin: 2px auto; }
+
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 5px; line-height: 1.3; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    .vf-lista { display: flex; flex-direction: column; gap: 6px; }
+    .vf-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; }
+    .vf-item .txt { flex: 1; }
+    .vf-pill { border: 1.5px solid #000; border-radius: 6px; width: 26px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink:0; }
+
+    .dibujar { display: flex; gap: 14px; flex-wrap: wrap; }
+    .dib-item { flex: 1 1 28%; }
+    .dib-item .lbl { font-size: 11.5px; font-weight: 700; margin-bottom: 4px; text-align: center; }
+    .dib-caja { border: 1.5px solid #000; border-radius: 8px; height: 96px; position: relative; }
+    .pt-d { position: absolute; width: 7px; height: 7px; background: #000; border-radius: 50%; transform: translate(-50%, -50%); }
+    .pt-d .lab { position:absolute; left:9px; top:-6px; font-size:11px; font-weight:700; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+
+    /* --- circunferencia y circulo --- */
+    .csvg { width: 84px; height: 84px; }
+    .csvg.sm { width: 58px; height: 58px; }
+    .csvg.lg { width: 108px; height: 108px; }
+    .fig-fila { display: flex; gap: 10px; row-gap: 4px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+    .fig-it { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .fig-it .et { font-size: 12px; font-weight: 800; }
+    .fig-it .ln { width: 100px; border-bottom: 1.4px solid #000; height: 18px; }
+    .sino { display: flex; gap: 5px; }
+    .sino .op { border: 1.5px solid #000; border-radius: 6px; padding: 1px 9px; font-size: 11px; font-weight: 800; }
+
+    .une { display: flex; justify-content: space-around; gap: 16px; align-items: center; }
+    .une-col { display: flex; flex-direction: column; gap: 6px; justify-content: space-around; }
+    .une-it { display: flex; align-items: center; gap: 8px; }
+    .une-it .dot { width: 9px; height: 9px; border-radius: 50%; background: #000; flex-shrink: 0; }
+    .une-col.txt .chip { border: 1.6px solid #000; border-radius: 999px; padding: 4px 12px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+    .tabla-c { width: 100%; border-collapse: collapse; margin-top: 2px; }
+    .tabla-c th, .tabla-c td { border: 1.4px solid #000; padding: 5px 4px; text-align: center; font-size: 12.5px; font-weight: 600; }
+    .tabla-c th { background: #eee; font-weight: 800; font-size: 11.5px; }
+    .cajita { width: 52px; height: 22px; border: 1.5px solid #000; border-radius: 5px; margin: 0 auto; }
+
+    .resumen { display: flex; gap: 8px; }
+    .resumen .col { flex: 1; text-align: center; border: 1.5px solid #000; border-radius: 8px; padding: 3px 4px; }
+    .resumen .col .t { font-size: 11.5px; font-weight: 800; display: block; }
+    .resumen .col .d { font-size: 9px; line-height: 1.15; color: #222; }
+    .resumen .col svg { display: block; margin: 2px auto; }
+
+    .clasif { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .clasif-it { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .clasif-it .et { font-size: 12px; font-weight: 800; }
+    .clasif-it .ln { width: 74px; border-bottom: 1.4px solid #000; height: 18px; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Circunferencia y círculo</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+<div class="tipo-badge">⭕ ¿Circunferencia o círculo?</div>
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 RECUERDA</div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="rec-cards" style="flex:1">
+        <div class="rec-card"><span class="nom">CIRCUNFERENCIA</span><svg class="csvg sm" viewBox="0 0 100 100" style="width:60px;height:60px"><circle cx="50" cy="50" r="34" fill="none" stroke="#000" stroke-width="2.4"/></svg><span class="desc">Es la <b>línea curva cerrada</b> (el borde). Como un <b>aro</b>.</span></div>
+        <div class="rec-card"><span class="nom">CÍRCULO</span><svg class="csvg sm" viewBox="0 0 100 100" style="width:60px;height:60px"><circle cx="50" cy="50" r="34" fill="#cfcfcf" stroke="#000" stroke-width="2.4"/></svg><span class="desc">Es la línea <b>y toda la región de dentro</b>. Como una <b>moneda</b>.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1</span>Observa cada figura y escribe debajo si es una <b>CIRCUNFERENCIA</b> o un <b>CÍRCULO</b>.</div>
+    <div class="clasif"><div class="clasif-it"><span class="et">a</span><svg class="csvg" viewBox="0 0 100 100" style="width:70px;height:70px"><circle cx="50" cy="50" r="34" fill="none" stroke="#000" stroke-width="2.4"/></svg><div class="ln"></div></div><div class="clasif-it"><span class="et">b</span><svg class="csvg" viewBox="0 0 100 100" style="width:70px;height:70px"><circle cx="50" cy="50" r="34" fill="#cfcfcf" stroke="#000" stroke-width="2.4"/></svg><div class="ln"></div></div><div class="clasif-it"><span class="et">c</span><svg class="csvg" viewBox="0 0 100 100" style="width:70px;height:70px"><circle cx="50" cy="50" r="34" fill="none" stroke="#000" stroke-width="2.4"/></svg><div class="ln"></div></div><div class="clasif-it"><span class="et">d</span><svg class="csvg" viewBox="0 0 100 100" style="width:70px;height:70px"><circle cx="50" cy="50" r="34" fill="#cfcfcf" stroke="#000" stroke-width="2.4"/></svg><div class="ln"></div></div><div class="clasif-it"><span class="et">e</span><svg class="csvg" viewBox="0 0 100 100" style="width:70px;height:70px"><circle cx="50" cy="50" r="34" fill="#cfcfcf" stroke="#000" stroke-width="2.4"/></svg><div class="ln"></div></div><div class="clasif-it"><span class="et">f</span><svg class="csvg" viewBox="0 0 100 100" style="width:70px;height:70px"><circle cx="50" cy="50" r="34" fill="none" stroke="#000" stroke-width="2.4"/></svg><div class="ln"></div></div></div>
+  </div>
+<div class="recuerda" style="margin-bottom:5px"><div class="recuerda-idea">Un punto puede estar <b>DENTRO</b> del círculo, <b>FUERA</b> o <b>SOBRE</b> la circunferencia (en la línea).</div></div>  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2</span>Escribe si cada punto está <b>dentro</b>, <b>fuera</b> o <b>sobre</b> la circunferencia.</div>
+    <div style="display:flex;align-items:center;gap:18px"><div><svg class="csvg lg" viewBox="0 0 100 100" style="width:118px;height:118px"><circle cx="50" cy="50" r="36" fill="none" stroke="#000" stroke-width="2.4"/><circle cx="44" cy="46" r="2.8" fill="#000"/><text x="48" y="43" font-size="11" font-weight="700">A</text><circle cx="18.8" cy="32.0" r="2.8" fill="#000"/><text x="5.800000000000001" y="29.0" font-size="11" font-weight="700">B</text><circle cx="86" cy="22" r="2.8" fill="#000"/><text x="90" y="19" font-size="11" font-weight="700">C</text><circle cx="58" cy="60" r="2.8" fill="#000"/><text x="62" y="57" font-size="11" font-weight="700">D</text></svg></div><table class="tabla-c" style="flex:1"><tr><th>Punto</th><th>A</th><th>B</th><th>C</th><th>D</th></tr><tr><th>¿Dónde está?</th><td><div class="cajita" style="width:78px"></div></td><td><div class="cajita" style="width:78px"></div></td><td><div class="cajita" style="width:78px"></div></td><td><div class="cajita" style="width:78px"></div></td></tr></table></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3</span>Lee y rodea <b>V</b> (verdadero) o <b>F</b> (falso).</div>
+    <div class="vf-lista"><div class="vf-item"><span class="vf-pill">V</span><span class="vf-pill">F</span><span class="txt">La circunferencia es una línea curva y cerrada.</span></div><div class="vf-item"><span class="vf-pill">V</span><span class="vf-pill">F</span><span class="txt">El círculo solo es el borde, sin la parte de dentro.</span></div><div class="vf-item"><span class="vf-pill">V</span><span class="vf-pill">F</span><span class="txt">Una moneda tiene forma de círculo.</span></div><div class="vf-item"><span class="vf-pill">V</span><span class="vf-pill">F</span><span class="txt">Un aro tiene forma de circunferencia.</span></div></div>
+  </div>
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
