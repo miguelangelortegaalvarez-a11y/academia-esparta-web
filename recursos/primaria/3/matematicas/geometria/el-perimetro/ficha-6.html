@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Repaso del perímetro · Geometría · 3º Primaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 12px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 4px; }
+    .recuerda-idea { font-size: 12.5px; line-height: 1.3; margin-bottom: 1px; }
+    .recuerda-idea b { font-weight: 700; }
+
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 5px; line-height: 1.3; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    .vf-lista { display: flex; flex-direction: column; gap: 6px; }
+    .vf-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; }
+    .vf-item .txt { flex: 1; }
+    .vf-pill { border: 1.5px solid #000; border-radius: 6px; width: 26px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink:0; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+
+    /* --- perimetro --- */
+    .psvg { display: block; }
+    .per-fila { display: flex; gap: 12px; row-gap: 8px; flex-wrap: wrap; justify-content: center; align-items: flex-end; }
+    .per-it { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .per-it .et { font-size: 12px; font-weight: 800; }
+    .per-it .resp { font-size: 12px; font-weight: 700; white-space: nowrap; }
+    .per-it .resp .lin { display: inline-block; width: 58px; border-bottom: 1.3px solid #000; height: 14px; vertical-align: middle; }
+    .per-it .resp .cajita { display: inline-block; width: 44px; height: 21px; border: 1.5px solid #000; border-radius: 5px; vertical-align: middle; }
+
+    .resumen { display: flex; gap: 8px; }
+    .resumen .col { flex: 1; text-align: center; border: 1.5px solid #000; border-radius: 8px; padding: 4px 6px; }
+    .resumen .col .t { font-size: 12px; font-weight: 800; display: block; margin-bottom: 2px; }
+    .resumen .col .d { font-size: 10.5px; line-height: 1.25; color: #111; }
+    .resumen .col svg { display: block; margin: 3px auto; }
+
+    /* cuadricula */
+    .cuad { display: grid; justify-content: center; margin: 0 auto; width: max-content; }
+    .cuad .c { width: 22px; height: 22px; border: 1px solid #9a9a9a; }
+    .cuad .c.on { background: #cfcfcf; border: 1.5px solid #333; }
+    .cuad .c.hidden { border: none; background: none; }
+    .grid-fila { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; align-items: flex-end; }
+    .grid-it { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .grid-it .et { font-size: 12px; font-weight: 800; }
+    .grid-it .resp { font-size: 12px; font-weight: 700; }
+    .grid-it .resp .cajita { display: inline-block; width: 44px; height: 21px; border: 1.5px solid #000; border-radius: 5px; vertical-align: middle; }
+
+    /* problemas */
+    .problemas { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .problema { border: 1.5px solid #000; border-radius: 8px; padding: 6px 9px; }
+    .problema .enun { font-size: 12px; line-height: 1.28; margin-bottom: 5px; }
+    .problema .enun b { font-weight: 700; }
+    .problema .zona { border: 1px dashed #888; border-radius: 6px; min-height: 40px; }
+    .problema .sol { margin-top: 5px; font-size: 11.5px; font-weight: 700; }
+    .problema .sol .cajita { display: inline-block; width: 50px; height: 20px; border: 1.4px solid #000; border-radius: 5px; vertical-align: middle; }
+
+    .calc-line { font-size: 12px; font-weight: 700; }
+    .calc-line .lin { display: inline-block; width: 70px; border-bottom: 1.3px solid #000; height: 14px; vertical-align: middle; }
+    .calc-line .cajita { display: inline-block; width: 46px; height: 21px; border: 1.5px solid #000; border-radius: 5px; vertical-align: middle; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Repaso</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+<div class="tipo-badge">📐 Repaso</div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1</span>Calcula el perímetro sumando los lados.</div>
+    <div class="per-fila"><div class="per-it"><span class="et">a</span><svg class="psvg" viewBox="0 0 114.3 95.9" style="width:114.0px;height:96.0px"><polygon points="31.3,80.9 86.3,80.9 28.0,15.0" fill="none" stroke="#000" stroke-width="2.2"/><circle cx="31.3" cy="80.9" r="2.4" fill="#000"/><circle cx="86.3" cy="80.9" r="2.4" fill="#000"/><circle cx="28.0" cy="15.0" r="2.4" fill="#000"/><text x="58.8" y="96.4" font-size="11" font-weight="700" text-anchor="middle">5 cm</text><text x="67.6" y="42.2" font-size="11" font-weight="700" text-anchor="middle">8 cm</text><text x="15.7" y="52.2" font-size="11" font-weight="700" text-anchor="middle">6 cm</text></svg><span class="resp">P = <span class="cajita"></span> cm</span></div><div class="per-it"><span class="et">b</span><svg class="psvg" viewBox="0 0 133 74" style="width:133px;height:74.0px"><polygon points="28,59 94,59 105,15 39,15" fill="none" stroke="#000" stroke-width="2.2"/><circle cx="28" cy="59" r="2.4" fill="#000"/><circle cx="94" cy="59" r="2.4" fill="#000"/><circle cx="105" cy="15" r="2.4" fill="#000"/><circle cx="39" cy="15" r="2.4" fill="#000"/><text x="61.0" y="74.5" font-size="11" font-weight="700" text-anchor="middle">6 cm</text><text x="113.1" y="43.9" font-size="11" font-weight="700" text-anchor="middle">4 cm</text><text x="72.0" y="15.5" font-size="11" font-weight="700" text-anchor="middle">6 cm</text><text x="19.9" y="37.1" font-size="11" font-weight="700" text-anchor="middle">4 cm</text></svg><span class="resp">P = <span class="cajita"></span> cm</span></div></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2</span>Usa el truco: cuadrado <b>4 × lado</b> · rectángulo <b>largo+ancho+largo+ancho</b>.</div>
+    <div class="per-fila"><div class="per-it"><span class="et">c</span><svg class="psvg" viewBox="0 0 146 120" style="width:146px;height:120.0px"><polygon points="28,105 118,105 118,15 28,15" fill="none" stroke="#000" stroke-width="2.2"/><circle cx="28" cy="105" r="2.4" fill="#000"/><circle cx="118" cy="105" r="2.4" fill="#000"/><circle cx="118" cy="15" r="2.4" fill="#000"/><circle cx="28" cy="15" r="2.4" fill="#000"/><text x="73.0" y="120.5" font-size="11" font-weight="700" text-anchor="middle">9 cm</text></svg><span class="resp">P = <span class="cajita"></span> cm</span></div><div class="per-it"><span class="et">d</span><svg class="psvg" viewBox="0 0 140 66" style="width:140px;height:66.0px"><polygon points="28,51 112,51 112,15 28,15" fill="none" stroke="#000" stroke-width="2.2"/><circle cx="28" cy="51" r="2.4" fill="#000"/><circle cx="112" cy="51" r="2.4" fill="#000"/><circle cx="112" cy="15" r="2.4" fill="#000"/><circle cx="28" cy="15" r="2.4" fill="#000"/><text x="70.0" y="66.5" font-size="11" font-weight="700" text-anchor="middle">7 cm</text><text x="124.8" y="36.5" font-size="11" font-weight="700" text-anchor="middle">3 cm</text></svg><span class="resp">P = <span class="cajita"></span> cm</span></div></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3</span>Cuenta los ladidos del borde (en unidades, <b>u</b>).</div>
+    <div class="grid-fila"><div class="grid-it"><span class="et">e</span><div class="cuad" style="grid-template-columns:repeat(4,22px)"><div class="c on"></div><div class="c on"></div><div class="c on"></div><div class="c on"></div><div class="c on"></div><div class="c on"></div><div class="c on"></div><div class="c on"></div></div><span class="resp">P = <span class="cajita"></span> u</span></div><div class="grid-it"><span class="et">f</span><div class="cuad" style="grid-template-columns:repeat(3,22px)"><div class="c on"></div><div class="c on"></div><div class="c"></div><div class="c on"></div><div class="c on"></div><div class="c"></div><div class="c on"></div><div class="c on"></div><div class="c on"></div><div class="c on"></div><div class="c on"></div><div class="c on"></div></div><span class="resp">P = <span class="cajita"></span> u</span></div></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4</span>Resuelve.</div>
+    <div class="problemas"><div class="problema"><div class="enun"><b>1.</b> Una <b>baldosa cuadrada</b> mide <b>30 cm</b> de lado. ¿Cuál es su perímetro?</div><div class="zona"></div><div class="sol">P = <span class="cajita"></span></div></div><div class="problema"><div class="enun"><b>2.</b> Una <b>huerta rectangular</b> mide <b>40 m</b> de largo y <b>20 m</b> de ancho. ¿Cuánta valla rodea la huerta?</div><div class="zona"></div><div class="sol">P = <span class="cajita"></span></div></div></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">5</span>Rodea <b>V</b> o <b>F</b>.</div>
+    <div class="vf-lista"><div class="vf-item"><span class="vf-pill">V</span><span class="vf-pill">F</span><span class="txt">El perímetro es la suma de todos los lados.</span></div><div class="vf-item"><span class="vf-pill">V</span><span class="vf-pill">F</span><span class="txt">En un cuadrado, el perímetro es 4 × lado.</span></div></div>
+  </div>
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
