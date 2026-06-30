@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problemas de división · 3º Primaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 12px; margin-bottom: 9px; }
+    .recuerda-titulo { font-size: 12.5px; font-weight: 800; letter-spacing: .4px; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .recuerda-pasos { font-size: 12px; line-height: 1.32; margin-bottom: 5px; }
+    .recuerda-pasos ol { padding-left: 20px; }
+    .recuerda-pasos li { margin-bottom: 1px; }
+    .recuerda-ejemplo { background: #f6f6f6; border: 1.5px solid #999; border-radius: 8px; padding: 5px 9px; font-size: 12px; line-height: 1.4; }
+    .recuerda-ejemplo .ej-label { font-size: 10px; font-weight: 800; color: #444; letter-spacing: .5px; }
+
+    .problemas { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .problema { border: 1.5px solid #000; border-radius: 10px; padding: 6px 14px; display: grid; grid-template-columns: 56px 1fr; gap: 10px; align-items: start; }
+    .problema-icono { display: flex; align-items: center; justify-content: center; padding-top: 4px; }
+    .problema-icono svg { width: 50px; height: 50px; }
+    .problema-cuerpo { display: flex; flex-direction: column; gap: 4px; }
+    .problema-cabecera { display: flex; align-items: baseline; gap: 6px; }
+    .problema-num { font-size: 15px; font-weight: 800; }
+    .problema-enunciado { font-size: 13px; line-height: 1.3; font-weight: 500; }
+    .problema-enunciado b { font-weight: 700; }
+    .problema-resolver { display: grid; grid-template-columns: 1fr 1.4fr; gap: 12px; align-items: stretch; margin-top: 3px; }
+    .zona { border: 1.5px dashed #555; border-radius: 6px; padding: 4px 8px; min-height: 55px; }
+    .zona-label { font-size: 10px; font-weight: 800; color: #444; letter-spacing: .4px; display: block; margin-bottom: 1px; }
+    .zona-solucion { display: flex; flex-direction: column; }
+    .solucion-linea { flex: 1; border-bottom: 1.5px solid #000; margin-top: 8px; min-height: 30px; }
+
+    .footer { margin-top: 9px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 3º Primaria · Problemas de división</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">➗ Problemas de división</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">💡 LA MITAD, EL TERCIO Y EL CUARTO</div>
+    <div class="recuerda-pasos">La <b>mitad</b> es dividir <b>÷ 2</b>, la <b>tercera parte</b> es <b>÷ 3</b> y la <b>cuarta parte</b> es <b>÷ 4</b>. También puedes preguntar <b>cuántos grupos</b> caben (agrupar).</div>
+  </div>
+
+  <div class="problemas">
+
+    <div class="problema">
+      <div class="problema-icono"><svg viewBox="0 0 60 60"><ellipse cx="30" cy="25" rx="14" ry="17" fill="none" stroke="#000" stroke-width="2.5"/><path d="M30 42 L30 50" fill="none" stroke="#000" stroke-width="1.6"/><path d="M27 43 L33 43 L30 48 Z" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">1.</span>
+          <span class="problema-enunciado">Marta tiene <b>46</b> cromos y le da <b>la mitad</b> a su amigo. ¿Cuántos cromos le da?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona" style="min-height:60px"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion" style="min-height:60px"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="problema">
+      <div class="problema-icono"><svg viewBox="0 0 60 60"><path d="M30 22 Q21 17 17 27 Q15 41 30 48 Q45 41 43 27 Q39 17 30 22 Z" fill="none" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/><path d="M30 22 Q31 14 38 13" fill="none" stroke="#000" stroke-width="2"/></svg></div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">2.</span>
+          <span class="problema-enunciado">En una caja hay <b>39</b> manzanas. Usamos <b>la tercera parte</b>. ¿Cuántas manzanas usamos?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona" style="min-height:60px"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion" style="min-height:60px"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="problema">
+      <div class="problema-icono"><svg viewBox="0 0 60 60"><path d="M23 14 L16 21 L21 27 L25 23 L25 48 L41 48 L41 23 L45 27 L50 21 L43 14 L37 14 Q33 18 29 14 Z" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg></div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">3.</span>
+          <span class="problema-enunciado">Una tienda tiene <b>48</b> camisetas y vende <b>la cuarta parte</b>. ¿Cuántas camisetas vende?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona" style="min-height:60px"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion" style="min-height:60px"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="problema">
+      <div class="problema-icono"><svg viewBox="0 0 60 60"><path d="M10 22 L50 22 Q47 30 50 38 L10 38 Q13 30 10 22 Z" fill="none" stroke="#000" stroke-width="2.3" stroke-linejoin="round"/><line x1="30" y1="24" x2="30" y2="36" stroke="#000" stroke-width="1.6" stroke-dasharray="3 2"/></svg></div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">4.</span>
+          <span class="problema-enunciado">Hay <b>54</b> panes para meter en bolsas de <b>6</b>. ¿Cuántas bolsas se llenan?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona" style="min-height:60px"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion" style="min-height:60px"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="problema">
+      <div class="problema-icono"><svg viewBox="0 0 60 60"><path d="M18 24 L42 24 L46 50 L14 50 Z" fill="none" stroke="#000" stroke-width="2.4" stroke-linejoin="round"/><path d="M24 24 Q24 14 30 14 Q36 14 36 24" fill="none" stroke="#000" stroke-width="2"/></svg></div>
+      <div class="problema-cuerpo">
+        <div class="problema-cabecera">
+          <span class="problema-num">5.</span>
+          <span class="problema-enunciado">Con <b>60</b> caramelos llenamos bolsas de <b>8</b>. ¿Cuántas bolsas se llenan y cuántos caramelos sobran?</span>
+        </div>
+        <div class="problema-resolver">
+          <div class="zona" style="min-height:66px"><span class="zona-label">OPERACIÓN</span></div>
+          <div class="zona zona-solucion" style="min-height:66px"><span class="zona-label">SOLUCIÓN</span><div class="solucion-linea"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
