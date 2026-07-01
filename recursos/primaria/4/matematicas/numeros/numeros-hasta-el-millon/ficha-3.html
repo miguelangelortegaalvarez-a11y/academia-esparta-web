@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formar y descomponer · CM · DM · UM · C · D · U · 4º Primaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 13px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 5px; }
+    .rec-linea { font-size: 12.5px; line-height: 1.38; margin-bottom: 4px; }
+    .rec-linea b { font-size: 15px; }
+    .rec-flex { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
+
+    /* Tabla de órdenes (Recuerda) con dos clases */
+    .ordenes-tabla { border-collapse: collapse; }
+    .ordenes-tabla th, .ordenes-tabla td { border: 1.5px solid #000; text-align: center; }
+    .ordenes-tabla .clase { font-size: 10px; font-weight: 800; letter-spacing: .3px; background: #e9e9e9; padding: 2px 0; }
+    .ordenes-tabla .orden { font-size: 11px; font-weight: 700; background: #f3f3f3; width: 40px; padding: 2px 0; }
+    .ordenes-tabla .cifra { font-size: 18px; font-weight: 700; height: 24px; }
+    .ordenes-tabla .sep-clase { border-left-width: 3px; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla descomponer CM DM UM C D U */
+    .cdu-tabla { border-collapse: collapse; margin-bottom: 4px; }
+    .cdu-tabla th, .cdu-tabla td { border: 1.5px solid #000; text-align: center; }
+    .cdu-tabla .clase-cab { font-size: 10.5px; font-weight: 800; letter-spacing: .3px; background: #e9e9e9; padding: 2px 0; }
+    .cdu-tabla th { font-size: 12px; font-weight: 700; background: #f3f3f3; padding: 3px 0; width: 46px; }
+    .cdu-tabla .num-cab { width: 108px; background: #fff; font-size: 18px; font-weight: 700; }
+    .cdu-tabla td { height: 27px; font-size: 18px; font-weight: 700; }
+    .cdu-tabla .sep-clase { border-left-width: 3px; }
+
+    /* Construir número desde piezas */
+    .construir-fila { display: flex; align-items: center; gap: 6px; font-size: 14.5px; font-weight: 700; margin-bottom: 6px; flex-wrap: wrap; }
+    .construir-fila .pieza { border: 1.5px solid #000; border-radius: 6px; padding: 4px 8px; }
+    .construir-fila .igual { font-size: 19px; }
+    .construir-fila .caja-res { width: 120px; height: 38px; border: 1.5px solid #000; border-radius: 6px; }
+
+    /* Descomponer en suma */
+    .suma-fila { display: flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 700; margin-bottom: 9px; flex-wrap: wrap; }
+    .suma-fila .num-grande { min-width: 74px; }
+    .suma-fila .caja-sum { width: 58px; height: 34px; border: 1.5px solid #000; border-radius: 6px; }
+    .suma-fila .mas { font-weight: 700; }
+
+    /* Serie de 100.000 en 100.000 */
+    .serie-cajas { display: flex; gap: 7px; flex-wrap: wrap; font-size: 13.5px; font-weight: 700; }
+    .serie-cajas .caja-num { width: 78px; height: 33px; border: 1.5px solid #000; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .serie-cajas .caja-num.vacia { background: #fff; }
+
+    /* Unir descomposición con su número (sin líneas guía) */
+    .unir-wrap { display: flex; justify-content: space-between; gap: 50px; padding: 0 10px; }
+    .unir-col { display: flex; flex-direction: column; gap: 18px; justify-content: space-between; }
+    .unir-item { border: 1.5px solid #000; border-radius: 6px; padding: 12px 14px; font-size: 14.5px; font-weight: 700; text-align: center; }
+    .unir-col.derecha .unir-item { min-width: 122px; }
+
+    .footer { margin-top: 8px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 4º Primaria · Números hasta el millón</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🔧 Formar y descomponer</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Descompón cada número escribiendo la cifra de cada orden:</div>
+    <table class="cdu-tabla">
+      <tr><td class="num-cab" rowspan="2">Número</td><td class="clase-cab" colspan="3">MILLARES</td><td class="clase-cab sep-clase" colspan="3">UNIDADES</td></tr>
+      <tr><th>CM</th><th>DM</th><th>UM</th><th class="sep-clase">C</th><th>D</th><th>U</th></tr>
+      <tr><td class="num-cab">372.914</td><td></td><td></td><td></td><td class="sep-clase"></td><td></td><td></td></tr>
+      <tr><td class="num-cab">605.130</td><td></td><td></td><td></td><td class="sep-clase"></td><td></td><td></td></tr>
+      <tr><td class="num-cab">480.007</td><td></td><td></td><td></td><td class="sep-clase"></td><td></td><td></td></tr>
+      <tr><td class="num-cab">219.560</td><td></td><td></td><td></td><td class="sep-clase"></td><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Escribe el número que se forma:</div>
+    <div class="construir-fila"><span class="pieza">5 CM</span><span class="mas">+</span><span class="pieza">2 DM</span><span class="mas">+</span><span class="pieza">9 UM</span><span class="mas">+</span><span class="pieza">4 C</span><span class="mas">+</span><span class="pieza">0 D</span><span class="mas">+</span><span class="pieza">6 U</span><span class="igual">=</span><div class="caja-res"></div></div>
+    <div class="construir-fila"><span class="pieza">7 CM</span><span class="mas">+</span><span class="pieza">0 DM</span><span class="mas">+</span><span class="pieza">3 UM</span><span class="mas">+</span><span class="pieza">1 C</span><span class="mas">+</span><span class="pieza">8 D</span><span class="mas">+</span><span class="pieza">0 U</span><span class="igual">=</span><div class="caja-res"></div></div>
+    <div class="construir-fila"><span class="pieza">9 CM</span><span class="mas">+</span><span class="pieza">4 DM</span><span class="mas">+</span><span class="pieza">0 UM</span><span class="mas">+</span><span class="pieza">0 C</span><span class="mas">+</span><span class="pieza">2 D</span><span class="mas">+</span><span class="pieza">5 U</span><span class="igual">=</span><div class="caja-res"></div></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Descompón cada número en suma:</div>
+    <div class="suma-fila"><span class="num-grande">274.836</span><span>=</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div></div>
+    <div class="suma-fila"><span class="num-grande">561.409</span><span>=</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div><span class="mas">+</span><div class="caja-sum"></div></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Une cada descomposición con su número:</div>
+    <div class="unir-wrap">
+      <div class="unir-col izquierda">
+        <div class="unir-item">400.000 + 30.000 + 5.000 + 200 + 10</div>
+        <div class="unir-item">400.000 + 3.000 + 500 + 2</div>
+        <div class="unir-item">40.000 + 3.000 + 500 + 20</div>
+      </div>
+      <div class="unir-col derecha">
+        <div class="unir-item">403.502</div>
+        <div class="unir-item">43.520</div>
+        <div class="unir-item">435.210</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
