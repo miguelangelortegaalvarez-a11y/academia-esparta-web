@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparar y ordenar · El redondeo · 4º Primaria</title>
+  <meta name="description" content="Redondear a la decena, a la centena y al millar — ficha 4 de Comparar y ordenar · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/numeros/comparar-y-ordenar/ficha-4.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 13px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 5px; }
+    .recuerda-ejemplos { display: flex; flex-wrap: wrap; gap: 6px 24px; align-items: flex-start; }
+    .rec-ej { font-size: 12.5px; line-height: 1.5; }
+    .rec-ej b { font-size: 15px; }
+    .rec-ej .sg { font-size: 18px; font-weight: 800; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 8px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Comparar con signo */
+    .cmp-lista { display: flex; flex-wrap: wrap; gap: 9px 18px; }
+    .cmp-item { display: flex; align-items: center; justify-content: center; gap: 11px; font-size: 18px; font-weight: 700; width: calc(50% - 9px); }
+    .cmp-item .caja-signo { width: 44px; height: 35px; border: 1.5px solid #000; border-radius: 6px; flex-shrink: 0; }
+
+    /* Rodear (parejas separadas) */
+    .par-lista { display: flex; flex-wrap: wrap; gap: 9px 18px; }
+    .par-item { display: flex; align-items: center; justify-content: center; gap: 28px; font-size: 18px; font-weight: 700; width: calc(50% - 9px); border: 1.5px dashed #aaa; border-radius: 8px; padding: 7px 4px; }
+
+    /* Verdadero / Falso */
+    .vf-lista { display: flex; flex-direction: column; gap: 7px; }
+    .vf-item { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; }
+    .vf-item .frase { flex: 1; }
+    .vf-item .frase .sg { font-size: 18px; }
+    .vf-item .opc { display: flex; gap: 8px; }
+    .vf-item .opc span { border: 1.5px solid #000; border-radius: 6px; width: 30px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+
+    .footer { margin-top: 8px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    /* Redondear (número → caja) */
+    .rd-lista { display: flex; flex-wrap: wrap; gap: 10px 14px; }
+    .rd-item { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15.5px; font-weight: 700; width: calc(33.33% - 10px); }
+    .rd-item .flecha { font-size: 13px; }
+    .rd-item .caja-resp { width: 80px; height: 33px; border: 1.5px solid #000; border-radius: 6px; }
+    /* Tabla de redondeo */
+    .rd-tabla { border-collapse: collapse; width: 100%; }
+    .rd-tabla th, .rd-tabla td { border: 1.5px solid #000; text-align: center; }
+    .rd-tabla th { font-size: 11.5px; font-weight: 700; background: #f3f3f3; padding: 5px 3px; line-height: 1.2; }
+    .rd-tabla td { height: 38px; font-size: 15px; font-weight: 700; }
+    .rd-tabla .num-cab { background: #fafafa; width: 110px; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 4º Primaria · Comparar y ordenar</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🎯 El redondeo</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <div class="recuerda-ejemplos">
+      <div class="rec-ej">Para redondear, mira la cifra <b>siguiente</b> al orden que te piden:<br>si es <b>5 o más</b>, ese orden sube 1 · si es <b>menor que 5</b>, se queda igual. Lo de la derecha se convierte en 0.</div>
+      <div class="rec-ej"><b>3.472</b> → a la decena <b>3.470</b> · a la centena <b>3.500</b> · al millar <b>3.000</b>.</div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Redondea a la <b>decena</b>:</div>
+    <div class="rd-lista">
+      <div class="rd-item"><span>84</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>347</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>1.235</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>6.892</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>45.678</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>99.996</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Redondea a la <b>centena</b>:</div>
+    <div class="rd-lista">
+      <div class="rd-item"><span>460</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>1.849</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>25.762</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>7.450</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>39.049</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>649.951</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Redondea al <b>millar</b>:</div>
+    <div class="rd-lista">
+      <div class="rd-item"><span>4.500</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>12.386</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>68.720</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>245.499</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>799.502</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+      <div class="rd-item"><span>999.499</span><span class="flecha">→</span><div class="caja-resp"></div></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Redondea el mismo número a los tres órdenes:</div>
+    <table class="rd-tabla">
+      <tr>
+        <th>Número</th>
+        <th>A la decena</th>
+        <th>A la centena</th>
+        <th>Al millar</th>
+      </tr>
+      <tr>
+        <td class="num-cab">5.463</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="num-cab">28.756</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="num-cab">173.249</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="num-cab">940.502</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
