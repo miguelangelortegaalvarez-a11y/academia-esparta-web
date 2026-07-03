@@ -181,7 +181,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - Ruta Mates: `recursos/primaria/CURSO/matematicas/BLOQUE/SUB-BLOQUE/nombre-sub-bloque-Xprimaria-serie-Y.html`
 - Cada serie = 6 fichas (gramática/lengua/mates) o 10 fichas (comprensión/velocidad).
 - El sitemap las recoge automáticamente — no hay que tocar nada más.
-- **Al cerrar un sub-bloque (norma ampliada 2026-07-03):** además de registrar la entrada en `RECURSOS` de `materiales.html`, ejecutar **`node generar-indices-recursos.mjs`** → regenera los índices estáticos `recursos/primaria/CURSO/ASIGNATURA/index.html` (páginas rastreables por curso+asignatura con enlaces `<a>` a todas las fichas; los robots de IA no ejecutan el React de materiales.html, así que sin estos índices el catálogo es invisible para ellos). El script valida que cada enlace exista en disco.
+- **Al cerrar un sub-bloque (norma ampliada 2026-07-03):** además de registrar la entrada en `RECURSOS` de `materiales.html`, ejecutar **`node generar-indices-recursos.mjs`** → regenera los índices estáticos `recursos/primaria/CURSO/ASIGNATURA/index.html` (páginas rastreables por curso+asignatura con enlaces `<a>` a todas las fichas; los robots de IA no ejecutan el React de materiales.html, así que sin estos índices el catálogo es invisible para ellos). El script valida que cada enlace exista en disco. Después ejecutar **`node anadir-seo-fichas.mjs`** → añade meta description (rica, desde RECURSOS) + canonical a las fichas nuevas que no la tengan (idempotente; hecho en masa a las 1.155 páginas el 2026-07-03).
 
 ---
 
