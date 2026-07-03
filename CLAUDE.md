@@ -463,12 +463,13 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 ### Blog (`/blog.html`)
 - **Índice rediseñado el 2026-06-15** (commits a31b003 + 362804d): fuera las portadas de emoji → diseño editorial con **fotos reales** (Pexels, uso comercial, self-hosted en `blog-img/` para no depender del CDN ni añadir cookies), **artículo destacado a doble ancho** con imagen de fondo y **color por categoría** (var `--cat` + `--img` por tarjeta). El **destacado es `como-elegir-academia-torremolinos`** (color **jade `#4fc3a1`** — el coral daba sensación de alerta), no Mates. Portadas `aspect-ratio:16/9` (las fotos verticales se recortan en el hero ancho → para el destacado mejor horizontal). Degradado verde sutil sobre cada foto. La de Lectura: niño de espaldas, NO identificable (norma de Miguel: fotos de niños sin cara identificable). El artículo `elegir-academia` se reescribió en clave de metodología propia y tono NO competitivo (ver memoria `project-posicionamiento-academia`).
-- 6 artículos publicados, casi todos con enlaces internos a fichas:
+- 7 artículos publicados, casi todos con enlaces internos a fichas:
   - `como-elegir-academia-torremolinos.html` (DESTACADO del blog; reescrito 2026-06-15: 7 claves en tono positivo "buena señal" + sección "Cómo trabajamos en Esparta"; enlaza a psicología, materiales y otros artículos)
   - `como-ayudar-comprension-lectora-primaria.html` (11 enlaces a fichas)
   - `tecnicas-de-estudio-primaria.html` (5 enlaces a fichas)
   - `como-trabajar-ortografia-primaria.html` (9 enlaces a fichas)
   - `como-ayudar-matematicas-primaria.html` (2026-06-04, commit 9ca66b7, 18 enlaces a fichas de mates 1º-2º — primer artículo de mates; 3 pilares número/cálculo/problemas; enlaza a psicología por discalculia)
+  - `fichas-para-repasar-en-verano-primaria.html` (2026-07-03 — guía de temporada: qué repasar antes de cada curso (terminó 1º→prepara 2º … 6º→ESO), 15-20 min/mañana, reglas del repaso; enlaza los 10 índices estáticos de fichas por curso + tablas de 2º y división de 3º; portada `blog-img/verano.jpg` (Pexels, niño con tiza no identificable, cat. Verano naranja #fb923c); honesto con lo que falta: mates 4º "en crecimiento", 5º sin fichas propias)
   - `como-preparar-la-ebau-andalucia.html` (2026-06-15 — guía estratégica de Bachillerato: nota 60/40, dos fases Acceso/Admisión, ponderaciones, plan de preparación; enlaza a psicología por gestión de nervios; CTA a inscripción. Sin enlaces a fichas: no hay material de ese nivel. Datos estables; el detalle de asignaturas/fechas se consulta cada año en el Distrito Único Andaluz)
 
 ### Páginas de servicio
