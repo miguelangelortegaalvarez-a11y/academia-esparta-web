@@ -155,6 +155,8 @@ Refundición del 13/05/2026. Documentación completa en `DISENO.md`.
 
 **Páginas en paleta legacy** (verde claro `#0e9343`, pendiente migrar): `materiales.html`.
 
+**Firma de autoría (2026-07-03, commit `3521de5`):** línea `Diseño y desarrollo por Miguel Ángel Ortega Álvarez` bajo el copyright del footer (centrada, uppercase, `letter-spacing:.16em`, tenue `rgba(236,253,245,0.3)`, inline en el `<p class="footer-credit">`). En las **13 páginas premium** con footer. Marca de identidad común a todas las webs de Miguel (nace de `moma`). Detalle en memoria `reference_firma_autoria`.
+
 | Token | Valor | Uso |
 |---|---|---|
 | Fondo principal | `#064e3b` | Hero, secciones A |
