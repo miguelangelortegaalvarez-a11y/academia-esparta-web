@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Los números decimales · Redondear al entero y repaso · 4º Primaria</title>
+  <meta name="description" content="Redondear un número decimal al entero más próximo (regla del 5) y repaso de los números decimales — ficha 6 · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/numeros/los-numeros-decimales/ficha-6.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 12px; margin-bottom: 6px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 4px; }
+    .rec-ej { font-size: 12.5px; line-height: 1.4; }
+    .rec-ej b { font-weight: 800; }
+    .rec-fila { display: flex; align-items: center; gap: 18px; margin-top: 5px; flex-wrap: wrap; }
+
+    /* Número decimal escrito con partes señaladas */
+    .num-dec { display: inline-flex; align-items: flex-start; font-weight: 800; font-size: 24px; line-height: 1; }
+    .num-dec .parte { display: inline-flex; flex-direction: column; align-items: center; }
+    .num-dec .parte .et { font-size: 9px; font-weight: 700; color: #333; margin-top: 3px; letter-spacing: .2px; }
+    .num-dec .coma { padding: 0 1px; }
+
+    /* Tira de 10 (décimas) */
+    .tira-dec { display: inline-flex; border: 1.5px solid #000; border-radius: 4px; overflow: hidden; height: 28px; vertical-align: middle; }
+    .tira-dec .cd { width: 26px; border-right: 1.5px solid #000; }
+    .tira-dec .cd:last-child { border-right: none; }
+    .tira-dec .cd.on { background: #cfcfcf; }
+
+    /* Cuadrícula de 100 (10×10, centésimas) */
+    .cuad100 { display: inline-grid; grid-template-columns: repeat(10, 15px); grid-auto-rows: 15px; border: 1.5px solid #000; vertical-align: middle; }
+    .cuad100 .cc { width: 15px; height: 15px; border: 0.5px solid #aaa; }
+    .cuad100 .cc.on { background: #cfcfcf; }
+
+    /* Recta numérica decimal (SVG) */
+    .recta-svg { width: 100%; height: auto; }
+    .escribe-caja { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10px; font-weight: 600; }
+    .escribe-caja .cj { width: 52px; height: 24px; border: 1.5px solid #000; border-radius: 4px; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 4px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+    .ej-nota { font-weight: 600; font-size: 11.5px; color: #333; }
+
+    .fig-grid { display: flex; flex-wrap: wrap; gap: 7px 24px; }
+    .fig-item { display: flex; align-items: center; gap: 12px; }
+    .fig-item .letra-ej { font-size: 13px; font-weight: 700; }
+    .fig-item .cajita { width: 52px; height: 24px; border: 1.5px solid #000; border-radius: 4px; }
+
+    /* Completar + V/F */
+    .completar { display: flex; flex-direction: column; gap: 7px; }
+    .comp-item { font-size: 13.5px; font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .comp-item .h { display: inline-block; width: 40px; height: 22px; border-bottom: 1.5px solid #000; vertical-align: middle; }
+    .vf-lista { display: flex; flex-direction: column; gap: 6px; margin-top: 5px; }
+    .vf-item { display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 600; }
+    .vf-item .frase { flex: 1; }
+    .vf-item .frase b { font-weight: 800; }
+    .vf-item .opc { display: flex; gap: 8px; }
+    .vf-item .opc span { border: 1.5px solid #000; border-radius: 6px; width: 30px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+
+    /* Redondeo con flecha */
+    .red-fila { display: flex; flex-wrap: wrap; gap: 14px 32px; margin-top: 5px; }
+    .red-item { display: inline-flex; align-items: center; gap: 9px; font-size: 20px; font-weight: 800; }
+    .red-item .fl { font-size: 18px; }
+    .red-item .cj { width: 54px; height: 42px; border: 1.5px solid #000; border-radius: 4px; }
+    .rep-lista { display: flex; flex-direction: column; gap: 13px; margin-top: 5px; }
+    .rep-item { font-size: 14.5px; font-weight: 600; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .rep-item .cj { width: 58px; height: 33px; border: 1.5px solid #000; border-radius: 4px; }
+    .bloque-esp { margin-bottom: 10px; }
+    .comp-item .h { height: 24px; }
+
+    .footer { margin-top: 8px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 4º Primaria · Los números decimales</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">🎯 Redondear al entero y repaso</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA · REDONDEAR AL ENTERO MÁS PRÓXIMO</div>
+    <div class="rec-ej">Para redondear un decimal al <b>entero más próximo</b> miramos la <b>cifra de las décimas</b>. Si es <b>0, 1, 2, 3 o 4</b> → se queda el <b>mismo entero</b> (redondeo hacia abajo). Si es <b>5, 6, 7, 8 o 9</b> → <b>sube</b> al siguiente entero. Ejemplos: <b>3,7 → 4</b> (la décima 7 es ≥5, sube); <b>2,4 → 2</b> (la décima 4 es &lt;5, se queda). Puedes apoyarte en la recta: <b>3,7</b> está más cerca de 4 que de 3.</div>
+  </div>
+
+  <div class="ej-block bloque-esp">
+    <div class="ej-enunciado"><span class="num">1.</span> Redondea cada número al <b>entero más próximo</b>:</div>
+    <div class="red-fila">
+      <div class="red-item">3,7 <span class="fl">→</span> <span class="cj"></span></div>
+      <div class="red-item">2,4 <span class="fl">→</span> <span class="cj"></span></div>
+      <div class="red-item">6,5 <span class="fl">→</span> <span class="cj"></span></div>
+      <div class="red-item">8,2 <span class="fl">→</span> <span class="cj"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block bloque-esp">
+    <div class="ej-enunciado"><span class="num">2.</span> Redondea al entero más próximo (fíjate bien en la décima):</div>
+    <div class="red-fila">
+      <div class="red-item">5,9 <span class="fl">→</span> <span class="cj"></span></div>
+      <div class="red-item">4,3 <span class="fl">→</span> <span class="cj"></span></div>
+      <div class="red-item">7,8 <span class="fl">→</span> <span class="cj"></span></div>
+      <div class="red-item">1,5 <span class="fl">→</span> <span class="cj"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block bloque-esp">
+    <div class="ej-enunciado"><span class="num">3.</span> Repaso de los números decimales:</div>
+    <div class="rep-lista">
+      <div class="rep-item">a) Escribe con cifras «tres unidades y siete centésimas»: <span class="cj"></span></div>
+      <div class="rep-item">b) Descompón <b>4,6</b> = <span class="cj"></span> + <span class="cj"></span></div>
+      <div class="rep-item">c) ¿Cuántas centésimas es <b>1 décima</b>? <span class="cj"></span></div>
+      <div class="rep-item">d) Redondea <b>9,5</b> al entero: <span class="cj"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Compara y responde:</div>
+    <div class="completar">
+      <div class="comp-item">Escribe <b>&gt;</b>, <b>&lt;</b> o <b>=</b>:&nbsp;&nbsp; 0,8 <span class="h"></span> 0,80 &nbsp;·&nbsp; 2,5 <span class="h"></span> 2,45 &nbsp;·&nbsp; 1,9 <span class="h"></span> 2,1</div>
+    </div>
+    <div class="vf-lista" style="gap:10px; margin-top:8px;">
+      <div class="vf-item"><span class="frase"><b>2,4</b> redondeado al entero más próximo es <b>3</b>.</span><div class="opc"><span>V</span><span>F</span></div></div>
+      <div class="vf-item"><span class="frase"><b>0,5</b> y <b>0,50</b> valen lo mismo.</span><div class="opc"><span>V</span><span>F</span></div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
