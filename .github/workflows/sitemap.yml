@@ -1,11 +1,15 @@
 name: Regenerar sitemap.xml
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '**.html'
-      - '.github/workflows/sitemap.yml'
+  # Antes corría en cada push de .html → generaba un 2º commit que disparaba
+  # un 2º "pages build and deployment", duplicando las publicaciones de Pages
+  # y topando el límite de deploys de la cuenta (fallos "Deployment failed,
+  # try again later"). Ahora corre 1 vez al día (o a mano) → 1 deploy/día en
+  # vez de 1 por cada push. Las URLs nuevas entran al sitemap en la siguiente
+  # ejecución; a los buscadores no les afecta ese desfase.
+  schedule:
+    - cron: '0 5 * * *'   # 05:00 UTC (07:00 España en verano)
+  workflow_dispatch: {}   # botón "Run workflow" para forzarlo cuando haga falta
 
 permissions:
   contents: write
