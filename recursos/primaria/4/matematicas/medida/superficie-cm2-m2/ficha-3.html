@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calcular el área: cuadrados y rectángulos · 4º Primaria</title>
+  <meta name="description" content="Calcular el área de cuadrados y rectángulos aplicando la fórmula y hallar el lado que falta — ficha 3 de Superficie: cm² y m² · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/medida/superficie-cm2-m2/ficha-3.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 6px 13px; margin-bottom: 7px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 4px; }
+    .recuerda-idea { font-size: 13px; line-height: 1.32; margin-bottom: 2px; }
+    .recuerda-idea b { font-weight: 700; }
+    .rec-unidad { display: flex; align-items: center; gap: 12px; margin: 5px 0; }
+    .uno-cm2 { width: 30px; height: 30px; border: 2px solid #000; background: #cfcfcf; flex-shrink: 0; }
+    .unidades-fila { display: flex; gap: 8px; margin-top: 5px; }
+    .uni-caja { flex: 1; border: 1.5px solid #000; border-radius: 8px; padding: 4px 8px; font-size: 11.5px; font-weight: 600; line-height: 1.25; }
+    .uni-caja b { font-size: 13px; }
+
+    /* Cuadrícula de cuadrados-unidad (reusada de 3º superficie) */
+    .cuad { display: grid; gap: 0; width: max-content; }
+    .cuad .c { width: 22px; height: 22px; border: 1.4px solid #9a9a9a; background: #fff; }
+    .cuad .c.on { background: #cfcfcf; border: 1.5px solid #333; }
+    .cuad .c.hidden { border: none; background: transparent; }
+    .figs-fila { display: flex; gap: 26px; align-items: flex-end; flex-wrap: wrap; }
+    .fig-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .fig-label { font-size: 12px; font-weight: 700; }
+    .fig-resp { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 4px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.35; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Caja respuesta */
+    .caja { width: 46px; height: 30px; border: 1.6px solid #000; border-radius: 6px; display: inline-block; vertical-align: middle; }
+    .caja-sm { width: 40px; height: 27px; }
+
+    /* Elegir unidad */
+    .unidad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+    .unidad-item { display: flex; align-items: center; justify-content: space-between; border: 1.5px solid #000; border-radius: 8px; padding: 4px 11px; gap: 8px; }
+    .unidad-obj { font-size: 12.5px; font-weight: 600; }
+    .unidad-ops { display: flex; gap: 6px; }
+    .pill { border: 1.5px solid #000; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 700; }
+
+    /* V/F */
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-item { display: flex; align-items: center; justify-content: space-between; border: 1.5px solid #000; border-radius: 8px; padding: 4px 11px; gap: 8px; font-size: 12.5px; font-weight: 600; }
+    .vf-pill { display: flex; gap: 6px; }
+
+    .footer { margin-top: 7px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+
+    /* --- Extra ficha-3: fórmulas del área --- */
+    .rsvg { width: 140px; height: auto; }
+    .rect-fila { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-end; }
+    .rect-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .calc-linea { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+    .falta-lista { display: flex; flex-direction: column; gap: 6px; }
+    .falta-item { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; border: 1.5px solid #000; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; }
+    .falta-item .caja { margin: 0 3px; }
+    .formulas-fila { display: flex; gap: 8px; margin-top: 5px; }
+    .form-caja { flex: 1; border: 1.5px solid #000; border-radius: 8px; padding: 4px 8px; font-size: 12.5px; font-weight: 700; text-align: center; }
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; }
+    .calc-item { display: flex; align-items: center; justify-content: space-between; border: 1.5px solid #000; border-radius: 8px; padding: 4px 11px; gap: 8px; font-size: 12.5px; font-weight: 600; }
+    .calc-resp { display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .mas-area { display: flex; gap: 14px; align-items: center; }
+    .opcion { flex: 1; display: flex; align-items: center; justify-content: space-between; border: 1.5px solid #000; border-radius: 8px; padding: 5px 10px; gap: 6px; font-size: 12px; font-weight: 600; }
+    .opcion > span:first-child { white-space: nowrap; }
+    .vs { font-size: 13px; font-weight: 800; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 4º Primaria · Superficie: cm² y m²</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">📐 Calculo el área</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <div class="formulas-fila">
+      <div class="form-caja">Rectángulo:<br>A = base × altura</div>
+      <div class="form-caja">Cuadrado:<br>A = lado × lado</div>
+    </div>
+    <div class="recuerda-idea" style="margin-top:5px">Si conozco el <b>área</b> y <b>un lado</b>, hago la operación contraria: <b>divido</b>.</div>
+    <div class="recuerda-idea">Ejemplo: A = 24 cm² y la base es 6 cm → altura = <b>24 ÷ 6 = 4 cm</b>.</div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Calcula el área de estos rectángulos:</div>
+    <div class="rect-fila">
+      <div class="rect-item">
+        <svg class="rsvg" viewBox="0 0 170 110"><rect x="34" y="16" width="110" height="66" fill="#ededed" stroke="#000" stroke-width="2"/><text x="89" y="99" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700">8 cm</text><text x="20" y="49" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" transform="rotate(-90 20 49)">5 cm</text></svg>
+        <div class="calc-linea">a) A = <span class="caja caja-sm"></span> × <span class="caja caja-sm"></span> = <span class="caja caja-sm"></span> cm²</div>
+      </div>
+      <div class="rect-item">
+        <svg class="rsvg" viewBox="0 0 170 110"><rect x="34" y="8" width="124" height="79" fill="#ededed" stroke="#000" stroke-width="2"/><text x="96" y="99" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700">9 cm</text><text x="20" y="47" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" transform="rotate(-90 20 47)">6 cm</text></svg>
+        <div class="calc-linea">b) A = <span class="caja caja-sm"></span> × <span class="caja caja-sm"></span> = <span class="caja caja-sm"></span> cm²</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Calcula el área. Escribe la operación:</div>
+    <div class="calc-grid">
+      <div class="calc-item"><span>a) Rectángulo de base 10 cm y altura 4 cm</span><span class="calc-resp">A = <span class="caja caja-sm"></span> cm²</span></div>
+      <div class="calc-item"><span>b) Rectángulo de base 12 cm y altura 3 cm</span><span class="calc-resp">A = <span class="caja caja-sm"></span> cm²</span></div>
+      <div class="calc-item"><span>c) Cuadrado de lado 6 cm</span><span class="calc-resp">A = <span class="caja caja-sm"></span> cm²</span></div>
+      <div class="calc-item"><span>d) Cuadrado de lado 10 cm</span><span class="calc-resp">A = <span class="caja caja-sm"></span> cm²</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Halla el lado que falta (piensa en la operación contraria):</div>
+    <div class="falta-lista">
+      <div class="falta-item"><span>a) Un rectángulo tiene <b>24 cm²</b> de área y la base mide <b>6 cm</b>. Su altura es <span class="caja caja-sm"></span> cm.</span></div>
+      <div class="falta-item"><span>b) Un rectángulo tiene <b>30 cm²</b> de área y la base mide <b>5 cm</b>. Su altura es <span class="caja caja-sm"></span> cm.</span></div>
+      <div class="falta-item"><span>c) Un rectángulo tiene <b>36 cm²</b> de área y la altura mide <b>4 cm</b>. Su base es <span class="caja caja-sm"></span> cm.</span></div>
+      <div class="falta-item"><span>d) Un cuadrado tiene <b>49 cm²</b> de área. Su lado mide <span class="caja caja-sm"></span> cm.</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block" style="margin-bottom:0">
+    <div class="ej-enunciado"><span class="num">4.</span> ¿Cuál tiene <b>MÁS</b> área? Calcula las dos y rodea la mayor:</div>
+    <div class="mas-area">
+      <div class="opcion"><span>Cuadrado de lado 8 m</span><span class="calc-resp">A = <span class="caja caja-sm"></span> m²</span></div>
+      <span class="vs">o</span>
+      <div class="opcion"><span>Rectángulo de 7 m × 4 m</span><span class="calc-resp">A = <span class="caja caja-sm"></span> m²</span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
