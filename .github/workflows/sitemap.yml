@@ -22,36 +22,72 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          # Historia completa: hace falta para saber CUÁNDO se tocó por última
+          # vez cada página (el <lastmod> real). filter=blob:none trae commits
+          # y árbol sin los blobs históricos → clone ligero pese a los 2.300+
+          # commits del repo.
+          fetch-depth: 0
+          filter: blob:none
 
       - name: Generar sitemap.xml
         run: |
-          TODAY=$(date +%Y-%m-%d)
+          set -euo pipefail
+
+          # ── Fecha real de última modificación de cada fichero ──────────────
+          # Antes el <lastmod> era "hoy" para las 1.290 URLs → el sitemap
+          # cambiaba entero cada día y el bot generaba un commit diario de
+          # 1.290 líneas sin que hubiera cambiado ninguna página. Además le
+          # decía a Google que todo el sitio se actualiza a diario, lo cual es
+          # falso y le resta valor a la señal.
+          #
+          # git log recorre la historia de más reciente a más antigua, así que
+          # la PRIMERA vez que aparece una ruta es su último cambio.
+          git -c core.quotePath=false log --pretty=format:'@%ad' --date=short --name-only \
+            | awk -v OFS='\t' '
+                /^@/ { d = substr($0, 2); next }
+                NF   { if (!($0 in seen)) { seen[$0] = 1; print $0, d } }
+              ' > /tmp/lastmod.tsv
+
+          # Fallback para un fichero sin rastro en la historia (p. ej. tras un
+          # rename raro): la fecha del último commit del repo, NO la de hoy —
+          # así no se reintroduce el cambio diario.
+          FALLBACK=$(git log -1 --format=%ad --date=short)
+
+          # ── Lista de páginas a incluir ────────────────────────────────────
+          # Columnas: FICHERO <TAB> URL <TAB> PRIORIDAD <TAB> CHANGEFREQ
+          # (la raíz "" se sirve desde index.html, de ahí las dos columnas)
+          {
+            printf 'index.html\t\t1.0\tmonthly\n'
+            for p in quienes-somos.html logopedia.html psicologia.html materiales.html; do
+              printf '%s\t%s\t0.8\tmonthly\n' "$p" "$p"
+            done
+            find recursos -name "*.html" 2>/dev/null | grep -v "ortografia-carla" | sort \
+              | awk -v OFS='\t' '{ print $0, $0, "0.5", "yearly" }'
+          } > /tmp/paginas.tsv
+
+          # ── Montaje del XML ───────────────────────────────────────────────
+          # Una sola pasada de awk: primero carga el mapa de fechas, luego
+          # emite una <url> por página. Sin arrays de bash (no todas las
+          # versiones los tienen) y sin un subproceso por fichero.
           {
             echo '<?xml version="1.0" encoding="UTF-8"?>'
             echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-
-            for url in "" "quienes-somos.html" "logopedia.html" "psicologia.html" "materiales.html"; do
-              PRIO="0.8"
-              [ -z "$url" ] && PRIO="1.0"
-              echo "  <url>"
-              echo "    <loc>https://academiaesparta.es/${url}</loc>"
-              echo "    <lastmod>${TODAY}</lastmod>"
-              echo "    <changefreq>monthly</changefreq>"
-              echo "    <priority>${PRIO}</priority>"
-              echo "  </url>"
-            done
-
-            find recursos -name "*.html" 2>/dev/null | grep -v "ortografia-carla" | sort | while read f; do
-              echo "  <url>"
-              echo "    <loc>https://academiaesparta.es/${f}</loc>"
-              echo "    <lastmod>${TODAY}</lastmod>"
-              echo "    <changefreq>yearly</changefreq>"
-              echo "    <priority>0.5</priority>"
-              echo "  </url>"
-            done
-
+            awk -F'\t' -v fallback="$FALLBACK" '
+              NR == FNR { lm[$1] = $2; next }
+              {
+                fecha = ($1 in lm) ? lm[$1] : fallback
+                printf "  <url>\n"
+                printf "    <loc>https://academiaesparta.es/%s</loc>\n", $2
+                printf "    <lastmod>%s</lastmod>\n", fecha
+                printf "    <changefreq>%s</changefreq>\n", $4
+                printf "    <priority>%s</priority>\n", $3
+                printf "  </url>\n"
+              }
+            ' /tmp/lastmod.tsv /tmp/paginas.tsv
             echo '</urlset>'
           } > sitemap.xml
+
+          echo "URLs en el sitemap: $(grep -c '<url>' sitemap.xml)"
 
       - name: Commit y push si hay cambios
         run: |
