@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gr&aacute;ficos de sectores &middot; Estad&iacute;stica &middot; 4&ordm; Primaria</title>
+  <meta name="description" content="Qu&eacute; es un gr&aacute;fico de sectores &mdash; ficha 1 de Gr&aacute;ficos de sectores &middot; Matem&aacute;ticas 4&ordm; Primaria. Gratis y lista para imprimir en A4 &middot; Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-sectores/ficha-1.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* Palotes de recuento (reusable) */
+    .recuento { display: flex; gap: 5px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .palote5 { width: 28px; height: 24px; }
+    .palote1 { width: 8px; height: 24px; }
+    .palote5 line, .palote1 line { stroke: #000; stroke-width: 2.5; stroke-linecap: round; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 12px; margin-bottom: 7px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 3px; }
+    .recuerda-idea { font-size: 12.5px; line-height: 1.3; margin-bottom: 4px; }
+    .recuerda-idea b { font-weight: 700; }
+    .recuerda-ejemplo { display: flex; justify-content: center; gap: 30px; align-items: center; }
+    .rec-item { display: flex; align-items: center; gap: 6px; }
+    .rec-num { font-size: 15px; font-weight: 800; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla de frecuencia */
+    .e1-wrap { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+    .mosaico { border: 2px solid #000; border-radius: 10px; padding: 6px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; justify-items: center; align-items: center; }
+    .mosaico svg { width: 31px; height: 31px; }
+    .tabla-frec { border-collapse: collapse; font-size: 12.5px; }
+    .tabla-frec th, .tabla-frec td { border: 1.5px solid #000; padding: 3px 8px; text-align: center; font-weight: 700; }
+    .tabla-frec th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-frec td svg.icono { width: 23px; height: 23px; vertical-align: middle; }
+    .tabla-frec .recuento-hueco { min-width: 120px; height: 31px; }
+    .tabla-frec .num-hueco { min-width: 46px; height: 25px; }
+    .tabla-frec .fila-total td { background: #ececec; }
+    .tabla-frec .fila-total td:first-child { text-align: right; font-family: sans-serif; font-size: 11.5px; }
+    .centrar { display: flex; justify-content: center; }
+
+    /* Preguntas */
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco-grande { display: inline-block; min-width: 105px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-op { display: inline-block; min-width: 145px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+
+    /* V/F */
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  
+    /* --- Graficos de sectores (4º) --- */
+    .tarta { width: 132px; height: auto; display: block; }
+    .tarta.g { width: 196px; }
+    .sec-fila { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .sec-item { text-align: center; }
+    .sec-item .et { font-family: sans-serif; font-size: 11px; font-weight: 700; margin-bottom: 2px; }
+    .sec-item .ln { border-bottom: 1.5px solid #000; height: 18px; width: 110px; margin: 5px auto 0; }
+    .leyenda-s { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; font-family: sans-serif; font-size: 11px; margin-top: 3px; }
+    .li { display: inline-flex; align-items: center; gap: 4px; }
+    .cuadro { display: inline-block; width: 12px; height: 12px; border: 1.5px solid #000; }
+    .tabla-g { border-collapse: collapse; font-size: 12px; margin: 0 auto; }
+    .tabla-g th, .tabla-g td { border: 1.5px solid #000; padding: 5px 10px; text-align: center; font-weight: 700; }
+    .tabla-g th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-g .lbl { background: #f3f3f3; font-family: sans-serif; font-size: 11px; }
+    .tabla-g .hueco { min-width: 58px; height: 36px; }
+    .preg-lista { display: flex; flex-direction: column; gap: 8px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco { display: inline-block; min-width: 104px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco.ancho { min-width: 150px; }
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+    .colorear { display: flex; gap: 22px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+
+    /* --- Ajuste de esta ficha --- */
+    .tarta.g { width: 152px; }
+  </style>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Academia Esparta">
+  <meta property="og:title" content="¿Qué es un gráfico de sectores? · Ficha 1 de Gráficos de sectores · Matemáticas 4º Primaria">
+  <meta property="og:description" content="Qué es un gráfico de sectores — ficha 1 de Gráficos de sectores · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.">
+  <meta property="og:url" content="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-sectores/ficha-1.html">
+  <meta property="og:image" content="https://academiaesparta.es/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LearningResource","name":"¿Qué es un gráfico de sectores? · Ficha 1","description":"Qué es un gráfico de sectores — ficha 1 de Gráficos de sectores · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.","url":"https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-sectores/ficha-1.html","learningResourceType":"worksheet","educationalLevel":"4º de Primaria","about":"Estadística · Gráficos de sectores","inLanguage":"es","isAccessibleForFree":true,"isFamilyFriendly":true,"educationalUse":"assignment","publisher":{"@type":"EducationalOrganization","name":"Academia Esparta","url":"https://academiaesparta.es/"},"typicalAgeRange":"9-10"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://academiaesparta.es/"},{"@type":"ListItem","position":2,"name":"Materiales","item":"https://academiaesparta.es/materiales.html"},{"@type":"ListItem","position":3,"name":"Fichas de Matemáticas de 4º de Primaria","item":"https://academiaesparta.es/recursos/primaria/4/matematicas/"},{"@type":"ListItem","position":4,"name":"¿Qué es un gráfico de sectores? · Ficha 1","item":"https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-sectores/ficha-1.html"}]}]}</script>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">&larr; Volver</a>
+    <button class="print-btn" onclick="window.print()">&#128424; Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matem&aacute;ticas &middot; 4&ordm; Primaria &middot; Estad&iacute;stica &middot; Gr&aacute;ficos de sectores</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <h1 class="tipo-badge">&#128202; &iquest;Qu&eacute; es un gr&aacute;fico de sectores?</h1>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">&#128161; RECUERDA</div>
+    <div class="recuerda-idea">En un <b>gr&aacute;fico de sectores</b>, el <b>c&iacute;rculo entero es el total</b>: todos los datos juntos. Cada <b>porci&oacute;n</b> es una parte de ese total y se nombra con una <b>fracci&oacute;n</b>. Cuanto <b>mayor es la porci&oacute;n</b>, mayor es la cantidad que representa. Todas las porciones juntas suman <b>un c&iacute;rculo entero</b>.</div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Observa los dos gr&aacute;ficos de sectores y <strong>responde</strong> a las preguntas:</div>
+    <div class="sec-fila">
+    <div class="sec-item"><div class="et">Deporte favorito</div><svg class="tarta g" viewBox="0 0 120 120"><path d="M60,60 L60,14 A46,46 0 0 1 60,106 Z" fill="#ffffff" stroke="#000" stroke-width="2"/><text x="88.52" y="64" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#000">1/2</text><path d="M60,60 L60,106 A46,46 0 0 1 14,60 Z" fill="#cfcfcf" stroke="#000" stroke-width="2"/><text x="39.83" y="84.17" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#000">1/4</text><path d="M60,60 L14,60 A46,46 0 0 1 60,14 Z" fill="#8f8f8f" stroke="#000" stroke-width="2"/><text x="39.83" y="43.83" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#000">1/4</text></svg><div class="leyenda-s"><span class="li"><span class="cuadro" style="background:#ffffff"></span>Fútbol</span><span class="li"><span class="cuadro" style="background:#cfcfcf"></span>Baloncesto</span><span class="li"><span class="cuadro" style="background:#8f8f8f"></span>Natación</span></div></div>
+    <div class="sec-item"><div class="et">Mascota favorita</div><svg class="tarta g" viewBox="0 0 120 120"><path d="M60,60 L60,14 A46,46 0 0 1 60,106 Z" fill="#ffffff" stroke="#000" stroke-width="2"/><text x="88.52" y="64" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#000">1/2</text><path d="M60,60 L60,106 A46,46 0 0 1 20.16,37 Z" fill="#cfcfcf" stroke="#000" stroke-width="2"/><text x="35.3" y="78.26" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#000">1/3</text><path d="M60,60 L20.16,37 A46,46 0 0 1 60,14 Z" fill="#8f8f8f" stroke="#000" stroke-width="2"/><text x="45.74" y="39.3" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#000">1/6</text></svg><div class="leyenda-s"><span class="li"><span class="cuadro" style="background:#ffffff"></span>Perro</span><span class="li"><span class="cuadro" style="background:#cfcfcf"></span>Gato</span><span class="li"><span class="cuadro" style="background:#8f8f8f"></span>Pez</span></div></div>
+    </div>
+    <div class="preg-lista" style="margin-top:7px">
+      <div class="preg-fila">a) &iquest;Qu&eacute; deporte ocupa <strong>la mitad</strong> del c&iacute;rculo? <span class="preg-hueco"></span></div>
+      <div class="preg-fila">b) &iquest;Qu&eacute; deportes ocupan <strong>la misma porci&oacute;n</strong>? <span class="preg-hueco ancho"></span></div>
+      <div class="preg-fila">c) &iquest;Qu&eacute; mascota prefieren <strong>menos</strong> ni&ntilde;os? <span class="preg-hueco"></span></div>
+      <div class="preg-fila">d) &iquest;Cu&aacute;ntas porciones como la del <strong>pez</strong> llenan el c&iacute;rculo? <span class="preg-hueco"></span></div>
+    </div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Verdadero o falso</strong>. Rodea la respuesta:</div>
+    <div class="vf-lista">
+      <div class="vf-fila"><span>El <strong>baloncesto</strong> y la <strong>nataci&oacute;n</strong> juntos ocupan la mitad del c&iacute;rculo.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+      <div class="vf-fila"><span>El <strong>perro</strong> ocupa m&aacute;s porci&oacute;n que el gato.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+      <div class="vf-fila"><span>La nataci&oacute;n ocupa <strong>m&aacute;s</strong> del c&iacute;rculo que el f&uacute;tbol.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+    </div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Colorea</strong> en cada c&iacute;rculo la fracci&oacute;n que se indica:</div>
+    <div class="colorear">
+      <div class="sec-item"><div class="et">Colorea 3/4</div><svg class="tarta" viewBox="0 0 120 120"><path d="M60,60 L60,14 A46,46 0 0 1 106,60 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L106,60 A46,46 0 0 1 60,106 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L60,106 A46,46 0 0 1 14,60 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L14,60 A46,46 0 0 1 60,14 Z" fill="#fff" stroke="#000" stroke-width="2"/></svg></div>
+      <div class="sec-item"><div class="et">Colorea 5/8</div><svg class="tarta" viewBox="0 0 120 120"><path d="M60,60 L60,14 A46,46 0 0 1 92.53,27.47 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L92.53,27.47 A46,46 0 0 1 106,60 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L106,60 A46,46 0 0 1 92.53,92.53 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L92.53,92.53 A46,46 0 0 1 60,106 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L60,106 A46,46 0 0 1 27.47,92.53 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L27.47,92.53 A46,46 0 0 1 14,60 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L14,60 A46,46 0 0 1 27.47,27.47 Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M60,60 L27.47,27.47 A46,46 0 0 1 60,14 Z" fill="#fff" stroke="#000" stroke-width="2"/></svg></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta &middot; academiaesparta.es</span>
+    <span class="footer-msg">&iexcl;El c&iacute;rculo entero es todo, y cada porci&oacute;n una parte!</span>
+  </div>
+</body>
+</html>
