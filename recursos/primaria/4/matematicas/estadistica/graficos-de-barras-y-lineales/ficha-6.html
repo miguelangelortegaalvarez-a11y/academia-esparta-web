@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gr&aacute;ficos de barras y lineales &middot; Estad&iacute;stica &middot; 4&ordm; Primaria</title>
+  <meta name="description" content="Repaso de gr&aacute;ficos de barras dobles y de dos l&iacute;neas &mdash; ficha 6 de Gr&aacute;ficos de barras y lineales &middot; Matem&aacute;ticas 4&ordm; Primaria. Gratis y lista para imprimir en A4 &middot; Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-barras-y-lineales/ficha-6.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* Palotes de recuento (reusable) */
+    .recuento { display: flex; gap: 5px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .palote5 { width: 28px; height: 24px; }
+    .palote1 { width: 8px; height: 24px; }
+    .palote5 line, .palote1 line { stroke: #000; stroke-width: 2.5; stroke-linecap: round; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 12px; margin-bottom: 7px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 3px; }
+    .recuerda-idea { font-size: 12.5px; line-height: 1.3; margin-bottom: 4px; }
+    .recuerda-idea b { font-weight: 700; }
+    .recuerda-ejemplo { display: flex; justify-content: center; gap: 30px; align-items: center; }
+    .rec-item { display: flex; align-items: center; gap: 6px; }
+    .rec-num { font-size: 15px; font-weight: 800; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla de frecuencia */
+    .e1-wrap { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+    .mosaico { border: 2px solid #000; border-radius: 10px; padding: 6px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; justify-items: center; align-items: center; }
+    .mosaico svg { width: 31px; height: 31px; }
+    .tabla-frec { border-collapse: collapse; font-size: 12.5px; }
+    .tabla-frec th, .tabla-frec td { border: 1.5px solid #000; padding: 3px 8px; text-align: center; font-weight: 700; }
+    .tabla-frec th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-frec td svg.icono { width: 23px; height: 23px; vertical-align: middle; }
+    .tabla-frec .recuento-hueco { min-width: 120px; height: 31px; }
+    .tabla-frec .num-hueco { min-width: 46px; height: 25px; }
+    .tabla-frec .fila-total td { background: #ececec; }
+    .tabla-frec .fila-total td:first-child { text-align: right; font-family: sans-serif; font-size: 11.5px; }
+    .centrar { display: flex; justify-content: center; }
+
+    /* Preguntas */
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco-grande { display: inline-block; min-width: 105px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-op { display: inline-block; min-width: 145px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+
+    /* V/F */
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  
+    /* --- Graficos de barras dobles y de dos lineas (4º) --- */
+    .grafico { width: 100%; max-width: 330px; height: auto; display: block; margin: 0 auto; }
+    .grafico-mini { width: 168px; height: auto; display: block; margin: 0 auto; }
+    .grafico-titulo { font-family: sans-serif; font-size: 11px; font-weight: 700; text-align: center; margin-bottom: 1px; }
+    .g-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .tabla-g { border-collapse: collapse; font-size: 12px; margin: 0 auto; }
+    .tabla-g th, .tabla-g td { border: 1.5px solid #000; padding: 3px 8px; text-align: center; font-weight: 700; }
+    .tabla-g th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-g .lbl { background: #f3f3f3; font-family: sans-serif; font-size: 11px; }
+    .tabla-g .hueco { min-width: 46px; height: 30px; }
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco { display: inline-block; min-width: 104px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco.ancho { min-width: 150px; }
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+    .escala-op { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 3px; }
+    .op-pill { border: 2px solid #000; border-radius: 999px; padding: 2px 14px; font-size: 12.5px; font-weight: 700; }
+
+    /* --- Ajuste de esta ficha (lleva DOS graficos) --- */
+    .grafico { max-width: 288px; }
+    .tabla-g .hueco { height: 26px; }
+    .tabla-g th, .tabla-g td { padding: 2px 7px; }
+  </style>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Academia Esparta">
+  <meta property="og:title" content="Repaso · Ficha 6 de Gráficos de barras y lineales · Matemáticas 4º Primaria">
+  <meta property="og:description" content="Repaso de gráficos de barras dobles y de dos líneas — ficha 6 de Gráficos de barras y lineales · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.">
+  <meta property="og:url" content="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-barras-y-lineales/ficha-6.html">
+  <meta property="og:image" content="https://academiaesparta.es/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LearningResource","name":"Repaso · Ficha 6","description":"Repaso de gráficos de barras dobles y de dos líneas — ficha 6 de Gráficos de barras y lineales · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.","url":"https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-barras-y-lineales/ficha-6.html","learningResourceType":"worksheet","educationalLevel":"4º de Primaria","about":"Estadística · Gráficos de barras y lineales","inLanguage":"es","isAccessibleForFree":true,"isFamilyFriendly":true,"educationalUse":"assignment","publisher":{"@type":"EducationalOrganization","name":"Academia Esparta","url":"https://academiaesparta.es/"},"typicalAgeRange":"9-10"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://academiaesparta.es/"},{"@type":"ListItem","position":2,"name":"Materiales","item":"https://academiaesparta.es/materiales.html"},{"@type":"ListItem","position":3,"name":"Fichas de Matemáticas de 4º de Primaria","item":"https://academiaesparta.es/recursos/primaria/4/matematicas/"},{"@type":"ListItem","position":4,"name":"Repaso · Ficha 6","item":"https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-barras-y-lineales/ficha-6.html"}]}]}</script>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">&larr; Volver</a>
+    <button class="print-btn" onclick="window.print()">&#128424; Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matem&aacute;ticas &middot; 4&ordm; Primaria &middot; Estad&iacute;stica &middot; Gr&aacute;ficos de barras y lineales</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <h1 class="tipo-badge">&#128202; Repaso</h1>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Barras dobles.</strong> Lee el gr&aacute;fico y <strong>completa la tabla</strong>:</div>
+    <div class="g-wrap"><div class="grafico-titulo">Deporte favorito</div><svg class="grafico" viewBox="0 0 320 218"><line x1="40" y1="150" x2="310" y2="150" stroke="#bbb" stroke-width="1"/><line x1="40" y1="130" x2="310" y2="130" stroke="#bbb" stroke-width="1"/><line x1="40" y1="110" x2="310" y2="110" stroke="#bbb" stroke-width="1"/><line x1="40" y1="90" x2="310" y2="90" stroke="#bbb" stroke-width="1"/><line x1="40" y1="70" x2="310" y2="70" stroke="#bbb" stroke-width="1"/><line x1="40" y1="50" x2="310" y2="50" stroke="#bbb" stroke-width="1"/><line x1="40" y1="30" x2="310" y2="30" stroke="#bbb" stroke-width="1"/><line x1="40" y1="10" x2="310" y2="10" stroke="#bbb" stroke-width="1"/><rect x="67.7" y="10" width="26" height="160" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="97.7" y="50" width="26" height="120" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="95.7" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">Fútbol</text><rect x="151" y="70" width="26" height="100" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="181" y="30" width="26" height="140" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="179" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">Baloncesto</text><rect x="234.3" y="90" width="26" height="80" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="264.3" y="130" width="26" height="40" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="262.3" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">Natación</text><line x1="40" y1="10" x2="40" y2="170" stroke="#000" stroke-width="2"/><line x1="40" y1="170" x2="310" y2="170" stroke="#000" stroke-width="2"/><text x="32" y="174" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">0</text><text x="32" y="154" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">1</text><text x="32" y="134" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">2</text><text x="32" y="114" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">3</text><text x="32" y="94" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">4</text><text x="32" y="74" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">5</text><text x="32" y="54" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">6</text><text x="32" y="34" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">7</text><text x="32" y="14" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">8</text><rect x="76" y="199" width="16" height="11" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><text x="98" y="208" font-family="sans-serif" font-size="11" fill="#000">Chicos</text><rect x="188" y="199" width="16" height="11" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="210" y="208" font-family="sans-serif" font-size="11" fill="#000">Chicas</text></svg><table class="tabla-g"><tr><th></th><th>Fútbol</th><th>Baloncesto</th><th>Natación</th></tr><tr><td class="lbl">Chicos</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr><tr><td class="lbl">Chicas</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr></table></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Dos l&iacute;neas.</strong> Cada cuadradito vale <strong>10</strong>. <strong>Responde</strong>:</div>
+    <div class="g-wrap"><div class="grafico-titulo">Comidas del mes</div><svg class="grafico" viewBox="0 0 320 218"><line x1="40" y1="150" x2="310" y2="150" stroke="#bbb" stroke-width="1"/><line x1="40" y1="130" x2="310" y2="130" stroke="#bbb" stroke-width="1"/><line x1="40" y1="110" x2="310" y2="110" stroke="#bbb" stroke-width="1"/><line x1="40" y1="90" x2="310" y2="90" stroke="#bbb" stroke-width="1"/><line x1="40" y1="70" x2="310" y2="70" stroke="#bbb" stroke-width="1"/><line x1="40" y1="50" x2="310" y2="50" stroke="#bbb" stroke-width="1"/><line x1="70" y1="50" x2="70" y2="170" stroke="#e2e2e2" stroke-width="1"/><line x1="143.3" y1="50" x2="143.3" y2="170" stroke="#e2e2e2" stroke-width="1"/><line x1="216.7" y1="50" x2="216.7" y2="170" stroke="#e2e2e2" stroke-width="1"/><line x1="290" y1="50" x2="290" y2="170" stroke="#e2e2e2" stroke-width="1"/><polyline points="70,110 143.3,70 216.7,90 290,50" fill="none" stroke="#000" stroke-width="2.5"/><polyline points="70,70 143.3,130 216.7,50 290,110" fill="none" stroke="#000" stroke-width="2.5" stroke-dasharray="6,4"/><circle cx="70" cy="110" r="4.5" fill="#fff" stroke="#000" stroke-width="2"/><circle cx="143.3" cy="70" r="4.5" fill="#fff" stroke="#000" stroke-width="2"/><circle cx="216.7" cy="90" r="4.5" fill="#fff" stroke="#000" stroke-width="2"/><circle cx="290" cy="50" r="4.5" fill="#fff" stroke="#000" stroke-width="2"/><rect x="65.5" y="65.5" width="9" height="9" fill="#8f8f8f" stroke="#000" stroke-width="2"/><rect x="138.8" y="125.5" width="9" height="9" fill="#8f8f8f" stroke="#000" stroke-width="2"/><rect x="212.2" y="45.5" width="9" height="9" fill="#8f8f8f" stroke="#000" stroke-width="2"/><rect x="285.5" y="105.5" width="9" height="9" fill="#8f8f8f" stroke="#000" stroke-width="2"/><text x="70" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">1ª sem</text><text x="143.3" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">2ª sem</text><text x="216.7" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">3ª sem</text><text x="290" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">4ª sem</text><line x1="40" y1="50" x2="40" y2="170" stroke="#000" stroke-width="2"/><line x1="40" y1="170" x2="310" y2="170" stroke="#000" stroke-width="2"/><text x="32" y="174" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">0</text><text x="32" y="154" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">10</text><text x="32" y="134" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">20</text><text x="32" y="114" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">30</text><text x="32" y="94" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">40</text><text x="32" y="74" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">50</text><text x="32" y="54" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">60</text><line x1="72" y1="207" x2="100" y2="207" stroke="#000" stroke-width="2.5"/><circle cx="86" cy="207" r="4" fill="#fff" stroke="#000" stroke-width="2"/><text x="108" y="208" font-family="sans-serif" font-size="11" fill="#000">Comedor</text><line x1="188" y1="207" x2="216" y2="207" stroke="#000" stroke-width="2.5" stroke-dasharray="6,4"/><rect x="197" y="202" width="9" height="9" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="224" y="208" font-family="sans-serif" font-size="11" fill="#000">Casa</text></svg></div>
+    <div class="preg-lista">
+      <div class="preg-fila">a) &iquest;Qu&eacute; semana se comi&oacute; <strong>m&aacute;s veces en el comedor</strong>? <span class="preg-hueco ancho"></span></div>
+      <div class="preg-fila">b) &iquest;Qu&eacute; semana se comi&oacute; <strong>m&aacute;s veces en casa</strong>? <span class="preg-hueco ancho"></span></div>
+      <div class="preg-fila">c) &iquest;En qu&eacute; semanas se comi&oacute; <strong>m&aacute;s en casa</strong> que en el comedor? <span class="preg-hueco ancho"></span></div>
+    </div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Verdadero o falso</strong>. Rodea la respuesta:</div>
+    <div class="vf-lista">
+      <div class="vf-fila"><span>En un gr&aacute;fico de barras dobles, la <strong>leyenda</strong> dice qu&eacute; grupo es cada barra.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+      <div class="vf-fila"><span>Si cada cuadradito vale <strong>10</strong>, una barra de 4 cuadraditos vale 14.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta &middot; academiaesparta.es</span>
+    <span class="footer-msg">&iexcl;Ya sabes comparar dos grupos de un vistazo!</span>
+  </div>
+</body>
+</html>

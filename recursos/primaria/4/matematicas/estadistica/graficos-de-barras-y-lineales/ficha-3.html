@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gr&aacute;ficos de barras y lineales &middot; Estad&iacute;stica &middot; 4&ordm; Primaria</title>
+  <meta name="description" content="Gr&aacute;ficos con escalas mayores &mdash; ficha 3 de Gr&aacute;ficos de barras y lineales &middot; Matem&aacute;ticas 4&ordm; Primaria. Gratis y lista para imprimir en A4 &middot; Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-barras-y-lineales/ficha-3.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* Palotes de recuento (reusable) */
+    .recuento { display: flex; gap: 5px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .palote5 { width: 28px; height: 24px; }
+    .palote1 { width: 8px; height: 24px; }
+    .palote5 line, .palote1 line { stroke: #000; stroke-width: 2.5; stroke-linecap: round; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 12px; margin-bottom: 7px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 3px; }
+    .recuerda-idea { font-size: 12.5px; line-height: 1.3; margin-bottom: 4px; }
+    .recuerda-idea b { font-weight: 700; }
+    .recuerda-ejemplo { display: flex; justify-content: center; gap: 30px; align-items: center; }
+    .rec-item { display: flex; align-items: center; gap: 6px; }
+    .rec-num { font-size: 15px; font-weight: 800; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla de frecuencia */
+    .e1-wrap { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+    .mosaico { border: 2px solid #000; border-radius: 10px; padding: 6px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; justify-items: center; align-items: center; }
+    .mosaico svg { width: 31px; height: 31px; }
+    .tabla-frec { border-collapse: collapse; font-size: 12.5px; }
+    .tabla-frec th, .tabla-frec td { border: 1.5px solid #000; padding: 3px 8px; text-align: center; font-weight: 700; }
+    .tabla-frec th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-frec td svg.icono { width: 23px; height: 23px; vertical-align: middle; }
+    .tabla-frec .recuento-hueco { min-width: 120px; height: 31px; }
+    .tabla-frec .num-hueco { min-width: 46px; height: 25px; }
+    .tabla-frec .fila-total td { background: #ececec; }
+    .tabla-frec .fila-total td:first-child { text-align: right; font-family: sans-serif; font-size: 11.5px; }
+    .centrar { display: flex; justify-content: center; }
+
+    /* Preguntas */
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco-grande { display: inline-block; min-width: 105px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-op { display: inline-block; min-width: 145px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+
+    /* V/F */
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  
+    /* --- Graficos de barras dobles y de dos lineas (4º) --- */
+    .grafico { width: 100%; max-width: 330px; height: auto; display: block; margin: 0 auto; }
+    .grafico-mini { width: 168px; height: auto; display: block; margin: 0 auto; }
+    .grafico-titulo { font-family: sans-serif; font-size: 11px; font-weight: 700; text-align: center; margin-bottom: 1px; }
+    .g-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .tabla-g { border-collapse: collapse; font-size: 12px; margin: 0 auto; }
+    .tabla-g th, .tabla-g td { border: 1.5px solid #000; padding: 3px 8px; text-align: center; font-weight: 700; }
+    .tabla-g th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-g .lbl { background: #f3f3f3; font-family: sans-serif; font-size: 11px; }
+    .tabla-g .hueco { min-width: 46px; height: 30px; }
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco { display: inline-block; min-width: 104px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco.ancho { min-width: 150px; }
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+    .escala-op { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 3px; }
+    .op-pill { border: 2px solid #000; border-radius: 999px; padding: 2px 14px; font-size: 12.5px; font-weight: 700; }
+
+    /* --- Ajuste de esta ficha (lleva DOS graficos) --- */
+    .grafico { max-width: 272px; }
+    .tabla-g .hueco { height: 26px; }
+    .tabla-g th, .tabla-g td { padding: 2px 7px; }
+  </style>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Academia Esparta">
+  <meta property="og:title" content="Gráficos con escalas mayores · Ficha 3 de Gráficos de barras y lineales · Matemáticas 4º Primaria">
+  <meta property="og:description" content="Gráficos con escalas mayores — ficha 3 de Gráficos de barras y lineales · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.">
+  <meta property="og:url" content="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-barras-y-lineales/ficha-3.html">
+  <meta property="og:image" content="https://academiaesparta.es/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LearningResource","name":"Gráficos con escalas mayores · Ficha 3","description":"Gráficos con escalas mayores — ficha 3 de Gráficos de barras y lineales · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.","url":"https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-barras-y-lineales/ficha-3.html","learningResourceType":"worksheet","educationalLevel":"4º de Primaria","about":"Estadística · Gráficos de barras y lineales","inLanguage":"es","isAccessibleForFree":true,"isFamilyFriendly":true,"educationalUse":"assignment","publisher":{"@type":"EducationalOrganization","name":"Academia Esparta","url":"https://academiaesparta.es/"},"typicalAgeRange":"9-10"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://academiaesparta.es/"},{"@type":"ListItem","position":2,"name":"Materiales","item":"https://academiaesparta.es/materiales.html"},{"@type":"ListItem","position":3,"name":"Fichas de Matemáticas de 4º de Primaria","item":"https://academiaesparta.es/recursos/primaria/4/matematicas/"},{"@type":"ListItem","position":4,"name":"Gráficos con escalas mayores · Ficha 3","item":"https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/graficos-de-barras-y-lineales/ficha-3.html"}]}]}</script>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">&larr; Volver</a>
+    <button class="print-btn" onclick="window.print()">&#128424; Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matem&aacute;ticas &middot; 4&ordm; Primaria &middot; Estad&iacute;stica &middot; Gr&aacute;ficos de barras y lineales</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <h1 class="tipo-badge">&#128202; Gr&aacute;ficos con escalas mayores</h1>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">&#128161; RECUERDA</div>
+    <div class="recuerda-idea">Cuando los n&uacute;meros son <b>grandes</b>, cada cuadradito no puede valer 1: se usa una <b>escala mayor</b> y vale <b>5, 10 o m&aacute;s</b>. Antes de leer un gr&aacute;fico, <b>mira siempre el eje</b>.</div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Cada cuadradito vale <strong>5</strong>. Lee el gr&aacute;fico y <strong>completa la tabla</strong>:</div>
+    <div class="g-wrap"><div class="grafico-titulo">Libros leídos por trimestre</div><svg class="grafico" viewBox="0 0 320 218"><line x1="40" y1="150" x2="310" y2="150" stroke="#bbb" stroke-width="1"/><line x1="40" y1="130" x2="310" y2="130" stroke="#bbb" stroke-width="1"/><line x1="40" y1="110" x2="310" y2="110" stroke="#bbb" stroke-width="1"/><line x1="40" y1="90" x2="310" y2="90" stroke="#bbb" stroke-width="1"/><line x1="40" y1="70" x2="310" y2="70" stroke="#bbb" stroke-width="1"/><line x1="40" y1="50" x2="310" y2="50" stroke="#bbb" stroke-width="1"/><line x1="40" y1="30" x2="310" y2="30" stroke="#bbb" stroke-width="1"/><line x1="40" y1="10" x2="310" y2="10" stroke="#bbb" stroke-width="1"/><rect x="67.7" y="70" width="26" height="100" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="97.7" y="50" width="26" height="120" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="95.7" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">1er tri</text><rect x="151" y="10" width="26" height="160" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="181" y="90" width="26" height="80" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="179" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">2º tri</text><rect x="234.3" y="50" width="26" height="120" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="264.3" y="30" width="26" height="140" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="262.3" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">3er tri</text><line x1="40" y1="10" x2="40" y2="170" stroke="#000" stroke-width="2"/><line x1="40" y1="170" x2="310" y2="170" stroke="#000" stroke-width="2"/><text x="32" y="174" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">0</text><text x="32" y="154" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">5</text><text x="32" y="134" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">10</text><text x="32" y="114" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">15</text><text x="32" y="94" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">20</text><text x="32" y="74" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">25</text><text x="32" y="54" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">30</text><text x="32" y="34" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">35</text><text x="32" y="14" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">40</text><rect x="76" y="199" width="16" height="11" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><text x="98" y="208" font-family="sans-serif" font-size="11" fill="#000">4ºA</text><rect x="188" y="199" width="16" height="11" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="210" y="208" font-family="sans-serif" font-size="11" fill="#000">4ºB</text></svg><table class="tabla-g"><tr><th></th><th>1er tri</th><th>2º tri</th><th>3er tri</th></tr><tr><td class="lbl">4ºA</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr><tr><td class="lbl">4ºB</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr></table></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Ahora cada cuadradito vale <strong>10</strong>. <strong>Responde</strong>:</div>
+    <div class="g-wrap"><div class="grafico-titulo">Visitantes de la biblioteca</div><svg class="grafico" viewBox="0 0 320 218"><line x1="40" y1="150" x2="310" y2="150" stroke="#bbb" stroke-width="1"/><line x1="40" y1="130" x2="310" y2="130" stroke="#bbb" stroke-width="1"/><line x1="40" y1="110" x2="310" y2="110" stroke="#bbb" stroke-width="1"/><line x1="40" y1="90" x2="310" y2="90" stroke="#bbb" stroke-width="1"/><line x1="40" y1="70" x2="310" y2="70" stroke="#bbb" stroke-width="1"/><line x1="40" y1="50" x2="310" y2="50" stroke="#bbb" stroke-width="1"/><line x1="40" y1="30" x2="310" y2="30" stroke="#bbb" stroke-width="1"/><line x1="40" y1="10" x2="310" y2="10" stroke="#bbb" stroke-width="1"/><rect x="58" y="50" width="25.2" height="120" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="87.2" y="110" width="25.2" height="60" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="85.2" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">Lunes</text><rect x="120.5" y="90" width="25.2" height="80" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="149.8" y="50" width="25.2" height="120" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="147.8" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">Martes</text><rect x="183" y="30" width="25.2" height="140" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="212.2" y="90" width="25.2" height="80" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="210.2" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">Miércoles</text><rect x="245.5" y="70" width="25.2" height="100" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><rect x="274.8" y="10" width="25.2" height="160" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="272.8" y="186" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#000">Jueves</text><line x1="40" y1="10" x2="40" y2="170" stroke="#000" stroke-width="2"/><line x1="40" y1="170" x2="310" y2="170" stroke="#000" stroke-width="2"/><text x="32" y="174" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">0</text><text x="32" y="154" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">10</text><text x="32" y="134" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">20</text><text x="32" y="114" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">30</text><text x="32" y="94" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">40</text><text x="32" y="74" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">50</text><text x="32" y="54" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">60</text><text x="32" y="34" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">70</text><text x="32" y="14" text-anchor="end" font-family="sans-serif" font-size="10" fill="#000">80</text><rect x="76" y="199" width="16" height="11" fill="#d6d6d6" stroke="#000" stroke-width="1.5"/><text x="98" y="208" font-family="sans-serif" font-size="11" fill="#000">Mañana</text><rect x="188" y="199" width="16" height="11" fill="#8f8f8f" stroke="#000" stroke-width="1.5"/><text x="210" y="208" font-family="sans-serif" font-size="11" fill="#000">Tarde</text></svg></div>
+    <div class="preg-lista">
+      <div class="preg-fila">a) &iquest;Cu&aacute;ntos visitantes hubo el <strong>mi&eacute;rcoles por la ma&ntilde;ana</strong>? <span class="preg-hueco ancho"></span></div>
+      <div class="preg-fila">b) &iquest;Cu&aacute;ntos visitantes hubo el <strong>jueves</strong> en todo el d&iacute;a? <span class="preg-hueco ancho"></span></div>
+    </div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> &iquest;Qu&eacute; <strong>escala</strong> usar&iacute;as para un gr&aacute;fico cuyo mayor dato es <strong>60</strong>? Rod&eacute;ala:</div>
+    <div class="escala-op"><span class="op-pill">cada cuadradito = 1</span><span class="op-pill">cada cuadradito = 2</span><span class="op-pill">cada cuadradito = 10</span></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta &middot; academiaesparta.es</span>
+    <span class="footer-msg">&iexcl;Mira siempre el eje antes de leer!</span>
+  </div>
+</body>
+</html>
