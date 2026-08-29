@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tablas y frecuencia &middot; Estad&iacute;stica &middot; 4&ordm; Primaria</title>
+  <meta name="description" content="&laquo;Repaso&raquo; &mdash; ficha 6 de Tablas y frecuencia &middot; Matem&aacute;ticas 4&ordm; Primaria. Gratis y lista para imprimir en A4 &middot; Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/tablas-y-frecuencia/ficha-6.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* Palotes de recuento (reusable) */
+    .recuento { display: flex; gap: 5px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .palote5 { width: 28px; height: 24px; }
+    .palote1 { width: 8px; height: 24px; }
+    .palote5 line, .palote1 line { stroke: #000; stroke-width: 2.5; stroke-linecap: round; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 12px; margin-bottom: 7px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 3px; }
+    .recuerda-idea { font-size: 12.5px; line-height: 1.3; margin-bottom: 4px; }
+    .recuerda-idea b { font-weight: 700; }
+    .recuerda-ejemplo { display: flex; justify-content: center; gap: 30px; align-items: center; }
+    .rec-item { display: flex; align-items: center; gap: 6px; }
+    .rec-num { font-size: 15px; font-weight: 800; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla de frecuencia */
+    .e1-wrap { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+    .mosaico { border: 2px solid #000; border-radius: 10px; padding: 6px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; justify-items: center; align-items: center; }
+    .mosaico svg { width: 31px; height: 31px; }
+    .tabla-frec { border-collapse: collapse; font-size: 12.5px; }
+    .tabla-frec th, .tabla-frec td { border: 1.5px solid #000; padding: 3px 8px; text-align: center; font-weight: 700; }
+    .tabla-frec th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-frec td svg.icono { width: 23px; height: 23px; vertical-align: middle; }
+    .tabla-frec .recuento-hueco { min-width: 120px; height: 31px; }
+    .tabla-frec .num-hueco { min-width: 46px; height: 25px; }
+    .tabla-frec .fila-total td { background: #ececec; }
+    .tabla-frec .fila-total td:first-child { text-align: right; font-family: sans-serif; font-size: 11.5px; }
+    .centrar { display: flex; justify-content: center; }
+
+    /* Preguntas */
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco-grande { display: inline-block; min-width: 105px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-op { display: inline-block; min-width: 145px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+
+    /* V/F */
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+
+    /* --- Componentes de 4º: acumulada, datos en bruto, doble entrada --- */
+    .tabla-frec .acum-hueco { min-width: 62px; height: 25px; }
+    .tabla-frec .cat-cel { font-family: sans-serif; font-size: 11.5px; text-align: left; padding-left: 10px; }
+    .datos-brutos { border: 2px solid #000; border-radius: 10px; padding: 7px 10px; text-align: center; font-size: 15px; font-weight: 700; letter-spacing: .5px; line-height: 1.5; }
+    .leyenda { font-size: 11.5px; margin-top: 3px; text-align: center; font-family: sans-serif; }
+    .tabla-doble { border-collapse: collapse; font-size: 12.5px; margin: 0 auto; }
+    .tabla-doble th, .tabla-doble td { border: 1.5px solid #000; padding: 4px 12px; text-align: center; font-weight: 700; }
+    .tabla-doble th { background: #f3f3f3; font-size: 11px; font-family: sans-serif; }
+    .tabla-doble .esquina { background: #e6e6e6; }
+    .tabla-doble .lbl { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .tabla-doble .tot { background: #ececec; font-family: sans-serif; font-size: 11.5px; }
+    .tabla-doble .hueco { min-width: 52px; height: 27px; }
+    .dos-tablas { display: flex; justify-content: center; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
+
+    /* --- Ajuste de esta ficha (repaso: 4 tablas en un solo folio) --- */
+    .tabla-frec .recuento-hueco { height: 31px; }
+    .tabla-frec .num-hueco { height: 22px; }
+    .tabla-frec .acum-hueco { height: 22px; }
+    .tabla-doble .hueco { height: 24px; }
+    .tabla-frec th, .tabla-frec td { padding: 2px 8px; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">&larr; Volver</a>
+    <button class="print-btn" onclick="window.print()">&#128424; Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matem&aacute;ticas &middot; 4&ordm; Primaria &middot; Estad&iacute;stica &middot; Tablas y frecuencia</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">&#128202; Repaso</div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Estas son las <strong>mascotas</strong> de la clase. Haz el <strong>recuento</strong>, escribe la <strong>frecuencia</strong> y la <strong>acumulada</strong>, y suma el <strong>TOTAL</strong>:</div>
+    <div class="datos-brutos">G&nbsp; P&nbsp; G&nbsp; C&nbsp; P&nbsp; G&nbsp; T&nbsp; G&nbsp; C&nbsp; P&nbsp; G&nbsp; T</div>
+    <div class="leyenda">P = Perro &middot; G = Gato &middot; C = Conejo &middot; T = Tortuga</div>
+    <div class="centrar" style="margin-top:3px">
+      <table class="tabla-frec">
+        <tr><th>Animal</th><th>Recuento</th><th>Frecuencia</th><th>Frecuencia acumulada</th></tr>
+        <tr><td class="cat-cel">Perro</td><td class="recuento-hueco"></td><td class="num-hueco"></td><td class="acum-hueco"></td></tr>
+        <tr><td class="cat-cel">Gato</td><td class="recuento-hueco"></td><td class="num-hueco"></td><td class="acum-hueco"></td></tr>
+        <tr><td class="cat-cel">Conejo</td><td class="recuento-hueco"></td><td class="num-hueco"></td><td class="acum-hueco"></td></tr>
+        <tr><td class="cat-cel">Tortuga</td><td class="recuento-hueco"></td><td class="num-hueco"></td><td class="acum-hueco"></td></tr>
+        <tr class="fila-total"><td colspan="2">TOTAL</td><td class="num-hueco"></td><td>&mdash;</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> <strong>Cromos</strong> que consigui&oacute; Roc&iacute;o cada semana. <strong>Completa</strong> la tabla y responde:</div>
+    <div class="centrar">
+      <table class="tabla-frec">
+        <tr><th>Semana</th><th>Frecuencia</th><th>Frecuencia acumulada</th></tr>
+        <tr><td class="cat-cel">Semana 1</td><td>14</td><td class="acum-hueco"></td></tr>
+        <tr><td class="cat-cel">Semana 2</td><td>9</td><td class="acum-hueco"></td></tr>
+        <tr><td class="cat-cel">Semana 3</td><td>17</td><td class="acum-hueco"></td></tr>
+        <tr><td class="cat-cel">Semana 4</td><td>11</td><td class="acum-hueco"></td></tr>
+        <tr class="fila-total"><td>TOTAL</td><td class="num-hueco"></td><td>&mdash;</td></tr>
+      </table>
+    </div>
+    <div class="preg-lista" style="margin-top:4px">
+      <div class="preg-fila">a) &iquest;Cu&aacute;ntos cromos llevaba al acabar la <strong>semana 3</strong>? <span class="preg-hueco-op"></span></div>
+      <div class="preg-fila">b) &iquest;En qu&eacute; semana consigui&oacute; <strong>menos</strong> cromos? <span class="preg-hueco-grande"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Men&uacute;s del comedor en una tabla de <strong>doble entrada</strong>. <strong>Completa</strong> todos los totales:</div>
+    <table class="tabla-doble">
+      <tr><th class="esquina"></th><th>Pasta</th><th>Arroz</th><th>Verdura</th><th>TOTAL</th></tr>
+      <tr><td class="lbl">Lunes</td><td>22</td><td>17</td><td>9</td><td class="hueco"></td></tr>
+      <tr><td class="lbl">Martes</td><td>15</td><td>19</td><td>13</td><td class="hueco"></td></tr>
+      <tr><td class="tot">TOTAL</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Verdadero o falso</strong>. Rodea la respuesta:</div>
+    <div class="vf-lista">
+      <div class="vf-fila"><span>En el ejercicio 1, el animal con <strong>mayor frecuencia</strong> es el gato.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+      <div class="vf-fila"><span>En el ejercicio 2, la <strong>frecuencia acumulada</strong> de la semana 2 es 9.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+      <div class="vf-fila"><span>En la <strong>doble entrada</strong>, el total de una fila es la <strong>suma</strong> de sus casillas.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta &middot; academiaesparta.es</span>
+    <span class="footer-msg">&iexcl;Ya sabes recoger, ordenar y leer datos!</span>
+  </div>
+</body>
+</html>

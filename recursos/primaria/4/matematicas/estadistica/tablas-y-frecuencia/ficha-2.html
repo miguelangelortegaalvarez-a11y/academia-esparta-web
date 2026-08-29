@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tablas y frecuencia &middot; Estad&iacute;stica &middot; 4&ordm; Primaria</title>
+  <meta name="description" content="La frecuencia acumulada &mdash; ficha 2 de Tablas y frecuencia &middot; Matem&aacute;ticas 4&ordm; Primaria. Gratis y lista para imprimir en A4 &middot; Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/tablas-y-frecuencia/ficha-2.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* Palotes de recuento (reusable) */
+    .recuento { display: flex; gap: 5px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .palote5 { width: 28px; height: 24px; }
+    .palote1 { width: 8px; height: 24px; }
+    .palote5 line, .palote1 line { stroke: #000; stroke-width: 2.5; stroke-linecap: round; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 12px; margin-bottom: 7px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 3px; }
+    .recuerda-idea { font-size: 12.5px; line-height: 1.3; margin-bottom: 4px; }
+    .recuerda-idea b { font-weight: 700; }
+    .recuerda-ejemplo { display: flex; justify-content: center; gap: 30px; align-items: center; }
+    .rec-item { display: flex; align-items: center; gap: 6px; }
+    .rec-num { font-size: 15px; font-weight: 800; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla de frecuencia */
+    .e1-wrap { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+    .mosaico { border: 2px solid #000; border-radius: 10px; padding: 6px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; justify-items: center; align-items: center; }
+    .mosaico svg { width: 31px; height: 31px; }
+    .tabla-frec { border-collapse: collapse; font-size: 12.5px; }
+    .tabla-frec th, .tabla-frec td { border: 1.5px solid #000; padding: 3px 8px; text-align: center; font-weight: 700; }
+    .tabla-frec th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-frec td svg.icono { width: 23px; height: 23px; vertical-align: middle; }
+    .tabla-frec .recuento-hueco { min-width: 120px; height: 31px; }
+    .tabla-frec .num-hueco { min-width: 46px; height: 25px; }
+    .tabla-frec .fila-total td { background: #ececec; }
+    .tabla-frec .fila-total td:first-child { text-align: right; font-family: sans-serif; font-size: 11.5px; }
+    .centrar { display: flex; justify-content: center; }
+
+    /* Preguntas */
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco-grande { display: inline-block; min-width: 105px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-op { display: inline-block; min-width: 145px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+
+    /* V/F */
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    /* --- Componentes de 4º: acumulada, datos en bruto, doble entrada --- */
+    .tabla-frec .acum-hueco { min-width: 62px; height: 25px; }
+    .tabla-frec .cat-cel { font-family: sans-serif; font-size: 11.5px; text-align: left; padding-left: 10px; }
+    .datos-brutos { border: 2px solid #000; border-radius: 10px; padding: 7px 10px; text-align: center; font-size: 15px; font-weight: 700; letter-spacing: .5px; line-height: 1.5; }
+    .leyenda { font-size: 11.5px; margin-top: 3px; text-align: center; font-family: sans-serif; }
+    .tabla-doble { border-collapse: collapse; font-size: 12.5px; margin: 0 auto; }
+    .tabla-doble th, .tabla-doble td { border: 1.5px solid #000; padding: 4px 12px; text-align: center; font-weight: 700; }
+    .tabla-doble th { background: #f3f3f3; font-size: 11px; font-family: sans-serif; }
+    .tabla-doble .esquina { background: #e6e6e6; }
+    .tabla-doble .lbl { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .tabla-doble .tot { background: #ececec; font-family: sans-serif; font-size: 11.5px; }
+    .tabla-doble .hueco { min-width: 52px; height: 27px; }
+    .dos-tablas { display: flex; justify-content: center; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">&larr; Volver</a>
+    <button class="print-btn" onclick="window.print()">&#128424; Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matem&aacute;ticas &middot; 4&ordm; Primaria &middot; Estad&iacute;stica &middot; Tablas y frecuencia</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">&#128202; La frecuencia acumulada</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">&#128161; RECUERDA</div>
+    <div class="recuerda-idea">La <b>frecuencia acumulada</b> de una fila es su frecuencia <b>m&aacute;s todo lo que hab&iacute;a antes</b>. Se suma de arriba abajo y la <b>&uacute;ltima</b> es <b>igual al TOTAL</b>.</div>
+    <div class="centrar"><table class="tabla-frec">
+      <tr><th>Dato</th><th>Frecuencia</th><th>Frecuencia acumulada</th></tr>
+      <tr><td class="cat-cel">A</td><td>4</td><td>4</td></tr>
+      <tr><td class="cat-cel">B</td><td>3</td><td>4 + 3 = 7</td></tr>
+      <tr><td class="cat-cel">C</td><td>5</td><td>7 + 5 = 12</td></tr>
+      <tr class="fila-total"><td>TOTAL</td><td>12</td><td>12</td></tr>
+    </table></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="dos-tablas">
+      <div style="flex:0 1 240px;">
+        <div class="ej-enunciado"><span class="num">1.</span> <strong>Libros</strong> le&iacute;dos por la clase. Completa la <strong>acumulada</strong> y el <strong>TOTAL</strong>:</div>
+        <table class="tabla-frec">
+          <tr><th>Mes</th><th>Frecuencia</th><th>Frecuencia acumulada</th></tr>
+          <tr><td class="cat-cel">Septiembre</td><td>5</td><td class="acum-hueco"></td></tr>
+          <tr><td class="cat-cel">Octubre</td><td>8</td><td class="acum-hueco"></td></tr>
+          <tr><td class="cat-cel">Noviembre</td><td>6</td><td class="acum-hueco"></td></tr>
+          <tr><td class="cat-cel">Diciembre</td><td>4</td><td class="acum-hueco"></td></tr>
+          <tr class="fila-total"><td>TOTAL</td><td class="num-hueco"></td><td class="acum-hueco"></td></tr>
+        </table>
+      </div>
+      <div style="flex:0 1 300px;">
+        <div class="ej-enunciado"><span class="num">2.</span> Lo mismo con los <strong>puntos</strong> de cada partido:</div>
+        <table class="tabla-frec">
+          <tr><th>Partido</th><th>Frecuencia</th><th>Frecuencia acumulada</th></tr>
+          <tr><td class="cat-cel">Partido 1</td><td>7</td><td class="acum-hueco"></td></tr>
+          <tr><td class="cat-cel">Partido 2</td><td>9</td><td class="acum-hueco"></td></tr>
+          <tr><td class="cat-cel">Partido 3</td><td>12</td><td class="acum-hueco"></td></tr>
+          <tr><td class="cat-cel">Partido 4</td><td>6</td><td class="acum-hueco"></td></tr>
+          <tr><td class="cat-cel">Partido 5</td><td>10</td><td class="acum-hueco"></td></tr>
+          <tr class="fila-total"><td>TOTAL</td><td class="num-hueco"></td><td class="acum-hueco"></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Al rev&eacute;s: visitantes de una exposici&oacute;n. La primera frecuencia es igual que su acumulada; las dem&aacute;s se obtienen <strong>restando</strong> la acumulada anterior:</div>
+    <div class="centrar"><table class="tabla-frec">
+      <tr><th>D&iacute;a</th><th>Frecuencia</th><th>Frecuencia acumulada</th></tr>
+      <tr><td class="cat-cel">Lunes</td><td class="num-hueco"></td><td>6</td></tr>
+      <tr><td class="cat-cel">Martes</td><td class="num-hueco"></td><td>14</td></tr>
+      <tr><td class="cat-cel">Mi&eacute;rcoles</td><td class="num-hueco"></td><td>21</td></tr>
+      <tr><td class="cat-cel">Jueves</td><td class="num-hueco"></td><td>30</td></tr>
+    </table></div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Responde</strong> mirando la tabla de los libros del ejercicio 1 y despu&eacute;s rodea <strong>V</strong> o <strong>F</strong>:</div>
+    <div class="preg-lista">
+      <div class="preg-fila">a) &iquest;Cu&aacute;ntos libros hab&iacute;an le&iacute;do <strong>hasta noviembre</strong> (incluido)? <span class="preg-hueco-op"></span></div>
+      <div class="preg-fila">b) &iquest;En qu&eacute; mes se pas&oacute; de los <strong>10</strong> libros acumulados? <span class="preg-hueco-grande"></span></div>
+      <div class="preg-fila">c) &iquest;Cu&aacute;ntos libros se leyeron <strong>en total</strong> en los cuatro meses? <span class="preg-hueco-op"></span></div>
+    </div>
+    <div class="vf-lista" style="margin-top:8px;">
+      <div class="vf-fila"><span>d) La <strong>&uacute;ltima</strong> frecuencia acumulada coincide con el <strong>TOTAL</strong>.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+      <div class="vf-fila"><span>e) En el ejercicio 1, la frecuencia acumulada de <strong>octubre</strong> es <strong>8</strong>.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta &middot; academiaesparta.es</span>
+    <span class="footer-msg">&iexcl;Cada fila lleva la cuenta de todo lo anterior!</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tablas y frecuencia &middot; Estad&iacute;stica &middot; 4&ordm; Primaria</title>
+  <meta name="description" content="La tabla de doble entrada &mdash; ficha 4 de Tablas y frecuencia &middot; Matem&aacute;ticas 4&ordm; Primaria. Gratis y lista para imprimir en A4 &middot; Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/tablas-y-frecuencia/ficha-4.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* Palotes de recuento (reusable) */
+    .recuento { display: flex; gap: 5px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .palote5 { width: 28px; height: 24px; }
+    .palote1 { width: 8px; height: 24px; }
+    .palote5 line, .palote1 line { stroke: #000; stroke-width: 2.5; stroke-linecap: round; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 12px; margin-bottom: 7px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 3px; }
+    .recuerda-idea { font-size: 12.5px; line-height: 1.3; margin-bottom: 4px; }
+    .recuerda-idea b { font-weight: 700; }
+    .recuerda-ejemplo { display: flex; justify-content: center; gap: 30px; align-items: center; }
+    .rec-item { display: flex; align-items: center; gap: 6px; }
+    .rec-num { font-size: 15px; font-weight: 800; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla de frecuencia */
+    .e1-wrap { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+    .mosaico { border: 2px solid #000; border-radius: 10px; padding: 6px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; justify-items: center; align-items: center; }
+    .mosaico svg { width: 31px; height: 31px; }
+    .tabla-frec { border-collapse: collapse; font-size: 12.5px; }
+    .tabla-frec th, .tabla-frec td { border: 1.5px solid #000; padding: 3px 8px; text-align: center; font-weight: 700; }
+    .tabla-frec th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-frec td svg.icono { width: 23px; height: 23px; vertical-align: middle; }
+    .tabla-frec .recuento-hueco { min-width: 120px; height: 31px; }
+    .tabla-frec .num-hueco { min-width: 46px; height: 25px; }
+    .tabla-frec .fila-total td { background: #ececec; }
+    .tabla-frec .fila-total td:first-child { text-align: right; font-family: sans-serif; font-size: 11.5px; }
+    .centrar { display: flex; justify-content: center; }
+
+    /* Preguntas */
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco-grande { display: inline-block; min-width: 105px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco-op { display: inline-block; min-width: 145px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+
+    /* V/F */
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    /* --- Componentes de 4º: acumulada, datos en bruto, doble entrada --- */
+    .tabla-frec .acum-hueco { min-width: 62px; height: 25px; }
+    .tabla-frec .cat-cel { font-family: sans-serif; font-size: 11.5px; text-align: left; padding-left: 10px; }
+    .datos-brutos { border: 2px solid #000; border-radius: 10px; padding: 7px 10px; text-align: center; font-size: 15px; font-weight: 700; letter-spacing: .5px; line-height: 1.5; }
+    .leyenda { font-size: 11.5px; margin-top: 3px; text-align: center; font-family: sans-serif; }
+    .tabla-doble { border-collapse: collapse; font-size: 12.5px; margin: 0 auto; }
+    .tabla-doble th, .tabla-doble td { border: 1.5px solid #000; padding: 4px 12px; text-align: center; font-weight: 700; }
+    .tabla-doble th { background: #f3f3f3; font-size: 11px; font-family: sans-serif; }
+    .tabla-doble .esquina { background: #e6e6e6; }
+    .tabla-doble .lbl { background: #f3f3f3; font-size: 11.5px; font-family: sans-serif; }
+    .tabla-doble .tot { background: #ececec; font-family: sans-serif; font-size: 11.5px; }
+    .tabla-doble .hueco { min-width: 52px; height: 27px; }
+    .dos-tablas { display: flex; justify-content: center; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
+
+    /* Ajuste de esta ficha: 4 tablas de doble entrada en un solo folio */
+    .tabla-doble th, .tabla-doble td { padding: 1px 10px; }
+    .tabla-doble .hueco { height: 24px; }
+    .recuerda-ejemplo .tabla-doble { font-size: 11px; }
+    .recuerda-ejemplo .tabla-doble th, .recuerda-ejemplo .tabla-doble td { padding: 1.5px 8px; }
+    .recuerda-ejemplo .rec-num { font-size: 13px; }
+    .recuerda { padding: 4px 11px; margin-bottom: 6px; }
+    .recuerda-idea { font-size: 12px; line-height: 1.25; margin-bottom: 3px; }
+    .ej-block { margin-bottom: 5px; }
+    .ej-enunciado { margin-bottom: 3px; }
+    .preg-lista { gap: 4px; }
+    .vf-lista { gap: 4px; }
+    .footer { margin-top: 7px; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">&larr; Volver</a>
+    <button class="print-btn" onclick="window.print()">&#128424; Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matem&aacute;ticas &middot; 4&ordm; Primaria &middot; Estad&iacute;stica &middot; Tablas y frecuencia</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <div class="tipo-badge">&#128202; La tabla de doble entrada</div>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">&#128161; RECUERDA</div>
+    <div class="recuerda-idea">En una <b>tabla de doble entrada</b> los datos se clasifican por <b>dos criterios a la vez</b> (uno en las filas y otro en las columnas) y cada casilla dice cu&aacute;ntos cumplen <b>las dos cosas</b>. Los totales se obtienen <b>sumando</b>, y la <b>esquina de abajo a la derecha es el TOTAL de todo</b>: sale igual por filas que por columnas.</div>
+    <div class="recuerda-ejemplo">
+      <table class="tabla-doble">
+        <tr><th class="esquina"></th><th>Perro</th><th>Gato</th><th class="tot">TOTAL</th></tr>
+        <tr><td class="lbl">Chicos</td><td>3</td><td>5</td><td class="tot">8</td></tr>
+        <tr><td class="lbl">Chicas</td><td>4</td><td>2</td><td class="tot">6</td></tr>
+        <tr><td class="tot">TOTAL</td><td class="tot">7</td><td class="tot">7</td><td class="tot">14</td></tr>
+      </table>
+      <div class="rec-item"><span class="rec-num">8 + 6 = 14</span></div>
+      <div class="rec-item"><span class="rec-num">7 + 7 = 14</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> En 4&ordm;A cada alumno ha elegido un <strong>taller</strong>. <strong>Completa</strong> los totales de las filas, los de las columnas y el <strong>TOTAL</strong>:</div>
+    <table class="tabla-doble">
+      <tr><th class="esquina"></th><th>Pintura</th><th>M&uacute;sica</th><th>Teatro</th><th class="tot">TOTAL</th></tr>
+      <tr><td class="lbl">Chicos</td><td>7</td><td>9</td><td>5</td><td class="hueco"></td></tr>
+      <tr><td class="lbl">Chicas</td><td>8</td><td>4</td><td>12</td><td class="hueco"></td></tr>
+      <tr><td class="tot">TOTAL</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Piezas de fruta vendidas en una fruter&iacute;a. <strong>Encuentra las tres casillas que faltan</strong>: usa los totales para averiguarlas.</div>
+    <table class="tabla-doble">
+      <tr><th class="esquina"></th><th>Manzanas</th><th>Peras</th><th>Pl&aacute;tanos</th><th class="tot">TOTAL</th></tr>
+      <tr><td class="lbl">Ma&ntilde;ana</td><td>12</td><td class="hueco"></td><td>15</td><td class="tot">36</td></tr>
+      <tr><td class="lbl">Tarde</td><td class="hueco"></td><td>13</td><td class="hueco"></td><td class="tot">31</td></tr>
+      <tr><td class="tot">TOTAL</td><td class="tot">22</td><td class="tot">22</td><td class="tot">23</td><td class="tot">67</td></tr>
+    </table>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> <strong>Entradas vendidas</strong> en un teatro el fin de semana. <strong>Responde</strong>:</div>
+    <table class="tabla-doble">
+      <tr><th class="esquina"></th><th>Adultos</th><th>Ni&ntilde;os</th><th class="tot">TOTAL</th></tr>
+      <tr><td class="lbl">S&aacute;bado</td><td>45</td><td>28</td><td class="tot">73</td></tr>
+      <tr><td class="lbl">Domingo</td><td>37</td><td>34</td><td class="tot">71</td></tr>
+      <tr><td class="tot">TOTAL</td><td class="tot">82</td><td class="tot">62</td><td class="tot">144</td></tr>
+    </table>
+    <div class="preg-lista">
+      <div class="preg-fila">a) &iquest;Cu&aacute;ntas entradas de <strong>ni&ntilde;o</strong> se vendieron el domingo? <span class="preg-hueco-grande"></span></div>
+      <div class="preg-fila">b) &iquest;Qu&eacute; d&iacute;a se vendieron <strong>m&aacute;s</strong> entradas y cu&aacute;ntas m&aacute;s? <span class="preg-hueco-op"></span></div>
+      <div class="preg-fila">c) &iquest;Cu&aacute;ntas entradas de <strong>adulto</strong> se vendieron entre los dos d&iacute;as? <span class="preg-hueco-grande"></span></div>
+      <div class="preg-fila">d) &iquest;Cu&aacute;ntas entradas se vendieron <strong>en total</strong>? <span class="preg-hueco-op"></span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Verdadero o falso</strong>. Rodea la respuesta:</div>
+    <div class="vf-lista">
+      <div class="vf-fila"><span>Sumar los totales por <strong>filas</strong> y por <strong>columnas</strong> da el mismo n&uacute;mero.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+      <div class="vf-fila"><span>Cada casilla cumple <strong>lo de su fila y lo de su columna</strong>.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+      <div class="vf-fila"><span>En el <strong>teatro</strong>, el domingo hubo m&aacute;s entradas de adulto que el s&aacute;bado.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta &middot; academiaesparta.es</span>
+    <span class="footer-msg">&iexcl;Cada casilla cruza una fila y una columna!</span>
+  </div>
+</body>
+</html>
