@@ -58,11 +58,38 @@ jobs:
           # (la raíz "" se sirve desde index.html, de ahí las dos columnas)
           {
             printf 'index.html\t\t1.0\tmonthly\n'
-            for p in quienes-somos.html logopedia.html psicologia.html materiales.html; do
-              printf '%s\t%s\t0.8\tmonthly\n' "$p" "$p"
+
+            # Resto de páginas de la raíz. Antes esto era una lista fija de 4
+            # ficheros, así que TODO lo creado después quedaba fuera del
+            # sitemap: el blog entero (hub + 7 artículos), nuestro-proyecto y
+            # tablas-de-multiplicar-para-imprimir. Nunca llegaron a declararse.
+            # Ahora se descubren solas y solo se excluye a mano lo que NO debe
+            # indexarse: las 3 páginas con <meta robots="noindex">, la de error
+            # y el fichero de verificación de Search Console.
+            find . -maxdepth 1 -name '*.html' -type f 2>/dev/null \
+              | sed 's|^\./||' | sort \
+              | grep -vxE 'index\.html|404\.html|inscripcion\.html|juegos\.html|google[0-9a-f]+\.html' \
+              | awk -v OFS='\t' '{ print $0, $0, "0.8", "monthly" }'
+
+            # Legales: se sirven como carpeta, sin el index.html final.
+            for d in privacidad terminos; do
+              [ -f "$d/index.html" ] && printf '%s/index.html\t%s/\t0.3\tyearly\n' "$d" "$d"
             done
-            find recursos -name "*.html" 2>/dev/null | grep -v "ortografia-carla" | sort \
-              | awk -v OFS='\t' '{ print $0, $0, "0.5", "yearly" }'
+
+            # Recursos. Los index.html son los hubs por curso+asignatura y se
+            # declaran como .../curso/asignatura/ (sin el index.html) para que
+            # la URL del sitemap coincida con el <link rel="canonical"> de la
+            # propia página: antes el sitemap decía /4/matematicas/index.html
+            # mientras la página se declaraba canónica en /4/matematicas/, así
+            # que ningún hub estaba realmente declarado.
+            find recursos -name '*.html' 2>/dev/null | grep -v 'ortografia-carla' | sort \
+              | awk -v OFS='\t' '{
+                  if ($0 ~ /\/index\.html$/) {
+                    u = $0; sub(/index\.html$/, "", u); print $0, u, "0.6", "monthly"
+                  } else {
+                    print $0, $0, "0.5", "yearly"
+                  }
+                }'
           } > /tmp/paginas.tsv
 
           # ── Montaje del XML ───────────────────────────────────────────────
