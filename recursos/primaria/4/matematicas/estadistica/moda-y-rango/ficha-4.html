@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moda y rango &middot; Estad&iacute;stica &middot; 4&ordm; Primaria</title>
+  <meta name="description" content="Calcular el rango restando el dato mayor menos el menor &mdash; ficha 4 de Moda y rango &middot; Matem&aacute;ticas 4&ordm; Primaria. Gratis y lista para imprimir en A4 &middot; Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/moda-y-rango/ficha-4.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 8px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 12px; margin-bottom: 7px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 3px; }
+    .recuerda-idea { font-size: 12.5px; line-height: 1.3; margin-bottom: 4px; }
+    .recuerda-idea b { font-weight: 700; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla de frecuencia */
+    .tabla-frec { border-collapse: collapse; font-size: 12.5px; margin: 0 auto; }
+    .tabla-frec th, .tabla-frec td { border: 1.5px solid #000; padding: 3px 9px; text-align: center; font-weight: 700; }
+    .tabla-frec th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .tabla-frec .cat-cel { font-family: sans-serif; font-size: 11.5px; }
+    .tabla-frec .num-hueco { min-width: 46px; height: 25px; }
+    .tabla-frec .fila-total td { background: #ececec; }
+    .tabla-frec .fila-total td:first-child { text-align: right; font-family: sans-serif; font-size: 11.5px; }
+    .centrar { display: flex; justify-content: center; }
+    .dos-tablas { display: flex; justify-content: center; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+
+    /* Datos en bruto */
+    .datos-brutos { border: 2px solid #000; border-radius: 10px; padding: 6px 10px; text-align: center; font-size: 15px; font-weight: 700; letter-spacing: .5px; line-height: 1.35; }
+    .leyenda { font-size: 11.5px; margin-top: 2px; text-align: center; font-family: sans-serif; }
+
+    /* Preguntas */
+    .preg-lista { display: flex; flex-direction: column; gap: 6px; }
+    .preg-fila { font-size: 13px; line-height: 1.3; }
+    .preg-hueco { display: inline-block; min-width: 104px; border-bottom: 1.5px solid #000; height: 15px; vertical-align: middle; margin-left: 4px; }
+    .preg-hueco.ancho { min-width: 150px; }
+
+    /* V/F */
+    .vf-lista { display: flex; flex-direction: column; gap: 5px; }
+    .vf-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; line-height: 1.3; }
+    .vf-pills { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 2px solid #000; border-radius: 50%; font-family: sans-serif; font-weight: 800; font-size: 12px; }
+
+    .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+
+    /* --- Moda y rango (4o) --- */
+    .grafico { width: 100%; max-width: 268px; height: auto; display: block; margin: 0 auto; }
+    .grafico-titulo { font-family: sans-serif; font-size: 11px; font-weight: 700; text-align: center; margin-bottom: 1px; }
+    .g-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .dos-graficos { display: flex; justify-content: center; gap: 14px; align-items: flex-start; flex-wrap: wrap; }
+    .dos-graficos .grafico { max-width: 252px; }
+
+    /* Lista de datos + su respuesta */
+    .dat-lista { display: flex; flex-direction: column; gap: 7px; }
+    .dat-item { display: flex; align-items: center; gap: 10px; }
+    .dat-lbl { font-size: 13px; font-weight: 800; flex-shrink: 0; }
+    .dat-item .datos-brutos { flex: 1; }
+    /* OJO: nada de display:flex aqui. Con flex, cada trozo de texto suelto es
+       un item anonimo y el `gap` mete un hueco antes de los dos puntos y del
+       signo de interrogacion ("la moda :", "mascota ?"). Texto normal. */
+    .dat-resp { font-size: 12.5px; font-weight: 700; font-family: sans-serif; line-height: 1.9; }
+    .dat-bloque { display: flex; flex-direction: column; gap: 3px; margin-bottom: 7px; }
+    .dat-bloque .dat-resp { text-align: center; }
+    .dat-item .dat-resp { flex-shrink: 0; }
+
+    /* Cajas de respuesta */
+    .cj { display: inline-block; border: 1.5px solid #000; border-radius: 5px; min-width: 52px; height: 26px; vertical-align: middle; margin: 0 3px; }
+    .cj.ancha { min-width: 168px; }
+    .cj.sm { min-width: 46px; height: 24px; }
+    .ln-larga { display: inline-block; border-bottom: 1.5px solid #000; min-width: 118px; height: 16px; vertical-align: middle; }
+
+    /* Calculo del rango: mayor - menor = rango */
+    .rango-calc { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12.5px; font-weight: 700; font-family: sans-serif; flex-wrap: wrap; }
+    .rango-calc.izq { justify-content: flex-start; }
+    .rango-calc .sg { font-size: 16px; font-weight: 800; }
+
+    /* Opciones para rodear */
+    .opt-fila { display: flex; gap: 9px; justify-content: center; flex-wrap: wrap; margin-top: 2px; }
+    .op-pill { border: 2px solid #000; border-radius: 999px; padding: 2px 13px; font-size: 12.5px; font-weight: 700; }
+    .dat-resp .op-pill { display: inline-block; margin-left: 7px; }
+
+    /* Tabla + su caja de respuesta debajo */
+    .tab-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+    /* Tabla de calculo: los datos a la izquierda, huecos a la derecha */
+    .rango-tabla { border-collapse: collapse; font-size: 12.5px; margin: 0 auto; }
+    .rango-tabla th, .rango-tabla td { border: 1.5px solid #000; padding: 4px 10px; text-align: center; font-weight: 700; }
+    .rango-tabla th { background: #f3f3f3; font-size: 10.5px; font-family: sans-serif; }
+    .rango-tabla .dat { letter-spacing: 1.6px; font-size: 13.5px; }
+    .rango-tabla .lb { font-family: sans-serif; font-size: 12px; }
+    .rango-tabla .hueco { min-width: 62px; height: 28px; }
+    .rango-tabla .hueco.ancho { min-width: 118px; }
+
+    /* Ejemplo resuelto dentro del Recuerda */
+    .rec-ej { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; font-size: 13px; font-weight: 700; }
+    .rec-ej .mini-datos { border: 1.5px solid #000; border-radius: 8px; padding: 3px 9px; letter-spacing: 1px; }
+    .rec-ej .marca { text-decoration: underline; text-underline-offset: 3px; }
+    .rec-ej .flecha { font-size: 15px; }
+  </style>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Academia Esparta">
+  <meta property="og:title" content="El rango: cuánto se separan los datos · Ficha 4">
+  <meta property="og:description" content="Calcular el rango restando el dato mayor menos el menor — ficha 4 de Moda y rango · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.">
+  <meta property="og:url" content="https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/moda-y-rango/ficha-4.html">
+  <meta property="og:image" content="https://academiaesparta.es/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LearningResource","name":"El rango: cuánto se separan los datos · Ficha 4","description":"Calcular el rango restando el dato mayor menos el menor — ficha 4 de Moda y rango · Matemáticas 4º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.","url":"https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/moda-y-rango/ficha-4.html","learningResourceType":"worksheet","educationalLevel":"4º de Primaria","about":"Estadística · Moda y rango","inLanguage":"es","isAccessibleForFree":true,"isFamilyFriendly":true,"educationalUse":"assignment","publisher":{"@type":"EducationalOrganization","name":"Academia Esparta","url":"https://academiaesparta.es/"},"typicalAgeRange":"9-10"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://academiaesparta.es/"},{"@type":"ListItem","position":2,"name":"Materiales","item":"https://academiaesparta.es/materiales.html"},{"@type":"ListItem","position":3,"name":"Fichas de Matemáticas de 4º de Primaria","item":"https://academiaesparta.es/recursos/primaria/4/matematicas/"},{"@type":"ListItem","position":4,"name":"El rango: cuánto se separan los datos · Ficha 4","item":"https://academiaesparta.es/recursos/primaria/4/matematicas/estadistica/moda-y-rango/ficha-4.html"}]}]}</script>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">&larr; Volver</a>
+    <button class="print-btn" onclick="window.print()">&#128424; Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matem&aacute;ticas &middot; 4&ordm; Primaria &middot; Estad&iacute;stica &middot; Moda y rango</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <h1 class="tipo-badge">&#128202; El rango: cu&aacute;nto se separan los datos</h1>
+  <div class="recuerda">
+    <div class="recuerda-titulo">&#128161; RECUERDA</div>
+    <div class="recuerda-idea">El <b>rango</b> dice <b>cu&aacute;nto se separan</b> los datos: se busca el <b>mayor</b>, se busca el <b>menor</b> y <b>se restan</b>.</div>
+    <div class="recuerda-idea">&#9888;&#65039; El rango solo se puede calcular con <b>n&uacute;meros</b>. Con colores o con deportes no hay mayor ni menor, as&iacute; que no hay rango.</div>
+    <div class="rec-ej"><span class="mini-datos">12 &nbsp;7 &nbsp;15 &nbsp;9</span><span class="flecha">&rarr;</span><span>mayor <b>15</b>, menor <b>7</b></span><span class="flecha">&rarr;</span><span>15 &minus; 7 = <b>8</b> de rango</span></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> <strong>Rodea</strong> el dato mayor y el menor de cada lista y <strong>calcula el rango</strong>:</div>
+    <table class="rango-tabla"><tr><th></th><th>Lista de datos</th><th>Mayor</th><th>Menor</th><th>Rango</th></tr><tr><td class="lb">a)</td><td class="dat">14&nbsp; 8&nbsp; 19&nbsp; 12&nbsp; 16</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr><tr><td class="lb">b)</td><td class="dat">24&nbsp; 30&nbsp; 18&nbsp; 27&nbsp; 21</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr><tr><td class="lb">c)</td><td class="dat">45&nbsp; 38&nbsp; 50&nbsp; 42&nbsp; 47&nbsp; 36</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr><tr><td class="lb">d)</td><td class="dat">128&nbsp; 135&nbsp; 122&nbsp; 140&nbsp; 131</td><td class="hueco"></td><td class="hueco"></td><td class="hueco"></td></tr></table>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Esta tabla recoge la temperatura de cada d&iacute;a. Calcula el <strong>rango</strong> de temperaturas:</div>
+    <div class="dos-tablas"><table class="tabla-frec"><tr><th>D&iacute;a</th><th>Temperatura (&ordm;C)</th></tr><tr><td class="cat-cel">Lunes</td><td>18</td></tr><tr><td class="cat-cel">Martes</td><td>21</td></tr><tr><td class="cat-cel">Mi&eacute;rcoles</td><td>17</td></tr><tr><td class="cat-cel">Jueves</td><td>24</td></tr><tr><td class="cat-cel">Viernes</td><td>20</td></tr></table><div class="tab-col"><div class="rango-calc">Mayor: <span class="cj sm"></span><span class="sg">&minus;</span> Menor: <span class="cj sm"></span><span class="sg">=</span> Rango: <span class="cj sm"></span></div></div></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> &iquest;Se puede calcular el <strong>rango</strong>? Rodea <em>S&Iacute;</em> o <em>NO</em>:</div>
+    <div class="vf-lista"><div class="vf-fila"><span>Las edades de 5 primos: 8, 11, 7, 13 y 9 a&ntilde;os.</span><span class="vf-pills"><span class="op-pill">S&Iacute;</span><span class="op-pill">NO</span></span></div><div class="vf-fila"><span>El deporte favorito de cada ni&ntilde;o de la clase.</span><span class="vf-pills"><span class="op-pill">S&Iacute;</span><span class="op-pill">NO</span></span></div><div class="vf-fila"><span>Los goles marcados en cada partido: 2, 0, 3, 1 y 2.</span><span class="vf-pills"><span class="op-pill">S&Iacute;</span><span class="op-pill">NO</span></span></div><div class="vf-fila"><span>El color del coche de cada vecino.</span><span class="vf-pills"><span class="op-pill">S&Iacute;</span><span class="op-pill">NO</span></span></div></div>
+  </div>
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> <strong>Verdadero o falso</strong>. Rodea la respuesta:</div>
+    <div class="vf-lista"><div class="vf-fila"><span>En la lista 30 &nbsp;22 &nbsp;25, el rango es <strong>5</strong>.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div><div class="vf-fila"><span>Si dos ni&ntilde;os miden lo mismo y son los &uacute;nicos de la lista, el rango es <strong>0</strong>.</span><span class="vf-pills"><span class="vf-pill">V</span><span class="vf-pill">F</span></span></div></div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta &middot; academiaesparta.es</span>
+    <span class="footer-msg">&iexcl;Rango = mayor &minus; menor!</span>
+  </div>
+</body>
+</html>
