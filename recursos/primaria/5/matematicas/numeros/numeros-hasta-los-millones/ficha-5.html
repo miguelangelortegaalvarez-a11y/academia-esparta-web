@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Números hasta los millones · Comparar, ordenar y redondear · 5º Primaria</title>
+  <meta name="description" content="Comparar, ordenar y redondear — ficha 5 de Números hasta los millones · Matemáticas 5º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.">
+  <link rel="canonical" href="https://academiaesparta.es/recursos/primaria/5/matematicas/numeros/numeros-hasta-los-millones/ficha-5.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #000; padding: 2rem 1.5rem 1rem; max-width: 780px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; }
+    .back-btn { color: #333; font-size: .8rem; text-decoration: none; border: 1px solid #ccc; padding: .3rem .8rem; border-radius: 999px; font-family: sans-serif; }
+    .print-btn { background: #222; color: #fff; font-size: .8rem; border: none; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; font-family: sans-serif; }
+    .header { margin-bottom: 5px; text-align: center; }
+    .academia-nombre { font-size: 21px; font-weight: 800; color: #000; display: block; margin-bottom: 1px; letter-spacing: .3px; }
+    .ficha-ref { font-size: 9.5px; color: #555; display: block; margin-bottom: 4px; }
+    .datos-alumno { display: flex; gap: 30px; margin-bottom: 3px; text-align: left; }
+    .dato { display: flex; align-items: center; gap: 6px; font-size: 12px; flex: 1; }
+    .dato label { white-space: nowrap; font-weight: 600; }
+    .dato .linea { flex: 1; border-bottom: 1px solid #000; height: 13px; }
+    .separador { border: none; border-top: 1.5px solid #000; margin-bottom: 7px; }
+    .tipo-badge { display: inline-flex; align-items: center; gap: 6px; border: 2px solid #000; border-radius: 999px; padding: 3px 14px; font-size: 13px; font-weight: 700; margin-bottom: 9px; }
+
+    /* Recuerda */
+    .recuerda { border: 2px solid #000; border-radius: 10px; padding: 5px 13px; margin-bottom: 8px; }
+    .recuerda-titulo { font-size: 12px; font-weight: 800; letter-spacing: .5px; margin-bottom: 5px; }
+    .rec-linea { font-size: 12.5px; line-height: 1.36; margin-bottom: 4px; }
+    .rec-linea b { font-size: 14.5px; }
+
+    /* Tabla de órdenes (Recuerda) con TRES clases */
+    .ordenes-tabla { border-collapse: collapse; margin: 0 auto 5px; }
+    .ordenes-tabla td { border: 1.5px solid #000; text-align: center; }
+    .ordenes-tabla .clase { font-size: 9.5px; font-weight: 800; letter-spacing: .3px; background: #e9e9e9; padding: 2px 0; }
+    .ordenes-tabla .orden { font-size: 10.5px; font-weight: 700; background: #f3f3f3; width: 40px; padding: 2px 0; }
+    .ordenes-tabla .cifra { font-size: 17px; font-weight: 700; height: 23px; }
+    .ordenes-tabla .sep-clase { border-left-width: 3px; }
+
+    /* Ejercicios */
+    .ej-block { margin-bottom: 7px; }
+    .ej-enunciado { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; line-height: 1.28; }
+    .ej-enunciado .num { font-weight: 800; margin-right: 4px; }
+
+    /* Tabla descomponer — 9 órdenes */
+    .cdu-tabla { border-collapse: collapse; margin-bottom: 3px; }
+    .cdu-tabla th, .cdu-tabla td { border: 1.5px solid #000; text-align: center; }
+    .cdu-tabla .clase-cab { font-size: 9.5px; font-weight: 800; letter-spacing: .3px; background: #e9e9e9; padding: 2px 0; }
+    .cdu-tabla th { font-size: 10.5px; font-weight: 700; background: #f3f3f3; padding: 3px 0; width: 38px; }
+    .cdu-tabla .num-cab { width: 108px; background: #fff; font-size: 16px; font-weight: 700; }
+    .cdu-tabla td { height: 25px; font-size: 17px; font-weight: 700; }
+    .cdu-tabla .sep-clase { border-left-width: 3px; }
+
+    /* Construir número desde piezas — DOS COLUMNAS: las 9 piezas envuelven en
+       su columna y el "= [caja]" se queda a la derecha, centrado. A una sola
+       columna con flex-wrap, la caja caía sola en un renglón entero para ella,
+       pegada a la izquierda y con medio folio de ancho desperdiciado al lado. */
+    .construir-fila { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+    .construir-fila .piezas { flex: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 3px; font-size: 12.5px; font-weight: 700; }
+    .construir-fila .pieza { border: 1.5px solid #000; border-radius: 6px; padding: 3px 5px; }
+    .construir-fila .res-wrap { flex-shrink: 0; display: flex; align-items: center; gap: 5px; }
+    .construir-fila .igual { font-size: 18px; font-weight: 700; }
+    .construir-fila .caja-res { width: 112px; height: 30px; border: 1.5px solid #000; border-radius: 6px; }
+
+    /* Descomponer en suma de valores */
+    .suma-fila { display: flex; align-items: center; gap: 4px; font-size: 13.5px; font-weight: 700; margin-bottom: 5px; flex-wrap: wrap; }
+    .suma-fila .num-grande { min-width: 96px; }
+    .suma-fila .caja-sum { width: 82px; height: 26px; border: 1.5px solid #000; border-radius: 6px; }
+
+    /* Serie */
+    .serie-cajas { display: flex; gap: 6px; flex-wrap: wrap; font-size: 12.5px; font-weight: 700; }
+    .serie-cajas .caja-num { width: 88px; height: 30px; border: 1.5px solid #000; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+
+    .footer { margin-top: 8px; padding-top: 5px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .footer-marca { font-size: 9.5px; color: #666; }
+    .footer-msg { font-size: 12px; font-weight: 700; }
+
+    @media print {
+      .topbar { display: none !important; }
+      body { padding: 0 !important; max-width: 15cm !important; margin: 2cm auto 1.5cm !important; filter: grayscale(100%); }
+      * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @page { size: A4 portrait; margin: 0; }
+
+    /* Ajuste de esta ficha ------------------------------------------------
+       Va DESPUÉS del @page: si se mete antes, el @media print del chasis lo
+       pisa y no hace nada. Componentes clonados de `comparar-y-ordenar` de 4º
+       y reescalados a 9 cifras (los números de 4º eran de 6). */
+
+    /* Ritmo vertical: la ficha lleva 4 ejercicios con mucha caja de trabajo,
+       así que el aire ENTRE bloques se recorta (las cajas, no). */
+    .ej-block { margin-bottom: 5px; }
+    .ej-enunciado { margin-bottom: 3px; }
+    .recuerda { padding: 4px 11px; margin-bottom: 6px; }
+    .recuerda-titulo { margin-bottom: 3px; }
+
+    /* Recuerda con las dos reglas de la ficha, cada una con su ejemplo */
+    .rec-reglas { display: flex; flex-direction: column; gap: 3px; }
+    .rec-regla { font-size: 11.8px; line-height: 1.26; }
+    .rec-regla .et { display: inline-block; border: 1.5px solid #000; border-radius: 999px; padding: 0 6px; font-size: 10px; font-weight: 800; margin-right: 4px; }
+    .rec-regla .ej { display: block; font-weight: 700; }
+    .rec-regla .ej .sg { font-size: 15px; font-weight: 800; }
+
+    /* Comparar con signo — a 9 cifras la fuente baja a 15.5px o los dos
+       números + la caja no caben en media línea de 15cm. */
+    .cmp-lista { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+    .cmp-item { display: flex; align-items: center; justify-content: center; gap: 9px; font-size: 15.5px; font-weight: 700; width: calc(50% - 7px); }
+    .cmp-item .caja-signo { width: 40px; height: 30px; border: 1.5px solid #000; border-radius: 6px; flex-shrink: 0; }
+
+    /* Ordenar: banco desordenado + casillas de destino. El banco a 13.5px y
+       gap 6 para que los 5 números de 9 cifras quepan en UN renglón (a 15px,
+       el quinto caía solo a una segunda línea y desperdiciaba el folio). */
+    .orden-banco { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; font-size: 13.5px; font-weight: 700; border: 1.5px dashed #aaa; border-radius: 8px; padding: 4px 6px; margin-bottom: 5px; }
+    .orden-secuencia { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 16px; font-weight: 800; }
+    .orden-secuencia .ob { width: 94px; height: 34px; border: 1.5px solid #000; border-radius: 6px; }
+
+    /* Redondear: tabla número + orden + resultado */
+    .rd-tabla { border-collapse: collapse; width: 100%; }
+    .rd-tabla th, .rd-tabla td { border: 1.5px solid #000; text-align: center; }
+    .rd-tabla th { font-size: 10.5px; font-weight: 700; background: #f3f3f3; padding: 2px; line-height: 1.2; }
+    .rd-tabla td { height: 27px; font-size: 14.5px; font-weight: 700; }
+    .rd-tabla .num-cab { background: #fafafa; width: 130px; }
+    .rd-tabla .orden-cel { font-size: 12px; font-weight: 600; width: 190px; }
+
+    .nota-ej { font-size: 11px; font-style: italic; margin-top: 3px; }
+  </style>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Academia Esparta">
+  <meta property="og:title" content="Comparar, ordenar y redondear · Ficha 5 de Números hasta los millones · Matemáticas 5º Primaria">
+  <meta property="og:description" content="Comparar, ordenar y redondear — ficha 5 de Números hasta los millones · Matemáticas 5º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.">
+  <meta property="og:url" content="https://academiaesparta.es/recursos/primaria/5/matematicas/numeros/numeros-hasta-los-millones/ficha-5.html">
+  <meta property="og:image" content="https://academiaesparta.es/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LearningResource","name":"Comparar, ordenar y redondear · Ficha 5","description":"Comparar, ordenar y redondear — ficha 5 de Números hasta los millones · Matemáticas 5º Primaria. Gratis y lista para imprimir en A4 · Academia Esparta.","url":"https://academiaesparta.es/recursos/primaria/5/matematicas/numeros/numeros-hasta-los-millones/ficha-5.html","learningResourceType":"worksheet","educationalLevel":"5º de Primaria","about":"Números · Números hasta los millones","inLanguage":"es","isAccessibleForFree":true,"isFamilyFriendly":true,"educationalUse":"assignment","publisher":{"@type":"EducationalOrganization","name":"Academia Esparta","url":"https://academiaesparta.es/"},"typicalAgeRange":"10-11"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://academiaesparta.es/"},{"@type":"ListItem","position":2,"name":"Materiales","item":"https://academiaesparta.es/materiales.html"},{"@type":"ListItem","position":3,"name":"Fichas de Matemáticas de 5º de Primaria","item":"https://academiaesparta.es/recursos/primaria/5/matematicas/"},{"@type":"ListItem","position":4,"name":"Comparar, ordenar y redondear · Ficha 5","item":"https://academiaesparta.es/recursos/primaria/5/matematicas/numeros/numeros-hasta-los-millones/ficha-5.html"}]}]}</script>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-btn" href="../../../../../../materiales.html">← Volver</a>
+    <button class="print-btn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div class="header">
+    <span class="academia-nombre">Academia Esparta</span>
+    <span class="ficha-ref">Matemáticas · 5º Primaria · Números hasta los millones</span>
+    <div class="datos-alumno">
+      <div class="dato"><label>Nombre:</label><div class="linea"></div></div>
+      <div class="dato"><label>Fecha:</label><div class="linea"></div></div>
+    </div>
+  </div>
+  <hr class="separador" />
+
+  <h1 class="tipo-badge">📊 Comparar, ordenar y redondear</h1>
+
+  <div class="recuerda">
+    <div class="recuerda-titulo">RECUERDA</div>
+    <div class="rec-reglas">
+      <div class="rec-regla"><span class="et">COMPARAR</span>Cuenta primero las <b>cifras</b>: el que tiene <b>más cifras es mayor</b>. Si tienen las mismas, compara <b>de izquierda a derecha</b> hasta la primera cifra distinta.
+        <span class="ej">9.800.000 <span class="sg">&lt;</span> 12.400.000 (7 cifras contra 8) · 305.6<u>1</u>2.000 <span class="sg">&lt;</span> 305.6<u>2</u>1.000 (iguales hasta el 6: luego 1 &lt; 2)</span>
+      </div>
+      <div class="rec-regla"><span class="et">REDONDEAR</span>Mira la cifra <b>siguiente</b> al orden que te piden: si es <b>5 o más</b> ese orden sube 1, y si es <b>menor que 5</b> se queda igual. Lo de detrás, a <b>cero</b>.
+        <span class="ej">Al millón: 62.<u>3</u>84.000 → 62.000.000 · 8.<u>6</u>40.000 → 9.000.000</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">1.</span> Escribe el signo <b>&gt;</b>, <b>&lt;</b> o <b>=</b> en cada casilla:</div>
+    <div class="cmp-lista">
+      <div class="cmp-item"><span>98.750.000</span><div class="caja-signo"></div><span>102.000.000</span></div>
+      <div class="cmp-item"><span>456.300.812</span><div class="caja-signo"></div><span>456.300.821</span></div>
+      <div class="cmp-item"><span>7.400.000</span><div class="caja-signo"></div><span>7.400.000</span></div>
+      <div class="cmp-item"><span>320.000.000</span><div class="caja-signo"></div><span>98.999.999</span></div>
+      <div class="cmp-item"><span>61.050.400</span><div class="caja-signo"></div><span>61.005.400</span></div>
+      <div class="cmp-item"><span>9.999.999</span><div class="caja-signo"></div><span>10.000.000</span></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">2.</span> Ordena de <b>menor a mayor</b>. Escribe los números en las casillas:</div>
+    <div class="orden-banco"><span>45.600.000</span><span>·</span><span>4.560.000</span><span>·</span><span>456.000.000</span><span>·</span><span>45.060.000</span><span>·</span><span>40.650.000</span></div>
+    <div class="orden-secuencia">
+      <div class="ob"></div><span>&lt;</span><div class="ob"></div><span>&lt;</span><div class="ob"></div><span>&lt;</span><div class="ob"></div><span>&lt;</span><div class="ob"></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">3.</span> Ordena de <b>mayor a menor</b>:</div>
+    <div class="orden-banco"><span>812.345.000</span><span>·</span><span>812.435.000</span><span>·</span><span>812.354.000</span><span>·</span><span>812.453.000</span><span>·</span><span>812.243.000</span></div>
+    <div class="orden-secuencia">
+      <div class="ob"></div><span>&gt;</span><div class="ob"></div><span>&gt;</span><div class="ob"></div><span>&gt;</span><div class="ob"></div><span>&gt;</span><div class="ob"></div>
+    </div>
+  </div>
+
+  <div class="ej-block">
+    <div class="ej-enunciado"><span class="num">4.</span> Redondea cada número <b>al orden que se te indica</b>:</div>
+    <table class="rd-tabla">
+      <tr><th class="num-cab">NÚMERO</th><th class="orden-cel">REDONDEA…</th><th>RESULTADO</th></tr>
+      <tr><td class="num-cab">47.382.915</td><td class="orden-cel">al millón</td><td></td></tr>
+      <tr><td class="num-cab">47.382.915</td><td class="orden-cel">a la centena de millar</td><td></td></tr>
+      <tr><td class="num-cab">6.851.240</td><td class="orden-cel">al millón</td><td></td></tr>
+      <tr><td class="num-cab">128.499.000</td><td class="orden-cel">al millón</td><td></td></tr>
+      <tr><td class="num-cab">128.499.000</td><td class="orden-cel">a la decena de millón</td><td></td></tr>
+      <tr><td class="num-cab">95.600.000</td><td class="orden-cel">a la decena de millón</td><td></td></tr>
+    </table>
+    <div class="nota-ej">¿Ves? El mismo número se redondea distinto según el orden que te pidan.</div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-marca">Academia Esparta · Torremolinos</span>
+    <span class="footer-msg">⭐ ¡Muy bien!</span>
+  </div>
+</body>
+</html>
