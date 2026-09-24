@@ -716,7 +716,9 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
 
 ### Blog (`/blog.html`)
 - **Índice rediseñado el 2026-06-15** (commits a31b003 + 362804d): fuera las portadas de emoji → diseño editorial con **fotos reales** (Pexels, uso comercial, self-hosted en `blog-img/` para no depender del CDN ni añadir cookies), **artículo destacado a doble ancho** con imagen de fondo y **color por categoría** (var `--cat` + `--img` por tarjeta). El **destacado es `como-elegir-academia-torremolinos`** (color **jade `#4fc3a1`** — el coral daba sensación de alerta), no Mates. Portadas `aspect-ratio:16/9` (las fotos verticales se recortan en el hero ancho → para el destacado mejor horizontal). Degradado verde sutil sobre cada foto. La de Lectura: niño de espaldas, NO identificable (norma de Miguel: fotos de niños sin cara identificable). El artículo `elegir-academia` se reescribió en clave de metodología propia y tono NO competitivo (ver memoria `project-posicionamiento-academia`).
-- 7 artículos publicados, casi todos con enlaces internos a fichas:
+- 9 artículos publicados, casi todos con enlaces internos a fichas:
+  - `que-hacer-si-tu-hijo-suspende-matematicas.html` (2026-09-25, commit 6c0337c — el momento del suspenso en Primaria y ESO: leer el examen (4 tipos de fallo), buscar el hueco en cursos anteriores, apartado propio ESO, hablar con el profe, plan corto; 24 enlaces internos; tarjeta lima #a3e635)
+  - `tablas-de-multiplicar-para-imprimir.html` (julio 2026, 51 fichas enlazadas)
   - `como-elegir-academia-torremolinos.html` (DESTACADO del blog; reescrito 2026-06-15: 7 claves en tono positivo "buena señal" + sección "Cómo trabajamos en Esparta"; enlaza a psicología, materiales y otros artículos)
   - `como-ayudar-comprension-lectora-primaria.html` (11 enlaces a fichas)
   - `tecnicas-de-estudio-primaria.html` (5 enlaces a fichas)
