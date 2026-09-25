@@ -735,7 +735,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - ⚠️ La fila «Rodea: + − × ÷» necesita `white-space: nowrap` o el ÷ cae solo en la línea siguiente.
   - Llenado varias **83.6 · 84.4 · 83.1 · 81.0 · 81.3 · 83.8**; mixtos **80.1 · 79.8 · 80.7 · 78.8 · 79.4 · 80.9**, 1 folio c/u, sin desborde. Registrados en RECURSOS + índices (**204 fichas, 34/34**) + SEO. **🎉 BLOQUE `problemas` DE 5º COMPLETO ✅ (36 fichas) y 5º MATES COMPLETO ✅ (204 fichas: numeros 36 + operaciones 36 + medida 30 + geometria 36 + estadistica 30 + problemas 36). Siguiente: 6º Primaria Matemáticas** (árbol y decisiones de nivel por acordar con Miguel; ya aplazados a 6º: negativos, mcm/mcd y factorización, regla de tres, proporcionalidad inversa, corchetes, área del círculo y polígonos regulares con apotema, Euler, áreas y volumen de prisma/cilindro, la mediana, coordenadas con negativos).
 
-### Sub-bloques 6º Primaria — EN MARCHA (6/34 sub-bloques, 36 fichas)
+### Sub-bloques 6º Primaria — EN MARCHA (7/34 sub-bloques, 42 fichas)
 
 Árbol acordado con Miguel el **2026-09-25** (AskUserQuestion). Mismos 6 bloques. Serie = 6 fichas. **Fuente Poppins.** back-btn = 6 niveles. Registrado ya en `ASIGNATURAS` de `materiales.html` (sustituye al placeholder antiguo de 2 bloques).
 
@@ -748,7 +748,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
 | Bloque | Sub-bloques |
 |---|---|
 | `numeros` ✅ COMPLETO | los-numeros-enteros ✅ · descomposicion-en-factores-primos ✅ · mcm-y-mcd ✅ · fracciones-decimales-y-porcentajes ✅ · razon-y-proporcion ✅ · numeros-grandes-y-aproximacion ✅ |
-| `operaciones` | operaciones-con-enteros · jerarquia-con-corchetes · operaciones-combinadas-con-fracciones · operaciones-con-decimales · potencias-y-raices · la-regla-de-tres |
+| `operaciones` | operaciones-con-enteros ✅ · jerarquia-con-corchetes · operaciones-combinadas-con-fracciones · operaciones-con-decimales · potencias-y-raices · la-regla-de-tres |
 | `medida` | sistema-metrico-repaso · volumen-capacidad-y-masa · superficie-y-volumen · el-tiempo-y-la-velocidad · escalas-mapas-y-planos |
 | `geometria` | angulos-de-los-poligonos · poligonos-regulares-y-apotema · longitud-y-area-del-circulo · cuerpos-euler-y-areas · volumen-de-prismas-y-cilindros · coordenadas-con-negativos |
 | `estadistica` | variables-y-frecuencias · graficos-estadisticos · media-mediana-moda-y-rango · combinatoria-sencilla · probabilidad |
@@ -785,7 +785,14 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - ⚠️ El control de regalos cazó que el **ejemplo del Recuerda de redondear** (4.678.500.000 → 5.000.000.000) era la respuesta de la primera fila de la tabla → ejemplo 8.537.000.000 (enseña además el «5 justo sube»). Y dos respuestas repetidas en las estimaciones de f6.
   - ⚠️ «Estima redondeando cada número» admite varias respuestas (7.950 → 7.900 u 8.000): el enunciado fija **«una sola cifra distinta de 0»**.
   - ⚠️ Números de 11-13 cifras + caja de 170 px en rejilla de 2 columnas **desbordan** (y Chrome encoge la página, el llenado BAJA): cajas de 122 px (`.cj.xm`) en rejilla, sumas de potencias a una columna, banco de ordenar a 13 px.
-  - Llenado **f1 84.4 · f2 83.8 · f3 84.4 · f4 83.6 · f5 83.3 · f6 83.4**, 1 folio c/u, sin desborde. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Números grandes y aproximación`) + índices (**36 fichas, 6/34**) + SEO. **🎉 BLOQUE `numeros` DE 6º COMPLETO ✅ (36 fichas). Siguiente: bloque `operaciones` de 6º, empezando por `operaciones-con-enteros`** (sumar y restar; × y ÷ con signos → 1º ESO).
+  - Llenado **f1 84.4 · f2 83.8 · f3 84.4 · f4 83.6 · f5 83.3 · f6 83.4**, 1 folio c/u, sin desborde. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Números grandes y aproximación`) + índices (**36 fichas, 6/34**) + SEO. **🎉 BLOQUE `numeros` DE 6º COMPLETO ✅ (36 fichas).** Publicado en commit 75fab54.
+
+**Bloque `operaciones` de 6º — EN MARCHA:**
+- **`operaciones-con-enteros` COMPLETO ✅ (6 fichas, 2026-09-25) — 7/34, ABRE `operaciones`.** Nivel acordado: solo **sumar y restar** (× y ÷ con la regla de los signos → 1º ESO). f1 sumar en la recta (saltos dibujados: dónde empiezo, cuánto salto con su signo, dónde llego) · f2 sumar con la regla (mismo signo / distinto signo → signo del mayor valor absoluto; número que falta) · f3 restar = sumar el opuesto (convertir y calcular, suma o resta mezcladas, número que falta) · f4 varios números y paréntesis (quitar paréntesis, juntar positivos y negativos, dos situaciones que se escriben como expresión) · f5 situaciones reales (diferencia máxima − mínima de temperaturas; ascensor, saldo, avión/submarino, congelador) · f6 repaso. **MÉTODO: `gen_opent.py` sobre `motor6.py`**. Componente reusable **`recta(saltos, marcas)`**: recta −10…10 (24 px por unidad) con saltos en arco y flecha; sin saltos se recorta el viewBox para no dejar hueco encima.
+  - ⚠️ **El control de regalos de `motor6` no sirve con enteros**: ignora el signo, y los números pequeños aparecen por todas partes (la recta imprime del −10 al 10). Control propio `FE`: quita los SVG, compara **con signo** y solo mira los números que van **tras «=» o «→»** (resultados impresos), con ≤ 2 espacios (si no, pilla el «3.» del ejercicio siguiente tras una caja vacía). Cazó V/F falsos que imprimían una respuesta real («(−15) + (+6) = −21», «(−3) − (−3) = −6») y ejemplos del Recuerda con el resultado de un ejercicio.
+  - Assert `mezcla()`: en cada bloque de cálculo, al menos 2 resultados negativos y 2 positivos (una fila salió con casi todo negativo); en la resta, `a − b ≠ a + b`.
+  - ⚠️ El 0 no va entre paréntesis: `p(0)` = «0».
+  - Llenado **f1 78.6 · f2 83.6 · f3 79.9 · f4 84.2 · f5 79.2 · f6 84.4**, 1 folio c/u, sin desborde. Registrado en RECURSOS (key `matematicas|6|OPERACIONES|Operaciones con enteros`) + índices (**42 fichas, 7/34**) + SEO. **Siguiente: `jerarquia-con-corchetes`.**
 
 ---
 
