@@ -735,7 +735,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - ⚠️ La fila «Rodea: + − × ÷» necesita `white-space: nowrap` o el ÷ cae solo en la línea siguiente.
   - Llenado varias **83.6 · 84.4 · 83.1 · 81.0 · 81.3 · 83.8**; mixtos **80.1 · 79.8 · 80.7 · 78.8 · 79.4 · 80.9**, 1 folio c/u, sin desborde. Registrados en RECURSOS + índices (**204 fichas, 34/34**) + SEO. **🎉 BLOQUE `problemas` DE 5º COMPLETO ✅ (36 fichas) y 5º MATES COMPLETO ✅ (204 fichas: numeros 36 + operaciones 36 + medida 30 + geometria 36 + estadistica 30 + problemas 36). Siguiente: 6º Primaria Matemáticas** (árbol y decisiones de nivel por acordar con Miguel; ya aplazados a 6º: negativos, mcm/mcd y factorización, regla de tres, proporcionalidad inversa, corchetes, área del círculo y polígonos regulares con apotema, Euler, áreas y volumen de prisma/cilindro, la mediana, coordenadas con negativos).
 
-### Sub-bloques 6º Primaria — EN MARCHA (1/34 sub-bloques, 6 fichas)
+### Sub-bloques 6º Primaria — EN MARCHA (2/34 sub-bloques, 12 fichas)
 
 Árbol acordado con Miguel el **2026-09-25** (AskUserQuestion). Mismos 6 bloques. Serie = 6 fichas. **Fuente Poppins.** back-btn = 6 niveles. Registrado ya en `ASIGNATURAS` de `materiales.html` (sustituye al placeholder antiguo de 2 bloques).
 
@@ -747,7 +747,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
 
 | Bloque | Sub-bloques |
 |---|---|
-| `numeros` | los-numeros-enteros ✅ · descomposicion-en-factores-primos · mcm-y-mcd · fracciones-decimales-y-porcentajes · razon-y-proporcion · numeros-grandes-y-aproximacion |
+| `numeros` | los-numeros-enteros ✅ · descomposicion-en-factores-primos ✅ · mcm-y-mcd · fracciones-decimales-y-porcentajes · razon-y-proporcion · numeros-grandes-y-aproximacion |
 | `operaciones` | operaciones-con-enteros · jerarquia-con-corchetes · operaciones-combinadas-con-fracciones · operaciones-con-decimales · potencias-y-raices · la-regla-de-tres |
 | `medida` | sistema-metrico-repaso · volumen-capacidad-y-masa · superficie-y-volumen · el-tiempo-y-la-velocidad · escalas-mapas-y-planos |
 | `geometria` | angulos-de-los-poligonos · poligonos-regulares-y-apotema · longitud-y-area-del-circulo · cuerpos-euler-y-areas · volumen-de-prismas-y-cilindros · coordenadas-con-negativos |
@@ -760,7 +760,13 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - ⚠️ **Termómetro: los números tienen que ir a `font-size` 11,5 dentro del SVG** (a 8,5 y a 10 salían ilegibles impresos) y el SVG a 56 px de ancho; leer la temperatura es justo lo que evalúa.
   - ⚠️ Asserts de nivel: en «compara» todas las parejas negativo-negativo tienen el trampa (gana el de MENOR valor absoluto) y hay ≥ 5; en «rodea el mayor», el mayor no va siempre en la misma posición.
   - Regalos cazados: el V/F «el 0 es positivo» y «+8 y 8 son el mismo» se copiaban del Recuerda; «|−3| > |2|» y «nunca es negativo», igual; la flecha B (−4) del repaso salía impresa en una comparación; y «entre −3 y 3 hay cinco enteros» era ambiguo (¿cuentan los extremos?). ⚠️ Notación: nada de «op(9)», que en Primaria no se usa → «el opuesto de 9». Iconos ↔️ y ⚖️ imprimen mancha → 🎯 y 🔍.
-  - Validador recreado en el scratchpad (Chrome `--print-to-pdf` + pypdf + sips + PIL, página por los píxeles claros, desborde a partir de 18,4 cm) y **calibrado contra `numeros-hasta-los-millones` f1/f4 de 5º** (82,6/81,7 frente a 82,4/81,6). Llenado **f1 83.0 · f2 81.7 · f3 81.8 · f4 80.4 · f5 84.4 · f6 83.6**, 1 folio c/u, sin desborde. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Los números enteros`) + `node generar-indices-recursos.mjs` (**crea `/recursos/primaria/6/matematicas/` — 6 fichas, 1/34** y añade «Matemáticas 6º» a la navegación de los otros índices) + SEO (0 pendientes). **Siguiente: `descomposicion-en-factores-primos`.**
+  - Validador recreado en el scratchpad (Chrome `--print-to-pdf` + pypdf + sips + PIL, página por los píxeles claros, desborde a partir de 18,4 cm) y **calibrado contra `numeros-hasta-los-millones` f1/f4 de 5º** (82,6/81,7 frente a 82,4/81,6). Llenado **f1 83.0 · f2 81.7 · f3 81.8 · f4 80.4 · f5 84.4 · f6 83.6**, 1 folio c/u, sin desborde. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Los números enteros`) + `node generar-indices-recursos.mjs` (**crea `/recursos/primaria/6/matematicas/` — 6 fichas, 1/34** y añade «Matemáticas 6º» a la navegación de los otros índices) + SEO (0 pendientes). (commit publicado 2026-09-25).
+- **`descomposicion-en-factores-primos` COMPLETO ✅ (6 fichas, 2026-09-25) — 2/34.** Nivel fijado por defecto (5º ya hizo primos, criterios y criba): f1 primos y compuestos (¿es primo un número < 121? → probar 2, 3, 5 y 7, tabla SÍ/NO + primer primo después de…) · f2 el árbol de factores · f3 divisiones sucesivas · f4 con potencias (y de la potencia al número + el primo que falta) · f5 usar la descomposición (¿está bien descompuesto? + ¿es divisible entre…? sin dividir, mirando los primos) · f6 repaso. mcm y mcd → sub-bloque siguiente. **MÉTODO: script `gen_factores.py`** (motor `motor6.py`; `factores()`, `pot()`, `es_primo()` verifican todo).
+  - Componentes reusables: `arbol(raiz, a, b, a1, a2, b1, b2, ocultos)` (árbol de 3 niveles con los primos rodeados; assert de productos y de hojas primas) y `tabla_parcial(n, k, filas)` (divisiones sucesivas con barra vertical: k filas resueltas, el resto en blanco).
+  - ⚠️ **Un árbol con huecos puede tener DOS soluciones:** en el de 100 con los dos hijos ocultos valían 10 × 10 y 25 × 4. Al ocultar nodos, comprobar que lo que queda a la vista fija la respuesta.
+  - ⚠️ La tabla de divisiones vacía **no puede traer el primer primo escrito** (regala el primer paso): solo el número.
+  - ⚠️ Desborde que el validador no cazaba (una caja 5 mm fuera): **umbral de desborde bajado de 18,4 a 18,15 cm**.
+  - Llenado **f1 79.1 · f2 79.2 · f3 82.3 · f4 84.8 · f5 82.9 · f6 83.1**, 1 folio c/u. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Descomposición en factores primos`) + índices (**12 fichas, 2/34**) + SEO. **Siguiente: `mcm-y-mcd`.**
 
 ---
 
