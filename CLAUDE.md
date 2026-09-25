@@ -735,7 +735,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - ⚠️ La fila «Rodea: + − × ÷» necesita `white-space: nowrap` o el ÷ cae solo en la línea siguiente.
   - Llenado varias **83.6 · 84.4 · 83.1 · 81.0 · 81.3 · 83.8**; mixtos **80.1 · 79.8 · 80.7 · 78.8 · 79.4 · 80.9**, 1 folio c/u, sin desborde. Registrados en RECURSOS + índices (**204 fichas, 34/34**) + SEO. **🎉 BLOQUE `problemas` DE 5º COMPLETO ✅ (36 fichas) y 5º MATES COMPLETO ✅ (204 fichas: numeros 36 + operaciones 36 + medida 30 + geometria 36 + estadistica 30 + problemas 36). Siguiente: 6º Primaria Matemáticas** (árbol y decisiones de nivel por acordar con Miguel; ya aplazados a 6º: negativos, mcm/mcd y factorización, regla de tres, proporcionalidad inversa, corchetes, área del círculo y polígonos regulares con apotema, Euler, áreas y volumen de prisma/cilindro, la mediana, coordenadas con negativos).
 
-### Sub-bloques 6º Primaria — EN MARCHA (4/34 sub-bloques, 24 fichas)
+### Sub-bloques 6º Primaria — EN MARCHA (5/34 sub-bloques, 30 fichas)
 
 Árbol acordado con Miguel el **2026-09-25** (AskUserQuestion). Mismos 6 bloques. Serie = 6 fichas. **Fuente Poppins.** back-btn = 6 niveles. Registrado ya en `ASIGNATURAS` de `materiales.html` (sustituye al placeholder antiguo de 2 bloques).
 
@@ -747,7 +747,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
 
 | Bloque | Sub-bloques |
 |---|---|
-| `numeros` | los-numeros-enteros ✅ · descomposicion-en-factores-primos ✅ · mcm-y-mcd ✅ · fracciones-decimales-y-porcentajes ✅ · razon-y-proporcion · numeros-grandes-y-aproximacion |
+| `numeros` | los-numeros-enteros ✅ · descomposicion-en-factores-primos ✅ · mcm-y-mcd ✅ · fracciones-decimales-y-porcentajes ✅ · razon-y-proporcion ✅ · numeros-grandes-y-aproximacion |
 | `operaciones` | operaciones-con-enteros · jerarquia-con-corchetes · operaciones-combinadas-con-fracciones · operaciones-con-decimales · potencias-y-raices · la-regla-de-tres |
 | `medida` | sistema-metrico-repaso · volumen-capacidad-y-masa · superficie-y-volumen · el-tiempo-y-la-velocidad · escalas-mapas-y-planos |
 | `geometria` | angulos-de-los-poligonos · poligonos-regulares-y-apotema · longitud-y-area-del-circulo · cuerpos-euler-y-areas · volumen-de-prismas-y-cilindros · coordenadas-con-negativos |
@@ -776,7 +776,11 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - ⚠️ **Los asserts de «rodea el mayor» y de V/F cazaron dos grupos con números IGUALES** (0,09 y 9 %; 1,7 y 170 %): con una sola respuesta posible por grupo hay que exigir valores distintos por código.
   - ⚠️ Formatear miles con `f'{c:,}'.replace(',', '.')` sobre TODA la cadena convirtió «0,5 %» en «0.5 %». Formatear solo el número.
   - ⚠️ Las fracciones apiladas llenan rápido: tabla de 6 filas con huecos de fracción = media página → dos tablas de 3 lado a lado; el «une» de fracción↔% en horizontal (dos filas), no en columna.
-  - Llenado **f1 83.2 · f2 83.4 · f3 79.4 · f4 84.6 · f5 79.1 · f6 83.4**, 1 folio c/u, sin desborde. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Fracciones, decimales y porcentajes`) + índices (**24 fichas, 4/34**) + SEO. **Siguiente: `razon-y-proporcion`.**
+  - Llenado **f1 83.2 · f2 83.4 · f3 79.4 · f4 84.6 · f5 79.1 · f6 83.4**, 1 folio c/u, sin desborde. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Fracciones, decimales y porcentajes`) + índices (**24 fichas, 4/34**) + SEO.
+- **`razon-y-proporcion` COMPLETO ✅ (6 fichas, 2026-09-25) — 5/34.** Nivel fijado por defecto, sin pisar `la-regla-de-tres` (operaciones, que lleva la inversa): razón (comparar, simplificar, «por cada»; el orden importa) · razones equivalentes y proporción (comprobar en cruz) · extremos, medios y propiedad fundamental (también con decimales) · el término desconocido (x = producto en cruz : el que queda) + 2 problemas planteando la proporción · magnitudes **directamente** proporcionales (tablas, constante = abajo : arriba, reconocer las que no lo son: edad/altura, huevos cociéndose a la vez). f1 la razón · f2 razones y proporciones · f3 extremos, medios y propiedad fundamental · f4 el término desconocido · f5 magnitudes directamente proporcionales (+ inventa una tabla de constante 5) · f6 repaso. **MÉTODO: `gen_rp.py`** (importa `FichaF`/`fr`/`frh` de `gen_fdp.py`; `frx(n, d)` = fracción con un término vacío).
+  - ⚠️ **Los asserts `es_prop` cazaron dos errores MÍOS de datos** antes de imprimirlos: 9/12 = x/20 con x = 16 (es 15) y una tabla de constante 4,5 donde 5 vueltas daban 22,5 min (el código lo redondeaba a 22 con `//`). Toda proporción y toda casilla de tabla se comprueba con `Fraction`, nunca con división entera.
+  - ⚠️ Con muchas proporciones en una ficha, el control de regalos salta constantemente (el 21 de una es dato de otra): hubo que rehacer los números de la f4 y la f6 enteros.
+  - Llenado **f1 82.7 · f2 83.8 · f3 83.9 · f4 84.1 · f5 80.2 · f6 84.3**, 1 folio c/u, sin desborde. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Razón y proporción`) + índices (**30 fichas, 5/34**) + SEO. **Siguiente: `numeros-grandes-y-aproximacion`** (cierra el bloque `numeros` de 6º).
 
 ---
 
