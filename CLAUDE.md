@@ -735,7 +735,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - ⚠️ La fila «Rodea: + − × ÷» necesita `white-space: nowrap` o el ÷ cae solo en la línea siguiente.
   - Llenado varias **83.6 · 84.4 · 83.1 · 81.0 · 81.3 · 83.8**; mixtos **80.1 · 79.8 · 80.7 · 78.8 · 79.4 · 80.9**, 1 folio c/u, sin desborde. Registrados en RECURSOS + índices (**204 fichas, 34/34**) + SEO. **🎉 BLOQUE `problemas` DE 5º COMPLETO ✅ (36 fichas) y 5º MATES COMPLETO ✅ (204 fichas: numeros 36 + operaciones 36 + medida 30 + geometria 36 + estadistica 30 + problemas 36). Siguiente: 6º Primaria Matemáticas** (árbol y decisiones de nivel por acordar con Miguel; ya aplazados a 6º: negativos, mcm/mcd y factorización, regla de tres, proporcionalidad inversa, corchetes, área del círculo y polígonos regulares con apotema, Euler, áreas y volumen de prisma/cilindro, la mediana, coordenadas con negativos).
 
-### Sub-bloques 6º Primaria — EN MARCHA (2/34 sub-bloques, 12 fichas)
+### Sub-bloques 6º Primaria — EN MARCHA (3/34 sub-bloques, 18 fichas)
 
 Árbol acordado con Miguel el **2026-09-25** (AskUserQuestion). Mismos 6 bloques. Serie = 6 fichas. **Fuente Poppins.** back-btn = 6 niveles. Registrado ya en `ASIGNATURAS` de `materiales.html` (sustituye al placeholder antiguo de 2 bloques).
 
@@ -747,7 +747,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
 
 | Bloque | Sub-bloques |
 |---|---|
-| `numeros` | los-numeros-enteros ✅ · descomposicion-en-factores-primos ✅ · mcm-y-mcd · fracciones-decimales-y-porcentajes · razon-y-proporcion · numeros-grandes-y-aproximacion |
+| `numeros` | los-numeros-enteros ✅ · descomposicion-en-factores-primos ✅ · mcm-y-mcd ✅ · fracciones-decimales-y-porcentajes · razon-y-proporcion · numeros-grandes-y-aproximacion |
 | `operaciones` | operaciones-con-enteros · jerarquia-con-corchetes · operaciones-combinadas-con-fracciones · operaciones-con-decimales · potencias-y-raices · la-regla-de-tres |
 | `medida` | sistema-metrico-repaso · volumen-capacidad-y-masa · superficie-y-volumen · el-tiempo-y-la-velocidad · escalas-mapas-y-planos |
 | `geometria` | angulos-de-los-poligonos · poligonos-regulares-y-apotema · longitud-y-area-del-circulo · cuerpos-euler-y-areas · volumen-de-prismas-y-cilindros · coordenadas-con-negativos |
@@ -766,7 +766,12 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - ⚠️ **Un árbol con huecos puede tener DOS soluciones:** en el de 100 con los dos hijos ocultos valían 10 × 10 y 25 × 4. Al ocultar nodos, comprobar que lo que queda a la vista fija la respuesta.
   - ⚠️ La tabla de divisiones vacía **no puede traer el primer primo escrito** (regala el primer paso): solo el número.
   - ⚠️ Desborde que el validador no cazaba (una caja 5 mm fuera): **umbral de desborde bajado de 18,4 a 18,15 cm**.
-  - Llenado **f1 79.1 · f2 79.2 · f3 82.3 · f4 84.8 · f5 82.9 · f6 83.1**, 1 folio c/u. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Descomposición en factores primos`) + índices (**12 fichas, 2/34**) + SEO. **Siguiente: `mcm-y-mcd`.**
+  - Llenado **f1 79.1 · f2 79.2 · f3 82.3 · f4 84.8 · f5 82.9 · f6 83.1**, 1 folio c/u. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Descomposición en factores primos`) + índices (**12 fichas, 2/34**) + SEO.
+- **`mcm-y-mcd` COMPLETO ✅ (6 fichas, 2026-09-25) — 3/34.** Nivel fijado por defecto: mcm y mcd **por listas** y **por factores primos** (mcm = comunes y no comunes con el mayor exponente; mcd = solo comunes con el menor) · primos entre sí · casos especiales (uno múltiplo del otro / primos entre sí) · tres números · uso en fracciones (común denominador con el mcm, simplificar de una vez con el mcd). Los problemas van en `problemas-de-mcm-y-mcd`; aquí solo dos en el repaso. f1 el mcm por listas · f2 el mcd por listas + primos entre sí · f3 el mcm con factores (+ completar exponentes) · f4 el mcd con factores · f5 casos especiales, tres números y fracciones · f6 repaso (+ «¿mcm o mcd?» y 2 problemas). **MÉTODO: `motor6.py` RECONSTRUIDO** (el de la sesión anterior se había borrado) clonando el CSS de `descomposicion-en-factores-primos/ficha-1.html` hasta la marca `/* ── Extra de este sub-bloque ── */` + script `gen_mcm.py`; `Ficha.check` extrae TODOS los números del texto de la ficha y salta si una respuesta de 2+ cifras sale impresa (sin registrar datos a mano). Validador recreado y calibrado contra factores primos f1/f2/f6 (79,1/79,2/83,1 exactos).
+  - ⚠️ **Al clonar el chasis cortando por la marca «Extra», las clases del extra del ancla se pierden** (`.tabla-e`, `.sino-it`): las tablas salieron sin bordes. Copiarlas al EXTRA nuevo.
+  - ⚠️ **Exponentes dentro de `.it` (flex) salen sueltos** («mcm(2 3 ·5…)»): cada trozo de texto es un item flex. Para expresiones con `<sup>` usar texto normal (`.it-ex`, `white-space:nowrap`).
+  - ⚠️ El control de regalos saltó **9 veces** (p. ej. `mcm(3, 7) = 21` con la pareja (21, 35) en la misma ficha; `mcd(48, 36) = 12` con el 12 en otro ejercicio). Excepción legítima: en «rodea los múltiplos comunes y escribe el mcm» el mcm TIENE que estar en la lista (no se registra).
+  - Llenado **f1 80.9 · f2 83.9 · f3 84.2 · f4 84.5 · f5 84.6 · f6 84.7**, 1 folio c/u, sin desborde. Registrado en RECURSOS (key `matematicas|6|NUMEROS|Mínimo común múltiplo y máximo común divisor`) + índices (**18 fichas, 3/34**) + SEO. **Siguiente: `fracciones-decimales-y-porcentajes`.**
 
 ---
 
