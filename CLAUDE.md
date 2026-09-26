@@ -736,7 +736,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - ⚠️ La fila «Rodea: + − × ÷» necesita `white-space: nowrap` o el ÷ cae solo en la línea siguiente.
   - Llenado varias **83.6 · 84.4 · 83.1 · 81.0 · 81.3 · 83.8**; mixtos **80.1 · 79.8 · 80.7 · 78.8 · 79.4 · 80.9**, 1 folio c/u, sin desborde. Registrados en RECURSOS + índices (**204 fichas, 34/34**) + SEO. **🎉 BLOQUE `problemas` DE 5º COMPLETO ✅ (36 fichas) y 5º MATES COMPLETO ✅ (204 fichas: numeros 36 + operaciones 36 + medida 30 + geometria 36 + estadistica 30 + problemas 36). Siguiente: 6º Primaria Matemáticas** (árbol y decisiones de nivel por acordar con Miguel; ya aplazados a 6º: negativos, mcm/mcd y factorización, regla de tres, proporcionalidad inversa, corchetes, área del círculo y polígonos regulares con apotema, Euler, áreas y volumen de prisma/cilindro, la mediana, coordenadas con negativos).
 
-### Sub-bloques 6º Primaria — EN MARCHA (12/34 sub-bloques, 72 fichas)
+### Sub-bloques 6º Primaria — EN MARCHA (13/34 sub-bloques, 78 fichas)
 
 Árbol acordado con Miguel el **2026-09-25** (AskUserQuestion). Mismos 6 bloques. Serie = 6 fichas. **Fuente Poppins.** back-btn = 6 niveles. Registrado ya en `ASIGNATURAS` de `materiales.html` (sustituye al placeholder antiguo de 2 bloques).
 
@@ -750,7 +750,7 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
 |---|---|
 | `numeros` ✅ COMPLETO | los-numeros-enteros ✅ · descomposicion-en-factores-primos ✅ · mcm-y-mcd ✅ · fracciones-decimales-y-porcentajes ✅ · razon-y-proporcion ✅ · numeros-grandes-y-aproximacion ✅ |
 | `operaciones` ✅ COMPLETO | operaciones-con-enteros ✅ · jerarquia-con-corchetes ✅ · operaciones-combinadas-con-fracciones ✅ · operaciones-con-decimales ✅ · potencias-y-raices ✅ · la-regla-de-tres ✅ |
-| `medida` | sistema-metrico-repaso · volumen-capacidad-y-masa · superficie-y-volumen · el-tiempo-y-la-velocidad · escalas-mapas-y-planos |
+| `medida` | sistema-metrico-repaso ✅ · volumen-capacidad-y-masa · superficie-y-volumen · el-tiempo-y-la-velocidad · escalas-mapas-y-planos |
 | `geometria` | angulos-de-los-poligonos · poligonos-regulares-y-apotema · longitud-y-area-del-circulo · cuerpos-euler-y-areas · volumen-de-prismas-y-cilindros · coordenadas-con-negativos |
 | `estadistica` | variables-y-frecuencias · graficos-estadisticos · media-mediana-moda-y-rango · combinatoria-sencilla · probabilidad |
 | `problemas` | problemas-con-enteros · problemas-de-mcm-y-mcd · problemas-de-regla-de-tres · problemas-de-porcentajes · problemas-de-geometria-y-medida · problemas-mixtos |
@@ -819,6 +819,14 @@ En 5º entra todo lo aplazado «→5º» en cursos anteriores: **milésimas, dis
   - **Componente reusable `esquema(m1, m2, a, b, c, vacio, lt)`**: tabla de la regla de tres (magnitudes arriba, flechas, *x*), vacía con líneas discontinuas para que el alumno la plantee; `XLU(u)` = «x = ▢ × ▢ : ▢ = ▢ unidad» (cajas de 30/54 px: con 40/70 no caben dos por fila en 15 cm). DIRECTA/INVERSA **al lado** del esquema (`.fila3`), no debajo: ahorra un renglón por problema.
   - Regalos cazados: 60 (Recuerda 12 × 5) era la respuesta de la fuente; 10, 12, 15 y 60 como datos de otros problemas → números cambiados. Un V/F («al multiplicar cada pareja sale lo mismo») copiaba el Recuerda.
   - Llenado **f1 84.7 · f2 83.1 · f3 84.8 · f4 80.6 · f5 83.3 · f6 79.1**, 1 folio c/u, sin desborde, y 0 px fuera en pantalla a 820 (viewport nuevo). Registrado en RECURSOS (key `matematicas|6|OPERACIONES|La regla de tres`) + índices (**72 fichas, 12/34**) + SEO. **🎉 BLOQUE `operaciones` DE 6º COMPLETO ✅ (36 fichas). Siguiente: bloque `medida`, empezando por `sistema-metrico-repaso`.**
+
+**Bloque `medida` de 6º — EN MARCHA:**
+- **`sistema-metrico-repaso` COMPLETO ✅ (6 fichas, 2026-09-26) — 13/34, ABRE `medida`.** Nivel fijado por defecto, sin repetir 5º (que hizo la escalera con decimales, la tonelada, compleja↔incompleja de dos unidades, comparar y sumar/restar): **n escalones = 10ⁿ** (potencias de 10, enlaza con `potencias-y-raices`) · **saltos largos** de hasta 6 escalones con decimales y ceros · **forma compleja con TRES unidades y huecos** (3 km 4 dam 5 m = 3,045 km) · **multiplicar y dividir una medida por un natural** · **estimar** (medida razonable, ¿la conversión tiene sentido?, redondear y calcular de cabeza) y **encontrar el error** al contar escalones. Volumen, superficie y tiempo tienen sus sub-bloques. f1 las tres escaleras y las potencias de 10 · f2 convertir con decimales y saltos largos · f3 forma compleja con tres unidades (+ BIEN/MAL de Leo) · f4 comparar, ordenar y operar · f5 estimar y detectar errores · f6 repaso. **MÉTODO: `/tmp/smr/gen.py`** (scratchpad, no se guarda; motor `/tmp/ocf/motor.py`, conversiones con `Decimal` por nº de escalones; la masa se modela como `t · · kg hg dag g dg cg mg` para que t→kg sean 3 escalones) **+ 2 revisores adversariales** (3 fichas c/u; 0 errores matemáticos).
+  - ⚠️ **La tonelada NO está en la escalera dibujada:** si el Recuerda solo dice «1 t = 1.000 kg», el niño cuenta t → kg como UN escalón (la lista t, kg, hg…) y falla todos los ítems con t. El Recuerda dice **«3 escalones sobre el kg»** (revisor).
+  - ⚠️ **Regalos cazados por los revisores, no por el control numérico:** ejemplos del Recuerda con el MISMO par de unidades que un ejercicio (0,0035 km → cm frente a 0,0072 km → cm: se copia «5 lugares») y con las mismas cifras (…,045 con hueco en la unidad intermedia). El control de números impresos no ve pares de unidades ni estructuras: hay que cruzarlo a mano.
+  - ⚠️ Estimar: el ítem cuya estimación coincide con el exacto (2,9 + 4,1) no evalúa estimar → assert exacto ≠ estimación.
+  - ⚠️ Maquetación: `.p3` (tarjeta de problema) vivía solo en el generador de la regla de tres, no en el motor: al clonar hay que copiar su CSS. «Operación = ___ = [caja]» en rejilla de 2 columnas desborda → dos renglones (operación arriba, trabajo y caja debajo).
+  - Llenado **f1 82.8 · f2 80.7 · f3 83.9 · f4 84.2 · f5 82.4 · f6 81.9**, 1 folio c/u, sin desborde (validador `/tmp/smr/validar.py` calibrado contra la regla de tres f1/f6: 84,7/79,0 frente a 84,7/79,1). Registrado en RECURSOS (key `matematicas|6|MEDIDA|Sistema métrico: repaso`) + índices (**78 fichas, 13/34**) + SEO. **Siguiente: `volumen-capacidad-y-masa`.**
 
 ---
 
