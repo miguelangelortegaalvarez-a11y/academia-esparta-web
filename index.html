@@ -3319,8 +3319,8 @@
           <div class="sv-line"></div>
         </div>
 
-        <!-- Fila 2: derecha → izquierda -->
-        <div class="srow">
+        <!-- Fila 2: derecha → izquierda (orden cronológico en el HTML; en escritorio se invierte con .srow-rev) -->
+        <div class="srow srow-rev">
           <div class="sitem pandemic">
             <div class="semoji-wrap">⚡</div>
             <span class="sitem-year">Pandemia · 2020</span>
@@ -3357,6 +3357,116 @@
       </div>
 
     </section>
+
+
+    <!-- ==================== HISTORIA: línea que se dibuja con el scroll ==================== -->
+    <style>
+      @media (min-width: 901px) { .srow-rev { flex-direction: row-reverse; } }
+      .tl-vivo { position: relative; }
+      .tl-svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
+      .tl-vivo .srow, .tl-vivo .sv-wrap { position: relative; z-index: 1; }
+      .tl-vivo .sline, .tl-vivo .sv-line { visibility: hidden; }
+      .tl-base { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 2; }
+      .tl-live { fill: none; stroke: #4ade80; stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(74,222,128,.75)); }
+      .tl-cabeza { fill: #dcfce7; filter: drop-shadow(0 0 8px #4ade80); transition: opacity .3s; }
+
+      /* Círculos: fondo sólido para que la línea pase por detrás */
+      .tl-vivo .sitem .semoji-wrap { background: linear-gradient(rgba(255,255,255,.09),rgba(255,255,255,.09)), #053a2c;
+        opacity: .4; transform: scale(.82); transition: opacity .5s, transform .5s cubic-bezier(.3,1.6,.5,1), border-color .5s, box-shadow .5s; }
+      .tl-vivo .sitem.pandemic .semoji-wrap { background: linear-gradient(rgba(220,38,38,.15),rgba(220,38,38,.15)), #053a2c; }
+      .tl-vivo .sitem.present .semoji-wrap { background: linear-gradient(rgba(14,147,67,.22),rgba(14,147,67,.22)), #053a2c; }
+      .tl-vivo .sitem.on .semoji-wrap { opacity: 1; transform: scale(1); border-color: #4ade80; box-shadow: 0 0 0 6px rgba(74,222,128,.12), 0 0 28px rgba(74,222,128,.45); }
+      .tl-vivo .sitem.pandemic.on .semoji-wrap { border-color: #f87171; box-shadow: 0 0 0 6px rgba(248,113,113,.14), 0 0 28px rgba(248,113,113,.5); animation: tlTiembla .5s .15s; }
+      .tl-vivo .sitem.present.on .semoji-wrap { animation: tlDestello 1.6s .2s; }
+      @keyframes tlTiembla { 20%{translate:-4px 0} 40%{translate:4px 0} 60%{translate:-3px 0} 80%{translate:2px 0} }
+      @keyframes tlDestello { 0%{box-shadow:0 0 0 0 rgba(74,222,128,.7),0 0 28px rgba(74,222,128,.45)} 100%{box-shadow:0 0 0 28px rgba(74,222,128,0),0 0 28px rgba(74,222,128,.45)} }
+
+      /* Texto: se levanta en 3D como una tarjeta que se pone de pie */
+      .tl-vivo .sitem > :not(.semoji-wrap) { opacity: 0; transform: perspective(700px) rotateX(-65deg) translateY(12px); transform-origin: 50% 0;
+        transition: opacity .55s ease, transform .7s cubic-bezier(.2,.9,.25,1.15); }
+      .tl-vivo .sitem.on > :not(.semoji-wrap) { opacity: 1; transform: none; }
+      .tl-vivo .sitem.on > h3 { transition-delay: .08s; }
+      .tl-vivo .sitem.on > p { transition-delay: .16s; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .tl-vivo .sitem > *, .tl-vivo .sitem .semoji-wrap { transition: none !important; animation: none !important; }
+      }
+    </style>
+    <script>
+    (() => {
+      const tl = document.querySelector('.snake-tl');
+      if (!tl || !('IntersectionObserver' in window)) return;
+      const items = [...tl.querySelectorAll('.sitem')];
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const NS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'tl-svg'); svg.setAttribute('aria-hidden', 'true');
+      const base = document.createElementNS(NS, 'path'); base.setAttribute('class', 'tl-base');
+      const live = document.createElementNS(NS, 'path'); live.setAttribute('class', 'tl-live');
+      const cab = document.createElementNS(NS, 'circle'); cab.setAttribute('class', 'tl-cabeza'); cab.setAttribute('r', '5');
+      svg.append(base, live, cab);
+      tl.classList.add('tl-vivo'); tl.prepend(svg);
+
+      let marcas = [], total = 0, escritorio = true;
+
+      function medir() {
+        escritorio = innerWidth > 900;
+        svg.style.display = escritorio ? '' : 'none';
+        if (!escritorio) return;
+        const r = tl.getBoundingClientRect();
+        const pts = items.map(it => {
+          const c = it.querySelector('.semoji-wrap').getBoundingClientRect();
+          return [c.left - r.left + c.width / 2, c.top - r.top + c.height / 2];
+        });
+        // Trozos del camino: fila 1 en recto; la bajada sale por el borde derecho (para no cruzar el texto de 2016) con curvas
+        const f = n => n.toFixed(1);
+        const trozos = [];
+        for (let i = 1; i < pts.length; i++) {
+          const [a, b] = [pts[i-1], pts[i]];
+          if (Math.abs(a[1] - b[1]) < 2) { trozos.push(' L' + f(b[0]) + ' ' + f(b[1])); continue; }
+          const xr = r.width + 18, R = Math.min(26, (b[1] - a[1]) / 2);
+          trozos.push(' L' + f(xr - R) + ' ' + f(a[1]) + ' Q' + f(xr) + ' ' + f(a[1]) + ' ' + f(xr) + ' ' + f(a[1] + R) +
+                      ' L' + f(xr) + ' ' + f(b[1] - R) + ' Q' + f(xr) + ' ' + f(b[1]) + ' ' + f(xr - R) + ' ' + f(b[1]) +
+                      ' L' + f(b[0]) + ' ' + f(b[1]));
+        }
+        let d = 'M' + f(pts[0][0]) + ' ' + f(pts[0][1]);
+        marcas = [0];
+        const medidor = document.createElementNS(NS, 'path');
+        svg.appendChild(medidor);
+        trozos.forEach(t => { d += t; medidor.setAttribute('d', d); marcas.push(medidor.getTotalLength()); });
+        medidor.remove();
+        total = marcas[marcas.length - 1];
+        base.setAttribute('d', d); live.setAttribute('d', d);
+        live.style.strokeDasharray = total + ' ' + total;
+      }
+
+      function pintar() {
+        const vh = innerHeight;
+        if (!escritorio) {
+          items.forEach(it => { const t = it.getBoundingClientRect().top; if (reduce || t < vh * .82) it.classList.add('on'); });
+          return;
+        }
+        const r = tl.getBoundingClientRect();
+        // empieza cuando la línea asoma por abajo y acaba cuando Hoy está a media pantalla
+        const ini = vh * .78, fin = vh * .45;
+        let p = (ini - r.top) / (ini - fin + r.height * .55);
+        p = reduce ? 1 : Math.min(1, Math.max(0, p));
+        const largo = p * total;
+        live.style.strokeDashoffset = total - largo;
+        const punto = live.getPointAtLength(Math.max(0, Math.min(total, largo)));
+        cab.setAttribute('cx', punto.x); cab.setAttribute('cy', punto.y);
+        cab.style.opacity = (p > 0 && p < 1) ? 1 : 0;
+        items.forEach((it, i) => it.classList.toggle('on', largo >= marcas[i] - 1 && p > 0));
+      }
+
+      let pend = false;
+      const pedir = () => { if (!pend) { pend = true; requestAnimationFrame(() => { pend = false; pintar(); }); } };
+      addEventListener('scroll', pedir, { passive: true });
+      addEventListener('resize', () => { medir(); pedir(); });
+      addEventListener('load', () => { medir(); pintar(); });
+      if (document.fonts) document.fonts.ready.then(() => { medir(); pintar(); });
+      medir(); pintar();
+    })();
+    </script>
 
     <!-- ==================== TESTIMONIOS ==================== -->
     <section id="testimonios" class="section testimonials-section testimonios-premium">
@@ -3512,6 +3622,150 @@
 
       </div>
     </section>
+
+
+    <!-- ==================== RESEÑAS: el 4,9 como un marcador que frena en seco ==================== -->
+    <style>
+      .rv-listo .rating-hero { position: relative; }
+      .rv-listo .rating-big { opacity: 0; }
+      .rv-listo .rating-stars-big .rv-st { display: inline-block; opacity: 0; }
+      .rv-listo .rating-count-label { opacity: 0; transform: translateY(10px); transition: opacity .6s, transform .6s; }
+      .rv-listo .t-card { opacity: 0; }
+      .rv-rodillo { display: inline-block; height: 1em; overflow: hidden; vertical-align: top; clip-path: inset(0 -30px); }
+      .rv-tira { display: block; will-change: transform, filter; }
+      .rv-tira span { display: block; height: 1em; text-align: center; }
+      .rv-coma { display: inline-block; vertical-align: top; }
+      .rv-gota { position: absolute; left: 0; top: 0; color: #fbbf24; line-height: 1; pointer-events: none; will-change: transform, opacity;
+        text-shadow: 0 0 10px rgba(251,191,36,.55); z-index: 3; }
+      /* estrellas grandes: una a una, a martillazos */
+      .rv-golpe .rv-st { animation: rvEstrella .5s cubic-bezier(.5,0,.9,.5) forwards, rvRebote .35s cubic-bezier(.3,1.8,.5,1) forwards; }
+      @keyframes rvEstrella { 0%{opacity:0;transform:translateY(-120px) rotate(-120deg) scale(1.8)} 100%{opacity:1;transform:translateY(0) rotate(0) scale(1.25,.75)} }
+      @keyframes rvRebote { 0%{opacity:1;transform:scale(1.25,.75)} 100%{opacity:1;transform:none} }
+      .rv-golpe .rating-count-label { opacity: 1; transform: none; transition-delay: 2.9s; }
+      /* tarjetas: caen en 3D y aterrizan */
+      .rv-cartas .t-card { animation: rvTarjeta .7s cubic-bezier(.5,0,.75,.4) forwards, rvTarjetaAterriza .4s cubic-bezier(.3,1.5,.5,1) forwards; }
+      @keyframes rvTarjeta {
+        0%   { opacity: 0; transform: perspective(900px) translateY(-60px) rotateX(-55deg) scale(1.12); }
+        60%  { opacity: 1; }
+        100% { opacity: 1; transform: perspective(900px) translateY(6px) rotateX(0) scale(1.02, .97); }
+      }
+      @keyframes rvTarjetaAterriza { 0%{opacity:1;transform:scale(1.02,.97) translateY(6px)} 100%{opacity:1;transform:none} }
+    </style>
+    <script>
+    (() => {
+      const sec = document.getElementById('testimonios');
+      if (!sec || !Element.prototype.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const hero = sec.querySelector('.rating-hero');
+      const num = sec.querySelector('.rating-big');
+      const est = sec.querySelector('.rating-stars-big');
+      const vp = sec.querySelector('.tc-viewport');
+      if (!hero || !num || !est) return;
+      const TOTAL = parseInt((sec.querySelector('.rating-count-label') || {}).textContent.match(/\d+/) || 84, 10);
+      est.innerHTML = [...est.textContent.trim()].map(c => '<span class="rv-st">' + c + '</span>').join('');
+      sec.classList.add('rv-listo');
+
+      const FORMA = 0;
+      const GIRO1 = 1250, GIRO2 = 1850;           // ms: cuándo se clava cada rodillo
+
+      function lluvia() {   // (mismo nombre para reutilizar el disparador)
+        const valor = num.textContent.trim();                 // «4,9»
+        const [ent, dec] = valor.split(',');
+        const medir = t => { const x = document.createElement('span'); x.textContent = t; x.style.visibility = 'hidden';
+          num.appendChild(x); const w = x.getBoundingClientRect().width; x.remove(); return w; };
+        const anchoEnt = medir(ent), anchoDec = medir(dec);
+        function rodillo(final, vueltas, ancho) {
+          const r = document.createElement('span'); r.className = 'rv-rodillo'; r.style.width = ancho + 'px';
+          const t = document.createElement('span'); t.className = 'rv-tira';
+          const total = vueltas * 10 + (+final);
+          for (let i = 0; i <= total + 1; i++) { const d = document.createElement('span'); d.textContent = i % 10; t.appendChild(d); }
+          r.appendChild(t); return [r, t, total];
+        }
+        const [r1, t1, n1] = rodillo(ent, 2, anchoEnt);
+        const [r2, t2, n2] = rodillo(dec, 3, anchoDec);
+        const coma = document.createElement('span'); coma.className = 'rv-coma'; coma.textContent = ',';
+        num.setAttribute('aria-label', valor);
+        num.textContent = ''; num.append(r1, coma, r2);
+        num.style.opacity = '1';
+        num.animate([{ opacity: 0, transform: 'perspective(600px) rotateX(35deg) scale(.9)' }, { opacity: 1, transform: 'none' }],
+                    { duration: 350, easing: 'ease-out' });
+
+        function girar(tira, n, dur) {
+          tira.animate([
+            { transform: 'translateY(0)', filter: 'blur(0)' },
+            { filter: 'blur(4px)', offset: .15 },
+            { filter: 'blur(3px)', offset: .7 },
+            { transform: `translateY(-${n + .22}em)`, filter: 'blur(0)', offset: .9 },
+            { transform: `translateY(-${n}em)`, filter: 'blur(0)' }
+          ], { duration: dur, easing: 'cubic-bezier(.2,.55,.25,1)', fill: 'forwards' });
+        }
+        girar(t1, n1, GIRO1); girar(t2, n2, GIRO2);
+
+        const cont = sec.querySelector('.container');
+        const clac = (fuerte) => {
+          if (cont) cont.animate([
+            { transform: 'none' }, { transform: `translateY(${fuerte ? 8 : 3}px)` }, { transform: `translate(${fuerte ? -4 : -1}px,-2px)` }, { transform: 'none' }
+          ], { duration: fuerte ? 360 : 200, easing: 'ease-out' });
+        };
+        setTimeout(() => clac(false), GIRO1 * .9);
+        setTimeout(() => {
+          clac(true);
+          num.animate([
+            { transform: 'scale(1)', textShadow: '0 0 0 rgba(251,191,36,0)' },
+            { transform: 'scale(1.12,.9)', textShadow: '0 0 60px rgba(251,191,36,.95)', offset: .25 },
+            { transform: 'scale(.97,1.03)', offset: .55 },
+            { transform: 'none', textShadow: '0 0 40px rgba(74,222,128,.25)' }
+          ], { duration: 700, easing: 'ease-out' });
+        }, GIRO2 * .9);
+        // al terminar, vuelve a ser texto normal (mismo aspecto, sin rodillos)
+        setTimeout(() => { num.textContent = valor; num.style.opacity = ''; num.removeAttribute('aria-label'); }, GIRO2 + 900);
+
+        sec.querySelectorAll('.rv-st').forEach((st, i) => {
+          const t = ((GIRO2 + 250) / 1000 + i * .13).toFixed(2);
+          st.style.animationDelay = t + 's, ' + (+t + .5).toFixed(2) + 's';
+        });
+        sec.classList.add('rv-golpe');
+      }
+
+      let golpe = false, cartas = false, t0 = 0;
+      function limpiar() {
+        const tocados = sec.querySelectorAll('.t-card,.rv-st,.rating-big,.rating-count-label');
+        tocados.forEach(e => { e.style.transition = 'none'; e.style.animationDelay = ''; });
+        num.getAnimations().forEach(a => { a.commitStyles && a.commitStyles(); a.cancel(); });
+        num.style.opacity = ''; num.style.transform = ''; num.style.filter = ''; num.style.textShadow = '';
+        sec.classList.remove('rv-listo', 'rv-golpe', 'rv-cartas');
+        void sec.offsetWidth;
+        setTimeout(() => tocados.forEach(e => e.style.transition = ''), 100);
+      }
+      function lanzar() {
+        const vh = innerHeight;
+        if (!golpe) {
+          const rn = num.getBoundingClientRect();
+          if (rn.bottom > 0 && rn.top < vh * .55) { golpe = true; t0 = performance.now(); lluvia(); }
+        }
+        if (golpe && !cartas && vp) {
+          const rc = vp.getBoundingClientRect();
+          if (rc.bottom > 0 && rc.top < vh * .8) {
+            cartas = true;
+            // nunca antes de que el 4,9 haya salido
+            const espera = Math.max(0, 2300 - (performance.now() - t0)) / 1000;
+            let n = 0;
+            sec.querySelectorAll('.t-card').forEach(c => {
+              const r = c.getBoundingClientRect();
+              const visible = r.right > rc.left + 5 && r.left < rc.right - 5;
+              const t = espera + (visible ? .2 + (n++) * .2 : .9);
+              c.style.animationDelay = t.toFixed(2) + 's, ' + (t + .7).toFixed(2) + 's';
+            });
+            sec.classList.add('rv-cartas');
+            removeEventListener('scroll', lanzar);
+            setTimeout(limpiar, espera * 1000 + 2600);
+          }
+        }
+      }
+      addEventListener('scroll', lanzar, { passive: true });
+      addEventListener('load', lanzar);
+      lanzar();
+    })();
+    </script>
 
     <!-- ==================== LEVELS PREMIUM ==================== -->
     <section id="levels" class="section levels-premium">
