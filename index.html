@@ -3570,14 +3570,20 @@
         m.hidden = false; if (anim) m.classList.add('cv-nuevo');
         caja.appendChild(m);
         const copias = caja.querySelectorAll('.cv-msg:not([hidden])');
-        if (copias.length > 6) copias[0].remove();
+        if (copias.length > 6) {                   // al quitar el de arriba, compensar para que no dé un salto
+          const h = copias[1].offsetTop - copias[0].offsetTop;
+          copias[0].remove(); caja.scrollTop -= h;
+        }
+        abajo(anim);
       };
+      // la caja tiene overflow:hidden y flex-end no deja desbordar por arriba: hay que bajarla a mano
+      const abajo = (suave) => caja.scrollTo({ top: caja.scrollHeight, behavior: suave ? 'smooth' : 'auto' });
       poner(false); poner(false);                  // en reposo ya hay conversación
       function ciclo() {
         if (!visible) { timer = null; return; }
         const t = document.createElement('div'); t.className = 'cv-typing'; t.setAttribute('aria-hidden', 'true');
         t.innerHTML = '<span></span><span></span><span></span>';
-        caja.appendChild(t);
+        caja.appendChild(t); abajo(true);
         estado.textContent = 'escribiendo…'; estado.classList.add('cv-escribe');
         timer = setTimeout(() => {
           t.remove(); estado.textContent = TXT; estado.classList.remove('cv-escribe');
