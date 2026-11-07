@@ -3473,23 +3473,14 @@
       <div class="container">
 
         <div class="cv-grid">
-          <!-- Rating hero (el 4,9 animado vive aquí) -->
-          <div class="rating-hero reveal">
-            <div class="rating-google-label">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-              Valoración en Google
-            </div>
-            <h2 class="cv-title">Las familias nos cuentan cómo les va</h2>
-            <div class="rating-big">4,9</div>
-            <span class="rating-stars-big">★★★★★</span>
-            <p class="rating-count-label">Basado en 86 reseñas verificadas</p>
-          </div>
+          <h2 class="cv-title reveal">Lo que nos escriben las familias</h2>
 
           <!-- Conversación: las reseñas llegan como mensajes -->
           <div class="cv-chat reveal" aria-label="Reseñas de familias en Google">
             <div class="cv-head">
               <span class="cv-logo" aria-hidden="true">E</span>
-              <div>Familias de Esparta<small id="cv-estado">Reseñas reales de Google</small></div>
+              <div>Familias de Esparta<small id="cv-estado">Reseñas de Google</small></div>
+              <div class="cv-rate" aria-label="Valoración 4,9 de 5 en Google, 86 reseñas"><strong>4,9</strong> <span class="cv-rate-st">★★★★★</span><span class="cv-rate-n">86 reseñas<span class="cv-rate-g"> en Google</span></span></div>
             </div>
             <div class="cv-msgs" id="cv-msgs">
               <div class="cv-msg"><span class="cv-who">Beatriz López</span><p>Llevamos 4 años con Miguel y Javi y no podemos estar más contentos. Personalmente a mi hijo <mark>le han guiado y acompañado todos estos años</mark> hasta el día de hoy y gracias a ellos mi hijo está muy contento y seguro.</p><span class="cv-st" aria-label="5 estrellas">★★★★★</span></div>
@@ -3513,10 +3504,13 @@
 
     <!-- ==================== RESEÑAS: la conversación (los mensajes se van escribiendo) ==================== -->
     <style>
-      .testimonios-premium .cv-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 3.5rem; align-items: center; max-width: 1080px; margin: 0 auto; }
-      .testimonios-premium .cv-grid .rating-hero { text-align: left; margin-bottom: 0; }
-      .cv-title { font-family: 'Fraunces', Georgia, serif; font-weight: 300; font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.15; color: #fff; margin: 0 0 .4rem; text-wrap: balance; }
-      .cv-chat { height: 470px; border-radius: 26px; background: #04291f; border: 1px solid rgba(74,222,128,.18);
+      .testimonios-premium .cv-grid { display: flex; flex-direction: column; gap: 1.6rem; max-width: 640px; margin: 0 auto; }
+      .cv-title { font-family: 'Fraunces', Georgia, serif; font-weight: 300; font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.15; color: #fff; margin: 0; text-align: center; text-wrap: balance; opacity: 1 !important; }
+      .cv-rate { margin-left: auto; text-align: right; line-height: 1.15; flex: none; }
+      .cv-rate strong { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 1.4rem; color: #fff; }
+      .cv-rate-st { color: #fbbf24; font-size: .74rem; letter-spacing: .05em; }
+      .cv-rate-n { display: block; font-size: .64rem; font-weight: 400; color: rgba(167,243,208,.7); }
+      .cv-chat { height: 520px; border-radius: 26px; background: #04291f; border: 1px solid rgba(74,222,128,.18);
         display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.35); opacity: 1 !important; }
       .cv-head { display: flex; gap: .75rem; align-items: center; padding: .95rem 1.15rem; background: rgba(255,255,255,.04);
         border-bottom: 1px solid rgba(255,255,255,.06); font-family: 'Poppins', sans-serif; font-size: .88rem; font-weight: 500; color: #fff; }
@@ -3540,9 +3534,12 @@
       .cv-typing span:nth-child(2) { animation-delay: .15s; } .cv-typing span:nth-child(3) { animation-delay: .3s; }
       @keyframes cvBl { 50% { opacity: .25; transform: translateY(-3px); } }
       @media (max-width: 860px) {
-        .testimonios-premium .cv-grid { grid-template-columns: 1fr; gap: 2.2rem; }
-        .testimonios-premium .cv-grid .rating-hero { text-align: center; }
         .cv-chat { height: 500px; }
+        .cv-head { padding: .8rem .9rem; gap: .6rem; font-size: .82rem; white-space: nowrap; }
+        .cv-logo { width: 32px; height: 32px; }
+        .cv-rate strong { font-size: 1.2rem; }
+        .cv-rate-st { font-size: .64rem; }
+        .cv-rate-g { display: none; }
         .cv-msg { max-width: 94%; }
         .cv-msg p { font-size: .82rem; }
       }
@@ -3581,152 +3578,9 @@
       }
       new IntersectionObserver(es => {
         visible = es[0].isIntersecting;
-        if (visible && !timer) timer = setTimeout(ciclo, arrancado ? 600 : 2600);  // la 1.ª vez, tras el 4,9
+        if (visible && !timer) timer = setTimeout(ciclo, arrancado ? 600 : 1200);
         if (visible) arrancado = true;
       }, { threshold: .35 }).observe(chat);
-    })();
-    </script>
-
-    <!-- ==================== RESEÑAS: el 4,9 como un marcador que frena en seco ==================== -->
-    <style>
-      .rv-listo .rating-hero { position: relative; }
-      .rv-listo .rating-big { opacity: 0; }
-      .rv-listo .rating-stars-big .rv-st { display: inline-block; opacity: 0; }
-      .rv-listo .rating-count-label { opacity: 0; transform: translateY(10px); transition: opacity .6s, transform .6s; }
-      .rv-listo .t-card { opacity: 0; }
-      .rv-rodillo { display: inline-block; height: 1em; overflow: hidden; vertical-align: top; clip-path: inset(0 -30px); }
-      .rv-tira { display: block; will-change: transform, filter; }
-      .rv-tira span { display: block; height: 1em; text-align: center; }
-      .rv-coma { display: inline-block; vertical-align: top; }
-      .rv-gota { position: absolute; left: 0; top: 0; color: #fbbf24; line-height: 1; pointer-events: none; will-change: transform, opacity;
-        text-shadow: 0 0 10px rgba(251,191,36,.55); z-index: 3; }
-      /* estrellas grandes: una a una, a martillazos */
-      .rv-golpe .rv-st { animation: rvEstrella .5s cubic-bezier(.5,0,.9,.5) forwards, rvRebote .35s cubic-bezier(.3,1.8,.5,1) forwards; }
-      @keyframes rvEstrella { 0%{opacity:0;transform:translateY(-120px) rotate(-120deg) scale(1.8)} 100%{opacity:1;transform:translateY(0) rotate(0) scale(1.25,.75)} }
-      @keyframes rvRebote { 0%{opacity:1;transform:scale(1.25,.75)} 100%{opacity:1;transform:none} }
-      .rv-golpe .rating-count-label { opacity: 1; transform: none; transition-delay: 2.9s; }
-      /* tarjetas: caen en 3D y aterrizan */
-      .rv-cartas .t-card { animation: rvTarjeta .7s cubic-bezier(.5,0,.75,.4) forwards, rvTarjetaAterriza .4s cubic-bezier(.3,1.5,.5,1) forwards; }
-      @keyframes rvTarjeta {
-        0%   { opacity: 0; transform: perspective(900px) translateY(-60px) rotateX(-55deg) scale(1.12); }
-        60%  { opacity: 1; }
-        100% { opacity: 1; transform: perspective(900px) translateY(6px) rotateX(0) scale(1.02, .97); }
-      }
-      @keyframes rvTarjetaAterriza { 0%{opacity:1;transform:scale(1.02,.97) translateY(6px)} 100%{opacity:1;transform:none} }
-    </style>
-    <script>
-    (() => {
-      const sec = document.getElementById('testimonios');
-      if (!sec || !Element.prototype.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const hero = sec.querySelector('.rating-hero');
-      const num = sec.querySelector('.rating-big');
-      const est = sec.querySelector('.rating-stars-big');
-      const vp = sec.querySelector('.cv-chat');
-      if (!hero || !num || !est) return;
-      const TOTAL = parseInt((sec.querySelector('.rating-count-label') || {}).textContent.match(/\d+/) || 86, 10);
-      est.innerHTML = [...est.textContent.trim()].map(c => '<span class="rv-st">' + c + '</span>').join('');
-      sec.classList.add('rv-listo');
-
-      const FORMA = 0;
-      const GIRO1 = 1250, GIRO2 = 1850;           // ms: cuándo se clava cada rodillo
-
-      function lluvia() {   // (mismo nombre para reutilizar el disparador)
-        const valor = num.textContent.trim();                 // «4,9»
-        const [ent, dec] = valor.split(',');
-        const medir = t => { const x = document.createElement('span'); x.textContent = t; x.style.visibility = 'hidden';
-          num.appendChild(x); const w = x.getBoundingClientRect().width; x.remove(); return w; };
-        const anchoEnt = medir(ent), anchoDec = medir(dec);
-        function rodillo(final, vueltas, ancho) {
-          const r = document.createElement('span'); r.className = 'rv-rodillo'; r.style.width = ancho + 'px';
-          const t = document.createElement('span'); t.className = 'rv-tira';
-          const total = vueltas * 10 + (+final);
-          for (let i = 0; i <= total + 1; i++) { const d = document.createElement('span'); d.textContent = i % 10; t.appendChild(d); }
-          r.appendChild(t); return [r, t, total];
-        }
-        const [r1, t1, n1] = rodillo(ent, 2, anchoEnt);
-        const [r2, t2, n2] = rodillo(dec, 3, anchoDec);
-        const coma = document.createElement('span'); coma.className = 'rv-coma'; coma.textContent = ',';
-        num.setAttribute('aria-label', valor);
-        num.textContent = ''; num.append(r1, coma, r2);
-        num.style.opacity = '1';
-        num.animate([{ opacity: 0, transform: 'perspective(600px) rotateX(35deg) scale(.9)' }, { opacity: 1, transform: 'none' }],
-                    { duration: 350, easing: 'ease-out' });
-
-        function girar(tira, n, dur) {
-          tira.animate([
-            { transform: 'translateY(0)', filter: 'blur(0)' },
-            { filter: 'blur(4px)', offset: .15 },
-            { filter: 'blur(3px)', offset: .7 },
-            { transform: `translateY(-${n + .22}em)`, filter: 'blur(0)', offset: .9 },
-            { transform: `translateY(-${n}em)`, filter: 'blur(0)' }
-          ], { duration: dur, easing: 'cubic-bezier(.2,.55,.25,1)', fill: 'forwards' });
-        }
-        girar(t1, n1, GIRO1); girar(t2, n2, GIRO2);
-
-        const cont = sec.querySelector('.container');
-        const clac = (fuerte) => {
-          if (cont) cont.animate([
-            { transform: 'none' }, { transform: `translateY(${fuerte ? 8 : 3}px)` }, { transform: `translate(${fuerte ? -4 : -1}px,-2px)` }, { transform: 'none' }
-          ], { duration: fuerte ? 360 : 200, easing: 'ease-out' });
-        };
-        setTimeout(() => clac(false), GIRO1 * .9);
-        setTimeout(() => {
-          clac(true);
-          num.animate([
-            { transform: 'scale(1)', textShadow: '0 0 0 rgba(251,191,36,0)' },
-            { transform: 'scale(1.12,.9)', textShadow: '0 0 60px rgba(251,191,36,.95)', offset: .25 },
-            { transform: 'scale(.97,1.03)', offset: .55 },
-            { transform: 'none', textShadow: '0 0 40px rgba(74,222,128,.25)' }
-          ], { duration: 700, easing: 'ease-out' });
-        }, GIRO2 * .9);
-        // al terminar, vuelve a ser texto normal (mismo aspecto, sin rodillos)
-        setTimeout(() => { num.textContent = valor; num.style.opacity = '1'; num.removeAttribute('aria-label'); }, GIRO2 + 900);
-
-        sec.querySelectorAll('.rv-st').forEach((st, i) => {
-          const t = ((GIRO2 + 250) / 1000 + i * .13).toFixed(2);
-          st.style.animationDelay = t + 's, ' + (+t + .5).toFixed(2) + 's';
-        });
-        sec.classList.add('rv-golpe');
-      }
-
-      let golpe = false, cartas = false, t0 = 0;
-      function limpiar() {
-        const tocados = sec.querySelectorAll('.t-card,.rv-st,.rating-big,.rating-count-label');
-        tocados.forEach(e => { e.style.transition = 'none'; e.style.animationDelay = ''; });
-        num.getAnimations().forEach(a => { a.commitStyles && a.commitStyles(); a.cancel(); });
-        num.style.opacity = ''; num.style.transform = ''; num.style.filter = ''; num.style.textShadow = '';
-        sec.classList.remove('rv-listo', 'rv-golpe', 'rv-cartas');
-        void sec.offsetWidth;
-        setTimeout(() => tocados.forEach(e => e.style.transition = ''), 100);
-      }
-      function lanzar() {
-        const vh = innerHeight;
-        if (!golpe) {
-          const rn = num.getBoundingClientRect();
-          if (rn.bottom > 0 && rn.top < vh * .55) { golpe = true; t0 = performance.now(); lluvia(); }
-        }
-        if (golpe && !cartas && vp) {
-          const rc = vp.getBoundingClientRect();
-          if (rc.bottom > 0 && rc.top < vh * .8) {
-            cartas = true;
-            // nunca antes de que el 4,9 haya salido
-            const espera = Math.max(0, 2300 - (performance.now() - t0)) / 1000;
-            let n = 0;
-            sec.querySelectorAll('.t-card').forEach(c => {
-              const r = c.getBoundingClientRect();
-              const visible = r.right > rc.left + 5 && r.left < rc.right - 5;
-              const t = espera + (visible ? .2 + (n++) * .2 : .9);
-              c.style.animationDelay = t.toFixed(2) + 's, ' + (t + .7).toFixed(2) + 's';
-            });
-            sec.classList.add('rv-cartas');
-            removeEventListener('scroll', lanzar);
-            setTimeout(limpiar, espera * 1000 + 2600);
-          }
-        }
-      }
-      addEventListener('scroll', lanzar, { passive: true });
-      addEventListener('load', lanzar);
-      lanzar();
     })();
     </script>
 
