@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Camino Matemático · Academia Esparta</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Juego de cálculo mental por cursos: sumas, restas, tablas y más. Gratis, de Academia Esparta." />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.PNG" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- ============ HOME: ELEGIR CURSO ============ -->
+  <section id="screen-home" class="screen is-active" aria-label="Elige tu curso">
+    <img class="screen-bg" src="./assets/backgrounds/screen-home.jpg" alt="" />
+    <div class="menu-overlay">
+      <a href="/juegos.html" class="back-btn back-btn--corner" aria-label="Volver a juegos">← Juegos</a>
+      <h1 class="menu-title">Camino <em>Matemático</em></h1>
+      <p class="menu-sub">Elige tu curso</p>
+      <div id="curso-list" class="btn-list" aria-label="Cursos"></div>
+    </div>
+  </section>
+
+  <!-- ============ TEMAS DEL CURSO ============ -->
+  <section id="screen-temas" class="screen" aria-label="Elige un reto">
+    <img class="screen-bg" src="./assets/backgrounds/screen-home.jpg" alt="" />
+    <div class="menu-overlay">
+      <button id="temas-back" class="back-btn back-btn--corner" type="button">← Cursos</button>
+      <h1 id="temas-title" class="menu-title">Curso</h1>
+      <p class="menu-sub">Elige un reto</p>
+      <div id="tema-list" class="btn-list" aria-label="Retos"></div>
+    </div>
+  </section>
+
+  <!-- ============ PARTIDA ============ -->
+  <section id="screen-game" class="screen" aria-label="Partida">
+    <img class="screen-bg bg-grecia" src="./assets/backgrounds/bg-grecia.jpg" alt="" />
+
+    <button id="game-back" class="back-btn back-btn--corner" type="button">← Salir</button>
+
+    <div class="progress-box" aria-label="Progreso">
+      <div id="progress-fill" class="progress-fill"></div>
+      <div id="progress-text" class="progress-text">0/10</div>
+    </div>
+
+    <div id="level-text" class="level-text">Nivel 1</div>
+
+    <div id="question" class="question">3 + 2 = ?</div>
+    <div id="streak" class="streak" aria-hidden="true"></div>
+
+    <div id="goal-flag" class="goal-flag" aria-hidden="true">🏁</div>
+    <div id="warrior-wrap" class="warrior-wrap">
+      <img id="warrior" class="warrior" src="./assets/espartano/espartano-idle.png" alt="Espartano" />
+    </div>
+
+    <div class="answers" role="group" aria-label="Respuestas">
+      <button class="answer-btn" data-index="0" type="button" aria-label="Respuesta izquierda">
+        <span class="answer-text" id="answer-a-text">0</span>
+      </button>
+      <button class="answer-btn" data-index="1" type="button" aria-label="Respuesta derecha">
+        <span class="answer-text" id="answer-b-text">0</span>
+      </button>
+    </div>
+
+    <img id="icon-correct" class="icon-feedback" src="./assets/icons/icon-correct.png" alt="" style="display:none" />
+    <img id="icon-wrong"   class="icon-feedback" src="./assets/icons/icon-wrong.png"   alt="" style="display:none" />
+  </section>
+
+  <!-- ============ FINAL ============ -->
+  <section id="screen-final" class="screen" aria-label="Resultado">
+    <img class="screen-bg bg-grecia" src="./assets/backgrounds/bg-grecia.jpg" alt="" />
+    <img class="final-hero" src="./assets/espartano/espartano-power.png" alt="" />
+
+    <div id="stars" class="stars" aria-label="Estrellas conseguidas"></div>
+
+    <div class="final-stats" aria-label="Resultados">
+      <div class="final-stat">
+        <span class="final-stat-label">Aciertos</span>
+        <span id="final-correct" class="final-stat-value">0</span>
+      </div>
+      <div class="final-stat">
+        <span class="final-stat-label">Fallos</span>
+        <span id="final-wrong" class="final-stat-value">0</span>
+      </div>
+    </div>
+
+    <div class="final-actions">
+      <button id="final-retry" class="txt-btn txt-btn--primary" type="button">Jugar otra vez</button>
+      <button id="final-menu"  class="txt-btn" type="button">Elegir otro reto</button>
+    </div>
+  </section>
+
+  <script src="./script.js"></script>
+</body>
+</html>
