@@ -192,6 +192,17 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 
 ---
 
+## Formato NUEVO de fichas (desde 22-nov-2026) — página + PDF
+
+Aprobado por Miguel con la **letra M de 1º** (`recursos/primaria/1/lengua/letras/m.html` + `letra-m-1-primaria.pdf`). Sustituye poco a poco al formato antiguo («deberíamos haberlo hecho así desde un principio»: se acaban las peleas de 1 folio / Safari / iPhone).
+
+- **Página web** (para Google y para verla) **+ botón «📄 Descargar PDF para imprimir»** con un PDF generado por Chrome que sale siempre igual. Misma dirección que la ficha antigua → Materiales, índices y buscador no cambian.
+- **Estilo** de las fichas del Tutor (cuaderno de Miguel Guzmán) en versión **ligera de tinta**: cabecera blanca con «Academia Esparta» en verde + línea verde, lema, pastilla oro; cajas sin fondo; **en color** (si imprimen en B/N, sale en B/N). Letra Playwrite ES.
+- **Letras de 1º, 6 páginas de fácil a difícil:** presentación de la letra (bloque con barra verde: mayúscula/minúscula, 2 palabras con la letra en verde, cómo suena, sílabas para leer) + rodear la letra en palabras (minúsculas a la izquierda, MAYÚSCULAS a la derecha, cajita «→ ☐» para contar cuántas) · sílabas en pauta · palabras en pauta (modelo negrita verde + UNA copia gris + puntos de inicio) · junto sílabas · frases con caja «Palabras para usar» · cuento con preguntas + dibujo.
+- **Herramienta:** `herramientas/fichas-letras/generar_ficha_letra.py <letra>` lee `herramientas/fichas-letras/letras/<letra>.json` (copiar `m.json` como modelo), comprueba el contenido (cada palabra lleva la letra, hay palabras sin ella, las soluciones están en la caja…) y escribe la página y el PDF. Estilo en `estilo.css`. Revisar el PDF a ojo antes de subir.
+- **Dibujos que no existen como emoji** → `emoji-propios/<nombre>.svg`, escritos `[nombre]` en el JSON. ⚠️ **No existe emoji de mesa: 🪑 es una SILLA** → `[mesa]`.
+- **Pendiente:** las otras 28 letras de 1º (vocales sin sílabas; ñ, h, q, ce/ci, ge/gi, rr, ll, ch con trato especial). Después, el resto de fichas por bloques.
+
 ## Estructura matemáticas Primaria
 
 Acordado con Miguel el **2026-05-24** antes de arrancar 1º Primaria Mates.
