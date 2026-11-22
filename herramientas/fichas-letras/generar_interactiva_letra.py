@@ -118,6 +118,8 @@ def cortar_lista(wav, n):
     return [pad + list(x[max(0, a - 3) * win:min(N, (b + 4) * win)]) + pad for a, b in segs], sr
 
 
+# ⚠️ ge y gi de la G (archivo «ge») son COPIA del je y ji de la J: suenan igual y el «ge» suelto de Sara sonaba a risa
+# (Miguel, 22-nov-2026). Si se borran, copiarlos otra vez de audio/j/ en vez de generarlos.
 def audios_silabas(d, A, carpeta, generar_faltan):
     """Las sílabas sueltas las alarga («maaa»): se dicen en lista («ma, me, mi, mo, mu, ma.»), se cortan
     por los silencios y se tira la última, que es la que se alarga. Decidido por Miguel el 22-nov-2026."""
@@ -321,6 +323,7 @@ PLANTILLA = r'''<!DOCTYPE html>
             border:3px solid color-mix(in srgb, var(--c) 25%, #fff); color:#0f172a; transition:transform .15s, background .15s; }
     .chip:hover { transform:translateY(-3px); border-color:var(--c); }
     .chip.toque { background:var(--c); color:#fff; animation:pop .35s; }
+    .pal-btn.visto { background:var(--c); border-color:var(--c); color:#fff; } .pal-btn.visto .pw, .pal-btn.visto .v { color:#fff; }
     .como-suena { margin:18px auto 14px; max-width:460px; text-align:center; background:#fffbeb; border:3px dashed var(--oro); border-radius:22px; padding:12px 16px 14px; }
     .como-suena h3 { margin:0; font-size:1.05rem; color:#92400e; }
     .como-suena .muestra { font-family:'Playwrite ES',cursive; font-size:3rem; color:var(--c); line-height:1.3; letter-spacing:.06em; padding-bottom:.1em; }
@@ -580,10 +583,11 @@ app.appendChild(portada);
   p.cuerpo.innerHTML = `<div class="conozco"><div class="par-letras"><span>${esc(D.mayus.charAt(0) + D.mayus.slice(1).toLowerCase())}</span><span>${esc(D.letra)}</span></div><div class="pal-intro">${pal}</div></div>
     <div class="como-suena"><h3>¿Cómo suena la ${letraPW(D.nombre.replace(/\s*\(.*\)/, ''))}?</h3><div class="muestra">${esc(D.suena[0])}</div><p>${esc(D.suena[1])}</p></div><div class="chips">${D.silabas.map(s => `<button class="chip" type="button">${esc(s)}</button>`).join('')}</div>`;
   const vistos = new Set();
-  const comprueba = () => { if (vistos.size >= D.intro.palabras.length + Math.min(3, D.silabas.length)) p.listo(); };
-  p.cuerpo.querySelectorAll('.pal-btn').forEach(b => b.onclick = () => { di(b.dataset.w); b.style.borderColor = 'var(--ok)'; vistos.add('p' + b.dataset.w); comprueba(); });
-  p.cuerpo.querySelectorAll('.chip').forEach(b => b.onclick = () => { di(b.textContent); b.classList.remove('toque'); void b.offsetWidth; b.classList.add('toque'); vistos.add('s' + b.textContent); comprueba(); });
-  const ayuda = el('p', 'cuenta-reto', 'Toca las dos palabras y por lo menos tres sílabas.'); p.cuerpo.appendChild(ayuda);
+  let ayuda; let hecho = false; const total = D.intro.palabras.length + new Set(D.silabas).size;
+  const comprueba = () => { ayuda.textContent = `Toca las dos palabras y todas las sílabas: ${vistos.size} de ${total}.`; if (!hecho && vistos.size >= total) { hecho = true; p.listo(); } };
+  p.cuerpo.querySelectorAll('.pal-btn').forEach(b => b.onclick = () => { di(b.dataset.w); b.classList.add('visto'); vistos.add('p' + b.dataset.w); comprueba(); });
+  p.cuerpo.querySelectorAll('.chip').forEach(b => b.onclick = () => { di(b.textContent); b.classList.remove('toque'); void b.offsetWidth; b.classList.add('toque', 'visto'); vistos.add('s' + b.textContent); comprueba(); });
+  ayuda = el('p', 'cuenta-reto'); p.cuerpo.appendChild(ayuda); comprueba();
   pasos.push(p); })();
 
 function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = '', i = 0;
