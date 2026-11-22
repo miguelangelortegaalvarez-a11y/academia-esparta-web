@@ -208,7 +208,8 @@ def generar(archivo, voz=False):
     datos = {
         'letra': L, 'mayus': LM, 'nombre': nombre, 'archivo': A,
         'intro': d['intro'], 'silabas': d['silabas'],
-        'toca': [[p, e] for p, e in d['rodea']['minusculas']] + [[p, e] for p, e in d['rodea']['mayusculas']],
+        # minúsculas a la izquierda y MAYÚSCULAS a la derecha, como en la ficha de papel (rejilla de 2 columnas)
+        'toca': [x for par in zip(d['rodea']['minusculas'], d['rodea']['mayusculas']) for x in par],
         'sil': sil, 'junta': d['junta']['filas'],
         'banco': d['frases']['banco'], 'frases': d['frases']['filas'],
         'cuento': d['cuento'],
@@ -323,7 +324,8 @@ PLANTILLA = r'''<!DOCTYPE html>
     .como-suena .muestra { font-family:'Playwrite ES',cursive; font-size:3rem; color:var(--c); line-height:1.5; letter-spacing:.06em; }
     .como-suena p { margin:0; color:#78350f; font-weight:600; font-size:.95rem; }
     /* paso 2 */
-    .toca-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:12px; }
+    .toca-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    @media (max-width:620px) { .toca-grid { grid-template-columns:1fr; } }
     .toca-it { display:flex; align-items:center; gap:10px; background:color-mix(in srgb, var(--c) 5%, #fff); border-radius:18px; padding:8px 10px;
                border:2px solid color-mix(in srgb, var(--c) 15%, #fff); transition:background .3s, border-color .3s; }
     .toca-it.listo { background:#ecfdf5; border-color:#86efac; }
@@ -583,7 +585,7 @@ function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = 
   const L = plegar(D.letra), n = D.letra.length; let faltan = 0;
   const grid = el('div', 'toca-grid'); p.cuerpo.appendChild(grid);
   const marc = el('p', 'cuenta-reto'); p.cuerpo.appendChild(marc);
-  const items = mezcla(D.toca);
+  const items = D.toca;
   let palabrasHechas = 0;
   items.forEach(([w, e]) => {
     const it = el('div', 'toca-it'); it.innerHTML = `<span class="emo">${emo(e)}</span>`;
