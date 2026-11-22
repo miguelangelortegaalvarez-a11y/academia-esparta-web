@@ -103,7 +103,7 @@ academia-esparta-web/
 |---|---|
 | Lenguaje | HTML5 / CSS3 / JS vanilla — sin build, sin npm |
 | Fuentes web | Google Fonts: **Fraunces** (serif, títulos) + **Poppins** (sans, cuerpo) |
-| Fuente fichas imprimibles | **Edu SA Beginner** (1º–2º Primaria) / **Poppins** (3º+) |
+| Fuente fichas imprimibles | **Playwrite ES** (1º–2º Primaria, ligada escolar, servida desde `fuentes/`, desde 22-nov-2026) / **Poppins** (3º+) |
 | Iconos | Font Awesome 6.4 (CDN) |
 | Índice fichas | React 18 UMD inline en `materiales.html` (sin Node, sin build) |
 | Analytics | Umami (snippet en 8 páginas principales) |
@@ -179,7 +179,10 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - ⚠️ **Impresión Safari (norma 2026-06-14):** poner el margen vía `@page { margin: 2cm 3cm 1.5cm 3cm }` falla en Safari (recorta el borde derecho de las cajas: Safari no respeta `@page{margin}`). En fichas con cajas/bordes que llegan al borde (`.problema`, tablas, `.recuerda`) usar **`@page { margin: 0 }` + en `@media print` `body { max-width: 15cm !important; margin: 2cm auto 1.5cm !important }`** (margen vía body, que Safari sí respeta). Mismo aspecto en Chrome. **Aplicado a las 202 fichas de Mates Primaria (1º + 2º, commit e69e24f, 2026-06-14).** Queda Lengua (~620 fichas) como deuda.
 - ⚠️ **Impresión desde el MÓVIL (20-sep-2026):** al imprimir una ficha desde el iPhone sale «Página 1 de 2» con el pie en la segunda hoja. **No es un fallo de la ficha** — Safari de iOS ignora el `@page{margin:0}` y añade su margen (~1,27 cm/lado) más las bandas de encabezado y pie con la URL: ~8 cm de folio perdidos. **Se arregla bajando la *Escala* al 87-90 %** en el propio diálogo de impresión. Comprobado que **la f1 de 3º (en producción desde junio) se parte antes que las nuevas de 5º**, así que el criterio de llenado no está mal: el que cambia es el entorno de impresión. El validador (Chrome, `--no-pdf-header-footer`) no ve nada de esto. Pendiente sin decidir: si se quiere cubrir el caso «padres que imprimen desde el móvil», hay que recortar ~2,5 cm por ficha y eso afecta a las ~1.300 del sitio → tarea propia, no de un sub-bloque.
 - ⚠️ **Ver fichas en el MÓVIL (26-sep-2026):** con `viewport width=device-width` el móvil maqueta la ficha a su ancho (≤500 px) y las filas que no se parten (operaciones, fracciones, tablas) **se salían por la derecha**: 41 de 66 fichas de 6º, hasta 102 px. En ordenador y tableta (≥820 px), 0. **Arreglo: `<meta name="viewport" content="width=820" />`** → el móvil maqueta a 820 px y encoge la ficha entera (vista de folio, se amplía con los dedos). La impresión no cambia. Aplicado a las 66 de 6º y al generador `/tmp/ocf/motor.py`. **Pendiente decidir: 1º-5º (y Lengua) siguen con `device-width`**; comprobar con `/tmp/scr/medir.py` (inyecta JS, mide lo que sobresale del body a un ancho dado).
-- Fuente 1º–2º: **Edu SA Beginner**. Fuente 3º+: **Poppins**.
+- Fuente 1º–2º: **Playwrite ES** (cambio del 22-nov-2026, antes Edu SA Beginner; decisión de Miguel, la usa con alumnos de esas edades). Fuente 3º+: **Poppins**.
+  - **Cómo se carga:** NO desde Google Fonts, sino desde `fuentes/playwrite-es.woff2` (licencia SIL OFL en `fuentes/OFL-playwrite-es.txt`) con un `@font-face` al principio del `<style>` de cada ficha, ruta relativa (`../` según profundidad) y **`size-adjust: 125%` en 1º y `115%` en 2º** (agranda solo esa letra; números/cajas/dibujos sin tocar). Copiarlo tal cual al crear fichas nuevas de 1º-2º.
+  - **Es más ancha y tiene trazos altos y bajos:** (1) los títulos/filas en `display:flex` con texto + `<strong>` sueltos se desordenan si parten en dos líneas → envolver el texto en `<span class="txt-flex">` (regla `.txt-flex { flex: 1 1 auto; min-width: 0; }`); (2) los textos de varias líneas necesitan interlineado holgado → `line-height: 1.875` en 1º / `1.725` en 2º (bloque `interlineado-playwrite`).
+  - **Folios:** Miguel acepta 2 folios si hay contenido real en el segundo. Las fichas que se pasaban por poco llevan `@media print { body { zoom: 0.85-0.97 } }` (bloque `ajuste-impresion`) para no dejar una hoja con solo el pie. Resultado al cambiar: 331 a 1 folio (153 con ajuste) + 93 a 2 folios.
 - Las fichas NO usan el sistema visual premium de la web.
 - Ruta Lengua: `recursos/primaria/CURSO/lengua/BLOQUE/nombre-bloque-Xprimaria-serie-Y.html`
 - Ruta Mates: `recursos/primaria/CURSO/matematicas/BLOQUE/SUB-BLOQUE/nombre-sub-bloque-Xprimaria-serie-Y.html`
@@ -324,7 +327,7 @@ recursos/primaria/3/matematicas/operaciones/sumas-llevadas/
 
 ### Sub-bloques 3º Primaria — ACORDADO 2026-06-15 (EN MARCHA)
 
-Árbol acordado con Miguel el 2026-06-15. Mismos 6 bloques. Serie = 6 fichas. **⚠️ 3º usa fuente Poppins** (no Edu SA Beginner, que es solo 1º-2º). Plantilla base: `recursos/primaria/3/matematicas/numeros/numeros-hasta-10000/ficha-1.html` (clonada de la de 2º, fuente cambiada a Poppins, arreglo impresión Safari incluido). back-btn = 6 niveles `../../../../../../materiales.html`.
+Árbol acordado con Miguel el 2026-06-15. Mismos 6 bloques. Serie = 6 fichas. **⚠️ 3º usa fuente Poppins** (no la ligada de 1º-2º: hoy Playwrite ES, antes Edu SA Beginner). Plantilla base: `recursos/primaria/3/matematicas/numeros/numeros-hasta-10000/ficha-1.html` (clonada de la de 2º, fuente cambiada a Poppins, arreglo impresión Safari incluido). back-btn = 6 niveles `../../../../../../materiales.html`.
 
 **Decisiones de NIVEL (Miguel):** decimales → **aplazados a 4º** (en 3º NO) · fracciones → **concepto + sumar/restar mismo denominador** · división → **una cifra, exacta Y con resto** (división por dos cifras es 4º).
 
