@@ -195,10 +195,36 @@ def a_emoji(html):
     return re.sub(r'<svg(\b[^>]*)>.*?</svg>', r, html, flags=re.S)
 
 
+_NUEVAS = None
+
+
+def clases_nuevas():
+    """Clases del formato nuevo (letras + extra.css): si una ficha antigua usa el mismo nombre, choca."""
+    global _NUEVAS
+    if _NUEVAS is None:
+        import os
+        aqui = os.path.dirname(os.path.abspath(__file__))
+        css = open(os.path.join(aqui, '..', 'fichas-letras', 'estilo.css')).read() + open(os.path.join(aqui, 'extra.css')).read()
+        _NUEVAS = set(re.findall(r'\.([a-zA-Z][\w-]*)', re.sub(r'url\([^)]*\)', '', css)))
+    return _NUEVAS
+
+
+def sin_choques_html(h):
+    """Renombra (v-<nombre>) las clases antiguas que se llaman igual que una del formato nuevo."""
+    N = clases_nuevas()
+    return re.sub(r'class="([^"]+)"', lambda m: 'class="' + ' '.join(('v-' + c) if c in N else c for c in m.group(1).split()) + '"', h)
+
+
+def sin_choques_css(css):
+    for c in clases_nuevas():
+        css = re.sub(r'\.' + re.escape(c) + r'(?![\w-])', '.v-' + c, css) if ('.' + c) in css else css
+    return css
+
+
 def ejercicios_chasis(d, ej):
     """Cada bloque de primer nivel es una pieza; un enunciado suelto va pegado al bloque siguiente;
     las listas de problemas se pueden repartir problema a problema."""
-    bl = [enunciado(a_emoji(b), ej) for b in d['bloques']]
+    bl = [enunciado(a_emoji(sin_choques_html(b)), ej) for b in d['bloques']]
     o = []; k = 0; defs = ''
     while k < len(bl):
         b = bl[k]
@@ -223,4 +249,4 @@ def css_ficha(d, rel_raiz):
     return (f"@font-face{{font-family:'PW-ficha';src:url('{rel_raiz}fuentes/playwrite-es.woff2') format('woff2');"
             f"font-weight:100 400;font-display:swap;size-adjust:{d.get('size_adjust', 100)}%}}"
             ".mz{zoom:1.12;font-family:'PW-ficha',cursive}.mz .ej{font-family:'Playwrite ES',cursive}"
-            + espaciado(interlineado(d['css'])))
+            + espaciado(interlineado(sin_choques_css(d['css']))))

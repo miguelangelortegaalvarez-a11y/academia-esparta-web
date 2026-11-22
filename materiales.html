@@ -705,9 +705,9 @@
     }
 
     /* Índice estático de fichas (enlaces rastreables sin JS) */
-    .indice-fichas { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; border-top: 1px solid rgba(74,222,128,0.18); }
+    .indice-fichas { max-width: 900px; margin: 0 auto; padding: 1.6rem 1.5rem 3rem; border-top: 1px solid rgba(74,222,128,0.18); }
     .indice-fichas h2 { font-size: 1.05rem; color: #ecfdf5; margin-bottom: .3rem; }
-    .indice-fichas > p { font-size: .82rem; color: rgba(236,253,245,0.6); margin-bottom: 1.1rem; }
+    .indice-fichas p { font-size: .82rem; color: rgba(236,253,245,0.6); margin-bottom: 1.1rem; }
     .if-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.2rem; }
     .if-grid h3 { font-size: .9rem; color: #a7f3d0; margin-bottom: .4rem; }
     .if-grid ul { list-style: none; }
@@ -774,6 +774,14 @@
   <style>
     /* ── Piezas de letras (Aprendizaje de letras de 1º) ── */
     @font-face { font-family:'PlaywriteLetras'; src:url('fuentes/playwrite-es.woff2') format('woff2'); font-display:swap; }
+    /* índice de abajo plegado (los enlaces siguen en la página para Google y los buscadores de IA) */
+    .if-plegable > summary { cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:.5rem; font:600 .85rem 'Poppins',sans-serif;
+                             color:rgba(167,243,208,.85); padding:.45rem .95rem; border:1px solid rgba(167,243,208,.3); border-radius:999px; }
+    .if-plegable > summary::-webkit-details-marker { display:none; }
+    .if-plegable > summary::after { content:'▸'; transition:transform .2s; }
+    .if-plegable[open] > summary::after { transform:rotate(90deg); }
+    .if-plegable > summary:hover { border-color:rgba(167,243,208,.7); color:#fff; }
+    .if-plegable[open] > summary { margin-bottom:1rem; }
     .lt-sec { font:600 .74rem 'Poppins',sans-serif; letter-spacing:.1em; text-transform:uppercase; color:rgba(167,243,208,.85); margin:1.3rem 0 .8rem; }
     .lt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(122px,1fr)); gap:16px; perspective:1000px; }
     .lt-grid.voc { grid-template-columns:repeat(5,minmax(0,1fr)); max-width:720px; }
@@ -878,6 +886,8 @@
   </div>
 
   <section class="indice-fichas" aria-label="Índice de fichas por curso">
+   <details class="if-plegable">
+    <summary>📋 Ver el índice de todas las fichas por curso</summary>
     <h2>Índice completo de fichas por curso</h2>
     <p>Acceso directo a todas las colecciones de fichas imprimibles gratuitas, organizadas por curso y asignatura:</p>
     <div class="if-grid">
@@ -905,6 +915,7 @@
         </ul>
       </div>
     </div>
+   </details>
   </section>
 
   <script>
