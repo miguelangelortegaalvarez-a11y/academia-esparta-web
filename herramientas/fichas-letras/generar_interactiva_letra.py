@@ -323,6 +323,9 @@ PLANTILLA = r'''<!DOCTYPE html>
             border:3px solid color-mix(in srgb, var(--c) 25%, #fff); color:#0f172a; transition:transform .15s, background .15s; }
     .chip:hover { transform:translateY(-3px); border-color:var(--c); }
     .chip.toque { background:var(--c); color:#fff; animation:pop .35s; }
+    /* guía: brillo suave en lo siguiente que hay que tocar (paso 1) */
+    .guia { animation:guia 1.7s ease-in-out infinite; }
+    @keyframes guia { 0%,100% { box-shadow:0 0 0 0 color-mix(in srgb, var(--c) 0%, transparent); } 50% { box-shadow:0 0 0 7px color-mix(in srgb, var(--c) 30%, transparent); transform:scale(1.03); } }
     .pal-btn.visto { background:var(--c); border-color:var(--c); color:#fff; } .pal-btn.visto .pw, .pal-btn.visto .v { color:#fff; }
     .como-suena { margin:18px auto 14px; max-width:460px; text-align:center; background:#fffbeb; border:3px dashed var(--oro); border-radius:22px; padding:12px 16px 14px; }
     .como-suena h3 { margin:0; font-size:1.05rem; color:#92400e; }
@@ -584,7 +587,9 @@ app.appendChild(portada);
     <div class="como-suena"><h3>¿Cómo suena la ${letraPW(D.nombre.replace(/\s*\(.*\)/, ''))}?</h3><div class="muestra">${esc(D.suena[0])}</div><p>${esc(D.suena[1])}</p></div><div class="chips">${D.silabas.map(s => `<button class="chip" type="button">${esc(s)}</button>`).join('')}</div>`;
   const vistos = new Set();
   let ayuda; let hecho = false; const total = D.intro.palabras.length + new Set(D.silabas).size;
-  const comprueba = () => { ayuda.textContent = `Toca las dos palabras y todas las sílabas: ${vistos.size} de ${total}.`; if (!hecho && vistos.size >= total) { hecho = true; p.listo(); } };
+  const guia = () => { p.cuerpo.querySelectorAll('.guia').forEach(x => x.classList.remove('guia'));
+    const sig = p.cuerpo.querySelector('.pal-btn:not(.visto)') || p.cuerpo.querySelector('.chip:not(.visto)'); if (sig) sig.classList.add('guia'); };
+  const comprueba = () => { guia(); ayuda.textContent = `Toca las dos palabras y todas las sílabas: ${vistos.size} de ${total}.`; if (!hecho && vistos.size >= total) { hecho = true; p.listo(); } };
   p.cuerpo.querySelectorAll('.pal-btn').forEach(b => b.onclick = () => { di(b.dataset.w); b.classList.add('visto'); vistos.add('p' + b.dataset.w); comprueba(); });
   p.cuerpo.querySelectorAll('.chip').forEach(b => b.onclick = () => { di(b.textContent); b.classList.remove('toque'); void b.offsetWidth; b.classList.add('toque', 'visto'); vistos.add('s' + b.textContent); comprueba(); });
   ayuda = el('p', 'cuenta-reto'); p.cuerpo.appendChild(ayuda); comprueba();
