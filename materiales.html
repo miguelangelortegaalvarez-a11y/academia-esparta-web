@@ -795,7 +795,9 @@
     .lt-btn { display:block; width:100%; text-align:center; font:600 .7rem 'Poppins',sans-serif; padding:.36rem .2rem; border-radius:9px; white-space:nowrap;
               background:rgba(255,255,255,.12); border:1.5px solid rgba(255,255,255,.6); color:#fff !important; text-decoration:none; pointer-events:none;
               transition:background .15s, color .15s, transform .15s, box-shadow .15s; }
-    .lt-btn:hover, .lt-btn:focus-visible { background:#fff; border-color:#fff; color:var(--c) !important; transform:scale(1.06); box-shadow:0 4px 10px rgba(0,0,0,.25); outline:none; }
+    .lt-btn:hover { background:#fff; border-color:#fff; color:var(--c) !important; transform:scale(1.06); box-shadow:0 4px 10px rgba(0,0,0,.25); }
+    .lt-btn:focus { outline:none; }
+    .lt-btn:focus-visible { outline:2px solid #fff; outline-offset:2px; }
     .lt-pieza.abierta .lt-int, .lt-pieza:focus-within .lt-int { transform:rotateY(180deg); }
     .lt-pieza.abierta .lt-btn, .lt-pieza:focus-within .lt-btn { pointer-events:auto; }
     @media (hover:hover) {
@@ -4176,7 +4178,7 @@
       const pieza = (f, k) => {
         const L = LETRAS_INFO[f.archivo] || { ver: f.titulo, emo: '', pal: '', pdf: f.archivo };
         const on = abierta === f.archivo;
-        const para = e => e.stopPropagation();
+        const para = e => { e.stopPropagation(); e.currentTarget.blur(); };
         return h('div', {
             key: f.archivo, tabIndex: 0, role: 'button', 'aria-label': f.titulo + ': abrir opciones',
             className: 'lt-pieza' + (on ? ' abierta' : ''),
