@@ -63,14 +63,9 @@ def reloj(h, corta=True):
 
 
 def moneda(v):
-    """Moneda (1 €, 2 €) o billete (5 €, 10 €) sencillos."""
-    if v in (5, 10):
-        return (f'<svg class="xm-bill" viewBox="0 0 90 50"><rect x="2" y="2" width="86" height="46" rx="5" fill="#fff" stroke="#1a1a1a" stroke-width="2"/>'
-                f'<text x="45" y="20" text-anchor="middle" font-size="9" font-family="sans-serif" letter-spacing="2">EURO</text>'
-                f'<text x="45" y="40" text-anchor="middle" font-size="18" font-weight="700" font-family="sans-serif">{v}</text></svg>')
-    return (f'<svg class="xm-mon" viewBox="0 0 60 60"><circle cx="30" cy="30" r="27" fill="#fff" stroke="#1a1a1a" stroke-width="2"/>'
-            f'<circle cx="30" cy="30" r="20" fill="none" stroke="#1a1a1a" stroke-width="1"/>'
-            f'<text x="30" y="36" text-anchor="middle" font-size="17" font-weight="700" font-family="sans-serif">{v}€</text></svg>')
+    """Moneda (1 €, 2 €) o billete (5 €, 10 €) en color (dinero.py)."""
+    import dinero
+    return dinero.billete(v, ' class="xm-bill" viewBox="0 0 160 90"') if v in (5, 10) else dinero.moneda(v * 100, ' class="xm-mon" viewBox="0 0 100 100"')
 
 
 def figura(nombre):

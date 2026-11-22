@@ -141,10 +141,64 @@ def enunciado(b, ej):
 PAUTA = ''
 
 
+# Dibujos de línea antiguos → emoji (decisión de Miguel, 23-nov-2026: «esos dibujos no los quiero»).
+# Clave = huella del SVG antiguo (sin width/height/class/style). Relojes, monedas y figuras NO se tocan.
+DIBUJO_A_EMOJI = {
+    '9491ad': '🍎', 'a1ce94': '🍎', 'a63cd3': '🍎', 'f8c9c2': '🍌', '856f6f': '🍐', '841b47': '🍐', 'c7cbeb': '🍇', 'dbdb23': '🍇',
+    'dfe98f': '🐶', '295129': '🐶', '698919': '🐶', '060410': '🐱', 'f968c1': '🐱', '3f6866': '🐱', 'afebb7': '🐟', 'b4df33': '🐟',
+    'df8889': '🚗', 'e4c55d': '🚗', '9b25ac': '🚲', '313770': '🚲', 'a6005d': '🚲', 'a40f8a': '✈️', 'b34351': '⛵',
+    '5b28c5': '✏️', '8526f6': '✏️', 'ac5c45': '✏️', '2a22ec': '📘', '110cd2': 'GOMA', '656014': 'SACAPUNTAS',
+    'd7ec3e': '🃏', 'c0b506': '🍪', '8714fa': '🧒', '0846eb': '🧒', '760346': '🪙', 'f623f3': '⭐', 'd68aa2': '🌸',
+    '4af2a9': '🍬', '42d7f4': '🍬', '8e34cc': '🎈', '56ca9e': '🐦', '21b656': '⚽',
+}
+PROPIOS = {   # objetos sin emoji: dibujo propio en color, estilo emoji
+    'GOMA': '<g transform="rotate(-18 30 30)"><rect x="8" y="20" width="44" height="22" rx="5" fill="#f9a8d4" stroke="#9d174d" stroke-width="2"/>'
+            '<rect x="30" y="20" width="22" height="22" rx="4" fill="#60a5fa" stroke="#1e3a8a" stroke-width="2"/></g>',
+    'SACAPUNTAS': '<rect x="12" y="16" width="36" height="30" rx="5" fill="#fbbf24" stroke="#92400e" stroke-width="2"/>'
+                  '<circle cx="30" cy="31" r="8" fill="#fff" stroke="#92400e" stroke-width="2"/><circle cx="30" cy="31" r="3" fill="#374151"/>'
+                  '<rect x="40" y="22" width="6" height="18" rx="2" fill="#d1d5db" stroke="#6b7280" stroke-width="1.5"/>',
+}
+
+
+def huella(svg):
+    import hashlib
+    k = re.sub(r'\s+', ' ', re.sub(r'(width|height|class|style)="[^"]*"', '', svg)).strip()
+    return hashlib.md5(k.encode()).hexdigest()[:6]
+
+
+def a_dinero(html):
+    """Monedas y billetes antiguos (dibujo de línea) → en color (dinero.py), leyendo su valor."""
+    import dinero
+    def r(m):
+        attrs, cuerpo = m.group(1), m.group(2)
+        cls = re.search(r'class="([^"]+)"', attrs)
+        if not cls or not re.search(r'moneda-svg|billete-svg', cls.group(1)): return m.group(0)
+        txt = ' '.join(re.findall(r'>([^<>]+)</text>', cuerpo))
+        if 'billete' in cls.group(1):
+            v = int(re.search(r'\d+', txt).group(0)); return dinero.billete(v, attrs)
+        e = re.search(r'(\d+)\s*€', txt)
+        cent = int(e.group(1)) * 100 if e else int(re.search(r'(\d+)\s*CENT', txt).group(1))
+        return dinero.moneda(cent, attrs)
+    return re.sub(r'<svg(\b[^>]*)>(.*?)</svg>', r, html, flags=re.S)
+
+
+def a_emoji(html):
+    html = a_dinero(html)
+    def r(m):
+        e = DIBUJO_A_EMOJI.get(huella(m.group(0)))
+        if not e: return m.group(0)
+        attrs = m.group(1)
+        if e in PROPIOS:
+            return f'<svg{attrs}>{PROPIOS[e]}</svg>'
+        return (f'<svg{attrs}><text x="30" y="51" font-size="54" text-anchor="middle" '
+                f'font-family="Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif">{e}</text></svg>')
+    return re.sub(r'<svg(\b[^>]*)>.*?</svg>', r, html, flags=re.S)
+
+
 def ejercicios_chasis(d, ej):
     """Cada bloque de primer nivel es una pieza; un enunciado suelto va pegado al bloque siguiente;
     las listas de problemas se pueden repartir problema a problema."""
-    bl = [enunciado(b, ej) for b in d['bloques']]
+    bl = [enunciado(a_emoji(b), ej) for b in d['bloques']]
     o = []; k = 0; defs = ''
     while k < len(bl):
         b = bl[k]
