@@ -217,6 +217,8 @@ def clases_nuevas():
         import os
         aqui = os.path.dirname(os.path.abspath(__file__))
         css = open(os.path.join(aqui, '..', 'fichas-letras', 'estilo.css')).read() + open(os.path.join(aqui, 'extra.css')).read()
+        css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
+        css = re.sub(r'(?:(?<=\})|^)\s*\.mz [^{]*\{[^}]*\}', '', css, flags=re.M)      # reglas para los ejercicios antiguos: no son clases «nuevas»
         _NUEVAS = set(re.findall(r'\.([a-zA-Z][\w-]*)', re.sub(r'url\([^)]*\)', '', css)))
         _NUEVAS -= {'mz'}               # el envoltorio de los ejercicios antiguos no es una clase «nueva»
     return _NUEVAS

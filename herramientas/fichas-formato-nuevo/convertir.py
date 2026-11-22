@@ -258,7 +258,7 @@ const pg=document.querySelector('.pagina'),P=pg.getBoundingClientRect().top;
 const u=[...document.querySelectorAll('[data-u]')].map(e=>{const r=e.getBoundingClientRect();return [e.dataset.u,r.top-P,r.bottom-P]});
 const lim=pg.getBoundingClientRect().right-pg.offsetWidth/21*1.6+2;let des=0;
 let quien='';pg.querySelectorAll('*').forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.right>lim&&r.right-lim>des){des=r.right-lim;quien=e.tagName+'.'+(e.getAttribute('class')||'')}});
-const pie=document.querySelector('.pie').offsetHeight, fin=document.querySelector('.fin').getBoundingClientRect();
+const pie=document.querySelector('.pie').offsetHeight, fe=document.querySelector('.fin'),fin=fe?fe.getBoundingClientRect():{height:34};
 const pre=document.createElement('pre');pre.id='alturas';pre.textContent=JSON.stringify({u,des,quien,pie,fin:fin.height+26,cm:pg.offsetWidth/21});
 document.body.appendChild(pre);});});</script>"""
 
@@ -267,10 +267,13 @@ def paginar(d, doc_medida, carpeta):
     """Mide con Chrome cada pieza y reparte en páginas llenando cada una."""
     prueba = os.path.join(carpeta, '.mide.html')
     open(prueba, 'w', encoding='utf8').write(doc_medida)
-    ud = tempfile.mkdtemp()
-    r = subprocess.run([CHROME, '--headless', '--disable-gpu', '--virtual-time-budget=8000', '--allow-file-access-from-files',
-                        f'--user-data-dir={ud}', '--window-size=1000,4000', '--dump-dom', 'file://' + prueba], capture_output=True, text=True)
-    shutil.rmtree(ud, ignore_errors=True); os.remove(prueba)
+    for intento in range(3):                       # Chrome sin pantalla a veces devuelve la página antes de medir
+        ud = tempfile.mkdtemp()
+        r = subprocess.run([CHROME, '--headless', '--disable-gpu', '--virtual-time-budget=%d' % (8000 + 6000 * intento), '--allow-file-access-from-files',
+                            f'--user-data-dir={ud}', '--window-size=1000,4000', '--dump-dom', 'file://' + prueba], capture_output=True, text=True)
+        shutil.rmtree(ud, ignore_errors=True)
+        if '<pre id="alturas">' in r.stdout: break
+    os.remove(prueba)
     m = json.loads(html.unescape(re.search(r'<pre id="alturas">(.*?)</pre>', r.stdout, re.S).group(1)))
     cm = m['cm']
     u = m['u']                                    # [id, top, bottom] en orden de documento
@@ -279,7 +282,7 @@ def paginar(d, doc_medida, carpeta):
         sig = u[k+1][1] if k + 1 < len(u) else bot + 30
         alto.append((uid, sig - top))
     y0 = u[0][1]
-    limite = 29.7 * cm - 0.8 * cm - m['pie'] - 30
+    limite = 29.7 * cm - 0.8 * cm - m['pie'] - 30 - MARGEN[0]
     paginas, libres, actual, y = [], [], [], y0
     for k, (uid, h) in enumerate(alto):
         extra = alto[k+1][1] if uid.startswith('c') and k + 1 < len(alto) else 0   # cabecera pegada a su 1.ª pieza
@@ -323,6 +326,7 @@ MIDE = '<style>@media print{.pagina{height:auto!important;min-height:0!important
 
 
 FIN = [True]
+MARGEN = [0]
 DESBORDE = [0]
 ZOOM = [1.12]
 
@@ -435,9 +439,13 @@ def generar_una(ruta):
             cab, cls, pz = EJ[-1]
             EJ = EJ[:-1] + ([(cab, cls, pz[:-1])] if len(pz) > 1 and not solo_modelo(pz[:-1]) else [])
             reparto, libres, alto_fin = medir(EJ); continue
-        print(f'✗ {rel}: el reparto no cabe ({n} folios para {T} páginas) — NO se escribe'); return False
+        if MARGEN[0] < 120:                                 # se pasa por poco: repartir con más margen
+            MARGEN[0] += 40; EJ = ejercicios(d); FIN[0] = True; nbase = len(EJ)
+            reparto, libres, alto_fin = medir(EJ); continue
+        print(f'✗ {rel}: el reparto no cabe ({n} folios para {T} páginas) — NO se escribe'); MARGEN[0] = 0; return False
     open(destino, 'w', encoding='utf8').write(doc)
     n = pdf(destino, os.path.join(carpeta, nom))
+    MARGEN[0] = 0
     print(f'{"✓" if n == T else "✗"} {rel} → {nom} ({n} pág.{"" if ZOOM[0] in (1.12, 1.0) else ", escala " + str(ZOOM[0])}: ' + ' | '.join(','.join(x for x in ids if x[0] == 'p') for ids in reparto) + ')')
     return n == T
 
