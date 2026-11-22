@@ -1273,6 +1273,7 @@
       },
       'lengua|1|LECTURA|Comprensión con opciones': {
         ruta: 'recursos/primaria/1/lengua/comprension-opciones/',
+        vista: 'vf', pdfPre: 'comprension-opciones-',
         fichas: [
           { num:1,  archivo:'m_opciones.html',   titulo:'Letra M',      emoji:'📖', nivel:'⭐⭐ Medio' },
           { num:2,  archivo:'p_opciones.html',   titulo:'Letra P',      emoji:'📖', nivel:'⭐⭐ Medio' },
@@ -4264,9 +4265,10 @@
       const [abierta, setAbierta] = React.useState(null);
       const pieza = (f, k) => {
         const on = abierta === f.archivo;
-        const L = LETRAS_INFO[f.archivo] || { ver: f.titulo };
-        const V = VF_INFO[f.archivo] || { emo: '', pal: '' };
-        const pdf = 'comprension-' + f.archivo.replace('.html', '') + '-1-primaria.pdf';
+        const base = f.archivo.replace('_opciones', '').replace('.html', '');   // misma lectura en V/F y con opciones
+        const L = LETRAS_INFO[base + '.html'] || { ver: f.titulo };
+        const V = VF_INFO[base + '.html'] || { emo: '', pal: '' };
+        const pdf = (rec.pdfPre || 'comprension-') + base + '-1-primaria.pdf';
         const para = e => { e.stopPropagation(); e.currentTarget.blur(); };
         return h('div', {
             key: f.archivo, tabIndex: 0, role: 'button', 'aria-label': f.titulo + ': abrir opciones',
@@ -4282,7 +4284,7 @@
             ),
             h('div', { className: 'lt-cara lt-dorso' },
               h('div', { className: 'lt-dorso-t' }, f.titulo),
-              h('a', { href: rec.ruta + pdf, className: 'lt-btn pdf', target: '_blank', rel: 'noopener', onClick: para, 'data-umami-event': 'pdf-vf-materiales' }, '📄 Imprimir'),
+              h('a', { href: rec.ruta + pdf, className: 'lt-btn pdf', target: '_blank', rel: 'noopener', onClick: para, 'data-umami-event': (rec.pdfPre ? 'pdf-opciones-materiales' : 'pdf-vf-materiales') }, '📄 Imprimir'),
               h('a', { href: rec.ruta + f.archivo, className: 'lt-btn', target: '_blank', rel: 'noopener', onClick: para }, '👀 Ver ficha')
             )
           )
