@@ -788,6 +788,12 @@
     .lt-emo { position:absolute; top:7px; right:9px; font-size:1.3rem; }
     .lt-letra { font-family:'PlaywriteLetras',cursive; font-size:2.5rem; line-height:1.15; color:var(--c); white-space:nowrap; margin-top:-1.1rem; }
     .lt-letra.larga { font-size:1.75rem; }
+    .lt-grid.cf { grid-template-columns:repeat(5,minmax(0,1fr)); max-width:900px; gap:20px; }
+    .lt-grid.cf .lt-dorso-t { font-size:.74rem; line-height:1.2; text-align:center; }
+    @media (max-width:640px) { .lt-grid.cf { grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; } }
+    .lt-emo-g { font-size:2.7rem; line-height:1; margin-top:-1.6rem; }
+    .lt-num { position:absolute; top:9px; left:11px; font:600 .66rem 'Poppins',sans-serif; color:#94a3b8; letter-spacing:.04em; }
+    .lt-pal.lt-tit { font:400 .9rem 'PlaywriteLetras',cursive; color:#334155; padding:0 6px; line-height:1.35; bottom:8px; }
     .lt-pal { position:absolute; bottom:9px; left:0; right:0; text-align:center; font:500 .76rem 'Poppins',sans-serif; color:#64748b; }
     .lt-dorso { background:var(--c); transform:rotateY(180deg); gap:5px; padding:8px 9px;
                 box-shadow:0 5px 0 rgba(0,0,0,.22), 0 14px 26px -10px rgba(0,0,0,.55); }
@@ -1221,6 +1227,7 @@
     const RECURSOS = {
       'lengua|1|LECTURA|Conciencia fonológica': {
         ruta: 'recursos/primaria/1/lengua/conciencia-fonologica/',
+        vista: 'conciencia',
         fichas: [
           { num:1, archivo:'reconocer-sonidos.html',     interactiva:'reconocer-sonidos-interactiva.html',     titulo:'Escucho las palabras', emoji:'👂', nivel:'⭐ Básico' },
           { num:2, archivo:'rimas.html',                 interactiva:'rimas-interactiva.html',                 titulo:'Rimas',                emoji:'🎵', nivel:'⭐ Básico' },
@@ -4213,6 +4220,43 @@
       );
     }
 
+    // Conciencia fonológica de 1º: las mismas piezas que las letras (caen, se giran, 3 botones)
+    function ConcienciaView({ rec }) {
+      const [abierta, setAbierta] = React.useState(null);
+      const pieza = (f, k) => {
+        const on = abierta === f.archivo;
+        const pdf = f.archivo.replace('.html', '-1-primaria.pdf');
+        const para = e => { e.stopPropagation(); e.currentTarget.blur(); };
+        return h('div', {
+            key: f.archivo, tabIndex: 0, role: 'button', 'aria-label': f.titulo + ': abrir opciones',
+            className: 'lt-pieza' + (on ? ' abierta' : ''),
+            style: { '--i': k, '--c': LT_COLORES[k % LT_COLORES.length], '--r': (((k * 37) % 5) - 2) * 0.9 + 'deg' },
+            onClick: () => setAbierta(on ? null : f.archivo)
+          },
+          h('div', { className: 'lt-int' },
+            h('div', { className: 'lt-cara lt-frente' },
+              h('span', { className: 'lt-num' }, 'Ficha ' + f.num),
+              h('span', { className: 'lt-emo-g', 'aria-hidden': 'true' }, f.emoji),
+              h('span', { className: 'lt-pal lt-tit' }, f.titulo)
+            ),
+            h('div', { className: 'lt-cara lt-dorso' },
+              h('div', { className: 'lt-dorso-t' }, f.titulo),
+              h('a', { href: rec.ruta + pdf, className: 'lt-btn pdf', target: '_blank', rel: 'noopener', onClick: para, 'data-umami-event': 'pdf-conciencia-materiales' }, '📄 Imprimir'),
+              h('a', { href: rec.ruta + f.archivo, className: 'lt-btn', target: '_blank', rel: 'noopener', onClick: para }, '👀 Ver ficha'),
+              f.interactiva && h('a', { href: rec.ruta + f.interactiva, className: 'lt-btn', target: '_blank', rel: 'noopener', onClick: para }, '💻 Interactiva')
+            )
+          )
+        );
+      };
+      return h('div', { className: 'fichas-disponibles' },
+        h('div', { className: 'fichas-dis-header' },
+          h('span', { className: 'fichas-dis-titulo' }, rec.fichas.length + ' fichas · de menos a más · toca una para abrirla'),
+          h('a', { href: rec.ruta + 'index.html', className: 'fichas-dis-link', target: '_blank' }, 'Ver índice completo →')
+        ),
+        h('div', { className: 'lt-grid cf' }, rec.fichas.map((f, k) => pieza(f, k)))
+      );
+    }
+
     // ── View 4: Resource detail ──────────────────────────────────────────────
     function RecursoView({ asig, curso, bloqueKey, subBloque }) {
       const b   = ASIGNATURAS[asig].curriculum[curso].bloques[bloqueKey];
@@ -4226,6 +4270,8 @@
         ),
         rec && rec.vista === 'letras'
           ? h(LetrasView, { rec })
+          : rec && rec.vista === 'conciencia'
+          ? h(ConcienciaView, { rec })
           : rec
           ? h('div', { className:'fichas-disponibles' },
               h('div', { className:'fichas-dis-header' },
