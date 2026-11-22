@@ -794,6 +794,28 @@
     .lt-emo-g { font-size:2.7rem; line-height:1; margin-top:-1.6rem; }
     .lt-num { position:absolute; top:9px; left:11px; font:600 .66rem 'Poppins',sans-serif; color:#94a3b8; letter-spacing:.04em; }
     .lt-pal.lt-tit { font:400 .9rem 'PlaywriteLetras',cursive; color:#334155; padding:0 6px; line-height:1.35; bottom:8px; }
+    .lt-pieza.nav .lt-num { left:auto; right:0; left:0; text-align:center; top:auto; bottom:-1.5rem; color:rgba(167,243,208,.85); }
+    .lt-pieza.nav:hover .lt-int, .lt-pieza.nav:focus-within .lt-int { transform:none; }
+    .lt-pieza.nav .lt-frente { justify-content:center; }
+    .lt-grid.cf .lt-pieza.nav { margin-bottom:1.4rem; }
+    .leoni-cab { display:flex; align-items:center; gap:22px; margin:0 0 1.6rem; padding:16px 22px 16px 10px; border-radius:22px;
+                 background:linear-gradient(135deg, rgba(6,78,59,.75), rgba(5,58,44,.9)); border:1px solid rgba(74,222,128,.22); }
+    .leoni-img { width:92px; height:auto; flex-shrink:0; animation:leoniBaila 3.2s ease-in-out infinite; transform-origin:50% 100%; filter:drop-shadow(0 6px 10px rgba(0,0,0,.35)); }
+    @keyframes leoniBaila { 0%,100% { transform:rotate(-3deg); } 50% { transform:rotate(3deg) translateY(-3px); } }
+    .leoni-der { flex:1; min-width:0; }
+    .leoni-tit { font:400 1.65rem 'PlaywriteLetras',cursive; color:#fff; line-height:1.5; margin-bottom:.4rem; }
+    .leoni-bocadillo { position:relative; display:inline-block; background:#fffdf6; color:#1f3d2b; font:500 .95rem 'Poppins',sans-serif; line-height:1.45;
+                       padding:.65rem 1rem; border-radius:16px; box-shadow:0 4px 14px rgba(0,0,0,.2); }
+    .leoni-bocadillo::before { content:''; position:absolute; left:-9px; top:50%; margin-top:-8px; border:8px solid transparent; border-right-color:#fffdf6; border-left:0; }
+    .leoni-pastillas { display:flex; flex-wrap:wrap; gap:8px; margin-top:.75rem; }
+    .leoni-pas { font:600 .74rem 'Poppins',sans-serif; color:#a7f3d0; border:1px solid rgba(167,243,208,.4); border-radius:999px; padding:.25rem .7rem; }
+    @media (max-width:640px) {
+      .leoni-cab { flex-direction:column; align-items:flex-start; gap:8px; padding:14px 16px; }
+      .leoni-img { width:64px; }
+      .leoni-tit { font-size:1.3rem; }
+      .leoni-bocadillo::before { left:22px; top:-9px; margin-top:0; border:8px solid transparent; border-bottom-color:#fffdf6; border-top:0; }
+    }
+    @media (prefers-reduced-motion:reduce) { .leoni-img { animation:none; } }
     .lt-pal { position:absolute; bottom:9px; left:0; right:0; text-align:center; font:500 .76rem 'Poppins',sans-serif; color:#64748b; }
     .lt-dorso { background:var(--c); transform:rotateY(180deg); gap:5px; padding:8px 9px;
                 box-shadow:0 5px 0 rgba(0,0,0,.22), 0 14px 26px -10px rgba(0,0,0,.55); }
@@ -1162,6 +1184,13 @@
       const c = ASIGNATURAS[asig].curriculum[curso];
       const entries = Object.entries(c.bloques);
       const isTwo = entries.length === 2;
+      if (curso === '1') {
+        return h('div', null,
+          h(LeoniCabecera, { titulo: c.nombre + ' · ' + ASIGNATURAS[asig].nombre, frase: 'Elige un bloque y después el tema que quieras practicar.',
+            pastillas: [entries.length + ' bloques'] }),
+          h('div', { className: 'lt-grid cf' }, entries.map(([key, bl], i) => piezaNav(i, bl.icono, bl.nombre, bl.subBloques.length + ' temas', () => onSelect(key))))
+        );
+      }
       return h('div', null,
         h('div', { className:'intro-block' },
           h('div', { className:'intro-title' }, c.nombre + ' · ' + CICLO[c.ciclo].label),
@@ -1195,6 +1224,16 @@
     // ── View 3: Sub-block list ───────────────────────────────────────────────
     function SubBloqueView({ asig, curso, bloqueKey, onSelect }) {
       const b = ASIGNATURAS[asig].curriculum[curso].bloques[bloqueKey];
+      if (curso === '1') {
+        return h('div', null,
+          h(LeoniCabecera, { titulo: b.nombre, frase: '¿Qué quieres trabajar hoy? Toca un tema para ver sus fichas.',
+            pastillas: [b.subBloques.length + ' temas', '1.º de Primaria'] }),
+          h('div', { className: 'lt-grid cf' }, b.subBloques.map((sb, i) => {
+            const r = RECURSOS[asig + '|' + curso + '|' + bloqueKey + '|' + sb];
+            return piezaNav(i, SB_EMO[sb] || b.icono, sb, r ? r.fichas.length + ' fichas' : '', () => onSelect(sb));
+          }))
+        );
+      }
       return h('div', null,
         h('div', { className:'sb-header', style:{ borderLeftColor: b.color } },
           h('span', { className:'sb-emoji' }, b.icono),
@@ -4178,6 +4217,9 @@
     };
 
     // ── Vista especial: piezas de letras (solo «Aprendizaje de letras» de 1º) ──
+    const SB_EMO = {"Conciencia fonológica": "👂", "Aprendizaje de letras": "✍️", "Lecturas de verdadero y falso": "✅", "Comprensión con opciones": "🔘", "Lecturas finales": "📖", "Números hasta 99": "🔢", "Decenas y unidades": "🔟", "Números ordinales": "🥇", "Comparar y ordenar": "⚖️", "Sumas sin llevadas": "➕", "Restas sin llevadas": "➖", "Sumas y restas mezcladas": "🚦", "Longitud, peso y capacidad": "📏", "Monedas y billetes": "💶", "El reloj en punto": "🕐", "Días de la semana": "📅", "Meses del año": "🌸", "Figuras planas": "🔺", "Cuerpos geométricos": "🧊", "Líneas y situación espacial": "〰️", "Tablas simples": "📊", "Pictogramas": "🍎", "Problemas de suma sencillos": "🧮", "Problemas de resta sencillos": "🍪", "Problemas mixtos básicos": "🤔"};
+    const PIEZAS_1 = {"matematicas|1|NUMEROS|Números hasta 99": [["🔢", "Del 1 al 10"], ["🔟", "Del 10 al 20"], ["🎯", "Del 20 al 50"], ["💯", "Del 50 al 99"], ["🔁", "Antes y después"], ["🦘", "De 2, 5 y 10 en 10"]], "matematicas|1|NUMEROS|Decenas y unidades": [["📦", "La decena"], ["🧱", "Decenas y unidades"]], "matematicas|1|NUMEROS|Números ordinales": [["🥇", "Primero, segundo…"], ["🏁", "Más ordinales"]], "matematicas|1|NUMEROS|Comparar y ordenar": [["⚖️", "Mayor, menor, igual"], ["🪜", "Ordenar números"]], "matematicas|1|OPERACIONES|Sumas sin llevadas": [["➕", "Empiezo a sumar"], ["✍️", "Practico sumas"], ["🍎", "Sumas con dibujos"], ["🧩", "Descomponer"], ["👯", "El doble"], ["🎲", "Tres sumandos"], ["📄", "Sumas en columna"], ["📝", "Más sumas"]], "matematicas|1|OPERACIONES|Restas sin llevadas": [["➖", "Empiezo a restar"], ["✍️", "Practico restas"], ["🍪", "Restas con dibujos"], ["❓", "Completar restas"], ["✂️", "La mitad"], ["🔗", "Restas encadenadas"], ["📄", "Restas en columna"], ["📝", "Más restas"]], "matematicas|1|OPERACIONES|Sumas y restas mezcladas": [["🚦", "¿Suma o resta?"], ["🥉", "Práctica 1"], ["🥈", "Práctica 2"], ["🥇", "Práctica 3"]], "matematicas|1|MEDIDA|Longitud, peso y capacidad": [["📏", "Largo, pesado, lleno"], ["🪶", "Corto y ligero"], ["🔄", "Repaso"]], "matematicas|1|MEDIDA|Monedas y billetes": [["💶", "Conozco el dinero"], ["🪙", "Contar monedas"], ["🛒", "¿Me llega?"]], "matematicas|1|MEDIDA|El reloj en punto": [["🕐", "Leo el reloj"], ["🕒", "Dibujo la hora"], ["⏰", "Repaso del reloj"]], "matematicas|1|MEDIDA|Días de la semana": [["📅", "Los días"], ["📆", "El calendario"], ["🔄", "Repaso"]], "matematicas|1|MEDIDA|Meses del año": [["🌸", "Los meses"], ["🎂", "Celebraciones"], ["🔄", "Repaso"]], "matematicas|1|GEOMETRIA|Figuras planas": [["🔺", "Las figuras"], ["🔷", "Contar y asociar"], ["🏠", "La casita"]], "matematicas|1|GEOMETRIA|Cuerpos geométricos": [["🧊", "Los cuerpos"], ["🎲", "Cuerpos en casa"], ["⛄", "El muñeco"]], "matematicas|1|GEOMETRIA|Líneas y situación espacial": [["〰️", "Las líneas"], ["📍", "Dentro y fuera"], ["🔄", "Repaso"]], "matematicas|1|ESTADISTICA|Tablas simples": [["📊", "Contar y apuntar"], ["🍓", "Las frutas"], ["✏️", "El estuche"]], "matematicas|1|ESTADISTICA|Pictogramas": [["🍎", "Pictogramas"], ["🐶", "Mascotas"], ["🚗", "Transportes"]], "matematicas|1|PROBLEMAS|Problemas de suma sencillos": [["🧮", "Problemas de sumar"], ["✏️", "Lápices y pelotas"], ["📖", "Repaso"]], "matematicas|1|PROBLEMAS|Problemas de resta sencillos": [["🐟", "Problemas de restar"], ["🍪", "Galletas y cromos"], ["📖", "Repaso"]], "matematicas|1|PROBLEMAS|Problemas mixtos básicos": [["🤔", "¿Sumo o resto?"], ["🎈", "Flores y globos"], ["📖", "Repaso"]]};
+    const LEONI_FRASE = {"Conciencia fonológica": "Escucha las palabras y juega con sus sonidos. ¡Todavía no hace falta leer!", "Aprendizaje de letras": "Elige una letra: aprende cómo suena, repásala y escríbela tú.", "Lecturas de verdadero y falso": "Elige una letra, lee el cuento y colorea V o F.", "Comprensión con opciones": "Elige una letra, lee el cuento y marca la respuesta buena.", "Lecturas finales": "Ya sabes leer: elige una lectura, léela y contesta las preguntas."};
     const VF_INFO = {"b.html": {"emo": "🫏", "pal": "Bibo"}, "c.html": {"emo": "🐊", "pal": "Coco"}, "ce.html": {"emo": "🎪", "pal": "Celia"}, "ch.html": {"emo": "🐵", "pal": "Chico"}, "d.html": {"emo": "🐬", "pal": "Dani"}, "f.html": {"emo": "🦭", "pal": "Fifi"}, "g.html": {"emo": "🦍", "pal": "Gogo"}, "ge.html": {"emo": "🌻", "pal": "Gema"}, "h.html": {"emo": "🧚", "pal": "Hana"}, "j.html": {"emo": "🦒", "pal": "Jojo"}, "l.html": {"emo": "🦜", "pal": "Lola"}, "ll.html": {"emo": "🦙", "pal": "Lluna"}, "m.html": {"emo": "🐒", "pal": "Memo"}, "n.html": {"emo": "☁️", "pal": "Nino"}, "nie.html": {"emo": "🍍", "pal": "Iñaki"}, "p.html": {"emo": "🦆", "pal": "Pipo"}, "q.html": {"emo": "🐭", "pal": "Quique"}, "r.html": {"emo": "🐸", "pal": "Romi"}, "rr.html": {"emo": "🐕", "pal": "Rorro"}, "s.html": {"emo": "☀️", "pal": "Sara"}, "t.html": {"emo": "🐯", "pal": "Tito"}, "v.html": {"emo": "🐄", "pal": "Vivi"}, "y.html": {"emo": "🐴", "pal": "Yaya"}, "z.html": {"emo": "🦊", "pal": "Zara"}};
     const LETRAS_INFO = {"a.html": {"ver": "A a", "emo": "🐝", "pal": "abeja", "pdf": "letra-a-1-primaria.pdf"}, "b.html": {"ver": "B b", "emo": "👢", "pal": "bota", "pdf": "letra-b-1-primaria.pdf"}, "c.html": {"ver": "C c", "emo": "🏠", "pal": "casa", "pdf": "letra-c-1-primaria.pdf"}, "ce.html": {"ver": "ce ci", "emo": "🦓", "pal": "cebra", "pdf": "letra-ce-1-primaria.pdf"}, "ch.html": {"ver": "Ch ch", "emo": "🍫", "pal": "chocolate", "pdf": "letra-ch-1-primaria.pdf"}, "d.html": {"ver": "D d", "emo": "🎲", "pal": "dado", "pdf": "letra-d-1-primaria.pdf"}, "e.html": {"ver": "E e", "emo": "🐘", "pal": "elefante", "pdf": "letra-e-1-primaria.pdf"}, "f.html": {"ver": "F f", "emo": "🦭", "pal": "foca", "pdf": "letra-f-1-primaria.pdf"}, "g.html": {"ver": "G g", "emo": "🐱", "pal": "gato", "pdf": "letra-g-1-primaria.pdf"}, "ge.html": {"ver": "ge gi", "emo": "🧞", "pal": "genio", "pdf": "letra-ge-1-primaria.pdf"}, "h.html": {"ver": "H h", "emo": "🧚", "pal": "hada", "pdf": "letra-h-1-primaria.pdf"}, "i.html": {"ver": "I i", "emo": "🧲", "pal": "imán", "pdf": "letra-i-1-primaria.pdf"}, "j.html": {"ver": "J j", "emo": "🦒", "pal": "jirafa", "pdf": "letra-j-1-primaria.pdf"}, "l.html": {"ver": "L l", "emo": "🦁", "pal": "león", "pdf": "letra-l-1-primaria.pdf"}, "ll.html": {"ver": "Ll ll", "emo": "🔑", "pal": "llave", "pdf": "letra-ll-1-primaria.pdf"}, "m.html": {"ver": "M m", "emo": "🐒", "pal": "mono", "pdf": "letra-m-1-primaria.pdf"}, "n.html": {"ver": "N n", "emo": "☁️", "pal": "nube", "pdf": "letra-n-1-primaria.pdf"}, "nie.html": {"ver": "Ñ ñ", "emo": "🍍", "pal": "piña", "pdf": "letra-nie-1-primaria.pdf"}, "o.html": {"ver": "O o", "emo": "🐻", "pal": "oso", "pdf": "letra-o-1-primaria.pdf"}, "p.html": {"ver": "P p", "emo": "🦆", "pal": "pato", "pdf": "letra-p-1-primaria.pdf"}, "q.html": {"ver": "Q q", "emo": "🧀", "pal": "queso", "pdf": "letra-q-1-primaria.pdf"}, "r.html": {"ver": "R r", "emo": "🐭", "pal": "ratón", "pdf": "letra-r-1-primaria.pdf"}, "rr.html": {"ver": "rr", "emo": "🐶", "pal": "perro", "pdf": "letra-rr-1-primaria.pdf"}, "s.html": {"ver": "S s", "emo": "☀️", "pal": "sol", "pdf": "letra-s-1-primaria.pdf"}, "t.html": {"ver": "T t", "emo": "🍅", "pal": "tomate", "pdf": "letra-t-1-primaria.pdf"}, "u.html": {"ver": "U u", "emo": "🍇", "pal": "uva", "pdf": "letra-u-1-primaria.pdf"}, "v.html": {"ver": "V v", "emo": "🐄", "pal": "vaca", "pdf": "letra-v-1-primaria.pdf"}, "y.html": {"ver": "Y y", "emo": "🪀", "pal": "yoyó", "pdf": "letra-y-1-primaria.pdf"}, "z.html": {"ver": "Z z", "emo": "👞", "pal": "zapato", "pdf": "letra-z-1-primaria.pdf"}};
     const LT_COLORES = ['#15803d', '#c2410c', '#be123c', '#1d4ed8', '#7c3aed'];
@@ -4299,18 +4341,92 @@
       );
     }
 
+
+    // ── 1º Primaria: Leoni en la cabecera y piezas que se mueven en todas las pantallas ──
+    function LeoniCabecera({ titulo, frase, pastillas }) {
+      return h('div', { className: 'leoni-cab' },
+        h('img', { src: 'mascota/leoni/hablando.webp', alt: 'Leoni, la leoncita de Academia Esparta', className: 'leoni-img', width: 245, height: 420 }),
+        h('div', { className: 'leoni-der' },
+          h('div', { className: 'leoni-tit' }, titulo),
+          h('div', { className: 'leoni-bocadillo' }, frase),
+          pastillas && h('div', { className: 'leoni-pastillas' }, pastillas.map((t, i) => h('span', { key: i, className: 'leoni-pas' }, t)))
+        )
+      );
+    }
+
+    function piezaNav(k, emo, nombre, pie, onClick) {
+      return h('div', {
+          key: nombre, tabIndex: 0, role: 'button', className: 'lt-pieza nav',
+          style: { '--i': k, '--c': LT_COLORES[k % LT_COLORES.length], '--r': (((k * 37) % 5) - 2) * 0.9 + 'deg' },
+          onClick, onKeyDown: e => { if (e.key === 'Enter') onClick(); }
+        },
+        h('div', { className: 'lt-int' },
+          h('div', { className: 'lt-cara lt-frente' },
+            h('span', { className: 'lt-emo-g', 'aria-hidden': 'true' }, emo),
+            h('span', { className: 'lt-pal lt-tit' }, nombre),
+            pie && h('span', { className: 'lt-num' }, pie)
+          )
+        )
+      );
+    }
+
+    function FichasPiezasView({ rec, recKey }) {
+      const [abierta, setAbierta] = React.useState(null);
+      const carpeta = rec.ruta.replace(/\/$/, '').split('/').pop();
+      const info = PIEZAS_1[recKey] || [];
+      const pieza = (f, k) => {
+        const on = abierta === f.archivo;
+        const I = info[k] || [f.emoji, f.titulo];
+        const pdf = carpeta + '-' + f.archivo.replace('.html', '') + '-1-primaria.pdf';
+        const para = e => { e.stopPropagation(); e.currentTarget.blur(); };
+        return h('div', {
+            key: f.archivo, tabIndex: 0, role: 'button', 'aria-label': f.titulo + ': abrir opciones',
+            className: 'lt-pieza' + (on ? ' abierta' : ''),
+            style: { '--i': k, '--c': LT_COLORES[k % LT_COLORES.length], '--r': (((k * 37) % 5) - 2) * 0.9 + 'deg' },
+            onClick: () => setAbierta(on ? null : f.archivo)
+          },
+          h('div', { className: 'lt-int' },
+            h('div', { className: 'lt-cara lt-frente' },
+              h('span', { className: 'lt-num' }, 'Ficha ' + f.num),
+              h('span', { className: 'lt-emo-g', 'aria-hidden': 'true' }, I[0]),
+              h('span', { className: 'lt-pal lt-tit' }, I[1])
+            ),
+            h('div', { className: 'lt-cara lt-dorso' },
+              h('div', { className: 'lt-dorso-t' }, I[1]),
+              h('a', { href: rec.ruta + pdf, className: 'lt-btn pdf', target: '_blank', rel: 'noopener', onClick: para, 'data-umami-event': 'pdf-1-materiales' }, '📄 Imprimir'),
+              h('a', { href: rec.ruta + f.archivo, className: 'lt-btn', target: '_blank', rel: 'noopener', onClick: para }, '👀 Ver ficha')
+            )
+          )
+        );
+      };
+      return h('div', { className: 'fichas-disponibles' },
+        h('div', { className: 'fichas-dis-header' },
+          h('span', { className: 'fichas-dis-titulo' }, rec.fichas.length + ' fichas · de menos a más · toca una para abrirla'),
+          h('a', { href: 'recursos/primaria/1/' + (recKey.startsWith('lengua') ? 'lengua' : 'matematicas') + '/index.html', className: 'fichas-dis-link', target: '_blank' }, 'Ver índice completo →')
+        ),
+        h('div', { className: 'lt-grid cf' }, rec.fichas.map((f, k) => pieza(f, k)))
+      );
+    }
+
     // ── View 4: Resource detail ──────────────────────────────────────────────
     function RecursoView({ asig, curso, bloqueKey, subBloque }) {
       const b   = ASIGNATURAS[asig].curriculum[curso].bloques[bloqueKey];
       const key = `${asig}|${curso}|${bloqueKey}|${subBloque}`;
       const rec = RECURSOS[key];
 
+      const es1 = curso === '1' && rec;
+      const fr = LEONI_FRASE[subBloque] || ('Elige una ficha de ' + subBloque.toLowerCase() + ': imprímela o mírala en la pantalla.');
       return h('div', null,
-        h('div', { className:'rec-header', style:{ borderLeftColor: b.color } },
-          h('div', { className:'rec-label', style:{ color: b.color } }, b.icono + '  ' + b.nombre),
-          h('div', { className:'rec-name' }, subBloque)
-        ),
-        rec && rec.vista === 'letras'
+        es1
+          ? h(LeoniCabecera, { titulo: subBloque, frase: fr,
+              pastillas: [rec.fichas.length + ' fichas', (rec.vista === 'vf' || rec.vista === 'letras') ? 'Una por letra' : 'De menos a más', '📄 PDF para imprimir'] })
+          : h('div', { className:'rec-header', style:{ borderLeftColor: b.color } },
+              h('div', { className:'rec-label', style:{ color: b.color } }, b.icono + '  ' + b.nombre),
+              h('div', { className:'rec-name' }, subBloque)
+            ),
+        es1 && !rec.vista
+          ? h(FichasPiezasView, { rec, recKey: key })
+          : rec && rec.vista === 'letras'
           ? h(LetrasView, { rec })
           : rec && rec.vista === 'conciencia'
           ? h(ConcienciaView, { rec })
