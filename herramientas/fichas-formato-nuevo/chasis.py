@@ -37,7 +37,7 @@ def trozos_primer_nivel(frag):
     return out
 
 
-QUITAR = re.compile(r'^\s*(html|body|\.topbar|\.back-btn|\.print-btn|\.header|\.academia-nombre|\.ficha-ref|\.datos-alumno|\.dato\b.*|\.separador|\.tipo-badge|\.footer.*|\*,.*|\.ej-enunciado.*|\.ej-block|\.num)\s*$')
+QUITAR = re.compile(r'^\s*(html|body|\.wrapper|\.seccion-titulo.*|\.ej-n|\.topbar|\.back-btn|\.print-btn|\.header|\.academia-nombre|\.ficha-ref|\.datos-alumno|\.dato\b.*|\.separador|\.tipo-badge|\.footer.*|\*,.*|\.ej-enunciado.*|\.ej-block|\.num)\s*$')
 
 
 def interlineado(css):
@@ -119,7 +119,13 @@ def extraer_chasis(s, d):
     body = re.sub(r'<style>.*?</style>', '', s.split('</head>', 1)[1], flags=re.S)
     mid = re.split(r'<hr class="separador"\s*/?>', body, 1)[1]
     mid = mid[:mid.rindex('<div class="footer">')]
+    if mid.lstrip().startswith('<div class="wrapper">'):
+        mid = mid.lstrip()[len('<div class="wrapper">'):]
     bl = trozos_primer_nivel(mid)
+    tb = re.search(r'class="texto-box"[^>]*>(.*?)</div>', mid, re.S)
+    if tb:
+        frases = re.split(r'<br\s*/?>|</p>', tb.group(1))
+        d['texto'] = [re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', x)).strip() for x in frases if re.sub(r'<[^>]+>|\s', '', x)]
     d['badge'] = ''
     d['bloques'] = []
     for b in bl:
@@ -135,7 +141,13 @@ def enunciado(b, ej):
     def r(m):
         n = re.sub(r'\D', '', m.group(1)) or ''
         return ej(n, m.group(2).strip())
-    return re.sub(r'<div class="ej-enunciado">\s*<span class="num">(.*?)</span>(.*?)</div>', r, b, flags=re.S)
+    b = re.sub(r'<div class="ej-enunciado">\s*<span class="num">(.*?)</span>(.*?)</div>', r, b, flags=re.S)
+    # 2º: <div class="seccion-titulo"><span class="ej-n">1</span> 📖 Lee el texto.</div>
+    def r2(m):
+        txt = re.sub(r'^\s*<span class="txt-flex">(.*)</span>\s*$', r'\1', m.group(2).strip(), flags=re.S)
+        txt = re.sub(r'^[^\wÁÉÍÓÚÑáéíóúñ¿¡<]+', '', txt.strip())
+        return ej(m.group(1).strip(), txt)
+    return re.sub(r'<div class="seccion-titulo">\s*<span class="ej-n">(.*?)</span>(.*?)</div>', r2, b, flags=re.S)
 
 
 PAUTA = ''
@@ -206,6 +218,7 @@ def clases_nuevas():
         aqui = os.path.dirname(os.path.abspath(__file__))
         css = open(os.path.join(aqui, '..', 'fichas-letras', 'estilo.css')).read() + open(os.path.join(aqui, 'extra.css')).read()
         _NUEVAS = set(re.findall(r'\.([a-zA-Z][\w-]*)', re.sub(r'url\([^)]*\)', '', css)))
+        _NUEVAS -= {'mz'}               # el envoltorio de los ejercicios antiguos no es una clase «nueva»
     return _NUEVAS
 
 
@@ -221,14 +234,49 @@ def sin_choques_css(css):
     return css
 
 
+PAUTA_ENTERA = ''
+MINI = ''
+
+
+def a_pauta(html):
+    """2º: escribir sobre pauta de 4 líneas como en 1º. Líneas largas → pauta entera; huecos de frase → pauta pequeña."""
+    html = re.sub(r'<div class="(respuesta-linea|escribir-linea|reflexion-linea)"[^>]*>\s*</div>', lambda m: PAUTA_ENTERA, html)
+    pq = MINI.replace('class="mini-pauta"', 'class="mini-pauta pq"')
+    html = re.sub(r'<span class="(?:v-)?hueco"[^>]*>\s*</span>', lambda m: pq, html)
+    html = re.sub(r'<div class="conector-hueco"[^>]*>\s*</div>', lambda m: pq, html)
+    return html
+
+
+def proteger_ej(b):
+    """Renombra las clases antiguas que chocan, sin tocar los enunciados ya convertidos al formato nuevo."""
+    trozos = re.split(r'(<div class="ej"><span class="ej-n">.*?</span><span>.*?</span></div>)', b, flags=re.S)
+    return ''.join(t if t.startswith('<div class="ej">') else sin_choques_html(t) for t in trozos)
+
+
+def partible(b):
+    """Bloque cuyos hijos son ≥3 piezas iguales (preguntas, frases…) → (clase, [hijos]). Si no, None."""
+    m = re.match(r'<div class="([^"]+)">(.*)</div>$', b.strip(), re.S)
+    if not m or 'recuerda' in m.group(1): return None
+    hijos = [h for h in trozos_primer_nivel(m.group(2))]
+    cls = [re.match(r'<\w+ class="([^"]+)"', h) for h in hijos]
+    if len(hijos) < 3 or not all(cls) or len(set(c.group(1) for c in cls)) != 1: return None
+    if re.sub(r'\s|<[^>]+>', '', ''.join(hijos)) != re.sub(r'\s|<[^>]+>', '', m.group(2)): return None   # no perder texto suelto
+    return m.group(1), hijos
+
+
 def ejercicios_chasis(d, ej):
     """Cada bloque de primer nivel es una pieza; un enunciado suelto va pegado al bloque siguiente;
     las listas de problemas se pueden repartir problema a problema."""
-    bl = [enunciado(a_emoji(sin_choques_html(b)), ej) for b in d['bloques']]
+    bl = [enunciado(a_emoji(b), ej) for b in d['bloques']]          # primero los enunciados (usan ej-n)
+    bl = [proteger_ej(b) for b in bl]
+    if '/primaria/2/' in d['origen']: bl = [a_pauta(b) for b in bl]
     o = []; k = 0; defs = ''
     while k < len(bl):
         b = bl[k]
         if b.startswith('<div class="ej">') and k + 1 < len(bl):      # enunciado suelto + su rejilla
+            lista = partible(bl[k+1])
+            if lista:                                                   # lista larga: se reparte pieza a pieza
+                o.append((b, 'mz ' + lista[0], lista[1])); k += 2; continue
             o.append(('', 'mz', [b + bl[k+1]])); k += 2; continue
         m = re.match(r'<div class="(problemas)">(.*)</div>$', b, re.S)
         if m:

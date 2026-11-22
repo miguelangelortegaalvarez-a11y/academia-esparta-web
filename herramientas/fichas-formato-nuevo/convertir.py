@@ -16,7 +16,7 @@ una vez convertida, el HTML ya no es el antiguo). «generar» escribe la página
 """
 import html, json, os, re, shutil, subprocess, sys, tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import chasis, extras_mates
+import chasis, extras_mates, extras_lengua2
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -56,7 +56,7 @@ def extraer(ruta):
     body = re.sub(r'<style>.*?</style>', '', s.split('</head>', 1)[1], flags=re.S)
     d = {'origen': os.path.relpath(ruta, RAIZ), 'cabecera': extraer_cabecera(s)}
     d['ref'] = limpia(re.search(r'class="ficha-ref">(.*?)</span>', body, re.S).group(1))
-    if 'class="ej-block"' in body or '/matematicas/' in ruta:
+    if 'class="ej-block"' in body or '/matematicas/' in ruta or '/primaria/2/' in ruta:
         return chasis.extraer_chasis(s, d)
     d['titulos'] = [quita_emoji_inicial(limpia(re.sub(r'<span class="ej-n">.*?</span>', '', t)))
                     for t in re.findall(r'class="seccion-titulo">(.*?)</div>', body, re.S)]
@@ -142,6 +142,8 @@ def info(d):
 
 def ejercicios(d):
     if d['plantilla'] == 'chasis':
+        chasis.PAUTA_ENTERA = pauta_vacia().replace('class="pauta"', 'class="pauta pz"')
+        chasis.MINI = mini_pauta(170)
         chasis.PAUTA = re.sub(r' width="\d+" height="\d+"', '', pauta_vacia().replace('class="pauta"', 'class="pb-pauta"'))
         return chasis.ejercicios_chasis(d, ej)
     return ejercicios_texto(d)
@@ -187,7 +189,8 @@ def frases_para_ordenar(d, n=2):
     for f in d['texto']:
         for fr in re.split(r'(?<=[.!?])\s+', texto_plano(f)):
             pal = fr.rstrip('.!?').split()
-            if 4 <= len(pal) <= 7 and fr not in [x[0] for x in out]:
+            tope = 10 if '/primaria/2/' in d.get('origen', '') else 7
+            if 4 <= len(pal) <= tope and fr not in [x[0] for x in out]:
                 rnd = random.Random(fr)
                 mez = pal[:]
                 while mez == pal or mez[0] == pal[0]:
@@ -254,9 +257,9 @@ MEDIR_JS = """<script>window.addEventListener('load',()=>{document.fonts.ready.t
 const pg=document.querySelector('.pagina'),P=pg.getBoundingClientRect().top;
 const u=[...document.querySelectorAll('[data-u]')].map(e=>{const r=e.getBoundingClientRect();return [e.dataset.u,r.top-P,r.bottom-P]});
 const lim=pg.getBoundingClientRect().right-pg.offsetWidth/21*1.6+2;let des=0;
-pg.querySelectorAll('*').forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.right>lim)des=Math.max(des,r.right-lim)});
+let quien='';pg.querySelectorAll('*').forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.right>lim&&r.right-lim>des){des=r.right-lim;quien=e.tagName+'.'+(e.getAttribute('class')||'')}});
 const pie=document.querySelector('.pie').offsetHeight, fin=document.querySelector('.fin').getBoundingClientRect();
-const pre=document.createElement('pre');pre.id='alturas';pre.textContent=JSON.stringify({u,des,pie,fin:fin.height+26,cm:pg.offsetWidth/21});
+const pre=document.createElement('pre');pre.id='alturas';pre.textContent=JSON.stringify({u,des,quien,pie,fin:fin.height+26,cm:pg.offsetWidth/21});
 document.body.appendChild(pre);});});</script>"""
 
 
@@ -285,6 +288,7 @@ def paginar(d, doc_medida, carpeta):
         actual.append(uid); y += h
     paginas.append(actual); libres.append(limite - y)
     DESBORDE[0] = m['des']
+    if os.environ.get('DEPURA') and m['des'] > 1: print('   se sale:', round(m['des']), m.get('quien'))
     return paginas, libres, m['fin']
 
 
@@ -324,7 +328,7 @@ ZOOM = [1.12]
 
 
 def generar(ruta):
-    for z in (1.12, 1.0, 0.9, 0.8):
+    for z in ((1.0, 0.9, 0.8) if '/primaria/2/lengua/' in ruta else (1.12, 1.0, 0.9, 0.8)):
         ZOOM[0] = z
         r = generar_una(ruta)
         if r != 'desborda': return r
@@ -370,7 +374,12 @@ def generar_una(ruta):
     if len(reparto) > 1:                                   # pasa a dos páginas: llenamos la última
         base = len(reparto)
         nbase = len(EJ)                                    # ejercicios de la ficha antigua (no se tocan)
-        if d['plantilla'] == 'chasis':
+        if d['plantilla'] == 'chasis' and '/lengua/' in d['origen']:
+            ultimo = max([int(x) for x in re.findall(r'<span class="ej-n">(\d+)</span>', ''.join(''.join(p) for _, _, p in EJ))] or [len(EJ)])
+            nuevos, n = (extras(d, ultimo + 1) if d.get('texto') else ([], ultimo + 1))
+            g = extras_lengua2.extras(d, n, ej, mini_pauta(170))
+            nuevos, n = nuevos + g, n + len(g)
+        elif d['plantilla'] == 'chasis':
             ultimo = max([int(x) for x in re.findall(r'<span class="ej-n">(\d+)</span>', ''.join(''.join(p) for _, _, p in EJ))] or [len(EJ)])
             d['_problemas'] = ''.join(''.join(p) for _, _, p in EJ).count('<div class="pb">')
             nuevos = extras_mates.extras(d, ultimo + 1, ej, chasis.PAUTA)
@@ -379,6 +388,7 @@ def generar_una(ruta):
             nuevos, n = extras(d, len(EJ) + 1)
         if nuevos:
             r2, l2, _ = medir(EJ + nuevos)
+            if os.environ.get('DEPURA'): print('   con nuevos:', r2, [round(x) for x in l2], 'base', base)
             if len(r2) > base:                             # lo que no cabe, fuera (pieza a pieza)
                 r2, l2 = r2[:base], l2[:base]
                 usados = {u for p in r2 for u in p}
@@ -391,7 +401,8 @@ def generar_una(ruta):
             EJ = EJ + nuevos
             reparto, libres, alto_fin = medir(EJ)
         hueco = libres[-1] - alto_fin - 70                 # 70 ≈ enunciado + márgenes
-        if hueco >= 150 and d['plantilla'] != 'chasis':
+        lect2 = d['origen'].split('/')[-2] in extras_lengua2.LECTURA
+        if hueco >= 150 and (d['plantilla'] != 'chasis' or d.get('texto') or lect2):
             EJ = EJ + [dibuja(n, min(hueco, 420))]
             reparto, libres, alto_fin = medir(EJ)
         while len(reparto) > base and len(EJ) > nbase:      # lo nuevo nunca añade páginas: se quita pieza a pieza
@@ -427,7 +438,7 @@ def generar_una(ruta):
         print(f'✗ {rel}: el reparto no cabe ({n} folios para {T} páginas) — NO se escribe'); return False
     open(destino, 'w', encoding='utf8').write(doc)
     n = pdf(destino, os.path.join(carpeta, nom))
-    print(f'{"✓" if n == T else "✗"} {rel} → {nom} ({n} pág.{"" if ZOOM[0] == 1.12 else ", escala " + str(ZOOM[0])}: ' + ' | '.join(','.join(x for x in ids if x[0] == 'p') for ids in reparto) + ')')
+    print(f'{"✓" if n == T else "✗"} {rel} → {nom} ({n} pág.{"" if ZOOM[0] in (1.12, 1.0) else ", escala " + str(ZOOM[0])}: ' + ' | '.join(','.join(x for x in ids if x[0] == 'p') for ids in reparto) + ')')
     return n == T
 
 
