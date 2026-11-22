@@ -214,7 +214,7 @@ Aprobado por Miguel con la **letra M de 1º** (`recursos/primaria/1/lengua/letra
   - **Herramientas:** `generar_ficha_conciencia.py <archivo>` (página + PDF) · `generar_interactiva_conciencia.py <archivo> [--voz]` · `fonologia.py` (tipos `silabas`, `sino`, `elige`, `intruso`, `completa` con criterios rima / empieza_silaba / termina_silaba / empieza_sonido / termina_sonido / encadena / quitar / juntar / ordenar / silabas_n). **Las palabras se escriben en sílabas con guiones** («ma-ri-po-sa»): rima, sílabas y sonidos se calculan y se COMPRUEBAN (una sola respuesta buena, no se acierta por la sílaba entera en los de sonido, SÍ/NO no alterna, la buena no cae siempre en el mismo sitio).
   - **Nivel:** el niño AÚN NO LEE → todo con dibujos y escuchando, el texto es para el adulto (nota «Para la familia»). En estas interactivas SÍ suena todo solo (al revés que en letras), con **cola de voz** para que no se pisen los audios.
   - **Referencia de nivel:** índice del programa Comunicar-nos (blog Siembra Estrellas). ⛔ No copiar NADA suyo: ni imágenes ni articulemas (bocas).
-- **Siguiente:** el resto de fichas de 1º, por bloques, con el formato nuevo.
+- **Siguiente (acordado con Miguel el 22-nov-2026):** terminar LENGUA de 1º en formato nuevo (página + PDF + interactiva con voz, el niño lee y pide ayuda con 🔊): **1) `lectura-frase` (10)** → 2) `comprension` (24, verdadero/falso) → 3) `comprension-opciones` (24). Después decidir Matemáticas de 1º (71 fichas en formato antiguo: ¿también interactiva o solo página + PDF?).
 
 ## Estructura matemáticas Primaria
 
