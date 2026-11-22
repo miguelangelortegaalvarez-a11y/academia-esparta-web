@@ -33,10 +33,10 @@ SEMILLA = 7
 CONSIGNAS = [
     'Mira la letra. Toca los dibujos para oír las palabras, y toca las sílabas. Después, pídele a tu profe que te diga cómo suena esta letra.',
     'Toca todas las letras iguales a estas dos que encuentres en cada palabra. Si una palabra no tiene ninguna, toca el botón: no tiene.',
-    'Mira el dibujo y escucha la palabra. Después, toca la sílaba que falta.',
+    'Mira el dibujo y lee la palabra. Si necesitas ayuda, toca el altavoz. Después, toca la sílaba que falta.',
     'Mira el dibujo y toca las sílabas en orden para formar la palabra.',
-    'Escucha la frase y toca la palabra que falta.',
-    'Escucha el cuento. Después, toca la respuesta buena de cada pregunta.',
+    'Lee la frase y toca la palabra que falta. Si necesitas ayuda, toca el altavoz.',
+    'Lee el cuento. Si necesitas ayuda, toca el botón para escucharlo. Después, toca la respuesta buena de cada pregunta.',
 ]
 FINAL = '¡Muy bien! ¡Lo has conseguido!'
 # Felicitación al acabar cada ejercicio (comunes, se elige una al azar): pedido por Miguel el 22-nov-2026
@@ -636,7 +636,7 @@ CONSTRUYE.push(() => { const p = tarjeta(1, `Toca todas las <b class="pw" style=
   return p; });
 
 /* 3 · ¿qué sílaba falta? */
-CONSTRUYE.push(() => { const p = tarjeta(2, 'Mira el dibujo y escucha la palabra. Después, toca la sílaba que falta.', null);
+CONSTRUYE.push(() => { const p = tarjeta(2, 'Mira el dibujo y lee la palabra. Si necesitas ayuda, toca 🔊. Después, toca la sílaba que falta.', null);
   const rondas = mezcla(D.sil); let k = 0;
   const caja = el('div', 'reto'); p.cuerpo.appendChild(caja);
   function ronda() {
@@ -645,7 +645,6 @@ CONSTRUYE.push(() => { const p = tarjeta(2, 'Mira el dibujo y escucha la palabra
     caja.innerHTML = `<div class="dibujo">${emo(r.e)}</div><div class="palabra">${esc(antes)}<span class="hueco">&nbsp;</span>${esc(despues)}
       <button class="voz" type="button" title="Escuchar">🔊</button></div><div class="opciones"></div><p class="cuenta-reto">${k + 1} de ${rondas.length}</p>`;
     caja.querySelector('.voz').onclick = () => di(r.w);
-    if (k > 0) di(r.w);
     const ops = caja.querySelector('.opciones');
     mezcla([...new Set(D.silabas.concat(r.s))]).forEach(s => { const b = el('button', 'op', esc(s)); b.type = 'button';
       b.onclick = () => { if (s === r.s) { b.classList.add('bien'); const h = caja.querySelector('.hueco'); bien(); vuela(b, h, () => { h.textContent = r.w.slice(r.ini, r.fin); h.classList.add('lleno'); }); di(r.w);
@@ -654,7 +653,7 @@ CONSTRUYE.push(() => { const p = tarjeta(2, 'Mira el dibujo y escucha la palabra
         else { b.classList.remove('mal'); void b.offsetWidth; b.classList.add('mal'); mal(); } };
       ops.appendChild(b); });
   }
-  ronda(); p.alEntrar = () => di(rondas[0].w, true); return p; });
+  ronda(); return p; });
 
 /* 4 · junto sílabas */
 CONSTRUYE.push(() => { const p = tarjeta(3, 'Mira el dibujo y toca las sílabas en orden para formar la palabra.', null);
@@ -675,7 +674,7 @@ CONSTRUYE.push(() => { const p = tarjeta(3, 'Mira el dibujo y toca las sílabas 
   ronda(); return p; });
 
 /* 5 · completa la frase */
-CONSTRUYE.push(() => { const p = tarjeta(4, 'Escucha la frase y toca la palabra que falta.', null);
+CONSTRUYE.push(() => { const p = tarjeta(4, 'Lee la frase y toca la palabra que falta. Si necesitas ayuda, toca 🔊.', null);
   const rondas = mezcla(D.frases); let k = 0;
   const caja = el('div', 'reto'); p.cuerpo.appendChild(caja);
   function ronda() {
@@ -684,7 +683,6 @@ CONSTRUYE.push(() => { const p = tarjeta(4, 'Escucha la frase y toca la palabra 
     caja.innerHTML = `<div class="dibujo">${emo(e)}</div><div class="frase">${esc(a)} <span class="hueco">&nbsp;</span>${tras}
       <button class="voz" type="button" title="Escuchar">🔊</button></div><div class="opciones"></div><p class="cuenta-reto">${k + 1} de ${rondas.length}</p>`;
     caja.querySelector('.voz').onclick = () => di(frase(a, '...', b));
-    if (k > 0) di(frase(a, '...', b));
     const ops = caja.querySelector('.opciones');
     mezcla(D.banco).forEach(([w, ew]) => { const bt = el('button', 'op', `<span style="font-size:.8em">${emo(ew)}</span> ${esc(w)}`); bt.type = 'button';
       bt.onclick = () => { if (w === sol) { bt.classList.add('bien'); const h = caja.querySelector('.hueco'); bien(); vuela(bt, h, () => { h.textContent = w; h.classList.add('lleno'); }); di(frase(a, w, b));
@@ -693,11 +691,11 @@ CONSTRUYE.push(() => { const p = tarjeta(4, 'Escucha la frase y toca la palabra 
         else { bt.classList.remove('mal'); void bt.offsetWidth; bt.classList.add('mal'); mal(); } };
       ops.appendChild(bt); });
   }
-  ronda(); p.alEntrar = () => { const [, a, , b] = rondas[0]; di(frase(a, '...', b), true); }; return p; });
+  ronda(); return p; });
 
 /* 6 · el cuento */
 CONSTRUYE.push(() => { const c = D.cuento;
-  const p = tarjeta(5, 'Escucha el cuento. Después, toca la respuesta buena de cada pregunta.', c.lineas.join(' '));
+  const p = tarjeta(5, 'Lee el cuento. Si necesitas ayuda, toca «Escuchar el cuento». Después, toca la respuesta buena de cada pregunta.', c.lineas.join(' '));
   p.cuerpo.innerHTML = `<div class="cuento"><span class="emo">${emo(c.emoji)}</span> ${c.lineas.map(esc).join('<br>')}</div>`;
   let ok = 0;
   c.preguntas.forEach(([q, a, b], i) => {
