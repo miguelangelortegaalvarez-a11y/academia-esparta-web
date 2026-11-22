@@ -134,9 +134,12 @@
     .cuento { font-family:'Playwrite ES',cursive; font-size:1.45rem; line-height:2.05; background:color-mix(in srgb, var(--c) 6%, #fff);
               border-radius:20px; padding:14px 20px; border:3px dashed color-mix(in srgb, var(--c) 30%, #fff); margin-bottom:16px; }
     .preg { margin:14px 0; }
-    .preg p { margin:0 0 8px; font-weight:700; font-size:1.05rem; }
+    .preg p { margin:0 0 8px; font-family:'Playwrite ES',cursive; font-size:1.35rem; line-height:1.9; }
     .preg .opciones { justify-content:flex-start; }
     .preg .op { font-size:1.35rem; min-width:0; }
+    .nav-paso { display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding-top:12px; border-top:2px dashed color-mix(in srgb, var(--c) 18%, #fff); }
+    .nav-b { font:600 .9rem 'Poppins'; color:#64748b; background:none; border:none; cursor:pointer; padding:.35rem .6rem; border-radius:10px; }
+    .nav-b:hover { color:var(--c); background:color-mix(in srgb, var(--c) 8%, #fff); }
     /* final */
     .final { text-align:center; padding:20px 0 6px; }
     .final .copa { font-size:5.5rem; display:inline-block; animation:bota 1.4s ease-in-out infinite; }
@@ -294,6 +297,9 @@ function tarjeta(n, consigna, vozTexto) {
   const cuerpo = el('div'); c.appendChild(cuerpo);
   const sig = el('button', 'siguiente', n === PASOS.length - 1 ? '¡Terminar! 🏆' : '¡Siguiente! ➜'); sig.type = 'button'; c.appendChild(sig);
   sig.onclick = () => ir(n + 1);
+  const nav = el('div', 'nav-paso', (n > 0 ? '<button class="nav-b atras" type="button">← Atrás</button>' : '<span></span>') + '<button class="nav-b saltar" type="button">' + (n === PASOS.length - 1 ? 'Saltar al final →' : 'Saltar →') + '</button>'); c.appendChild(nav);
+  if (n > 0) nav.querySelector('.atras').onclick = () => ir(n - 1);
+  nav.querySelector('.saltar').onclick = () => ir(n + 1);
   t.appendChild(c); app.appendChild(t);
   return { t, cuerpo, listo: () => { felicita(); setTimeout(() => { sig.classList.add('ver'); sig.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 1600); } };
 }
@@ -317,12 +323,12 @@ function felicita() {
   clearTimeout(felicita.t); felicita.t = setTimeout(() => c.classList.remove('ver'), 1800);
 }
 mascota.style.display = 'none';
-const pasos = [];
+const pasos = [], CONSTRUYE = [];   // cada pantalla se construye de nuevo al entrar (así se puede repetir)
 function ir(n, cola) {
   document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
   actual = n; pintaProgreso();
   if (n >= PASOS.length) { mascota.style.display = 'none'; albumGuardar(D.archivo); $('#final .album-hueco').innerHTML = albumHtml(D.archivo); $('#final').classList.add('activo'); fanfarria(); confeti(); setTimeout(() => di(D.final), 700); }
-  else { pasos[n].t.classList.add('activo'); (matchMedia('(max-width:1200px)').matches ? pasos[n].t.querySelector('.tarjeta') : document.body).appendChild(mascota); mascota.style.display = ''; di(D.consignas[n], cola); if (pasos[n].alEntrar) pasos[n].alEntrar(); }
+  else { if (pasos[n]) pasos[n].t.remove(); pasos[n] = CONSTRUYE[n](); pasos[n].t.classList.add('activo'); (matchMedia('(max-width:1200px)').matches ? pasos[n].t.querySelector('.tarjeta') : document.body).appendChild(mascota); mascota.style.display = ''; di(D.consignas[n], cola); if (pasos[n].alEntrar) pasos[n].alEntrar(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -343,7 +349,7 @@ portada.querySelector('.grande').onclick = () => { di(D.saludo); ir(0, true); };
 app.appendChild(portada);
 
 /* 1 · conozco la letra */
-(() => { const p = tarjeta(0, 'Mira la letra. Toca los dibujos para oír las palabras y toca las sílabas.', null);
+CONSTRUYE.push(() => { const p = tarjeta(0, 'Mira la letra. Toca los dibujos para oír las palabras y toca las sílabas.', null);
   const pal = D.intro.palabras.map(([e, w]) => `<button class="pal-btn" type="button" data-w="${esc(w)}"><span class="emo">${emo(e)}</span><span class="pw">${marcaLetra(w)}</span></button>`).join('');
   p.cuerpo.innerHTML = `<div class="conozco"><div class="par-letras"><span>${esc(D.mayus.charAt(0) + D.mayus.slice(1).toLowerCase())}</span><span>${esc(D.letra)}</span></div><div class="pal-intro">${pal}</div></div>
     <div class="como-suena"><h3>¿Cómo suena la ${letraPW(D.nombre.replace(/\s*\(.*\)/, ''))}?</h3><div class="muestra">${esc(D.suena[0])}</div><p>${esc(D.suena[1])}</p></div><div class="chips">${D.silabas.map(s => `<button class="chip" type="button">${esc(s)}</button>`).join('')}</div>`;
@@ -355,13 +361,13 @@ app.appendChild(portada);
   p.cuerpo.querySelectorAll('.pal-btn').forEach(b => b.onclick = () => { di(b.dataset.w); b.classList.add('visto'); vistos.add('p' + b.dataset.w); comprueba(); });
   p.cuerpo.querySelectorAll('.chip').forEach(b => b.onclick = () => { di(b.textContent); b.classList.remove('toque'); void b.offsetWidth; b.classList.add('toque', 'visto'); vistos.add('s' + b.textContent); comprueba(); });
   ayuda = el('p', 'cuenta-reto'); p.cuerpo.appendChild(ayuda); comprueba();
-  pasos.push(p); })();
+  return p; });
 
 function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = '', i = 0;
   while (i < w.length) { if (plegar(w.substr(i, n)) === L) { o += `<span class="v">${esc(w.substr(i, n))}</span>`; i += n; } else { o += esc(w[i]); i++; } } return o; }
 
 /* 2 · toca la letra */
-(() => { const p = tarjeta(1, `Toca todas las <b class="pw" style="color:var(--c);font-size:1.3em">${esc(D.mayus.charAt(0) + D.mayus.slice(1).toLowerCase())}</b> y <b class="pw" style="color:var(--c);font-size:1.3em">${esc(D.letra)}</b> de cada palabra. Si una palabra no tiene ninguna, toca «No tiene».`, null);
+CONSTRUYE.push(() => { const p = tarjeta(1, `Toca todas las <b class="pw" style="color:var(--c);font-size:1.3em">${esc(D.mayus.charAt(0) + D.mayus.slice(1).toLowerCase())}</b> y <b class="pw" style="color:var(--c);font-size:1.3em">${esc(D.letra)}</b> de cada palabra. Si una palabra no tiene ninguna, toca «No tiene».`, null);
   const L = plegar(D.letra), n = D.letra.length; let faltan = 0;
   const grid = el('div', 'toca-grid'); p.cuerpo.appendChild(grid);
   const marc = el('p', 'cuenta-reto'); p.cuerpo.appendChild(marc);
@@ -386,10 +392,10 @@ function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = 
     it.appendChild(ning); grid.appendChild(it);
   });
   const marcador = () => marc.textContent = `Palabras terminadas: ${palabrasHechas} de ${items.length}`; marcador();
-  pasos.push(p); })();
+  return p; });
 
 /* 3 · ¿qué sílaba falta? */
-(() => { const p = tarjeta(2, 'Mira el dibujo y escucha la palabra. Después, toca la sílaba que falta.', null);
+CONSTRUYE.push(() => { const p = tarjeta(2, 'Mira el dibujo y escucha la palabra. Después, toca la sílaba que falta.', null);
   const rondas = mezcla(D.sil); let k = 0;
   const caja = el('div', 'reto'); p.cuerpo.appendChild(caja);
   function ronda() {
@@ -407,15 +413,16 @@ function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = 
         else { b.classList.remove('mal'); void b.offsetWidth; b.classList.add('mal'); mal(); } };
       ops.appendChild(b); });
   }
-  ronda(); p.alEntrar = () => di(rondas[0].w, true); pasos.push(p); })();
+  ronda(); p.alEntrar = () => di(rondas[0].w, true); return p; });
 
 /* 4 · junto sílabas */
-(() => { const p = tarjeta(3, 'Mira el dibujo y toca las sílabas en orden para formar la palabra.', null);
+CONSTRUYE.push(() => { const p = tarjeta(3, 'Mira el dibujo y toca las sílabas en orden para formar la palabra.', null);
   const rondas = mezcla(D.junta); let k = 0;
   const caja = el('div', 'reto'); p.cuerpo.appendChild(caja);
   function ronda() {
     const [e, ss] = rondas[k]; let pos = 0;
-    caja.innerHTML = `<div class="dibujo">${emo(e)}</div><div class="huecos-junta">${ss.map(() => '<span>&nbsp;</span>').join('')}</div><div class="opciones"></div><p class="cuenta-reto">${k + 1} de ${rondas.length}</p>`;
+    caja.innerHTML = `<div class="dibujo">${emo(e)}</div><p style="margin:2px 0 6px"><button class="voz" type="button" title="Escuchar">🔊 Escuchar la palabra</button></p><div class="huecos-junta">${ss.map(() => '<span>&nbsp;</span>').join('')}</div><div class="opciones"></div><p class="cuenta-reto">${k + 1} de ${rondas.length}</p>`;
+    caja.querySelector('.voz').onclick = () => di(ss.join(''));
     const huecos = caja.querySelectorAll('.huecos-junta span'), ops = caja.querySelector('.opciones');
     let piezas = ss.map((s, i) => ({ s, i })); do { piezas = mezcla(piezas); } while (ss.length > 1 && piezas.every((x, i) => x.i === i));
     piezas.forEach(({ s }) => { const b = el('button', 'op', esc(s)); b.type = 'button';
@@ -424,10 +431,10 @@ function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = 
         else { b.classList.remove('mal'); void b.offsetWidth; b.classList.add('mal'); mal(); } };
       ops.appendChild(b); });
   }
-  ronda(); pasos.push(p); })();
+  ronda(); return p; });
 
 /* 5 · completa la frase */
-(() => { const p = tarjeta(4, 'Escucha la frase y toca la palabra que falta.', null);
+CONSTRUYE.push(() => { const p = tarjeta(4, 'Escucha la frase y toca la palabra que falta.', null);
   const rondas = mezcla(D.frases); let k = 0;
   const caja = el('div', 'reto'); p.cuerpo.appendChild(caja);
   function ronda() {
@@ -445,10 +452,10 @@ function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = 
         else { bt.classList.remove('mal'); void bt.offsetWidth; bt.classList.add('mal'); mal(); } };
       ops.appendChild(bt); });
   }
-  ronda(); p.alEntrar = () => { const [, a, , b] = rondas[0]; di(frase(a, '...', b), true); }; pasos.push(p); })();
+  ronda(); p.alEntrar = () => { const [, a, , b] = rondas[0]; di(frase(a, '...', b), true); }; return p; });
 
 /* 6 · el cuento */
-(() => { const c = D.cuento;
+CONSTRUYE.push(() => { const c = D.cuento;
   const p = tarjeta(5, 'Escucha el cuento. Después, toca la respuesta buena de cada pregunta.', c.lineas.join(' '));
   p.cuerpo.innerHTML = `<div class="cuento"><span class="emo">${emo(c.emoji)}</span> ${c.lineas.map(esc).join('<br>')}</div>`;
   let ok = 0;
@@ -462,7 +469,7 @@ function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = 
         else { bt.classList.remove('mal'); void bt.offsetWidth; bt.classList.add('mal'); mal(); } };
       ops.appendChild(bt); });
     p.cuerpo.appendChild(pr); });
-  pasos.push(p); })();
+  return p; });
 
 
 /* final */
