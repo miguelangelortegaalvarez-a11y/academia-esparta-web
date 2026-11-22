@@ -60,15 +60,21 @@ def mini_pauta(w, texto=''):
             f'<line x1="0" y1="{base}" x2="{w}" y2="{base}" class="l-base"/><line x1="0" y1="{base+20}" x2="{w}" y2="{base+20}" class="l-fina"/>{t}</svg>')
 
 
+_TILDES = str.maketrans('áéíóúüÁÉÍÓÚÜ', 'aeiouuAEIOUU')
+def pleg(t):
+    """Quita tildes (á→a) sin tocar la ñ; misma longitud."""
+    return t.translate(_TILDES).lower()
+
+
 def cuenta(palabra, letra):
-    return palabra.lower().count(letra.lower())
+    return pleg(palabra).count(pleg(letra))
 
 
 def rodea(palabra, letra):
     """Rodea cada aparición de la letra (vale para dígrafos: ll, ch, rr)."""
     n = len(letra); out = ''; i = 0
     while i < len(palabra):
-        if palabra[i:i+n].lower() == letra.lower():
+        if pleg(palabra[i:i+n]) == pleg(letra):
             out += f'<span class="circ">{E(palabra[i:i+n])}</span>'; i += n
         else:
             out += E(palabra[i]); i += 1
@@ -81,6 +87,8 @@ def verde(palabra, letra):
 
 def construir(d):
     L, LM = d['letra'], d['mayus']
+    N = d.get('nombre', L)
+    PILL = d.get('pill', 'La letra ' + N)
     chip = lambda s: f'<span class="chip">{E(s)}</span>'
     EJ = lambda n, t: f'<div class="ej"><span class="ej-n">{n}</span><span>{t}</span></div>'
     MIRA = lambda c: f'<div class="mira"><div class="mira-t">Mira cómo se hace:</div>{c}</div><div class="ahora">Ahora tú:</div>'
@@ -88,7 +96,7 @@ def construir(d):
     def pagina(n, rotulo, cuerpo):
         return (f'<section class="pagina"><header class="banda"><div><div class="banda-t">Academia Esparta</div>'
                 f'<div class="banda-lema">El esfuerzo de hoy es el éxito de mañana</div></div>'
-                f'<div class="banda-d"><span class="pill">Lengua · La letra {E(L)}</span><span class="banda-c">1.º Primaria · Lengua</span></div></header>'
+                f'<div class="banda-d"><span class="pill">Lengua · {E(PILL)}</span><span class="banda-c">1.º Primaria · Lengua</span></div></header>'
                 f'<div class="datos"><span>Nombre: <i></i></span><span>Fecha: <i></i></span></div>'
                 f'<div class="rotulo"><span>{rotulo}</span><b></b></div>{cuerpo}'
                 f'<footer class="pie"><span>academiaesparta.es</span><span>Lengua · 1.º Primaria</span><span>Página {n} de {T}</span></footer></section>')
@@ -106,7 +114,7 @@ def construir(d):
     pal1 = [x for par in zip(r['minusculas'], r['mayusculas']) for x in par]
     cu = lambda e, p, n='': (f'<div class="cu-it"><span class="emo-b">{e}</span><span class="pw cu-pal">{p}</span>'
                              f'<span class="cu-fl">→</span><span class="cu-caja pw">{n}</span></div>')
-    P.append(pagina(1, f'Conozco la {E(L)}', '<div class="p1">' + intro
+    P.append(pagina(1, E(d.get('rotulo1', 'Conozco la ' + N)), '<div class="p1">' + intro
         + f'<div class="p1-ej"><span class="p1-num">1</span><span>Rodea la <b>{E(LM)}</b> y la <b>{E(L)}</b> en cada palabra.<br>Escribe cuántas tiene.</span></div>'
         + MIRA('<div class="cu-grid">' + ''.join(cu(e, rodea(p, L), str(cuenta(p, L))) for e, p in r['ejemplos']) + '</div>')
         + '<div class="cu-grid">' + ''.join(cu(e, E(p)) for p, e in pal1) + '</div>'
@@ -114,14 +122,14 @@ def construir(d):
 
     # 2 · Sílabas en pauta
     ps = d['pauta_silabas']
-    P.append(pagina(2, 'Repaso las sílabas', EJ(2, 'Repasa la letra y las sílabas. Después escríbelas tú empezando en cada punto.')
+    P.append(pagina(2, d.get('rotulo2', 'Repaso las sílabas'), EJ(2, d.get('enunciado2', 'Repasa la letra y las sílabas. Después escríbelas tú empezando en cada punto.'))
         + MIRA(pauta(ps['ejemplo'][0], (ps['ejemplo'][0],), ps['ejemplo'][1], hueco=120))
         + ''.join(pauta(s, (s,), e, hueco=120) for s, e in ps['filas'])
         + f'<p class="pista">{ps["pista"]}</p>'))
 
     # 3 · Palabras en pauta
     pp = d['pauta_palabras']
-    P.append(pagina(3, f'Palabras con {E(L)}', EJ(3, 'Repasa la palabra. Después escríbela tú empezando en cada punto.')
+    P.append(pagina(3, E(d.get('rotulo3', 'Palabras con ' + N)), EJ(3, 'Repasa la palabra. Después escríbela tú empezando en cada punto.')
         + MIRA(pauta(pp['ejemplo'][0], (pp['ejemplo'][0],), pp['ejemplo'][1], hueco=165))
         + ''.join(pauta(p, (p,), e, hueco=165) for p, e in pp['filas'])))
 
@@ -164,11 +172,11 @@ def comprobar(d):
     if not all(p == p.upper() for p, _ in r['mayusculas']): fallos.append('rodea.mayusculas: hay alguna palabra con minúsculas')
     todas = r['minusculas'] + r['mayusculas']
     if not any(cuenta(p, L) == 0 for p, _ in todas): fallos.append('rodea: pon alguna palabra SIN la letra (para que se fijen)')
-    if not any(cuenta(p, L) >= 2 for p, _ in todas): fallos.append('rodea: conviene alguna palabra con la letra dos veces')
+    if not d.get('sin_doble') and not any(cuenta(p, L) >= 2 for p, _ in todas): fallos.append('rodea: conviene alguna palabra con la letra dos veces')
     for p, _ in d['pauta_palabras']['filas'] + [d['pauta_palabras']['ejemplo']]:
-        if L not in p.lower(): fallos.append(f'pauta_palabras: «{p}» no lleva la {L}')
+        if pleg(L) not in pleg(p): fallos.append(f'pauta_palabras: «{p}» no lleva la {L}')
     for e, ss in d['junta']['filas']:
-        if L not in ''.join(ss).lower(): fallos.append(f'junta: «{"".join(ss)}» no lleva la {L}')
+        if pleg(L) not in pleg(''.join(ss)): fallos.append(f'junta: «{"".join(ss)}» no lleva la {L}')
     banco = [b for b, _ in d['frases']['banco']]
     for _, _, sol, _ in d['frases']['filas']:
         if sol not in banco: fallos.append(f'frases: la solución «{sol}» no está en la caja de palabras')
@@ -192,8 +200,10 @@ def comprobar(d):
 
 def cabecera(d):
     L, LM = d['letra'], d['mayus']
-    url = f'https://academiaesparta.es/recursos/primaria/1/lengua/letras/{L}.html'
-    titulo = f'Ficha Letra {LM} · 1º Primaria'
+    A = d.get('archivo', L)
+    url = f'https://academiaesparta.es/recursos/primaria/1/lengua/letras/{A}.html'
+    titulo = d.get('titulo', f'Ficha Letra {LM} · 1º Primaria')
+    LM = d.get('nombre_mayus', LM)
     desc = d['descripcion']
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "LearningResource", "name": f"Letra {LM} · Ficha de la letra", "description": desc, "url": url,
@@ -219,7 +229,7 @@ def generar(letra):
     fallos = comprobar(d)
     if fallos:
         print(f'✗ {letra}: no se genera'); [print('   -', x) for x in fallos]; return False
-    L = d['letra']; pdf = f'letra-{L}-1-primaria.pdf'
+    L = d.get('archivo', d['letra']); pdf = f'letra-{L}-1-primaria.pdf'
     css = open(os.path.join(AQUI, 'estilo.css'), encoding='utf8').read()
     doc = ('<!DOCTYPE html>\n<html lang="es">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=820" />\n'
            + cabecera(d) + f'  <style>{css}</style>\n</head>\n<body>\n'
