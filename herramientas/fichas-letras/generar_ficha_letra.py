@@ -176,7 +176,17 @@ def comprobar(d):
     for e in re.findall(r'\[([a-z-]+)\]', json.dumps(d, ensure_ascii=False)):
         if not os.path.exists(os.path.join(RAIZ, 'emoji-propios', e + '.svg')):
             fallos.append(f'falta el dibujo emoji-propios/{e}.svg')
-    if '🪑' in json.dumps(d, ensure_ascii=False): fallos.append('🪑 es una SILLA, no una mesa: usa [mesa]')
+    def pares(x):  # [palabra, emoji] o [emoji, palabra, ...] en cualquier sitio del JSON
+        if isinstance(x, list):
+            if len(x) >= 2 and all(isinstance(y, str) for y in x[:2]): yield x
+            for y in x: yield from pares(y)
+        elif isinstance(x, dict):
+            for y in x.values(): yield from pares(y)
+    for par in pares(d):
+        if '🪑' in par[:2] and any('mesa' in s.lower() for s in par if isinstance(s, str)):
+            fallos.append('🪑 es una SILLA, no una mesa: usa [mesa]')
+    for s in ([d['pauta_silabas']['pista']] if 'pista' in d.get('pauta_silabas', {}) else []):
+        if re.search(r'🪑\s*\w+ de mesa', s): fallos.append('pista: 🪑 es una SILLA, no una mesa: usa [mesa]')
     return fallos
 
 
