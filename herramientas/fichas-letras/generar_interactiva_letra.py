@@ -61,7 +61,9 @@ def como_suena(d):
     A, L = d.get('archivo', d['letra']), d['letra']
     if A == 'h': return 'h', 'La h es muda: no suena. 🤫'
     if A in ('ce', 'ge', 'q'): return ' · '.join(d['silabas']), 'Tu profe te va a decir cómo suena. ¡Repítelo tú también!'
-    if L in SE_ALARGAN: return (L * 4 if len(L) == 1 else L * 3), 'Tu profe te va a decir cómo suena. ¡Repítelo tú también!'
+    if L in ('l', 'r', 'f', 'j', 'y'): return ' '.join([L] * 4), 'Tu profe te va a decir cómo suena. ¡Repítelo tú también!'   # «llll»/«rrrr» parecen ll y rr
+    if L == 'rr': return 'rr rr rr', 'Tu profe te va a decir cómo suena. ¡Repítelo tú también!'
+    if L in SE_ALARGAN: return L * 4, 'Tu profe te va a decir cómo suena. ¡Repítelo tú también!'
     return ' · '.join([L] * 3), 'Tu profe te va a decir cómo suena. ¡Repítelo tú también!'
 
 
@@ -296,7 +298,7 @@ PLANTILLA = r'''<!DOCTYPE html>
     .emo img, img.emo-img { width:1em; height:1em; vertical-align:-.12em; }
     /* bienvenida */
     .portada { text-align:center; padding:28px 10px 10px; }
-    .portada .letrota { font-family:'Playwrite ES',cursive; font-size:min(34vw,9rem); color:var(--c); line-height:1.2;
+    .portada .letrota { padding-bottom:.55em; font-family:'Playwrite ES',cursive; font-size:min(34vw,9rem); color:var(--c); line-height:1.2;
                         display:inline-block; animation:bota 1.6s ease-in-out infinite; text-shadow:0 8px 0 color-mix(in srgb, var(--c) 22%, #fff); }
     @keyframes bota { 50% { transform:translateY(-14px) rotate(-3deg); } }
     .portada h1 { margin:6px 0 4px; font-size:1.6rem; color:#0f172a; }
@@ -307,7 +309,7 @@ PLANTILLA = r'''<!DOCTYPE html>
     /* paso 1 */
     .conozco { display:flex; gap:22px; align-items:center; flex-wrap:wrap; justify-content:center; }
     .par-letras { font-family:'Playwrite ES',cursive; font-size:5.2rem; color:var(--c); line-height:1.25; display:flex; gap:14px; }
-    .par-letras span { background:color-mix(in srgb, var(--c) 9%, #fff); border-radius:22px; padding:0 18px; border:3px dashed color-mix(in srgb, var(--c) 35%, #fff); }
+    .par-letras span { background:color-mix(in srgb, var(--c) 9%, #fff); border-radius:22px; padding:0 18px .5em; border:3px dashed color-mix(in srgb, var(--c) 35%, #fff); }
     .pal-intro { display:flex; flex-direction:column; gap:10px; }
     .pal-btn { display:flex; align-items:center; gap:12px; background:#fff; border:3px solid color-mix(in srgb, var(--c) 20%, #fff); border-radius:18px;
                padding:8px 16px; cursor:pointer; font-size:1.7rem; transition:transform .15s; }
@@ -321,7 +323,7 @@ PLANTILLA = r'''<!DOCTYPE html>
     .chip.toque { background:var(--c); color:#fff; animation:pop .35s; }
     .como-suena { margin:18px auto 14px; max-width:460px; text-align:center; background:#fffbeb; border:3px dashed var(--oro); border-radius:22px; padding:12px 16px 14px; }
     .como-suena h3 { margin:0; font-size:1.05rem; color:#92400e; }
-    .como-suena .muestra { font-family:'Playwrite ES',cursive; font-size:3rem; color:var(--c); line-height:1.5; letter-spacing:.06em; }
+    .como-suena .muestra { font-family:'Playwrite ES',cursive; font-size:3rem; color:var(--c); line-height:1.3; letter-spacing:.06em; padding-bottom:.45em; }
     .como-suena p { margin:0; color:#78350f; font-weight:600; font-size:.95rem; }
     /* paso 2 */
     .toca-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
@@ -332,6 +334,7 @@ PLANTILLA = r'''<!DOCTYPE html>
     .letras { display:flex; flex-wrap:nowrap; gap:1px; flex:1; min-width:0; }
     .lt { font:600 1.4rem 'Poppins'; min-width:26px; height:46px; border:none; background:transparent; border-radius:12px; cursor:pointer; color:#0f172a; padding:0 4px; }
     .lt.min { font-family:'Playwrite ES',cursive; font-weight:400; font-size:1.55rem; }
+    .toca-it.larga .lt { min-width:20px; padding:0 2px; font-size:1.15rem; } .toca-it.larga .lt.min { font-size:1.25rem; }
     .lt:hover { background:color-mix(in srgb, var(--c) 12%, #fff); }
     .lt.bien { background:var(--ok); color:#fff; animation:pop .35s; }
     .lt.mal { animation:tiembla .4s; color:var(--mal); }
@@ -392,8 +395,11 @@ PLANTILLA = r'''<!DOCTYPE html>
     .bocadillo { position:relative; background:#fff; border:3px solid var(--c); border-radius:20px; padding:8px 14px; font:800 1.05rem 'Poppins'; color:var(--c); margin-bottom:90px; white-space:nowrap; }
     .bocadillo::after { content:''; position:absolute; left:-12px; bottom:14px; border:9px solid transparent; border-right-color:var(--c); border-left:0; }
     .final .leo-fin { width:150px; height:auto; display:block; margin:0 auto -6px; animation:bota 1.4s ease-in-out infinite; }
-    @media (max-width:1200px) { .mascota { left:8px; top:auto; bottom:4px; transform:none; width:96px; } main { padding-bottom:190px; } }
-    @media (max-width:560px) { .mascota { width:78px; } main { padding-bottom:160px; } }
+    /* pantallas sin hueco a los lados (tableta, móvil): pequeña dentro de la tarjeta, junto al título, sin tapar nada */
+    @media (max-width:1200px) {
+      .mascota { position:absolute; left:auto; right:8px; top:-34px; transform:none; width:74px; }
+      .paso .titulo { padding-right:70px; } .paso .consigna { padding-right:64px; }
+    }
     /* piezas que vuelan */
     .volando { position:fixed; z-index:14; margin:0; pointer-events:none; transition:transform .45s cubic-bezier(.5,0,.3,1.25), opacity .45s; }
     .huecos-junta.unidas { animation:unidas .6s cubic-bezier(.34,1.56,.64,1); }
@@ -451,6 +457,7 @@ const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const emo = e => { const m = /^\[([a-z-]+)\]$/.exec(e || ''); return m ? `<img class="emo-img" src="${REL}emoji-propios/${m[1]}.svg" alt="${m[1]}">` : esc(e || ''); };
 const mezcla = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const frase = (a, w, b) => (w === '...' && b === '.') ? `${a}...` : `${a} ${w}${b.startsWith('.') ? '' : ' '}${b}`;
+const letraPW = t => `<span class="pw" style="color:var(--c);font-size:1.25em;padding:0 .08em">${esc(t)}</span>`;
 const plegar = t => t.normalize('NFD').replace(/[́̈]/g, '').normalize('NFC').toLowerCase(); // á→a, ü→u, la ñ se queda
 $('#btn-pdf').href = D.pdf;
 
@@ -545,7 +552,7 @@ function ir(n, cola) {
   document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
   actual = n; pintaProgreso();
   if (n >= PASOS.length) { mascota.style.display = 'none'; albumGuardar(D.archivo); $('#final .album-hueco').innerHTML = albumHtml(D.archivo); $('#final').classList.add('activo'); fanfarria(); confeti(); setTimeout(() => di(D.final), 700); }
-  else { pasos[n].t.classList.add('activo'); mascota.style.display = ''; di(D.consignas[n], cola); if (pasos[n].alEntrar) pasos[n].alEntrar(); }
+  else { pasos[n].t.classList.add('activo'); (matchMedia('(max-width:1200px)').matches ? pasos[n].t.querySelector('.tarjeta') : document.body).appendChild(mascota); mascota.style.display = ''; di(D.consignas[n], cola); if (pasos[n].alEntrar) pasos[n].alEntrar(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -560,7 +567,7 @@ function albumHtml(nueva) { const l = albumLeer();
 /* portada */
 const portada = el('section', 'paso activo');
 portada.innerHTML = `<div class="tarjeta portada"><div class="portada-leo"><img src="${REL}mascota/leoni/frente.webp" alt="Leoni, la mascota de Academia Esparta"><span class="bocadillo">¡Hola! Soy Leoni</span></div><div class="letrota">${esc(D.mayus.charAt(0) + D.mayus.slice(1).toLowerCase())} ${esc(D.letra)}</div>
-  <h1>Vamos a aprender la ${esc(D.nombre)}</h1><p>Seis juegos cortos. ¡Termínalos y gana la pegatina de esta letra!</p>
+  <h1>Vamos a aprender la ${letraPW(D.nombre)}</h1><p>Seis juegos cortos. ¡Termínalos y gana la pegatina de esta letra!</p>
   <button class="grande" type="button">¡Empezar! 🚀</button>${albumLeer().length ? `<br><span class="album-link">📒 Mi álbum: ${albumLeer().length} de ${D.album.length} pegatinas</span>` : ''}</div>`;
 portada.querySelector('.grande').onclick = () => { di(D.saludo); ir(0, true); };
 app.appendChild(portada);
@@ -569,7 +576,7 @@ app.appendChild(portada);
 (() => { const p = tarjeta(0, 'Mira la letra. Toca los dibujos para oír las palabras y toca las sílabas.', null);
   const pal = D.intro.palabras.map(([e, w]) => `<button class="pal-btn" type="button" data-w="${esc(w)}"><span class="emo">${emo(e)}</span><span class="pw">${marcaLetra(w)}</span></button>`).join('');
   p.cuerpo.innerHTML = `<div class="conozco"><div class="par-letras"><span>${esc(D.mayus.charAt(0) + D.mayus.slice(1).toLowerCase())}</span><span>${esc(D.letra)}</span></div><div class="pal-intro">${pal}</div></div>
-    <div class="como-suena"><h3>¿Cómo suena la ${esc(D.nombre.replace(/\s*\(.*\)/, ''))}?</h3><div class="muestra">${esc(D.suena[0])}</div><p>${esc(D.suena[1])}</p></div><div class="chips">${D.silabas.map(s => `<button class="chip" type="button">${esc(s)}</button>`).join('')}</div>`;
+    <div class="como-suena"><h3>¿Cómo suena la ${letraPW(D.nombre.replace(/\s*\(.*\)/, ''))}?</h3><div class="muestra">${esc(D.suena[0])}</div><p>${esc(D.suena[1])}</p></div><div class="chips">${D.silabas.map(s => `<button class="chip" type="button">${esc(s)}</button>`).join('')}</div>`;
   const vistos = new Set();
   const comprueba = () => { if (vistos.size >= D.intro.palabras.length + Math.min(3, D.silabas.length)) p.listo(); };
   p.cuerpo.querySelectorAll('.pal-btn').forEach(b => b.onclick = () => { di(b.dataset.w); b.style.borderColor = 'var(--ok)'; vistos.add('p' + b.dataset.w); comprueba(); });
@@ -588,7 +595,7 @@ function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = 
   const items = D.toca;
   let palabrasHechas = 0;
   items.forEach(([w, e]) => {
-    const it = el('div', 'toca-it'); it.innerHTML = `<span class="emo">${emo(e)}</span>`;
+    const it = el('div', 'toca-it' + (w.length >= 8 ? ' larga' : '')); it.innerHTML = `<span class="emo">${emo(e)}</span>`;
     const ls = el('div', 'letras'); it.appendChild(ls);
     const esMayus = w === w.toUpperCase();
     let i = 0, tiene = 0;
@@ -688,7 +695,7 @@ function marcaLetra(w) { const L = plegar(D.letra), n = D.letra.length; let o = 
 /* final */
 const fin = el('section', 'paso'); fin.id = 'final';
 const pegMia = (D.album.find(x => x.a === D.archivo) || {}).emo || '⭐';
-fin.innerHTML = `<div class="tarjeta final"><img class="leo-fin" src="${REL}mascota/leoni/celebrando.webp" alt=""><h2>¡Lo has conseguido!</h2><p>Has ganado la pegatina de la ${esc(D.nombre)}:</p>
+fin.innerHTML = `<div class="tarjeta final"><img class="leo-fin" src="${REL}mascota/leoni/celebrando.webp" alt=""><h2>¡Lo has conseguido!</h2><p>Has ganado la pegatina de la ${letraPW(D.nombre)}:</p>
   <div class="pegatina-nueva">${emo(pegMia)}</div><div class="album-hueco"></div>
   <div class="acciones"><a class="lleno" href="${D.pdf}" target="_blank" rel="noopener">📄 Ficha para imprimir</a><button type="button" id="otra-vez">↺ Jugar otra vez</button><a href="${REL}materiales.html">Más letras</a></div></div>`;
 app.appendChild(fin);
