@@ -2531,6 +2531,104 @@
         font-size: clamp(0.98rem, 1.4vw, 1.1rem) !important;
         color: rgba(236,253,245,0.65) !important;
       }
+      /* ── Buscador de fichas (bf-*) ── */
+      .bf { max-width: 860px; margin: -1.5rem auto 4rem; }
+      .bf-caja {
+        border: 1px solid rgba(74,222,128,0.22);
+        background: rgba(5,58,44,0.55);
+        backdrop-filter: blur(10px);
+        border-radius: 22px;
+        padding: 1.6rem 1.6rem 1.3rem;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+      }
+      .bf-label {
+        display: block;
+        font-family: 'Fraunces', serif;
+        font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+        color: #fff;
+        margin-bottom: .9rem;
+      }
+      .bf-input {
+        display: flex; align-items: center; gap: .7rem;
+        background: rgba(236,253,245,0.07);
+        border: 1px solid rgba(74,222,128,0.3);
+        border-radius: 14px;
+        padding: .2rem 1rem;
+        transition: border-color .2s ease, box-shadow .2s ease;
+      }
+      .bf-input:focus-within { border-color: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,0.15); }
+      .bf-input svg { flex-shrink: 0; width: 20px; height: 20px; color: #4ade80; }
+      .bf-input input {
+        flex: 1; min-width: 0;
+        background: transparent; border: 0; outline: 0;
+        color: #fff; font: 400 1.05rem 'Poppins', sans-serif;
+        padding: .85rem 0;
+      }
+      .bf-input input::placeholder { color: rgba(236,253,245,0.45); }
+      .bf-input input::-webkit-search-cancel-button { filter: invert(1) opacity(.6); }
+      .bf-filtros { display: flex; flex-wrap: wrap; gap: .45rem 1.2rem; margin-top: 1rem; }
+      .bf-grupo { display: flex; flex-wrap: wrap; gap: .4rem; }
+      .bf-chip {
+        font: 500 .82rem 'Poppins', sans-serif;
+        color: rgba(236,253,245,0.8);
+        background: transparent;
+        border: 1px solid rgba(74,222,128,0.25);
+        border-radius: 9999px;
+        padding: .32rem .8rem;
+        cursor: pointer;
+        transition: background .2s ease, color .2s ease, border-color .2s ease;
+      }
+      .bf-chip:hover { border-color: #4ade80; color: #fff; }
+      .bf-chip[aria-pressed="true"] { background: #4ade80; border-color: #4ade80; color: #053a2c; }
+      .bf-sug { margin-top: .9rem; font-size: .82rem; color: rgba(236,253,245,0.55); }
+      .bf-sug button {
+        font: inherit; color: #a7f3d0; background: none; border: 0;
+        border-bottom: 1px dashed rgba(167,243,208,0.45);
+        padding: 0; margin: 0 .35rem; cursor: pointer;
+      }
+      .bf-sug button:hover { color: #fff; border-bottom-color: #fff; }
+      .bf-estado { margin: 1.1rem .3rem 0; font-size: .9rem; color: rgba(236,253,245,0.65); min-height: 1.3em; }
+      .bf-estado b { color: #fff; font-weight: 600; }
+      .bf-lista { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .9rem; margin-top: .9rem; }
+      .bf-card {
+        border: 1px solid rgba(74,222,128,0.18);
+        background: rgba(236,253,245,0.04);
+        border-radius: 16px;
+        padding: 1rem 1.1rem 1.05rem;
+        animation: bfEntra .45s cubic-bezier(.2,.8,.2,1) both;
+        animation-delay: calc(var(--i, 0) * 45ms);
+      }
+      @keyframes bfEntra { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+      .bf-meta { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: #4ade80; font-weight: 600; }
+      .bf-tit { font-family: 'Fraunces', serif; font-size: 1.15rem; color: #fff; margin: .25rem 0 .65rem; line-height: 1.25; }
+      .bf-tit mark { background: rgba(74,222,128,0.25); color: #fff; border-radius: 3px; padding: 0 2px; }
+      .bf-fichas { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+      .bf-flbl { font-size: .72rem; color: rgba(236,253,245,0.5); margin-right: .2rem; }
+      .bf-fichas a.bf-n { min-width: 2.1rem; text-align: center; font-weight: 600; }
+      .bf-fichas a {
+        font-size: .78rem; color: #ecfdf5;
+        background: rgba(74,222,128,0.1);
+        border: 1px solid rgba(74,222,128,0.2);
+        border-radius: 8px;
+        padding: .28rem .55rem;
+        transition: background .2s ease, transform .2s ease;
+      }
+      .bf-fichas a:hover { background: rgba(74,222,128,0.28); transform: translateY(-1px); }
+      .bf-fichas a.bf-mas { background: transparent; border-style: dashed; color: #a7f3d0; }
+      .bf-vermas {
+        display: block; margin: 1.1rem auto 0;
+        font: 500 .88rem 'Poppins', sans-serif; color: #4ade80;
+        background: none; border: 1px solid rgba(74,222,128,0.35);
+        border-radius: 9999px; padding: .5rem 1.3rem; cursor: pointer;
+      }
+      .bf-vermas:hover { background: rgba(74,222,128,0.1); }
+      @media (max-width: 700px) {
+        .bf { margin-top: -1rem; }
+        .bf-caja { padding: 1.2rem 1rem 1rem; border-radius: 18px; }
+        .bf-lista { grid-template-columns: 1fr; }
+      }
+      @media (prefers-reduced-motion: reduce) { .bf-card { animation: none; } }
+
       /* Adaptar las 2 portal cards al dark mode */
       .recursos-premium .portal-card {
         border: 1px solid rgba(74,222,128,0.2) !important;
@@ -3946,6 +4044,37 @@
           <p>Todo el contenido organizado en su propio espacio. Elige lo que necesitas.</p>
         </div>
 
+        <!-- Buscador de fichas: los datos salen de buscador-fichas.json (lo regenera generar-indices-recursos.mjs) -->
+        <div class="bf" id="buscador-fichas">
+          <div class="bf-caja" role="search">
+            <label class="bf-label" for="bf-q">¿Qué está dando tu hijo en clase?</label>
+            <div class="bf-input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input id="bf-q" type="search" autocomplete="off" placeholder="Fracciones, la división, la b y la v…" aria-describedby="bf-estado">
+            </div>
+            <div class="bf-filtros">
+              <div class="bf-grupo" data-filtro="curso" aria-label="Curso">
+                <button type="button" class="bf-chip" data-v="" aria-pressed="true">Todos</button>
+                <button type="button" class="bf-chip" data-v="1" aria-pressed="false">1º</button>
+                <button type="button" class="bf-chip" data-v="2" aria-pressed="false">2º</button>
+                <button type="button" class="bf-chip" data-v="3" aria-pressed="false">3º</button>
+                <button type="button" class="bf-chip" data-v="4" aria-pressed="false">4º</button>
+                <button type="button" class="bf-chip" data-v="5" aria-pressed="false">5º</button>
+                <button type="button" class="bf-chip" data-v="6" aria-pressed="false">6º</button>
+              </div>
+              <div class="bf-grupo" data-filtro="asig" aria-label="Asignatura">
+                <button type="button" class="bf-chip" data-v="" aria-pressed="true">Todo</button>
+                <button type="button" class="bf-chip" data-v="lengua" aria-pressed="false">Lengua</button>
+                <button type="button" class="bf-chip" data-v="matematicas" aria-pressed="false">Matemáticas</button>
+              </div>
+            </div>
+            <div class="bf-sug">Prueba:<button type="button">tablas de multiplicar</button><button type="button">fracciones</button><button type="button">ortografía</button><button type="button">comprensión lectora</button><button type="button">la división</button></div>
+          </div>
+          <p class="bf-estado" id="bf-estado" aria-live="polite"></p>
+          <div class="bf-lista" id="bf-lista"></div>
+          <button type="button" class="bf-vermas" id="bf-vermas" hidden>Ver más resultados</button>
+        </div>
+
         <div class="portales-duo reveal">
 
           <!-- Tarjeta Recursos -->
@@ -4576,5 +4705,168 @@
         });
       })();
     </script>
+  <!-- Buscador de fichas -->
+  <script>
+  (function () {
+    var raiz = document.getElementById('buscador-fichas');
+    if (!raiz) return;
+    var q = document.getElementById('bf-q');
+    var lista = document.getElementById('bf-lista');
+    var estado = document.getElementById('bf-estado');
+    var verMas = document.getElementById('bf-vermas');
+    var filtros = { curso: '', asig: '' };
+    function inicial() { return window.innerWidth < 700 ? 4 : 8; }
+    var datos = null, cargando = null, limite = inicial(), ultimos = [];
+    var NOMBRE = { lengua: 'Lengua', matematicas: 'Matemáticas' };
+    var VACIAS = { de:1, la:1, el:1, los:1, las:1, y:1, e:1, en:1, con:1, del:1, a:1, al:1, por:1, para:1, un:1, una:1, que:1, mi:1, hijo:1, hija:1, primaria:1, fichas:1, ficha:1 };
+
+    function norm(s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+    function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+
+    function cargar() {
+      if (!cargando) cargando = fetch('/buscador-fichas.json').then(function (r) { return r.json(); }).then(function (filas) {
+        datos = filas.map(function (f) {
+          var nTit = f[5].map(function (x) { return limpia(x[2]); });
+          return { asig: f[0], curso: f[1], bloque: f[2], sub: f[3], ruta: f[4], fichas: f[5], nTit: nTit,
+                   nSub: limpia(f[3]), nTodo: limpia(f[3] + ' ' + f[2] + ' ' + NOMBRE[f[0]]) + ' ' + nTit.join(' ') };
+        });
+      }).catch(function () { estado.textContent = 'No se ha podido cargar el buscador. Puedes ver todas las fichas en Materiales.'; });
+      return cargando;
+    }
+    // Se descarga cuando el buscador se acerca a la pantalla o al tocarlo
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { cargar(); io.disconnect(); } }, { rootMargin: '400px' });
+      io.observe(raiz);
+    }
+    q.addEventListener('focus', cargar);
+
+    // «V/F» no es la letra v
+    function limpia(s) { return norm(s).replace(/\bv\/f\b/g, 'verdadero falso'); }
+    // Una letra o cifra suelta solo cuenta como palabra entera («Letra B», «tabla del 7»)
+    function esta(texto, t) {
+      if (t.length > 1) return texto.indexOf(t) >= 0;
+      return new RegExp('(^|[^a-z0-9ñ])' + t + '([^a-z0-9ñ]|$)').test(texto);
+    }
+    // Raíz corta de las palabras largas: «multiplicar» encuentra «multiplicación»
+    function raizDe(t) { return t.length >= 6 ? t.slice(0, Math.max(4, t.length - 3)) : t; }
+
+    function buscar() {
+      var texto = norm(q.value.trim());
+      var curso = filtros.curso, asig = filtros.asig, terminos = [];
+      var trozos = texto.split(/[^a-z0-9ñº]+/);
+      trozos.forEach(function (t, j) {
+        if (!t || VACIAS[t]) return;
+        var m = t.match(/^([1-6])(o|a|er|ero|do|to|º)?$/);
+        // «5º» o «division 4» es el curso; «tabla del 5» no
+        var tras = trozos[j - 1];
+        if (m && (m[2] || (tras !== 'del' && tras !== 'de'))) { if (!curso) curso = m[1]; return; }
+        t = t.replace(/º$/, '');
+        if (/^(mates?|matematicas?)$/.test(t)) { if (!asig) asig = 'matematicas'; return; }
+        if (t === 'lengua') { if (!asig) asig = 'lengua'; return; }
+        terminos.push(raizDe(t));
+      });
+      if (!terminos.length && !curso && !asig) return null;
+      var frase = trozos.filter(function (t) { return t && !/^[1-6]/.test(t) && !/^(mates?|matematicas?|lengua)$/.test(t); }).join(' ');
+      var res = [];
+      datos.forEach(function (d) {
+        if (curso && d.curso !== curso) return;
+        if (asig && d.asig !== asig) return;
+        var puntos = 1;
+        for (var i = 0; i < terminos.length; i++) {
+          if (!esta(d.nTodo, terminos[i])) return;
+          if (esta(d.nSub, terminos[i])) puntos += 3; else puntos += 1;
+        }
+        if (frase.length > 4 && d.nSub.indexOf(frase) >= 0) puntos += 6;
+        // Fichas cuyo título coincide: salen primero en la tarjeta
+        var aciertos = [];
+        var extra = terminos.filter(function (t) { return !esta(d.nSub, t); });
+        if (extra.length) d.nTit.forEach(function (nt, k) {
+          if (extra.some(function (t) { return esta(nt, t); })) aciertos.push(k);
+        });
+        if (aciertos.length && aciertos.length < d.fichas.length) puntos += 2;
+        res.push({ d: d, p: puntos, aciertos: aciertos.length < d.fichas.length ? aciertos : [] });
+      });
+      res.sort(function (a, b) { return b.p - a.p || a.d.curso - b.d.curso; });
+      return { res: res, terminos: terminos };
+    }
+
+    function marcar(texto, terminos) {
+      var html = esc(texto), n = norm(texto);
+      terminos.forEach(function (t) {
+        var i = n.indexOf(t);
+        if (i >= 0 && t.length >= 3) {
+          var a = i, z = i + t.length;   // la palabra entera, no solo la raíz
+          while (a > 0 && /[a-z0-9ñ]/.test(n[a - 1])) a--;
+          while (z < n.length && /[a-z0-9ñ]/.test(n[z])) z++;
+          var original = texto.slice(a, z);
+          html = html.replace(esc(original), '<mark>' + esc(original) + '</mark>');
+        }
+      });
+      return html;
+    }
+
+    function tarjeta(r, i, terminos) {
+      var d = r.d, max = 6;
+      var orden = r.aciertos.concat(d.fichas.map(function (_, k) { return k; }).filter(function (k) { return r.aciertos.indexOf(k) < 0; }));
+      var chips = orden.slice(0, max).map(function (k) {
+        var f = d.fichas[k], acierta = r.aciertos.indexOf(k) >= 0;
+        var texto = acierta ? (f[2].length > 34 ? f[2].slice(0, 32) + '…' : f[2]) : String(f[0]);
+        return '<a href="/' + d.ruta + f[1] + '"' + (acierta ? '' : ' class="bf-n"') + ' data-umami-event="buscador-ficha" title="Ficha ' + f[0] + ': ' + esc(f[2]) + '">' + esc(texto) + '</a>';
+      }).join('');
+      chips = '<span class="bf-flbl">Fichas</span>' + chips;
+      if (d.fichas.length > max) chips += '<a class="bf-mas" href="/recursos/primaria/' + d.curso + '/' + d.asig + '/">+' + (d.fichas.length - max) + ' más</a>';
+      return '<article class="bf-card" style="--i:' + i + '">' +
+        '<div class="bf-meta">' + d.curso + 'º · ' + NOMBRE[d.asig] + ' · ' + esc(d.bloque) + '</div>' +
+        '<h3 class="bf-tit">' + marcar(d.sub, terminos) + '</h3>' +
+        '<div class="bf-fichas">' + chips + '</div></article>';
+    }
+
+    function pintar() {
+      if (!datos) { if (q.value.trim() || filtros.curso || filtros.asig) estado.textContent = 'Cargando fichas…'; return; }
+      var r = buscar();
+      if (!r) { lista.innerHTML = ''; estado.textContent = ''; verMas.hidden = true; return; }
+      ultimos = r;
+      var n = r.res.length, fichas = r.res.reduce(function (s, x) { return s + x.d.fichas.length; }, 0);
+      if (!n) {
+        estado.innerHTML = 'No hay fichas de eso todavía. Prueba con otra palabra o <a href="materiales.html" style="color:#4ade80">mira el catálogo completo</a>.';
+        lista.innerHTML = ''; verMas.hidden = true; return;
+      }
+      estado.innerHTML = '<b>' + fichas.toLocaleString('es-ES') + ' fichas</b> en ' + n + (n === 1 ? ' tema' : ' temas') + ' · gratis y listas para imprimir';
+      lista.innerHTML = r.res.slice(0, limite).map(function (x, i) { return tarjeta(x, i, r.terminos); }).join('');
+      verMas.hidden = n <= limite;
+    }
+
+    var espera, rastreo;
+    q.addEventListener('input', function () {
+      limite = inicial();
+      clearTimeout(espera); espera = setTimeout(function () { cargar().then(pintar); }, 120);
+      // Para saber qué buscan las familias (Umami, sin cookies)
+      clearTimeout(rastreo);
+      rastreo = setTimeout(function () {
+        var t = q.value.trim();
+        if (t.length >= 3 && window.umami) umami.track('buscador', { q: t.slice(0, 60), resultados: ultimos.res ? ultimos.res.length : 0 });
+      }, 1500);
+    });
+    raiz.querySelectorAll('.bf-grupo').forEach(function (g) {
+      g.addEventListener('click', function (e) {
+        var b = e.target.closest('.bf-chip'); if (!b) return;
+        g.querySelectorAll('.bf-chip').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        filtros[g.dataset.filtro] = b.dataset.v; limite = inicial();
+        cargar().then(pintar);
+      });
+    });
+    raiz.querySelectorAll('.bf-sug button').forEach(function (b) {
+      b.addEventListener('click', function () { q.value = b.textContent; limite = inicial(); cargar().then(pintar); q.focus(); });
+    });
+    verMas.addEventListener('click', function () { limite += 12; pintar(); });
+
+    // El texto de ejemplo va cambiando mientras la caja está vacía
+    var ejemplos = ['Fracciones, la división, la b y la v…', 'Tablas de multiplicar…', 'Comprensión lectora 3º…', 'Problemas de mates 4º…', 'Ortografía, tildes, sílabas…', 'El reloj, el dinero…'];
+    var k = 0;
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInterval(function () { if (!q.value && document.activeElement !== q) { k = (k + 1) % ejemplos.length; q.placeholder = ejemplos[k]; } }, 3200);
+    }
+  })();
+  </script>
   </body>
 </html>

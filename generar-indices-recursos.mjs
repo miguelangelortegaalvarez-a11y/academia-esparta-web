@@ -238,6 +238,25 @@ ${bloquesHtml.join('\n')}
   console.log(`✅ ${urlDir}index.html — ${totalFichas} fichas, ${subConFichas}/${subTotales} sub-bloques`);
 }
 
+// ── Índice del buscador de la home (buscador-fichas.json) ──
+// Una fila por sub-bloque: [asig, curso, bloque, subBloque, ruta, [[num, archivo, titulo], …]]
+const buscador = [];
+for (const [asig, def] of Object.entries(ASIGNATURAS)) {
+  for (const [curso, cur] of Object.entries(def.curriculum)) {
+    if (!cur.bloques) continue;
+    for (const [bloqueKey, bloque] of Object.entries(cur.bloques)) {
+      for (const sb of bloque.subBloques) {
+        const rec = RECURSOS[`${asig}|${curso}|${bloqueKey}|${sb}`];
+        if (!rec) continue;
+        buscador.push([asig, curso, bloque.nombre, sb, rec.ruta,
+          rec.fichas.map(f => [f.num, f.archivo, f.titulo])]);
+      }
+    }
+  }
+}
+writeFileSync(join(RAIZ, 'buscador-fichas.json'), JSON.stringify(buscador));
+console.log(`✅ buscador-fichas.json — ${buscador.length} sub-bloques, ${buscador.reduce((n, r) => n + r[5].length, 0)} fichas`);
+
 // ── Validación: cada enlace generado debe existir en disco ──
 const rotos = enlacesGenerados.filter(href => !existsSync(join(RAIZ, href.slice(1))));
 console.log(`\nEnlaces a fichas generados: ${enlacesGenerados.length}`);
