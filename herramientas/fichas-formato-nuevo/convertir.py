@@ -15,6 +15,8 @@ Dos pasos (desde la raíz del repo):
 una vez convertida, el HTML ya no es el antiguo). «generar» escribe la página y el PDF desde el JSON.
 """
 import html, json, os, re, shutil, subprocess, sys, tempfile
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import chasis, extras_mates
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -54,6 +56,8 @@ def extraer(ruta):
     body = re.sub(r'<style>.*?</style>', '', s.split('</head>', 1)[1], flags=re.S)
     d = {'origen': os.path.relpath(ruta, RAIZ), 'cabecera': extraer_cabecera(s)}
     d['ref'] = limpia(re.search(r'class="ficha-ref">(.*?)</span>', body, re.S).group(1))
+    if 'class="ej-block"' in body or '/matematicas/' in ruta:
+        return chasis.extraer_chasis(s, d)
     d['titulos'] = [quita_emoji_inicial(limpia(re.sub(r'<span class="ej-n">.*?</span>', '', t)))
                     for t in re.findall(r'class="seccion-titulo">(.*?)</div>', body, re.S)]
     if 'pregunta-row' in body:                                   # comprension (V/F)
@@ -95,6 +99,12 @@ def comprobar_extraccion(d, ruta):
         if len(d['rodea']) != n('palabra-rodea'): f.append('faltan palabras de rodear')
     if d['plantilla'] == 'lectura':
         if len(d['preguntas']) != n('pregunta-item') or len(d['completa']) != n('completa-item'): f.append('faltan preguntas/completa')
+    if d['plantilla'] == 'chasis':
+        sin = lambda x: re.sub(r'\s+', '', re.sub(r'<[^>]+>', '', x))
+        mid = re.split(r'<hr class="separador"\s*/?>', re.sub(r'<style>.*?</style>', '', s, flags=re.S), 1)[1]
+        mid = mid[:mid.rindex('<div class="footer">')]
+        if sin(mid) != sin(d['badge'] + ''.join(d['bloques'])): f.append('se ha perdido texto al trocear')
+        return f
     if not d['texto']: f.append('sin texto')
     return f
 
@@ -125,10 +135,19 @@ def info(d):
     trozos = [x.strip() for x in d['ref'].split('·')]
     bloque = trozos[2] if len(trozos) > 2 else ''
     etiqueta = ' · '.join(trozos[3:])
+    if d.get('plantilla') == 'chasis' and d.get('badge'):
+        etiqueta = re.sub(r'^[^\wÁÉÍÓÚÑáéíóúñ¿¡]+', '', d['badge'])
     return curso, asig, bloque, etiqueta
 
 
 def ejercicios(d):
+    if d['plantilla'] == 'chasis':
+        chasis.PAUTA = re.sub(r' width="\d+" height="\d+"', '', pauta_vacia().replace('class="pauta"', 'class="pb-pauta"'))
+        return chasis.ejercicios_chasis(d, ej)
+    return ejercicios_texto(d)
+
+
+def ejercicios_texto(d):
     """Lista de ejercicios: cabecera + clase de la lista + piezas. Una pieza nunca se parte;
     una lista sí puede seguir en la página siguiente (pieza a pieza)."""
     T = d['titulos']
@@ -213,17 +232,31 @@ def dibuja(n, alto, texto='Dibuja lo que pasa en el texto.'):
     return (ej(n, texto), 'dib-w', [f'<div class="dibuja" style="height:{int(alto)}px"></div>'])
 
 
+def solo_modelo(pz):
+    """Un ejercicio nuevo que se ha quedado solo con su fila de modelo no sirve: fuera entero."""
+    return len(pz) == 1 and 'xm-mira-t' in pz[0]
+
+
+def caja(cls):
+    """Contenedor de una lista: «mz problemas» = escala de Mates + la clase antigua dentro."""
+    if cls.startswith('mz '):
+        return f'<div class="mz"><div class="{cls[3:]}">', '</div></div>'
+    return f'<div class="{cls}">', '</div>'
+
+
 def montar(trozos):
     """trozos = [(nº ejercicio, con_cabecera, [piezas])] → HTML de una página."""
-    return ''.join(f'<div class="ej-blq">{cab if con else ""}<div class="{cls}">{"".join(piezas)}</div></div>'
+    return ''.join(f'<div class="ej-blq">{cab if con else ""}{caja(cls)[0]}{"".join(piezas)}{caja(cls)[1]}</div>'
                    for cab, cls, con, piezas in trozos)
 
 
 MEDIR_JS = """<script>window.addEventListener('load',()=>{document.fonts.ready.then(()=>{
 const pg=document.querySelector('.pagina'),P=pg.getBoundingClientRect().top;
 const u=[...document.querySelectorAll('[data-u]')].map(e=>{const r=e.getBoundingClientRect();return [e.dataset.u,r.top-P,r.bottom-P]});
+const lim=pg.getBoundingClientRect().right-pg.offsetWidth/21*1.6+2;let des=0;
+pg.querySelectorAll('*').forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.right>lim)des=Math.max(des,r.right-lim)});
 const pie=document.querySelector('.pie').offsetHeight, fin=document.querySelector('.fin').getBoundingClientRect();
-const pre=document.createElement('pre');pre.id='alturas';pre.textContent=JSON.stringify({u,pie,fin:fin.height+26,cm:pg.offsetWidth/21});
+const pre=document.createElement('pre');pre.id='alturas';pre.textContent=JSON.stringify({u,des,pie,fin:fin.height+26,cm:pg.offsetWidth/21});
 document.body.appendChild(pre);});});</script>"""
 
 
@@ -243,7 +276,7 @@ def paginar(d, doc_medida, carpeta):
         sig = u[k+1][1] if k + 1 < len(u) else bot + 30
         alto.append((uid, sig - top))
     y0 = u[0][1]
-    limite = 29.7 * cm - 0.8 * cm - m['pie'] - 14
+    limite = 29.7 * cm - 0.8 * cm - m['pie'] - 30
     paginas, libres, actual, y = [], [], [], y0
     for k, (uid, h) in enumerate(alto):
         extra = alto[k+1][1] if uid.startswith('c') and k + 1 < len(alto) else 0   # cabecera pegada a su 1.ª pieza
@@ -251,6 +284,7 @@ def paginar(d, doc_medida, carpeta):
             paginas.append(actual); libres.append(limite - y); actual, y = [], y0
         actual.append(uid); y += h
     paginas.append(actual); libres.append(limite - y)
+    DESBORDE[0] = m['des']
     return paginas, libres, m['fin']
 
 
@@ -285,9 +319,19 @@ MIDE = '<style>@media print{.pagina{height:auto!important;min-height:0!important
 
 
 FIN = [True]
+DESBORDE = [0]
+ZOOM = [1.12]
 
 
 def generar(ruta):
+    for z in (1.12, 1.0, 0.9, 0.8):
+        ZOOM[0] = z
+        r = generar_una(ruta)
+        if r != 'desborda': return r
+    print(f'✗ {ruta}: se sale por la derecha incluso al 80 %'); return False
+
+
+def generar_una(ruta):
     rel = os.path.relpath(os.path.abspath(ruta), RAIZ)
     jd = os.path.join(DATOS, os.path.splitext(rel)[0] + '.json')
     d = json.load(open(jd, encoding='utf8'))
@@ -295,6 +339,7 @@ def generar(ruta):
     REL = '../' * prof
     css = open(CSS_BASE, encoding='utf8').read().replace('../../../../../fuentes/', REL + 'fuentes/')
     css += open(CSS_EXTRA, encoding='utf8').read()
+    if d['plantilla'] == 'chasis': css += chasis.css_ficha(d, REL).replace('.mz{zoom:1.12;', '.mz{zoom:%s;' % ZOOM[0])
     nom = nombre_pdf(d)
     destino = os.path.join(RAIZ, rel)
     carpeta = os.path.dirname(destino)
@@ -313,16 +358,25 @@ def generar(ruta):
                       + ''.join(f'<div data-u="p{e}_{k}">{x}</div>' for k, x in enumerate(piezas)) + '</div></div>'
                       for e, (cab, cls, piezas) in enumerate(EJ))
     def medir(EJ):
-        marcado = ''.join(f'<div class="ej-blq"><div data-u="c{e}">{cab}</div><div class="{cls}">'
-                          + ''.join(f'<div data-u="p{e}_{k}">{x}</div>' for k, x in enumerate(piezas)) + '</div></div>'
+        marcado = ''.join(f'<div class="ej-blq"><div data-u="c{e}">{cab}</div>{caja(cls)[0]}'
+                          + ''.join(f'<div data-u="p{e}_{k}">{x}</div>' for k, x in enumerate(piezas)) + caja(cls)[1] + '</div>'
                           for e, (cab, cls, piezas) in enumerate(EJ))
         return paginar(d, documento([marcado], MIDE + MEDIR_JS), carpeta)
 
     FIN[0] = True
+    nbase = len(EJ)
     reparto, libres, alto_fin = medir(EJ)
+    if DESBORDE[0] > 1 and d['plantilla'] == 'chasis' and ZOOM[0] > 0.8: return 'desborda'
     if len(reparto) > 1:                                   # pasa a dos páginas: llenamos la última
         base = len(reparto)
-        nuevos, n = extras(d, len(EJ) + 1)
+        nbase = len(EJ)                                    # ejercicios de la ficha antigua (no se tocan)
+        if d['plantilla'] == 'chasis':
+            ultimo = max([int(x) for x in re.findall(r'<span class="ej-n">(\d+)</span>', ''.join(''.join(p) for _, _, p in EJ))] or [len(EJ)])
+            d['_problemas'] = ''.join(''.join(p) for _, _, p in EJ).count('<div class="pb">')
+            nuevos = extras_mates.extras(d, ultimo + 1, ej, chasis.PAUTA)
+            n = ultimo + 1 + len(nuevos)
+        else:
+            nuevos, n = extras(d, len(EJ) + 1)
         if nuevos:
             r2, l2, _ = medir(EJ + nuevos)
             if len(r2) > base:                             # lo que no cabe, fuera (pieza a pieza)
@@ -331,40 +385,49 @@ def generar(ruta):
                 nuevos2 = []
                 for e, (cab, cls, piezas) in enumerate(nuevos, start=len(EJ)):
                     pz = [x for k, x in enumerate(piezas) if f'p{e}_{k}' in usados]
-                    if pz: nuevos2.append((cab, cls, pz))
+                    if pz and not solo_modelo(pz): nuevos2.append((cab, cls, pz))
                 nuevos = nuevos2
                 n = len(EJ) + len(nuevos) + 1
             EJ = EJ + nuevos
             reparto, libres, alto_fin = medir(EJ)
         hueco = libres[-1] - alto_fin - 70                 # 70 ≈ enunciado + márgenes
-        if hueco >= 150:
+        if hueco >= 150 and d['plantilla'] != 'chasis':
             EJ = EJ + [dibuja(n, min(hueco, 420))]
             reparto, libres, alto_fin = medir(EJ)
-    if libres[-1] < alto_fin: FIN[0] = False
-    # 2) montar cada página con sus piezas
-    htmls = []
-    for ids in reparto:
-        trozos = []
-        for uid in ids:
-            if uid.startswith('c'): continue
-            e, k = map(int, uid[1:].split('_'))
-            cab, cls, piezas = EJ[e]
-            if trozos and trozos[-1][4] == e:
-                trozos[-1][3].append(piezas[k])
-            else:
-                trozos.append([cab, cls, ('c%d' % e) in ids, [piezas[k]], e])
-        htmls.append(montar([t[:4] for t in trozos]))
-    T = len(htmls)
-    doc = documento(htmls)
-    # 3) comprobar que nada se sale (sin el recorte del chasis) y escribir
-    prueba = os.path.join(carpeta, '.mide.html')
-    open(prueba, 'w', encoding='utf8').write(doc.replace('</head>', MIDE + '</head>'))
-    n = pdf(prueba, os.path.join(tempfile.gettempdir(), 'mide.pdf')); os.remove(prueba)
-    if n != T:
+        while len(reparto) > base and len(EJ) > nbase:      # lo nuevo nunca añade páginas: se quita pieza a pieza
+            cab, cls, pz = EJ[-1]
+            EJ = EJ[:-1] + ([(cab, cls, pz[:-1])] if len(pz) > 1 and not solo_modelo(pz[:-1]) else [])
+            reparto, libres, alto_fin = medir(EJ)
+    while True:
+        FIN[0] = libres[-1] >= alto_fin
+        # 2) montar cada página con sus piezas
+        htmls = []
+        for ids in reparto:
+            trozos = []
+            for uid in ids:
+                if uid.startswith('c'): continue
+                e, k = map(int, uid[1:].split('_'))
+                cab, cls, piezas = EJ[e]
+                if trozos and trozos[-1][4] == e:
+                    trozos[-1][3].append(piezas[k])
+                else:
+                    trozos.append([cab, cls, ('c%d' % e) in ids, [piezas[k]], e])
+            htmls.append(montar([t[:4] for t in trozos]))
+        T = len(htmls)
+        doc = documento(htmls)
+        # 3) comprobar que nada se sale (sin el recorte del chasis)
+        prueba = os.path.join(carpeta, '.mide.html')
+        open(prueba, 'w', encoding='utf8').write(doc.replace('</head>', MIDE + '</head>'))
+        n = pdf(prueba, os.path.join(tempfile.gettempdir(), 'mide.pdf')); os.remove(prueba)
+        if n == T: break
+        if len(EJ) > nbase:                                 # quitamos una pieza de lo nuevo y otra vez
+            cab, cls, pz = EJ[-1]
+            EJ = EJ[:-1] + ([(cab, cls, pz[:-1])] if len(pz) > 1 and not solo_modelo(pz[:-1]) else [])
+            reparto, libres, alto_fin = medir(EJ); continue
         print(f'✗ {rel}: el reparto no cabe ({n} folios para {T} páginas) — NO se escribe'); return False
     open(destino, 'w', encoding='utf8').write(doc)
     n = pdf(destino, os.path.join(carpeta, nom))
-    print(f'{"✓" if n == T else "✗"} {rel} → {nom} ({n} pág.: ' + ' | '.join(','.join(x for x in ids if x[0] == 'p') for ids in reparto) + ')')
+    print(f'{"✓" if n == T else "✗"} {rel} → {nom} ({n} pág.{"" if ZOOM[0] == 1.12 else ", escala " + str(ZOOM[0])}: ' + ' | '.join(','.join(x for x in ids if x[0] == 'p') for ids in reparto) + ')')
     return n == T
 
 
@@ -385,5 +448,8 @@ if __name__ == '__main__':
     orden, fichas = sys.argv[1], sys.argv[2:]
     ok = True
     if orden in ('extraer', 'todo'): ok = all([guardar_extraccion(f) for f in fichas])
-    if ok and orden in ('generar', 'todo'): ok = all([generar(f) for f in fichas])
+    def seguro(f):
+        try: return generar(f)
+        except Exception as e: print(f'✗ {f}: {type(e).__name__}: {e}'); return False
+    if ok and orden in ('generar', 'todo'): ok = all([seguro(f) for f in fichas])
     sys.exit(0 if ok else 1)
