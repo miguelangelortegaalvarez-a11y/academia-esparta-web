@@ -309,7 +309,7 @@ PLANTILLA = r'''<!DOCTYPE html>
     /* paso 1 */
     .conozco { display:flex; gap:22px; align-items:center; flex-wrap:wrap; justify-content:center; }
     .par-letras { font-family:'Playwrite ES',cursive; font-size:5.2rem; color:var(--c); line-height:1.25; display:flex; gap:14px; }
-    .par-letras span { background:color-mix(in srgb, var(--c) 9%, #fff); border-radius:22px; padding:0 18px .5em; border:3px dashed color-mix(in srgb, var(--c) 35%, #fff); }
+    .par-letras span { background:color-mix(in srgb, var(--c) 9%, #fff); border-radius:22px; padding:0 18px; line-height:1.95; display:inline-flex; align-items:center; border:3px dashed color-mix(in srgb, var(--c) 35%, #fff); }
     .pal-intro { display:flex; flex-direction:column; gap:10px; }
     .pal-btn { display:flex; align-items:center; gap:12px; background:#fff; border:3px solid color-mix(in srgb, var(--c) 20%, #fff); border-radius:18px;
                padding:8px 16px; cursor:pointer; font-size:1.7rem; transition:transform .15s; }
