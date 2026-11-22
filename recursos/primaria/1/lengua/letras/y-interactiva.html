@@ -62,7 +62,7 @@
     .emo img, img.emo-img { width:1em; height:1em; vertical-align:-.12em; }
     /* bienvenida */
     .portada { text-align:center; padding:28px 10px 10px; }
-    .portada .letrota { padding-bottom:.55em; font-family:'Playwrite ES',cursive; font-size:min(34vw,9rem); color:var(--c); line-height:1.2;
+    .portada .letrota { padding-bottom:.08em; margin-top:.12em; font-family:'Playwrite ES',cursive; font-size:min(34vw,9rem); color:var(--c); line-height:1.2;
                         display:inline-block; animation:bota 1.6s ease-in-out infinite; text-shadow:0 8px 0 color-mix(in srgb, var(--c) 22%, #fff); }
     @keyframes bota { 50% { transform:translateY(-14px) rotate(-3deg); } }
     .portada h1 { margin:6px 0 4px; font-size:1.6rem; color:#0f172a; }
@@ -87,7 +87,8 @@
     .chip.toque { background:var(--c); color:#fff; animation:pop .35s; }
     .como-suena { margin:18px auto 14px; max-width:460px; text-align:center; background:#fffbeb; border:3px dashed var(--oro); border-radius:22px; padding:12px 16px 14px; }
     .como-suena h3 { margin:0; font-size:1.05rem; color:#92400e; }
-    .como-suena .muestra { font-family:'Playwrite ES',cursive; font-size:3rem; color:var(--c); line-height:1.3; letter-spacing:.06em; padding-bottom:.45em; }
+    .como-suena .muestra { font-family:'Playwrite ES',cursive; font-size:3rem; color:var(--c); line-height:1.3; letter-spacing:.06em; padding-bottom:.1em; }
+    body.baja .portada .letrota { padding-bottom:.55em; } body.baja .como-suena .muestra { padding-bottom:.45em; }
     .como-suena p { margin:0; color:#78350f; font-weight:600; font-size:.95rem; }
     /* paso 2 */
     .toca-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
@@ -222,6 +223,7 @@ const emo = e => { const m = /^\[([a-z-]+)\]$/.exec(e || ''); return m ? `<img c
 const mezcla = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const frase = (a, w, b) => (w === '...' && b === '.') ? `${a}...` : `${a} ${w}${b.startsWith('.') ? '' : ' '}${b}`;
 const letraPW = t => `<span class="pw" style="color:var(--c);font-size:1.25em;padding:0 .08em">${esc(t)}</span>`;
+if (/[fgjpqyz]/.test(D.letra + D.silabas.join(''))) document.body.classList.add('baja');   // letras con trazo hacia abajo
 const plegar = t => t.normalize('NFD').replace(/[́̈]/g, '').normalize('NFC').toLowerCase(); // á→a, ü→u, la ñ se queda
 $('#btn-pdf').href = D.pdf;
 
