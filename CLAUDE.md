@@ -201,7 +201,9 @@ Aprobado por Miguel con la **letra M de 1º** (`recursos/primaria/1/lengua/letra
 - **Letras de 1º, 6 páginas de fácil a difícil:** presentación de la letra (bloque con barra verde: mayúscula/minúscula, 2 palabras con la letra en verde, cómo suena, sílabas para leer) + rodear la letra en palabras (minúsculas a la izquierda, MAYÚSCULAS a la derecha, cajita «→ ☐» para contar cuántas) · sílabas en pauta · palabras en pauta (modelo negrita verde + UNA copia gris + puntos de inicio) · junto sílabas · frases con caja «Palabras para usar» · cuento con preguntas + dibujo.
 - **Herramienta:** `herramientas/fichas-letras/generar_ficha_letra.py <letra>` lee `herramientas/fichas-letras/letras/<letra>.json` (copiar `m.json` como modelo), comprueba el contenido (cada palabra lleva la letra, hay palabras sin ella, las soluciones están en la caja…) y escribe la página y el PDF. Estilo en `estilo.css`. Revisar el PDF a ojo antes de subir.
 - **Dibujos que no existen como emoji** → `emoji-propios/<nombre>.svg`, escritos `[nombre]` en el JSON. ⚠️ **No existe emoji de mesa: 🪑 es una SILLA** → `[mesa]`.
-- **Pendiente:** las otras 28 letras de 1º (vocales sin sílabas; ñ, h, q, ce/ci, ge/gi, rr, ll, ch con trato especial). Después, el resto de fichas por bloques.
+- **LAS 29 LETRAS DE 1º HECHAS ✅ (22-nov-2026, commits 5db2bb0 · 8799ac5 · 4aeace6):** misma dirección que las antiguas, así que índices y buscador no cambian. Pendiente: que Miguel las revise una a una en la web.
+- **Claves opcionales del JSON** para las letras especiales: `archivo` (ñ → `nie`, `ce`, `ge`), `nombre`/`nombre_mayus`/`pill`/`rotulo1`/`rotulo3`/`titulo` (rótulos propios: «Ficha Vocal A», «C (ce, ci)»), `rotulo2`/`enunciado2` (vocales: «Repaso la letra»), `sin_doble` (h, j, ñ, q, ll, rr, ch…: no exige una palabra con la letra dos veces). Las tildes cuentan como su vocal (á = a); la ñ no se toca. 🪑 solo da error si va con «mesa». El ejemplo de «Mira cómo se hace» del rodear tiene que ser una palabra CORTA: «chocolate» se partía en dos renglones.
+- **Siguiente:** el resto de fichas de 1º, por bloques, con el formato nuevo.
 
 ## Estructura matemáticas Primaria
 
