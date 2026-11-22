@@ -87,6 +87,7 @@ def frase_completa(a, w, b):
 def textos_voz(d):
     """Todo lo que la interactiva puede decir en voz alta (mismas cadenas que usa el JS)."""
     t = [consigna_toca(d.get('archivo', d['letra']))] + [w for _, w in d['intro']['palabras']] + d['silabas']
+    t += [w.lower() for w, _ in d['rodea']['minusculas'] + d['rodea']['mayusculas']]   # pantalla 2: oír cada palabra
     for trozo in d['pauta_silabas']['pista'].split('·'):
         t.append(re.match(r'\s*(\S+)\s+(\S+)\s+de\s+(\S+)', trozo).group(3))
     t += [''.join(ss) for _, ss in d['junta']['filas']]
@@ -348,6 +349,7 @@ PLANTILLA = r'''<!DOCTYPE html>
     .ninguna { font:700 .72rem 'Poppins'; border:2px dashed #94a3b8; background:#fff; color:#475569; border-radius:10px; padding:4px 7px; cursor:pointer; }
     .ninguna.bien { background:var(--ok); color:#fff; border-color:var(--ok); }
     .ninguna.mal { animation:tiembla .4s; border-color:var(--mal); color:var(--mal); }
+    .oir-t { flex:none; padding:.3rem .45rem; font-size:.8rem; }
     .marcador { font:800 .9rem 'Poppins'; color:var(--c); white-space:nowrap; }
     /* pasos 3-5 */
     .reto { text-align:center; }
@@ -612,7 +614,8 @@ CONSTRUYE.push(() => { const p = tarjeta(1, `Toca todas las <b class="pw" style=
   const items = D.toca;
   let palabrasHechas = 0;
   items.forEach(([w, e]) => {
-    const it = el('div', 'toca-it' + (w.length >= 8 ? ' larga' : '')); it.innerHTML = `<span class="emo">${emo(e)}</span>`;
+    const it = el('div', 'toca-it' + (w.length >= 8 ? ' larga' : '')); it.innerHTML = `<span class="emo">${emo(e)}</span><button class="voz oir-t" type="button" title="Escuchar">🔊</button>`;
+    it.querySelector('.oir-t').onclick = () => di(w.toLowerCase());
     const ls = el('div', 'letras'); it.appendChild(ls);
     const esMayus = w === w.toUpperCase();
     let i = 0, tiene = 0;
