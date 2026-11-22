@@ -770,6 +770,46 @@
       .ae-burger { display: flex; }
     }
   </style>
+
+  <style>
+    /* ── Piezas de letras (Aprendizaje de letras de 1º) ── */
+    @font-face { font-family:'PlaywriteLetras'; src:url('fuentes/playwrite-es.woff2') format('woff2'); font-display:swap; }
+    .lt-sec { font:600 .74rem 'Poppins',sans-serif; letter-spacing:.1em; text-transform:uppercase; color:rgba(167,243,208,.85); margin:1.3rem 0 .8rem; }
+    .lt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(122px,1fr)); gap:16px; perspective:1000px; }
+    .lt-grid.voc { grid-template-columns:repeat(5,minmax(0,1fr)); max-width:720px; }
+    .lt-pieza { aspect-ratio:1/1.05; cursor:pointer; outline:none; transform:rotate(var(--r)); transition:transform .25s ease;
+                animation:ltCae .6s cubic-bezier(.34,1.56,.64,1) backwards; animation-delay:calc(var(--i) * 28ms); }
+    @keyframes ltCae { 0% { opacity:0; transform:translateY(-46px) rotate(calc(var(--r) * 5)) scale(.9); } 100% { opacity:1; transform:rotate(var(--r)); } }
+    .lt-int { position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.4,1.35,.5,1); }
+    .lt-cara { position:absolute; inset:0; border-radius:18px; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+               display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .lt-frente { background:#fffdf6; border-top:7px solid var(--c);
+                 box-shadow:0 5px 0 rgba(0,0,0,.22), 0 14px 26px -10px rgba(0,0,0,.55); }
+    .lt-emo { position:absolute; top:7px; right:9px; font-size:1.3rem; }
+    .lt-letra { font-family:'PlaywriteLetras',cursive; font-size:2.5rem; line-height:1.15; color:var(--c); white-space:nowrap; margin-top:-1.1rem; }
+    .lt-letra.larga { font-size:1.75rem; }
+    .lt-pal { position:absolute; bottom:9px; left:0; right:0; text-align:center; font:500 .76rem 'Poppins',sans-serif; color:#64748b; }
+    .lt-dorso { background:var(--c); transform:rotateY(180deg); gap:5px; padding:8px 9px;
+                box-shadow:0 5px 0 rgba(0,0,0,.22), 0 14px 26px -10px rgba(0,0,0,.55); }
+    .lt-dorso-t { font:700 .8rem 'Poppins',sans-serif; color:#fff; margin-bottom:1px; }
+    .lt-btn { display:block; width:100%; text-align:center; font:600 .7rem 'Poppins',sans-serif; padding:.36rem .2rem; border-radius:9px; white-space:nowrap;
+              background:rgba(255,255,255,.18); color:#fff !important; text-decoration:none; pointer-events:none; }
+    .lt-btn.pdf { background:#fff; color:var(--c) !important; }
+    .lt-btn:hover { filter:brightness(1.1); }
+    .lt-pieza.abierta .lt-int, .lt-pieza:focus-within .lt-int { transform:rotateY(180deg); }
+    .lt-pieza.abierta .lt-btn, .lt-pieza:focus-within .lt-btn { pointer-events:auto; }
+    @media (hover:hover) {
+      .lt-pieza:hover { transform:rotate(0deg) translateY(-5px); z-index:2; }
+      .lt-pieza:hover .lt-int { transform:rotateY(180deg); }
+      .lt-pieza:hover .lt-btn { pointer-events:auto; }
+    }
+    @media (max-width:560px) {
+      .lt-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+      .lt-grid.voc { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .lt-letra { font-size:2.1rem; } .lt-letra.larga { font-size:1.45rem; }
+    }
+    @media (prefers-reduced-motion:reduce) { .lt-pieza { animation:none; } .lt-int, .lt-pieza { transition:none; } }
+  </style>
 </head>
 <body>
 
@@ -1189,6 +1229,7 @@
       },
       'lengua|1|LECTURA|Aprendizaje de letras': {
         ruta: 'recursos/primaria/1/lengua/letras/',
+        vista: 'letras',
         fichas: [
           { num:1, archivo:'m.html', interactiva:'m-interactiva.html', titulo:'Letra M', emoji:'📝', nivel:'⭐ Básico' },
           { num:2,  archivo:'p.html',   interactiva:'p-interactiva.html',   titulo:'Letra P',            emoji:'📝', nivel:'⭐ Básico' },
@@ -4125,6 +4166,51 @@
 
     };
 
+    // ── Vista especial: piezas de letras (solo «Aprendizaje de letras» de 1º) ──
+    const LETRAS_INFO = {"a.html": {"ver": "A a", "emo": "🐝", "pal": "abeja", "pdf": "letra-a-1-primaria.pdf"}, "b.html": {"ver": "B b", "emo": "👢", "pal": "bota", "pdf": "letra-b-1-primaria.pdf"}, "c.html": {"ver": "C c", "emo": "🏠", "pal": "casa", "pdf": "letra-c-1-primaria.pdf"}, "ce.html": {"ver": "ce ci", "emo": "🦓", "pal": "cebra", "pdf": "letra-ce-1-primaria.pdf"}, "ch.html": {"ver": "Ch ch", "emo": "🍫", "pal": "chocolate", "pdf": "letra-ch-1-primaria.pdf"}, "d.html": {"ver": "D d", "emo": "🎲", "pal": "dado", "pdf": "letra-d-1-primaria.pdf"}, "e.html": {"ver": "E e", "emo": "🐘", "pal": "elefante", "pdf": "letra-e-1-primaria.pdf"}, "f.html": {"ver": "F f", "emo": "🦭", "pal": "foca", "pdf": "letra-f-1-primaria.pdf"}, "g.html": {"ver": "G g", "emo": "🐱", "pal": "gato", "pdf": "letra-g-1-primaria.pdf"}, "ge.html": {"ver": "ge gi", "emo": "🧞", "pal": "genio", "pdf": "letra-ge-1-primaria.pdf"}, "h.html": {"ver": "H h", "emo": "🧚", "pal": "hada", "pdf": "letra-h-1-primaria.pdf"}, "i.html": {"ver": "I i", "emo": "🧲", "pal": "imán", "pdf": "letra-i-1-primaria.pdf"}, "j.html": {"ver": "J j", "emo": "🦒", "pal": "jirafa", "pdf": "letra-j-1-primaria.pdf"}, "l.html": {"ver": "L l", "emo": "🦁", "pal": "león", "pdf": "letra-l-1-primaria.pdf"}, "ll.html": {"ver": "Ll ll", "emo": "🔑", "pal": "llave", "pdf": "letra-ll-1-primaria.pdf"}, "m.html": {"ver": "M m", "emo": "🐒", "pal": "mono", "pdf": "letra-m-1-primaria.pdf"}, "n.html": {"ver": "N n", "emo": "☁️", "pal": "nube", "pdf": "letra-n-1-primaria.pdf"}, "nie.html": {"ver": "Ñ ñ", "emo": "🍍", "pal": "piña", "pdf": "letra-nie-1-primaria.pdf"}, "o.html": {"ver": "O o", "emo": "🐻", "pal": "oso", "pdf": "letra-o-1-primaria.pdf"}, "p.html": {"ver": "P p", "emo": "🦆", "pal": "pato", "pdf": "letra-p-1-primaria.pdf"}, "q.html": {"ver": "Q q", "emo": "🧀", "pal": "queso", "pdf": "letra-q-1-primaria.pdf"}, "r.html": {"ver": "R r", "emo": "🐭", "pal": "ratón", "pdf": "letra-r-1-primaria.pdf"}, "rr.html": {"ver": "rr", "emo": "🐶", "pal": "perro", "pdf": "letra-rr-1-primaria.pdf"}, "s.html": {"ver": "S s", "emo": "☀️", "pal": "sol", "pdf": "letra-s-1-primaria.pdf"}, "t.html": {"ver": "T t", "emo": "🍅", "pal": "tomate", "pdf": "letra-t-1-primaria.pdf"}, "u.html": {"ver": "U u", "emo": "🍇", "pal": "uva", "pdf": "letra-u-1-primaria.pdf"}, "v.html": {"ver": "V v", "emo": "🐄", "pal": "vaca", "pdf": "letra-v-1-primaria.pdf"}, "y.html": {"ver": "Y y", "emo": "🪀", "pal": "yoyó", "pdf": "letra-y-1-primaria.pdf"}, "z.html": {"ver": "Z z", "emo": "👞", "pal": "zapato", "pdf": "letra-z-1-primaria.pdf"}};
+    const LT_COLORES = ['#15803d', '#c2410c', '#be123c', '#1d4ed8', '#7c3aed'];
+    function LetrasView({ rec }) {
+      const [abierta, setAbierta] = React.useState(null);
+      const esVocal = f => /^[aeiou]\.html$/.test(f.archivo);
+      const orden = [...rec.fichas.filter(esVocal), ...rec.fichas.filter(f => !esVocal(f))];
+      const pieza = (f, k) => {
+        const L = LETRAS_INFO[f.archivo] || { ver: f.titulo, emo: '', pal: '', pdf: f.archivo };
+        const on = abierta === f.archivo;
+        const para = e => e.stopPropagation();
+        return h('div', {
+            key: f.archivo, tabIndex: 0, role: 'button', 'aria-label': f.titulo + ': abrir opciones',
+            className: 'lt-pieza' + (on ? ' abierta' : ''),
+            style: { '--i': k, '--c': LT_COLORES[k % LT_COLORES.length], '--r': (((k * 37) % 5) - 2) * 0.9 + 'deg' },
+            onClick: () => setAbierta(on ? null : f.archivo)
+          },
+          h('div', { className: 'lt-int' },
+            h('div', { className: 'lt-cara lt-frente' },
+              h('span', { className: 'lt-emo', 'aria-hidden': 'true' }, L.emo),
+              h('span', { className: 'lt-letra' + (L.ver.length > 3 ? ' larga' : '') }, L.ver),
+              h('span', { className: 'lt-pal' }, L.pal)
+            ),
+            h('div', { className: 'lt-cara lt-dorso' },
+              h('div', { className: 'lt-dorso-t' }, f.titulo),
+              h('a', { href: rec.ruta + L.pdf, className: 'lt-btn pdf', target: '_blank', rel: 'noopener', onClick: para, 'data-umami-event': 'pdf-letra-materiales' }, '📄 Imprimir'),
+              h('a', { href: rec.ruta + f.archivo, className: 'lt-btn', target: '_blank', rel: 'noopener', onClick: para }, '👀 Ver ficha'),
+              f.interactiva && h('a', { href: rec.ruta + f.interactiva, className: 'lt-btn', target: '_blank', rel: 'noopener', onClick: para }, '💻 Interactiva')
+            )
+          )
+        );
+      };
+      const nv = orden.filter(esVocal).length;
+      return h('div', { className: 'fichas-disponibles' },
+        h('div', { className: 'fichas-dis-header' },
+          h('span', { className: 'fichas-dis-titulo' }, orden.length + ' letras · toca una para abrirla'),
+          h('a', { href: 'recursos/primaria/1/lengua/index.html', className: 'fichas-dis-link', target: '_blank' }, 'Ver índice completo →')
+        ),
+        h('div', { className: 'lt-sec' }, 'Primero, las vocales'),
+        h('div', { className: 'lt-grid voc' }, orden.slice(0, nv).map((f, k) => pieza(f, k))),
+        h('div', { className: 'lt-sec' }, 'Después, las consonantes · en el orden en que se aprenden'),
+        h('div', { className: 'lt-grid' }, orden.slice(nv).map((f, k) => pieza(f, k + nv)))
+      );
+    }
+
     // ── View 4: Resource detail ──────────────────────────────────────────────
     function RecursoView({ asig, curso, bloqueKey, subBloque }) {
       const b   = ASIGNATURAS[asig].curriculum[curso].bloques[bloqueKey];
@@ -4136,7 +4222,9 @@
           h('div', { className:'rec-label', style:{ color: b.color } }, b.icono + '  ' + b.nombre),
           h('div', { className:'rec-name' }, subBloque)
         ),
-        rec
+        rec && rec.vista === 'letras'
+          ? h(LetrasView, { rec })
+          : rec
           ? h('div', { className:'fichas-disponibles' },
               h('div', { className:'fichas-dis-header' },
                 h('span', { className:'fichas-dis-titulo' }, rec.fichas.length + ' fichas · de menos a más dificultad'),
