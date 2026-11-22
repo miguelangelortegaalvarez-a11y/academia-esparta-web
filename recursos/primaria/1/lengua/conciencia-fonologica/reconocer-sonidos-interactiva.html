@@ -110,6 +110,7 @@
     .ninguna { font:700 .72rem 'Poppins'; border:2px dashed #94a3b8; background:#fff; color:#475569; border-radius:10px; padding:4px 7px; cursor:pointer; }
     .ninguna.bien { background:var(--ok); color:#fff; border-color:var(--ok); }
     .ninguna.mal { animation:tiembla .4s; border-color:var(--mal); color:var(--mal); }
+    .oir-t { flex:none; padding:.3rem .45rem; font-size:.8rem; }
     .marcador { font:800 .9rem 'Poppins'; color:var(--c); white-space:nowrap; }
     /* pasos 3-5 */
     .reto { text-align:center; }
@@ -206,6 +207,14 @@
     }
     @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } .burbujas { display:none; } }
   
+
+    .carta.quieta { cursor:default; } .carta.quieta:hover { transform:none; }
+    .pareja.tres .carta { min-width:140px; }
+    .sino-op .op { font-family:'Poppins'; font-weight:800; font-size:1.6rem; min-width:120px; }
+    .trozos { display:flex; gap:12px; justify-content:center; margin:6px 0 4px; } .trozos .chip { font-size:2.2rem; cursor:default; }
+    .bolitas.grandes { margin:14px 0 6px; } .bolitas.grandes b { width:30px; height:30px; background:var(--c); }
+    .sin { font-family:'Poppins'; font-size:1rem; color:#475569; } .sin b { color:var(--c); font-family:'Playwrite ES',cursive; font-size:1.3rem; }
+    .frase-c { font-family:'Playwrite ES',cursive; font-size:1.6rem; margin:6px 0 4px; }
     .nav-paso { display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding-top:12px; border-top:2px dashed color-mix(in srgb, var(--c) 18%, #fff); }
     .nav-b { font:600 .9rem 'Poppins'; color:#64748b; background:none; border:none; cursor:pointer; padding:.35rem .6rem; border-radius:10px; }
     .nav-b:hover { color:var(--c); background:color-mix(in srgb, var(--c) 8%, #fff); }
@@ -405,6 +414,44 @@ P.forEach((pg, n) => { CONSTRUYE[n] = () => { const p = tarjeta(n);
       if (+c.dataset.i === r.larga) { hecho = true; c.classList.add('bien'); bien();
         caja.querySelectorAll('.carta').forEach(x => { const nn = +x.dataset.i ? r.nb : r.na; x.querySelector('.bolitas').innerHTML = Array.from({ length: nn }, (_, j) => `<b style="animation-delay:${j * .12}s"></b>`).join(''); });
         di(c.querySelector('.oir').dataset.w); sigue(); } else sacude(c); }); return r.voz; });
+
+  const cartasHtml = ops => ops.map((x, i) => `<div class="carta" data-i="${i}"><button class="oir" type="button" data-w="${esc(x[1])}">🔊</button><span class="e">${emo(x[0])}</span><span class="w">${esc(x[1])}</span></div>`).join('');
+  const elegir = (caja, r, sigue) => { let hecho = false;
+    caja.querySelectorAll('.oir').forEach(b => b.onclick = ev => { ev.stopPropagation(); di(b.dataset.w); });
+    caja.querySelectorAll('.carta[data-i]').forEach(c => c.onclick = () => { if (hecho) return;
+      if (+c.dataset.i === r.buena) { hecho = true; c.classList.add('bien'); bien(); di(r.op[r.buena][1]); sigue(); } else sacude(c); }); };
+  const autoBtn = (t) => `<p><button class="voz auto" type="button">🔊 ${t}</button></p>`;
+  if (pg.tipo === 'silabas') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    caja.innerHTML = `<div class="dibujo-g">${emo(r.e)}</div><div class="adulto-t">${esc(r.w)} <button class="voz auto" type="button">🔊</button></div><div class="num-op"></div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz);
+    const ops = caja.querySelector('.num-op');
+    for (let v = 1; v <= pg.max; v++) { const b = el('button', 'op', `${v}<i>${'<b></b>'.repeat(v)}</i>`); b.type = 'button';
+      b.onclick = () => { if (v === r.n) { b.classList.add('bien'); bien(); ops.querySelectorAll('.op').forEach(x => x.disabled = true); di(r.w); sigue(); } else sacude(b); };
+      ops.appendChild(b); } return r.voz; });
+  if (pg.tipo === 'sino') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    const carta = x => `<div class="carta quieta"><button class="oir" type="button" data-w="${esc(x[1])}">🔊</button><span class="e">${emo(x[0])}</span><span class="w">${esc(x[1])}</span></div>`;
+    caja.innerHTML = `<div class="pareja">${carta(r.a)}<span class="o">y</span>${carta(r.b)}</div>${autoBtn('Escuchar las dos')}<div class="opciones sino-op"></div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz);
+    caja.querySelectorAll('.oir').forEach(b => b.onclick = ev => { ev.stopPropagation(); di(b.dataset.w); });
+    const ops = caja.querySelector('.sino-op');
+    [['SÍ', true], ['NO', false]].forEach(([t, v]) => { const b = el('button', 'op', t); b.type = 'button';
+      b.onclick = () => { if (v === r.si) { b.classList.add('bien'); bien(); ops.querySelectorAll('.op').forEach(x => x.disabled = true); sigue(); } else sacude(b); };
+      ops.appendChild(b); }); return r.voz; });
+  if (pg.tipo === 'elige') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    const m = r.modelo; let cab = '';
+    if (m.k === 'pal') cab = `<div class="dibujo-g">${emo(m.e)}</div><div class="adulto-t">${esc(m.w)}</div>`;
+    if (m.k === 'quitar') cab = `<div class="dibujo-g">${emo(m.e)}</div><div class="adulto-t">${esc(m.w)} <span class="sin">sin <b>${esc(m.quito)}</b></span></div>`;
+    if (m.k === 'sil') cab = `<div class="trozos">${m.silabas.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div>`;
+    if (m.k === 'n') cab = `<div class="bolitas grandes">${'<b></b>'.repeat(m.n)}</div>`;
+    caja.innerHTML = `${cab}${autoBtn('Escuchar')}<div class="pareja tres">${cartasHtml(r.op)}</div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz); elegir(caja, r, sigue); return r.voz; });
+  if (pg.tipo === 'intruso') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    caja.innerHTML = `${autoBtn('Escuchar las tres')}<div class="pareja tres">${cartasHtml(r.op)}</div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz); elegir(caja, r, sigue); return r.voz; });
+  if (pg.tipo === 'completa') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    caja.innerHTML = `<div class="dibujo-g">${emo(r.e)}</div><div class="frase-c">${esc(r.frase)}</div>${autoBtn('Escuchar')}<div class="pareja tres">${cartasHtml(r.op)}</div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz); elegir(caja, r, sigue); return r.voz; });
+
   return p; }; });
 
 /* final */

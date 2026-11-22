@@ -18,6 +18,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(AQUI, '..', 'fichas-letras'))
 import generar_interactiva_letra as GL          # noqa: E402  (solo definiciones; no genera nada al importarse)
 from generar_ficha_conciencia import palabras, silabas, comprobar, SALIDA, REL, E   # noqa: E402
+import fonologia as FO   # noqa: E402
 
 COLOR = '#0f766e'
 CONSIGNA = {
@@ -30,10 +31,56 @@ FINAL, SALUDO, ELOGIOS = GL.FINAL, GL.SALUDO, GL.ELOGIOS
 COMUN = os.path.join(SALIDA, '..', 'letras', 'audio', 'comun')
 
 
+def plano(w): return FO.plano(w)
+
+
+def datos_nuevos(pg):
+    """Datos para el JS de los tipos de las fichas 2-5 (voz: lo que suena solo al empezar cada ronda)."""
+    t, c = pg['tipo'], pg.get('criterio')
+    op = lambda xs: [[e, plano(w)] for e, w in xs]
+    nombres = lambda xs: '... '.join(plano(w) for _, w in xs)
+    if t == 'silabas':
+        return [{'e': e, 'w': plano(w), 'n': len(FO.sil(w)), 'voz': plano(w)} for e, w in pg['filas']]
+    if t == 'sino':
+        return [{'a': [a[0], plano(a[1])], 'b': [b[0], plano(b[1])], 'si': FO.cumple(c, a[1], b[1]), 'voz': f'{plano(a[1])}... {plano(b[1])}'}
+                for a, b in pg['filas']]
+    if t == 'intruso':
+        return [{'op': op(tr), 'buena': FO.intruso_de(pg, tr)[0], 'voz': nombres(tr)} for tr in pg['filas']]
+    if t == 'completa':
+        return [{'e': f['e'], 'frase': f['frase'], 'op': op(f['op']), 'buena': f['buena'],
+                 'voz': f"{f['frase'].replace('…', '')}... {nombres(f['op'])}"} for f in pg['filas']]
+    if t == 'elige':
+        out = []
+        for f in pg['filas']:
+            d = {'op': op(f['op']), 'buena': f['buena']}
+            if c in ('juntar', 'ordenar'):
+                d['modelo'] = {'k': 'sil', 'silabas': f['silabas']}; d['voz'] = '... '.join(f['silabas'])
+            elif c == 'silabas_n':
+                d['modelo'] = {'k': 'n', 'n': f['n']}; d['voz'] = nombres(f['op'])
+            elif c == 'quitar':
+                q = f['quito'].replace('-', '')
+                d['modelo'] = {'k': 'quitar', 'e': f['m'][0], 'w': plano(f['m'][1]), 'quito': q}
+                d['voz'] = f"{plano(f['m'][1])}, sin {q}. ¿Qué queda?"
+            else:
+                d['modelo'] = {'k': 'pal', 'e': f['m'][0], 'w': plano(f['m'][1])}
+                d['voz'] = f"{plano(f['m'][1])}... {nombres(f['op'])}"
+            out.append(d)
+        return out
+    return None
+
+
 def textos_voz(d):
     t = []
     for pg in d['paginas']:
-        tp = pg['tipo']; t.append(CONSIGNA[tp])
+        tp = pg['tipo']; t.append(pg.get('interactiva') or CONSIGNA[tp])
+        dn = datos_nuevos(pg)
+        if dn is not None:
+            for f in dn:
+                t.append(f['voz'])
+                for _, w in f.get('op', []): t.append(w)
+                if 'a' in f: t += [f['a'][1], f['b'][1]]
+                if 'w' in f: t.append(f['w'])
+            continue
         if tp == 'contar': t += [f for _, f in pg['filas']]
         if tp == 'largas': t += [f'{a[1]}... o... {b[1]}' for a, b in pg['filas']] + [x[1] for a, b in pg['filas'] for x in (a, b)]
         if tp == 'escondidas': t += [f['palabra'] for f in pg['filas']] + [f['escondida'] for f in pg['filas']]
@@ -69,8 +116,11 @@ def generar(nombre, voz=False):
     A = d['archivo']
     pasos = []
     for pg in d['paginas']:
-        p = {'tipo': pg['tipo'], 'titulo': pg['rotulo'], 'consigna': CONSIGNA[pg['tipo']]}
-        if pg['tipo'] == 'contar':
+        p = {'tipo': pg['tipo'], 'titulo': pg['rotulo'], 'consigna': pg.get('interactiva') or CONSIGNA[pg['tipo']]}
+        dn = datos_nuevos(pg)
+        if dn is not None:
+            p['filas'] = dn; p['criterio'] = pg.get('criterio'); p['max'] = pg.get('max', 4)
+        elif pg['tipo'] == 'contar':
             p['max'] = pg['max']; p['filas'] = [{'e': e, 'f': f, 'n': len(palabras(f))} for e, f in pg['filas']]
         elif pg['tipo'] == 'largas':
             p['filas'] = [{'a': a, 'b': b, 'larga': 0 if silabas(a[1]) > silabas(b[1]) else 1, 'voz': f'{a[1]}... o... {b[1]}'} for a, b in pg['filas']]
@@ -101,6 +151,14 @@ def generar(nombre, voz=False):
 
 
 CSS = r'''
+
+    .carta.quieta { cursor:default; } .carta.quieta:hover { transform:none; }
+    .pareja.tres .carta { min-width:140px; }
+    .sino-op .op { font-family:'Poppins'; font-weight:800; font-size:1.6rem; min-width:120px; }
+    .trozos { display:flex; gap:12px; justify-content:center; margin:6px 0 4px; } .trozos .chip { font-size:2.2rem; cursor:default; }
+    .bolitas.grandes { margin:14px 0 6px; } .bolitas.grandes b { width:30px; height:30px; background:var(--c); }
+    .sin { font-family:'Poppins'; font-size:1rem; color:#475569; } .sin b { color:var(--c); font-family:'Playwrite ES',cursive; font-size:1.3rem; }
+    .frase-c { font-family:'Playwrite ES',cursive; font-size:1.6rem; margin:6px 0 4px; }
     .nav-paso { display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding-top:12px; border-top:2px dashed color-mix(in srgb, var(--c) 18%, #fff); }
     .nav-b { font:600 .9rem 'Poppins'; color:#64748b; background:none; border:none; cursor:pointer; padding:.35rem .6rem; border-radius:10px; }
     .nav-b:hover { color:var(--c); background:color-mix(in srgb, var(--c) 8%, #fff); }
@@ -224,6 +282,44 @@ P.forEach((pg, n) => { CONSTRUYE[n] = () => { const p = tarjeta(n);
       if (+c.dataset.i === r.larga) { hecho = true; c.classList.add('bien'); bien();
         caja.querySelectorAll('.carta').forEach(x => { const nn = +x.dataset.i ? r.nb : r.na; x.querySelector('.bolitas').innerHTML = Array.from({ length: nn }, (_, j) => `<b style="animation-delay:${j * .12}s"></b>`).join(''); });
         di(c.querySelector('.oir').dataset.w); sigue(); } else sacude(c); }); return r.voz; });
+
+  const cartasHtml = ops => ops.map((x, i) => `<div class="carta" data-i="${i}"><button class="oir" type="button" data-w="${esc(x[1])}">🔊</button><span class="e">${emo(x[0])}</span><span class="w">${esc(x[1])}</span></div>`).join('');
+  const elegir = (caja, r, sigue) => { let hecho = false;
+    caja.querySelectorAll('.oir').forEach(b => b.onclick = ev => { ev.stopPropagation(); di(b.dataset.w); });
+    caja.querySelectorAll('.carta[data-i]').forEach(c => c.onclick = () => { if (hecho) return;
+      if (+c.dataset.i === r.buena) { hecho = true; c.classList.add('bien'); bien(); di(r.op[r.buena][1]); sigue(); } else sacude(c); }); };
+  const autoBtn = (t) => `<p><button class="voz auto" type="button">🔊 ${t}</button></p>`;
+  if (pg.tipo === 'silabas') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    caja.innerHTML = `<div class="dibujo-g">${emo(r.e)}</div><div class="adulto-t">${esc(r.w)} <button class="voz auto" type="button">🔊</button></div><div class="num-op"></div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz);
+    const ops = caja.querySelector('.num-op');
+    for (let v = 1; v <= pg.max; v++) { const b = el('button', 'op', `${v}<i>${'<b></b>'.repeat(v)}</i>`); b.type = 'button';
+      b.onclick = () => { if (v === r.n) { b.classList.add('bien'); bien(); ops.querySelectorAll('.op').forEach(x => x.disabled = true); di(r.w); sigue(); } else sacude(b); };
+      ops.appendChild(b); } return r.voz; });
+  if (pg.tipo === 'sino') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    const carta = x => `<div class="carta quieta"><button class="oir" type="button" data-w="${esc(x[1])}">🔊</button><span class="e">${emo(x[0])}</span><span class="w">${esc(x[1])}</span></div>`;
+    caja.innerHTML = `<div class="pareja">${carta(r.a)}<span class="o">y</span>${carta(r.b)}</div>${autoBtn('Escuchar las dos')}<div class="opciones sino-op"></div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz);
+    caja.querySelectorAll('.oir').forEach(b => b.onclick = ev => { ev.stopPropagation(); di(b.dataset.w); });
+    const ops = caja.querySelector('.sino-op');
+    [['SÍ', true], ['NO', false]].forEach(([t, v]) => { const b = el('button', 'op', t); b.type = 'button';
+      b.onclick = () => { if (v === r.si) { b.classList.add('bien'); bien(); ops.querySelectorAll('.op').forEach(x => x.disabled = true); sigue(); } else sacude(b); };
+      ops.appendChild(b); }); return r.voz; });
+  if (pg.tipo === 'elige') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    const m = r.modelo; let cab = '';
+    if (m.k === 'pal') cab = `<div class="dibujo-g">${emo(m.e)}</div><div class="adulto-t">${esc(m.w)}</div>`;
+    if (m.k === 'quitar') cab = `<div class="dibujo-g">${emo(m.e)}</div><div class="adulto-t">${esc(m.w)} <span class="sin">sin <b>${esc(m.quito)}</b></span></div>`;
+    if (m.k === 'sil') cab = `<div class="trozos">${m.silabas.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div>`;
+    if (m.k === 'n') cab = `<div class="bolitas grandes">${'<b></b>'.repeat(m.n)}</div>`;
+    caja.innerHTML = `${cab}${autoBtn('Escuchar')}<div class="pareja tres">${cartasHtml(r.op)}</div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz); elegir(caja, r, sigue); return r.voz; });
+  if (pg.tipo === 'intruso') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    caja.innerHTML = `${autoBtn('Escuchar las tres')}<div class="pareja tres">${cartasHtml(r.op)}</div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz); elegir(caja, r, sigue); return r.voz; });
+  if (pg.tipo === 'completa') rondas(p, pg.filas, (caja, r, pie, sigue) => {
+    caja.innerHTML = `<div class="dibujo-g">${emo(r.e)}</div><div class="frase-c">${esc(r.frase)}</div>${autoBtn('Escuchar')}<div class="pareja tres">${cartasHtml(r.op)}</div>${pie}`;
+    caja.querySelector('.auto').onclick = () => di(r.voz); elegir(caja, r, sigue); return r.voz; });
+
   return p; }; });
 
 /* final */

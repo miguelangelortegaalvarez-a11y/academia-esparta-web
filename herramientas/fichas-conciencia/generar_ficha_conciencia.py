@@ -121,6 +121,8 @@ def p_frases(d, n):
 
 
 PAGINAS = {'contar': p_contar, 'largas': p_largas, 'escondidas': p_escondidas, 'frases': p_frases}
+import fonologia as FO   # noqa: E402  fichas 2-5: rimas, sílabas, jugar con sílabas, sonidos
+PAGINAS.update(FO.PAGINAS)
 
 
 # ───────────────────────── comprobaciones ─────────────────────────
@@ -128,6 +130,8 @@ def comprobar(d):
     f = []
     for pg in d['paginas']:
         t = pg['tipo']
+        if t in FO.PAGINAS:
+            f += FO.comprobar(pg); continue
         if t == 'contar':
             ns = [len(palabras(fr)) for _, fr in pg['filas']]
             if max(ns + [len(palabras(pg['ejemplo'][1]))]) > pg['max']: f.append('contar: alguna frase tiene más palabras que círculos')
