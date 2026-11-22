@@ -71,7 +71,7 @@ academia-esparta-web/
 │                                 # Resto de 1º ESO sin cubrir
 │
 │  ── Imágenes ──
-├── Logo.PNG / favicon.PNG / apple-touch-icon.png / og-image.jpg
+├── favicon.PNG / apple-touch-icon.png / og-image.jpg   # favicon = logo real (columnas + «academia ESPARTA»). El templo genérico Logo.PNG se borró el 22-nov-2026: no usar
 ├── hero.jpg / quienes-somos.jpg / primaria.jpg / secundaria.jpg / bachiller.jpg
 └── julio.jpg / miguel.jpg        # Fotos equipo (todas en uso)
 │
