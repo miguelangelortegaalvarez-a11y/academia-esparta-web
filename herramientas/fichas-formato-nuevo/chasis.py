@@ -307,8 +307,14 @@ def ejercicios_chasis(d, ej):
 
 
 def css_ficha(d, rel_raiz):
-    """CSS propio de la ficha: su letra (con el size-adjust que tenía), sus reglas y la escala."""
+    """CSS propio de la ficha: su letra (con el size-adjust que tenía), sus reglas y la escala.
+    Playwrite ES NO adelgaza al hacerse pequeña: el trazo mide lo mismo a 14 px que a 22 px.
+    En 2º (size-adjust ≤ 115 %) el texto va a ~16 px y a peso 400 parece negrita frente a 1º
+    (Miguel, 23-nov-2026) → se baja a 'wght' 250, que deja la misma proporción que en 1º.
+    font-synthesis:none evita además la negrita FALSA de las reglas antiguas con font-weight 600-700."""
+    sa = d.get('size_adjust', 100)
+    peso = ";font-synthesis:none;font-variation-settings:'wght' 250" if float(sa) <= 115 else ''
     return (f"@font-face{{font-family:'PW-ficha';src:url('{rel_raiz}fuentes/playwrite-es.woff2') format('woff2');"
-            f"font-weight:100 400;font-display:swap;size-adjust:{d.get('size_adjust', 100)}%}}"
-            ".mz{zoom:1.12;font-family:'PW-ficha',cursive}.mz .ej{font-family:'Playwrite ES',cursive}"
+            f"font-weight:100 400;font-display:swap;size-adjust:{sa}%}}"
+            ".mz{zoom:1.12;font-family:'PW-ficha',cursive" + peso + "}.mz .ej{font-family:'Playwrite ES',cursive}"
             + espaciado(interlineado(sin_choques_css(d['css']))))
