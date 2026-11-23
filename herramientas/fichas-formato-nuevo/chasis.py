@@ -258,7 +258,7 @@ def proteger_ej(b):
 def partible(b):
     """Bloque cuyos hijos son ≥3 piezas iguales (preguntas, frases…) → (clase, [hijos]). Si no, None."""
     m = re.match(r'<div class="([^"]+)">(.*)</div>$', b.strip(), re.S)
-    if not m or 'recuerda' in m.group(1): return None
+    if not m or re.search(r'recuerda|opcion', m.group(1)): return None   # una pregunta con opciones nunca se parte
     hijos = [h for h in trozos_primer_nivel(m.group(2))]
     cls = [re.match(r'<\w+ class="([^"]+)"', h) for h in hijos]
     if len(hijos) < 3 or not all(cls) or len(set(c.group(1) for c in cls)) != 1: return None

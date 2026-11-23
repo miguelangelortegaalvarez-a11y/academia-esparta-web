@@ -409,6 +409,9 @@ def generar_una(ruta):
         if hueco >= 150 and (d['plantilla'] != 'chasis' or d.get('texto') or lect2):
             EJ = EJ + [dibuja(n, min(hueco, 420))]
             reparto, libres, alto_fin = medir(EJ)
+        elif hueco >= 40 and lect2:                          # poco sitio para dibujar: una frase sobre el texto
+            EJ = EJ + [(ej(n, 'Escribe qué es lo que más te ha gustado del texto.'), 'pr-lista', [pauta_vacia()])]
+            reparto, libres, alto_fin = medir(EJ)
         while len(reparto) > base and len(EJ) > nbase:      # lo nuevo nunca añade páginas: se quita pieza a pieza
             cab, cls, pz = EJ[-1]
             EJ = EJ[:-1] + ([(cab, cls, pz[:-1])] if len(pz) > 1 and not solo_modelo(pz[:-1]) else [])
@@ -464,7 +467,7 @@ def guardar_extraccion(ruta):
 
 if __name__ == '__main__':
     if len(sys.argv) < 3: print(__doc__); sys.exit(1)
-    orden, fichas = sys.argv[1], sys.argv[2:]
+    orden, fichas = sys.argv[1], [f for f in sys.argv[2:] if 'interactiva' not in f]   # las interactivas no se tocan
     ok = True
     if orden in ('extraer', 'todo'): ok = all([guardar_extraccion(f) for f in fichas])
     def seguro(f):
