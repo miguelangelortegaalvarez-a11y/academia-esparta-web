@@ -171,6 +171,18 @@ PROPIOS = {   # objetos sin emoji: dibujo propio en color, estilo emoji
                   '<rect x="40" y="22" width="6" height="18" rx="2" fill="#d1d5db" stroke="#6b7280" stroke-width="1.5"/>',
 }
 
+# Mates 2º: dibujos de los problemas → emoji (elegidos leyendo cada enunciado)
+DIBUJO_A_EMOJI.update({
+    'f4ade3': '🃏', 'd643e2': '🃏', '9ad17e': '🃏', 'c975ea': '🚌', 'f5f3c2': '💶', '7bfbb9': '💶', 'c56652': '💶', '271c07': '💶',
+    'a3d8ff': '💶', 'a10f82': '💶', 'ccc453': '💶', '01c096': '💶', 'bbc21c': '💶', '2c8543': '🐷', '2d8f5f': '✏️',
+    '33fa95': '🧒', '590dd9': '🧒', '61b7f5': '🧒', '9dd122': '🎯', 'f88cb8': '⭐', '3f1baa': '🎯', '38c784': '⭐',
+    '5a88ad': '🎈', '65ae0a': '🎈', 'ee89b3': '🎈', '3a745d': '🎈', '973df8': '🎈', 'b8a3ac': '📖', 'dd998a': '📚', '8199ea': '📚',
+    '3dff8f': '🌸', 'a574ab': '🍎', 'f727ce': '⚽', '226b55': '⚽', 'a5cbfe': '⚽', 'e90294': '📮', '022818': '🪑', 'd0b66e': '🪑',
+    'ff0d41': '🪑', '912a12': '🪑', '79b5c6': '🪑', '48b628': '🧦', 'a003c6': '🍬', '0a9164': '🍬', 'abad1b': '🖍️', 'ef3721': '🖍️',
+    '0421ee': '🧁', '2ced50': '🧁', '742dba': '🥚', '7c5a99': '🥬', '38fcc6': '🍫', '04239b': '🧱', '08b297': '🥛', '936893': '⚽',
+    '3cce30': '🍪',
+})
+
 
 def huella(svg):
     import hashlib

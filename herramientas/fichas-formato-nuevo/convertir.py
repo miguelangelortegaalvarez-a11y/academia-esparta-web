@@ -16,7 +16,7 @@ una vez convertida, el HTML ya no es el antiguo). «generar» escribe la página
 """
 import html, json, os, re, shutil, subprocess, sys, tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import chasis, extras_mates, extras_lengua2
+import chasis, extras_mates, extras_mates2, extras_lengua2
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -386,7 +386,7 @@ def generar_una(ruta):
         elif d['plantilla'] == 'chasis':
             ultimo = max([int(x) for x in re.findall(r'<span class="ej-n">(\d+)</span>', ''.join(''.join(p) for _, _, p in EJ))] or [len(EJ)])
             d['_problemas'] = ''.join(''.join(p) for _, _, p in EJ).count('<div class="pb">')
-            nuevos = extras_mates.extras(d, ultimo + 1, ej, chasis.PAUTA)
+            nuevos = (extras_mates2 if '/primaria/2/' in d['origen'] else extras_mates).extras(d, ultimo + 1, ej, chasis.PAUTA)
             n = ultimo + 1 + len(nuevos)
         else:
             nuevos, n = extras(d, len(EJ) + 1)
