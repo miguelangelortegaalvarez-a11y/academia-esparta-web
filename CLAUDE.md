@@ -131,6 +131,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - **El contenido NO se toca: se cambia el formato.** Más aire; si no cabe, a 2 páginas, y la última se rellena con ejercicios NUEVOS con modelo.
 - ⛔ Interactivas SOLO en letras y conciencia fonológica de 1º.
 - Método: muestra por plantilla → OK de Miguel → bloque → revisar las miniaturas de TODAS las páginas → subir.
+- **Revisión de Miguel en curso (27-nov-2026):** marco común con el Tutor (logo real, negro) en 1º-2º; enunciado ≥12 px de lo de debajo (regla estricta); ejemplos sin recuadro y alineados; emojis variados; bloques base 10 en 3D; **números de las cuentas en NUNITO, mismo tamaño, una casilla por cifra** (20 fichas de operaciones de 1º). Lengua 1º revisada sin cambios. **Mañana: seguir revisando Mates 1º desde el bloque siguiente a Operaciones**, luego Lengua 2º y Mates 2º. Detalle y herramientas en la memoria `project_revision_fichas_27nov`.
 
 ---
 
