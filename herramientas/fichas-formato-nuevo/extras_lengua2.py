@@ -77,18 +77,23 @@ def _pares(r, n, ej, html, lista, titulo):
     return [(ej(n, titulo), 'xm', [modelo] + bloques)]
 
 
+def _pp(w, ok=None):
+    """Casilla «palabra arriba, pauta debajo» (Miguel, 27-nov-2026). Con ok = el modelo, escrito en verde sobre la pauta."""
+    pz = MINI.replace('<svg class="mini-pauta"', '<svg class="mini-pauta" preserveAspectRatio="none"', 1)
+    if ok is None: return fila(f'<span class="xm-w">{w}</span>{pz}')
+    return mira(f'<span class="xm-w">{w}</span><div class="xm-pz">{pz}<span class="xm-ok">{ok}</span></div>')
+
+
 def g_plural(r, n, ej, html):
     ws = r.sample(_libres(SINGULARES, html), 7)
-    p = [mira(f'<span class="xm-w">{E(ws[0])}</span> → <span class="xm-ok">{E(plural(ws[0]))}</span>')]
-    p += [fila(f'<span class="xm-w">{E(w)}</span> → {MINI}') for w in ws[1:]]
-    return [(ej(n, 'Escribe el <b>plural</b>.'), 'xm xm-2col', p)]
+    p = [_pp(E(ws[0]), E(plural(ws[0])))] + [_pp(E(w)) for w in ws[1:]]
+    return [(ej(n, 'Escribe el <b>plural</b>.'), 'xm xm-2col xm-pp', p)]
 
 
 def g_femenino(r, n, ej, html):
     ws = r.sample(_libres(FEMENINO, html, lambda x: x[0]), 7)
-    p = [mira(f'<span class="xm-w">{E(ws[0][0])}</span> → <span class="xm-ok">{E(ws[0][1])}</span>')]
-    p += [fila(f'<span class="xm-w">{E(m_)}</span> → {MINI}') for m_, _ in ws[1:]]
-    return [(ej(n, 'Escribe el <b>femenino</b>.'), 'xm xm-2col', p)]
+    p = [_pp(E(ws[0][0]), E(ws[0][1]))] + [_pp(E(m_)) for m_, _ in ws[1:]]
+    return [(ej(n, 'Escribe el <b>femenino</b>.'), 'xm xm-2col xm-pp', p)]
 
 
 def g_signos(r, n, ej, html):
@@ -100,9 +105,8 @@ def g_signos(r, n, ej, html):
 
 def g_clases(r, n, ej, html):
     ws = r.sample(_libres(CLASES, html, lambda x: x[0]), 7)
-    p = [mira(f'<span class="xm-w">{E(ws[0][0])}</span> → <span class="xm-ok">{ws[0][1]}</span>')]
-    p += [fila(f'<span class="xm-w">{E(w)}</span> → {MINI}') for w, _ in ws[1:]]
-    return [(ej(n, '¿Es un <b>nombre</b>, un <b>adjetivo</b> o un <b>verbo</b>? Escríbelo.'), 'xm xm-2col', p)]
+    p = [_pp(E(ws[0][0]), ws[0][1])] + [_pp(E(w)) for w, _ in ws[1:]]
+    return [(ej(n, '¿Es un <b>nombre</b>, un <b>adjetivo</b> o un <b>verbo</b>? Escríbelo.'), 'xm xm-2col xm-pp', p)]
 
 
 GEN = {
