@@ -94,7 +94,7 @@ def construir(d):
     MIRA = lambda c: f'<div class="mira"><div class="mira-t">Mira cómo se hace:</div>{c}</div><div class="ahora">Ahora tú:</div>'
 
     def pagina(n, rotulo, cuerpo):
-        return (f'<section class="pagina"><header class="banda"><div><div class="banda-t">Academia Esparta</div>'
+        return (f'<section class="pagina"><header class="banda"><div><img class="banda-logo" src="{REL}img-fichas/logo-esparta.png" alt="Academia Esparta">'
                 f'<div class="banda-lema">El esfuerzo de hoy es el éxito de mañana</div></div>'
                 f'<div class="banda-d"><span class="pill">Lengua · {E(PILL)}</span><span class="banda-c">1.º Primaria · Lengua</span></div></header>'
                 f'<div class="datos"><span>Nombre: <i></i></span><span>Fecha: <i></i></span></div>'

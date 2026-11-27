@@ -298,7 +298,7 @@ def paginar(d, doc_medida, carpeta):
 def pagina(d, n, T, contenido):
     curso, asig, bloque, etiqueta = info(d)
     A = 'Lengua' if asig == 'lengua' else 'Matemáticas'
-    return (f'<section class="pagina"><header class="banda"><div><div class="banda-t">Academia Esparta</div>'
+    return (f'<section class="pagina"><header class="banda"><div><img class="banda-logo" src="{RAIZ_REL[0]}img-fichas/logo-esparta.png" alt="Academia Esparta">'
             f'<div class="banda-lema">El esfuerzo de hoy es el éxito de mañana</div></div>'
             f'<div class="banda-d"><span class="pill">{A} · {E(bloque)}</span><span class="banda-c">{curso}.º Primaria · {A}</span></div></header>'
             f'<div class="datos"><span>Nombre: <i></i></span><span>Fecha: <i></i></span></div>'
@@ -326,6 +326,7 @@ MIDE = '<style>@media print{.pagina{height:auto!important;min-height:0!important
 
 
 FIN = [True]
+RAIZ_REL = ['../../../../../']   # ruta a la raíz del sitio (la fija generar_una), para el logo
 MARGEN = [0]
 DESBORDE = [0]
 ZOOM = [1.12]
@@ -345,6 +346,7 @@ def generar_una(ruta):
     d = json.load(open(jd, encoding='utf8'))
     prof = rel.count('/')                  # recursos/primaria/1/lengua/bloque/x.html → 5
     REL = '../' * prof
+    RAIZ_REL[0] = REL
     css = open(CSS_BASE, encoding='utf8').read().replace('../../../../../fuentes/', REL + 'fuentes/')
     css += open(CSS_EXTRA, encoding='utf8').read()
     if d['plantilla'] == 'chasis': css += chasis.css_ficha(d, REL).replace('.mz{zoom:1.12;', '.mz{zoom:%s;' % ZOOM[0])
