@@ -122,7 +122,7 @@ def g_numeros(r, n, ej):
     p2 = [mira(''.join(cj(x) for x in series[0]))]
     for s in series[1:]:
         hue = set(r.sample(range(1, 6), 3))
-        p2.append(fila(''.join(cj() if i in hue else f'<span class="xm-c dado">{x}</span>' for i, x in enumerate(s))))
+        p2.append(fila(''.join(cj() if i in hue else f'<span class="xm-c dado" style="width:52px">{x}</span>' for i, x in enumerate(s))))
     out.append((ej(n + 1, 'Completa la serie.'), 'xm', p2))
     return out
 
