@@ -44,7 +44,10 @@ COSAS = [  # palabra del problema → emoji (la primera que aparezca)
     ('pez', '🐟'), ('peces', '🐟'), ('pato', '🦆'), ('gallina', '🐔'), ('oveja', '🐑'), ('pájaro', '🐦'),
     ('globo', '🎈'), ('pegatina', '⭐'), ('moneda', '🪙'), ('céntimo', '🪙'), ('lápi', '✏️'),
     ('pelota', '⚽'), ('libro', '📚'), ('cuento', '📖'), ('coche', '🚗'), ('autobús', '🚌'),
-    ('hoja', '🍃'), ('niño', '🧒'),
+    ('hoja', '🍃'), ('persona', '🧑'), ('euro', '💶'), ('caja', '📦'), ('rueda', '🛞'), ('pata', '🐾'),
+    ('fresa', '🍓'), ('naranja', '🍊'), ('huevo', '🥚'), ('silla', '🪑'), ('mesa', '🍽️'), ('bolsa', '🛍️'),
+    ('peluche', '🧸'), ('alumno', '🎒'), ('baloncesto', '🏀'), ('punto', '🏀'),
+    ('niño', '🧒'), ('niña', '👧'),
 ]
 
 LECTURAS = {'1': '🐱', '2': '🐶', '3': '👦', '4': '🐄', '5': '🌳',
