@@ -45,12 +45,12 @@ def aplicar(src):
             if not t: return m.group(0)
             col = COLORES[n[0] % 6]; n[0] += 1
             return (abre.replace('<svg ', '<svg data-cuerpo="1" ', 1) +
-                    f'<image href="{RUTA}{t}-{col}.png" x="-4" y="-4" width="68" height="68" '
+                    f'<image href="{RUTA}{t}-{col}.png" x="0" y="0" width="60" height="60" '
                     f'preserveAspectRatio="xMidYMid meet"><title>{t}</title></image></svg>')
         bloques[k] = re.sub(r'(<svg\b[^>]*>)(.*?)</svg>', cambia, b, flags=re.S)
     cuerpo = ''.join(bloques)
     if 'data-cuerpo="1"' in cuerpo and 'id="cuerpos-img"' not in cab:
-        cab = cab.replace('</head>', '<style id="cuerpos-img">.mz svg[data-cuerpo]{zoom:1.35;overflow:visible}</style>\n</head>', 1)
+        cab = cab.replace('</head>', '<style id="cuerpos-img">.mz svg[data-cuerpo]{zoom:1.45;overflow:visible}</style>\n</head>', 1)
     return cab + cuerpo
 
 

@@ -15,11 +15,11 @@ def aplicar(src):
         nombre = m.group(3).strip().lower()
         img = NOMBRES.get(nombre)
         if not img: return m.group(0)
-        return (f'{m.group(1)}<image href="{RUTA}{img}.png" x="-4" y="-4" width="68" height="68" '
+        return (f'{m.group(1)}<image href="{RUTA}{img}.png" x="0" y="0" width="60" height="60" '
                 f'preserveAspectRatio="xMidYMid meet"/></svg>{m.group(2)}<span class="objeto-nombre">{m.group(3)}</span>')
     n = re.sub(r'(<svg viewBox="0 0 60 60"[^>]*>).*?</svg>(\s*)<span class="objeto-nombre">([^<]+)</span>', cambia, src, flags=re.S)
     if n != src and 'id="objetos-img"' not in n:
-        n = n.replace('</head>', '<style id="objetos-img">.objeto-caja svg{zoom:1.6}.pagina .mz .objeto-nombre{font:700 16px "Nunito",sans-serif!important;font-variation-settings:normal!important;color:#333!important}</style>\n</head>', 1)
+        n = n.replace('</head>', '<style id="objetos-img">.objeto-caja svg{zoom:1.7;overflow:visible}.mz .objeto-caja{align-self:stretch!important;justify-content:flex-start!important;padding-left:24px}.pagina .mz .objeto-nombre{font:700 16px "Nunito",sans-serif!important;font-variation-settings:normal!important;color:#333!important}</style>\n</head>', 1)
     return n
 
 
