@@ -14,6 +14,7 @@ import re, sys
 EMO = re.compile('[\U0001F300-\U0001FAFF☀-➿⭐]')
 
 TEMAS = [  # (trozo de la ruta, emojis por orden de ejercicio)
+    ('monedas', ['🪙', '💶', '🐷', '🛒', '🍦', '🎁']),
     ('dias-semana', ['📅', '🌞', '🎒', '🌙', '🎉', '🛝']),
     ('meses', ['📅', '🎂', '🌸', '☀️', '🍂', '❄️']),
     ('reloj', ['⏰', '🌞', '🥪', '🛁', '🌙', '🛏️']),
@@ -57,10 +58,10 @@ def emojis_cuerpo(src):
     return len(EMO.findall(re.sub(r'<[^>]+>', ' ', b)))
 
 
-def aplicar(src, ruta):
+def aplicar(src, ruta, forzar=False):
     if 'id="fichas-alegres"' in src or 'id="cuentas-vivas"' in src:
         return src
-    if emojis_cuerpo(src) > 2:
+    if emojis_cuerpo(src) > 2 and not forzar:
         return src
     src = src.replace('</head>', CSS + '\n</head>', 1)
     lista = next((l for k, l in TEMAS if k in ruta), DEFECTO)
@@ -87,9 +88,10 @@ def aplicar(src, ruta):
 
 
 if __name__ == '__main__':
-    for f in sys.argv[1:]:
+    forzar = '--forzar' in sys.argv  # también en fichas que ya tienen dibujos (monedas)
+    for f in [a for a in sys.argv[1:] if a != '--forzar']:
         s = open(f, encoding='utf-8').read()
-        nuevo = aplicar(s, f)
+        nuevo = aplicar(s, f, forzar)
         if nuevo != s:
             open(f, 'w', encoding='utf-8').write(nuevo)
             print('ok', f)
