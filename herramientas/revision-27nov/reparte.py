@@ -32,6 +32,21 @@ def _trocear(b, cols):
     pre_cont = re.sub(r'<div class="ej">.*?</div>|<div class="ej-enunciado">.*?</div>', '', pre, count=1, flags=re.S)
     filas = [items[i:i + cols] for i in range(0, len(items), cols)]
     return [{'pre': pre if k == 0 else pre_cont, 'items': f, 'suf': suf, 'id': id(b), 'k': k} for k, f in enumerate(filas)]
+UNIR = False
+def _unir_continuaciones(bloques):
+    """--unir: un bloque sin enunciado (p. ej. las frases de un banco de palabras) es la
+    continuación del anterior → se mete DENTRO del mismo ej-blq para que nunca se separen."""
+    out = []
+    for b in bloques:
+        es_cont = (b.startswith('<div class="ej-blq">') and 'class="ej"' not in b and 'ej-enunciado' not in b
+                   and 'recuerda' not in b and out and out[-1].startswith('<div class="ej-blq">'))
+        if es_cont:
+            prev = out[-1].rstrip(); cont = b.rstrip()
+            interior = cont[len('<div class="ej-blq">'):cont.rfind('</div>')]
+            out[-1] = prev[:prev.rfind('</div>')] + interior + '</div>'
+        else:
+            out.append(b)
+    return out
 def repartir(rel):
     ruta = os.path.join(RAIZ, rel); s = open(ruta).read()
     secs = re.findall(r'<section class="pagina">.*?</section>', s, re.S)
@@ -42,6 +57,7 @@ def repartir(rel):
         cuerpo = sec[len(re.match(r'<section class="pagina">.*?<div class="rotulo">.*?</div>', sec, re.S).group(0)):]
         cuerpo = cuerpo[:cuerpo.rfind('<footer class="pie">')]
         bloques += re.findall(r'<div class="ej-blq">.*?(?=<div class="ej-blq">|<div class="fin|$)|<div class="fin[^"]*">.*?</div>', cuerpo, re.S)
+    if UNIR: bloques = _unir_continuaciones(bloques)
     m = _medir(s, secs, cab, pie, bloques, ruta); cap = m['limite'] - m['ini'] - 6
     # piezas: bloques enteros o filas de una rejilla grande
     piezas = []
@@ -75,4 +91,6 @@ def repartir(rel):
     open(ruta, 'w').write(s[:s.find(secs[0])] + ''.join(nuevas) + s[s.rfind('</section>') + 10:])
     return len(secs), T
 if __name__ == '__main__':
-    for rel in sys.argv[1:]: print(rel, repartir(rel))
+    args = sys.argv[1:]
+    if '--unir' in args: UNIR = True; args.remove('--unir')
+    for rel in args: print(rel, repartir(rel))
