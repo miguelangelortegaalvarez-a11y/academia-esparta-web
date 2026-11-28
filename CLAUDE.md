@@ -131,7 +131,7 @@ Template aprobado **26 abril 2026** — no variar tamaños ni márgenes.
 - **El contenido NO se toca: se cambia el formato.** Más aire; si no cabe, a 2 páginas, y la última se rellena con ejercicios NUEVOS con modelo.
 - ⛔ Interactivas SOLO en letras y conciencia fonológica de 1º.
 - Método: muestra por plantilla → OK de Miguel → bloque → revisar las miniaturas de TODAS las páginas → subir.
-- **Revisión de Miguel en curso (27-nov-2026):** marco común con el Tutor (logo real, negro) en 1º-2º; enunciado ≥12 px de lo de debajo (regla estricta); ejemplos sin recuadro y alineados; emojis variados; bloques base 10 en 3D; **números de las cuentas en NUNITO, mismo tamaño, una casilla por cifra** (20 fichas de operaciones de 1º). Lengua 1º revisada sin cambios. **Mañana: seguir revisando Mates 1º desde el bloque siguiente a Operaciones**, luego Lengua 2º y Mates 2º. Detalle y herramientas en la memoria `project_revision_fichas_27nov`.
+- **Revisión de Miguel (27-28 nov 2026), 1º-2º:** marco común con el Tutor; enunciado ≥12 px de lo de debajo; ejemplos sin recuadro; bloques base 10 en 3D. **28-nov, «que no sean sosas»:** cuentas «vivas» (D roja / U azul, Nunito grande, casillas en color, MENOS cuentas) en operaciones de 1º y 2º; emojis en todas las fichas sosas de 1º y 2º + «⭐ ¡Muy bien! 🏆»; medida de 1º con dibujos; **problemas 1º-2º en columnas Datos | Operación | Solución con cuenta en blanco**. Herramientas: `herramientas/revision-27nov/` (LEEME). **Pendiente:** tablas de multiplicar y multiplicación de 2º a Nunito grande; luego 3º. Detalle en la memoria `project_revision_fichas_27nov`.
 
 ---
 
