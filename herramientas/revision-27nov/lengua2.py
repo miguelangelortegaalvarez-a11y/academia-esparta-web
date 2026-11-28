@@ -32,8 +32,15 @@ CSS = """<style id="lengua2-letra">
 .mz .recuerda-item .recuerda-ej,.mz .recuerda-ej{font-family:inherit!important;font-size:15px!important;font-style:normal!important;color:#333!important}
 .mz .recuerda-titulo{font:800 13px 'Nunito',sans-serif!important;font-variation-settings:normal!important}
 .mz .np{white-space:nowrap}
+.mz .opcion-group{display:inline-block;white-space:nowrap}
+.mz .mini-pauta.pq line:first-child{display:none}
 .xm-fila > .mini-pauta.larga{display:block;width:100%!important;height:74px!important}
 .xm-fila:has(> .mini-pauta.larga){display:block!important;padding-right:0!important}
+.v-banco{font:800 15px 'Nunito',sans-serif!important;font-variation-settings:normal!important;letter-spacing:.3px}
+.mz .opcion{font-family:inherit!important;font-size:16px!important}
+.necesitas{font:600 15px 'Nunito',sans-serif!important;font-variation-settings:normal!important}
+.vf-op{font:800 15px 'Nunito',sans-serif!important;font-variation-settings:normal!important}
+.def-letra{font:800 15px 'Nunito',sans-serif!important;font-variation-settings:normal!important;color:#d64541}
 .v-pista{font-family:'Nunito',sans-serif!important;font-variation-settings:normal!important;font-size:14px!important;font-weight:600!important}
 </style>"""
 
@@ -69,6 +76,9 @@ if __name__ == '__main__':
     for f in [a for a in sys.argv[1:] if not a.startswith('--')]:
         s = open(f, encoding='utf-8').read()
         n = aplicar(s)
+        # en signos, el hueco es para UN signo: estrecho (el de una palabra partía la frase)
+        if 'signos-puntuacion' in f and 'id="signos-hueco"' not in n:
+            n = n.replace('</head>', '<style id="signos-hueco">.mz .mini-pauta.pq{width:56px!important}</style>\n</head>', 1)
         if n != s:
             with open(f, 'w', encoding='utf-8') as w:
                 w.write(n)
