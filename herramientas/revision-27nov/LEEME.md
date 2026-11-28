@@ -11,3 +11,4 @@
 - `cdp.mjs` — Chrome headless por CDP: carga una lista de fichas y ejecuta `/tmp/negritas/eval.js` en cada una.
 
 Después de tocar una ficha: regenerar su PDF con Chrome (`--headless --no-pdf-header-footer --virtual-time-budget=8000`) y comprobar páginas y pie.
+- `mult2.py` — (28-nov) multiplicación de 2º (tablas-de-multiplicar 10 + multiplicacion-concepto 6) al aspecto vivo: carga Nunito DE VERDAD (link de Google Fonts; `.mz` pone `font-variation-settings:'wght' 250` → hay que anularlo o Nunito sale finísima), números Nunito 700 con × rojo, casillas azules / resultado verde, tablas con título naranja (ficha 1: dos tablas → una columna cada una, del 1 al 10), puntitos → emoji del ejercicio dentro de cuencos naranjas, series en una fila con la etiqueta encima, filas con 2 casillas → una columna. Después `reparte.py` en cada ficha. Idempotente.
