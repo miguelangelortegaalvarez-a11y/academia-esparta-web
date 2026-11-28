@@ -25,6 +25,10 @@ CSS = """<style id="mult-viva">
 .mz .resp-fila,.mz .resp-fila .lead,.mz .resp-fila .sep{font-size:21px!important}
 .mz .resp-fila .lead.frase{font-size:17px!important;font-weight:600!important}
 .mz .resp-fila .sep{color:#1a1a1a}
+.mz .resp-fila .lead.etq{font-size:17px!important;min-width:0!important}
+.mz .calc-grid .resp-fila:has(.etq){flex-wrap:nowrap!important;gap:8px!important}
+.dm-t{font:600 17px 'Nunito',sans-serif;font-variation-settings:normal;white-space:nowrap}
+.xm-fila:has(.dm-t){flex-wrap:nowrap!important;gap:8px!important;white-space:nowrap}
 .mz .calc-grid.una-col,.mz .dos-col.una-col{grid-template-columns:1fr!important}
 .mz .rejillas-fila .resp-fila{flex-wrap:nowrap!important;gap:8px!important}
 .mz .rejillas-fila .resp-fila,.mz .rejillas-fila .resp-fila .sep{font-size:18px!important}
@@ -83,8 +87,16 @@ def aplicar(src):
             partes[i] = partes[i].replace('">', ' una-col">')
     src = ''.join(partes)
     # frases largas en .lead → más pequeñas
-    src = re.sub(r'<span class="lead"([^>]*)>([^<]*[a-záéíóúñ¿?]{3}[^<]*)</span>',
-                 r'<span class="lead frase"\1>\2</span>', src)
+    def frase(m):
+        txt = re.sub('<[^>]+>', '', m.group(2))
+        if not re.search(r'[a-záéíóúñ¿?]{3}', txt):
+            return m.group(0)
+        c = 'frase' if len(txt) > 22 else 'etq'
+        return f'<span class="lead {c}"{m.group(1)}>{m.group(2)}</span>'
+    src = re.sub(r'<span class="lead"([^>]*)>((?:[^<]|<span class="mx">×</span>)*)</span>', frase, src)
+    # doble y mitad: «→ doble» y «mitad» en Nunito pequeña, sin partir la fila
+    src = re.sub(r'(<b class="xm-n">[^<]*</b>) → doble ', r'\1 <span class="dm-t">→ doble</span> ', src)
+    src = re.sub(r'</span> mitad <span class="xm-c', r'</span> <span class="dm-t">mitad</span> <span class="xm-c', src)
     # dos tablas en la misma fila → cada una en una columna, del 1 al 10
     if src.count('class="tabla-mult"') == 2:
         def ordena(m):
